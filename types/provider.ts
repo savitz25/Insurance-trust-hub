@@ -19,6 +19,10 @@ export interface Provider {
   is_verified: boolean;
   license_number?: string | null;
   years_in_business?: number | null;
+  trust_score?: number;
+  local_market_experience?: number;
+  avg_response_hours?: number;
+  bbb_rating?: string;
   carriers?: string[];
   created_at?: string;
   updated_at?: string;

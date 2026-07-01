@@ -7,6 +7,7 @@ import {
   getFallbackProviderBySlug,
   searchFallbackProviders,
 } from '@/lib/providers/fallback-data';
+import { getHubAgentBySlug } from '@/lib/hubs/agent-lookup';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import type { Provider as DbProvider } from '@/types/supabase';
 
@@ -84,6 +85,9 @@ export async function getProviders(
 }
 
 export async function getProviderBySlug(slug: string): Promise<Provider | null> {
+  const hubAgent = getHubAgentBySlug(slug);
+  if (hubAgent) return hubAgent;
+
   if (!isSupabaseConfigured()) {
     return getFallbackProviderBySlug(slug) ?? null;
   }

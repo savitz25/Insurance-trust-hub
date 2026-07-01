@@ -3,21 +3,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
-  { href: '/directory', label: 'DIRECTORY' },
-  { href: '/destinations', label: 'DESTINATIONS' },
-  { href: '/resources', label: 'RESOURCES' },
-  { href: '/tools', label: 'TOOLS' },
+  { href: '/directory', label: 'DIRECTORIES' },
+  { href: '/hubs', label: 'HEALTH HUBS' },
+  { href: '/hubs/browse', label: 'STATE & MSA BROWSER' },
+  { href: '/calculators', label: 'CALCULATORS' },
+  { href: '/about', label: 'TRUST & TRANSPARENCY' },
   { href: '/about', label: 'ABOUT' },
-  { href: '/contact', label: 'Contact' },
 ] as const;
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [directoriesOpen, setDirectoriesOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -26,7 +27,7 @@ export function Navbar() {
           <Link prefetch={false} href="/" className="group">
             <Image
               src="/brand/insurance-trust-hub-logo.png"
-              alt="Insurance Trust Hub — trusted insurance agency directory"
+              alt="Insurance Trust Hub — trusted insurance agent directory"
               width={280}
               height={56}
               priority
@@ -36,70 +37,70 @@ export function Navbar() {
             />
           </Link>
           <div className="hidden md:flex items-center rounded-full bg-trust/10 px-2 py-0.5 text-[9px] font-semibold tracking-[1px] text-trust border border-trust/20">
-            TRUSTED
+            INDEPENDENT
           </div>
         </div>
 
-        <div className="hidden lg:flex items-center gap-7 text-sm">
-          {NAV_LINKS.map((link) => (
+        <div className="hidden xl:flex items-center gap-6 text-sm">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setDirectoriesOpen(!directoriesOpen)}
+              className="inline-flex items-center gap-1 font-medium text-muted-foreground hover:text-foreground"
+              aria-expanded={directoriesOpen}
+            >
+              Directories <ChevronDown className="h-4 w-4" />
+            </button>
+            {directoriesOpen && (
+              <div className="absolute left-0 top-full z-50 mt-2 w-52 rounded-xl border bg-card py-2 shadow-trust-lg">
+                <Link href="/directory" className="block px-4 py-2 text-sm hover:bg-secondary" onClick={() => setDirectoriesOpen(false)}>
+                  All Agents & Agencies
+                </Link>
+                <Link href="/hubs" className="block px-4 py-2 text-sm hover:bg-secondary" onClick={() => setDirectoriesOpen(false)}>
+                  Health Insurance Hubs
+                </Link>
+                <Link href="/destinations" className="block px-4 py-2 text-sm hover:bg-secondary" onClick={() => setDirectoriesOpen(false)}>
+                  Relocation Destinations
+                </Link>
+              </div>
+            )}
+          </div>
+          {NAV_LINKS.slice(1).map((link) => (
             <Link
-              key={link.href}
+              key={`${link.href}-${link.label}`}
               prefetch={false}
               href={link.href}
-              className={cn(
-                'font-medium text-muted-foreground hover:text-foreground transition-colors relative',
-                'after:absolute after:bottom-[-2px] after:left-0 after:h-px after:w-0 after:bg-foreground after:transition-all hover:after:w-full',
-                link.label === 'Contact' ? 'normal-case' : 'uppercase tracking-wide text-xs'
-              )}
+              className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </Link>
           ))}
-          <Button size="sm" asChild className="gap-2 shadow-sm">
+          <Button size="sm" variant="trust" asChild className="gap-2">
             <Link href="/contact">
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              Get Quotes
+              <Phone className="h-4 w-4" /> Contact
             </Link>
           </Button>
         </div>
 
-        <div className="flex lg:hidden items-center gap-2">
-          <Button size="sm" asChild className="min-h-[44px] px-3">
-            <Link href="/contact">Quotes</Link>
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-11 w-11 min-h-[44px] min-w-[44px]"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-        </div>
+        <button
+          type="button"
+          className="xl:hidden p-2"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
       {isOpen && (
-        <div className="lg:hidden border-t bg-background px-4 py-4">
-          <div className="flex flex-col gap-1 text-sm">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                prefetch={false}
-                href={link.href}
-                className="py-3 min-h-[44px] flex items-center font-medium text-muted-foreground hover:text-foreground"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Button className="w-full mt-2 min-h-[48px]" asChild>
-              <Link href="/contact" onClick={() => setIsOpen(false)}>
-                Get Free Quotes
-              </Link>
-            </Button>
-          </div>
+        <div className="xl:hidden border-t bg-background px-4 py-4 space-y-3">
+          <Link href="/directory" className="block font-medium" onClick={() => setIsOpen(false)}>Directories</Link>
+          {NAV_LINKS.map((link) => (
+            <Link key={`${link.href}-${link.label}`} href={link.href} className="block font-medium" onClick={() => setIsOpen(false)}>
+              {link.label}
+            </Link>
+          ))}
+          <Link href="/contact" className="block font-medium" onClick={() => setIsOpen(false)}>Contact</Link>
         </div>
       )}
     </nav>

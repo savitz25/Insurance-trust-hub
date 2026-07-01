@@ -33,9 +33,10 @@ export function Footer() {
               DIRECTORY
             </div>
             <div className="space-y-1.5 text-sm text-muted-foreground">
-              <div><Link prefetch={false} href="/directory" className="hover:text-foreground transition-colors">All Agencies</Link></div>
-              <div><Link prefetch={false} href="/directory?verified=true" className="hover:text-foreground transition-colors">Verified Agents</Link></div>
-              <div><Link prefetch={false} href="/directory?sort=rating" className="hover:text-foreground transition-colors">Top Rated</Link></div>
+              <div><Link prefetch={false} href="/directory" className="hover:text-foreground transition-colors">All Agents</Link></div>
+              <div><Link prefetch={false} href="/hubs" className="hover:text-foreground transition-colors">Health Insurance Hubs</Link></div>
+              <div><Link prefetch={false} href="/hubs/browse" className="hover:text-foreground transition-colors">State &amp; MSA Browser</Link></div>
+              <div><Link prefetch={false} href="/calculators" className="hover:text-foreground transition-colors">Calculators</Link></div>
             </div>
           </div>
 
@@ -58,7 +59,9 @@ export function Footer() {
             </div>
             <div className="space-y-1.5 text-sm text-muted-foreground">
               <div><Link prefetch={false} href="/resources" className="hover:text-foreground transition-colors">All Guides</Link></div>
-              <div><Link prefetch={false} href="/resources/how-to-choose-insurance-agent" className="hover:text-foreground transition-colors">Choose an Agent</Link></div>
+              <div><Link prefetch={false} href="/resources/how-to-choose-insurance-agent" className="hover:text-foreground transition-colors">Choosing Health Insurance 2026</Link></div>
+              <div><Link prefetch={false} href="/resources/avoiding-coverage-gaps" className="hover:text-foreground transition-colors">Scam Avoidance</Link></div>
+              <div><Link prefetch={false} href="/tools/license-verification" className="hover:text-foreground transition-colors">State DOI Links</Link></div>
               <div><Link prefetch={false} href="/resources/auto-insurance-costs-by-state" className="hover:text-foreground transition-colors">Auto Insurance Costs</Link></div>
               <div><Link prefetch={false} href="/resources/homeowners-insurance-basics" className="hover:text-foreground transition-colors">Homeowners Basics</Link></div>
               <div><Link prefetch={false} href="/tools/cost-estimator" className="hover:text-foreground transition-colors">Cost Estimator</Link></div>

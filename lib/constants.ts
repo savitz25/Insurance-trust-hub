@@ -91,10 +91,10 @@ export const US_STATES = [
 ] as const;
 
 export const TRUST_STATS = [
-  { label: 'Verified Licensed Providers', value: '850+' },
-  { label: 'Average Rating', value: '4.8★' },
-  { label: 'Attributed Reviews', value: '15,200+' },
-  { label: 'Guidance for All 50 States', value: '50 States' },
+  { label: 'Verified Agents', value: '850+' },
+  { label: 'Reviews Analyzed', value: '15,200+' },
+  { label: 'States & Counties', value: '50 States' },
+  { label: 'Market Hubs', value: '54 Hubs' },
 ] as const;
 
 export const MOVE_TRUST_HUB_URL = 'https://www.movetrusthub.com';

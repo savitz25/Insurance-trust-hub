@@ -15,6 +15,8 @@ import { getProviderBySlug } from '@/lib/providers/queries';
 import { getReviewsForProvider, getRatingBreakdown } from '@/lib/providers/reviews';
 import { getProviderLicenseUrl } from '@/lib/providers/license';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
+import { INSURANCE_HUBS } from '@/lib/hubs/registry';
+import { getAgentsForHub } from '@/lib/hubs/agents';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildInsuranceAgencySchema } from '@/lib/seo/schemas';
@@ -33,7 +35,16 @@ interface ProviderPageProps {
 }
 
 export async function generateStaticParams() {
-  return FALLBACK_PROVIDERS.map((p) => ({ slug: p.slug }));
+  const hubSlugs = INSURANCE_HUBS.flatMap((hub) =>
+    getAgentsForHub(hub).map((a) => ({ slug: a.slug }))
+  );
+  const fallback = FALLBACK_PROVIDERS.map((p) => ({ slug: p.slug }));
+  const seen = new Set<string>();
+  return [...fallback, ...hubSlugs].filter((p) => {
+    if (seen.has(p.slug)) return false;
+    seen.add(p.slug);
+    return true;
+  });
 }
 
 export async function generateMetadata({ params }: ProviderPageProps): Promise<Metadata> {
@@ -61,9 +72,10 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
   const licenseUrl = getProviderLicenseUrl(provider);
 
   const suitsRelocating =
-    provider.specialties.includes('Independent Agency') ||
+    provider.specialties.includes('Relocation Experienced') ||
+    provider.specialties.includes('Medicare Specialists') ||
     provider.specialties.includes('Bilingual Services') ||
-    provider.years_in_business != null && provider.years_in_business >= 10;
+    (provider.years_in_business != null && provider.years_in_business >= 10);
 
   return (
     <>
@@ -313,6 +325,28 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
                 />
               </CardContent>
             </Card>
+
+            {(provider.trust_score != null || provider.local_market_experience != null) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Trust metrics</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm space-y-2">
+                  {provider.trust_score != null && (
+                    <p><span className="font-medium">Trust Score:</span> {provider.trust_score}/100</p>
+                  )}
+                  {provider.local_market_experience != null && (
+                    <p><span className="font-medium">Local Market Experience:</span> {provider.local_market_experience}/100</p>
+                  )}
+                  {provider.avg_response_hours != null && (
+                    <p><span className="font-medium">Avg Response:</span> &lt;{provider.avg_response_hours} hours</p>
+                  )}
+                  {provider.bbb_rating && (
+                    <p><span className="font-medium">BBB Rating:</span> {provider.bbb_rating}</p>
+                  )}
+                </CardContent>
+              </Card>
+            )}
 
             {provider.years_in_business && (
               <p className={cn('text-center text-sm text-muted-foreground')}>

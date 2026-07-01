@@ -3,6 +3,7 @@ import { SITE_URL } from '@/lib/constants';
 import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { ARTICLES } from '@/lib/resources/articles';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
+import { INSURANCE_HUBS, getAllStateSlugs } from '@/lib/hubs/registry';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -13,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/destinations',
     '/resources',
     '/tools',
+    '/hubs',
+    '/hubs/browse',
+    '/calculators',
+    '/calculators/premium-estimator',
+    '/calculators/medicare-gap',
+    '/calculators/aca-subsidy',
     '/tools/cost-estimator',
     '/tools/needs-assessment',
     '/tools/license-verification',
@@ -57,8 +64,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const hubStates = getAllStateSlugs().map((state) => ({
+    url: `${SITE_URL}/hubs/${state}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }));
+
+  const hubPages = INSURANCE_HUBS.map((hub) => ({
+    url: `${SITE_URL}/hubs/${hub.stateSlug}/${hub.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: hub.priority <= 15 ? 0.85 : 0.7,
+  }));
+
   return [
     ...staticRoutes,
+    ...hubStates,
+    ...hubPages,
     ...destinationStates,
     ...destinationCities,
     ...articles,

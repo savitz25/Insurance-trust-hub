@@ -1,65 +1,50 @@
-import { ClipboardList, MessageSquare, Search, ShieldCheck } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Search, Scale, Handshake } from 'lucide-react';
 
 const STEPS = [
   {
+    step: '01',
     icon: Search,
-    title: 'Search your area',
+    title: 'Search Your ZIP',
     description:
-      'Filter licensed agencies by state, insurance type, and specialty. Read verified reviews and compare ratings.',
+      'Enter your ZIP code to auto-detect your county and MSA. See ranked local agents with health insurance specialists highlighted for ACA, Medicare, and employer plans.',
   },
   {
-    icon: ClipboardList,
-    title: 'Review agency profiles',
+    step: '02',
+    icon: Scale,
+    title: 'Compare & Verify',
     description:
-      'See carriers represented, years in business, license details, and coverage specialties before you reach out.',
+      'Review Trust Scores, state DOI licensing, NAIC verification, BBB ratings, and attributed reviews. We analyze public records — never sponsored placements.',
   },
   {
-    icon: MessageSquare,
-    title: 'Request free quotes',
+    step: '03',
+    icon: Handshake,
+    title: 'Connect Securely',
     description:
-      'Contact agencies directly or submit a quote request. Independent agents shop multiple carriers for you.',
+      'Use our calculators to understand your numbers, then connect with independent agents who specialize in your coverage needs. Always verify licensing before engaging.',
   },
-  {
-    icon: ShieldCheck,
-    title: 'Verify & decide',
-    description:
-      'Confirm licensing with your state insurance department, compare coverage — not just price — and choose with confidence.',
-  },
-] as const;
+];
 
-interface HowItWorksProps {
-  className?: string;
-}
-
-export function HowItWorks({ className }: HowItWorksProps) {
+export function HowItWorks() {
   return (
-    <section className={cn('py-16 md:py-20', className)} aria-labelledby="how-it-works-heading">
+    <section className="py-16 md:py-20 border-t bg-secondary/20">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 id="how-it-works-heading" className="section-heading">
-            How Insurance Trust Hub works
-          </h2>
-          <p className="mt-3 text-muted-foreground leading-relaxed">
-            An independent research directory — we help you find licensed agents, not sell policies ourselves.
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold tracking-[0.2em] text-trust uppercase mb-2">How It Works</p>
+          <h2 className="section-heading">Your Path to the Right Agent</h2>
+          <p className="mt-2 text-muted-foreground max-w-xl mx-auto">
+            Three steps to discover honest local insurance experts with transparent, data-driven listings.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {STEPS.map((step, index) => (
-            <div key={step.title} className="stat-card text-left">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <step.icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <span className="text-xs font-bold text-muted-foreground/60 tracking-widest">
-                  STEP {index + 1}
-                </span>
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {STEPS.map((item) => (
+            <div key={item.step} className="rounded-2xl border bg-card p-6 shadow-trust text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+                <span className="text-2xl font-bold text-primary/30">{item.step}</span>
+                <item.icon className="h-6 w-6 text-trust" aria-hidden="true" />
               </div>
-              <h3 className="font-semibold text-foreground">{step.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                {step.description}
-              </p>
+              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
