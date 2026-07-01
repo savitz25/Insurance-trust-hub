@@ -15,6 +15,7 @@ import { CHICAGO_AGENTS } from '@/lib/hubs/data/chicago-agents';
 import { DALLAS_FORT_WORTH_AGENTS } from '@/lib/hubs/data/dallas-fort-worth-agents';
 import { HOUSTON_AGENTS } from '@/lib/hubs/data/houston-agents';
 import { WASHINGTON_DC_AGENTS } from '@/lib/hubs/data/washington-dc-agents';
+import { BOSTON_AGENTS } from '@/lib/hubs/data/boston-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -203,6 +204,17 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Linda McGill · Zahra Gharany · Cory Weaver',
     healthFeaturedLimit: 8,
   },
+  boston: {
+    slug: 'boston',
+    sectionTitle: 'Boston Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Suffolk County with service to Middlesex, Essex, Norfolk, and Plymouth — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Major Northeast market with employer-sponsored plans in education, healthcare, biotech, and finance alongside Health Connector optimization and Medicare demand. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Suffolk', 'Middlesex', 'Essex', 'Norfolk', 'Plymouth'],
+    badges: ['Health Connector · Biotech corridor · North & South Shore'],
+    featuredHealthLine:
+      'Top 3 featured: Ted Wallus · iHealthBrokers · Francis Burgoyne',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -222,6 +234,7 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   'dallas-fort-worth': DALLAS_FORT_WORTH_AGENTS,
   houston: HOUSTON_AGENTS,
   'washington-dc': WASHINGTON_DC_AGENTS,
+  boston: BOSTON_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
