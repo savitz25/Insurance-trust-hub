@@ -23,6 +23,11 @@ import { MINNEAPOLIS_AGENTS } from '@/lib/hubs/data/minneapolis-agents';
 import { ST_LOUIS_AGENTS } from '@/lib/hubs/data/st-louis-agents';
 import { DENVER_AGENTS } from '@/lib/hubs/data/denver-agents';
 import { BALTIMORE_AGENTS } from '@/lib/hubs/data/baltimore-agents';
+import { PORTLAND_AGENTS } from '@/lib/hubs/data/portland-agents';
+import { SAN_ANTONIO_AGENTS } from '@/lib/hubs/data/san-antonio-agents';
+import { SACRAMENTO_AGENTS } from '@/lib/hubs/data/sacramento-agents';
+import { PITTSBURGH_AGENTS } from '@/lib/hubs/data/pittsburgh-agents';
+import { LAS_VEGAS_AGENTS } from '@/lib/hubs/data/las-vegas-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -299,6 +304,61 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Gerard Washington · East Coast Health Advisors · Zahra Gharany',
     healthFeaturedLimit: 8,
   },
+  portland: {
+    slug: 'portland',
+    sectionTitle: 'Portland Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Multnomah, Washington, and Clackamas counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Oregon Health Plan marketplace enrollment, cross-river Washington licensing, and tech-corridor ACA demand. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Multnomah', 'Washington', 'Clackamas'],
+    badges: ['Oregon marketplace · Cross-river · Progressive healthcare'],
+    featuredHealthLine:
+      'Top 3 featured: Travis Harmon · Hummingbird Insurance · Russ Harshberger',
+    healthFeaturedLimit: 8,
+  },
+  'san-antonio': {
+    slug: 'san-antonio',
+    sectionTitle: 'San Antonio Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Bexar, Comal, Guadalupe, and Kendall counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Military/TRICARE-adjacent Medicare, bilingual ACA enrollment, and employer-sponsored plan volume. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Bexar', 'Comal', 'Guadalupe', 'Kendall'],
+    badges: ['Bilingual EN/ES · Military corridor · Hill Country growth'],
+    featuredHealthLine:
+      'Top 3 featured: Rodney Powell · Deschenes Financial Services · Sid Martinez',
+    healthFeaturedLimit: 8,
+  },
+  sacramento: {
+    slug: 'sacramento',
+    sectionTitle: 'Sacramento Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Sacramento, Placer, El Dorado, and Yolo counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California, CalPERS-adjacent retirement transitions, and state-capital employer benefits. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Sacramento', 'Placer', 'El Dorado', 'Yolo'],
+    badges: ['Covered California · State capital · Gold River corridor'],
+    featuredHealthLine:
+      'Top 3 featured: Quinn McNamara · Summit Independent Insurance Services · John Goeden',
+    healthFeaturedLimit: 8,
+  },
+  pittsburgh: {
+    slug: 'pittsburgh',
+    sectionTitle: 'Greater Pittsburgh Coverage Area',
+    summary:
+      '12 verified independent agencies across Allegheny, Beaver, Butler, Washington, and Westmoreland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. UPMC-adjacent healthcare workers, university ACA enrollment, and aging mill-town Medicare demand. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Allegheny', 'Beaver', 'Butler', 'Washington', 'Westmoreland'],
+    badges: ['UPMC corridor · University ACA · South Hills'],
+    featuredHealthLine:
+      'Top 3 featured: Matthew Gaus · Murray Insurance Services · Paula Duffy',
+    healthFeaturedLimit: 8,
+  },
+  'las-vegas': {
+    slug: 'las-vegas',
+    sectionTitle: 'Las Vegas Valley Coverage Area',
+    summary:
+      '12 verified independent agencies across Clark County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Hospitality-worker ACA demand, retiree Medicare growth, and California relocation health transitions. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Clark'],
+    badges: ['Hospitality ACA · Retiree Medicare · Bilingual EN/ES'],
+    featuredHealthLine:
+      "Top 3 featured: James O'Neal · Tyler Insurance Group · Amos St. Louis",
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -326,6 +386,11 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   'st-louis': ST_LOUIS_AGENTS,
   denver: DENVER_AGENTS,
   baltimore: BALTIMORE_AGENTS,
+  portland: PORTLAND_AGENTS,
+  'san-antonio': SAN_ANTONIO_AGENTS,
+  sacramento: SACRAMENTO_AGENTS,
+  pittsburgh: PITTSBURGH_AGENTS,
+  'las-vegas': LAS_VEGAS_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
