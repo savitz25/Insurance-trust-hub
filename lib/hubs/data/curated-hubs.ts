@@ -2,6 +2,7 @@ import type { HubAgent } from '@/types/agent';
 import { JACKSONVILLE_AGENTS } from '@/lib/hubs/data/jacksonville-agents';
 import { ORLANDO_AGENTS } from '@/lib/hubs/data/orlando-agents';
 import { SOUTH_FLORIDA_AGENTS } from '@/lib/hubs/data/south-florida-agents';
+import { ATLANTA_AGENTS } from '@/lib/hubs/data/atlanta-agents';
 import { TAMPA_BAY_AGENTS } from '@/lib/hubs/data/tampa-bay-agents';
 
 export interface CuratedHubConfig {
@@ -59,6 +60,17 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: HealthPlan4U · Affordable Insurance Team · The Medicare Dude',
     healthFeaturedLimit: 7,
   },
+  atlanta: {
+    slug: 'atlanta',
+    sectionTitle: 'Metro Atlanta Coverage Area',
+    summary:
+      '12 verified independent agencies across Fulton, DeKalb, Gwinnett, Cobb, and Clayton counties — 7 with primary Medicare/ACA/health or group benefits emphasis and 5 multi-line independents. Georgia\'s largest health market with 6–7 competing carriers (Kaiser, Oscar, Anthem, Ambetter, UnitedHealthcare). Average Google rating ~4.8–5.0 stars.',
+    counties: ['Fulton', 'DeKalb', 'Gwinnett', 'Cobb', 'Clayton'],
+    badges: ['Georgia Access · Kaiser · Oscar · Ambetter'],
+    featuredHealthLine:
+      'Top 3 featured: Georgia Health Insurance · iHealthBrokers · The Big 65',
+    healthFeaturedLimit: 7,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -66,6 +78,7 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   orlando: ORLANDO_AGENTS,
   jacksonville: JACKSONVILLE_AGENTS,
   tampa: TAMPA_BAY_AGENTS,
+  atlanta: ATLANTA_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
