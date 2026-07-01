@@ -19,6 +19,10 @@ import { BOSTON_AGENTS } from '@/lib/hubs/data/boston-agents';
 import { DETROIT_AGENTS } from '@/lib/hubs/data/detroit-agents';
 import { SEATTLE_AGENTS } from '@/lib/hubs/data/seattle-agents';
 import { INLAND_EMPIRE_AGENTS } from '@/lib/hubs/data/inland-empire-agents';
+import { MINNEAPOLIS_AGENTS } from '@/lib/hubs/data/minneapolis-agents';
+import { ST_LOUIS_AGENTS } from '@/lib/hubs/data/st-louis-agents';
+import { DENVER_AGENTS } from '@/lib/hubs/data/denver-agents';
+import { BALTIMORE_AGENTS } from '@/lib/hubs/data/baltimore-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -251,6 +255,50 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Cynthia Nakaya · Dee Thomas Agency · Michael Ryan',
     healthFeaturedLimit: 8,
   },
+  minneapolis: {
+    slug: 'minneapolis',
+    sectionTitle: 'Twin Cities Coverage Area',
+    summary:
+      '12 verified independent agencies across Hennepin and Ramsey counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. MNsure marketplace enrollment, Medtronic/healthcare employer benefits, and Mayo-adjacent corridor expertise. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Hennepin', 'Ramsey'],
+    badges: ['MNsure · Healthcare corridor · Edina/St Paul suburbs'],
+    featuredHealthLine:
+      'Top 3 featured: James Romeo · Twin Cities Health Insurance Solutions · Randi Dinner Fogel',
+    healthFeaturedLimit: 8,
+  },
+  'st-louis': {
+    slug: 'st-louis',
+    sectionTitle: 'Greater St. Louis Coverage Area',
+    summary:
+      '12 verified independent agencies across St. Louis City and St. Louis County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Bi-state MO/IL marketplace enrollment, healthcare and manufacturing employer volume, and Arch Brokerage individual health expertise since 1969. Average Google rating ~4.8–5.0 stars.',
+    counties: ['St. Louis City', 'St. Louis County'],
+    badges: ['Bi-state MO/IL · Arch Brokerage · Blue Chip Consortium'],
+    featuredHealthLine:
+      'Top 3 featured: Steve Potje · Arch Brokerage · Ed & Peggy Weir',
+    healthFeaturedLimit: 8,
+  },
+  denver: {
+    slug: 'denver',
+    sectionTitle: 'Denver Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Denver, Arapahoe, Jefferson, and Adams counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Connect for Health Colorado, relocation-driven ACA demand, and bilingual Medicare expertise. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Denver', 'Arapahoe', 'Jefferson', 'Adams'],
+    badges: ['Connect for Health CO · Bilingual EN/ES · Relocation corridor'],
+    featuredHealthLine:
+      'Top 3 featured: Voss Speros · Colorado Health Insurance Brokers · Nichole Wright',
+    healthFeaturedLimit: 8,
+  },
+  baltimore: {
+    slug: 'baltimore',
+    sectionTitle: 'Baltimore Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Baltimore City and Baltimore County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Maryland Health Connection, Johns Hopkins healthcare corridor, and DC commuter benefit transitions. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Baltimore City', 'Baltimore County'],
+    badges: ['Maryland Health Connection · Hopkins corridor · Mid-Atlantic'],
+    featuredHealthLine:
+      'Top 3 featured: Gerard Washington · East Coast Health Advisors · Zahra Gharany',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -274,6 +322,10 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   detroit: DETROIT_AGENTS,
   seattle: SEATTLE_AGENTS,
   'riverside-san-bernardino': INLAND_EMPIRE_AGENTS,
+  minneapolis: MINNEAPOLIS_AGENTS,
+  'st-louis': ST_LOUIS_AGENTS,
+  denver: DENVER_AGENTS,
+  baltimore: BALTIMORE_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
