@@ -16,6 +16,7 @@ import { DALLAS_FORT_WORTH_AGENTS } from '@/lib/hubs/data/dallas-fort-worth-agen
 import { HOUSTON_AGENTS } from '@/lib/hubs/data/houston-agents';
 import { WASHINGTON_DC_AGENTS } from '@/lib/hubs/data/washington-dc-agents';
 import { BOSTON_AGENTS } from '@/lib/hubs/data/boston-agents';
+import { DETROIT_AGENTS } from '@/lib/hubs/data/detroit-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -215,6 +216,17 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Ted Wallus · iHealthBrokers · Francis Burgoyne',
     healthFeaturedLimit: 8,
   },
+  detroit: {
+    slug: 'detroit',
+    sectionTitle: 'Detroit Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Wayne, Oakland, and Macomb counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Auto industry employer volume, UAW benefit familiarity, and Michigan marketplace enrollment drive competitive individual and group options. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Wayne', 'Oakland', 'Macomb'],
+    badges: ['Auto industry benefits · BCBSM · Dearborn corridor'],
+    featuredHealthLine:
+      'Top 3 featured: Shaun & Elizabeth Abshire · Vicki Ferguson · Michigan Planners',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -235,6 +247,7 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   houston: HOUSTON_AGENTS,
   'washington-dc': WASHINGTON_DC_AGENTS,
   boston: BOSTON_AGENTS,
+  detroit: DETROIT_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
