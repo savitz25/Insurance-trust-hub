@@ -6,7 +6,7 @@ import { getHubBySlug, getAllHubParams } from '@/lib/hubs/registry';
 import { getAgentsForHub, getFeaturedHealthAgents, getHubStats } from '@/lib/hubs/agents';
 import { AgentCard } from '@/components/agent-card';
 import { HubAgentTable } from '@/components/hub-agent-table';
-import { isSouthFloridaHub } from '@/lib/hubs/data/south-florida-agents';
+import { getCuratedHubConfig } from '@/lib/hubs/data/curated-hubs';
 import { ZipSearch } from '@/components/zip-search';
 import { HubMatchForm } from '@/components/hub-match-form';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
@@ -53,7 +53,7 @@ export default async function HubPage({
   const healthAgents = getFeaturedHealthAgents(hub);
   const otherAgents = allAgents.filter((a) => !a.isHealthFeatured);
   const stats = getHubStats(hub);
-  const isSouthFlorida = isSouthFloridaHub(hub.slug);
+  const curatedConfig = getCuratedHubConfig(hub.slug);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -137,18 +137,14 @@ export default async function HubPage({
               </ul>
             </section>
 
-            {isSouthFlorida && (
+            {curatedConfig && (
               <section>
-                <h2 className="text-2xl font-bold mb-2">Tri-County Coverage Area</h2>
+                <h2 className="text-2xl font-bold mb-2">{curatedConfig.sectionTitle}</h2>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  12 verified independent agencies across <strong className="text-foreground">Miami-Dade</strong>,{' '}
-                  <strong className="text-foreground">Broward</strong>, and{' '}
-                  <strong className="text-foreground">Palm Beach</strong> counties — 8 with primary
-                  Medicare/ACA/health emphasis and 4 strong multi-line partners. Average Google rating
-                  ~4.9 stars across entries with sufficient review volume.
+                  {curatedConfig.summary}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {['Miami-Dade', 'Broward', 'Palm Beach'].map((county) => (
+                  {curatedConfig.counties.map((county) => (
                     <span
                       key={county}
                       className="rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust"
@@ -156,9 +152,14 @@ export default async function HubPage({
                       {county}
                     </span>
                   ))}
-                  <span className="rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground">
-                    Bilingual EN/ES available
-                  </span>
+                  {curatedConfig.badges?.map((badge) => (
+                    <span
+                      key={badge}
+                      className="rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground"
+                    >
+                      {badge}
+                    </span>
+                  ))}
                 </div>
                 <HubAgentTable agents={allAgents} hubName={hub.shortName} />
               </section>
@@ -169,9 +170,8 @@ export default async function HubPage({
                 Health Insurance Specialists in {hub.shortName}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {isSouthFlorida
-                  ? 'Top 3 featured: SFIB · Absolute Best Insurance · Medicare Advisors of South Florida'
-                  : '60% health emphasis · Featured Medicare/ACA agencies · Diverse-population brokers'}
+                {curatedConfig?.featuredHealthLine ??
+                  '60% health emphasis · Featured Medicare/ACA agencies · Diverse-population brokers'}
               </p>
               <div className="space-y-5">
                 {healthAgents.map((agent, i) => (
