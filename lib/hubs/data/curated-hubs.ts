@@ -39,6 +39,10 @@ import { INDIANAPOLIS_AGENTS } from '@/lib/hubs/data/indianapolis-agents';
 import { SALT_LAKE_CITY_AGENTS } from '@/lib/hubs/data/salt-lake-city-agents';
 import { MILWAUKEE_AGENTS } from '@/lib/hubs/data/milwaukee-agents';
 import { OKLAHOMA_CITY_AGENTS } from '@/lib/hubs/data/oklahoma-city-agents';
+import { LOUISVILLE_AGENTS } from '@/lib/hubs/data/louisville-agents';
+import { RICHMOND_AGENTS } from '@/lib/hubs/data/richmond-agents';
+import { BIRMINGHAM_AGENTS } from '@/lib/hubs/data/birmingham-agents';
+import { BUFFALO_AGENTS } from '@/lib/hubs/data/buffalo-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -491,6 +495,50 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Jason Hark · Eagle Group Associates · Joe Graves',
     healthFeaturedLimit: 8,
   },
+  louisville: {
+    slug: 'louisville',
+    sectionTitle: 'Louisville Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Jefferson, Oldham, Bullitt, and Shelby counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Healthcare and UPS logistics corridor benefits, Kentucky marketplace enrollment, and Ohio River bi-state commuters. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Jefferson', 'Oldham', 'Bullitt', 'Shelby'],
+    badges: ['Healthcare corridor · Kentucky marketplace · Ohio River bi-state'],
+    featuredHealthLine:
+      'Top 3 featured: Kim Ford · Hyland Insurance · Jason Hark',
+    healthFeaturedLimit: 8,
+  },
+  richmond: {
+    slug: 'richmond',
+    sectionTitle: 'Richmond Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Henrico, Chesterfield, Hanover, and Goochland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. State capital employee benefits, Virginia marketplace enrollment, and RVA tech-corridor growth. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Henrico', 'Chesterfield', 'Hanover', 'Goochland'],
+    badges: ['State capital · Virginia marketplace · RVA tech growth'],
+    featuredHealthLine:
+      'Top 3 featured: Chris Connell · Hyland Insurance · Travis Lane',
+    healthFeaturedLimit: 8,
+  },
+  birmingham: {
+    slug: 'birmingham',
+    sectionTitle: 'Birmingham Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Jefferson, Shelby, St. Clair, and Blount counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. UAB healthcare corridor employment, Alabama marketplace enrollment, and Hoover–Homewood suburban growth. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Jefferson', 'Shelby', 'St. Clair', 'Blount'],
+    badges: ['UAB healthcare · Alabama marketplace · Hoover suburbs'],
+    featuredHealthLine:
+      'Top 3 featured: Steve Adlman · Rebecca Brom · TaylorMade Insurance Hub',
+    healthFeaturedLimit: 8,
+  },
+  buffalo: {
+    slug: 'buffalo',
+    sectionTitle: 'Buffalo Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Erie, Niagara, Cattaraugus, and Chautauqua counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. NY State of Health enrollment, Buffalo Niagara medical corridor employment, and Canadian border commuter coverage. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Erie', 'Niagara', 'Cattaraugus', 'Chautauqua'],
+    badges: ['NY State of Health · Medical corridor · Border commuters'],
+    featuredHealthLine:
+      'Top 3 featured: Paul Reidenouer · Davies Agency · Krissy Tenhagen',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -534,6 +582,10 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   'salt-lake-city': SALT_LAKE_CITY_AGENTS,
   milwaukee: MILWAUKEE_AGENTS,
   'oklahoma-city': OKLAHOMA_CITY_AGENTS,
+  louisville: LOUISVILLE_AGENTS,
+  richmond: RICHMOND_AGENTS,
+  birmingham: BIRMINGHAM_AGENTS,
+  buffalo: BUFFALO_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
