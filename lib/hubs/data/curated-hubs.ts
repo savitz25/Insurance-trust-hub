@@ -11,6 +11,7 @@ import { NASHVILLE_AGENTS } from '@/lib/hubs/data/nashville-agents';
 import { MEMPHIS_AGENTS } from '@/lib/hubs/data/memphis-agents';
 import { CHATTANOOGA_AGENTS } from '@/lib/hubs/data/chattanooga-agents';
 import { KNOXVILLE_AGENTS } from '@/lib/hubs/data/knoxville-agents';
+import { CHICAGO_AGENTS } from '@/lib/hubs/data/chicago-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -155,6 +156,17 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: The Akers Solution · Beacon Group · Heritage Insurance Group',
     healthFeaturedLimit: 8,
   },
+  chicago: {
+    slug: 'chicago',
+    sectionTitle: 'Chicago Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Cook County with service to DuPage, Lake, Will, and Kane — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. One of the largest U.S. markets blending employer headquarters, union health funds, and Get Covered Illinois marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Cook', 'DuPage', 'Lake', 'Will', 'Kane'],
+    badges: ['Get Covered Illinois · Union benefits · Bilingual EN/ES'],
+    featuredHealthLine:
+      'Top 3 featured: Illinois Health Agents · The Health Insurance Shoppe · Victor Fuentes',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -170,6 +182,7 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   memphis: MEMPHIS_AGENTS,
   chattanooga: CHATTANOOGA_AGENTS,
   knoxville: KNOXVILLE_AGENTS,
+  chicago: CHICAGO_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
