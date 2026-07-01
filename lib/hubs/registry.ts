@@ -310,7 +310,32 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
   },
   // Remaining 35+ hubs (condensed metadata — full agent rosters generated programmatically)
   { slug: 'minneapolis', stateSlug: 'minnesota', stateCode: 'MN', stateName: 'Minnesota', msaName: 'Minneapolis-St. Paul-Bloomington', shortName: 'Twin Cities', population: 3_700_000, enrollmentHighlight: 'MNsure marketplace and Medtronic/retail HQ benefits', localDescriptor: 'Twin Cities families and healthcare corridor workers', priority: 16, zipCodes: ['55401', '55101', '55416'], healthInsuranceDensity: 'high', marketSnapshot: 'Twin Cities agents excel at MNsure ACA enrollment, Mayo-adjacent healthcare benefits, and winter property coverage bundled with health plans.', healthNeeds: ['MNsure ACA', 'Healthcare employer plans', 'Medicare Advantage'], metaTitle: 'Insurance Agents in Minneapolis-St. Paul (2026)', metaDescription: 'Verified health insurance agents in the Twin Cities metro.' },
-  { slug: 'tampa', stateSlug: 'florida', stateCode: 'FL', stateName: 'Florida', msaName: 'Tampa-St. Petersburg-Clearwater', shortName: 'Tampa Bay', population: 3_300_000, enrollmentHighlight: 'Medicare-heavy retiree market on Gulf Coast', localDescriptor: 'retirees, military veterans, and Gulf Coast families', priority: 17, zipCodes: ['33602', '33701', '34677'], healthInsuranceDensity: 'very-high', marketSnapshot: 'Tampa Bay rivals South Florida in Medicare density with strong VA-adjacent broker expertise and hurricane-season property/health bundling.', healthNeeds: ['Medicare Advantage', 'VA benefits coordination', 'Hurricane coverage'], metaTitle: 'Insurance Agents in Tampa Bay (2026)', metaDescription: 'Medicare and health insurance agents in Tampa-St. Petersburg-Clearwater.' },
+  {
+    slug: 'tampa',
+    stateSlug: 'florida',
+    stateCode: 'FL',
+    stateName: 'Florida',
+    msaName: 'Tampa-St. Petersburg-Clearwater',
+    shortName: 'Tampa Bay',
+    population: 3_300_000,
+    enrollmentHighlight: 'Medicare-heavy Gulf Coast retiree market with strong independent broker volume',
+    localDescriptor: 'retirees, military veterans, Tampa families, and St. Petersburg Gulf Coast communities',
+    priority: 17,
+    zipCodes: ['33602', '33701', '34677', '33544', '33764'],
+    healthInsuranceDensity: 'very-high',
+    marketSnapshot:
+      'Tampa Bay rivals South Florida in Medicare density across Hillsborough, Pinellas, and Pasco counties. Independent brokers like HealthPlan4U and Affordable Insurance Team serve Tampa seniors with 17+ carrier comparisons, while multi-line agencies with 2,000+ reviews shop 80+ carriers alongside VA-adjacent navigation and hurricane-season property/health bundling.',
+    healthNeeds: [
+      'Medicare Advantage (Hillsborough/Pinellas networks)',
+      'VA/TRICARE coordination',
+      'ACA for Tampa workforce',
+      'Group health (Bay area businesses)',
+      'Hurricane flood + health bundling',
+    ],
+    metaTitle: 'Insurance Agents in Tampa Bay (2026) | Hillsborough, Pinellas & Pasco',
+    metaDescription:
+      'Compare 12 verified independent insurance agents in Tampa-St. Petersburg-Clearwater. Medicare, ACA, and multi-line specialists across Hillsborough, Pinellas, and Pasco — DFS verified.',
+  },
   { slug: 'denver', stateSlug: 'colorado', stateCode: 'CO', stateName: 'Colorado', msaName: 'Denver-Aurora-Lakewood', shortName: 'Denver', population: 2_900_000, enrollmentHighlight: 'Connect for Health Colorado and outdoor-lifestyle relocations', localDescriptor: 'relocating professionals, outdoor enthusiasts, and cannabis-industry workers', priority: 18, zipCodes: ['80202', '80012', '80123'], healthInsuranceDensity: 'high', marketSnapshot: 'Denver\'s relocation boom drives ACA and employer plan demand. Agents navigate Connect for Health Colorado and wildfire property risks in foothill suburbs.', healthNeeds: ['Connect for Health CO', 'Relocation coverage', 'Wildfire property'], metaTitle: 'Insurance Agents in Denver Metro (2026)', metaDescription: 'Health insurance experts in Denver-Aurora-Lakewood.' },
   { slug: 'baltimore', stateSlug: 'maryland', stateCode: 'MD', stateName: 'Maryland', msaName: 'Baltimore-Columbia-Towson', shortName: 'Baltimore', population: 2_800_000, enrollmentHighlight: 'Maryland Health Connection and Johns Hopkins corridor', localDescriptor: 'healthcare workers, federal commuters, and Columbia planned community', priority: 19, zipCodes: ['21201', '21044', '21234'], healthInsuranceDensity: 'high', marketSnapshot: 'Baltimore agents serve Maryland Health Connection enrollees, Hopkins healthcare employees, and DC commuter benefit transitions.', healthNeeds: ['Maryland Health Connection', 'Healthcare worker plans', 'DC commuter benefits'], metaTitle: 'Insurance Agents in Baltimore Metro (2026)', metaDescription: 'Verified agents in Baltimore-Columbia-Towson.' },
   { slug: 'st-louis', stateSlug: 'missouri', stateCode: 'MO', stateName: 'Missouri', msaName: 'St. Louis', shortName: 'St. Louis', population: 2_800_000, enrollmentHighlight: 'Bi-state marketplace enrollment MO/IL', localDescriptor: 'bi-state families, healthcare, and manufacturing workers', priority: 20, zipCodes: ['63101', '63117', '62034'], healthInsuranceDensity: 'high', marketSnapshot: 'St. Louis spans Missouri and Illinois marketplaces, requiring agents with bi-state licensing for ACA and employer transitions.', healthNeeds: ['Bi-state ACA', 'Employer transitions', 'Medicare'], metaTitle: 'Insurance Agents in St. Louis (2026)', metaDescription: 'Health insurance agents serving Greater St. Louis.' },

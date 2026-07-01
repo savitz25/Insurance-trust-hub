@@ -2,6 +2,7 @@ import type { HubAgent } from '@/types/agent';
 import { JACKSONVILLE_AGENTS } from '@/lib/hubs/data/jacksonville-agents';
 import { ORLANDO_AGENTS } from '@/lib/hubs/data/orlando-agents';
 import { SOUTH_FLORIDA_AGENTS } from '@/lib/hubs/data/south-florida-agents';
+import { TAMPA_BAY_AGENTS } from '@/lib/hubs/data/tampa-bay-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -47,12 +48,24 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: The Medicare Dude · Florida Life & Health Exchange · Green Ins',
     healthFeaturedLimit: 7,
   },
+  tampa: {
+    slug: 'tampa',
+    sectionTitle: 'Tampa Bay Coverage Area',
+    summary:
+      '12 verified independent agencies across Hillsborough, Pinellas, and Pasco counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (with health or employee benefits capabilities). Average Google rating ~4.9 stars where review volume permits.',
+    counties: ['Hillsborough', 'Pinellas', 'Pasco'],
+    badges: ['Tampa · St. Petersburg · Clearwater'],
+    featuredHealthLine:
+      'Top 3 featured: HealthPlan4U · Affordable Insurance Team · The Medicare Dude',
+    healthFeaturedLimit: 7,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
   'miami-fort-lauderdale': SOUTH_FLORIDA_AGENTS,
   orlando: ORLANDO_AGENTS,
   jacksonville: JACKSONVILLE_AGENTS,
+  tampa: TAMPA_BAY_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
