@@ -28,6 +28,11 @@ import { SAN_ANTONIO_AGENTS } from '@/lib/hubs/data/san-antonio-agents';
 import { SACRAMENTO_AGENTS } from '@/lib/hubs/data/sacramento-agents';
 import { PITTSBURGH_AGENTS } from '@/lib/hubs/data/pittsburgh-agents';
 import { LAS_VEGAS_AGENTS } from '@/lib/hubs/data/las-vegas-agents';
+import { AUSTIN_AGENTS } from '@/lib/hubs/data/austin-agents';
+import { CINCINNATI_AGENTS } from '@/lib/hubs/data/cincinnati-agents';
+import { KANSAS_CITY_AGENTS } from '@/lib/hubs/data/kansas-city-agents';
+import { HARTFORD_AGENTS } from '@/lib/hubs/data/hartford-agents';
+import { DES_MOINES_AGENTS } from '@/lib/hubs/data/des-moines-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -359,6 +364,61 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       "Top 3 featured: James O'Neal · Tyler Insurance Group · Amos St. Louis",
     healthFeaturedLimit: 8,
   },
+  austin: {
+    slug: 'austin',
+    sectionTitle: 'Austin Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Travis, Williamson, Hays, and Bastrop counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tech-relocation ACA demand, startup contractor plans, and Hill Country Medicare growth. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Travis', 'Williamson', 'Hays', 'Bastrop'],
+    badges: ['Tech relocation · Bilingual EN/ES · Hill Country growth'],
+    featuredHealthLine:
+      'Top 3 featured: Rodney Powell · Custom Health Plans · Mark Lyne',
+    healthFeaturedLimit: 8,
+  },
+  cincinnati: {
+    slug: 'cincinnati',
+    sectionTitle: 'Greater Cincinnati Coverage Area',
+    summary:
+      '12 verified independent agencies across Hamilton, Butler, Clermont, and Warren counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tri-state OH/KY/IN marketplace enrollment, P&G corridor benefits, and UC Health retiree Medicare. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Hamilton', 'Butler', 'Clermont', 'Warren'],
+    badges: ['Tri-state ACA · P&G corridor · Ohio River communities'],
+    featuredHealthLine:
+      'Top 3 featured: Brian Moore · Ohio Health Insurance Consultants · Don Scheiderer',
+    healthFeaturedLimit: 8,
+  },
+  'kansas-city': {
+    slug: 'kansas-city',
+    sectionTitle: 'Kansas City Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Jackson, Clay, Platte (MO) and Johnson, Wyandotte (KS) — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Bi-state MO/KS marketplace enrollment, logistics employment, and bilingual Medicare expertise. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Jackson', 'Clay', 'Platte', 'Johnson', 'Wyandotte'],
+    badges: ['Bi-state MO/KS · Bilingual EN/ES · Logistics corridor'],
+    featuredHealthLine:
+      'Top 3 featured: Jeffrey Slibowski · AIS Health Insurance Advisors · George Ibanez',
+    healthFeaturedLimit: 8,
+  },
+  hartford: {
+    slug: 'hartford',
+    sectionTitle: 'Hartford Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Hartford, Tolland, Middlesex, and New London counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Access Health CT enrollment, insurance-industry employment hub, and capital-region group benefits. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Hartford', 'Tolland', 'Middlesex', 'New London'],
+    badges: ['Access Health CT · Insurance capital · Capital region'],
+    featuredHealthLine:
+      'Top 3 featured: Michael Andrews · Jaclyn Lasaracina · KPK Senior Insurance Solutions',
+    healthFeaturedLimit: 8,
+  },
+  'des-moines': {
+    slug: 'des-moines',
+    sectionTitle: 'Des Moines Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Polk, Dallas, Warren, and Madison counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Iowa marketplace enrollment, insurer-HQ employment corridor, and growing capital-city suburban demand. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Polk', 'Dallas', 'Warren', 'Madison'],
+    badges: ['Iowa marketplace · Insurer HQ corridor · Bilingual EN/ES'],
+    featuredHealthLine:
+      'Top 3 featured: Stephen Burgett · Iowa Health Agents · Bob Thompson',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -391,6 +451,11 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   sacramento: SACRAMENTO_AGENTS,
   pittsburgh: PITTSBURGH_AGENTS,
   'las-vegas': LAS_VEGAS_AGENTS,
+  austin: AUSTIN_AGENTS,
+  cincinnati: CINCINNATI_AGENTS,
+  'kansas-city': KANSAS_CITY_AGENTS,
+  hartford: HARTFORD_AGENTS,
+  'des-moines': DES_MOINES_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
