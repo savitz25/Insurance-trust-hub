@@ -7,6 +7,10 @@ import { CHARLOTTE_AGENTS } from '@/lib/hubs/data/charlotte-agents';
 import { RESEARCH_TRIANGLE_AGENTS } from '@/lib/hubs/data/research-triangle-agents';
 import { TRIAD_AGENTS } from '@/lib/hubs/data/triad-agents';
 import { TAMPA_BAY_AGENTS } from '@/lib/hubs/data/tampa-bay-agents';
+import { NASHVILLE_AGENTS } from '@/lib/hubs/data/nashville-agents';
+import { MEMPHIS_AGENTS } from '@/lib/hubs/data/memphis-agents';
+import { CHATTANOOGA_AGENTS } from '@/lib/hubs/data/chattanooga-agents';
+import { KNOXVILLE_AGENTS } from '@/lib/hubs/data/knoxville-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -107,6 +111,50 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Health Plans of NC · Blue Moon Benefits · Triad Insurance Partners',
     healthFeaturedLimit: 7,
   },
+  nashville: {
+    slug: 'nashville',
+    sectionTitle: 'Nashville Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Davidson, Williamson, and Rutherford counties (Rating Area 4) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. Corporate healthcare hub driven by HCA and employer-sponsored volume alongside competitive individual market with Oscar, Cigna, and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Davidson', 'Williamson', 'Rutherford'],
+    badges: ['HCA corridor · Oscar · Cigna · UHC'],
+    featuredHealthLine:
+      'Top 3 featured: The Jordan Insurance Agency · Madison Insurance Group (MIG) · Boyle Insurance Agency',
+    healthFeaturedLimit: 8,
+  },
+  memphis: {
+    slug: 'memphis',
+    sectionTitle: 'Memphis Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Shelby County and surrounding areas (Rating Area 6) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. Logistics-driven economy with FedEx-scale employer volume and competitive individual market featuring Oscar, Cigna, and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Shelby'],
+    badges: ['FedEx corridor · Logistics benefits · Narrow networks'],
+    featuredHealthLine:
+      'Top 3 featured: Higginbotham · Boyle Insurance Agency · Sneed Insurance Agency',
+    healthFeaturedLimit: 8,
+  },
+  chattanooga: {
+    slug: 'chattanooga',
+    sectionTitle: 'Chattanooga Market Coverage Area',
+    summary:
+      '12 verified independent agencies across Hamilton County (Rating Area 3) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. BCBS TN headquarters market with diverse carrier choices including Alliant Health Plans and the state\'s only Platinum-tier marketplace plans. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Hamilton'],
+    badges: ['BCBS TN HQ · Alliant Health · Platinum-tier ACA'],
+    featuredHealthLine:
+      'Top 3 featured: Atlas Insurance Agency · American Exchange · Justin Brock',
+    healthFeaturedLimit: 8,
+  },
+  knoxville: {
+    slug: 'knoxville',
+    sectionTitle: 'Knoxville & Tri-Cities Coverage Area',
+    summary:
+      '12 verified independent agencies across Knox, Blount, and Washington counties (Rating Areas 1 & 2) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. East Tennessee localized networks including Covenant Health and UT Medical Center alongside BCBS TN dominance. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Knox', 'Blount', 'Washington'],
+    badges: ['Covenant Health · UT Medical Center · BCBS TN'],
+    featuredHealthLine:
+      'Top 3 featured: The Akers Solution · Beacon Group · Heritage Insurance Group',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -118,6 +166,10 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   charlotte: CHARLOTTE_AGENTS,
   raleigh: RESEARCH_TRIANGLE_AGENTS,
   greensboro: TRIAD_AGENTS,
+  nashville: NASHVILLE_AGENTS,
+  memphis: MEMPHIS_AGENTS,
+  chattanooga: CHATTANOOGA_AGENTS,
+  knoxville: KNOXVILLE_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
