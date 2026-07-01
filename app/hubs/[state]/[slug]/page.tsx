@@ -5,6 +5,8 @@ import { Shield, MapPin, Users, Star } from 'lucide-react';
 import { getHubBySlug, getAllHubParams } from '@/lib/hubs/registry';
 import { getAgentsForHub, getFeaturedHealthAgents, getHubStats } from '@/lib/hubs/agents';
 import { AgentCard } from '@/components/agent-card';
+import { HubAgentTable } from '@/components/hub-agent-table';
+import { isSouthFloridaHub } from '@/lib/hubs/data/south-florida-agents';
 import { ZipSearch } from '@/components/zip-search';
 import { HubMatchForm } from '@/components/hub-match-form';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
@@ -51,6 +53,7 @@ export default async function HubPage({
   const healthAgents = getFeaturedHealthAgents(hub);
   const otherAgents = allAgents.filter((a) => !a.isHealthFeatured);
   const stats = getHubStats(hub);
+  const isSouthFlorida = isSouthFloridaHub(hub.slug);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -134,12 +137,41 @@ export default async function HubPage({
               </ul>
             </section>
 
+            {isSouthFlorida && (
+              <section>
+                <h2 className="text-2xl font-bold mb-2">Tri-County Coverage Area</h2>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  12 verified independent agencies across <strong className="text-foreground">Miami-Dade</strong>,{' '}
+                  <strong className="text-foreground">Broward</strong>, and{' '}
+                  <strong className="text-foreground">Palm Beach</strong> counties — 8 with primary
+                  Medicare/ACA/health emphasis and 4 strong multi-line partners. Average Google rating
+                  ~4.9 stars across entries with sufficient review volume.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {['Miami-Dade', 'Broward', 'Palm Beach'].map((county) => (
+                    <span
+                      key={county}
+                      className="rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust"
+                    >
+                      {county}
+                    </span>
+                  ))}
+                  <span className="rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground">
+                    Bilingual EN/ES available
+                  </span>
+                </div>
+                <HubAgentTable agents={allAgents} hubName={hub.shortName} />
+              </section>
+            )}
+
             <section>
               <h2 className="text-2xl font-bold mb-2">
                 Health Insurance Specialists in {hub.shortName}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                60% health emphasis · Featured Medicare/ACA agencies · Diverse-population brokers
+                {isSouthFlorida
+                  ? 'Top 3 featured: SFIB · Absolute Best Insurance · Medicare Advisors of South Florida'
+                  : '60% health emphasis · Featured Medicare/ACA agencies · Diverse-population brokers'}
               </p>
               <div className="space-y-5">
                 {healthAgents.map((agent, i) => (

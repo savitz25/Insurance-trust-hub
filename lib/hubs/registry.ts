@@ -136,11 +136,17 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     zipCodes: ['33101', '33139', '33301', '33024', '33401'],
     healthInsuranceDensity: 'very-high',
     marketSnapshot:
-      'South Florida leads the nation in Medicare Advantage enrollment density, with massive retiree migration driving supplement and Part D demand. ACA brokers serve diverse Miami-Dade families, while property insurers address hurricane and flood risks alongside health coverage.',
-    healthNeeds: ['Medicare Advantage comparison', 'Snowbird coverage transitions', 'ACA for service workers', 'Hurricane property + health'],
-    metaTitle: 'Insurance Agents in Miami & Fort Lauderdale (2026) | Medicare Experts',
+      'South Florida leads the nation in Medicare Advantage enrollment density across Miami-Dade, Broward, and Palm Beach counties. Independent brokers in Doral, Hollywood, Fort Lauderdale, Greenacres, and Boca Raton compare Advantage, supplement, and ACA plans for retirees, snowbirds, and bilingual families — with property insurers addressing hurricane and flood risks alongside health coverage.',
+    healthNeeds: [
+      'Medicare Advantage comparison (tri-county)',
+      'Bilingual ACA enrollment (Miami-Dade)',
+      'Snowbird coverage transitions',
+      'Palm Beach senior supplement plans',
+      'Hurricane property + health bundling',
+    ],
+    metaTitle: 'Insurance Agents in South Florida (2026) | Miami-Dade, Broward & Palm Beach',
     metaDescription:
-      'Top verified insurance agents in South Florida. Medicare Advantage, ACA, supplement plans, home, flood, and auto specialists serving retirees and families.',
+      'Compare 12 verified independent insurance agents across Miami-Dade, Broward, and Palm Beach. Medicare Advantage, ACA, supplement plans, and multi-line specialists — 4.9 avg rating, DFS verified.',
   },
   {
     slug: 'philadelphia',

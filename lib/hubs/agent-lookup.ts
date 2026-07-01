@@ -5,15 +5,19 @@ import type { HubAgent } from '@/types/agent';
 import type { Specialty } from '@/lib/constants';
 
 function hubAgentToProvider(agent: HubAgent): Provider {
+  const description = [agent.shortDescription, agent.reviewHighlight]
+    .filter(Boolean)
+    .join(' ');
+
   return {
     id: agent.id,
     slug: agent.slug,
     name: agent.name,
     short_description: agent.shortDescription,
-    description: agent.shortDescription,
+    description,
     city: agent.city,
     state: agent.state,
-    phone: null,
+    phone: agent.phone ?? null,
     website: agent.website ?? null,
     license_number: agent.licenseNumber,
     insurance_types: agent.insuranceTypes,

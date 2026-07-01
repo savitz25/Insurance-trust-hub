@@ -1,5 +1,6 @@
 import type { HubAgent, InsuranceHub } from '@/types/agent';
 import type { InsuranceType, Specialty } from '@/lib/constants';
+import { SOUTH_FLORIDA_AGENTS, isSouthFloridaHub } from '@/lib/hubs/data/south-florida-agents';
 
 const HEALTH_AGENCY_NAMES = [
   'Summit Health Partners',
@@ -122,7 +123,21 @@ function buildAgent(
   };
 }
 
+function sortAgents(agents: HubAgent[]): HubAgent[] {
+  return [...agents].sort((a, b) => {
+    if (a.featuredRank != null && b.featuredRank != null) {
+      return a.featuredRank - b.featuredRank;
+    }
+    if (a.isHealthFeatured !== b.isHealthFeatured) return a.isHealthFeatured ? -1 : 1;
+    return b.trustScore - a.trustScore;
+  });
+}
+
 export function getAgentsForHub(hub: InsuranceHub): HubAgent[] {
+  if (isSouthFloridaHub(hub.slug)) {
+    return sortAgents(SOUTH_FLORIDA_AGENTS);
+  }
+
   const agents: HubAgent[] = [];
 
   // 4-6 featured health specialists
@@ -145,14 +160,12 @@ export function getAgentsForHub(hub: InsuranceHub): HubAgent[] {
     agents.push(buildAgent(hub, `${name}`, healthCount + i, { isHealthFeatured: false }));
   }
 
-  return agents.sort((a, b) => {
-    if (a.isHealthFeatured !== b.isHealthFeatured) return a.isHealthFeatured ? -1 : 1;
-    return b.trustScore - a.trustScore;
-  });
+  return sortAgents(agents);
 }
 
 export function getFeaturedHealthAgents(hub: InsuranceHub): HubAgent[] {
-  return getAgentsForHub(hub).filter((a) => a.isHealthFeatured).slice(0, 6);
+  const limit = isSouthFloridaHub(hub.slug) ? 8 : 6;
+  return getAgentsForHub(hub).filter((a) => a.isHealthFeatured).slice(0, limit);
 }
 
 export function getHubStats(hub: InsuranceHub) {

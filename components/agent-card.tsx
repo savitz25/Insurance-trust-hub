@@ -13,7 +13,12 @@ interface AgentCardProps {
 }
 
 export function AgentCard({ agent, rank, hubLabel, className }: AgentCardProps) {
-  const locationLine = [agent.city, agent.state, hubLabel ? `Serves ${hubLabel}` : undefined]
+  const locationLine = [
+    agent.city,
+    agent.state,
+    agent.county ? `${agent.county} County` : undefined,
+    hubLabel ? `Serves ${hubLabel}` : undefined,
+  ]
     .filter(Boolean)
     .join(' · ');
 
@@ -66,6 +71,19 @@ export function AgentCard({ agent, rank, hubLabel, className }: AgentCardProps) 
 
       <p className="mb-4 text-sm leading-relaxed text-muted-foreground">{agent.shortDescription}</p>
 
+      {agent.reviewHighlight && (
+        <blockquote className="mb-4 border-l-2 border-trust/40 pl-3 text-xs italic text-muted-foreground leading-relaxed">
+          {agent.reviewHighlight}
+        </blockquote>
+      )}
+
+      {agent.awards && agent.awards.length > 0 && (
+        <p className="mb-4 text-xs text-muted-foreground">
+          <span className="font-medium text-foreground">Recognition:</span>{' '}
+          {agent.awards.join(' · ')}
+        </p>
+      )}
+
       <div className="mb-4 flex flex-wrap gap-1.5" aria-label="Specialties">
         {healthBadges.map((badge) => (
           <Badge key={badge} variant={badge.includes('Medicare') || badge.includes('ACA') ? 'success' : 'secondary'}>
@@ -108,6 +126,11 @@ export function AgentCard({ agent, rank, hubLabel, className }: AgentCardProps) 
           <span className="text-xs text-muted-foreground">NAIC Verified · BBB {agent.bbbRating}</span>
         </div>
         <div className="flex gap-2">
+          {agent.phone && (
+            <Button size="sm" variant="outline" asChild>
+              <a href={`tel:${agent.phone.replace(/\D/g, '')}`}>{agent.phone}</a>
+            </Button>
+          )}
           <Button size="sm" variant="trust" asChild>
             <Link href={`/providers/${agent.slug}#quote`}>Get Free Health Quote</Link>
           </Button>

@@ -35,7 +35,15 @@ export interface HubAgent {
   isMedicareFeatured: boolean;
   isDiversePopulations: boolean;
   website?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  county?: string;
+  contactPerson?: string;
+  reviewHighlight?: string;
+  awards?: string[];
   yearsInBusiness: number;
+  featuredRank?: number;
 }
 
 export interface InsuranceHub {
