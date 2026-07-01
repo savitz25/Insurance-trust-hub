@@ -43,6 +43,7 @@ import { LOUISVILLE_AGENTS } from '@/lib/hubs/data/louisville-agents';
 import { RICHMOND_AGENTS } from '@/lib/hubs/data/richmond-agents';
 import { BIRMINGHAM_AGENTS } from '@/lib/hubs/data/birmingham-agents';
 import { BUFFALO_AGENTS } from '@/lib/hubs/data/buffalo-agents';
+import { PROVIDENCE_AGENTS } from '@/lib/hubs/data/providence-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -536,7 +537,18 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     counties: ['Erie', 'Niagara', 'Cattaraugus', 'Chautauqua'],
     badges: ['NY State of Health · Medical corridor · Border commuters'],
     featuredHealthLine:
-      'Top 3 featured: Paul Reidenouer · Davies Agency · Krissy Tenhagen',
+      'Top 3 featured: Paul Reidenouer · WNY Medicare Advisors · Krissy Tenhagen',
+    healthFeaturedLimit: 8,
+  },
+  providence: {
+    slug: 'providence',
+    sectionTitle: 'Providence Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Providence, Kent, and Bristol counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. HealthSource RI enrollment, Brown University corridor benefits, and Boston commuter health transitions. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Providence', 'Kent', 'Bristol'],
+    badges: ['HealthSource RI · Boston commuters · Coastal communities'],
+    featuredHealthLine:
+      'Top 3 featured: Christian Soucy · Brenna Anderson · Elite Insurance LLC',
     healthFeaturedLimit: 8,
   },
 };
@@ -586,6 +598,7 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   richmond: RICHMOND_AGENTS,
   birmingham: BIRMINGHAM_AGENTS,
   buffalo: BUFFALO_AGENTS,
+  providence: PROVIDENCE_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
