@@ -33,6 +33,12 @@ import { CINCINNATI_AGENTS } from '@/lib/hubs/data/cincinnati-agents';
 import { KANSAS_CITY_AGENTS } from '@/lib/hubs/data/kansas-city-agents';
 import { HARTFORD_AGENTS } from '@/lib/hubs/data/hartford-agents';
 import { DES_MOINES_AGENTS } from '@/lib/hubs/data/des-moines-agents';
+import { SAN_JOSE_AGENTS } from '@/lib/hubs/data/san-jose-agents';
+import { COLUMBUS_AGENTS } from '@/lib/hubs/data/columbus-agents';
+import { INDIANAPOLIS_AGENTS } from '@/lib/hubs/data/indianapolis-agents';
+import { SALT_LAKE_CITY_AGENTS } from '@/lib/hubs/data/salt-lake-city-agents';
+import { MILWAUKEE_AGENTS } from '@/lib/hubs/data/milwaukee-agents';
+import { OKLAHOMA_CITY_AGENTS } from '@/lib/hubs/data/oklahoma-city-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -419,6 +425,72 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Stephen Burgett · Iowa Health Agents · Bob Thompson',
     healthFeaturedLimit: 8,
   },
+  'san-jose': {
+    slug: 'san-jose',
+    sectionTitle: 'Silicon Valley Coverage Area',
+    summary:
+      '12 verified independent agencies across Santa Clara County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California high-income cliffs, tech equity transitions, and startup benefits navigation. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Santa Clara'],
+    badges: ['Silicon Valley · Covered California · Bilingual EN/ES'],
+    featuredHealthLine:
+      'Top 3 featured: Gary Church · Pete Randazzo · Nicole Daman Insurance Services',
+    healthFeaturedLimit: 8,
+  },
+  columbus: {
+    slug: 'columbus',
+    sectionTitle: 'Columbus Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Franklin, Delaware, Fairfield, and Licking counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. State capital employee benefits, Ohio State corridor enrollment, and insurance-industry employment hub. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Franklin', 'Delaware', 'Fairfield', 'Licking'],
+    badges: ['State capital · Ohio marketplace · OSU corridor'],
+    featuredHealthLine:
+      'Top 3 featured: Brian Moore · Hyers & Associates · Nica Langdon',
+    healthFeaturedLimit: 8,
+  },
+  indianapolis: {
+    slug: 'indianapolis',
+    sectionTitle: 'Indianapolis Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Marion, Hamilton, Hendricks, Johnson, and Hancock counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Healthcare employment benefits, Indiana marketplace enrollment, and growing capital-city suburban demand. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Marion', 'Hamilton', 'Hendricks', 'Johnson', 'Hancock'],
+    badges: ['Healthcare corridor · Indiana marketplace · Carmel suburbs'],
+    featuredHealthLine:
+      'Top 3 featured: Jason Hark · Indyhealthagent · Michael Wehner',
+    healthFeaturedLimit: 8,
+  },
+  'salt-lake-city': {
+    slug: 'salt-lake-city',
+    sectionTitle: 'Salt Lake Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Salt Lake, Davis, Weber, and Utah counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Young-family growth, Silicon Slopes tech relocation, and Utah marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Salt Lake', 'Davis', 'Weber', 'Utah'],
+    badges: ['Silicon Slopes · Utah marketplace · Family health plans'],
+    featuredHealthLine:
+      'Top 3 featured: Justin Call · Ark Insurance Solutions · Trevor Snell',
+    healthFeaturedLimit: 8,
+  },
+  milwaukee: {
+    slug: 'milwaukee',
+    sectionTitle: 'Milwaukee Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Milwaukee, Waukesha, Ozaukee, and Washington counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Manufacturing benefit transitions, Wisconsin marketplace enrollment, and lakefront community Medicare growth. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Milwaukee', 'Waukesha', 'Ozaukee', 'Washington'],
+    badges: ['Manufacturing benefits · Wisconsin marketplace · Lakefront communities'],
+    featuredHealthLine:
+      'Top 3 featured: William Kravit · MKE Benefits · Frank Souk',
+    healthFeaturedLimit: 8,
+  },
+  'oklahoma-city': {
+    slug: 'oklahoma-city',
+    sectionTitle: 'Oklahoma City Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Oklahoma, Canadian, and Cleveland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Energy sector benefits, Tinker AFB military families, and Oklahoma marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Oklahoma', 'Canadian', 'Cleveland'],
+    badges: ['Energy sector · Military families · Oklahoma marketplace'],
+    featuredHealthLine:
+      'Top 3 featured: Jason Hark · Eagle Group Associates · Joe Graves',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -456,6 +528,12 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   'kansas-city': KANSAS_CITY_AGENTS,
   hartford: HARTFORD_AGENTS,
   'des-moines': DES_MOINES_AGENTS,
+  'san-jose': SAN_JOSE_AGENTS,
+  columbus: COLUMBUS_AGENTS,
+  indianapolis: INDIANAPOLIS_AGENTS,
+  'salt-lake-city': SALT_LAKE_CITY_AGENTS,
+  milwaukee: MILWAUKEE_AGENTS,
+  'oklahoma-city': OKLAHOMA_CITY_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
