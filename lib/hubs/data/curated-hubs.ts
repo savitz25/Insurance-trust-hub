@@ -12,6 +12,9 @@ import { MEMPHIS_AGENTS } from '@/lib/hubs/data/memphis-agents';
 import { CHATTANOOGA_AGENTS } from '@/lib/hubs/data/chattanooga-agents';
 import { KNOXVILLE_AGENTS } from '@/lib/hubs/data/knoxville-agents';
 import { CHICAGO_AGENTS } from '@/lib/hubs/data/chicago-agents';
+import { DALLAS_FORT_WORTH_AGENTS } from '@/lib/hubs/data/dallas-fort-worth-agents';
+import { HOUSTON_AGENTS } from '@/lib/hubs/data/houston-agents';
+import { WASHINGTON_DC_AGENTS } from '@/lib/hubs/data/washington-dc-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -167,6 +170,39 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Illinois Health Agents · The Health Insurance Shoppe · Victor Fuentes',
     healthFeaturedLimit: 8,
   },
+  'dallas-fort-worth': {
+    slug: 'dallas-fort-worth',
+    sectionTitle: 'DFW Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Dallas and Tarrant counties with service to Collin, Denton, and Ellis — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Fastest-growing large MSA with corporate HQ employer volume and HealthCare.gov individual competition. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Dallas', 'Tarrant', 'Collin', 'Denton', 'Ellis'],
+    badges: ['Corporate relocations · BCBS TX · Plano/Frisco growth'],
+    featuredHealthLine:
+      'Top 3 featured: Custom Health Plans · John Lynch (Dallas Health Agent) · Selected Benefits',
+    healthFeaturedLimit: 8,
+  },
+  houston: {
+    slug: 'houston',
+    sectionTitle: 'Houston Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Harris County with service to Fort Bend, Montgomery, Brazoria, and Galveston — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Energy, healthcare, and port/logistics employer volume alongside diverse ACA and Medicare demand. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Harris', 'Fort Bend', 'Montgomery', 'Brazoria'],
+    badges: ['Texas Medical Center · Energy sector · Bilingual EN/ES'],
+    featuredHealthLine:
+      'Top 3 featured: Selected Benefits · Ruben Trejo · Rodney Powell',
+    healthFeaturedLimit: 8,
+  },
+  'washington-dc': {
+    slug: 'washington-dc',
+    sectionTitle: 'DC Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across DC, Maryland (Montgomery, Prince George\'s), and Virginia (Arlington, Fairfax, Alexandria) — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Federal FEHB, contractor transitions, and tri-jurisdictional marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+    counties: ['District of Columbia', 'Montgomery', 'Prince George\'s', 'Arlington', 'Fairfax'],
+    badges: ['FEHB · NoVA tech corridor · DC/MD/VA licensed'],
+    featuredHealthLine:
+      'Top 3 featured: Linda McGill · Zahra Gharany · Cory Weaver',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -183,6 +219,9 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   chattanooga: CHATTANOOGA_AGENTS,
   knoxville: KNOXVILLE_AGENTS,
   chicago: CHICAGO_AGENTS,
+  'dallas-fort-worth': DALLAS_FORT_WORTH_AGENTS,
+  houston: HOUSTON_AGENTS,
+  'washington-dc': WASHINGTON_DC_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
