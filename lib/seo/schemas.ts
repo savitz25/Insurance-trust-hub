@@ -6,7 +6,7 @@ export const organizationSchema = {
   '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/brand/insurance-trust-hub-logo.png`,
+  logo: `${SITE_URL}/brand/insurance-trust-hub-logo-stacked.png`,
   email: SITE_EMAIL,
   contactPoint: {
     '@type': 'ContactPoint',
@@ -90,7 +90,7 @@ export function buildLocalBusinessSchema(provider: Provider) {
     '@type': 'LocalBusiness',
     '@id': `${SITE_URL}/providers/${provider.slug}/#localbusiness`,
     name: provider.name,
-    image: provider.logo ?? `${SITE_URL}/brand/insurance-trust-hub-logo.png`,
+    image: provider.logo ?? `${SITE_URL}/brand/insurance-trust-hub-icon-192.png`,
     url: provider.website ?? `${SITE_URL}/providers/${provider.slug}`,
     telephone: provider.phone ?? undefined,
     address: {

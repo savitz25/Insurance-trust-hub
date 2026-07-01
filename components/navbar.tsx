@@ -1,12 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
+import { BrandLogo } from '@/components/BrandLogo';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-
 const NAV_LINKS = [
   { href: '/directory', label: 'DIRECTORIES' },
   { href: '/hubs', label: 'HEALTH HUBS' },
@@ -24,18 +22,7 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link prefetch={false} href="/" className="group">
-            <Image
-              src="/brand/insurance-trust-hub-logo.png"
-              alt="Insurance Trust Hub — trusted insurance agent directory"
-              width={280}
-              height={56}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 180px, 280px"
-              className="h-12 w-auto transition-transform group-hover:scale-[1.02] max-w-[280px]"
-            />
-          </Link>
+          <BrandLogo priority />
           <div className="hidden md:flex items-center rounded-full bg-trust/10 px-2 py-0.5 text-[9px] font-semibold tracking-[1px] text-trust border border-trust/20">
             INDEPENDENT
           </div>

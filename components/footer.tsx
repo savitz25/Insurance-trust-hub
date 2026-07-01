@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { BrandLogoStacked } from '@/components/BrandLogo';
 import { DISCLAIMER, MOVE_TRUST_HUB_URL, SITE_EMAIL, SITE_NAME } from '@/lib/constants';
 
 export function Footer() {
@@ -10,18 +10,8 @@ export function Footer() {
       <div className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-y-9">
           <div className="col-span-2 md:col-span-1">
-            <Link prefetch={false} href="/" className="flex items-center gap-2 font-semibold text-base tracking-tight">
-              <span className="relative block h-12 w-[200px] shrink-0" aria-hidden="true">
-                <Image
-                  src="/brand/insurance-trust-hub-logo.png"
-                  alt=""
-                  width={200}
-                  height={48}
-                  loading="lazy"
-                  sizes="200px"
-                  className="h-12 w-[200px] object-contain object-left"
-                />
-              </span>
+            <Link prefetch={false} href="/" className="inline-block">
+              <BrandLogoStacked />
             </Link>
             <p className="mt-2.5 text-sm text-muted-foreground max-w-[220px] leading-snug">
               Independent directory for licensed insurance agencies nationwide.
