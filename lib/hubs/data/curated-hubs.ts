@@ -44,6 +44,12 @@ import { RICHMOND_AGENTS } from '@/lib/hubs/data/richmond-agents';
 import { BIRMINGHAM_AGENTS } from '@/lib/hubs/data/birmingham-agents';
 import { BUFFALO_AGENTS } from '@/lib/hubs/data/buffalo-agents';
 import { PROVIDENCE_AGENTS } from '@/lib/hubs/data/providence-agents';
+import { NEW_ORLEANS_AGENTS } from '@/lib/hubs/data/new-orleans-agents';
+import { HONOLULU_AGENTS } from '@/lib/hubs/data/honolulu-agents';
+import { ALBUQUERQUE_AGENTS } from '@/lib/hubs/data/albuquerque-agents';
+import { TUCSON_AGENTS } from '@/lib/hubs/data/tucson-agents';
+import { FRESNO_AGENTS } from '@/lib/hubs/data/fresno-agents';
+import { OMAHA_AGENTS } from '@/lib/hubs/data/omaha-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -551,6 +557,72 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Christian Soucy · Brenna Anderson · Elite Insurance LLC',
     healthFeaturedLimit: 8,
   },
+  'new-orleans': {
+    slug: 'new-orleans',
+    sectionTitle: 'New Orleans Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Orleans, Jefferson, St. Tammany, and Plaquemines parishes — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Louisiana marketplace enrollment, tourism-worker ACA gaps, and hurricane-zone property bundling. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Orleans', 'Jefferson', 'St. Tammany', 'Plaquemines'],
+    badges: ['Louisiana marketplace · Tourism workers · Gulf Coast resilience'],
+    featuredHealthLine:
+      'Top 3 featured: Noelle Laderer · David Normand Insurance · Paul Granen',
+    healthFeaturedLimit: 8,
+  },
+  honolulu: {
+    slug: 'honolulu',
+    sectionTitle: 'Honolulu Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Honolulu County on Oahu — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Hawaii marketplace expertise, military/TRICARE coordination, and island-wide employer health. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Honolulu'],
+    badges: ['Hawaii marketplace · Military/TRICARE · Island-wide service'],
+    featuredHealthLine:
+      'Top 3 featured: Premier Benefit Consultants · Senior Benefits Consultants · Proinsurance Hawaii',
+    healthFeaturedLimit: 8,
+  },
+  albuquerque: {
+    slug: 'albuquerque',
+    sectionTitle: 'Albuquerque Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Bernalillo, Sandoval, Valencia, and Torrance counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. beWellnm marketplace enrollment, Sandia labs corridor benefits, and diverse Native community health needs. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Bernalillo', 'Sandoval', 'Valencia', 'Torrance'],
+    badges: ['beWellnm · Sandia labs · Southwest growth'],
+    featuredHealthLine:
+      'Top 3 featured: Janix Barbosa-LLanos · Angelica Lopez · Linton & Associates',
+    healthFeaturedLimit: 8,
+  },
+  tucson: {
+    slug: 'tucson',
+    sectionTitle: 'Tucson Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Pima County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Retiree Medicare demand, university and Davis-Monthan military health navigation, and bilingual enrollment support. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Pima'],
+    badges: ['Retiree destination · University corridor · Bilingual EN/ES available'],
+    featuredHealthLine:
+      'Top 3 featured: Eli Roque · Lehrman Group Health Insurance Brokers · Wade Lashley',
+    healthFeaturedLimit: 8,
+  },
+  fresno: {
+    slug: 'fresno',
+    sectionTitle: 'Fresno Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Fresno County and the Central Valley — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California enrollment, agricultural worker Medi-Cal transitions, and Clovis suburban growth. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Fresno', 'Madera', 'Kings', 'Tulare'],
+    badges: ['Covered California · Agricultural workforce · Central Valley'],
+    featuredHealthLine:
+      'Top 3 featured: Shawn Yeatts · Denise Cagle · Valley Capital Advisors LLC',
+    healthFeaturedLimit: 8,
+  },
+  omaha: {
+    slug: 'omaha',
+    sectionTitle: 'Omaha Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Douglas, Sarpy, Washington, and Cass counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Nebraska marketplace enrollment, insurance-industry employment expertise, and bi-state Council Bluffs coordination. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Douglas', 'Sarpy', 'Washington', 'Cass'],
+    badges: ['Nebraska marketplace · Insurance industry hub · Bi-state enrollment'],
+    featuredHealthLine:
+      'Top 3 featured: Christopher Grimmond · Depke Insurance Agency · Jodie Enenbach Moreno',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -599,6 +671,12 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   birmingham: BIRMINGHAM_AGENTS,
   buffalo: BUFFALO_AGENTS,
   providence: PROVIDENCE_AGENTS,
+  'new-orleans': NEW_ORLEANS_AGENTS,
+  honolulu: HONOLULU_AGENTS,
+  albuquerque: ALBUQUERQUE_AGENTS,
+  tucson: TUCSON_AGENTS,
+  fresno: FRESNO_AGENTS,
+  omaha: OMAHA_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
