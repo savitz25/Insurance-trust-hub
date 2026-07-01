@@ -17,6 +17,8 @@ import { HOUSTON_AGENTS } from '@/lib/hubs/data/houston-agents';
 import { WASHINGTON_DC_AGENTS } from '@/lib/hubs/data/washington-dc-agents';
 import { BOSTON_AGENTS } from '@/lib/hubs/data/boston-agents';
 import { DETROIT_AGENTS } from '@/lib/hubs/data/detroit-agents';
+import { SEATTLE_AGENTS } from '@/lib/hubs/data/seattle-agents';
+import { INLAND_EMPIRE_AGENTS } from '@/lib/hubs/data/inland-empire-agents';
 
 export interface CuratedHubConfig {
   slug: string;
@@ -227,6 +229,28 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Shaun & Elizabeth Abshire · Vicki Ferguson · Michigan Planners',
     healthFeaturedLimit: 8,
   },
+  seattle: {
+    slug: 'seattle',
+    sectionTitle: 'Puget Sound Coverage Area',
+    summary:
+      '12 verified independent agencies across King County with service to Snohomish, Pierce, and Kitsap — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tech employer benefits, Washington Healthplanfinder enrollment, and contractor 1099 coverage drive competitive Puget Sound options. Average Google rating ~4.8–5.0 stars.',
+    counties: ['King', 'Snohomish', 'Pierce', 'Kitsap'],
+    badges: ['Healthplanfinder · Amazon/Microsoft corridor · Eastside'],
+    featuredHealthLine:
+      'Top 3 featured: Jason Hark · Team Health Insurance · Nick Casanova',
+    healthFeaturedLimit: 8,
+  },
+  'riverside-san-bernardino': {
+    slug: 'riverside-san-bernardino',
+    sectionTitle: 'Inland Empire Coverage Area',
+    summary:
+      '12 verified independent agencies across Riverside and San Bernardino counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. LA overflow migration, logistics employment, and affordable Covered California enrollment drive growing Inland Empire demand. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Riverside', 'San Bernardino'],
+    badges: ['Covered California · Medi-Cal transitions · Bilingual EN/ES'],
+    featuredHealthLine:
+      'Top 3 featured: Cynthia Nakaya · Dee Thomas Agency · Michael Ryan',
+    healthFeaturedLimit: 8,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -248,6 +272,8 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   'washington-dc': WASHINGTON_DC_AGENTS,
   boston: BOSTON_AGENTS,
   detroit: DETROIT_AGENTS,
+  seattle: SEATTLE_AGENTS,
+  'riverside-san-bernardino': INLAND_EMPIRE_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
