@@ -1,4 +1,5 @@
 import type { HubAgent } from '@/types/agent';
+import { JACKSONVILLE_AGENTS } from '@/lib/hubs/data/jacksonville-agents';
 import { ORLANDO_AGENTS } from '@/lib/hubs/data/orlando-agents';
 import { SOUTH_FLORIDA_AGENTS } from '@/lib/hubs/data/south-florida-agents';
 
@@ -35,11 +36,23 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: The Medicare Dude · Benson Insurance · Insurance Pro Florida',
     healthFeaturedLimit: 6,
   },
+  jacksonville: {
+    slug: 'jacksonville',
+    sectionTitle: 'Northeast Florida Coverage Area',
+    summary:
+      '12 verified independent agencies across Duval, St. Johns, Clay, and Nassau counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (several with group health or cross-sell capabilities). Average Google rating ~4.9 stars where review volume permits.',
+    counties: ['Duval', 'St. Johns', 'Clay', 'Nassau'],
+    badges: ['First Coast · Jacksonville metro'],
+    featuredHealthLine:
+      'Top 3 featured: The Medicare Dude · Florida Life & Health Exchange · Green Ins',
+    healthFeaturedLimit: 7,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
   'miami-fort-lauderdale': SOUTH_FLORIDA_AGENTS,
   orlando: ORLANDO_AGENTS,
+  jacksonville: JACKSONVILLE_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
