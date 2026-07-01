@@ -3,6 +3,9 @@ import { JACKSONVILLE_AGENTS } from '@/lib/hubs/data/jacksonville-agents';
 import { ORLANDO_AGENTS } from '@/lib/hubs/data/orlando-agents';
 import { SOUTH_FLORIDA_AGENTS } from '@/lib/hubs/data/south-florida-agents';
 import { ATLANTA_AGENTS } from '@/lib/hubs/data/atlanta-agents';
+import { CHARLOTTE_AGENTS } from '@/lib/hubs/data/charlotte-agents';
+import { RESEARCH_TRIANGLE_AGENTS } from '@/lib/hubs/data/research-triangle-agents';
+import { TRIAD_AGENTS } from '@/lib/hubs/data/triad-agents';
 import { TAMPA_BAY_AGENTS } from '@/lib/hubs/data/tampa-bay-agents';
 
 export interface CuratedHubConfig {
@@ -71,6 +74,39 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
       'Top 3 featured: Georgia Health Insurance · iHealthBrokers · The Big 65',
     healthFeaturedLimit: 7,
   },
+  charlotte: {
+    slug: 'charlotte',
+    sectionTitle: 'Charlotte Metro Coverage Area',
+    summary:
+      '12 verified independent agencies across Mecklenburg, Union, Cabarrus, and Gaston counties — 7 with large-group, Medicare, or ACA emphasis and 5 multi-line independents. Corporate health battleground for banking, tech, and healthcare with Atrium Health and Oscar Health network alignments. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Mecklenburg', 'Union', 'Cabarrus', 'Gaston'],
+    badges: ['Atrium Health · Oscar · Corporate benefits'],
+    featuredHealthLine:
+      'Top 3 featured: Benefits Bridge · Health Plans of NC · Insurance People of the Carolinas',
+    healthFeaturedLimit: 7,
+  },
+  raleigh: {
+    slug: 'raleigh',
+    sectionTitle: 'Research Triangle Coverage Area',
+    summary:
+      '12 verified independent agencies across Wake, Durham, and Orange counties — 7 with employer-sponsored group, ACA, or Medicare capabilities and 5 multi-line independents. Competitive tech, biotech, and university market dominated by BCBSNC and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Wake', 'Durham', 'Orange'],
+    badges: ['BCBSNC · UnitedHealthcare · RTP · UNC/Duke'],
+    featuredHealthLine:
+      'Top 3 featured: Health Plans of NC · Triangle Employee Benefits · Benefits Bridge',
+    healthFeaturedLimit: 7,
+  },
+  greensboro: {
+    slug: 'greensboro',
+    sectionTitle: 'The Triad Coverage Area',
+    summary:
+      '12 verified independent agencies across Guilford and Forsyth counties (Greensboro, Winston-Salem, High Point) — 7 with health/group/Medicare emphasis and 5 multi-line independents. Tiered network expertise around Novant Health and Atrium Health Wake Forest Baptist via BCBSNC Blue Home/Blue Local. Average Google rating ~4.8–5.0 stars.',
+    counties: ['Guilford', 'Forsyth'],
+    badges: ['Novant · Atrium WFB · BCBSNC tiered networks'],
+    featuredHealthLine:
+      'Top 3 featured: Health Plans of NC · Blue Moon Benefits · Triad Insurance Partners',
+    healthFeaturedLimit: 7,
+  },
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
@@ -79,6 +115,9 @@ const CURATED_AGENTS: Record<string, HubAgent[]> = {
   jacksonville: JACKSONVILLE_AGENTS,
   tampa: TAMPA_BAY_AGENTS,
   atlanta: ATLANTA_AGENTS,
+  charlotte: CHARLOTTE_AGENTS,
+  raleigh: RESEARCH_TRIANGLE_AGENTS,
+  greensboro: TRIAD_AGENTS,
 };
 
 export function getCuratedHubConfig(slug: string): CuratedHubConfig | null {
