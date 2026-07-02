@@ -67,7 +67,7 @@ function buildProvider(index: number): Provider {
   const prefix = AGENCY_PREFIXES[index % AGENCY_PREFIXES.length];
   const suffix = AGENCY_SUFFIXES[Math.floor(index / AGENCY_PREFIXES.length) % AGENCY_SUFFIXES.length];
   const name = `${prefix} ${suffix}`;
-  const slug = `${prefix.toLowerCase()}-${suffix.toLowerCase().replace(/\s+/g, '-')}-${city.toLowerCase()}-${state.toLowerCase()}`;
+  const slug = `${prefix.toLowerCase()}-${suffix.toLowerCase().replace(/\s+/g, '-')}-${city.toLowerCase().replace(/\s+/g, '-')}-${state.toLowerCase()}`;
   const types = TYPE_SETS[index % TYPE_SETS.length];
   const specialties = SPECIALTY_SETS[index % SPECIALTY_SETS.length];
   const rating = Number((3.8 + (index % 12) * 0.1).toFixed(1));
