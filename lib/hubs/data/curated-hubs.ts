@@ -2,6 +2,7 @@ import type { HubAgent } from '@/types/agent';
 import { JACKSONVILLE_AGENTS } from '@/lib/hubs/data/jacksonville-agents';
 import { ORLANDO_AGENTS } from '@/lib/hubs/data/orlando-agents';
 import { SOUTH_FLORIDA_AGENTS } from '@/lib/hubs/data/south-florida-agents';
+import { getSouthFloridaCountyAgents } from '@/lib/hubs/county-agents';
 import { ATLANTA_AGENTS } from '@/lib/hubs/data/atlanta-agents';
 import { CHARLOTTE_AGENTS } from '@/lib/hubs/data/charlotte-agents';
 import { RESEARCH_TRIANGLE_AGENTS } from '@/lib/hubs/data/research-triangle-agents';
@@ -62,6 +63,36 @@ export interface CuratedHubConfig {
 }
 
 export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
+  'miami-dade': {
+    slug: 'miami-dade',
+    sectionTitle: 'Miami-Dade County Coverage',
+    summary:
+      '12 verified independent agencies serving Miami-Dade County — county-local Medicare/ACA specialists prioritized with tri-county partners. FL DFS verified, bilingual EN/ES available.',
+    counties: ['Miami-Dade'],
+    badges: ['Bilingual EN/ES', 'Medicare Advantage hub'],
+    featuredHealthLine: 'Top featured: SFIB · The Health Experts · Kaizen Solution Group',
+    healthFeaturedLimit: 8,
+  },
+  'broward-county': {
+    slug: 'broward-county',
+    sectionTitle: 'Broward County Coverage',
+    summary:
+      '12 verified independent agencies serving Broward County — Fort Lauderdale and Hollywood Medicare/ACA specialists with multi-line partners across the I-95 corridor.',
+    counties: ['Broward'],
+    badges: ['Fort Lauderdale · Hollywood · Pembroke Pines'],
+    featuredHealthLine: 'Top featured: Medicare Advisors of South Florida · Waxman Insurance · B&B Insurance',
+    healthFeaturedLimit: 8,
+  },
+  'palm-beach-county': {
+    slug: 'palm-beach-county',
+    sectionTitle: 'Palm Beach County Coverage',
+    summary:
+      '12 verified independent agencies serving Palm Beach County — West Palm Beach and Boca Raton retiree Medicare specialists with supplement and Advantage expertise.',
+    counties: ['Palm Beach'],
+    badges: ['West Palm Beach · Boca Raton · Greenacres'],
+    featuredHealthLine: 'Top featured: Absolute Best Insurance · Pettineo Insurance · Medicare Sharks',
+    healthFeaturedLimit: 8,
+  },
   'miami-fort-lauderdale': {
     slug: 'miami-fort-lauderdale',
     sectionTitle: 'Tri-County Coverage Area',
@@ -626,6 +657,9 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
 };
 
 const CURATED_AGENTS: Record<string, HubAgent[]> = {
+  'miami-dade': getSouthFloridaCountyAgents('Miami-Dade'),
+  'broward-county': getSouthFloridaCountyAgents('Broward'),
+  'palm-beach-county': getSouthFloridaCountyAgents('Palm Beach'),
   'miami-fort-lauderdale': SOUTH_FLORIDA_AGENTS,
   orlando: ORLANDO_AGENTS,
   jacksonville: JACKSONVILLE_AGENTS,

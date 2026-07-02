@@ -308,6 +308,152 @@ export const ARTICLES: Article[] = [
       { href: '/resources/flood-insurance-guide', label: 'Flood Insurance Guide' },
     ],
   },
+  {
+    slug: 'health-insurance-2026-guide',
+    title: 'Health Insurance Guide 2026: ACA, Employer & Individual Plans',
+    description:
+      'Navigate 2026 health insurance options — marketplace subsidies, employer open enrollment, and when to use a licensed agent.',
+    publishedAt: '2026-05-01',
+    updatedAt: '2026-07-01',
+    readTime: '11 min',
+    category: 'Health Insurance',
+    sections: [
+      {
+        heading: 'Your 2026 coverage options',
+        content:
+          'Most Americans get coverage through an employer, the ACA marketplace, Medicare (65+), or Medicaid. Each path has different enrollment windows, network rules, and subsidy mechanics. Independent agents help compare all available paths in your ZIP code.',
+        bullets: [
+          'Employer-sponsored group plans',
+          'ACA marketplace (HealthCare.gov or state exchange)',
+          'Medicare Advantage, supplement, and Part D',
+          'Short-term and gap coverage between jobs',
+        ],
+      },
+      {
+        heading: 'When to use an agent',
+        content:
+          'Complex households — mixed employer/part-time income, immigration status questions, or chronic-condition network needs — benefit from agent guidance at no direct cost to you (agents earn carrier commissions).',
+      },
+    ],
+    relatedLinks: [
+      { href: '/hubs/health-insurance', label: 'Health Insurance Hubs' },
+      { href: '/tools/aca-eligibility-checker', label: 'ACA Eligibility Checker' },
+      { href: '/hubs/florida/miami-dade', label: 'Miami-Dade Agents' },
+    ],
+  },
+  {
+    slug: 'medicare-advantage-guide',
+    title: 'Medicare Advantage vs Supplement: 2026 Comparison Guide',
+    description:
+      'Compare Medicare Advantage (Part C), Medigap supplements, and Part D. Understand networks, out-of-pocket caps, and enrollment periods.',
+    publishedAt: '2026-05-10',
+    updatedAt: '2026-07-01',
+    readTime: '10 min',
+    category: 'Medicare',
+    sections: [
+      {
+        heading: 'Medicare Advantage (Part C)',
+        content:
+          'Advantage plans bundle hospital, medical, and often drug coverage with an annual out-of-pocket maximum. They use HMO/PPO networks — popular in South Florida, Arizona, and Texas where penetration exceeds 50%.',
+      },
+      {
+        heading: 'Medigap supplements',
+        content:
+          'Supplements pair with Original Medicare and reduce predictable cost-sharing. Best for seniors who want broad provider access and travel frequently. Premiums are higher but networks are wider.',
+      },
+    ],
+    relatedLinks: [
+      { href: '/hubs/medicare', label: 'Medicare Specialists' },
+      { href: '/tools/medicare-plan-finder', label: 'Medicare Plan Finder' },
+      { href: '/hubs/south-florida', label: 'South Florida Medicare Agents' },
+    ],
+  },
+  {
+    slug: 'aca-obamacare-guide',
+    title: 'ACA / Obamacare Enrollment Guide 2026',
+    description:
+      'Open enrollment, special enrollment periods, premium tax credits, and CSR Silver plans explained for marketplace shoppers.',
+    publishedAt: '2026-05-15',
+    updatedAt: '2026-07-01',
+    readTime: '9 min',
+    category: 'Health Insurance',
+    sections: [
+      {
+        heading: 'Open vs special enrollment',
+        content:
+          'Annual open enrollment typically runs November–January. SEPs trigger after job loss, marriage, birth, or moving. Missing windows can leave gaps unless you qualify for Medicaid or a short-term plan.',
+      },
+      {
+        heading: 'Subsidies and metal tiers',
+        content:
+          'Premium tax credits reduce monthly premiums based on income vs federal poverty level. Cost-sharing reductions lower deductibles on Silver plans for qualifying households.',
+      },
+    ],
+    relatedLinks: [
+      { href: '/hubs/aca', label: 'ACA Marketplace Agents' },
+      { href: '/calculators/aca-subsidy', label: 'ACA Subsidy Calculator' },
+      { href: '/hubs/florida/broward-county', label: 'Broward County Agents' },
+    ],
+  },
+  {
+    slug: 'how-to-verify-insurance-agent-license',
+    title: 'How to Verify an Insurance Agent License (State-by-State)',
+    description:
+      'Step-by-step guide to verifying agent and agency licenses through state Departments of Insurance and the NAIC.',
+    publishedAt: '2026-05-20',
+    updatedAt: '2026-07-01',
+    readTime: '7 min',
+    category: 'Getting Started',
+    sections: [
+      {
+        heading: 'State DOI lookup',
+        content:
+          'Every state maintains an online license database. Search by agent name, NPN (National Producer Number), or agency license ID. Confirm status is Active and lines of authority include the products being sold.',
+      },
+      {
+        heading: 'Red flags',
+        content:
+          'Unlicensed solicitation, pressure to pay fees outside carrier portals, and guarantees of claim approval are warning signs. Always verify before sharing personal health or financial data.',
+        bullets: [
+          'License status: Active vs expired',
+          'Lines of authority: Life, health, property, casualty',
+          'Appointment with the carrier being quoted',
+        ],
+      },
+    ],
+    relatedLinks: [
+      { href: '/tools/license-verification', label: 'License Verification Tool' },
+      { href: '/resources/how-to-choose-insurance-agent', label: 'How to Choose an Agent' },
+      { href: '/resources/avoiding-insurance-scams', label: 'Avoiding Insurance Scams' },
+    ],
+  },
+  {
+    slug: 'avoiding-insurance-scams',
+    title: 'Avoiding Insurance Scams: Red Flags & Verification Steps',
+    description:
+      'Protect yourself from fake agents, phishing, and assignment-of-benefits fraud. Verify licenses and never pay mystery fees.',
+    publishedAt: '2026-06-01',
+    updatedAt: '2026-07-01',
+    readTime: '8 min',
+    category: 'Getting Started',
+    sections: [
+      {
+        heading: 'Common scam patterns',
+        content:
+          'Robocalls promising free plans, social media ads with unrealistic premiums, and storm-chasing contractors tying insurance assignments to repairs are frequent schemes. Legitimate agents provide license numbers and carrier documentation.',
+      },
+      {
+        heading: 'How to protect yourself',
+        content:
+          'Verify licenses on your state DOI site, pay premiums through official carrier portals, and get all coverage details in writing before binding.',
+      },
+    ],
+    relatedLinks: [
+      { href: '/tools/license-verification', label: 'License Verification' },
+      { href: '/about', label: 'How We Verify Agents' },
+      { href: '/contact', label: 'Report Suspicious Listing' },
+    ],
+  },
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {

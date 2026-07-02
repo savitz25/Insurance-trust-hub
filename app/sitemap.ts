@@ -4,6 +4,7 @@ import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { ARTICLES } from '@/lib/resources/articles';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
 import { INSURANCE_HUBS, getAllStateSlugs } from '@/lib/hubs/registry';
+import { SPECIALTY_TOPICS } from '@/lib/hubs/specialty-topics';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,8 +15,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/destinations',
     '/resources',
     '/tools',
+    '/providers',
     '/hubs',
     '/hubs/browse',
+    '/hubs/south-florida',
+    '/hubs/health-insurance',
+    '/hubs/medicare',
+    '/hubs/aca',
     '/calculators',
     '/calculators/premium-estimator',
     '/calculators/medicare-gap',
@@ -23,6 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/cost-estimator',
     '/tools/needs-assessment',
     '/tools/license-verification',
+    '/tools/quote-comparison',
+    '/tools/medicare-plan-finder',
+    '/tools/aca-eligibility-checker',
     '/about',
     '/contact',
     '/privacy',
@@ -32,6 +41,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: path === '' ? 'daily' : 'weekly',
     priority: path === '' ? 1 : 0.8,
+  }));
+
+  const browseStates = getAllStateSlugs().map((state) => ({
+    url: `${SITE_URL}/hubs/browse/${state}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  const specialtyTopics = SPECIALTY_TOPICS.map((topic) => ({
+    url: `${SITE_URL}${topic.path}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
   }));
 
   const destinationStates = DESTINATION_STATES.map((state) => ({
@@ -58,11 +81,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const providers = FALLBACK_PROVIDERS.map((provider) => ({
-    url: `${SITE_URL}/providers/${provider.slug}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }));
+      url: `${SITE_URL}/providers/${provider.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    }));
 
   const hubStates = getAllStateSlugs().map((state) => ({
     url: `${SITE_URL}/hubs/${state}`,
@@ -75,11 +98,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}/hubs/${hub.stateSlug}/${hub.slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
-    priority: hub.priority <= 15 ? 0.85 : 0.7,
+    priority: hub.priority <= 15 ? 0.85 : hub.priority >= 55 ? 0.88 : 0.7,
   }));
 
   return [
     ...staticRoutes,
+    ...specialtyTopics,
+    ...browseStates,
     ...hubStates,
     ...hubPages,
     ...destinationStates,

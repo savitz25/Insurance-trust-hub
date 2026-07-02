@@ -94,7 +94,7 @@ export const TRUST_STATS = [
   { label: 'Verified Agents', value: '850+' },
   { label: 'Reviews Analyzed', value: '15,200+' },
   { label: 'States & Counties', value: '50 States' },
-  { label: 'Market Hubs', value: '54 Hubs' },
+  { label: 'Market Hubs', value: '57 Hubs' },
 ] as const;
 
 export const MOVE_TRUST_HUB_URL = 'https://www.movetrusthub.com';

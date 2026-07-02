@@ -33,6 +33,24 @@ const TOOLS = [
     description:
       'Links to every state insurance department lookup. Verify agents and agencies before you buy.',
   },
+  {
+    href: '/tools/quote-comparison',
+    icon: Calculator,
+    title: 'Quote comparison',
+    description: 'Compare ballpark premium ranges by state and coverage type before contacting an agent.',
+  },
+  {
+    href: '/tools/medicare-plan-finder',
+    icon: ClipboardCheck,
+    title: 'Medicare plan finder',
+    description: 'Estimate Medicare supplement gaps and compare plan types with educational tools.',
+  },
+  {
+    href: '/tools/aca-eligibility-checker',
+    icon: ShieldCheck,
+    title: 'ACA eligibility checker',
+    description: 'Rough marketplace subsidy estimate by income and household size.',
+  },
 ] as const;
 
 export default function ToolsPage() {
@@ -49,7 +67,7 @@ export default function ToolsPage() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {TOOLS.map((tool) => (
           <Link key={tool.href} href={tool.href}>
             <Card className="h-full hover:shadow-trust-lg transition-shadow">
