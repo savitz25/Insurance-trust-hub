@@ -454,6 +454,93 @@ export const ARTICLES: Article[] = [
       { href: '/contact', label: 'Report Suspicious Listing' },
     ],
   },
+  {
+    slug: 'short-term-health-insurance-vs-aca-marketplace',
+    title:
+      'Short-Term Health Insurance vs. ACA Marketplace Plans: Pros, Cons, Eligibility, and When Each Makes Sense',
+    description:
+      'Short-term health insurance vs. ACA Marketplace plans in 2026: compare coverage, costs, eligibility, pre-existing conditions, and subsidies. Learn which option fits your situation. Use independent comparison tools on our platform.',
+    publishedAt: '2026-07-17',
+    updatedAt: '2026-07-17',
+    readTime: '11 min',
+    category: 'Health Insurance',
+    sections: [
+      {
+        heading: 'Why this comparison matters in 2026',
+        content:
+          'Short-term health insurance and ACA Marketplace plans serve very different purposes. One offers quick, flexible, and often lower-cost coverage for temporary gaps; the other provides comprehensive, subsidized protection with pre-existing condition coverage. With open enrollment and changing economic conditions in 2026, many consumers must decide which type best meets their needs. Understanding the trade-offs is essential to avoid coverage gaps or unexpected medical bills. InsuranceTrustHub.com is an independent directory of DOI-verified insurance agents and agencies. We offer transparent comparisons and resources with no paid placements or affiliations.',
+      },
+      {
+        heading: 'Key differences at a glance',
+        content:
+          'Use this side-by-side snapshot when comparing short-term medical plans and ACA Marketplace coverage.',
+        bullets: [
+          'Duration: short-term is typically 1–364 days (renewable in some states); ACA covers a full calendar year',
+          'Pre-existing conditions: usually excluded on short-term; fully covered on ACA plans',
+          'Essential Health Benefits: limited or none on short-term; 10 required benefits on ACA',
+          'Premium subsidies: none on short-term; available on ACA based on income',
+          'Out-of-pocket maximum: often none or very high on short-term; federally capped on ACA',
+          'Underwriting: medical questions required for most short-term plans; no medical underwriting for ACA',
+        ],
+      },
+      {
+        heading: 'Pros and cons of short-term plans',
+        content:
+          'Short-term plans can be useful bridges—not full replacements—for comprehensive coverage.',
+        bullets: [
+          'Pros: lower premiums, quick approval, flexible start dates, useful for gaps between jobs or waiting periods',
+          'Cons: limited benefits, no pre-existing condition coverage, no subsidies, potential denial or rescission',
+        ],
+      },
+      {
+        heading: 'Pros and cons of ACA Marketplace plans',
+        content:
+          'ACA plans prioritize comprehensive protection and consumer safeguards.',
+        bullets: [
+          'Pros: comprehensive coverage, pre-existing conditions covered, subsidies available, out-of-pocket protections',
+          'Cons: higher premiums without subsidies, open enrollment restrictions, more paperwork',
+        ],
+      },
+      {
+        heading: 'Eligibility and special enrollment periods',
+        content:
+          'Short-term coverage is available year-round in most states with minimal restrictions. ACA Marketplace enrollment is primarily November 1–January 15. Qualifying events (job loss, marriage, birth, and others) can trigger special enrollment periods for Marketplace plans.',
+      },
+      {
+        heading: 'When each makes sense in 2026',
+        content:
+          'Match the product to your health status, budget, and how long you need coverage.',
+        bullets: [
+          'Choose short-term if you need temporary coverage (e.g., between jobs or awaiting employer benefits), are healthy, and want to minimize monthly costs for a short period',
+          'Choose ACA Marketplace if you have pre-existing conditions, qualify for premium subsidies, or want comprehensive coverage and protection from high medical bills',
+        ],
+      },
+      {
+        heading: 'Frequently asked questions',
+        content:
+          'Common questions when comparing short-term medical insurance and ACA plans.',
+        bullets: [
+          'Can short-term plans cover pre-existing conditions? Generally no—most exclude them entirely.',
+          'Do short-term plans count toward continuous coverage? No. They do not protect against future ACA waiting periods in the same way.',
+          'How much can subsidies reduce ACA premiums? Depending on income, subsidies can reduce or eliminate premiums for many households.',
+          'Can I switch from short-term to ACA mid-year? Only during open enrollment or with a qualifying life event.',
+          'How does InsuranceTrustHub help? Compare DOI-verified agents who specialize in short-term and ACA guidance without sales pressure.',
+        ],
+      },
+      {
+        heading: 'Conclusion and next steps',
+        content:
+          'Short-term and ACA Marketplace plans serve different needs. The right choice depends on your health status, budget, coverage duration, and risk tolerance. InsuranceTrustHub.com provides independent resources to research agents, compare options, and make confident decisions. Always verify licensing through your state Department of Insurance. InsuranceTrustHub is an independent informational directory with no paid placements or affiliations.',
+      },
+    ],
+    relatedLinks: [
+      { href: '/hubs/aca', label: 'ACA Insurance Hub' },
+      { href: '/calculators/aca-subsidy', label: 'ACA Subsidy Calculator' },
+      { href: '/resources/how-to-choose-insurance-agent', label: 'How to Choose an Agent' },
+      { href: '/tools/needs-assessment', label: 'Needs Assessment Tool' },
+      { href: '/directory', label: 'Browse Verified Agents' },
+    ],
+  },
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {
