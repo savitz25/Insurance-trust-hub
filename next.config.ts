@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
       { source: '/resources/how-to-choose-an-insurance-agent', destination: '/resources/how-to-choose-insurance-agent', permanent: true },
       { source: '/resources/independent-vs-captive-agents', destination: '/resources/independent-vs-captive', permanent: true },
       { source: '/resources/hurricane-prep-insurance-florida', destination: '/resources/hurricane-prep-insurance', permanent: true },
+      // Consolidate overlapping tools into flagship experiences
+      { source: '/tools/aca-eligibility-checker', destination: '/calculators/aca-subsidy', permanent: true },
+      { source: '/tools/quote-comparison', destination: '/tools/cost-estimator', permanent: true },
     ];
   },
 };
