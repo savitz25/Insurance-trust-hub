@@ -92,7 +92,7 @@ export const ARTICLES: Article[] = [
       },
     ],
     relatedLinks: [
-      { href: '/tools/cost-estimator', label: 'Premium Cost Estimator' },
+      { href: '/tools/cost-estimator', label: 'Cost & Coverage Planner' },
       { href: '/destinations/texas', label: 'Texas Insurance Guide' },
       { href: '/destinations/florida', label: 'Florida Insurance Guide' },
     ],
@@ -165,7 +165,7 @@ export const ARTICLES: Article[] = [
     relatedLinks: [
       { href: '/destinations/florida', label: 'Florida Insurance' },
       { href: '/destinations/texas', label: 'Texas Insurance' },
-      { href: '/tools/cost-estimator', label: 'Cost Estimator' },
+      { href: '/tools/cost-estimator', label: 'Cost & Coverage Planner' },
     ],
   },
   {

@@ -690,7 +690,7 @@ function ResultsPanel({
                   </div>
                   {isRec && (
                     <span className="rounded-full bg-teal-700 px-2.5 py-0.5 text-xs font-semibold text-white">
-                      Best match for you
+                      Aligned with your inputs
                     </span>
                   )}
                 </div>

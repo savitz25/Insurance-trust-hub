@@ -110,7 +110,7 @@ export const DESTINATION_STATES: DestinationState[] = [
       { href: '/hubs/south-florida', label: 'South Florida Health Hub' },
       { href: '/resources/flood-insurance-guide', label: 'Flood Insurance Guide' },
       { href: '/resources/hurricane-prep-insurance', label: 'Hurricane Prep & Insurance' },
-      { href: '/tools/cost-estimator', label: 'Premium Cost Estimator' },
+      { href: '/tools/cost-estimator', label: 'Cost & Coverage Planner' },
     ],
   },
   {
