@@ -36,4 +36,28 @@ node scripts/import-cms-opt-out.mjs
 ## Canonical URLs
 
 - Plan Complaint Index: `https://www.insurancetrusthub.com/data/plan-complaint-index`
+- County dashboards: `https://www.insurancetrusthub.com/data/counties/{slug}`
 - Legacy `/insurance/*` → apex via `vercel.json` 301s
+
+## Phase 2 — County Medicare Intelligence
+
+```bash
+set CMS_DATA_ROOT=./cms-data
+node scripts/import-cms-county-summaries.mjs
+```
+
+Output: `data/county-summaries.json` (Miami-Dade, Broward, Palm Beach first slice).
+
+### Metrics cleanly derived
+
+| Metric | Status |
+|--------|--------|
+| Published MA/PD enrollment (lower bound) | Yes — sum of non-suppressed CPSC cells |
+| Material contracts (≥50 published) | Yes |
+| MA vs PDP material split | Yes — from contract org type |
+| Plan options present | Yes |
+| Complaint-measure star distribution (C28/D02) | Yes — contract-level |
+| Top contracts by county enrollment | Yes |
+| Lowest complaint rates among material | Yes — join to complaint-rankings |
+| YoY enrollment change | No — single month loaded |
+| MA penetration vs Original Medicare | No — needs eligibility file |

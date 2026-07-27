@@ -42,16 +42,20 @@ export default function PlanComplaintIndexPage() {
             Last synced <strong className="font-semibold text-slate-800">{syncedLabel}</strong>
           </p>
           <p className="mt-4 text-sm text-slate-500">
+            <Link href="/data/counties" className="font-medium text-teal-700 hover:underline">
+              County Medicare dashboards
+            </Link>
+            {' · '}
+            <Link href="/data/counties/miami-dade-fl" className="font-medium text-teal-700 hover:underline">
+              Miami-Dade
+            </Link>
+            {' · '}
             <Link href="/tools" className="font-medium text-teal-700 hover:underline">
               Tools
             </Link>
             {' · '}
             <Link href="/hubs/medicare" className="font-medium text-teal-700 hover:underline">
               Medicare hubs
-            </Link>
-            {' · '}
-            <Link href="/resources" className="font-medium text-teal-700 hover:underline">
-              Guides
             </Link>
           </p>
         </div>

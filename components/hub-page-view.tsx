@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { Shield, MapPin, Users, Star } from 'lucide-react';
+import { Shield, MapPin, Users, Star, BarChart3 } from 'lucide-react';
 import type { InsuranceHub } from '@/types/agent';
 import { getAgentsForHub, getFeaturedHealthAgents, getHubStats } from '@/lib/hubs/agents';
 import { getCuratedHubConfig } from '@/lib/hubs/data/curated-hubs';
+import { getAllCountySummaries } from '@/lib/insurance/cms/county-summaries';
 import { AgentCard } from '@/components/agent-card';
 import { HubAgentTable } from '@/components/hub-agent-table';
 import { ZipSearch } from '@/components/zip-search';
@@ -17,6 +18,13 @@ interface HubPageViewProps {
   canonicalPath?: string;
 }
 
+const COUNTY_DASHBOARD_BY_HUB_SLUG: Record<string, string> = {
+  'miami-dade': 'miami-dade-fl',
+  'broward-county': 'broward-fl',
+  'palm-beach-county': 'palm-beach-fl',
+  'miami-fort-lauderdale': 'miami-dade-fl',
+};
+
 export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
   const { stateSlug: state, slug } = hub;
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
@@ -25,6 +33,10 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
   const otherAgents = allAgents.filter((a) => !a.isHealthFeatured);
   const stats = getHubStats(hub);
   const curatedConfig = getCuratedHubConfig(hub.slug);
+  const countyDashboardSlug = COUNTY_DASHBOARD_BY_HUB_SLUG[slug];
+  const countySummary = countyDashboardSlug
+    ? getAllCountySummaries().find((c) => c.slug === countyDashboardSlug)
+    : undefined;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -106,6 +118,24 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                   <li key={need}>{need}</li>
                 ))}
               </ul>
+              {countySummary ? (
+                <div className="mt-6 rounded-xl border border-teal-200 bg-teal-50/50 p-4">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-teal-900">
+                    <BarChart3 className="h-4 w-4" aria-hidden />
+                    Medicare Intelligence dashboard
+                  </p>
+                  <p className="mt-1 text-sm text-teal-900/80">
+                    CMS-derived published enrollment, material contracts, and complaint-measure
+                    context for {countySummary.displayName}.
+                  </p>
+                  <Link
+                    href={`/data/counties/${countySummary.slug}`}
+                    className="mt-2 inline-flex text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
+                  >
+                    Open {countySummary.displayName} Medicare dashboard →
+                  </Link>
+                </div>
+              ) : null}
             </section>
 
             {curatedConfig && (

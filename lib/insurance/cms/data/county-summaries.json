@@ -1,0 +1,428 @@
+{
+  "generatedAt": "2026-07-27T18:06:36.173Z",
+  "meta": {
+    "enrollmentSource": "CMS Monthly Enrollment by Contract/Plan/State/County — July 2026",
+    "enrollmentFile": "CPSC_Enrollment_Info_2026_07.csv",
+    "contractFile": "CPSC_Contract_Info_2026_07.csv",
+    "starSource": "CMS 2026 Star Ratings Measure Stars (C28/D02)",
+    "complaintSource": "lib/insurance/cms/data/complaint-rankings.json (from 2026 Star Ratings Measure Data)",
+    "syncedAt": "2026-07-27T00:00:00.000Z",
+    "usingPlaceholderData": false
+  },
+  "counties": [
+    {
+      "slug": "miami-dade-fl",
+      "displayName": "Miami-Dade County",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "countyName": "Miami-Dade",
+      "fips": "12086",
+      "hubSlug": "miami-dade",
+      "hubStateSlug": "florida",
+      "enrollmentPeriod": "2026-07",
+      "metrics": {
+        "publishedEnrollment": 473820,
+        "publishedEnrollmentNote": "Sum of CPSC county rows with published enrollment only. CMS suppresses cells with 10 or fewer enrollees as \"*\"; those rows are excluded, so totals are a lower bound.",
+        "yearOverYearChange": null,
+        "yearOverYearNote": "Not available — only a single enrollment month is loaded (July 2026).",
+        "maPenetrationVsOriginal": null,
+        "maPenetrationNote": "Not available from CPSC enrollment alone (requires Medicare eligibility / Original Medicare county counts).",
+        "contractsWithAnyPresence": 279,
+        "planOptionsWithAnyPresence": 1614,
+        "materialContracts": 44,
+        "materialThreshold": 50,
+        "materialConsumerContracts": 39,
+        "maContractsMaterial": 32,
+        "pdpContractsMaterial": 7,
+        "publishedRows": 205,
+        "suppressedRows": 1409
+      },
+      "starDistribution": {
+        "measure": "C28 Complaints about the Health Plan star (fallback D02) — not overall Part C/D summary rating",
+        "counts": {
+          "1": 0,
+          "2": 0,
+          "3": 2,
+          "4": 24,
+          "5": 8,
+          "unknown": 5
+        },
+        "contractsWithStar": 34
+      },
+      "topContractsByEnrollment": [
+        {
+          "contractId": "H1036",
+          "carrierName": "Humana",
+          "publishedEnrollment": 65859,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.22,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H5420",
+          "carrierName": "UnitedHealthcare",
+          "publishedEnrollment": 57696,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.2,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H1045",
+          "carrierName": "UnitedHealthcare",
+          "publishedEnrollment": 55817,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.17,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H5431",
+          "carrierName": "HealthSun Health Plans, Inc.",
+          "publishedEnrollment": 48540,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.19,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "S4802",
+          "carrierName": "Wellcare",
+          "publishedEnrollment": 43710,
+          "bucket": "pdp",
+          "complaintRatePerThousand": 0.07,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H4286",
+          "carrierName": "Leon Health, Inc.",
+          "publishedEnrollment": 40281,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.06,
+          "complaintMeasureStar": 5
+        },
+        {
+          "contractId": "H1019",
+          "carrierName": "CarePlus Health Plans, Inc.",
+          "publishedEnrollment": 28173,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.17,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H4140",
+          "carrierName": "Doctors HealthCare Plans, Inc.",
+          "publishedEnrollment": 23973,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.16,
+          "complaintMeasureStar": 4
+        }
+      ],
+      "lowestComplaintAmongMaterial": [
+        {
+          "contractId": "H7617",
+          "carrierName": "Humana",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 2630
+        },
+        {
+          "contractId": "S5820",
+          "carrierName": "UnitedHealthcare",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 913
+        },
+        {
+          "contractId": "S5904",
+          "carrierName": "Florida Blue",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 2143
+        },
+        {
+          "contractId": "H5522",
+          "carrierName": "Aetna Medicare",
+          "complaintRatePerThousand": 0.05,
+          "publishedEnrollment": 1275
+        },
+        {
+          "contractId": "S5884",
+          "carrierName": "Humana",
+          "complaintRatePerThousand": 0.05,
+          "publishedEnrollment": 5056
+        }
+      ]
+    },
+    {
+      "slug": "broward-fl",
+      "displayName": "Broward County",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "countyName": "Broward",
+      "fips": "12011",
+      "hubSlug": "broward-county",
+      "hubStateSlug": "florida",
+      "enrollmentPeriod": "2026-07",
+      "metrics": {
+        "publishedEnrollment": 331802,
+        "publishedEnrollmentNote": "Sum of CPSC county rows with published enrollment only. CMS suppresses cells with 10 or fewer enrollees as \"*\"; those rows are excluded, so totals are a lower bound.",
+        "yearOverYearChange": null,
+        "yearOverYearNote": "Not available — only a single enrollment month is loaded (July 2026).",
+        "maPenetrationVsOriginal": null,
+        "maPenetrationNote": "Not available from CPSC enrollment alone (requires Medicare eligibility / Original Medicare county counts).",
+        "contractsWithAnyPresence": 293,
+        "planOptionsWithAnyPresence": 1677,
+        "materialContracts": 50,
+        "materialThreshold": 50,
+        "materialConsumerContracts": 41,
+        "maContractsMaterial": 33,
+        "pdpContractsMaterial": 8,
+        "publishedRows": 236,
+        "suppressedRows": 1441
+      },
+      "starDistribution": {
+        "measure": "C28 Complaints about the Health Plan star (fallback D02) — not overall Part C/D summary rating",
+        "counts": {
+          "1": 0,
+          "2": 0,
+          "3": 2,
+          "4": 23,
+          "5": 11,
+          "unknown": 5
+        },
+        "contractsWithStar": 36
+      },
+      "topContractsByEnrollment": [
+        {
+          "contractId": "H1036",
+          "carrierName": "Humana",
+          "publishedEnrollment": 87778,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.22,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "S4802",
+          "carrierName": "Wellcare",
+          "publishedEnrollment": 43141,
+          "bucket": "pdp",
+          "complaintRatePerThousand": 0.07,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H1045",
+          "carrierName": "UnitedHealthcare",
+          "publishedEnrollment": 29425,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.17,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H1609",
+          "carrierName": "Aetna Medicare",
+          "publishedEnrollment": 19100,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.29,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H5216",
+          "carrierName": "Humana",
+          "publishedEnrollment": 18275,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.16,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H1019",
+          "carrierName": "CarePlus Health Plans, Inc.",
+          "publishedEnrollment": 17612,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.17,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H5431",
+          "carrierName": "HealthSun Health Plans, Inc.",
+          "publishedEnrollment": 16372,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.19,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "S5921",
+          "carrierName": "UnitedHealthcare",
+          "publishedEnrollment": 12291,
+          "bucket": "pdp",
+          "complaintRatePerThousand": 0.08,
+          "complaintMeasureStar": 4
+        }
+      ],
+      "lowestComplaintAmongMaterial": [
+        {
+          "contractId": "S2893",
+          "carrierName": "Blue MedicareRx",
+          "complaintRatePerThousand": 0.03,
+          "publishedEnrollment": 200
+        },
+        {
+          "contractId": "H7617",
+          "carrierName": "Humana",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 10112
+        },
+        {
+          "contractId": "H9572",
+          "carrierName": "Blue Cross Blue Shield of Michigan",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 240
+        },
+        {
+          "contractId": "S5820",
+          "carrierName": "UnitedHealthcare",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 1556
+        },
+        {
+          "contractId": "S5904",
+          "carrierName": "Florida Blue",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 1778
+        }
+      ]
+    },
+    {
+      "slug": "palm-beach-fl",
+      "displayName": "Palm Beach County",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "countyName": "Palm Beach",
+      "fips": "12099",
+      "hubSlug": "palm-beach-county",
+      "hubStateSlug": "florida",
+      "enrollmentPeriod": "2026-07",
+      "metrics": {
+        "publishedEnrollment": 328542,
+        "publishedEnrollmentNote": "Sum of CPSC county rows with published enrollment only. CMS suppresses cells with 10 or fewer enrollees as \"*\"; those rows are excluded, so totals are a lower bound.",
+        "yearOverYearChange": null,
+        "yearOverYearNote": "Not available — only a single enrollment month is loaded (July 2026).",
+        "maPenetrationVsOriginal": null,
+        "maPenetrationNote": "Not available from CPSC enrollment alone (requires Medicare eligibility / Original Medicare county counts).",
+        "contractsWithAnyPresence": 289,
+        "planOptionsWithAnyPresence": 1678,
+        "materialContracts": 52,
+        "materialThreshold": 50,
+        "materialConsumerContracts": 40,
+        "maContractsMaterial": 32,
+        "pdpContractsMaterial": 8,
+        "publishedRows": 251,
+        "suppressedRows": 1427
+      },
+      "starDistribution": {
+        "measure": "C28 Complaints about the Health Plan star (fallback D02) — not overall Part C/D summary rating",
+        "counts": {
+          "1": 0,
+          "2": 0,
+          "3": 2,
+          "4": 20,
+          "5": 14,
+          "unknown": 4
+        },
+        "contractsWithStar": 36
+      },
+      "topContractsByEnrollment": [
+        {
+          "contractId": "S4802",
+          "carrierName": "Wellcare",
+          "publishedEnrollment": 63381,
+          "bucket": "pdp",
+          "complaintRatePerThousand": 0.07,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H1036",
+          "carrierName": "Humana",
+          "publishedEnrollment": 52453,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.22,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "S5921",
+          "carrierName": "UnitedHealthcare",
+          "publishedEnrollment": 26533,
+          "bucket": "pdp",
+          "complaintRatePerThousand": 0.08,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "S5601",
+          "carrierName": "Aetna Medicare",
+          "publishedEnrollment": 24483,
+          "bucket": "pdp",
+          "complaintRatePerThousand": 0.09,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H5216",
+          "carrierName": "Humana",
+          "publishedEnrollment": 22352,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.16,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H2406",
+          "carrierName": "UnitedHealthcare",
+          "publishedEnrollment": 15658,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.12,
+          "complaintMeasureStar": 5
+        },
+        {
+          "contractId": "S5884",
+          "carrierName": "Humana",
+          "publishedEnrollment": 13884,
+          "bucket": "pdp",
+          "complaintRatePerThousand": 0.05,
+          "complaintMeasureStar": 4
+        },
+        {
+          "contractId": "H1019",
+          "carrierName": "CarePlus Health Plans, Inc.",
+          "publishedEnrollment": 10663,
+          "bucket": "ma",
+          "complaintRatePerThousand": 0.17,
+          "complaintMeasureStar": 4
+        }
+      ],
+      "lowestComplaintAmongMaterial": [
+        {
+          "contractId": "S2893",
+          "carrierName": "Blue MedicareRx",
+          "complaintRatePerThousand": 0.03,
+          "publishedEnrollment": 423
+        },
+        {
+          "contractId": "H7617",
+          "carrierName": "Humana",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 9726
+        },
+        {
+          "contractId": "H9572",
+          "carrierName": "Blue Cross Blue Shield of Michigan",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 486
+        },
+        {
+          "contractId": "S5820",
+          "carrierName": "UnitedHealthcare",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 2153
+        },
+        {
+          "contractId": "S5904",
+          "carrierName": "Florida Blue",
+          "complaintRatePerThousand": 0.04,
+          "publishedEnrollment": 3640
+        }
+      ]
+    }
+  ]
+}

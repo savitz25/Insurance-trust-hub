@@ -86,3 +86,59 @@ export type GovernmentStandingInput = {
   /** Enforcement / sanction flag when available */
   hasEnforcementFlag?: boolean | null;
 };
+
+/** Pre-computed county Medicare intelligence (Phase 2). */
+export type CountyContractHighlight = {
+  contractId: string;
+  carrierName: string;
+  publishedEnrollment: number;
+  bucket?: 'ma' | 'pdp' | 'employer' | 'other';
+  complaintRatePerThousand?: number | null;
+  complaintMeasureStar?: number | null;
+};
+
+export type CountyMedicareSummary = {
+  slug: string;
+  displayName: string;
+  stateCode: string;
+  stateName: string;
+  countyName: string;
+  fips: string;
+  hubSlug: string;
+  hubStateSlug: string;
+  enrollmentPeriod: string;
+  metrics: {
+    publishedEnrollment: number;
+    publishedEnrollmentNote: string;
+    yearOverYearChange: number | null;
+    yearOverYearNote: string;
+    maPenetrationVsOriginal: number | null;
+    maPenetrationNote: string;
+    contractsWithAnyPresence: number;
+    planOptionsWithAnyPresence: number;
+    materialContracts: number;
+    materialThreshold: number;
+    materialConsumerContracts: number;
+    maContractsMaterial: number;
+    pdpContractsMaterial: number;
+    publishedRows: number;
+    suppressedRows: number;
+  };
+  starDistribution: {
+    measure: string;
+    counts: Record<string, number>;
+    contractsWithStar: number;
+  };
+  topContractsByEnrollment: CountyContractHighlight[];
+  lowestComplaintAmongMaterial: CountyContractHighlight[];
+};
+
+export type CountySummariesMeta = {
+  enrollmentSource: string;
+  enrollmentFile: string;
+  contractFile: string;
+  starSource: string;
+  complaintSource: string;
+  syncedAt: string;
+  usingPlaceholderData: boolean;
+};
