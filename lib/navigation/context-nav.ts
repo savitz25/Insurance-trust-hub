@@ -221,14 +221,21 @@ const ROUTE_RULES: RouteRule[] = [
   },
   {
     match: (p) => p.startsWith('/calculators/'),
-    resolve: (_p, currentLabel) => ({
-      back: { href: '/calculators', label: 'Back to Calculators', shortLabel: 'Calculators' },
-      crumbs: [
-        { href: '/', label: 'Home' },
-        { href: '/calculators', label: 'Calculators' },
-        { label: currentLabel || 'Calculator' },
-      ],
-    }),
+    resolve: (path, currentLabel) => {
+      const labels: Record<string, string> = {
+        '/calculators/aca-subsidy': 'ACA Coverage & Savings Planner',
+        '/calculators/premium-estimator': 'Premium estimator',
+        '/calculators/medicare-gap': 'Medicare gap analyzer',
+      };
+      return {
+        back: { href: '/calculators', label: 'Back to Calculators', shortLabel: 'Calculators' },
+        crumbs: [
+          { href: '/', label: 'Home' },
+          { href: '/calculators', label: 'Calculators' },
+          { label: currentLabel || labels[path] || 'Calculator' },
+        ],
+      };
+    },
   },
 ];
 

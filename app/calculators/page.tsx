@@ -30,9 +30,9 @@ const CALCULATORS = [
   {
     href: '/calculators/aca-subsidy',
     icon: PiggyBank,
-    title: 'ACA Subsidy Estimator',
+    title: 'ACA Coverage & Savings Planner',
     description:
-      'Rough 2026 marketplace subsidy estimate based on household size, income, and ZIP. Not official CMS data.',
+      'ZIP, ages, and income → premium tax credit ranges, CSR alerts, local cost paths, and 400% FPL cliff education. Educational only.',
   },
   {
     href: '/tools/license-verification',

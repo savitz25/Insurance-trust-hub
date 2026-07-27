@@ -225,15 +225,21 @@ export function fplForHousehold(size: number): number {
 }
 
 /**
- * Enhanced PTC required contribution % of income (IRA-style educational table).
+ * Educational PTC applicable % of income for plan year 2026 modeling.
+ * Uses statutory schedule with restored 400% FPL cliff (no PTC above 400% FPL).
+ * Enhanced IRA no-cliff table applied through 2025 only.
+ * Returns a high sentinel when ineligible so callers can treat as no credit when desired.
  */
 export function requiredContributionPercent(fplRatio: number): number {
-  if (fplRatio <= 1.5) return 0;
-  if (fplRatio <= 2.0) return lerp(0, 2, (fplRatio - 1.5) / 0.5);
-  if (fplRatio <= 2.5) return lerp(2, 4, (fplRatio - 2.0) / 0.5);
-  if (fplRatio <= 3.0) return lerp(4, 6, (fplRatio - 2.5) / 0.5);
-  if (fplRatio <= 4.0) return lerp(6, 8.5, (fplRatio - 3.0) / 1.0);
-  return 8.5;
+  if (fplRatio < 1.0) return 100; // effectively no PTC path in simplified model
+  if (fplRatio > 4.0) return 100; // cliff — no PTC
+  if (fplRatio <= 1.33) return 2.0;
+  if (fplRatio <= 1.5) return lerp(2.0, 3.0, (fplRatio - 1.33) / 0.17);
+  if (fplRatio <= 2.0) return lerp(3.0, 4.0, (fplRatio - 1.5) / 0.5);
+  if (fplRatio <= 2.5) return lerp(4.0, 6.3, (fplRatio - 2.0) / 0.5);
+  if (fplRatio <= 3.0) return lerp(6.3, 8.05, (fplRatio - 2.5) / 0.5);
+  if (fplRatio <= 4.0) return lerp(8.05, 9.5, (fplRatio - 3.0) / 1.0);
+  return 100;
 }
 
 function lerp(a: number, b: number, t: number): number {
@@ -351,21 +357,33 @@ export function buildPlannerResult(input: PlannerInput): PlannerResult {
       'No income entered — showing unsubsidized premium ranges. Add household income to see premium tax credit context.';
   } else {
     expectedContributionPct = requiredContributionPercent(fplRatio);
-    expectedContributionAnnual = Math.round(income! * (expectedContributionPct / 100));
-    estimatedAnnualPtc = Math.max(0, Math.round(silverAnnual - expectedContributionAnnual));
-    mayQualifyPtc = estimatedAnnualPtc > 0 || fplRatio <= 4.0;
-    mayQualifyCsr = fplRatio >= 1.0 && fplRatio <= 2.5;
-    if (fplRatio < 1.0) {
-      subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — you may qualify for Medicaid or marketplace subsidies depending on your state. Confirm eligibility on HealthCare.gov or your state agency.`;
-      mayQualifyPtc = true;
-      mayQualifyCsr = true;
-    } else if (mayQualifyCsr) {
-      subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — you may qualify for premium tax credits and cost-sharing reductions on Silver plans (lower deductibles). Not a determination.`;
-    } else if (estimatedAnnualPtc > 0) {
-      subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — educational estimate suggests premium tax credits may reduce monthly cost (benchmark-based). Confirm on HealthCare.gov.`;
-    } else {
-      subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — subsidies may be limited. You can still compare metal tiers by total annual cost.`;
+    const cliffOut = expectedContributionPct >= 100 || fplRatio > 4.0;
+    if (cliffOut && fplRatio >= 1.0) {
+      expectedContributionPct = null;
+      expectedContributionAnnual = null;
+      estimatedAnnualPtc = 0;
       mayQualifyPtc = false;
+      mayQualifyCsr = false;
+      subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — under the educational 2026 model with a restored 400% FPL cliff, premium tax credits are generally $0 above 400% FPL. Confirm current law on the Marketplace.`;
+    } else if (fplRatio < 1.0) {
+      expectedContributionAnnual = Math.round(income! * ((expectedContributionPct ?? 100) / 100));
+      estimatedAnnualPtc = Math.max(0, Math.round(silverAnnual - expectedContributionAnnual));
+      mayQualifyPtc = false;
+      mayQualifyCsr = false;
+      subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — you may qualify for Medicaid or marketplace subsidies depending on your state. Confirm eligibility on HealthCare.gov or your state agency.`;
+    } else {
+      expectedContributionAnnual = Math.round(income! * (expectedContributionPct / 100));
+      estimatedAnnualPtc = Math.max(0, Math.round(silverAnnual - expectedContributionAnnual));
+      mayQualifyPtc = estimatedAnnualPtc > 0;
+      mayQualifyCsr = fplRatio >= 1.0 && fplRatio <= 2.5;
+      if (mayQualifyCsr) {
+        subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — you may qualify for premium tax credits and cost-sharing reductions on Silver plans (lower deductibles). Not a determination.`;
+      } else if (estimatedAnnualPtc > 0) {
+        subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — educational estimate suggests premium tax credits may reduce monthly cost (benchmark-based). Confirm on HealthCare.gov.`;
+      } else {
+        subsidySummary = `About ${fplRatio.toFixed(2)}× FPL — subsidies may be limited. You can still compare metal tiers by total annual cost.`;
+        mayQualifyPtc = false;
+      }
     }
   }
 
