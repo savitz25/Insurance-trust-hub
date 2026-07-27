@@ -6,8 +6,13 @@ import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
 import { INSURANCE_HUBS, getAllStateSlugs } from '@/lib/hubs/registry';
 import { SPECIALTY_TOPICS } from '@/lib/hubs/specialty-topics';
 
+/**
+ * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
+ * Never emit movetrusthub.com or /insurance/* prefixes.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const site = SITE_URL.replace(/\/$/, '');
 
   const staticRoutes: MetadataRoute.Sitemap = [
     '',
@@ -18,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/providers',
     '/hubs',
     '/hubs/browse',
-    '/hubs/south-florida',
     '/hubs/health-insurance',
     '/hubs/medicare',
     '/hubs/aca',
@@ -29,9 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/cost-estimator',
     '/tools/needs-assessment',
     '/tools/license-verification',
-    '/tools/quote-comparison',
     '/tools/medicare-plan-finder',
-    '/tools/aca-eligibility-checker',
     '/tools/medicare-provider-lookup',
     '/data/plan-complaint-index',
     '/data/counties',
@@ -43,28 +45,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy',
     '/terms',
   ].map((path) => ({
-    url: `${SITE_URL}${path}`,
+    url: path === '' ? site : `${site}${path}`,
     lastModified: now,
-    changeFrequency: path === '' ? 'daily' : 'weekly',
-    priority: path === '' ? 1 : 0.8,
+    changeFrequency: path === '' || path === '/tools' ? ('daily' as const) : ('weekly' as const),
+    priority:
+      path === ''
+        ? 1
+        : path.startsWith('/data') ||
+            path.startsWith('/tools/cost') ||
+            path.startsWith('/calculators/aca') ||
+            path.includes('provider-lookup') ||
+            path.includes('complaint')
+          ? 0.95
+          : 0.8,
   }));
 
   const browseStates = getAllStateSlugs().map((state) => ({
-    url: `${SITE_URL}/hubs/browse/${state}`,
+    url: `${site}/hubs/browse/${state}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
 
   const specialtyTopics = SPECIALTY_TOPICS.map((topic) => ({
-    url: `${SITE_URL}${topic.path}`,
+    url: `${site}${topic.path}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.85,
   }));
 
   const destinationStates = DESTINATION_STATES.map((state) => ({
-    url: `${SITE_URL}/destinations/${state.slug}`,
+    url: `${site}/destinations/${state.slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.7,
@@ -72,7 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const destinationCities = DESTINATION_STATES.flatMap((state) =>
     state.cities.map((city) => ({
-      url: `${SITE_URL}/destinations/${state.slug}/${city.slug}`,
+      url: `${site}/destinations/${state.slug}/${city.slug}`,
       lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: 0.6,
@@ -80,34 +91,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const articles = ARTICLES.map((article) => ({
-    url: `${SITE_URL}/resources/${article.slug}`,
+    url: `${site}/resources/${article.slug}`,
     lastModified: new Date(article.updatedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
 
   const providers = FALLBACK_PROVIDERS.map((provider) => ({
-      url: `${SITE_URL}/providers/${provider.slug}`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-    }));
+    url: `${site}/providers/${provider.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }));
 
   const hubStates = getAllStateSlugs().map((state) => ({
-    url: `${SITE_URL}/hubs/${state}`,
+    url: `${site}/hubs/${state}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.75,
   }));
 
   const hubPages = INSURANCE_HUBS.map((hub) => ({
-    url: `${SITE_URL}/hubs/${hub.stateSlug}/${hub.slug}`,
+    url: `${site}/hubs/${hub.stateSlug}/${hub.slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: hub.priority <= 15 ? 0.85 : hub.priority >= 55 ? 0.88 : 0.7,
   }));
 
-  return [
+  const all = [
     ...staticRoutes,
     ...specialtyTopics,
     ...browseStates,
@@ -118,4 +129,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...articles,
     ...providers,
   ];
+
+  // Safety: never emit Move or monorepo-prefixed URLs
+  return all.filter((entry) => {
+    if (entry.url.includes('movetrusthub.com')) return false;
+    if (entry.url.includes('/insurance/')) return false;
+    return entry.url.startsWith(site);
+  });
 }

@@ -113,7 +113,7 @@ export const rootLayoutMetadata: Metadata = {
     'compare insurance agents',
     'insurance trust hub',
   ],
-  authors: [{ name: SITE_NAME }],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
   icons: {
     icon: [
       { url: brandAsset(BRAND_LOGO.favicon16), sizes: '16x16', type: 'image/png' },
