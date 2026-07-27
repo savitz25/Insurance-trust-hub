@@ -43,6 +43,12 @@ export function normalizeNpi(npi: string | null | undefined): string | null {
   return digits.length === 10 ? digits : null;
 }
 
+export function isOptedOutOfMedicare(npi: string | null | undefined): boolean {
+  const id = normalizeNpi(npi);
+  if (!id) return false;
+  return OPT_OUT.has(id);
+}
+
 export function isActivelyEnrolledInMedicareFfs(
   npi: string | null | undefined
 ): boolean | null {

@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-07-27T18:31:24.480Z",
+  "sourceFile": "PPEF_Enrollment_Extract_2026.07.17.csv",
+  "dataVintage": "PPEF Enrollment Extract 2026.07.17",
+  "syncedAt": "2026-07-27T00:00:00.000Z",
+  "fields": [
+    "npi",
+    "first",
+    "mid",
+    "last",
+    "org",
+    "state",
+    "type"
+  ],
+  "notes": [
+    "Built from CMS Medicare Fee-For-Service Public Provider Enrollment base extract.",
+    "City/address not included (separate PPEF practice-location sub-file).",
+    "Presence in this index indicates the NPI appeared in the PPEF active enrollment extract for the listed state."
+  ],
+  "states": {
+    "FL": {
+      "total": 184652,
+      "shards": [
+        {
+          "letter": "_",
+          "count": 107,
+          "file": "FL/_.json"
+        },
+        {
+          "letter": "A",
+          "count": 10445,
+          "file": "FL/A.json"
+        },
+        {
+          "letter": "B",
+          "count": 13502,
+          "file": "FL/B.json"
+        },
+        {
+          "letter": "C",
+          "count": 13684,
+          "file": "FL/C.json"
+        },
+        {
+          "letter": "D",
+          "count": 8903,
+          "file": "FL/D.json"
+        },
+        {
+          "letter": "E",
+          "count": 3840,
+          "file": "FL/E.json"
+        },
+        {
+          "letter": "F",
+          "count": 6873,
+          "file": "FL/F.json"
+        },
+        {
+          "letter": "G",
+          "count": 9711,
+          "file": "FL/G.json"
+        },
+        {
+          "letter": "H",
+          "count": 10173,
+          "file": "FL/H.json"
+        },
+        {
+          "letter": "I",
+          "count": 1763,
+          "file": "FL/I.json"
+        },
+        {
+          "letter": "J",
+          "count": 4734,
+          "file": "FL/J.json"
+        },
+        {
+          "letter": "K",
+          "count": 6730,
+          "file": "FL/K.json"
+        },
+        {
+          "letter": "L",
+          "count": 8482,
+          "file": "FL/L.json"
+        },
+        {
+          "letter": "M",
+          "count": 16059,
+          "file": "FL/M.json"
+        },
+        {
+          "letter": "N",
+          "count": 4515,
+          "file": "FL/N.json"
+        },
+        {
+          "letter": "O",
+          "count": 3288,
+          "file": "FL/O.json"
+        },
+        {
+          "letter": "P",
+          "count": 11930,
+          "file": "FL/P.json"
+        },
+        {
+          "letter": "Q",
+          "count": 582,
+          "file": "FL/Q.json"
+        },
+        {
+          "letter": "R",
+          "count": 10338,
+          "file": "FL/R.json"
+        },
+        {
+          "letter": "S",
+          "count": 17537,
+          "file": "FL/S.json"
+        },
+        {
+          "letter": "T",
+          "count": 6613,
+          "file": "FL/T.json"
+        },
+        {
+          "letter": "U",
+          "count": 832,
+          "file": "FL/U.json"
+        },
+        {
+          "letter": "V",
+          "count": 3738,
+          "file": "FL/V.json"
+        },
+        {
+          "letter": "W",
+          "count": 7735,
+          "file": "FL/W.json"
+        },
+        {
+          "letter": "X",
+          "count": 74,
+          "file": "FL/X.json"
+        },
+        {
+          "letter": "Y",
+          "count": 1087,
+          "file": "FL/Y.json"
+        },
+        {
+          "letter": "Z",
+          "count": 1377,
+          "file": "FL/Z.json"
+        }
+      ]
+    }
+  }
+}

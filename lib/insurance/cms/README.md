@@ -61,3 +61,13 @@ Output: `data/county-summaries.json` (Miami-Dade, Broward, Palm Beach first slic
 | Lowest complaint rates among material | Yes — join to complaint-rankings |
 | YoY enrollment change | No — single month loaded |
 | MA penetration vs Original Medicare | No — needs eligibility file |
+
+## Phase 3A � Medicare provider lookup
+
+`bash
+set CMS_DATA_ROOT=./cms-data
+node scripts/import-cms-ppef-search-shards.mjs --states=FL
+`
+
+Tool page: `/tools/medicare-provider-lookup`
+Shards: `data/ppef-search/`
