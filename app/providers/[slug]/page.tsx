@@ -344,46 +344,42 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
               </CardContent>
             </Card>
 
-            {(provider.trust_score != null || provider.local_market_experience != null) && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Trust metrics</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm space-y-4">
-                  {provider.trust_score != null && (
-                    <TrustScoreBreakdownPanel
-                      breakdown={{
-                        ...trustBreakdown,
-                        total: provider.trust_score,
-                      }}
-                    />
-                  )}
-                  {provider.local_market_experience != null && (
-                    <p>
-                      <span className="font-medium">Local Market Experience:</span>{' '}
-                      {provider.local_market_experience}/100
-                    </p>
-                  )}
-                  {provider.avg_response_hours != null && (
-                    <p>
-                      <span className="font-medium">Avg Response:</span> &lt;
-                      {provider.avg_response_hours} hours
-                    </p>
-                  )}
-                  {provider.bbb_rating && (
-                    <p>
-                      <span className="font-medium">BBB Rating:</span> {provider.bbb_rating}
-                    </p>
-                  )}
-                  <p className="text-[11px] text-muted-foreground">
-                    Government Standing sub-score: {trustBreakdown.governmentStanding}/100.{' '}
-                    <Link href="/data/plan-complaint-index" className="text-primary hover:underline">
-                      Plan Complaint Index
-                    </Link>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Trust metrics</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm space-y-4">
+                <TrustScoreBreakdownPanel
+                  breakdown={{
+                    ...trustBreakdown,
+                    total: provider.trust_score ?? trustBreakdown.total,
+                  }}
+                />
+                {provider.local_market_experience != null && (
+                  <p>
+                    <span className="font-medium">Local Market Experience:</span>{' '}
+                    {provider.local_market_experience}/100
                   </p>
-                </CardContent>
-              </Card>
-            )}
+                )}
+                {provider.avg_response_hours != null && (
+                  <p>
+                    <span className="font-medium">Avg Response:</span> &lt;
+                    {provider.avg_response_hours} hours
+                  </p>
+                )}
+                {provider.bbb_rating && (
+                  <p>
+                    <span className="font-medium">BBB Rating:</span> {provider.bbb_rating}
+                  </p>
+                )}
+                <p className="text-[11px] text-muted-foreground">
+                  Government Standing sub-score: {trustBreakdown.governmentStanding}/100.{' '}
+                  <Link href="/data/plan-complaint-index" className="text-primary hover:underline">
+                    Plan Complaint Index
+                  </Link>
+                </p>
+              </CardContent>
+            </Card>
 
             {provider.years_in_business && (
               <p className={cn('text-center text-sm text-muted-foreground')}>
