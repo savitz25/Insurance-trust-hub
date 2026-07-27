@@ -264,7 +264,7 @@ export function searchMedicareProviders(input: ProviderSearchInput): ProviderSea
 
   const letter = shardLetter(lastName, lastName);
   const shard = loadShard(state, letter);
-  let matched = shard.filter((r) => {
+  const matched = shard.filter((r) => {
     if (npi && r.npi !== npi) return false;
     if (lastName) {
       const last = normalizeName(r.last);
