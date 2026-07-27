@@ -56,8 +56,9 @@ const TOOLS = [
   {
     href: '/tools/medicare-plan-finder',
     icon: ClipboardCheck,
-    title: 'Medicare plan finder',
-    description: 'Estimate Medicare supplement gaps and compare plan types with educational tools.',
+    title: 'Medicare research guide',
+    description:
+      'Situation-based research router to CMS complaint rankings, county dashboards, provider lookup, and verified agents — not a plan quoting tool.',
   },
   {
     href: '/tools/aca-eligibility-checker',

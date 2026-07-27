@@ -218,7 +218,7 @@ export function PlanComplaintIndexClient({ meta }: Props) {
           href="/tools/medicare-plan-finder"
           className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline"
         >
-          Medicare plan finder
+          Medicare research guide
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
       </div>

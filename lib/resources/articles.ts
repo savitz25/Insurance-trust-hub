@@ -364,7 +364,7 @@ export const ARTICLES: Article[] = [
     ],
     relatedLinks: [
       { href: '/hubs/medicare', label: 'Medicare Specialists' },
-      { href: '/tools/medicare-plan-finder', label: 'Medicare Plan Finder' },
+      { href: '/tools/medicare-plan-finder', label: 'Medicare Research Guide' },
       { href: '/hubs/south-florida', label: 'South Florida Medicare Agents' },
     ],
   },

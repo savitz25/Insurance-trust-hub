@@ -1,31 +1,54 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { MedicareGapCalculator } from '@/components/calculators/medicare-gap-calculator';
+import { Compass } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { MedicareResearchRouter } from '@/components/tools/medicare-research-router';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Medicare Plan Finder — Advantage vs Supplement Estimator',
+  title: 'Medicare Research Guide — Situation-Based Next Steps',
   description:
-    'Educational Medicare gap and supplement cost estimator. Compare plan types, then consult a licensed Medicare agent in your market.',
+    'Not a plan quoting tool. Choose your Medicare situation and get a clear research path to CMS complaint rates, county dashboards, provider lookup, and verified agents. We do not sell plans.',
   path: '/tools/medicare-plan-finder',
 });
 
 export default function MedicarePlanFinderPage() {
   return (
-    <div className="container mx-auto px-4 py-10 md:py-14 max-w-2xl">
-      <nav className="text-sm text-muted-foreground mb-6">
-        <Link href="/tools">Tools</Link> / Medicare plan finder
-      </nav>
-      <h1 className="section-heading">Medicare plan finder</h1>
-      <p className="mt-3 text-muted-foreground leading-relaxed">
-        Estimate Medicare supplement gap costs. For plan comparisons, see our{' '}
-        <Link href="/hubs/medicare" className="text-primary hover:underline">Medicare specialists</Link>{' '}
-        or{' '}
-        <Link href="/hubs/florida/miami-dade" className="text-primary hover:underline">South Florida agents</Link>.
-      </p>
-      <div className="mt-8">
-        <MedicareGapCalculator />
+    <>
+      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
+        <div className="container mx-auto max-w-3xl px-4 py-10 md:py-14">
+          <nav className="mb-4 text-sm text-slate-500">
+            <Link href="/" className="hover:text-slate-800">
+              Home
+            </Link>
+            {' / '}
+            <Link href="/tools" className="hover:text-slate-800">
+              Tools
+            </Link>
+            {' / '}
+            <span className="text-slate-700">Medicare research guide</span>
+          </nav>
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+            <Compass className="h-3.5 w-3.5" aria-hidden />
+            Research router · Not a plan finder
+          </p>
+          <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+            Medicare research guide
+          </h1>
+          <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-slate-600 md:text-lg">
+            Tell us your situation and we&apos;ll point you to the best free research tools on
+            InsuranceTrustHub — CMS complaint rankings, county Medicare dashboards, provider
+            participation lookup, and verified agents. We do not sell plans, quote premiums, or take
+            lead fees on this page.
+          </p>
+        </div>
       </div>
-    </div>
+
+      <div className="container mx-auto max-w-3xl px-4 py-10 md:py-12">
+        <MedicareResearchRouter />
+      </div>
+
+      <DisclaimerBanner />
+    </>
   );
 }
