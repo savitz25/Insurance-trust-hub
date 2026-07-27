@@ -37,6 +37,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# CMS raw downloads (~2GB) and optional full PPEF NPI index (~33MB)
+/cms-data/**
+!/cms-data/README.md
+/lib/insurance/cms/data/ppef-active-npis.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

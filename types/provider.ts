@@ -18,6 +18,8 @@ export interface Provider {
   review_count: number;
   is_verified: boolean;
   license_number?: string | null;
+  /** Medicare NPI when known from verified CMS data — never invent */
+  npi?: string | null;
   years_in_business?: number | null;
   trust_score?: number;
   local_market_experience?: number;

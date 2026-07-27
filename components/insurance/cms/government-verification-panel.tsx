@@ -59,8 +59,7 @@ type Props = {
 };
 
 /**
- * Reusable Government / CMS verification panel for agent (and later carrier) profiles.
- * All values come from props — never invents NPI or enrollment claims.
+ * Government / CMS verification panel — never invents NPI or overclaims verification.
  */
 export function GovernmentVerificationPanel({ data, className }: Props) {
   const title = data.title ?? 'Government Verification';
@@ -72,6 +71,37 @@ export function GovernmentVerificationPanel({ data, className }: Props) {
       : participationStatus
     : 'missing';
   const licenseStatus: RowStatus = data.licenseVerified ? 'verified' : 'pending';
+
+  const panelBadge = (() => {
+    if (participationStatus === 'verified' && data.npi) {
+      return {
+        label: 'CMS enrollment matched',
+        className: 'border-emerald-200 bg-emerald-50 text-xs font-medium text-emerald-900',
+      };
+    }
+    if (participationStatus === 'pending') {
+      return {
+        label: 'CMS signals pending',
+        className: 'border-amber-200 bg-amber-50 text-xs font-medium text-amber-950',
+      };
+    }
+    if (participationStatus === 'na') {
+      return {
+        label: 'CMS not applicable',
+        className: 'border-slate-200 bg-slate-50 text-xs font-medium text-slate-700',
+      };
+    }
+    if (participationStatus === 'missing') {
+      return {
+        label: 'CMS data limited',
+        className: 'border-slate-200 bg-slate-50 text-xs font-medium text-slate-700',
+      };
+    }
+    return {
+      label: 'Government data',
+      className: 'border-slate-200 bg-white text-xs font-medium text-slate-700',
+    };
+  })();
 
   const rows: {
     key: string;
@@ -110,10 +140,7 @@ export function GovernmentVerificationPanel({ data, className }: Props) {
   ];
 
   return (
-    <section
-      aria-labelledby="government-verification-heading"
-      className={cn(className)}
-    >
+    <section aria-labelledby="government-verification-heading" className={cn(className)}>
       <Card className="overflow-hidden border-slate-200/90 shadow-sm ring-1 ring-slate-100">
         <CardHeader className="border-b border-slate-100 bg-gradient-to-r from-slate-50 to-teal-50/40 pb-4">
           <div className="flex flex-wrap items-start justify-between gap-3">
@@ -126,11 +153,8 @@ export function GovernmentVerificationPanel({ data, className }: Props) {
               </span>
               {title}
             </CardTitle>
-            <Badge
-              variant="outline"
-              className="border-teal-200 bg-white text-xs font-medium text-teal-800"
-            >
-              CMS Data Verified
+            <Badge variant="outline" className={panelBadge.className}>
+              {panelBadge.label}
             </Badge>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-slate-600">
@@ -141,10 +165,7 @@ export function GovernmentVerificationPanel({ data, className }: Props) {
         <CardContent className="space-y-0 p-0">
           <ul className="divide-y divide-slate-100">
             {rows.map((row) => (
-              <li
-                key={row.key}
-                className="flex gap-3 px-5 py-4 sm:items-start"
-              >
+              <li key={row.key} className="flex gap-3 px-5 py-4 sm:items-start">
                 <StatusIcon status={row.status} />
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">

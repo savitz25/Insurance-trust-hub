@@ -1,0 +1,12 @@
+{
+  "sourceFile": "PPEF_Enrollment_Extract_2026.07.17.csv",
+  "sourcePathHint": "cms-data/provider-enrollment/PPEF_Enrollment_Extract_2026.07.17.csv",
+  "syncedAt": "2026-07-27T00:00:00.000Z",
+  "dataVintage": "PPEF 2026-07-17 extract (2026-07-01 dataset release)",
+  "columnsUsed": [
+    "NPI"
+  ],
+  "note": "NPI present in PPEF base extract indicates actively approved to bill Medicare FFS (PECOS public file).",
+  "rowCountScanned": 2978925,
+  "uniqueNpis": 2541258
+}

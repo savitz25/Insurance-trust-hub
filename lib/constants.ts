@@ -97,4 +97,3 @@ export const TRUST_STATS = [
   { label: 'Market Hubs', value: '57 Hubs' },
 ] as const;
 
-export const MOVE_TRUST_HUB_URL = 'https://www.movetrusthub.com';

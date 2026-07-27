@@ -1,42 +1,39 @@
-# CMS data integration (Phase 1)
+# CMS data integration (Phase 1) — InsuranceTrustHub
 
-Government-backed trust signals for **Insurance Trust Hub** (`https://www.insurancetrusthub.com`).
-
-Canonical repo: `https://github.com/savitz25/Insurance-trust-hub`  
-Vercel project: `insurance-trust-hub`
-
-Routes (apex domain, not nested under `/insurance`):
-- Plan Complaint Index: `/data/plan-complaint-index`
-- Provider profiles: `/providers/[slug]` (Government Verification panel)
+Standalone deploy: **https://www.insurancetrusthub.com**  
+Repo: `savitz25/Insurance-trust-hub` (Vercel project for this domain only).
 
 ## Deliverables
 
-1. **Government Verification Panel** — `components/insurance/cms/government-verification-panel.tsx`  
-   Props: `GovernmentVerificationData` (`types.ts`). Resolved from providers via `resolve-government-verification.ts`. Never invents NPI.
+1. **Plan Complaint Index** — `/data/plan-complaint-index`  
+   Real rankings from `data/complaint-rankings.json` (CMS 2026 Star Ratings C28/D02).
 
-2. **Plan Complaint Index** — `/insurance/data/plan-complaint-index`  
-   Rankings from `complaint-rankings.ts`. Seed rows are `isPlaceholder: true` until CMS public file import.
+2. **Government Verification Panel** — provider profiles  
+   PPEF / Opt Out via `ppef-lookup.ts` when NPI is present; honest pending states otherwise.
 
-3. **Trust Score · Government Standing** — `government-standing.ts` + `enrichment/trust-score.ts`  
-   Neutral when CMS data missing. Breakdown UI in `trust-score-breakdown.tsx`.
+3. **Trust Score · Government Standing** — neutral when CMS data missing.
 
-## CMS import fields (complaint rates)
+## Processed data (committed)
 
-| Field | Description |
-|-------|-------------|
-| `contract_id` | CMS contract ID (e.g. H1234) |
-| `organization_name` | Carrier / parent marketing name |
-| `complaints_per_1000_enrollees` | CMS complaint rate measure |
-| `measurement_year` / vintage | e.g. CY2024 |
-| `overall_star_rating` | Optional |
-| `state_service_area` | Optional filter |
-| `enrollment` | Optional |
+| File | Purpose |
+|------|---------|
+| `data/complaint-rankings.json` | National / FL / TX rankings + byContractId |
+| `data/opt-out-npis.json` | CMS Opt Out Affidavit NPIs (~56k) |
+| `data/ppef-meta.json` | PPEF extract provenance |
 
-Prefer **scheduled public CMS file import** over live restricted APIs. Version with `dataVintage` + `syncedAt` on `CMS_COMPLAINT_DATASET_META`.
+Optional (gitignored, large): `data/ppef-active-npis.json` from `scripts/import-cms-ppef-index.mjs`.
 
-## Refresh procedure
+## Refresh
 
-1. Download public CMS Part C/D complaint rate file for the target year.
-2. Transform to `CmsComplaintRanking[]` (set `isPlaceholder: false`).
-3. Update `CMS_COMPLAINT_DATASET_META` vintage + `syncedAt` + `usingPlaceholderData: false`.
-4. Deploy. Page UI does not need structural changes.
+```bash
+# From this repo after re-downloading cms-data/
+set CMS_DATA_ROOT=./cms-data
+node scripts/import-cms-complaint-rankings.mjs
+node scripts/import-cms-opt-out.mjs
+# optional: node scripts/import-cms-ppef-index.mjs
+```
+
+## Canonical URLs
+
+- Plan Complaint Index: `https://www.insurancetrusthub.com/data/plan-complaint-index`
+- Legacy `/insurance/*` → apex via `vercel.json` 301s

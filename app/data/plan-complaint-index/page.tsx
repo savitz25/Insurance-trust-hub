@@ -83,11 +83,13 @@ export default function PlanComplaintIndexPage() {
             ))}
           </ul>
           <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
-            <p className="font-semibold text-slate-900">Import fields (for CMS file pipeline)</p>
+            <p className="font-semibold text-slate-900">CMS columns used in this build</p>
             <p className="mt-1 text-slate-600">
-              contract_id · organization_name · complaints_per_1000_enrollees · measurement_year ·
-              optional overall_star_rating · optional state_service_area · optional enrollment.
-              Prefer scheduled public CMS file import over live restricted endpoints.
+              CONTRACT_ID · Organization Marketing Name · <strong>C28 Complaints about the Health
+              Plan</strong> (primary rate) · <strong>D02 Complaints about the Drug Plan</strong>{' '}
+              (fallback) · C28/D02 measure stars · 2025→2026 rate delta for trend · July 2026 CPSC
+              enrollment for Florida/Texas material-enrollment filters. Refresh via{' '}
+              <code className="text-xs">scripts/import-cms-complaint-rankings.mjs</code>.
             </p>
           </div>
         </section>

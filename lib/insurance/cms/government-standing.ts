@@ -47,12 +47,13 @@ export function computeGovernmentStandingScore(input: GovernmentStandingInput): 
 
   const rate = input.complaintRatePerThousand;
   if (rate != null && Number.isFinite(rate)) {
-    // Lower complaint rates are better (illustrative bands until real CMS import)
+    // Lower complaint rates are better (CMS C28/D02 scale; typical range ~0–3+)
     if (rate <= 0.05) score += 12;
     else if (rate <= 0.15) score += 6;
     else if (rate <= 0.3) score += 0;
     else if (rate <= 0.5) score -= 8;
-    else score -= 16;
+    else if (rate <= 1.0) score -= 12;
+    else score -= 18;
   }
 
   if (input.hasEnforcementFlag === true) score -= 25;

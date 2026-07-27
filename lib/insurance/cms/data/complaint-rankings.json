@@ -1,0 +1,8461 @@
+{
+  "generatedAt": "2026-07-27T17:14:05.561Z",
+  "sourceFiles": {
+    "measureData": "2026 Star Ratings Data Table - Measure Data (Oct 8 2025).csv",
+    "measureStars": "2026 Star Ratings Data Table - Measure Stars (Oct 8 2025).csv",
+    "measureData2025": "2025 Star Ratings Data Table - Measure Data (Dec 2 2024).csv",
+    "cpscContract": "CPSC_Contract_Info_2026_07.csv"
+  },
+  "meta": {
+    "dataVintage": "2026 Star Ratings (CY2024 measurement for C28/D02)",
+    "syncedAt": "2026-07-27T00:00:00.000Z",
+    "sourceLabel": "CMS 2026 Star Ratings Data Tables — Measure Data",
+    "sourceDataset": "C28: Complaints about the Health Plan · D02: Complaints about the Drug Plan (rate per 1,000 member months / CMS Star measure scale)",
+    "usingPlaceholderData": false,
+    "totalContractsWithRate": 571,
+    "floridaContracts": 76,
+    "texasContracts": 76
+  },
+  "national": [
+    {
+      "id": "us-H0571",
+      "rank": 1,
+      "carrierName": "CCHP (Chinese Community Health Plan)",
+      "contractId": "H0571",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1119",
+      "rank": 2,
+      "carrierName": "Valor Health Plan",
+      "contractId": "H1119",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1181",
+      "rank": 3,
+      "carrierName": "Network Health Medicare Advantage Plans",
+      "contractId": "H1181",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "unknown",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1302",
+      "rank": 4,
+      "carrierName": "Blue Cross of Idaho",
+      "contractId": "H1302",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1347",
+      "rank": 5,
+      "carrierName": "Patrius Health",
+      "contractId": "H1347",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "unknown",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1587",
+      "rank": 6,
+      "carrierName": "Tribute Health Plans",
+      "contractId": "H1587",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1659",
+      "rank": 7,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "H1659",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H2416",
+      "rank": 8,
+      "carrierName": "PrimeWest Health",
+      "contractId": "H2416",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H2419",
+      "rank": 9,
+      "carrierName": "South Country Health Alliance",
+      "contractId": "H2419",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H2816",
+      "rank": 10,
+      "carrierName": "Wellcare",
+      "contractId": "H2816",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H6154",
+      "rank": 11,
+      "carrierName": "Medica",
+      "contractId": "H6154",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H6910",
+      "rank": 12,
+      "carrierName": "Saint Alphonsus Health Plan",
+      "contractId": "H6910",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H9834",
+      "rank": 13,
+      "carrierName": "Quartz Medicare Advantage (HMO)",
+      "contractId": "H9834",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H9942",
+      "rank": 14,
+      "carrierName": "Longevity Health Plan",
+      "contractId": "H9942",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S1140",
+      "rank": 15,
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "contractId": "S1140",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S3389",
+      "rank": 16,
+      "carrierName": "UPMC Health Plan",
+      "contractId": "S3389",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S5877",
+      "rank": 17,
+      "carrierName": "EMI Health",
+      "contractId": "S5877",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S5916",
+      "rank": 18,
+      "carrierName": "Regence BlueShield of Idaho and Regence BC BS Utah",
+      "contractId": "S5916",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S6875",
+      "rank": 19,
+      "carrierName": "Independence Blue Cross",
+      "contractId": "S6875",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S8067",
+      "rank": 20,
+      "carrierName": "Avalon Insurance Company",
+      "contractId": "S8067",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1537",
+      "rank": 21,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "H1537",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H1651",
+      "rank": 22,
+      "carrierName": "Medical Associates Health Plan, Inc.",
+      "contractId": "H1651",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "unknown",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H5264",
+      "rank": 23,
+      "carrierName": "Dean Health Plan, Inc.",
+      "contractId": "H5264",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "unknown",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S3521",
+      "rank": 24,
+      "carrierName": "Excellus Health Plan, Inc",
+      "contractId": "S3521",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S4501",
+      "rank": 25,
+      "carrierName": "Pharmacy Benefit Dimensions PDP",
+      "contractId": "S4501",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S5975",
+      "rank": 26,
+      "carrierName": "Moda Health Plan, Inc.",
+      "contractId": "S5975",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S8841",
+      "rank": 27,
+      "carrierName": "Optum Insurance of Ohio, Inc.",
+      "contractId": "S8841",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S9701",
+      "rank": 28,
+      "carrierName": "Navitus MedicareRx",
+      "contractId": "S9701",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H2320",
+      "rank": 29,
+      "carrierName": "Priority Health Medicare",
+      "contractId": "H2320",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H2461",
+      "rank": 30,
+      "carrierName": "Blue Cross and Blue Shield of Minnesota",
+      "contractId": "H2461",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H2942",
+      "rank": 31,
+      "carrierName": "Cox HealthPlans",
+      "contractId": "H2942",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H3664",
+      "rank": 32,
+      "carrierName": "PrimeTime Health Plan",
+      "contractId": "H3664",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H5211",
+      "rank": 33,
+      "carrierName": "Security Health Plan of Wisconsin, Inc.",
+      "contractId": "H5211",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H5256",
+      "rank": 34,
+      "carrierName": "Medical Associates Clinic Health Plan of Wisconsin",
+      "contractId": "H5256",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "unknown",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-R5361",
+      "rank": 35,
+      "carrierName": "Humana",
+      "contractId": "R5361",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S1822",
+      "rank": 36,
+      "carrierName": "HealthPartners",
+      "contractId": "S1822",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S5540",
+      "rank": 37,
+      "carrierName": "Blue Cross and Blue Shield of North Carolina",
+      "contractId": "S5540",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-S5660",
+      "rank": 38,
+      "carrierName": "Express Scripts Medicare",
+      "contractId": "S5660",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H0104",
+      "rank": 39,
+      "carrierName": "Blue Cross and Blue Shield of Alabama",
+      "contractId": "H0104",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.03,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "us-H2292",
+      "rank": 40,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "H2292",
+      "stateCode": "US",
+      "stateName": "National",
+      "complaintRatePerThousand": 0.03,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    }
+  ],
+  "florida": [
+    {
+      "id": "fl-S1140",
+      "rank": 1,
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "contractId": "S1140",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S6875",
+      "rank": 2,
+      "carrierName": "Independence Blue Cross",
+      "contractId": "S6875",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H1537",
+      "rank": 3,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "H1537",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S3521",
+      "rank": 4,
+      "carrierName": "Excellus Health Plan, Inc",
+      "contractId": "S3521",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S5975",
+      "rank": 5,
+      "carrierName": "Moda Health Plan, Inc.",
+      "contractId": "S5975",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S8841",
+      "rank": 6,
+      "carrierName": "Optum Insurance of Ohio, Inc.",
+      "contractId": "S8841",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S9701",
+      "rank": 7,
+      "carrierName": "Navitus MedicareRx",
+      "contractId": "S9701",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S5660",
+      "rank": 8,
+      "carrierName": "Express Scripts Medicare",
+      "contractId": "S5660",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H5938",
+      "rank": 9,
+      "carrierName": "Capital Health Plan",
+      "contractId": "H5938",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.03,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S2893",
+      "rank": 10,
+      "carrierName": "Blue MedicareRx",
+      "contractId": "S2893",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.03,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S5966",
+      "rank": 11,
+      "carrierName": "EmblemHealth",
+      "contractId": "S5966",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.03,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H3335",
+      "rank": 12,
+      "carrierName": "Excellus Health Plan, Inc",
+      "contractId": "H3335",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H4875",
+      "rank": 13,
+      "carrierName": "Priority Health Medicare",
+      "contractId": "H4875",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H6078",
+      "rank": 14,
+      "carrierName": "Blue Medicare Advantage",
+      "contractId": "H6078",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H7617",
+      "rank": 15,
+      "carrierName": "Humana",
+      "contractId": "H7617",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H9572",
+      "rank": 16,
+      "carrierName": "Blue Cross Blue Shield of Michigan",
+      "contractId": "H9572",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S5743",
+      "rank": 17,
+      "carrierName": "MedicareBlue Rx",
+      "contractId": "S5743",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S5820",
+      "rank": 18,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "S5820",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S5904",
+      "rank": 19,
+      "carrierName": "Florida Blue",
+      "contractId": "S5904",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H1099",
+      "rank": 20,
+      "carrierName": "Health First Health Plans, Inc.",
+      "contractId": "H1099",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H5522",
+      "rank": 21,
+      "carrierName": "Aetna Medicare",
+      "contractId": "H5522",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-H5959",
+      "rank": 22,
+      "carrierName": "Blue Cross and Blue Shield of Minnesota",
+      "contractId": "H5959",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S2135",
+      "rank": 23,
+      "carrierName": "Blue Cross Blue Shield Association",
+      "contractId": "S2135",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "unknown",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S3285",
+      "rank": 24,
+      "carrierName": "MG Insurance Company",
+      "contractId": "S3285",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "fl-S5715",
+      "rank": 25,
+      "carrierName": "Blue Cross and Blue Shield of IL, NM, OK, TX",
+      "contractId": "S5715",
+      "stateCode": "FL",
+      "stateName": "Florida",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    }
+  ],
+  "texas": [
+    {
+      "id": "tx-H1537",
+      "rank": 1,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "H1537",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S8841",
+      "rank": 2,
+      "carrierName": "Optum Insurance of Ohio, Inc.",
+      "contractId": "S8841",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S9701",
+      "rank": 3,
+      "carrierName": "Navitus MedicareRx",
+      "contractId": "S9701",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.01,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5660",
+      "rank": 4,
+      "carrierName": "Express Scripts Medicare",
+      "contractId": "S5660",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.02,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S2893",
+      "rank": 5,
+      "carrierName": "Blue MedicareRx",
+      "contractId": "S2893",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.03,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5966",
+      "rank": 6,
+      "carrierName": "EmblemHealth",
+      "contractId": "S5966",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.03,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H1248",
+      "rank": 7,
+      "carrierName": "Blue Cross and Blue Shield of Louisiana",
+      "contractId": "H1248",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H7617",
+      "rank": 8,
+      "carrierName": "Humana",
+      "contractId": "H7617",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H9572",
+      "rank": 9,
+      "carrierName": "Blue Cross Blue Shield of Michigan",
+      "contractId": "H9572",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5743",
+      "rank": 10,
+      "carrierName": "MedicareBlue Rx",
+      "contractId": "S5743",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5820",
+      "rank": 11,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "S5820",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.04,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H5522",
+      "rank": 12,
+      "carrierName": "Aetna Medicare",
+      "contractId": "H5522",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S2135",
+      "rank": 13,
+      "carrierName": "Blue Cross Blue Shield Association",
+      "contractId": "S2135",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "unknown",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S3285",
+      "rank": 14,
+      "carrierName": "MG Insurance Company",
+      "contractId": "S3285",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5715",
+      "rank": 15,
+      "carrierName": "Blue Cross and Blue Shield of IL, NM, OK, TX",
+      "contractId": "S5715",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5884",
+      "rank": 16,
+      "carrierName": "Humana",
+      "contractId": "S5884",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5960",
+      "rank": 17,
+      "carrierName": "Wellpoint",
+      "contractId": "S5960",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.05,
+      "starRating": 4,
+      "trend": "improving",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H1189",
+      "rank": 18,
+      "carrierName": "CHRISTUS Health Advantage",
+      "contractId": "H1189",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.06,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H3916",
+      "rank": 19,
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "contractId": "H3916",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.06,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H5652",
+      "rank": 20,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "H5652",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.06,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S5596",
+      "rank": 21,
+      "carrierName": "Anthem Insurance Companies, Inc.",
+      "contractId": "S5596",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.06,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H0107",
+      "rank": 22,
+      "carrierName": "Blue Cross and Blue Shield of Montana",
+      "contractId": "H0107",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.07,
+      "starRating": 5,
+      "trend": "improving",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H4036",
+      "rank": 23,
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "contractId": "H4036",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.07,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-S4802",
+      "rank": 24,
+      "carrierName": "Wellcare",
+      "contractId": "S4802",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.07,
+      "starRating": 4,
+      "trend": "stable",
+      "planType": "Part D",
+      "measureUsed": "D02",
+      "isPlaceholder": false
+    },
+    {
+      "id": "tx-H0710",
+      "rank": 25,
+      "carrierName": "UnitedHealthcare",
+      "contractId": "H0710",
+      "stateCode": "TX",
+      "stateName": "Texas",
+      "complaintRatePerThousand": 0.08,
+      "starRating": 5,
+      "trend": "stable",
+      "planType": "Medicare Advantage",
+      "measureUsed": "C28",
+      "isPlaceholder": false
+    }
+  ],
+  "byContractId": {
+    "E3014": {
+      "rate": 0.01,
+      "measure": "D02",
+      "carrierName": "Pennsylvania Public School Employees Retirement Sy",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "DE",
+        "FL",
+        "MD",
+        "NC",
+        "NJ",
+        "NV",
+        "NY",
+        "OH",
+        "PA",
+        "SC",
+        "TX",
+        "VA"
+      ]
+    },
+    "H0028": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "CO",
+        "HI",
+        "IA",
+        "IL",
+        "KS",
+        "MO",
+        "NE",
+        "NM",
+        "TX"
+      ]
+    },
+    "H0034": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Hamaspik, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H0074": {
+      "rate": 0.39,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "MS"
+      ]
+    },
+    "H0104": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Alabama",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL"
+      ]
+    },
+    "H0107": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Montana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "FL",
+        "IL",
+        "IN",
+        "KY",
+        "MD",
+        "MI",
+        "MO",
+        "MT",
+        "NC",
+        "NM",
+        "NV",
+        "NY",
+        "OK",
+        "OR",
+        "PA",
+        "TN",
+        "TX",
+        "WA",
+        "WI"
+      ]
+    },
+    "H0111": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H0154": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "VIVA Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL"
+      ]
+    },
+    "H0169": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA",
+        "KS",
+        "MO",
+        "NE"
+      ]
+    },
+    "H0174": {
+      "rate": 0.47,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H0251": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TN"
+      ]
+    },
+    "H0292": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "KY"
+      ]
+    },
+    "H0294": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA",
+        "MI",
+        "NM",
+        "WI"
+      ]
+    },
+    "H0302": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Blue Cross Blue Shield of Arizona (AZ Blue)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H0321": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H0332": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "KelseyCare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H0342": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "CarePartners of Connecticut",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CT"
+      ]
+    },
+    "H0351": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AZ",
+        "NV"
+      ]
+    },
+    "H0354": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H0423": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "MetroPlus Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H0432": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AL"
+      ]
+    },
+    "H0439": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA",
+        "MO",
+        "UT"
+      ]
+    },
+    "H0473": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H0504": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Blue Shield of California",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H0523": {
+      "rate": 0.52,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H0524": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "CA",
+        "NV"
+      ]
+    },
+    "H0543": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H0544": {
+      "rate": 0.31,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H0562": {
+      "rate": 0.3,
+      "measure": "C28",
+      "carrierName": "Wellcare By Health Net",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H0571": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "CCHP (Chinese Community Health Plan)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H0609": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "CO",
+        "NV",
+        "TX"
+      ]
+    },
+    "H0624": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CO"
+      ]
+    },
+    "H0628": {
+      "rate": 0.26,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "KY",
+        "OH"
+      ]
+    },
+    "H0630": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CO"
+      ]
+    },
+    "H0672": {
+      "rate": 0.38,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CO",
+        "KY",
+        "NM",
+        "OH"
+      ]
+    },
+    "H0710": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AZ",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "IL",
+        "IN",
+        "MD",
+        "ME",
+        "MO",
+        "MS",
+        "NC",
+        "NH",
+        "NJ",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "TX",
+        "UT",
+        "VA",
+        "WA"
+      ]
+    },
+    "H0712": {
+      "rate": 0.36,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CT"
+      ]
+    },
+    "H0755": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CT",
+        "NJ"
+      ]
+    },
+    "H0764": {
+      "rate": 0.37,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "RI"
+      ]
+    },
+    "H0783": {
+      "rate": 0.5,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H0885": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Braven Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL",
+        "NJ",
+        "PA",
+        "SC"
+      ]
+    },
+    "H0907": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "Wellpoint",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA"
+      ]
+    },
+    "H0908": {
+      "rate": 0.81,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H0913": {
+      "rate": 0.44,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H0976": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "SCAN Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H0978": {
+      "rate": 1.18,
+      "measure": "C28",
+      "carrierName": "SCAN Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "NV"
+      ]
+    },
+    "H0982": {
+      "rate": 0.68,
+      "measure": "C28",
+      "carrierName": "Solis Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H1019": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "CarePlus Health Plans, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H1032": {
+      "rate": 0.28,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H1035": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Florida Blue HMO",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H1036": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL",
+        "KY",
+        "MS",
+        "NC",
+        "OR",
+        "VA",
+        "WA"
+      ]
+    },
+    "H1045": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H1099": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Health First Health Plans, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H1109": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H1112": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H1119": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Valor Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H1170": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H1181": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Network Health Medicare Advantage Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H1189": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "CHRISTUS Health Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NM",
+        "TX"
+      ]
+    },
+    "H1215": {
+      "rate": 0.48,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NE"
+      ]
+    },
+    "H1224": {
+      "rate": 0.46,
+      "measure": "C28",
+      "carrierName": "L.A. Care Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H1225": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Johns Hopkins Advantage MD",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MD"
+      ]
+    },
+    "H1230": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "HI"
+      ]
+    },
+    "H1248": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Louisiana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "LA",
+        "TX"
+      ]
+    },
+    "H1278": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA",
+        "NE",
+        "TX",
+        "WA"
+      ]
+    },
+    "H1290": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H1302": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Blue Cross of Idaho",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID"
+      ]
+    },
+    "H1304": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Regence BlueShield of Idaho",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID"
+      ]
+    },
+    "H1347": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Patrius Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MS"
+      ]
+    },
+    "H1350": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Blue Cross of Idaho",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID"
+      ]
+    },
+    "H1360": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NV"
+      ]
+    },
+    "H1365": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Martin's Point Generations Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "ME"
+      ]
+    },
+    "H1395": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NE"
+      ]
+    },
+    "H1416": {
+      "rate": 0.32,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR",
+        "IL",
+        "MS",
+        "TN"
+      ]
+    },
+    "H1423": {
+      "rate": 0.35,
+      "measure": "C28",
+      "carrierName": "Wellpoint",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H1468": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IL"
+      ]
+    },
+    "H1537": {
+      "rate": 0.01,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IL",
+        "MD",
+        "MO",
+        "NC",
+        "NJ",
+        "NV",
+        "NY",
+        "OH",
+        "PA",
+        "SC",
+        "TX",
+        "VA",
+        "WA"
+      ]
+    },
+    "H1587": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Tribute Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AR"
+      ]
+    },
+    "H1607": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IN"
+      ]
+    },
+    "H1608": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR",
+        "GA",
+        "IA",
+        "IL",
+        "KS",
+        "MO",
+        "ND",
+        "NE",
+        "OH",
+        "SD",
+        "WV"
+      ]
+    },
+    "H1609": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL",
+        "IA"
+      ]
+    },
+    "H1610": {
+      "rate": 0.46,
+      "measure": "C28",
+      "carrierName": "Aetna Better Health of Virginia",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "VA"
+      ]
+    },
+    "H1651": {
+      "rate": 0.01,
+      "measure": "C28",
+      "carrierName": "Medical Associates Health Plan, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "IL"
+      ]
+    },
+    "H1659": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "VA"
+      ]
+    },
+    "H1664": {
+      "rate": 0.77,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "MO"
+      ]
+    },
+    "H1666": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of NM, TX",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NM",
+        "TX"
+      ]
+    },
+    "H1692": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WV"
+      ]
+    },
+    "H1722": {
+      "rate": 0.26,
+      "measure": "C28",
+      "carrierName": "Healthfirst Medicare Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H1799": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Passport Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA",
+        "KY"
+      ]
+    },
+    "H1822": {
+      "rate": 0.31,
+      "measure": "C28",
+      "carrierName": "SCAN Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H1846": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "MediGold",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "OH"
+      ]
+    },
+    "H1862": {
+      "rate": 0.3,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA"
+      ]
+    },
+    "H1889": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AL",
+        "AR",
+        "FL",
+        "GA",
+        "KY",
+        "LA",
+        "MS",
+        "NC",
+        "NV",
+        "PA",
+        "WY"
+      ]
+    },
+    "H1894": {
+      "rate": 0.78,
+      "measure": "C28",
+      "carrierName": "Wellpoint",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H1914": {
+      "rate": 0.41,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CT",
+        "NC"
+      ]
+    },
+    "H1947": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Healthy Blue",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "LA"
+      ]
+    },
+    "H1951": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "LA"
+      ]
+    },
+    "H1961": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Peoples Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "LA"
+      ]
+    },
+    "H1969": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Regence BlueShield of Idaho",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": []
+    },
+    "H1993": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "Astiva Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H1994": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Select Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CO",
+        "NV",
+        "UT"
+      ]
+    },
+    "H1997": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Regence BlueShield",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H2001": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VI",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "H2032": {
+      "rate": 0.25,
+      "measure": "C28",
+      "carrierName": "Baylor Scott & White Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H2056": {
+      "rate": 0.32,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H2108": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "DC",
+        "DE",
+        "MD"
+      ]
+    },
+    "H2117": {
+      "rate": 0.8,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H2162": {
+      "rate": 0.25,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": []
+    },
+    "H2168": {
+      "rate": 0.32,
+      "measure": "C28",
+      "carrierName": "VillageCareMAX",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H2172": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "DC",
+        "MD",
+        "VA"
+      ]
+    },
+    "H2174": {
+      "rate": 0.28,
+      "measure": "C28",
+      "carrierName": "Wellcare By Trillium",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H2224": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H2225": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Commonwealth Care Alliance Massachusetts",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H2226": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H2230": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Blue Cross Blue Shield of Massachusetts",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA",
+        "NH"
+      ]
+    },
+    "H2235": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "BayCare Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H2237": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "iCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H2247": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H2256": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Tufts Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H2261": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Blue Cross Blue Shield of Massachusetts",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H2292": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H2293": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA",
+        "TX"
+      ]
+    },
+    "H2320": {
+      "rate": 0.02,
+      "measure": "C28",
+      "carrierName": "Priority Health Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H2322": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "HAP Senior Plus (PPO)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H2354": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "HAP Senior Plus",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H2392": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Kansas Health Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "KS"
+      ]
+    },
+    "H2400": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Signature Advantage (HMO SNP)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "KY",
+        "TN"
+      ]
+    },
+    "H2406": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "CO",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "MO",
+        "NC",
+        "NM",
+        "OR",
+        "PA",
+        "TX",
+        "VA"
+      ]
+    },
+    "H2416": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "PrimeWest Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H2419": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "South Country Health Alliance",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H2422": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "HealthPartners",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H2425": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Blue Plus",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H2450": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "Medica",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "MN",
+        "ND",
+        "NE",
+        "SD",
+        "WI"
+      ]
+    },
+    "H2456": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "UCare's MSHO",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": []
+    },
+    "H2458": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Medica",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H2459": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "UCare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": []
+    },
+    "H2461": {
+      "rate": 0.02,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Minnesota",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H2462": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "HealthPartners",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H2463": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H2486": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "ID",
+        "UT",
+        "WA"
+      ]
+    },
+    "H2491": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "LA"
+      ]
+    },
+    "H2509": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H2526": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H2563": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "Sentara Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "VA"
+      ]
+    },
+    "H2593": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "Wellpoint",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "TX"
+      ]
+    },
+    "H2610": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Essence Healthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AR",
+        "IL",
+        "IN",
+        "KY",
+        "MO"
+      ]
+    },
+    "H2624": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "HealthTeam Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H2663": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR",
+        "IL",
+        "KS",
+        "MO",
+        "OK"
+      ]
+    },
+    "H2686": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "HI"
+      ]
+    },
+    "H2697": {
+      "rate": 0.35,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H2737": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Health New England Medicare Advantage Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H2775": {
+      "rate": 0.4,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "ME",
+        "NY"
+      ]
+    },
+    "H2802": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AR",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "MO",
+        "NE"
+      ]
+    },
+    "H2816": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ME",
+        "NY"
+      ]
+    },
+    "H2819": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Blue Shield of California",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H2836": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CT"
+      ]
+    },
+    "H2915": {
+      "rate": 0.78,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H2923": {
+      "rate": 0.38,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H2942": {
+      "rate": 0.02,
+      "measure": "C28",
+      "carrierName": "Cox HealthPlans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MO"
+      ]
+    },
+    "H2960": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Senior Care Plus",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NV"
+      ]
+    },
+    "H2962": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Ultimate Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H3038": {
+      "rate": 0.56,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of California",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H3071": {
+      "rate": 1.12,
+      "measure": "C28",
+      "carrierName": "Clear Spring Health",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": []
+    },
+    "H3080": {
+      "rate": 0.47,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AL"
+      ]
+    },
+    "H3113": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NJ",
+        "PA",
+        "RI"
+      ]
+    },
+    "H3146": {
+      "rate": 0.31,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NC",
+        "SC",
+        "TN"
+      ]
+    },
+    "H3152": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H3186": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "Align powered by Sanford Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H3192": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "IL",
+        "IN",
+        "MI"
+      ]
+    },
+    "H3204": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Presbyterian Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NM"
+      ]
+    },
+    "H3219": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "Allina Health Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H3239": {
+      "rate": 0.41,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AL",
+        "LA",
+        "MS"
+      ]
+    },
+    "H3240": {
+      "rate": 0.35,
+      "measure": "C28",
+      "carrierName": "Wellpoint",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H3251": {
+      "rate": 0.3,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of New Mexico",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NM"
+      ]
+    },
+    "H3256": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H3259": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "BlueCare Plus Tennessee",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TN"
+      ]
+    },
+    "H3288": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA",
+        "OK",
+        "TX"
+      ]
+    },
+    "H3291": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "PruittHealth Premier",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H3305": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "MVP HEALTH CARE",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3312": {
+      "rate": 0.31,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3330": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "EmblemHealth",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3335": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Excellus Health Plan, Inc",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL",
+        "NY",
+        "PA",
+        "SC"
+      ]
+    },
+    "H3344": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Independent Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3347": {
+      "rate": 0.28,
+      "measure": "C28",
+      "carrierName": "Elderplan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3351": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Excellus Health Plan, Inc",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3359": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Healthfirst Medicare Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3362": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Independent Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3379": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3384": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3387": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3388": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "CDPHP Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3404": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of North Carolina",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H3418": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3443": {
+      "rate": 0.46,
+      "measure": "C28",
+      "carrierName": "Alignment Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H3447": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Anthem HealthKeepers",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IN",
+        "MO",
+        "VA"
+      ]
+    },
+    "H3449": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of North Carolina",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H3467": {
+      "rate": 0.36,
+      "measure": "C28",
+      "carrierName": "ProCare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H3499": {
+      "rate": 0.49,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "IN"
+      ]
+    },
+    "H3528": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "ConnectiCare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CT"
+      ]
+    },
+    "H3533": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H3536": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": []
+    },
+    "H3557": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Blue Cross & Blue Shield of Rhode Island",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL",
+        "MA",
+        "RI"
+      ]
+    },
+    "H3561": {
+      "rate": 0.35,
+      "measure": "C28",
+      "carrierName": "Wellcare By Health Net",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H3597": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ME"
+      ]
+    },
+    "H3653": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Paramount Elite Medicare Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MI",
+        "OH"
+      ]
+    },
+    "H3655": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H3660": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "SummaCare Medicare Advantage Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H3664": {
+      "rate": 0.02,
+      "measure": "C28",
+      "carrierName": "PrimeTime Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H3668": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "MediGold",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "OH"
+      ]
+    },
+    "H3672": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "The Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH",
+        "WV"
+      ]
+    },
+    "H3706": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "GlobalHealth",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OK"
+      ]
+    },
+    "H3727": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Communicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IN",
+        "MD",
+        "OH"
+      ]
+    },
+    "H3748": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H3755": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "CommunityCare Senior Health Plan (HMO)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OK"
+      ]
+    },
+    "H3777": {
+      "rate": 0.87,
+      "measure": "C28",
+      "carrierName": "Experience Health",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H3794": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H3800": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Provider Partners Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IL"
+      ]
+    },
+    "H3805": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR",
+        "WA"
+      ]
+    },
+    "H3810": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "AllCare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H3811": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Samaritan Advantage Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H3814": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "ATRIO Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H3815": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Alignment Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H3817": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Regence BlueCross BlueShield of Oregon",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID",
+        "OR",
+        "WA"
+      ]
+    },
+    "H3822": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of IL, NM",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IL",
+        "NM"
+      ]
+    },
+    "H3832": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "HMSA Akamai Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "HI",
+        "NV"
+      ]
+    },
+    "H3864": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "PacificSource Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID",
+        "MT",
+        "OR"
+      ]
+    },
+    "H3890": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Johns Hopkins Advantage MD",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MD"
+      ]
+    },
+    "H3907": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "UPMC for Life",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH",
+        "PA"
+      ]
+    },
+    "H3909": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Independence Blue Cross",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "DE",
+        "NJ",
+        "PA"
+      ]
+    },
+    "H3916": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "MA",
+        "MD",
+        "MI",
+        "NC",
+        "NE",
+        "NJ",
+        "NY",
+        "OH",
+        "OR",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    },
+    "H3923": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Capital Blue Cross",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H3924": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Geisinger Gold",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H3928": {
+      "rate": 0.68,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "LA"
+      ]
+    },
+    "H3931": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AZ",
+        "CO",
+        "DC",
+        "DE",
+        "NC",
+        "NV",
+        "OH",
+        "PA",
+        "VA",
+        "WA"
+      ]
+    },
+    "H3949": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NJ",
+        "PA"
+      ]
+    },
+    "H3952": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Independence Blue Cross",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H3954": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Geisinger Gold",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H3957": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H3959": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "DE",
+        "PA"
+      ]
+    },
+    "H3962": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Capital Blue Cross",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H3975": {
+      "rate": 0.36,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "KY"
+      ]
+    },
+    "H3979": {
+      "rate": 0.3,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Oklahoma",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OK"
+      ]
+    },
+    "H4003": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Medicare y Mucho Mas (MMM)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PR"
+      ]
+    },
+    "H4004": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Medicare y Mucho Mas (MMM)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PR"
+      ]
+    },
+    "H4005": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Triple-S Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PR"
+      ]
+    },
+    "H4036": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    },
+    "H4045": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Santa Clara Family Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H4054": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Provider Partners Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H4073": {
+      "rate": 0.65,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H4091": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "Simpra Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL"
+      ]
+    },
+    "H4140": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Doctors HealthCare Plans, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H4141": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H4152": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Blue Cross & Blue Shield of Rhode Island",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA",
+        "RI"
+      ]
+    },
+    "H4161": {
+      "rate": 0.7,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross Partnership Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H4172": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "NHC Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MO",
+        "SC",
+        "TN"
+      ]
+    },
+    "H4213": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Arkansas Blue Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR"
+      ]
+    },
+    "H4227": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "VISTA Health Plan Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H4279": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "UPMC for Life Complete Care",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H4286": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Leon Health, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H4346": {
+      "rate": 0.41,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CO",
+        "NV"
+      ]
+    },
+    "H4407": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MS",
+        "OR",
+        "WA"
+      ]
+    },
+    "H4461": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AL",
+        "AZ",
+        "KS",
+        "MO",
+        "NM",
+        "TN",
+        "TX"
+      ]
+    },
+    "H4471": {
+      "rate": 0.68,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H4497": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Medical Mutual of Ohio",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H4506": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H4513": {
+      "rate": 0.24,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AL",
+        "AR",
+        "GA",
+        "IL",
+        "MS",
+        "NV",
+        "OK",
+        "TN",
+        "TX"
+      ]
+    },
+    "H4514": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H4523": {
+      "rate": 0.31,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H4527": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H4544": {
+      "rate": 0.66,
+      "measure": "C28",
+      "carrierName": "Peoples Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "LA"
+      ]
+    },
+    "H4604": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID",
+        "NM",
+        "UT"
+      ]
+    },
+    "H4605": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Regence BlueCross BlueShield of Utah",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "UT"
+      ]
+    },
+    "H4623": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MO"
+      ]
+    },
+    "H4624": {
+      "rate": 1.52,
+      "measure": "C28",
+      "carrierName": "Zing Health",
+      "planType": "Medicare Advantage",
+      "starRating": 1,
+      "materialStates": [
+        "IL",
+        "IN",
+        "MI",
+        "MS",
+        "OH",
+        "TN"
+      ]
+    },
+    "H4676": {
+      "rate": 0.28,
+      "measure": "C28",
+      "carrierName": "Troy Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H4704": {
+      "rate": 0.42,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross Life and Health Insurance Compan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H4711": {
+      "rate": 0.43,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CO",
+        "NV"
+      ]
+    },
+    "H4733": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "Community Health Group",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H4754": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "PacificSource Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID",
+        "OR"
+      ]
+    },
+    "H4808": {
+      "rate": 0.38,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CO"
+      ]
+    },
+    "H4835": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H4847": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "SC"
+      ]
+    },
+    "H4868": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H4875": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Priority Health Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL",
+        "MI"
+      ]
+    },
+    "H4882": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "HealthPartners",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H4909": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "KY",
+        "MO",
+        "VA"
+      ]
+    },
+    "H4931": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Banner Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H4937": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Blue Shield of California",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "CA",
+        "CO",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "MT",
+        "NM",
+        "NV",
+        "OR",
+        "TX",
+        "UT",
+        "WA"
+      ]
+    },
+    "H4961": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Alignment Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H4982": {
+      "rate": 0.52,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5008": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "LA",
+        "MS",
+        "WA"
+      ]
+    },
+    "H5009": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Regence BlueShield",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H5015": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Texas Independence Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H5042": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "CDPHP Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H5050": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H5087": {
+      "rate": 0.38,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5106": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Highmark Blue Cross Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "KY",
+        "OH",
+        "PA",
+        "WV"
+      ]
+    },
+    "H5141": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Clover Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA",
+        "NJ",
+        "PA",
+        "SC",
+        "TX"
+      ]
+    },
+    "H5209": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "My Choice Wisconsin",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H5211": {
+      "rate": 0.02,
+      "measure": "C28",
+      "carrierName": "Security Health Plan of Wisconsin, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H5215": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "Network Health Medicare Advantage Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H5216": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "H5253": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "DE",
+        "IA",
+        "IL",
+        "KY",
+        "MA",
+        "ME",
+        "MS",
+        "NC",
+        "NH",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "TN",
+        "VA",
+        "WI"
+      ]
+    },
+    "H5256": {
+      "rate": 0.02,
+      "measure": "C28",
+      "carrierName": "Medical Associates Clinic Health Plan of Wisconsin",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "WI"
+      ]
+    },
+    "H5262": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Quartz Medicare Advantage (HMO)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "WI"
+      ]
+    },
+    "H5264": {
+      "rate": 0.01,
+      "measure": "C28",
+      "carrierName": "Dean Health Plan, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H5273": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "CarePartners of Connecticut",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CT"
+      ]
+    },
+    "H5294": {
+      "rate": 0.58,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H5296": {
+      "rate": 0.46,
+      "measure": "C28",
+      "carrierName": "Alignment Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NC",
+        "NV"
+      ]
+    },
+    "H5299": {
+      "rate": 0.38,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H5302": {
+      "rate": 0.32,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H5322": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA",
+        "KS",
+        "OH",
+        "OK",
+        "SC",
+        "TX"
+      ]
+    },
+    "H5325": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR",
+        "MO"
+      ]
+    },
+    "H5361": {
+      "rate": 0.3,
+      "measure": "C28",
+      "carrierName": "AmeriHealth",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H5374": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Longevity Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H5377": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA",
+        "VA"
+      ]
+    },
+    "H5386": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Sharp Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5410": {
+      "rate": 0.47,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5420": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5422": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H5425": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "SCAN Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5427": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Freedom Health, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5431": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "HealthSun Health Plans, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5433": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "CalOptima Health OneCare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5434": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Florida Blue",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5435": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "KS",
+        "MT",
+        "WY"
+      ]
+    },
+    "H5439": {
+      "rate": 0.26,
+      "measure": "C28",
+      "carrierName": "Wellcare By Health Net",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OR",
+        "WA"
+      ]
+    },
+    "H5454": {
+      "rate": 2.28,
+      "measure": "C28",
+      "carrierName": "Clear Spring Health",
+      "planType": "Medicare Advantage",
+      "starRating": 1,
+      "materialStates": []
+    },
+    "H5471": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Simply Healthcare Plans, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5472": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Alignment Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H5475": {
+      "rate": 0.39,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H5496": {
+      "rate": 0.75,
+      "measure": "C28",
+      "carrierName": "Imperial Health Plan of California, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5521": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MS",
+        "NC",
+        "NH",
+        "NJ",
+        "NV",
+        "NY",
+        "OH",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "UT",
+        "VA",
+        "WA",
+        "WI"
+      ]
+    },
+    "H5522": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "H5525": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AL",
+        "CA",
+        "GA",
+        "ID",
+        "IL",
+        "IN",
+        "KY",
+        "MT",
+        "NC",
+        "OH",
+        "OR",
+        "PA",
+        "WV",
+        "WY"
+      ]
+    },
+    "H5526": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL",
+        "NY",
+        "PA"
+      ]
+    },
+    "H5533": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "UPMC for Life",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H5549": {
+      "rate": 0.58,
+      "measure": "C28",
+      "carrierName": "VNS Health Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H5577": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "MCS Classicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "PR"
+      ]
+    },
+    "H5580": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Mercy Care Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H5587": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Blue Cross Blue Shield of Arizona Health Choice",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H5590": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H5591": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Martin's Point Generations Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ME"
+      ]
+    },
+    "H5593": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA"
+      ]
+    },
+    "H5594": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Optimum HealthCare, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5599": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "Wellcare By Fidelis Care",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H5608": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "Elevate Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CO"
+      ]
+    },
+    "H5619": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AL",
+        "AR",
+        "CA",
+        "ID",
+        "IN",
+        "KY",
+        "ME",
+        "NH",
+        "OK",
+        "SC",
+        "VA",
+        "WA",
+        "WV"
+      ]
+    },
+    "H5628": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of Utah & Idaho",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "ID",
+        "UT"
+      ]
+    },
+    "H5649": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Central Health Medicare Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5652": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CO",
+        "FL",
+        "KS",
+        "MA",
+        "MD",
+        "MI",
+        "NC",
+        "NJ",
+        "PA",
+        "TX",
+        "VA"
+      ]
+    },
+    "H5774": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Triple S Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "PR"
+      ]
+    },
+    "H5779": {
+      "rate": 0.43,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "IL"
+      ]
+    },
+    "H5793": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CT",
+        "MA",
+        "NH",
+        "RI"
+      ]
+    },
+    "H5810": {
+      "rate": 3.15,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of California",
+      "planType": "Medicare Advantage",
+      "starRating": 1,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5823": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of Washington, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H5826": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Community Health Plan of WA Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H5828": {
+      "rate": 0.35,
+      "measure": "C28",
+      "carrierName": "Wellpoint",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TN"
+      ]
+    },
+    "H5843": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Banner Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H5854": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CT"
+      ]
+    },
+    "H5859": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "CareOregon Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H5883": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Blue Care Network",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H5900": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Wellmark Advantage Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "SD"
+      ]
+    },
+    "H5926": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of Michigan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H5928": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Blue Shield of California",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H5932": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Highmark Wholecare Medicare Assured",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H5937": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "UCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": []
+    },
+    "H5938": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "Capital Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H5945": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Prominence Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NV"
+      ]
+    },
+    "H5959": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Minnesota",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "FL",
+        "MN",
+        "WI"
+      ]
+    },
+    "H5965": {
+      "rate": 1.01,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "WA"
+      ]
+    },
+    "H5969": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "AlohaCare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "HI"
+      ]
+    },
+    "H5970": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H5989": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Healthfirst Medicare Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H5991": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "EmblemHealth",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H5995": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "ATRIO Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H6018": {
+      "rate": 1.04,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H6019": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "HEALTH PLAN OF SAN MATEO",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H6078": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Blue Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "DE",
+        "FL",
+        "NC",
+        "NJ",
+        "NY",
+        "PA",
+        "SC"
+      ]
+    },
+    "H6154": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Medica",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H6158": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Arkansas Blue Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AR"
+      ]
+    },
+    "H6200": {
+      "rate": 0.25,
+      "measure": "C28",
+      "carrierName": "Essence Healthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR",
+        "IL",
+        "KY",
+        "MO"
+      ]
+    },
+    "H6202": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "NextBlue of North Dakota",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ND"
+      ]
+    },
+    "H6237": {
+      "rate": 0.03,
+      "measure": "C28",
+      "carrierName": "Regence BlueCross BlueShield of Oregon",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H6322": {
+      "rate": 0.45,
+      "measure": "C28",
+      "carrierName": "McLaren Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H6348": {
+      "rate": 0.8,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "IN"
+      ]
+    },
+    "H6351": {
+      "rate": 0.36,
+      "measure": "C28",
+      "carrierName": "Liberty Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H6379": {
+      "rate": 1.21,
+      "measure": "C28",
+      "carrierName": "Clear Spring Health",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": []
+    },
+    "H6396": {
+      "rate": 0.27,
+      "measure": "C28",
+      "carrierName": "CareSource MyCare Ohio (HMO D-SNP)",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H6399": {
+      "rate": 0.82,
+      "measure": "C28",
+      "carrierName": "Aetna Better Health of New Jersey",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H6453": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Louisiana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "LA"
+      ]
+    },
+    "H6529": {
+      "rate": 0.47,
+      "measure": "C28",
+      "carrierName": "MyTruAdvantage",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "IN"
+      ]
+    },
+    "H6545": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IL"
+      ]
+    },
+    "H6550": {
+      "rate": 1.05,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "KS"
+      ]
+    },
+    "H6586": {
+      "rate": 0.52,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H6595": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "KY"
+      ]
+    },
+    "H6622": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "KY",
+        "MD",
+        "MS",
+        "MT",
+        "NC",
+        "NJ",
+        "NV",
+        "OH",
+        "OK",
+        "PA",
+        "VA",
+        "WI"
+      ]
+    },
+    "H6672": {
+      "rate": 2.54,
+      "measure": "C28",
+      "carrierName": "Clear Spring Health",
+      "planType": "Medicare Advantage",
+      "starRating": 1,
+      "materialStates": []
+    },
+    "H6723": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Medical Mutual of Ohio",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H6743": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "ATRIO Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H6765": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Iowa Health Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA"
+      ]
+    },
+    "H6813": {
+      "rate": 0.56,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H6815": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Wellcare By Health Net",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H6832": {
+      "rate": 0.25,
+      "measure": "C28",
+      "carrierName": "Align Senior Care",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H6851": {
+      "rate": 0.53,
+      "measure": "C28",
+      "carrierName": "WellSense Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NH"
+      ]
+    },
+    "H6852": {
+      "rate": 0.81,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H6874": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Aspirus Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H6876": {
+      "rate": 3.12,
+      "measure": "C28",
+      "carrierName": "Zing Health",
+      "planType": "Medicare Advantage",
+      "starRating": 1,
+      "materialStates": [
+        "IN",
+        "MI",
+        "TN"
+      ]
+    },
+    "H6898": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Vermont Blue Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": []
+    },
+    "H6910": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Saint Alphonsus Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "ID"
+      ]
+    },
+    "H6988": {
+      "rate": 0.32,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield HP",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H7006": {
+      "rate": 0.24,
+      "measure": "C28",
+      "carrierName": "ATRIO Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H7020": {
+      "rate": 0.26,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "SC"
+      ]
+    },
+    "H7028": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "SC"
+      ]
+    },
+    "H7063": {
+      "rate": 0.36,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Kansas",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "KS"
+      ]
+    },
+    "H7093": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IN"
+      ]
+    },
+    "H7115": {
+      "rate": 0.39,
+      "measure": "C28",
+      "carrierName": "Memorial Hermann Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H7123": {
+      "rate": 0.66,
+      "measure": "C28",
+      "carrierName": "UPMC for Life Complete Care",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "H7147": {
+      "rate": 0.4,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CO"
+      ]
+    },
+    "H7149": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NE"
+      ]
+    },
+    "H7151": {
+      "rate": 0.26,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IL"
+      ]
+    },
+    "H7199": {
+      "rate": 0.35,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "OR"
+      ]
+    },
+    "H7220": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Anthem HealthKeepers",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IN"
+      ]
+    },
+    "H7284": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H7301": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IL"
+      ]
+    },
+    "H7323": {
+      "rate": 1.24,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H7326": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "SC"
+      ]
+    },
+    "H7379": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "CareFirst BlueCross BlueShield Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "DC",
+        "DE",
+        "FL",
+        "MD",
+        "NC",
+        "PA",
+        "SC",
+        "VA",
+        "WV"
+      ]
+    },
+    "H7389": {
+      "rate": 0.92,
+      "measure": "C28",
+      "carrierName": "Cigna Healthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": []
+    },
+    "H7464": {
+      "rate": 0.3,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "DC",
+        "MD"
+      ]
+    },
+    "H7518": {
+      "rate": 1.03,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "MO"
+      ]
+    },
+    "H7557": {
+      "rate": 0.17,
+      "measure": "C28",
+      "carrierName": "Longevity Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H7605": {
+      "rate": 0.69,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TN"
+      ]
+    },
+    "H7607": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Clever Care Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H7617": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    },
+    "H7670": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Mass Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H7678": {
+      "rate": 0.75,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of Texas, Inc.",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H7680": {
+      "rate": 0.2,
+      "measure": "C28",
+      "carrierName": "Prominence Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H7787": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CT",
+        "FL",
+        "GA",
+        "MA",
+        "ME",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "VT"
+      ]
+    },
+    "H7849": {
+      "rate": 0.41,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AL",
+        "AR",
+        "AZ",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "GA",
+        "IL",
+        "KS",
+        "MO",
+        "MS",
+        "NC",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "UT",
+        "VA"
+      ]
+    },
+    "H7917": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "BlueCross BlueShield of Tennessee",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "GA",
+        "TN"
+      ]
+    },
+    "H7993": {
+      "rate": 0.24,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA",
+        "TX"
+      ]
+    },
+    "H8003": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Blue Cross Blue Shield of South Carolina",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "SC"
+      ]
+    },
+    "H8010": {
+      "rate": 0.37,
+      "measure": "C28",
+      "carrierName": "Clover Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H8070": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "UCare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": []
+    },
+    "H8093": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Georgia Health Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "GA"
+      ]
+    },
+    "H8133": {
+      "rate": 0.24,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Texas",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H8142": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Baylor Scott & White Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H8145": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "GA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "MI",
+        "MN",
+        "MO",
+        "MT",
+        "NC",
+        "OH",
+        "OK",
+        "PA",
+        "SC",
+        "TX",
+        "VA",
+        "WI",
+        "WV"
+      ]
+    },
+    "H8166": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Highmark Blue Cross Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "DE"
+      ]
+    },
+    "H8173": {
+      "rate": 0.31,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "H8176": {
+      "rate": 0.43,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of South Carolina",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "SC"
+      ]
+    },
+    "H8181": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Nebraska",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NE"
+      ]
+    },
+    "H8189": {
+      "rate": 0.75,
+      "measure": "C28",
+      "carrierName": "Wellcare by Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H8211": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MT",
+        "WV"
+      ]
+    },
+    "H8298": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Horizon Blue Cross Blue Shield of New Jersey",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H8330": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Tufts Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H8332": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H8379": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "Priority Health Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H8385": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Align powered by Sanford Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA",
+        "ND",
+        "SD"
+      ]
+    },
+    "H8432": {
+      "rate": 0.22,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield HP",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H8457": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Longevity Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H8547": {
+      "rate": 0.54,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Illinois",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "IL"
+      ]
+    },
+    "H8552": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross Life and Health Insurance Compan",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H8554": {
+      "rate": 0.64,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of OK, TX",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H8578": {
+      "rate": 0.07,
+      "measure": "C28",
+      "carrierName": "Health New England Medicare Advantage Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H8597": {
+      "rate": 0.65,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H8604": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "The Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OH",
+        "WV"
+      ]
+    },
+    "H8634": {
+      "rate": 0.33,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of IL, NM, OK, TX",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "IL",
+        "NM",
+        "OK",
+        "TX"
+      ]
+    },
+    "H8649": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "UT"
+      ]
+    },
+    "H8764": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "Aspire Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H8768": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "IA",
+        "IL",
+        "KS",
+        "KY",
+        "MA",
+        "MO",
+        "MS",
+        "NH",
+        "NJ",
+        "OH",
+        "OK",
+        "RI"
+      ]
+    },
+    "H8783": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "UCare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": []
+    },
+    "H8794": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H8849": {
+      "rate": 0.37,
+      "measure": "C28",
+      "carrierName": "Wellpoint",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H8854": {
+      "rate": 0.31,
+      "measure": "C28",
+      "carrierName": "CareFirst BlueCross BlueShield Medicare Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MD"
+      ]
+    },
+    "H8889": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Medica",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IA",
+        "MN",
+        "ND",
+        "NE",
+        "SD"
+      ]
+    },
+    "H8894": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "IEHP DualChoice",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "CA"
+      ]
+    },
+    "H8908": {
+      "rate": 0.18,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H8928": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Fallon Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H8947": {
+      "rate": 0.39,
+      "measure": "C28",
+      "carrierName": "Peak Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "PA",
+        "WV"
+      ]
+    },
+    "H9001": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Fallon Health",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H9003": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Kaiser Permanente",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "OR",
+        "WA"
+      ]
+    },
+    "H9042": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "MyTruAdvantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IN"
+      ]
+    },
+    "H9047": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "Providence Medicare Advantage Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "CA",
+        "OR",
+        "WA"
+      ]
+    },
+    "H9065": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "AMH Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "ME"
+      ]
+    },
+    "H9096": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Dean Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WI"
+      ]
+    },
+    "H9147": {
+      "rate": 0.35,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of North Carolina",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H9153": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "West Virginia Senior Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "WV"
+      ]
+    },
+    "H9179": {
+      "rate": 0.28,
+      "measure": "C28",
+      "carrierName": "Trinity Health Plan of Michigan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MI"
+      ]
+    },
+    "H9191": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Provider Partners Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MO"
+      ]
+    },
+    "H9207": {
+      "rate": 0.15,
+      "measure": "C28",
+      "carrierName": "Jefferson Health Plans",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NJ",
+        "PA"
+      ]
+    },
+    "H9231": {
+      "rate": 0.61,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TN"
+      ]
+    },
+    "H9306": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "Alterwood Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "MD"
+      ]
+    },
+    "H9364": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "ME"
+      ]
+    },
+    "H9387": {
+      "rate": 1.21,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 2,
+      "materialStates": [
+        "KS"
+      ]
+    },
+    "H9431": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "ND"
+      ]
+    },
+    "H9460": {
+      "rate": 0.38,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "KS",
+        "MO"
+      ]
+    },
+    "H9485": {
+      "rate": 0.21,
+      "measure": "C28",
+      "carrierName": "Mass General Brigham Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H9525": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "KY",
+        "WI"
+      ]
+    },
+    "H9572": {
+      "rate": 0.04,
+      "measure": "C28",
+      "carrierName": "Blue Cross Blue Shield of Michigan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "WA",
+        "WI"
+      ]
+    },
+    "H9615": {
+      "rate": 0.06,
+      "measure": "C28",
+      "carrierName": "MVP HEALTH CARE",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL",
+        "NY"
+      ]
+    },
+    "H9630": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Wellcare By Allwell",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR"
+      ]
+    },
+    "H9678": {
+      "rate": 0.3,
+      "measure": "C28",
+      "carrierName": "Healthfirst Medicare Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "H9686": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "Alignment Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NV"
+      ]
+    },
+    "H9699": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "Arkansas Blue Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AR"
+      ]
+    },
+    "H9706": {
+      "rate": 0.61,
+      "measure": "C28",
+      "carrierName": "Blue Cross and Blue Shield of Texas",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "H9725": {
+      "rate": 0.26,
+      "measure": "C28",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NC",
+        "VA"
+      ]
+    },
+    "H9730": {
+      "rate": 0.36,
+      "measure": "C28",
+      "carrierName": "Wellcare",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "KY"
+      ]
+    },
+    "H9808": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "HealthTeam Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "H9834": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Quartz Medicare Advantage (HMO)",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "MN"
+      ]
+    },
+    "H9884": {
+      "rate": 0.29,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "H9888": {
+      "rate": 0.34,
+      "measure": "C28",
+      "carrierName": "Devoted Health",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "AL"
+      ]
+    },
+    "H9904": {
+      "rate": 0.16,
+      "measure": "C28",
+      "carrierName": "Mass Advantage",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H9907": {
+      "rate": 0.28,
+      "measure": "C28",
+      "carrierName": "Tufts Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "MA"
+      ]
+    },
+    "H9942": {
+      "rate": 0,
+      "measure": "C28",
+      "carrierName": "Longevity Health Plan",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "H9955": {
+      "rate": 0.46,
+      "measure": "C28",
+      "carrierName": "Molina Healthcare of Ohio",
+      "planType": "Medicare Advantage",
+      "starRating": 3,
+      "materialStates": [
+        "OH"
+      ]
+    },
+    "H9986": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Florida Complete Care",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "R0110": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "GA",
+        "IN",
+        "KY",
+        "LA",
+        "MI",
+        "MS",
+        "NC",
+        "OH",
+        "PA",
+        "SC",
+        "TN",
+        "VA",
+        "WV"
+      ]
+    },
+    "R0759": {
+      "rate": 0.11,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "R1532": {
+      "rate": 0.24,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR",
+        "MO"
+      ]
+    },
+    "R2604": {
+      "rate": 0.08,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "GA",
+        "SC"
+      ]
+    },
+    "R3444": {
+      "rate": 0.13,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AR",
+        "MO"
+      ]
+    },
+    "R4182": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "R5342": {
+      "rate": 0.1,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": []
+    },
+    "R5361": {
+      "rate": 0.02,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IL",
+        "WI"
+      ]
+    },
+    "R5826": {
+      "rate": 0.09,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "R5941": {
+      "rate": 0.05,
+      "measure": "C28",
+      "carrierName": "Anthem Blue Cross and Blue Shield",
+      "planType": "Medicare Advantage",
+      "starRating": 5,
+      "materialStates": [
+        "IN",
+        "KY",
+        "OH"
+      ]
+    },
+    "R6694": {
+      "rate": 0.14,
+      "measure": "C28",
+      "carrierName": "Aetna Medicare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "NJ"
+      ]
+    },
+    "R6801": {
+      "rate": 0.19,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "TX"
+      ]
+    },
+    "R7220": {
+      "rate": 0.23,
+      "measure": "C28",
+      "carrierName": "Humana",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": [
+        "AZ"
+      ]
+    },
+    "R7444": {
+      "rate": 0.12,
+      "measure": "C28",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Medicare Advantage",
+      "starRating": 4,
+      "materialStates": []
+    },
+    "S1030": {
+      "rate": 0.03,
+      "measure": "D02",
+      "carrierName": "BlueRx (PDP)",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AL",
+        "TN"
+      ]
+    },
+    "S1140": {
+      "rate": 0,
+      "measure": "D02",
+      "carrierName": "Highmark Blue Cross Blue Shield or Highmark Blue S",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "FL",
+        "NY"
+      ]
+    },
+    "S1822": {
+      "rate": 0.02,
+      "measure": "D02",
+      "carrierName": "HealthPartners",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "MN",
+        "WI"
+      ]
+    },
+    "S2135": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "Blue Cross Blue Shield Association",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "GU",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "PR",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VI",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S2468": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "Blue Shield of California",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "CA",
+        "NV",
+        "OR"
+      ]
+    },
+    "S2893": {
+      "rate": 0.03,
+      "measure": "D02",
+      "carrierName": "Blue MedicareRx",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "CA",
+        "CT",
+        "FL",
+        "GA",
+        "MA",
+        "MD",
+        "ME",
+        "NC",
+        "NH",
+        "NY",
+        "PA",
+        "RI",
+        "SC",
+        "TX",
+        "VT"
+      ]
+    },
+    "S3285": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "MG Insurance Company",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "FL",
+        "GA",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MS",
+        "NC",
+        "NJ",
+        "NY",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "WA",
+        "WI"
+      ]
+    },
+    "S3389": {
+      "rate": 0,
+      "measure": "D02",
+      "carrierName": "UPMC Health Plan",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "S3521": {
+      "rate": 0.01,
+      "measure": "D02",
+      "carrierName": "Excellus Health Plan, Inc",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "FL",
+        "NY",
+        "SC"
+      ]
+    },
+    "S4501": {
+      "rate": 0.01,
+      "measure": "D02",
+      "carrierName": "Pharmacy Benefit Dimensions PDP",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "S4802": {
+      "rate": 0.07,
+      "measure": "D02",
+      "carrierName": "Wellcare",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S5540": {
+      "rate": 0.02,
+      "measure": "D02",
+      "carrierName": "Blue Cross and Blue Shield of North Carolina",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "NC"
+      ]
+    },
+    "S5584": {
+      "rate": 0.09,
+      "measure": "D02",
+      "carrierName": "Blue Cross Blue Shield of Michigan",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "FL",
+        "IN",
+        "MI"
+      ]
+    },
+    "S5593": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "Highmark Blue Shield",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "DE",
+        "PA",
+        "WV"
+      ]
+    },
+    "S5596": {
+      "rate": 0.06,
+      "measure": "D02",
+      "carrierName": "Anthem Insurance Companies, Inc.",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "NH",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OR",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    },
+    "S5601": {
+      "rate": 0.09,
+      "measure": "D02",
+      "carrierName": "Aetna Medicare",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "PR",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VI",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S5609": {
+      "rate": 0.06,
+      "measure": "D02",
+      "carrierName": "Asuris Northwest Health",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "OR",
+        "WA"
+      ]
+    },
+    "S5617": {
+      "rate": 0.09,
+      "measure": "D02",
+      "carrierName": "Cigna HealthCare",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "PR",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VI",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S5660": {
+      "rate": 0.02,
+      "measure": "D02",
+      "carrierName": "Express Scripts Medicare",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VI",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S5715": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "Blue Cross and Blue Shield of IL, NM, OK, TX",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "DE",
+        "FL",
+        "IA",
+        "IL",
+        "IN",
+        "KY",
+        "MO",
+        "NJ",
+        "NM",
+        "OK",
+        "PA",
+        "TX"
+      ]
+    },
+    "S5726": {
+      "rate": 0.08,
+      "measure": "D02",
+      "carrierName": "Blue Cross and Blue Shield of Kansas",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "KS"
+      ]
+    },
+    "S5743": {
+      "rate": 0.04,
+      "measure": "D02",
+      "carrierName": "MedicareBlue Rx",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "FL",
+        "IA",
+        "MN",
+        "MO",
+        "MT",
+        "ND",
+        "NE",
+        "SD",
+        "TX",
+        "WI",
+        "WY"
+      ]
+    },
+    "S5795": {
+      "rate": 0.03,
+      "measure": "D02",
+      "carrierName": "Arkansas Blue Medicare",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AR"
+      ]
+    },
+    "S5805": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "NY"
+      ]
+    },
+    "S5820": {
+      "rate": 0.04,
+      "measure": "D02",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "GU",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MP",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "PR",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VI",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S5877": {
+      "rate": 0,
+      "measure": "D02",
+      "carrierName": "EMI Health",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "UT"
+      ]
+    },
+    "S5884": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "Humana",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S5904": {
+      "rate": 0.04,
+      "measure": "D02",
+      "carrierName": "Florida Blue",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "FL"
+      ]
+    },
+    "S5916": {
+      "rate": 0,
+      "measure": "D02",
+      "carrierName": "Regence BlueShield of Idaho and Regence BC BS Utah",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "ID",
+        "UT"
+      ]
+    },
+    "S5921": {
+      "rate": 0.08,
+      "measure": "D02",
+      "carrierName": "UnitedHealthcare",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S5953": {
+      "rate": 0.06,
+      "measure": "D02",
+      "carrierName": "Blue Cross Blue Shield of South Carolina",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "SC"
+      ]
+    },
+    "S5960": {
+      "rate": 0.05,
+      "measure": "D02",
+      "carrierName": "Wellpoint",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "AZ",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "MA",
+        "MD",
+        "MN",
+        "NC",
+        "NJ",
+        "NY",
+        "PA",
+        "RI",
+        "SC",
+        "TX"
+      ]
+    },
+    "S5966": {
+      "rate": 0.03,
+      "measure": "D02",
+      "carrierName": "EmblemHealth",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "IL",
+        "MA",
+        "MD",
+        "NC",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "PA",
+        "SC",
+        "TX",
+        "VA"
+      ]
+    },
+    "S5975": {
+      "rate": 0.01,
+      "measure": "D02",
+      "carrierName": "Moda Health Plan, Inc.",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "CA",
+        "FL",
+        "HI",
+        "ID",
+        "MT",
+        "NV",
+        "OR",
+        "UT",
+        "WA"
+      ]
+    },
+    "S5993": {
+      "rate": 0.09,
+      "measure": "D02",
+      "carrierName": "Horizon Blue Cross Blue Shield of New Jersey",
+      "planType": "Part D",
+      "starRating": 4,
+      "materialStates": [
+        "DE",
+        "FL",
+        "NJ",
+        "PA"
+      ]
+    },
+    "S6875": {
+      "rate": 0,
+      "measure": "D02",
+      "carrierName": "Independence Blue Cross",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "DE",
+        "FL",
+        "NJ",
+        "PA"
+      ]
+    },
+    "S8067": {
+      "rate": 0,
+      "measure": "D02",
+      "carrierName": "Avalon Insurance Company",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "PA"
+      ]
+    },
+    "S8841": {
+      "rate": 0.01,
+      "measure": "D02",
+      "carrierName": "Optum Insurance of Ohio, Inc.",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AK",
+        "AL",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "S9701": {
+      "rate": 0.01,
+      "measure": "D02",
+      "carrierName": "Navitus MedicareRx",
+      "planType": "Part D",
+      "starRating": 5,
+      "materialStates": [
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "KY",
+        "MA",
+        "MD",
+        "MI",
+        "MN",
+        "MT",
+        "NC",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OR",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    }
+  }
+}
