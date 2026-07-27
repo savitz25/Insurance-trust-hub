@@ -36,9 +36,9 @@ const TOOLS = [
   {
     href: '/tools/needs-assessment',
     icon: ClipboardCheck,
-    title: 'Coverage needs assessment',
+    title: 'Coverage Compass',
     description:
-      'Answer a few questions to see which insurance types and agent specialties may fit your situation.',
+      'Guided card-based path to coverage focus areas and live research tools. Educational only — no quotes or leads.',
   },
   {
     href: '/tools/license-verification',
