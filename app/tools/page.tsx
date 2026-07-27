@@ -45,9 +45,9 @@ const TOOLS = [
   {
     href: '/tools/license-verification',
     icon: ShieldCheck,
-    title: 'License verification',
+    title: 'License verification hub',
     description:
-      'Links to every state insurance department lookup. Verify agents and agencies before you buy.',
+      'Reach official state DOI lookups with consent before you leave our site. Search our directory first if you prefer.',
   },
   {
     href: '/tools/quote-comparison',
