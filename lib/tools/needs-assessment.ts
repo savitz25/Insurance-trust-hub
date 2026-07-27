@@ -558,7 +558,7 @@ export function computeAssessment(answers: Record<string, string>): AssessmentRe
   summary +=
     'We ranked coverage focus areas and research tools — not products to buy, and not quotes.';
 
-  let insight =
+  const insight =
     priority === 'cost'
       ? 'When cost is the goal, look at total annual cost (premium + care), not the cheapest monthly sticker alone.'
       : priority === 'doctors'
