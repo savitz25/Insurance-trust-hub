@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { BarChart3 } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { ContextNav } from '@/components/context-nav';
 import { CountyMedicareDashboard } from '@/components/insurance/cms/county-medicare-dashboard';
 import {
   getAllCountySummaries,
@@ -12,7 +13,10 @@ import {
 } from '@/lib/insurance/cms/county-summaries';
 import { getSouthFloridaCountyAgents } from '@/lib/hubs/county-agents';
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ from?: string }>;
+};
 
 export function generateStaticParams() {
   return getCountySummarySlugs().map((slug) => ({ slug }));
@@ -30,8 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function CountyMedicareIntelligencePage({ params }: Props) {
+export default async function CountyMedicareIntelligencePage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const sp = searchParams ? await searchParams : {};
   const summary = getCountySummary(slug);
   if (!summary) notFound();
 
@@ -42,17 +47,12 @@ export default async function CountyMedicareIntelligencePage({ params }: Props) 
     <>
       <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
         <div className="container mx-auto max-w-5xl px-4 py-10 md:py-14">
-          <nav className="mb-4 text-sm text-slate-500">
-            <Link href="/" className="hover:text-slate-800">
-              Home
-            </Link>
-            {' / '}
-            <Link href="/data/plan-complaint-index" className="hover:text-slate-800">
-              Medicare data
-            </Link>
-            {' / '}
-            <span className="text-slate-700">{summary.displayName}</span>
-          </nav>
+          <ContextNav
+            pathname={`/data/counties/${summary.slug}`}
+            from={sp.from}
+            currentLabel={summary.displayName}
+            className="mb-5"
+          />
           <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             <BarChart3 className="h-3.5 w-3.5" aria-hidden />
             Medicare Intelligence · County dashboard

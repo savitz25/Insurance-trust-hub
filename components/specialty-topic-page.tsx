@@ -9,6 +9,7 @@ import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { SITE_URL } from '@/lib/constants';
 import { Card, CardContent } from '@/components/ui/card';
+import { ContextNav } from '@/components/context-nav';
 
 interface SpecialtyTopicPageProps {
   topic: SpecialtyTopic;
@@ -30,13 +31,9 @@ export function SpecialtyTopicPage({ topic }: SpecialtyTopicPageProps) {
     <>
       <JsonLd data={jsonLd} />
 
-      <nav className="container mx-auto px-4 pt-6 text-sm text-muted-foreground">
-        <Link href="/" className="hover:text-foreground">Home</Link>
-        {' / '}
-        <Link href="/hubs" className="hover:text-foreground">Health Insurance Hubs</Link>
-        {' / '}
-        <span className="text-foreground">{topic.title}</span>
-      </nav>
+      <div className="container mx-auto px-4 pt-6">
+        <ContextNav pathname={topic.path} currentLabel={topic.title} />
+      </div>
 
       <section className="border-b bg-gradient-to-br from-primary to-primary/80 py-14 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">

@@ -13,6 +13,9 @@ import {
 import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import { withReturnContext } from '@/lib/navigation/context-nav';
+
+const FROM = '/tools/medicare-plan-finder';
 
 type StepId = 'complaints' | 'counties' | 'provider' | 'agents';
 
@@ -37,7 +40,7 @@ type Situation = {
 const BASE_STEPS: Record<StepId, ResearchStep> = {
   complaints: {
     id: 'complaints',
-    href: '/data/plan-complaint-index',
+    href: withReturnContext('/data/plan-complaint-index', FROM),
     title: 'Plan Complaint Index',
     description:
       'Government-sourced complaint rates for Medicare Advantage and Part D contracts — ranked with clear methodology.',
@@ -45,7 +48,7 @@ const BASE_STEPS: Record<StepId, ResearchStep> = {
   },
   counties: {
     id: 'counties',
-    href: '/data/counties',
+    href: withReturnContext('/data/counties', FROM),
     title: 'County Medicare Dashboards',
     description:
       'Enrollment and quality context by county so you can see what plans are active where you live.',
@@ -53,14 +56,14 @@ const BASE_STEPS: Record<StepId, ResearchStep> = {
   },
   provider: {
     id: 'provider',
-    href: '/tools/medicare-provider-lookup',
+    href: withReturnContext('/tools/medicare-provider-lookup', FROM),
     title: 'Medicare Provider Lookup',
     description: 'Check whether a doctor or provider appears in CMS Medicare FFS enrollment or Opt Out records.',
     icon: Stethoscope,
   },
   agents: {
     id: 'agents',
-    href: '/hubs/south-florida',
+    href: withReturnContext('/hubs/south-florida', FROM),
     title: 'South Florida Medicare Agents',
     description:
       'Browse verified local agents when you are ready for licensed help — not a sales funnel from us.',
@@ -118,9 +121,9 @@ const SITUATIONS: Situation[] = [
 ];
 
 const COUNTY_LINKS = [
-  { href: '/data/counties/miami-dade-fl', label: 'Miami-Dade' },
-  { href: '/data/counties/broward-fl', label: 'Broward' },
-  { href: '/data/counties/palm-beach-fl', label: 'Palm Beach' },
+  { href: withReturnContext('/data/counties/miami-dade-fl', FROM), label: 'Miami-Dade' },
+  { href: withReturnContext('/data/counties/broward-fl', FROM), label: 'Broward' },
+  { href: withReturnContext('/data/counties/palm-beach-fl', FROM), label: 'Palm Beach' },
 ] as const;
 
 function stepsForSituation(situation: Situation): ResearchStep[] {
@@ -129,7 +132,7 @@ function stepsForSituation(situation: Situation): ResearchStep[] {
     if (id === 'agents' && situation.value === 'medigap') {
       return {
         ...base,
-        href: '/hubs/medicare',
+        href: withReturnContext('/hubs/medicare', FROM),
         title: 'Medicare Specialists Directory',
         description:
           'Find verified Medicare-focused agents when you want licensed help comparing Medigap vs Advantage paths.',

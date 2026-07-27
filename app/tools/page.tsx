@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { Card, CardContent } from '@/components/ui/card';
+import { withReturnContext } from '@/lib/navigation/context-nav';
+import { ContextNav } from '@/components/context-nav';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Tools — Calculators & Verification Helpers',
@@ -79,6 +81,7 @@ export default function ToolsPage() {
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
       <div className="max-w-3xl mb-12">
+        <ContextNav pathname="/tools" className="mb-5" />
         <h1 className="section-heading flex items-center gap-3">
           <Wrench className="h-8 w-8 text-primary" />
           Insurance tools
@@ -91,7 +94,7 @@ export default function ToolsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {TOOLS.map((tool) => (
-          <Link key={tool.href} href={tool.href}>
+          <Link key={tool.href} href={withReturnContext(tool.href, '/tools')}>
             <Card className="h-full hover:shadow-trust-lg transition-shadow">
               <CardContent className="pt-6">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary mb-4">

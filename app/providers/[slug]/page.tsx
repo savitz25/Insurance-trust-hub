@@ -35,10 +35,12 @@ import { computeProviderTrustScoreBreakdown } from '@/lib/insurance/enrichment/t
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ContextNav } from '@/components/context-nav';
 import { cn } from '@/lib/utils';
 
 interface ProviderPageProps {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ from?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -68,8 +70,9 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
   });
 }
 
-export default async function ProviderPage({ params }: ProviderPageProps) {
+export default async function ProviderPage({ params, searchParams }: ProviderPageProps) {
   const { slug } = await params;
+  const sp = searchParams ? await searchParams : {};
   const provider = await getProviderBySlug(slug);
   if (!provider) notFound();
 
@@ -99,6 +102,12 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
 
       <div className="border-b bg-muted/20">
         <div className="container mx-auto px-4 py-10 md:py-14">
+          <ContextNav
+            pathname={`/providers/${slug}`}
+            from={sp.from}
+            currentLabel={provider.name}
+            className="mb-5"
+          />
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
             <div className="max-w-3xl">
               <div className="flex flex-wrap items-center gap-2 mb-3">

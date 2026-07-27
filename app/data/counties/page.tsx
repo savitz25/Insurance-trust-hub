@@ -8,6 +8,7 @@ import {
   getAllCountySummaries,
 } from '@/lib/insurance/cms/county-summaries';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { ContextNav } from '@/components/context-nav';
 
 export const metadata: Metadata = buildMetadata({
   title: 'County Medicare Intelligence Dashboards | CMS Market Snapshots',
@@ -16,7 +17,10 @@ export const metadata: Metadata = buildMetadata({
   path: '/data/counties',
 });
 
-export default function CountyMedicareIndexPage() {
+type Props = { searchParams?: Promise<{ from?: string }> };
+
+export default async function CountyMedicareIndexPage({ searchParams }: Props) {
+  const sp = searchParams ? await searchParams : {};
   const counties = getAllCountySummaries();
   const synced = new Date(COUNTY_SUMMARIES_META.syncedAt).toLocaleDateString('en-US', {
     month: 'long',
@@ -27,6 +31,12 @@ export default function CountyMedicareIndexPage() {
     <>
       <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
         <div className="container mx-auto max-w-4xl px-4 py-10 md:py-14">
+          <ContextNav
+            pathname="/data/counties"
+            from={sp.from}
+            currentLabel="County dashboards"
+            className="mb-5"
+          />
           <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             <BarChart3 className="h-3.5 w-3.5" aria-hidden />
             Medicare Intelligence

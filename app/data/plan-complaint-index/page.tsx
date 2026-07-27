@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { BarChart3 } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { ContextNav } from '@/components/context-nav';
 import { PlanComplaintIndexClient } from '@/components/insurance/cms/plan-complaint-index-client';
 import { CMS_COMPLAINT_DATASET_META } from '@/lib/insurance/cms/complaint-rankings';
 
@@ -13,7 +14,10 @@ export const metadata: Metadata = buildMetadata({
   path: '/data/plan-complaint-index',
 });
 
-export default function PlanComplaintIndexPage() {
+type Props = { searchParams?: Promise<{ from?: string }> };
+
+export default async function PlanComplaintIndexPage({ searchParams }: Props) {
+  const sp = searchParams ? await searchParams : {};
   const meta = CMS_COMPLAINT_DATASET_META;
   const syncedLabel = new Date(meta.syncedAt).toLocaleDateString('en-US', {
     month: 'long',
@@ -24,6 +28,12 @@ export default function PlanComplaintIndexPage() {
     <>
       <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
         <div className="container mx-auto max-w-4xl px-4 py-10 md:py-14">
+          <ContextNav
+            pathname="/data/plan-complaint-index"
+            from={sp.from}
+            currentLabel="Plan Complaint Index"
+            className="mb-5"
+          />
           <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
             <BarChart3 className="h-3.5 w-3.5" aria-hidden />
             Insurance Trust Hub · Original data

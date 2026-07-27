@@ -201,21 +201,21 @@ export function PlanComplaintIndexClient({ meta }: Props) {
 
       <div className="flex flex-wrap gap-3 text-sm">
         <Link
-          href="/hubs/medicare"
+          href="/hubs/medicare?from=%2Fdata%2Fplan-complaint-index"
           className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline"
         >
           Medicare specialist hubs
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
         <Link
-          href="/hubs/south-florida"
+          href="/hubs/south-florida?from=%2Fdata%2Fplan-complaint-index"
           className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline"
         >
           South Florida agents
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
         <Link
-          href="/tools/medicare-plan-finder"
+          href="/tools/medicare-plan-finder?from=%2Fdata%2Fplan-complaint-index"
           className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline"
         >
           Medicare research guide
