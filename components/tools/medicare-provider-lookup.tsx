@@ -21,6 +21,8 @@ import { cn } from '@/lib/utils';
 
 const STATES = [{ value: 'FL', label: 'Florida' }] as const;
 
+type SearchMode = 'name' | 'npi';
+
 function StatusIcon({ status }: { status: ProviderSearchHit['status'] }) {
   if (status === 'active') {
     return <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" aria-hidden />;
@@ -60,6 +62,7 @@ export function MedicareProviderLookupTool({
   syncedLabel,
   optOutCount,
 }: Props) {
+  const [mode, setMode] = useState<SearchMode>('name');
   const [npi, setNpi] = useState('');
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -68,16 +71,36 @@ export function MedicareProviderLookupTool({
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
+  function switchMode(next: SearchMode) {
+    setMode(next);
+    setError(null);
+    setResult(null);
+  }
+
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+
+    if (mode === 'name') {
+      if (!lastName.trim()) {
+        setError('Enter a last name or organization name to search.');
+        return;
+      }
+    } else {
+      const digits = npi.replace(/\D/g, '');
+      if (digits.length !== 10) {
+        setError('Enter a valid 10-digit NPI.');
+        return;
+      }
+    }
+
     startTransition(async () => {
       try {
         const res = await runMedicareProviderSearch({
-          npi,
-          lastName,
-          firstName,
-          state,
+          npi: mode === 'npi' ? npi : '',
+          lastName: mode === 'name' ? lastName : '',
+          firstName: mode === 'name' ? firstName : '',
+          state: mode === 'name' ? state : state,
           limit: 25,
         });
         setResult(res);
@@ -92,70 +115,153 @@ export function MedicareProviderLookupTool({
     <div className="space-y-8">
       <form
         onSubmit={onSubmit}
-        className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6"
+        className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6"
       >
-        <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-          <Stethoscope className="h-4 w-4 text-teal-700" aria-hidden />
-          Search Medicare FFS participation
-        </div>
-        <p className="text-xs text-slate-500">
-          Enter an NPI and/or provider last name. Name search currently covers:{' '}
-          <strong className="font-medium text-slate-700">{searchableStates.join(', ')}</strong>.
-          City is not in the base PPEF extract — state + name/NPI only.
-        </p>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-1.5">
-            <Label htmlFor="npi">NPI (10 digits)</Label>
-            <Input
-              id="npi"
-              inputMode="numeric"
-              autoComplete="off"
-              placeholder="e.g. 1234567890"
-              value={npi}
-              onChange={(e) => setNpi(e.target.value)}
-              maxLength={12}
-            />
+        <div>
+          <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <Stethoscope className="h-4 w-4 text-teal-700" aria-hidden />
+            Search Medicare FFS participation
           </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="state">State</Label>
-            <Select id="state" value={state} onChange={(e) => setState(e.target.value)}>
-              {STATES.filter((s) => searchableStates.includes(s.value)).map((s) => (
-                <option key={s.value} value={s.value}>
-                  {s.label}
-                </option>
-              ))}
-            </Select>
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="lastName">Last name or organization</Label>
-            <Input
-              id="lastName"
-              autoComplete="off"
-              placeholder="e.g. Garcia"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="firstName">First name (optional)</Label>
-            <Input
-              id="firstName"
-              autoComplete="off"
-              placeholder="e.g. Maria"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
+          <p className="mt-1 text-sm text-slate-600">
+            You don&apos;t need the NPI — most people search by name.
+          </p>
         </div>
 
-        <Button type="submit" disabled={pending} className="gap-2">
+        {/* Mode tabs */}
+        <div
+          role="tablist"
+          aria-label="Search method"
+          className="flex rounded-xl border border-slate-200 bg-slate-50 p-1"
+        >
+          <button
+            type="button"
+            role="tab"
+            id="tab-name"
+            aria-selected={mode === 'name'}
+            aria-controls="panel-name"
+            onClick={() => switchMode('name')}
+            className={cn(
+              'min-h-[44px] flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+              mode === 'name'
+                ? 'bg-white text-teal-900 shadow-sm ring-1 ring-slate-200'
+                : 'text-slate-600 hover:text-slate-900'
+            )}
+          >
+            Search by doctor or organization name
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-npi"
+            aria-selected={mode === 'npi'}
+            aria-controls="panel-npi"
+            onClick={() => switchMode('npi')}
+            className={cn(
+              'min-h-[44px] flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+              mode === 'npi'
+                ? 'bg-white text-teal-900 shadow-sm ring-1 ring-slate-200'
+                : 'text-slate-600 hover:text-slate-900'
+            )}
+          >
+            I have the 10-digit NPI
+          </button>
+        </div>
+
+        {mode === 'name' ? (
+          <div
+            role="tabpanel"
+            id="panel-name"
+            aria-labelledby="tab-name"
+            className="space-y-4"
+          >
+            <p className="rounded-lg border border-teal-100 bg-teal-50/70 px-3 py-2 text-sm text-teal-900">
+              Search by last name or clinic/organization name. First name is optional.
+            </p>
+            <p className="text-xs text-slate-500">
+              Name search currently covers:{' '}
+              <strong className="font-medium text-slate-700">
+                {searchableStates.join(', ') || 'none'}
+              </strong>
+              {' '}
+              only (Florida letter shards). City is not in the base PPEF extract — state + name
+              only. We will not invent a match.
+            </p>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="lastName">Last name or organization name</Label>
+              <Input
+                id="lastName"
+                autoComplete="off"
+                autoFocus
+                placeholder="e.g. Garcia or Miami Cardiology"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="h-11"
+              />
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="firstName">First name (optional)</Label>
+                <Input
+                  id="firstName"
+                  autoComplete="off"
+                  placeholder="e.g. Maria"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="h-11"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="state">State</Label>
+                <Select
+                  id="state"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className="h-11"
+                >
+                  {STATES.filter((s) => searchableStates.includes(s.value)).map((s) => (
+                    <option key={s.value} value={s.value}>
+                      {s.label}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div role="tabpanel" id="panel-npi" aria-labelledby="tab-npi" className="space-y-4">
+            <p className="text-sm text-slate-600">
+              Use this if you already have the provider&apos;s National Provider Identifier.
+            </p>
+            <div className="space-y-1.5">
+              <Label htmlFor="npi">10-digit NPI</Label>
+              <Input
+                id="npi"
+                inputMode="numeric"
+                autoComplete="off"
+                autoFocus
+                placeholder="e.g. 1234567890"
+                value={npi}
+                onChange={(e) => setNpi(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                maxLength={10}
+                className="h-11 max-w-xs font-mono tracking-wide"
+              />
+            </div>
+            <p className="text-xs text-slate-500">
+              Exact NPI match against CMS PPEF enrollment and Opt Out Affidavits. No fuzzy
+              guessing.
+            </p>
+          </div>
+        )}
+
+        <Button type="submit" disabled={pending} className="min-h-[44px] gap-2">
           {pending ? (
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
           ) : (
             <Search className="h-4 w-4" aria-hidden />
           )}
-          {pending ? 'Searching…' : 'Search'}
+          {pending ? 'Searching…' : mode === 'name' ? 'Search by name' : 'Search by NPI'}
         </Button>
         {error ? <p className="text-sm text-rose-700">{error}</p> : null}
       </form>
@@ -181,19 +287,30 @@ export function MedicareProviderLookupTool({
 
           {result.emptyReason && result.hits.length === 0 ? (
             <div className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-6 text-sm text-slate-700">
-              <p className="font-semibold text-slate-900">No match found</p>
-              <p className="mt-1 leading-relaxed">{result.emptyReason}</p>
+              <p className="font-semibold text-slate-900">No match found in our CMS index</p>
+              <p className="mt-1 leading-relaxed">
+                {result.emptyReason} That does not mean the doctor is “fake” — only that we did not
+                find a row for this query in the current PPEF / Opt Out extracts we load.
+              </p>
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-600">
+                <li>Try a different spelling, last name only, or organization name.</li>
+                <li>Confirm the state — name search is limited to {searchableStates.join(', ')}.</li>
+                <li>If you have the NPI, switch to “I have the 10-digit NPI” for an exact check.</li>
+                <li>
+                  Verify on{' '}
+                  <a
+                    href="https://npiregistry.cms.hhs.gov/"
+                    className="font-medium text-teal-700 hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    CMS NPPES
+                  </a>{' '}
+                  or ask the provider’s office.
+                </li>
+              </ul>
               <p className="mt-3 text-xs text-slate-500">
-                We never invent an NPI or participation status. Verify via{' '}
-                <a
-                  href="https://npiregistry.cms.hhs.gov/"
-                  className="font-medium text-teal-700 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  CMS NPPES
-                </a>
-                .
+                We never invent an NPI or participation status.
               </p>
             </div>
           ) : null}
@@ -245,6 +362,10 @@ export function MedicareProviderLookupTool({
           <li>CMS Opt Out Affidavits cross-check ({optOutCount.toLocaleString()} NPIs loaded).</li>
           <li>
             Last synced <strong className="font-medium text-slate-800">{syncedLabel}</strong>.
+          </li>
+          <li>
+            Statuses shown: Active Medicare FFS (PPEF), Opted out, or No match found — never
+            invented.
           </li>
           <li>
             Active status means the NPI appears in the PPEF enrollment extract for Fee-For-Service

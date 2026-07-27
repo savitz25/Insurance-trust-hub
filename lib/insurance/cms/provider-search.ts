@@ -198,7 +198,7 @@ export function searchMedicareProviders(input: ProviderSearchInput): ProviderSea
       totalMatched: 0,
       truncated: false,
       meta,
-      emptyReason: 'Enter an NPI and/or last name to search.',
+      emptyReason: 'Enter a last name / organization name, or a 10-digit NPI to search.',
     };
   }
 
@@ -316,7 +316,7 @@ export function searchMedicareProviders(input: ProviderSearchInput): ProviderSea
     meta,
     emptyReason:
       hits.length === 0
-        ? 'No matching providers in the PPEF search index for this name/state. Try a different spelling, NPI, or verify on CMS NPPES.'
+        ? 'No matching providers in the PPEF search index for this query. Try another spelling, last name only, organization name, or an exact NPI — or verify on CMS NPPES.'
         : undefined,
   };
 }

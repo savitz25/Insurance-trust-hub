@@ -9,7 +9,7 @@ import { getProviderSearchMeta } from '@/lib/insurance/cms/provider-search';
 export const metadata: Metadata = buildMetadata({
   title: 'Medicare Provider Participation Lookup | Does My Doctor Accept Medicare?',
   description:
-    'Check whether a doctor or provider NPI appears in CMS Medicare Fee-For-Service enrollment (PPEF) or Opt Out Affidavits. Educational tool — not advice.',
+    'Search by doctor or organization name (or NPI) against CMS Medicare Fee-For-Service enrollment (PPEF) and Opt Out Affidavits. Educational tool — not advice.',
   path: '/tools/medicare-provider-lookup',
 });
 
@@ -43,9 +43,9 @@ export default function MedicareProviderLookupPage() {
             Does my doctor accept Medicare?
           </h1>
           <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-slate-600 md:text-lg">
-            Look up a provider NPI or name against CMS Public Provider Enrollment (PPEF) and Opt
-            Out Affidavits. Results are transparency signals for Fee-For-Service participation —
-            not network guarantees for every Medicare Advantage plan.
+            Search by doctor or organization name — you do not need the NPI. We match against CMS
+            Public Provider Enrollment (PPEF) and Opt Out Affidavits. Results are Fee-For-Service
+            transparency signals — not network guarantees for every Medicare Advantage plan.
           </p>
           <p className="mt-3 text-sm text-slate-500">
             Data vintage: <strong className="font-medium text-slate-800">{meta.dataVintage}</strong>
