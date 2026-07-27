@@ -1,12 +1,13 @@
 import { SITE_EMAIL, SITE_NAME, SITE_URL } from '@/lib/constants';
 import type { Provider } from '@/types/provider';
+import { brandAsset, BRAND_LOGO } from '@/lib/brand';
 
 export const organizationSchema = {
   '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/brand/insurance-trust-hub-logo-stacked.png`,
+  logo: `${SITE_URL}${brandAsset(BRAND_LOGO.full)}`,
   email: SITE_EMAIL,
   contactPoint: {
     '@type': 'ContactPoint',
@@ -90,7 +91,7 @@ export function buildLocalBusinessSchema(provider: Provider) {
     '@type': 'LocalBusiness',
     '@id': `${SITE_URL}/providers/${provider.slug}/#localbusiness`,
     name: provider.name,
-    image: provider.logo ?? `${SITE_URL}/brand/insurance-trust-hub-icon-192.png`,
+    image: provider.logo ?? `${SITE_URL}${brandAsset(BRAND_LOGO.icon192)}`,
     url: provider.website ?? `${SITE_URL}/providers/${provider.slug}`,
     telephone: provider.phone ?? undefined,
     address: {

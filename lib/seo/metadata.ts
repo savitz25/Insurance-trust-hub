@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
+import { brandAsset, BRAND_LOGO } from '@/lib/brand';
 
 export { SITE_URL };
 
@@ -12,9 +13,9 @@ export const DEFAULT_SITE_DESCRIPTION =
   'Insurance Trust Hub is an independent directory of licensed insurance agencies. Research providers, read verified reviews, and request quotes for auto, home, life, and business insurance.';
 
 export const OG_IMAGE = {
-  url: '/brand/insurance-trust-hub-logo-stacked.png',
+  url: brandAsset(BRAND_LOGO.og),
   width: 1200,
-  height: 1200,
+  height: 630,
   alt: 'Insurance Trust Hub — trusted insurance agency directory',
 } as const;
 
@@ -114,9 +115,14 @@ export const rootLayoutMetadata: Metadata = {
   ],
   authors: [{ name: SITE_NAME }],
   icons: {
-    icon: [{ url: '/brand/insurance-trust-hub-favicon-32.png', sizes: '32x32', type: 'image/png' }],
-    apple: [{ url: '/brand/insurance-trust-hub-icon-192.png', sizes: '192x192', type: 'image/png' }],
+    icon: [
+      { url: brandAsset(BRAND_LOGO.favicon16), sizes: '16x16', type: 'image/png' },
+      { url: brandAsset(BRAND_LOGO.favicon32), sizes: '32x32', type: 'image/png' },
+      { url: brandAsset(BRAND_LOGO.icon192), sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [{ url: brandAsset(BRAND_LOGO.icon192), sizes: '192x192', type: 'image/png' }],
   },
+  manifest: '/site.webmanifest',
   openGraph: buildOpenGraph(),
   twitter: buildTwitter(),
   robots: {

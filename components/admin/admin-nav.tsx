@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { LayoutDashboard, Building2, MessageSquare, Users, LogOut } from 'lucide-react';
+import { BrandLogo } from '@/components/BrandLogo';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -26,6 +27,9 @@ export function AdminNav() {
   return (
     <aside className="w-full md:w-56 shrink-0 border-b md:border-b-0 md:border-r bg-muted/20">
       <div className="p-4 md:py-6">
+        <div className="mb-3">
+          <BrandLogo href="/" />
+        </div>
         <p className="text-xs font-bold tracking-widest text-muted-foreground mb-4">ADMIN</p>
         <nav className="flex md:flex-col gap-1 overflow-x-auto">
           {LINKS.map((link) => {

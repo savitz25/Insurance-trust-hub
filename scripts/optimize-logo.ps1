@@ -1,181 +1,131 @@
-# Insurance Trust Hub — logo pipeline (true transparency + header-safe padding)
+# Insurance Trust Hub — logo pipeline from transparent horizontal lockup
 # Usage: powershell -ExecutionPolicy Bypass -File scripts/optimize-logo.ps1
 
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Drawing
 
-$src = "C:\Users\Michael.Savitsky\logos\insuranceTH.png"
-if (-not (Test-Path $src)) { $src = Join-Path $PSScriptRoot "..\..\logos\insuranceTH.png" }
+$candidates = @(
+  "C:\Users\Michael.Savitsky\Consumer Trust Hub\logos for all verticals\InsuranceTrustHub-logo-transparent.png",
+  (Join-Path $PSScriptRoot "..\public\brand\source\InsuranceTrustHub-logo-transparent.png")
+)
+$src = $null
+foreach ($c in $candidates) {
+  if (Test-Path $c) { $src = (Resolve-Path $c).Path; break }
+}
+if (-not $src) { throw "Source logo not found." }
+
 $outDir = Join-Path $PSScriptRoot "..\public\brand"
-New-Item -ItemType Directory -Force -Path $outDir | Out-Null
+$appDir = Join-Path $PSScriptRoot "..\app"
+$pubDir = Join-Path $PSScriptRoot "..\public"
+$sourceDir = Join-Path $outDir "source"
+New-Item -ItemType Directory -Force -Path $outDir, $sourceDir | Out-Null
+Copy-Item $src (Join-Path $sourceDir "InsuranceTrustHub-logo-transparent.png") -Force
 
-function New-TransparentBitmap([int]$width, [int]$height) {
-    $bmp = New-Object System.Drawing.Bitmap $width, $height, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
-    $g = [System.Drawing.Graphics]::FromImage($bmp)
-    $g.Clear([System.Drawing.Color]::FromArgb(0, 0, 0, 0))
-    $g.Dispose()
-    return $bmp
+function New-Bmp([int]$w, [int]$h) {
+  if ($w -lt 1 -or $h -lt 1) { throw "Invalid size ${w}x${h}" }
+  New-Object System.Drawing.Bitmap $w, $h, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+}
+function New-G($bmp) {
+  $g = [System.Drawing.Graphics]::FromImage($bmp)
+  $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+  $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
+  $g.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::HighQuality
+  $g.CompositingQuality = [System.Drawing.Drawing2D.CompositingQuality]::HighQuality
+  return $g
+}
+function Save-Png($bmp, $path) {
+  $bmp.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
+  Write-Host "  $path ($($bmp.Width)x$($bmp.Height))"
+}
+function Resize-ToWidth($source, [int]$width) {
+  $ratio = $width / $source.Width
+  $height = [Math]::Max(1, [int][Math]::Round($source.Height * $ratio))
+  $bmp = New-Bmp $width $height
+  $g = New-G $bmp
+  $g.Clear([System.Drawing.Color]::FromArgb(0, 0, 0, 0))
+  $g.DrawImage($source, 0, 0, $width, $height)
+  $g.Dispose()
+  return $bmp
+}
+function Pad-Square($source, [int]$size, [double]$fill = 0.82) {
+  $side = [Math]::Max($source.Width, $source.Height)
+  $scale = ($size * $fill) / $side
+  $nw = [Math]::Max(1, [int][Math]::Round($source.Width * $scale))
+  $nh = [Math]::Max(1, [int][Math]::Round($source.Height * $scale))
+  $square = New-Bmp $size $size
+  $g = New-G $square
+  $g.Clear([System.Drawing.Color]::FromArgb(0, 0, 0, 0))
+  $g.DrawImage($source, [int](($size - $nw) / 2), [int](($size - $nh) / 2), $nw, $nh)
+  $g.Dispose()
+  return $square
 }
 
-function New-Graphics($bmp) {
-    $g = [System.Drawing.Graphics]::FromImage($bmp)
-    $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-    $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
-    $g.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::HighQuality
-    $g.CompositingQuality = [System.Drawing.Drawing2D.CompositingQuality]::HighQuality
-    $g.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceOver
-    return $g
+$img = [System.Drawing.Image]::FromFile($src)
+$master = New-Bmp $img.Width $img.Height
+$gm = New-G $master
+$gm.Clear([System.Drawing.Color]::FromArgb(0, 0, 0, 0))
+$gm.DrawImage($img, 0, 0, $img.Width, $img.Height)
+$gm.Dispose()
+$img.Dispose()
+Write-Host "Source: $($master.Width)x$($master.Height)"
+
+Save-Png $master (Join-Path $outDir "insurance-trust-hub-logo.png")
+foreach ($pair in @(
+  @(1600, "insurance-trust-hub-logo@2x.png"),
+  @(1200, "insurance-trust-hub-logo-stacked.png"),
+  @(600, "insurance-trust-hub-logo-stacked-sm.png"),
+  @(1600, "insurance-trust-hub-logo-stacked@2x.png"),
+  @(480, "insurance-trust-hub-logo-header.png"),
+  @(960, "insurance-trust-hub-logo-header@2x.png")
+)) {
+  $r = Resize-ToWidth $master ([int]$pair[0])
+  Save-Png $r (Join-Path $outDir $pair[1])
+  $r.Dispose()
 }
 
-function Save-Png($bitmap, $path) {
-    $bitmap.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
-    Write-Host "  $path ($($bitmap.Width)x$($bitmap.Height))"
-}
+$iconX = [int]($master.Width * 0.62)
+$iconRect = New-Object System.Drawing.Rectangle $iconX, 0, ($master.Width - $iconX), $master.Height
+$iconCrop = $master.Clone($iconRect, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
 
-function To-ArgbBitmap($image) {
-    if ($image.PixelFormat -eq [System.Drawing.Imaging.PixelFormat]::Format32bppArgb) { return $image }
-    $bmp = New-TransparentBitmap $image.Width $image.Height
-    $g = New-Graphics $bmp
-    $g.DrawImage($image, 0, 0, $image.Width, $image.Height)
-    $g.Dispose()
-    return $bmp
-}
-
-function Resize-Bitmap($source, $width) {
-    $src = To-ArgbBitmap $source
-    $ratio = $width / $src.Width
-    $height = [int]($src.Height * $ratio)
-    $bmp = New-TransparentBitmap $width $height
-    $g = New-Graphics $bmp
-    $g.DrawImage($src, 0, 0, $width, $height)
-    $g.Dispose()
-    if ($src -ne $source) { $src.Dispose() }
-    return $bmp
-}
-
-function Crop-Bitmap($source, $x, $y, $w, $h) {
-    $rect = New-Object System.Drawing.Rectangle $x, $y, $w, $h
-    return $source.Clone($rect, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
-}
-
-function Trim-Transparent($bitmap) {
-    $bmp = To-ArgbBitmap $bitmap
-    $w = $bmp.Width; $h = $bmp.Height
-    $minX = $w; $minY = $h; $maxX = 0; $maxY = 0
-    $data = $bmp.LockBits(
-        (New-Object System.Drawing.Rectangle 0, 0, $w, $h),
-        [System.Drawing.Imaging.ImageLockMode]::ReadOnly,
-        [System.Drawing.Imaging.PixelFormat]::Format32bppArgb
-    )
-    $stride = $data.Stride
-    $bytes = New-Object byte[] ($stride * $h)
-    [System.Runtime.InteropServices.Marshal]::Copy($data.Scan0, $bytes, 0, $bytes.Length)
-    $bmp.UnlockBits($data)
-    for ($y = 0; $y -lt $h; $y++) {
-        for ($x = 0; $x -lt $w; $x++) {
-            $i = $y * $stride + $x * 4
-            if ($bytes[$i + 3] -gt 20) {
-                if ($x -lt $minX) { $minX = $x }
-                if ($y -lt $minY) { $minY = $y }
-                if ($x -gt $maxX) { $maxX = $x }
-                if ($y -gt $maxY) { $maxY = $y }
-            }
-        }
-    }
-    if ($maxX -le $minX) { return $bmp }
-    return Crop-Bitmap $bmp $minX $minY ($maxX - $minX + 1) ($maxY - $minY + 1)
-}
-
-function Add-Padding($bitmap, [double]$padTop, [double]$padBottom, [double]$padLeft, [double]$padRight) {
-    $bmp = Trim-Transparent $bitmap
-    $pt = [int]($bmp.Height * $padTop)
-    $pb = [int]($bmp.Height * $padBottom)
-    $pl = [int]($bmp.Width * $padLeft)
-    $pr = [int]($bmp.Width * $padRight)
-    $cw = $bmp.Width + $pl + $pr
-    $ch = $bmp.Height + $pt + $pb
-    $canvas = New-TransparentBitmap $cw $ch
-    $g = New-Graphics $canvas
-    $g.DrawImage($bmp, $pl, $pt, $bmp.Width, $bmp.Height)
-    $g.Dispose()
-    return $canvas
-}
-
-function Remove-CheckerboardArtifacts($bitmap) {
-    $bmp = To-ArgbBitmap $bitmap
-    $w = $bmp.Width; $h = $bmp.Height
-    $data = $bmp.LockBits(
-        (New-Object System.Drawing.Rectangle 0, 0, $w, $h),
-        [System.Drawing.Imaging.ImageLockMode]::ReadWrite,
-        [System.Drawing.Imaging.PixelFormat]::Format32bppArgb
-    )
-    $stride = $data.Stride
-    $bytes = New-Object byte[] ($stride * $h)
-    [System.Runtime.InteropServices.Marshal]::Copy($data.Scan0, $bytes, 0, $bytes.Length)
-    for ($y = 0; $y -lt $h; $y++) {
-        for ($x = 0; $x -lt $w; $x++) {
-            $i = $y * $stride + $x * 4
-            $b = $bytes[$i]; $g = $bytes[$i + 1]; $r = $bytes[$i + 2]; $a = $bytes[$i + 3]
-            if ($a -lt 10) { continue }
-            $isBrandBlue = ($b -gt $r + 8) -and ($r -lt 80)
-            $isDark = ($r -lt 90) -and ($g -lt 90) -and ($b -lt 120)
-            if ($isBrandBlue -or $isDark) { continue }
-            $isNeutral = ([Math]::Abs($r - $g) -lt 12) -and ([Math]::Abs($g - $b) -lt 12)
-            $isLight = ($r -gt 160) -and ($g -gt 160) -and ($b -gt 160)
-            if ($isNeutral -and $isLight) {
-                $bytes[$i] = 0; $bytes[$i + 1] = 0; $bytes[$i + 2] = 0; $bytes[$i + 3] = 0
-            }
-        }
-    }
-    [System.Runtime.InteropServices.Marshal]::Copy($bytes, 0, $data.Scan0, $bytes.Length)
-    $bmp.UnlockBits($data)
-    return $bmp
-}
-
-function Pad-Square($bitmap, $size, [double]$fillRatio = 0.72) {
-    $bmp = Trim-Transparent $bitmap
-    $side = [Math]::Max($bmp.Width, $bmp.Height)
-    $scale = ($size * $fillRatio) / $side
-    $nw = [int]($bmp.Width * $scale)
-    $nh = [int]($bmp.Height * $scale)
-    $scaled = Resize-Bitmap $bmp $nw
-    $square = New-TransparentBitmap $size $size
-    $g = New-Graphics $square
-    $g.DrawImage($scaled, [int](($size - $nw) / 2), [int](($size - $nh) / 2), $nw, $nh)
-    $g.Dispose()
-    $scaled.Dispose()
-    return (Remove-CheckerboardArtifacts $square)
-}
-
-# ── Load source ──────────────────────────────────────────────────────────────
-$original = To-ArgbBitmap ([System.Drawing.Image]::FromFile($src))
-$w = $original.Width; $h = $original.Height
-Write-Host "Source: $w x $h"
-
-# Stacked — full logo with padding
-$stackedPadded = Add-Padding $original 0.04 0.06 0.04 0.04
-$stackedClean = Remove-CheckerboardArtifacts $stackedPadded
-Save-Png $stackedClean (Join-Path $outDir "insurance-trust-hub-logo-stacked@2x.png")
-Save-Png (Remove-CheckerboardArtifacts (Resize-Bitmap $stackedClean 1200)) (Join-Path $outDir "insurance-trust-hub-logo-stacked.png")
-Save-Png (Remove-CheckerboardArtifacts (Resize-Bitmap $stackedClean 600)) (Join-Path $outDir "insurance-trust-hub-logo-stacked-sm.png")
-
-# Icon — crop umbrella emblem (top ~62% of image)
-$iconRaw = Crop-Bitmap $original ([int]($w * 0.06)) ([int]($h * 0.01)) ([int]($w * 0.88)) ([int]($h * 0.62))
-$icon = Remove-CheckerboardArtifacts (Trim-Transparent $iconRaw)
-$icon = Add-Padding $icon 0.08 0.14 0.08 0.08
-
-$icon512 = Pad-Square $icon 512 0.64
+$icon512 = Pad-Square $iconCrop 512 0.82
 Save-Png $icon512 (Join-Path $outDir "insurance-trust-hub-icon.png")
-$icon192 = Pad-Square $icon 192 0.64
+$icon192 = Pad-Square $iconCrop 192 0.82
 Save-Png $icon192 (Join-Path $outDir "insurance-trust-hub-icon-192.png")
-$icon32 = Pad-Square $icon 32 0.64
+$icon32 = Pad-Square $iconCrop 32 0.88
 Save-Png $icon32 (Join-Path $outDir "insurance-trust-hub-favicon-32.png")
+$icon16 = Pad-Square $iconCrop 16 0.88
+Save-Png $icon16 (Join-Path $outDir "insurance-trust-hub-favicon-16.png")
 
-$icon512.Save((Join-Path $PSScriptRoot "..\app\icon.png"), [System.Drawing.Imaging.ImageFormat]::Png)
-$icon192.Save((Join-Path $PSScriptRoot "..\app\apple-icon.png"), [System.Drawing.Imaging.ImageFormat]::Png)
-Write-Host "  app/icon.png + app/apple-icon.png"
+$icon512.Save((Join-Path $appDir "icon.png"), [System.Drawing.Imaging.ImageFormat]::Png)
+$icon192.Save((Join-Path $appDir "apple-icon.png"), [System.Drawing.Imaging.ImageFormat]::Png)
+Save-Png $icon32 (Join-Path $pubDir "favicon.png")
+Copy-Item (Join-Path $outDir "insurance-trust-hub-favicon-32.png") (Join-Path $pubDir "favicon.ico") -Force
 
-$original.Dispose(); $stackedPadded.Dispose(); $stackedClean.Dispose()
-$iconRaw.Dispose(); $icon.Dispose()
-$icon512.Dispose(); $icon192.Dispose(); $icon32.Dispose()
+$og = New-Bmp 1200 630
+$go = New-G $og
+$go.Clear([System.Drawing.Color]::FromArgb(255, 248, 250, 252))
+$maxW = 744; $maxH = 264
+$scale = [Math]::Min($maxW / $master.Width, $maxH / $master.Height)
+$nw = [int]($master.Width * $scale); $nh = [int]($master.Height * $scale)
+$go.DrawImage($master, [int]((1200 - $nw) / 2), [int]((630 - $nh) / 2), $nw, $nh)
+$go.Dispose()
+Save-Png $og (Join-Path $outDir "insurance-trust-hub-og.png")
+
+$svg = @"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="g" x1="32" y1="8" x2="32" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E6BFF"/>
+      <stop offset="1" stop-color="#00A99D"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 8 L56 52 H8 Z" fill="url(#g)"/>
+  <path d="M32 28 L44 52 H20 Z" fill="#00A99D"/>
+  <rect x="46" y="8" width="6" height="14" rx="1" fill="#1E6BFF"/>
+</svg>
+"@
+[System.IO.File]::WriteAllText((Join-Path $outDir "insurance-trust-hub-icon.svg"), $svg.Trim() + "`n")
+
+$master.Dispose(); $iconCrop.Dispose()
+$icon512.Dispose(); $icon192.Dispose(); $icon32.Dispose(); $icon16.Dispose(); $og.Dispose()
 Write-Host "Done."
