@@ -25,6 +25,13 @@ import { LeadForm } from '@/components/lead-form';
 import { ReviewForm } from '@/components/review-form';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { GovernmentVerificationPanel } from '@/components/insurance/cms/government-verification-panel';
+import { TrustScoreBreakdownPanel } from '@/components/insurance/cms/trust-score-breakdown';
+import {
+  providerIsMedicareSpecialist,
+  resolveGovernmentVerification,
+} from '@/lib/insurance/cms/resolve-government-verification';
+import { computeProviderTrustScoreBreakdown } from '@/lib/insurance/enrichment/trust-score';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -70,6 +77,15 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
   const breakdown = getRatingBreakdown(reviews);
   const totalBreakdown = Object.values(breakdown).reduce((a, b) => a + b, 0) || 1;
   const licenseUrl = getProviderLicenseUrl(provider);
+  const governmentVerification = resolveGovernmentVerification(provider);
+  const trustBreakdown = computeProviderTrustScoreBreakdown({
+    bbbRating: provider.bbb_rating,
+    isVerified: provider.is_verified,
+    yearsInBusiness: provider.years_in_business,
+    cmsParticipation: governmentVerification.cmsParticipation,
+    hasNpi: Boolean(governmentVerification.npi),
+    isMedicareSpecialist: providerIsMedicareSpecialist(provider),
+  });
 
   const suitsRelocating =
     provider.specialties.includes('Relocation Experienced') ||
@@ -141,6 +157,8 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
                 </p>
               </section>
             )}
+
+            <GovernmentVerificationPanel data={governmentVerification} />
 
             <section>
               <h2 className="text-xl font-semibold mb-4">License information</h2>
@@ -331,19 +349,38 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
                 <CardHeader>
                   <CardTitle className="text-lg">Trust metrics</CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm space-y-2">
+                <CardContent className="text-sm space-y-4">
                   {provider.trust_score != null && (
-                    <p><span className="font-medium">Trust Score:</span> {provider.trust_score}/100</p>
+                    <TrustScoreBreakdownPanel
+                      breakdown={{
+                        ...trustBreakdown,
+                        total: provider.trust_score,
+                      }}
+                    />
                   )}
                   {provider.local_market_experience != null && (
-                    <p><span className="font-medium">Local Market Experience:</span> {provider.local_market_experience}/100</p>
+                    <p>
+                      <span className="font-medium">Local Market Experience:</span>{' '}
+                      {provider.local_market_experience}/100
+                    </p>
                   )}
                   {provider.avg_response_hours != null && (
-                    <p><span className="font-medium">Avg Response:</span> &lt;{provider.avg_response_hours} hours</p>
+                    <p>
+                      <span className="font-medium">Avg Response:</span> &lt;
+                      {provider.avg_response_hours} hours
+                    </p>
                   )}
                   {provider.bbb_rating && (
-                    <p><span className="font-medium">BBB Rating:</span> {provider.bbb_rating}</p>
+                    <p>
+                      <span className="font-medium">BBB Rating:</span> {provider.bbb_rating}
+                    </p>
                   )}
+                  <p className="text-[11px] text-muted-foreground">
+                    Government Standing sub-score: {trustBreakdown.governmentStanding}/100.{' '}
+                    <Link href="/data/plan-complaint-index" className="text-primary hover:underline">
+                      Plan Complaint Index
+                    </Link>
+                  </p>
                 </CardContent>
               </Card>
             )}

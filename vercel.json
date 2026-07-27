@@ -1,9 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://www.movetrusthub.com/insurance/:path*",
-      "permanent": true
-    }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs"
 }

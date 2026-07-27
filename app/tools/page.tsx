@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Calculator, ClipboardCheck, ShieldCheck, Wrench } from 'lucide-react';
+import { BarChart3, Calculator, ClipboardCheck, ShieldCheck, Wrench } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -50,6 +50,13 @@ const TOOLS = [
     icon: ShieldCheck,
     title: 'ACA eligibility checker',
     description: 'Rough marketplace subsidy estimate by income and household size.',
+  },
+  {
+    href: '/data/plan-complaint-index',
+    icon: BarChart3,
+    title: 'Medicare Plan Complaint Index',
+    description:
+      'Editorial rankings of MA/Part D contracts by CMS complaints per 1,000 enrollees — with transparent methodology.',
   },
 ] as const;
 

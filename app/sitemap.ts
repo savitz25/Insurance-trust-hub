@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/quote-comparison',
     '/tools/medicare-plan-finder',
     '/tools/aca-eligibility-checker',
+    '/data/plan-complaint-index',
     '/about',
     '/contact',
     '/privacy',
