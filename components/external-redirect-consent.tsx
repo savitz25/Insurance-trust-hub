@@ -16,14 +16,17 @@ export type ExternalRedirectTarget = {
 type Props = {
   open: boolean;
   target: ExternalRedirectTarget | null;
+  /** Cancel / stay on page */
   onClose: () => void;
-  /** Called after user agrees and we open the external URL */
   onConfirmed?: (target: ExternalRedirectTarget) => void;
 };
 
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 /**
- * Modal shown before any navigation to an external official license lookup.
- * Requires explicit checkbox agreement — no silent redirects.
+ * Consent modal before leaving InsuranceTrustHub for official state license sites.
+ * Requires checkbox agreement; Cancel / Escape / backdrop keep the user on-site.
  */
 export function ExternalRedirectConsent({ open, target, onClose, onConfirmed }: Props) {
   const [agreed, setAgreed] = useState(false);
@@ -31,29 +34,66 @@ export function ExternalRedirectConsent({ open, target, onClose, onConfirmed }: 
   const descId = useId();
   const checkboxId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) {
       setAgreed(false);
       return;
     }
-    const prev = document.body.style.overflow;
+
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    const t = window.setTimeout(() => {
-      panelRef.current?.querySelector<HTMLElement>('button, input, a')?.focus();
-    }, 0);
+
+    const panel = panelRef.current;
+    const focusFirst = () => {
+      const nodes = panel?.querySelectorAll<HTMLElement>(FOCUSABLE);
+      const first = nodes?.[0];
+      first?.focus();
+    };
+    const t = window.setTimeout(focusFirst, 0);
+
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab' || !panel) return;
+      const nodes = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+        (el) => !el.hasAttribute('disabled') && el.tabIndex !== -1
+      );
+      if (nodes.length === 0) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
+
     window.addEventListener('keydown', onKey);
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevOverflow;
       window.clearTimeout(t);
       window.removeEventListener('keydown', onKey);
+      previouslyFocused.current?.focus?.();
     };
   }, [open, onClose]);
 
   if (!open || !target) return null;
+
+  const stateLabel = target.stateName?.trim() || 'your selected state';
+
+  function stay() {
+    onClose();
+  }
 
   function confirm() {
     if (!agreed || !target) return;
@@ -69,9 +109,9 @@ export function ExternalRedirectConsent({ open, target, onClose, onConfirmed }: 
     >
       <button
         type="button"
-        className="absolute inset-0 bg-slate-900/50 backdrop-blur-[2px]"
-        aria-label="Dismiss dialog"
-        onClick={onClose}
+        className="absolute inset-0 bg-slate-900/45 backdrop-blur-[1px]"
+        aria-label="Stay on InsuranceTrustHub"
+        onClick={stay}
       />
       <div
         ref={panelRef}
@@ -81,14 +121,14 @@ export function ExternalRedirectConsent({ open, target, onClose, onConfirmed }: 
         aria-describedby={descId}
         className={cn(
           'relative z-[101] w-full max-w-md rounded-2xl border border-slate-200 bg-white p-5 shadow-xl',
-          'sm:p-6'
+          'max-h-[min(90vh,640px)] overflow-y-auto sm:p-6'
         )}
       >
         <button
           type="button"
-          onClick={onClose}
-          className="absolute right-3 top-3 rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
-          aria-label="Close"
+          onClick={stay}
+          className="absolute right-3 top-3 rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+          aria-label="Stay on InsuranceTrustHub"
         >
           <X className="h-4 w-4" />
         </button>
@@ -101,29 +141,25 @@ export function ExternalRedirectConsent({ open, target, onClose, onConfirmed }: 
             <h2 id={titleId} className="text-lg font-semibold tracking-tight text-slate-900">
               You are leaving InsuranceTrustHub
             </h2>
-            <p id={descId} className="mt-2 text-sm leading-relaxed text-slate-600">
-              Next you will open the{' '}
-              <strong className="font-semibold text-slate-800">
-                official{target.stateName ? ` ${target.stateName}` : ''} state license verification
-                site
-              </strong>
+            <div id={descId} className="mt-2 space-y-3 text-sm leading-relaxed text-slate-600">
+              <p>
+                You are about to open the official state insurance license verification website for{' '}
+                <strong className="font-semibold text-slate-800">{stateLabel}</strong>.
+              </p>
               {target.destinationLabel ? (
-                <>
-                  {' '}
-                  operated by <span className="font-medium text-slate-800">{target.destinationLabel}</span>
-                </>
+                <p>
+                  Destination:{' '}
+                  <span className="font-medium text-slate-800">{target.destinationLabel}</span>
+                </p>
               ) : null}
-              . InsuranceTrustHub does not control that website, its search results, or license
-              records. Final license status comes from the state — not from us.
-            </p>
+              <p>
+                InsuranceTrustHub does not operate that website and cannot control its content,
+                availability, or results. Final license status should be confirmed on the official
+                state source.
+              </p>
+            </div>
           </div>
         </div>
-
-        <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm text-slate-600">
-          <li>We do not live-verify all 50-state producer licenses in-house.</li>
-          <li>We never invent or cache official license status for you.</li>
-          <li>Use the state site to confirm active status before buying coverage.</li>
-        </ul>
 
         <label
           htmlFor={checkboxId}
@@ -132,19 +168,18 @@ export function ExternalRedirectConsent({ open, target, onClose, onConfirmed }: 
           <input
             id={checkboxId}
             type="checkbox"
-            className="mt-0.5 h-4 w-4 rounded border-slate-300"
+            className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
           />
           <span>
-            I understand I am leaving InsuranceTrustHub and that the official state site is the
-            authority for license status.
+            I understand I am leaving InsuranceTrustHub to use the official state verification site
           </span>
         </label>
 
         <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button type="button" variant="ghost" onClick={onClose} className="min-h-[44px]">
-            Stay on this site
+          <Button type="button" variant="outline" onClick={stay} className="min-h-[44px]">
+            Stay on InsuranceTrustHub
           </Button>
           <Button
             type="button"

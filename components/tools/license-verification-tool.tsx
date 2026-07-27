@@ -128,7 +128,7 @@ export function LicenseVerificationTool() {
               <ExternalLink className="h-4 w-4" aria-hidden />
             </Button>
             <p className="mt-2 text-xs text-slate-500">
-              You will be asked to confirm before leaving InsuranceTrustHub.
+              Opens a consent step first. You can cancel and stay on InsuranceTrustHub.
             </p>
           </div>
         )}
