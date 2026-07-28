@@ -5,6 +5,10 @@ import { X, Mail, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useMyInsurance } from '@/components/my-insurance/my-insurance-provider';
+import {
+  InsuranceFacebookSignInButton,
+  InsuranceGoogleSignInButton,
+} from '@/components/my-insurance/social-sign-in-buttons';
 import { createBrowserSupabaseClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -111,31 +115,15 @@ export function AuthModal() {
           saved work across devices. We never sell your data or sell leads.
         </p>
 
-        <div className="mt-5 grid gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            className="h-11 w-full justify-center gap-2"
-            onClick={() => {
-              window.location.assign(
-                `/api/auth/google?next=${encodeURIComponent(redirectPath)}`
-              );
-            }}
-          >
-            Continue with Google
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            className="h-11 w-full justify-center gap-2"
-            onClick={() => {
-              window.location.assign(
-                `/api/auth/facebook?next=${encodeURIComponent(redirectPath)}`
-              );
-            }}
-          >
-            Continue with Facebook
-          </Button>
+        <div className="mt-5 grid gap-2.5">
+          <InsuranceGoogleSignInButton
+            href={`/api/auth/google?next=${encodeURIComponent(redirectPath)}`}
+            disabled={sending}
+          />
+          <InsuranceFacebookSignInButton
+            href={`/api/auth/facebook?next=${encodeURIComponent(redirectPath)}`}
+            disabled={sending}
+          />
         </div>
 
         <div className="my-4 flex items-center gap-3 text-xs text-slate-400">
