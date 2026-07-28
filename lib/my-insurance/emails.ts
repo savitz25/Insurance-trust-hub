@@ -2,6 +2,28 @@ import 'server-only';
 
 import { PRODUCTION_SITE_ORIGIN } from '@/lib/my-insurance/constants';
 
+/** Insurance Trust Hub transactional email brand tokens (inline CSS for clients). */
+const BRAND = {
+  name: 'Insurance Trust Hub',
+  product: 'Insurance HQ',
+  siteUrl: PRODUCTION_SITE_ORIGIN,
+  siteHost: 'insurancetrusthub.com',
+  logoUrl: `${PRODUCTION_SITE_ORIGIN}/brand/insurance-trust-hub-logo-header.png`,
+  /** Teal — primary CTAs & brand accent */
+  primary: '#0f766e',
+  primaryDark: '#0d5f59',
+  /** Deep navy for headlines */
+  ink: '#0f172a',
+  body: '#334155',
+  muted: '#64748b',
+  faint: '#94a3b8',
+  border: '#e2e8f0',
+  bg: '#f1f5f9',
+  card: '#ffffff',
+  supportEmail: 'hello@insurancetrusthub.com',
+  trustLine: 'Independent research workspace — no paid placements, no lead selling.',
+} as const;
+
 function isResendConfigured(): boolean {
   return Boolean(process.env.RESEND_API_KEY?.trim());
 }
@@ -48,49 +70,178 @@ async function sendResend(params: {
   return true;
 }
 
-function layout(title: string, bodyHtml: string): string {
-  return `<!DOCTYPE html>
-<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width"/></head>
-<body style="margin:0;padding:0;background:#f8fafc;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#0f172a;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;padding:32px 16px;">
-    <tr><td align="center">
-      <table role="presentation" width="100%" style="max-width:560px;background:#ffffff;border-radius:16px;border:1px solid #e2e8f0;overflow:hidden;">
-        <tr><td style="background:#0f766e;padding:20px 24px;color:#fff;font-weight:700;font-size:18px;">
-          Insurance Trust Hub
-        </td></tr>
-        <tr><td style="padding:28px 24px;">
-          <h1 style="margin:0 0 12px;font-size:20px;line-height:1.3;">${title}</h1>
-          ${bodyHtml}
-          <p style="margin:24px 0 0;font-size:12px;color:#64748b;line-height:1.5;">
-            Independent research workspace — no paid placements, no lead selling.
-            Tools work without an account; sign-in only syncs your saved work.
-          </p>
-        </td></tr>
+type LayoutOptions = {
+  /** Inbox preview (hidden preheader) */
+  preheader: string;
+  /** Document / card title */
+  title: string;
+  /** Main HTML body (paragraphs, lists) */
+  bodyHtml: string;
+  /** Primary button */
+  ctaLabel?: string;
+  ctaHref?: string;
+  /** Small note under CTA (expiry, etc.) */
+  noteHtml?: string;
+  /** Optional secondary links row under CTA */
+  secondaryHtml?: string;
+};
+
+/**
+ * Premium single-column shell — table layout + inline CSS for Gmail/Outlook/Apple Mail.
+ * Auth URLs are never rewritten here; pass confirmUrl through as-is.
+ */
+function buildEmailHtml(options: LayoutOptions): string {
+  const { preheader, title, bodyHtml, ctaLabel, ctaHref, noteHtml, secondaryHtml } = options;
+  const font =
+    "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
+
+  const ctaBlock =
+    ctaLabel && ctaHref
+      ? `
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 0;">
+        <tr>
+          <td align="left" style="border-radius:10px;background:${BRAND.primary};">
+            <a href="${ctaHref}" target="_blank" rel="noopener noreferrer"
+              style="display:inline-block;padding:14px 28px;font-family:${font};font-size:15px;font-weight:600;line-height:1.2;color:#ffffff;text-decoration:none;border-radius:10px;">
+              ${ctaLabel}
+            </a>
+          </td>
+        </tr>
       </table>
-    </td></tr>
+      <p style="margin:16px 0 0;font-family:${font};font-size:12px;line-height:1.55;color:${BRAND.muted};">
+        If the button doesn’t work, copy and paste this link into your browser:
+      </p>
+      <p style="margin:6px 0 0;font-family:${font};font-size:12px;line-height:1.5;word-break:break-all;">
+        <a href="${ctaHref}" style="color:${BRAND.primary};text-decoration:underline;">${escapeHtml(ctaHref)}</a>
+      </p>`
+      : '';
+
+  const note = noteHtml
+    ? `<p style="margin:20px 0 0;font-family:${font};font-size:13px;line-height:1.55;color:${BRAND.muted};">${noteHtml}</p>`
+    : '';
+
+  const secondary = secondaryHtml
+    ? `<div style="margin:20px 0 0;font-family:${font};font-size:14px;line-height:1.5;">${secondaryHtml}</div>`
+    : '';
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light" />
+  <title>${escapeHtml(title)} — ${BRAND.name}</title>
+</head>
+<body style="margin:0;padding:0;background:${BRAND.bg};-webkit-text-size-adjust:100%;">
+  <!-- Preheader (inbox preview) -->
+  <div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">
+    ${escapeHtml(preheader)}
+    &#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${BRAND.bg};padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+          <!-- Brand header -->
+          <tr>
+            <td align="center" style="padding:0 0 20px;">
+              <a href="${BRAND.siteUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                <img src="${BRAND.logoUrl}" alt="${BRAND.name}" width="220" height="48"
+                  style="display:block;width:220px;max-width:70%;height:auto;border:0;" />
+              </a>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background:${BRAND.card};border:1px solid ${BRAND.border};border-radius:14px;overflow:hidden;">
+              <!-- Accent bar -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="height:4px;line-height:4px;font-size:0;background:${BRAND.primary};">&nbsp;</td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding:32px 28px 28px;">
+                    <p style="margin:0 0 8px;font-family:${font};font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${BRAND.primary};">
+                      My Insurance · ${BRAND.product}
+                    </p>
+                    <h1 style="margin:0 0 16px;font-family:${font};font-size:22px;line-height:1.25;font-weight:600;color:${BRAND.ink};">
+                      ${escapeHtml(title)}
+                    </h1>
+                    <div style="font-family:${font};font-size:15px;line-height:1.65;color:${BRAND.body};">
+                      ${bodyHtml}
+                    </div>
+                    ${ctaBlock}
+                    ${note}
+                    ${secondary}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Trust + footer -->
+          <tr>
+            <td style="padding:28px 12px 8px;text-align:center;">
+              <p style="margin:0 0 12px;font-family:${font};font-size:12px;line-height:1.55;color:${BRAND.muted};">
+                ${BRAND.trustLine}
+              </p>
+              <p style="margin:0 0 8px;font-family:${font};font-size:12px;line-height:1.5;color:${BRAND.muted};">
+                <a href="${BRAND.siteUrl}" style="color:${BRAND.primary};text-decoration:none;font-weight:600;">${BRAND.name}</a>
+                &nbsp;·&nbsp;
+                <a href="${BRAND.siteUrl}" style="color:${BRAND.primary};text-decoration:none;">${BRAND.siteHost}</a>
+              </p>
+              <p style="margin:0 0 8px;font-family:${font};font-size:12px;line-height:1.5;color:${BRAND.muted};">
+                <a href="${BRAND.siteUrl}/my-insurance" style="color:${BRAND.primary};text-decoration:none;">My Insurance</a>
+                &nbsp;·&nbsp;
+                <a href="${BRAND.siteUrl}/tools" style="color:${BRAND.primary};text-decoration:none;">Tools</a>
+                &nbsp;·&nbsp;
+                <a href="mailto:${BRAND.supportEmail}" style="color:${BRAND.primary};text-decoration:none;">${BRAND.supportEmail}</a>
+              </p>
+              <p style="margin:12px 0 0;font-family:${font};font-size:11px;line-height:1.5;color:${BRAND.faint};">
+                If you didn’t request this email, you can ignore it.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
   </table>
-</body></html>`;
+</body>
+</html>`;
 }
 
 export async function sendWelcomeEmail(params: { to: string }): Promise<boolean> {
   const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
-  const html = layout(
-    'Welcome to Insurance HQ',
-    `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#334155;">
-      Your My Insurance workspace is ready. Save agents, and soon prescription lists and calculator results —
+  const html = buildEmailHtml({
+    preheader: 'Your Insurance HQ workspace is ready — open My Insurance anytime.',
+    title: 'Welcome to Insurance HQ',
+    bodyHtml: `<p style="margin:0 0 12px;">
+      Your My Insurance workspace is ready. Save agents you trust, and soon prescription lists and calculator results —
       then open them from any device.
     </p>
-    <p style="margin:0 0 20px;">
-      <a href="${hq}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:600;font-size:14px;">
-        Open Insurance HQ
-      </a>
-    </p>`
-  );
+    <p style="margin:0;">
+      Tools work without an account; sign-in only syncs your saved work.
+    </p>`,
+    ctaLabel: 'Open Insurance HQ',
+    ctaHref: hq,
+  });
   return sendResend({
     to: params.to,
     subject: 'Welcome to My Insurance — Insurance Trust Hub',
     html,
-    text: `Welcome to Insurance HQ. Open your workspace: ${hq}`,
+    text: [
+      'Welcome to Insurance HQ',
+      '',
+      'Your My Insurance workspace is ready. Save agents, and open them from any device.',
+      '',
+      `Open Insurance HQ: ${hq}`,
+      '',
+      BRAND.trustLine,
+      `${BRAND.name} · ${BRAND.siteHost}`,
+      "If you didn't request this email, you can ignore it.",
+    ].join('\n'),
   });
 }
 
@@ -101,22 +252,33 @@ export async function sendSavedProviderEmail(params: {
 }): Promise<boolean> {
   const profile = `${PRODUCTION_SITE_ORIGIN}/providers/${params.providerSlug}`;
   const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
-  const html = layout(
-    'Saved to My Insurance',
-    `<p style="margin:0 0 12px;font-size:15px;line-height:1.6;color:#334155;">
-      <strong>${escapeHtml(params.providerName)}</strong> is in your Insurance HQ shortlist.
-    </p>
-    <p style="margin:0 0 8px;">
-      <a href="${profile}" style="color:#0f766e;font-weight:600;">View profile</a>
-      &nbsp;·&nbsp;
-      <a href="${hq}" style="color:#0f766e;font-weight:600;">Open Insurance HQ</a>
-    </p>`
-  );
+  const name = escapeHtml(params.providerName);
+  const html = buildEmailHtml({
+    preheader: `${params.providerName} was saved to your Insurance HQ shortlist.`,
+    title: 'Saved to My Insurance',
+    bodyHtml: `<p style="margin:0;">
+      <strong style="color:${BRAND.ink};">${name}</strong> is now in your Insurance HQ shortlist.
+      Open the profile anytime, or return to HQ to compare what you’ve saved.
+    </p>`,
+    ctaLabel: 'Open Insurance HQ',
+    ctaHref: hq,
+    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View ${name} profile →</a>`,
+  });
   return sendResend({
     to: params.to,
     subject: `Saved: ${params.providerName} — My Insurance`,
     html,
-    text: `Saved ${params.providerName}. Profile: ${profile}. HQ: ${hq}`,
+    text: [
+      'Saved to My Insurance',
+      '',
+      `${params.providerName} is in your Insurance HQ shortlist.`,
+      '',
+      `Profile: ${profile}`,
+      `Insurance HQ: ${hq}`,
+      '',
+      BRAND.trustLine,
+      `${BRAND.name} · ${BRAND.siteHost}`,
+    ].join('\n'),
   });
 }
 
@@ -124,23 +286,36 @@ export async function sendMagicLinkEmail(params: {
   to: string;
   confirmUrl: string;
 }): Promise<boolean> {
-  const html = layout(
-    'Your sign-in link',
-    `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#334155;">
-      Use this secure link to sign in to My Insurance. It expires soon and can only be used once.
-    </p>
-    <p style="margin:0 0 20px;">
-      <a href="${params.confirmUrl}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:600;font-size:14px;">
-        Sign in to Insurance HQ
-      </a>
-    </p>
-    <p style="margin:0;font-size:12px;color:#94a3b8;word-break:break-all;">${escapeHtml(params.confirmUrl)}</p>`
-  );
+  // confirmUrl must be passed through unchanged (token_hash, type, next, etc.)
+  const html = buildEmailHtml({
+    preheader: 'Sign in to your InsuranceTrustHub research workspace',
+    title: 'Sign in to Insurance HQ',
+    bodyHtml: `<p style="margin:0;">
+      Use this secure one-time link to open your My Insurance workspace and access saved agents,
+      research, and future baskets and results.
+    </p>`,
+    ctaLabel: 'Sign in to Insurance HQ',
+    ctaHref: params.confirmUrl,
+    noteHtml:
+      'This link expires soon and can only be used once. For your security, don’t forward this email.',
+  });
   return sendResend({
     to: params.to,
     subject: 'Sign in to My Insurance — Insurance Trust Hub',
     html,
-    text: `Sign in: ${params.confirmUrl}`,
+    text: [
+      'Sign in to Insurance HQ',
+      '',
+      'Use this secure one-time link to open your My Insurance workspace.',
+      '',
+      params.confirmUrl,
+      '',
+      'This link expires soon and can only be used once.',
+      '',
+      BRAND.trustLine,
+      `${BRAND.name} · ${BRAND.siteHost}`,
+      "If you didn't request this email, you can ignore it.",
+    ].join('\n'),
   });
 }
 
