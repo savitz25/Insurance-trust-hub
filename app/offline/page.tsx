@@ -14,6 +14,7 @@ const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/tools', label: 'Research Center' },
   { href: '/directory', label: 'Agent directory' },
+  { href: '/my-insurance', label: 'My Insurance' },
   { href: '/tools/cost-estimator', label: 'Cost Planner' },
   { href: '/calculators/aca-subsidy', label: 'ACA Savings Planner' },
   { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
