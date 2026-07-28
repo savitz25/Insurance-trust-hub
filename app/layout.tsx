@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import { MyInsuranceShell } from '@/components/my-insurance/my-insurance-shell';
 import { rootLayoutMetadata } from '@/lib/seo/metadata';
 import './globals.css';
 
@@ -23,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <Navbar />
-        <main className="min-h-[calc(100vh-5rem)]">{children}</main>
-        <Footer />
-        <Toaster position="top-right" richColors closeButton />
-        <Analytics />
+        <MyInsuranceShell>
+          <Navbar />
+          <main className="min-h-[calc(100vh-5rem)]">{children}</main>
+          <Footer />
+          <Toaster position="top-right" richColors closeButton />
+          <Analytics />
+        </MyInsuranceShell>
       </body>
     </html>
   );

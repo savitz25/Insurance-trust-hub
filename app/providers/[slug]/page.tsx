@@ -25,6 +25,7 @@ import { LeadForm } from '@/components/lead-form';
 import { ReviewForm } from '@/components/review-form';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
 import { GovernmentVerificationPanel } from '@/components/insurance/cms/government-verification-panel';
 import { TrustScoreBreakdownPanel } from '@/components/insurance/cms/trust-score-breakdown';
 import {
@@ -135,6 +136,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
             </div>
 
             <div className="flex flex-wrap gap-2 shrink-0">
+              <SaveProviderButton
+                providerSlug={provider.slug}
+                providerName={provider.name}
+              />
               {provider.phone && (
                 <Button asChild variant="outline" className="gap-2">
                   <a href={`tel:${provider.phone.replace(/\D/g, '')}`}>

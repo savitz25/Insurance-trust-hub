@@ -40,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/data/counties/miami-dade-fl',
     '/data/counties/broward-fl',
     '/data/counties/palm-beach-fl',
+    '/my-insurance',
     '/about',
     '/contact',
     '/privacy',

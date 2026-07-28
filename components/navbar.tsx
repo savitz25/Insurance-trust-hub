@@ -3,13 +3,16 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { BrandLogo } from '@/components/BrandLogo';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
+
 const NAV_LINKS = [
   { href: '/directory', label: 'DIRECTORIES' },
   { href: '/hubs', label: 'HEALTH HUBS' },
   { href: '/hubs/browse', label: 'STATE & MSA BROWSER' },
   { href: '/calculators', label: 'CALCULATORS' },
+  { href: '/my-insurance', label: 'MY INSURANCE' },
   { href: '/about', label: 'TRUST & TRANSPARENCY' },
   { href: '/about', label: 'ABOUT' },
 ] as const;
@@ -17,6 +20,8 @@ const NAV_LINKS = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [directoriesOpen, setDirectoriesOpen] = useState(false);
+  const mi = useMyInsuranceOptional();
+  const savedCount = mi?.user ? mi.savedProviderSlugs.size : 0;
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -62,6 +67,17 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Button size="sm" variant="outline" asChild className="gap-2">
+            <Link href="/my-insurance" aria-label="My Insurance">
+              <Bookmark className="h-4 w-4" />
+              My Insurance
+              {savedCount > 0 ? (
+                <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                  {savedCount}
+                </span>
+              ) : null}
+            </Link>
+          </Button>
           <Button size="sm" variant="trust" asChild className="gap-2">
             <Link href="/contact">
               <Phone className="h-4 w-4" /> Contact
@@ -87,6 +103,9 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Link href="/my-insurance" className="block font-medium" onClick={() => setIsOpen(false)}>
+            My Insurance{savedCount > 0 ? ` (${savedCount})` : ''}
+          </Link>
           <Link href="/contact" className="block font-medium" onClick={() => setIsOpen(false)}>Contact</Link>
         </div>
       )}

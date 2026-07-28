@@ -230,6 +230,150 @@ export type Database = {
           },
         ];
       };
+      insurance_user_profiles: {
+        Row: {
+          id: string;
+          email: string;
+          full_name: string | null;
+          marketing_opt_in: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          email: string;
+          full_name?: string | null;
+          marketing_opt_in?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          email?: string;
+          full_name?: string | null;
+          marketing_opt_in?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      saved_providers: {
+        Row: {
+          id: string;
+          user_id: string;
+          provider_slug: string;
+          provider_name: string;
+          notes: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          provider_slug: string;
+          provider_name: string;
+          notes?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          provider_slug?: string;
+          provider_name?: string;
+          notes?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      drug_baskets: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      drug_basket_items: {
+        Row: {
+          id: string;
+          basket_id: string;
+          name: string;
+          strength: string;
+          form: string;
+          dosage: string;
+          quantity: string | null;
+          notes: string | null;
+          sort_order: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          basket_id: string;
+          name: string;
+          strength?: string;
+          form?: string;
+          dosage?: string;
+          quantity?: string | null;
+          notes?: string | null;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          basket_id?: string;
+          name?: string;
+          strength?: string;
+          form?: string;
+          dosage?: string;
+          quantity?: string | null;
+          notes?: string | null;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      saved_calculator_results: {
+        Row: {
+          id: string;
+          user_id: string;
+          calculator_id: string;
+          title: string;
+          snapshot: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          calculator_id: string;
+          title: string;
+          snapshot?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          calculator_id?: string;
+          title?: string;
+          snapshot?: Json;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

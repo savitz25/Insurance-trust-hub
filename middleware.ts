@@ -3,8 +3,6 @@ import { updateSession } from '@/lib/supabase/middleware';
 
 /**
  * Paths that belong to MoveTrustHub / LenderTrustHub — never serve on this host.
- * 301 to the correct network apex so accidental links or residual DNS/alias issues
- * cannot paint Move chrome on insurancetrusthub.com.
  */
 const MOVE_ONLY_PREFIXES = [
   '/local-movers',
@@ -20,7 +18,7 @@ const MOVE_ONLY_PREFIXES = [
   '/suggest',
   '/resources/routes',
   '/resources/scams',
-  '/insurance', // monorepo-prefixed paths should not exist on apex ITH
+  '/insurance',
 ] as const;
 
 const MOVE_SITE = 'https://www.movetrusthub.com';
@@ -34,13 +32,12 @@ function isMoveOnlyPath(pathname: string): boolean {
   return false;
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (isMoveOnlyPath(pathname)) {
     const isLender = pathname === '/lender' || pathname.startsWith('/lender/');
     const base = isLender ? LENDER_SITE : MOVE_SITE;
-    // Strip accidental /insurance prefix when bouncing to Move.
     const destPath =
       pathname.startsWith('/insurance/')
         ? pathname.slice('/insurance'.length) || '/'
@@ -51,19 +48,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(target, 301);
   }
 
-  // Admin session refresh only
-  if (pathname.startsWith('/admin')) {
-    return updateSession(request);
-  }
-
-  return NextResponse.next();
+  // Admin guard + optional Supabase auth cookie refresh
+  return updateSession(request);
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match page navigations; skip static assets and Next internals.
-     */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|woff2|woff|ttf|otf|xml|txt|webmanifest)$).*)',
   ],
 };
