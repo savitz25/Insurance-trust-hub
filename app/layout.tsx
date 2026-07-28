@@ -1,10 +1,11 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { MyInsuranceShell } from '@/components/my-insurance/my-insurance-shell';
+import { InsurancePwaProvider } from '@/components/pwa/insurance-pwa-provider';
 import { rootLayoutMetadata } from '@/lib/seo/metadata';
 import './globals.css';
 
@@ -16,6 +17,13 @@ const inter = Inter({
 
 export const metadata: Metadata = rootLayoutMetadata;
 
+export const viewport: Viewport = {
+  themeColor: '#0A2540',
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,11 +31,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased pt-[env(safe-area-inset-top)]`}>
         <MyInsuranceShell>
           <Navbar />
-          <main className="min-h-[calc(100vh-5rem)]">{children}</main>
+          <main className="min-h-[calc(100vh-5rem)] pb-[env(safe-area-inset-bottom)]">
+            {children}
+          </main>
           <Footer />
+          <InsurancePwaProvider />
           <Toaster position="top-right" richColors closeButton />
           <Analytics />
         </MyInsuranceShell>

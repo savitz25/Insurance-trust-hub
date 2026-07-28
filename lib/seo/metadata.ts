@@ -114,11 +114,20 @@ export const rootLayoutMetadata: Metadata = {
     'insurance trust hub',
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
+  appleWebApp: {
+    capable: true,
+    title: 'Insurance HQ',
+    statusBarStyle: 'default',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+  },
   icons: {
     icon: [
       { url: brandAsset(BRAND_LOGO.favicon16), sizes: '16x16', type: 'image/png' },
       { url: brandAsset(BRAND_LOGO.favicon32), sizes: '32x32', type: 'image/png' },
       { url: brandAsset(BRAND_LOGO.icon192), sizes: '192x192', type: 'image/png' },
+      { url: brandAsset(BRAND_LOGO.icon512), sizes: '512x512', type: 'image/png' },
     ],
     apple: [{ url: brandAsset(BRAND_LOGO.icon192), sizes: '192x192', type: 'image/png' }],
   },
