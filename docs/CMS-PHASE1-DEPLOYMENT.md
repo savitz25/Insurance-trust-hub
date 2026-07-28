@@ -33,13 +33,21 @@ Previously both `insurancetrusthub.com` and `www.insurancetrusthub.com` were ali
 
 They were reassigned to the latest **insurance-trust-hub** production deployment so the apex site serves this repo (not the MTH monorepo).
 
-## MoveTrustHub cleanup (optional, non-blocking)
+## Cross-contamination fix (2026-07-28)
 
-MTH monorepo still contains a port of CMS under `/insurance/...` from commit `2678993b`. That is fine for the multi-hub site if you keep insurance content there.
+**Symptom:** `www.insurancetrusthub.com/local-movers/...` served Move chrome when domains pointed at the monorepo project.
 
-Recommended cleanup on MTH (when convenient):
+**Fixes shipped:**
 
-1. Leave CMS code if `www.movetrusthub.com/insurance` should stay feature-parity.
-2. Or strip insurance CMS UI later if insurance is fully apex-only on ITH.
-3. Ensure future deploys from `move-trust-hub` **do not** re-add `insurancetrusthub.com` domain aliases.
-4. Keep `movetrusthub.com` only on project `move-trust-hub`.
+| Repo | Change |
+|------|--------|
+| **Insurance-trust-hub** | Middleware 301s Move-only paths (`/local-movers`, `/companies`, `/auto-transport`, `/moving-to`, `/lender`, …) to the correct network apex |
+| **Move-trust-Hub** | `lib/hub/domains.ts` + middleware: on insurance host, Move-only paths **301 → movetrusthub.com** (never rewrite into `/insurance/[[...legacy]]`) |
+
+**Ops rule:** Domain aliases for `insurancetrusthub.com` / `www` must stay on Vercel project **`insurance-trust-hub`**, not `move-trust-hub`.
+
+## MoveTrustHub cleanup (optional)
+
+1. After any monorepo deploy, confirm ITH domains still alias to **insurance-trust-hub**.
+2. Monorepo may keep `/insurance/*` for multi-hub; public Move host redirects `/insurance/*` → ITH apex when configured.
+3. Keep `movetrusthub.com` only on project `move-trust-hub`.
