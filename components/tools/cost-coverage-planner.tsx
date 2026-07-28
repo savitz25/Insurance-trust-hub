@@ -37,6 +37,7 @@ import {
   type SituationId,
   type UtilizationLevel,
 } from '@/lib/tools/aca-cost-planner';
+import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
 
 const STEPS = [
   { id: 1, label: 'Situation' },
@@ -604,6 +605,17 @@ function ResultsPanel({
   onToggleMath: () => void;
   onEditAssumptions: () => void;
 }) {
+  const monthlyNet = formatMoneyRange(result.summaryMonthlyNet, 'mo');
+  const annualTotal = formatMoneyRange(result.summaryTotalAnnual, 'yr');
+  const saveTitle = `Cost estimate · ${result.location.displayLabel}`;
+  const summaryText = [
+    result.subsidy.summary,
+    `Est. monthly net premium: ${monthlyNet}`,
+    `Est. total annual cost: ${annualTotal}`,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
   return (
     <div className="space-y-8">
       <div>
@@ -617,6 +629,34 @@ function ResultsPanel({
           Highlighted path based on your priorities and care use. Figures are educational ranges —
           not plan quotes.
         </p>
+        <div className="mt-4">
+          <SaveCalculatorButton
+            calculatorId="cost_estimator"
+            title={saveTitle}
+            snapshot={{
+              sourcePath: '/tools/cost-estimator',
+              summaryText,
+              inputs: {
+                zip: result.location.zip,
+                displayLabel: result.location.displayLabel,
+                utilization,
+              },
+              outputs: {
+                summaryMonthlyNet: result.summaryMonthlyNet,
+                summaryTotalAnnual: result.summaryTotalAnnual,
+                recommendedPathId: result.recommendedPathId,
+                subsidy: result.subsidy,
+              },
+              result: {
+                paths: result.paths.map((p) => ({
+                  id: p.id,
+                  label: p.label,
+                  totalAnnualCost: p.totalAnnualCost,
+                })),
+              },
+            }}
+          />
+        </div>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3">

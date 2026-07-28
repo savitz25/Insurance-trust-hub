@@ -293,6 +293,122 @@ export async function sendSavedProviderEmail(params: {
   });
 }
 
+export async function sendDrugBasketEmail(params: {
+  to: string;
+  basketName: string;
+  items: Array<{
+    name: string;
+    strength: string;
+    form?: string;
+    dosage: string;
+    quantity?: string | null;
+    notes?: string | null;
+  }>;
+}): Promise<boolean> {
+  const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
+  const tool = `${PRODUCTION_SITE_ORIGIN}/tools/prescription-drug-list`;
+  const listHtml = params.items
+    .map((item, i) => {
+      const bits = [
+        `<strong style="color:${BRAND.ink};">${escapeHtml(item.name)}</strong> ${escapeHtml(item.strength)}`,
+        item.form ? `(${escapeHtml(item.form)})` : '',
+        `<br/><span style="color:${BRAND.muted};">Dosage: ${escapeHtml(item.dosage)}</span>`,
+        item.quantity
+          ? `<br/><span style="color:${BRAND.muted};">Qty: ${escapeHtml(item.quantity)}</span>`
+          : '',
+        item.notes
+          ? `<br/><span style="color:${BRAND.muted};">Notes: ${escapeHtml(item.notes)}</span>`
+          : '',
+      ]
+        .filter(Boolean)
+        .join(' ');
+      return `<tr><td style="padding:10px 0;border-bottom:1px solid ${BRAND.border};font-size:14px;line-height:1.5;">${i + 1}. ${bits}</td></tr>`;
+    })
+    .join('');
+
+  const html = buildEmailHtml({
+    preheader: `${params.items.length} medication${params.items.length === 1 ? '' : 's'} saved in Insurance HQ`,
+    title: 'Your prescription drug list',
+    bodyHtml: `<p style="margin:0 0 12px;">
+      <strong style="color:${BRAND.ink};">${escapeHtml(params.basketName)}</strong> is saved in your
+      My Insurance workspace (${params.items.length} medication${params.items.length === 1 ? '' : 's'}).
+    </p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0 0;">
+      ${listHtml}
+    </table>
+    <p style="margin:16px 0 0;font-size:13px;color:${BRAND.muted};">
+      Educational organization tool only — not medical advice. Verify with your pharmacist or doctor.
+    </p>`,
+    ctaLabel: 'Open Insurance HQ',
+    ctaHref: hq,
+    secondaryHtml: `<a href="${tool}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Edit drug list →</a>`,
+  });
+
+  const textLines = [
+    `Prescription list: ${params.basketName}`,
+    '',
+    ...params.items.map(
+      (item, i) =>
+        `${i + 1}. ${item.name} ${item.strength}${item.form ? ` (${item.form})` : ''} — ${item.dosage}`
+    ),
+    '',
+    `Insurance HQ: ${hq}`,
+    BRAND.trustLine,
+  ];
+
+  return sendResend({
+    to: params.to,
+    subject: `Your prescription list — My Insurance`,
+    html,
+    text: textLines.join('\n'),
+  });
+}
+
+export async function sendSavedCalculatorEmail(params: {
+  to: string;
+  toolLabel: string;
+  title: string;
+  summaryText: string;
+  sourcePath?: string;
+}): Promise<boolean> {
+  const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
+  const toolUrl = params.sourcePath
+    ? `${PRODUCTION_SITE_ORIGIN}${params.sourcePath.startsWith('/') ? params.sourcePath : `/${params.sourcePath}`}`
+    : hq;
+
+  const html = buildEmailHtml({
+    preheader: `${params.toolLabel} saved to Insurance HQ`,
+    title: 'Calculator result saved',
+    bodyHtml: `<p style="margin:0 0 12px;">
+      <strong style="color:${BRAND.ink};">${escapeHtml(params.toolLabel)}</strong> is in your My Insurance workspace.
+    </p>
+    <p style="margin:0 0 8px;font-weight:600;color:${BRAND.ink};">${escapeHtml(params.title)}</p>
+    <p style="margin:0;color:${BRAND.body};">${escapeHtml(params.summaryText)}</p>
+    <p style="margin:16px 0 0;font-size:13px;color:${BRAND.muted};">
+      Educational estimates only — not a quote, enrollment decision, or financial advice.
+    </p>`,
+    ctaLabel: 'Open Insurance HQ',
+    ctaHref: hq,
+    secondaryHtml: `<a href="${toolUrl}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Re-run this tool →</a>`,
+  });
+
+  return sendResend({
+    to: params.to,
+    subject: `Saved: ${params.toolLabel} — My Insurance`,
+    html,
+    text: [
+      'Calculator result saved',
+      '',
+      params.toolLabel,
+      params.title,
+      params.summaryText,
+      '',
+      `Insurance HQ: ${hq}`,
+      BRAND.trustLine,
+    ].join('\n'),
+  });
+}
+
 export async function sendMagicLinkEmail(params: {
   to: string;
   confirmUrl: string;

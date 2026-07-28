@@ -24,8 +24,8 @@ export default async function MyInsurancePage() {
           Insurance HQ
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-          Your private research workspace for saved agents and upcoming tools. Independent — no paid
-          placements, no lead selling.
+          Your private research workspace for saved agents, prescription lists, and calculator
+          results. Independent — no paid placements, no lead selling.
         </p>
         <p className="mt-2 text-sm text-slate-500">
           <Link href="/directory" className="font-medium text-teal-700 hover:underline">

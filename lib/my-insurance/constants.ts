@@ -1,17 +1,21 @@
-import { SITE_URL } from '@/lib/constants';
+﻿import { SITE_URL } from '@/lib/constants';
 
 export const MY_INSURANCE_PATH = '/my-insurance';
 export const AUTH_CALLBACK_PATH = '/auth/callback';
 export const AUTH_CONFIRM_PATH = '/auth/confirm';
 
 export const PRODUCTION_SITE_ORIGIN =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || SITE_URL;
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || SITE_URL.replace(/\/$/, '');
 
 export const AUTH_CALLBACK_URL = `${PRODUCTION_SITE_ORIGIN}${AUTH_CALLBACK_PATH}`;
 
 export const GUEST_SAVED_PROVIDERS_KEY = 'ith-my-insurance-saved-providers-v1';
 export const PENDING_SAVE_ACTION_KEY = 'ith-my-insurance-pending-action-v1';
 export const POST_LOGIN_REDIRECT_KEY = 'ith-my-insurance-post-login-redirect';
+
+export const DRUG_BASKET_PATH = '/tools/prescription-drug-list';
+export const ACA_SUBSIDY_PATH = '/calculators/aca-subsidy';
+export const COST_ESTIMATOR_PATH = '/tools/cost-estimator';
 
 /**
  * Safe post-login paths for InsuranceTrustHub only.

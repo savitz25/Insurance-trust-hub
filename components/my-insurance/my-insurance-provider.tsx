@@ -15,6 +15,8 @@ import {
   ensureUserProfileAction,
   listSavedProviderSlugsAction,
   mergeGuestProvidersAction,
+  saveCalculatorResultAction,
+  saveDrugBasketAction,
   saveProviderAction,
 } from '@/actions/my-insurance';
 import {
@@ -60,11 +62,37 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
 
   const executePending = useCallback(async () => {
     const pending = consumePendingSaveAction();
-    if (!pending || pending.type !== 'provider') return;
-    const res = await saveProviderAction(pending.payload);
-    if (res.ok) {
-      setSavedProviderSlugs((prev) => new Set(prev).add(pending.payload.providerSlug));
-      toast.success(`${pending.payload.providerName} saved to My Insurance`);
+    if (!pending) return;
+
+    if (pending.type === 'provider') {
+      const res = await saveProviderAction(pending.payload);
+      if (res.ok) {
+        setSavedProviderSlugs((prev) => new Set(prev).add(pending.payload.providerSlug));
+        toast.success(`${pending.payload.providerName} saved to My Insurance`);
+      }
+      return;
+    }
+
+    if (pending.type === 'calculator') {
+      const res = await saveCalculatorResultAction({
+        calculatorId: pending.payload.calculatorId,
+        title: pending.payload.title,
+        snapshot: pending.payload.snapshot,
+        sendEmail: true,
+      });
+      if (res.ok) toast.success('Calculator result saved to Insurance HQ');
+      else toast.error(res.error);
+      return;
+    }
+
+    if (pending.type === 'drug_basket') {
+      const res = await saveDrugBasketAction({
+        items: pending.payload.items,
+        basketName: pending.payload.basketName,
+        sendEmail: true,
+      });
+      if (res.ok) toast.success('Prescription list saved to Insurance HQ');
+      else toast.error(res.error);
     }
   }, []);
 

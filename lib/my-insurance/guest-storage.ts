@@ -56,6 +56,17 @@ export function consumePendingSaveAction(): PendingSaveAction | null {
   }
 }
 
+export function peekPendingSaveAction(): PendingSaveAction | null {
+  if (typeof window === 'undefined') return null;
+  const raw = sessionStorage.getItem(PENDING_SAVE_ACTION_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as PendingSaveAction;
+  } catch {
+    return null;
+  }
+}
+
 export function stashPostLoginRedirect(path: string): void {
   if (typeof window === 'undefined') return;
   sessionStorage.setItem(POST_LOGIN_REDIRECT_KEY, path);

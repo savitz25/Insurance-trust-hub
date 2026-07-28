@@ -26,6 +26,7 @@ import {
   type PersonInput,
   type SubsidyPlannerResult,
 } from '@/lib/tools/aca-subsidy-planner';
+import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
 
 const STEPS = [
   { id: 1, label: 'Location' },
@@ -342,6 +343,18 @@ function Results({
   showMath: boolean;
   onToggleMath: () => void;
 }) {
+  const ptcLabel = result.estimatedPtcMonthly
+    ? formatMoneyRange(result.estimatedPtcMonthly, 'mo')
+    : '$0';
+  const saveTitle = `ACA estimate · ${result.location.displayLabel}`;
+  const summaryText = [
+    result.assistanceSummary,
+    `Est. monthly PTC: ${ptcLabel}`,
+    `FPL position: ${result.fplPercentLabel}`,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
   return (
     <div className="space-y-8">
       <div>
@@ -355,6 +368,34 @@ function Results({
         {result.incomeConfidenceNote && (
           <p className="mt-2 text-xs text-slate-500">{result.incomeConfidenceNote}</p>
         )}
+        <div className="mt-4">
+          <SaveCalculatorButton
+            calculatorId="aca_subsidy"
+            title={saveTitle}
+            snapshot={{
+              sourcePath: '/calculators/aca-subsidy',
+              summaryText,
+              inputs: {
+                zip: result.location.zip,
+                displayLabel: result.location.displayLabel,
+                fplAmount: result.fplAmount,
+                fplRatio: result.fplRatio,
+              },
+              outputs: {
+                estimatedPtcMonthly: result.estimatedPtcMonthly,
+                estimatedPtcAnnual: result.estimatedPtcAnnual,
+                fplPercentLabel: result.fplPercentLabel,
+                qualifiesPtc: result.qualifiesPtc,
+                qualifiesCsr: result.qualifiesCsr,
+              },
+              result: {
+                assistanceSummary: result.assistanceSummary,
+                cliff: result.cliff,
+                csrSummary: result.csrSummary,
+              },
+            }}
+          />
+        </div>
       </div>
 
       {/* A. Assistance snapshot */}
