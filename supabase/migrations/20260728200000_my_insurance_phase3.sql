@@ -1,5 +1,6 @@
--- My Insurance Phase 3: comparisons + auth-linked review fields
--- Additive only. Safe to run after 20260728120000_my_insurance.sql
+-- My Insurance Phase 3: comparisons + reviews
+-- Safe after 20260728120000_my_insurance.sql
+-- Works whether or not the full Insurance directory schema was applied.
 
 CREATE TABLE IF NOT EXISTS provider_comparisons (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -48,24 +49,91 @@ CREATE POLICY "provider_comparison_items_all_own" ON provider_comparison_items
     )
   );
 
-ALTER TABLE reviews ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL;
-ALTER TABLE reviews ADD COLUMN IF NOT EXISTS coverage_type TEXT;
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'review_status') THEN
+    CREATE TYPE review_status AS ENUM ('pending', 'approved', 'rejected');
+  END IF;
+END $$;
 
-CREATE INDEX IF NOT EXISTS reviews_user_id_idx ON reviews (user_id)
+DO $$
+BEGIN
+  IF to_regclass('public.reviews') IS NOT NULL THEN
+    RETURN;
+  END IF;
+
+  IF to_regclass('public.providers') IS NOT NULL THEN
+    CREATE TABLE public.reviews (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      provider_id UUID NOT NULL REFERENCES public.providers(id) ON DELETE CASCADE,
+      author_name TEXT NOT NULL,
+      author_location TEXT,
+      rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+      title TEXT,
+      content TEXT NOT NULL,
+      status review_status NOT NULL DEFAULT 'pending',
+      user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+      coverage_type TEXT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+  ELSE
+    CREATE TABLE public.reviews (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      provider_id UUID NOT NULL,
+      author_name TEXT NOT NULL,
+      author_location TEXT,
+      rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+      title TEXT,
+      content TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'pending'
+        CHECK (status IN ('pending', 'approved', 'rejected', 'published', 'hidden')),
+      user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+      coverage_type TEXT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+  END IF;
+END $$;
+
+ALTER TABLE public.reviews ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL;
+ALTER TABLE public.reviews ADD COLUMN IF NOT EXISTS coverage_type TEXT;
+
+CREATE INDEX IF NOT EXISTS idx_reviews_provider_id ON public.reviews (provider_id);
+CREATE INDEX IF NOT EXISTS idx_reviews_status ON public.reviews (status);
+CREATE INDEX IF NOT EXISTS idx_reviews_created_at ON public.reviews (created_at DESC);
+CREATE INDEX IF NOT EXISTS reviews_user_id_idx ON public.reviews (user_id)
   WHERE user_id IS NOT NULL;
 
-DROP POLICY IF EXISTS "reviews_select_own" ON reviews;
-CREATE POLICY "reviews_select_own" ON reviews
-  FOR SELECT USING (auth.uid() = user_id);
+ALTER TABLE public.reviews ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "reviews_insert_authenticated" ON reviews;
-CREATE POLICY "reviews_insert_authenticated" ON reviews
-  FOR INSERT WITH CHECK (
+DROP POLICY IF EXISTS "Public can view approved reviews" ON public.reviews;
+CREATE POLICY "Public can view approved reviews"
+  ON public.reviews
+  FOR SELECT
+  USING (status::text IN ('approved', 'published'));
+
+DROP POLICY IF EXISTS "reviews_select_own" ON public.reviews;
+CREATE POLICY "reviews_select_own" ON public.reviews
+  FOR SELECT USING (auth.uid() IS NOT NULL AND auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "reviews_insert_authenticated" ON public.reviews;
+CREATE POLICY "reviews_insert_authenticated" ON public.reviews
+  FOR INSERT
+  WITH CHECK (
     auth.uid() IS NOT NULL
     AND (user_id IS NULL OR user_id = auth.uid())
   );
 
-DROP POLICY IF EXISTS "reviews_update_own" ON reviews;
-CREATE POLICY "reviews_update_own" ON reviews
+DROP POLICY IF EXISTS "reviews_update_own" ON public.reviews;
+CREATE POLICY "reviews_update_own" ON public.reviews
   FOR UPDATE USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "reviews_delete_own" ON public.reviews;
+CREATE POLICY "reviews_delete_own" ON public.reviews
+  FOR DELETE USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Public can submit reviews" ON public.reviews;
+CREATE POLICY "Public can submit reviews"
+  ON public.reviews
+  FOR INSERT
+  WITH CHECK (user_id IS NULL AND status::text = 'pending');
