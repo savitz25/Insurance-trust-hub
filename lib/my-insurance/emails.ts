@@ -2,13 +2,24 @@ import 'server-only';
 
 import { PRODUCTION_SITE_ORIGIN } from '@/lib/my-insurance/constants';
 
+/**
+ * Absolute logo for email clients (must not depend on which Vercel project
+ * currently holds the apex domain). Monorepo serves assets under /insurance/brand;
+ * override with MY_INSURANCE_EMAIL_LOGO_URL if the host map changes.
+ */
+const EMAIL_LOGO_URL =
+  process.env.MY_INSURANCE_EMAIL_LOGO_URL?.trim() ||
+  'https://www.insurancetrusthub.com/insurance/brand/insurance-trust-hub-logo-header.png';
+
 /** Insurance Trust Hub transactional email brand tokens (inline CSS for clients). */
 const BRAND = {
   name: 'Insurance Trust Hub',
   product: 'Insurance HQ',
-  siteUrl: PRODUCTION_SITE_ORIGIN,
+  siteUrl: PRODUCTION_SITE_ORIGIN.includes('insurancetrusthub.com')
+    ? PRODUCTION_SITE_ORIGIN
+    : 'https://www.insurancetrusthub.com',
   siteHost: 'insurancetrusthub.com',
-  logoUrl: `${PRODUCTION_SITE_ORIGIN}/brand/insurance-trust-hub-logo-header.png`,
+  logoUrl: EMAIL_LOGO_URL,
   /** Teal — primary CTAs & brand accent */
   primary: '#0f766e',
   primaryDark: '#0d5f59',
