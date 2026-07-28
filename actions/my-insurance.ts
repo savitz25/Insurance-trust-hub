@@ -1,4 +1,4 @@
-'use server';
+﻿'use server';
 
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
@@ -10,28 +10,36 @@ import { ensureUserProfile } from '@/lib/my-insurance/ensure-profile';
 import type {
   CalculatorSnapshot,
   CalculatorToolId,
+  ComparisonWithItems,
   DrugBasketItemInput,
   DrugBasketItemRow,
   DrugBasketWithItems,
   GuestSavedProvider,
   MyInsuranceDashboardData,
+  MyInsuranceReviewRow,
   SavedCalculatorResultRow,
   SavedProviderRow,
 } from '@/lib/my-insurance/types';
 import { CALCULATOR_LABELS } from '@/lib/my-insurance/types';
 import {
+  COMPARE_PATH,
   DRUG_BASKET_PATH,
+  MAX_COMPARE_PROVIDERS,
   MY_INSURANCE_PATH,
 } from '@/lib/my-insurance/constants';
 import {
+  sendComparisonSummaryEmail,
   sendDrugBasketEmail,
+  sendReviewSubmittedEmail,
   sendSavedCalculatorEmail,
   sendSavedProviderEmail,
   sendWelcomeEmail,
 } from '@/lib/my-insurance/emails';
+import { getProviderBySlug } from '@/lib/providers/queries';
+// provider lookup for reviews
 
 /**
- * ITH tables (saved_providers, drug_baskets, …) live on the Insurance Supabase project
+ * ITH tables (saved_providers, drug_baskets, â€¦) live on the Insurance Supabase project
  * and are not in Move monorepo generated Database types.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -404,26 +412,41 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
   const supabase = await insuranceDb();
   await ensureUserProfile(await createClient(), user);
 
-  const [providersRes, basketsRes, calcRes] = await Promise.all([
-    supabase
-      .from('saved_providers')
-      .select('id,user_id,provider_slug,provider_name,notes,created_at')
-      .eq('user_id', user.id)
-      .order('created_at', { ascending: false }),
-    supabase
-      .from('drug_baskets')
-      .select('id,user_id,name,created_at,updated_at')
-      .eq('user_id', user.id)
-      .order('created_at', { ascending: true })
-      .limit(1)
-      .maybeSingle(),
-    supabase
-      .from('saved_calculator_results')
-      .select('id,user_id,calculator_id,title,snapshot,created_at')
-      .eq('user_id', user.id)
-      .order('created_at', { ascending: false })
-      .limit(50),
-  ]);
+  const [providersRes, basketsRes, calcRes, comparisonsRes, reviewsRes] =
+    await Promise.all([
+      supabase
+        .from('saved_providers')
+        .select('id,user_id,provider_slug,provider_name,notes,created_at')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false }),
+      supabase
+        .from('drug_baskets')
+        .select('id,user_id,name,created_at,updated_at')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: true })
+        .limit(1)
+        .maybeSingle(),
+      supabase
+        .from('saved_calculator_results')
+        .select('id,user_id,calculator_id,title,snapshot,created_at')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(50),
+      supabase
+        .from('provider_comparisons')
+        .select('id,user_id,title,snapshot_json,created_at,updated_at')
+        .eq('user_id', user.id)
+        .order('updated_at', { ascending: false })
+        .limit(20),
+      supabase
+        .from('reviews')
+        .select(
+          'id,provider_id,user_id,author_name,rating,title,content,coverage_type,status,created_at'
+        )
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(50),
+    ]);
 
   let drugBasket: DrugBasketWithItems | null = null;
   if (basketsRes.data?.id) {
@@ -441,11 +464,51 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
     };
   }
 
+  const comparisons: ComparisonWithItems[] = [];
+  for (const c of comparisonsRes.data ?? []) {
+    const { data: items } = await supabase
+      .from('provider_comparison_items')
+      .select('id,comparison_id,provider_slug,provider_name,sort_order,created_at')
+      .eq('comparison_id', c.id)
+      .order('sort_order', { ascending: true });
+    comparisons.push({
+      ...c,
+      snapshot_json: (c.snapshot_json ?? {}) as Record<string, unknown>,
+      items: items ?? [],
+    });
+  }
+
+  const myReviews: MyInsuranceReviewRow[] = [];
+  for (const r of reviewsRes.data ?? []) {
+    let provider_slug: string | undefined;
+    let provider_name: string | undefined;
+    if (r.provider_id) {
+      const { data: prov } = await supabase
+        .from('providers')
+        .select('slug,name')
+        .eq('id', r.provider_id)
+        .maybeSingle();
+      provider_slug = prov?.slug;
+      provider_name = prov?.name;
+    }
+    myReviews.push({
+      ...r,
+      provider_slug,
+      provider_name,
+    });
+  }
+
   if (providersRes.error) {
     console.error('[my-insurance] dashboard providers', providersRes.error.message);
   }
   if (calcRes.error) {
     console.error('[my-insurance] dashboard calc', calcRes.error.message);
+  }
+  if (comparisonsRes.error) {
+    console.error('[my-insurance] dashboard comparisons', comparisonsRes.error.message);
+  }
+  if (reviewsRes.error) {
+    console.error('[my-insurance] dashboard reviews', reviewsRes.error.message);
   }
 
   return {
@@ -457,8 +520,185 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
         snapshot: (row.snapshot ?? {}) as CalculatorSnapshot,
       })
     ) as SavedCalculatorResultRow[],
+    comparisons,
+    myReviews,
     email: user.email ?? null,
   };
+}
+
+export async function saveComparisonAction(input: {
+  title?: string;
+  providers: Array<{ slug: string; name: string }>;
+  sendEmail?: boolean;
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    const providers = input.providers
+      .filter((p) => p.slug?.trim())
+      .slice(0, MAX_COMPARE_PROVIDERS);
+    if (providers.length < 2) {
+      return { ok: false, error: 'Select at least 2 agencies to compare.' };
+    }
+
+    const supabase = await insuranceDb();
+    await ensureUserProfile(await createClient(), user);
+
+    const title =
+      input.title?.trim() ||
+      `Compare ${providers.map((p) => p.name).join(' Â· ')}`.slice(0, 120);
+
+    const snapshot = {
+      providers: providers.map((p) => ({ slug: p.slug, name: p.name })),
+      savedAt: new Date().toISOString(),
+    };
+
+    const { data: row, error } = await supabase
+      .from('provider_comparisons')
+      .insert({
+        user_id: user.id,
+        title,
+        snapshot_json: snapshot,
+      })
+      .select('id')
+      .single();
+
+    if (error || !row?.id) {
+      console.error('[my-insurance] save comparison', error?.message);
+      return { ok: false, error: 'Could not save comparison' };
+    }
+
+    const items = providers.map((p, i) => ({
+      comparison_id: row.id,
+      provider_slug: p.slug,
+      provider_name: p.name,
+      sort_order: i,
+    }));
+    const { error: itemsErr } = await supabase
+      .from('provider_comparison_items')
+      .insert(items);
+    if (itemsErr) {
+      console.error('[my-insurance] comparison items', itemsErr.message);
+      return { ok: false, error: 'Could not save comparison items' };
+    }
+
+    revalidatePath(MY_INSURANCE_PATH);
+    revalidatePath(COMPARE_PATH);
+
+    if (input.sendEmail !== false && user.email) {
+      void sendComparisonSummaryEmail({
+        to: user.email,
+        title,
+        providers,
+        comparisonId: row.id,
+      }).catch((err) => console.error('[my-insurance] comparison email', err));
+    }
+
+    return { ok: true, id: row.id as string };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
+}
+
+export async function deleteComparisonAction(
+  id: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    const supabase = await insuranceDb();
+    const { error } = await supabase
+      .from('provider_comparisons')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', user.id);
+    if (error) return { ok: false, error: 'Could not delete comparison' };
+    revalidatePath(MY_INSURANCE_PATH);
+    return { ok: true };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
+}
+
+export async function submitProviderReviewAction(input: {
+  providerSlug: string;
+  rating: number;
+  title?: string;
+  body: string;
+  coverageType?: string;
+}): Promise<{ ok: true; status: string } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    if (input.rating < 1 || input.rating > 5) {
+      return { ok: false, error: 'Choose a rating from 1 to 5 stars.' };
+    }
+    const body = input.body.trim();
+    if (body.length < 20) {
+      return { ok: false, error: 'Please write at least 20 characters.' };
+    }
+
+    const provider = await getProviderBySlug(input.providerSlug);
+    if (!provider) return { ok: false, error: 'Provider not found.' };
+
+    const supabase = await insuranceDb();
+    await ensureUserProfile(await createClient(), user);
+
+    const authorName =
+      (user.user_metadata?.full_name as string | undefined)?.trim() ||
+      user.email?.split('@')[0] ||
+      'My Insurance user';
+
+    const status = 'pending';
+    const { error } = await supabase.from('reviews').insert({
+      provider_id: provider.id,
+      user_id: user.id,
+      author_name: authorName,
+      rating: input.rating,
+      title: input.title?.trim() || null,
+      content: body,
+      coverage_type: input.coverageType?.trim() || null,
+      status,
+    });
+
+    if (error) {
+      console.error('[my-insurance] review', error.message);
+      return { ok: false, error: 'Could not submit review. Please try again.' };
+    }
+
+    revalidatePath(MY_INSURANCE_PATH);
+    revalidatePath(`/providers/${input.providerSlug}`);
+
+    if (user.email) {
+      void sendReviewSubmittedEmail({
+        to: user.email,
+        providerName: provider.name,
+        providerSlug: provider.slug,
+        rating: input.rating,
+        status,
+      }).catch((err) => console.error('[my-insurance] review email', err));
+    }
+
+    return { ok: true, status };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
+}
+
+export async function deleteMyReviewAction(
+  id: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    const supabase = await insuranceDb();
+    const { error } = await supabase
+      .from('reviews')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', user.id);
+    if (error) return { ok: false, error: 'Could not delete review' };
+    revalidatePath(MY_INSURANCE_PATH);
+    return { ok: true };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
 }
 
 export async function signOutAction(): Promise<void> {

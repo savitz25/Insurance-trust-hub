@@ -1,4 +1,4 @@
-import 'server-only';
+﻿import 'server-only';
 
 import { PRODUCTION_SITE_ORIGIN } from '@/lib/my-insurance/constants';
 
@@ -20,7 +20,7 @@ const BRAND = {
     : 'https://www.insurancetrusthub.com',
   siteHost: 'insurancetrusthub.com',
   logoUrl: EMAIL_LOGO_URL,
-  /** Teal — primary CTAs & brand accent */
+  /** Teal â€” primary CTAs & brand accent */
   primary: '#0f766e',
   primaryDark: '#0d5f59',
   /** Deep navy for headlines */
@@ -32,7 +32,7 @@ const BRAND = {
   bg: '#f1f5f9',
   card: '#ffffff',
   supportEmail: 'hello@insurancetrusthub.com',
-  trustLine: 'Independent research workspace — no paid placements, no lead selling.',
+  trustLine: 'Independent research workspace â€” no paid placements, no lead selling.',
 } as const;
 
 function isResendConfigured(): boolean {
@@ -54,7 +54,7 @@ async function sendResend(params: {
   text: string;
 }): Promise<boolean> {
   if (!isResendConfigured()) {
-    console.info('[my-insurance/email] RESEND_API_KEY not set — skipped', params.subject, params.to);
+    console.info('[my-insurance/email] RESEND_API_KEY not set â€” skipped', params.subject, params.to);
     return false;
   }
 
@@ -98,7 +98,7 @@ type LayoutOptions = {
 };
 
 /**
- * Premium single-column shell — table layout + inline CSS for Gmail/Outlook/Apple Mail.
+ * Premium single-column shell â€” table layout + inline CSS for Gmail/Outlook/Apple Mail.
  * Auth URLs are never rewritten here; pass confirmUrl through as-is.
  */
 function buildEmailHtml(options: LayoutOptions): string {
@@ -120,7 +120,7 @@ function buildEmailHtml(options: LayoutOptions): string {
         </tr>
       </table>
       <p style="margin:16px 0 0;font-family:${font};font-size:12px;line-height:1.55;color:${BRAND.muted};">
-        If the button doesn’t work, copy and paste this link into your browser:
+        If the button doesnâ€™t work, copy and paste this link into your browser:
       </p>
       <p style="margin:6px 0 0;font-family:${font};font-size:12px;line-height:1.5;word-break:break-all;">
         <a href="${ctaHref}" style="color:${BRAND.primary};text-decoration:underline;">${escapeHtml(ctaHref)}</a>
@@ -142,7 +142,7 @@ function buildEmailHtml(options: LayoutOptions): string {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
   <meta name="supported-color-schemes" content="light" />
-  <title>${escapeHtml(title)} — ${BRAND.name}</title>
+  <title>${escapeHtml(title)} â€” ${BRAND.name}</title>
 </head>
 <body style="margin:0;padding:0;background:${BRAND.bg};-webkit-text-size-adjust:100%;">
   <!-- Preheader (inbox preview) -->
@@ -176,7 +176,7 @@ function buildEmailHtml(options: LayoutOptions): string {
                 <tr>
                   <td style="padding:32px 28px 28px;">
                     <p style="margin:0 0 8px;font-family:${font};font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${BRAND.primary};">
-                      My Insurance · ${BRAND.product}
+                      My Insurance Â· ${BRAND.product}
                     </p>
                     <h1 style="margin:0 0 16px;font-family:${font};font-size:22px;line-height:1.25;font-weight:600;color:${BRAND.ink};">
                       ${escapeHtml(title)}
@@ -200,18 +200,18 @@ function buildEmailHtml(options: LayoutOptions): string {
               </p>
               <p style="margin:0 0 8px;font-family:${font};font-size:12px;line-height:1.5;color:${BRAND.muted};">
                 <a href="${BRAND.siteUrl}" style="color:${BRAND.primary};text-decoration:none;font-weight:600;">${BRAND.name}</a>
-                &nbsp;·&nbsp;
+                &nbsp;Â·&nbsp;
                 <a href="${BRAND.siteUrl}" style="color:${BRAND.primary};text-decoration:none;">${BRAND.siteHost}</a>
               </p>
               <p style="margin:0 0 8px;font-family:${font};font-size:12px;line-height:1.5;color:${BRAND.muted};">
                 <a href="${BRAND.siteUrl}/my-insurance" style="color:${BRAND.primary};text-decoration:none;">My Insurance</a>
-                &nbsp;·&nbsp;
+                &nbsp;Â·&nbsp;
                 <a href="${BRAND.siteUrl}/tools" style="color:${BRAND.primary};text-decoration:none;">Tools</a>
-                &nbsp;·&nbsp;
+                &nbsp;Â·&nbsp;
                 <a href="mailto:${BRAND.supportEmail}" style="color:${BRAND.primary};text-decoration:none;">${BRAND.supportEmail}</a>
               </p>
               <p style="margin:12px 0 0;font-family:${font};font-size:11px;line-height:1.5;color:${BRAND.faint};">
-                If you didn’t request this email, you can ignore it.
+                If you didnâ€™t request this email, you can ignore it.
               </p>
             </td>
           </tr>
@@ -226,10 +226,10 @@ function buildEmailHtml(options: LayoutOptions): string {
 export async function sendWelcomeEmail(params: { to: string }): Promise<boolean> {
   const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
   const html = buildEmailHtml({
-    preheader: 'Your Insurance HQ workspace is ready — open My Insurance anytime.',
+    preheader: 'Your Insurance HQ workspace is ready â€” open My Insurance anytime.',
     title: 'Welcome to Insurance HQ',
     bodyHtml: `<p style="margin:0 0 12px;">
-      Your My Insurance workspace is ready. Save agents you trust, and soon prescription lists and calculator results —
+      Your My Insurance workspace is ready. Save agents you trust, and soon prescription lists and calculator results â€”
       then open them from any device.
     </p>
     <p style="margin:0;">
@@ -240,7 +240,7 @@ export async function sendWelcomeEmail(params: { to: string }): Promise<boolean>
   });
   return sendResend({
     to: params.to,
-    subject: 'Welcome to My Insurance — Insurance Trust Hub',
+    subject: 'Welcome to My Insurance â€” Insurance Trust Hub',
     html,
     text: [
       'Welcome to Insurance HQ',
@@ -250,7 +250,7 @@ export async function sendWelcomeEmail(params: { to: string }): Promise<boolean>
       `Open Insurance HQ: ${hq}`,
       '',
       BRAND.trustLine,
-      `${BRAND.name} · ${BRAND.siteHost}`,
+      `${BRAND.name} Â· ${BRAND.siteHost}`,
       "If you didn't request this email, you can ignore it.",
     ].join('\n'),
   });
@@ -269,15 +269,15 @@ export async function sendSavedProviderEmail(params: {
     title: 'Saved to My Insurance',
     bodyHtml: `<p style="margin:0;">
       <strong style="color:${BRAND.ink};">${name}</strong> is now in your Insurance HQ shortlist.
-      Open the profile anytime, or return to HQ to compare what you’ve saved.
+      Open the profile anytime, or return to HQ to compare what youâ€™ve saved.
     </p>`,
     ctaLabel: 'Open Insurance HQ',
     ctaHref: hq,
-    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View ${name} profile →</a>`,
+    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View ${name} profile â†’</a>`,
   });
   return sendResend({
     to: params.to,
-    subject: `Saved: ${params.providerName} — My Insurance`,
+    subject: `Saved: ${params.providerName} â€” My Insurance`,
     html,
     text: [
       'Saved to My Insurance',
@@ -288,7 +288,7 @@ export async function sendSavedProviderEmail(params: {
       `Insurance HQ: ${hq}`,
       '',
       BRAND.trustLine,
-      `${BRAND.name} · ${BRAND.siteHost}`,
+      `${BRAND.name} Â· ${BRAND.siteHost}`,
     ].join('\n'),
   });
 }
@@ -337,11 +337,11 @@ export async function sendDrugBasketEmail(params: {
       ${listHtml}
     </table>
     <p style="margin:16px 0 0;font-size:13px;color:${BRAND.muted};">
-      Educational organization tool only — not medical advice. Verify with your pharmacist or doctor.
+      Educational organization tool only â€” not medical advice. Verify with your pharmacist or doctor.
     </p>`,
     ctaLabel: 'Open Insurance HQ',
     ctaHref: hq,
-    secondaryHtml: `<a href="${tool}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Edit drug list →</a>`,
+    secondaryHtml: `<a href="${tool}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Edit drug list â†’</a>`,
   });
 
   const textLines = [
@@ -349,7 +349,7 @@ export async function sendDrugBasketEmail(params: {
     '',
     ...params.items.map(
       (item, i) =>
-        `${i + 1}. ${item.name} ${item.strength}${item.form ? ` (${item.form})` : ''} — ${item.dosage}`
+        `${i + 1}. ${item.name} ${item.strength}${item.form ? ` (${item.form})` : ''} â€” ${item.dosage}`
     ),
     '',
     `Insurance HQ: ${hq}`,
@@ -358,7 +358,7 @@ export async function sendDrugBasketEmail(params: {
 
   return sendResend({
     to: params.to,
-    subject: `Your prescription list — My Insurance`,
+    subject: `Your prescription list â€” My Insurance`,
     html,
     text: textLines.join('\n'),
   });
@@ -385,16 +385,16 @@ export async function sendSavedCalculatorEmail(params: {
     <p style="margin:0 0 8px;font-weight:600;color:${BRAND.ink};">${escapeHtml(params.title)}</p>
     <p style="margin:0;color:${BRAND.body};">${escapeHtml(params.summaryText)}</p>
     <p style="margin:16px 0 0;font-size:13px;color:${BRAND.muted};">
-      Educational estimates only — not a quote, enrollment decision, or financial advice.
+      Educational estimates only â€” not a quote, enrollment decision, or financial advice.
     </p>`,
     ctaLabel: 'Open Insurance HQ',
     ctaHref: hq,
-    secondaryHtml: `<a href="${toolUrl}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Re-run this tool →</a>`,
+    secondaryHtml: `<a href="${toolUrl}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Re-run this tool â†’</a>`,
   });
 
   return sendResend({
     to: params.to,
-    subject: `Saved: ${params.toolLabel} — My Insurance`,
+    subject: `Saved: ${params.toolLabel} â€” My Insurance`,
     html,
     text: [
       'Calculator result saved',
@@ -404,6 +404,103 @@ export async function sendSavedCalculatorEmail(params: {
       params.summaryText,
       '',
       `Insurance HQ: ${hq}`,
+      BRAND.trustLine,
+    ].join('\n'),
+  });
+}
+
+export async function sendComparisonSummaryEmail(params: {
+  to: string;
+  title: string;
+  providers: Array<{ name: string; slug: string }>;
+  comparisonId?: string;
+}): Promise<boolean> {
+  const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
+  const compareUrl = params.comparisonId
+    ? `${PRODUCTION_SITE_ORIGIN}/my-insurance/compare?id=${encodeURIComponent(params.comparisonId)}`
+    : `${PRODUCTION_SITE_ORIGIN}/my-insurance/compare?${params.providers.map((p) => `add=${encodeURIComponent(p.slug)}`).join('&')}`;
+
+  const listHtml = params.providers
+    .map(
+      (p, i) =>
+        `<tr><td style="padding:8px 0;border-bottom:1px solid ${BRAND.border};font-size:14px;">
+          ${i + 1}. <strong style="color:${BRAND.ink};">${escapeHtml(p.name)}</strong>
+          <br/><a href="${PRODUCTION_SITE_ORIGIN}/providers/${escapeHtml(p.slug)}" style="color:${BRAND.primary};font-size:12px;">View profile</a>
+        </td></tr>`
+    )
+    .join('');
+
+  const html = buildEmailHtml({
+    preheader: `Your agent comparison (${params.providers.length} agencies)`,
+    title: 'Agent comparison saved',
+    bodyHtml: `<p style="margin:0 0 12px;">
+      <strong style="color:${BRAND.ink};">${escapeHtml(params.title)}</strong> is in Insurance HQ.
+    </p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${listHtml}</table>
+    <p style="margin:16px 0 0;font-size:13px;color:${BRAND.muted};">
+      Independent directory research only â€” not a recommendation, quote, or official endorsement.
+    </p>`,
+    ctaLabel: 'Open comparison',
+    ctaHref: compareUrl,
+    secondaryHtml: `<a href="${hq}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Insurance HQ â†’</a>`,
+  });
+
+  return sendResend({
+    to: params.to,
+    subject: `Comparison: ${params.title} â€” My Insurance`,
+    html,
+    text: [
+      'Agent comparison saved',
+      params.title,
+      '',
+      ...params.providers.map((p, i) => `${i + 1}. ${p.name}`),
+      '',
+      `Open: ${compareUrl}`,
+      BRAND.trustLine,
+    ].join('\n'),
+  });
+}
+
+export async function sendReviewSubmittedEmail(params: {
+  to: string;
+  providerName: string;
+  providerSlug: string;
+  rating: number;
+  status: string;
+}): Promise<boolean> {
+  const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
+  const profile = `${PRODUCTION_SITE_ORIGIN}/providers/${params.providerSlug}`;
+  const pendingNote =
+    params.status === 'published'
+      ? 'Your review is published on the agency profile.'
+      : 'Your review is pending moderation before it appears publicly. You can still see it in Insurance HQ.';
+
+  const html = buildEmailHtml({
+    preheader: `Review submitted for ${params.providerName}`,
+    title: 'Review received',
+    bodyHtml: `<p style="margin:0 0 12px;">
+      Thanks for sharing your experience with
+      <strong style="color:${BRAND.ink};">${escapeHtml(params.providerName)}</strong>
+      (${params.rating} star${params.rating === 1 ? '' : 's'}).
+    </p>
+    <p style="margin:0;color:${BRAND.body};">${escapeHtml(pendingNote)}</p>
+    <p style="margin:16px 0 0;font-size:13px;color:${BRAND.muted};">
+      InsuranceTrustHub is an independent research directory â€” reviews do not imply DOI/CMS endorsement.
+    </p>`,
+    ctaLabel: 'Open Insurance HQ',
+    ctaHref: hq,
+    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View agency profile â†’</a>`,
+  });
+
+  return sendResend({
+    to: params.to,
+    subject: `Review submitted â€” ${params.providerName}`,
+    html,
+    text: [
+      'Review received',
+      `${params.providerName} Â· ${params.rating} stars`,
+      pendingNote,
+      `HQ: ${hq}`,
       BRAND.trustLine,
     ].join('\n'),
   });
@@ -424,11 +521,11 @@ export async function sendMagicLinkEmail(params: {
     ctaLabel: 'Sign in to Insurance HQ',
     ctaHref: params.confirmUrl,
     noteHtml:
-      'This link expires soon and can only be used once. For your security, don’t forward this email.',
+      'This link expires soon and can only be used once. For your security, donâ€™t forward this email.',
   });
   return sendResend({
     to: params.to,
-    subject: 'Sign in to My Insurance — Insurance Trust Hub',
+    subject: 'Sign in to My Insurance â€” Insurance Trust Hub',
     html,
     text: [
       'Sign in to Insurance HQ',
@@ -440,7 +537,7 @@ export async function sendMagicLinkEmail(params: {
       'This link expires soon and can only be used once.',
       '',
       BRAND.trustLine,
-      `${BRAND.name} · ${BRAND.siteHost}`,
+      `${BRAND.name} Â· ${BRAND.siteHost}`,
       "If you didn't request this email, you can ignore it.",
     ].join('\n'),
   });

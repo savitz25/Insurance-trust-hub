@@ -1,4 +1,4 @@
-export type SavedProviderRow = {
+﻿export type SavedProviderRow = {
   id: string;
   user_id: string;
   provider_slug: string;
@@ -98,10 +98,46 @@ export type GuestSavedProvider = {
   savedAt: string;
 };
 
+export type ComparisonItemRow = {
+  id: string;
+  comparison_id: string;
+  provider_slug: string;
+  provider_name: string;
+  sort_order: number;
+  created_at: string;
+};
+
+export type ComparisonWithItems = {
+  id: string;
+  user_id: string;
+  title: string;
+  snapshot_json: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+  items: ComparisonItemRow[];
+};
+
+export type MyInsuranceReviewRow = {
+  id: string;
+  provider_id: string;
+  provider_slug?: string;
+  provider_name?: string;
+  user_id: string | null;
+  author_name: string;
+  rating: number;
+  title: string | null;
+  content: string;
+  coverage_type: string | null;
+  status: 'pending' | 'published' | 'hidden' | string;
+  created_at: string;
+};
+
 export type MyInsuranceDashboardData = {
   savedProviders: SavedProviderRow[];
   drugBasket: DrugBasketWithItems | null;
   calculatorResults: SavedCalculatorResultRow[];
+  comparisons: ComparisonWithItems[];
+  myReviews: MyInsuranceReviewRow[];
   email: string | null;
 };
 

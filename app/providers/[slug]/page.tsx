@@ -22,10 +22,11 @@ import { JsonLd } from '@/lib/seo/json-ld';
 import { buildInsuranceAgencySchema } from '@/lib/seo/schemas';
 import { INSURANCE_TYPES } from '@/lib/constants';
 import { LeadForm } from '@/components/lead-form';
-import { ReviewForm } from '@/components/review-form';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
+import { CompareProviderButton } from '@/components/my-insurance/compare-provider-button';
+import { WriteReviewForm } from '@/components/my-insurance/write-review-form';
 import { GovernmentVerificationPanel } from '@/components/insurance/cms/government-verification-panel';
 import { TrustScoreBreakdownPanel } from '@/components/insurance/cms/trust-score-breakdown';
 import {
@@ -137,6 +138,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
 
             <div className="flex flex-wrap gap-2 shrink-0">
               <SaveProviderButton
+                providerSlug={provider.slug}
+                providerName={provider.name}
+              />
+              <CompareProviderButton
                 providerSlug={provider.slug}
                 providerName={provider.name}
               />
@@ -339,7 +344,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
 
             <section>
               <h2 className="text-xl font-semibold mb-4">Write a review</h2>
-              <ReviewForm providerSlug={provider.slug} providerName={provider.name} />
+              <WriteReviewForm providerSlug={provider.slug} providerName={provider.name} />
             </section>
           </div>
 

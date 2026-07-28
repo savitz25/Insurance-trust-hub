@@ -1,56 +1,47 @@
-# My Insurance (Insurance HQ)
+﻿# My Insurance (Insurance HQ)
 
-Parallel to MoveTrustHub **My Move / Move HQ**, fully isolated on `www.insurancetrusthub.com`.
+Independent research workspace on `www.insurancetrusthub.com`.
 
-## Phase 1 + Phase 2
+## Phases
 
-| Feature | Status |
-|---------|--------|
-| Optional auth (magic link, Google, Facebook, password) | Phase 1 |
-| Save agents / agencies | Phase 1 |
-| Guest shortlist merge | Phase 1 |
-| Prescription drug baskets (sync + email) | **Phase 2** |
-| Save calculator results (ACA + Cost Planner) | **Phase 2** |
-| Insurance HQ dashboard sections | **Phase 2** |
-| Reviews / comparisons | Phase 3 |
-
-## Privacy
-
-- No lead selling / paid placements  
-- Research workspace only  
-- Tools work without sign-in  
+| Phase | Features |
+|-------|----------|
+| 1 | Auth, saved agents, guest merge, branded emails |
+| 2 | Drug baskets, calculator result saves |
+| 3 | Shortlist compare tray, saved comparisons, auth reviews |
 
 ## Schema
 
-Migration: `supabase/migrations/20260728120000_my_insurance.sql` (ITH project)
+- `insurance_user_profiles`, `saved_providers`
+- `drug_baskets` / `drug_basket_items`
+- `saved_calculator_results`
+- `provider_comparisons` / `provider_comparison_items` (Phase 3)
+- `reviews` (+ optional `user_id`, `coverage_type`) â€” new reviews default **pending**
 
-- `insurance_user_profiles`
-- `saved_providers`
-- `drug_baskets` / `drug_basket_items` (one primary basket per user in Phase 2)
-- `saved_calculator_results` (`calculator_id` + `title` + `snapshot` JSONB)
+Migrations:
+- `20260728120000_my_insurance.sql`
+- `20260728200000_my_insurance_phase3.sql`
 
-## Routes (public apex)
+## Routes
 
-- `/my-insurance` — Insurance HQ dashboard  
-- `/tools/prescription-drug-list` — build list + **Save to My Insurance**  
-- `/calculators/aca-subsidy` — results **Save to My Insurance**  
-- `/tools/cost-estimator` — results **Save to My Insurance**  
-- Auth: `/auth/insurance/confirm`, `/auth/insurance/callback`, `/api/insurance-auth/*`  
+- `/my-insurance` â€” HQ dashboard  
+- `/my-insurance/compare` â€” side-by-side (query `add=` slugs)  
+- `/tools/prescription-drug-list`  
+- `/calculators/aca-subsidy`, `/tools/cost-estimator`  
+- Auth: `/auth/insurance/*`, `/api/insurance-auth/*`  
 
-## Guest → auth merge
+## Shortlist vs compare
 
-Session pending actions (`PENDING_SAVE_ACTION_KEY`):
+- **Shortlist** = `saved_providers` (Save to My Insurance)  
+- **Compare tray** = localStorage (up to 4) + optional cloud save to `provider_comparisons`  
 
-- `provider` | `drug_basket` | `calculator`  
+## Reviews
 
-On `SIGNED_IN`, provider merges guest localStorage agents and executes pending save.
+- Auth required via My Insurance form  
+- Status `pending` until moderated  
+- Published reviews appear on provider profiles (existing published query)  
+- User sees own reviews (any status) in HQ  
 
-## Emails (Resend)
+## Privacy
 
-- Welcome, saved provider (P1)  
-- Drug basket summary, calculator result summary (P2)  
-- Magic link (branded)  
-
-## Monorepo note
-
-When `insurancetrusthub.com` is served by Move monorepo, Insurance code lives under `app/insurance/*` and `lib/insurance/my-insurance/*`. Auth must stay host-aware (never force My Move).
+No lead selling, no paid placements, no invented verification badges.
