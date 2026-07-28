@@ -5,6 +5,10 @@ import {
   PRODUCTION_SITE_ORIGIN,
   sanitizePostLoginPath,
 } from '@/lib/my-insurance/constants';
+import {
+  ensureInsuranceOAuthUrl,
+  insuranceAuthErrorUrl,
+} from '@/lib/my-insurance/oauth-redirect';
 import { isSupabaseConfigured } from '@/lib/supabase/config';
 
 export async function GET(request: Request) {
@@ -26,10 +30,8 @@ export async function GET(request: Request) {
 
   if (error || !data.url) {
     console.error('[auth/facebook]', error?.message);
-    return NextResponse.redirect(
-      new URL(`/my-insurance?auth=error&next=${encodeURIComponent(next)}`, PRODUCTION_SITE_ORIGIN)
-    );
+    return NextResponse.redirect(insuranceAuthErrorUrl(next));
   }
 
-  return NextResponse.redirect(data.url);
+  return NextResponse.redirect(ensureInsuranceOAuthUrl(data.url, next));
 }

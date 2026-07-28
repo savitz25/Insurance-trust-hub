@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { ensureUserProfile } from '@/lib/my-insurance/ensure-profile';
+import { sanitizePostLoginPath } from '@/lib/my-insurance/constants';
 import {
-  MY_INSURANCE_PATH,
-  PRODUCTION_SITE_ORIGIN,
-  sanitizePostLoginPath,
-} from '@/lib/my-insurance/constants';
+  insuranceAuthErrorUrl,
+  insuranceAuthSuccessUrl,
+} from '@/lib/my-insurance/oauth-redirect';
 import { sendWelcomeEmail } from '@/lib/my-insurance/emails';
 
 export async function GET(request: Request) {
@@ -14,14 +14,9 @@ export async function GET(request: Request) {
   const next = sanitizePostLoginPath(searchParams.get('next'));
   const oauthError = searchParams.get('error');
 
-  const fail = new URL(
-    `${MY_INSURANCE_PATH}?auth=error&next=${encodeURIComponent(next)}`,
-    PRODUCTION_SITE_ORIGIN
-  );
-
   if (oauthError) {
     console.error('[auth/callback] provider error', oauthError);
-    return NextResponse.redirect(fail);
+    return NextResponse.redirect(insuranceAuthErrorUrl(next));
   }
 
   if (code) {
@@ -41,10 +36,10 @@ export async function GET(request: Request) {
           console.error('[auth/callback] profile', err);
         }
       }
-      return NextResponse.redirect(new URL(next, PRODUCTION_SITE_ORIGIN));
+      return NextResponse.redirect(insuranceAuthSuccessUrl(next));
     }
     console.error('[auth/callback] exchange failed', error.message);
   }
 
-  return NextResponse.redirect(fail);
+  return NextResponse.redirect(insuranceAuthErrorUrl(next));
 }
