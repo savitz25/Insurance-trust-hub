@@ -51,23 +51,16 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
         ),
       },
       {
-        label: 'Google rating',
+        label: 'Rating',
         values: providers.map((p) =>
-          p.google_rating != null
-            ? `${p.google_rating.toFixed(1)} (${p.google_review_count ?? 0})`
-            : p.rating
-              ? `${p.rating.toFixed(1)} (${p.review_count})`
-              : '—'
+          p.rating
+            ? `${Number(p.rating).toFixed(1)} (${p.review_count ?? 0} reviews)`
+            : '—'
         ),
       },
       {
         label: 'BBB',
-        values: providers.map((p) => {
-          const parts: string[] = [];
-          if (p.bbb_rating) parts.push(p.bbb_rating);
-          if (p.bbb_accredited) parts.push('Accredited');
-          return parts.length ? parts.join(' Â· ') : '—';
-        }),
+        values: providers.map((p) => display(p.bbb_rating)),
       },
       {
         label: 'Coverage focus',
