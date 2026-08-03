@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Agency Directory — Search Licensed Agents by State',
   description:
-    'Search and compare licensed insurance agencies by state, coverage type, rating, and specialty. Read reviews and request free quotes.',
+    'Search licensed insurance agencies by state, coverage type, rating, and specialty. Independent research directory — re-check DOI licensing before you enroll.',
   path: '/directory',
 });
 

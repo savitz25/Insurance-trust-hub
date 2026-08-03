@@ -17,7 +17,7 @@ export const organizationSchema = {
     availableLanguage: 'English',
   },
   description:
-    'Independent directory of licensed insurance agencies and brokers in the United States. Compare reviews, specialties, and request quotes for personal and commercial coverage.',
+    'Independent research directory of licensed insurance agencies and brokers in the United States. Compare listings and specialties; re-check DOI / NAIC records. We do not sell policies.',
 };
 
 export const websiteSchema = {
@@ -36,23 +36,17 @@ export const websiteSchema = {
 
 export const homepageServiceSchema = {
   '@type': 'Service',
-  '@id': `${SITE_URL}/#insurance-quote-service`,
-  name: 'Insurance Agency Matching',
-  serviceType: 'Insurance agency comparison and quote referral',
+  '@id': `${SITE_URL}/#insurance-research-directory`,
+  name: 'Insurance Agency Research Directory',
+  serviceType: 'Independent insurance agency research directory',
   provider: { '@id': `${SITE_URL}/#organization` },
   areaServed: {
     '@type': 'Country',
     name: 'United States',
   },
   description:
-    'Compare licensed insurance agencies by state, specialty, and customer reviews. Request free quotes for auto, home, life, and business insurance.',
+    'Research licensed insurance agencies by state and specialty. Educational tools for ACA and Medicare. No paid placements. Not a policy marketplace.',
   url: SITE_URL,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-    description: 'Free quote referral to licensed insurance agencies',
-  },
 };
 
 export function buildInsuranceAgencySchema(provider: Provider) {

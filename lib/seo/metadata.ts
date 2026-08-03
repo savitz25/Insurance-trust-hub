@@ -5,18 +5,18 @@ import { brandAsset, BRAND_LOGO } from '@/lib/brand';
 export { SITE_URL };
 
 export const HOMEPAGE_TITLE =
-  'Find Trusted Insurance Agents (2026) | Compare Licensed Agencies by State';
+  'Licensed Insurance Agents Directory (2026) | Insurance Trust Hub';
 export const HOMEPAGE_DESCRIPTION =
-  'Compare independent and captive insurance agencies by reviews, specialties, and state licensing. Get free quotes for auto, home, life, and business coverage.';
+  'Independent research directory of state-licensed insurance agencies and agents. Re-check DOI / NAIC records. Educational ACA and Medicare tools. No paid placements. We do not sell policies.';
 
 export const DEFAULT_SITE_DESCRIPTION =
-  'Insurance Trust Hub is an independent directory of licensed insurance agencies. Research providers, read verified reviews, and request quotes for auto, home, life, and business insurance.';
+  'Insurance Trust Hub is an independent research directory of licensed insurance agencies. Verify licenses, compare listings, and use educational coverage tools — not a policy marketplace.';
 
 export const OG_IMAGE = {
   url: brandAsset(BRAND_LOGO.og),
   width: 1200,
   height: 630,
-  alt: 'Insurance Trust Hub — trusted insurance agency directory',
+  alt: 'Insurance Trust Hub — independent licensed agency directory',
 } as const;
 
 export function buildOpenGraph(
@@ -33,7 +33,7 @@ export function buildOpenGraph(
     url: overrides.url ?? SITE_URL,
     siteName: SITE_NAME,
     type: overrides.type ?? 'website',
-    locale: 'en_US',
+    locale: 'en-US',
     images: [OG_IMAGE],
   };
 }
@@ -106,11 +106,11 @@ export const rootLayoutMetadata: Metadata = {
   keywords: [
     'insurance agents',
     'insurance agencies',
-    'auto insurance quotes',
-    'homeowners insurance',
+    'DOI license verification',
     'independent insurance agent',
     'insurance directory',
-    'compare insurance agents',
+    'Medicare research',
+    'ACA educational tools',
     'insurance trust hub',
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],

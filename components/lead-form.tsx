@@ -65,11 +65,11 @@ export function LeadForm({
     return (
       <Card className="border-trust/30 bg-trust/5 p-8 text-center">
         <CheckCircle2 className="h-10 w-10 text-trust mx-auto mb-3" />
-        <h2 className="text-xl font-semibold">Quote request sent</h2>
+        <h2 className="text-xl font-semibold">Message sent</h2>
         <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
           {providerName
-            ? `Thank you. ${providerName} or a licensed agent in your area may contact you about coverage options.`
-            : 'Thank you. A licensed agent may contact you about coverage options.'}
+            ? `Thank you. ${providerName} or a licensed agent in your area may contact you. Always re-verify their state DOI license before sharing sensitive information.`
+            : 'Thank you. A licensed agent may contact you. Always re-verify state DOI licensing before sharing sensitive information.'}
         </p>
       </Card>
     );
@@ -160,8 +160,8 @@ export function LeadForm({
           onCheckedChange={(checked) => setValue('consent', checked === true, { shouldValidate: true })}
         />
         <Label htmlFor="lead-consent" className="text-sm font-normal cursor-pointer leading-relaxed">
-          I agree to be contacted about insurance quotes. Insurance Trust Hub does not sell policies
-          directly.{' '}
+          I agree to be contacted by a listed agency about coverage options. Insurance Trust Hub
+          does not sell policies or paid placements.{' '}
           <Link href="/privacy" className="underline underline-offset-2">
             Privacy Policy
           </Link>
@@ -186,7 +186,7 @@ export function LeadForm({
           </>
         ) : (
           <>
-            <Send className="h-4 w-4" /> Request free quote
+            <Send className="h-4 w-4" /> Send contact request
           </>
         )}
       </Button>

@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { href: '/hubs/browse', label: 'STATE & MSA BROWSER' },
   { href: '/calculators', label: 'CALCULATORS' },
   { href: '/my-insurance', label: 'MY INSURANCE' },
-  { href: '/about', label: 'TRUST & TRANSPARENCY' },
+  { href: '/methodology', label: 'METHODOLOGY' },
   { href: '/about', label: 'ABOUT' },
 ] as const;
 

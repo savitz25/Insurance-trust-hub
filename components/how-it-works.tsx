@@ -1,50 +1,56 @@
-import { Search, Scale, Handshake } from 'lucide-react';
+import { Search, Scale, BookOpen } from 'lucide-react';
 
 const STEPS = [
   {
     step: '01',
     icon: Search,
-    title: 'Search Your ZIP',
+    title: 'Find licensed agents in your market',
     description:
-      'Enter your ZIP code to auto-detect your county and MSA. See ranked local agents with health insurance specialists highlighted for ACA, Medicare, and employer plans.',
+      'Search by ZIP or browse health hubs. Listings surface state-licensed agencies and agents for research — not a ranked marketplace of paid placements.',
   },
   {
     step: '02',
     icon: Scale,
-    title: 'Compare & Verify',
+    title: 'Re-check DOI and NAIC records',
     description:
-      'Review Trust Scores, state DOI licensing, NAIC verification, BBB ratings, and attributed reviews. We analyze public records — never sponsored placements.',
+      'Use license numbers and our license-verification pathways to confirm Active status and lines of authority on official state DOI sources before you share personal data.',
   },
   {
     step: '03',
-    icon: Handshake,
-    title: 'Connect Securely',
+    icon: BookOpen,
+    title: 'Use educational tools, then decide',
     description:
-      'Use our calculators to understand your numbers, then connect with independent agents who specialize in your coverage needs. Always verify licensing before engaging.',
+      'ACA subsidy estimates, Medicare research guides, and cost planners are educational only — not enrollment and not binding coverage. You choose the agent and the policy.',
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section className="py-16 md:py-20 border-t bg-secondary/20">
+    <section className="border-t bg-secondary/20 py-16 md:py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold tracking-[0.2em] text-trust uppercase mb-2">How It Works</p>
-          <h2 className="section-heading">Your Path to the Right Agent</h2>
-          <p className="mt-2 text-muted-foreground max-w-xl mx-auto">
-            Three steps to discover honest local insurance experts with transparent, data-driven listings.
+        <div className="mb-12 text-center">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-trust">
+            How research works here
+          </p>
+          <h2 className="section-heading">From coverage confusion to verified licensing</h2>
+          <p className="mx-auto mt-2 max-w-xl text-muted-foreground">
+            Insurance Trust Hub is a research directory. We do not sell policies or rank agents for
+            pay.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
           {STEPS.map((item) => (
-            <div key={item.step} className="rounded-2xl border bg-card p-6 shadow-trust text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+            <div
+              key={item.step}
+              className="rounded-2xl border bg-card p-6 text-center shadow-trust md:text-left"
+            >
+              <div className="mb-4 flex items-center justify-center gap-3 md:justify-start">
                 <span className="text-2xl font-bold text-primary/30">{item.step}</span>
                 <item.icon className="h-6 w-6 text-trust" aria-hidden="true" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
             </div>
           ))}
         </div>

@@ -15,10 +15,25 @@ export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-10 md:py-14 max-w-3xl">
       <h1 className="section-heading">About {SITE_NAME}</h1>
-      <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-        {SITE_NAME} is an independent informational directory. We help consumers research licensed
-        insurance agencies, read moderated reviews, and request quotes — we do not sell insurance
-        policies or receive commissions from listings displayed.
+      <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+        {SITE_NAME} is an independent research directory. We help consumers research licensed
+        insurance agencies and agents, re-check DOI / NAIC pathways, and use educational tools — we
+        do not sell insurance policies or accept paid placements for ranking.
+      </p>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+        Full methodology (sources, verification, limits) lives on{' '}
+        <a href="/methodology" className="font-semibold text-primary underline-offset-2 hover:underline">
+          /methodology
+        </a>
+        , under{' '}
+        <a
+          href="https://www.asktrusthub.com/methodology"
+          className="font-semibold text-primary underline-offset-2 hover:underline"
+          rel="noopener noreferrer"
+        >
+          The Ask Trust Hub Standard
+        </a>
+        .
       </p>
 
       <section className="mt-12">

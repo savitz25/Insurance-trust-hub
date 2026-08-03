@@ -23,20 +23,20 @@ export default function HomePage() {
       <section className="relative overflow-hidden border-b bg-gradient-to-br from-primary/5 via-background to-trust/5">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-trust/10 px-4 py-1.5 text-sm font-semibold text-trust border border-trust/20">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-trust/20 bg-trust/10 px-4 py-1.5 text-sm font-semibold text-trust">
               <Shield className="h-4 w-4" aria-hidden="true" />
-              DOI VERIFIED · ZERO PAID PLACEMENTS · HEALTH FOCUS
+              INDEPENDENT DOI DIRECTORY · NO PAID PLACEMENTS · NO PAY-TO-RANK
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
-              Discover Honest Insurance Agents
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl">
+              Cut through coverage confusion
               <br />
-              <span className="text-trust">in Your Market</span>
+              <span className="text-trust">with agents you can re-check on DOI records</span>
             </h1>
-            <p className="mt-5 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Transparent data, confident choices. Compare verified local insurance agents and
-              agencies — with health insurance specialists (ACA, Medicare, employer plans) highlighted
-              in every high-volume hub.
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              Insurance Trust Hub is an independent research directory of state-licensed agencies and
+              agents. Use educational ACA and Medicare tools, then confirm Active status and lines of
+              authority before you enroll. We do not sell policies.
             </p>
 
             <div className="mt-10 flex justify-center">
@@ -44,17 +44,23 @@ export default function HomePage() {
             </div>
 
             <p className="mt-4 text-sm text-muted-foreground">
-              Trusted Local Agents · Verified Licensing · All 50 States & 3,000+ Counties
+              Expanding state &amp; metro coverage · License research pathways · Health hubs for ACA
+              &amp; Medicare education
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button size="lg" variant="trust" asChild className="gap-2">
+                <Link href="/directory">
+                  Browse agent directory <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild className="gap-2">
                 <Link href="/calculators">
-                  Explore Calculators <Calculator className="h-5 w-5" />
+                  Educational calculators <Calculator className="h-5 w-5" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/about">How We Verify Agents</Link>
+                <Link href="/methodology">Methodology</Link>
               </Button>
             </div>
           </div>
@@ -89,9 +95,9 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
               <h2 className="section-heading">Health Insurance Hubs</h2>
-              <p className="mt-2 text-muted-foreground max-w-xl">
-                54 verified market hubs featuring health insurance specialists in every major MSA.
-                60% health emphasis + multi-line trusted partners.
+              <p className="mt-2 max-w-xl text-muted-foreground">
+                Market hubs for researching licensed agencies with health coverage focus (ACA,
+                Medicare, multi-line). Coverage is expanding — not every U.S. county is listed.
               </p>
             </div>
             <Button variant="outline" asChild>

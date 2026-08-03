@@ -351,7 +351,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
           <aside className="lg:sticky lg:top-24 lg:self-start space-y-6">
             <Card className="shadow-trust-lg">
               <CardHeader>
-                <CardTitle className="text-lg">Request a free quote</CardTitle>
+                <CardTitle className="text-lg">Contact this agency</CardTitle>
               </CardHeader>
               <CardContent>
                 <LeadForm
