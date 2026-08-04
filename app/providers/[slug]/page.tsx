@@ -142,6 +142,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               <SaveProviderButton
                 providerSlug={provider.slug}
                 providerName={provider.name}
+                city={provider.city}
+                state={provider.state}
               />
               <CompareProviderButton
                 providerSlug={provider.slug}
