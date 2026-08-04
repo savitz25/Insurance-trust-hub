@@ -115,24 +115,8 @@ export function AuthModal() {
           saved work across devices. We never sell your data or sell leads.
         </p>
 
-        <div className="mt-5 grid gap-2.5">
-          <InsuranceGoogleSignInButton
-            href={`/api/auth/google?next=${encodeURIComponent(redirectPath)}`}
-            disabled={sending}
-          />
-          <InsuranceFacebookSignInButton
-            href={`/api/auth/facebook?next=${encodeURIComponent(redirectPath)}`}
-            disabled={sending}
-          />
-        </div>
-
-        <div className="my-4 flex items-center gap-3 text-xs text-slate-400">
-          <div className="h-px flex-1 bg-slate-200" />
-          or email
-          <div className="h-px flex-1 bg-slate-200" />
-        </div>
-
-        <div className="mb-3 flex gap-2 text-xs font-medium">
+        {/* Move parity order: 1) Magic link (default) 2) Google 3) Facebook */}
+        <div className="mb-3 mt-5 flex gap-2 text-xs font-medium">
           <button
             type="button"
             className={cn(
@@ -221,9 +205,27 @@ export function AuthModal() {
           </form>
         )}
 
+        <div className="my-4 flex items-center gap-3 text-xs text-slate-400">
+          <div className="h-px flex-1 bg-slate-200" />
+          or continue with
+          <div className="h-px flex-1 bg-slate-200" />
+        </div>
+
+        <div className="grid gap-2.5">
+          <InsuranceGoogleSignInButton
+            href={`/api/auth/google?next=${encodeURIComponent(redirectPath)}`}
+            disabled={sending}
+          />
+          <InsuranceFacebookSignInButton
+            href={`/api/auth/facebook?next=${encodeURIComponent(redirectPath)}`}
+            disabled={sending}
+          />
+        </div>
+
         <p className="mt-4 flex items-start gap-2 text-[11px] leading-relaxed text-slate-500">
           <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-600" aria-hidden />
-          Independent research workspace. No paid placements. Sign out anytime from Insurance HQ.
+          One Ask Trust Hub account across Move, Insurance, and Lending. Magic link by default —
+          or optional password. Also Google and Facebook. Sign out anytime from HQ.
         </p>
       </div>
     </div>
