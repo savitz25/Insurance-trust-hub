@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { SearchFilters } from '@/components/search-filters';
 import { DirectoryControls } from '@/components/directory-controls';
 import { ProviderCard } from '@/components/provider-card';
@@ -85,6 +86,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <p className="mt-3 text-muted-foreground leading-relaxed">
           Search licensed independent and captive agencies by location, coverage type, and customer
           ratings. Always verify licensing with your state insurance department.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">
+            Save agencies to My Insurance
+          </Link>{' '}
+          to build a research shortlist (guest-saved on this device).
         </p>
       </div>
 

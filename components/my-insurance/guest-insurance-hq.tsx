@@ -22,13 +22,20 @@ import {
 import {
   ensureActivePlan,
   getActivePlan,
+  getHistory,
   getLastSaveError,
   getProvidersForPlan,
+  getResearching,
+  getShortlisted,
   loadMyInsuranceStore,
   removeProviderFromPlan,
+  SHORTLIST_CAP,
+  shortlistReplacing,
+  shortlistWithDemoteOldest,
   updatePlan,
   updateSavedProviderStatus,
 } from '@/lib/my-insurance/storage';
+import { ShortlistFullPanel } from '@/components/my-insurance/shortlist-full-panel';
 import { toast } from 'sonner';
 import { TrustMark } from '@/components/network/trust-mark';
 import { Button } from '@/components/ui/button';
@@ -50,6 +57,12 @@ export function GuestInsuranceHq() {
   const [stateCode, setStateCode] = useState('');
   const [notes, setNotes] = useState('');
   const [focus, setFocus] = useState<ProtectFocus[]>([]);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [fullPanel, setFullPanel] = useState<{
+    shortlisted: SavedProvider[];
+    pendingId: string;
+    pendingName: string;
+  } | null>(null);
 
   const refresh = useCallback(() => {
     const store = loadMyInsuranceStore();
@@ -234,97 +247,160 @@ export function GuestInsuranceHq() {
         </CardContent>
       </Card>
 
-      <Card className="shadow-sm">
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Bookmark className="h-5 w-5 text-teal-700" aria-hidden />
-            Saved providers
-            <span className="text-sm font-normal text-slate-500">({providers.length})</span>
-          </CardTitle>
-          <p className="text-sm text-slate-600">
-            Shortlist from agency profiles. Status is for your research tracking only.
-          </p>
-        </CardHeader>
-        <CardContent>
-          {providers.length === 0 ? (
-            <div className="rounded-xl border border-dashed bg-slate-50 px-4 py-8 text-center">
-              <Building2 className="mx-auto h-8 w-8 text-slate-400" aria-hidden />
-              <p className="mt-2 font-medium text-slate-800">No saved providers yet</p>
-              <p className="mt-1 text-sm text-slate-600">
-                Save agencies from the directory or a profile to build your shortlist.
-              </p>
-              <Button asChild className="mt-4 bg-teal-600 hover:bg-teal-700">
-                <Link href="/directory">Find licensed agencies</Link>
-              </Button>
-            </div>
-          ) : (
-            <ul className="space-y-3">
-              {providers.map((p) => (
-                <li
-                  key={p.id}
-                  className="flex flex-col gap-3 rounded-xl border bg-white p-4 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div className="min-w-0">
-                    <Link
-                      href={p.profilePath || `/providers/${p.providerSlug}`}
-                      className="font-semibold text-slate-900 hover:text-teal-800 hover:underline"
-                    >
-                      {p.providerName}
-                    </Link>
-                    <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs text-slate-500">
-                      {p.city || p.state ? (
-                        <span className="inline-flex items-center gap-1">
-                          <MapPin className="h-3 w-3" aria-hidden />
-                          {[p.city, p.state].filter(Boolean).join(', ')}
-                        </span>
-                      ) : null}
-                      <span className="font-mono">{p.providerSlug}</span>
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <label className="sr-only" htmlFor={`status-${p.id}`}>
-                      Status for {p.providerName}
-                    </label>
-                    <select
-                      id={`status-${p.id}`}
-                      value={p.status}
-                      onChange={(e) => {
-                        updateSavedProviderStatus(p.id, e.target.value as ProviderResearchStatus);
+      {providers.length === 0 ? (
+        <Card className="shadow-sm">
+          <CardContent className="py-10 text-center">
+            <Building2 className="mx-auto h-8 w-8 text-slate-400" aria-hidden />
+            <p className="mt-2 font-medium text-slate-800">No saved providers yet</p>
+            <p className="mt-1 text-sm text-slate-600">
+              Save agencies from the directory (Researching) or shortlist from a profile (max{' '}
+              {SHORTLIST_CAP}).
+            </p>
+            <Button asChild className="mt-4 bg-teal-600 hover:bg-teal-700">
+              <Link href="/directory">Find licensed agencies</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      ) : (
+        <>
+          <ProviderBucket
+            title={`Your shortlist (${getShortlisted(providers).length}/${SHORTLIST_CAP})`}
+            hint="Top candidates — max 3. Promote carefully."
+            items={getShortlisted(providers)}
+            planId={plan?.id}
+            empty="No shortlisted agencies yet. Promote from Researching or shortlist on a profile."
+            onStatus={(id, status, name) => {
+              const res = updateSavedProviderStatus(id, status);
+              if (res && 'ok' in res && res.ok === false && res.reason === 'shortlist_full') {
+                setFullPanel({
+                  shortlisted: res.shortlisted,
+                  pendingId: id,
+                  pendingName: name,
+                });
+              } else {
+                refresh();
+              }
+            }}
+            onRemove={(slug) => {
+              removeProviderFromPlan(slug, plan?.id);
+              refresh();
+            }}
+          />
+          <ProviderBucket
+            title={`Still researching (${getResearching(providers).length})`}
+            hint="Directory saves land here by default."
+            items={getResearching(providers)}
+            planId={plan?.id}
+            empty="Nothing in researching — save from the directory to explore more agencies."
+            onStatus={(id, status, name) => {
+              const res = updateSavedProviderStatus(id, status);
+              if (res && 'ok' in res && res.ok === false && res.reason === 'shortlist_full') {
+                setFullPanel({
+                  shortlisted: res.shortlisted,
+                  pendingId: id,
+                  pendingName: name,
+                });
+              } else {
+                refresh();
+              }
+            }}
+            onRemove={(slug) => {
+              removeProviderFromPlan(slug, plan?.id);
+              refresh();
+            }}
+          />
+          <Card className="shadow-sm">
+            <CardHeader className="pb-2">
+              <button
+                type="button"
+                className="flex w-full items-center justify-between text-left"
+                onClick={() => setHistoryOpen((v) => !v)}
+                aria-expanded={historyOpen}
+              >
+                <CardTitle className="text-base">
+                  Reached out / done ({getHistory(providers).length})
+                </CardTitle>
+                <span className="text-xs font-medium text-slate-500">
+                  {historyOpen ? 'Hide' : 'Show'}
+                </span>
+              </button>
+            </CardHeader>
+            {historyOpen ? (
+              <CardContent>
+                {getHistory(providers).length === 0 ? (
+                  <p className="text-sm text-slate-500">No history yet.</p>
+                ) : (
+                  <ProviderList
+                    items={getHistory(providers)}
+                    planId={plan?.id}
+                    onStatus={(id, status, name) => {
+                      const res = updateSavedProviderStatus(id, status);
+                      if (res && 'ok' in res && res.ok === false && res.reason === 'shortlist_full') {
+                        setFullPanel({
+                          shortlisted: res.shortlisted,
+                          pendingId: id,
+                          pendingName: name,
+                        });
+                      } else {
                         refresh();
-                      }}
-                      className="h-10 rounded-md border border-slate-200 bg-white px-2 text-sm"
-                    >
-                      {PROVIDER_STATUS_OPTIONS.map((s) => (
-                        <option key={s.id} value={s.id}>
-                          {s.label}
-                        </option>
-                      ))}
-                    </select>
-                    <Button variant="outline" size="sm" asChild>
-                      <Link href={p.profilePath || `/providers/${p.providerSlug}`}>
-                        Profile <ExternalLink className="ml-1 h-3.5 w-3.5" aria-hidden />
-                      </Link>
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="text-red-700 hover:bg-red-50 hover:text-red-800"
-                      onClick={() => {
-                        removeProviderFromPlan(p.providerSlug, plan?.id);
-                        refresh();
-                      }}
-                    >
-                      <Trash2 className="h-4 w-4" aria-hidden />
-                      <span className="sr-only">Remove</span>
-                    </Button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </CardContent>
-      </Card>
+                      }
+                    }}
+                    onRemove={(slug) => {
+                      removeProviderFromPlan(slug, plan?.id);
+                      refresh();
+                    }}
+                  />
+                )}
+              </CardContent>
+            ) : null}
+          </Card>
+        </>
+      )}
+
+      {fullPanel ? (
+        <ShortlistFullPanel
+          shortlisted={fullPanel.shortlisted}
+          incomingName={fullPanel.pendingName}
+          onCancel={() => setFullPanel(null)}
+          onDemoteOldest={() => {
+            const p = providers.find((x) => x.id === fullPanel.pendingId);
+            if (p) {
+              shortlistWithDemoteOldest({
+                providerSlug: p.providerSlug,
+                providerName: p.providerName,
+                profilePath: p.profilePath,
+                status: 'shortlisted',
+              });
+            }
+            setFullPanel(null);
+            refresh();
+          }}
+          onReplace={(slug) => {
+            const p = providers.find((x) => x.id === fullPanel.pendingId);
+            if (p) {
+              shortlistReplacing(
+                {
+                  providerSlug: p.providerSlug,
+                  providerName: p.providerName,
+                  profilePath: p.profilePath,
+                  status: 'shortlisted',
+                },
+                slug
+              );
+            }
+            setFullPanel(null);
+            refresh();
+          }}
+          onSaveAsResearching={() => {
+            const p = providers.find((x) => x.id === fullPanel.pendingId);
+            if (p) {
+              updateSavedProviderStatus(p.id, 'researching');
+            }
+            setFullPanel(null);
+            refresh();
+          }}
+        />
+      ) : null}
 
       <div className="rounded-xl border bg-muted/20 px-4 py-4 text-sm text-slate-600">
         <p className="flex items-start gap-2">
@@ -339,5 +415,117 @@ export function GuestInsuranceHq() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ProviderBucket({
+  title,
+  hint,
+  items,
+  planId,
+  empty,
+  onStatus,
+  onRemove,
+}: {
+  title: string;
+  hint: string;
+  items: SavedProvider[];
+  planId?: string;
+  empty: string;
+  onStatus: (id: string, status: ProviderResearchStatus, name: string) => void;
+  onRemove: (slug: string) => void;
+}) {
+  return (
+    <Card className="shadow-sm">
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          <Bookmark className="h-5 w-5 text-teal-700" aria-hidden />
+          {title}
+        </CardTitle>
+        <p className="text-sm text-slate-600">{hint}</p>
+      </CardHeader>
+      <CardContent>
+        {items.length === 0 ? (
+          <p className="text-sm text-slate-500">{empty}</p>
+        ) : (
+          <ProviderList items={items} planId={planId} onStatus={onStatus} onRemove={onRemove} />
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function ProviderList({
+  items,
+  planId,
+  onStatus,
+  onRemove,
+}: {
+  items: SavedProvider[];
+  planId?: string;
+  onStatus: (id: string, status: ProviderResearchStatus, name: string) => void;
+  onRemove: (slug: string) => void;
+}) {
+  return (
+    <ul className="space-y-3">
+      {items.map((p) => (
+        <li
+          key={p.id}
+          className="flex flex-col gap-3 rounded-xl border bg-white p-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="min-w-0">
+            <Link
+              href={p.profilePath || `/providers/${p.providerSlug}`}
+              className="font-semibold text-slate-900 hover:text-teal-800 hover:underline"
+            >
+              {p.providerName}
+            </Link>
+            <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs text-slate-500">
+              {p.city || p.state ? (
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="h-3 w-3" aria-hidden />
+                  {[p.city, p.state].filter(Boolean).join(', ')}
+                </span>
+              ) : null}
+              {p.licenseSummary ? <span>{p.licenseSummary}</span> : null}
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <label className="sr-only" htmlFor={`status-${p.id}`}>
+              Status for {p.providerName}
+            </label>
+            <select
+              id={`status-${p.id}`}
+              value={p.status}
+              onChange={(e) =>
+                onStatus(p.id, e.target.value as ProviderResearchStatus, p.providerName)
+              }
+              className="h-10 rounded-md border border-slate-200 bg-white px-2 text-sm"
+            >
+              {PROVIDER_STATUS_OPTIONS.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+            <Button variant="outline" size="sm" asChild>
+              <Link href={p.profilePath || `/providers/${p.providerSlug}`}>
+                Profile <ExternalLink className="ml-1 h-3.5 w-3.5" aria-hidden />
+              </Link>
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="text-red-700 hover:bg-red-50 hover:text-red-800"
+              onClick={() => onRemove(p.providerSlug)}
+            >
+              <Trash2 className="h-4 w-4" aria-hidden />
+              <span className="sr-only">Remove</span>
+            </Button>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }

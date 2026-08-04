@@ -19,6 +19,12 @@ import {
   MY_INSURANCE_STORE_KEY_LEGACY,
 } from '@/lib/my-insurance/constants';
 import type { GuestSavedProvider } from '@/lib/my-insurance/types';
+import {
+  gateShortlistAdd,
+  getShortlisted,
+  providersOnPlan,
+  SHORTLIST_CAP,
+} from '@/lib/my-insurance/shortlist-rules';
 
 const MAX_SAVED_PROVIDERS = 50;
 
@@ -319,10 +325,31 @@ export type UpsertSavedProviderInput = {
   notes?: string;
   city?: string;
   state?: string;
+  /**
+   * When shortlist is full and desired status is shortlisted:
+   * - block (default): return shortlist_full without writing shortlisted status
+   * - demote_oldest: move oldest shortlisted → researching, then shortlist this one
+   * - replace_slug: demote specific shortlisted slug → researching, then shortlist this one
+   */
+  shortlistPolicy?: 'block' | 'demote_oldest' | 'replace_slug';
+  replaceShortlistedSlug?: string;
 };
 
-/** Spec name: upsertSavedProvider */
-export function upsertSavedProvider(input: UpsertSavedProviderInput): SavedProvider {
+export type UpsertSavedProviderResult =
+  | { ok: true; provider: SavedProvider; alreadySaved: boolean; created: boolean }
+  | {
+      ok: false;
+      reason: 'shortlist_full';
+      message: string;
+      shortlisted: SavedProvider[];
+      /** Provider may still exist as researching if we only blocked shortlist */
+      provider?: SavedProvider;
+    };
+
+/** Spec name: upsertSavedProvider — Phase B enforces shortlist cap of 3. */
+export function upsertSavedProvider(
+  input: UpsertSavedProviderInput
+): UpsertSavedProviderResult {
   const state = loadState();
   let plan =
     (input.planId
@@ -340,15 +367,77 @@ export function upsertSavedProvider(input: UpsertSavedProviderInput): SavedProvi
     (p) => p.providerSlug === input.providerSlug && (p.planId === plan!.id || !p.planId)
   );
   const ts = nowIso();
+  const desiredStatus: ProviderResearchStatus =
+    input.status ?? (existing ? existing.status : 'researching');
+
+  let planProviders = providersOnPlan(plan, state.savedProviders);
+  const gate = gateShortlistAdd(planProviders, input.providerSlug, desiredStatus);
+
+  if (!gate.ok) {
+    const policy = input.shortlistPolicy ?? 'block';
+    if (policy === 'block') {
+      // Still allow save as researching if not already saved
+      if (!existing && desiredStatus === 'shortlisted') {
+        // don't auto-save on blocked shortlist — caller shows modal
+        return {
+          ok: false,
+          reason: 'shortlist_full',
+          message: gate.message,
+          shortlisted: gate.shortlisted,
+        };
+      }
+      if (existing && desiredStatus === 'shortlisted' && existing.status !== 'shortlisted') {
+        return {
+          ok: false,
+          reason: 'shortlist_full',
+          message: gate.message,
+          shortlisted: gate.shortlisted,
+          provider: existing,
+        };
+      }
+    } else if (policy === 'demote_oldest') {
+      const oldest = [...getShortlisted(planProviders)].sort((a, b) =>
+        a.updatedAt > b.updatedAt ? 1 : -1
+      )[0];
+      if (oldest) {
+        state.savedProviders = state.savedProviders.map((p) =>
+          p.id === oldest.id
+            ? { ...p, status: 'researching' as const, updatedAt: ts }
+            : p
+        );
+      }
+    } else if (policy === 'replace_slug' && input.replaceShortlistedSlug) {
+      state.savedProviders = state.savedProviders.map((p) =>
+        p.providerSlug === input.replaceShortlistedSlug &&
+        (p.planId === plan!.id || plan!.savedProviderIds.includes(p.id))
+          ? { ...p, status: 'researching' as const, updatedAt: ts }
+          : p
+      );
+    }
+    // refresh plan providers after demote
+    planProviders = providersOnPlan(plan, state.savedProviders);
+    const gate2 = gateShortlistAdd(planProviders, input.providerSlug, desiredStatus);
+    if (!gate2.ok) {
+      return {
+        ok: false,
+        reason: 'shortlist_full',
+        message: gate2.message,
+        shortlisted: gate2.shortlisted,
+      };
+    }
+  }
 
   if (existing) {
+    const alreadySame =
+      existing.status === desiredStatus &&
+      existing.providerName === (input.providerName || existing.providerName);
     const updated: SavedProvider = {
       ...existing,
       providerName: input.providerName || existing.providerName,
       profilePath,
       licenseSummary: input.licenseSummary ?? existing.licenseSummary,
       lines: input.lines ?? existing.lines,
-      status: input.status ?? existing.status,
+      status: desiredStatus,
       notes: input.notes ?? existing.notes,
       city: input.city ?? existing.city,
       state: input.state ?? existing.state,
@@ -366,7 +455,13 @@ export function upsertSavedProvider(input: UpsertSavedProviderInput): SavedProvi
     state.plans = state.plans.map((p) => (p.id === plan!.id ? plan! : p));
     state.activePlanId = plan.id;
     saveState(state);
-    return updated;
+    return {
+      ok: true,
+      provider: updated,
+      alreadySaved: true,
+      created: false,
+      // alreadySame unused but available for callers via alreadySaved
+    };
   }
 
   const saved: SavedProvider = {
@@ -377,7 +472,7 @@ export function upsertSavedProvider(input: UpsertSavedProviderInput): SavedProvi
     profilePath,
     licenseSummary: input.licenseSummary,
     lines: input.lines,
-    status: input.status ?? 'shortlisted',
+    status: desiredStatus,
     notes: input.notes,
     city: input.city,
     state: input.state,
@@ -390,8 +485,39 @@ export function upsertSavedProvider(input: UpsertSavedProviderInput): SavedProvi
   state.plans = state.plans.map((p) => (p.id === plan!.id ? plan! : p));
   state.activePlanId = plan.id;
   saveState(state);
-  return saved;
+  return { ok: true, provider: saved, alreadySaved: false, created: true };
 }
+
+/** Force-add as researching (never blocked by shortlist cap). */
+export function saveAsResearching(input: UpsertSavedProviderInput): UpsertSavedProviderResult {
+  return upsertSavedProvider({ ...input, status: 'researching', shortlistPolicy: 'block' });
+}
+
+/** Move provider to shortlisted, demoting oldest if full. */
+export function shortlistWithDemoteOldest(
+  input: UpsertSavedProviderInput
+): UpsertSavedProviderResult {
+  return upsertSavedProvider({
+    ...input,
+    status: 'shortlisted',
+    shortlistPolicy: 'demote_oldest',
+  });
+}
+
+/** Move provider to shortlisted, demoting a chosen shortlisted slug. */
+export function shortlistReplacing(
+  input: UpsertSavedProviderInput,
+  replaceShortlistedSlug: string
+): UpsertSavedProviderResult {
+  return upsertSavedProvider({
+    ...input,
+    status: 'shortlisted',
+    shortlistPolicy: 'replace_slug',
+    replaceShortlistedSlug,
+  });
+}
+
+export { SHORTLIST_CAP, getShortlisted, getResearching, getHistory, providersOnPlan } from '@/lib/my-insurance/shortlist-rules';
 
 /** Spec name: removeSavedProvider */
 export function removeSavedProvider(providerSlug: string, planId?: string): void {
@@ -418,15 +544,33 @@ export function removeSavedProvider(providerSlug: string, planId?: string): void
 
 export function updateSavedProviderStatus(
   savedId: string,
-  status: ProviderResearchStatus
-): SavedProvider | null {
+  status: ProviderResearchStatus,
+  options?: { shortlistPolicy?: UpsertSavedProviderInput['shortlistPolicy']; replaceShortlistedSlug?: string }
+): UpsertSavedProviderResult | { ok: true; provider: SavedProvider } {
   const state = loadState();
-  const idx = state.savedProviders.findIndex((p) => p.id === savedId);
-  if (idx < 0) return null;
-  const next = { ...state.savedProviders[idx], status, updatedAt: nowIso() };
-  state.savedProviders[idx] = next;
-  saveState(state);
-  return next;
+  const existing = state.savedProviders.find((p) => p.id === savedId);
+  if (!existing) {
+    return {
+      ok: false,
+      reason: 'shortlist_full',
+      message: 'Provider not found',
+      shortlisted: [],
+    };
+  }
+  return upsertSavedProvider({
+    providerSlug: existing.providerSlug,
+    providerName: existing.providerName,
+    profilePath: existing.profilePath,
+    planId: existing.planId,
+    status,
+    city: existing.city,
+    state: existing.state,
+    notes: existing.notes,
+    licenseSummary: existing.licenseSummary,
+    lines: existing.lines,
+    shortlistPolicy: options?.shortlistPolicy,
+    replaceShortlistedSlug: options?.replaceShortlistedSlug,
+  });
 }
 
 export function isProviderSaved(providerSlug: string, state?: MyInsuranceState): boolean {
@@ -502,7 +646,9 @@ export const saveProviderToPlan = (input: {
   licenseSummary?: string;
   lines?: string[];
   planId?: string;
-}): SavedProvider => upsertSavedProvider(input);
+  shortlistPolicy?: UpsertSavedProviderInput['shortlistPolicy'];
+  replaceShortlistedSlug?: string;
+}): UpsertSavedProviderResult => upsertSavedProvider(input);
 
 export const removeProviderFromPlan = removeSavedProvider;
 

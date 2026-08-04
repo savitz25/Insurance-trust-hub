@@ -152,6 +152,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       : undefined
                 }
                 lines={provider.insurance_types?.map(String)}
+                defaultStatus="shortlisted"
               />
               <CompareProviderButton
                 providerSlug={provider.slug}

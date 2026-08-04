@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Bookmark, BookmarkCheck } from 'lucide-react';
+import Link from 'next/link';
+import { Bookmark, BookmarkCheck, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
 import {
@@ -9,16 +10,24 @@ import {
   saveProviderAction,
 } from '@/actions/my-insurance';
 import {
+  getActivePlan,
   getLastSaveError,
-  isProviderSaved,
+  getProvidersForPlan,
   removeProviderFromPlan,
-  saveProviderToPlan,
+  saveAsResearching,
+  shortlistReplacing,
+  shortlistWithDemoteOldest,
+  upsertSavedProvider,
+  type UpsertSavedProviderResult,
 } from '@/lib/my-insurance/storage';
+import type { ProviderResearchStatus, SavedProvider } from '@/lib/my-insurance/plan-types';
+import { PROVIDER_STATUS_OPTIONS } from '@/lib/my-insurance/plan-types';
 import { removeGuestProvider } from '@/lib/my-insurance/guest-storage';
+import { ShortlistFullPanel } from '@/components/my-insurance/shortlist-full-panel';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
-type Props = {
+export type SaveProviderButtonProps = {
   providerSlug: string;
   providerName: string;
   city?: string;
@@ -27,11 +36,24 @@ type Props = {
   lines?: string[];
   className?: string;
   variant?: 'default' | 'outline' | 'secondary';
+  /**
+   * Directory default: researching.
+   * Profile explicit shortlist: shortlisted.
+   */
+  defaultStatus?: ProviderResearchStatus;
+  /** Compact card layout for directory grids */
+  compact?: boolean;
 };
 
+function findLocalProvider(slug: string): SavedProvider | null {
+  const plan = getActivePlan();
+  if (!plan) return null;
+  return getProvidersForPlan(plan.id).find((p) => p.providerSlug === slug) ?? null;
+}
+
 /**
- * Save to My Insurance plan (guest localStorage or signed-in cloud).
- * Phase A: guest save works without login — research shortlist only.
+ * Save / manage My Insurance shortlist (guest localStorage + optional cloud).
+ * Phase B: directory default researching; shortlist cap 3 with replace flow.
  */
 export function SaveProviderButton({
   providerSlug,
@@ -42,218 +64,243 @@ export function SaveProviderButton({
   lines,
   className,
   variant = 'outline',
-}: Props) {
+  defaultStatus = 'shortlisted',
+  compact = false,
+}: SaveProviderButtonProps) {
   const mi = useMyInsuranceOptional();
   const [busy, setBusy] = useState(false);
-  const [guestSaved, setGuestSaved] = useState(false);
+  const [local, setLocal] = useState<SavedProvider | null>(null);
+  const [manageOpen, setManageOpen] = useState(false);
+  const [fullPanel, setFullPanel] = useState<SavedProvider[] | null>(null);
 
-  const refreshGuest = useCallback(() => {
-    setGuestSaved(isProviderSaved(providerSlug));
+  const refresh = useCallback(() => {
+    setLocal(findLocalProvider(providerSlug));
   }, [providerSlug]);
 
   useEffect(() => {
-    refreshGuest();
-    const onStore = () => refreshGuest();
+    refresh();
+    const onStore = () => refresh();
     window.addEventListener('ith-my-insurance-store', onStore);
     return () => window.removeEventListener('ith-my-insurance-store', onStore);
-  }, [refreshGuest]);
+  }, [refresh]);
 
-  if (!mi) {
-    // Still allow pure guest save without provider shell
-    return (
-      <GuestOnlySaveButton
-        providerSlug={providerSlug}
-        providerName={providerName}
-        city={city}
-        state={state}
-        className={className}
-        variant={variant}
-      />
-    );
-  }
+  const baseInput = {
+    providerSlug,
+    providerName,
+    city,
+    state,
+    licenseSummary,
+    lines,
+    profilePath: `/providers/${providerSlug}` as const,
+  };
 
-  const { user, loading, isProviderSaved: cloudSaved, markProviderSaved, unmarkProviderSaved } =
-    mi;
-  const saved = user ? cloudSaved(providerSlug) : guestSaved;
-
-  async function handleClick() {
-    if (loading || busy) return;
-
-    if (!user) {
-      setBusy(true);
-      try {
-        if (guestSaved) {
-          removeProviderFromPlan(providerSlug);
-          toast.message('Removed from this device plan');
-        } else {
-          saveProviderToPlan({
-            providerSlug,
-            providerName,
-            city,
-            state,
-            licenseSummary,
-            lines,
-            profilePath: `/providers/${providerSlug}`,
-            status: 'shortlisted',
-          });
-          const err = getLastSaveError();
-          if (err) {
-            toast.error(err);
-          } else {
-            toast.success('Saved to My Insurance', {
-              description: 'Stored on this device · research only',
-              action: {
-                label: 'Open HQ',
-                onClick: () => {
-                  window.location.href = '/my-insurance';
-                },
-              },
-            });
-          }
-        }
-        refreshGuest();
-      } finally {
-        setBusy(false);
-      }
+  function handleResult(result: UpsertSavedProviderResult, opts?: { intendShortlist?: boolean }) {
+    const err = getLastSaveError();
+    if (err) {
+      toast.error(err);
+      refresh();
       return;
     }
+    if (!result.ok) {
+      setFullPanel(result.shortlisted);
+      return;
+    }
+    if (result.alreadySaved && !opts?.intendShortlist) {
+      toast.message('Already in My Insurance', {
+        description: result.provider.status,
+        action: {
+          label: 'Manage',
+          onClick: () => {
+            window.location.href = '/my-insurance';
+          },
+        },
+      });
+    } else if (result.created) {
+      toast.success('Saved to My Insurance', {
+        description:
+          result.provider.status === 'researching'
+            ? 'Added under Researching · this device'
+            : 'Added to shortlist · this device',
+        action: {
+          label: 'Open HQ',
+          onClick: () => {
+            window.location.href = '/my-insurance';
+          },
+        },
+      });
+    } else {
+      toast.success('Updated in My Insurance', {
+        description: `Status: ${result.provider.status}`,
+        action: {
+          label: 'Open HQ',
+          onClick: () => {
+            window.location.href = '/my-insurance';
+          },
+        },
+      });
+    }
+    refresh();
+  }
 
+  async function saveWithStatus(status: ProviderResearchStatus) {
+    if (busy) return;
     setBusy(true);
     try {
-      if (saved) {
-        const res = await removeProviderAction(providerSlug);
-        if (res.ok) {
-          unmarkProviderSaved(providerSlug);
-          removeProviderFromPlan(providerSlug);
-          removeGuestProvider(providerSlug);
-          toast.success('Removed from My Insurance');
-        } else {
-          toast.error(res.error);
-        }
-      } else {
-        const res = await saveProviderAction({ providerSlug, providerName });
-        if (res.ok) {
-          markProviderSaved(providerSlug);
-          saveProviderToPlan({
-            providerSlug,
-            providerName,
-            city,
-            state,
-            licenseSummary,
-            lines,
-            profilePath: `/providers/${providerSlug}`,
-            status: 'shortlisted',
-          });
-          toast.success('Saved to My Insurance', {
-            description: providerName,
-            action: {
-              label: 'Open HQ',
-              onClick: () => {
-                window.location.href = '/my-insurance';
-              },
-            },
-          });
-        } else {
-          toast.error(res.error);
+      if (mi?.user) {
+        // Cloud sync best-effort; local plan is source of shortlist discipline
+        if (!mi.isProviderSaved(providerSlug)) {
+          await saveProviderAction({ providerSlug, providerName });
+          mi.markProviderSaved(providerSlug);
         }
       }
-      refreshGuest();
+      const result = upsertSavedProvider({
+        ...baseInput,
+        status,
+        shortlistPolicy: 'block',
+      });
+      handleResult(result, { intendShortlist: status === 'shortlisted' });
     } finally {
       setBusy(false);
     }
   }
 
-  return (
-    <Button
-      type="button"
-      variant={saved ? 'secondary' : variant}
-      size="sm"
-      onClick={handleClick}
-      disabled={busy || loading}
-      className={cn('gap-2', className)}
-      aria-pressed={saved}
-    >
-      {saved ? (
-        <BookmarkCheck className="h-4 w-4 text-teal-700" aria-hidden />
-      ) : (
-        <Bookmark className="h-4 w-4" aria-hidden />
-      )}
-      {saved ? 'Saved' : 'Save'}
-    </Button>
-  );
-}
+  async function handlePrimaryClick() {
+    if (local) {
+      setManageOpen((v) => !v);
+      return;
+    }
+    // First save: directory uses researching; profile often shortlisted
+    await saveWithStatus(defaultStatus);
+  }
 
-function GuestOnlySaveButton({
-  providerSlug,
-  providerName,
-  city,
-  state,
-  licenseSummary,
-  lines,
-  className,
-  variant,
-}: Props) {
-  const [busy, setBusy] = useState(false);
-  const [saved, setSaved] = useState(false);
+  async function handleRemove() {
+    if (busy) return;
+    setBusy(true);
+    try {
+      if (mi?.user) {
+        await removeProviderAction(providerSlug);
+        mi.unmarkProviderSaved(providerSlug);
+      }
+      removeProviderFromPlan(providerSlug);
+      removeGuestProvider(providerSlug);
+      toast.message('Removed from My Insurance');
+      setManageOpen(false);
+      refresh();
+    } finally {
+      setBusy(false);
+    }
+  }
 
-  useEffect(() => {
-    setSaved(isProviderSaved(providerSlug));
-    const onStore = () => setSaved(isProviderSaved(providerSlug));
-    window.addEventListener('ith-my-insurance-store', onStore);
-    return () => window.removeEventListener('ith-my-insurance-store', onStore);
-  }, [providerSlug]);
+  const saved = Boolean(local) || (mi?.user ? mi.isProviderSaved(providerSlug) : false);
 
   return (
-    <Button
-      type="button"
-      variant={saved ? 'secondary' : variant}
-      size="sm"
-      disabled={busy}
-      className={cn('gap-2', className)}
-      aria-pressed={saved}
-      onClick={() => {
-        setBusy(true);
-        try {
-          if (saved) {
-            removeProviderFromPlan(providerSlug);
-            toast.message('Removed from this device plan');
-          } else {
-            saveProviderToPlan({
-              providerSlug,
-              providerName,
-              city,
-              state,
-              licenseSummary,
-              lines,
-              profilePath: `/providers/${providerSlug}`,
-            });
-            const err = getLastSaveError();
-            if (err) {
-              toast.error(err);
-            } else {
-              toast.success('Saved to My Insurance', {
-                description: 'Stored on this device · research only',
-                action: {
-                  label: 'Open HQ',
-                  onClick: () => {
-                    window.location.href = '/my-insurance';
-                  },
-                },
-              });
-            }
-          }
-          setSaved(isProviderSaved(providerSlug));
-        } finally {
-          setBusy(false);
-        }
-      }}
-    >
-      {saved ? (
-        <BookmarkCheck className="h-4 w-4 text-teal-700" aria-hidden />
-      ) : (
-        <Bookmark className="h-4 w-4" aria-hidden />
-      )}
-      {saved ? 'Saved' : 'Save'}
-    </Button>
+    <>
+      <div className={cn('relative inline-flex flex-col items-stretch gap-1', className)}>
+        <Button
+          type="button"
+          variant={saved ? 'secondary' : variant}
+          size={compact ? 'sm' : 'sm'}
+          onClick={handlePrimaryClick}
+          disabled={busy || mi?.loading}
+          className={cn('gap-1.5', compact && 'h-8 text-xs')}
+          aria-pressed={saved}
+          aria-expanded={saved ? manageOpen : undefined}
+        >
+          {saved ? (
+            <BookmarkCheck className="h-4 w-4 text-teal-700" aria-hidden />
+          ) : (
+            <Bookmark className="h-4 w-4" aria-hidden />
+          )}
+          {saved ? (compact ? 'Saved' : 'In My Insurance') : compact ? 'Save' : 'Save'}
+          {saved ? <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden /> : null}
+        </Button>
+
+        {saved && local ? (
+          <p className="text-center text-[10px] font-medium uppercase tracking-wide text-teal-800">
+            {local.status.replace('_', ' ')}
+          </p>
+        ) : null}
+
+        {manageOpen && local ? (
+          <div className="absolute right-0 top-full z-50 mt-1 min-w-[12rem] rounded-xl border bg-white p-2 shadow-lg">
+            <p className="px-2 py-1 text-xs font-semibold text-slate-500">Manage</p>
+            <label className="sr-only" htmlFor={`manage-status-${providerSlug}`}>
+              Status
+            </label>
+            <select
+              id={`manage-status-${providerSlug}`}
+              className="mb-2 w-full rounded-md border px-2 py-1.5 text-sm"
+              value={local.status}
+              onChange={async (e) => {
+                const status = e.target.value as ProviderResearchStatus;
+                setBusy(true);
+                try {
+                  const result = upsertSavedProvider({
+                    ...baseInput,
+                    status,
+                    shortlistPolicy: 'block',
+                  });
+                  if (!result.ok) {
+                    setFullPanel(result.shortlisted);
+                  } else {
+                    toast.success(`Status: ${status.replace('_', ' ')}`);
+                    refresh();
+                  }
+                } finally {
+                  setBusy(false);
+                }
+              }}
+            >
+              {PROVIDER_STATUS_OPTIONS.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              className="mb-1 w-full"
+              asChild
+            >
+              <Link href="/my-insurance">Open My Insurance</Link>
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className="w-full text-red-700"
+              onClick={handleRemove}
+            >
+              Remove
+            </Button>
+          </div>
+        ) : null}
+      </div>
+
+      {fullPanel ? (
+        <ShortlistFullPanel
+          shortlisted={fullPanel}
+          incomingName={providerName}
+          onCancel={() => setFullPanel(null)}
+          onDemoteOldest={() => {
+            const result = shortlistWithDemoteOldest({ ...baseInput, status: 'shortlisted' });
+            setFullPanel(null);
+            handleResult(result, { intendShortlist: true });
+          }}
+          onReplace={(slug) => {
+            const result = shortlistReplacing({ ...baseInput, status: 'shortlisted' }, slug);
+            setFullPanel(null);
+            handleResult(result, { intendShortlist: true });
+          }}
+          onSaveAsResearching={() => {
+            const result = saveAsResearching({ ...baseInput });
+            setFullPanel(null);
+            handleResult(result);
+          }}
+        />
+      ) : null}
+    </>
   );
 }

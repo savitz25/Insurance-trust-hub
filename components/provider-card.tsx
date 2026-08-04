@@ -5,6 +5,7 @@ import { INSURANCE_TYPES } from '@/lib/constants';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { StarRating } from '@/components/star-rating';
+import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
 import { cn } from '@/lib/utils';
 
 interface ProviderCardProps {
@@ -74,7 +75,19 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
         )}
       </CardContent>
 
-      <CardFooter className="pt-0">
+      <CardFooter className="flex flex-wrap items-center justify-between gap-2 pt-0">
+        <SaveProviderButton
+          providerSlug={provider.slug}
+          providerName={provider.name}
+          city={provider.city}
+          state={provider.state}
+          licenseSummary={
+            provider.license_number ? `License ${provider.license_number}` : undefined
+          }
+          lines={provider.insurance_types?.map(String)}
+          defaultStatus="researching"
+          compact
+        />
         <Link
           href={`/providers/${provider.slug}`}
           className="text-sm font-medium text-primary hover:underline underline-offset-4"
