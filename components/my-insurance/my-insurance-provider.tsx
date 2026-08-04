@@ -13,6 +13,7 @@ import type { User } from '@supabase/supabase-js';
 import { createBrowserSupabaseClient } from '@/lib/supabase/client';
 import {
   ensureUserProfileAction,
+  getMyInsuranceDashboardData,
   listSavedProviderSlugsAction,
   mergeGuestProvidersAction,
   saveCalculatorResultAction,
@@ -20,10 +21,11 @@ import {
   saveProviderAction,
 } from '@/actions/my-insurance';
 import {
-  clearGuestSavedProviders,
-  consumePendingSaveAction,
-  getGuestSavedProviders,
-} from '@/lib/my-insurance/guest-storage';
+  collectLocalProvidersForMerge,
+  importCloudProvidersIntoLocal,
+  localProviderSlugs,
+} from '@/lib/my-insurance/auth-continuity';
+import { consumePendingSaveAction } from '@/lib/my-insurance/guest-storage';
 import { toast } from 'sonner';
 
 type AuthContext = 'provider' | 'general';
@@ -34,6 +36,7 @@ type MyInsuranceContextValue = {
   authOpen: boolean;
   authContext: AuthContext;
   redirectPath: string;
+  /** Cloud ∪ local slugs for Save button / badge */
   savedProviderSlugs: Set<string>;
   openAuth: (opts?: { context?: AuthContext; redirectPath?: string }) => void;
   closeAuth: () => void;
@@ -42,10 +45,16 @@ type MyInsuranceContextValue = {
   markProviderSaved: (slug: string) => void;
   unmarkProviderSaved: (slug: string) => void;
   refreshSaved: () => Promise<void>;
+  /** Sync guest → cloud and cloud → guest. Never clears localStorage. */
+  syncAuthContinuity: (opts?: { announce?: boolean }) => Promise<void>;
   signOutLocal: () => Promise<void>;
 };
 
 const MyInsuranceContext = createContext<MyInsuranceContextValue | null>(null);
+
+function unionSlugs(cloud: string[], local: string[]): Set<string> {
+  return new Set([...cloud, ...local]);
+}
 
 export function MyInsuranceProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -56,9 +65,10 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
   const [savedProviderSlugs, setSavedProviderSlugs] = useState<Set<string>>(new Set());
 
   const refreshSaved = useCallback(async () => {
-    const slugs = await listSavedProviderSlugsAction();
-    setSavedProviderSlugs(new Set(slugs));
-  }, []);
+    const cloud = user ? await listSavedProviderSlugsAction() : [];
+    const local = localProviderSlugs();
+    setSavedProviderSlugs(unionSlugs(cloud, local));
+  }, [user]);
 
   const executePending = useCallback(async () => {
     const pending = consumePendingSaveAction();
@@ -96,22 +106,57 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const mergeGuests = useCallback(async () => {
-    const guests = getGuestSavedProviders();
-    if (!guests.length) return;
-    const res = await mergeGuestProvidersAction(guests);
-    if (res.ok && res.merged > 0) {
-      clearGuestSavedProviders();
-      toast.success(
-        `Synced ${res.merged} saved agent${res.merged === 1 ? '' : 's'} from this device`
-      );
-      await refreshSaved();
+  /**
+   * Guest-first continuity:
+   * 1. Import local (ith:my-insurance:v1 + legacy) → cloud
+   * 2. Import cloud-only rows → local
+   * 3. Never clear localStorage
+   * @param opts.announce — toast when local data was present (sign-in only)
+   */
+  const syncAuthContinuity = useCallback(async (opts?: { announce?: boolean }) => {
+    if (typeof window === 'undefined') return;
+
+    const localList = collectLocalProvidersForMerge();
+    let importedToCloud = 0;
+    let importedToLocal = 0;
+
+    if (localList.length > 0) {
+      const res = await mergeGuestProvidersAction(localList);
+      if (res.ok && res.merged > 0) {
+        importedToCloud = res.merged;
+      }
     }
-  }, [refreshSaved]);
+
+    // Cloud → local so empty cloud never hides local, and cloud-only shows in Guest HQ
+    try {
+      const dash = await getMyInsuranceDashboardData();
+      const cloudRows = dash?.savedProviders ?? [];
+      importedToLocal = importCloudProvidersIntoLocal(
+        cloudRows.map((p) => ({
+          provider_slug: p.provider_slug,
+          provider_name: p.provider_name,
+        }))
+      );
+    } catch {
+      /* ignore */
+    }
+
+    const cloudSlugs = await listSavedProviderSlugsAction();
+    setSavedProviderSlugs(unionSlugs(cloudSlugs, localProviderSlugs()));
+
+    if (opts?.announce && (localList.length > 0 || importedToLocal > 0 || importedToCloud > 0)) {
+      toast.success('Restored your saved agencies on this device.');
+    }
+
+    // Notify HQ / nav listeners
+    window.dispatchEvent(new CustomEvent('ith-my-insurance-store'));
+  }, []);
 
   useEffect(() => {
     const supabase = createBrowserSupabaseClient();
     if (!supabase) {
+      // Still seed badge from local guest store
+      setSavedProviderSlugs(new Set(localProviderSlugs()));
       setLoading(false);
       return;
     }
@@ -124,9 +169,11 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       setLoading(false);
       if (data.user) {
         void ensureUserProfileAction();
-        void refreshSaved();
         void executePending();
-        void mergeGuests();
+        // Session restore: merge quietly (no toast spam on every page load)
+        void syncAuthContinuity({ announce: false });
+      } else {
+        setSavedProviderSlugs(new Set(localProviderSlugs()));
       }
     });
 
@@ -139,19 +186,30 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
         setAuthOpen(false);
         await ensureUserProfileAction();
         await executePending();
-        await mergeGuests();
-        await refreshSaved();
+        await syncAuthContinuity({ announce: true });
       }
       if (event === 'SIGNED_OUT') {
-        setSavedProviderSlugs(new Set());
+        // Keep localStorage intact — only drop cloud-only view state
+        setSavedProviderSlugs(new Set(localProviderSlugs()));
+        window.dispatchEvent(new CustomEvent('ith-my-insurance-store'));
       }
     });
+
+    // Keep slug set in sync when guest store mutates
+    const onStore = () => {
+      setSavedProviderSlugs((prev) => {
+        const local = localProviderSlugs();
+        return unionSlugs(Array.from(prev), local);
+      });
+    };
+    window.addEventListener('ith-my-insurance-store', onStore);
 
     return () => {
       mounted = false;
       subscription.unsubscribe();
+      window.removeEventListener('ith-my-insurance-store', onStore);
     };
-  }, [executePending, mergeGuests, refreshSaved]);
+  }, [executePending, syncAuthContinuity]);
 
   const openAuth = useCallback(
     (opts?: { context?: AuthContext; redirectPath?: string }) => {
@@ -190,15 +248,19 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       unmarkProviderSaved: (slug) =>
         setSavedProviderSlugs((prev) => {
           const next = new Set(prev);
+          // Keep local truth: if still in local store, leave marked
+          if (localProviderSlugs().includes(slug)) return prev;
           next.delete(slug);
           return next;
         }),
       refreshSaved,
+      syncAuthContinuity,
       signOutLocal: async () => {
         const supabase = createBrowserSupabaseClient();
         await supabase?.auth.signOut();
         setUser(null);
-        setSavedProviderSlugs(new Set());
+        // Never clear ith:my-insurance:v1 or compare tray
+        setSavedProviderSlugs(new Set(localProviderSlugs()));
       },
     }),
     [
@@ -212,6 +274,7 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       closeAuth,
       requireAuth,
       refreshSaved,
+      syncAuthContinuity,
     ]
   );
 
