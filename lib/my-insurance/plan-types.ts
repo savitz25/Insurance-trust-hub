@@ -1,0 +1,98 @@
+/**
+ * My Insurance Phase A — guest-first coverage research model.
+ * Aligns vocabulary with future My Move / journey chapters:
+ * Plan · Saved providers · Status
+ */
+
+export type ProtectFocus =
+  | 'home'
+  | 'auto'
+  | 'health'
+  | 'life'
+  | 'family'
+  | 'relocating'
+  | 'other';
+
+export type ProviderResearchStatus =
+  | 'researching'
+  | 'shortlisted'
+  | 'reached_out'
+  | 'done';
+
+export type PlanStatus = 'active' | 'archived';
+
+export type PlanLocation = {
+  zip?: string;
+  state?: string;
+  city?: string;
+  label?: string;
+};
+
+/** Coverage research plan (one active focus for Phase A; multi-plan later). */
+export type CoveragePlan = {
+  id: string;
+  label: string;
+  protectFocus: ProtectFocus[];
+  location?: PlanLocation;
+  notes?: string;
+  status: PlanStatus;
+  createdAt: string;
+  updatedAt: string;
+  /** SavedProvider ids belonging to this plan */
+  savedProviderIds: string[];
+};
+
+/** Agency/agent shortlist item — research only, not a lead. */
+export type SavedProvider = {
+  id: string;
+  planId?: string | null;
+  providerSlug: string;
+  providerName: string;
+  /** Optional directory/internal id when known */
+  providerId?: string;
+  status: ProviderResearchStatus;
+  notes?: string;
+  profilePath?: string;
+  city?: string;
+  state?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type MyInsuranceLocalStore = {
+  version: 1;
+  activePlanId: string | null;
+  plans: CoveragePlan[];
+  savedProviders: SavedProvider[];
+};
+
+export const PROTECT_FOCUS_OPTIONS: { id: ProtectFocus; label: string }[] = [
+  { id: 'health', label: 'My health' },
+  { id: 'home', label: 'My home' },
+  { id: 'auto', label: 'My car' },
+  { id: 'family', label: 'My family' },
+  { id: 'life', label: 'Life coverage' },
+  { id: 'relocating', label: 'I’m relocating' },
+  { id: 'other', label: 'Other' },
+];
+
+export const PROVIDER_STATUS_OPTIONS: {
+  id: ProviderResearchStatus;
+  label: string;
+}[] = [
+  { id: 'researching', label: 'Researching' },
+  { id: 'shortlisted', label: 'Shortlisted' },
+  { id: 'reached_out', label: 'Reached out' },
+  { id: 'done', label: 'Done' },
+];
+
+export function newId(): string {
+  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+    return crypto.randomUUID();
+  }
+  return `ith_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+}
+
+export function nowIso(): string {
+  return new Date().toISOString();
+}

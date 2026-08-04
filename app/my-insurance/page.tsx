@@ -7,7 +7,7 @@ import { MyInsuranceDashboard } from '@/components/my-insurance/my-insurance-das
 export const metadata: Metadata = buildMetadata({
   title: 'My Insurance — Insurance HQ',
   description:
-    'Your Insurance Trust Hub research workspace. Save agents, sync across devices, and manage account access. Tools work without signing in.',
+    'Guest-first coverage research plan and saved providers on Insurance Trust Hub. Works without signing in. Research only — no paid placements, no quote marketplace.',
   path: '/my-insurance',
 });
 
@@ -24,8 +24,9 @@ export default async function MyInsurancePage() {
           Insurance HQ
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-          Your private research workspace: shortlist, compare agencies, reviews, prescription lists,
-          and calculator results. Independent — no paid placements, no lead selling.
+          Coverage research plan and saved providers — guest-first on this device. Shortlist agencies
+          from the directory, track status, then verify licenses on DOI / NAIC. Research only — no
+          paid placements, no lead selling.
         </p>
         <p className="mt-2 text-sm text-slate-500">
           <Link href="/directory" className="font-medium text-teal-700 hover:underline">

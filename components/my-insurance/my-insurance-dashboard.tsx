@@ -41,6 +41,7 @@ import {
 } from '@/actions/my-insurance';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { GuestInsuranceHq } from '@/components/my-insurance/guest-insurance-hq';
 
 type Props = {
   initial: MyInsuranceDashboardData | null;
@@ -66,55 +67,30 @@ export function MyInsuranceDashboard({ initial }: Props) {
   if (loading) {
     return (
       <div className="animate-pulse rounded-2xl border bg-slate-50 p-10 text-center text-sm text-slate-500">
-        Loading Insurance HQâ€¦
+        Loading Insurance HQ…
       </div>
     );
   }
 
   if (!user) {
     return (
-      <Card className="border-teal-100 shadow-sm">
-        <CardHeader>
-          <CardTitle className="text-xl">Sign in to Insurance HQ</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-sm leading-relaxed text-slate-600">
-            Sign in to shortlist agencies, compare side-by-side, leave moderated reviews, and save
-            research tools â€” all optional.
-          </p>
-          <ul className="space-y-2 text-sm text-slate-600">
-            <li className="flex gap-2">
-              <Sparkles className="mt-0.5 h-4 w-4 text-teal-600" /> Shortlist &amp; compare agents
-            </li>
-            <li className="flex gap-2">
-              <MessageSquare className="mt-0.5 h-4 w-4 text-teal-600" /> Reviews (moderated)
-            </li>
-            <li className="flex gap-2">
-              <Pill className="mt-0.5 h-4 w-4 text-teal-600" /> Drug baskets &amp; calculator saves
-            </li>
-            <li className="flex gap-2">
-              <Shield className="mt-0.5 h-4 w-4 text-teal-600" /> No paid placements Â· no lead selling
-            </li>
-          </ul>
-          <Button
-            className="bg-teal-600 hover:bg-teal-700"
-            onClick={() => openAuth({ redirectPath: '/my-insurance' })}
-          >
-            Sign in to My Insurance
-          </Button>
-          <div className="flex flex-wrap gap-3 text-sm">
-            <Link href="/directory" className="font-medium text-teal-700 hover:underline">
-              Browse agents
-            </Link>
-            <Link href={DRUG_BASKET_PATH} className="font-medium text-teal-700 hover:underline">
-              Build drug list
-            </Link>
-            <Link href="/tools" className="font-medium text-teal-700 hover:underline">
-              Insurance tools
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-6">
+        <GuestInsuranceHq />
+        <Card className="border-slate-200 bg-slate-50/80 shadow-none">
+          <CardContent className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-slate-600">
+              Optional: sign in later to sync shortlists across devices. Guest plans stay on this
+              device.
+            </p>
+            <Button
+              variant="outline"
+              onClick={() => openAuth({ redirectPath: '/my-insurance' })}
+            >
+              Sign in (optional)
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
