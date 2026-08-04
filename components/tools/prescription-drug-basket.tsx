@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useCallback, useEffect, useId, useState } from 'react';
 import {
@@ -378,7 +378,7 @@ export function PrescriptionDrugBasket() {
             </h2>
             <p className="mt-0.5 text-sm text-slate-600">
               {!hydrated
-                ? 'Loading your listâ€¦'
+                ? 'Loading your list...'
                 : items.length === 0
                   ? '0 medications in your list'
                   : `${items.length} medication${items.length === 1 ? '' : 's'} in your list`}
@@ -421,7 +421,7 @@ export function PrescriptionDrugBasket() {
         <div className="mb-4 hidden print:block">
           <h1 className="text-2xl font-semibold">My Prescription Drug List</h1>
           <p className="text-sm text-slate-600">
-            {items.length} medication{items.length === 1 ? '' : 's'} Â· Printed{' '}
+            {items.length} medication{items.length === 1 ? '' : 's'} · Printed{' '}
             {new Date().toLocaleString()}
           </p>
         </div>
@@ -447,7 +447,7 @@ export function PrescriptionDrugBasket() {
                 <div className="min-w-0 flex-1">
                   <p className="text-base font-semibold text-slate-900">{item.name}</p>
                   <p className="mt-0.5 text-sm text-slate-600">
-                    {item.strength} Â· {item.form}
+                    {item.strength} · {item.form}
                   </p>
                   <p className="mt-1 text-sm text-slate-800">{item.dosage}</p>
                   {item.quantity && (
@@ -524,7 +524,7 @@ export function PrescriptionDrugBasket() {
           <p className="flex items-start gap-2 text-xs leading-relaxed text-slate-500">
             <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-600" aria-hidden />
             Draft stays on this device until you save. Saving to My Insurance syncs your list across
-            devices â€” we never sell your data. Educational only â€” not medical advice.
+            devices  -  we never sell your data. Educational only  -  not medical advice.
           </p>
         </div>
       </section>

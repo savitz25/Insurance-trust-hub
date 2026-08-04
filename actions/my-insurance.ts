@@ -1,4 +1,4 @@
-﻿'use server';
+'use server';
 
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
@@ -39,7 +39,7 @@ import { getProviderBySlug } from '@/lib/providers/queries';
 // provider lookup for reviews
 
 /**
- * ITH tables (saved_providers, drug_baskets, â€¦) live on the Insurance Supabase project
+ * ITH tables (saved_providers, drug_baskets, ...) live on the Insurance Supabase project
  * and are not in Move monorepo generated Database types.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -545,7 +545,7 @@ export async function saveComparisonAction(input: {
 
     const title =
       input.title?.trim() ||
-      `Compare ${providers.map((p) => p.name).join(' Â· ')}`.slice(0, 120);
+      `Compare ${providers.map((p) => p.name).join(' · ')}`.slice(0, 120);
 
     const snapshot = {
       providers: providers.map((p) => ({ slug: p.slug, name: p.name })),

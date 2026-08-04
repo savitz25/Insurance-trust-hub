@@ -100,18 +100,9 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
     });
   }
 
+  // Empty / partial states are handled by CompareSession (tray-aware).
   if (providers.length < 2) {
-    return (
-      <div className="rounded-2xl border border-dashed bg-slate-50 p-8 text-center">
-        <p className="font-medium text-slate-900">Select 2â€“4 agencies to compare</p>
-        <p className="mt-2 text-sm text-slate-600">
-          Use <strong>Add to compare</strong> on provider profiles or your shortlist.
-        </p>
-        <Button asChild className="mt-4 bg-teal-600 hover:bg-teal-700">
-          <Link href="/directory">Browse directory</Link>
-        </Button>
-      </div>
-    );
+    return null;
   }
 
   return (
@@ -128,7 +119,7 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
             disabled={pending || Boolean(savedId)}
           >
             <BookmarkPlus className="h-4 w-4" />
-            {savedId ? 'Saved to HQ' : pending ? 'Savingâ€¦' : 'Save comparison'}
+            {savedId ? 'Saved to HQ' : pending ? 'Saving...' : 'Save comparison'}
           </Button>
           <Button asChild variant="outline" className="gap-2">
             <Link href="/my-insurance">

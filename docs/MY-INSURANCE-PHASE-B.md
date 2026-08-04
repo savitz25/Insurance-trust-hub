@@ -37,3 +37,5 @@
 5. HQ sections + hard refresh  
 
 Storage remains `ith:my-insurance:v1`.
+
+**Compare tray (separate):** `ith-my-insurance-compare-tray-v1` — see `docs/MY-INSURANCE-COMPARE-FIX.md`.

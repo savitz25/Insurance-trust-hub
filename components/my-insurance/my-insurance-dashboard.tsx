@@ -136,7 +136,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
             Signed in as <span className="font-medium text-slate-900">{user.email}</span>
           </p>
           <p className="mt-1 text-xs text-slate-500">
-            Research workspace only â€” tools still work without signing in.
+            Research workspace only - tools still work without signing in.
           </p>
         </div>
         <Button
@@ -154,12 +154,18 @@ export function MyInsuranceDashboard({ initial }: Props) {
         </Button>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        <Button asChild size="sm" className="bg-teal-600 hover:bg-teal-700">
-          <Link href="/directory">Browse agents</Link>
+      <nav aria-label="My Insurance sections" className="flex flex-wrap gap-2">
+        <Button asChild size="sm" variant="outline">
+          <Link href="/my-insurance/setup">Setup</Link>
         </Button>
         <Button asChild size="sm" variant="outline">
-          <Link href={COMPARE_PATH}>Open compare</Link>
+          <Link href="/my-insurance/report">Report</Link>
+        </Button>
+        <Button asChild size="sm" variant="outline">
+          <Link href={COMPARE_PATH}>Compare</Link>
+        </Button>
+        <Button asChild size="sm" className="bg-teal-600 hover:bg-teal-700">
+          <Link href="/directory">Browse agents</Link>
         </Button>
         <Button asChild size="sm" variant="outline">
           <Link href={DRUG_BASKET_PATH}>Drug basket</Link>
@@ -170,7 +176,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
         <Button asChild size="sm" variant="outline">
           <Link href={COST_ESTIMATOR_PATH}>Cost planner</Link>
         </Button>
-      </div>
+      </nav>
 
       {/* Shortlist */}
       <section>
@@ -196,7 +202,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
               <Building2 className="h-8 w-8 text-slate-300" />
               <p className="font-medium text-slate-800">No shortlisted agents yet</p>
               <p className="max-w-md text-sm text-slate-600">
-                Save agencies from the directory, then compare 2â€“4 side by side.
+                Save agencies from the directory, then compare 2-4 side by side.
               </p>
               <Button asChild className="bg-teal-600 hover:bg-teal-700">
                 <Link href="/directory">Browse agents</Link>
@@ -293,7 +299,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
                   <div>
                     <p className="font-semibold text-slate-900">{c.title}</p>
                     <p className="text-sm text-slate-600">
-                      {c.items.map((i) => i.provider_name).join(' Â· ')}
+                      {c.items.map((i) => i.provider_name).join('  ·  ')}
                     </p>
                     <p className="text-xs text-slate-500">
                       {new Date(c.updated_at || c.created_at).toLocaleString()}
@@ -361,12 +367,12 @@ export function MyInsuranceDashboard({ initial }: Props) {
                   </div>
                   <p className="mt-1 font-semibold text-slate-900">
                     {r.provider_name || 'Agency'}
-                    {r.title ? ` â€” ${r.title}` : ''}
+                    {r.title ? ` - ${r.title}` : ''}
                   </p>
                   <p className="mt-1 line-clamp-3 text-sm text-slate-600">{r.content}</p>
                   <p className="mt-1 text-xs text-slate-500">
                     {new Date(r.created_at).toLocaleDateString()}
-                    {r.coverage_type ? ` Â· ${r.coverage_type}` : ''}
+                    {r.coverage_type ? `  ·  ${r.coverage_type}` : ''}
                   </p>
                 </div>
                 <div className="flex gap-2">
@@ -424,7 +430,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
                   Updated{' '}
                   {basket?.updated_at
                     ? new Date(basket.updated_at).toLocaleString()
-                    : 'â€”'}
+                    : '-'}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -473,7 +479,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
                       <span className="font-normal text-slate-600">{item.strength}</span>
                     </p>
                     <p className="text-sm text-slate-600">
-                      {item.form} Â· {item.dosage}
+                      {item.form}  ·  {item.dosage}
                     </p>
                   </div>
                   <Button

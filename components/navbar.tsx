@@ -1,27 +1,47 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrandLogo } from '@/components/BrandLogo';
 import { Menu, X, Phone, ChevronDown, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
+import { guestSavedCount } from '@/lib/my-insurance/storage';
+import { getCompareTray } from '@/lib/my-insurance/compare-storage';
 
+/** Single primary nav list - My Insurance is the CTA button only (not duplicated here). */
 const NAV_LINKS = [
-  { href: '/directory', label: 'DIRECTORIES' },
-  { href: '/hubs', label: 'HEALTH HUBS' },
-  { href: '/hubs/browse', label: 'STATE & MSA BROWSER' },
-  { href: '/calculators', label: 'CALCULATORS' },
-  { href: '/my-insurance', label: 'MY INSURANCE' },
-  { href: '/methodology', label: 'METHODOLOGY' },
-  { href: '/about', label: 'ABOUT' },
+  { href: '/hubs', label: 'Health Hubs' },
+  { href: '/hubs/browse', label: 'State & MSA' },
+  { href: '/calculators', label: 'Calculators' },
+  { href: '/methodology', label: 'Methodology' },
+  { href: '/about', label: 'About' },
 ] as const;
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [directoriesOpen, setDirectoriesOpen] = useState(false);
+  const [badgeCount, setBadgeCount] = useState(0);
   const mi = useMyInsuranceOptional();
-  const savedCount = mi?.user ? mi.savedProviderSlugs.size : 0;
+
+  useEffect(() => {
+    const sync = () => {
+      const guest = guestSavedCount();
+      const cloud = mi?.user ? mi.savedProviderSlugs.size : 0;
+      const compare = getCompareTray().length;
+      // Prefer shortlist/saved count; fall back to compare set size for awareness
+      setBadgeCount(Math.max(cloud, guest, compare > 0 && guest === 0 && cloud === 0 ? compare : 0));
+    };
+    sync();
+    window.addEventListener('ith-my-insurance-store', sync);
+    window.addEventListener('ith-compare-tray', sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener('ith-my-insurance-store', sync);
+      window.removeEventListener('ith-compare-tray', sync);
+      window.removeEventListener('storage', sync);
+    };
+  }, [mi?.user, mi?.savedProviderSlugs.size]);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -45,19 +65,31 @@ export function Navbar() {
             </button>
             {directoriesOpen && (
               <div className="absolute left-0 top-full z-50 mt-2 w-52 rounded-xl border bg-card py-2 shadow-trust-lg">
-                <Link href="/directory" className="block px-4 py-2 text-sm hover:bg-secondary" onClick={() => setDirectoriesOpen(false)}>
+                <Link
+                  href="/directory"
+                  className="block px-4 py-2 text-sm hover:bg-secondary"
+                  onClick={() => setDirectoriesOpen(false)}
+                >
                   All Agents & Agencies
                 </Link>
-                <Link href="/hubs" className="block px-4 py-2 text-sm hover:bg-secondary" onClick={() => setDirectoriesOpen(false)}>
+                <Link
+                  href="/hubs"
+                  className="block px-4 py-2 text-sm hover:bg-secondary"
+                  onClick={() => setDirectoriesOpen(false)}
+                >
                   Health Insurance Hubs
                 </Link>
-                <Link href="/destinations" className="block px-4 py-2 text-sm hover:bg-secondary" onClick={() => setDirectoriesOpen(false)}>
+                <Link
+                  href="/destinations"
+                  className="block px-4 py-2 text-sm hover:bg-secondary"
+                  onClick={() => setDirectoriesOpen(false)}
+                >
                   Relocation Destinations
                 </Link>
               </div>
             )}
           </div>
-          {NAV_LINKS.slice(1).map((link) => (
+          {NAV_LINKS.map((link) => (
             <Link
               key={`${link.href}-${link.label}`}
               prefetch={false}
@@ -71,9 +103,9 @@ export function Navbar() {
             <Link href="/my-insurance" aria-label="My Insurance">
               <Bookmark className="h-4 w-4" />
               My Insurance
-              {savedCount > 0 ? (
+              {badgeCount > 0 ? (
                 <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                  {savedCount}
+                  {badgeCount}
                 </span>
               ) : null}
             </Link>
@@ -97,16 +129,30 @@ export function Navbar() {
 
       {isOpen && (
         <div className="xl:hidden border-t bg-background px-4 py-4 space-y-3">
-          <Link href="/directory" className="block font-medium" onClick={() => setIsOpen(false)}>Directories</Link>
+          <Link href="/directory" className="block font-medium" onClick={() => setIsOpen(false)}>
+            Directories
+          </Link>
           {NAV_LINKS.map((link) => (
-            <Link key={`${link.href}-${link.label}`} href={link.href} className="block font-medium" onClick={() => setIsOpen(false)}>
+            <Link
+              key={`${link.href}-${link.label}`}
+              href={link.href}
+              className="block font-medium"
+              onClick={() => setIsOpen(false)}
+            >
               {link.label}
             </Link>
           ))}
           <Link href="/my-insurance" className="block font-medium" onClick={() => setIsOpen(false)}>
-            My Insurance{savedCount > 0 ? ` (${savedCount})` : ''}
+            My Insurance
+            {badgeCount > 0 ? (
+              <span className="ml-2 rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                {badgeCount}
+              </span>
+            ) : null}
           </Link>
-          <Link href="/contact" className="block font-medium" onClick={() => setIsOpen(false)}>Contact</Link>
+          <Link href="/contact" className="block font-medium" onClick={() => setIsOpen(false)}>
+            Contact
+          </Link>
         </div>
       )}
     </nav>

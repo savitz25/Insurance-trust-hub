@@ -1,14 +1,15 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 import { GitCompare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   addToCompareTray,
+  getCompareTray,
   isInCompareTray,
   removeFromCompareTray,
 } from '@/lib/my-insurance/compare-storage';
-import { MAX_COMPARE_PROVIDERS } from '@/lib/my-insurance/constants';
+import { COMPARE_PATH, MAX_COMPARE_PROVIDERS } from '@/lib/my-insurance/constants';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
@@ -51,7 +52,24 @@ export function CompareProviderButton({
       return;
     }
     setActive(true);
-    toast.success('Added to compare');
+    const n = res.items.length;
+    toast.success(n >= 2 ? `In compare (${n})` : 'Added to compare', {
+      description:
+        n >= 2
+          ? 'Open side-by-side comparison'
+          : 'Add one more agency to compare',
+      action:
+        n >= 2
+          ? {
+              label: 'Compare now',
+              onClick: () => {
+                const tray = getCompareTray();
+                const qs = tray.map((t) => `add=${encodeURIComponent(t.slug)}`).join('&');
+                window.location.href = `${COMPARE_PATH}?${qs}`;
+              },
+            }
+          : undefined,
+    });
   }
 
   return (

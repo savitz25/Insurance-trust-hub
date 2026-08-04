@@ -5,8 +5,11 @@ import Link from 'next/link';
 import {
   Bookmark,
   Building2,
+  FileText,
+  GitCompare,
   MapPin,
   Plus,
+  Settings2,
   Shield,
   Trash2,
   ExternalLink,
@@ -35,7 +38,14 @@ import {
   updatePlan,
   updateSavedProviderStatus,
 } from '@/lib/my-insurance/storage';
+import {
+  addToCompareTray,
+  clearCompareTray,
+  getCompareTray,
+} from '@/lib/my-insurance/compare-storage';
+import { COMPARE_PATH } from '@/lib/my-insurance/constants';
 import { ShortlistFullPanel } from '@/components/my-insurance/shortlist-full-panel';
+import { CompareProviderButton } from '@/components/my-insurance/compare-provider-button';
 import { toast } from 'sonner';
 import { TrustMark } from '@/components/network/trust-mark';
 import { Button } from '@/components/ui/button';
@@ -43,15 +53,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 /**
  * Phase A guest-first Insurance HQ — durable plan + shortlist in localStorage.
  * Research only; no lead-gen.
  */
 export function GuestInsuranceHq() {
+  const router = useRouter();
   const [plan, setPlan] = useState<CoveragePlan | null>(null);
   const [providers, setProviders] = useState<SavedProvider[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  const [compareCount, setCompareCount] = useState(0);
+  const [compareHref, setCompareHref] = useState(COMPARE_PATH);
   const [label, setLabel] = useState('');
   const [zip, setZip] = useState('');
   const [stateCode, setStateCode] = useState('');
@@ -78,6 +92,13 @@ export function GuestInsuranceHq() {
     } else {
       setProviders([]);
     }
+    const tray = getCompareTray();
+    setCompareCount(tray.length);
+    setCompareHref(
+      tray.length > 0
+        ? `${COMPARE_PATH}?${tray.map((t) => `add=${encodeURIComponent(t.slug)}`).join('&')}`
+        : COMPARE_PATH
+    );
   }, []);
 
   useEffect(() => {
@@ -86,12 +107,30 @@ export function GuestInsuranceHq() {
     setHydrated(true);
     const onStore = () => refresh();
     window.addEventListener('ith-my-insurance-store', onStore);
+    window.addEventListener('ith-compare-tray', onStore);
     window.addEventListener('storage', onStore);
     return () => {
       window.removeEventListener('ith-my-insurance-store', onStore);
+      window.removeEventListener('ith-compare-tray', onStore);
       window.removeEventListener('storage', onStore);
     };
   }, [refresh]);
+
+  const shortlisted = useMemo(() => getShortlisted(providers), [providers]);
+
+  function loadShortlistIntoCompare() {
+    const list = getShortlisted(providers).slice(0, 4);
+    if (list.length < 2) {
+      toast.error('Shortlist at least 2 agencies to compare');
+      return;
+    }
+    clearCompareTray();
+    for (const p of list) {
+      addToCompareTray({ slug: p.providerSlug, name: p.providerName });
+    }
+    const qs = list.map((p) => `add=${encodeURIComponent(p.providerSlug)}`).join('&');
+    router.push(`${COMPARE_PATH}?${qs}`);
+  }
 
   const locationLabel = useMemo(() => {
     const parts = [zip, stateCode].filter(Boolean);
@@ -124,13 +163,58 @@ export function GuestInsuranceHq() {
   if (!hydrated) {
     return (
       <div className="animate-pulse rounded-2xl border bg-slate-50 p-10 text-center text-sm text-slate-500">
-        Loading Insurance HQ…
+        Loading Insurance HQ...
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
+      {/* Secondary rooms — Setup · Report · Compare (one HQ home, not second nav homes) */}
+      <nav
+        aria-label="My Insurance sections"
+        className="flex flex-wrap gap-2"
+      >
+        <Button asChild size="sm" variant="outline" className="gap-1.5">
+          <Link href="/my-insurance/setup">
+            <Settings2 className="h-3.5 w-3.5" aria-hidden />
+            Setup
+          </Link>
+        </Button>
+        <Button asChild size="sm" variant="outline" className="gap-1.5">
+          <Link href="/my-insurance/report">
+            <FileText className="h-3.5 w-3.5" aria-hidden />
+            Report
+          </Link>
+        </Button>
+        {compareCount >= 2 ? (
+          <Button asChild size="sm" className="gap-1.5 bg-teal-600 hover:bg-teal-700">
+            <Link href={compareHref}>
+              <GitCompare className="h-3.5 w-3.5" aria-hidden />
+              Compare ({compareCount})
+            </Link>
+          </Button>
+        ) : shortlisted.length >= 2 ? (
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            className="gap-1.5"
+            onClick={loadShortlistIntoCompare}
+          >
+            <GitCompare className="h-3.5 w-3.5" aria-hidden />
+            Compare shortlist ({shortlisted.length})
+          </Button>
+        ) : (
+          <Button asChild size="sm" variant="outline" className="gap-1.5">
+            <Link href={COMPARE_PATH}>
+              <GitCompare className="h-3.5 w-3.5" aria-hidden />
+              Compare{compareCount === 1 ? ' (add 1 more)' : ''}
+            </Link>
+          </Button>
+        )}
+      </nav>
+
       <Card className="border-teal-100 shadow-sm">
         <CardHeader className="pb-3">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
@@ -139,7 +223,7 @@ export function GuestInsuranceHq() {
           <CardTitle className="text-xl text-slate-900">Coverage research plan</CardTitle>
           <p className="text-sm leading-relaxed text-slate-600">
             Guest-saved on this device. Edit details below or start from the directory. Research
-            only — not a quote marketplace.
+            only - not a quote marketplace.
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -519,6 +603,11 @@ function ProviderList({
                 </option>
               ))}
             </select>
+            <CompareProviderButton
+              providerSlug={p.providerSlug}
+              providerName={p.providerName}
+              size="sm"
+            />
             <Button variant="outline" size="sm" asChild>
               <Link href={p.profilePath || `/providers/${p.providerSlug}`}>
                 Profile <ExternalLink className="ml-1 h-3.5 w-3.5" aria-hidden />

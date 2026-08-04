@@ -1,4 +1,4 @@
-﻿# My Insurance (Insurance HQ)
+# My Insurance (Insurance HQ)
 
 Independent research workspace on `www.insurancetrusthub.com`.
 
@@ -16,7 +16,7 @@ Independent research workspace on `www.insurancetrusthub.com`.
 - `drug_baskets` / `drug_basket_items`
 - `saved_calculator_results`
 - `provider_comparisons` / `provider_comparison_items` (Phase 3)
-- `reviews` (+ optional `user_id`, `coverage_type`) â€” new reviews default **pending**
+- `reviews` (+ optional `user_id`, `coverage_type`)  -  new reviews default **pending**
 
 Migrations:
 - `20260728120000_my_insurance.sql`
@@ -24,8 +24,8 @@ Migrations:
 
 ## Routes
 
-- `/my-insurance` â€” HQ dashboard  
-- `/my-insurance/compare` â€” side-by-side (query `add=` slugs)  
+- `/my-insurance`  -  HQ dashboard  
+- `/my-insurance/compare`  -  side-by-side (query `add=` slugs)  
 - `/tools/prescription-drug-list`  
 - `/calculators/aca-subsidy`, `/tools/cost-estimator`  
 - Auth: `/auth/insurance/*`, `/api/insurance-auth/*`  

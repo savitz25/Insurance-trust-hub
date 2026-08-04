@@ -160,7 +160,7 @@ export function WriteReviewForm({ providerSlug, providerName }: Props) {
         >
           {COVERAGE_OPTIONS.map((o) => (
             <option key={o || 'none'} value={o}>
-              {o || 'Selectâ€¦'}
+              {o || 'Select...'}
             </option>
           ))}
         </select>
@@ -178,7 +178,7 @@ export function WriteReviewForm({ providerSlug, providerName }: Props) {
         className="h-11 w-full gap-2 bg-teal-600 hover:bg-teal-700 sm:w-auto"
       >
         {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-        {busy ? 'Submittingâ€¦' : 'Submit review'}
+        {busy ? 'Submitting...' : 'Submit review'}
       </Button>
     </form>
   );
