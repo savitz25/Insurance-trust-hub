@@ -12,6 +12,11 @@ import { ProviderCard } from '@/components/provider-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { NetworkHandoff } from '@/components/network/network-handoff';
+import {
+  EmptyCoveragePanel,
+  NAIC_CONSUMER_URL,
+  DOI_PATHWAY_HREF,
+} from '@/components/research/empty-coverage-panel';
 
 interface CityPageProps {
   params: Promise<{ state: string; city: string }>;
@@ -136,13 +141,31 @@ export default async function CityDestinationPage({ params }: CityPageProps) {
             </Button>
           </div>
           {providers.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
-              No agencies found for this city. Try the{' '}
-              <Link href={`/directory?state=${state.code}`} className="text-primary hover:underline">
-                {state.name} directory
-              </Link>
-              .
-            </p>
+            <EmptyCoveragePanel
+              variant="unmapped"
+              title={`No agencies listed in ${city.name} yet`}
+              description={`We have not listed agencies for ${city.name}, ${state.code} in this guide. Coverage is expanding — verify any agent on state DOI records before you enroll.`}
+              placeLabel={`${city.name}, ${state.code}`}
+              primarySources={[
+                { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
+                {
+                  href: NAIC_CONSUMER_URL,
+                  label: 'NAIC consumer tools',
+                  external: true,
+                },
+              ]}
+              widenLinks={[
+                { href: `/directory?state=${state.code}`, label: `${state.name} directory` },
+                { href: '/tools/needs-assessment', label: 'Needs assessment' },
+                { href: '/calculators', label: 'Educational calculators' },
+                { href: '/destinations', label: 'All destinations' },
+              ]}
+              journeyLink={{
+                href: 'https://www.movetrusthub.com/verify-dot',
+                label: 'Research movers for this relocation',
+                external: true,
+              }}
+            />
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {providers.map((p) => (

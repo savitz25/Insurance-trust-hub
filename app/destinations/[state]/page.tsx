@@ -12,6 +12,11 @@ import { ProviderCard } from '@/components/provider-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { NetworkHandoff } from '@/components/network/network-handoff';
+import {
+  EmptyCoveragePanel,
+  NAIC_CONSUMER_URL,
+  DOI_PATHWAY_HREF,
+} from '@/components/research/empty-coverage-panel';
 
 interface StatePageProps {
   params: Promise<{ state: string }>;
@@ -136,13 +141,30 @@ export default async function StateDestinationPage({ params }: StatePageProps) {
         <section>
           <h2 className="text-2xl font-semibold mb-6">Local insurance agencies</h2>
           {providers.length === 0 ? (
-            <p className="text-muted-foreground text-sm">
-              No agencies listed yet.{' '}
-              <Link href="/directory" className="text-primary hover:underline">
-                Browse the full directory
-              </Link>
-              .
-            </p>
+            <EmptyCoveragePanel
+              variant="unmapped"
+              title={`No agencies listed for ${dest.name} yet`}
+              description="We have not listed agencies for this destination guide. Use DOI / NAIC tools to verify any agent, and educational calculators while coverage expands."
+              placeLabel={dest.name}
+              primarySources={[
+                { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
+                {
+                  href: NAIC_CONSUMER_URL,
+                  label: 'NAIC consumer tools',
+                  external: true,
+                },
+              ]}
+              widenLinks={[
+                { href: '/directory', label: 'Full directory' },
+                { href: '/tools/needs-assessment', label: 'Needs assessment' },
+                { href: '/calculators', label: 'Educational calculators' },
+              ]}
+              journeyLink={{
+                href: 'https://www.movetrusthub.com/verify-dot',
+                label: 'Research movers if you’re relocating',
+                external: true,
+              }}
+            />
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {providers.map((p) => (

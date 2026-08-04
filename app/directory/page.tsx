@@ -10,6 +10,11 @@ import type { Provider } from '@/types/provider';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { NetworkBelongingLine } from '@/components/network/network-belonging-line';
+import {
+  EmptyCoveragePanel,
+  NAIC_CONSUMER_URL,
+  DOI_PATHWAY_HREF,
+} from '@/components/research/empty-coverage-panel';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Agency Directory — Search Licensed Agents by State',
@@ -96,12 +101,39 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           </Suspense>
 
           {providers.length === 0 ? (
-            <div className="rounded-xl border bg-muted/30 p-12 text-center">
-              <p className="font-medium">No agencies match your filters</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Try broadening your search or clearing filters.
-              </p>
-            </div>
+            <EmptyCoveragePanel
+              variant={query || state || type || specialty || verifiedOnly || minRating ? 'filtered' : 'unmapped'}
+              title={
+                state || query
+                  ? 'No agencies match your filters'
+                  : 'No agencies match these criteria yet'
+              }
+              description={
+                state || query || type || specialty
+                  ? 'No listings match the current filters. Broaden the search or clear filters — empty results are not filled with unrelated national spam.'
+                  : 'This research directory is expanding. Empty here does not mean unlicensed agents do not exist — verify on state DOI / NAIC tools.'
+              }
+              placeLabel={state || query || undefined}
+              primarySources={[
+                { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
+                {
+                  href: NAIC_CONSUMER_URL,
+                  label: 'NAIC consumer tools',
+                  external: true,
+                },
+              ]}
+              widenLinks={[
+                { href: '/directory', label: 'Clear directory home' },
+                { href: '/tools/needs-assessment', label: 'Needs assessment tool' },
+                { href: '/calculators', label: 'Educational calculators' },
+                { href: '/methodology', label: 'Methodology' },
+              ]}
+              journeyLink={{
+                href: 'https://www.movetrusthub.com/verify-dot',
+                label: 'Research movers if you’re relocating',
+                external: true,
+              }}
+            />
           ) : (
             <div
               className={cn(
