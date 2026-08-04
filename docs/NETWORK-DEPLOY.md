@@ -31,6 +31,12 @@ Constant: `lib/network/standard-version.ts` → `ASK_NETWORK_STANDARD_VERSION`
 - **Do not bump for:** unrelated vertical content
 - Live host exposes `data-network-standard` on `<body>`
 
+### Trust Mark contract
+
+Primary: `Ask Trust Hub Standard` → `https://www.asktrusthub.com/methodology`  
+Long: `Researched to the Ask Trust Hub Standard`  
+Network bar **Standards** → Ask methodology. Component: `components/network/trust-mark.tsx`.
+
 ## Post-deploy smoke
 
 Prefer the canonical script from **Move-trust-Hub**:

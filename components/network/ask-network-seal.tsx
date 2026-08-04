@@ -1,4 +1,5 @@
 import { ASK_TRUST_HUB, NETWORK_HUBS } from '@/lib/network/ask-trust-hub';
+import { TrustMark } from '@/components/network/trust-mark';
 
 /**
  * Footer network seal — identical spirit to Move Trust Hub seal.
@@ -36,16 +37,11 @@ export function AskNetworkSeal() {
         </a>
         {' · '}
         <a href="/methodology" className="underline underline-offset-2 hover:opacity-90">
-          Methodology
+          Hub methodology
         </a>
-        {' · '}
-        <a
-          href={ASK_TRUST_HUB.methodologyUrl}
-          className="underline underline-offset-2 hover:opacity-90"
-          rel="noopener noreferrer"
-        >
-          Ask Standard
-        </a>
+      </p>
+      <p className="mt-2 flex flex-wrap items-center justify-center gap-2">
+        <TrustMark />
       </p>
       <ul
         className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] text-muted-foreground/80"

@@ -20,7 +20,8 @@ export function AskNetworkBar() {
     {
       id: 'standards',
       label: 'Standards',
-      href: ASK_TRUST_HUB.promiseUrl,
+      // Clear path to The Ask Trust Hub Standard (methodology)
+      href: ASK_TRUST_HUB.methodologyUrl,
       active: false,
     },
   ];

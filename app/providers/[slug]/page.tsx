@@ -24,6 +24,7 @@ import { INSURANCE_TYPES } from '@/lib/constants';
 import { LeadForm } from '@/components/lead-form';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { TrustMark } from '@/components/network/trust-mark';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
 import { CompareProviderButton } from '@/components/my-insurance/compare-provider-button';
 import { WriteReviewForm } from '@/components/my-insurance/write-review-form';
@@ -199,6 +200,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   </Button>
+                  <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
+                    Research listing only — not an endorsement of this agency.
+                  </p>
+                  <TrustMark />
                 </CardContent>
               </Card>
             </section>
