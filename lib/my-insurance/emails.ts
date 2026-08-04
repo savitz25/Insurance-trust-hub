@@ -273,7 +273,7 @@ export async function sendSavedProviderEmail(params: {
     </p>`,
     ctaLabel: 'Open Insurance HQ',
     ctaHref: hq,
-    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View ${name} profile â†’</a>`,
+    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View ${name} profile →</a>`,
   });
   return sendResend({
     to: params.to,
@@ -341,7 +341,7 @@ export async function sendDrugBasketEmail(params: {
     </p>`,
     ctaLabel: 'Open Insurance HQ',
     ctaHref: hq,
-    secondaryHtml: `<a href="${tool}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Edit drug list â†’</a>`,
+    secondaryHtml: `<a href="${tool}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Edit drug list →</a>`,
   });
 
   const textLines = [
@@ -389,7 +389,7 @@ export async function sendSavedCalculatorEmail(params: {
     </p>`,
     ctaLabel: 'Open Insurance HQ',
     ctaHref: hq,
-    secondaryHtml: `<a href="${toolUrl}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Re-run this tool â†’</a>`,
+    secondaryHtml: `<a href="${toolUrl}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Re-run this tool →</a>`,
   });
 
   return sendResend({
@@ -442,7 +442,7 @@ export async function sendComparisonSummaryEmail(params: {
     </p>`,
     ctaLabel: 'Open comparison',
     ctaHref: compareUrl,
-    secondaryHtml: `<a href="${hq}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Insurance HQ â†’</a>`,
+    secondaryHtml: `<a href="${hq}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Insurance HQ →</a>`,
   });
 
   return sendResend({
@@ -489,7 +489,7 @@ export async function sendReviewSubmittedEmail(params: {
     </p>`,
     ctaLabel: 'Open Insurance HQ',
     ctaHref: hq,
-    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View agency profile â†’</a>`,
+    secondaryHtml: `<a href="${profile}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">View agency profile →</a>`,
   });
 
   return sendResend({
@@ -521,7 +521,7 @@ export async function sendMagicLinkEmail(params: {
     ctaLabel: 'Sign in to Insurance HQ',
     ctaHref: params.confirmUrl,
     noteHtml:
-      'This link expires soon and can only be used once. For your security, don't forward this email.',
+      "This link expires soon and can only be used once. For your security, don't forward this email.",
   });
   return sendResend({
     to: params.to,
