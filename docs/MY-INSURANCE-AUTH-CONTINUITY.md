@@ -48,6 +48,10 @@
 4. Signed out: **Sign in** on HQ + header; top-right My Insurance works  
 5. Signed in: top-right My Insurance works; Sign out works; cloud extras do not replace shortlist  
 
+## Phase D plans (local-first)
+
+Coverage plans live only in `ith:my-insurance:v1` (not cloud). Auth merge never drops local plans/providers. Cloud `saved_providers` still union by slug into the **active** plan on import. See `docs/MY-INSURANCE-PHASE-D.md`.
+
 ## Out of scope
 
-Phase D multi-plan, full SSO with Move/Lender, forcing login for Save.
+Full SSO with Move/Lender, forcing login for Save.

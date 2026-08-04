@@ -1,6 +1,7 @@
 /**
  * Guest-first My Insurance persistence (localStorage).
- * Storage key: ith:my-insurance:v1
+ * Storage key: ith:my-insurance:v1 (Phase D multi-plan; migrate in normalizeState)
+ * Compare tray stays global: ith-my-insurance-compare-tray-v1
  * SSR-safe: all reads return empty on server.
  */
 
@@ -27,11 +28,12 @@ import {
   SHORTLIST_CAP,
 } from '@/lib/my-insurance/shortlist-rules';
 
-const MAX_SAVED_PROVIDERS = 50;
+const MAX_SAVED_PROVIDERS = 80;
+const MAX_PLANS = 25;
 
 function emptyState(): MyInsuranceState {
   return {
-    version: 1,
+    version: 2,
     activePlanId: null,
     plans: [],
     savedProviders: [],
@@ -63,21 +65,87 @@ function normalizeProvider(p: SavedProvider): SavedProvider {
   };
 }
 
+/**
+ * Phase D migration:
+ * - Accept version 1 or 2
+ * - Backfill planId on providers from plan.savedProviderIds
+ * - Ensure activePlanId points at a non-archived plan when any exist
+ */
 function normalizeState(raw: unknown): MyInsuranceState | null {
   if (!raw || typeof raw !== 'object') return null;
   const parsed = raw as MyInsuranceState;
-  if (parsed.version !== 1 || !Array.isArray(parsed.plans)) return null;
-  return {
-    version: 1,
-    activePlanId: parsed.activePlanId ?? null,
-    plans: (Array.isArray(parsed.plans) ? parsed.plans : []).map((p) => ({
+  if (parsed.version !== 1 && parsed.version !== 2) return null;
+  if (!Array.isArray(parsed.plans)) return null;
+
+  let plans: CoveragePlan[] = (Array.isArray(parsed.plans) ? parsed.plans : [])
+    .filter((p) => p && typeof p.id === 'string')
+    .map((p) => ({
       ...p,
+      label: String(p.label || 'My coverage research'),
+      protectFocus: Array.isArray(p.protectFocus) ? p.protectFocus : [],
+      status: p.status === 'archived' ? ('archived' as const) : ('active' as const),
+      createdAt: p.createdAt || nowIso(),
+      updatedAt: p.updatedAt || p.createdAt || nowIso(),
+      savedProviderIds: Array.isArray(p.savedProviderIds) ? p.savedProviderIds : [],
       toolSnapshots: Array.isArray(p.toolSnapshots) ? p.toolSnapshots : [],
-    })),
-    savedProviders: (Array.isArray(parsed.savedProviders) ? parsed.savedProviders : []).map(
-      normalizeProvider
-    ),
+    }))
+    .slice(0, MAX_PLANS);
+
+  let savedProviders = (Array.isArray(parsed.savedProviders) ? parsed.savedProviders : [])
+    .map(normalizeProvider)
+    .filter((p) => p.providerSlug);
+
+  // Backfill planId from membership lists
+  const idToPlan = new Map<string, string>();
+  for (const plan of plans) {
+    for (const pid of plan.savedProviderIds) {
+      idToPlan.set(pid, plan.id);
+    }
+  }
+  const fallbackPlanId =
+    parsed.activePlanId && plans.some((p) => p.id === parsed.activePlanId)
+      ? parsed.activePlanId
+      : listNonArchived(plans)[0]?.id ?? plans[0]?.id ?? null;
+
+  savedProviders = savedProviders.map((p) => {
+    if (p.planId && plans.some((pl) => pl.id === p.planId)) return p;
+    const fromList = idToPlan.get(p.id);
+    if (fromList) return { ...p, planId: fromList };
+    if (fallbackPlanId) return { ...p, planId: fallbackPlanId };
+    return p;
+  });
+
+  // Ensure plan.savedProviderIds includes providers with matching planId
+  plans = plans.map((plan) => {
+    const fromField = savedProviders
+      .filter((p) => p.planId === plan.id)
+      .map((p) => p.id);
+    const merged = Array.from(new Set([...plan.savedProviderIds, ...fromField]));
+    return { ...plan, savedProviderIds: merged };
+  });
+
+  let activePlanId = parsed.activePlanId ?? null;
+  if (activePlanId) {
+    const hit = plans.find((p) => p.id === activePlanId);
+    if (!hit || hit.status === 'archived') {
+      activePlanId = listNonArchived(plans)[0]?.id ?? null;
+    }
+  } else {
+    activePlanId = listNonArchived(plans)[0]?.id ?? null;
+  }
+
+  return {
+    version: 2,
+    activePlanId,
+    plans,
+    savedProviders: savedProviders.slice(0, MAX_SAVED_PROVIDERS),
   };
+}
+
+function listNonArchived(plans: CoveragePlan[]): CoveragePlan[] {
+  return plans
+    .filter((p) => p.status !== 'archived')
+    .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
 }
 
 function dispatchChange(): void {
@@ -136,9 +204,9 @@ export function loadState(): MyInsuranceState {
 export function saveState(state: MyInsuranceState): { ok: true } | { ok: false; error: string } {
   if (!isBrowser()) return { ok: false, error: 'Not available on server' };
   const next: MyInsuranceState = {
-    version: 1,
+    version: 2,
     activePlanId: state.activePlanId,
-    plans: state.plans,
+    plans: state.plans.slice(0, MAX_PLANS),
     savedProviders: state.savedProviders
       .map(normalizeProvider)
       .filter((p) => p.providerSlug)
@@ -208,7 +276,7 @@ function migrateFromLegacyGuestProviders(): MyInsuranceState {
       savedProviderIds: savedProviders.map((p) => p.id),
     };
     const state: MyInsuranceState = {
-      version: 1,
+      version: 2,
       activePlanId: planId,
       plans: [plan],
       savedProviders,
@@ -220,20 +288,47 @@ function migrateFromLegacyGuestProviders(): MyInsuranceState {
   }
 }
 
+/** Non-archived plans (library “open” set). */
 export function listActivePlans(state?: MyInsuranceState): CoveragePlan[] {
   const s = state ?? loadState();
-  return s.plans
-    .filter((p) => p.status === 'active')
-    .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
+  return listNonArchived(s.plans);
+}
+
+/** Full library: open + archived, most recently updated first. */
+export function listAllPlans(state?: MyInsuranceState): CoveragePlan[] {
+  const s = state ?? loadState();
+  return s.plans.slice().sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
+}
+
+export function getPlanById(planId: string, state?: MyInsuranceState): CoveragePlan | null {
+  const s = state ?? loadState();
+  return s.plans.find((p) => p.id === planId) ?? null;
 }
 
 export function getActivePlan(state?: MyInsuranceState): CoveragePlan | null {
   const s = state ?? loadState();
   if (s.activePlanId) {
-    const hit = s.plans.find((p) => p.id === s.activePlanId);
+    const hit = s.plans.find((p) => p.id === s.activePlanId && p.status !== 'archived');
     if (hit) return hit;
   }
-  return listActivePlans(s)[0] ?? s.plans[0] ?? null;
+  return listActivePlans(s)[0] ?? null;
+}
+
+/** Switch HQ active plan. Unarchives if needed so Open from library works. */
+export function setActivePlan(planId: string): CoveragePlan | null {
+  const state = loadState();
+  const idx = state.plans.findIndex((p) => p.id === planId);
+  if (idx < 0) return null;
+  const ts = nowIso();
+  const plan: CoveragePlan = {
+    ...state.plans[idx],
+    status: 'active',
+    updatedAt: ts,
+  };
+  state.plans[idx] = plan;
+  state.activePlanId = plan.id;
+  saveState(state);
+  return plan;
 }
 
 export function getProvidersForPlan(
@@ -260,7 +355,11 @@ export type UpsertPlanInput = {
 
 type PlanStatus = CoveragePlan['status'];
 
-/** Spec name: upsertPlan — create or update; Phase A keeps at most one active. */
+/**
+ * Spec name: upsertPlan — create or update.
+ * Phase D: creating a plan does NOT archive siblings; sets activePlanId to the new/updated plan
+ * when status is active (non-archived).
+ */
 export function upsertPlan(input: UpsertPlanInput): CoveragePlan {
   const state = loadState();
   const ts = nowIso();
@@ -273,25 +372,44 @@ export function upsertPlan(input: UpsertPlanInput): CoveragePlan {
         ...state.plans[idx],
         label,
         protectFocus: input.protectFocus ?? state.plans[idx].protectFocus,
-        location: input.location ?? state.plans[idx].location,
+        location: input.location !== undefined ? input.location : state.plans[idx].location,
         notes: input.notes !== undefined ? input.notes : state.plans[idx].notes,
         status: input.status ?? state.plans[idx].status,
         updatedAt: ts,
       };
       state.plans[idx] = next;
-      if (next.status === 'active') state.activePlanId = next.id;
+      if (next.status === 'active') {
+        state.activePlanId = next.id;
+      } else if (state.activePlanId === next.id) {
+        state.activePlanId = listNonArchived(state.plans)[0]?.id ?? null;
+      }
       saveState(state);
       return next;
     }
   }
 
-  // New plan — Phase A: archive other actives so one active remains simple
-  state.plans = state.plans.map((p) =>
-    p.status === 'active' ? { ...p, status: 'archived' as const, updatedAt: ts } : p
-  );
+  return createPlan({
+    label,
+    protectFocus: input.protectFocus,
+    location: input.location,
+    notes: input.notes,
+    makeActive: true,
+  });
+}
+
+/** Create a new plan in the library (does not archive existing plans). */
+export function createPlan(input: {
+  label?: string;
+  protectFocus?: ProtectFocus[];
+  location?: CoveragePlan['location'];
+  notes?: string;
+  makeActive?: boolean;
+}): CoveragePlan {
+  const state = loadState();
+  const ts = nowIso();
   const plan: CoveragePlan = {
     id: newId(),
-    label,
+    label: (input.label?.trim() || 'My coverage research').slice(0, 120),
     protectFocus: input.protectFocus ?? [],
     location: input.location,
     notes: input.notes,
@@ -299,9 +417,14 @@ export function upsertPlan(input: UpsertPlanInput): CoveragePlan {
     createdAt: ts,
     updatedAt: ts,
     savedProviderIds: [],
+    toolSnapshots: [],
   };
-  state.plans = [plan, ...state.plans];
-  state.activePlanId = plan.id;
+  state.plans = [plan, ...state.plans].slice(0, MAX_PLANS);
+  if (input.makeActive !== false) {
+    state.activePlanId = plan.id;
+  } else if (!state.activePlanId) {
+    state.activePlanId = plan.id;
+  }
   saveState(state);
   return plan;
 }
@@ -313,9 +436,95 @@ export function archivePlan(planId: string): void {
     p.id === planId ? { ...p, status: 'archived' as const, updatedAt: ts } : p
   );
   if (state.activePlanId === planId) {
-    state.activePlanId = listActivePlans(state)[0]?.id ?? null;
+    state.activePlanId = listNonArchived(state.plans)[0]?.id ?? null;
   }
   saveState(state);
+}
+
+/** Permanently remove plan + its providers/snapshots. */
+export function deletePlan(planId: string): void {
+  const state = loadState();
+  const plan = state.plans.find((p) => p.id === planId);
+  if (!plan) return;
+  const removeIds = new Set(plan.savedProviderIds);
+  state.savedProviders = state.savedProviders.filter(
+    (p) => p.planId !== planId && !removeIds.has(p.id)
+  );
+  state.plans = state.plans.filter((p) => p.id !== planId);
+  if (state.activePlanId === planId) {
+    state.activePlanId = listNonArchived(state.plans)[0]?.id ?? null;
+  }
+  saveState(state);
+}
+
+/** Clone plan + providers + snapshots with new ids; becomes active. */
+export function duplicatePlan(planId: string): CoveragePlan | null {
+  const state = loadState();
+  const source = state.plans.find((p) => p.id === planId);
+  if (!source) return null;
+  const ts = nowIso();
+  const newPlanId = newId();
+  const idMap = new Map<string, string>();
+  const clonedProviders: SavedProvider[] = getProvidersForPlan(planId, state).map((p) => {
+    const nid = newId();
+    idMap.set(p.id, nid);
+    return {
+      ...p,
+      id: nid,
+      planId: newPlanId,
+      savedAt: ts,
+      updatedAt: ts,
+    };
+  });
+  const plan: CoveragePlan = {
+    ...source,
+    id: newPlanId,
+    label: `${source.label} (copy)`.slice(0, 120),
+    status: 'active',
+    createdAt: ts,
+    updatedAt: ts,
+    savedProviderIds: clonedProviders.map((p) => p.id),
+    toolSnapshots: (source.toolSnapshots ?? []).map((s) => ({
+      ...s,
+      id: newId(),
+      capturedAt: ts,
+    })),
+  };
+  state.plans = [plan, ...state.plans].slice(0, MAX_PLANS);
+  state.savedProviders = [...clonedProviders, ...state.savedProviders].slice(
+    0,
+    MAX_SAVED_PROVIDERS
+  );
+  state.activePlanId = plan.id;
+  saveState(state);
+  return plan;
+}
+
+export function renamePlan(planId: string, label: string): CoveragePlan | null {
+  const existing = loadState().plans.find((p) => p.id === planId);
+  if (!existing) return null;
+  return upsertPlan({
+    id: planId,
+    label: label.trim() || existing.label,
+    protectFocus: existing.protectFocus,
+    location: existing.location,
+    notes: existing.notes,
+    status: existing.status,
+  });
+}
+
+/** Counts for library cards */
+export function getPlanStats(
+  planId: string,
+  state?: MyInsuranceState
+): { shortlist: number; providers: number; snapshots: number } {
+  const s = state ?? loadState();
+  const providers = getProvidersForPlan(planId, s);
+  return {
+    shortlist: getShortlisted(providers).length,
+    providers: providers.length,
+    snapshots: (s.plans.find((p) => p.id === planId)?.toolSnapshots ?? []).length,
+  };
 }
 
 export type UpsertSavedProviderInput = {

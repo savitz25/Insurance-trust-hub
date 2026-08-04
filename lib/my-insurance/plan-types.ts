@@ -76,12 +76,14 @@ export type SavedProvider = {
   createdAt?: string;
 };
 
-/** Root guest blob (localStorage). */
+/** Root guest blob (localStorage). Phase D: multi-plan library via activePlanId. */
 export type MyInsuranceState = {
-  version: 1;
-  /** Phase A convenience: which plan is “current” */
+  /** 1 = original; 2 = multi-plan library (same key, migrated in loadState) */
+  version: 1 | 2;
+  /** Exactly one preferred plan when any non-archived plan exists */
   activePlanId: string | null;
   plans: CoveragePlan[];
+  /** Strongly associated via planId / plan.savedProviderIds */
   savedProviders: SavedProvider[];
 };
 

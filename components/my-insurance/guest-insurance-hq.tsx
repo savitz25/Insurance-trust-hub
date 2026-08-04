@@ -6,6 +6,7 @@ import {
   Bookmark,
   Building2,
   FileText,
+  FolderOpen,
   GitCompare,
   MapPin,
   Plus,
@@ -30,8 +31,10 @@ import {
   getProvidersForPlan,
   getResearching,
   getShortlisted,
+  listActivePlans,
   loadMyInsuranceStore,
   removeProviderFromPlan,
+  setActivePlan,
   SHORTLIST_CAP,
   shortlistReplacing,
   shortlistWithDemoteOldest,
@@ -72,6 +75,7 @@ export function GuestInsuranceHq() {
   const [notes, setNotes] = useState('');
   const [focus, setFocus] = useState<ProtectFocus[]>([]);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [openPlans, setOpenPlans] = useState<CoveragePlan[]>([]);
   const [fullPanel, setFullPanel] = useState<{
     shortlisted: SavedProvider[];
     pendingId: string;
@@ -82,6 +86,7 @@ export function GuestInsuranceHq() {
     const store = loadMyInsuranceStore();
     const active = getActivePlan(store);
     setPlan(active);
+    setOpenPlans(listActivePlans(store));
     if (active) {
       setProviders(getProvidersForPlan(active.id, store));
       setLabel(active.label);
@@ -176,6 +181,12 @@ export function GuestInsuranceHq() {
         className="flex flex-wrap gap-2"
       >
         <Button asChild size="sm" variant="outline" className="gap-1.5">
+          <Link href="/my-insurance/plans">
+            <FolderOpen className="h-3.5 w-3.5" aria-hidden />
+            All plans
+          </Link>
+        </Button>
+        <Button asChild size="sm" variant="outline" className="gap-1.5">
           <Link href="/my-insurance/setup">
             <Settings2 className="h-3.5 w-3.5" aria-hidden />
             Setup
@@ -217,14 +228,48 @@ export function GuestInsuranceHq() {
 
       <Card className="border-teal-100 shadow-sm">
         <CardHeader className="pb-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
-            Active plan
-          </p>
-          <CardTitle className="text-xl text-slate-900">Coverage research plan</CardTitle>
-          <p className="text-sm leading-relaxed text-slate-600">
-            Guest-saved on this device. Edit details below or start from the directory. Research
-            only - not a quote marketplace.
-          </p>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
+                Active plan
+              </p>
+              <CardTitle className="text-xl text-slate-900">
+                {plan?.label || 'Coverage research plan'}
+              </CardTitle>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                Guest-saved on this device. Shortlist and report attach to this plan only. Research
+                only - not a quote marketplace.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {openPlans.length > 1 ? (
+                <label className="flex items-center gap-2 text-sm text-slate-600">
+                  <span className="sr-only">Switch plan</span>
+                  <select
+                    className="h-9 max-w-[14rem] rounded-md border border-slate-200 bg-white px-2 text-sm font-medium text-slate-800"
+                    value={plan?.id ?? ''}
+                    onChange={(e) => {
+                      const id = e.target.value;
+                      if (!id) return;
+                      setActivePlan(id);
+                      toast.message('Switched active plan');
+                      refresh();
+                    }}
+                    aria-label="Switch active plan"
+                  >
+                    {openPlans.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
+              <Button asChild size="sm" variant="outline">
+                <Link href="/my-insurance/plans">All plans</Link>
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">

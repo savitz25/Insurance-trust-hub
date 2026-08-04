@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Check, Copy, Mail, Printer } from 'lucide-react';
 import {
   PROTECT_FOCUS_OPTIONS,
@@ -11,6 +12,7 @@ import {
 } from '@/lib/my-insurance/plan-types';
 import {
   getActivePlan,
+  getPlanById,
   getProvidersForPlan,
   getShortlisted,
   getToolSnapshots,
@@ -28,7 +30,9 @@ function buildPlainText(params: {
 }): string {
   const { plan, shortlist, snapshots } = params;
   const lines: string[] = [
-    'Your coverage research summary',
+    plan?.label
+      ? `Coverage research summary: ${plan.label}`
+      : 'Your coverage research summary',
     'Research only · Not an endorsement · Insurance Trust Hub',
     '',
   ];
@@ -76,8 +80,12 @@ function buildPlainText(params: {
 
 /**
  * Report-ready takeaway — copy / print / mailto.
+ * Optional ?planId= loads that plan (and sets active for continuity).
  */
 export function CoverageReport() {
+  const searchParams = useSearchParams();
+  const planIdParam = searchParams?.get('planId') ?? null;
+
   const [plan, setPlan] = useState<CoveragePlan | null>(null);
   const [providers, setProviders] = useState<SavedProvider[]>([]);
   const [snapshots, setSnapshots] = useState<ToolSnapshot[]>([]);
@@ -86,11 +94,15 @@ export function CoverageReport() {
 
   const refresh = useCallback(() => {
     const state = loadState();
-    const active = getActivePlan(state);
-    setPlan(active);
-    setProviders(active ? getProvidersForPlan(active.id, state) : []);
-    setSnapshots(active ? getToolSnapshots(active.id) : []);
-  }, []);
+    let target: CoveragePlan | null = null;
+    if (planIdParam) {
+      target = getPlanById(planIdParam, state);
+    }
+    if (!target) target = getActivePlan(state);
+    setPlan(target);
+    setProviders(target ? getProvidersForPlan(target.id, state) : []);
+    setSnapshots(target ? getToolSnapshots(target.id) : []);
+  }, [planIdParam]);
 
   useEffect(() => {
     refresh();
@@ -129,7 +141,7 @@ export function CoverageReport() {
   if (!hydrated) {
     return (
       <div className="animate-pulse rounded-2xl border bg-slate-50 p-10 text-center text-sm text-slate-500">
-        Loading report…
+        Loading report...
       </div>
     );
   }
@@ -147,10 +159,10 @@ export function CoverageReport() {
             <Link href="/my-insurance/setup">Guided setup</Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/directory">Directory</Link>
+            <Link href="/my-insurance/plans">All plans</Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/tools/cost-estimator">Cost estimator</Link>
+            <Link href="/directory">Directory</Link>
           </Button>
         </div>
       </div>
@@ -161,7 +173,9 @@ export function CoverageReport() {
     <div className="space-y-8 print:space-y-4">
       <header className="print:break-inside-avoid">
         <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-          Your coverage research summary
+          {plan?.label
+            ? `Coverage research: ${plan.label}`
+            : 'Your coverage research summary'}
         </h1>
         <p className="mt-2 text-sm text-slate-600">
           Research only · Not an endorsement · Guest-saved on this device
@@ -186,6 +200,9 @@ export function CoverageReport() {
           </Button>
           <Button type="button" variant="ghost" asChild>
             <Link href="/my-insurance">Back to HQ</Link>
+          </Button>
+          <Button type="button" variant="ghost" asChild>
+            <Link href="/my-insurance/plans">All plans</Link>
           </Button>
         </div>
       </header>
@@ -301,32 +318,11 @@ export function CoverageReport() {
             </a>
           </li>
         </ul>
-        {plan?.protectFocus.includes('relocating') ? (
-          <p className="mt-3 text-sm text-slate-600">
-            Next in your journey:{' '}
-            <a
-              href="https://www.movetrusthub.com/verify-dot"
-              className="font-semibold text-teal-700 underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Research movers on Move Trust Hub
-            </a>
-          </p>
-        ) : null}
-        {plan?.protectFocus.includes('home') ? (
-          <p className="mt-2 text-sm text-slate-600">
-            Home purchase research:{' '}
-            <a
-              href="https://www.lendertrusthub.com/local-lenders"
-              className="font-semibold text-teal-700 underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Lender Trust Hub local lenders
-            </a>
-          </p>
-        ) : null}
+        <p className="mt-4 text-sm print:hidden">
+          <Link href="/my-insurance/plans" className="font-medium text-teal-700 underline">
+            All plans
+          </Link>
+        </p>
       </section>
     </div>
   );

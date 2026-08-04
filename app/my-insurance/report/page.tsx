@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { CoverageReport } from '@/components/my-insurance/coverage-report';
 
@@ -19,11 +20,23 @@ export default function MyInsuranceReportPage() {
         </p>
         <p className="mt-2 text-sm print:hidden">
           <Link href="/my-insurance" className="font-medium text-teal-700 hover:underline">
-            ← Back to My Insurance
+            Back to My Insurance
+          </Link>
+          {' · '}
+          <Link href="/my-insurance/plans" className="font-medium text-teal-700 hover:underline">
+            All plans
           </Link>
         </p>
         <div className="mt-6">
-          <CoverageReport />
+          <Suspense
+            fallback={
+              <div className="animate-pulse rounded-2xl border bg-slate-50 p-10 text-center text-sm text-slate-500">
+                Loading report...
+              </div>
+            }
+          >
+            <CoverageReport />
+          </Suspense>
         </div>
       </div>
     </div>

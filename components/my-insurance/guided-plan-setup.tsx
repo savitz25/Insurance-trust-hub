@@ -1,13 +1,20 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import {
   PROTECT_FOCUS_OPTIONS,
   type ProtectFocus,
 } from '@/lib/my-insurance/plan-types';
-import { ensureActivePlan, getLastSaveError, upsertPlan } from '@/lib/my-insurance/storage';
+import {
+  createPlan,
+  ensureActivePlan,
+  getActivePlan,
+  getLastSaveError,
+  getProvidersForPlan,
+  upsertPlan,
+} from '@/lib/my-insurance/storage';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,7 +30,7 @@ const SITUATION_CHIPS = [
 ] as const;
 
 /**
- * Light guided plan setup (3–4 steps) — Phase C.
+ * Light guided plan setup — Phase C + D multi-plan create-as-new.
  */
 export function GuidedPlanSetup() {
   const [step, setStep] = useState(0);
@@ -32,12 +39,39 @@ export function GuidedPlanSetup() {
   const [stateCode, setStateCode] = useState('');
   const [situations, setSituations] = useState<string[]>([]);
   const [notes, setNotes] = useState('');
+  const [customLabel, setCustomLabel] = useState('');
+  const [createAsNew, setCreateAsNew] = useState(false);
+  const [hasShortlist, setHasShortlist] = useState(false);
+  const [activeLabel, setActiveLabel] = useState('My coverage research');
+  const [savedLabel, setSavedLabel] = useState('');
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const active = ensureActivePlan({ label: 'My coverage research' });
+    setActiveLabel(active.label);
+    setCustomLabel(active.label);
+    const providers = getProvidersForPlan(active.id);
+    setHasShortlist(providers.length > 0);
+    // If user already has shortlist, default to create-as-new so we don't wipe context
+    setCreateAsNew(providers.length > 0);
+  }, []);
 
   const locationLabel = useMemo(() => {
     const parts = [zip, stateCode].filter(Boolean);
     return parts.join(' · ') || undefined;
   }, [zip, stateCode]);
+
+  const suggestedLabel = useMemo(() => {
+    if (customLabel.trim()) return customLabel.trim().slice(0, 80);
+    if (focus.length > 0) {
+      return `Coverage plan · ${focus.slice(0, 3).join(', ')}${locationLabel ? ` · ${locationLabel}` : ''}`.slice(
+        0,
+        80
+      );
+    }
+    if (locationLabel) return `Coverage research · ${locationLabel}`.slice(0, 80);
+    return 'My coverage research';
+  }, [customLabel, focus, locationLabel]);
 
   function toggleFocus(id: ProtectFocus) {
     setFocus((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -55,33 +89,44 @@ export function GuidedPlanSetup() {
       .filter(Boolean)
       .join('; ');
     const mergedNotes = [notes.trim(), situationNotes].filter(Boolean).join(' · ') || undefined;
-    const label =
-      focus.length > 0
-        ? `Coverage plan · ${focus.slice(0, 3).join(', ')}${locationLabel ? ` · ${locationLabel}` : ''}`
-        : locationLabel
-          ? `Coverage research · ${locationLabel}`
-          : 'My coverage research';
+    const label = suggestedLabel;
 
-    const existing = ensureActivePlan();
-    upsertPlan({
-      id: existing.id,
-      label: label.slice(0, 80),
-      protectFocus: focus,
-      location: {
-        zip: zip.trim() || undefined,
-        state: stateCode.trim().toUpperCase().slice(0, 2) || undefined,
-        label: locationLabel,
-      },
-      notes: mergedNotes,
-      status: 'active',
-    });
+    if (createAsNew) {
+      createPlan({
+        label,
+        protectFocus: focus,
+        location: {
+          zip: zip.trim() || undefined,
+          state: stateCode.trim().toUpperCase().slice(0, 2) || undefined,
+          label: locationLabel,
+        },
+        notes: mergedNotes,
+        makeActive: true,
+      });
+    } else {
+      const existing = getActivePlan() ?? ensureActivePlan();
+      upsertPlan({
+        id: existing.id,
+        label,
+        protectFocus: focus,
+        location: {
+          zip: zip.trim() || undefined,
+          state: stateCode.trim().toUpperCase().slice(0, 2) || undefined,
+          label: locationLabel,
+        },
+        notes: mergedNotes,
+        status: 'active',
+      });
+    }
+
     const err = getLastSaveError();
     if (err) {
       toast.error(err);
       return;
     }
+    setSavedLabel(label);
     setDone(true);
-    toast.success('Coverage plan saved on this device');
+    toast.success(createAsNew ? 'New plan created on this device' : 'Coverage plan saved on this device');
   }
 
   if (done) {
@@ -90,12 +135,15 @@ export function GuidedPlanSetup() {
         <Check className="mx-auto h-10 w-10 text-teal-700" aria-hidden />
         <h2 className="mt-3 text-xl font-semibold text-slate-900">Plan ready</h2>
         <p className="mt-2 text-sm text-slate-600">
-          Next: shortlist agencies from the directory, run educational tools, then open your research
-          report.
+          Saved to <strong>{savedLabel}</strong>. Next: shortlist agencies, run educational tools, then
+          open your research report.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-2">
           <Button asChild className="bg-teal-600 hover:bg-teal-700">
             <Link href="/my-insurance">Open My Insurance</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/my-insurance/plans">All plans</Link>
           </Button>
           <Button asChild variant="outline">
             <Link href="/directory">Browse directory</Link>
@@ -229,6 +277,17 @@ export function GuidedPlanSetup() {
       {step === 3 && (
         <section className="rounded-2xl border bg-white p-5 shadow-sm sm:p-6">
           <h2 className="text-lg font-semibold text-slate-900">Review</h2>
+          <div className="mt-4">
+            <Label htmlFor="setup-label">Plan label</Label>
+            <Input
+              id="setup-label"
+              value={customLabel}
+              onChange={(e) => setCustomLabel(e.target.value.slice(0, 80))}
+              className="mt-1"
+              placeholder={suggestedLabel}
+            />
+            <p className="mt-1 text-xs text-slate-500">Will save as: {suggestedLabel}</p>
+          </div>
           <dl className="mt-4 space-y-3 text-sm">
             <div>
               <dt className="font-medium text-slate-500">Protect focus</dt>
@@ -256,6 +315,43 @@ export function GuidedPlanSetup() {
               </dd>
             </div>
           </dl>
+
+          <fieldset className="mt-5 space-y-2 rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+            <legend className="px-1 text-sm font-semibold text-slate-800">Save as</legend>
+            <label className="flex cursor-pointer items-start gap-2 text-sm">
+              <input
+                type="radio"
+                name="save-mode"
+                className="mt-1"
+                checked={!createAsNew}
+                onChange={() => setCreateAsNew(false)}
+              />
+              <span>
+                <span className="font-medium text-slate-900">Update current plan</span>
+                <span className="block text-slate-600">
+                  {activeLabel}
+                  {hasShortlist ? ' (keeps existing shortlist)' : ''}
+                </span>
+              </span>
+            </label>
+            <label className="flex cursor-pointer items-start gap-2 text-sm">
+              <input
+                type="radio"
+                name="save-mode"
+                className="mt-1"
+                checked={createAsNew}
+                onChange={() => setCreateAsNew(true)}
+              />
+              <span>
+                <span className="font-medium text-slate-900">Create as new plan</span>
+                <span className="block text-slate-600">
+                  Starts a fresh shortlist; previous plan stays in All plans
+                  {hasShortlist ? ' (recommended — you already have saves)' : ''}
+                </span>
+              </span>
+            </label>
+          </fieldset>
+
           <p className="mt-4 text-xs text-slate-500">
             Research only · Not an endorsement · Guest-saved on this device
           </p>
@@ -292,7 +388,7 @@ export function GuidedPlanSetup() {
           </div>
         ) : (
           <Button type="button" className="bg-teal-600 hover:bg-teal-700" onClick={finish}>
-            Save plan
+            {createAsNew ? 'Create plan' : 'Save plan'}
           </Button>
         )}
       </div>
