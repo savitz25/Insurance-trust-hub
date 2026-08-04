@@ -32,10 +32,10 @@ export function HowItWorks() {
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-trust">
             How research works here
           </p>
-          <h2 className="section-heading">From coverage confusion to verified licensing</h2>
+          <h2 className="section-heading">Name what you protect — then verify licensing</h2>
           <p className="mx-auto mt-2 max-w-xl text-muted-foreground">
-            Insurance Trust Hub is a research directory. We do not sell policies or rank agents for
-            pay.
+            Insurance Trust Hub is a research directory for DOI-licensed options. We do not sell
+            policies, free quotes, or rank agents for pay.
           </p>
         </div>
 

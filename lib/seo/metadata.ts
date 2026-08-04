@@ -5,9 +5,9 @@ import { brandAsset, BRAND_LOGO } from '@/lib/brand';
 export { SITE_URL };
 
 export const HOMEPAGE_TITLE =
-  'Licensed Insurance Agents Directory (2026) | Insurance Trust Hub';
+  'What Are You Trying to Protect? | Insurance Trust Hub';
 export const HOMEPAGE_DESCRIPTION =
-  'Independent research directory of state-licensed insurance agencies and agents. Re-check DOI / NAIC records. Educational ACA and Medicare tools. No paid placements. We do not sell policies.';
+  'What are you trying to protect? Research state-licensed insurance agencies by coverage need — health, home, auto, family, relocating. Educational tools. Re-check DOI / NAIC. No paid placements. We do not sell policies.';
 
 export const DEFAULT_SITE_DESCRIPTION =
   'Insurance Trust Hub is an independent research directory of licensed insurance agencies. Verify licenses, compare listings, and use educational coverage tools — not a policy marketplace.';

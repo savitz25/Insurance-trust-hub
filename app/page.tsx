@@ -4,7 +4,9 @@ import { ZipSearch } from '@/components/zip-search';
 import { TrustBar } from '@/components/trust-bar';
 import { HowItWorks } from '@/components/how-it-works';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { HeroProtectChips } from '@/components/hero-protect-chips';
 import { NetworkBelongingLine } from '@/components/network/network-belonging-line';
+import { TrustMark } from '@/components/network/trust-mark';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildHomepageGraph } from '@/lib/seo/schemas';
 import { getTopHubs } from '@/lib/hubs/registry';
@@ -22,46 +24,55 @@ export default function HomePage() {
       <JsonLd data={buildHomepageGraph()} />
 
       <section className="relative overflow-hidden border-b bg-gradient-to-br from-primary/5 via-background to-trust/5">
-        <div className="container mx-auto px-4 py-16 md:py-24">
+        <div className="container mx-auto px-4 py-14 md:py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-trust/20 bg-trust/10 px-4 py-1.5 text-sm font-semibold text-trust">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-trust/20 bg-trust/10 px-4 py-1.5 text-sm font-semibold text-trust">
               <Shield className="h-4 w-4" aria-hidden="true" />
-              INDEPENDENT DOI DIRECTORY · NO PAID PLACEMENTS · NO PAY-TO-RANK
+              INDEPENDENT DOI RESEARCH · NO PAID PLACEMENTS · NO PAY-TO-RANK
             </div>
-            <NetworkBelongingLine className="mb-4" />
+            <NetworkBelongingLine className="mb-3" />
+            <div className="mb-5 flex justify-center">
+              <TrustMark />
+            </div>
 
             <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-              Cut through coverage confusion
-              <br />
-              <span className="text-trust">with agents you can re-check on DOI records</span>
+              What are you trying to protect?
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Insurance Trust Hub is an independent research directory of state-licensed agencies and
-              agents. Use educational ACA and Medicare tools, then confirm Active status and lines of
-              authority before you enroll. We do not sell policies.
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              Choose what matters, then research state-licensed agencies and educational tools.
+              Confirm Active status and lines of authority on DOI / NAIC pathways before you enroll.
+              We do not sell policies or free quotes.
             </p>
 
+            <div className="mt-8">
+              <HeroProtectChips />
+            </div>
+
             <div className="mt-10 flex justify-center">
-              <ZipSearch />
+              <div className="w-full max-w-md">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Or search agents by ZIP
+                </p>
+                <ZipSearch />
+              </div>
             </div>
 
             <p className="mt-4 text-sm text-muted-foreground">
-              Expanding state &amp; metro coverage · License research pathways · Health hubs for ACA
-              &amp; Medicare education
+              Expanding state &amp; metro coverage · License research · ACA &amp; Medicare education
             </p>
 
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="lg" variant="trust" asChild className="gap-2">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button size="lg" variant="trust" asChild className="gap-2 min-h-11">
                 <Link href="/directory">
                   Browse agent directory <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="gap-2">
+              <Button size="lg" variant="outline" asChild className="gap-2 min-h-11">
                 <Link href="/calculators">
                   Educational calculators <Calculator className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" asChild className="min-h-11">
                 <Link href="/methodology">Methodology</Link>
               </Button>
             </div>
