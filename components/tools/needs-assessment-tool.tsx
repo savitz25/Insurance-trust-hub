@@ -40,6 +40,7 @@ import {
 } from '@/lib/tools/needs-assessment';
 import { INSURANCE_TYPES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
+import { SaveToolSnapshotButton } from '@/components/my-insurance/save-tool-snapshot-button';
 import { cn } from '@/lib/utils';
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -233,6 +234,23 @@ export function NeedsAssessmentTool() {
             </section>
 
             <div className="flex flex-wrap gap-3 border-t border-slate-100 pt-5">
+              <SaveToolSnapshotButton
+                toolId="needs-assessment"
+                title={result.headline ?? 'Coverage Compass result'}
+                summary={
+                  [
+                    result.summary,
+                    result.focusAreas?.slice(0, 3).map((a) => a.label).join(', '),
+                  ]
+                    .filter(Boolean)
+                    .join(' · ') || 'Coverage Compass research path'
+                }
+                href="/tools/needs-assessment"
+                payload={{
+                  focusAreaIds: result.focusAreas?.map((a) => a.id),
+                  insuranceTypes: result.insuranceTypes,
+                }}
+              />
               <Button type="button" variant="outline" onClick={reset} className="min-h-[44px]">
                 Start over
               </Button>

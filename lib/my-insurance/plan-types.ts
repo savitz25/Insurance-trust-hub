@@ -27,6 +27,17 @@ export type PlanLocation = {
   label?: string;
 };
 
+/** Phase C — tool result saved onto a plan (educational snapshot only). */
+export type ToolSnapshot = {
+  id: string;
+  toolId: string;
+  title: string;
+  summary: string;
+  href: string;
+  capturedAt: string;
+  payload?: Record<string, unknown>;
+};
+
 /** Coverage research plan. Phase A uses one active plan; array shape ready for multi-plan. */
 export type CoveragePlan = {
   id: string;
@@ -39,6 +50,8 @@ export type CoveragePlan = {
   updatedAt: string;
   /** SavedProvider ids belonging to this plan */
   savedProviderIds: string[];
+  /** Phase C tool saves (default []) */
+  toolSnapshots?: ToolSnapshot[];
 };
 
 /** Agency/agent shortlist item — research only, not a lead. */

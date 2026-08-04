@@ -227,6 +227,15 @@ export function GuestInsuranceHq() {
             <Button type="button" className="bg-teal-600 hover:bg-teal-700" onClick={persistPlanFields}>
               Save plan on this device
             </Button>
+            {(getShortlisted(providers).length > 0 ||
+              (plan?.toolSnapshots?.length ?? 0) > 0) && (
+              <Button type="button" variant="default" className="bg-slate-900 hover:bg-slate-800" asChild>
+                <Link href="/my-insurance/report">View report</Link>
+              </Button>
+            )}
+            <Button type="button" variant="outline" asChild>
+              <Link href="/my-insurance/setup">Guided setup</Link>
+            </Button>
             <Button type="button" variant="outline" asChild>
               <Link href="/directory">
                 <Plus className="mr-1.5 h-4 w-4" aria-hidden />
@@ -240,8 +249,10 @@ export function GuestInsuranceHq() {
 
           {plan ? (
             <p className="text-xs text-slate-500">
-              Plan id {plan.id.slice(0, 8)}… · Updated{' '}
-              {new Date(plan.updatedAt).toLocaleString()} · Status {plan.status}
+              Shortlist {getShortlisted(providers).length}/3 ·{' '}
+              {plan.toolSnapshots?.length ?? 0} tool save
+              {(plan.toolSnapshots?.length ?? 0) === 1 ? '' : 's'} · Updated{' '}
+              {new Date(plan.updatedAt).toLocaleString()}
             </p>
           ) : null}
         </CardContent>

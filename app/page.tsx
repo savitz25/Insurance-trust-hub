@@ -62,6 +62,9 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button size="lg" variant="outline" asChild className="min-h-11">
+                <Link href="/my-insurance/setup">Build my coverage plan</Link>
+              </Button>
               <Button size="lg" variant="trust" asChild className="gap-2 min-h-11">
                 <Link href="/directory">
                   Browse agent directory <ArrowRight className="h-5 w-5" />

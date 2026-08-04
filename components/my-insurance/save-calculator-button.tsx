@@ -5,7 +5,10 @@ import { BookmarkPlus, Check, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
 import { saveCalculatorResultAction } from '@/actions/my-insurance';
-import { stashPendingSaveAction } from '@/lib/my-insurance/guest-storage';
+import {
+  addToolSnapshot,
+  getLastSaveError,
+} from '@/lib/my-insurance/storage';
 import type {
   CalculatorSnapshot,
   CalculatorToolId,
@@ -39,33 +42,50 @@ export function SaveCalculatorButton({
   async function handleSave() {
     if (saved || saving) return;
 
-    if (!mi?.user) {
-      stashPendingSaveAction({
-        type: 'calculator',
-        payload: { calculatorId, title, snapshot },
-      });
-      mi?.openAuth({
-        context: 'general',
-        redirectPath: snapshot.sourcePath || '/my-insurance',
-      });
-      toast.message('Sign in to save this result to My Insurance');
-      return;
-    }
-
     setSaving(true);
     try {
-      const res = await saveCalculatorResultAction({
-        calculatorId,
+      // Guest-first plan snapshot (Phase C)
+      const summary =
+        snapshot.summaryText ||
+        (typeof snapshot.outputs === 'object'
+          ? 'Educational calculator result saved to plan'
+          : 'Educational calculator result');
+      const snap = addToolSnapshot({
+        toolId: calculatorId,
         title,
-        snapshot,
-        sendEmail: true,
+        summary,
+        href: snapshot.sourcePath || '/tools',
+        payload: {
+          inputs: snapshot.inputs,
+          outputs: snapshot.outputs,
+        },
       });
-      if (res.ok) {
-        setSaved(true);
-        toast.success('Saved to Insurance HQ');
-      } else {
-        toast.error(res.error);
+      const err = getLastSaveError();
+      if (!snap || err) {
+        toast.error(err || 'Could not save on this device');
+        return;
       }
+
+      // Optional cloud save when signed in
+      if (mi?.user) {
+        await saveCalculatorResultAction({
+          calculatorId,
+          title,
+          snapshot,
+          sendEmail: false,
+        });
+      }
+
+      setSaved(true);
+      toast.success('Saved to My Insurance', {
+        description: 'On your coverage plan · this device',
+        action: {
+          label: 'View report',
+          onClick: () => {
+            window.location.href = '/my-insurance/report';
+          },
+        },
+      });
     } finally {
       setSaving(false);
     }

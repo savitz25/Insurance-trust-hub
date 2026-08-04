@@ -10,6 +10,7 @@ import {
   type ProtectFocus,
   type ProviderResearchStatus,
   type SavedProvider,
+  type ToolSnapshot,
   newId,
   nowIso,
 } from '@/lib/my-insurance/plan-types';
@@ -69,7 +70,10 @@ function normalizeState(raw: unknown): MyInsuranceState | null {
   return {
     version: 1,
     activePlanId: parsed.activePlanId ?? null,
-    plans: Array.isArray(parsed.plans) ? parsed.plans : [],
+    plans: (Array.isArray(parsed.plans) ? parsed.plans : []).map((p) => ({
+      ...p,
+      toolSnapshots: Array.isArray(p.toolSnapshots) ? p.toolSnapshots : [],
+    })),
     savedProviders: (Array.isArray(parsed.savedProviders) ? parsed.savedProviders : []).map(
       normalizeProvider
     ),
@@ -651,6 +655,73 @@ export const saveProviderToPlan = (input: {
 }): UpsertSavedProviderResult => upsertSavedProvider(input);
 
 export const removeProviderFromPlan = removeSavedProvider;
+
+export type AddToolSnapshotInput = {
+  toolId: string;
+  title: string;
+  summary: string;
+  href: string;
+  payload?: Record<string, unknown>;
+  planId?: string;
+};
+
+/** Phase C — attach educational tool result to active plan. */
+export function addToolSnapshot(input: AddToolSnapshotInput): ToolSnapshot | null {
+  const state = loadState();
+  let plan =
+    (input.planId
+      ? state.plans.find((p) => p.id === input.planId)
+      : getActivePlan(state)) ?? null;
+  if (!plan) {
+    plan = upsertPlan({ label: 'My coverage research' });
+    Object.assign(state, loadState());
+    plan = getActivePlan(state)!;
+  }
+  const snap: ToolSnapshot = {
+    id: newId(),
+    toolId: input.toolId,
+    title: input.title.trim() || 'Tool result',
+    summary: input.summary.trim() || 'Saved research note',
+    href: input.href || '/tools',
+    capturedAt: nowIso(),
+    payload: input.payload,
+  };
+  const existing = plan.toolSnapshots ?? [];
+  // Replace same toolId snapshot to avoid unbounded growth
+  const nextSnaps = [snap, ...existing.filter((s) => s.toolId !== snap.toolId)].slice(0, 12);
+  const nextPlan: CoveragePlan = {
+    ...plan,
+    toolSnapshots: nextSnaps,
+    updatedAt: nowIso(),
+  };
+  state.plans = state.plans.map((p) => (p.id === plan!.id ? nextPlan : p));
+  state.activePlanId = plan.id;
+  const result = saveState(state);
+  if (!result.ok) return null;
+  return snap;
+}
+
+export function removeToolSnapshot(snapshotId: string, planId?: string): void {
+  const state = loadState();
+  const plan = planId
+    ? state.plans.find((p) => p.id === planId)
+    : getActivePlan(state);
+  if (!plan) return;
+  const nextPlan: CoveragePlan = {
+    ...plan,
+    toolSnapshots: (plan.toolSnapshots ?? []).filter((s) => s.id !== snapshotId),
+    updatedAt: nowIso(),
+  };
+  state.plans = state.plans.map((p) => (p.id === plan!.id ? nextPlan : p));
+  saveState(state);
+}
+
+export function getToolSnapshots(planId?: string): ToolSnapshot[] {
+  const plan = planId
+    ? loadState().plans.find((p) => p.id === planId)
+    : getActivePlan();
+  return plan?.toolSnapshots ?? [];
+}
 
 export function clearAllGuestPlans(): void {
   if (!isBrowser()) return;
