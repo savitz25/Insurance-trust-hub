@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getMyInsuranceDashboardData } from '@/actions/my-insurance';
 import { MyInsuranceDashboard } from '@/components/my-insurance/my-insurance-dashboard';
+import { TrustMark } from '@/components/network/trust-mark';
 
 export const metadata: Metadata = buildMetadata({
   title: 'My Insurance — Insurance HQ',
@@ -21,24 +22,33 @@ export default async function MyInsurancePage() {
           Insurance Trust Hub
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
-          Insurance HQ
+          My Insurance
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-          Coverage research plan and saved providers — guest-first on this device. Shortlist agencies
-          from the directory, track status, then verify licenses on DOI / NAIC. Research only — no
-          paid placements, no lead selling.
+          Research passport for coverage — guest-saved on this device. Shortlist agencies, track
+          status, then verify licenses on DOI / NAIC pathways.
         </p>
-        <p className="mt-2 text-sm text-slate-500">
+        <p className="mt-2 text-xs text-slate-500">
+          Research only · Not an endorsement · Part of the Ask Trust Hub network
+        </p>
+        <div className="mt-2">
+          <TrustMark />
+        </div>
+        <p className="mt-3 text-sm text-slate-500">
           <Link href="/directory" className="font-medium text-teal-700 hover:underline">
             Directory
           </Link>
           {' · '}
-          <Link href="/tools" className="font-medium text-teal-700 hover:underline">
-            Tools
+          <Link href="/hubs" className="font-medium text-teal-700 hover:underline">
+            Health hubs
           </Link>
           {' · '}
-          <Link href="/data/plan-complaint-index" className="font-medium text-teal-700 hover:underline">
-            Plan Complaint Index
+          <Link href="/calculators" className="font-medium text-teal-700 hover:underline">
+            Calculators
+          </Link>
+          {' · '}
+          <Link href="/tools" className="font-medium text-teal-700 hover:underline">
+            Tools
           </Link>
         </p>
 

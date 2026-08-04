@@ -1,7 +1,6 @@
 /**
  * My Insurance Phase A — guest-first coverage research model.
- * Aligns vocabulary with future My Move / journey chapters:
- * Plan · Saved providers · Status
+ * Plan · Saved providers · Status (chapter vocabulary for later journey work).
  */
 
 export type ProtectFocus =
@@ -28,7 +27,7 @@ export type PlanLocation = {
   label?: string;
 };
 
-/** Coverage research plan (one active focus for Phase A; multi-plan later). */
+/** Coverage research plan. Phase A uses one active plan; array shape ready for multi-plan. */
 export type CoveragePlan = {
   id: string;
   label: string;
@@ -45,26 +44,36 @@ export type CoveragePlan = {
 /** Agency/agent shortlist item — research only, not a lead. */
 export type SavedProvider = {
   id: string;
+  /** Optional link to a plan; may be unassigned */
   planId?: string | null;
   providerSlug: string;
   providerName: string;
-  /** Optional directory/internal id when known */
-  providerId?: string;
+  /** e.g. /providers/{slug} */
+  profilePath: string;
+  licenseSummary?: string;
+  lines?: string[];
   status: ProviderResearchStatus;
   notes?: string;
-  profilePath?: string;
   city?: string;
   state?: string;
-  createdAt: string;
+  /** When first saved (ISO) */
+  savedAt: string;
   updatedAt: string;
+  /** @deprecated prefer savedAt — kept for older local blobs */
+  createdAt?: string;
 };
 
-export type MyInsuranceLocalStore = {
+/** Root guest blob (localStorage). */
+export type MyInsuranceState = {
   version: 1;
+  /** Phase A convenience: which plan is “current” */
   activePlanId: string | null;
   plans: CoveragePlan[];
   savedProviders: SavedProvider[];
 };
+
+/** @deprecated use MyInsuranceState */
+export type MyInsuranceLocalStore = MyInsuranceState;
 
 export const PROTECT_FOCUS_OPTIONS: { id: ProtectFocus; label: string }[] = [
   { id: 'health', label: 'My health' },

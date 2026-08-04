@@ -1,34 +1,33 @@
 # My Insurance Phase A — Guest-first HQ + data model
 
-**Production:** `www.insurancetrusthub.com` ← **Insurance-trust-hub** only.
+**Production:** `www.insurancetrusthub.com` ← **Insurance-trust-hub** only (not Move monorepo).
 
-## Shipped
+## Acceptance map
 
-| Piece | Location |
-|-------|----------|
-| Types | `lib/my-insurance/plan-types.ts` — `CoveragePlan`, `SavedProvider` |
-| Storage | `lib/my-insurance/storage.ts` — localStorage `ith-my-insurance-store-v1` |
-| HQ UI | `components/my-insurance/guest-insurance-hq.tsx` (guest) + existing signed-in dashboard |
-| Save | `components/my-insurance/save-provider-button.tsx` — guest save without login |
+| Spec | Implementation |
+|------|----------------|
+| `CoveragePlan` / `SavedProvider` / `MyInsuranceState` | `lib/my-insurance/plan-types.ts` |
+| Storage key `ith:my-insurance:v1` | `MY_INSURANCE_STORE_KEY` in `constants.ts` |
+| `loadState` / `saveState` / `upsertPlan` / `archivePlan` / `upsertSavedProvider` / `removeSavedProvider` / `listActivePlans` | `lib/my-insurance/storage.ts` |
+| `/my-insurance` real HQ | Guest: `guest-insurance-hq.tsx`; signed-in: existing dashboard |
+| Save on `/providers/[slug]` | `SaveProviderButton` → upsert + toast **Open HQ** |
+| Status chips | researching · shortlisted · reached_out · done |
+| Nav | Primary nav **My Insurance** → `/my-insurance`; footer RESOURCES link |
 
-## Model (chapter vocabulary)
+## Model
 
-- **Plan** = coverage research plan (`CoveragePlan`)
-- **Saved providers** = shortlist items (`SavedProvider`)
-- **Status** = `researching` \| `shortlisted` \| `reached_out` \| `done`
+```ts
+MyInsuranceState = { version: 1; activePlanId; plans: CoveragePlan[]; savedProviders: SavedProvider[] }
+SavedProvider = { id, planId?, providerSlug, providerName, profilePath, licenseSummary?, lines?, status, notes?, savedAt, updatedAt, city?, state? }
+```
 
-## Guest rules
+## Rules
 
-- Works with no login
-- Migrates legacy `ith-my-insurance-saved-providers-v1` into a default plan
-- Optional sign-in still available for cloud sync (existing auth)
+- Guest-first localStorage; SSR-safe (empty on server)
+- One **active** plan in Phase A UI (array retained for multi-plan later)
+- Migrates legacy shortlist keys
+- Research only — no quote / lead-gen CTAs
 
-## Out of scope (later phases)
+## Out of scope (later)
 
-- Multi-plan library UI
-- Email reports / guided wizard
-- Cross-hub journey object / SSO
-
-## Product rules
-
-Research only · no request-quotes CTAs · no “agents will call you.”
+Multi-plan library, email/PDF report, wizard, SSO, tool snapshots

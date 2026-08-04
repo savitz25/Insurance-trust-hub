@@ -1,12 +1,12 @@
 /**
  * Guest-first My Insurance persistence (localStorage).
- * Phase A: one active coverage plan + saved providers.
- * No server required. Research-only — not lead-gen.
+ * Storage key: ith:my-insurance:v1
+ * SSR-safe: all reads return empty on server.
  */
 
 import {
   type CoveragePlan,
-  type MyInsuranceLocalStore,
+  type MyInsuranceState,
   type ProtectFocus,
   type ProviderResearchStatus,
   type SavedProvider,
@@ -16,12 +16,13 @@ import {
 import {
   GUEST_SAVED_PROVIDERS_KEY,
   MY_INSURANCE_STORE_KEY,
+  MY_INSURANCE_STORE_KEY_LEGACY,
 } from '@/lib/my-insurance/constants';
 import type { GuestSavedProvider } from '@/lib/my-insurance/types';
 
 const MAX_SAVED_PROVIDERS = 50;
 
-function emptyStore(): MyInsuranceLocalStore {
+function emptyState(): MyInsuranceState {
   return {
     version: 1,
     activePlanId: null,
@@ -34,50 +35,95 @@ function isBrowser(): boolean {
   return typeof window !== 'undefined';
 }
 
-function readRawStore(): MyInsuranceLocalStore {
-  if (!isBrowser()) return emptyStore();
-  try {
-    const raw = localStorage.getItem(MY_INSURANCE_STORE_KEY);
-    if (!raw) return migrateFromLegacyGuestProviders();
-    const parsed = JSON.parse(raw) as MyInsuranceLocalStore;
-    if (!parsed || parsed.version !== 1 || !Array.isArray(parsed.plans)) {
-      return migrateFromLegacyGuestProviders();
-    }
-    return {
-      version: 1,
-      activePlanId: parsed.activePlanId ?? null,
-      plans: Array.isArray(parsed.plans) ? parsed.plans : [],
-      savedProviders: Array.isArray(parsed.savedProviders) ? parsed.savedProviders : [],
-    };
-  } catch {
-    return emptyStore();
-  }
+function normalizeProvider(p: SavedProvider): SavedProvider {
+  const savedAt = p.savedAt || p.createdAt || nowIso();
+  return {
+    ...p,
+    profilePath: p.profilePath || `/providers/${p.providerSlug}`,
+    savedAt,
+    updatedAt: p.updatedAt || savedAt,
+    status: p.status || 'shortlisted',
+  };
 }
 
-function writeStore(store: MyInsuranceLocalStore): void {
+function normalizeState(raw: unknown): MyInsuranceState | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const parsed = raw as MyInsuranceState;
+  if (parsed.version !== 1 || !Array.isArray(parsed.plans)) return null;
+  return {
+    version: 1,
+    activePlanId: parsed.activePlanId ?? null,
+    plans: Array.isArray(parsed.plans) ? parsed.plans : [],
+    savedProviders: (Array.isArray(parsed.savedProviders) ? parsed.savedProviders : []).map(
+      normalizeProvider
+    ),
+  };
+}
+
+function dispatchChange(): void {
   if (!isBrowser()) return;
-  localStorage.setItem(MY_INSURANCE_STORE_KEY, JSON.stringify(store));
-  // Keep legacy key in sync for any old readers
-  const legacy: GuestSavedProvider[] = store.savedProviders
+  window.dispatchEvent(new CustomEvent('ith-my-insurance-store'));
+}
+
+function syncLegacyShortlist(state: MyInsuranceState): void {
+  if (!isBrowser()) return;
+  const legacy: GuestSavedProvider[] = state.savedProviders
     .slice()
     .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1))
     .map((p) => ({
       providerSlug: p.providerSlug,
       providerName: p.providerName,
-      savedAt: p.createdAt,
+      savedAt: p.savedAt,
     }));
-  localStorage.setItem(GUEST_SAVED_PROVIDERS_KEY, JSON.stringify(legacy.slice(0, MAX_SAVED_PROVIDERS)));
-  window.dispatchEvent(new CustomEvent('ith-my-insurance-store'));
+  localStorage.setItem(
+    GUEST_SAVED_PROVIDERS_KEY,
+    JSON.stringify(legacy.slice(0, MAX_SAVED_PROVIDERS))
+  );
 }
 
-/** One-time lift of simple guest shortlist into CoveragePlan model. */
-function migrateFromLegacyGuestProviders(): MyInsuranceLocalStore {
-  if (!isBrowser()) return emptyStore();
+/** Spec name: loadState */
+export function loadState(): MyInsuranceState {
+  if (!isBrowser()) return emptyState();
+  try {
+    const raw =
+      localStorage.getItem(MY_INSURANCE_STORE_KEY) ||
+      localStorage.getItem(MY_INSURANCE_STORE_KEY_LEGACY);
+    if (!raw) return migrateFromLegacyGuestProviders();
+    const parsed = normalizeState(JSON.parse(raw));
+    if (!parsed) return migrateFromLegacyGuestProviders();
+    // Promote legacy key → canonical
+    if (!localStorage.getItem(MY_INSURANCE_STORE_KEY)) {
+      saveState(parsed);
+    }
+    return parsed;
+  } catch {
+    return emptyState();
+  }
+}
+
+/** Spec name: saveState */
+export function saveState(state: MyInsuranceState): void {
+  if (!isBrowser()) return;
+  const next: MyInsuranceState = {
+    version: 1,
+    activePlanId: state.activePlanId,
+    plans: state.plans,
+    savedProviders: state.savedProviders.map(normalizeProvider).slice(0, MAX_SAVED_PROVIDERS),
+  };
+  localStorage.setItem(MY_INSURANCE_STORE_KEY, JSON.stringify(next));
+  // Keep previous key written for one release
+  localStorage.setItem(MY_INSURANCE_STORE_KEY_LEGACY, JSON.stringify(next));
+  syncLegacyShortlist(next);
+  dispatchChange();
+}
+
+function migrateFromLegacyGuestProviders(): MyInsuranceState {
+  if (!isBrowser()) return emptyState();
   try {
     const raw = localStorage.getItem(GUEST_SAVED_PROVIDERS_KEY);
-    if (!raw) return emptyStore();
+    if (!raw) return emptyState();
     const legacy = JSON.parse(raw) as GuestSavedProvider[];
-    if (!Array.isArray(legacy) || legacy.length === 0) return emptyStore();
+    if (!Array.isArray(legacy) || legacy.length === 0) return emptyState();
 
     const ts = nowIso();
     const planId = newId();
@@ -88,9 +134,9 @@ function migrateFromLegacyGuestProviders(): MyInsuranceLocalStore {
         planId,
         providerSlug: g.providerSlug,
         providerName: g.providerName,
-        status: 'shortlisted' as const,
         profilePath: `/providers/${g.providerSlug}`,
-        createdAt: g.savedAt || ts,
+        status: 'shortlisted' as const,
+        savedAt: g.savedAt || ts,
         updatedAt: g.savedAt || ts,
       };
     });
@@ -103,34 +149,40 @@ function migrateFromLegacyGuestProviders(): MyInsuranceLocalStore {
       updatedAt: ts,
       savedProviderIds: savedProviders.map((p) => p.id),
     };
-    const store: MyInsuranceLocalStore = {
+    const state: MyInsuranceState = {
       version: 1,
       activePlanId: planId,
       plans: [plan],
       savedProviders,
     };
-    writeStore(store);
-    return store;
+    saveState(state);
+    return state;
   } catch {
-    return emptyStore();
+    return emptyState();
   }
 }
 
-export function loadMyInsuranceStore(): MyInsuranceLocalStore {
-  return readRawStore();
+export function listActivePlans(state?: MyInsuranceState): CoveragePlan[] {
+  const s = state ?? loadState();
+  return s.plans
+    .filter((p) => p.status === 'active')
+    .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
 }
 
-export function getActivePlan(store?: MyInsuranceLocalStore): CoveragePlan | null {
-  const s = store ?? readRawStore();
-  if (!s.activePlanId) return s.plans.find((p) => p.status === 'active') ?? s.plans[0] ?? null;
-  return s.plans.find((p) => p.id === s.activePlanId) ?? null;
+export function getActivePlan(state?: MyInsuranceState): CoveragePlan | null {
+  const s = state ?? loadState();
+  if (s.activePlanId) {
+    const hit = s.plans.find((p) => p.id === s.activePlanId);
+    if (hit) return hit;
+  }
+  return listActivePlans(s)[0] ?? s.plans[0] ?? null;
 }
 
 export function getProvidersForPlan(
   planId: string,
-  store?: MyInsuranceLocalStore
+  state?: MyInsuranceState
 ): SavedProvider[] {
-  const s = store ?? readRawStore();
+  const s = state ?? loadState();
   const plan = s.plans.find((p) => p.id === planId);
   if (!plan) return [];
   const byId = new Map(s.savedProviders.map((p) => [p.id, p]));
@@ -139,32 +191,49 @@ export function getProvidersForPlan(
     .filter((p): p is SavedProvider => Boolean(p));
 }
 
-export type EnsurePlanInput = {
-  label?: string;
+export type UpsertPlanInput = {
+  id?: string;
+  label: string;
   protectFocus?: ProtectFocus[];
   location?: CoveragePlan['location'];
   notes?: string;
+  status?: PlanStatus;
 };
 
-/** Ensure an active plan exists; create default if needed. */
-export function ensureActivePlan(input: EnsurePlanInput = {}): CoveragePlan {
-  const store = readRawStore();
-  const existing = getActivePlan(store);
-  if (existing) {
-    if (
-      input.label ||
-      input.protectFocus ||
-      input.location ||
-      typeof input.notes === 'string'
-    ) {
-      return updatePlan(existing.id, input) ?? existing;
-    }
-    return existing;
-  }
+type PlanStatus = CoveragePlan['status'];
+
+/** Spec name: upsertPlan — create or update; Phase A keeps at most one active. */
+export function upsertPlan(input: UpsertPlanInput): CoveragePlan {
+  const state = loadState();
   const ts = nowIso();
+  const label = input.label.trim() || 'My coverage research';
+
+  if (input.id) {
+    const idx = state.plans.findIndex((p) => p.id === input.id);
+    if (idx >= 0) {
+      const next: CoveragePlan = {
+        ...state.plans[idx],
+        label,
+        protectFocus: input.protectFocus ?? state.plans[idx].protectFocus,
+        location: input.location ?? state.plans[idx].location,
+        notes: input.notes !== undefined ? input.notes : state.plans[idx].notes,
+        status: input.status ?? state.plans[idx].status,
+        updatedAt: ts,
+      };
+      state.plans[idx] = next;
+      if (next.status === 'active') state.activePlanId = next.id;
+      saveState(state);
+      return next;
+    }
+  }
+
+  // New plan — Phase A: archive other actives so one active remains simple
+  state.plans = state.plans.map((p) =>
+    p.status === 'active' ? { ...p, status: 'archived' as const, updatedAt: ts } : p
+  );
   const plan: CoveragePlan = {
     id: newId(),
-    label: input.label?.trim() || 'My coverage research',
+    label,
     protectFocus: input.protectFocus ?? [],
     location: input.location,
     notes: input.notes,
@@ -173,58 +242,53 @@ export function ensureActivePlan(input: EnsurePlanInput = {}): CoveragePlan {
     updatedAt: ts,
     savedProviderIds: [],
   };
-  store.plans = [plan, ...store.plans.filter((p) => p.id !== plan.id)];
-  store.activePlanId = plan.id;
-  writeStore(store);
+  state.plans = [plan, ...state.plans];
+  state.activePlanId = plan.id;
+  saveState(state);
   return plan;
 }
 
-export function updatePlan(
-  planId: string,
-  patch: Partial<
-    Pick<CoveragePlan, 'label' | 'protectFocus' | 'location' | 'notes' | 'status'>
-  >
-): CoveragePlan | null {
-  const store = readRawStore();
-  const idx = store.plans.findIndex((p) => p.id === planId);
-  if (idx < 0) return null;
-  const next: CoveragePlan = {
-    ...store.plans[idx],
-    ...patch,
-    label: patch.label?.trim() || store.plans[idx].label,
-    updatedAt: nowIso(),
-  };
-  store.plans[idx] = next;
-  writeStore(store);
-  return next;
+export function archivePlan(planId: string): void {
+  const state = loadState();
+  const ts = nowIso();
+  state.plans = state.plans.map((p) =>
+    p.id === planId ? { ...p, status: 'archived' as const, updatedAt: ts } : p
+  );
+  if (state.activePlanId === planId) {
+    state.activePlanId = listActivePlans(state)[0]?.id ?? null;
+  }
+  saveState(state);
 }
 
-export type SaveProviderInput = {
+export type UpsertSavedProviderInput = {
   providerSlug: string;
   providerName: string;
-  providerId?: string;
-  city?: string;
-  state?: string;
   profilePath?: string;
+  planId?: string | null;
+  licenseSummary?: string;
+  lines?: string[];
   status?: ProviderResearchStatus;
   notes?: string;
-  planId?: string;
+  city?: string;
+  state?: string;
 };
 
-export function saveProviderToPlan(input: SaveProviderInput): SavedProvider {
-  const store = readRawStore();
+/** Spec name: upsertSavedProvider */
+export function upsertSavedProvider(input: UpsertSavedProviderInput): SavedProvider {
+  const state = loadState();
   let plan =
     (input.planId
-      ? store.plans.find((p) => p.id === input.planId)
-      : getActivePlan(store)) ?? null;
+      ? state.plans.find((p) => p.id === input.planId)
+      : getActivePlan(state)) ?? null;
+
   if (!plan) {
-    plan = ensureActivePlan();
-    // re-read after ensure
-    Object.assign(store, readRawStore());
-    plan = getActivePlan(store)!;
+    plan = upsertPlan({ label: 'My coverage research' });
+    Object.assign(state, loadState());
+    plan = getActivePlan(state)!;
   }
 
-  const existing = store.savedProviders.find(
+  const profilePath = input.profilePath || `/providers/${input.providerSlug}`;
+  const existing = state.savedProviders.find(
     (p) => p.providerSlug === input.providerSlug && (p.planId === plan!.id || !p.planId)
   );
   const ts = nowIso();
@@ -233,25 +297,27 @@ export function saveProviderToPlan(input: SaveProviderInput): SavedProvider {
     const updated: SavedProvider = {
       ...existing,
       providerName: input.providerName || existing.providerName,
-      providerId: input.providerId ?? existing.providerId,
-      city: input.city ?? existing.city,
-      state: input.state ?? existing.state,
-      profilePath: input.profilePath ?? existing.profilePath ?? `/providers/${input.providerSlug}`,
+      profilePath,
+      licenseSummary: input.licenseSummary ?? existing.licenseSummary,
+      lines: input.lines ?? existing.lines,
       status: input.status ?? existing.status,
       notes: input.notes ?? existing.notes,
+      city: input.city ?? existing.city,
+      state: input.state ?? existing.state,
       planId: plan.id,
       updatedAt: ts,
+      savedAt: existing.savedAt || existing.createdAt || ts,
     };
-    store.savedProviders = store.savedProviders.map((p) =>
+    state.savedProviders = state.savedProviders.map((p) =>
       p.id === existing.id ? updated : p
     );
     if (!plan.savedProviderIds.includes(existing.id)) {
       plan.savedProviderIds = [existing.id, ...plan.savedProviderIds];
     }
     plan.updatedAt = ts;
-    store.plans = store.plans.map((p) => (p.id === plan!.id ? plan! : p));
-    store.activePlanId = plan.id;
-    writeStore(store);
+    state.plans = state.plans.map((p) => (p.id === plan!.id ? plan! : p));
+    state.activePlanId = plan.id;
+    saveState(state);
     return updated;
   }
 
@@ -260,60 +326,63 @@ export function saveProviderToPlan(input: SaveProviderInput): SavedProvider {
     planId: plan.id,
     providerSlug: input.providerSlug,
     providerName: input.providerName,
-    providerId: input.providerId,
+    profilePath,
+    licenseSummary: input.licenseSummary,
+    lines: input.lines,
     status: input.status ?? 'shortlisted',
     notes: input.notes,
-    profilePath: input.profilePath ?? `/providers/${input.providerSlug}`,
     city: input.city,
     state: input.state,
-    createdAt: ts,
+    savedAt: ts,
     updatedAt: ts,
   };
-  store.savedProviders = [saved, ...store.savedProviders].slice(0, MAX_SAVED_PROVIDERS);
+  state.savedProviders = [saved, ...state.savedProviders].slice(0, MAX_SAVED_PROVIDERS);
   plan.savedProviderIds = [saved.id, ...plan.savedProviderIds.filter((id) => id !== saved.id)];
   plan.updatedAt = ts;
-  store.plans = store.plans.map((p) => (p.id === plan!.id ? plan! : p));
-  store.activePlanId = plan.id;
-  writeStore(store);
+  state.plans = state.plans.map((p) => (p.id === plan!.id ? plan! : p));
+  state.activePlanId = plan.id;
+  saveState(state);
   return saved;
 }
 
-export function removeProviderFromPlan(providerSlug: string, planId?: string): void {
-  const store = readRawStore();
+/** Spec name: removeSavedProvider */
+export function removeSavedProvider(providerSlug: string, planId?: string): void {
+  const state = loadState();
   const plan = planId
-    ? store.plans.find((p) => p.id === planId)
-    : getActivePlan(store);
-  const toRemove = store.savedProviders.filter(
+    ? state.plans.find((p) => p.id === planId)
+    : getActivePlan(state);
+  const toRemove = state.savedProviders.filter(
     (p) =>
       p.providerSlug === providerSlug &&
       (!plan || p.planId === plan.id || plan.savedProviderIds.includes(p.id))
   );
   if (toRemove.length === 0) return;
   const removeIds = new Set(toRemove.map((p) => p.id));
-  store.savedProviders = store.savedProviders.filter((p) => !removeIds.has(p.id));
-  store.plans = store.plans.map((p) => ({
+  state.savedProviders = state.savedProviders.filter((p) => !removeIds.has(p.id));
+  const ts = nowIso();
+  state.plans = state.plans.map((p) => ({
     ...p,
     savedProviderIds: p.savedProviderIds.filter((id) => !removeIds.has(id)),
-    updatedAt: nowIso(),
+    updatedAt: ts,
   }));
-  writeStore(store);
+  saveState(state);
 }
 
 export function updateSavedProviderStatus(
   savedId: string,
   status: ProviderResearchStatus
 ): SavedProvider | null {
-  const store = readRawStore();
-  const idx = store.savedProviders.findIndex((p) => p.id === savedId);
+  const state = loadState();
+  const idx = state.savedProviders.findIndex((p) => p.id === savedId);
   if (idx < 0) return null;
-  const next = { ...store.savedProviders[idx], status, updatedAt: nowIso() };
-  store.savedProviders[idx] = next;
-  writeStore(store);
+  const next = { ...state.savedProviders[idx], status, updatedAt: nowIso() };
+  state.savedProviders[idx] = next;
+  saveState(state);
   return next;
 }
 
-export function isProviderSaved(providerSlug: string, store?: MyInsuranceLocalStore): boolean {
-  const s = store ?? readRawStore();
+export function isProviderSaved(providerSlug: string, state?: MyInsuranceState): boolean {
+  const s = state ?? loadState();
   const plan = getActivePlan(s);
   if (!plan) return s.savedProviders.some((p) => p.providerSlug === providerSlug);
   const ids = new Set(plan.savedProviderIds);
@@ -322,9 +391,77 @@ export function isProviderSaved(providerSlug: string, store?: MyInsuranceLocalSt
   );
 }
 
+export function guestSavedCount(): number {
+  const plan = getActivePlan();
+  if (!plan) return loadState().savedProviders.length;
+  return getProvidersForPlan(plan.id).length;
+}
+
+// ── Backward-compatible aliases used by Phase A UI ──────────────────────────
+
+export const loadMyInsuranceStore = loadState;
+export const ensureActivePlan = (input: {
+  label?: string;
+  protectFocus?: ProtectFocus[];
+  location?: CoveragePlan['location'];
+  notes?: string;
+} = {}): CoveragePlan => {
+  const existing = getActivePlan();
+  if (existing) {
+    if (input.label || input.protectFocus || input.location || typeof input.notes === 'string') {
+      return upsertPlan({
+        id: existing.id,
+        label: input.label ?? existing.label,
+        protectFocus: input.protectFocus ?? existing.protectFocus,
+        location: input.location ?? existing.location,
+        notes: input.notes !== undefined ? input.notes : existing.notes,
+      });
+    }
+    return existing;
+  }
+  return upsertPlan({
+    label: input.label ?? 'My coverage research',
+    protectFocus: input.protectFocus,
+    location: input.location,
+    notes: input.notes,
+  });
+};
+
+export const updatePlan = (
+  planId: string,
+  patch: Partial<Pick<CoveragePlan, 'label' | 'protectFocus' | 'location' | 'notes' | 'status'>>
+): CoveragePlan | null => {
+  const existing = loadState().plans.find((p) => p.id === planId);
+  if (!existing) return null;
+  return upsertPlan({
+    id: planId,
+    label: patch.label ?? existing.label,
+    protectFocus: patch.protectFocus ?? existing.protectFocus,
+    location: patch.location ?? existing.location,
+    notes: patch.notes !== undefined ? patch.notes : existing.notes,
+    status: patch.status ?? existing.status,
+  });
+};
+
+export const saveProviderToPlan = (input: {
+  providerSlug: string;
+  providerName: string;
+  city?: string;
+  state?: string;
+  profilePath?: string;
+  status?: ProviderResearchStatus;
+  notes?: string;
+  licenseSummary?: string;
+  lines?: string[];
+  planId?: string;
+}): SavedProvider => upsertSavedProvider(input);
+
+export const removeProviderFromPlan = removeSavedProvider;
+
 export function clearAllGuestPlans(): void {
   if (!isBrowser()) return;
   localStorage.removeItem(MY_INSURANCE_STORE_KEY);
+  localStorage.removeItem(MY_INSURANCE_STORE_KEY_LEGACY);
   localStorage.removeItem(GUEST_SAVED_PROVIDERS_KEY);
-  window.dispatchEvent(new CustomEvent('ith-my-insurance-store'));
+  dispatchChange();
 }

@@ -10,8 +10,10 @@ export const PRODUCTION_SITE_ORIGIN =
 export const AUTH_CALLBACK_URL = `${PRODUCTION_SITE_ORIGIN}${AUTH_CALLBACK_PATH}`;
 
 export const GUEST_SAVED_PROVIDERS_KEY = 'ith-my-insurance-saved-providers-v1';
-/** Phase A durable store: plans + saved providers (see storage.ts) */
-export const MY_INSURANCE_STORE_KEY = 'ith-my-insurance-store-v1';
+/** Spec storage key for CoveragePlan + SavedProvider blob */
+export const MY_INSURANCE_STORE_KEY = 'ith:my-insurance:v1';
+/** Pre-spec key; still read once then rewritten to MY_INSURANCE_STORE_KEY */
+export const MY_INSURANCE_STORE_KEY_LEGACY = 'ith-my-insurance-store-v1';
 export const PENDING_SAVE_ACTION_KEY = 'ith-my-insurance-pending-action-v1';
 export const POST_LOGIN_REDIRECT_KEY = 'ith-my-insurance-post-login-redirect';
 

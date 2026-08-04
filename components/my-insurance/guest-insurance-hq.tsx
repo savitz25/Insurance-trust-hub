@@ -115,12 +115,12 @@ export function GuestInsuranceHq() {
       <Card className="border-teal-100 shadow-sm">
         <CardHeader className="pb-3">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
-            Guest research workspace
+            Active plan
           </p>
-          <CardTitle className="text-xl text-slate-900">Your coverage plan</CardTitle>
+          <CardTitle className="text-xl text-slate-900">Coverage research plan</CardTitle>
           <p className="text-sm leading-relaxed text-slate-600">
-            Saved on this device only. Research shortlist — not a quote marketplace. No paid
-            placements.
+            Guest-saved on this device. Edit details below or start from the directory. Research
+            only — not a quote marketplace.
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -245,7 +245,7 @@ export function GuestInsuranceHq() {
               <Building2 className="mx-auto h-8 w-8 text-slate-400" aria-hidden />
               <p className="mt-2 font-medium text-slate-800">No saved providers yet</p>
               <p className="mt-1 text-sm text-slate-600">
-                Open a directory profile and use <strong>Save</strong> to add an agency to this plan.
+                Save agencies from the directory or a profile to build your shortlist.
               </p>
               <Button asChild className="mt-4 bg-teal-600 hover:bg-teal-700">
                 <Link href="/directory">Find licensed agencies</Link>

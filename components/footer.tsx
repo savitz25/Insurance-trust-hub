@@ -115,6 +115,15 @@ export function Footer() {
               <div>
                 <Link
                   prefetch={false}
+                  href="/my-insurance"
+                  className="transition-colors hover:text-foreground"
+                >
+                  My Insurance
+                </Link>
+              </div>
+              <div>
+                <Link
+                  prefetch={false}
                   href="/resources"
                   className="transition-colors hover:text-foreground"
                 >

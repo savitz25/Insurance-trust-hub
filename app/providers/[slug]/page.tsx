@@ -144,6 +144,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 providerName={provider.name}
                 city={provider.city}
                 state={provider.state}
+                licenseSummary={
+                  provider.license_number
+                    ? `License ${provider.license_number}`
+                    : provider.is_verified
+                      ? 'Verified listing'
+                      : undefined
+                }
+                lines={provider.insurance_types?.map(String)}
               />
               <CompareProviderButton
                 providerSlug={provider.slug}

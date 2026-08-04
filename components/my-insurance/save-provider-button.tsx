@@ -22,6 +22,8 @@ type Props = {
   providerName: string;
   city?: string;
   state?: string;
+  licenseSummary?: string;
+  lines?: string[];
   className?: string;
   variant?: 'default' | 'outline' | 'secondary';
 };
@@ -35,6 +37,8 @@ export function SaveProviderButton({
   providerName,
   city,
   state,
+  licenseSummary,
+  lines,
   className,
   variant = 'outline',
 }: Props) {
@@ -86,11 +90,19 @@ export function SaveProviderButton({
             providerName,
             city,
             state,
+            licenseSummary,
+            lines,
             profilePath: `/providers/${providerSlug}`,
             status: 'shortlisted',
           });
-          toast.success(`Saved to My Insurance plan`, {
+          toast.success('Saved to My Insurance', {
             description: 'Stored on this device · research only',
+            action: {
+              label: 'Open HQ',
+              onClick: () => {
+                window.location.href = '/my-insurance';
+              },
+            },
           });
         }
         refreshGuest();
@@ -121,10 +133,20 @@ export function SaveProviderButton({
             providerName,
             city,
             state,
+            licenseSummary,
+            lines,
             profilePath: `/providers/${providerSlug}`,
             status: 'shortlisted',
           });
-          toast.success(`${providerName} saved to My Insurance`);
+          toast.success('Saved to My Insurance', {
+            description: providerName,
+            action: {
+              label: 'Open HQ',
+              onClick: () => {
+                window.location.href = '/my-insurance';
+              },
+            },
+          });
         } else {
           toast.error(res.error);
         }
@@ -160,6 +182,8 @@ function GuestOnlySaveButton({
   providerName,
   city,
   state,
+  licenseSummary,
+  lines,
   className,
   variant,
 }: Props) {
@@ -193,10 +217,18 @@ function GuestOnlySaveButton({
               providerName,
               city,
               state,
+              licenseSummary,
+              lines,
               profilePath: `/providers/${providerSlug}`,
             });
-            toast.success('Saved to My Insurance plan', {
+            toast.success('Saved to My Insurance', {
               description: 'Stored on this device · research only',
+              action: {
+                label: 'Open HQ',
+                onClick: () => {
+                  window.location.href = '/my-insurance';
+                },
+              },
             });
           }
           setSaved(isProviderSaved(providerSlug));
