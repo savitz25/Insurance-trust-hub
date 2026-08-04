@@ -30,6 +30,11 @@ Constant: `lib/network/standard-version.ts` → `ASK_NETWORK_STANDARD_VERSION`
 - **Bump when:** network bar/seal contract, journey module label API, Trust Mark, belonging line, methodology cross-links
 - **Do not bump for:** unrelated vertical content
 - Live host exposes `data-network-standard` on `<body>`
+- **2026.08.06:** seal uses common-ownership line (not bare “Independently operated”)
+
+### Ownership seal (Priority 5)
+
+`Common ownership · Separated research & listing order · No paid placements`
 
 ### Hero intent (Priority 4)
 

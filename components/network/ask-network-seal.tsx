@@ -1,8 +1,9 @@
 import { ASK_TRUST_HUB, NETWORK_HUBS } from '@/lib/network/ask-trust-hub';
+import { ASK_NETWORK_OWNERSHIP_SHORT } from '@/lib/network/standard-version';
 import { TrustMark } from '@/components/network/trust-mark';
 
 /**
- * Footer network seal — identical spirit to Move Trust Hub seal.
+ * Footer network seal — common ownership + separated research (not unaffiliated).
  */
 export function AskNetworkSeal() {
   return (
@@ -10,16 +11,17 @@ export function AskNetworkSeal() {
       <p className="text-sm font-semibold tracking-tight text-foreground">
         Part of the{' '}
         <a
-          href={ASK_TRUST_HUB.promiseUrl}
+          href={ASK_TRUST_HUB.url}
           className="underline underline-offset-2 hover:text-foreground/80"
           rel="noopener noreferrer"
         >
           Ask Trust Hub network
         </a>
       </p>
+      <p className="mt-1.5 text-xs font-medium leading-relaxed text-foreground/80">
+        {ASK_NETWORK_OWNERSHIP_SHORT}
+      </p>
       <p className="mt-1 text-xs leading-relaxed">
-        Independently operated · No paid placements
-        {' · '}
         <a
           href={ASK_TRUST_HUB.promiseUrl}
           className="underline underline-offset-2 hover:opacity-90"

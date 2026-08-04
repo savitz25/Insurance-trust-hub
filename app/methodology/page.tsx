@@ -101,8 +101,8 @@ export default function MethodologyPage() {
       <h1 className="section-heading mt-3">Insurance Trust Hub methodology</h1>
       <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
         How {SITE_NAME} applies The Ask Trust Hub Standard to state-licensed insurance research —
-        sources, verification, tools vs directory, cadence, and limits. Independently operated. No
-        paid placements.
+        sources, verification, tools vs directory, cadence, and limits. Part of the Ask Trust Hub
+        network — common ownership, separated research and listing order, no paid placements.
       </p>
       <div className="mt-4">
         <TrustMark />
