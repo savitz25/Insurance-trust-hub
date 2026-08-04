@@ -128,18 +128,8 @@ export function Navbar() {
             </Link>
           </Button>
 
-          {mi?.user ? (
-            <Button
-              size="sm"
-              variant="ghost"
-              className="hidden gap-1.5 text-slate-600 sm:inline-flex"
-              onClick={() => void handleSignOut()}
-              aria-label="Sign out"
-            >
-              <LogOut className="h-4 w-4" />
-              <span className="max-w-[9rem] truncate text-xs">{mi.user.email}</span>
-            </Button>
-          ) : (
+          {/* Signed-in identity + Sign out live on /my-insurance HQ only — no header email chip. */}
+          {!mi?.user ? (
             <Button
               size="sm"
               variant="ghost"
@@ -149,7 +139,7 @@ export function Navbar() {
               <LogIn className="h-4 w-4" />
               <span className="hidden sm:inline">Sign in</span>
             </Button>
-          )}
+          ) : null}
 
           <Button size="sm" variant="trust" asChild className="hidden gap-2 lg:inline-flex">
             <Link href="/contact">
