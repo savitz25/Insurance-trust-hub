@@ -24,6 +24,7 @@ import {
   collectLocalProvidersForMerge,
   importCloudProvidersIntoLocal,
   localProviderSlugs,
+  snapshotLocalPlans,
 } from '@/lib/my-insurance/auth-continuity';
 import { consumePendingSaveAction } from '@/lib/my-insurance/guest-storage';
 import { toast } from 'sonner';
@@ -107,19 +108,22 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /**
-   * Guest-first continuity:
-   * 1. Import local (ith:my-insurance:v1 + legacy) → cloud
-   * 2. Import cloud-only rows → local
-   * 3. Never clear localStorage
-   * @param opts.announce — toast when local data was present (sign-in only)
+   * Guest-first continuity (Phase D multi-plan safe):
+   * 1. Snapshot local plans — never drop them if cloud is empty
+   * 2. Import local providers → cloud (by slug for cloud table)
+   * 3. Import cloud-only rows → active plan as (planId, providerSlug) union
+   * 4. Never clear localStorage / plans / compare tray
+   * @param opts.announce — toast on explicit sign-in when local had data
    */
   const syncAuthContinuity = useCallback(async (opts?: { announce?: boolean }) => {
     if (typeof window === 'undefined') return;
 
+    const plansBefore = snapshotLocalPlans();
     const localList = collectLocalProvidersForMerge();
     let importedToCloud = 0;
     let importedToLocal = 0;
 
+    // Local → cloud (optional overlay). Empty cloud is fine; we still keep local plans.
     if (localList.length > 0) {
       const res = await mergeGuestProvidersAction(localList);
       if (res.ok && res.merged > 0) {
@@ -127,18 +131,33 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    // Cloud → local so empty cloud never hides local, and cloud-only shows in Guest HQ
+    // Cloud → local (additive only onto active plan)
     try {
       const dash = await getMyInsuranceDashboardData();
       const cloudRows = dash?.savedProviders ?? [];
-      importedToLocal = importCloudProvidersIntoLocal(
-        cloudRows.map((p) => ({
-          provider_slug: p.provider_slug,
-          provider_name: p.provider_name,
-        }))
-      );
+      // Explicit: empty cloud must not rewrite or clear multi-plan library
+      if (cloudRows.length > 0) {
+        importedToLocal = importCloudProvidersIntoLocal(
+          cloudRows.map((p) => ({
+            provider_slug: p.provider_slug,
+            provider_name: p.provider_name,
+          }))
+        );
+      }
     } catch {
-      /* ignore */
+      /* ignore — local remains source of truth */
+    }
+
+    const plansAfter = snapshotLocalPlans();
+    if (
+      plansBefore.planCount > 0 &&
+      plansAfter.planCount < plansBefore.planCount &&
+      typeof console !== 'undefined'
+    ) {
+      console.error('[my-insurance] syncAuthContinuity: local plans decreased (bug)', {
+        plansBefore,
+        plansAfter,
+      });
     }
 
     const cloudSlugs = await listSavedProviderSlugsAction();
@@ -148,7 +167,6 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       toast.success('Restored your saved agencies on this device.');
     }
 
-    // Notify HQ / nav listeners
     window.dispatchEvent(new CustomEvent('ith-my-insurance-store'));
   }, []);
 

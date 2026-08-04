@@ -26,6 +26,7 @@ MyInsuranceState {
 3. Creating a plan via setup: **Update current** or **Create as new** (does not archive siblings).  
 4. Switch plan → HQ shortlist/snapshots for that plan only; providers not orphaned.  
 5. Migration: backfill `planId` on providers; promote version → 2.  
+6. Provider identity on a plan: **`(planId, providerSlug)`** — same agency may appear on two plans.  
 
 ### APIs (`lib/my-insurance/storage.ts`)
 
@@ -43,23 +44,43 @@ MyInsuranceState {
 
 ## Auth merge (D.6)
 
-- Plans remain **local-only**.  
-- `syncAuthContinuity` must not clear local plans.  
-- Cloud provider slugs still import into local (active plan / researching).  
-- Merge identity: local plan `id` is source of truth; no cloud plan table in this phase.
+Plans are **local-only** (no cloud plan table). Rules:
+
+| Rule | Behavior |
+|------|----------|
+| Never drop local plans | Empty cloud must not clear `plans[]` / `activePlanId` |
+| Provider union | Local membership by **`(planId, providerSlug)`** |
+| Cloud import | Additive only onto **active** plan as `researching` if that pair is missing |
+| Local → cloud | Flat by `providerSlug` for Supabase `saved_providers` (optional overlay) |
+| `createdAt` | Used **sparingly** — only as fallback stamp when `savedAt`/`updatedAt` missing; **not** merge identity |
+| Sign-out | Keep full local multi-plan + compare tray |
+
+Implementation: `lib/my-insurance/auth-continuity.ts` + `syncAuthContinuity` in `my-insurance-provider.tsx`.  
+Also see `docs/MY-INSURANCE-AUTH-CONTINUITY.md`.
+
+## Acceptance criteria
+
+- [x] ≥2 non-archived plans; switch from library/HQ  
+- [x] Shortlist plan-scoped; switch changes visible providers  
+- [x] Rename / archive / delete (confirm) cleans providers  
+- [x] Report reflects active or `?planId=`  
+- [x] Guest path localStorage; refresh safe  
+- [x] Sign-in does not wipe multi-plan local state  
+- [x] `/my-insurance/plans` linked from HQ  
+- [x] Docs + Insurance-trust-hub SHA  
 
 ## Human tests
 
-1. Setup → create plan A → shortlist 2  
-2. Setup → **Create as new plan** B → HQ shows B shortlist empty; All plans shows A + B  
-3. Open A from library → shortlist 2 again  
-4. Archive B → A remains active  
-5. Report title includes plan label; All plans link works  
-6. Sign in/out → plans still present  
+1. Setup plan A → shortlist 2 agencies  
+2. Create plan B (new) → shortlist 1 different agency  
+3. Library shows both; switch to A → see 2; switch to B → see 1  
+4. Rename B; archive A; delete confirm on a duplicate test plan  
+5. Report for active plan; copy still works  
+6. Sign out / sign in → plans remain  
 
 ## Files
 
-- `lib/my-insurance/plan-types.ts`, `storage.ts`  
+- `lib/my-insurance/plan-types.ts`, `storage.ts`, `auth-continuity.ts`  
 - `components/my-insurance/plans-library.tsx`  
 - `app/my-insurance/plans/page.tsx`  
 - `guest-insurance-hq.tsx`, `guided-plan-setup.tsx`, `coverage-report.tsx`  

@@ -1,57 +1,71 @@
 # My Insurance — Auth continuity (guest ↔ signed-in)
 
 **Production:** Insurance-trust-hub only (`www.insurancetrusthub.com`)  
-**Related:** `docs/MY-INSURANCE-COMPARE-FIX.md`, Phase A–C docs
+**Related:** `docs/MY-INSURANCE-COMPARE-FIX.md`, `docs/MY-INSURANCE-PHASE-D.md`
 
 ## Storage (never wipe on auth)
 
 | Key | Role |
 |-----|------|
-| `ith:my-insurance:v1` | Primary guest plan + shortlist (CoveragePlan / SavedProvider) |
-| `ith-my-insurance-compare-tray-v1` | Compare set (slugs + names) |
+| `ith:my-insurance:v1` | Multi-plan library + providers (`plans[]`, `activePlanId`, `savedProviders`) |
+| `ith-my-insurance-compare-tray-v1` | Global compare set (slugs + names) |
 | `ith-my-insurance-saved-providers-v1` | Legacy guest list (still read for merge) |
-| Supabase `saved_providers` | Optional cloud shortlist when signed in |
+| Supabase `saved_providers` | Optional cloud shortlist when signed in (**no** cloud plans table) |
 
-**Rule:** Sign-in and sign-out must **not** clear localStorage keys above.
+**Rule:** Sign-in and sign-out must **not** clear localStorage keys above.  
+**Rule:** Empty cloud must **never** drop or replace multi-plan local state.
 
-## Merge rules (by `providerSlug`)
+## Merge rules (Phase D)
 
-1. **Always read local first** for HQ shortlist/plan UI (`GuestInsuranceHq`).
-2. On **sign-in** (`syncAuthContinuity`):
-   - Collect local providers (Phase A store ∪ legacy key).
-   - **Import local → cloud** via `mergeGuestProvidersAction` (upsert; empty cloud must not win).
-   - **Import cloud → local** for any cloud slug missing locally (status `researching` to avoid shortlist cap fights).
-   - Toast when local had data: *“Restored your saved agencies on this device.”*
-3. **Display:** cloud ∪ local. Prefer non-empty local over empty cloud dashboard.
-4. On **sign-out:** keep local; drop only in-memory cloud slug set for remote-only state.
-5. Badge count: `max(guest plan count, cloud∪local slug size, compare tray if needed)`.
+### Local plan library
+
+- Source of truth for plans is always local.
+- `syncAuthContinuity` snapshots plan count before/after and never clears `plans[]`.
+- If cloud returns zero providers, skip cloud→local import entirely.
+
+### Provider union
+
+| Layer | Identity |
+|-------|----------|
+| **Local membership** | `(planId, providerSlug)` — same agency can live on plan A and plan B |
+| **Cloud table** | `providerSlug` only (flat); local→cloud de-dupes by slug for upload |
+| **`createdAt`** | **Sparingly** — fallback stamp when `savedAt`/`updatedAt` missing; **not** used as merge key |
+
+### On sign-in (`syncAuthContinuity`)
+
+1. Snapshot local plans.  
+2. Collect local providers (Phase D store ∪ legacy) → **import local → cloud** if any.  
+3. If cloud has rows: **import cloud → local** onto **active** plan only when `(activePlanId, slug)` is missing (status `researching`).  
+4. Toast on explicit sign-in when local had data: *“Restored your saved agencies on this device.”*  
+5. Display HQ always from local (`GuestInsuranceHq`); cloud extras are additive only.
+
+### On sign-out
+
+Keep full multi-plan library + compare tray; drop only in-memory cloud slug set for remote-only UI.
 
 ## UI
 
 | Surface | Behavior |
 |---------|----------|
-| `/my-insurance` | Always renders `GuestInsuranceHq` (plan, shortlist, Setup/Report/Compare). Signed-in adds identity strip + optional cloud extras (comparisons, reviews, drug basket, calculators). |
-| Header | Persistent **My Insurance** (bookmark icon + badge) top-right desktop **and** mobile (beside hamburger). **Sign in** when signed out; email/sign-out when signed in. |
+| `/my-insurance` | Always `GuestInsuranceHq` (active plan shortlist). Signed-in adds identity + optional cloud extras. |
+| `/my-insurance/plans` | Multi-plan library |
+| Header | Persistent **My Insurance** + Sign in / Sign out |
 
 ## Code map
 
-- `lib/my-insurance/auth-continuity.ts` — collect local, import cloud→local  
-- `components/my-insurance/my-insurance-provider.tsx` — `syncAuthContinuity`, no clear on merge  
+- `lib/my-insurance/auth-continuity.ts` — `collectLocalProvidersForMerge`, `importCloudProvidersIntoLocal`, `snapshotLocalPlans`, `(planId, slug)` keys  
+- `components/my-insurance/my-insurance-provider.tsx` — `syncAuthContinuity`  
 - `components/my-insurance/my-insurance-dashboard.tsx` — unified HQ  
-- `components/navbar.tsx` — My Move–style passport control  
+- `components/navbar.tsx` — passport control  
 
 ## Human tests
 
-1. Clean guest → save 2 providers → HQ shows 2  
-2. Sign in → still 2 (not 0); toast restore if applicable  
-3. Sign out → still 2  
-4. Signed out: **Sign in** on HQ + header; top-right My Insurance works  
-5. Signed in: top-right My Insurance works; Sign out works; cloud extras do not replace shortlist  
-
-## Phase D plans (local-first)
-
-Coverage plans live only in `ith:my-insurance:v1` (not cloud). Auth merge never drops local plans/providers. Cloud `saved_providers` still union by slug into the **active** plan on import. See `docs/MY-INSURANCE-PHASE-D.md`.
+1. Guest → save 2 on plan A → HQ shows 2  
+2. Create plan B → shortlist 1 → switch A/B shows 2 vs 1  
+3. Sign in → both plans remain; shortlists intact  
+4. Sign out → still both plans  
+5. Signed out: **Sign in** on HQ + header; top-right My Insurance works  
 
 ## Out of scope
 
-Full SSO with Move/Lender, forcing login for Save.
+Full SSO with Move/Lender, cloud-hosted plan library, forcing login for Save.
