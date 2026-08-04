@@ -35,7 +35,7 @@ export function HowItWorks() {
           <h2 className="section-heading">Name what you protect — then verify licensing</h2>
           <p className="mx-auto mt-2 max-w-xl text-muted-foreground">
             Insurance Trust Hub is a research directory for DOI-licensed options. We do not sell
-            policies, free quotes, or rank agents for pay.
+            policies, run a quote marketplace, or rank agents for pay.
           </p>
         </div>
 
