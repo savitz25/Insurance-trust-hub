@@ -41,7 +41,7 @@ export default function HomePage() {
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Choose what matters, then research state-licensed agencies and educational tools.
               Confirm Active status and lines of authority on DOI / NAIC pathways before you enroll.
-              We do not sell policies or free quotes.
+              We do not sell policies or operate a quote marketplace.
             </p>
 
             <div className="mt-8">
