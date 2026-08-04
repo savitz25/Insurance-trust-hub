@@ -1,5 +1,15 @@
 # Insurance Trust Hub
 
+**Production domain:** https://www.insurancetrusthub.com  
+**This repo is the source of truth for that domain** (`Insurance-trust-hub` → Vercel Insurance project).
+
+Sibling network repos: [Conumers-Trust-Hub](https://github.com/savitz25/Conumers-Trust-Hub) (Ask) · [Move-trust-Hub](https://github.com/savitz25/Move-trust-Hub) · [Lender-Trust-Hub](https://github.com/savitz25/Lender-Trust-Hub)
+
+**Network / multi-domain:** see [docs/NETWORK-DEPLOY.md](./docs/NETWORK-DEPLOY.md) and [docs/NETWORK-PR-CHECKLIST.md](./docs/NETWORK-PR-CHECKLIST.md).  
+Move monorepo `app/insurance` changes do **not** update this apex domain — push **this** repo for production Insurance.
+
+---
+
 An independent, authoritative directory platform helping individuals and families relocating to new cities identify, compare, and connect with licensed insurance providers for homeowners, auto, health, Medicare, renters, and related personal insurance needs.
 
 **Independent directory. Not affiliated with any insurance carrier, agency, or agent.** All information is for research purposes only. Always verify licensing directly with your state's Department of Insurance, NAIC, or official sources before engaging any provider.

@@ -8,6 +8,7 @@ import { AskNetworkBar } from '@/components/network/ask-network-bar';
 import { MyInsuranceShell } from '@/components/my-insurance/my-insurance-shell';
 import { InsurancePwaProvider } from '@/components/pwa/insurance-pwa-provider';
 import { rootLayoutMetadata } from '@/lib/seo/metadata';
+import { ASK_NETWORK_STANDARD_VERSION } from '@/lib/network/standard-version';
 import './globals.css';
 
 const inter = Inter({
@@ -32,7 +33,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased pt-[env(safe-area-inset-top)]`}>
+      <body
+        className={`${inter.variable} font-sans antialiased pt-[env(safe-area-inset-top)]`}
+        data-network-standard={ASK_NETWORK_STANDARD_VERSION}
+      >
+        {/* network-standard: {ASK_NETWORK_STANDARD_VERSION} */}
         <MyInsuranceShell>
           <AskNetworkBar />
           <Navbar />
