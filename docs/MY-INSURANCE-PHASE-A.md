@@ -31,3 +31,16 @@ SavedProvider = { id, planId?, providerSlug, providerName, profilePath, licenseS
 ## Out of scope (later)
 
 Multi-plan library, email/PDF report, wizard, SSO, tool snapshots
+
+## Human test steps
+
+1. Open `/my-insurance` signed out → guest HQ (plan form; empty shortlist if first visit).  
+2. Set plan label + protect-focus chips → **Save plan on this device**.  
+3. Open any `/providers/[slug]` → **Save** → toast “Saved to My Insurance” → **Open HQ**.  
+4. Confirm provider listed with status **Shortlisted**.  
+5. Hard refresh `/my-insurance` → plan + provider still present.  
+6. Change status → **Done**; then remove → gone after refresh.  
+
+**Default plan when saving with zero plans:** auto-creates `My coverage research` (`upsertSavedProvider` → `upsertPlan`).  
+
+**Storage key:** `ith:my-insurance:v1`

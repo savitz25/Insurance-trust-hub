@@ -35,14 +35,24 @@ function isBrowser(): boolean {
   return typeof window !== 'undefined';
 }
 
+const VALID_STATUSES: ProviderResearchStatus[] = [
+  'researching',
+  'shortlisted',
+  'reached_out',
+  'done',
+];
+
 function normalizeProvider(p: SavedProvider): SavedProvider {
   const savedAt = p.savedAt || p.createdAt || nowIso();
+  const status = VALID_STATUSES.includes(p.status) ? p.status : 'shortlisted';
   return {
     ...p,
+    providerSlug: String(p.providerSlug || ''),
+    providerName: String(p.providerName || p.providerSlug || 'Provider'),
     profilePath: p.profilePath || `/providers/${p.providerSlug}`,
     savedAt,
     updatedAt: p.updatedAt || savedAt,
-    status: p.status || 'shortlisted',
+    status,
   };
 }
 
@@ -81,6 +91,17 @@ function syncLegacyShortlist(state: MyInsuranceState): void {
   );
 }
 
+/** Last save error for UI (cleared on success). */
+let lastSaveError: string | null = null;
+
+export function getLastSaveError(): string | null {
+  return lastSaveError;
+}
+
+function noteSaveResult(result: { ok: true } | { ok: false; error: string }): void {
+  lastSaveError = result.ok ? null : result.error;
+}
+
 /** Spec name: loadState */
 export function loadState(): MyInsuranceState {
   if (!isBrowser()) return emptyState();
@@ -101,20 +122,47 @@ export function loadState(): MyInsuranceState {
   }
 }
 
-/** Spec name: saveState */
-export function saveState(state: MyInsuranceState): void {
-  if (!isBrowser()) return;
+/** Spec name: saveState — fails soft on quota/private mode (no throw). */
+export function saveState(state: MyInsuranceState): { ok: true } | { ok: false; error: string } {
+  if (!isBrowser()) return { ok: false, error: 'Not available on server' };
   const next: MyInsuranceState = {
     version: 1,
     activePlanId: state.activePlanId,
     plans: state.plans,
-    savedProviders: state.savedProviders.map(normalizeProvider).slice(0, MAX_SAVED_PROVIDERS),
+    savedProviders: state.savedProviders
+      .map(normalizeProvider)
+      .filter((p) => p.providerSlug)
+      .slice(0, MAX_SAVED_PROVIDERS),
   };
-  localStorage.setItem(MY_INSURANCE_STORE_KEY, JSON.stringify(next));
-  // Keep previous key written for one release
-  localStorage.setItem(MY_INSURANCE_STORE_KEY_LEGACY, JSON.stringify(next));
-  syncLegacyShortlist(next);
-  dispatchChange();
+  try {
+    const json = JSON.stringify(next);
+    localStorage.setItem(MY_INSURANCE_STORE_KEY, json);
+    // Keep previous key written for one release
+    try {
+      localStorage.setItem(MY_INSURANCE_STORE_KEY_LEGACY, json);
+    } catch {
+      /* legacy key optional */
+    }
+    try {
+      syncLegacyShortlist(next);
+    } catch {
+      /* non-fatal */
+    }
+    dispatchChange();
+    noteSaveResult({ ok: true });
+    return { ok: true };
+  } catch (e) {
+    const msg =
+      e instanceof DOMException && e.name === 'QuotaExceededError'
+        ? 'Storage full — could not save My Insurance on this device.'
+        : 'Could not save My Insurance on this device (storage blocked or unavailable).';
+    if (typeof console !== 'undefined') {
+      console.warn('[my-insurance]', msg, e);
+    }
+    const fail = { ok: false as const, error: msg };
+    noteSaveResult(fail);
+    return fail;
+  }
 }
 
 function migrateFromLegacyGuestProviders(): MyInsuranceState {

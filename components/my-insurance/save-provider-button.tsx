@@ -9,6 +9,7 @@ import {
   saveProviderAction,
 } from '@/actions/my-insurance';
 import {
+  getLastSaveError,
   isProviderSaved,
   removeProviderFromPlan,
   saveProviderToPlan,
@@ -95,15 +96,20 @@ export function SaveProviderButton({
             profilePath: `/providers/${providerSlug}`,
             status: 'shortlisted',
           });
-          toast.success('Saved to My Insurance', {
-            description: 'Stored on this device · research only',
-            action: {
-              label: 'Open HQ',
-              onClick: () => {
-                window.location.href = '/my-insurance';
+          const err = getLastSaveError();
+          if (err) {
+            toast.error(err);
+          } else {
+            toast.success('Saved to My Insurance', {
+              description: 'Stored on this device · research only',
+              action: {
+                label: 'Open HQ',
+                onClick: () => {
+                  window.location.href = '/my-insurance';
+                },
               },
-            },
-          });
+            });
+          }
         }
         refreshGuest();
       } finally {
@@ -221,15 +227,20 @@ function GuestOnlySaveButton({
               lines,
               profilePath: `/providers/${providerSlug}`,
             });
-            toast.success('Saved to My Insurance', {
-              description: 'Stored on this device · research only',
-              action: {
-                label: 'Open HQ',
-                onClick: () => {
-                  window.location.href = '/my-insurance';
+            const err = getLastSaveError();
+            if (err) {
+              toast.error(err);
+            } else {
+              toast.success('Saved to My Insurance', {
+                description: 'Stored on this device · research only',
+                action: {
+                  label: 'Open HQ',
+                  onClick: () => {
+                    window.location.href = '/my-insurance';
+                  },
                 },
-              },
-            });
+              });
+            }
           }
           setSaved(isProviderSaved(providerSlug));
         } finally {

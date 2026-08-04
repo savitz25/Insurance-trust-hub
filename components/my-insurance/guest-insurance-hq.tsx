@@ -22,12 +22,14 @@ import {
 import {
   ensureActivePlan,
   getActivePlan,
+  getLastSaveError,
   getProvidersForPlan,
   loadMyInsuranceStore,
   removeProviderFromPlan,
   updatePlan,
   updateSavedProviderStatus,
 } from '@/lib/my-insurance/storage';
+import { toast } from 'sonner';
 import { TrustMark } from '@/components/network/trust-mark';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -95,6 +97,10 @@ export function GuestInsuranceHq() {
         label: locationLabel,
       },
     });
+    const err = getLastSaveError();
+    if (err) {
+      toast.error(err);
+    }
     refresh();
   }
 
