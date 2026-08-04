@@ -9,6 +9,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import type { Provider } from '@/types/provider';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+import { NetworkBelongingLine } from '@/components/network/network-belonging-line';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Agency Directory — Search Licensed Agents by State',
@@ -75,6 +76,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     <div className="container mx-auto px-4 py-10 md:py-14">
       <div className="max-w-3xl mb-10">
         <h1 className="section-heading">Insurance agency directory</h1>
+        <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
           Search licensed independent and captive agencies by location, coverage type, and customer
           ratings. Always verify licensing with your state insurance department.

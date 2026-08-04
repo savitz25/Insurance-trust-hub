@@ -11,6 +11,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { ProviderCard } from '@/components/provider-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { NetworkHandoff } from '@/components/network/network-handoff';
 
 interface StatePageProps {
   params: Promise<{ state: string }>;
@@ -150,6 +151,12 @@ export default async function StateDestinationPage({ params }: StatePageProps) {
             </div>
           )}
         </section>
+
+        <NetworkHandoff
+          context="insurance-destination"
+          geography={{ state: dest.name, stateCode: dest.code }}
+          variant="card"
+        />
       </div>
     </div>
   );

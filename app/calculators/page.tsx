@@ -4,6 +4,7 @@ import { Calculator, Heart, Shield, PiggyBank } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { NetworkBelongingLine } from '@/components/network/network-belonging-line';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Calculators — Premium, Medicare & ACA Tools',
@@ -47,6 +48,7 @@ export default function CalculatorsPage() {
     <div className="container mx-auto px-4 py-12 md:py-16">
       <div className="max-w-3xl mb-12">
         <h1 className="text-3xl md:text-4xl font-bold">Insurance Calculators</h1>
+        <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground text-lg">
           Educational tools to estimate costs and identify coverage gaps. All outputs are estimates
           only — consult a licensed agent and verify with official sources.

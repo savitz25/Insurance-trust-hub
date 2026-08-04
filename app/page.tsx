@@ -4,6 +4,7 @@ import { ZipSearch } from '@/components/zip-search';
 import { TrustBar } from '@/components/trust-bar';
 import { HowItWorks } from '@/components/how-it-works';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { NetworkBelongingLine } from '@/components/network/network-belonging-line';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildHomepageGraph } from '@/lib/seo/schemas';
 import { getTopHubs } from '@/lib/hubs/registry';
@@ -27,6 +28,7 @@ export default function HomePage() {
               <Shield className="h-4 w-4" aria-hidden="true" />
               INDEPENDENT DOI DIRECTORY · NO PAID PLACEMENTS · NO PAY-TO-RANK
             </div>
+            <NetworkBelongingLine className="mb-4" />
 
             <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl">
               Cut through coverage confusion

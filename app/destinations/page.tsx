@@ -5,6 +5,8 @@ import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { NetworkHandoff } from '@/components/network/network-handoff';
+import { NetworkBelongingLine } from '@/components/network/network-belonging-line';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance by Destination — State & City Guides for Movers',
@@ -18,6 +20,7 @@ export default function DestinationsPage() {
     <div className="container mx-auto px-4 py-10 md:py-14">
       <div className="max-w-3xl mb-12">
         <h1 className="section-heading">Insurance destinations</h1>
+        <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
           Moving to a new state? Each destination guide covers local insurance risks, average
           premiums, and licensed agencies serving the area. Educational content only — always
@@ -60,6 +63,10 @@ export default function DestinationsPage() {
             Browse all agencies <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
+      </div>
+
+      <div className="mt-12 max-w-2xl mx-auto">
+        <NetworkHandoff context="insurance-destination" variant="card" />
       </div>
     </div>
   );

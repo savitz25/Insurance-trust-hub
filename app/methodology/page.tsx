@@ -13,6 +13,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { DISCLAIMER, SITE_NAME } from '@/lib/constants';
 import { Card, CardContent } from '@/components/ui/card';
 import { ASK_TRUST_HUB } from '@/lib/network/ask-trust-hub';
+import { TrustMark } from '@/components/network/trust-mark';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Methodology — How Insurance Trust Hub Verifies Agencies',
@@ -103,6 +104,9 @@ export default function MethodologyPage() {
         sources, verification, tools vs directory, cadence, and limits. Independently operated. No
         paid placements.
       </p>
+      <div className="mt-4">
+        <TrustMark />
+      </div>
 
       <aside className="mt-8 rounded-xl border bg-muted/25 px-4 py-4 text-sm sm:px-5">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
