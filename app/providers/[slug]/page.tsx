@@ -25,6 +25,7 @@ import { LeadForm } from '@/components/lead-form';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { TrustMark } from '@/components/network/trust-mark';
+import { BeforeYouReachOut } from '@/components/research/before-you-reach-out';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
 import { CompareProviderButton } from '@/components/my-insurance/compare-provider-button';
 import { WriteReviewForm } from '@/components/my-insurance/write-review-form';
@@ -412,6 +413,19 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
             )}
           </aside>
         </div>
+      </div>
+
+      <div className="container mx-auto max-w-3xl px-4 pb-12">
+        <BeforeYouReachOut
+          summaryLines={[
+            provider.name,
+            provider.license_number ? `License: ${provider.license_number}` : undefined,
+            `${provider.city}, ${provider.state}`,
+            `Profile: https://www.insurancetrusthub.com/providers/${provider.slug}`,
+            'Verify Active status on state DOI / NAIC before enrolling',
+          ].filter(Boolean) as string[]}
+          mailtoSubject={`${provider.name} — Insurance Trust Hub research notes`}
+        />
       </div>
 
       <DisclaimerBanner />
