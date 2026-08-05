@@ -9,9 +9,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
 
-  const result = await requestMagicLink(body.email ?? '', body.next);
+  const result = await requestMagicLink(body.email ?? '', body.next, request);
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: result.status });
   }
-  return NextResponse.json({ ok: true, delivery: result.delivery });
+  return NextResponse.json({
+    ok: true,
+    delivery: result.delivery,
+    emailRedirectTo: result.emailRedirectTo,
+  });
 }

@@ -60,12 +60,27 @@ Post-login default: `/my-insurance` (success/error via `?auth=` helpers in `oaut
 
 ## Ops checklist (human — consoles)
 
-### Supabase Auth → URL configuration
+### Supabase Auth → URL configuration (required — human)
 
-- `https://www.movetrusthub.com/auth/callback`
-- `https://www.insurancetrusthub.com/auth/callback`
-- `https://www.lendertrusthub.com/auth/callback`
-- (optional) preview URLs; confirm paths if used
+Shared project **arepfylnilkjmyduhwbz**. If a hub’s callback is missing from **Redirect URLs**, Supabase falls back to Site URL (Move) → `movetrusthub.com/?code=…`.
+
+Add if missing:
+
+```
+https://www.movetrusthub.com/**
+https://www.insurancetrusthub.com/**
+https://www.lendertrusthub.com/**
+https://www.asktrusthub.com/**
+http://localhost:3000/**
+```
+
+### App redirect rules (code)
+
+Magic link / OAuth always target this hub:
+
+`https://www.insurancetrusthub.com/auth/callback?next=…`
+
+`resolveSiteOrigin` (`lib/my-insurance/constants.ts`): request Host (Insurance/localhost) → env only if Insurance host → canonical. Move env on this project is ignored.
 
 ### Google Cloud OAuth + Facebook Login
 
@@ -73,9 +88,9 @@ Authorized origins / redirect URIs for all three `www` domains.
 
 ### Vercel (Insurance)
 
-- `NEXT_PUBLIC_SUPABASE_URL` = **same value as Move**
+- `NEXT_PUBLIC_SUPABASE_URL` = **same value as Move** (project arepfylnilkjmyduhwbz)
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = **same as Move**
-- `NEXT_PUBLIC_SITE_URL` = `https://www.insurancetrusthub.com`
+- `NEXT_PUBLIC_SITE_URL` = `https://www.insurancetrusthub.com` (must be Insurance, not Move)
 
 ---
 

@@ -3,19 +3,20 @@ import { createClient } from '@/lib/supabase/server';
 import { ensureUserProfile } from '@/lib/my-insurance/ensure-profile';
 import {
   MY_INSURANCE_PATH,
-  PRODUCTION_SITE_ORIGIN,
+  resolveSiteOrigin,
   sanitizePostLoginPath,
 } from '@/lib/my-insurance/constants';
 import { sendWelcomeEmail } from '@/lib/my-insurance/emails';
 import type { EmailOtpType } from '@supabase/supabase-js';
 
 export async function GET(request: Request) {
+  const origin = resolveSiteOrigin(request);
   const { searchParams } = new URL(request.url);
   const token_hash = searchParams.get('token_hash');
   const type = (searchParams.get('type') || 'magiclink') as EmailOtpType;
   const next = sanitizePostLoginPath(searchParams.get('next'));
 
-  const fail = new URL(`${MY_INSURANCE_PATH}?auth=error`, PRODUCTION_SITE_ORIGIN);
+  const fail = new URL(`${MY_INSURANCE_PATH}?auth=error`, origin);
 
   if (!token_hash) {
     return NextResponse.redirect(fail);
@@ -42,5 +43,5 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.redirect(new URL(next, PRODUCTION_SITE_ORIGIN));
+  return NextResponse.redirect(new URL(next, origin));
 }

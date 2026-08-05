@@ -1,13 +1,95 @@
-﻿import { SITE_URL } from '@/lib/constants';
+import { SITE_URL } from '@/lib/constants';
 
 export const MY_INSURANCE_PATH = '/my-insurance';
 export const AUTH_CALLBACK_PATH = '/auth/callback';
 export const AUTH_CONFIRM_PATH = '/auth/confirm';
 
-export const PRODUCTION_SITE_ORIGIN =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || SITE_URL.replace(/\/$/, '');
+/** Canonical production origin for this hub — never movetrusthub.com */
+export const HUB_CANONICAL_ORIGIN = 'https://www.insurancetrusthub.com';
+const HUB_HOST_FRAGMENT = 'insurancetrusthub.com';
 
-export const AUTH_CALLBACK_URL = `${PRODUCTION_SITE_ORIGIN}${AUTH_CALLBACK_PATH}`;
+/**
+ * Resolve this hub’s public origin for Auth redirects.
+ * Priority: request Host (this hub / localhost) → env if Insurance → canonical.
+ * Wrong env (e.g. Move URL) is ignored so magic links never land on Move.
+ */
+export function resolveSiteOrigin(request?: Request | null): string {
+  if (request) {
+    const hostRaw = (
+      request.headers.get('x-forwarded-host') ||
+      request.headers.get('host') ||
+      ''
+    )
+      .split(',')[0]
+      .trim()
+      .toLowerCase();
+
+    if (hostRaw.includes(HUB_HOST_FRAGMENT)) {
+      const proto = (
+        request.headers.get('x-forwarded-proto') ||
+        'https'
+      )
+        .split(',')[0]
+        .trim();
+      return `${proto}://${hostRaw}`.replace(/\/$/, '');
+    }
+
+    if (
+      hostRaw.startsWith('localhost') ||
+      hostRaw.startsWith('127.0.0.1')
+    ) {
+      const proto = (
+        request.headers.get('x-forwarded-proto') ||
+        'http'
+      )
+        .split(',')[0]
+        .trim();
+      return `${proto}://${hostRaw}`.replace(/\/$/, '');
+    }
+  }
+
+  const env = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, '');
+  if (env) {
+    try {
+      if (new URL(env).hostname.toLowerCase().includes(HUB_HOST_FRAGMENT)) {
+        return env;
+      }
+      console.warn(
+        '[auth] NEXT_PUBLIC_SITE_URL is not an Insurance host; ignoring for redirects:',
+        env
+      );
+    } catch {
+      /* ignore */
+    }
+  }
+
+  return HUB_CANONICAL_ORIGIN;
+}
+
+/**
+ * Static site origin for emails / SEO — Insurance only (never trust a Move env).
+ */
+export const PRODUCTION_SITE_ORIGIN = (() => {
+  const env = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, '');
+  if (env) {
+    try {
+      if (new URL(env).hostname.toLowerCase().includes(HUB_HOST_FRAGMENT)) {
+        return env;
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  return SITE_URL.replace(/\/$/, '') || HUB_CANONICAL_ORIGIN;
+})();
+
+export function authCallbackUrl(nextPath: string, origin?: string): string {
+  const base = (origin || resolveSiteOrigin()).replace(/\/$/, '');
+  return `${base}${AUTH_CALLBACK_PATH}?next=${encodeURIComponent(nextPath)}`;
+}
+
+/** Prefer authCallbackUrl(next, resolveSiteOrigin(request)). Canonical fallback. */
+export const AUTH_CALLBACK_URL = `${HUB_CANONICAL_ORIGIN}${AUTH_CALLBACK_PATH}`;
 
 export const GUEST_SAVED_PROVIDERS_KEY = 'ith-my-insurance-saved-providers-v1';
 /** Spec storage key for CoveragePlan + SavedProvider blob */
@@ -38,9 +120,7 @@ export function sanitizePostLoginPath(next: string | null | undefined): string {
     return MY_INSURANCE_PATH;
   }
   try {
-    const base = PRODUCTION_SITE_ORIGIN.includes('insurancetrusthub.com')
-      ? PRODUCTION_SITE_ORIGIN
-      : 'https://www.insurancetrusthub.com';
+    const base = HUB_CANONICAL_ORIGIN;
     const parsed = new URL(next, base);
     if (parsed.origin !== new URL(base).origin) {
       return MY_INSURANCE_PATH;

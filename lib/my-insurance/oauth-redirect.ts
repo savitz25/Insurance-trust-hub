@@ -1,8 +1,6 @@
-import 'server-only';
-
 import {
-  AUTH_CALLBACK_URL,
-  PRODUCTION_SITE_ORIGIN,
+  authCallbackUrl,
+  resolveSiteOrigin,
   sanitizePostLoginPath,
 } from '@/lib/my-insurance/constants';
 
@@ -11,12 +9,13 @@ import {
  */
 export function ensureInsuranceOAuthUrl(
   oauthUrl: string,
-  nextPath?: string | null
+  nextPath?: string | null,
+  origin?: string
 ): string {
   try {
     const parsed = new URL(oauthUrl);
     const next = sanitizePostLoginPath(nextPath);
-    const desired = `${AUTH_CALLBACK_URL}?next=${encodeURIComponent(next)}`;
+    const desired = authCallbackUrl(next, origin);
     parsed.searchParams.set('redirect_to', desired);
     return parsed.toString();
   } catch {
@@ -24,15 +23,21 @@ export function ensureInsuranceOAuthUrl(
   }
 }
 
-export function insuranceAuthSuccessUrl(nextPath?: string | null): string {
+export function insuranceAuthSuccessUrl(
+  nextPath?: string | null,
+  origin?: string
+): string {
   const next = sanitizePostLoginPath(nextPath);
-  return new URL(next, PRODUCTION_SITE_ORIGIN).toString();
+  return new URL(next, origin || resolveSiteOrigin()).toString();
 }
 
-export function insuranceAuthErrorUrl(nextPath?: string | null): string {
+export function insuranceAuthErrorUrl(
+  nextPath?: string | null,
+  origin?: string
+): string {
   const next = sanitizePostLoginPath(nextPath);
   return new URL(
     `/my-insurance?auth=error&next=${encodeURIComponent(next)}`,
-    PRODUCTION_SITE_ORIGIN
+    origin || resolveSiteOrigin()
   ).toString();
 }
