@@ -3,26 +3,38 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { ASK_TRUST_HUB, NETWORK_HUBS } from '@/lib/network/ask-trust-hub';
+import { networkHubHref, type HubLinkId } from '@/lib/network/handoff-href';
+import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
 
 /**
- * Slim network bar above Insurance primary header (matches Move chrome).
+ * Slim network bar. Signed-in users go through silent SSO handoff when
+ * switching specialist hubs; guests get plain public URLs.
  */
 export function AskNetworkBar() {
   const [open, setOpen] = useState(false);
+  const mi = useMyInsuranceOptional();
+  const signedIn = Boolean(mi?.user) && !mi?.loading;
 
   const links = [
-    ...NETWORK_HUBS.map((h) => ({
-      id: h.id,
-      label: h.shortLabel,
-      href: h.url,
-      active: h.id === 'insurance',
-    })),
+    ...NETWORK_HUBS.map((h) => {
+      const id = h.id as HubLinkId;
+      return {
+        id: h.id,
+        label: h.shortLabel,
+        href:
+          id === 'insurance'
+            ? h.url
+            : networkHubHref(id, signedIn),
+        active: h.id === 'insurance',
+        sameOrigin: id !== 'insurance' && signedIn,
+      };
+    }),
     {
       id: 'standards',
       label: 'Standards',
-      // Clear path to The Ask Trust Hub Standard (methodology)
       href: ASK_TRUST_HUB.methodologyUrl,
       active: false,
+      sameOrigin: false,
     },
   ];
 
@@ -53,7 +65,7 @@ export function AskNetworkBar() {
                 key={link.id}
                 href={link.href}
                 className="rounded-md px-2.5 py-1 font-medium hover:bg-background/80 hover:text-foreground"
-                rel="noopener noreferrer"
+                rel={link.sameOrigin ? undefined : 'noopener noreferrer'}
               >
                 {link.label}
               </a>
@@ -77,7 +89,7 @@ export function AskNetworkBar() {
                   key={link.id}
                   href={link.href}
                   className="block px-3 py-2 text-sm hover:bg-muted"
-                  rel="noopener noreferrer"
+                  rel={link.sameOrigin ? undefined : 'noopener noreferrer'}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
