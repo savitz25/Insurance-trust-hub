@@ -4,11 +4,14 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { ASK_TRUST_HUB, NETWORK_HUBS } from '@/lib/network/ask-trust-hub';
 import { networkHubHref, type HubLinkId } from '@/lib/network/handoff-href';
+import { NetworkHandoffLink } from '@/components/network/network-handoff-link';
 
-/**
- * Slim network bar. Other specialist hubs always use same-origin SSO /start
- * (guest → plain 307 without code; signed-in → one-time code redirect).
- */
+const HUB_HOME: Record<HubLinkId, string> = {
+  move: '/my-move',
+  insurance: '/my-insurance',
+  lender: '/my-lending',
+};
+
 export function AskNetworkBar() {
   const [open, setOpen] = useState(false);
 
@@ -19,7 +22,9 @@ export function AskNetworkBar() {
       return {
         id: h.id,
         label: h.shortLabel,
-        href: active ? h.url : networkHubHref(id),
+        href: active ? h.url : networkHubHref(id, true, HUB_HOME[id]),
+        toHub: id,
+        nextPath: HUB_HOME[id],
         active,
         sameOrigin: !active,
       };
@@ -28,6 +33,8 @@ export function AskNetworkBar() {
       id: 'standards',
       label: 'Standards',
       href: ASK_TRUST_HUB.methodologyUrl,
+      toHub: null as HubLinkId | null,
+      nextPath: undefined as string | undefined,
       active: false,
       sameOrigin: false,
     },
@@ -55,13 +62,22 @@ export function AskNetworkBar() {
               >
                 {link.label}
               </span>
+            ) : link.sameOrigin && link.toHub ? (
+              <NetworkHandoffLink
+                key={link.id}
+                href={link.href}
+                toHub={link.toHub}
+                nextPath={link.nextPath}
+                className="rounded-md px-2.5 py-1 font-medium hover:bg-background/80 hover:text-foreground"
+              >
+                {link.label}
+              </NetworkHandoffLink>
             ) : (
               <a
                 key={link.id}
                 href={link.href}
                 className="rounded-md px-2.5 py-1 font-medium hover:bg-background/80 hover:text-foreground"
-                rel={link.sameOrigin ? undefined : 'noopener noreferrer'}
-                data-network-handoff={link.sameOrigin ? 'start' : undefined}
+                rel="noopener noreferrer"
               >
                 {link.label}
               </a>
@@ -80,19 +96,32 @@ export function AskNetworkBar() {
           </button>
           {open ? (
             <div className="absolute right-0 top-full z-50 mt-1 min-w-[10rem] rounded-lg border bg-background py-1 shadow-md">
-              {links.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  className="block px-3 py-2 text-sm hover:bg-muted"
-                  rel={link.sameOrigin ? undefined : 'noopener noreferrer'}
-                  data-network-handoff={link.sameOrigin ? 'start' : undefined}
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                  {link.active ? ' · you are here' : ''}
-                </a>
-              ))}
+              {links.map((link) =>
+                link.sameOrigin && link.toHub ? (
+                  <NetworkHandoffLink
+                    key={link.id}
+                    href={link.href}
+                    toHub={link.toHub}
+                    nextPath={link.nextPath}
+                    className="block px-3 py-2 text-sm hover:bg-muted"
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                    {link.active ? ' · you are here' : ''}
+                  </NetworkHandoffLink>
+                ) : (
+                  <a
+                    key={link.id}
+                    href={link.href}
+                    className="block px-3 py-2 text-sm hover:bg-muted"
+                    rel={link.sameOrigin ? undefined : 'noopener noreferrer'}
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                    {link.active ? ' · you are here' : ''}
+                  </a>
+                )
+              )}
             </div>
           ) : null}
         </div>

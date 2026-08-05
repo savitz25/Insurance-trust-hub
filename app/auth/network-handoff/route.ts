@@ -29,9 +29,32 @@ function failRedirect(reason: string) {
   return res;
 }
 
-/**
- * Complete SSO handoff on Insurance: consume one-time code, set session cookies, go to HQ.
- */
+function applyCookie(
+  response: NextResponse,
+  name: string,
+  value: string,
+  options?: Record<string, unknown>
+) {
+  const sameSiteRaw = options?.sameSite;
+  const sameSite =
+    sameSiteRaw === true
+      ? 'strict'
+      : sameSiteRaw === false
+        ? undefined
+        : ((sameSiteRaw as 'lax' | 'strict' | 'none' | undefined) ?? 'lax');
+
+  response.cookies.set({
+    name,
+    value,
+    path: typeof options?.path === 'string' ? options.path : '/',
+    sameSite,
+    secure: typeof options?.secure === 'boolean' ? options.secure : true,
+    httpOnly: typeof options?.httpOnly === 'boolean' ? options.httpOnly : true,
+    maxAge: typeof options?.maxAge === 'number' ? options.maxAge : undefined,
+    expires: options?.expires instanceof Date ? options.expires : undefined,
+  });
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code') || '';
@@ -84,26 +107,31 @@ export async function GET(request: Request) {
           } catch {
             /* ignore */
           }
-          response.cookies.set(name, value, {
-            ...options,
-            path: options?.path ?? '/',
-            sameSite: (options?.sameSite as 'lax' | 'strict' | 'none' | undefined) ?? 'lax',
-            secure: options?.secure ?? true,
-          });
+          applyCookie(response, name, value, options as Record<string, unknown>);
         });
       },
     },
   });
 
-  const { error } = await supabase.auth.verifyOtp({
-    type: (minted.type || 'magiclink') as EmailOtpType,
+  const type = (minted.type || 'magiclink') as EmailOtpType;
+  let { error } = await supabase.auth.verifyOtp({
+    type,
     token_hash: minted.tokenHash,
   });
+
+  if (error && type !== 'email') {
+    const retry = await supabase.auth.verifyOtp({
+      type: 'email',
+      token_hash: minted.tokenHash,
+    });
+    error = retry.error;
+  }
 
   if (error) {
     console.error('[network-handoff/complete] verifyOtp', {
       message: error.message,
       status: error.status,
+      type: minted.type,
     });
     return failRedirect('otp_failed');
   }
