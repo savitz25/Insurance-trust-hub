@@ -30,6 +30,18 @@ Cookies stay **per domain**; this handoff establishes a session on the destinati
 2. Each Vercel project needs **`SUPABASE_SERVICE_ROLE_KEY`** (server-only) for handoff create/consume  
 3. Same `NEXT_PUBLIC_SUPABASE_URL` + anon key as shared project  
 
+### Production probe (must pass after deploy)
+
+```http
+GET /api/auth/network-handoff/health  → 200 JSON { ok: true, hub, serviceRole }
+GET /auth/network-handoff             → 307 to HQ ?handoff=failed (not 404)
+GET /api/auth/network-handoff/start?to=lender → 307 (not 404)
+```
+
+**Why production 404’d (2026-08-05):** routes were on GitHub `main` (Insurance `fa9357e+`, Move `1559bb89+`) but **Vercel Production was still serving an older deployment** without those route modules. Lender auto-deployed (health 200); Move/Insurance did not. Fix: Vercel → Project → Deployments → **Redeploy** Production from latest `main` (or fix Production Branch / failed build).
+
+Env name for admin: **`SUPABASE_SERVICE_ROLE_KEY`** (same on all hubs; health JSON `serviceRole: true` confirms).
+
 ## Routes
 
 | Route | Role |
