@@ -33,6 +33,8 @@ Do **not** hardcode secrets in git.
 | `GET /api/auth/facebook` | Start Facebook OAuth |
 | `GET /auth/callback` | OAuth / code exchange → session + profile |
 | `GET /auth/confirm` | Email OTP `token_hash` verify |
+| `GET /api/auth/network-handoff/start` | Start silent SSO to another hub (session required) |
+| `GET /auth/network-handoff` | Complete SSO — set cookies on this domain |
 
 Post-login default: `/my-insurance` (success/error via `?auth=` helpers in `oauth-redirect.ts`).
 
@@ -102,10 +104,37 @@ Authorized origins / redirect URIs for all three `www` domains.
 
 ---
 
+## Silent cross-domain SSO (network handoff)
+
+Cookies are **per domain**. After initial login stays on the originating hub, navigating to another specialist domain uses a one-time handoff:
+
+1. Signed-in user on Hub A clicks network bar / seal / journey link  
+2. `GET /api/auth/network-handoff/start?to=lender&next=/my-lending` (same origin)  
+3. A verifies session → inserts `network_auth_handoffs` row (SHA-256 of code, 90s TTL)  
+4. 302 → `https://www.{target}/auth/network-handoff?code={plaintext_once}`  
+5. B consumes code (atomic `used_at`), mints session via **admin `generateLink` + `verifyOtp`**, sets cookies with the same `@supabase/ssr` pattern as `/auth/callback`, redirects to HQ  
+
+| Item | Detail |
+|------|--------|
+| Migration | `supabase/migrations/20260805120000_network_auth_handoffs.sql` (run once on shared project) |
+| Start | `app/api/auth/network-handoff/start/route.ts` |
+| Complete | `app/auth/network-handoff/route.ts` |
+| Lib | `lib/network/network-handoff.ts` |
+| Client helper | `lib/network/handoff-href.ts` → `networkHubHref` / `rewriteCrossHubHref` |
+| Wiring | Network bar, footer seal, journey `NetworkHandoff` cards via `CrossHubLink` |
+| Env | **`SUPABASE_SERVICE_ROLE_KEY`** required on each Vercel project for handoff |
+| Sign-out v1 | Current domain only (other hubs may stay signed in until expiry) |
+| Guest | Plain absolute URLs — no handoff |
+
+Full write-up: `docs/NETWORK-SSO-HANDOFF.md`.
+
+---
+
 ## Phase 4 (out of scope here)
 
 - Full cross-hub plan sync tables  
-- Cross-subdomain SSO cookie tricks  
+- Subdomain migration under asktrusthub.com  
+- Broadcast sign-out across all hubs  
 - Account deletion / data export  
 
 ---
@@ -128,4 +157,7 @@ Authorized origins / redirect URIs for all three `www` domains.
 2. Magic link or Google → signed in; same user id as Move when env is shared.  
 3. Sign out → multi-plan library remains.  
 4. No login wall on research pages.  
-5. Facebook smoke-test when app review allows.
+5. Facebook smoke-test when app review allows.  
+6. **SSO:** signed in on Insurance → network bar **Lending** → land signed in on Lender (no form).  
+7. Replay handoff `code` twice → second fails soft.  
+8. Logged out → network links are plain public URLs.

@@ -1,6 +1,7 @@
 import { ASK_TRUST_HUB, NETWORK_HUBS } from '@/lib/network/ask-trust-hub';
 import { ASK_NETWORK_OWNERSHIP_SHORT } from '@/lib/network/standard-version';
 import { TrustMark } from '@/components/network/trust-mark';
+import { CrossHubLink } from '@/components/network/cross-hub-link';
 
 /**
  * Footer network seal — common ownership + separated research (not unaffiliated).
@@ -70,13 +71,13 @@ export function AskNetworkSeal() {
                 <span className="ml-1 opacity-70">(you are here)</span>
               </span>
             ) : (
-              <a
+              <CrossHubLink
                 href={hub.url}
+                currentHub="insurance"
                 className="underline-offset-2 hover:underline"
-                rel="noopener noreferrer"
               >
                 {hub.proseName}
-              </a>
+              </CrossHubLink>
             )}
           </li>
         ))}
