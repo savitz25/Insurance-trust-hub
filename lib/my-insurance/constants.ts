@@ -9,12 +9,22 @@ export const HUB_CANONICAL_ORIGIN = 'https://www.insurancetrusthub.com';
 const HUB_HOST_FRAGMENT = 'insurancetrusthub.com';
 
 /**
- * Resolve this hub’s public origin for Auth redirects.
- * Priority: request Host (this hub / localhost) → env if Insurance → canonical.
- * Wrong env (e.g. Move URL) is ignored so magic links never land on Move.
+ * Shared Supabase Site URL host. Used as OAuth/magic bridge when redirect
+ * allow-list only has Move — Move hands code off here without exchanging.
+ */
+export const MOVE_AUTH_BRIDGE =
+  process.env.MOVE_AUTH_BRIDGE_URL?.trim() ||
+  'https://www.movetrusthub.com/auth/callback';
+
+export function useDirectAuthRedirect(): boolean {
+  return process.env.AUTH_OAUTH_DIRECT === '1' || process.env.AUTH_OAUTH_DIRECT === 'true';
+}
+
+/**
+ * Origin for post-login on THIS hub. Canonical www in production.
  */
 export function resolveSiteOrigin(request?: Request | null): string {
-  if (request) {
+  if (request && process.env.NODE_ENV === 'development') {
     const hostRaw = (
       request.headers.get('x-forwarded-host') ||
       request.headers.get('host') ||
@@ -23,21 +33,7 @@ export function resolveSiteOrigin(request?: Request | null): string {
       .split(',')[0]
       .trim()
       .toLowerCase();
-
-    if (hostRaw.includes(HUB_HOST_FRAGMENT)) {
-      const proto = (
-        request.headers.get('x-forwarded-proto') ||
-        'https'
-      )
-        .split(',')[0]
-        .trim();
-      return `${proto}://${hostRaw}`.replace(/\/$/, '');
-    }
-
-    if (
-      hostRaw.startsWith('localhost') ||
-      hostRaw.startsWith('127.0.0.1')
-    ) {
+    if (hostRaw.startsWith('localhost') || hostRaw.startsWith('127.0.0.1')) {
       const proto = (
         request.headers.get('x-forwarded-proto') ||
         'http'
@@ -52,10 +48,13 @@ export function resolveSiteOrigin(request?: Request | null): string {
   if (env) {
     try {
       if (new URL(env).hostname.toLowerCase().includes(HUB_HOST_FRAGMENT)) {
+        if (env.includes('insurancetrusthub.com') && !env.includes('localhost')) {
+          return HUB_CANONICAL_ORIGIN;
+        }
         return env;
       }
       console.warn(
-        '[auth] NEXT_PUBLIC_SITE_URL is not an Insurance host; ignoring for redirects:',
+        '[auth] NEXT_PUBLIC_SITE_URL is not an Insurance host; using canonical',
         env
       );
     } catch {
@@ -66,15 +65,13 @@ export function resolveSiteOrigin(request?: Request | null): string {
   return HUB_CANONICAL_ORIGIN;
 }
 
-/**
- * Static site origin for emails / SEO — Insurance only (never trust a Move env).
- */
+/** Static site origin for emails / SEO — Insurance only. */
 export const PRODUCTION_SITE_ORIGIN = (() => {
   const env = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, '');
   if (env) {
     try {
       if (new URL(env).hostname.toLowerCase().includes(HUB_HOST_FRAGMENT)) {
-        return env;
+        return HUB_CANONICAL_ORIGIN;
       }
     } catch {
       /* ignore */
@@ -83,12 +80,28 @@ export const PRODUCTION_SITE_ORIGIN = (() => {
   return SITE_URL.replace(/\/$/, '') || HUB_CANONICAL_ORIGIN;
 })();
 
-export function authCallbackUrl(nextPath: string, origin?: string): string {
-  const base = (origin || resolveSiteOrigin()).replace(/\/$/, '');
-  return `${base}${AUTH_CALLBACK_PATH}?next=${encodeURIComponent(nextPath)}`;
+/**
+ * Supabase emailRedirectTo / OAuth redirectTo.
+ * Default: Move bridge with hub=insurance (allowlisted Site URL).
+ * AUTH_OAUTH_DIRECT=1 → this hub’s /auth/callback only.
+ */
+export function authExternalRedirectUrl(nextPath: string): string {
+  const next = sanitizePostLoginPath(nextPath);
+  if (useDirectAuthRedirect()) {
+    return `${HUB_CANONICAL_ORIGIN}${AUTH_CALLBACK_PATH}?next=${encodeURIComponent(next)}&hub=insurance`;
+  }
+  const bridge = new URL(MOVE_AUTH_BRIDGE);
+  bridge.searchParams.set('next', next);
+  bridge.searchParams.set('hub', 'insurance');
+  return bridge.toString();
 }
 
-/** Prefer authCallbackUrl(next, resolveSiteOrigin(request)). Canonical fallback. */
+export function authCallbackUrl(nextPath: string, origin?: string): string {
+  const base = (origin || HUB_CANONICAL_ORIGIN).replace(/\/$/, '');
+  const next = sanitizePostLoginPath(nextPath);
+  return `${base}${AUTH_CALLBACK_PATH}?next=${encodeURIComponent(next)}&hub=insurance`;
+}
+
 export const AUTH_CALLBACK_URL = `${HUB_CANONICAL_ORIGIN}${AUTH_CALLBACK_PATH}`;
 
 export const GUEST_SAVED_PROVIDERS_KEY = 'ith-my-insurance-saved-providers-v1';

@@ -74,13 +74,21 @@ https://www.asktrusthub.com/**
 http://localhost:3000/**
 ```
 
-### App redirect rules (code)
+### App redirect rules (code) — Move bridge
 
-Magic link / OAuth always target this hub:
+Shared Supabase **Site URL** is Move. Missing allow-list entries cause magic link / Google to finish on Move with **no cookie** on Insurance.
 
-`https://www.insurancetrusthub.com/auth/callback?next=…`
+**Default** (`AUTH_OAUTH_DIRECT` unset):
 
-`resolveSiteOrigin` (`lib/my-insurance/constants.ts`): request Host (Insurance/localhost) → env only if Insurance host → canonical. Move env on this project is ignored.
+1. `emailRedirectTo` / OAuth `redirectTo` =  
+   `https://www.movetrusthub.com/auth/callback?next=/my-insurance&hub=insurance`
+2. Move hands off **without exchanging** →  
+   `https://www.insurancetrusthub.com/auth/callback?code=…`
+3. Insurance sets session cookies on **insurancetrusthub.com**
+
+Resend magic links (when configured) use `/auth/confirm` **directly on Insurance** (token_hash; no bridge).
+
+Set `AUTH_OAUTH_DIRECT=1` only after allow-list includes this hub.
 
 ### Google Cloud OAuth + Facebook Login
 

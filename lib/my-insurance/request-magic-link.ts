@@ -7,8 +7,8 @@ import {
   isSupabaseConfigured,
 } from '@/lib/supabase/config';
 import {
-  authCallbackUrl,
-  resolveSiteOrigin,
+  authExternalRedirectUrl,
+  HUB_CANONICAL_ORIGIN,
   sanitizePostLoginPath,
 } from '@/lib/my-insurance/constants';
 import { sendMagicLinkEmail } from '@/lib/my-insurance/emails';
@@ -19,12 +19,13 @@ export type RequestMagicLinkResult =
 
 /**
  * Magic link for Insurance HQ.
- * Always uses this hub’s origin for emailRedirectTo / confirm URLs (never Move).
+ * emailRedirectTo uses Move bridge by default (hub=insurance) so Supabase accepts
+ * the redirect; Move forwards the code here without setting a Move session.
  */
 export async function requestMagicLink(
   emailRaw: string,
   nextRaw?: string | null,
-  request?: Request | null
+  _request?: Request | null
 ): Promise<RequestMagicLinkResult> {
   const email = emailRaw.trim().toLowerCase();
   if (!email || !email.includes('@')) {
@@ -39,22 +40,25 @@ export async function requestMagicLink(
   }
 
   const nextPath = sanitizePostLoginPath(nextRaw);
-  const origin = resolveSiteOrigin(request);
-  const emailRedirectTo = authCallbackUrl(nextPath, origin);
+  const emailRedirectTo = authExternalRedirectUrl(nextPath);
 
-  // Preferred: admin generateLink + Resend (confirm URL on this hub)
+  // Preferred: admin generateLink + Resend with confirm URL on THIS hub
+  // (token_hash path never needs Move bridge)
   if (isSupabaseAdminConfigured() && process.env.RESEND_API_KEY?.trim()) {
     try {
       const admin = createAdminClient();
       const { data, error } = await admin.auth.admin.generateLink({
         type: 'magiclink',
         email,
-        options: { redirectTo: emailRedirectTo },
+        options: {
+          // After verify, Supabase may still honor redirectTo — keep hub-scoped
+          redirectTo: `${HUB_CANONICAL_ORIGIN}/auth/confirm?next=${encodeURIComponent(nextPath)}`,
+        },
       });
 
       if (!error && data?.properties?.hashed_token) {
         const type = data.properties.verification_type || 'magiclink';
-        const confirmUrl = new URL(`${origin}/auth/confirm`);
+        const confirmUrl = new URL(`${HUB_CANONICAL_ORIGIN}/auth/confirm`);
         confirmUrl.searchParams.set('token_hash', data.properties.hashed_token);
         confirmUrl.searchParams.set('type', type);
         confirmUrl.searchParams.set('next', nextPath);
@@ -79,7 +83,7 @@ export async function requestMagicLink(
     }
   }
 
-  // Fallback: Supabase built-in OTP mailer — hub-specific emailRedirectTo
+  // Supabase mailer — bridge redirect so Site URL allowlist accepts the link
   try {
     console.info('[my-insurance] magic-link emailRedirectTo', emailRedirectTo);
     const supabase = await createClient();
@@ -98,7 +102,7 @@ export async function requestMagicLink(
           ok: false,
           status: 500,
           error:
-            'Sign-in redirect is not allow-listed in Supabase. Add https://www.insurancetrusthub.com/** to Auth → Redirect URLs.',
+            'Sign-in redirect is not allow-listed. Add https://www.movetrusthub.com/** and https://www.insurancetrusthub.com/** under Auth → Redirect URLs.',
         };
       }
       return {

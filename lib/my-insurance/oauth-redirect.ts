@@ -1,22 +1,22 @@
 import {
-  authCallbackUrl,
-  resolveSiteOrigin,
+  authExternalRedirectUrl,
+  HUB_CANONICAL_ORIGIN,
   sanitizePostLoginPath,
 } from '@/lib/my-insurance/constants';
 
 /**
- * Force Supabase authorize `redirect_to` onto InsuranceTrustHub auth callback.
+ * Force Supabase authorize redirect_to onto Move bridge or direct ITH callback.
  */
 export function ensureInsuranceOAuthUrl(
   oauthUrl: string,
-  nextPath?: string | null,
-  origin?: string
+  nextPath?: string | null
 ): string {
   try {
     const parsed = new URL(oauthUrl);
-    const next = sanitizePostLoginPath(nextPath);
-    const desired = authCallbackUrl(next, origin);
-    parsed.searchParams.set('redirect_to', desired);
+    parsed.searchParams.set(
+      'redirect_to',
+      authExternalRedirectUrl(sanitizePostLoginPath(nextPath))
+    );
     return parsed.toString();
   } catch {
     return oauthUrl;
@@ -28,7 +28,7 @@ export function insuranceAuthSuccessUrl(
   origin?: string
 ): string {
   const next = sanitizePostLoginPath(nextPath);
-  return new URL(next, origin || resolveSiteOrigin()).toString();
+  return new URL(next, origin || HUB_CANONICAL_ORIGIN).toString();
 }
 
 export function insuranceAuthErrorUrl(
@@ -38,6 +38,6 @@ export function insuranceAuthErrorUrl(
   const next = sanitizePostLoginPath(nextPath);
   return new URL(
     `/my-insurance?auth=error&next=${encodeURIComponent(next)}`,
-    origin || resolveSiteOrigin()
+    origin || HUB_CANONICAL_ORIGIN
   ).toString();
 }
