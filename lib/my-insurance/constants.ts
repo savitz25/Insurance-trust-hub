@@ -16,7 +16,8 @@ export const MOVE_AUTH_BRIDGE =
   process.env.MOVE_AUTH_BRIDGE_URL?.trim() ||
   'https://www.movetrusthub.com/auth/callback';
 
-export function useDirectAuthRedirect(): boolean {
+/** Env flag — not a React hook (name must not start with use*). */
+export function isDirectAuthRedirectEnabled(): boolean {
   return process.env.AUTH_OAUTH_DIRECT === '1' || process.env.AUTH_OAUTH_DIRECT === 'true';
 }
 
@@ -87,7 +88,7 @@ export const PRODUCTION_SITE_ORIGIN = (() => {
  */
 export function authExternalRedirectUrl(nextPath: string): string {
   const next = sanitizePostLoginPath(nextPath);
-  if (useDirectAuthRedirect()) {
+  if (isDirectAuthRedirectEnabled()) {
     return `${HUB_CANONICAL_ORIGIN}${AUTH_CALLBACK_PATH}?next=${encodeURIComponent(next)}&hub=insurance`;
   }
   const bridge = new URL(MOVE_AUTH_BRIDGE);

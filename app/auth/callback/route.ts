@@ -38,7 +38,7 @@ export async function GET(request: Request) {
 
   const successUrl = insuranceAuthSuccessUrl(next, HUB_CANONICAL_ORIGIN);
   const errorUrl = insuranceAuthErrorUrl(next, HUB_CANONICAL_ORIGIN);
-  let response = NextResponse.redirect(successUrl);
+  const response = NextResponse.redirect(successUrl);
   const cookieStore = await cookies();
 
   const supabase = createServerClient(getSupabaseUrl()!, getSupabaseAnonKey()!, {

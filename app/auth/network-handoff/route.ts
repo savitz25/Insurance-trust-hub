@@ -15,7 +15,7 @@ import {
   HUB_ORIGINS,
   mintSessionTokenHashForUser,
   sanitizeHandoffPath,
-} from '@/lib/network/network-handoff';
+} from '@/lib/network/sso-handoff';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -60,7 +60,7 @@ export async function GET(request: Request) {
   const successUrl = new URL(destPath, HUB_ORIGINS.insurance);
   successUrl.searchParams.set('handoff', 'ok');
 
-  let response = NextResponse.redirect(successUrl);
+  const response = NextResponse.redirect(successUrl);
   const cookieStore = await cookies();
 
   const supabase = createServerClient(getSupabaseUrl()!, getSupabaseAnonKey()!, {

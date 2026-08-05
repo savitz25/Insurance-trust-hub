@@ -7,7 +7,7 @@ import {
   HUB_ORIGINS,
   isNetworkHubId,
   type NetworkHubId,
-} from '@/lib/network/network-handoff';
+} from '@/lib/network/sso-handoff';
 import {
   isSupabaseAdminConfigured,
   isSupabaseConfigured,
