@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { getMyInsuranceDashboardData } from '@/actions/my-insurance';
 import { MyInsuranceDashboard } from '@/components/my-insurance/my-insurance-dashboard';
+import { HandoffStatusBanner } from '@/components/my-insurance/handoff-status-banner';
 import { TrustMark } from '@/components/network/trust-mark';
 
 export const metadata: Metadata = buildMetadata({
@@ -34,6 +36,11 @@ export default async function MyInsurancePage() {
         <div className="mt-2">
           <TrustMark />
         </div>
+        <Suspense fallback={null}>
+          <div className="mt-4">
+            <HandoffStatusBanner />
+          </div>
+        </Suspense>
         <p className="mt-3 text-sm text-slate-500">
           <Link href="/directory" className="font-medium text-teal-700 hover:underline">
             Directory

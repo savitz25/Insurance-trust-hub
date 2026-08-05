@@ -5,6 +5,7 @@ import type { EmailOtpType } from '@supabase/supabase-js';
 import {
   getSupabaseAnonKey,
   getSupabaseUrl,
+  isSupabaseAdminConfigured,
   isSupabaseConfigured,
 } from '@/lib/supabase/config';
 import {
@@ -16,9 +17,12 @@ import {
   sanitizeHandoffPath,
 } from '@/lib/network/network-handoff';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 /**
  * Complete SSO handoff on Insurance: consume one-time code, set session cookies, go to HQ.
- * Soft failure → logged-out HQ (no panic).
+ * Soft failure → logged-out HQ (no panic). Never 404 — always redirect.
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -30,6 +34,13 @@ export async function GET(request: Request) {
   failUrl.searchParams.set('handoff', 'failed');
 
   if (!code || !isSupabaseConfigured()) {
+    return NextResponse.redirect(failUrl);
+  }
+
+  if (!isSupabaseAdminConfigured()) {
+    console.error(
+      '[network-handoff/complete] SUPABASE_SERVICE_ROLE_KEY missing — cannot mint session'
+    );
     return NextResponse.redirect(failUrl);
   }
 

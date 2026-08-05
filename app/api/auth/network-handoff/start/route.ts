@@ -8,7 +8,13 @@ import {
   isNetworkHubId,
   type NetworkHubId,
 } from '@/lib/network/network-handoff';
-import { isSupabaseConfigured } from '@/lib/supabase/config';
+import {
+  isSupabaseAdminConfigured,
+  isSupabaseConfigured,
+} from '@/lib/supabase/config';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 function clientIp(request: Request): string | null {
   return (
@@ -39,7 +45,10 @@ export async function GET(request: Request) {
     HUB_ORIGINS[toHub]
   ).toString();
 
-  if (!isSupabaseConfigured()) {
+  if (!isSupabaseConfigured() || !isSupabaseAdminConfigured()) {
+    console.warn(
+      '[network-handoff/start] missing Supabase public env or SUPABASE_SERVICE_ROLE_KEY'
+    );
     return NextResponse.redirect(fallback);
   }
 
