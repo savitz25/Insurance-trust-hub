@@ -1,6 +1,6 @@
 /**
  * Client-safe helpers for network bar / inter-hub links.
- * When signed in, route through same-origin handoff start; else plain hub URL.
+ * Cross-hub always uses same-origin /start (guest-safe plain 307 without code).
  */
 
 export type HubLinkId = 'move' | 'insurance' | 'lender';
@@ -23,7 +23,6 @@ const HOST_TO_HUB: Array<{ fragment: string; id: HubLinkId }> = [
   { fragment: 'lendertrusthub.com', id: 'lender' },
 ];
 
-/** Path used by network bar when signed in (silent SSO). */
 export function networkHandoffStartHref(to: HubLinkId, next?: string): string {
   const path = next?.startsWith('/') ? next : HUB_HOME[to];
   return `/api/auth/network-handoff/start?to=${encodeURIComponent(to)}&next=${encodeURIComponent(path)}`;
@@ -33,22 +32,18 @@ export function networkHubPublicUrl(to: HubLinkId): string {
   return HUB_URL[to];
 }
 
-/** Pick handoff vs public URL based on session. */
-export function networkHubHref(to: HubLinkId, signedIn: boolean, next?: string): string {
-  if (!signedIn) return networkHubPublicUrl(to);
+/** Always handoff start — /start is guest-safe. */
+export function networkHubHref(to: HubLinkId, _signedIn?: boolean, next?: string): string {
   return networkHandoffStartHref(to, next);
 }
 
-/**
- * Rewrite absolute specialist-hub URLs through handoff when signed in.
- * Leaves same-site, Ask parent, and non-hub URLs unchanged.
- */
+/** Rewrite absolute specialist-hub URLs through handoff start (always). */
 export function rewriteCrossHubHref(
   href: string,
-  signedIn: boolean,
+  _signedIn: boolean,
   currentHub: HubLinkId
 ): string {
-  if (!signedIn || !href) return href;
+  if (!href) return href;
   try {
     const base =
       typeof window !== 'undefined' ? window.location.origin : HUB_URL[currentHub];

@@ -4,29 +4,24 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { ASK_TRUST_HUB, NETWORK_HUBS } from '@/lib/network/ask-trust-hub';
 import { networkHubHref, type HubLinkId } from '@/lib/network/handoff-href';
-import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
 
 /**
- * Slim network bar. Signed-in users go through silent SSO handoff when
- * switching specialist hubs; guests get plain public URLs.
+ * Slim network bar. Other specialist hubs always use same-origin SSO /start
+ * (guest → plain 307 without code; signed-in → one-time code redirect).
  */
 export function AskNetworkBar() {
   const [open, setOpen] = useState(false);
-  const mi = useMyInsuranceOptional();
-  const signedIn = Boolean(mi?.user) && !mi?.loading;
 
   const links = [
     ...NETWORK_HUBS.map((h) => {
       const id = h.id as HubLinkId;
+      const active = id === 'insurance';
       return {
         id: h.id,
         label: h.shortLabel,
-        href:
-          id === 'insurance'
-            ? h.url
-            : networkHubHref(id, signedIn),
-        active: h.id === 'insurance',
-        sameOrigin: id !== 'insurance' && signedIn,
+        href: active ? h.url : networkHubHref(id),
+        active,
+        sameOrigin: !active,
       };
     }),
     {
@@ -66,6 +61,7 @@ export function AskNetworkBar() {
                 href={link.href}
                 className="rounded-md px-2.5 py-1 font-medium hover:bg-background/80 hover:text-foreground"
                 rel={link.sameOrigin ? undefined : 'noopener noreferrer'}
+                data-network-handoff={link.sameOrigin ? 'start' : undefined}
               >
                 {link.label}
               </a>
@@ -90,6 +86,7 @@ export function AskNetworkBar() {
                   href={link.href}
                   className="block px-3 py-2 text-sm hover:bg-muted"
                   rel={link.sameOrigin ? undefined : 'noopener noreferrer'}
+                  data-network-handoff={link.sameOrigin ? 'start' : undefined}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}

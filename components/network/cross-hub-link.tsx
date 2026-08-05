@@ -5,7 +5,6 @@ import {
   rewriteCrossHubHref,
   type HubLinkId,
 } from '@/lib/network/handoff-href';
-import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
 
 type CrossHubLinkProps = Omit<ComponentPropsWithoutRef<'a'>, 'href'> & {
   href: string;
@@ -14,7 +13,8 @@ type CrossHubLinkProps = Omit<ComponentPropsWithoutRef<'a'>, 'href'> & {
 };
 
 /**
- * Anchor that rewrites specialist-hub URLs through SSO handoff when signed in.
+ * Anchor that rewrites specialist-hub URLs through SSO handoff start.
+ * Always rewrites (guest-safe) — does not depend on client session timing.
  */
 export function CrossHubLink({
   href,
@@ -23,15 +23,14 @@ export function CrossHubLink({
   rel,
   ...rest
 }: CrossHubLinkProps) {
-  const mi = useMyInsuranceOptional();
-  const signedIn = Boolean(mi?.user) && !mi?.loading;
-  const resolved = rewriteCrossHubHref(href, signedIn, currentHub);
+  const resolved = rewriteCrossHubHref(href, true, currentHub);
   const isHandoff = resolved.startsWith('/api/auth/network-handoff/');
 
   return (
     <a
       href={resolved}
       rel={isHandoff ? undefined : rel ?? 'noopener noreferrer'}
+      data-network-handoff={isHandoff ? 'start' : undefined}
       {...rest}
     >
       {children}
