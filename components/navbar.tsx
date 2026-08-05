@@ -3,16 +3,15 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BrandLogo } from '@/components/BrandLogo';
-import { Menu, X, Phone, ChevronDown, Bookmark, LogIn, LogOut } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, Bookmark, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
-import { guestSavedCount } from '@/lib/my-insurance/storage';
-import { getCompareTray } from '@/lib/my-insurance/compare-storage';
+import { listSavedProviderSlugsAction } from '@/actions/my-insurance';
 import { signOutAction } from '@/actions/my-insurance';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
-/** Primary nav list — My Insurance lives as persistent top-right control (My Move parity). */
+/** Primary nav list — My Insurance is the sole account entry (no separate Sign in). */
 const NAV_LINKS = [
   { href: '/hubs', label: 'Health Hubs' },
   { href: '/hubs/browse', label: 'State & MSA' },
@@ -21,35 +20,55 @@ const NAV_LINKS = [
   { href: '/about', label: 'About' },
 ] as const;
 
+/**
+ * Header account control (My Move parity):
+ * - Logged out: “My Insurance” only — no guest badge, no separate Sign in
+ * - Logged in: badge = cloud/account saved providers only (not guest localStorage)
+ * Sign-in lives on HQ / auth modal.
+ */
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [directoriesOpen, setDirectoriesOpen] = useState(false);
-  const [badgeCount, setBadgeCount] = useState(0);
+  const [accountBadge, setAccountBadge] = useState(0);
   const mi = useMyInsuranceOptional();
   const router = useRouter();
+  const signedIn = Boolean(mi?.user);
+  const authReady = !mi?.loading;
 
   useEffect(() => {
-    const sync = () => {
-      const guest = guestSavedCount();
-      const cloud = mi?.user ? mi.savedProviderSlugs.size : 0;
-      const compare = getCompareTray().length;
-      // Union-aware: max of guest plan count, cloud∪local slug set, compare tray
-      setBadgeCount(Math.max(guest, cloud, compare > 0 && guest === 0 && cloud === 0 ? compare : 0));
+    let cancelled = false;
+
+    async function syncAccountBadge() {
+      if (!mi?.user) {
+        if (!cancelled) setAccountBadge(0);
+        return;
+      }
+      // Account-scoped cloud count only — never guest localStorage / compare tray.
+      try {
+        const cloud = await listSavedProviderSlugsAction();
+        if (!cancelled) setAccountBadge(cloud.length);
+      } catch {
+        if (!cancelled) setAccountBadge(0);
+      }
+    }
+
+    void syncAccountBadge();
+    const onStore = () => {
+      void syncAccountBadge();
     };
-    sync();
-    window.addEventListener('ith-my-insurance-store', sync);
-    window.addEventListener('ith-compare-tray', sync);
-    window.addEventListener('storage', sync);
+    window.addEventListener('ith-my-insurance-store', onStore);
     return () => {
-      window.removeEventListener('ith-my-insurance-store', sync);
-      window.removeEventListener('ith-compare-tray', sync);
-      window.removeEventListener('storage', sync);
+      cancelled = true;
+      window.removeEventListener('ith-my-insurance-store', onStore);
     };
-  }, [mi?.user, mi?.savedProviderSlugs.size]);
+  }, [mi?.user]);
+
+  const showBadge = authReady && signedIn && accountBadge > 0;
 
   async function handleSignOut() {
     await signOutAction();
     await mi?.signOutLocal();
+    setAccountBadge(0);
     toast.message('Signed out — research stays on this device');
     router.refresh();
     setIsOpen(false);
@@ -65,7 +84,6 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Desktop center links */}
         <div className="hidden xl:flex items-center gap-6 text-sm">
           <div className="relative">
             <button
@@ -114,32 +132,30 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* Always-visible top-right: My Insurance + account (My Move parity) */}
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <Button size="sm" variant="outline" asChild className="gap-1.5 sm:gap-2">
-            <Link href="/my-insurance" aria-label="My Insurance">
+            <Link
+              href="/my-insurance"
+              aria-label={
+                showBadge
+                  ? `My Insurance, ${accountBadge} saved agencies`
+                  : 'My Insurance'
+              }
+              title={
+                signedIn
+                  ? 'My Insurance — coverage research HQ'
+                  : 'My Insurance — research passport (sign in optional on HQ)'
+              }
+            >
               <Bookmark className="h-4 w-4 text-teal-700" />
               <span className="hidden sm:inline">My Insurance</span>
-              {badgeCount > 0 ? (
-                <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                  {badgeCount}
+              {showBadge ? (
+                <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
+                  {accountBadge > 99 ? '99+' : accountBadge}
                 </span>
               ) : null}
             </Link>
           </Button>
-
-          {/* Signed-in identity + Sign out live on /my-insurance HQ only — no header email chip. */}
-          {!mi?.user ? (
-            <Button
-              size="sm"
-              variant="ghost"
-              className="gap-1.5"
-              onClick={() => mi?.openAuth({ redirectPath: '/my-insurance' })}
-            >
-              <LogIn className="h-4 w-4" />
-              <span className="hidden sm:inline">Sign in</span>
-            </Button>
-          ) : null}
 
           <Button size="sm" variant="trust" asChild className="hidden gap-2 lg:inline-flex">
             <Link href="/contact">
@@ -180,34 +196,23 @@ export function Navbar() {
           >
             <Bookmark className="h-4 w-4" />
             My Insurance
-            {badgeCount > 0 ? (
-              <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                {badgeCount}
+            {showBadge ? (
+              <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
+                {accountBadge > 99 ? '99+' : accountBadge}
               </span>
             ) : null}
           </Link>
-          {mi?.user ? (
+          {/* Sign out only when signed in — no redundant Sign in row */}
+          {signedIn ? (
             <button
               type="button"
-              className="flex items-center gap-2 font-medium text-left w-full"
+              className="flex w-full items-center gap-2 text-left font-medium"
               onClick={() => void handleSignOut()}
             >
               <LogOut className="h-4 w-4" />
               Sign out
             </button>
-          ) : (
-            <button
-              type="button"
-              className="flex items-center gap-2 font-medium text-left w-full"
-              onClick={() => {
-                setIsOpen(false);
-                mi?.openAuth({ redirectPath: '/my-insurance' });
-              }}
-            >
-              <LogIn className="h-4 w-4" />
-              Sign in
-            </button>
-          )}
+          ) : null}
           <Link href="/contact" className="block font-medium" onClick={() => setIsOpen(false)}>
             Contact
           </Link>
