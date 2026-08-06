@@ -1,39 +1,56 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useId, useRef, useState } from 'react';
+import {
+  Bookmark,
+  ChevronDown,
+  LogOut,
+  Menu,
+  Phone,
+  X,
+} from 'lucide-react';
 import { BrandLogo } from '@/components/BrandLogo';
-import { Menu, X, Phone, ChevronDown, Bookmark, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
-import { listSavedProviderSlugsAction } from '@/actions/my-insurance';
-import { signOutAction } from '@/actions/my-insurance';
+import { listSavedProviderSlugsAction, signOutAction } from '@/actions/my-insurance';
+import {
+  DIRECTORY_NAV,
+  NAV_CTA,
+  PRIMARY_NAV,
+  navLinkActive,
+} from '@/lib/nav/primary-nav';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
-/** Primary nav list — My Insurance is the sole account entry (no separate Sign in). */
-const NAV_LINKS = [
-  { href: '/hubs', label: 'Health Hubs' },
-  { href: '/hubs/browse', label: 'State & MSA' },
-  { href: '/calculators', label: 'Calculators' },
-  { href: '/methodology', label: 'Methodology' },
-  { href: '/about', label: 'About' },
-] as const;
+const linkClass =
+  'font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-trust focus-visible:ring-offset-2';
+
+const tapTarget =
+  'min-h-[48px] flex items-center rounded-md px-2 -mx-2 transition-colors hover:bg-muted/40 active:bg-muted/60';
 
 /**
- * Header account control (My Move parity):
- * - Logged out: “My Insurance” only — no guest badge, no separate Sign in
- * - Logged in: badge = cloud/account saved providers only (not guest localStorage)
- * Sign-in lives on HQ / auth modal.
+ * Sticky primary header for InsuranceTrustHub.
+ * Desktop (lg+): Directory · Calculators · Guides · Methodology · Trust & Transparency
+ *   + My Insurance · Contact · Compare agencies CTA
+ * Mobile: My Insurance + CTA chip + hamburger with the same primary items.
  */
 export function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const mi = useMyInsuranceOptional();
   const [isOpen, setIsOpen] = useState(false);
   const [directoriesOpen, setDirectoriesOpen] = useState(false);
+  const [mobileDirectoriesOpen, setMobileDirectoriesOpen] = useState(false);
   const [accountBadge, setAccountBadge] = useState(0);
-  const mi = useMyInsuranceOptional();
-  const router = useRouter();
+  const panelId = useId();
+  const mobilePanelId = useId();
+  const dirRef = useRef<HTMLDivElement>(null);
+
   const signedIn = Boolean(mi?.user);
   const authReady = !mi?.loading;
+  const showBadge = authReady && signedIn && accountBadge > 0;
 
   useEffect(() => {
     let cancelled = false;
@@ -43,7 +60,6 @@ export function Navbar() {
         if (!cancelled) setAccountBadge(0);
         return;
       }
-      // Account-scoped cloud count only — never guest localStorage / compare tray.
       try {
         const cloud = await listSavedProviderSlugsAction();
         if (!cancelled) setAccountBadge(cloud.length);
@@ -63,7 +79,40 @@ export function Navbar() {
     };
   }, [mi?.user]);
 
-  const showBadge = authReady && signedIn && accountBadge > 0;
+  useEffect(() => {
+    if (!directoriesOpen) return;
+    const onDoc = (e: MouseEvent) => {
+      if (!dirRef.current?.contains(e.target as Node)) setDirectoriesOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setDirectoriesOpen(false);
+    };
+    document.addEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDoc);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [directoriesOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMobile();
+    };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
+  function closeMobile() {
+    setIsOpen(false);
+    setMobileDirectoriesOpen(false);
+  }
 
   async function handleSignOut() {
     await signOutAction();
@@ -71,69 +120,100 @@ export function Navbar() {
     setAccountBadge(0);
     toast.message('Signed out — research stays on this device');
     router.refresh();
-    setIsOpen(false);
+    closeMobile();
   }
 
+  const directoryActive = DIRECTORY_NAV.some((l) => navLinkActive(l.href, pathname));
+
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-20 items-center justify-between gap-2 px-4">
+    <nav
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      aria-label="Primary"
+    >
+      <div className="container mx-auto relative flex h-16 sm:h-20 items-center justify-between gap-2 px-4 overflow-visible">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <BrandLogo priority />
-          <div className="hidden md:flex items-center rounded-full bg-trust/10 px-2 py-0.5 text-[9px] font-semibold tracking-[1px] text-trust border border-trust/20">
+          <div
+            className="hidden md:flex items-center rounded-full bg-trust/10 px-2 py-0.5 text-[9px] font-semibold tracking-[1px] text-trust border border-trust/20"
+            title="Independent DOI-verified directory · no paid placements"
+          >
             INDEPENDENT
           </div>
         </div>
 
-        <div className="hidden xl:flex items-center gap-6 text-sm">
-          <div className="relative">
+        {/* Desktop primary nav — lg+ (not xl-only) */}
+        <div className="hidden lg:flex items-center gap-3 xl:gap-4 text-sm">
+          <div className="relative" ref={dirRef}>
             <button
               type="button"
-              onClick={() => setDirectoriesOpen(!directoriesOpen)}
-              className="inline-flex items-center gap-1 font-medium text-muted-foreground hover:text-foreground"
+              onClick={() => setDirectoriesOpen((o) => !o)}
+              className={cn(
+                linkClass,
+                'inline-flex items-center gap-1',
+                directoryActive && 'font-semibold text-foreground'
+              )}
               aria-expanded={directoriesOpen}
+              aria-controls={panelId}
+              aria-haspopup="true"
             >
-              Directories <ChevronDown className="h-4 w-4" />
+              Directory
+              <ChevronDown
+                className={cn('h-4 w-4 transition-transform', directoriesOpen && 'rotate-180')}
+                aria-hidden
+              />
             </button>
-            {directoriesOpen && (
-              <div className="absolute left-0 top-full z-50 mt-2 w-52 rounded-xl border bg-card py-2 shadow-trust-lg">
-                <Link
-                  href="/directory"
-                  className="block px-4 py-2 text-sm hover:bg-secondary"
-                  onClick={() => setDirectoriesOpen(false)}
-                >
-                  All Agents & Agencies
-                </Link>
-                <Link
-                  href="/hubs"
-                  className="block px-4 py-2 text-sm hover:bg-secondary"
-                  onClick={() => setDirectoriesOpen(false)}
-                >
-                  Health Insurance Hubs
-                </Link>
-                <Link
-                  href="/destinations"
-                  className="block px-4 py-2 text-sm hover:bg-secondary"
-                  onClick={() => setDirectoriesOpen(false)}
-                >
-                  Relocation Destinations
-                </Link>
+            {directoriesOpen ? (
+              <div
+                id={panelId}
+                role="menu"
+                className="absolute left-0 top-full z-50 mt-2 w-72 rounded-xl border bg-card py-2 shadow-trust-lg"
+              >
+                {DIRECTORY_NAV.map((link) => {
+                  const active = navLinkActive(link.href, pathname);
+                  return (
+                    <Link
+                      key={link.href}
+                      role="menuitem"
+                      prefetch={false}
+                      href={link.href}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'block px-4 py-2.5 hover:bg-secondary focus-visible:outline-none focus-visible:bg-secondary',
+                        active && 'bg-secondary/80'
+                      )}
+                      onClick={() => setDirectoriesOpen(false)}
+                    >
+                      <span className="block text-sm font-medium text-foreground">
+                        {link.label}
+                      </span>
+                      {link.description ? (
+                        <span className="mt-0.5 block text-xs text-muted-foreground">
+                          {link.description}
+                        </span>
+                      ) : null}
+                    </Link>
+                  );
+                })}
               </div>
-            )}
+            ) : null}
           </div>
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={`${link.href}-${link.label}`}
-              prefetch={false}
-              href={link.href}
-              className="font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
 
-        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <Button size="sm" variant="outline" asChild className="gap-1.5 sm:gap-2">
+          {PRIMARY_NAV.filter((l) => l.href !== '/directory').map((link) => {
+            const active = navLinkActive(link.href, pathname);
+            return (
+              <Link
+                key={link.href}
+                prefetch={false}
+                href={link.href}
+                className={cn(linkClass, active && 'font-semibold text-foreground')}
+                aria-current={active ? 'page' : undefined}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
+          <Button size="sm" variant="outline" asChild className="gap-1.5">
             <Link
               href="/my-insurance"
               aria-label={
@@ -141,14 +221,15 @@ export function Navbar() {
                   ? `My Insurance, ${accountBadge} saved agencies`
                   : 'My Insurance'
               }
+              aria-current={navLinkActive('/my-insurance', pathname) ? 'page' : undefined}
               title={
                 signedIn
                   ? 'My Insurance — coverage research HQ'
                   : 'My Insurance — research passport (sign in optional on HQ)'
               }
             >
-              <Bookmark className="h-4 w-4 text-teal-700" />
-              <span className="hidden sm:inline">My Insurance</span>
+              <Bookmark className="h-4 w-4 text-teal-700" aria-hidden />
+              <span>My Insurance</span>
               {showBadge ? (
                 <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
                   {accountBadge > 99 ? '99+' : accountBadge}
@@ -157,67 +238,190 @@ export function Navbar() {
             </Link>
           </Button>
 
-          <Button size="sm" variant="trust" asChild className="hidden gap-2 lg:inline-flex">
-            <Link href="/contact">
-              <Phone className="h-4 w-4" /> Contact
+          <Link
+            prefetch={false}
+            href="/contact"
+            className={cn(
+              linkClass,
+              navLinkActive('/contact', pathname) && 'font-semibold text-foreground'
+            )}
+            aria-current={navLinkActive('/contact', pathname) ? 'page' : undefined}
+          >
+            Contact
+          </Link>
+
+          <Button size="sm" variant="trust" asChild className="gap-2 min-h-9">
+            <Link prefetch={false} href={NAV_CTA.href}>
+              {NAV_CTA.label}
             </Link>
           </Button>
+        </div>
 
+        {/* Mobile / tablet right cluster */}
+        <div className="flex lg:hidden shrink-0 items-center gap-1.5 sm:gap-2">
+          <Button size="sm" variant="outline" asChild className="gap-1.5 px-2.5 sm:px-3">
+            <Link
+              href="/my-insurance"
+              aria-label={
+                showBadge
+                  ? `My Insurance, ${accountBadge} saved agencies`
+                  : 'My Insurance'
+              }
+              title="My Insurance"
+            >
+              <Bookmark className="h-4 w-4 text-teal-700" aria-hidden />
+              <span className="hidden sm:inline">My Insurance</span>
+              {showBadge ? (
+                <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
+                  {accountBadge > 99 ? '99+' : accountBadge}
+                </span>
+              ) : null}
+            </Link>
+          </Button>
+          <Button size="sm" variant="trust" asChild className="min-h-[44px] px-2.5 sm:px-3">
+            <Link prefetch={false} href={NAV_CTA.href}>
+              <span className="sm:hidden">Directory</span>
+              <span className="hidden sm:inline">{NAV_CTA.label}</span>
+            </Link>
+          </Button>
           <button
             type="button"
-            className="xl:hidden p-2"
-            onClick={() => setIsOpen(!isOpen)}
+            className="rounded-md p-2 min-h-11 min-w-11 inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-trust"
+            onClick={() => setIsOpen((o) => !o)}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+            aria-controls={mobilePanelId}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>
 
-      {isOpen && (
-        <div className="xl:hidden border-t bg-background px-4 py-4 space-y-3">
-          <Link href="/directory" className="block font-medium" onClick={() => setIsOpen(false)}>
-            Directories
-          </Link>
-          {NAV_LINKS.map((link) => (
+      {isOpen ? (
+        <div
+          id={mobilePanelId}
+          className="lg:hidden border-t bg-background px-4 py-4 max-h-[min(80vh,640px)] overflow-y-auto overscroll-contain shadow-md"
+        >
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-1 text-sm">
             <Link
-              key={`${link.href}-${link.label}`}
-              href={link.href}
-              className="block font-medium"
-              onClick={() => setIsOpen(false)}
+              href="/my-insurance"
+              className={cn(
+                'flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-3 font-semibold min-h-[48px]',
+                navLinkActive('/my-insurance', pathname) && 'border-trust/40 bg-trust/5'
+              )}
+              aria-current={navLinkActive('/my-insurance', pathname) ? 'page' : undefined}
+              onClick={closeMobile}
             >
-              {link.label}
+              <Bookmark className="h-4 w-4 text-teal-700" aria-hidden />
+              My Insurance
+              {showBadge ? (
+                <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
+                  {accountBadge > 99 ? '99+' : accountBadge}
+                </span>
+              ) : null}
             </Link>
-          ))}
-          <Link
-            href="/my-insurance"
-            className="flex items-center gap-2 font-medium text-teal-800"
-            onClick={() => setIsOpen(false)}
-          >
-            <Bookmark className="h-4 w-4" />
-            My Insurance
-            {showBadge ? (
-              <span className="rounded-full bg-teal-600 px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
-                {accountBadge > 99 ? '99+' : accountBadge}
-              </span>
-            ) : null}
-          </Link>
-          {/* Sign out only when signed in — no redundant Sign in row */}
-          {signedIn ? (
-            <button
-              type="button"
-              className="flex w-full items-center gap-2 text-left font-medium"
-              onClick={() => void handleSignOut()}
+
+            <div className="border-b border-border/50 pb-2 mb-1">
+              <button
+                type="button"
+                className={cn(
+                  'w-full justify-between font-medium text-muted-foreground hover:text-foreground',
+                  tapTarget
+                )}
+                aria-expanded={mobileDirectoriesOpen}
+                onClick={() => setMobileDirectoriesOpen((o) => !o)}
+              >
+                <span>Directory</span>
+                <ChevronDown
+                  className={cn(
+                    'h-4 w-4 transition-transform',
+                    mobileDirectoriesOpen && 'rotate-180'
+                  )}
+                  aria-hidden
+                />
+              </button>
+              {mobileDirectoriesOpen ? (
+                <div className="pl-1 pb-2 pt-1 space-y-1">
+                  {DIRECTORY_NAV.map((link) => {
+                    const active = navLinkActive(link.href, pathname);
+                    return (
+                      <Link
+                        key={link.href}
+                        prefetch={false}
+                        href={link.href}
+                        className={cn(
+                          'text-muted-foreground hover:text-foreground',
+                          tapTarget,
+                          active && 'font-semibold text-foreground'
+                        )}
+                        aria-current={active ? 'page' : undefined}
+                        onClick={closeMobile}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
+
+            {PRIMARY_NAV.filter((l) => l.href !== '/directory').map((link) => {
+              const active = navLinkActive(link.href, pathname);
+              return (
+                <Link
+                  key={link.href}
+                  prefetch={false}
+                  href={link.href}
+                  className={cn(
+                    'font-medium text-muted-foreground hover:text-foreground border-b border-border/50 pb-2 mb-1',
+                    tapTarget,
+                    active && 'font-semibold text-foreground'
+                  )}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={closeMobile}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+
+            <Link
+              href="/contact"
+              className={cn(
+                'font-medium text-muted-foreground hover:text-foreground border-b border-border/50 pb-2 mb-1',
+                tapTarget,
+                navLinkActive('/contact', pathname) && 'font-semibold text-foreground'
+              )}
+              aria-current={navLinkActive('/contact', pathname) ? 'page' : undefined}
+              onClick={closeMobile}
             >
-              <LogOut className="h-4 w-4" />
-              Sign out
-            </button>
-          ) : null}
-          <Link href="/contact" className="block font-medium" onClick={() => setIsOpen(false)}>
-            Contact
-          </Link>
+              <span className="inline-flex items-center gap-2">
+                <Phone className="h-4 w-4" aria-hidden />
+                Contact
+              </span>
+            </Link>
+
+            {signedIn ? (
+              <button
+                type="button"
+                className={cn('w-full text-left font-medium', tapTarget)}
+                onClick={() => void handleSignOut()}
+              >
+                <span className="inline-flex items-center gap-2">
+                  <LogOut className="h-4 w-4" aria-hidden />
+                  Sign out
+                </span>
+              </button>
+            ) : null}
+
+            <Button variant="trust" className="w-full mt-3 min-h-[48px]" asChild>
+              <Link prefetch={false} href={NAV_CTA.href} onClick={closeMobile}>
+                {NAV_CTA.label}
+              </Link>
+            </Button>
+          </nav>
         </div>
-      )}
+      ) : null}
     </nav>
   );
 }
