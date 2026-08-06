@@ -150,14 +150,26 @@ async function getOrCreatePrimaryBasket(
   supabase: any,
   userId: string,
   name = 'My prescriptions'
-): Promise<{ id: string } | null> {
-  const { data: existing } = await supabase
+): Promise<{ id: string } | { error: string }> {
+  const { data: existing, error: selectErr } = await supabase
     .from('drug_baskets')
     .select('id')
     .eq('user_id', userId)
     .order('created_at', { ascending: true })
     .limit(1)
     .maybeSingle();
+
+  if (selectErr) {
+    console.error('[my-insurance] select basket', selectErr.message);
+    // Relation missing / RLS — surface a clear ops message
+    if (/relation|does not exist|permission denied|schema cache/i.test(selectErr.message)) {
+      return {
+        error:
+          'Drug basket storage is not available yet (database). Please try again later or contact support.',
+      };
+    }
+    return { error: 'Could not load your basket' };
+  }
 
   if (existing?.id) return { id: existing.id as string };
 
@@ -169,12 +181,48 @@ async function getOrCreatePrimaryBasket(
 
   if (error || !created?.id) {
     console.error('[my-insurance] create basket', error?.message);
-    return null;
+    if (error && /relation|does not exist|permission denied|schema cache/i.test(error.message)) {
+      return {
+        error:
+          'Drug basket storage is not available yet (database). Please try again later or contact support.',
+      };
+    }
+    return { error: error?.message || 'Could not create basket' };
   }
   return { id: created.id as string };
 }
 
-/** Replace primary basket items with the given list (one active basket). */
+function normalizeDrugItemRow(
+  item: DrugBasketItemInput,
+  basketId: string,
+  index: number
+) {
+  const name = String(item.name ?? '').trim();
+  const strength = String(item.strength ?? '').trim();
+  const dosage = String(item.dosage ?? '').trim();
+  const form = String(item.form || 'Tablet').trim() || 'Tablet';
+  const quantityRaw = item.quantity;
+  const quantity =
+    quantityRaw == null || quantityRaw === ''
+      ? null
+      : String(quantityRaw).trim() || null;
+  const notesRaw = item.notes;
+  const notes =
+    notesRaw == null || notesRaw === '' ? null : String(notesRaw).trim() || null;
+
+  return {
+    basket_id: basketId,
+    name,
+    strength,
+    form,
+    dosage,
+    quantity,
+    notes,
+    sort_order: typeof item.sort_order === 'number' ? item.sort_order : index,
+  };
+}
+
+/** Replace primary basket items with the given list (one active basket — idempotent upsert). */
 export async function saveDrugBasketAction(input: {
   items: DrugBasketItemInput[];
   basketName?: string;
@@ -182,50 +230,70 @@ export async function saveDrugBasketAction(input: {
 }): Promise<{ ok: true; basketId: string } | { ok: false; error: string }> {
   try {
     const user = await requireAuthenticatedUser();
-    if (!input.items.length) {
+    if (!Array.isArray(input.items) || !input.items.length) {
       return { ok: false, error: 'Add at least one medication before saving.' };
     }
+
+    const cleaned = input.items
+      .map((item, index) => normalizeDrugItemRow(item, '', index))
+      .filter((r) => r.name && r.strength && r.dosage);
+
+    if (!cleaned.length) {
+      return {
+        ok: false,
+        error: 'Each medication needs a name, strength, and dosage.',
+      };
+    }
+
     const supabase = await insuranceDb();
     await ensureUserProfile(await createClient(), user);
 
-    const basket = await getOrCreatePrimaryBasket(
-      supabase,
-      user.id,
-      input.basketName?.trim() || 'My prescriptions'
-    );
-    if (!basket) return { ok: false, error: 'Could not create basket' };
+    const basketName = input.basketName?.trim() || 'My prescriptions';
+    const basketResult = await getOrCreatePrimaryBasket(supabase, user.id, basketName);
+    if ('error' in basketResult) {
+      return { ok: false, error: basketResult.error };
+    }
+    const basket = basketResult;
 
-    if (input.basketName?.trim()) {
-      await supabase
-        .from('drug_baskets')
-        .update({ name: input.basketName.trim(), updated_at: new Date().toISOString() })
-        .eq('id', basket.id)
-        .eq('user_id', user.id);
-    } else {
-      await supabase
-        .from('drug_baskets')
-        .update({ updated_at: new Date().toISOString() })
-        .eq('id', basket.id)
-        .eq('user_id', user.id);
+    const { error: updateErr } = await supabase
+      .from('drug_baskets')
+      .update({ name: basketName, updated_at: new Date().toISOString() })
+      .eq('id', basket.id)
+      .eq('user_id', user.id);
+
+    if (updateErr) {
+      console.error('[my-insurance] update basket', updateErr.message);
+      return { ok: false, error: 'Could not update basket' };
     }
 
-    await supabase.from('drug_basket_items').delete().eq('basket_id', basket.id);
+    const { error: delErr } = await supabase
+      .from('drug_basket_items')
+      .delete()
+      .eq('basket_id', basket.id);
 
-    const rows = input.items.map((item, index) => ({
+    if (delErr) {
+      console.error('[my-insurance] clear basket items', delErr.message);
+      return {
+        ok: false,
+        error: 'Could not update medications (clear failed). Try again.',
+      };
+    }
+
+    const rows = cleaned.map((r, index) => ({
+      ...r,
       basket_id: basket.id,
-      name: item.name.trim(),
-      strength: item.strength.trim(),
-      form: (item.form || 'Tablet').trim() || 'Tablet',
-      dosage: item.dosage.trim(),
-      quantity: item.quantity?.trim() || null,
-      notes: item.notes?.trim() || null,
-      sort_order: item.sort_order ?? index,
+      sort_order: index,
     }));
 
     const { error: insertErr } = await supabase.from('drug_basket_items').insert(rows);
     if (insertErr) {
       console.error('[my-insurance] basket items', insertErr.message);
-      return { ok: false, error: 'Could not save medications' };
+      return {
+        ok: false,
+        error: insertErr.message?.includes('row-level security')
+          ? 'Could not save medications (permission denied). Sign out and back in, then try again.'
+          : 'Could not save medications. Please try again.',
+      };
     }
 
     revalidatePath(MY_INSURANCE_PATH);
@@ -234,7 +302,7 @@ export async function saveDrugBasketAction(input: {
     if (input.sendEmail !== false && user.email) {
       void sendDrugBasketEmail({
         to: user.email,
-        basketName: input.basketName?.trim() || 'My prescriptions',
+        basketName,
         items: rows.map((r) => ({
           name: r.name,
           strength: r.strength,
@@ -247,8 +315,71 @@ export async function saveDrugBasketAction(input: {
     }
 
     return { ok: true, basketId: basket.id };
-  } catch {
-    return { ok: false, error: 'Sign in required' };
+  } catch (e) {
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      return { ok: false, error: 'Sign in required' };
+    }
+    console.error('[my-insurance] saveDrugBasketAction', e);
+    return {
+      ok: false,
+      error: e instanceof Error ? e.message : 'Could not save medications',
+    };
+  }
+}
+
+/** Load the signed-in user's primary drug basket (for HQ + tool preload). */
+export async function getDrugBasketAction(): Promise<
+  | { ok: true; basket: DrugBasketWithItems | null }
+  | { ok: false; error: string }
+> {
+  try {
+    const user = await getAuthenticatedUser();
+    if (!user) return { ok: false, error: 'Sign in required' };
+
+    const supabase = await insuranceDb();
+    const { data: basketRow, error: basketErr } = await supabase
+      .from('drug_baskets')
+      .select('id,user_id,name,created_at,updated_at')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    if (basketErr) {
+      console.error('[my-insurance] getDrugBasket basket', basketErr.message);
+      return { ok: false, error: 'Could not load basket' };
+    }
+
+    if (!basketRow?.id) {
+      return { ok: true, basket: null };
+    }
+
+    const { data: items, error: itemsErr } = await supabase
+      .from('drug_basket_items')
+      .select(
+        'id,basket_id,name,strength,form,dosage,quantity,notes,sort_order,created_at'
+      )
+      .eq('basket_id', basketRow.id)
+      .order('sort_order', { ascending: true });
+
+    if (itemsErr) {
+      console.error('[my-insurance] getDrugBasket items', itemsErr.message);
+      return { ok: false, error: 'Could not load medications' };
+    }
+
+    return {
+      ok: true,
+      basket: {
+        ...(basketRow as Omit<DrugBasketWithItems, 'items'>),
+        items: (items ?? []) as DrugBasketItemRow[],
+      },
+    };
+  } catch (e) {
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      return { ok: false, error: 'Sign in required' };
+    }
+    console.error('[my-insurance] getDrugBasketAction', e);
+    return { ok: false, error: 'Could not load basket' };
   }
 }
 
@@ -259,12 +390,18 @@ export async function deleteDrugBasketAction(): Promise<
     const user = await requireAuthenticatedUser();
     const supabase = await insuranceDb();
     const { error } = await supabase.from('drug_baskets').delete().eq('user_id', user.id);
-    if (error) return { ok: false, error: 'Could not delete basket' };
+    if (error) {
+      console.error('[my-insurance] delete basket', error.message);
+      return { ok: false, error: 'Could not delete basket' };
+    }
     revalidatePath(MY_INSURANCE_PATH);
     revalidatePath(DRUG_BASKET_PATH);
     return { ok: true };
-  } catch {
-    return { ok: false, error: 'Sign in required' };
+  } catch (e) {
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      return { ok: false, error: 'Sign in required' };
+    }
+    return { ok: false, error: 'Could not delete basket' };
   }
 }
 
@@ -274,8 +411,9 @@ export async function removeDrugBasketItemAction(
   try {
     const user = await requireAuthenticatedUser();
     const supabase = await insuranceDb();
-    const basket = await getOrCreatePrimaryBasket(supabase, user.id);
-    if (!basket) return { ok: false, error: 'Basket not found' };
+    const basketResult = await getOrCreatePrimaryBasket(supabase, user.id);
+    if ('error' in basketResult) return { ok: false, error: basketResult.error };
+    const basket = basketResult;
 
     const { error } = await supabase
       .from('drug_basket_items')
@@ -292,8 +430,11 @@ export async function removeDrugBasketItemAction(
 
     revalidatePath(MY_INSURANCE_PATH);
     return { ok: true };
-  } catch {
-    return { ok: false, error: 'Sign in required' };
+  } catch (e) {
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      return { ok: false, error: 'Sign in required' };
+    }
+    return { ok: false, error: 'Could not remove medication' };
   }
 }
 
@@ -448,15 +589,23 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
         .limit(50),
     ]);
 
+  if (basketsRes.error) {
+    console.error('[my-insurance] dashboard baskets', basketsRes.error.message);
+  }
+
   let drugBasket: DrugBasketWithItems | null = null;
   if (basketsRes.data?.id) {
-    const { data: items } = await supabase
+    const { data: items, error: itemsErr } = await supabase
       .from('drug_basket_items')
       .select(
         'id,basket_id,name,strength,form,dosage,quantity,notes,sort_order,created_at'
       )
       .eq('basket_id', basketsRes.data.id)
       .order('sort_order', { ascending: true });
+
+    if (itemsErr) {
+      console.error('[my-insurance] dashboard basket items', itemsErr.message);
+    }
 
     drugBasket = {
       ...(basketsRes.data as Omit<DrugBasketWithItems, 'items'>),

@@ -30,9 +30,43 @@ import {
   type PrescriptionItem,
 } from '@/lib/tools/prescription-basket';
 import { SaveDrugBasketButton } from '@/components/my-insurance/save-drug-basket-button';
+import {
+  deleteDrugBasketAction,
+  getDrugBasketAction,
+} from '@/actions/my-insurance';
+import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
+import {
+  clearLocalAccountDrugBasket,
+  loadLocalAccountDrugBasket,
+} from '@/lib/my-insurance/drug-basket-local';
+import type { DrugBasketItemRow } from '@/lib/my-insurance/types';
+import { toast } from 'sonner';
+
+function normalizeForm(form: string | null | undefined): MedicationForm {
+  const f = (form || 'Tablet').trim();
+  return (MEDICATION_FORMS as readonly string[]).includes(f)
+    ? (f as MedicationForm)
+    : 'Tablet';
+}
+
+function cloudItemsToLocal(rows: DrugBasketItemRow[]): PrescriptionItem[] {
+  const now = new Date().toISOString();
+  return rows.map((row) => ({
+    id: row.id || createPrescriptionId(),
+    name: row.name,
+    strength: row.strength,
+    form: normalizeForm(row.form),
+    dosage: row.dosage,
+    quantity: row.quantity || undefined,
+    notes: row.notes || undefined,
+    createdAt: row.created_at || now,
+    updatedAt: now,
+  }));
+}
 
 export function PrescriptionDrugBasket() {
   const formId = useId();
+  const mi = useMyInsuranceOptional();
   const [items, setItems] = useState<PrescriptionItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
   const [draft, setDraft] = useState<PrescriptionBasketDraft>(EMPTY_DRAFT);
@@ -40,11 +74,77 @@ export function PrescriptionDrugBasket() {
   const [feedback, setFeedback] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<keyof PrescriptionBasketDraft, string>>>({});
   const [confirmClear, setConfirmClear] = useState(false);
+  const [loadedFromAccount, setLoadedFromAccount] = useState(false);
 
   useEffect(() => {
-    setItems(loadBasketFromStorage());
-    setHydrated(true);
-  }, []);
+    let cancelled = false;
+
+    async function hydrate() {
+      const params =
+        typeof window !== 'undefined'
+          ? new URLSearchParams(window.location.search)
+          : null;
+      const forceAccount =
+        params?.get('load') === 'account' || params?.get('from') === 'hq';
+
+      const draftLocal = loadBasketFromStorage();
+
+      // Prefer device draft unless HQ asked to load the account basket for edit
+      if (draftLocal.length > 0 && !forceAccount) {
+        if (!cancelled) {
+          setItems(draftLocal);
+          setHydrated(true);
+        }
+        return;
+      }
+
+      // Signed-in: preload account basket into the tool
+      if (mi?.user && !mi.loading) {
+        const res = await getDrugBasketAction();
+        if (!cancelled && res.ok && res.basket?.items?.length) {
+          const mapped = cloudItemsToLocal(res.basket.items);
+          setItems(mapped);
+          saveBasketToStorage(mapped);
+          setLoadedFromAccount(true);
+          setHydrated(true);
+          setFeedback(`Loaded ${mapped.length} medication(s) from My Insurance`);
+          return;
+        }
+        const localAccount = loadLocalAccountDrugBasket(mi.user.id);
+        if (!cancelled && localAccount?.items?.length) {
+          const now = new Date().toISOString();
+          const mapped: PrescriptionItem[] = localAccount.items.map((item) => ({
+            id: createPrescriptionId(),
+            name: item.name,
+            strength: item.strength,
+            form: (item.form as MedicationForm) || 'Tablet',
+            dosage: item.dosage,
+            quantity: item.quantity || undefined,
+            notes: item.notes || undefined,
+            createdAt: now,
+            updatedAt: now,
+          }));
+          setItems(mapped);
+          saveBasketToStorage(mapped);
+          setLoadedFromAccount(true);
+          setHydrated(true);
+          return;
+        }
+      }
+
+      if (!cancelled) {
+        setItems(draftLocal);
+        setHydrated(true);
+      }
+    }
+
+    // Wait for auth to settle when provider is present
+    if (mi?.loading) return;
+    void hydrate();
+    return () => {
+      cancelled = true;
+    };
+  }, [mi?.user, mi?.loading]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -141,11 +241,29 @@ export function PrescriptionDrugBasket() {
     setFeedback(target ? `Removed ${target.name}` : 'Medication removed');
   }
 
-  function clearAll() {
+  async function clearAll() {
+    // Clear only the on-device draft by default
     setItems([]);
     setConfirmClear(false);
     cancelEdit();
-    setFeedback('Your list has been cleared');
+    setFeedback('Draft list cleared on this device');
+
+    // Optionally clear account basket when list was loaded from My Insurance
+    if (loadedFromAccount && mi?.user) {
+      const alsoCloud = window.confirm(
+        'Also delete the prescription basket saved to your My Insurance account?'
+      );
+      if (alsoCloud) {
+        const res = await deleteDrugBasketAction();
+        if (res.ok) {
+          clearLocalAccountDrugBasket();
+          setLoadedFromAccount(false);
+          toast.success('Account basket deleted');
+        } else {
+          toast.error(res.error);
+        }
+      }
+    }
   }
 
   function quickAdd(name: string) {

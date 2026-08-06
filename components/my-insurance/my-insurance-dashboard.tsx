@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   Calculator,
@@ -13,7 +13,10 @@ import {
   Star,
   Trash2,
 } from 'lucide-react';
-import type { MyInsuranceDashboardData } from '@/lib/my-insurance/types';
+import type {
+  DrugBasketWithItems,
+  MyInsuranceDashboardData,
+} from '@/lib/my-insurance/types';
 import { CALCULATOR_LABELS, type CalculatorToolId } from '@/lib/my-insurance/types';
 import {
   ACA_SUBSIDY_PATH,
@@ -30,9 +33,14 @@ import {
   deleteDrugBasketAction,
   deleteMyReviewAction,
   emailDrugBasketAction,
+  getDrugBasketAction,
   removeDrugBasketItemAction,
   signOutAction,
 } from '@/actions/my-insurance';
+import {
+  clearLocalAccountDrugBasket,
+  loadLocalAccountDrugBasket,
+} from '@/lib/my-insurance/drug-basket-local';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { GuestInsuranceHq } from '@/components/my-insurance/guest-insurance-hq';
@@ -296,13 +304,77 @@ function CloudReviews({
 }
 
 function CloudDrugBasket({
-  basket,
+  basket: initialBasket,
   onRefresh,
 }: {
   basket: MyInsuranceDashboardData['drugBasket'];
   onRefresh: () => void;
 }) {
+  const { user } = useMyInsurance();
+  const [basket, setBasket] = useState<DrugBasketWithItems | null>(initialBasket);
+  const [loadingBasket, setLoadingBasket] = useState(false);
+
+  // Re-fetch from server so stale RSC `initial` cannot hide a just-saved basket.
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      if (!user) {
+        setBasket(null);
+        return;
+      }
+      setLoadingBasket(true);
+      try {
+        const res = await getDrugBasketAction();
+        if (cancelled) return;
+        if (res.ok && res.basket?.items?.length) {
+          setBasket(res.basket);
+          return;
+        }
+        // Fall back to device mirror of last successful account save
+        const local = loadLocalAccountDrugBasket(user.id);
+        if (local?.items?.length) {
+          setBasket({
+            id: local.basketId || 'local-mirror',
+            user_id: user.id,
+            name: local.basketName,
+            created_at: local.updatedAt,
+            updated_at: local.updatedAt,
+            items: local.items.map((item, i) => ({
+              id: `local-${i}-${item.name}`,
+              basket_id: local.basketId || 'local-mirror',
+              name: item.name,
+              strength: item.strength,
+              form: item.form || 'Tablet',
+              dosage: item.dosage,
+              quantity: item.quantity ?? null,
+              notes: item.notes ?? null,
+              sort_order: item.sort_order ?? i,
+              created_at: local.updatedAt,
+            })),
+          });
+          return;
+        }
+        if (res.ok) setBasket(res.basket);
+        else if (initialBasket) setBasket(initialBasket);
+      } finally {
+        if (!cancelled) setLoadingBasket(false);
+      }
+    }
+
+    void load();
+    const onMirror = () => {
+      void load();
+    };
+    window.addEventListener('ith-my-insurance-drug-basket', onMirror);
+    return () => {
+      cancelled = true;
+      window.removeEventListener('ith-my-insurance-drug-basket', onMirror);
+    };
+  }, [user, initialBasket]);
+
   const items = basket?.items ?? [];
+
   return (
     <section>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -310,46 +382,79 @@ function CloudDrugBasket({
           <Pill className="h-5 w-5 text-teal-700" />
           Prescription drug basket
         </h2>
-        <span className="text-sm text-slate-500">{items.length}</span>
+        <span className="text-sm text-slate-500">
+          {loadingBasket && items.length === 0 ? '…' : items.length}
+        </span>
       </div>
       {items.length === 0 ? (
-        <Button asChild size="sm" variant="outline">
-          <Link href={DRUG_BASKET_PATH}>Build drug basket</Link>
-        </Button>
+        <Card className="border-dashed">
+          <CardContent className="flex flex-col items-start gap-3 py-8">
+            <Pill className="h-8 w-8 text-slate-300" />
+            <p className="font-medium text-slate-800">No medications saved yet</p>
+            <p className="text-sm text-slate-600">
+              Build a list on the prescription tool, then use Save to My Insurance.
+            </p>
+            <Button asChild size="sm" className="bg-teal-600 hover:bg-teal-700">
+              <Link href={`${DRUG_BASKET_PATH}?from=hq`}>Build drug basket</Link>
+            </Button>
+          </CardContent>
+        </Card>
       ) : (
         <div className="space-y-3">
-          <div className="flex flex-wrap gap-2">
-            <Button asChild size="sm" variant="outline">
-              <Link href={DRUG_BASKET_PATH}>Edit list</Link>
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              className="gap-1.5"
-              onClick={async () => {
-                const res = await emailDrugBasketAction();
-                if (res.ok) toast.success('Basket emailed to you');
-                else toast.error(res.error);
-              }}
-            >
-              <Mail className="h-3.5 w-3.5" />
-              Email me
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              className="gap-1.5 text-rose-700"
-              onClick={async () => {
-                const res = await deleteDrugBasketAction();
-                if (res.ok) {
-                  toast.success('Basket removed');
-                  onRefresh();
-                } else toast.error(res.error);
-              }}
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-              Delete basket
-            </Button>
+          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-teal-100 bg-teal-50/50 px-4 py-3">
+            <div>
+              <p className="font-medium text-slate-900">
+                {basket?.name || 'My prescriptions'}
+              </p>
+              <p className="text-xs text-slate-500">
+                {items.length} medication{items.length === 1 ? '' : 's'}
+                {basket?.updated_at
+                  ? ` · Updated ${new Date(basket.updated_at).toLocaleString()}`
+                  : ''}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button asChild size="sm" variant="outline">
+                <Link href={`${DRUG_BASKET_PATH}?load=account`}>Edit list</Link>
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="gap-1.5"
+                onClick={async () => {
+                  const res = await emailDrugBasketAction();
+                  if (res.ok) toast.success('Basket emailed to you');
+                  else toast.error(res.error);
+                }}
+              >
+                <Mail className="h-3.5 w-3.5" />
+                Email me
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="gap-1.5 text-rose-700"
+                onClick={async () => {
+                  if (
+                    !window.confirm(
+                      'Delete your account prescription basket? This cannot be undone.'
+                    )
+                  ) {
+                    return;
+                  }
+                  const res = await deleteDrugBasketAction();
+                  if (res.ok) {
+                    clearLocalAccountDrugBasket();
+                    setBasket(null);
+                    toast.success('Basket removed');
+                    onRefresh();
+                  } else toast.error(res.error);
+                }}
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                Delete basket
+              </Button>
+            </div>
           </div>
           <ul className="divide-y rounded-2xl border bg-white shadow-sm">
             {items.map((item) => (
@@ -365,20 +470,30 @@ function CloudDrugBasket({
                   <p className="text-sm text-slate-600">
                     {item.form} · {item.dosage}
                   </p>
+                  {item.quantity ? (
+                    <p className="text-xs text-slate-500">Qty / supply: {item.quantity}</p>
+                  ) : null}
+                  {item.notes ? (
+                    <p className="text-xs italic text-slate-500">Note: {item.notes}</p>
+                  ) : null}
                 </div>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={async () => {
-                    const res = await removeDrugBasketItemAction(item.id);
-                    if (res.ok) {
-                      toast.success('Removed');
-                      onRefresh();
-                    } else toast.error(res.error);
-                  }}
-                >
-                  Remove
-                </Button>
+                {!String(item.id).startsWith('local-') ? (
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={async () => {
+                      const res = await removeDrugBasketItemAction(item.id);
+                      if (res.ok) {
+                        toast.success('Removed');
+                        const next = await getDrugBasketAction();
+                        if (next.ok) setBasket(next.basket);
+                        onRefresh();
+                      } else toast.error(res.error);
+                    }}
+                  >
+                    Remove
+                  </Button>
+                ) : null}
               </li>
             ))}
           </ul>

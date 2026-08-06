@@ -102,8 +102,32 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
         basketName: pending.payload.basketName,
         sendEmail: true,
       });
-      if (res.ok) toast.success('Prescription list saved to Insurance HQ');
-      else toast.error(res.error);
+      if (res.ok) {
+        const { saveLocalAccountDrugBasket } = await import(
+          '@/lib/my-insurance/drug-basket-local'
+        );
+        const client = createBrowserSupabaseClient();
+        const uid = client
+          ? (await client.auth.getUser()).data.user?.id
+          : null;
+        if (uid) {
+          saveLocalAccountDrugBasket({
+            userId: uid,
+            basketName: pending.payload.basketName || 'My prescriptions',
+            items: pending.payload.items,
+            updatedAt: new Date().toISOString(),
+            basketId: res.basketId,
+          });
+        }
+        toast.success('Prescription list saved to My Insurance', {
+          description: `${pending.payload.items.length} medication${
+            pending.payload.items.length === 1 ? '' : 's'
+          } synced to your account`,
+        });
+        window.dispatchEvent(new CustomEvent('ith-my-insurance-drug-basket'));
+      } else {
+        toast.error(res.error);
+      }
     }
   }, []);
 

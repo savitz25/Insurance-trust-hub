@@ -21,6 +21,22 @@ Independent research workspace on `www.insurancetrusthub.com`.
 Migrations:
 - `20260728120000_my_insurance.sql`
 - `20260728200000_my_insurance_phase3.sql`
+- `20260806120000_ensure_drug_baskets.sql` (idempotent re-apply of drug basket tables + RLS)
+
+### Prescription drug basket flow
+
+| Layer | Storage | Role |
+|-------|---------|------|
+| Tool draft | `localStorage` `ith:prescription-basket:v1` | Device-only until Save |
+| Account cloud | `drug_baskets` + `drug_basket_items` | Source of truth when signed in |
+| Account mirror | `localStorage` `ith:my-insurance-drug-basket:v1` | Instant HQ display after save |
+
+**Save to My Insurance** requires auth, then idempotent upsert (clear items + insert).  
+**HQ:** signed-in extras → Prescription drug basket (client re-fetches so stale RSC cannot hide a just-saved list).  
+**Tool:** `/tools/prescription-drug-list?load=account` preloads the account basket for edit.  
+**Clear all** on the tool clears the device draft only, unless the user confirms deleting the account basket.
+
+If Save fails with “storage is not available”, apply `20260806120000_ensure_drug_baskets.sql` on the Insurance Supabase project.
 
 ## Routes
 

@@ -1,13 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { BookmarkPlus, Check, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-provider';
 import { saveDrugBasketAction } from '@/actions/my-insurance';
-import { stashPendingSaveAction } from '@/lib/my-insurance/guest-storage';
+import {
+  stashPendingSaveAction,
+  stashPostLoginRedirect,
+} from '@/lib/my-insurance/guest-storage';
+import { saveLocalAccountDrugBasket } from '@/lib/my-insurance/drug-basket-local';
 import type { DrugBasketItemInput } from '@/lib/my-insurance/types';
-import { DRUG_BASKET_PATH } from '@/lib/my-insurance/constants';
+import { DRUG_BASKET_PATH, MY_INSURANCE_PATH } from '@/lib/my-insurance/constants';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
@@ -25,8 +31,45 @@ export function SaveDrugBasketButton({
   disabled,
 }: Props) {
   const mi = useMyInsuranceOptional();
+  const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  async function persistToAccount(list: DrugBasketItemInput[]) {
+    const res = await saveDrugBasketAction({
+      items: list,
+      basketName,
+      sendEmail: true,
+    });
+    if (!res.ok) {
+      toast.error(res.error || 'Could not save to My Insurance');
+      return false;
+    }
+
+    if (mi?.user?.id) {
+      saveLocalAccountDrugBasket({
+        userId: mi.user.id,
+        basketName,
+        items: list,
+        updatedAt: new Date().toISOString(),
+        basketId: res.basketId,
+      });
+    }
+
+    setSaved(true);
+    toast.success('Prescription list saved to My Insurance', {
+      description: `${list.length} medication${list.length === 1 ? '' : 's'} in your account basket`,
+      action: {
+        label: 'View in My Insurance',
+        onClick: () => {
+          router.push(MY_INSURANCE_PATH);
+          router.refresh();
+        },
+      },
+    });
+    router.refresh();
+    return true;
+  }
 
   async function handleSave() {
     if (saved || saving || disabled) return;
@@ -35,57 +78,86 @@ export function SaveDrugBasketButton({
       return;
     }
 
+    // Wait for auth session to resolve — avoid false "logged out" while loading
+    if (mi?.loading) {
+      toast.message('Checking sign-in…', {
+        description: 'Try again in a moment.',
+      });
+      return;
+    }
+
     if (!mi?.user) {
       stashPendingSaveAction({
         type: 'drug_basket',
         payload: { basketName, items },
       });
-      mi?.openAuth({ context: 'general', redirectPath: DRUG_BASKET_PATH });
-      toast.message('Sign in to save your drug list to My Insurance');
+      stashPostLoginRedirect(MY_INSURANCE_PATH);
+      if (mi?.openAuth) {
+        mi.openAuth({ context: 'general', redirectPath: MY_INSURANCE_PATH });
+      } else {
+        toast.error('Sign-in is unavailable. Refresh the page and try again.');
+        return;
+      }
+      toast.message('Sign in to save your drug list to My Insurance', {
+        description: 'After you sign in, we will finish saving this list.',
+      });
       return;
     }
 
     setSaving(true);
     try {
-      const res = await saveDrugBasketAction({
-        items,
-        basketName,
-        sendEmail: true,
-      });
-      if (res.ok) {
-        setSaved(true);
-        toast.success('Prescription list saved to Insurance HQ');
-      } else {
-        toast.error(res.error);
-      }
+      await persistToAccount(items);
+    } catch (e) {
+      console.error('[save-drug-basket]', e);
+      toast.error(
+        e instanceof Error ? e.message : 'Network error while saving your list'
+      );
     } finally {
       setSaving(false);
     }
   }
 
   return (
-    <Button
-      type="button"
-      className={cn(
-        'h-11 min-h-[44px] gap-2 rounded-xl bg-teal-600 font-semibold text-white hover:bg-teal-700',
-        className
-      )}
-      onClick={() => void handleSave()}
-      disabled={disabled || saving || saved || items.length === 0}
-      aria-label={saved ? 'Drug list saved' : 'Save drug list to My Insurance'}
-    >
-      {saving ? (
-        <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-      ) : saved ? (
-        <Check className="h-4 w-4" aria-hidden />
+    <div className={cn('flex flex-col gap-2', className)}>
+      <Button
+        type="button"
+        className={cn(
+          'h-11 min-h-[44px] w-full gap-2 rounded-xl bg-teal-600 font-semibold text-white hover:bg-teal-700'
+        )}
+        onClick={() => void handleSave()}
+        disabled={disabled || saving || saved || items.length === 0}
+        aria-label={saved ? 'Drug list saved' : 'Save drug list to My Insurance'}
+      >
+        {saving ? (
+          <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+        ) : saved ? (
+          <Check className="h-4 w-4" aria-hidden />
+        ) : (
+          <BookmarkPlus className="h-4 w-4" aria-hidden />
+        )}
+        {saved
+          ? 'Saved to My Insurance'
+          : saving
+            ? 'Saving…'
+            : 'Save to My Insurance'}
+      </Button>
+      {saved ? (
+        <Link
+          href={MY_INSURANCE_PATH}
+          className="text-center text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
+          onClick={() => router.refresh()}
+        >
+          View in My Insurance →
+        </Link>
       ) : (
-        <BookmarkPlus className="h-4 w-4" aria-hidden />
+        <p className="text-center text-[11px] text-slate-500">
+          Account save (not just this device).{' '}
+          <Link href={DRUG_BASKET_PATH} className="underline-offset-2 hover:underline">
+            Draft stays local until you save
+          </Link>
+          .
+        </p>
       )}
-      {saved
-        ? 'Saved to My Insurance'
-        : saving
-          ? 'Saving…'
-          : 'Save to My Insurance'}
-    </Button>
+    </div>
   );
 }
