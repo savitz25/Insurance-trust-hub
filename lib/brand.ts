@@ -3,7 +3,7 @@
 import { INSURANCE_BRAND, INSURANCE_TAGLINE } from '@/lib/design/insurance-design-system';
 
 /** Bump when logo / favicon assets change (cache bust). */
-export const BRAND_ASSET_VERSION = '20260807ith-fav-t';
+export const BRAND_ASSET_VERSION = '20260807transport';
 export const INSURANCE_LOGO_VERSION = BRAND_ASSET_VERSION;
 
 export function brandAsset(path: string): string {

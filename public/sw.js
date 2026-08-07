@@ -1,5 +1,5 @@
 /* InsuranceTrustHub PWA service worker (standalone repo) */
-const VERSION = 'ith-pwa-v1';
+const VERSION = 'ith-pwa-v20260807transport';
 const PRECACHE = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 
@@ -9,8 +9,9 @@ const PRECACHE_URLS = [
   '/tools',
   '/directory',
   '/site.webmanifest',
-  '/brand/insurance-trust-hub-icon-192.png?v=20260727',
-  '/brand/insurance-trust-hub-icon.png?v=20260727',
+  '/brand/insurance-trust-hub-icon-192.png?v=20260807transport',
+  '/brand/insurance-trust-hub-icon.png?v=20260807transport',
+  '/apple-touch-icon.png?v=20260807transport',
 ];
 
 function isPrivatePath(pathname) {

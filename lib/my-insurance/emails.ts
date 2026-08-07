@@ -2,14 +2,15 @@ import 'server-only';
 
 import { PRODUCTION_SITE_ORIGIN } from '@/lib/my-insurance/constants';
 
+import { BRAND_ASSET_VERSION } from '@/lib/brand';
+
 /**
- * Absolute logo for email clients (must not depend on which Vercel project
- * currently holds the apex domain). Monorepo serves assets under /insurance/brand;
- * override with MY_INSURANCE_EMAIL_LOGO_URL if the host map changes.
+ * Absolute logo for email clients — standalone serves /brand/* on the apex.
+ * Final transport lockup with cache bust.
  */
 const EMAIL_LOGO_URL =
   process.env.MY_INSURANCE_EMAIL_LOGO_URL?.trim() ||
-  'https://www.insurancetrusthub.com/insurance/brand/insurance-trust-hub-logo-header.png';
+  `https://www.insurancetrusthub.com/brand/insurance-trust-hub-logo-header.png?v=${BRAND_ASSET_VERSION}`;
 
 /** Insurance Trust Hub transactional email brand tokens (inline CSS for clients). */
 const BRAND = {
@@ -23,7 +24,8 @@ const BRAND = {
   /** Shield Blue — primary CTAs & brand accent */
   primary: '#0284C7',
   primaryDark: '#1E3A8A',
-  /** Deep navy for headlines */
+  /** Deep navy for headlines / footer */
+  navy: '#0A2540',
   ink: '#0A2540',
   body: '#1E293B',
   muted: '#334155',
@@ -33,7 +35,8 @@ const BRAND = {
   card: '#FFFFFF',
   ice: '#E0F2FE',
   supportEmail: 'hello@insurancetrusthub.com',
-  trustLine: 'Independent research workspace  -  no paid placements, no lead selling.',
+  trustLine: 'Independent research workspace — no paid placements, no lead selling.',
+  independenceUrl: 'https://www.asktrusthub.com/promise',
 } as const;
 
 function isResendConfigured(): boolean {
@@ -193,27 +196,37 @@ function buildEmailHtml(options: LayoutOptions): string {
               </table>
             </td>
           </tr>
-          <!-- Trust + footer -->
+          <!-- Navy brand footer -->
           <tr>
-            <td style="padding:28px 12px 8px;text-align:center;">
-              <p style="margin:0 0 12px;font-family:${font};font-size:12px;line-height:1.55;color:${BRAND.muted};">
-                ${BRAND.trustLine}
-              </p>
-              <p style="margin:0 0 8px;font-family:${font};font-size:12px;line-height:1.5;color:${BRAND.muted};">
-                <a href="${BRAND.siteUrl}" style="color:${BRAND.primary};text-decoration:none;font-weight:600;">${BRAND.name}</a>
-                &nbsp; · &nbsp;
-                <a href="${BRAND.siteUrl}" style="color:${BRAND.primary};text-decoration:none;">${BRAND.siteHost}</a>
-              </p>
-              <p style="margin:0 0 8px;font-family:${font};font-size:12px;line-height:1.5;color:${BRAND.muted};">
-                <a href="${BRAND.siteUrl}/my-insurance" style="color:${BRAND.primary};text-decoration:none;">My Insurance</a>
-                &nbsp; · &nbsp;
-                <a href="${BRAND.siteUrl}/tools" style="color:${BRAND.primary};text-decoration:none;">Tools</a>
-                &nbsp; · &nbsp;
-                <a href="mailto:${BRAND.supportEmail}" style="color:${BRAND.primary};text-decoration:none;">${BRAND.supportEmail}</a>
-              </p>
-              <p style="margin:12px 0 0;font-family:${font};font-size:11px;line-height:1.5;color:${BRAND.faint};">
-                If you didn't request this email, you can ignore it.
-              </p>
+            <td style="padding:24px 0 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${BRAND.navy};border-radius:12px;">
+                <tr>
+                  <td style="padding:24px 20px;text-align:center;">
+                    <a href="${BRAND.siteUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                      <img src="${BRAND.logoUrl}" alt="${BRAND.name}" width="200"
+                        style="display:inline-block;max-width:200px;height:auto;border:0;" />
+                    </a>
+                    <p style="margin:14px 0 6px;font-family:${font};font-size:12px;font-weight:600;color:#ffffff;">
+                      Part of the Ask Trust Hub network
+                    </p>
+                    <p style="margin:0 0 12px;font-family:${font};font-size:12px;line-height:1.5;color:#94a3b8;">
+                      ${BRAND.trustLine}
+                    </p>
+                    <p style="margin:0 0 10px;font-family:${font};font-size:12px;line-height:1.5;">
+                      <a href="${BRAND.siteUrl}" style="color:#7dd3fc;text-decoration:none;margin:0 6px;">Website</a>
+                      <span style="color:#475569;">·</span>
+                      <a href="${BRAND.independenceUrl}" style="color:#7dd3fc;text-decoration:none;margin:0 6px;">Independence Policy</a>
+                      <span style="color:#475569;">·</span>
+                      <a href="${BRAND.siteUrl}/my-insurance" style="color:#7dd3fc;text-decoration:none;margin:0 6px;">My Insurance</a>
+                      <span style="color:#475569;">·</span>
+                      <a href="mailto:${BRAND.supportEmail}" style="color:#7dd3fc;text-decoration:none;margin:0 6px;">Contact</a>
+                    </p>
+                    <p style="margin:0;font-family:${font};font-size:11px;line-height:1.5;color:#64748b;">
+                      If you didn't request this email, you can ignore it.
+                    </p>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>
