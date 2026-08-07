@@ -2,6 +2,14 @@ import { SITE_EMAIL, SITE_NAME, SITE_URL } from '@/lib/constants';
 import type { Provider } from '@/types/provider';
 import { brandAsset, BRAND_LOGO } from '@/lib/brand';
 
+/** Parent knowledge layer — reciprocal with Ask Trust Hub Organization graph. */
+export const ASK_PARENT_ORGANIZATION = {
+  '@type': 'Organization' as const,
+  '@id': 'https://www.asktrusthub.com/#organization',
+  name: 'Ask Trust Hub',
+  url: 'https://www.asktrusthub.com',
+};
+
 export const organizationSchema = {
   '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
@@ -17,7 +25,8 @@ export const organizationSchema = {
     availableLanguage: 'English',
   },
   description:
-    'Independent research directory of licensed insurance agencies and brokers in the United States. Compare listings and specialties; re-check DOI / NAIC records. We do not sell policies.',
+    'Specialist research directory of licensed insurance agencies and brokers in the United States. Part of the Ask Trust Hub network under common ownership with separated research and listing order. Compare listings and specialties; re-check DOI / NAIC records. We do not sell policies. No paid placements.',
+  parentOrganization: ASK_PARENT_ORGANIZATION,
 };
 
 export const websiteSchema = {
