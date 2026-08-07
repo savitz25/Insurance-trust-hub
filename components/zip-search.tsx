@@ -6,6 +6,7 @@ import { Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { INSURANCE_TYPES } from '@/lib/constants';
+import { INSURANCE_BRAND } from '@/lib/design/insurance-design-system';
 import { cn } from '@/lib/utils';
 
 interface ZipSearchProps {
@@ -34,10 +35,18 @@ export function ZipSearch({ className, defaultZip = '' }: ZipSearchProps) {
   }
 
   return (
-    <form onSubmit={handleSearch} className={cn('w-full max-w-2xl', className)}>
-      <div className="flex flex-col sm:flex-row gap-2">
+    <form
+      onSubmit={handleSearch}
+      className={cn('w-full max-w-2xl', className)}
+      aria-label="Search licensed agencies by ZIP"
+    >
+      <div className="flex flex-col gap-2 sm:flex-row">
         <div className="relative flex-1">
-          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <MapPin
+            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
+            style={{ color: INSURANCE_BRAND.shield }}
+            aria-hidden
+          />
           <Input
             type="text"
             inputMode="numeric"
@@ -46,35 +55,38 @@ export function ZipSearch({ className, defaultZip = '' }: ZipSearchProps) {
             placeholder="Enter ZIP code"
             value={zip}
             onChange={(e) => setZip(e.target.value.replace(/\D/g, '').slice(0, 5))}
-            className="pl-10 h-12 text-base"
+            className="h-12 pl-10 text-base text-[#1E293B] focus-visible:ring-[#0284C7]"
             aria-label="ZIP code"
           />
         </div>
-        <Button type="submit" size="lg" className="h-12 gap-2 shrink-0">
-          <Search className="h-4 w-4" />
-          Search Agents
+        <Button type="submit" size="lg" variant="trust" className="h-12 shrink-0 gap-2">
+          <Search className="h-4 w-4" aria-hidden />
+          Find agencies
         </Button>
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-2 justify-center sm:justify-start">
-        {INSURANCE_TYPES.slice(0, 6).map((type) => (
-          <button
-            key={type.value}
-            type="button"
-            onClick={() => toggleType(type.value)}
-            className={cn(
-              'rounded-full px-3 py-1 text-xs font-medium border transition-colors',
-              types.includes(type.value)
-                ? 'bg-primary text-primary-foreground border-primary'
-                : 'bg-background text-muted-foreground border-border hover:border-primary/40'
-            )}
-          >
-            {type.label}
-          </button>
-        ))}
+      <div className="mt-3 flex flex-wrap justify-start gap-2">
+        {INSURANCE_TYPES.slice(0, 6).map((type) => {
+          const active = types.includes(type.value);
+          return (
+            <button
+              key={type.value}
+              type="button"
+              onClick={() => toggleType(type.value)}
+              className={cn(
+                'rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors',
+                active
+                  ? 'border-[#0284C7] bg-[#0284C7] text-white'
+                  : 'border-[#E2E8F0] bg-white text-[#1E293B] hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/60'
+              )}
+            >
+              {type.label}
+            </button>
+          );
+        })}
       </div>
-      <p className="mt-2 text-xs text-muted-foreground text-center sm:text-left">
-        ZIP search auto-detects your county/MSA and ranks local verified agents. 100% data-driven — never sponsored.
+      <p className="mt-2 text-xs leading-relaxed" style={{ color: INSURANCE_BRAND.ink }}>
+        Local research only — ranked by public signals, never sponsored placements.
       </p>
     </form>
   );

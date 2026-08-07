@@ -64,6 +64,27 @@ export const INSURANCE_INDEPENDENCE_LINE =
 
 export const INSURANCE_LAYER_LABEL = 'Protection & Coverage';
 
+/** Phase 2 — homepage hero (Protection & Coverage research layer) */
+export const INSURANCE_HERO = {
+  eyebrow: 'Insurance Trust Hub  ·  Protection & Coverage',
+  headline: 'Verify. Compare. Protect with confidence.',
+  support:
+    'Independent research for insurance coverage decisions. We surface verified public sources — including DOI and license context — with no paid placements and no lead fees. You decide.',
+  primaryCta: { label: 'Compare coverage', href: '/directory' },
+  secondaryCta: { label: 'Explore guides', href: '/resources' },
+  philosophy: 'We cite. You decide.',
+  tagline: 'Cover what counts. Choose well.',
+  networkLine: 'The Protection & Coverage layer of the Ask Trust Hub network.',
+  chips: [
+    { id: 'doi', label: 'DOI / license context' },
+    { id: 'independent', label: 'Independent research' },
+    { id: 'no-paid', label: 'No paid placements' },
+    { id: 'guidance', label: 'Clear coverage guidance' },
+  ],
+  searchTitle: 'Find licensed agencies',
+  searchHint: 'Enter a ZIP and optional coverage types to start local research.',
+} as const;
+
 /**
  * Primary header nav (insurance research IA).
  * Switch Hub is a separate control.

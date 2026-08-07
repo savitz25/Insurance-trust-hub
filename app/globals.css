@@ -59,6 +59,11 @@ body {
   @apply mx-auto max-w-7xl;
 }
 
+/* Shared homepage section rhythm */
+.ith-section-pad {
+  @apply mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16;
+}
+
 /* Header logo slot — network-consistent sizing */
 .hub-logo-slot {
   display: block;
