@@ -42,7 +42,8 @@ export function SwitchHubMenu({ className, compact = false }: Props) {
         type="button"
         className={cn(
           'inline-flex min-h-10 items-center gap-1.5 rounded-xl border bg-white px-3 py-2 text-sm font-semibold transition-colors',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7] focus-visible:ring-offset-2',
+          'hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/50'
         )}
         style={{
           borderColor: INSURANCE_BRAND.border,

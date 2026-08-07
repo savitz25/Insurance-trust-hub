@@ -102,10 +102,9 @@ export function Navbar() {
           ? 'My Insurance — coverage research HQ'
           : 'My Insurance — research passport (sign in optional on HQ)'
       }
-      className="inline-flex h-9 items-center gap-1.5 rounded-xl border bg-white px-3 text-xs font-semibold transition-colors"
+      className="inline-flex h-9 items-center gap-1.5 rounded-xl border bg-white px-3 text-xs font-semibold text-[#0A2540] transition-colors hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/50 hover:text-[#0284C7]"
       style={{
         borderColor: INSURANCE_BRAND.border,
-        color: INSURANCE_BRAND.navy,
       }}
       onClick={() => setIsOpen(false)}
     >

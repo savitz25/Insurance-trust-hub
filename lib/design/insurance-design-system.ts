@@ -3,25 +3,41 @@
  * Protection & Coverage layer of the Ask Trust Hub network.
  *
  * CSS variables: app/globals.css (:root / [data-hub="insurance"]).
+ *
+ * Visual rules (light surfaces):
+ * - Body / nav / labels: only navy `#0A2540` or ink `#1E293B` (never light gray)
+ * - Primary interactive (links, active, focus, CTAs): Shield Blue `#0284C7`
+ * - Hover emphasis: Deep Sapphire `#1E3A8A`
+ * - Ice Blue `#E0F2FE`: soft backgrounds / selected surfaces only — not body text
+ * - On navy footer: white / ice for readable reverse text; interactive links stay Shield Blue
  */
 
 export const INSURANCE_BRAND = {
-  /** Shield Blue — primary CTAs, active nav, focus */
+  /** Shield Blue — primary CTAs, active nav, focus, interactive accents */
   shield: '#0284C7',
   /** Deep Sapphire — hover / deeper emphasis */
   sapphire: '#1E3A8A',
   sapphireDeep: '#172554',
-  /** Ice Blue — soft surfaces, tags, selected */
+  /** Ice Blue — soft surfaces, tags, selected (never body text) */
   ice: '#E0F2FE',
-  /** Deep Navy — primary text, footer */
+  /** Deep Navy — primary text, dark surfaces, footer background */
   navy: '#0A2540',
-  /** High-contrast body */
+  /** High-contrast body (light surfaces only) */
   ink: '#1E293B',
   canvas: '#F8FAFC',
   white: '#FFFFFF',
   border: '#E2E8F0',
-  onNavyMuted: '#94A3B8',
-  onNavySoft: '#CBD5E1',
+  /** On navy — high-contrast reverse (not light-gray body on canvas) */
+  onNavyMuted: '#CBD5E1',
+  onNavySoft: '#E2E8F0',
+} as const;
+
+/** Canonical text colors for light UI (header, panels, page) */
+export const INSURANCE_TEXT = {
+  primary: '#0A2540',
+  body: '#1E293B',
+  interactive: '#0284C7',
+  interactiveHover: '#1E3A8A',
 } as const;
 
 export const INSURANCE_RADIUS = {
