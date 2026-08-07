@@ -55,8 +55,8 @@ export function BackLink({
     <Link
       href={back.href}
       className={cn(
-        'group inline-flex min-h-[40px] items-center gap-1.5 rounded-lg text-sm font-medium text-teal-800',
-        'transition-colors hover:text-teal-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2',
+        'group inline-flex min-h-[40px] items-center gap-1.5 rounded-lg text-sm font-medium text-[#0284C7]',
+        'transition-colors hover:text-[#0A2540] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7] focus-visible:ring-offset-2',
         className
       )}
     >

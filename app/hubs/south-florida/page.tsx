@@ -21,12 +21,12 @@ export const metadata: Metadata = {
 export default function SouthFloridaHubPage() {
   return (
     <>
-      <div className="border-b bg-teal-50/80">
+      <div className="border-b bg-[#E0F2FE]/80">
         <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-sm">
-          <p className="font-medium text-teal-950">
+          <p className="font-medium text-[#0A2540]">
             New: CMS county Medicare Intelligence for Miami-Dade, Broward &amp; Palm Beach
           </p>
-          <div className="flex flex-wrap gap-3 font-medium text-teal-800">
+          <div className="flex flex-wrap gap-3 font-medium text-[#0284C7]">
             <Link href="/data/counties/miami-dade-fl" className="hover:underline">
               Miami-Dade
             </Link>

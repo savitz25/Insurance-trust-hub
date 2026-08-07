@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useMemo, useState, useTransition } from 'react';
 import Link from 'next/link';
@@ -114,7 +114,7 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
         <div className="flex flex-wrap gap-2">
           <Button
             type="button"
-            className="gap-2 bg-teal-600 hover:bg-teal-700"
+            className="gap-2 bg-[#0284C7] hover:bg-[#1E3A8A]"
             onClick={saveComparison}
             disabled={pending || Boolean(savedId)}
           >
@@ -142,7 +142,7 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
                 <th key={p.slug} className="px-4 py-3 font-semibold text-slate-900">
                   <Link
                     href={`/providers/${p.slug}`}
-                    className="text-teal-800 hover:underline"
+                    className="text-[#0284C7] hover:underline"
                   >
                     {p.name}
                   </Link>
@@ -173,7 +173,7 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
           <div key={p.slug} className="rounded-2xl border bg-white p-4 shadow-sm">
             <Link
               href={`/providers/${p.slug}`}
-              className="text-base font-semibold text-teal-800 hover:underline"
+              className="text-base font-semibold text-[#0284C7] hover:underline"
             >
               {p.name}
             </Link>
@@ -194,7 +194,7 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
           'flex items-start gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600'
         )}
       >
-        <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-700" aria-hidden />
+        <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#0284C7]" aria-hidden />
         Independent directory comparison for research only. Not a quote, ranking, or official
         endorsement from DOI/CMS or any carrier.
       </p>

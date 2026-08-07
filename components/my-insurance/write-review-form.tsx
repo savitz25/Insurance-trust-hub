@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { CheckCircle2, Loader2, Star } from 'lucide-react';
@@ -72,8 +72,8 @@ export function WriteReviewForm({ providerSlug, providerName }: Props) {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-teal-100 bg-teal-50/50 p-6 text-center">
-        <CheckCircle2 className="mx-auto h-9 w-9 text-teal-600" />
+      <div className="rounded-2xl border border-[#E0F2FE] bg-[#E0F2FE]/50 p-6 text-center">
+        <CheckCircle2 className="mx-auto h-9 w-9 text-[#0284C7]" />
         <h3 className="mt-3 text-lg font-semibold text-slate-900">Thank you</h3>
         <p className="mt-2 text-sm text-slate-600">
           Your review of {providerName} is <strong>pending moderation</strong> before public display.
@@ -102,7 +102,7 @@ export function WriteReviewForm({ providerSlug, providerName }: Props) {
             <button
               key={star}
               type="button"
-              className="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+              className="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7]"
               onMouseEnter={() => setHover(star)}
               onMouseLeave={() => setHover(0)}
               onClick={() => setRating(star)}
@@ -175,7 +175,7 @@ export function WriteReviewForm({ providerSlug, providerName }: Props) {
       <Button
         type="submit"
         disabled={busy}
-        className="h-11 w-full gap-2 bg-teal-600 hover:bg-teal-700 sm:w-auto"
+        className="h-11 w-full gap-2 bg-[#0284C7] hover:bg-[#1E3A8A] sm:w-auto"
       >
         {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         {busy ? 'Submitting...' : 'Submit review'}

@@ -131,15 +131,15 @@ export function GuidedPlanSetup() {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-teal-200 bg-teal-50/50 p-6 text-center sm:p-8">
-        <Check className="mx-auto h-10 w-10 text-teal-700" aria-hidden />
+      <div className="rounded-2xl border border-[#0284C7]/30 bg-[#E0F2FE]/50 p-6 text-center sm:p-8">
+        <Check className="mx-auto h-10 w-10 text-[#0284C7]" aria-hidden />
         <h2 className="mt-3 text-xl font-semibold text-slate-900">Plan ready</h2>
         <p className="mt-2 text-sm text-slate-600">
           Saved to <strong>{savedLabel}</strong>. Next: shortlist agencies, run educational tools, then
           open your research report.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-2">
-          <Button asChild className="bg-teal-600 hover:bg-teal-700">
+          <Button asChild className="bg-[#0284C7] hover:bg-[#1E3A8A]">
             <Link href="/my-insurance">Open My Insurance</Link>
           </Button>
           <Button asChild variant="outline">
@@ -164,7 +164,7 @@ export function GuidedPlanSetup() {
             key={label}
             className={cn(
               'rounded-full px-3 py-1',
-              i === step ? 'bg-teal-600 text-white' : i < step ? 'bg-teal-100 text-teal-900' : 'bg-slate-100'
+              i === step ? 'bg-[#0284C7] text-white' : i < step ? 'bg-[#E0F2FE] text-[#0A2540]' : 'bg-slate-100'
             )}
           >
             {i + 1}. {label}
@@ -187,7 +187,7 @@ export function GuidedPlanSetup() {
                     className={cn(
                       'inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold',
                       on
-                        ? 'border-teal-600 bg-teal-50 text-teal-900'
+                        ? 'border-[#0284C7] bg-[#E0F2FE] text-[#0A2540]'
                         : 'border-slate-200 bg-white text-slate-700'
                     )}
                     aria-pressed={on}
@@ -249,7 +249,7 @@ export function GuidedPlanSetup() {
                     className={cn(
                       'inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold',
                       on
-                        ? 'border-teal-600 bg-teal-50 text-teal-900'
+                        ? 'border-[#0284C7] bg-[#E0F2FE] text-[#0A2540]'
                         : 'border-slate-200 bg-white text-slate-700'
                     )}
                     aria-pressed={on}
@@ -380,14 +380,14 @@ export function GuidedPlanSetup() {
             ) : null}
             <Button
               type="button"
-              className="gap-1 bg-teal-600 hover:bg-teal-700"
+              className="gap-1 bg-[#0284C7] hover:bg-[#1E3A8A]"
               onClick={() => setStep((s) => Math.min(3, s + 1))}
             >
               Continue <ArrowRight className="h-4 w-4" aria-hidden />
             </Button>
           </div>
         ) : (
-          <Button type="button" className="bg-teal-600 hover:bg-teal-700" onClick={finish}>
+          <Button type="button" className="bg-[#0284C7] hover:bg-[#1E3A8A]" onClick={finish}>
             {createAsNew ? 'Create plan' : 'Save plan'}
           </Button>
         )}

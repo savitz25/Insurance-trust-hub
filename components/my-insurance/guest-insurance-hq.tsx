@@ -199,7 +199,7 @@ export function GuestInsuranceHq() {
           </Link>
         </Button>
         {compareCount >= 2 ? (
-          <Button asChild size="sm" className="gap-1.5 bg-teal-600 hover:bg-teal-700">
+          <Button asChild size="sm" className="gap-1.5 bg-[#0284C7] hover:bg-[#1E3A8A]">
             <Link href={compareHref}>
               <GitCompare className="h-3.5 w-3.5" aria-hidden />
               Compare ({compareCount})
@@ -226,11 +226,11 @@ export function GuestInsuranceHq() {
         )}
       </nav>
 
-      <Card className="border-teal-100 shadow-sm">
+      <Card className="border-[#E0F2FE] shadow-sm">
         <CardHeader className="pb-3">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">
                 Active plan
               </p>
               <CardTitle className="text-xl text-slate-900">
@@ -326,8 +326,8 @@ export function GuestInsuranceHq() {
                       className={cn(
                         'inline-flex min-h-10 items-center rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors',
                         on
-                          ? 'border-teal-600 bg-teal-50 text-teal-900'
-                          : 'border-slate-200 bg-white text-slate-700 hover:border-teal-300'
+                          ? 'border-[#0284C7] bg-[#E0F2FE] text-[#0A2540]'
+                          : 'border-slate-200 bg-white text-slate-700 hover:border-[#0284C7]/40'
                       )}
                       aria-pressed={on}
                     >
@@ -353,7 +353,7 @@ export function GuestInsuranceHq() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Button type="button" className="bg-teal-600 hover:bg-teal-700" onClick={persistPlanFields}>
+            <Button type="button" className="bg-[#0284C7] hover:bg-[#1E3A8A]" onClick={persistPlanFields}>
               Save plan on this device
             </Button>
             {(getShortlisted(providers).length > 0 ||
@@ -396,7 +396,7 @@ export function GuestInsuranceHq() {
               Save agencies from the directory (Researching) or shortlist from a profile (max{' '}
               {SHORTLIST_CAP}).
             </p>
-            <Button asChild className="mt-4 bg-teal-600 hover:bg-teal-700">
+            <Button asChild className="mt-4 bg-[#0284C7] hover:bg-[#1E3A8A]">
               <Link href="/directory">Find licensed agencies</Link>
             </Button>
           </CardContent>
@@ -544,7 +544,7 @@ export function GuestInsuranceHq() {
 
       <div className="rounded-xl border bg-muted/20 px-4 py-4 text-sm text-slate-600">
         <p className="flex items-start gap-2">
-          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-teal-700" aria-hidden />
+          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-[#0284C7]" aria-hidden />
           <span>
             Research only · Not an endorsement · Common ownership network · No paid placements.
             Verify licenses on state DOI / NAIC before you enroll.
@@ -579,7 +579,7 @@ function ProviderBucket({
     <Card className="shadow-sm">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Bookmark className="h-5 w-5 text-teal-700" aria-hidden />
+          <Bookmark className="h-5 w-5 text-[#0284C7]" aria-hidden />
           {title}
         </CardTitle>
         <p className="text-sm text-slate-600">{hint}</p>
@@ -616,7 +616,7 @@ function ProviderList({
           <div className="min-w-0">
             <Link
               href={p.profilePath || `/providers/${p.providerSlug}`}
-              className="font-semibold text-slate-900 hover:text-teal-800 hover:underline"
+              className="font-semibold text-slate-900 hover:text-[#0284C7] hover:underline"
             >
               {p.providerName}
             </Link>

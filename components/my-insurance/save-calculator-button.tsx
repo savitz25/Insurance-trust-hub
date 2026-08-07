@@ -97,7 +97,7 @@ export function SaveCalculatorButton({
       variant="outline"
       size={size === 'sm' ? 'sm' : 'default'}
       className={cn(
-        'gap-2 border-teal-200 bg-white text-teal-900 hover:bg-teal-50',
+        'gap-2 border-[#0284C7]/30 bg-white text-[#0A2540] hover:bg-[#E0F2FE]',
         size === 'default' && 'h-11 min-h-[44px]',
         className
       )}
@@ -108,7 +108,7 @@ export function SaveCalculatorButton({
       {saving ? (
         <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
       ) : saved ? (
-        <Check className="h-4 w-4 text-teal-600" aria-hidden />
+        <Check className="h-4 w-4 text-[#0284C7]" aria-hidden />
       ) : (
         <BookmarkPlus className="h-4 w-4" aria-hidden />
       )}

@@ -145,9 +145,9 @@ export function NeedsAssessmentTool() {
       >
         <ProgressChrome progress={100} label="Results" />
 
-        <div className="overflow-hidden rounded-2xl border border-teal-200/80 bg-gradient-to-b from-teal-50/80 via-white to-white shadow-sm">
-          <div className="border-b border-teal-100/80 px-5 py-5 md:px-7 md:py-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">
+        <div className="overflow-hidden rounded-2xl border border-[#0284C7]/30 bg-gradient-to-b from-[#E0F2FE]/80 via-white to-white shadow-sm">
+          <div className="border-b border-[#E0F2FE]/80 px-5 py-5 md:px-7 md:py-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
               Your Coverage Compass
             </p>
             <h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-900 md:text-2xl">
@@ -157,7 +157,7 @@ export function NeedsAssessmentTool() {
               {result.summary}
             </p>
             {result.insight ? (
-              <p className="mt-3 rounded-xl border border-teal-100 bg-white/80 px-3 py-2 text-sm text-teal-900">
+              <p className="mt-3 rounded-xl border border-[#E0F2FE] bg-white/80 px-3 py-2 text-sm text-[#0A2540]">
                 {result.insight}
               </p>
             ) : null}
@@ -175,7 +175,7 @@ export function NeedsAssessmentTool() {
                     className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
                   >
                     <div className="flex items-start gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-100 text-sm font-bold text-teal-800">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E0F2FE] text-sm font-bold text-[#0284C7]">
                         {i + 1}
                       </span>
                       <div>
@@ -213,13 +213,13 @@ export function NeedsAssessmentTool() {
                   <li key={stepItem.href}>
                     <Link
                       href={stepItem.href}
-                      className="group flex gap-3 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-teal-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                      className="group flex gap-3 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-[#0284C7]/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7]"
                     >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-bold text-slate-700 group-hover:bg-teal-50 group-hover:text-teal-800">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-bold text-slate-700 group-hover:bg-[#E0F2FE] group-hover:text-[#0284C7]">
                         {index + 1}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <p className="font-semibold text-slate-900 group-hover:text-teal-900">
+                        <p className="font-semibold text-slate-900 group-hover:text-[#0A2540]">
                           {stepItem.title}
                           <ArrowRight className="ml-1 inline h-4 w-4 opacity-40 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
                         </p>
@@ -282,7 +282,7 @@ export function NeedsAssessmentTool() {
           entered ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
         )}
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
           {question.eyebrow}
         </p>
         <h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-900 md:text-2xl">
@@ -302,10 +302,10 @@ export function NeedsAssessmentTool() {
                 onClick={() => choose(opt.value)}
                 className={cn(
                   'group flex min-h-[72px] items-start gap-3 rounded-xl border px-4 py-3.5 text-left transition-all',
-                  'hover:border-teal-300 hover:bg-teal-50/40 hover:shadow-sm',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2',
+                  'hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/40 hover:shadow-sm',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7] focus-visible:ring-offset-2',
                   isOn
-                    ? 'border-teal-500 bg-teal-50/70 shadow-sm ring-1 ring-teal-200'
+                    ? 'border-[#0284C7] bg-[#E0F2FE]/70 shadow-sm ring-1 ring-[#E0F2FE]'
                     : 'border-slate-200 bg-white'
                 )}
               >
@@ -313,8 +313,8 @@ export function NeedsAssessmentTool() {
                   className={cn(
                     'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors',
                     isOn
-                      ? 'bg-teal-600 text-white'
-                      : 'bg-slate-100 text-slate-600 group-hover:bg-teal-100 group-hover:text-teal-800'
+                      ? 'bg-[#0284C7] text-white'
+                      : 'bg-slate-100 text-slate-600 group-hover:bg-[#E0F2FE] group-hover:text-[#0284C7]'
                   )}
                 >
                   {isOn ? <Check className="h-5 w-5" aria-hidden /> : <OptionIcon name={opt.icon} />}
@@ -363,7 +363,7 @@ function ProgressChrome({ progress, label }: { progress: number; label: string }
     <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E0F2FE] text-[#0284C7]">
             <Compass className="h-4.5 w-4.5 h-4 w-4" aria-hidden />
           </span>
           <div>
@@ -371,11 +371,11 @@ function ProgressChrome({ progress, label }: { progress: number; label: string }
             <p className="text-xs text-slate-500">{label}</p>
           </div>
         </div>
-        <p className="text-sm font-semibold tabular-nums text-teal-800">{progress}%</p>
+        <p className="text-sm font-semibold tabular-nums text-[#0284C7]">{progress}%</p>
       </div>
       <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-teal-600 to-cyan-500 transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-[#0284C7] to-[#1E3A8A] transition-all duration-500 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -386,7 +386,7 @@ function ProgressChrome({ progress, label }: { progress: number; label: string }
             className={cn(
               'h-1 flex-1 rounded-full transition-colors',
               progress === 100 || i < Math.floor((progress / 100) * STEP_COUNT)
-                ? 'bg-teal-500'
+                ? 'bg-[#E0F2FE]0'
                 : 'bg-slate-200'
             )}
           />

@@ -87,7 +87,7 @@ export function BeforeYouReachOut({
             className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-border/80 bg-background px-3 py-2 text-sm font-semibold hover:bg-muted/40"
           >
             {copied ? (
-              <Check className="h-4 w-4 text-emerald-600" aria-hidden />
+              <Check className="h-4 w-4 text-[#0284C7]" aria-hidden />
             ) : (
               <Copy className="h-4 w-4" aria-hidden />
             )}

@@ -45,7 +45,7 @@ export default async function CountyMedicareIntelligencePage({ params, searchPar
 
   return (
     <>
-      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
+      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
         <div className="container mx-auto max-w-5xl px-4 py-10 md:py-14">
           <ContextNav
             pathname={`/data/counties/${summary.slug}`}
@@ -53,7 +53,7 @@ export default async function CountyMedicareIntelligencePage({ params, searchPar
             currentLabel={summary.displayName}
             className="mb-5"
           />
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
             <BarChart3 className="h-3.5 w-3.5" aria-hidden />
             Medicare Intelligence · County dashboard
           </p>
@@ -66,16 +66,16 @@ export default async function CountyMedicareIntelligencePage({ params, searchPar
             {summary.displayName}, {summary.stateName}.
           </p>
           <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-500">
-            <Link href="/data/plan-complaint-index" className="font-medium text-teal-700 hover:underline">
+            <Link href="/data/plan-complaint-index" className="font-medium text-[#0284C7] hover:underline">
               Plan Complaint Index
             </Link>
             <Link
               href={`/hubs/${summary.hubStateSlug}/${summary.hubSlug}`}
-              className="font-medium text-teal-700 hover:underline"
+              className="font-medium text-[#0284C7] hover:underline"
             >
               Local agent hub
             </Link>
-            <Link href="/hubs/south-florida" className="font-medium text-teal-700 hover:underline">
+            <Link href="/hubs/south-florida" className="font-medium text-[#0284C7] hover:underline">
               South Florida hub
             </Link>
           </p>
@@ -95,7 +95,7 @@ export default async function CountyMedicareIntelligencePage({ params, searchPar
                 <li key={c.slug}>
                   <Link
                     href={`/data/counties/${c.slug}`}
-                    className="inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:border-teal-300 hover:text-teal-800"
+                    className="inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:border-[#0284C7]/40 hover:text-[#0284C7]"
                   >
                     {c.displayName}
                   </Link>

@@ -29,7 +29,7 @@ export default async function CountyMedicareIndexPage({ searchParams }: Props) {
 
   return (
     <>
-      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
+      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
         <div className="container mx-auto max-w-4xl px-4 py-10 md:py-14">
           <ContextNav
             pathname="/data/counties"
@@ -37,7 +37,7 @@ export default async function CountyMedicareIndexPage({ searchParams }: Props) {
             currentLabel="County dashboards"
             className="mb-5"
           />
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
             <BarChart3 className="h-3.5 w-3.5" aria-hidden />
             Medicare Intelligence
           </p>
@@ -61,9 +61,9 @@ export default async function CountyMedicareIndexPage({ searchParams }: Props) {
             <li key={c.slug}>
               <Link
                 href={`/data/counties/${c.slug}`}
-                className="block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-teal-300 hover:shadow-md"
+                className="block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-[#0284C7]/40 hover:shadow-md"
               >
-                <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#0284C7]">
                   {c.stateName}
                 </p>
                 <h2 className="mt-1 text-lg font-semibold text-slate-900">{c.displayName}</h2>
@@ -82,11 +82,11 @@ export default async function CountyMedicareIndexPage({ searchParams }: Props) {
 
         <p className="text-sm text-slate-600">
           Related:{' '}
-          <Link href="/data/plan-complaint-index" className="font-medium text-teal-700 hover:underline">
+          <Link href="/data/plan-complaint-index" className="font-medium text-[#0284C7] hover:underline">
             Plan Complaint Index
           </Link>
           {' · '}
-          <Link href="/hubs/south-florida" className="font-medium text-teal-700 hover:underline">
+          <Link href="/hubs/south-florida" className="font-medium text-[#0284C7] hover:underline">
             South Florida agents
           </Link>
         </p>

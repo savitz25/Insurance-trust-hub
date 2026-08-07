@@ -103,7 +103,7 @@ export function AuthModal() {
           <X className="h-4 w-4" />
         </button>
 
-        <p className="text-xs font-semibold uppercase tracking-wider text-teal-700">
+        <p className="text-xs font-semibold uppercase tracking-wider text-[#0284C7]">
           My Insurance
         </p>
         <h2 id="auth-modal-title" className="mt-1 text-xl font-semibold text-slate-900">
@@ -121,7 +121,7 @@ export function AuthModal() {
             type="button"
             className={cn(
               'rounded-full px-3 py-1',
-              mode === 'magic' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600'
+              mode === 'magic' ? 'bg-[#0284C7] text-white' : 'bg-slate-100 text-slate-600'
             )}
             onClick={() => setMode('magic')}
           >
@@ -131,7 +131,7 @@ export function AuthModal() {
             type="button"
             className={cn(
               'rounded-full px-3 py-1',
-              mode === 'password' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600'
+              mode === 'password' ? 'bg-[#0284C7] text-white' : 'bg-slate-100 text-slate-600'
             )}
             onClick={() => setMode('password')}
           >
@@ -157,7 +157,7 @@ export function AuthModal() {
             <Button
               type="submit"
               disabled={sending || sent}
-              className="h-11 w-full gap-2 bg-teal-600 hover:bg-teal-700"
+              className="h-11 w-full gap-2 bg-[#0284C7] hover:bg-[#1E3A8A]"
             >
               <Mail className="h-4 w-4" />
               {sent ? 'Link sent — check email' : sending ? 'Sending…' : 'Email me a sign-in link'}
@@ -195,7 +195,7 @@ export function AuthModal() {
             <Button
               type="submit"
               disabled={sending}
-              className="h-11 w-full bg-teal-600 hover:bg-teal-700"
+              className="h-11 w-full bg-[#0284C7] hover:bg-[#1E3A8A]"
             >
               {sending ? 'Signing in…' : 'Sign in with password'}
             </Button>
@@ -223,7 +223,7 @@ export function AuthModal() {
         </div>
 
         <p className="mt-4 flex items-start gap-2 text-[11px] leading-relaxed text-slate-500">
-          <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-600" aria-hidden />
+          <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#0284C7]" aria-hidden />
           One Ask Trust Hub account across Move, Insurance, and Lending. Magic link by default —
           or optional password. Also Google and Facebook. Sign out anytime from HQ.
         </p>

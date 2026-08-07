@@ -31,7 +31,7 @@ export function TrustScoreBreakdownPanel({ breakdown, className }: Props) {
               <p
                 className={cn(
                   'text-sm font-semibold tabular-nums',
-                  f.points > 0 && 'text-emerald-700',
+                  f.points > 0 && 'text-[#0284C7]',
                   f.points < 0 && 'text-rose-700',
                   f.points === 0 && 'text-slate-600'
                 )}

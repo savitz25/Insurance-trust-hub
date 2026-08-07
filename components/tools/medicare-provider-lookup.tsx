@@ -26,7 +26,7 @@ type SearchMode = 'name' | 'npi';
 
 function StatusIcon({ status }: { status: ProviderSearchHit['status'] }) {
   if (status === 'active') {
-    return <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" aria-hidden />;
+    return <CheckCircle2 className="h-5 w-5 shrink-0 text-[#0284C7]" aria-hidden />;
   }
   if (status === 'inactive') {
     return <ShieldOff className="h-5 w-5 shrink-0 text-rose-600" aria-hidden />;
@@ -40,7 +40,7 @@ function StatusIcon({ status }: { status: ProviderSearchHit['status'] }) {
 function statusStyles(status: ProviderSearchHit['status']) {
   switch (status) {
     case 'active':
-      return 'border-emerald-200 bg-emerald-50/80 text-emerald-950';
+      return 'border-[#0284C7]/30 bg-[#E0F2FE]/80 text-[#0A2540]';
     case 'inactive':
       return 'border-rose-200 bg-rose-50/80 text-rose-950';
     case 'not_found':
@@ -120,7 +120,7 @@ export function MedicareProviderLookupTool({
       >
         <div>
           <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-            <Stethoscope className="h-4 w-4 text-teal-700" aria-hidden />
+            <Stethoscope className="h-4 w-4 text-[#0284C7]" aria-hidden />
             Search Medicare FFS participation
           </div>
           <p className="mt-1 text-sm text-slate-600">
@@ -144,7 +144,7 @@ export function MedicareProviderLookupTool({
             className={cn(
               'min-h-[44px] flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
               mode === 'name'
-                ? 'bg-white text-teal-900 shadow-sm ring-1 ring-slate-200'
+                ? 'bg-white text-[#0A2540] shadow-sm ring-1 ring-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
             )}
           >
@@ -160,7 +160,7 @@ export function MedicareProviderLookupTool({
             className={cn(
               'min-h-[44px] flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
               mode === 'npi'
-                ? 'bg-white text-teal-900 shadow-sm ring-1 ring-slate-200'
+                ? 'bg-white text-[#0A2540] shadow-sm ring-1 ring-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
             )}
           >
@@ -175,7 +175,7 @@ export function MedicareProviderLookupTool({
             aria-labelledby="tab-name"
             className="space-y-4"
           >
-            <p className="rounded-lg border border-teal-100 bg-teal-50/70 px-3 py-2 text-sm text-teal-900">
+            <p className="rounded-lg border border-[#E0F2FE] bg-[#E0F2FE]/70 px-3 py-2 text-sm text-[#0A2540]">
               Search by last name or clinic/organization name. First name is optional.
             </p>
             <p className="text-xs text-slate-500">
@@ -301,7 +301,7 @@ export function MedicareProviderLookupTool({
                   Verify on{' '}
                   <a
                     href="https://npiregistry.cms.hhs.gov/"
-                    className="font-medium text-teal-700 hover:underline"
+                    className="font-medium text-[#0284C7] hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -342,7 +342,7 @@ export function MedicareProviderLookupTool({
           <div className="flex flex-wrap gap-3 text-sm font-medium">
             <Link
               href={withReturnContext('/data/counties', '/tools/medicare-provider-lookup')}
-              className="text-teal-700 hover:underline"
+              className="text-[#0284C7] hover:underline"
             >
               County Medicare dashboards
             </Link>
@@ -351,13 +351,13 @@ export function MedicareProviderLookupTool({
                 '/data/plan-complaint-index',
                 '/tools/medicare-provider-lookup'
               )}
-              className="text-teal-700 hover:underline"
+              className="text-[#0284C7] hover:underline"
             >
               Plan Complaint Index
             </Link>
             <Link
               href={withReturnContext('/hubs/south-florida', '/tools/medicare-provider-lookup')}
-              className="text-teal-700 hover:underline"
+              className="text-[#0284C7] hover:underline"
             >
               South Florida agents
             </Link>

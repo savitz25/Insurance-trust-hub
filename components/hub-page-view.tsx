@@ -122,18 +122,18 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                 ))}
               </ul>
               {countySummary ? (
-                <div className="mt-6 rounded-xl border border-teal-200 bg-teal-50/50 p-4">
-                  <p className="flex items-center gap-2 text-sm font-semibold text-teal-900">
+                <div className="mt-6 rounded-xl border border-[#0284C7]/30 bg-[#E0F2FE]/50 p-4">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-[#0A2540]">
                     <BarChart3 className="h-4 w-4" aria-hidden />
                     Medicare Intelligence dashboard
                   </p>
-                  <p className="mt-1 text-sm text-teal-900/80">
+                  <p className="mt-1 text-sm text-[#1E293B]">
                     CMS-derived published enrollment, material contracts, and complaint-measure
                     context for {countySummary.displayName}.
                   </p>
                   <Link
                     href={`/data/counties/${countySummary.slug}`}
-                    className="mt-2 inline-flex text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
+                    className="mt-2 inline-flex text-sm font-medium text-[#0284C7] underline-offset-2 hover:underline"
                   >
                     Open {countySummary.displayName} Medicare dashboard →
                   </Link>

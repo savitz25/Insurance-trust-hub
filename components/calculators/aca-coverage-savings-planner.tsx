@@ -100,7 +100,7 @@ export function AcaCoverageSavingsPlanner() {
     <div className="space-y-6">
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
         <div className="flex items-center justify-between gap-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">
             Step {step} of {STEPS.length}
           </p>
           <p className="text-xs text-slate-500">{STEPS[step - 1]?.label}</p>
@@ -111,8 +111,8 @@ export function AcaCoverageSavingsPlanner() {
               key={s.id}
               className={cn(
                 'h-1.5 flex-1 rounded-full transition-colors',
-                s.id < step && 'bg-teal-600',
-                s.id === step && 'bg-teal-500',
+                s.id < step && 'bg-[#0284C7]',
+                s.id === step && 'bg-[#E0F2FE]0',
                 s.id > step && 'bg-slate-200'
               )}
             />
@@ -145,7 +145,7 @@ export function AcaCoverageSavingsPlanner() {
                 />
               </div>
               {location && (
-                <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-teal-800">
+                <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-[#0284C7]">
                   <Check className="h-4 w-4" aria-hidden />
                   {location.displayLabel}
                   {location.resolution === 'state' && (
@@ -285,7 +285,7 @@ export function AcaCoverageSavingsPlanner() {
                     className={cn(
                       'rounded-xl border px-4 py-3 text-left text-sm font-medium transition-colors',
                       confidence === id
-                        ? 'border-teal-500 bg-teal-50 text-teal-900'
+                        ? 'border-[#0284C7] bg-[#E0F2FE] text-[#0A2540]'
                         : 'border-slate-200 text-slate-700 hover:border-slate-300'
                     )}
                   >
@@ -358,7 +358,7 @@ function Results({
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
           Assistance &amp; local cost picture
         </p>
         <h2 className="mt-1 text-xl font-semibold text-slate-900 md:text-2xl">
@@ -434,7 +434,7 @@ function Results({
 
       {/* D. $0 premium */}
       {result.zeroPremiumPossible && (
-        <div className="flex gap-3 rounded-xl border border-emerald-200 bg-emerald-50/80 px-4 py-3 text-sm text-emerald-950">
+        <div className="flex gap-3 rounded-xl border border-[#0284C7]/30 bg-[#E0F2FE]/80 px-4 py-3 text-sm text-[#0A2540]">
           <Sparkles className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
           <p>
             <strong className="font-semibold">Very low or $0 premium range possible.</strong> Your
@@ -446,9 +446,9 @@ function Results({
 
       {/* C. CSR */}
       {result.qualifiesCsr && (
-        <div className="rounded-xl border border-teal-300 bg-teal-50/70 p-4 md:p-5">
-          <p className="text-sm font-semibold text-teal-900">Cost-Sharing Reductions may apply</p>
-          <p className="mt-2 text-sm leading-relaxed text-teal-900/90">{result.csrSummary}</p>
+        <div className="rounded-xl border border-[#0284C7]/40 bg-[#E0F2FE]/70 p-4 md:p-5">
+          <p className="text-sm font-semibold text-[#0A2540]">Cost-Sharing Reductions may apply</p>
+          <p className="mt-2 text-sm leading-relaxed text-[#1E293B]">{result.csrSummary}</p>
         </div>
       )}
       {!result.qualifiesCsr && (
@@ -487,17 +487,17 @@ function Results({
               className={cn(
                 'rounded-xl border p-4',
                 path.id === 'silver' && result.qualifiesCsr
-                  ? 'border-teal-300 bg-teal-50/40'
+                  ? 'border-[#0284C7]/40 bg-[#E0F2FE]/40'
                   : 'border-slate-200 bg-white'
               )}
             >
               <p className="font-semibold text-slate-900">{path.label}</p>
-              <p className="text-xs font-medium uppercase tracking-wide text-teal-700">
+              <p className="text-xs font-medium uppercase tracking-wide text-[#0284C7]">
                 {path.tagline}
               </p>
               <p className="mt-1 text-sm text-slate-600">{path.fits}</p>
               {path.csrNote && (
-                <p className="mt-2 text-sm font-medium text-teal-800">{path.csrNote}</p>
+                <p className="mt-2 text-sm font-medium text-[#0284C7]">{path.csrNote}</p>
               )}
               <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
                 <div>
@@ -565,7 +565,7 @@ function Results({
         <h3 className="text-base font-semibold text-slate-900">Next research steps</h3>
         <ul className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
           <li>
-            <Link href="/tools/cost-estimator" className="font-medium text-teal-700 hover:underline">
+            <Link href="/tools/cost-estimator" className="font-medium text-[#0284C7] hover:underline">
               Insurance Cost &amp; Coverage Planner
             </Link>
             <span className="block text-xs text-slate-500">Total annual cost scenarios</span>
@@ -573,20 +573,20 @@ function Results({
           <li>
             <Link
               href="/data/plan-complaint-index"
-              className="font-medium text-teal-700 hover:underline"
+              className="font-medium text-[#0284C7] hover:underline"
             >
               Plan Complaint Index
             </Link>
             <span className="block text-xs text-slate-500">CMS complaint transparency</span>
           </li>
           <li>
-            <Link href="/data/counties" className="font-medium text-teal-700 hover:underline">
+            <Link href="/data/counties" className="font-medium text-[#0284C7] hover:underline">
               County Medicare dashboards
             </Link>
             <span className="block text-xs text-slate-500">Local market context</span>
           </li>
           <li>
-            <Link href="/hubs/aca" className="font-medium text-teal-700 hover:underline">
+            <Link href="/hubs/aca" className="font-medium text-[#0284C7] hover:underline">
               ACA marketplace agents
             </Link>
             <span className="block text-xs text-slate-500">Verified directory — no gate</span>
@@ -594,7 +594,7 @@ function Results({
           <li>
             <Link
               href="/tools/medicare-provider-lookup"
-              className="font-medium text-teal-700 hover:underline"
+              className="font-medium text-[#0284C7] hover:underline"
             >
               Medicare provider lookup
             </Link>
@@ -603,7 +603,7 @@ function Results({
           <li>
             <Link
               href="/tools/needs-assessment"
-              className="font-medium text-teal-700 hover:underline"
+              className="font-medium text-[#0284C7] hover:underline"
             >
               Coverage Compass
             </Link>
@@ -628,7 +628,7 @@ function Stat({
     <div
       className={cn(
         'rounded-xl border px-4 py-3',
-        emphasize ? 'border-teal-300 bg-teal-50/60' : 'border-slate-200 bg-slate-50/50'
+        emphasize ? 'border-[#0284C7]/40 bg-[#E0F2FE]/60' : 'border-slate-200 bg-slate-50/50'
       )}
     >
       <p className="text-xs font-medium text-slate-500">{label}</p>

@@ -84,7 +84,7 @@ export function CompareSession({ providers, comparisonId, hasUrlSlugs }: Props) 
           side-by-side view.
         </p>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
-          <Button asChild className="bg-teal-600 hover:bg-teal-700">
+          <Button asChild className="bg-[#0284C7] hover:bg-[#1E3A8A]">
             <Link href="/directory">Browse directory</Link>
           </Button>
           <Button asChild variant="outline">
@@ -104,7 +104,7 @@ export function CompareSession({ providers, comparisonId, hasUrlSlugs }: Props) 
         selection is saved on this device until you clear it.
       </p>
       <div className="mt-4 flex flex-wrap justify-center gap-2">
-        <Button asChild className="bg-teal-600 hover:bg-teal-700">
+        <Button asChild className="bg-[#0284C7] hover:bg-[#1E3A8A]">
           <Link href="/directory">Browse directory</Link>
         </Button>
         <Button asChild variant="outline">

@@ -122,7 +122,7 @@ export function SaveDrugBasketButton({
       <Button
         type="button"
         className={cn(
-          'h-11 min-h-[44px] w-full gap-2 rounded-xl bg-teal-600 font-semibold text-white hover:bg-teal-700'
+          'h-11 min-h-[44px] w-full gap-2 rounded-xl bg-[#0284C7] font-semibold text-white hover:bg-[#1E3A8A]'
         )}
         onClick={() => void handleSave()}
         disabled={disabled || saving || saved || items.length === 0}
@@ -144,7 +144,7 @@ export function SaveDrugBasketButton({
       {saved ? (
         <Link
           href={MY_INSURANCE_PATH}
-          className="text-center text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
+          className="text-center text-sm font-medium text-[#0284C7] underline-offset-2 hover:underline"
           onClick={() => router.refresh()}
         >
           View in My Insurance →

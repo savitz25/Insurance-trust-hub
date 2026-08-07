@@ -91,7 +91,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
     <div className="space-y-8">
       {/* Account strip */}
       {user ? (
-        <div className="flex flex-col gap-3 rounded-2xl border border-teal-100 bg-white px-4 py-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 rounded-2xl border border-[#E0F2FE] bg-white px-4 py-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm text-slate-600">
               Signed in as <span className="font-medium text-slate-900">{user.email}</span>
@@ -116,7 +116,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
           </Button>
         </div>
       ) : (
-        <Card className="border-teal-200 bg-teal-50/40 shadow-none">
+        <Card className="border-[#0284C7]/30 bg-[#E0F2FE]/40 shadow-none">
           <CardContent className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-medium text-slate-900">Sign in (optional)</p>
@@ -126,7 +126,7 @@ export function MyInsuranceDashboard({ initial }: Props) {
               </p>
             </div>
             <Button
-              className="gap-2 bg-teal-600 hover:bg-teal-700"
+              className="gap-2 bg-[#0284C7] hover:bg-[#1E3A8A]"
               onClick={() => openAuth({ redirectPath: '/my-insurance' })}
             >
               <LogIn className="h-4 w-4" />
@@ -180,7 +180,7 @@ function CloudComparisons({
     <section>
       <div className="mb-4 flex items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-          <GitCompare className="h-5 w-5 text-teal-700" />
+          <GitCompare className="h-5 w-5 text-[#0284C7]" />
           Saved comparisons
         </h2>
         <span className="text-sm text-slate-500">{comparisons.length}</span>
@@ -250,7 +250,7 @@ function CloudReviews({
     <section>
       <div className="mb-4 flex items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-          <MessageSquare className="h-5 w-5 text-teal-700" />
+          <MessageSquare className="h-5 w-5 text-[#0284C7]" />
           My reviews
         </h2>
         <span className="text-sm text-slate-500">{reviews.length}</span>
@@ -379,7 +379,7 @@ function CloudDrugBasket({
     <section>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-          <Pill className="h-5 w-5 text-teal-700" />
+          <Pill className="h-5 w-5 text-[#0284C7]" />
           Prescription drug basket
         </h2>
         <span className="text-sm text-slate-500">
@@ -394,14 +394,14 @@ function CloudDrugBasket({
             <p className="text-sm text-slate-600">
               Build a list on the prescription tool, then use Save to My Insurance.
             </p>
-            <Button asChild size="sm" className="bg-teal-600 hover:bg-teal-700">
+            <Button asChild size="sm" className="bg-[#0284C7] hover:bg-[#1E3A8A]">
               <Link href={`${DRUG_BASKET_PATH}?from=hq`}>Build drug basket</Link>
             </Button>
           </CardContent>
         </Card>
       ) : (
         <div className="space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-teal-100 bg-teal-50/50 px-4 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-[#E0F2FE] bg-[#E0F2FE]/50 px-4 py-3">
             <div>
               <p className="font-medium text-slate-900">
                 {basket?.name || 'My prescriptions'}
@@ -514,7 +514,7 @@ function CloudCalculators({
     <section>
       <div className="mb-4 flex items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-          <Calculator className="h-5 w-5 text-teal-700" />
+          <Calculator className="h-5 w-5 text-[#0284C7]" />
           Saved calculator results
         </h2>
         <span className="text-sm text-slate-500">{rows.length}</span>
@@ -542,7 +542,7 @@ function CloudCalculators({
                 className="flex flex-col gap-3 p-4 sm:flex-row sm:items-start sm:justify-between"
               >
                 <div className="min-w-0">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#0284C7]">
                     {calcLabel(row.calculator_id)}
                   </p>
                   <p className="mt-0.5 font-semibold text-slate-900">{row.title}</p>

@@ -26,7 +26,7 @@ export default async function PlanComplaintIndexPage({ searchParams }: Props) {
 
   return (
     <>
-      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
+      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
         <div className="container mx-auto max-w-4xl px-4 py-10 md:py-14">
           <ContextNav
             pathname="/data/plan-complaint-index"
@@ -34,7 +34,7 @@ export default async function PlanComplaintIndexPage({ searchParams }: Props) {
             currentLabel="Plan Complaint Index"
             className="mb-5"
           />
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
             <BarChart3 className="h-3.5 w-3.5" aria-hidden />
             Insurance Trust Hub · Original data
           </p>
@@ -52,19 +52,19 @@ export default async function PlanComplaintIndexPage({ searchParams }: Props) {
             Last synced <strong className="font-semibold text-slate-800">{syncedLabel}</strong>
           </p>
           <p className="mt-4 text-sm text-slate-500">
-            <Link href="/data/counties" className="font-medium text-teal-700 hover:underline">
+            <Link href="/data/counties" className="font-medium text-[#0284C7] hover:underline">
               County Medicare dashboards
             </Link>
             {' · '}
-            <Link href="/data/counties/miami-dade-fl" className="font-medium text-teal-700 hover:underline">
+            <Link href="/data/counties/miami-dade-fl" className="font-medium text-[#0284C7] hover:underline">
               Miami-Dade
             </Link>
             {' · '}
-            <Link href="/tools" className="font-medium text-teal-700 hover:underline">
+            <Link href="/tools" className="font-medium text-[#0284C7] hover:underline">
               Tools
             </Link>
             {' · '}
-            <Link href="/hubs/medicare" className="font-medium text-teal-700 hover:underline">
+            <Link href="/hubs/medicare" className="font-medium text-[#0284C7] hover:underline">
               Medicare hubs
             </Link>
           </p>

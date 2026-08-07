@@ -127,7 +127,7 @@ export function ExternalRedirectConsent({ open, target, onClose, onConfirmed }: 
         <button
           type="button"
           onClick={stay}
-          className="absolute right-3 top-3 rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+          className="absolute right-3 top-3 rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7]"
           aria-label="Stay on InsuranceTrustHub"
         >
           <X className="h-4 w-4" />

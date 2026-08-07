@@ -23,7 +23,7 @@ function participationRowStatus(status: CmsParticipationStatus): RowStatus {
 
 function StatusIcon({ status }: { status: RowStatus }) {
   if (status === 'verified') {
-    return <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" aria-hidden />;
+    return <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0284C7]" aria-hidden />;
   }
   if (status === 'pending') {
     return <CircleDashed className="h-4 w-4 shrink-0 text-amber-600" aria-hidden />;
@@ -76,7 +76,7 @@ export function GovernmentVerificationPanel({ data, className }: Props) {
     if (participationStatus === 'verified' && data.npi) {
       return {
         label: 'CMS enrollment matched',
-        className: 'border-emerald-200 bg-emerald-50 text-xs font-medium text-emerald-900',
+        className: 'border-[#0284C7]/30 bg-[#E0F2FE] text-xs font-medium text-[#0A2540]',
       };
     }
     if (participationStatus === 'pending') {
@@ -142,13 +142,13 @@ export function GovernmentVerificationPanel({ data, className }: Props) {
   return (
     <section aria-labelledby="government-verification-heading" className={cn(className)}>
       <Card className="overflow-hidden border-slate-200/90 shadow-sm ring-1 ring-slate-100">
-        <CardHeader className="border-b border-slate-100 bg-gradient-to-r from-slate-50 to-teal-50/40 pb-4">
+        <CardHeader className="border-b border-slate-100 bg-gradient-to-r from-slate-50 to-[#E0F2FE]/40 pb-4">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <CardTitle
               id="government-verification-heading"
               className="flex items-center gap-2 text-base font-semibold text-slate-900"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-600 text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0284C7] text-white">
                 <Shield className="h-4 w-4" aria-hidden />
               </span>
               {title}
@@ -173,7 +173,7 @@ export function GovernmentVerificationPanel({ data, className }: Props) {
                     <span
                       className={cn(
                         'rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide',
-                        row.status === 'verified' && 'bg-emerald-50 text-emerald-800',
+                        row.status === 'verified' && 'bg-[#E0F2FE] text-[#0284C7]',
                         row.status === 'pending' && 'bg-amber-50 text-amber-900',
                         (row.status === 'missing' || row.status === 'na') &&
                           'bg-slate-100 text-slate-600'

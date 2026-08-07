@@ -286,7 +286,7 @@ export function PrescriptionDrugBasket() {
   }
 
   const fieldClass =
-    'h-12 text-base rounded-xl border-slate-200 bg-white shadow-sm focus-visible:ring-teal-500/30 focus-visible:border-teal-500';
+    'h-12 text-base rounded-xl border-slate-200 bg-white shadow-sm focus-visible:ring-[#0284C7]/30 focus-visible:border-[#0284C7]';
   const labelClass = 'mb-1.5 block text-sm font-medium text-slate-800';
 
   return (
@@ -296,9 +296,9 @@ export function PrescriptionDrugBasket() {
         <div
           role="status"
           aria-live="polite"
-          className="print:hidden flex items-center gap-2 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-medium text-teal-900 shadow-sm"
+          className="print:hidden flex items-center gap-2 rounded-xl border border-[#0284C7]/30 bg-[#E0F2FE] px-4 py-3 text-sm font-medium text-[#0A2540] shadow-sm"
         >
-          <Check className="h-4 w-4 shrink-0 text-teal-600" aria-hidden />
+          <Check className="h-4 w-4 shrink-0 text-[#0284C7]" aria-hidden />
           {feedback}
         </div>
       )}
@@ -310,7 +310,7 @@ export function PrescriptionDrugBasket() {
       >
         <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <h2 id={`${formId}-heading`} className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-            <Pill className="h-5 w-5 text-teal-600" aria-hidden />
+            <Pill className="h-5 w-5 text-[#0284C7]" aria-hidden />
             {editingId ? 'Edit medication' : 'Add a medication'}
           </h2>
           {editingId && (
@@ -385,7 +385,7 @@ export function PrescriptionDrugBasket() {
                 onChange={(e) => updateDraft('form', e.target.value as MedicationForm)}
                 className={cn(
                   fieldClass,
-                  'w-full border px-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500/30'
+                  'w-full border px-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0284C7]/30'
                 )}
               >
                 {MEDICATION_FORMS.map((f) => (
@@ -444,7 +444,7 @@ export function PrescriptionDrugBasket() {
           <Button
             type="submit"
             size="lg"
-            className="h-12 w-full gap-2 rounded-xl bg-teal-600 text-base font-semibold text-white hover:bg-teal-700 sm:w-auto sm:min-w-[200px]"
+            className="h-12 w-full gap-2 rounded-xl bg-[#0284C7] text-base font-semibold text-white hover:bg-[#1E3A8A] sm:w-auto sm:min-w-[200px]"
           >
             {editingId ? (
               <>
@@ -463,7 +463,7 @@ export function PrescriptionDrugBasket() {
         {/* Quick-add */}
         <div className="mt-6 border-t border-slate-100 pt-5">
           <p className="mb-2 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-slate-500">
-            <Sparkles className="h-3.5 w-3.5 text-teal-600" aria-hidden />
+            <Sparkles className="h-3.5 w-3.5 text-[#0284C7]" aria-hidden />
             Quick-add common medications
           </p>
           <div className="flex flex-wrap gap-2">
@@ -472,7 +472,7 @@ export function PrescriptionDrugBasket() {
                 key={name}
                 type="button"
                 onClick={() => quickAdd(name)}
-                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:border-teal-300 hover:bg-teal-50 hover:text-teal-900"
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:border-[#0284C7]/40 hover:bg-[#E0F2FE] hover:text-[#0A2540]"
               >
                 {name}
               </button>
@@ -559,7 +559,7 @@ export function PrescriptionDrugBasket() {
                 key={item.id}
                 className={cn(
                   'flex flex-col gap-3 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between',
-                  editingId === item.id && 'rounded-xl bg-teal-50/50 px-3 ring-1 ring-teal-100'
+                  editingId === item.id && 'rounded-xl bg-[#E0F2FE]/50 px-3 ring-1 ring-[#E0F2FE]'
                 )}
               >
                 <div className="min-w-0 flex-1">
@@ -579,7 +579,7 @@ export function PrescriptionDrugBasket() {
                   <button
                     type="button"
                     onClick={() => startEdit(item)}
-                    className="inline-flex h-11 items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 hover:border-teal-300 hover:bg-teal-50 hover:text-teal-900"
+                    className="inline-flex h-11 items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 hover:border-[#0284C7]/40 hover:bg-[#E0F2FE] hover:text-[#0A2540]"
                     aria-label={`Edit ${item.name}`}
                   >
                     <Pencil className="h-4 w-4" aria-hidden />
@@ -640,7 +640,7 @@ export function PrescriptionDrugBasket() {
             </Button>
           </div>
           <p className="flex items-start gap-2 text-xs leading-relaxed text-slate-500">
-            <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-600" aria-hidden />
+            <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#0284C7]" aria-hidden />
             Draft stays on this device until you save. Saving to My Insurance syncs your list across
             devices  -  we never sell your data. Educational only  -  not medical advice.
           </p>

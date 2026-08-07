@@ -179,14 +179,14 @@ export function MedicareResearchRouter() {
       {situation && (
         <section
           aria-labelledby="research-path-heading"
-          className="rounded-2xl border border-teal-200/80 bg-gradient-to-b from-teal-50/60 via-white to-white p-5 shadow-sm md:p-8"
+          className="rounded-2xl border border-[#0284C7]/30 bg-gradient-to-b from-[#E0F2FE]/60 via-white to-white p-5 shadow-sm md:p-8"
         >
           <div className="flex flex-wrap items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-teal-800">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E0F2FE] text-[#0284C7]">
               <Route className="h-5 w-5" aria-hidden />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
                 Research guide
               </p>
               <h2
@@ -215,7 +215,7 @@ export function MedicareResearchRouter() {
                     href={step.href}
                     className={cn(
                       'group flex gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all',
-                      'hover:border-teal-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2'
+                      'hover:border-[#0284C7]/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7] focus-visible:ring-offset-2'
                     )}
                   >
                     <span
@@ -225,16 +225,16 @@ export function MedicareResearchRouter() {
                       {index + 1}
                     </span>
                     <div className="flex min-w-0 flex-1 gap-3">
-                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E0F2FE] text-[#0284C7]">
                         <Icon className="h-4 w-4" aria-hidden />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-semibold text-slate-900 group-hover:text-teal-800">
+                          <span className="font-semibold text-slate-900 group-hover:text-[#0284C7]">
                             {step.title}
                           </span>
                           <ArrowRight
-                            className="h-4 w-4 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-teal-600"
+                            className="h-4 w-4 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-[#0284C7]"
                             aria-hidden
                           />
                         </div>
@@ -257,13 +257,13 @@ export function MedicareResearchRouter() {
               <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
                 {COUNTY_LINKS.map((c) => (
                   <li key={c.href}>
-                    <Link href={c.href} className="font-medium text-teal-700 hover:underline">
+                    <Link href={c.href} className="font-medium text-[#0284C7] hover:underline">
                       {c.label}
                     </Link>
                   </li>
                 ))}
                 <li>
-                  <Link href="/data/counties" className="font-medium text-teal-700 hover:underline">
+                  <Link href="/data/counties" className="font-medium text-[#0284C7] hover:underline">
                     All counties
                   </Link>
                 </li>
@@ -276,7 +276,7 @@ export function MedicareResearchRouter() {
             enrollment, and eligibility decisions belong on{' '}
             <a
               href="https://www.medicare.gov"
-              className="font-medium text-teal-700 hover:underline"
+              className="font-medium text-[#0284C7] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >

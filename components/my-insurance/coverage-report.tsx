@@ -155,7 +155,7 @@ export function CoverageReport() {
           takeaway summary.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-2">
-          <Button asChild className="bg-teal-600 hover:bg-teal-700">
+          <Button asChild className="bg-[#0284C7] hover:bg-[#1E3A8A]">
             <Link href="/my-insurance/setup">Guided setup</Link>
           </Button>
           <Button asChild variant="outline">
@@ -185,7 +185,7 @@ export function CoverageReport() {
         </div>
         <div className="mt-4 flex flex-wrap gap-2 print:hidden">
           <Button type="button" variant="outline" className="gap-1.5" onClick={onCopy}>
-            {copied ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
+            {copied ? <Check className="h-4 w-4 text-[#0284C7]" /> : <Copy className="h-4 w-4" />}
             {copied ? 'Copied' : 'Copy summary'}
           </Button>
           <Button type="button" variant="outline" className="gap-1.5" onClick={() => window.print()}>
@@ -237,7 +237,7 @@ export function CoverageReport() {
         {shortlist.length === 0 ? (
           <p className="mt-2 text-sm text-slate-600">
             No shortlisted agencies yet.{' '}
-            <Link href="/directory" className="font-medium text-teal-700 underline">
+            <Link href="/directory" className="font-medium text-[#0284C7] underline">
               Browse directory
             </Link>
           </p>
@@ -252,7 +252,7 @@ export function CoverageReport() {
                 </p>
                 <Link
                   href={p.profilePath}
-                  className="mt-1 inline-block text-sm font-medium text-teal-700 underline"
+                  className="mt-1 inline-block text-sm font-medium text-[#0284C7] underline"
                 >
                   {typeof window !== 'undefined'
                     ? `${window.location.origin}${p.profilePath}`
@@ -285,7 +285,7 @@ export function CoverageReport() {
               <li key={s.id} className="rounded-lg border border-slate-100 px-3 py-3">
                 <p className="font-semibold text-slate-900">{s.title}</p>
                 <p className="mt-1 text-sm text-slate-600">{s.summary}</p>
-                <Link href={s.href} className="mt-1 inline-block text-sm font-medium text-teal-700 underline">
+                <Link href={s.href} className="mt-1 inline-block text-sm font-medium text-[#0284C7] underline">
                   Open tool
                 </Link>
                 <p className="mt-1 text-xs text-slate-400">
@@ -303,14 +303,14 @@ export function CoverageReport() {
         </h2>
         <ul className="mt-2 space-y-1 text-sm">
           <li>
-            <Link href={DOI_PATHWAY_HREF} className="font-medium text-teal-700 underline">
+            <Link href={DOI_PATHWAY_HREF} className="font-medium text-[#0284C7] underline">
               License verification guide (DOI pathways)
             </Link>
           </li>
           <li>
             <a
               href={NAIC_CONSUMER_URL}
-              className="font-medium text-teal-700 underline"
+              className="font-medium text-[#0284C7] underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -319,7 +319,7 @@ export function CoverageReport() {
           </li>
         </ul>
         <p className="mt-4 text-sm print:hidden">
-          <Link href="/my-insurance/plans" className="font-medium text-teal-700 underline">
+          <Link href="/my-insurance/plans" className="font-medium text-[#0284C7] underline">
             All plans
           </Link>
         </p>

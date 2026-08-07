@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -37,12 +37,12 @@ export function CompareTray() {
         role="status"
         aria-live="polite"
       >
-        <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-teal-200 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur">
-          <GitCompare className="h-4 w-4 shrink-0 text-teal-700" aria-hidden />
+        <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-[#0284C7]/30 bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur">
+          <GitCompare className="h-4 w-4 shrink-0 text-[#0284C7]" aria-hidden />
           <span className="min-w-0 flex-1 truncate text-sm font-medium text-slate-800">
             {items.length} selected: {items.map((i) => i.name).join(', ')}
           </span>
-          <Button size="sm" className="bg-teal-600 hover:bg-teal-700" asChild>
+          <Button size="sm" className="bg-[#0284C7] hover:bg-[#1E3A8A]" asChild>
             <Link href={href}>Compare</Link>
           </Button>
           <Button
@@ -57,13 +57,13 @@ export function CompareTray() {
         </div>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-teal-100 bg-white/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-lg backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#E0F2FE] bg-white/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-lg backdrop-blur md:hidden">
         <div className="mb-2 flex flex-wrap gap-1">
           {items.map((i) => (
             <button
               key={i.slug}
               type="button"
-              className="inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-xs text-teal-900"
+              className="inline-flex items-center gap-1 rounded-full bg-[#E0F2FE] px-2 py-0.5 text-xs text-[#0A2540]"
               onClick={() => removeFromCompareTray(i.slug)}
             >
               {i.name}
@@ -72,7 +72,7 @@ export function CompareTray() {
           ))}
         </div>
         <div className="flex gap-2">
-          <Button className="flex-1 gap-2 bg-teal-600 hover:bg-teal-700" asChild>
+          <Button className="flex-1 gap-2 bg-[#0284C7] hover:bg-[#1E3A8A]" asChild>
             <Link href={href}>
               <GitCompare className="h-4 w-4" />
               Compare {items.length}

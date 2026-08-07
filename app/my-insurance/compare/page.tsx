@@ -34,9 +34,9 @@ export default async function MyInsuranceComparePage({ searchParams }: PageProps
   }
 
   return (
-    <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
+    <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
       <div className="container mx-auto max-w-5xl px-4 py-10 md:py-14">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
           My Insurance · Compare
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
@@ -46,11 +46,11 @@ export default async function MyInsuranceComparePage({ searchParams }: PageProps
           Research-only comparison of public listing signals. Not a ranking, quote, or endorsement.
         </p>
         <p className="mt-2 text-sm text-slate-500">
-          <Link href="/my-insurance" className="font-medium text-teal-700 hover:underline">
+          <Link href="/my-insurance" className="font-medium text-[#0284C7] hover:underline">
             Back to Insurance HQ
           </Link>
           {' · '}
-          <Link href="/directory" className="font-medium text-teal-700 hover:underline">
+          <Link href="/directory" className="font-medium text-[#0284C7] hover:underline">
             Directory
           </Link>
         </p>

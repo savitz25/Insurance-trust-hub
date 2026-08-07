@@ -44,7 +44,7 @@ function MetricCard({
             {value}
           </p>
         </div>
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E0F2FE] text-[#0284C7]">
           <Icon className="h-5 w-5" aria-hidden />
         </span>
       </div>
@@ -138,7 +138,7 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
           </div>
           <Link
             href="/data/plan-complaint-index"
-            className="inline-flex items-center gap-1 text-sm font-medium text-teal-700 hover:underline"
+            className="inline-flex items-center gap-1 text-sm font-medium text-[#0284C7] hover:underline"
           >
             Plan Complaint Index <ArrowRight className="h-4 w-4" />
           </Link>
@@ -243,7 +243,7 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
                         {c.contractId} · {formatEnrollment(c.publishedEnrollment)} published enrollees
                       </p>
                     </div>
-                    <p className="text-sm font-bold tabular-nums text-teal-800">
+                    <p className="text-sm font-bold tabular-nums text-[#0284C7]">
                       {formatComplaintRate(c.complaintRatePerThousand)}
                       <span className="text-xs font-normal text-slate-500"> /1k</span>
                     </p>
@@ -274,11 +274,11 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
           <div className="flex flex-wrap gap-3 text-sm font-medium">
             <Link
               href={`/hubs/${summary.hubStateSlug}/${summary.hubSlug}`}
-              className="text-teal-700 hover:underline"
+              className="text-[#0284C7] hover:underline"
             >
               County agent hub
             </Link>
-            <Link href="/directory?state=FL" className="text-teal-700 hover:underline">
+            <Link href="/directory?state=FL" className="text-[#0284C7] hover:underline">
               Full Florida directory
             </Link>
           </div>
@@ -300,7 +300,7 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
         className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
       >
         <h2 id="provenance-heading" className="flex items-center gap-2 text-xl font-semibold text-slate-900">
-          <Shield className="h-5 w-5 text-teal-700" aria-hidden />
+          <Shield className="h-5 w-5 text-[#0284C7]" aria-hidden />
           Data provenance
         </h2>
         <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">

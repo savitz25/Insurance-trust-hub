@@ -49,7 +49,7 @@ export default async function CostEstimatorPage({ searchParams }: PageProps) {
   const sp = searchParams ? await searchParams : {};
   return (
     <>
-      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
+      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
         <div className="container mx-auto max-w-3xl px-4 py-10 md:py-14">
           <ContextNav
             pathname="/tools/cost-estimator"
@@ -57,7 +57,7 @@ export default async function CostEstimatorPage({ searchParams }: PageProps) {
             currentLabel="Cost & Coverage Planner"
             className="mb-5"
           />
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
             <Calculator className="h-3.5 w-3.5" aria-hidden />
             Flagship tool · ACA / Marketplace first
           </p>
@@ -68,14 +68,14 @@ export default async function CostEstimatorPage({ searchParams }: PageProps) {
             Estimate what health coverage could really cost you — premiums, deductibles, and
             expected out-of-pocket — based on your household and situation.
           </p>
-          <p className="mt-4 inline-flex max-w-2xl items-start gap-2 rounded-xl border border-teal-200/80 bg-white/80 px-3 py-2 text-sm text-teal-900">
+          <p className="mt-4 inline-flex max-w-2xl items-start gap-2 rounded-xl border border-[#0284C7]/30 bg-white/80 px-3 py-2 text-sm text-[#0A2540]">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
             No quote requests. No lead selling. Your inputs are used only to generate estimates.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3 text-xs text-slate-600">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1">
-              <Sparkles className="h-3.5 w-3.5 text-teal-600" aria-hidden />
+              <Sparkles className="h-3.5 w-3.5 text-[#0284C7]" aria-hidden />
               Independent
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1">
@@ -165,32 +165,32 @@ export default async function CostEstimatorPage({ searchParams }: PageProps) {
             </h2>
             <ul className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
               <li>
-                <Link href="/data/plan-complaint-index" className="font-medium text-teal-700 hover:underline">
+                <Link href="/data/plan-complaint-index" className="font-medium text-[#0284C7] hover:underline">
                   Medicare Plan Complaint Index
                 </Link>
               </li>
               <li>
-                <Link href="/data/counties" className="font-medium text-teal-700 hover:underline">
+                <Link href="/data/counties" className="font-medium text-[#0284C7] hover:underline">
                   County Medicare dashboards
                 </Link>
               </li>
               <li>
-                <Link href="/tools/medicare-provider-lookup" className="font-medium text-teal-700 hover:underline">
+                <Link href="/tools/medicare-provider-lookup" className="font-medium text-[#0284C7] hover:underline">
                   Medicare provider lookup
                 </Link>
               </li>
               <li>
-                <Link href="/tools/medicare-plan-finder" className="font-medium text-teal-700 hover:underline">
+                <Link href="/tools/medicare-plan-finder" className="font-medium text-[#0284C7] hover:underline">
                   Medicare research guide
                 </Link>
               </li>
               <li>
-                <Link href="/calculators/aca-subsidy" className="font-medium text-teal-700 hover:underline">
+                <Link href="/calculators/aca-subsidy" className="font-medium text-[#0284C7] hover:underline">
                   ACA subsidy calculator
                 </Link>
               </li>
               <li>
-                <Link href="/hubs/aca" className="font-medium text-teal-700 hover:underline">
+                <Link href="/hubs/aca" className="font-medium text-[#0284C7] hover:underline">
                   ACA marketplace agents
                 </Link>
               </li>
@@ -217,13 +217,13 @@ export default async function CostEstimatorPage({ searchParams }: PageProps) {
               Browse verified agents when you are ready — no forced lead form from this page.
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm">
-              <Link href="/hubs/aca" className="font-medium text-teal-700 hover:underline">
+              <Link href="/hubs/aca" className="font-medium text-[#0284C7] hover:underline">
                 ACA specialists
               </Link>
-              <Link href="/hubs/south-florida" className="font-medium text-teal-700 hover:underline">
+              <Link href="/hubs/south-florida" className="font-medium text-[#0284C7] hover:underline">
                 South Florida agents
               </Link>
-              <Link href="/hubs/medicare" className="font-medium text-teal-700 hover:underline">
+              <Link href="/hubs/medicare" className="font-medium text-[#0284C7] hover:underline">
                 Medicare specialists
               </Link>
             </div>
@@ -247,7 +247,7 @@ function ExplainCard({
 }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#E0F2FE] text-[#0284C7]">
         <Icon className="h-4 w-4" aria-hidden />
       </div>
       <h3 className="mt-3 font-semibold text-slate-900">{title}</h3>

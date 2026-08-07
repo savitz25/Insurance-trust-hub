@@ -53,7 +53,7 @@ export function ShortlistFullPanel({
           ))}
         </ul>
         <div className="mt-4 flex flex-col gap-2">
-          <Button type="button" className="bg-teal-600 hover:bg-teal-700" onClick={onDemoteOldest}>
+          <Button type="button" className="bg-[#0284C7] hover:bg-[#1E3A8A]" onClick={onDemoteOldest}>
             Move oldest shortlisted → Researching &amp; add this
           </Button>
           <Button type="button" variant="outline" onClick={onSaveAsResearching}>

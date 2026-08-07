@@ -21,6 +21,7 @@
   --primary: #0284c7;
   --accent: #1e3a8a;
   --trust: #0284c7;
+  --ring: #0284c7;
   --background: #f8fafc;
   --foreground: #1e293b;
   --radius: 0.75rem;
@@ -32,6 +33,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--ith-shield);
   --color-trust: var(--ith-shield);
+  --color-ring: var(--ith-shield);
   --color-ink: var(--ith-ink);
   --color-canvas: var(--ith-canvas);
   --color-border: var(--ith-border);

@@ -80,7 +80,7 @@ export function PlansLibrary() {
             Start guided setup to create your first research plan. Shortlist and reports attach to the
             active plan.
           </p>
-          <Button asChild className="mt-2 bg-teal-600 hover:bg-teal-700">
+          <Button asChild className="mt-2 bg-[#0284C7] hover:bg-[#1E3A8A]">
             <Link href="/my-insurance/setup">
               <Plus className="mr-1.5 h-4 w-4" aria-hidden />
               Guided setup
@@ -97,7 +97,7 @@ export function PlansLibrary() {
         <p className="text-sm text-slate-600">
           {plans.length} plan{plans.length === 1 ? '' : 's'} on this device. Compare tray stays global.
         </p>
-        <Button asChild size="sm" className="bg-teal-600 hover:bg-teal-700">
+        <Button asChild size="sm" className="bg-[#0284C7] hover:bg-[#1E3A8A]">
           <Link href="/my-insurance/setup">
             <Plus className="mr-1 h-4 w-4" aria-hidden />
             New plan setup
@@ -115,7 +115,7 @@ export function PlansLibrary() {
               <Card
                 className={cn(
                   'shadow-sm transition-colors',
-                  isActive && 'border-teal-300 ring-1 ring-teal-100'
+                  isActive && 'border-[#0284C7]/40 ring-1 ring-[#E0F2FE]'
                 )}
               >
                 <CardHeader className="pb-2">
@@ -132,7 +132,7 @@ export function PlansLibrary() {
                           />
                           <Button
                             size="sm"
-                            className="bg-teal-600 hover:bg-teal-700"
+                            className="bg-[#0284C7] hover:bg-[#1E3A8A]"
                             onClick={() => {
                               renamePlan(plan.id, renameValue);
                               setRenamingId(null);
@@ -155,7 +155,7 @@ export function PlansLibrary() {
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {isActive ? (
-                        <span className="rounded-full bg-teal-600 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
+                        <span className="rounded-full bg-[#0284C7] px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
                           Active
                         </span>
                       ) : null}
@@ -192,7 +192,7 @@ export function PlansLibrary() {
                   <div className="flex flex-wrap gap-2">
                     <Button
                       size="sm"
-                      className="bg-teal-600 hover:bg-teal-700"
+                      className="bg-[#0284C7] hover:bg-[#1E3A8A]"
                       onClick={() => {
                         setActivePlan(plan.id);
                         toast.success(`Active plan: ${plan.label}`);

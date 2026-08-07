@@ -38,7 +38,7 @@ export default function OfflinePage() {
           <li key={l.href}>
             <Link
               href={l.href}
-              className="flex min-h-[44px] items-center justify-between rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-teal-800 hover:border-teal-300"
+              className="flex min-h-[44px] items-center justify-between rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-[#0284C7] hover:border-[#0284C7]/40"
             >
               {l.label}
               <span aria-hidden>→</span>

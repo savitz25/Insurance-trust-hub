@@ -60,13 +60,13 @@ export function LicenseVerificationTool() {
   return (
     <div className="space-y-8">
       {/* Path A — Official state */}
-      <section className="rounded-2xl border border-teal-200/80 bg-gradient-to-b from-teal-50/50 via-white to-white p-5 shadow-sm md:p-7">
+      <section className="rounded-2xl border border-[#0284C7]/30 bg-gradient-to-b from-[#E0F2FE]/50 via-white to-white p-5 shadow-sm md:p-7">
         <div className="flex items-start gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-teal-800">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#E0F2FE] text-[#0284C7]">
             <ShieldCheck className="h-5 w-5" aria-hidden />
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">
               Path A · Primary
             </p>
             <h2 className="mt-1 text-xl font-semibold text-slate-900">
@@ -193,7 +193,7 @@ export function LicenseVerificationTool() {
       {/* Path C — NPN / education */}
       <section className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 md:p-6">
         <div className="flex items-start gap-3">
-          <BookOpen className="mt-0.5 h-5 w-5 shrink-0 text-teal-700" aria-hidden />
+          <BookOpen className="mt-0.5 h-5 w-5 shrink-0 text-[#0284C7]" aria-hidden />
           <div className="space-y-2 text-sm text-slate-600">
             <h2 className="text-base font-semibold text-slate-900">Have an NPN?</h2>
             <p>
@@ -203,13 +203,13 @@ export function LicenseVerificationTool() {
               to confirm the license is active for the product they sell.
             </p>
             <p className="flex flex-wrap gap-x-4 gap-y-1">
-              <Link href="/tools/medicare-provider-lookup" className="font-medium text-teal-700 hover:underline">
+              <Link href="/tools/medicare-provider-lookup" className="font-medium text-[#0284C7] hover:underline">
                 Medicare provider lookup
               </Link>
-              <Link href="/calculators/aca-subsidy" className="font-medium text-teal-700 hover:underline">
+              <Link href="/calculators/aca-subsidy" className="font-medium text-[#0284C7] hover:underline">
                 ACA Coverage &amp; Savings Planner
               </Link>
-              <Link href="/tools/needs-assessment" className="font-medium text-teal-700 hover:underline">
+              <Link href="/tools/needs-assessment" className="font-medium text-[#0284C7] hover:underline">
                 Coverage Compass
               </Link>
             </p>
@@ -234,7 +234,7 @@ export function LicenseVerificationTool() {
               onClick={() => requestExternal(d.lookupUrl, d.department, d.name)}
               className={cn(
                 'flex min-h-[44px] items-center justify-between gap-2 rounded-lg border border-slate-200 px-3 py-2.5 text-left text-sm',
-                'transition-colors hover:border-teal-300 hover:bg-teal-50/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600'
+                'transition-colors hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7]'
               )}
             >
               <span>

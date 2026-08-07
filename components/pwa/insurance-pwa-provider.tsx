@@ -96,7 +96,7 @@ export function InsurancePwaProvider() {
     >
       <div className="pointer-events-auto rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-lg backdrop-blur">
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-800">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E0F2FE] text-[#0284C7]">
             <Download className="h-5 w-5" aria-hidden />
           </div>
           <div className="min-w-0 flex-1">

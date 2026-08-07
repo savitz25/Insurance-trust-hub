@@ -20,17 +20,18 @@ const BRAND = {
     : 'https://www.insurancetrusthub.com',
   siteHost: 'insurancetrusthub.com',
   logoUrl: EMAIL_LOGO_URL,
-  /** Teal  -  primary CTAs & brand accent */
-  primary: '#0f766e',
-  primaryDark: '#0d5f59',
+  /** Shield Blue — primary CTAs & brand accent */
+  primary: '#0284C7',
+  primaryDark: '#1E3A8A',
   /** Deep navy for headlines */
-  ink: '#0f172a',
-  body: '#334155',
-  muted: '#64748b',
-  faint: '#94a3b8',
-  border: '#e2e8f0',
-  bg: '#f1f5f9',
-  card: '#ffffff',
+  ink: '#0A2540',
+  body: '#1E293B',
+  muted: '#334155',
+  faint: '#64748B',
+  border: '#E2E8F0',
+  bg: '#F8FAFC',
+  card: '#FFFFFF',
+  ice: '#E0F2FE',
   supportEmail: 'hello@insurancetrusthub.com',
   trustLine: 'Independent research workspace  -  no paid placements, no lead selling.',
 } as const;

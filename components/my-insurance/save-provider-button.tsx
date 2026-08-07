@@ -207,7 +207,7 @@ export function SaveProviderButton({
           aria-expanded={saved ? manageOpen : undefined}
         >
           {saved ? (
-            <BookmarkCheck className="h-4 w-4 text-teal-700" aria-hidden />
+            <BookmarkCheck className="h-4 w-4 text-[#0284C7]" aria-hidden />
           ) : (
             <Bookmark className="h-4 w-4" aria-hidden />
           )}
@@ -216,7 +216,7 @@ export function SaveProviderButton({
         </Button>
 
         {saved && local ? (
-          <p className="text-center text-[10px] font-medium uppercase tracking-wide text-teal-800">
+          <p className="text-center text-[10px] font-medium uppercase tracking-wide text-[#0284C7]">
             {local.status.replace('_', ' ')}
           </p>
         ) : null}

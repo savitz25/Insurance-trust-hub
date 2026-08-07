@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 function TrendCell({ trend }: { trend: ComplaintTrend }) {
   if (trend === 'improving') {
     return (
-      <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700">
+      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#0284C7]">
         <ArrowDown className="h-3.5 w-3.5" aria-hidden />
         Improving
       </span>
@@ -169,7 +169,7 @@ export function PlanComplaintIndexClient({ meta }: Props) {
           >
             <div className="flex items-start justify-between gap-2">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#0284C7]">
                   Rank #{row.rank}
                 </p>
                 <p className="mt-0.5 font-semibold text-slate-900">{row.carrierName}</p>
@@ -202,21 +202,21 @@ export function PlanComplaintIndexClient({ meta }: Props) {
       <div className="flex flex-wrap gap-3 text-sm">
         <Link
           href="/hubs/medicare?from=%2Fdata%2Fplan-complaint-index"
-          className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline"
+          className="inline-flex items-center gap-1 font-medium text-[#0284C7] hover:underline"
         >
           Medicare specialist hubs
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
         <Link
           href="/hubs/south-florida?from=%2Fdata%2Fplan-complaint-index"
-          className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline"
+          className="inline-flex items-center gap-1 font-medium text-[#0284C7] hover:underline"
         >
           South Florida agents
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
         <Link
           href="/tools/medicare-plan-finder?from=%2Fdata%2Fplan-complaint-index"
-          className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline"
+          className="inline-flex items-center gap-1 font-medium text-[#0284C7] hover:underline"
         >
           Medicare research guide
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />

@@ -20,7 +20,7 @@ export default async function LicenseVerificationPage({ searchParams }: PageProp
 
   return (
     <>
-      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-teal-50/30">
+      <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
         <div className="container mx-auto max-w-3xl px-4 py-10 md:py-14">
           <ContextNav
             pathname="/tools/license-verification"
@@ -28,7 +28,7 @@ export default async function LicenseVerificationPage({ searchParams }: PageProp
             currentLabel="License verification"
             className="mb-5"
           />
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
             <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
             License Verification Hub
           </p>
@@ -39,7 +39,7 @@ export default async function LicenseVerificationPage({ searchParams }: PageProp
             Before you buy coverage, confirm the person or agency is licensed where they sell. An
             active license is a baseline trust signal — not a guarantee of quality or product fit.
           </p>
-          <p className="mt-4 inline-flex max-w-2xl items-start gap-2 rounded-xl border border-teal-200/80 bg-white/80 px-3 py-2 text-sm text-teal-900">
+          <p className="mt-4 inline-flex max-w-2xl items-start gap-2 rounded-xl border border-[#0284C7]/30 bg-white/80 px-3 py-2 text-sm text-[#0A2540]">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
             We help you reach the official source. Final license status comes from the state.
           </p>
@@ -103,25 +103,25 @@ export default async function LicenseVerificationPage({ searchParams }: PageProp
             </p>
             <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
               <li>
-                <Link href="/directory" className="font-medium text-teal-700 hover:underline">
+                <Link href="/directory" className="font-medium text-[#0284C7] hover:underline">
                   Agent directory
                 </Link>
               </li>
               <li>
-                <Link href="/tools/cost-estimator" className="font-medium text-teal-700 hover:underline">
+                <Link href="/tools/cost-estimator" className="font-medium text-[#0284C7] hover:underline">
                   Cost &amp; Coverage Planner
                 </Link>
               </li>
               <li>
                 <Link
                   href="/data/plan-complaint-index"
-                  className="font-medium text-teal-700 hover:underline"
+                  className="font-medium text-[#0284C7] hover:underline"
                 >
                   Plan Complaint Index
                 </Link>
               </li>
               <li>
-                <Link href="/tools" className="font-medium text-teal-700 hover:underline">
+                <Link href="/tools" className="font-medium text-[#0284C7] hover:underline">
                   All tools
                 </Link>
               </li>

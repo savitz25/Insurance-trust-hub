@@ -193,7 +193,7 @@ export function CostCoveragePlanner() {
       {/* Progress */}
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
         <div className="flex items-center justify-between gap-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">
             Step {step} of {STEPS.length}
           </p>
           <p className="text-xs text-slate-500">{STEPS[step - 1]?.label}</p>
@@ -205,8 +205,8 @@ export function CostCoveragePlanner() {
               role="listitem"
               className={cn(
                 'h-1.5 flex-1 rounded-full transition-colors',
-                s.id < step && 'bg-teal-600',
-                s.id === step && 'bg-teal-500',
+                s.id < step && 'bg-[#0284C7]',
+                s.id === step && 'bg-[#E0F2FE]0',
                 s.id > step && 'bg-slate-200'
               )}
               aria-current={s.id === step ? 'step' : undefined}
@@ -271,7 +271,7 @@ export function CostCoveragePlanner() {
                 />
               </div>
               {location && (
-                <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-teal-800">
+                <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-[#0284C7]">
                   <Check className="h-4 w-4" aria-hidden />
                   {location.displayLabel}
                   {location.resolution === 'state' && (
@@ -285,31 +285,31 @@ export function CostCoveragePlanner() {
             </div>
 
             {medicare && (
-              <div className="rounded-xl border border-teal-200 bg-teal-50/70 p-4">
-                <p className="text-sm font-semibold text-teal-900">Medicare path available</p>
-                <p className="mt-1 text-sm text-teal-900/80">
+              <div className="rounded-xl border border-[#0284C7]/30 bg-[#E0F2FE]/70 p-4">
+                <p className="text-sm font-semibold text-[#0A2540]">Medicare path available</p>
+                <p className="mt-1 text-sm text-[#1E293B]">
                   For Medicare, our dedicated tools are usually more useful than ACA marketplace
                   math. You can open them now or continue this planner for household health cost
                   context.
                 </p>
                 <ul className="mt-3 space-y-2 text-sm">
                   <li>
-                    <Link href="/tools/medicare-plan-finder" className="font-medium text-teal-800 hover:underline">
+                    <Link href="/tools/medicare-plan-finder" className="font-medium text-[#0284C7] hover:underline">
                       Medicare research guide
                     </Link>
                   </li>
                   <li>
-                    <Link href="/tools/medicare-provider-lookup" className="font-medium text-teal-800 hover:underline">
+                    <Link href="/tools/medicare-provider-lookup" className="font-medium text-[#0284C7] hover:underline">
                       Does my doctor accept Medicare?
                     </Link>
                   </li>
                   <li>
-                    <Link href="/data/counties" className="font-medium text-teal-800 hover:underline">
+                    <Link href="/data/counties" className="font-medium text-[#0284C7] hover:underline">
                       County Medicare dashboards
                     </Link>
                   </li>
                   <li>
-                    <Link href="/data/plan-complaint-index" className="font-medium text-teal-800 hover:underline">
+                    <Link href="/data/plan-complaint-index" className="font-medium text-[#0284C7] hover:underline">
                       Plan Complaint Index
                     </Link>
                   </li>
@@ -339,7 +339,7 @@ export function CostCoveragePlanner() {
                     className={cn(
                       'rounded-xl border px-3 py-3 text-left text-sm font-medium transition-colors',
                       householdShape === h.id
-                        ? 'border-teal-500 bg-teal-50 text-teal-900'
+                        ? 'border-[#0284C7] bg-[#E0F2FE] text-[#0A2540]'
                         : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
                     )}
                   >
@@ -487,7 +487,7 @@ export function CostCoveragePlanner() {
                   className={cn(
                     'rounded-xl border px-4 py-3 text-left transition-colors',
                     utilization === u.id
-                      ? 'border-teal-500 bg-teal-50'
+                      ? 'border-[#0284C7] bg-[#E0F2FE]'
                       : 'border-slate-200 hover:border-slate-300'
                   )}
                 >
@@ -536,7 +536,7 @@ export function CostCoveragePlanner() {
                   className={cn(
                     'rounded-xl border px-4 py-3 text-left text-sm font-medium transition-colors',
                     priority === p.id
-                      ? 'border-teal-500 bg-teal-50 text-teal-900'
+                      ? 'border-[#0284C7] bg-[#E0F2FE] text-[#0A2540]'
                       : 'border-slate-200 text-slate-700 hover:border-slate-300'
                   )}
                 >
@@ -619,7 +619,7 @@ function ResultsPanel({
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
           Your estimated annual cost picture
         </p>
         <h2 className="mt-1 text-xl font-semibold text-slate-900 md:text-2xl">
@@ -717,19 +717,19 @@ function ResultsPanel({
                 key={path.id}
                 className={cn(
                   'rounded-xl border p-4 md:p-5',
-                  isRec ? 'border-teal-400 bg-teal-50/50 ring-1 ring-teal-200' : 'border-slate-200 bg-white'
+                  isRec ? 'border-[#0284C7]/50 bg-[#E0F2FE]/50 ring-1 ring-[#E0F2FE]' : 'border-slate-200 bg-white'
                 )}
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
                     <p className="font-semibold text-slate-900">{path.label}</p>
-                    <p className="text-xs font-medium uppercase tracking-wide text-teal-700">
+                    <p className="text-xs font-medium uppercase tracking-wide text-[#0284C7]">
                       {path.tagline}
                       {path.csrApplied ? ' · CSR-sensitive Silver view' : ''}
                     </p>
                   </div>
                   {isRec && (
-                    <span className="rounded-full bg-teal-700 px-2.5 py-0.5 text-xs font-semibold text-white">
+                    <span className="rounded-full bg-[#0284C7] px-2.5 py-0.5 text-xs font-semibold text-white">
                       Aligned with your inputs
                     </span>
                   )}
@@ -756,7 +756,7 @@ function ResultsPanel({
                   </div>
                   <div>
                     <dt className="text-slate-500">Total annual cost (premium + care)</dt>
-                    <dd className="font-semibold text-teal-900">
+                    <dd className="font-semibold text-[#0A2540]">
                       {formatMoneyRange(path.totalAnnualCost, 'yr')}
                     </dd>
                   </div>
@@ -771,7 +771,7 @@ function ResultsPanel({
         <button
           type="button"
           onClick={onEditAssumptions}
-          className="font-medium text-teal-700 hover:underline"
+          className="font-medium text-[#0284C7] hover:underline"
         >
           Edit care-use assumptions
         </button>
@@ -898,7 +898,7 @@ function StatCard({
     <div
       className={cn(
         'rounded-xl border px-4 py-3',
-        emphasize ? 'border-teal-300 bg-teal-50/60' : 'border-slate-200 bg-slate-50/50'
+        emphasize ? 'border-[#0284C7]/40 bg-[#E0F2FE]/60' : 'border-slate-200 bg-slate-50/50'
       )}
     >
       <p className="text-xs font-medium text-slate-500">{label}</p>
@@ -922,13 +922,13 @@ function NextLink({
     <li>
       <Link
         href={href}
-        className="group flex gap-3 rounded-xl border border-slate-200 bg-white p-3 transition-colors hover:border-teal-300 hover:bg-teal-50/30"
+        className="group flex gap-3 rounded-xl border border-slate-200 bg-white p-3 transition-colors hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/30"
       >
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E0F2FE] text-[#0284C7]">
           <Icon className="h-4 w-4" aria-hidden />
         </div>
         <div>
-          <p className="text-sm font-semibold text-slate-900 group-hover:text-teal-900">{title}</p>
+          <p className="text-sm font-semibold text-slate-900 group-hover:text-[#0A2540]">{title}</p>
           <p className="text-xs text-slate-500">{desc}</p>
         </div>
       </Link>
