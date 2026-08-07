@@ -7,6 +7,7 @@ import { Footer } from '@/components/footer';
 import { AskNetworkBar } from '@/components/network/ask-network-bar';
 import { MyInsuranceShell } from '@/components/my-insurance/my-insurance-shell';
 import { InsurancePwaProvider } from '@/components/pwa/insurance-pwa-provider';
+import { HubLastLocationBridge } from '@/components/network/hub-last-location-bridge';
 import { rootLayoutMetadata } from '@/lib/seo/metadata';
 import { ASK_NETWORK_STANDARD_VERSION } from '@/lib/network/standard-version';
 import './globals.css';
@@ -43,6 +44,7 @@ export default function RootLayout({
       >
         {/* network-standard: {ASK_NETWORK_STANDARD_VERSION} */}
         <MyInsuranceShell>
+          <HubLastLocationBridge hubId="insurance" />
           <AskNetworkBar />
           <Navbar />
           <main className="min-h-[calc(100vh-5rem)] pb-[env(safe-area-inset-bottom)]">

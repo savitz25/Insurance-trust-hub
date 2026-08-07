@@ -6,6 +6,7 @@ import {
   INSURANCE_BRAND,
   INSURANCE_NETWORK_LINKS,
 } from '@/lib/design/insurance-design-system';
+import { resolveSwitchHubHref } from '@/lib/network/hub-last-location';
 import { cn } from '@/lib/utils';
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 
 /**
  * Switch Hub — network sibling + parent Ask destinations.
+ * Specialist hubs use resume entry URLs (last path restored on target).
  */
 export function SwitchHubMenu({ className, compact = false }: Props) {
   const [open, setOpen] = useState(false);
@@ -81,7 +83,7 @@ export function SwitchHubMenu({ className, compact = false }: Props) {
               <li key={hub.id}>
                 <a
                   role="menuitem"
-                  href={hub.href}
+                  href={resolveSwitchHubHref(hub.id, hub.href)}
                   rel="noopener noreferrer"
                   className="flex items-start gap-2 rounded-xl px-2.5 py-2.5 transition-colors hover:bg-[#E0F2FE]/80"
                   onClick={() => setOpen(false)}
