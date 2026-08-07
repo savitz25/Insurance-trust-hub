@@ -1,245 +1,125 @@
 import Link from 'next/link';
 import { BrandLogoStacked } from '@/components/BrandLogo';
 import { AskNetworkSeal } from '@/components/network/ask-network-seal';
-import { DISCLAIMER, SITE_EMAIL, SITE_NAME } from '@/lib/constants';
+import {
+  INSURANCE_BRAND,
+  INSURANCE_FOOTER_COLUMNS,
+  INSURANCE_INDEPENDENCE_LINE,
+  INSURANCE_LAYER_LABEL,
+  INSURANCE_NETWORK_LINKS,
+} from '@/lib/design/insurance-design-system';
+import { DISCLAIMER, SITE_EMAIL } from '@/lib/constants';
 
+/**
+ * Insurance footer — Phase 1: navy, network hubs, independence, legal.
+ */
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-muted/20">
-      <div className="container mx-auto px-4 py-10">
-        <div className="grid grid-cols-2 gap-y-9 md:grid-cols-6">
-          <div className="col-span-2 md:col-span-1">
-            <Link prefetch={false} href="/" className="inline-block">
-              <BrandLogoStacked />
-            </Link>
-            <p className="mt-2.5 max-w-[220px] text-sm leading-snug text-muted-foreground">
-              Independent research directory for licensed insurance agencies. No paid placements.
+    <footer
+      data-hub="insurance"
+      className="border-t border-white/10 text-slate-200"
+      style={{ backgroundColor: INSURANCE_BRAND.navy }}
+    >
+      <div className="container mx-auto px-4 py-12 sm:py-14">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
+          <div className="sm:col-span-2 lg:col-span-4">
+            <div className="mb-4">
+              <Link prefetch={false} href="/" className="inline-block">
+                <BrandLogoStacked />
+              </Link>
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7DD3FC]">
+              {INSURANCE_LAYER_LABEL}
             </p>
-          </div>
-
-          <div>
-            <div className="mb-2.5 text-xs font-semibold tracking-widest text-muted-foreground/80">
-              DIRECTORY
-            </div>
-            <div className="space-y-1.5 text-sm text-muted-foreground">
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/directory"
-                  className="transition-colors hover:text-foreground"
-                >
-                  All Agents
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/hubs"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Health Insurance Hubs
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/hubs/browse"
-                  className="transition-colors hover:text-foreground"
-                >
-                  State &amp; MSA Browser
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/calculators"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Calculators
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-2.5 text-xs font-semibold tracking-widest text-muted-foreground/80">
-              DESTINATIONS
-            </div>
-            <div className="space-y-1.5 text-sm text-muted-foreground">
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/destinations"
-                  className="transition-colors hover:text-foreground"
-                >
-                  All States
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/destinations/florida"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Florida
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/destinations/texas"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Texas
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/destinations/california"
-                  className="transition-colors hover:text-foreground"
-                >
-                  California
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-2.5 text-xs font-semibold tracking-widest text-muted-foreground/80">
-              RESOURCES
-            </div>
-            <div className="space-y-1.5 text-sm text-muted-foreground">
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/my-insurance"
-                  className="transition-colors hover:text-foreground"
-                >
-                  My Insurance
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/resources"
-                  className="transition-colors hover:text-foreground"
-                >
-                  All Guides
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/tools/license-verification"
-                  className="transition-colors hover:text-foreground"
-                >
-                  License Verification
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/tools/cost-estimator"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Cost &amp; Coverage Planner
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-2.5 text-xs font-semibold tracking-widest text-muted-foreground/80">
-              COMPANY &amp; LEGAL
-            </div>
-            <div className="space-y-1.5 text-sm text-muted-foreground">
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/about"
-                  className="transition-colors hover:text-foreground"
-                >
-                  About Us
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/methodology"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Methodology
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/contact"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Contact
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/privacy"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Privacy Policy
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/terms"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Terms of Service
-                </Link>
-              </div>
-              <div>
-                <Link
-                  prefetch={false}
-                  href="/about#disclaimer"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Disclaimer
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-span-2 text-sm text-muted-foreground md:col-span-1">
-            <div className="mb-2 text-xs font-semibold tracking-widest text-muted-foreground/80">
-              CONTACT
-            </div>
-            <p className="text-[13px] leading-snug">
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
+              Independent research directory for licensed insurance agencies and coverage options.
+              DOI-oriented verification signals. Not an insurer or agency — research tools only.
+            </p>
+            <p className="mt-3 text-xs leading-relaxed text-slate-400">
+              {INSURANCE_INDEPENDENCE_LINE}
+            </p>
+            <p className="mt-3 text-sm">
               <a
                 href={`mailto:${SITE_EMAIL}`}
-                className="transition-colors hover:text-foreground"
+                className="font-medium text-[#7DD3FC] underline-offset-2 hover:text-white hover:underline"
               >
                 {SITE_EMAIL}
               </a>
             </p>
-            <div className="mt-3 text-[11px] text-muted-foreground/70">
-              © {year} {SITE_NAME}
-            </div>
           </div>
+
+          <div className="lg:col-span-2">
+            <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
+              Network
+            </h4>
+            <ul className="space-y-2.5 text-sm text-slate-300">
+              {INSURANCE_NETWORK_LINKS.map((hub) => (
+                <li key={hub.id}>
+                  <a
+                    href={hub.href}
+                    className="transition-colors hover:text-white"
+                    rel="noopener noreferrer"
+                  >
+                    {hub.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="https://www.asktrusthub.com/promise"
+                  className="font-medium text-[#7DD3FC] transition-colors hover:text-white"
+                  rel="noopener noreferrer"
+                >
+                  Independence Policy
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {INSURANCE_FOOTER_COLUMNS.map((col) => (
+            <div key={col.title} className="lg:col-span-2">
+              <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
+                {col.title}
+              </h4>
+              <ul className="space-y-2.5 text-sm text-slate-300">
+                {col.links.map((item) => (
+                  <li key={item.href}>
+                    {'external' in item && item.external ? (
+                      <a
+                        href={item.href}
+                        className="transition-colors hover:text-white"
+                        rel="noopener noreferrer"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        prefetch={false}
+                        href={item.href}
+                        className="transition-colors hover:text-white"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      </div>
 
-      <div className="border-t py-6">
-        <AskNetworkSeal />
-      </div>
+        <p className="mt-8 text-xs leading-relaxed text-slate-400">{DISCLAIMER}</p>
 
-      <div className="border-t py-5">
-        <p className="container mx-auto max-w-4xl px-4 text-center text-[10px] leading-relaxed tracking-wide text-muted-foreground/70">
-          {DISCLAIMER}
-        </p>
+        <div className="mt-8 border-t border-white/10 pt-8">
+          <AskNetworkSeal />
+        </div>
+
+        <div className="mt-6 border-t border-white/10 pt-6 text-center text-xs text-slate-500">
+          © {year} InsuranceTrustHub.com — Independent research · Expanding coverage · Zero paid
+          placements
+        </div>
       </div>
     </footer>
   );

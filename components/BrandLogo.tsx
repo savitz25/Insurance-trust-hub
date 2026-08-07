@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { brandAsset, BRAND_LOGO } from '@/lib/brand';
+import { brandAsset, BRAND, BRAND_LOGO } from '@/lib/brand';
 
 /**
- * Header logo: full horizontal InsuranceTrustHub lockup (transparent PNG).
- * Logo image includes wordmark — no separate HTML brand text.
+ * Header logo — official transparent ITH lockup (Phase 1).
+ * No background plate; multi-color mark + wordmark.
  */
 export function BrandLogo({
   href = '/',
@@ -17,15 +17,15 @@ export function BrandLogo({
   const src2x = brandAsset(BRAND_LOGO.header2x);
 
   const inner = (
-    <span className="flex min-w-0 max-w-[min(280px,68vw)] items-center sm:max-w-[300px] md:max-w-[340px]">
+    <span className="hub-logo-slot relative block shrink-0 bg-transparent">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
-        srcSet={`${src} 480w, ${src2x} 960w`}
-        sizes="(max-width: 640px) 180px, (max-width: 768px) 220px, 260px"
-        alt="Insurance Trust Hub"
-        width={480}
-        height={151}
-        className="h-10 w-auto max-h-11 object-contain object-left sm:h-11 md:h-12"
+        srcSet={`${src} 1x, ${src2x} 2x`}
+        alt={BRAND.name}
+        width={720}
+        height={209}
+        className="h-full w-full object-contain object-left bg-transparent"
         loading={load}
         decoding="async"
         {...(priority ? { fetchPriority: 'high' as const } : {})}
@@ -40,28 +40,24 @@ export function BrandLogo({
   return (
     <Link
       href={href}
-      className="group flex shrink-0 items-center rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-trust focus-visible:ring-offset-2"
-      aria-label="Insurance Trust Hub — home"
+      className="group flex shrink-0 items-center rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0284C7] focus-visible:ring-offset-2"
+      aria-label={`${BRAND.name} — home`}
     >
       {inner}
     </Link>
   );
 }
 
-/** Footer / compact logo (same horizontal lockup, smaller footprint). */
+/** Footer logo on navy — lightened wordmark variant (no CSS invert) */
 export function BrandLogoStacked({ className = '' }: { className?: string }) {
-  const src = brandAsset(BRAND_LOGO.fullSm);
-  const srcLg = brandAsset(BRAND_LOGO.full);
-
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
-      srcSet={`${src} 600w, ${srcLg} 1200w`}
-      sizes="(max-width: 640px) 140px, 180px"
-      alt="Insurance Trust Hub"
-      width={600}
-      height={150}
-      className={`h-auto w-[140px] object-contain object-left py-1 sm:w-[180px] ${className}`}
+      src={brandAsset(BRAND_LOGO.footer)}
+      alt={BRAND.name}
+      width={720}
+      height={209}
+      className={`h-12 w-auto max-w-[200px] object-contain object-left bg-transparent ${className}`}
       loading="lazy"
       decoding="async"
     />

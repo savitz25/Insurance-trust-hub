@@ -51,10 +51,10 @@ export const DIRECTORY_NAV: PrimaryNavLink[] = [
   },
 ];
 
-/** Green CTA — independent directory tone (no lead-gen / free quotes). */
+/** Shield Blue CTA — independent directory tone (no lead-gen / free quotes). */
 export const NAV_CTA = {
   href: '/directory',
-  label: 'Compare agencies',
+  label: 'Compare coverage',
 } as const;
 
 export function navLinkActive(href: string, pathname: string | null | undefined): boolean {

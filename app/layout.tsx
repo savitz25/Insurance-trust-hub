@@ -20,7 +20,10 @@ const inter = Inter({
 export const metadata: Metadata = rootLayoutMetadata;
 
 export const viewport: Viewport = {
-  themeColor: '#0A2540',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#0284C7' },
+    { media: '(prefers-color-scheme: dark)', color: '#0A2540' },
+  ],
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -34,7 +37,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} font-sans antialiased pt-[env(safe-area-inset-top)]`}
+        className={`${inter.variable} font-sans antialiased pt-[env(safe-area-inset-top)] bg-[#F8FAFC] text-[#1E293B]`}
+        data-hub="insurance"
         data-network-standard={ASK_NETWORK_STANDARD_VERSION}
       >
         {/* network-standard: {ASK_NETWORK_STANDARD_VERSION} */}

@@ -1,117 +1,165 @@
 @import "tailwindcss";
 
-/* Insurance Trust Hub theme — deep navy primary, trust green, clean minimalist */
+/**
+ * Insurance Trust Hub — Design System (Phase 1)
+ * Shield Blue · Deep Sapphire · Ice Blue · Deep Navy
+ * Tokens: lib/design/insurance-design-system.ts
+ */
+
+:root,
+[data-hub='insurance'] {
+  --ith-shield: #0284c7;
+  --ith-sapphire: #1e3a8a;
+  --ith-sapphire-deep: #172554;
+  --ith-ice: #e0f2fe;
+  --ith-navy: #0a2540;
+  --ith-ink: #1e293b;
+  --ith-canvas: #f8fafc;
+  --ith-white: #ffffff;
+  --ith-border: #e2e8f0;
+
+  --primary: #0284c7;
+  --accent: #1e3a8a;
+  --trust: #0284c7;
+  --background: #f8fafc;
+  --foreground: #1e293b;
+  --radius: 0.75rem;
+}
+
+/* Keep HSL shadcn-compatible vars mapped toward Phase 1 tokens */
 @theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-trust: hsl(var(--trust));
-
-  --shadow-trust: 0 1px 2px 0 rgb(0 0 0 / 0.04), 0 1px 3px -1px rgb(0 0 0 / 0.06);
-  --shadow-trust-lg: 0 8px 16px -4px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.05);
-
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--ith-shield);
+  --color-trust: var(--ith-shield);
+  --color-ink: var(--ith-ink);
+  --color-canvas: var(--ith-canvas);
+  --color-border: var(--ith-border);
+  --font-sans: var(--font-sans);
+  --shadow-trust: 0 1px 2px rgb(10 37 64 / 0.04), 0 4px 16px rgb(10 37 64 / 0.05);
+  --shadow-trust-lg: 0 1px 2px rgb(10 37 64 / 0.05), 0 8px 24px rgb(10 37 64 / 0.07);
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
 }
 
-@layer base {
-  :root {
-    /* Brand: primary #0A2540, background #FFFFFF / #F8FAFC, trust green #059669 */
-    --background: 0 0% 100%;
-    --foreground: 209 73% 15%;
-    --card: 0 0% 100%;
-    --card-foreground: 209 73% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 209 73% 15%;
-    --primary: 209 73% 15%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 40% 98%;
-    --secondary-foreground: 209 73% 15%;
-    --muted: 210 40% 98%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 160 94% 30%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 209 73% 15%;
-    --trust: 160 94% 30%;
-    --radius: 0.5rem;
-    --star: 45 93% 47%;
-  }
+html {
+  color-scheme: light;
 }
 
-@layer base {
-  * {
-    border-color: hsl(var(--border));
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+  font-feature-settings: "rlig" 1, "kern" 1;
+}
+
+.container {
+  @apply mx-auto max-w-7xl;
+}
+
+/* Header logo slot — network-consistent sizing */
+.hub-logo-slot {
+  display: block;
+  width: 10rem;
+  height: 3rem;
+  max-width: 10rem;
+  flex-shrink: 0;
+  background: transparent;
+}
+.hub-logo-slot img {
+  background: transparent !important;
+}
+@media (min-width: 640px) {
+  .hub-logo-slot {
+    width: 12.5rem;
+    max-width: 12.5rem;
   }
-  body {
-    @apply bg-background text-foreground antialiased font-sans;
-    font-feature-settings: "rlig" 1, "kern" 1;
+}
+@media (min-width: 1024px) {
+  .hub-logo-slot {
+    width: 15rem;
+    max-width: 15rem;
   }
 }
 
-@layer components {
-  .trust-badge {
-    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium border;
-  }
-  .trust-badge-verified {
-    @apply bg-emerald-50 text-emerald-700 border-emerald-200;
-  }
-  .star {
-    @apply text-amber-500;
-  }
-
-  .provider-card {
-    @apply bg-card border border-border/70 rounded-xl shadow-trust transition-all duration-150 hover:shadow-trust-lg hover:border-border;
-  }
-
-  .section-heading {
-    @apply text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-foreground;
-  }
-
-  .stat-card {
-    @apply bg-card border border-border/60 rounded-xl p-6 text-center;
-  }
-
-  .filter-chip {
-    @apply inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors hover:bg-muted cursor-pointer;
-  }
-  .filter-chip-active {
-    @apply bg-primary text-primary-foreground border-primary hover:bg-primary/90;
-  }
-
-  .trust-proof {
-    @apply bg-muted/40 border-y;
-  }
+/* Primary CTA — Shield Blue */
+.ith-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 6px 20px -6px rgb(2 132 199 / 0.35);
+  transition: background-color 0.15s ease;
+}
+.ith-cta:hover {
+  background-color: #1e3a8a !important;
+  color: #ffffff !important;
 }
 
-@layer utilities {
-  .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-  }
+.ith-link {
+  color: var(--ith-shield);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ith-link:hover {
+  color: var(--ith-sapphire);
+}
+
+.trust-badge {
+  @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold;
+  border-color: #bae6fd;
+  background-color: #e0f2fe;
+  color: #0a2540;
+}
+
+.trust-badge-verified {
+  border-color: #7dd3fc;
+  background-color: #e0f2fe;
+  color: #0c4a6e;
+}
+
+.provider-card {
+  @apply rounded-xl border bg-white transition-all duration-150;
+  border-color: var(--ith-border);
+  box-shadow: var(--shadow-trust);
+}
+.provider-card:hover {
+  box-shadow: var(--shadow-trust-lg);
+}
+
+.section-heading {
+  @apply text-3xl font-semibold tracking-[-0.025em] md:text-4xl;
+  color: var(--ith-ink);
+}
+
+.stat-card {
+  @apply rounded-xl border bg-white p-6 text-center;
+  border-color: var(--ith-border);
+}
+
+.filter-chip {
+  @apply inline-flex cursor-pointer items-center rounded-full border px-3 py-1 text-sm transition-colors;
+  border-color: var(--ith-border);
+  color: var(--ith-ink);
+}
+.filter-chip:hover {
+  background-color: var(--ith-ice);
+}
+.filter-chip-active {
+  background-color: var(--ith-shield);
+  border-color: var(--ith-shield);
+  color: #ffffff;
 }
 
 .skeleton {
-  @apply animate-pulse bg-muted rounded;
+  @apply animate-pulse rounded;
+  background-color: #e2e8f0;
 }
 
 @media (hover: none) and (pointer: coarse) {
