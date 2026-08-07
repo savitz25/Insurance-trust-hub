@@ -85,6 +85,175 @@ export const INSURANCE_HERO = {
   searchHint: 'Enter a ZIP and optional coverage types to start local research.',
 } as const;
 
+/** Phase 3 — homepage sections below the hero */
+export const INSURANCE_TOOLS = {
+  eyebrow: 'Key tools',
+  title: 'What you can do here',
+  support:
+    'Practical research tools for coverage decisions — not a quote marketplace. Start where you need clarity.',
+  items: [
+    {
+      id: 'compare',
+      title: 'Compare coverage',
+      description:
+        'Browse licensed agencies and public signals side-by-side — not paid rankings or sponsored slots.',
+      href: '/directory',
+      cta: 'Open directory',
+    },
+    {
+      id: 'verify',
+      title: 'Verify DOI / license',
+      description:
+        'Use license research tools and public DOI pathways so you can re-check Active status yourself.',
+      href: '/tools/license-verification',
+      cta: 'Verify a license',
+    },
+    {
+      id: 'guides',
+      title: 'Coverage guides',
+      description:
+        'Calm, educational articles that explain what matters before you enroll or switch coverage.',
+      href: '/resources',
+      cta: 'Explore guides',
+    },
+    {
+      id: 'tools',
+      title: 'Tools & calculators',
+      description:
+        'Educational planners for costs, ACA, Medicare, and related coverage questions.',
+      href: '/calculators',
+      cta: 'Open tools',
+    },
+  ],
+} as const;
+
+export const INSURANCE_HOW_IT_WORKS = {
+  eyebrow: 'How it works',
+  title: 'Independent research, step by step',
+  support:
+    'A calm path from public records to your decision — with no pressure and no paid placements.',
+  steps: [
+    {
+      step: '01',
+      title: 'Start with verified public sources',
+      description:
+        'Begin with directory listings and DOI / license context drawn from public research signals we surface.',
+    },
+    {
+      step: '02',
+      title: 'Compare coverage options',
+      description:
+        'Review agencies and educational tools side-by-side — never sponsored order or lead-fee ranking.',
+    },
+    {
+      step: '03',
+      title: 'Use guides to understand what matters',
+      description:
+        'Read clear coverage guidance so you know which questions to ask before you act.',
+    },
+    {
+      step: '04',
+      title: 'You decide',
+      description:
+        'Re-check licenses on official DOI pathways, compare offers yourself, and protect with confidence. We cite. You decide.',
+    },
+  ],
+} as const;
+
+export const INSURANCE_TRUST = {
+  eyebrow: 'Trust & methodology',
+  title: 'Built for confidence — not conversion',
+  support:
+    'Insurance Trust Hub is independent research only. We surface verified public sources so you can decide with clearer context.',
+  pillars: [
+    {
+      title: 'Independent research only',
+      body: 'We do not sell policies, operate a quote marketplace, or sell ranking position.',
+    },
+    {
+      title: 'Verified public sources',
+      body: 'DOI / license context and other public signals are cited so you can re-check primary records yourself.',
+    },
+    {
+      title: 'No paid placements or lead fees',
+      body: 'Directory order and research aids are not sold. We do not collect lead fees for introductions.',
+    },
+    {
+      title: 'Clear separation of roles',
+      body: 'Research tools stay on this hub. Any relationship with an external provider is yours to evaluate — not ours to sell.',
+    },
+  ],
+  primaryCta: { label: 'Read our methodology', href: '/methodology' },
+  secondaryCta: {
+    label: 'Independence Policy',
+    href: 'https://www.asktrusthub.com/promise',
+    external: true,
+  },
+  tertiaryCta: { label: 'About & Trust', href: '/about' },
+  philosophy: 'We cite. You decide.',
+  tagline: 'Cover what counts. Choose well.',
+} as const;
+
+export const INSURANCE_PATHWAYS = {
+  eyebrow: 'Popular pathways',
+  title: 'Where people start',
+  support:
+    'Jump into common coverage types, markets, protection goals, or the tools you are most likely to need next.',
+  coverageTypes: [
+    { label: 'Health', href: '/directory?type=health' },
+    { label: 'Medicare', href: '/directory?type=medicare' },
+    { label: 'Auto', href: '/directory?type=auto' },
+    { label: 'Homeowners', href: '/directory?type=homeowners' },
+    { label: 'Life', href: '/directory?type=life' },
+    { label: 'Renters', href: '/directory?type=renters' },
+  ],
+  markets: [
+    { label: 'Florida', href: '/destinations/florida' },
+    { label: 'Texas', href: '/destinations/texas' },
+    { label: 'California', href: '/destinations/california' },
+    { label: 'All hubs', href: '/hubs' },
+    { label: 'State browser', href: '/hubs/browse' },
+  ],
+  goals: [
+    {
+      label: 'Protect my family',
+      href: '/resources',
+      detail: 'Guides for personal coverage decisions',
+    },
+    {
+      label: 'Verify an agency',
+      href: '/tools/license-verification',
+      detail: 'DOI / license research tools',
+    },
+    {
+      label: 'Compare options',
+      href: '/directory',
+      detail: 'Licensed directory research',
+    },
+    {
+      label: 'Estimate costs',
+      href: '/calculators',
+      detail: 'Educational planners and tools',
+    },
+  ],
+  tools: [
+    { label: 'Agency directory', href: '/directory' },
+    { label: 'License verification', href: '/tools/license-verification' },
+    { label: 'Calculators', href: '/calculators' },
+    { label: 'My Insurance', href: '/my-insurance' },
+    { label: 'Methodology', href: '/methodology' },
+  ],
+} as const;
+
+export const INSURANCE_NETWORK_SECTION = {
+  eyebrow: 'Ask Trust Hub network',
+  title: 'Protection & Coverage within a wider research network',
+  support:
+    'Insurance Trust Hub is the specialist protection layer. Ask is the parent knowledge layer; Move and Lender cover their own verified domains under the same independence standard.',
+  philosophy: 'We cite. You decide.',
+  tagline: 'Cover what counts. Choose well.',
+} as const;
+
 /**
  * Primary header nav (insurance research IA).
  * Switch Hub is a separate control.
