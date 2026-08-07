@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { brandAsset, BRAND_LOGO } from '@/lib/brand';
+import { brandAsset, BRAND_ICONS, BRAND_LOGO } from '@/lib/brand';
 
 export { SITE_URL };
 
@@ -124,14 +124,17 @@ export const rootLayoutMetadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: brandAsset(BRAND_LOGO.favicon16), sizes: '16x16', type: 'image/png' },
-      { url: brandAsset(BRAND_LOGO.favicon32), sizes: '32x32', type: 'image/png' },
-      { url: brandAsset(BRAND_LOGO.icon192), sizes: '192x192', type: 'image/png' },
-      { url: brandAsset(BRAND_LOGO.icon512), sizes: '512x512', type: 'image/png' },
+      { url: BRAND_ICONS.faviconIco, sizes: 'any' },
+      { url: BRAND_ICONS.favicon16, sizes: '16x16', type: 'image/png' },
+      { url: BRAND_ICONS.favicon32, sizes: '32x32', type: 'image/png' },
+      { url: BRAND_ICONS.favicon48, sizes: '48x48', type: 'image/png' },
+      { url: BRAND_ICONS.android192, sizes: '192x192', type: 'image/png' },
+      { url: BRAND_ICONS.android512, sizes: '512x512', type: 'image/png' },
     ],
-    apple: [{ url: brandAsset(BRAND_LOGO.icon192), sizes: '192x192', type: 'image/png' }],
+    apple: [{ url: BRAND_ICONS.apple, sizes: '180x180', type: 'image/png' }],
+    shortcut: [BRAND_ICONS.favicon32],
   },
-  manifest: '/site.webmanifest',
+  manifest: BRAND_ICONS.manifest,
   openGraph: buildOpenGraph(),
   twitter: buildTwitter(),
   robots: {

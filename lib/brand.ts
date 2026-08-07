@@ -3,7 +3,7 @@
 import { INSURANCE_BRAND, INSURANCE_TAGLINE } from '@/lib/design/insurance-design-system';
 
 /** Bump when logo / favicon assets change (cache bust). */
-export const BRAND_ASSET_VERSION = '20260807ith-p1';
+export const BRAND_ASSET_VERSION = '20260807ith-fav-t';
 export const INSURANCE_LOGO_VERSION = BRAND_ASSET_VERSION;
 
 export function brandAsset(path: string): string {
@@ -35,4 +35,16 @@ export const BRAND_LOGO = {
   icon512: '/brand/insurance-trust-hub-icon.png',
   favicon32: '/brand/insurance-trust-hub-favicon-32.png',
   favicon16: '/brand/insurance-trust-hub-favicon-16.png',
+} as const;
+
+/** Public-root favicon / PWA paths (transparent mark set). */
+export const BRAND_ICONS = {
+  faviconIco: `/favicon.ico?v=${BRAND_ASSET_VERSION}`,
+  favicon16: `/favicon-16x16.png?v=${BRAND_ASSET_VERSION}`,
+  favicon32: `/favicon-32x32.png?v=${BRAND_ASSET_VERSION}`,
+  favicon48: `/favicon-48x48.png?v=${BRAND_ASSET_VERSION}`,
+  apple: `/apple-touch-icon.png?v=${BRAND_ASSET_VERSION}`,
+  android192: `/android-chrome-192x192.png?v=${BRAND_ASSET_VERSION}`,
+  android512: `/android-chrome-512x512.png?v=${BRAND_ASSET_VERSION}`,
+  manifest: `/site.webmanifest?v=${BRAND_ASSET_VERSION}`,
 } as const;

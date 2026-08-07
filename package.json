@@ -16,6 +16,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "brand:favicons": "node scripts/install-ith-favicon.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"
   },
