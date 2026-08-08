@@ -163,7 +163,7 @@ export function estimatePlanAnnualCost(params: {
       : null;
 
   // Prefer CMS total_costs when it looks usable; else premium annual + OOPC
-  let cmsTotal =
+  const cmsTotal =
     plan.cmsTotalCosts != null &&
     Number.isFinite(plan.cmsTotalCosts) &&
     plan.cmsTotalCosts >= 0
