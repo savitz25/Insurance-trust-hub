@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "source": "https://licenseesearch.fldfs.com/ (public Licensee Detail pages)",
+  "disclaimer": "Official FL DFS public records for operator import only. Confirm still active on source URL before promote. Do not invent numbers.",
+  "candidates": [
+    {
+      "legalName": "WE INSURE, LLC",
+      "slug": "we-insure-llc-sunrise-fl",
+      "city": "Sunrise",
+      "state": "FL",
+      "zip": "33323",
+      "address": "1560 SAWGRASS CORPORATE PARKWAY 4TH FLOOR",
+      "licenseNumber": "L062256",
+      "licenseType": "AGENCY LICENSE (2105)",
+      "source": "FL DFS Licensee Search",
+      "sourceUrl": "https://licenseesearch.fldfs.com/Licensee/1132052",
+      "method": "manual",
+      "identityMatchAccepted": true,
+      "notes": "Public DFS licensee detail crawled 2026-08. Re-open URL and confirm Active before promote.",
+      "status": "ready_for_operator_confirm"
+    },
+    {
+      "legalName": "PRIMERICA FINANCIAL SERVICES, LLC",
+      "slug": "primerica-financial-services-llc-margate-fl",
+      "city": "Margate",
+      "state": "FL",
+      "zip": "33068",
+      "address": "441 S STATE RD 7 STE 11",
+      "phone": "(954) 876-1007",
+      "licenseNumber": "L013236",
+      "licenseType": "AGENCY LICENSE (2105)",
+      "source": "FL DFS Licensee Search",
+      "sourceUrl": "https://licenseesearch.fldfs.com/Licensee/832915",
+      "method": "manual",
+      "identityMatchAccepted": true,
+      "notes": "Public DFS licensee detail. Multi-location firm — this row is Margate business address on DFS. Re-confirm Active before promote.",
+      "status": "ready_for_operator_confirm"
+    }
+  ]
+}

@@ -22,6 +22,7 @@
     "check:phase6a": "node scripts/check-phase6a-integrity.mjs",
     "check:phase6b1": "node scripts/check-phase6b1-promotion.mjs",
     "check:phase6b2": "node scripts/check-phase6b2-enrichment.mjs",
+    "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"
   },
