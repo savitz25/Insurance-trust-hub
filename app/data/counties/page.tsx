@@ -7,13 +7,14 @@ import {
   formatEnrollment,
   getAllCountySummaries,
 } from '@/lib/insurance/cms/county-summaries';
+import { countyPathFromSummary } from '@/lib/insurance/cms/medicare-routes';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { ContextNav } from '@/components/context-nav';
 
 export const metadata: Metadata = buildMetadata({
   title: 'County Medicare Intelligence Dashboards | CMS Market Snapshots',
   description:
-    'County-level Medicare Advantage and Part D market snapshots from CMS enrollment and Star Ratings data. Start with Miami-Dade, Broward, and Palm Beach.',
+    'County-level Medicare Advantage and Part D market snapshots from CMS enrollment and complaint-measure data. Quality-gated markets only — confirm on Medicare.gov.',
   path: '/data/counties',
 });
 
@@ -45,12 +46,17 @@ export default async function CountyMedicareIndexPage({ searchParams }: Props) {
             County Medicare dashboards
           </h1>
           <p className="mt-4 max-w-2xl text-base text-slate-600 md:text-lg">
-            CMS-derived enrollment and complaint-measure context by county. Phase 2 first slice
-            covers South Florida tri-county markets.
+            CMS-derived enrollment and complaint-measure context by county. Quality-gated markets
+            only — not mass thin national sprawl. Prefer the Medicare hub for navigation.
           </p>
           <p className="mt-3 text-sm text-slate-500">
             Enrollment vintage: {COUNTY_SUMMARIES_META.enrollmentSource.split('—')[1]?.trim() ?? 'CMS'} · Last
             synced {synced}
+          </p>
+          <p className="mt-3 text-sm">
+            <Link href="/medicare" className="font-medium text-[#0284C7] hover:underline">
+              Medicare Market Intelligence hub
+            </Link>
           </p>
         </div>
       </div>
@@ -60,7 +66,7 @@ export default async function CountyMedicareIndexPage({ searchParams }: Props) {
           {counties.map((c) => (
             <li key={c.slug}>
               <Link
-                href={`/data/counties/${c.slug}`}
+                href={countyPathFromSummary(c)}
                 className="block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-[#0284C7]/40 hover:shadow-md"
               >
                 <p className="text-xs font-semibold uppercase tracking-wide text-[#0284C7]">

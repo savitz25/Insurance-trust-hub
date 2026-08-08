@@ -11,6 +11,11 @@ import {
   getCountySummary,
   getCountySummarySlugs,
 } from '@/lib/insurance/cms/county-summaries';
+import {
+  countyPathFromSummary,
+  isMedicareCountyIndexable,
+} from '@/lib/insurance/cms/medicare-routes';
+import { MedicareCountyOpenBeacon } from '@/components/insurance/cms/medicare-analytics';
 import { getSouthFloridaCountyAgents } from '@/lib/hubs/county-agents';
 
 type Props = {
@@ -27,10 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const summary = getCountySummary(slug);
   if (!summary) return { title: 'County Medicare Intelligence' };
 
+  const indexable = isMedicareCountyIndexable(summary);
   return buildMetadata({
-    title: `${summary.displayName} Medicare Intelligence (2026) | CMS Enrollment Dashboard`,
-    description: `CMS-derived Medicare Advantage and Part D market snapshot for ${summary.displayName}: published enrollment, material contracts, complaint-measure stars, and verified local agents.`,
+    title: `${summary.displayName} Medicare Intelligence | CMS Enrollment Dashboard`,
+    description: `CMS-derived Medicare Advantage and Part D market snapshot for ${summary.displayName}: published enrollment, material contracts, complaint-measure context. Educational — confirm on Medicare.gov.`,
     path: `/data/counties/${summary.slug}`,
+    noIndex: !indexable,
   });
 }
 
@@ -43,8 +50,11 @@ export default async function CountyMedicareIntelligencePage({ params, searchPar
   const agents = getSouthFloridaCountyAgents(summary.countyName);
   const siblings = getAllCountySummaries().filter((c) => c.slug !== summary.slug);
 
+  const canonical = countyPathFromSummary(summary);
+
   return (
     <>
+      <MedicareCountyOpenBeacon slug={summary.slug} path={`/data/counties/${summary.slug}`} />
       <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
         <div className="container mx-auto max-w-5xl px-4 py-10 md:py-14">
           <ContextNav
@@ -61,11 +71,17 @@ export default async function CountyMedicareIntelligencePage({ params, searchPar
             {summary.displayName} Medicare Intelligence
           </h1>
           <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-slate-600 md:text-lg">
-            CMS-sourced enrollment and complaint-measure context for shoppers, caregivers, and
-            agents researching Medicare Advantage and Part D options in{' '}
-            {summary.displayName}, {summary.stateName}.
+            CMS-sourced enrollment and complaint-measure context for shoppers and caregivers
+            researching Medicare Advantage and Part D options in {summary.displayName},{' '}
+            {summary.stateName}. Research only — confirm on Medicare.gov.
           </p>
           <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-500">
+            <Link href={canonical} className="font-medium text-[#0284C7] hover:underline">
+              Canonical Medicare URL
+            </Link>
+            <Link href="/medicare" className="font-medium text-[#0284C7] hover:underline">
+              Medicare hub
+            </Link>
             <Link href="/data/plan-complaint-index" className="font-medium text-[#0284C7] hover:underline">
               Plan Complaint Index
             </Link>
@@ -73,10 +89,7 @@ export default async function CountyMedicareIntelligencePage({ params, searchPar
               href={`/hubs/${summary.hubStateSlug}/${summary.hubSlug}`}
               className="font-medium text-[#0284C7] hover:underline"
             >
-              Local agent hub
-            </Link>
-            <Link href="/hubs/south-florida" className="font-medium text-[#0284C7] hover:underline">
-              South Florida hub
+              Local agent hub (optional)
             </Link>
           </p>
         </div>

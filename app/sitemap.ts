@@ -13,6 +13,8 @@ import {
   CURATED_ACA_MARKETS,
   marketPath,
 } from '@/lib/marketplace/curated-markets';
+import { allCanonicalMedicareCountyPaths } from '@/lib/insurance/cms/medicare-routes';
+import { listIndexableContractIds } from '@/lib/insurance/cms/contract-intelligence';
 
 /**
  * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
@@ -47,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/medicare-provider-lookup',
     '/tools/aca-plan-explorer',
     '/marketplace',
+    '/medicare',
     '/data/plan-complaint-index',
     '/data/counties',
     '/data/counties/miami-dade-fl',
@@ -152,6 +155,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Plan X-Ray URLs are dynamic by plan id — not mass-emitted (quality over volume).
 
+  // Phase 12: quality-gated Medicare county + contract intelligence URLs only
+  const medicareCounties: MetadataRoute.Sitemap = allCanonicalMedicareCountyPaths().map(
+    (p) => ({
+      url: `${site}/medicare/${p.state}/${p.county}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.88,
+    })
+  );
+
+  const medicareContracts: MetadataRoute.Sitemap = listIndexableContractIds(60).map(
+    (contractId) => ({
+      url: `${site}/medicare/contracts/${contractId}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })
+  );
+
   const all = [
     ...staticRoutes,
     ...specialtyTopics,
@@ -159,6 +181,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...hubStates,
     ...hubPages,
     ...marketplaceCounties,
+    ...medicareCounties,
+    ...medicareContracts,
     ...destinationStates,
     ...destinationCities,
     ...articles,

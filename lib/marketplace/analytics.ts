@@ -28,7 +28,12 @@ export type MarketplaceEventName =
   | 'wallet_magic_link_requested'
   | 'wallet_opened'
   | 'continue_from_wallet_to_explorer'
-  | 'wallet_item_deleted';
+  | 'wallet_item_deleted'
+  | 'medicare_county_opened'
+  | 'medicare_plan_intelligence_opened'
+  | 'medicare_tool_handoff'
+  | 'outbound_medicare_gov_click'
+  | 'medicare_save_intent';
 
 export function trackMarketplaceEvent(
   name: MarketplaceEventName,

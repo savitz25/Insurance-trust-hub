@@ -25,6 +25,11 @@ export type ContextNavModel = {
 const FROM_ALLOWLIST: Array<{ test: (p: string) => boolean; label: string; shortLabel: string }> = [
   { test: (p) => p === '/tools' || p.startsWith('/tools/'), label: 'Back to Tools', shortLabel: 'Tools' },
   {
+    test: (p) => p === '/medicare' || p.startsWith('/medicare/'),
+    label: 'Back to Medicare research',
+    shortLabel: 'Medicare',
+  },
+  {
     test: (p) => p === '/data/counties' || p.startsWith('/data/counties/'),
     label: 'Back to County dashboards',
     shortLabel: 'Counties',

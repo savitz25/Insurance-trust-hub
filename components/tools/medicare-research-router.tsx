@@ -48,10 +48,10 @@ const BASE_STEPS: Record<StepId, ResearchStep> = {
   },
   counties: {
     id: 'counties',
-    href: withReturnContext('/data/counties', FROM),
-    title: 'County Medicare Dashboards',
+    href: withReturnContext('/medicare', FROM),
+    title: 'County Medicare Intelligence',
     description:
-      'Enrollment and quality context by county so you can see what plans are active where you live.',
+      'CMS enrollment and complaint-measure context by curated county — understand the market before anyone sells you a plan.',
     icon: MapPin,
   },
   provider: {

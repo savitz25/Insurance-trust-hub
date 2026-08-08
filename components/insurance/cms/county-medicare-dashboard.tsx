@@ -4,6 +4,7 @@ import {
   Activity,
   ArrowRight,
   Building2,
+  ExternalLink,
   FileText,
   Shield,
   Star,
@@ -16,6 +17,7 @@ import {
   formatComplaintRate,
   formatEnrollment,
 } from '@/lib/insurance/cms/county-summaries';
+import { contractIntelligencePath } from '@/lib/insurance/cms/medicare-routes';
 import { AgentCard } from '@/components/agent-card';
 import { cn } from '@/lib/utils';
 
@@ -71,6 +73,54 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
 
   return (
     <div className="space-y-10">
+      {/* Positioning + official handoff */}
+      <div className="rounded-2xl border border-[#0284C7]/25 bg-[#E0F2FE]/40 px-4 py-4 text-sm text-[#0A2540]">
+        <p className="font-semibold">
+          Understand your Medicare market before anyone sells you a plan
+        </p>
+        <p className="mt-1 text-[#1E293B] leading-relaxed">
+          Independent CMS-backed research — not Medicare enrollment, not an official CMS tool, and
+          not a “best plan in {summary.displayName}” ranking. Plan availability and costs change.
+          Confirm on Medicare.gov. No paid placements. You decide.
+        </p>
+        <p className="mt-2 text-xs text-slate-600">
+          Data vintage: {COUNTY_SUMMARIES_META.enrollmentSource} · Complaint measures:{' '}
+          {COUNTY_SUMMARIES_META.starSource} · Last synced {syncedLabel}
+          {COUNTY_SUMMARIES_META.usingPlaceholderData
+            ? ' · Note: placeholder flag is set on this extract'
+            : ''}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <a
+            href="https://www.medicare.gov/plan-compare/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 rounded-lg bg-[#0284C7] px-3 py-2 text-xs font-semibold text-white hover:bg-[#1E3A8A]"
+          >
+            Confirm on Medicare.gov
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          </a>
+          <Link
+            href="/data/plan-complaint-index"
+            className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 hover:border-[#0284C7]/40"
+          >
+            Plan Complaint Index
+          </Link>
+          <Link
+            href="/tools/medicare-provider-lookup"
+            className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 hover:border-[#0284C7]/40"
+          >
+            Provider lookup (FFS / Opt Out)
+          </Link>
+          <Link
+            href="/tools/medicare-plan-finder"
+            className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 hover:border-[#0284C7]/40"
+          >
+            Medicare research guide
+          </Link>
+        </div>
+      </div>
+
       {/* Snapshot */}
       <section aria-labelledby="market-snapshot-heading">
         <h2 id="market-snapshot-heading" className="text-xl font-semibold text-slate-900">
@@ -80,6 +130,8 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
           Enrollment period <strong className="font-medium text-slate-800">{summary.enrollmentPeriod}</strong>
           {' · '}
           FIPS {summary.fips}
+          {' · '}
+          Distinct from ACA Marketplace research (separate programs)
         </p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <MetricCard
@@ -198,8 +250,13 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
                   {summary.topContractsByEnrollment.map((c) => (
                     <tr key={c.contractId}>
                       <td className="px-4 py-2.5">
-                        <p className="font-medium text-slate-900">{c.carrierName}</p>
-                        <p className="text-xs text-slate-500">{c.contractId}</p>
+                        <Link
+                          href={contractIntelligencePath(c.contractId)}
+                          className="font-medium text-[#0284C7] hover:underline"
+                        >
+                          {c.carrierName}
+                        </Link>
+                        <p className="text-xs text-slate-500 font-mono">{c.contractId}</p>
                       </td>
                       <td className="px-4 py-2.5 text-xs uppercase text-slate-600">
                         {c.bucket ?? '—'}
@@ -237,7 +294,13 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
                   <li key={c.contractId} className="flex items-center justify-between gap-3 px-5 py-3">
                     <div>
                       <p className="text-sm font-medium text-slate-900">
-                        #{i + 1} {c.carrierName}
+                        #{i + 1}{' '}
+                        <Link
+                          href={contractIntelligencePath(c.contractId)}
+                          className="text-[#0284C7] hover:underline"
+                        >
+                          {c.carrierName}
+                        </Link>
                       </p>
                       <p className="text-xs text-slate-500">
                         {c.contractId} · {formatEnrollment(c.publishedEnrollment)} published enrollees
@@ -255,20 +318,19 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
         </div>
       </section>
 
-      {/* Agents */}
-      <section aria-labelledby="agents-heading">
+      {/* Optional human help — secondary to research; not a lead funnel primary CTA */}
+      <section aria-labelledby="agents-heading" className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 p-5">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 id="agents-heading" className="text-xl font-semibold text-slate-900">
-              Local verified agents
+            <h2 id="agents-heading" className="text-lg font-semibold text-slate-900">
+              Optional: licensed help (secondary)
             </h2>
             <p className="mt-1 text-sm text-slate-600">
-              {agents.length} InsuranceTrustHub listing
-              {agents.length === 1 ? '' : 's'} from the South Florida / county hub data
-              {medicareAgents.length
-                ? ` · ${medicareAgents.length} Medicare-focused`
+              Research first with CMS context and Medicare.gov. Directory listings are separate —
+              we do not sell your research as leads from this page.
+              {agents.length
+                ? ` ${agents.length} local listing${agents.length === 1 ? '' : 's'} available if you want human help.`
                 : ''}
-              .
             </p>
           </div>
           <div className="flex flex-wrap gap-3 text-sm font-medium">
@@ -278,16 +340,13 @@ export function CountyMedicareDashboard({ summary, agents }: Props) {
             >
               County agent hub
             </Link>
-            <Link href="/directory?state=FL" className="text-[#0284C7] hover:underline">
-              Full Florida directory
-            </Link>
           </div>
         </div>
         {featuredAgents.length === 0 ? (
           <p className="mt-4 text-sm text-slate-500">No curated agents linked for this county yet.</p>
         ) : (
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredAgents.map((agent) => (
+            {featuredAgents.slice(0, 3).map((agent) => (
               <AgentCard key={agent.id} agent={agent} />
             ))}
           </div>
