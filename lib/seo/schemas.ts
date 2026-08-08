@@ -59,12 +59,14 @@ export const homepageServiceSchema = {
 };
 
 export function buildInsuranceAgencySchema(provider: Provider) {
-  // Phase 6A: no AggregateRating / telephone from seed inventory
+  // Phase 6A/6B2: no AggregateRating from seed or third-party Google snapshots
   const isSeed =
     provider.id.startsWith('fallback-') ||
     provider.id.startsWith('seed-') ||
     !provider.license_number ||
     !/\d/.test(provider.license_number);
+  // Never emit AggregateRating from Google Places snapshots (Phase 6B2)
+  const hasFirstPartyReviews = false;
 
   return {
     '@type': 'InsuranceAgency',
@@ -81,7 +83,7 @@ export function buildInsuranceAgencySchema(provider: Provider) {
       addressCountry: 'US',
     },
     aggregateRating:
-      !isSeed && provider.review_count > 0
+      !isSeed && hasFirstPartyReviews && provider.review_count > 0
       ? {
           '@type': 'AggregateRating',
           ratingValue: provider.rating,

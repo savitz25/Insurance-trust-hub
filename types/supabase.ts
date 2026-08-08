@@ -48,6 +48,8 @@ export interface ContactInfo {
   email?: string;
   website?: string;
   address?: ContactAddress;
+  /** Phase 6B2 — Google/BBB snapshots nested under contact jsonb */
+  enrichment?: import('@/lib/enrichment/types').ProviderEnrichment;
 }
 
 export type Database = {

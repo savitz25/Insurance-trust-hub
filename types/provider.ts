@@ -1,4 +1,5 @@
 import type { InsuranceType, Specialty } from '@/lib/constants';
+import type { ProviderEnrichment } from '@/lib/enrichment/types';
 
 export interface Provider {
   id: string;
@@ -35,6 +36,8 @@ export interface Provider {
   avg_response_hours?: number;
   bbb_rating?: string;
   carriers?: string[];
+  /** Phase 6B2 secondary snapshots (Google/BBB) — never license authority */
+  enrichment?: ProviderEnrichment | null;
   created_at?: string;
   updated_at?: string;
 }

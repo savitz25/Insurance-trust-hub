@@ -71,7 +71,8 @@ export function toPublicProviderView(provider: Provider): PublicProviderView {
 
   const seed = listingClass === 'seed';
   const phone = seed ? null : publicDisplayPhone(provider.phone);
-  const showReviews = !seed && provider.review_count > 0 && provider.rating > 0;
+  // First-party ITH reviews only — Google snapshots render via ProviderSecondarySignals
+  const showReviews = false;
   const yearsInBusiness = seed ? null : provider.years_in_business ?? null;
   const showCarriers = !seed && (provider.carriers?.length ?? 0) > 0;
   const hasMinInputs = Boolean(cleanLicenseNumber(provider.license_number));

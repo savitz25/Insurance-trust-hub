@@ -40,7 +40,9 @@ import {
   allowContactForm,
   toPublicProviderView,
 } from '@/lib/provenance/public-listing';
+import { toPublicSecondarySignals } from '@/lib/enrichment/pipeline';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
+import { ProviderSecondarySignals } from '@/components/provider-secondary-signals';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -90,6 +92,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   if (!provider) notFound();
 
   const publicView = toPublicProviderView(provider);
+  const secondarySignals = toPublicSecondarySignals(provider);
   const showContact = allowContactForm(publicView.listingClass);
   const reviews = await getReviewsForProvider(slug);
   const breakdown = getRatingBreakdown(reviews);
@@ -216,6 +219,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
             )}
 
             <GovernmentVerificationPanel data={governmentVerification} />
+
+            {secondarySignals ? (
+              <ProviderSecondarySignals signals={secondarySignals} />
+            ) : null}
 
             <section>
               <h2 className="text-xl font-semibold mb-4">License information</h2>
@@ -440,11 +447,15 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     .
                   </p>
                 )}
-                {publicView.listingClass !== 'seed' && provider.bbb_rating && (
+                {secondarySignals?.bbb?.rating ? (
                   <p>
-                    <span className="font-medium">BBB Rating:</span> {provider.bbb_rating}
+                    <span className="font-medium">BBB snapshot:</span>{' '}
+                    {secondarySignals.bbb.rating}
+                    {secondarySignals.bbb.checkedAtLabel
+                      ? ` · as of ${secondarySignals.bbb.checkedAtLabel}`
+                      : ''}
                   </p>
-                )}
+                ) : null}
                 {trustBreakdown.published ? (
                   <p className="text-[11px] text-muted-foreground">
                     Government Standing sub-score: {trustBreakdown.governmentStanding}/100.{' '}

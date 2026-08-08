@@ -9,6 +9,7 @@ import {
   Users,
   LogOut,
   BadgeCheck,
+  Sparkles,
 } from 'lucide-react';
 import { BrandLogo } from '@/components/BrandLogo';
 import { Button } from '@/components/ui/button';
@@ -18,6 +19,7 @@ const LINKS = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/providers', label: 'Providers', icon: Building2 },
   { href: '/admin/license-backfill', label: 'License backfill', icon: BadgeCheck },
+  { href: '/admin/enrichment', label: 'Google/BBB', icon: Sparkles },
   { href: '/admin/reviews', label: 'Reviews', icon: MessageSquare },
   { href: '/admin/leads', label: 'Leads', icon: Users },
 ] as const;

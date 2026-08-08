@@ -79,6 +79,55 @@ export async function validateAdminLogin(password: string): Promise<boolean> {
   return Boolean(secret && parsed.data.password === secret);
 }
 
+export async function runSecondaryEnrichmentAction(input: {
+  providerId: string;
+  runGoogle?: boolean;
+  bbbUrl?: string;
+  bbbRating?: string;
+  bbbAccredited?: boolean;
+  bbbIdentityMatchAccepted?: boolean;
+  operatorNotes?: string;
+}): Promise<AdminActionResult & { message?: string }> {
+  try {
+    const { runSecondaryEnrichment } = await import('@/lib/enrichment/pipeline');
+    const result = await runSecondaryEnrichment({
+      providerId: input.providerId,
+      runGoogle: input.runGoogle,
+      bbb:
+        input.bbbUrl && input.bbbIdentityMatchAccepted
+          ? {
+              profileUrl: input.bbbUrl,
+              rating: input.bbbRating,
+              accredited: input.bbbAccredited,
+              identityMatchAccepted: true,
+              notes: input.operatorNotes,
+            }
+          : input.bbbUrl
+            ? {
+                profileUrl: input.bbbUrl,
+                rating: input.bbbRating,
+                accredited: input.bbbAccredited,
+                identityMatchAccepted: false,
+                notes: input.operatorNotes,
+              }
+            : null,
+      operatorNotes: input.operatorNotes,
+    });
+    if (!result.eligible && result.google === 'skipped' && result.bbb === 'skipped') {
+      return { success: false, error: result.reasons.join(' · ') };
+    }
+    return {
+      success: true,
+      message: `Google: ${result.google}; BBB: ${result.bbb}\n${result.reasons.join('\n')}`,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Enrichment failed',
+    };
+  }
+}
+
 export async function applyLicenseBackfillAction(input: {
   providerId: string;
   licenseNumber: string;

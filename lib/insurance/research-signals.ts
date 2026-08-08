@@ -75,6 +75,9 @@ type SignalInput = {
   hasNpi?: boolean;
   /** When true, reputation inputs are seed/synthetic and must not score */
   reputationIsSeed?: boolean;
+  /** Phase 6B2: only count Google/BBB when provenance enrichment present */
+  secondaryGoogleProvenance?: boolean;
+  secondaryBbbProvenance?: boolean;
 };
 
 function fromHubAgent(agent: HubAgent): SignalInput {
@@ -97,19 +100,25 @@ function fromHubAgent(agent: HubAgent): SignalInput {
 
 function fromProvider(p: Provider): SignalInput {
   const seed = p.id.startsWith('fallback-') || p.id.startsWith('seed-');
+  const g = p.enrichment?.google;
+  const b = p.enrichment?.bbb;
+  const googleOk = Boolean(g && g.matchConfidence === 'high');
+  const bbbOk = Boolean(b && (b.matchConfidence === 'high' || b.matchConfidence === 'medium'));
   return {
     licenseNumber: p.license_number,
     state: p.state,
     isVerified: seed ? false : p.is_verified,
     yearsInBusiness: seed ? null : p.years_in_business,
-    rating: seed ? null : p.rating,
-    reviewCount: seed ? null : p.review_count,
-    bbbRating: seed ? null : p.bbb_rating,
+    rating: googleOk ? g!.rating ?? null : null,
+    reviewCount: googleOk ? g!.reviewCount ?? null : null,
+    bbbRating: bbbOk ? b!.rating ?? null : null,
     city: p.city,
     phone: p.phone,
     website: p.website,
     hasNpi: Boolean(p.npi),
     reputationIsSeed: seed,
+    secondaryGoogleProvenance: googleOk,
+    secondaryBbbProvenance: bbbOk,
   };
 }
 
@@ -146,44 +155,45 @@ export function computeResearchScore(input: SignalInput): {
   const factors: ResearchFactor[] = [];
   let total = 0;
 
-  // Reputation only when not seed
+  // Phase 6B2: third-party reputation only when provenance-labeled enrichment exists
+  // Cap weight so Google/BBB never dominate or substitute for license
   let repPts = 0;
-  if (!input.reputationIsSeed) {
+  if (!input.reputationIsSeed && input.secondaryGoogleProvenance) {
     const gRating = input.rating ?? null;
     const gCount = input.reviewCount ?? 0;
     if (gRating != null && gRating > 0 && gCount > 0) {
-      const quality = Math.max(0, Math.min(12, (gRating - 3.2) * 8));
+      const quality = Math.max(0, Math.min(6, (gRating - 3.2) * 4));
       const volume =
-        gCount >= 200 ? 12 : gCount >= 80 ? 9 : gCount >= 25 ? 6 : gCount >= 5 ? 3 : 1;
-      repPts = clamp(quality + volume * 0.5, 0, 28);
+        gCount >= 200 ? 6 : gCount >= 80 ? 4 : gCount >= 25 ? 3 : gCount >= 5 ? 2 : 1;
+      repPts = clamp(quality + volume * 0.5, 0, 12);
     }
   }
   factors.push({
     id: 'reputation',
-    label: 'Consumer reputation (third-party)',
+    label: 'Google snapshot (secondary)',
     points: repPts,
-    maxPoints: 28,
+    maxPoints: 12,
     detail:
       repPts > 0
-        ? `Attributed snapshot · ${input.rating?.toFixed(1)} · ${input.reviewCount} reviews`
-        : 'No independently verified review volume on file',
+        ? `Google Places snapshot · ${input.rating?.toFixed(1)} · ${input.reviewCount} reviews`
+        : 'No high-confidence Google snapshot on file',
   });
   total += repPts;
 
   let bbbPts = 0;
   const bbb = (input.bbbRating ?? '').trim();
-  if (!input.reputationIsSeed) {
-    if (bbb === 'A+') bbbPts = 8;
-    else if (bbb === 'A') bbbPts = 6;
-    else if (bbb === 'A-') bbbPts = 4;
+  if (!input.reputationIsSeed && input.secondaryBbbProvenance) {
+    if (bbb === 'A+') bbbPts = 6;
+    else if (bbb === 'A') bbbPts = 4;
+    else if (bbb === 'A-') bbbPts = 3;
     else if (bbb.startsWith('B')) bbbPts = 2;
   }
   factors.push({
     id: 'bbb',
-    label: 'BBB standing (third-party)',
+    label: 'BBB snapshot (secondary)',
     points: bbbPts,
-    maxPoints: 12,
-    detail: bbbPts > 0 ? `Grade ${bbb}` : 'BBB not independently confirmed',
+    maxPoints: 6,
+    detail: bbbPts > 0 ? `BBB grade ${bbb} (not a license)` : 'No BBB snapshot on file',
   });
   total += bbbPts;
 
