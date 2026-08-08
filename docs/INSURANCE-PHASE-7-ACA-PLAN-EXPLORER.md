@@ -60,8 +60,8 @@ Keys expire ~60 days — empty/error states stay honest when missing or rotated.
 
 Visible research-only framing on page + results. No lead form on the tool.
 
-## Later phases (not this ship)
+## Later phases
 
-- Doctor / drug checkers on plan detail  
-- Full OOP utilization total-cost engine  
-- Statewide marketplace landscape PUF aggregates  
+- **Phase 8 shipped:** Doctor / drug checkers — `INSURANCE-PHASE-8-DOCTOR-RX-COVERAGE.md`  
+- **Phase 9 shipped:** Total annual cost engine (CMS OOPC scenarios) — `INSURANCE-PHASE-9-TOTAL-ANNUAL-COST.md`  
+- Plan X-Ray + county ACA intelligence  

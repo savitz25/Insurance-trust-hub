@@ -23,6 +23,8 @@ type Props = {
   className?: string;
   /** Compact variant for dense results panels */
   size?: 'default' | 'sm';
+  /** Optional research-tool analytics after a successful save */
+  onSaved?: () => void;
 };
 
 /**
@@ -34,6 +36,7 @@ export function SaveCalculatorButton({
   snapshot,
   className,
   size = 'default',
+  onSaved,
 }: Props) {
   const mi = useMyInsuranceOptional();
   const [saving, setSaving] = useState(false);
@@ -77,6 +80,7 @@ export function SaveCalculatorButton({
       }
 
       setSaved(true);
+      onSaved?.();
       toast.success('Saved to My Insurance', {
         description: 'On your coverage plan · this device',
         action: {

@@ -131,16 +131,22 @@ public/brand/         # Logo assets
 3. Set `verified: true` only after confirming license status with state DOI records
 4. Update `license_info` JSON with official verification URLs
 
-## Email Notifications (Optional)
+## Email
 
-To notify on new leads, add [Resend](https://resend.com):
+| Direction | System |
+|-----------|--------|
+| **Inbound** `@insurancetrusthub.com` | [ImprovMX](https://improvmx.com) → `info@movetrusthub.com` |
+| **Outbound** (forms, My Insurance) | [Resend](https://resend.com) |
 
 ```
 RESEND_API_KEY=re_xxxxxxxx
-LEAD_NOTIFICATION_EMAIL=hello@insurancetrusthub.com
+RESEND_FROM=Insurance Trust Hub <hello@insurancetrusthub.com>
+OPERATOR_INBOX=info@movetrusthub.com
 ```
 
-Extend `lib/actions/leads.ts` to send emails on successful submission.
+- Routing map: [docs/EMAIL-ROUTING.md](./docs/EMAIL-ROUTING.md)  
+- ImprovMX + Vercel DNS: [docs/IMPROVMX-SETUP.md](./docs/IMPROVMX-SETUP.md)  
+- Verify DNS: `node scripts/improvmx-dns.mjs verify`
 
 ## License & Disclaimer
 

@@ -85,10 +85,11 @@ const FLAGSHIPS = [
     icon: Compass,
     badge: 'P1 · Live Coverage Intelligence',
     title: 'Live ACA Plan Explorer',
-    question: 'Which Marketplace plans are actually available for my ZIP and household?',
+    question:
+      'Which Marketplace plans are available — and what might they cost me for the year?',
     description:
-      'Research real CMS Marketplace plans by ZIP and ages — metal, premium, deductible, HSA. Research only; no lead form; no invented premiums.',
-    time: '~2–5 min',
+      'Research CMS Marketplace plans by ZIP and ages, compare estimated yearly cost under care scenarios, and check doctor/Rx match signals. Research only; no lead form; no invented costs.',
+    time: '~3–8 min',
   },
   {
     href: '/calculators/aca-subsidy',
@@ -119,8 +120,26 @@ const FLAGSHIPS = [
 
 const QUICK_TOOLS = [
   {
-    href: '/tools/medicare-provider-lookup',
+    href: '/tools/aca-plan-explorer#doctors',
     icon: Stethoscope,
+    title: 'Doctor network checker (ACA)',
+    purpose:
+      'Add doctors inside Plan Explorer — CMS-reported in-network signals on candidate plans.',
+    bestFor: 'Marketplace plan research with your providers',
+    time: '~3–5 min',
+  },
+  {
+    href: '/tools/aca-plan-explorer#prescriptions',
+    icon: HeartPulse,
+    title: 'Prescription coverage checker (ACA)',
+    purpose:
+      'Add medications inside Plan Explorer — CMS formulary reported-covered / unknown states.',
+    bestFor: 'Comparing drug signals across Marketplace plans',
+    time: '~3–5 min',
+  },
+  {
+    href: '/tools/medicare-provider-lookup',
+    icon: Users,
     title: 'Does my doctor accept Medicare?',
     purpose: 'Name or NPI search against CMS PPEF and Opt Out records.',
     bestFor: 'Checking FFS participation signals',

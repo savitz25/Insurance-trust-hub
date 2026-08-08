@@ -176,6 +176,15 @@ function mapPlanRow(
     num((row.quality as Record<string, unknown> | undefined)?.global_rating) ??
     num(row.stars);
 
+  // CMS oopc is -1 when age/gender/utilization not sufficient to calculate
+  const oopcRaw = num(row.oopc);
+  const cmsOopc =
+    oopcRaw != null && Number.isFinite(oopcRaw) && oopcRaw >= 0 ? oopcRaw : null;
+  const totalRaw =
+    num(row.total_costs) ?? num(row.total_cost) ?? num(row.totalCosts);
+  const cmsTotalCosts =
+    totalRaw != null && Number.isFinite(totalRaw) && totalRaw >= 0 ? totalRaw : null;
+
   return {
     id: id || name,
     name: name || id,
@@ -209,6 +218,9 @@ function mapPlanRow(
           : null,
     premiumIsEstimate: false,
     afterCreditIsEstimate: premiumAfter != null && num(row.premium_w_credit) == null,
+    cmsOopc,
+    cmsTotalCosts,
+    utilizationApplied: null,
   };
 }
 
@@ -273,12 +285,24 @@ export async function searchMarketplacePlans(
   }
 
   const county = counties[0]!;
-  const people = (input.people?.length ? input.people : [{ age: 35 }]).map((p) => ({
-    age: Math.max(0, Math.min(120, Math.round(p.age))),
-    aptc_eligible: true,
-    gender: 'Female',
-    uses_tobacco: Boolean(p.usesTobacco),
-  }));
+  const utilization =
+    input.utilization === 'Low' ||
+    input.utilization === 'Medium' ||
+    input.utilization === 'High'
+      ? input.utilization
+      : null;
+
+  const people = (input.people?.length ? input.people : [{ age: 35 }]).map((p) => {
+    const row: Record<string, unknown> = {
+      age: Math.max(0, Math.min(120, Math.round(p.age))),
+      aptc_eligible: true,
+      gender: 'Female',
+      uses_tobacco: Boolean(p.usesTobacco),
+    };
+    // CMS calculates plan oopc when age, gender, and utilization are present
+    if (utilization) row.utilization = utilization;
+    return row;
+  });
 
   const body = {
     market: 'Individual',
@@ -351,9 +375,14 @@ export async function searchMarketplacePlans(
   });
 
   const plans = arr
-    .map((p) =>
-      mapPlanRow(p as Record<string, unknown>, creditContext.estimatedMonthlyCredit)
-    )
+    .map((p) => {
+      const card = mapPlanRow(
+        p as Record<string, unknown>,
+        creditContext.estimatedMonthlyCredit
+      );
+      if (!card) return null;
+      return { ...card, utilizationApplied: utilization };
+    })
     .filter(Boolean) as MarketplacePlanCard[];
 
   if (!plans.length) {

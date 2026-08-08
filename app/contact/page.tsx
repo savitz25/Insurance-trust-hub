@@ -44,6 +44,9 @@ export default function ContactPage() {
                   >
                     {SITE_EMAIL}
                   </a>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed max-w-[16rem]">
+                    You can email us directly or use the form — both reach our team.
+                  </p>
                 </div>
               </div>
             </CardContent>

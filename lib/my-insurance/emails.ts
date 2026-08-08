@@ -1,8 +1,12 @@
 import 'server-only';
 
 import { PRODUCTION_SITE_ORIGIN } from '@/lib/my-insurance/constants';
-
 import { BRAND_ASSET_VERSION } from '@/lib/brand';
+import {
+  isResendConfigured as isResendKeyConfigured,
+  transactionalFromAddress,
+} from '@/lib/email/routing';
+
 
 /**
  * Absolute logo for email clients — standalone serves /brand/* on the apex.
@@ -40,15 +44,12 @@ const BRAND = {
 } as const;
 
 function isResendConfigured(): boolean {
-  return Boolean(process.env.RESEND_API_KEY?.trim());
+  return isResendKeyConfigured();
 }
 
+/** Outbound From only — never use operator inbox / LEAD_NOTIFICATION_EMAIL as From. */
 function fromAddress(): string {
-  return (
-    process.env.MY_INSURANCE_FROM_EMAIL?.trim() ||
-    process.env.LEAD_NOTIFICATION_EMAIL?.trim() ||
-    'Insurance Trust Hub <hello@insurancetrusthub.com>'
-  );
+  return transactionalFromAddress();
 }
 
 async function sendResend(params: {

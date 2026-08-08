@@ -1,5 +1,6 @@
 export const SITE_NAME = 'InsuranceTrustHub';
 export const SITE_URL = 'https://www.insurancetrusthub.com';
+/** Public brand contact — inbound requires MX forward (see docs/EMAIL-ROUTING.md). */
 export const SITE_EMAIL = 'hello@insurancetrusthub.com';
 
 export const DISCLAIMER =

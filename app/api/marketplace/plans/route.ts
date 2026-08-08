@@ -46,6 +46,12 @@ export async function POST(req: Request) {
       ? null
       : Number(incomeRaw);
 
+  const utilRaw = String(b.utilization ?? b.cmsUtilization ?? '').trim();
+  const utilization =
+    utilRaw === 'Low' || utilRaw === 'Medium' || utilRaw === 'High'
+      ? utilRaw
+      : null;
+
   const input: MarketplaceSearchInput = {
     zip,
     year,
@@ -55,6 +61,7 @@ export async function POST(req: Request) {
       : null,
     householdSize:
       b.householdSize != null ? Number(b.householdSize) : people.length,
+    utilization,
   };
 
   const result = await searchMarketplacePlans(input);

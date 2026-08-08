@@ -10,7 +10,7 @@ import { isMarketplaceApiConfigured } from '@/lib/marketplace/client';
 export const metadata: Metadata = buildMetadata({
   title: 'Live ACA Plan Explorer — Marketplace plan research',
   description:
-    'Research actual ACA Marketplace plans by ZIP and household. Sort and filter by metal, premium, deductible, and HSA. Educational research only — not enrollment, not a lead marketplace.',
+    'Research ACA Marketplace plans by ZIP and household. Compare estimated yearly cost under care-use scenarios, plus doctor and Rx match signals. Educational research only — not enrollment.',
   path: '/tools/aca-plan-explorer',
 });
 
@@ -33,13 +33,26 @@ export default function AcaPlanExplorerPage() {
             Live ACA Plan Explorer
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">
-            See Marketplace plans available for your ZIP and household. Compare metal levels,
-            premiums, deductibles, and HSA eligibility — then verify and enroll only on official
-            Marketplace sites. No lead form required.
+            See Marketplace plans for your ZIP and household. Compare estimated yearly cost under a
+            care-usage scenario (CMS expected out-of-pocket when available — not invented $0 fakes).
+            Optionally add doctors and prescriptions for network and formulary signals. No lead form
+            required.
           </p>
           <p className="mt-3 text-sm">
+            <a href="#yearly-cost" className="text-primary hover:underline">
+              Yearly cost scenarios
+            </a>
+            {' · '}
+            <a href="#doctors" className="text-primary hover:underline">
+              Doctor network checker
+            </a>
+            {' · '}
+            <a href="#prescriptions" className="text-primary hover:underline">
+              Prescription coverage checker
+            </a>
+            {' · '}
             <Link href="/calculators/aca-subsidy" className="text-primary hover:underline">
-              Prefer subsidy / FPL education first?
+              Subsidy / FPL education
             </Link>
             {' · '}
             <Link href="/tools" className="text-primary hover:underline">
