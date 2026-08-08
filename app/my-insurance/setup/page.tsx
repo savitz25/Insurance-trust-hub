@@ -8,6 +8,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     'Build a guest-saved coverage research plan: what you protect, where, and optional situation notes. Educational only — no quotes.',
   path: '/my-insurance/setup',
+  noIndex: true,
 });
 
 export default function MyInsuranceSetupPage() {

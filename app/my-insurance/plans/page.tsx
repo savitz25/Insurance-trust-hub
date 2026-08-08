@@ -6,8 +6,9 @@ import { PlansLibrary } from '@/components/my-insurance/plans-library';
 export const metadata: Metadata = buildMetadata({
   title: 'Coverage plans - My Insurance',
   description:
-    'Library of guest-saved coverage research plans. Switch active plan, rename, archive, or open report-ready summaries. Research only.',
+    'Private library of guest-saved coverage research plans. Research only — not a public directory.',
   path: '/my-insurance/plans',
+  noIndex: true,
 });
 
 export default function MyInsurancePlansPage() {

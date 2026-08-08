@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Building2 } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { JsonLd } from '@/lib/seo/json-ld';
+import { RESEARCH_META, buildResearchPageGraph } from '@/lib/seo/research-seo';
 import { ContextNav } from '@/components/context-nav';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,18 +13,29 @@ import {
   listMedicareEvidencedCarrierSlugs,
 } from '@/lib/carriers/rollup';
 
+const META = RESEARCH_META.carriersHub;
+
 export const metadata: Metadata = buildMetadata({
-  title: 'Carrier research — public-data intelligence profiles',
-  description:
-    'Carrier research from CMS Marketplace and Medicare extracts — not sales rankings. Educational only; confirm on HealthCare.gov and Medicare.gov.',
+  title: META.title,
+  description: META.description,
   path: '/carriers',
 });
 
 export default function CarriersIndexPage() {
   const evidenced = new Set(listMedicareEvidencedCarrierSlugs());
+  const jsonLd = buildResearchPageGraph({
+    path: '/carriers',
+    name: META.h1,
+    description: META.description,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Carrier research', path: '/carriers' },
+    ],
+  });
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <div className="border-b bg-muted/20">
         <div className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
           <ContextNav pathname="/carriers" currentLabel="Carriers" className="mb-4" />
@@ -30,7 +43,7 @@ export default function CarriersIndexPage() {
             Carrier intelligence
           </p>
           <h1 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[#0A2540]">
-            Carrier research from public data — not a sales ranking
+            {META.h1}
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">
             Organization-level rollups of CMS Marketplace and Medicare signals already on Insurance

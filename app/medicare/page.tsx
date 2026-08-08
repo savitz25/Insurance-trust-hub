@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BarChart3, ExternalLink, MapPin, Stethoscope } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { JsonLd } from '@/lib/seo/json-ld';
+import { RESEARCH_META, buildResearchPageGraph } from '@/lib/seo/research-seo';
 import { ContextNav } from '@/components/context-nav';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,10 +18,11 @@ import {
 } from '@/lib/insurance/cms/medicare-routes';
 import { CMS_COMPLAINT_DATASET_META } from '@/lib/insurance/cms/complaint-rankings';
 
+const META = RESEARCH_META.medicareHub;
+
 export const metadata: Metadata = buildMetadata({
-  title: 'Medicare Market Intelligence — CMS-backed county & contract research',
-  description:
-    'Understand your Medicare market before anyone sells you a plan. County enrollment context, complaint-measure signals, and contract research from CMS extracts. Educational only — confirm on Medicare.gov.',
+  title: META.title,
+  description: META.description,
   path: '/medicare',
 });
 
@@ -29,9 +32,20 @@ export default function MedicareHubPage() {
     month: 'long',
     year: 'numeric',
   });
+  const jsonLd = buildResearchPageGraph({
+    path: '/medicare',
+    name: META.h1,
+    description: META.description,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Medicare research', path: '/medicare' },
+    ],
+    dateModified: COUNTY_SUMMARIES_META.syncedAt,
+  });
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <div className="border-b bg-muted/20">
         <div className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
           <ContextNav pathname="/medicare" currentLabel="Medicare research" className="mb-4" />
@@ -39,7 +53,7 @@ export default function MedicareHubPage() {
             Medicare Market Intelligence
           </p>
           <h1 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[#0A2540]">
-            Understand your Medicare market before anyone sells you a plan
+            {META.h1}
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">
             CMS-backed county snapshots and contract complaint context — research only, not

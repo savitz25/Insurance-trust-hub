@@ -11,6 +11,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     'Side-by-side research comparison of insurance agencies. Independent directory - no paid placements.',
   path: '/my-insurance/compare',
+  noIndex: true,
 });
 
 type PageProps = {

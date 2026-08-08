@@ -11,6 +11,8 @@ import {
   marketPath,
   ACA_MARKET_PLAN_YEAR,
 } from '@/lib/marketplace/curated-markets';
+import { JsonLd } from '@/lib/seo/json-ld';
+import { metaAcaCounty, buildResearchPageGraph } from '@/lib/seo/research-seo';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -40,12 +42,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await loadCountyIntelligence(state, county, ACA_MARKET_PLAN_YEAR);
   const path = marketPath(market);
   const indexable = Boolean(data?.ok && data.indexable);
+  const m = metaAcaCounty({
+    countyName: market.countyName,
+    stateCode: market.stateCode,
+    stateName: market.stateName,
+    planYear: ACA_MARKET_PLAN_YEAR,
+    indexable,
+  });
 
   return buildMetadata({
-    title: `${market.countyName} County, ${market.stateName} ACA Marketplace research`,
-    description: indexable
-      ? `CMS-backed ACA plan market snapshot for ${market.countyName} County, ${market.stateCode}: issuers, metal mix, premium ranges. Educational research only.`
-      : `Limited or unavailable ACA Marketplace snapshot for ${market.countyName} County. Research via Plan Explorer or HealthCare.gov.`,
+    title: m.title,
+    description: m.description,
     path,
     noIndex: !indexable,
   });
@@ -59,12 +66,33 @@ export default async function CountyAcaIntelligencePage({ params }: Props) {
   const data = await loadCountyIntelligence(state, county, ACA_MARKET_PLAN_YEAR);
   if (!data) notFound();
 
+  const m = metaAcaCounty({
+    countyName: market.countyName,
+    stateCode: market.stateCode,
+    stateName: market.stateName,
+    planYear: data.planYear,
+    indexable: data.indexable,
+  });
+  const path = marketPath(market);
+  const jsonLd = buildResearchPageGraph({
+    path,
+    name: m.h1,
+    description: m.description,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Marketplace research', path: '/marketplace' },
+      { name: m.h1, path },
+    ],
+    dateModified: data.retrievedAt,
+  });
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <div className="border-b bg-muted/20">
         <div className="container mx-auto px-4 py-6 max-w-3xl">
           <ContextNav
-            pathname={marketPath(market)}
+            pathname={path}
             currentLabel={`${market.countyName} ACA`}
             className="mb-2"
           />

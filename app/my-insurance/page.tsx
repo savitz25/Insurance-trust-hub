@@ -10,8 +10,9 @@ import { TrustMark } from '@/components/network/trust-mark';
 export const metadata: Metadata = buildMetadata({
   title: 'My Insurance — Insurance HQ',
   description:
-    'Guest-first coverage research plan and saved providers on Insurance Trust Hub. Works without signing in. Research only — no paid placements, no quote marketplace.',
+    'Private coverage research wallet on Insurance Trust Hub. Works without signing in. Research only — not a public directory page.',
   path: '/my-insurance',
+  noIndex: true,
 });
 
 export default async function MyInsurancePage() {

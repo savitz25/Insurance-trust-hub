@@ -11,15 +11,11 @@ export type PrimaryNavLink = {
 
 /** Always-visible product links on desktop (lg+). */
 export const PRIMARY_NAV: PrimaryNavLink[] = [
+  { href: '/tools', label: 'Research', description: 'ACA, Medicare & cost tools' },
   { href: '/directory', label: 'Directory', description: 'Licensed agencies & agents' },
-  { href: '/calculators', label: 'Calculators', description: 'ACA, Medicare & premium tools' },
-  { href: '/resources', label: 'Guides', description: 'Coverage research articles' },
-  { href: '/methodology', label: 'Methodology', description: 'How we verify agencies' },
-  {
-    href: '/about',
-    label: 'Trust & Transparency',
-    description: 'Independence and listing standards',
-  },
+  { href: '/medicare', label: 'Medicare', description: 'Market intelligence' },
+  { href: '/carriers', label: 'Carriers', description: 'Public-data carrier research' },
+  { href: '/methodology', label: 'Methodology', description: 'How we verify & research' },
 ];
 
 /** Directory dropdown entry points. */

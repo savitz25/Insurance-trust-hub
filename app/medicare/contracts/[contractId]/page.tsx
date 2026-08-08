@@ -8,6 +8,8 @@ import {
   loadContractIntelligence,
 } from '@/lib/insurance/cms/contract-intelligence';
 import { contractIntelligencePath } from '@/lib/insurance/cms/medicare-routes';
+import { JsonLd } from '@/lib/seo/json-ld';
+import { metaMedicareContract, buildResearchPageGraph } from '@/lib/seo/research-seo';
 
 export const dynamic = 'force-static';
 
@@ -31,12 +33,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       noIndex: true,
     });
   }
-  const name = data.carrierName || data.contractId;
+  const m = metaMedicareContract({
+    contractId: data.contractId,
+    carrierName: data.carrierName,
+    indexable: data.indexable,
+  });
   return buildMetadata({
-    title: `${name} (${data.contractId}) — Medicare contract intelligence`,
-    description: data.indexable
-      ? `CMS complaint-measure and local enrollment context for contract ${data.contractId} (${name}). Educational only — confirm on Medicare.gov.`
-      : `Limited CMS context for contract ${data.contractId}. Educational research only.`,
+    title: m.title,
+    description: m.description,
     path,
     noIndex: !data.indexable,
   });
@@ -45,13 +49,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function MedicareContractPage({ params }: Props) {
   const { contractId } = await params;
   const data = loadContractIntelligence(contractId);
+  const path = contractIntelligencePath(contractId);
+  const m = metaMedicareContract({
+    contractId: data.contractId,
+    carrierName: data.carrierName,
+    indexable: data.indexable,
+  });
+  const jsonLd = data.ok
+    ? buildResearchPageGraph({
+        path,
+        name: m.h1,
+        description: m.description,
+        breadcrumbs: [
+          { name: 'Home', path: '/' },
+          { name: 'Medicare research', path: '/medicare' },
+          { name: data.contractId, path },
+        ],
+        dateModified: data.complaintSyncedAt,
+      })
+    : null;
 
   return (
     <>
+      {jsonLd ? <JsonLd data={jsonLd} /> : null}
       <div className="border-b bg-muted/20">
         <div className="container mx-auto max-w-3xl px-4 py-6">
           <ContextNav
-            pathname={contractIntelligencePath(contractId)}
+            pathname={path}
             currentLabel="Contract intelligence"
             className="mb-2"
           />

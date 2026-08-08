@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { JsonLd } from '@/lib/seo/json-ld';
+import { RESEARCH_META, buildResearchPageGraph } from '@/lib/seo/research-seo';
 import { ContextNav } from '@/components/context-nav';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,16 +13,28 @@ import {
   ACA_MARKET_PLAN_YEAR,
 } from '@/lib/marketplace/curated-markets';
 
+const META = RESEARCH_META.marketplaceHub;
+
 export const metadata: Metadata = buildMetadata({
-  title: 'Marketplace research — Plan X-Ray & county ACA intelligence',
-  description:
-    'Research ACA Marketplace plans and curated county market snapshots from CMS data. Educational only — not enrollment, no paid placements.',
+  title: META.title,
+  description: META.description,
   path: '/marketplace',
 });
 
 export default function MarketplaceHubPage() {
+  const jsonLd = buildResearchPageGraph({
+    path: '/marketplace',
+    name: META.h1,
+    description: META.description,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Marketplace research', path: '/marketplace' },
+    ],
+  });
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <div className="border-b bg-muted/20">
         <div className="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
           <ContextNav pathname="/marketplace" currentLabel="Marketplace research" className="mb-4" />
@@ -28,16 +42,25 @@ export default function MarketplaceHubPage() {
             Coverage Intelligence · Plan year {ACA_MARKET_PLAN_YEAR}
           </p>
           <h1 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[#0A2540]">
-            Marketplace research
+            {META.h1}
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">
-            Durable plan X-Ray pages and curated county ACA snapshots built from CMS Marketplace
-            data. Quality over volume — we do not mass-generate empty county doorways. Research
-            only; confirm on HealthCare.gov.
+            Curated ACA Marketplace county intelligence and Plan X-Ray research pages from CMS data
+            for plan year {ACA_MARKET_PLAN_YEAR}. Quality over volume — we do not mass-generate empty
+            county doorways. Educational only; confirm on HealthCare.gov. Separate from Medicare
+            research.
           </p>
           <p className="mt-3 text-sm">
             <Link href="/tools/aca-plan-explorer" className="text-primary hover:underline">
               Live ACA Plan Explorer
+            </Link>
+            {' · '}
+            <Link href="/carriers" className="text-primary hover:underline">
+              Carrier research
+            </Link>
+            {' · '}
+            <Link href="/methodology" className="text-primary hover:underline">
+              Methodology
             </Link>
             {' · '}
             <Link href="/tools" className="text-primary hover:underline">

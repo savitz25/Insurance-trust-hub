@@ -16,9 +16,9 @@ import { ASK_TRUST_HUB } from '@/lib/network/ask-trust-hub';
 import { TrustMark } from '@/components/network/trust-mark';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Methodology — How Insurance Trust Hub Verifies Agencies',
+  title: 'Methodology — verification & Coverage Intelligence sources',
   description:
-    'Insurance Trust Hub methodology under The Ask Trust Hub Standard: state DOI / NAIC pathways, what verified means, tools vs directory, update cadence, and limitations. Research only — not quotes or enrollment.',
+    'How Insurance Trust Hub verifies agencies and builds Coverage Intelligence (ACA, Medicare, carriers) under The Ask Trust Hub Standard. CMS vintages, quality-gated pages, independence. Research only — not quotes or enrollment.',
   path: '/methodology',
 });
 
@@ -67,14 +67,19 @@ const DATA_SOURCES = [
       'Coordinating references for multi-state producer identity where used — always secondary to the state’s own record.',
   },
   {
+    name: 'CMS Marketplace API (ACA Coverage Intelligence)',
+    detail:
+      'Plan search, provider network, formulary, and OOPC fields when configured. Plan Explorer, Plan X-Ray, county ACA snapshots, and carrier ACA rollups. Fail closed when data is missing — no invented premiums or matches.',
+  },
+  {
+    name: 'CMS Medicare extracts (Medicare Intelligence)',
+    detail:
+      'CPSC enrollment by county/contract and Star Ratings complaint measures (C28/D02) for Plan Complaint Index, county Medicare dashboards, contract pages, and carrier Medicare rollups. Vintages labeled on each surface.',
+  },
+  {
     name: 'Public complaint / regulatory actions',
     detail:
       'Only when we actually incorporate an attributable public source (e.g. CMS complaint index for Medicare research).',
-  },
-  {
-    name: 'Moderated consumer reviews',
-    detail:
-      'User-submitted reviews screened for spam and conflicts. Not purchased testimonials.',
   },
   {
     name: 'Educational reference ranges',
@@ -89,7 +94,9 @@ const LIMITATIONS = [
   'We do not underwrite, sell policies, bind coverage, or place carrier appointments for you.',
   'Medicare, ACA, and other tools are educational — program rules change and personal eligibility varies.',
   'Modeled cost estimates must never be treated as carrier-bound rates.',
+  'Coverage Intelligence pages (county, contract, carrier) are not complete national inventories and are not official CMS tools.',
   'We do not operate a “free insurance quotes” lead marketplace; research and verification only.',
+  'Seed or incomplete agency listings are never treated as verified indexable research inventory.',
 ] as const;
 
 export default function MethodologyPage() {
@@ -108,7 +115,35 @@ export default function MethodologyPage() {
         <TrustMark />
       </div>
 
-      <aside className="mt-8 rounded-xl border bg-muted/25 px-4 py-4 text-sm sm:px-5">
+      <aside className="mt-8 rounded-xl border border-[#0284C7]/20 bg-[#E0F2FE]/30 px-4 py-4 text-sm sm:px-5">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0284C7]">
+          Coverage Intelligence research
+        </p>
+        <p className="mt-1.5 leading-relaxed text-muted-foreground">
+          Plan Explorer, Marketplace county pages, Medicare hub, contracts, and carrier profiles use
+          CMS-backed extracts and labeled educational estimates only. Quality-gated indexation — no
+          mass thin counties or seed-agency SEO.
+        </p>
+        <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+          <Link href="/tools/aca-plan-explorer" className="font-medium text-primary hover:underline">
+            ACA Plan Explorer
+          </Link>
+          <Link href="/marketplace" className="font-medium text-primary hover:underline">
+            Marketplace
+          </Link>
+          <Link href="/medicare" className="font-medium text-primary hover:underline">
+            Medicare
+          </Link>
+          <Link href="/carriers" className="font-medium text-primary hover:underline">
+            Carriers
+          </Link>
+          <Link href="/tools" className="font-medium text-primary hover:underline">
+            Research Center
+          </Link>
+        </p>
+      </aside>
+
+      <aside className="mt-6 rounded-xl border bg-muted/25 px-4 py-4 text-sm sm:px-5">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
           Parent standard
         </p>

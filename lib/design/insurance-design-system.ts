@@ -300,12 +300,14 @@ export const INSURANCE_FOOTER_COLUMNS = [
   {
     title: 'Research',
     links: [
-      { href: '/directory', label: 'Directory' },
-      { href: '/hubs', label: 'Health hubs' },
+      { href: '/tools', label: 'Research Center' },
+      { href: '/tools/aca-plan-explorer', label: 'ACA Plan Explorer' },
+      { href: '/marketplace', label: 'Marketplace counties' },
+      { href: '/medicare', label: 'Medicare intelligence' },
+      { href: '/carriers', label: 'Carrier research' },
+      { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
+      { href: '/directory', label: 'Agency directory' },
       { href: '/calculators', label: 'Calculators' },
-      { href: '/tools/license-verification', label: 'License verification' },
-      { href: '/resources', label: 'Guides' },
-      { href: '/my-insurance', label: 'My Insurance' },
     ],
   },
   {
@@ -316,6 +318,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
       { href: 'https://www.asktrusthub.com/promise', label: 'Independence Policy', external: true },
       { href: 'https://www.asktrusthub.com/trust', label: 'Trust Center', external: true },
       { href: '/contact', label: 'Contact' },
+      { href: '/my-insurance', label: 'My Insurance (private)' },
     ],
   },
   {

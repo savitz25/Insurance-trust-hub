@@ -25,8 +25,13 @@ export const organizationSchema = {
     availableLanguage: 'English',
   },
   description:
-    'Specialist research directory of licensed insurance agencies and brokers in the United States. Part of the Ask Trust Hub network under common ownership with separated research and listing order. Compare listings and specialties; re-check DOI / NAIC records. We do not sell policies. No paid placements.',
+    'Specialist research directory of licensed insurance agencies and Coverage Intelligence tools (ACA Marketplace, Medicare, carriers) in the United States. Part of the Ask Trust Hub network under common ownership with separated research and listing order. Educational only. We do not sell policies. No paid placements.',
   parentOrganization: ASK_PARENT_ORGANIZATION,
+  sameAs: [
+    'https://www.asktrusthub.com',
+    'https://www.movetrusthub.com',
+    'https://www.lendertrusthub.com',
+  ],
 };
 
 export const websiteSchema = {
@@ -54,7 +59,7 @@ export const homepageServiceSchema = {
     name: 'United States',
   },
   description:
-    'Research licensed insurance agencies by state and specialty. Educational tools for ACA and Medicare. No paid placements. Not a policy marketplace.',
+    'Research licensed insurance agencies by state and specialty. Educational Coverage Intelligence for ACA Marketplace and Medicare markets. No paid placements. Not a policy marketplace.',
   url: SITE_URL,
 };
 

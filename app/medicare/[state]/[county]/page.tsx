@@ -14,6 +14,9 @@ import {
   isMedicareCountyIndexable,
 } from '@/lib/insurance/cms/medicare-routes';
 import { getSouthFloridaCountyAgents } from '@/lib/hubs/county-agents';
+import { JsonLd } from '@/lib/seo/json-ld';
+import { metaMedicareCounty, buildResearchPageGraph } from '@/lib/seo/research-seo';
+import { COUNTY_SUMMARIES_META } from '@/lib/insurance/cms/county-summaries';
 
 type Props = {
   params: Promise<{ state: string; county: string }>;
@@ -39,11 +42,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const path = `/medicare/${state}/${county}`;
   const indexable = isMedicareCountyIndexable(summary);
+  const m = metaMedicareCounty({
+    displayName: summary.displayName,
+    stateName: summary.stateName,
+    indexable,
+  });
   return buildMetadata({
-    title: `${summary.displayName} Medicare market intelligence | CMS enrollment & complaints`,
-    description: indexable
-      ? `CMS-backed Medicare Advantage / Part D market snapshot for ${summary.displayName}: enrollment, material contracts, complaint-measure context. Educational only — confirm on Medicare.gov.`
-      : `Limited Medicare research data for ${summary.displayName}. Confirm on Medicare.gov.`,
+    title: m.title,
+    description: m.description,
     path,
     noIndex: !indexable,
   });
@@ -59,9 +65,26 @@ export default async function MedicareCountyPage({ params, searchParams }: Props
   const agents = getSouthFloridaCountyAgents(summary.countyName);
   const siblings = getAllCountySummaries().filter((c) => c.slug !== summary.slug);
   const path = `/medicare/${state}/${county}`;
+  const m = metaMedicareCounty({
+    displayName: summary.displayName,
+    stateName: summary.stateName,
+    indexable: isMedicareCountyIndexable(summary),
+  });
+  const jsonLd = buildResearchPageGraph({
+    path,
+    name: m.h1,
+    description: m.description,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Medicare research', path: '/medicare' },
+      { name: m.h1, path },
+    ],
+    dateModified: COUNTY_SUMMARIES_META.syncedAt,
+  });
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <MedicareCountyOpenBeacon slug={summary.slug} path={path} />
       <div className="border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-[#E0F2FE]/30">
         <div className="container mx-auto max-w-5xl px-4 py-10 md:py-14">
@@ -76,7 +99,7 @@ export default async function MedicareCountyPage({ params, searchParams }: Props
             Medicare Market Intelligence · County
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
-            {summary.displayName} Medicare market
+            {m.h1}
           </h1>
           <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-slate-600 md:text-lg">
             CMS-sourced enrollment and complaint-measure context for {summary.displayName},{' '}

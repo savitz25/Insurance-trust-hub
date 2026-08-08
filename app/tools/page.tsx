@@ -26,9 +26,9 @@ import { ACA_SAVINGS_META } from '@/lib/tools/aca-subsidy-planner';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Insurance Research Center — Cost, Subsidy & Medicare Tools',
+  title: 'Insurance Research Center — ACA, Medicare & cost tools',
   description:
-    'Insurance Research Center: estimate costs, check ACA subsidies, research Medicare, verify providers and licenses — no paid placements, no lead selling.',
+    'Insurance Research Center: ACA Plan Explorer, Medicare market intelligence, carrier research, cost tools, and license verification — no paid placements, no lead selling.',
   path: '/tools',
 });
 

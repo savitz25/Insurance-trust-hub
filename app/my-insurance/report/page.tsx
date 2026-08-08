@@ -9,6 +9,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     'Takeaway summary of your guest-saved coverage plan, shortlist, and tool snapshots. Research only — not an endorsement.',
   path: '/my-insurance/report',
+  noIndex: true,
 });
 
 export default function MyInsuranceReportPage() {

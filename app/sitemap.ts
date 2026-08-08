@@ -58,11 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/data/counties/miami-dade-fl',
     '/data/counties/broward-fl',
     '/data/counties/palm-beach-fl',
-    '/my-insurance',
-    '/my-insurance/plans',
-    '/my-insurance/setup',
-    '/my-insurance/report',
-    '/my-insurance/compare',
+    // My Insurance wallet is noindex (personal workspace) — not in sitemap
     '/about',
     '/contact',
     '/privacy',
@@ -74,11 +70,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       path === ''
         ? 1
-        : path.startsWith('/data') ||
+        : path === '/tools' ||
+            path === '/medicare' ||
+            path === '/marketplace' ||
+            path === '/carriers' ||
+            path === '/tools/aca-plan-explorer' ||
+            path.startsWith('/data') ||
             path.startsWith('/tools/cost') ||
             path.startsWith('/calculators/aca') ||
             path.includes('provider-lookup') ||
-            path.includes('complaint')
+            path.includes('complaint') ||
+            path === '/methodology'
           ? 0.95
           : 0.8,
   }));
