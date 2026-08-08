@@ -11,6 +11,7 @@ import { SaveResearchWalletButton } from '@/components/my-insurance/save-researc
 import { trackMarketplaceEvent } from '@/lib/marketplace/analytics';
 import { marketPath, planXrayPath, type CuratedAcaMarket } from '@/lib/marketplace/curated-markets';
 import type { PlanXRayResult } from '@/lib/marketplace/plan-xray';
+import { matchCarrierByReportedName, carrierPath } from '@/lib/carriers/registry';
 
 function money(n: number | null | undefined): string {
   if (n == null || !Number.isFinite(n)) return 'Not listed';
@@ -74,7 +75,22 @@ export function PlanXRayView({ data, relatedMarket, explorerHref }: Props) {
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#0A2540]">
             {plan.name}
           </h1>
-          <p className="mt-1 text-muted-foreground">{plan.issuerName}</p>
+          <p className="mt-1 text-muted-foreground">
+            {(() => {
+              const matched = matchCarrierByReportedName(plan.issuerName);
+              if (matched) {
+                return (
+                  <Link
+                    href={carrierPath(matched.slug)}
+                    className="text-[#0284C7] hover:underline"
+                  >
+                    {plan.issuerName}
+                  </Link>
+                );
+              }
+              return plan.issuerName;
+            })()}
+          </p>
           {data.locationLabel ? (
             <p className="text-sm text-muted-foreground mt-1">Market context: {data.locationLabel}</p>
           ) : null}

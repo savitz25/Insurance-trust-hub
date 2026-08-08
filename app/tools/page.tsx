@@ -121,6 +121,15 @@ const FLAGSHIPS = [
 
 const QUICK_TOOLS = [
   {
+    href: '/carriers',
+    icon: Briefcase,
+    title: 'Carrier intelligence',
+    purpose:
+      'Organization-level rollups of CMS Marketplace and Medicare signals — not sales rankings.',
+    bestFor: 'Comparing public-data carrier evidence',
+    time: '~2–4 min',
+  },
+  {
     href: '/marketplace',
     icon: Compass,
     title: 'County ACA intelligence',

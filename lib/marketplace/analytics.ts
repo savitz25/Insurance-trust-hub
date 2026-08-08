@@ -33,7 +33,12 @@ export type MarketplaceEventName =
   | 'medicare_plan_intelligence_opened'
   | 'medicare_tool_handoff'
   | 'outbound_medicare_gov_click'
-  | 'medicare_save_intent';
+  | 'medicare_save_intent'
+  | 'carrier_page_opened'
+  | 'carrier_to_aca_explorer'
+  | 'carrier_to_medicare_county'
+  | 'carrier_to_contract'
+  | 'outbound_official_source_click'
 
 export function trackMarketplaceEvent(
   name: MarketplaceEventName,

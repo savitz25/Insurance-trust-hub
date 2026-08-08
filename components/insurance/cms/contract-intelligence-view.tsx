@@ -9,6 +9,7 @@ import type { ContractIntelligence } from '@/lib/insurance/cms/contract-intellig
 import { formatComplaintRate } from '@/lib/insurance/cms/county-summaries';
 import { trackMarketplaceEvent } from '@/lib/marketplace/analytics';
 import { MedicareContractOpenBeacon } from '@/components/insurance/cms/medicare-analytics';
+import { matchCarrierByReportedName, carrierPath } from '@/lib/carriers/registry';
 
 type Props = { data: ContractIntelligence };
 
@@ -64,6 +65,20 @@ export function ContractIntelligenceView({ data }: Props) {
           {' · '}
           Synced {synced}
         </p>
+        {(() => {
+          const matched = matchCarrierByReportedName(data.carrierName);
+          if (!matched) return null;
+          return (
+            <p className="mt-2 text-sm">
+              <Link
+                href={carrierPath(matched.slug)}
+                className="font-medium text-[#0284C7] hover:underline"
+              >
+                Carrier research: {matched.displayName}
+              </Link>
+            </p>
+          );
+        })()}
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">

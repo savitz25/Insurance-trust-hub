@@ -30,6 +30,11 @@ const FROM_ALLOWLIST: Array<{ test: (p: string) => boolean; label: string; short
     shortLabel: 'Medicare',
   },
   {
+    test: (p) => p === '/carriers' || p.startsWith('/carriers/'),
+    label: 'Back to Carriers',
+    shortLabel: 'Carriers',
+  },
+  {
     test: (p) => p === '/data/counties' || p.startsWith('/data/counties/'),
     label: 'Back to County dashboards',
     shortLabel: 'Counties',

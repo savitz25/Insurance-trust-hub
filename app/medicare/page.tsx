@@ -96,6 +96,19 @@ export default function MedicareHubPage() {
                 </CardContent>
               </Card>
             </Link>
+            <Link href="/carriers">
+              <Card className="h-full hover:border-primary/40 transition-colors">
+                <CardContent className="pt-5 pb-4 flex gap-3">
+                  <BarChart3 className="h-5 w-5 text-[#0284C7] shrink-0" aria-hidden />
+                  <div>
+                    <p className="font-semibold">Carrier intelligence</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      Organization rollups of CMS Medicare + Marketplace evidence
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
             <a
               href="https://www.medicare.gov/plan-compare/"
               target="_blank"

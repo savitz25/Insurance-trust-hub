@@ -15,6 +15,8 @@ import {
 } from '@/lib/marketplace/curated-markets';
 import { allCanonicalMedicareCountyPaths } from '@/lib/insurance/cms/medicare-routes';
 import { listIndexableContractIds } from '@/lib/insurance/cms/contract-intelligence';
+import { listMedicareEvidencedCarrierSlugs } from '@/lib/carriers/rollup';
+import { carrierPath } from '@/lib/carriers/registry';
 
 /**
  * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
@@ -50,6 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/aca-plan-explorer',
     '/marketplace',
     '/medicare',
+    '/carriers',
     '/data/plan-complaint-index',
     '/data/counties',
     '/data/counties/miami-dade-fl',
@@ -174,6 +177,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // Phase 13: carriers with Medicare extract evidence (ACA live evidence not required for sitemap)
+  const carrierPages: MetadataRoute.Sitemap = listMedicareEvidencedCarrierSlugs().map(
+    (slug) => ({
+      url: `${site}${carrierPath(slug)}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })
+  );
+
   const all = [
     ...staticRoutes,
     ...specialtyTopics,
@@ -183,6 +196,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...marketplaceCounties,
     ...medicareCounties,
     ...medicareContracts,
+    ...carrierPages,
     ...destinationStates,
     ...destinationCities,
     ...articles,
