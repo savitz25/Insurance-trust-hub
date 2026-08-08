@@ -59,21 +59,29 @@ export const homepageServiceSchema = {
 };
 
 export function buildInsuranceAgencySchema(provider: Provider) {
+  // Phase 6A: no AggregateRating / telephone from seed inventory
+  const isSeed =
+    provider.id.startsWith('fallback-') ||
+    provider.id.startsWith('seed-') ||
+    !provider.license_number ||
+    !/\d/.test(provider.license_number);
+
   return {
     '@type': 'InsuranceAgency',
     '@id': `${SITE_URL}/providers/${provider.slug}/#agency`,
     name: provider.name,
     url: provider.website ?? `${SITE_URL}/providers/${provider.slug}`,
     description: provider.short_description ?? provider.description,
-    telephone: provider.phone ?? undefined,
+    telephone: isSeed ? undefined : provider.phone ?? undefined,
     address: {
       '@type': 'PostalAddress',
       addressLocality: provider.city,
       addressRegion: provider.state,
-      postalCode: provider.zip ?? undefined,
+      postalCode: isSeed ? undefined : provider.zip ?? undefined,
       addressCountry: 'US',
     },
-    aggregateRating: provider.review_count > 0
+    aggregateRating:
+      !isSeed && provider.review_count > 0
       ? {
           '@type': 'AggregateRating',
           ratingValue: provider.rating,

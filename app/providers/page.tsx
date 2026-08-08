@@ -6,23 +6,29 @@ import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Insurance Providers Directory — Verified Agencies',
+  title: 'Insurance Agencies Directory — Research Listings',
   description:
-    'Browse verified insurance agencies and brokerages nationwide. Compare ratings, licensing, and specialties before requesting a quote.',
+    'Browse insurance agency listings for research. Re-check state licenses on official DOI tools. Seed inventory is labeled honestly — not verified research.',
   path: '/providers',
+  noIndex: true,
 });
 
 export default function ProvidersDirectoryPage() {
-  const providers = [...FALLBACK_PROVIDERS].sort((a, b) => b.rating - a.rating);
+  const providers = [...FALLBACK_PROVIDERS].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl md:text-4xl font-bold">Insurance Providers Directory</h1>
+        <h1 className="text-3xl md:text-4xl font-bold">Insurance agencies directory</h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">
-          {providers.length} verified agencies with state licensing data and attributed reviews.
-          For metro-specific health specialists, visit our{' '}
-          <Link href="/hubs" className="text-primary hover:underline">market hubs</Link>.
+          {providers.length} research listings (seed catalog). These rows are{' '}
+          <strong className="text-foreground font-medium">not</strong> independently verified
+          public-record research — use state DOI / NIPR tools before contacting anyone. For
+          metro-specific research, visit our{' '}
+          <Link href="/hubs" className="text-primary hover:underline">
+            market hubs
+          </Link>
+          .
         </p>
 
         <div className="mt-10 grid md:grid-cols-2 gap-5">

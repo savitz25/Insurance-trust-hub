@@ -54,32 +54,66 @@ export type TrustScoreBreakdown = {
   governmentStanding: number;
 };
 
-export function computeProviderTrustScoreBreakdown(input: TrustScoreInput): TrustScoreBreakdown {
-  const base = 65;
+export type TrustScoreInputPhase6 = TrustScoreInput & {
+  /** Re-checkable license number required for a public score */
+  licenseNumber?: string | null;
+  /** When true, inputs are seed — return null total */
+  isSeed?: boolean;
+};
+
+/**
+ * Phase 6A: null total when seed or no re-checkable license number.
+ * Prefer incomplete over decorative 90+ scores.
+ */
+export function computeProviderTrustScoreBreakdown(
+  input: TrustScoreInputPhase6
+): TrustScoreBreakdown & { published: boolean } {
+  const licenseOk =
+    Boolean(input.licenseNumber && /\d/.test(String(input.licenseNumber))) &&
+    !/[✅✓]/.test(String(input.licenseNumber ?? ''));
+
+  if (input.isSeed || !licenseOk) {
+    return {
+      total: 0,
+      base: 0,
+      factors: [
+        {
+          id: 'insufficient',
+          label: 'Insufficient verified inputs',
+          points: 0,
+          detail:
+            'Research Score suppressed — need a re-checkable license number (seed listings never score).',
+        },
+      ],
+      governmentStanding: 0,
+      published: false,
+    };
+  }
+
+  const base = 38;
   const factors: TrustScoreFactor[] = [];
 
   let googlePts = 0;
   const googleRating = input.googleRating;
   const reviewCount = input.googleReviewCount ?? 0;
-  if (googleRating != null) {
-    googlePts += (googleRating - 3.5) * 8;
+  if (googleRating != null && reviewCount > 0) {
+    googlePts += (googleRating - 3.5) * 6;
   }
   if (reviewCount > 25) googlePts += 2;
-  if (reviewCount > 100) googlePts += 3;
-  if (reviewCount > 300) googlePts += 2;
-  googlePts = Math.round(googlePts);
+  if (reviewCount > 100) googlePts += 2;
+  googlePts = Math.round(Math.max(0, googlePts));
   factors.push({
     id: 'consumer-reputation',
     label: 'Consumer Reputation',
     points: googlePts,
     detail:
-      googleRating != null
-        ? `Google ${googleRating.toFixed(1)} · ${reviewCount} reviews`
-        : 'Google rating not available',
+      googleRating != null && reviewCount > 0
+        ? `Attributed snapshot · ${googleRating.toFixed(1)} · ${reviewCount} reviews`
+        : 'No independently attributed review volume',
   });
 
   const bbbPts =
-    gradeToTrustBoost(input.bbbRating) + (input.bbbAccredited ? 5 : 0);
+    gradeToTrustBoost(input.bbbRating) + (input.bbbAccredited ? 3 : 0);
   factors.push({
     id: 'bbb',
     label: 'BBB Standing',
@@ -89,14 +123,17 @@ export function computeProviderTrustScoreBreakdown(input: TrustScoreInput): Trus
       : 'BBB rating not available',
   });
 
-  const licensePts = input.isVerified ? 3 : 0;
+  const licensePts = input.isVerified && licenseOk ? 18 : licenseOk ? 10 : 0;
   factors.push({
     id: 'licensing',
     label: 'Licensing & Verification',
     points: licensePts,
-    detail: input.isVerified
-      ? 'DOI-verified listing on Insurance Trust Hub'
-      : 'Listing not marked DOI-verified',
+    detail:
+      input.isVerified && licenseOk
+        ? 'Re-checkable license number on file'
+        : licenseOk
+          ? 'License number on file — confirm status on official lookup'
+          : 'No re-checkable license number',
   });
 
   let tenurePts = 0;
@@ -139,9 +176,10 @@ export function computeProviderTrustScoreBreakdown(input: TrustScoreInput): Trus
     )
   );
 
-  return { total, base, factors, governmentStanding };
+  return { total, base, factors, governmentStanding, published: true };
 }
 
-export function computeProviderTrustScore(input: TrustScoreInput): number {
-  return computeProviderTrustScoreBreakdown(input).total;
+export function computeProviderTrustScore(input: TrustScoreInputPhase6): number | null {
+  const b = computeProviderTrustScoreBreakdown(input);
+  return b.published ? b.total : null;
 }

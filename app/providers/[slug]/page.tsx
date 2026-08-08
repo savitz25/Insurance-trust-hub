@@ -36,6 +36,11 @@ import {
   resolveGovernmentVerification,
 } from '@/lib/insurance/cms/resolve-government-verification';
 import { computeProviderTrustScoreBreakdown } from '@/lib/insurance/enrichment/trust-score';
+import {
+  allowContactForm,
+  toPublicProviderView,
+} from '@/lib/provenance/public-listing';
+import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -65,12 +70,16 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
   const provider = await getProviderBySlug(slug);
   if (!provider) return { title: 'Provider Not Found' };
 
+  const view = toPublicProviderView(provider);
+  const seed = view.listingClass === 'seed';
+
   return buildMetadata({
-    title: `${provider.name} — ${provider.city}, ${provider.state} Insurance Agency`,
+    title: `${provider.name} — ${provider.city}, ${provider.state} Insurance Research`,
     description:
       provider.short_description ??
-      `Read reviews and contact ${provider.name}, a licensed insurance agency in ${provider.city}, ${provider.state}.`,
+      `Research ${provider.name} in ${provider.city}, ${provider.state}. Re-check licenses on official state tools.`,
     path: `/providers/${slug}`,
+    noIndex: seed,
   });
 }
 
@@ -80,25 +89,32 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const provider = await getProviderBySlug(slug);
   if (!provider) notFound();
 
+  const publicView = toPublicProviderView(provider);
+  const showContact = allowContactForm(publicView.listingClass);
   const reviews = await getReviewsForProvider(slug);
   const breakdown = getRatingBreakdown(reviews);
   const totalBreakdown = Object.values(breakdown).reduce((a, b) => a + b, 0) || 1;
   const licenseUrl = getProviderLicenseUrl(provider);
   const governmentVerification = resolveGovernmentVerification(provider);
   const trustBreakdown = computeProviderTrustScoreBreakdown({
-    bbbRating: provider.bbb_rating,
-    isVerified: provider.is_verified,
-    yearsInBusiness: provider.years_in_business,
+    bbbRating: publicView.listingClass === 'seed' ? null : provider.bbb_rating,
+    isVerified: publicView.verification.showLicenseVerifiedBadge,
+    yearsInBusiness: publicView.yearsInBusiness,
     cmsParticipation: governmentVerification.cmsParticipation,
     hasNpi: Boolean(governmentVerification.npi),
     isMedicareSpecialist: providerIsMedicareSpecialist(provider),
+    licenseNumber: provider.license_number,
+    isSeed: publicView.listingClass === 'seed',
+    googleRating: publicView.showReviews ? publicView.rating : null,
+    googleReviewCount: publicView.showReviews ? publicView.reviewCount : null,
   });
 
   const suitsRelocating =
-    provider.specialties.includes('Relocation Experienced') ||
-    provider.specialties.includes('Medicare Specialists') ||
-    provider.specialties.includes('Bilingual Services') ||
-    (provider.years_in_business != null && provider.years_in_business >= 10);
+    publicView.listingClass !== 'seed' &&
+    (provider.specialties.includes('Relocation Experienced') ||
+      provider.specialties.includes('Medicare Specialists') ||
+      provider.specialties.includes('Bilingual Services') ||
+      (publicView.yearsInBusiness != null && publicView.yearsInBusiness >= 10));
 
   return (
     <>
@@ -115,14 +131,13 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
             <div className="max-w-3xl">
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                {provider.is_verified && (
-                  <Badge variant="success" className="gap-1">
-                    <BadgeCheck className="h-3.5 w-3.5" /> Verified listing
-                  </Badge>
-                )}
+                <InsuranceVerificationBadge verification={publicView.verification} />
                 <Badge variant="secondary">
                   {provider.city}, {provider.state}
                 </Badge>
+                {publicView.listingClass === 'seed' ? (
+                  <Badge variant="outline">Seed listing — not verified research</Badge>
+                ) : null}
               </div>
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{provider.name}</h1>
               {provider.short_description && (
@@ -131,11 +146,23 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 </p>
               )}
               <div className="mt-4 flex flex-wrap items-center gap-4">
-                <StarRating rating={provider.rating} size="lg" />
-                <span className="text-sm text-muted-foreground">
-                  {provider.review_count} review{provider.review_count !== 1 ? 's' : ''}
-                </span>
+                {publicView.showReviews && publicView.rating != null ? (
+                  <>
+                    <StarRating rating={publicView.rating} size="lg" />
+                    <span className="text-sm text-muted-foreground">
+                      {publicView.reviewCount} review
+                      {publicView.reviewCount !== 1 ? 's' : ''}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-sm text-muted-foreground">
+                    No independently verified review summary available
+                  </span>
+                )}
               </div>
+              <p className="mt-2 text-xs text-muted-foreground max-w-xl">
+                {publicView.verification.summary}
+              </p>
             </div>
 
             <div className="flex flex-wrap gap-2 shrink-0">
@@ -145,11 +172,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 city={provider.city}
                 state={provider.state}
                 licenseSummary={
-                  provider.license_number
-                    ? `License ${provider.license_number}`
-                    : provider.is_verified
-                      ? 'Verified listing'
-                      : undefined
+                  publicView.verification.licenseNumber
+                    ? `License ${publicView.verification.licenseNumber}`
+                    : undefined
                 }
                 lines={provider.insurance_types?.map(String)}
                 defaultStatus="shortlisted"
@@ -158,10 +183,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 providerSlug={provider.slug}
                 providerName={provider.name}
               />
-              {provider.phone && (
+              {publicView.phone && (
                 <Button asChild variant="outline" className="gap-2">
-                  <a href={`tel:${provider.phone.replace(/\D/g, '')}`}>
-                    <Phone className="h-4 w-4" /> {provider.phone}
+                  <a href={`tel:${publicView.phone!.replace(/\D/g, '')}`}>
+                    <Phone className="h-4 w-4" /> {publicView.phone}
                   </a>
                 </Button>
               )}
@@ -265,10 +290,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   {provider.specialties.join(' · ')}
                 </p>
               )}
-              {provider.carriers && provider.carriers.length > 0 && (
+              {publicView.showCarriers && publicView.carriers.length > 0 && (
                 <p className="mt-2 text-sm text-muted-foreground">
                   <span className="font-medium text-foreground">Represented carriers:</span>{' '}
-                  {provider.carriers.join(', ')}
+                  {publicView.carriers.join(', ')}
                 </p>
               )}
             </section>
@@ -368,60 +393,74 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
           <aside className="lg:sticky lg:top-24 lg:self-start space-y-6">
             <Card className="shadow-trust-lg">
               <CardHeader>
-                <CardTitle className="text-lg">Contact this agency</CardTitle>
+                <CardTitle className="text-lg">
+                  {showContact ? 'Contact this agency' : 'Research tools'}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <LeadForm
-                  providerSlug={provider.slug}
-                  providerName={provider.name}
-                  defaultState={provider.state}
-                  defaultInsuranceType={provider.insurance_types[0]}
-                />
+                {showContact ? (
+                  <LeadForm
+                    providerSlug={provider.slug}
+                    providerName={provider.name}
+                    defaultState={provider.state}
+                    defaultInsuranceType={provider.insurance_types[0]}
+                  />
+                ) : (
+                  <div className="space-y-3 text-sm text-muted-foreground">
+                    <p>
+                      Contact forms are disabled on seed or unverified listings (research-only
+                      policy). Use official state tools to re-check licenses before sharing personal
+                      data.
+                    </p>
+                    <Button asChild variant="trust" className="w-full">
+                      <Link href="/tools/license-verification">Verify a license</Link>
+                    </Button>
+                    <Button asChild variant="outline" className="w-full">
+                      <Link href="/methodology">How we score research</Link>
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Trust metrics</CardTitle>
+                <CardTitle className="text-lg">Research metrics</CardTitle>
               </CardHeader>
               <CardContent className="text-sm space-y-4">
-                <TrustScoreBreakdownPanel
-                  breakdown={{
-                    ...trustBreakdown,
-                    total: provider.trust_score ?? trustBreakdown.total,
-                  }}
-                />
-                {provider.local_market_experience != null && (
-                  <p>
-                    <span className="font-medium">Local Market Experience:</span>{' '}
-                    {provider.local_market_experience}/100
+                {trustBreakdown.published ? (
+                  <TrustScoreBreakdownPanel breakdown={trustBreakdown} />
+                ) : (
+                  <p className="text-muted-foreground">
+                    Research Score not published — insufficient verified inputs (re-checkable
+                    license required). See{' '}
+                    <Link href="/methodology" className="text-primary underline">
+                      methodology
+                    </Link>
+                    .
                   </p>
                 )}
-                {provider.avg_response_hours != null && (
-                  <p>
-                    <span className="font-medium">Avg Response:</span> &lt;
-                    {provider.avg_response_hours} hours
-                  </p>
-                )}
-                {provider.bbb_rating && (
+                {publicView.listingClass !== 'seed' && provider.bbb_rating && (
                   <p>
                     <span className="font-medium">BBB Rating:</span> {provider.bbb_rating}
                   </p>
                 )}
-                <p className="text-[11px] text-muted-foreground">
-                  Government Standing sub-score: {trustBreakdown.governmentStanding}/100.{' '}
-                  <Link href="/data/plan-complaint-index" className="text-primary hover:underline">
-                    Plan Complaint Index
-                  </Link>
-                </p>
+                {trustBreakdown.published ? (
+                  <p className="text-[11px] text-muted-foreground">
+                    Government Standing sub-score: {trustBreakdown.governmentStanding}/100.{' '}
+                    <Link href="/data/plan-complaint-index" className="text-primary hover:underline">
+                      Plan Complaint Index
+                    </Link>
+                  </p>
+                ) : null}
               </CardContent>
             </Card>
 
-            {provider.years_in_business && (
+            {publicView.yearsInBusiness ? (
               <p className={cn('text-center text-sm text-muted-foreground')}>
-                {provider.years_in_business} years in business
+                {publicView.yearsInBusiness} years in business
               </p>
-            )}
+            ) : null}
           </aside>
         </div>
       </div>

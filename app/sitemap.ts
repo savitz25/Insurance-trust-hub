@@ -104,7 +104,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const providers = FALLBACK_PROVIDERS.map((provider) => ({
+  // Phase 6A: seed fallback providers are not indexable research — omit from sitemap
+  const providers: MetadataRoute.Sitemap = FALLBACK_PROVIDERS.filter(
+    (p) => p.is_verified && p.license_number && /\d/.test(p.license_number) && !p.id.startsWith('fallback-')
+  ).map((provider) => ({
     url: `${site}/providers/${provider.slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,

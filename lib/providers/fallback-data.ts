@@ -1,6 +1,12 @@
 import type { Provider } from '@/types/provider';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 
+/**
+ * Phase 6A — seed/demo catalog only.
+ * Rows are explicitly non-verified research. Public render paths must treat
+ * id prefix `fallback-` as seed (noindex, no hard Verified, no contact form).
+ */
+
 const CITIES: Record<string, string[]> = {
   FL: ['Miami', 'Tampa', 'Orlando', 'Jacksonville', 'Fort Lauderdale'],
   TX: ['Houston', 'Dallas', 'Austin', 'San Antonio', 'Fort Worth'],
@@ -51,14 +57,6 @@ const SPECIALTY_SETS: Specialty[][] = [
   ['Independent Agency', 'Small Business', 'Commercial Lines'],
 ];
 
-const CARRIERS = [
-  ['State Farm', 'Progressive', 'Travelers'],
-  ['Allstate', 'Nationwide', 'Liberty Mutual'],
-  ['GEICO', 'USAA', 'Farmers'],
-  ['Hartford', 'Chubb', 'MetLife'],
-  ['Blue Cross', 'Aetna', 'Cigna'],
-];
-
 function buildProvider(index: number): Provider {
   const stateCodes = Object.keys(CITIES);
   const state = stateCodes[index % stateCodes.length];
@@ -70,33 +68,31 @@ function buildProvider(index: number): Provider {
   const slug = `${prefix.toLowerCase()}-${suffix.toLowerCase().replace(/\s+/g, '-')}-${city.toLowerCase().replace(/\s+/g, '-')}-${state.toLowerCase()}`;
   const types = TYPE_SETS[index % TYPE_SETS.length];
   const specialties = SPECIALTY_SETS[index % SPECIALTY_SETS.length];
-  const rating = Number((3.8 + (index % 12) * 0.1).toFixed(1));
-  const reviewCount = 12 + (index * 7) % 180;
-  const years = 5 + (index % 35);
 
   return {
     id: `fallback-${index + 1}`,
     slug,
     name,
-    short_description: `Licensed ${state} agency specializing in ${types.slice(0, 2).join(' & ')} coverage for families and businesses.`,
-    description: `${name} is an independent insurance agency serving ${city}, ${state} and surrounding communities. Our licensed agents compare quotes from multiple carriers to help you find the right coverage at competitive rates.`,
+    short_description: `Illustrative seed listing for ${city}, ${state} — not independently verified research. Use state DOI tools before contacting any agency.`,
+    description: `${name} appears in the directory seed catalog for layout and tooling demos only. License status, ratings, and contact data are not verified public-record research.`,
     city,
     state,
-    zip: `${10000 + index * 111}`.slice(0, 5),
-    phone: `(555) ${String(200 + index).padStart(3, '0')}-${String(1000 + index * 13).slice(-4)}`,
-    website: `https://www.${prefix.toLowerCase()}${suffix.split(' ')[0].toLowerCase()}.com`,
+    // No invented ZIP / phone / license / ratings for seed honesty
+    zip: null,
+    phone: null,
+    website: null,
     insurance_types: types,
     specialties,
-    rating: Math.min(rating, 5),
-    review_count: reviewCount,
-    is_verified: index % 3 !== 0,
-    license_number: `${state}-${100000 + index}`,
-    years_in_business: years,
-    carriers: CARRIERS[index % CARRIERS.length],
+    rating: 0,
+    review_count: 0,
+    is_verified: false,
+    license_number: null,
+    years_in_business: null,
+    carriers: [],
   };
 }
 
-/** 50 mock providers used when Supabase is not configured. */
+/** 50 seed providers — never indexable research (id prefix fallback-). */
 export const FALLBACK_PROVIDERS: Provider[] = Array.from({ length: 50 }, (_, i) =>
   buildProvider(i)
 );
@@ -132,10 +128,11 @@ export function searchFallbackProviders(filters: {
   if (filters.specialty) {
     results = results.filter((p) => p.specialties.includes(filters.specialty!));
   }
+  // verifiedOnly never matches seed rows (all is_verified false)
   if (filters.verifiedOnly) {
     results = results.filter((p) => p.is_verified);
   }
-  if (filters.minRating) {
+  if (filters.minRating != null && filters.minRating > 0) {
     results = results.filter((p) => p.rating >= filters.minRating!);
   }
   if (filters.query) {
@@ -144,15 +141,12 @@ export function searchFallbackProviders(filters: {
       (p) =>
         p.name.toLowerCase().includes(q) ||
         p.city.toLowerCase().includes(q) ||
-        p.state.toLowerCase().includes(q) ||
-        p.specialties.some((s) => s.toLowerCase().includes(q))
+        p.state.toLowerCase().includes(q)
     );
   }
 
   const total = results.length;
   const offset = filters.offset ?? 0;
-  const limit = filters.limit ?? 24;
-  results = results.slice(offset, offset + limit);
-
-  return { providers: results, total };
+  const limit = filters.limit ?? results.length;
+  return { providers: results.slice(offset, offset + limit), total };
 }

@@ -72,17 +72,20 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
         <div className="container mx-auto px-4 text-center">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm">
             <Shield className="h-4 w-4" />
-            Verified · Independent · Licensed Only
+            Independent research · Re-check state licenses
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
-            Top Verified Insurance Agents in {hub.shortName}
+            Research insurance agencies in {hub.shortName}
           </h1>
           <p className="mt-2 text-lg text-primary-foreground/80">
-            Health Insurance Experts Serving {hub.localDescriptor}
+            Licensed agencies with re-checkable public records for {hub.localDescriptor}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
-            {stats.totalAgents} agencies · {stats.healthSpecialists} health specialists · Avg trust
-            score {stats.avgTrustScore}/100 · {stats.totalReviews.toLocaleString()} reviews analyzed
+            {stats.totalAgents} agencies listed · {stats.healthSpecialists} health-focused ·{' '}
+            {stats.verified} with re-checkable verified license numbers
+            {stats.seedInventory
+              ? ' · Research inventory may be incomplete — missing data is better than invented verification'
+              : ''}
           </p>
           <div className="mt-6 flex justify-center">
             <ZipSearch defaultZip={hub.zipCodes[0]} className="[&_input]:bg-white [&_button]:bg-trust" />
@@ -109,8 +112,14 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                 </div>
                 <div className="rounded-lg border p-4 text-center">
                   <Star className="h-5 w-5 mx-auto text-amber-500 mb-1" />
-                  <p className="text-lg font-bold">{stats.avgTrustScore}/100</p>
-                  <p className="text-xs text-muted-foreground">Avg trust score</p>
+                  <p className="text-lg font-bold">
+                    {stats.avgTrustScore != null ? `${stats.avgTrustScore}/100` : '—'}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {stats.avgTrustScore != null
+                      ? 'Avg research score'
+                      : 'Score suppressed (seed/incomplete)'}
+                  </p>
                 </div>
               </div>
               <p className="mt-4 text-sm text-muted-foreground">
@@ -212,7 +221,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                 specific to your ZIP code.
               </p>
               <div className="flex flex-wrap gap-2">
-                {['DOI Verified', 'NAIC Data', 'BBB Rated', 'No Paid Ads'].map((badge) => (
+                {['Independent research', 'Re-check DOI', 'No paid placements', 'No lead fees'].map((badge) => (
                   <span
                     key={badge}
                     className="rounded-full bg-trust/10 text-trust text-[10px] font-semibold px-2 py-0.5"

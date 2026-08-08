@@ -1,11 +1,13 @@
 import Link from 'next/link';
-import { BadgeCheck, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import type { Provider } from '@/types/provider';
 import { INSURANCE_TYPES } from '@/lib/constants';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { StarRating } from '@/components/star-rating';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
+import { InsuranceVerificationBadge } from '@/components/verification-badge';
+import { toPublicProviderView } from '@/lib/provenance/public-listing';
 import { cn } from '@/lib/utils';
 
 interface ProviderCardProps {
@@ -14,6 +16,7 @@ interface ProviderCardProps {
 }
 
 export function ProviderCard({ provider, className }: ProviderCardProps) {
+  const view = toPublicProviderView(provider);
   const typeLabels = provider.insurance_types
     .slice(0, 3)
     .map((t) => INSURANCE_TYPES.find((it) => it.value === t)?.label ?? t);
@@ -36,12 +39,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
               {provider.city}, {provider.state}
             </p>
           </div>
-          {provider.is_verified && (
-            <Badge variant="success" className="shrink-0 gap-1">
-              <BadgeCheck className="h-3 w-3" aria-hidden="true" />
-              Verified
-            </Badge>
-          )}
+          <InsuranceVerificationBadge verification={view.verification} className="shrink-0" />
         </div>
       </CardHeader>
 
@@ -52,13 +50,22 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
           </p>
         )}
 
-        <StarRating rating={provider.rating} size="sm" />
-        <p className="text-xs text-muted-foreground">
-          {provider.review_count} review{provider.review_count !== 1 ? 's' : ''}
-          {provider.years_in_business
-            ? ` · ${provider.years_in_business} years in business`
-            : ''}
-        </p>
+        {view.showReviews && view.rating != null ? (
+          <>
+            <StarRating rating={view.rating} size="sm" />
+            <p className="text-xs text-muted-foreground">
+              {view.reviewCount} review{view.reviewCount !== 1 ? 's' : ''}
+              {view.yearsInBusiness
+                ? ` · ${view.yearsInBusiness} years in business`
+                : ''}
+            </p>
+          </>
+        ) : (
+          <p className="text-xs text-muted-foreground">
+            No independently verified review summary available
+            {view.yearsInBusiness ? ` · ${view.yearsInBusiness} years in business` : ''}
+          </p>
+        )}
 
         <div className="flex flex-wrap gap-1.5">
           {typeLabels.map((label) => (
@@ -79,20 +86,13 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
         <SaveProviderButton
           providerSlug={provider.slug}
           providerName={provider.name}
-          city={provider.city}
-          state={provider.state}
-          licenseSummary={
-            provider.license_number ? `License ${provider.license_number}` : undefined
-          }
-          lines={provider.insurance_types?.map(String)}
-          defaultStatus="researching"
-          compact
+          className="text-xs"
         />
         <Link
           href={`/providers/${provider.slug}`}
-          className="text-sm font-medium text-primary hover:underline underline-offset-4"
+          className="text-sm font-medium text-primary hover:underline"
         >
-          View profile →
+          Research →
         </Link>
       </CardFooter>
     </Card>

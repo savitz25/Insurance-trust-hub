@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import { Star, ShieldCheck, ExternalLink, Clock } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import type { HubAgent } from '@/types/agent';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { InsuranceVerificationBadge } from '@/components/verification-badge';
+import { toPublicHubAgentView } from '@/lib/provenance/public-listing';
 import { cn } from '@/lib/utils';
 
 interface AgentCardProps {
@@ -13,12 +15,8 @@ interface AgentCardProps {
 }
 
 export function AgentCard({ agent, rank, hubLabel, className }: AgentCardProps) {
-  const locationLine = [
-    agent.city,
-    agent.state,
-    agent.county ? `${agent.county} County` : undefined,
-    hubLabel ? `Serves ${hubLabel}` : undefined,
-  ]
+  const view = toPublicHubAgentView(agent);
+  const locationLine = [agent.city, agent.state, agent.county ? `${agent.county} County` : undefined]
     .filter(Boolean)
     .join(' · ');
 
@@ -36,7 +34,7 @@ export function AgentCard({ agent, rank, hubLabel, className }: AgentCardProps) 
         'rounded-2xl border border-border bg-card p-5 shadow-trust transition-colors hover:border-primary/30 sm:p-6',
         className
       )}
-      aria-label={`${agent.name} — insurance agent${hubLabel ? ` in ${hubLabel}` : ''}`}
+      aria-label={`${agent.name} — insurance agency research${hubLabel ? ` in ${hubLabel}` : ''}`}
     >
       <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
@@ -60,85 +58,67 @@ export function AgentCard({ agent, rank, hubLabel, className }: AgentCardProps) 
             <p className="mt-0.5 text-xs text-muted-foreground">{locationLine}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-2.5 py-1 text-sm font-semibold text-amber-700">
-          <Star className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
-          {agent.rating.toFixed(1)}
-          <span className="text-xs font-normal text-muted-foreground">
-            ({agent.reviewCount.toLocaleString()} reviews)
-          </span>
-        </div>
+        <InsuranceVerificationBadge verification={view.verification} />
       </div>
 
       <p className="mb-4 text-sm leading-relaxed text-muted-foreground">{agent.shortDescription}</p>
 
-      {agent.reviewHighlight && (
+      {view.showReviewHighlight && agent.reviewHighlight ? (
         <blockquote className="mb-4 border-l-2 border-trust/40 pl-3 text-xs italic text-muted-foreground leading-relaxed">
           {agent.reviewHighlight}
         </blockquote>
-      )}
-
-      {agent.awards && agent.awards.length > 0 && (
-        <p className="mb-4 text-xs text-muted-foreground">
-          <span className="font-medium text-foreground">Recognition:</span>{' '}
-          {agent.awards.join(' · ')}
-        </p>
-      )}
+      ) : null}
 
       <div className="mb-4 flex flex-wrap gap-1.5" aria-label="Specialties">
         {healthBadges.map((badge) => (
-          <Badge key={badge} variant={badge.includes('Medicare') || badge.includes('ACA') ? 'success' : 'secondary'}>
+          <Badge
+            key={badge}
+            variant={badge.includes('Medicare') || badge.includes('ACA') ? 'secondary' : 'secondary'}
+          >
             {badge}
           </Badge>
         ))}
-        {agent.isMedicareFeatured && (
-          <Badge variant="success">Featured Medicare/ACA</Badge>
-        )}
-        {agent.isDiversePopulations && (
-          <Badge variant="outline">Diverse Populations</Badge>
-        )}
       </div>
 
       <div className="mb-4 grid gap-2 text-xs text-muted-foreground sm:grid-cols-2">
         <div>
-          <span className="font-medium text-foreground">License:</span> {agent.licenseNumber}
+          <span className="font-medium text-foreground">License:</span>{' '}
+          {view.verification.licenseNumber ?? 'Not on file — re-check state DOI'}
         </div>
-        <div>
-          <span className="font-medium text-foreground">Trust Score:</span> {agent.trustScore}/100
-        </div>
-        <div>
-          <span className="font-medium text-foreground">Local Market Experience:</span>{' '}
-          {agent.localMarketExperience}/100
-        </div>
-        <div className="flex items-center gap-1">
-          <Clock className="h-3 w-3" aria-hidden="true" />
-          <span className="font-medium text-foreground">Avg Response:</span> &lt;{agent.avgResponseHours}h
-        </div>
+        {view.showTrustScore && view.trustScore != null ? (
+          <div>
+            <span className="font-medium text-foreground">Research Score:</span> {view.trustScore}/100
+          </div>
+        ) : (
+          <div>
+            <span className="font-medium text-foreground">Research Score:</span> Not published
+          </div>
+        )}
+        {!view.showReviews ? (
+          <div className="sm:col-span-2">
+            No independently verified review summary available
+          </div>
+        ) : null}
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
-        <div className="flex flex-wrap items-center gap-2">
-          {agent.isVerified && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-trust/10 px-2 py-0.5 text-xs font-medium text-trust">
-              <ShieldCheck className="h-3 w-3" aria-hidden="true" />
-              DOI Verified
-            </span>
-          )}
-          <span className="text-xs text-muted-foreground">NAIC Verified · BBB {agent.bbbRating}</span>
-        </div>
+        <p className="text-xs text-muted-foreground max-w-xs">
+          {view.verification.summary}
+        </p>
         <div className="flex gap-2">
-          {agent.phone && (
+          {view.phone ? (
             <Button size="sm" variant="outline" asChild>
-              <a href={`tel:${agent.phone.replace(/\D/g, '')}`}>{agent.phone}</a>
+              <a href={`tel:${view.phone.replace(/\D/g, '')}`}>{view.phone}</a>
             </Button>
-          )}
+          ) : null}
           <Button size="sm" variant="trust" asChild>
-            <Link href={`/providers/${agent.slug}#quote`}>Get Free Health Quote</Link>
+            <Link href={`/tools/license-verification`}>Verify license</Link>
           </Button>
           <Link
             href={`/providers/${agent.slug}`}
             className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
           >
-            View Profile <ExternalLink className="h-3 w-3" aria-hidden="true" />
+            Research profile <ExternalLink className="h-3 w-3" aria-hidden="true" />
           </Link>
         </div>
       </div>

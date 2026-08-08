@@ -1,6 +1,7 @@
 import type { HubAgent, InsuranceHub } from '@/types/agent';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import { getCuratedHubAgents } from '@/lib/hubs/data/curated-hubs';
+import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
 
 const HEALTH_AGENCY_NAMES = [
   'Summit Health Partners',
@@ -72,15 +73,12 @@ function buildAgent(
   opts: Partial<HubAgent> & { isHealthFeatured?: boolean }
 ): HubAgent {
   const seed = hash(`${hub.slug}-${name}-${index}`);
-  const rating = 4.2 + (seed % 8) / 10;
-  const reviewCount = 45 + (seed % 280);
-  const trustScore = 88 + (seed % 12);
-  const localExp = 85 + (seed % 15);
   const isHealth = opts.isHealthFeatured ?? index < 6;
 
   const healthTypes: InsuranceType[] = ['health', 'medicare'];
   const multiTypes: InsuranceType[] = ['auto', 'homeowners', 'life', 'renters'];
 
+  // Phase 6A: generated agents are seed inventory — never verified, no scores/reviews/phones
   return {
     id: `${hub.slug}-agent-${index}`,
     slug: slugify(name, hub),
@@ -104,22 +102,25 @@ function buildAgent(
     specialties: (isHealth
       ? ['Medicare Specialists', 'Relocation Experienced', 'Bundle Experts'].slice(0, 2 + (seed % 2))
       : ['Independent Agency', 'Personal Lines', 'Bundle Experts']) as Specialty[],
-    rating: Math.round(rating * 10) / 10,
-    reviewCount,
+    rating: 0,
+    reviewCount: 0,
     shortDescription: isHealth
       ? HEALTH_DESCRIPTIONS[seed % HEALTH_DESCRIPTIONS.length](hub)
       : MULTILINE_DESCRIPTIONS[seed % MULTILINE_DESCRIPTIONS.length](hub),
-    licenseNumber: `${hub.stateCode}-${100000 + (seed % 899999)}`,
-    trustScore,
-    localMarketExperience: localExp,
-    avgResponseHours: 1 + (seed % 4),
-    bbbRating: seed % 5 === 0 ? 'A' : 'A+',
-    isVerified: true,
+    licenseNumber: '',
+    trustScore: 0,
+    localMarketExperience: 0,
+    avgResponseHours: 0,
+    bbbRating: '',
+    isVerified: false,
     isHealthFeatured: isHealth,
     isMedicareFeatured: opts.isMedicareFeatured ?? false,
     isDiversePopulations: opts.isDiversePopulations ?? false,
-    yearsInBusiness: 8 + (seed % 22),
+    yearsInBusiness: 0,
     website: undefined,
+    phone: undefined,
+    reviewHighlight: undefined,
+    awards: undefined,
   };
 }
 
@@ -129,7 +130,7 @@ function sortAgents(agents: HubAgent[]): HubAgent[] {
       return a.featuredRank - b.featuredRank;
     }
     if (a.isHealthFeatured !== b.isHealthFeatured) return a.isHealthFeatured ? -1 : 1;
-    return b.trustScore - a.trustScore;
+    return a.name.localeCompare(b.name);
   });
 }
 
@@ -175,15 +176,18 @@ export function getFeaturedHealthAgents(hub: InsuranceHub): HubAgent[] {
 export function getHubStats(hub: InsuranceHub) {
   const agents = getAgentsForHub(hub);
   const healthAgents = agents.filter((a) => a.isHealthFeatured);
-  const avgTrust =
-    Math.round(agents.reduce((s, a) => s + a.trustScore, 0) / agents.length);
-  const totalReviews = agents.reduce((s, a) => s + a.reviewCount, 0);
+  // Phase 6A: only count hard-verified when license number is re-checkable
+  const verified = agents.filter(
+    (a) => a.isVerified && cleanLicenseNumber(a.licenseNumber)
+  ).length;
 
   return {
     totalAgents: agents.length,
     healthSpecialists: healthAgents.length,
-    verified: agents.filter((a) => a.isVerified).length,
-    avgTrustScore: avgTrust,
-    totalReviews,
+    verified,
+    /** Suppressed for seed hubs — not a public research score */
+    avgTrustScore: null as number | null,
+    totalReviews: 0,
+    seedInventory: verified === 0,
   };
 }

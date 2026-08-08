@@ -77,8 +77,13 @@ export async function getReviewsForProvider(slug: string): Promise<ProviderRevie
   const provider = await getProviderBySlug(slug);
   if (!provider) return [];
 
+  // Phase 6A: never invent synthetic reviews for seed/fallback catalog
+  if (provider.id.startsWith('fallback-') || provider.id.startsWith('seed-')) {
+    return [];
+  }
+
   if (!isSupabaseConfigured()) {
-    return buildFallbackReviews(slug, Math.min(provider.review_count, 8));
+    return [];
   }
 
   try {
@@ -92,10 +97,12 @@ export async function getReviewsForProvider(slug: string): Promise<ProviderRevie
       .limit(20);
 
     if (error || !data?.length) {
-      return buildFallbackReviews(slug, Math.min(provider.review_count, 8));
+      return [];
     }
 
-    return data.map((row) => ({
+    // Drop duplicated review bodies (seed/import contamination)
+    const seen = new Set<string>();
+    const mapped = data.map((row) => ({
       id: row.id,
       author: row.author_name,
       authorLocation: row.author_location,
@@ -104,7 +111,13 @@ export async function getReviewsForProvider(slug: string): Promise<ProviderRevie
       content: row.content,
       createdAt: row.created_at,
     }));
+    return mapped.filter((r) => {
+      const key = r.content.trim().toLowerCase().slice(0, 160);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   } catch {
-    return buildFallbackReviews(slug, Math.min(provider.review_count, 8));
+    return [];
   }
 }
