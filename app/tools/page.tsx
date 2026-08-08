@@ -81,13 +81,23 @@ const FLAGSHIPS = [
     time: '~3–5 min',
   },
   {
+    href: '/tools/aca-plan-explorer',
+    icon: Compass,
+    badge: 'P1 · Live Coverage Intelligence',
+    title: 'Live ACA Plan Explorer',
+    question: 'Which Marketplace plans are actually available for my ZIP and household?',
+    description:
+      'Research real CMS Marketplace plans by ZIP and ages — metal, premium, deductible, HSA. Research only; no lead form; no invented premiums.',
+    time: '~2–5 min',
+  },
+  {
     href: '/calculators/aca-subsidy',
     icon: PiggyBank,
-    badge: 'Flagship · Primary ACA path',
+    badge: 'Flagship · PTC / CSR education',
     title: 'ACA Coverage & Savings Planner',
     question: 'Will I qualify for a Marketplace subsidy — and what does that mean where I live?',
     description:
-      'ZIP, ages, and income → premium tax credit ranges, CSR alerts, 400% FPL cliff education, and local net-cost paths. Canonical assistance tool (replaces older eligibility widgets).',
+      'ZIP, ages, and income → premium tax credit ranges, CSR alerts, 400% FPL cliff education, and local net-cost paths. Educational assistance path.',
     time: '~2–4 min',
   },
   {

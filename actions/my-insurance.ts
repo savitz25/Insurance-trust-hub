@@ -489,9 +489,11 @@ export async function saveCalculatorResultAction(input: {
         input.snapshot.sourcePath ||
         (input.calculatorId === 'aca_subsidy'
           ? '/calculators/aca-subsidy'
-          : input.calculatorId === 'cost_estimator'
-            ? '/tools/cost-estimator'
-            : '/tools'),
+          : input.calculatorId === 'aca_plan_explorer'
+            ? '/tools/aca-plan-explorer'
+            : input.calculatorId === 'cost_estimator'
+              ? '/tools/cost-estimator'
+              : '/tools'),
     };
 
     const { data, error } = await supabase

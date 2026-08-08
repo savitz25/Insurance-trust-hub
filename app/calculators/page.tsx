@@ -36,6 +36,13 @@ const CALCULATORS = [
       'ZIP, ages, and income → premium tax credit ranges, CSR alerts, local cost paths, and 400% FPL cliff education. Educational only.',
   },
   {
+    href: '/tools/aca-plan-explorer',
+    icon: Calculator,
+    title: 'Live ACA Plan Explorer',
+    description:
+      'Research actual Marketplace plans for your ZIP and household (CMS API). Not enrollment — no lead form.',
+  },
+  {
     href: '/tools/license-verification',
     icon: Shield,
     title: 'License Verification Guide',

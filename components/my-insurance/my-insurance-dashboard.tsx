@@ -56,6 +56,7 @@ function calcLabel(id: string): string {
 function sourcePathForCalc(id: string, snapshotPath?: string): string {
   if (snapshotPath) return snapshotPath;
   if (id === 'aca_subsidy') return ACA_SUBSIDY_PATH;
+  if (id === 'aca_plan_explorer') return '/tools/aca-plan-explorer';
   if (id === 'cost_estimator') return COST_ESTIMATOR_PATH;
   return '/tools';
 }

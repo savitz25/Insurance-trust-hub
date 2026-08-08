@@ -41,6 +41,7 @@ export type DrugBasketWithItems = {
 
 export type CalculatorToolId =
   | 'aca_subsidy'
+  | 'aca_plan_explorer'
   | 'cost_estimator'
   | 'needs_assessment';
 
@@ -143,6 +144,7 @@ export type MyInsuranceDashboardData = {
 
 export const CALCULATOR_LABELS: Record<CalculatorToolId, string> = {
   aca_subsidy: 'ACA Coverage & Savings Planner',
+  aca_plan_explorer: 'Live ACA Plan Explorer',
   cost_estimator: 'Insurance Cost & Coverage Planner',
   needs_assessment: 'Coverage Compass / Needs Assessment',
 };
