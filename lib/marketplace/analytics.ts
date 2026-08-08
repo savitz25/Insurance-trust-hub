@@ -15,7 +15,12 @@ export type MarketplaceEventName =
   | 'custom_scenario_used'
   | 'sort_by_yearly_cost'
   | 'plan_detail_with_cost'
-  | 'compare_with_yearly_cost';
+  | 'compare_with_yearly_cost'
+  | 'plan_xray_opened'
+  | 'county_intelligence_opened'
+  | 'explorer_prefill_from_county'
+  | 'outbound_official_exchange_click'
+  | 'save_plan_from_xray';
 
 export function trackMarketplaceEvent(
   name: MarketplaceEventName,

@@ -9,6 +9,10 @@ import {
   classifyProviderListing,
   isIndexableListing,
 } from '@/lib/provenance/public-listing';
+import {
+  CURATED_ACA_MARKETS,
+  marketPath,
+} from '@/lib/marketplace/curated-markets';
 
 /**
  * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
@@ -42,6 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/medicare-plan-finder',
     '/tools/medicare-provider-lookup',
     '/tools/aca-plan-explorer',
+    '/marketplace',
     '/data/plan-complaint-index',
     '/data/counties',
     '/data/counties/miami-dade-fl',
@@ -134,12 +139,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: hub.priority <= 15 ? 0.85 : hub.priority >= 55 ? 0.88 : 0.7,
   }));
 
+  // Phase 10: curated county ACA pages only (quality list — not all US counties).
+  // Thin markets stay noindex at page level; FL federal markets prioritized in sitemap.
+  const marketplaceCounties: MetadataRoute.Sitemap = CURATED_ACA_MARKETS.filter(
+    (m) => m.stateCode === 'FL' || m.stateCode === 'TX' || m.stateCode === 'AZ'
+  ).map((m) => ({
+    url: `${site}${marketPath(m)}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.82,
+  }));
+
+  // Plan X-Ray URLs are dynamic by plan id — not mass-emitted (quality over volume).
+
   const all = [
     ...staticRoutes,
     ...specialtyTopics,
     ...browseStates,
     ...hubStates,
     ...hubPages,
+    ...marketplaceCounties,
     ...destinationStates,
     ...destinationCities,
     ...articles,

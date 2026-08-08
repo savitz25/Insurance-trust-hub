@@ -64,4 +64,4 @@ Visible research-only framing on page + results. No lead form on the tool.
 
 - **Phase 8 shipped:** Doctor / drug checkers — `INSURANCE-PHASE-8-DOCTOR-RX-COVERAGE.md`  
 - **Phase 9 shipped:** Total annual cost engine (CMS OOPC scenarios) — `INSURANCE-PHASE-9-TOTAL-ANNUAL-COST.md`  
-- Plan X-Ray + county ACA intelligence  
+- **Phase 10 shipped:** Plan X-Ray + county ACA intelligence — `INSURANCE-PHASE-10-PLAN-XRAY-COUNTY.md`  

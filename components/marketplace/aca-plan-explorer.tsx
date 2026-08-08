@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import {
   AlertCircle,
   BookmarkPlus,
@@ -14,6 +15,11 @@ import {
   Stethoscope,
   X,
 } from 'lucide-react';
+import {
+  CURATED_ACA_MARKETS,
+  marketPath,
+  planXrayPath,
+} from '@/lib/marketplace/curated-markets';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -102,6 +108,7 @@ export function AcaPlanExplorer() {
   const [people, setPeople] = useState<PersonRow[]>([{ age: '35', tobacco: false }]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<MarketplaceSearchResult | null>(null);
+  const prefillDone = useRef(false);
   const [sort, setSort] = useState<PlanSortKey>('estimated_premium');
   const [metals, setMetals] = useState<MetalLevel[]>([]);
   const [planTypes, setPlanTypes] = useState<PlanTypeCode[]>([]);
@@ -177,6 +184,40 @@ export function AcaPlanExplorer() {
     },
     [zip, year, income, people, scenario, customCare]
   );
+
+  // Prefill ZIP/year from county intelligence deep links (?zip=&year=)
+  useEffect(() => {
+    if (prefillDone.current || typeof window === 'undefined') return;
+    prefillDone.current = true;
+    const sp = new URLSearchParams(window.location.search);
+    const z = (sp.get('zip') || '').replace(/\D/g, '').slice(0, 5);
+    const y = sp.get('year');
+    if (y === '2025' || y === '2026') setYear(y);
+    if (z.length !== 5) return;
+    setZip(z);
+    window.setTimeout(() => {
+      void (async () => {
+        setLoading(true);
+        try {
+          const res = await fetch('/api/marketplace/plans', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              zip: z,
+              year: Number(y) || MARKETPLACE_PLAN_YEAR_DEFAULT,
+              people: [{ age: 35, usesTobacco: false }],
+            }),
+          });
+          const data = (await res.json()) as MarketplaceSearchResult;
+          setResult(data);
+        } catch {
+          // user can retry manually
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, 0);
+  }, []);
 
   const runCoverageMatch = useCallback(
     async (planIds: string[], docs: SessionDoctor[], rxs: SessionPrescription[]) => {
@@ -1028,7 +1069,30 @@ export function AcaPlanExplorer() {
                   : 'No plan list available'}
               </h2>
               {result.locationLabel ? (
-                <p className="text-sm text-muted-foreground mt-0.5">{result.locationLabel}</p>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  {result.locationLabel}
+                  {(() => {
+                    const st = result.provenance.state?.toLowerCase();
+                    const hit = CURATED_ACA_MARKETS.find(
+                      (m) =>
+                        m.stateCode === result.provenance.state ||
+                        (st && m.stateSlug === st) ||
+                        (result.provenance.zip && m.sampleZip === result.provenance.zip)
+                    );
+                    if (!hit) return null;
+                    return (
+                      <>
+                        {' · '}
+                        <Link
+                          href={marketPath(hit)}
+                          className="text-primary hover:underline"
+                        >
+                          {hit.countyName} county ACA intelligence
+                        </Link>
+                      </>
+                    );
+                  })()}
+                </p>
               ) : null}
               {result.provenance ? (
                 <p className="text-xs text-muted-foreground mt-1">
@@ -1430,7 +1494,20 @@ export function AcaPlanExplorer() {
                               variant="trust"
                               onClick={() => openDetail(plan)}
                             >
-                              Plan detail
+                              Quick detail
+                            </Button>
+                            <Button asChild size="sm" variant="outline">
+                              <Link
+                                href={planXrayPath(
+                                  result?.provenance.planYear ||
+                                    Number(year) ||
+                                    MARKETPLACE_PLAN_YEAR_DEFAULT,
+                                  plan.id,
+                                  zip || result?.provenance.zip
+                                )}
+                              >
+                                Plan X-Ray
+                              </Link>
                             </Button>
                             <Button
                               type="button"
@@ -1733,6 +1810,19 @@ export function AcaPlanExplorer() {
                     Confirm on HealthCare.gov
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
+                </Button>
+                <Button asChild size="sm" variant="outline">
+                  <Link
+                    href={planXrayPath(
+                      result?.provenance.planYear ||
+                        Number(year) ||
+                        MARKETPLACE_PLAN_YEAR_DEFAULT,
+                      detail.id,
+                      zip || result?.provenance.zip
+                    )}
+                  >
+                    Open full Plan X-Ray
+                  </Link>
                 </Button>
                 <Button type="button" size="sm" variant="ghost" onClick={() => setDetail(null)}>
                   Back to results

@@ -88,7 +88,7 @@ const FLAGSHIPS = [
     question:
       'Which Marketplace plans are available — and what might they cost me for the year?',
     description:
-      'Research CMS Marketplace plans by ZIP and ages, compare estimated yearly cost under care scenarios, and check doctor/Rx match signals. Research only; no lead form; no invented costs.',
+      'Research CMS Marketplace plans by ZIP and ages, compare estimated yearly cost, check doctor/Rx match, then open Plan X-Ray or county intelligence. Research only; no lead form.',
     time: '~3–8 min',
   },
   {
@@ -119,6 +119,15 @@ const FLAGSHIPS = [
 ] as const;
 
 const QUICK_TOOLS = [
+  {
+    href: '/marketplace',
+    icon: Compass,
+    title: 'County ACA intelligence',
+    purpose:
+      'Curated county Marketplace snapshots (issuers, metal mix, premium ranges) from CMS plan data.',
+    bestFor: 'Local market research before Explorer',
+    time: '~2–4 min',
+  },
   {
     href: '/tools/aca-plan-explorer#doctors',
     icon: Stethoscope,
