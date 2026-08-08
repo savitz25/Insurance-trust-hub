@@ -18,6 +18,15 @@ export interface Provider {
   review_count: number;
   is_verified: boolean;
   license_number?: string | null;
+  /** Phase 6B1 provenance — required with license for hard verified / indexable */
+  license_state?: string | null;
+  license_source?: string | null;
+  license_source_url?: string | null;
+  license_checked_at?: string | null;
+  license_method?: 'manual' | 'automated' | 'operator_submitted' | 'seed' | null;
+  license_notes?: string | null;
+  /** Operator accepted name/identity match before attach */
+  license_identity_match_accepted?: boolean | null;
   /** Medicare NPI when known from verified CMS data — never invent */
   npi?: string | null;
   years_in_business?: number | null;

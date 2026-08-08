@@ -1,0 +1,15 @@
+[
+  {
+    "providerId": "REPLACE_WITH_REAL_UUID",
+    "name": "Example Agency LLC",
+    "licenseNumber": "REAL_NUMBER_FROM_DOI_ONLY",
+    "licenseState": "FL",
+    "source": "FL DFS Licensee Search",
+    "sourceUrl": "https://licenseesearch.fldfs.com/",
+    "checkedAt": "2026-08-08T15:00:00.000Z",
+    "method": "manual",
+    "identityMatchAccepted": true,
+    "intent": "save_pending",
+    "notes": "Do not invent. Replace with real official lookup results only."
+  }
+]

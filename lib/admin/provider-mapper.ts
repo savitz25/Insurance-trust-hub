@@ -1,7 +1,9 @@
 import type { Provider as PublicProvider } from '@/types/provider';
-import type { Provider as DbProvider, ProviderInsert } from '@/types/supabase';
+import type { Provider as DbProvider, ProviderInsert, LicenseInfo } from '@/types/supabase';
 import type { AdminProviderFormValues } from '@/lib/validations/admin';
 import { getLicenseDepartment } from '@/lib/tools/license-verification';
+import { isPlaceholderPhone } from '@/lib/provenance/phone';
+import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
 
 export interface AdminProviderFormData {
   slug: string;
@@ -13,6 +15,12 @@ export interface AdminProviderFormData {
   phone: string;
   website: string;
   licenseNumber: string;
+  licenseSource: string;
+  licenseSourceUrl: string;
+  licenseCheckedAt: string;
+  licenseMethod: 'manual' | 'automated';
+  licenseNotes: string;
+  identityMatchAccepted: boolean;
   insuranceTypes: string[];
   specialties: string[];
   yearsInBusiness: number | null;
@@ -33,6 +41,12 @@ export function schemaToFormData(data: AdminProviderFormValues): AdminProviderFo
     phone: data.phone ?? '',
     website: data.website ?? '',
     licenseNumber: data.licenseNumber ?? '',
+    licenseSource: data.licenseSource ?? '',
+    licenseSourceUrl: data.licenseSourceUrl ?? '',
+    licenseCheckedAt: data.licenseCheckedAt ?? '',
+    licenseMethod: data.licenseMethod ?? 'manual',
+    licenseNotes: data.licenseNotes ?? '',
+    identityMatchAccepted: data.identityMatchAccepted ?? false,
     insuranceTypes: data.insuranceTypes,
     specialties: data.specialties,
     yearsInBusiness: data.yearsInBusiness ?? null,
@@ -54,6 +68,12 @@ export function publicProviderToForm(provider: PublicProvider): AdminProviderFor
     phone: provider.phone ?? '',
     website: provider.website ?? '',
     licenseNumber: provider.license_number ?? '',
+    licenseSource: provider.license_source ?? '',
+    licenseSourceUrl: provider.license_source_url ?? '',
+    licenseCheckedAt: provider.license_checked_at ?? '',
+    licenseMethod: (provider.license_method as 'manual' | 'automated') || 'manual',
+    licenseNotes: provider.license_notes ?? '',
+    identityMatchAccepted: Boolean(provider.license_identity_match_accepted),
     insuranceTypes: provider.insurance_types,
     specialties: provider.specialties,
     yearsInBusiness: provider.years_in_business ?? null,
@@ -78,6 +98,12 @@ export function dbProviderToForm(provider: DbProvider): AdminProviderFormData {
     phone: provider.contact?.phone ?? '',
     website: provider.contact?.website ?? '',
     licenseNumber: license?.license_number ?? '',
+    licenseSource: license?.source ?? '',
+    licenseSourceUrl: license?.verification_url ?? '',
+    licenseCheckedAt: license?.checkedAt ?? '',
+    licenseMethod: (license?.method as 'manual' | 'automated') || 'manual',
+    licenseNotes: license?.notes ?? '',
+    identityMatchAccepted: Boolean(license?.identityMatchAccepted),
     insuranceTypes: provider.categories,
     specialties: provider.specialties,
     yearsInBusiness: provider.years_in_business,
@@ -91,6 +117,31 @@ export function dbProviderToForm(provider: DbProvider): AdminProviderFormData {
 export function formToDbInsert(data: AdminProviderFormData): ProviderInsert {
   const state = data.state.toUpperCase();
   const dept = getLicenseDepartment(state);
+  const cleaned = cleanLicenseNumber(data.licenseNumber);
+  const phone = data.phone && !isPlaceholderPhone(data.phone) ? data.phone : '';
+  const source = data.licenseSource.trim() || dept?.department || '';
+  const sourceUrl =
+    data.licenseSourceUrl.trim() || dept?.lookupUrl || 'https://content.naic.org/consumer.htm';
+  const checkedAt = data.licenseCheckedAt.trim() || undefined;
+
+  // Never write verified without full provenance (Phase 6B1)
+  const canVerify =
+    data.verified &&
+    Boolean(cleaned) &&
+    Boolean(source) &&
+    Boolean(checkedAt) &&
+    data.identityMatchAccepted;
+
+  const prevAudit: LicenseInfo['audit'] = [];
+  if (cleaned) {
+    prevAudit.push({
+      at: new Date().toISOString(),
+      method: data.licenseMethod,
+      action: canVerify ? 'admin_save_verified' : 'admin_save_pending',
+      notes: data.licenseNotes || undefined,
+      license_number: cleaned,
+    });
+  }
 
   return {
     slug: data.slug,
@@ -100,25 +151,32 @@ export function formToDbInsert(data: AdminProviderFormData): ProviderInsert {
     states_licensed: state ? [state] : [],
     cities: data.city ? [data.city] : [],
     license_info: {
-      licenses: data.licenseNumber
+      licenses: cleaned
         ? [
             {
               state,
-              license_number: data.licenseNumber,
+              license_number: cleaned,
               type: 'agent',
-              verification_url: dept?.lookupUrl ?? 'https://content.naic.org/consumer.htm',
+              verification_url: sourceUrl,
+              source: source || undefined,
+              checkedAt,
+              method: data.licenseMethod,
+              notes: data.licenseNotes || undefined,
+              status: canVerify ? 'verified' : 'pending',
+              identityMatchAccepted: data.identityMatchAccepted,
             },
           ]
         : [],
+      audit: prevAudit,
     },
     specialties: data.specialties,
     years_in_business: data.yearsInBusiness,
     relocation_experience: data.relocationExperience,
-    verified: data.verified,
+    verified: canVerify,
     short_description: data.shortDescription || null,
     description: data.description || null,
     contact: {
-      phone: data.phone || undefined,
+      phone: phone || undefined,
       website: data.website || undefined,
       address: {
         street: '',
@@ -141,6 +199,13 @@ export function formToPublicProvider(data: AdminProviderFormData, id: string): P
     phone: data.phone || null,
     website: data.website || null,
     license_number: data.licenseNumber || null,
+    license_state: data.state.toUpperCase(),
+    license_source: data.licenseSource || null,
+    license_source_url: data.licenseSourceUrl || null,
+    license_checked_at: data.licenseCheckedAt || null,
+    license_method: data.licenseMethod,
+    license_notes: data.licenseNotes || null,
+    license_identity_match_accepted: data.identityMatchAccepted,
     insurance_types: data.insuranceTypes as PublicProvider['insurance_types'],
     specialties: data.specialties as PublicProvider['specialties'],
     years_in_business: data.yearsInBusiness,

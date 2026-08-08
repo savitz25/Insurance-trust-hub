@@ -124,6 +124,9 @@ export function ProviderForm({ providerId, defaultValues }: ProviderFormProps) {
         <div>
           <Label htmlFor="licenseNumber">License number</Label>
           <Input id="licenseNumber" className="mt-1.5" {...register('licenseNumber')} />
+          {errors.licenseNumber && (
+            <p className="mt-1 text-xs text-destructive">{errors.licenseNumber.message}</p>
+          )}
         </div>
         <div>
           <Label htmlFor="providerType">Provider type</Label>
@@ -134,6 +137,77 @@ export function ProviderForm({ providerId, defaultValues }: ProviderFormProps) {
           </Select>
         </div>
       </div>
+
+      <fieldset className="rounded-xl border p-4 space-y-3">
+        <legend className="px-1 text-sm font-semibold">License provenance (Phase 6B1)</legend>
+        <p className="text-xs text-muted-foreground">
+          Official DOI/DFS source is required to mark verified. Never invent license numbers.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="licenseSource">Source (regulator name)</Label>
+            <Input
+              id="licenseSource"
+              className="mt-1.5"
+              placeholder="e.g. FL DFS Licensee Search"
+              {...register('licenseSource')}
+            />
+            {errors.licenseSource && (
+              <p className="mt-1 text-xs text-destructive">{errors.licenseSource.message}</p>
+            )}
+          </div>
+          <div>
+            <Label htmlFor="licenseSourceUrl">Source URL</Label>
+            <Input
+              id="licenseSourceUrl"
+              className="mt-1.5"
+              placeholder="https://licenseesearch.fldfs.com/..."
+              {...register('licenseSourceUrl')}
+            />
+            {errors.licenseSourceUrl && (
+              <p className="mt-1 text-xs text-destructive">{errors.licenseSourceUrl.message}</p>
+            )}
+          </div>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="licenseCheckedAt">Checked at (ISO or date)</Label>
+            <Input
+              id="licenseCheckedAt"
+              className="mt-1.5"
+              placeholder="2026-08-08T15:00:00Z"
+              {...register('licenseCheckedAt')}
+            />
+            {errors.licenseCheckedAt && (
+              <p className="mt-1 text-xs text-destructive">{errors.licenseCheckedAt.message}</p>
+            )}
+          </div>
+          <div>
+            <Label htmlFor="licenseMethod">Method</Label>
+            <Select id="licenseMethod" className="mt-1.5" {...register('licenseMethod')}>
+              <option value="manual">manual</option>
+              <option value="automated">automated</option>
+            </Select>
+          </div>
+        </div>
+        <div>
+          <Label htmlFor="licenseNotes">Operator notes</Label>
+          <Textarea id="licenseNotes" rows={2} className="mt-1.5" {...register('licenseNotes')} />
+        </div>
+        <div className="flex items-center gap-2">
+          <Checkbox
+            id="identityMatchAccepted"
+            checked={watch('identityMatchAccepted')}
+            onCheckedChange={(c) => setValue('identityMatchAccepted', c === true)}
+          />
+          <Label htmlFor="identityMatchAccepted" className="font-normal cursor-pointer">
+            Identity match accepted (name/state align with official record)
+          </Label>
+        </div>
+        {errors.identityMatchAccepted && (
+          <p className="text-xs text-destructive">{errors.identityMatchAccepted.message}</p>
+        )}
+      </fieldset>
 
       <div>
         <Label htmlFor="yearsInBusiness">Years in business</Label>
@@ -200,7 +274,9 @@ export function ProviderForm({ providerId, defaultValues }: ProviderFormProps) {
             checked={watch('verified')}
             onCheckedChange={(c) => setValue('verified', c === true)}
           />
-          <Label htmlFor="verified" className="font-normal cursor-pointer">Verified listing</Label>
+          <Label htmlFor="verified" className="font-normal cursor-pointer">
+            Verified + indexable (requires license + source + checkedAt + identity match)
+          </Label>
         </div>
         <div className="flex items-center gap-2">
           <Checkbox

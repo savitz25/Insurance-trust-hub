@@ -78,3 +78,43 @@ export async function validateAdminLogin(password: string): Promise<boolean> {
   const secret = process.env.ADMIN_SECRET?.trim();
   return Boolean(secret && parsed.data.password === secret);
 }
+
+export async function applyLicenseBackfillAction(input: {
+  providerId: string;
+  licenseNumber: string;
+  licenseState: string;
+  source: string;
+  sourceUrl?: string;
+  checkedAt: string;
+  method: 'manual' | 'automated';
+  notes?: string;
+  identityMatchAccepted: boolean;
+  intent: 'promote_indexable' | 'save_pending' | 'keep_suppressed';
+}): Promise<AdminActionResult & { message?: string }> {
+  try {
+    const { applyLicenseBackfill } = await import('@/lib/ops/license-backfill');
+    const result = await applyLicenseBackfill(input.providerId, {
+      licenseNumber: input.licenseNumber,
+      licenseState: input.licenseState,
+      source: input.source,
+      sourceUrl: input.sourceUrl,
+      checkedAt: input.checkedAt,
+      method: input.method,
+      notes: input.notes,
+      identityMatchAccepted: input.identityMatchAccepted,
+      intent: input.intent,
+    });
+    if (!result.ok) {
+      return { success: false, error: result.errors.join(' · ') };
+    }
+    return {
+      success: true,
+      message: `Saved as ${result.listingClass}${result.verified ? ' (verified)' : ''}`,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Backfill failed',
+    };
+  }
+}

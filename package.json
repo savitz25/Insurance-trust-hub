@@ -18,6 +18,9 @@
     "typecheck": "tsc --noEmit",
     "brand:favicons": "node scripts/install-ith-favicon.mjs",
     "brand:final-logo": "node scripts/run-logo-install.cjs",
+    "ops:license-report": "node scripts/ops-license-backfill-report.mjs",
+    "check:phase6a": "node scripts/check-phase6a-integrity.mjs",
+    "check:phase6b1": "node scripts/check-phase6b1-promotion.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"
   },

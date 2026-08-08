@@ -94,7 +94,9 @@ export function resolveInsuranceVerification(params: {
       ? 'Confirm status on official lookup'
       : 'Not shown';
 
-  if (licenseNumber && flagged) {
+  // Phase 6B1: hard verified badge requires number + flag + source + checkedAt
+  const hasProvenance = Boolean(sourceLabel) && Boolean(lastCheckedLabel);
+  if (licenseNumber && flagged && hasProvenance) {
     const parts = [
       `License ${licenseNumber}${licenseState ? ` (${licenseState})` : ''}`,
       `Status: ${statusLabel}`,
@@ -114,6 +116,27 @@ export function resolveInsuranceVerification(params: {
       sourceUrl,
       lastCheckedLabel,
       showLicenseVerifiedBadge: true,
+    };
+  }
+
+  // Flagged verified without full provenance → soft "on file" / pending, not hard badge
+  if (licenseNumber && flagged && !hasProvenance) {
+    return {
+      level: 'license_located',
+      badgeLabel: 'License number on file',
+      badgeVariant: 'located',
+      summary: [
+        `License ${licenseNumber}${licenseState ? ` (${licenseState})` : ''}`,
+        'Verification pending full source + checkedAt provenance (Phase 6B1)',
+        'Confirm status on the official state lookup.',
+      ].join(' · '),
+      licenseNumber,
+      licenseState,
+      statusLabel,
+      sourceLabel,
+      sourceUrl,
+      lastCheckedLabel,
+      showLicenseVerifiedBadge: false,
     };
   }
 

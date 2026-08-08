@@ -15,10 +15,25 @@ export interface LicenseEntry {
   license_number: string;
   type: string;
   verification_url: string;
+  /** Phase 6B1 provenance */
+  source?: string;
+  checkedAt?: string;
+  method?: 'manual' | 'automated' | 'operator_submitted' | 'seed';
+  notes?: string;
+  status?: 'verified' | 'pending' | 'unavailable' | 'seed' | 'suppressed';
+  identityMatchAccepted?: boolean;
 }
 
 export interface LicenseInfo {
   licenses: LicenseEntry[];
+  /** Ops audit trail (append-only preferred) */
+  audit?: Array<{
+    at: string;
+    method: string;
+    action: string;
+    notes?: string;
+    license_number?: string;
+  }>;
 }
 
 export interface ContactAddress {

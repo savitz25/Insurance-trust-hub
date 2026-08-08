@@ -5,6 +5,10 @@ import { ARTICLES } from '@/lib/resources/articles';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
 import { INSURANCE_HUBS, getAllStateSlugs } from '@/lib/hubs/registry';
 import { SPECIALTY_TOPICS } from '@/lib/hubs/specialty-topics';
+import {
+  classifyProviderListing,
+  isIndexableListing,
+} from '@/lib/provenance/public-listing';
 
 /**
  * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
@@ -104,9 +108,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Phase 6A: seed fallback providers are not indexable research — omit from sitemap
-  const providers: MetadataRoute.Sitemap = FALLBACK_PROVIDERS.filter(
-    (p) => p.is_verified && p.license_number && /\d/.test(p.license_number) && !p.id.startsWith('fallback-')
+  // Phase 6A/6B1: only indexable_research (license + source + checkedAt + verified)
+  // FALLBACK seed catalog never qualifies — empty until Supabase promotions land.
+  const providers: MetadataRoute.Sitemap = FALLBACK_PROVIDERS.filter((p) =>
+    isIndexableListing(classifyProviderListing(p))
   ).map((provider) => ({
     url: `${site}/providers/${provider.slug}`,
     lastModified: now,

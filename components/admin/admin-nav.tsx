@@ -2,7 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Building2, MessageSquare, Users, LogOut } from 'lucide-react';
+import {
+  LayoutDashboard,
+  Building2,
+  MessageSquare,
+  Users,
+  LogOut,
+  BadgeCheck,
+} from 'lucide-react';
 import { BrandLogo } from '@/components/BrandLogo';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -10,6 +17,7 @@ import { cn } from '@/lib/utils';
 const LINKS = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/providers', label: 'Providers', icon: Building2 },
+  { href: '/admin/license-backfill', label: 'License backfill', icon: BadgeCheck },
   { href: '/admin/reviews', label: 'Reviews', icon: MessageSquare },
   { href: '/admin/leads', label: 'Leads', icon: Users },
 ] as const;
