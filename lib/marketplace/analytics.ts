@@ -20,7 +20,15 @@ export type MarketplaceEventName =
   | 'county_intelligence_opened'
   | 'explorer_prefill_from_county'
   | 'outbound_official_exchange_click'
-  | 'save_plan_from_xray';
+  | 'save_plan_from_xray'
+  | 'wallet_save_plan'
+  | 'wallet_save_doctor'
+  | 'wallet_save_drug'
+  | 'wallet_restore'
+  | 'wallet_magic_link_requested'
+  | 'wallet_opened'
+  | 'continue_from_wallet_to_explorer'
+  | 'wallet_item_deleted';
 
 export function trackMarketplaceEvent(
   name: MarketplaceEventName,

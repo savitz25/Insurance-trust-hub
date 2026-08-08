@@ -874,3 +874,119 @@ export async function listSavedProviderSlugsAction(): Promise<string[]> {
     .eq('user_id', user.id);
   return (data ?? []).map((r: { provider_slug: string }) => r.provider_slug);
 }
+
+/* ── Phase 11 research wallet (cross-device) ── */
+
+export type ResearchWalletPayload = {
+  version: 1;
+  updatedAt: string;
+  plans: unknown[];
+  doctors: unknown[];
+  drugs: unknown[];
+  preferences: Record<string, unknown>;
+  notes: string;
+};
+
+/**
+ * Fetch cloud research wallet for signed-in user.
+ * Returns null if not signed in or table missing / empty.
+ */
+export async function getResearchWalletCloudAction(): Promise<{
+  ok: true;
+  payload: ResearchWalletPayload | null;
+} | { ok: false; error: string }> {
+  try {
+    const user = await getAuthenticatedUser();
+    if (!user) return { ok: true, payload: null };
+
+    const supabase = await insuranceDb();
+    const { data, error } = await supabase
+      .from('insurance_research_wallets')
+      .select('payload, updated_at')
+      .eq('user_id', user.id)
+      .maybeSingle();
+
+    if (error) {
+      // Table may not be migrated yet — soft fail
+      console.warn('[research-wallet] get', error.message);
+      return { ok: true, payload: null };
+    }
+    if (!data?.payload) return { ok: true, payload: null };
+    return { ok: true, payload: data.payload as ResearchWalletPayload };
+  } catch (e) {
+    return {
+      ok: false,
+      error: e instanceof Error ? e.message : 'Could not load wallet',
+    };
+  }
+}
+
+/** Upsert full research wallet payload for signed-in user. */
+export async function saveResearchWalletCloudAction(
+  payload: ResearchWalletPayload
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    const supabase = await insuranceDb();
+    await ensureUserProfile(await createClient(), user);
+
+    const body = {
+      user_id: user.id,
+      payload: {
+        ...payload,
+        version: 1 as const,
+        updatedAt: new Date().toISOString(),
+      },
+      updated_at: new Date().toISOString(),
+    };
+
+    const { error } = await supabase
+      .from('insurance_research_wallets')
+      .upsert(body, { onConflict: 'user_id' });
+
+    if (error) {
+      console.error('[research-wallet] save', error.message);
+      return {
+        ok: false,
+        error:
+          error.message?.includes('does not exist') ||
+          error.message?.includes('schema cache')
+            ? 'Cloud wallet table not available yet — saved on this device only.'
+            : 'Could not sync wallet to cloud',
+      };
+    }
+
+    revalidatePath(MY_INSURANCE_PATH);
+    return { ok: true };
+  } catch (e) {
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      return { ok: false, error: 'Sign in with magic link to sync across devices' };
+    }
+    return { ok: false, error: 'Could not sync wallet' };
+  }
+}
+
+/** Delete cloud research wallet for signed-in user. */
+export async function deleteResearchWalletCloudAction(): Promise<
+  { ok: true } | { ok: false; error: string }
+> {
+  try {
+    const user = await requireAuthenticatedUser();
+    const supabase = await insuranceDb();
+    const { error } = await supabase
+      .from('insurance_research_wallets')
+      .delete()
+      .eq('user_id', user.id);
+    if (error) {
+      console.error('[research-wallet] delete', error.message);
+      return { ok: false, error: 'Could not delete cloud wallet' };
+    }
+    revalidatePath(MY_INSURANCE_PATH);
+    return { ok: true };
+  } catch (e) {
+    if (e instanceof Error && e.message === 'UNAUTHORIZED') {
+      return { ok: false, error: 'Sign in required' };
+    }
+    return { ok: false, error: 'Could not delete cloud wallet' };
+  }
+}

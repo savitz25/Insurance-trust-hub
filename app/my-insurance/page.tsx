@@ -27,11 +27,13 @@ export default async function MyInsurancePage() {
           My Insurance
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-          Research passport for coverage — guest-saved on this device. Shortlist agencies, track
-          status, then verify licenses on DOI / NAIC pathways.
+          Research wallet for coverage decisions — shortlisted plans, doctors, prescriptions, and
+          market context. Works on this device without signing in; magic link restores across
+          devices. Contents are private research, not leads.
         </p>
         <p className="mt-2 text-xs text-slate-500">
-          Research only · Not an endorsement · Part of the Ask Trust Hub network
+          Research only · Not an endorsement · Not a claims portal · Part of the Ask Trust Hub
+          network
         </p>
         <div className="mt-2">
           <TrustMark />
@@ -56,6 +58,13 @@ export default async function MyInsurancePage() {
           {' · '}
           <Link href="/tools" className="font-medium text-[#0284C7] hover:underline">
             Tools
+          </Link>
+          {' · '}
+          <Link
+            href="/tools/aca-plan-explorer"
+            className="font-medium text-[#0284C7] hover:underline"
+          >
+            Plan Explorer
           </Link>
         </p>
 

@@ -44,6 +44,7 @@ import {
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { GuestInsuranceHq } from '@/components/my-insurance/guest-insurance-hq';
+import { ResearchWalletPanel } from '@/components/my-insurance/research-wallet-panel';
 
 type Props = {
   initial: MyInsuranceDashboardData | null;
@@ -122,8 +123,8 @@ export function MyInsuranceDashboard({ initial }: Props) {
             <div>
               <p className="text-sm font-medium text-slate-900">Sign in (optional)</p>
               <p className="mt-1 text-sm text-slate-600">
-                Research workspace only — tools still work without signing in. Sign in to sync
-                shortlists across devices; guest plans stay on this device either way.
+                Research workspace only — tools still work without signing in. Magic link is for
+                restoring your research wallet on another device; contents are not sold as leads.
               </p>
             </div>
             <Button
@@ -137,7 +138,10 @@ export function MyInsuranceDashboard({ initial }: Props) {
         </Card>
       )}
 
-      {/* Core research passport — same for guest and signed-in */}
+      {/* Phase 11 — Marketplace research wallet (guest local + optional cloud) */}
+      <ResearchWalletPanel />
+
+      {/* Core agency shortlist passport — same for guest and signed-in */}
       <GuestInsuranceHq />
 
       {/* Cloud extras (signed-in only) — additive, never a replacement for empty shortlist */}

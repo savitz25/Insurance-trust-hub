@@ -20,6 +20,8 @@ import {
   marketPath,
   planXrayPath,
 } from '@/lib/marketplace/curated-markets';
+import { SaveResearchWalletButton } from '@/components/my-insurance/save-research-wallet-button';
+import { loadResearchWallet } from '@/lib/my-insurance/research-wallet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -185,16 +187,72 @@ export function AcaPlanExplorer() {
     [zip, year, income, people, scenario, customCare]
   );
 
-  // Prefill ZIP/year from county intelligence deep links (?zip=&year=)
+  // Prefill ZIP/year from county intelligence or research wallet restore
   useEffect(() => {
     if (prefillDone.current || typeof window === 'undefined') return;
     prefillDone.current = true;
     const sp = new URLSearchParams(window.location.search);
-    const z = (sp.get('zip') || '').replace(/\D/g, '').slice(0, 5);
-    const y = sp.get('year');
+    const restoreWallet = sp.get('restore') === 'wallet';
+    let z = (sp.get('zip') || '').replace(/\D/g, '').slice(0, 5);
+    let y = sp.get('year');
+    const scenarioQ = sp.get('scenario') as CareScenarioId | null;
+
+    if (restoreWallet) {
+      const w = loadResearchWallet();
+      if (!z && w.preferences.zip) z = String(w.preferences.zip).replace(/\D/g, '').slice(0, 5);
+      if (!y && w.preferences.year) y = String(w.preferences.year);
+      if (w.doctors.length) {
+        setDoctors(
+          w.doctors.map((d) => ({
+            sessionId: `wallet-${d.npi}`,
+            npi: d.npi,
+            name: d.name,
+            specialty: d.specialty,
+          }))
+        );
+      }
+      if (w.drugs.length) {
+        setPrescriptions(
+          w.drugs.map((d) => ({
+            sessionId: `wallet-${d.rxcui}`,
+            rxcui: d.rxcui,
+            name: d.name,
+            strength: d.strength,
+          }))
+        );
+      }
+      if (w.preferences.scenario && w.preferences.scenario !== 'none') {
+        setScenario(w.preferences.scenario as CareScenarioId);
+      }
+      if (w.preferences.customCare) {
+        setCustomCare({
+          ...DEFAULT_CUSTOM_CARE,
+          ...w.preferences.customCare,
+        });
+      }
+      trackMarketplaceEvent('wallet_restore', { source: 'explorer_query' });
+    }
+
     if (y === '2025' || y === '2026') setYear(y);
+    if (
+      scenarioQ === 'low' ||
+      scenarioQ === 'moderate' ||
+      scenarioQ === 'higher' ||
+      scenarioQ === 'custom'
+    ) {
+      setScenario(scenarioQ);
+    }
     if (z.length !== 5) return;
     setZip(z);
+    const util =
+      scenarioQ && scenarioQ !== 'none'
+        ? scenarioToCmsUtilization(scenarioQ, DEFAULT_CUSTOM_CARE)
+        : restoreWallet
+          ? scenarioToCmsUtilization(
+              (loadResearchWallet().preferences.scenario as CareScenarioId) || 'none',
+              DEFAULT_CUSTOM_CARE
+            )
+          : null;
     window.setTimeout(() => {
       void (async () => {
         setLoading(true);
@@ -206,6 +264,7 @@ export function AcaPlanExplorer() {
               zip: z,
               year: Number(y) || MARKETPLACE_PLAN_YEAR_DEFAULT,
               people: [{ age: 35, usesTobacco: false }],
+              utilization: util,
             }),
           });
           const data = (await res.json()) as MarketplaceSearchResult;
@@ -1111,49 +1170,69 @@ export function AcaPlanExplorer() {
               ) : null}
             </div>
             {result.ok && filtered.length > 0 ? (
-              <SaveCalculatorButton
-                calculatorId="aca_plan_explorer"
-                title="ACA Plan Explorer snapshot"
-                size="sm"
-                onSaved={() => {
-                  if (hasSessionLists) {
-                    trackMarketplaceEvent('save_doctors_drugs_workspace', {
-                      doctors: doctors.length,
-                      prescriptions: prescriptions.length,
-                    });
-                  }
-                }}
-                snapshot={{
-                  summaryText: `${filtered.length} plans · ${result.locationLabel || zip} · year ${result.provenance.planYear}${
-                    hasSessionLists
-                      ? ` · ${doctors.length} doctors · ${prescriptions.length} meds`
-                      : ''
-                  }`,
-                  sourcePath: '/tools/aca-plan-explorer',
-                  inputs: {
-                    zip,
-                    year,
-                    income,
-                    people,
-                    doctors: doctors.map((d) => ({
-                      npi: d.npi,
-                      name: d.name,
-                      specialty: d.specialty,
-                    })),
-                    prescriptions: prescriptions.map((d) => ({
-                      rxcui: d.rxcui,
-                      name: d.name,
-                      strength: d.strength,
-                    })),
-                  },
-                  outputs: {
-                    planCount: filtered.length,
-                    provenance: result.provenance,
-                    planIds: filtered.slice(0, 20).map((p) => p.id),
-                    coverageRetrievedAt: coverage?.retrievedAt ?? null,
-                  },
-                }}
-              />
+              <div className="flex flex-wrap gap-2">
+                <SaveResearchWalletButton
+                  mode="session"
+                  zip={zip || result.provenance.zip}
+                  year={result.provenance.planYear}
+                  scenario={scenario}
+                  doctors={doctors.map((d) => ({
+                    npi: d.npi,
+                    name: d.name,
+                    specialty: d.specialty,
+                  }))}
+                  drugs={prescriptions.map((d) => ({
+                    rxcui: d.rxcui,
+                    name: d.name,
+                    strength: d.strength,
+                  }))}
+                  customCare={scenario === 'custom' ? customCare : null}
+                  label="Save research to wallet"
+                />
+                <SaveCalculatorButton
+                  calculatorId="aca_plan_explorer"
+                  title="ACA Plan Explorer snapshot"
+                  size="sm"
+                  onSaved={() => {
+                    if (hasSessionLists) {
+                      trackMarketplaceEvent('save_doctors_drugs_workspace', {
+                        doctors: doctors.length,
+                        prescriptions: prescriptions.length,
+                      });
+                    }
+                  }}
+                  snapshot={{
+                    summaryText: `${filtered.length} plans · ${result.locationLabel || zip} · year ${result.provenance.planYear}${
+                      hasSessionLists
+                        ? ` · ${doctors.length} doctors · ${prescriptions.length} meds`
+                        : ''
+                    }`,
+                    sourcePath: '/tools/aca-plan-explorer',
+                    inputs: {
+                      zip,
+                      year,
+                      income,
+                      people,
+                      doctors: doctors.map((d) => ({
+                        npi: d.npi,
+                        name: d.name,
+                        specialty: d.specialty,
+                      })),
+                      prescriptions: prescriptions.map((d) => ({
+                        rxcui: d.rxcui,
+                        name: d.name,
+                        strength: d.strength,
+                      })),
+                    },
+                    outputs: {
+                      planCount: filtered.length,
+                      provenance: result.provenance,
+                      planIds: filtered.slice(0, 20).map((p) => p.id),
+                      coverageRetrievedAt: coverage?.retrievedAt ?? null,
+                    },
+                  }}
+                />
+              </div>
             ) : null}
           </div>
 
@@ -1509,6 +1588,31 @@ export function AcaPlanExplorer() {
                                 Plan X-Ray
                               </Link>
                             </Button>
+                            <SaveResearchWalletButton
+                              mode="plan"
+                              size="sm"
+                              plan={{
+                                planId: plan.id,
+                                planYear:
+                                  result?.provenance.planYear ||
+                                  Number(year) ||
+                                  MARKETPLACE_PLAN_YEAR_DEFAULT,
+                                name: plan.name,
+                                issuerName: plan.issuerName,
+                                metalLevel: plan.metalLevel,
+                                planType: plan.planType,
+                                premiumMonthly: plan.premiumMonthly,
+                                xrayPath: planXrayPath(
+                                  result?.provenance.planYear ||
+                                    Number(year) ||
+                                    MARKETPLACE_PLAN_YEAR_DEFAULT,
+                                  plan.id,
+                                  zip || result?.provenance.zip
+                                ),
+                                zip: zip || result?.provenance.zip,
+                                source: 'plan_explorer',
+                              }}
+                            />
                             <Button
                               type="button"
                               size="sm"

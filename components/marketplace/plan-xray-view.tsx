@@ -7,8 +7,9 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
+import { SaveResearchWalletButton } from '@/components/my-insurance/save-research-wallet-button';
 import { trackMarketplaceEvent } from '@/lib/marketplace/analytics';
-import { marketPath, type CuratedAcaMarket } from '@/lib/marketplace/curated-markets';
+import { marketPath, planXrayPath, type CuratedAcaMarket } from '@/lib/marketplace/curated-markets';
 import type { PlanXRayResult } from '@/lib/marketplace/plan-xray';
 
 function money(n: number | null | undefined): string {
@@ -79,6 +80,23 @@ export function PlanXRayView({ data, relatedMarket, explorerHref }: Props) {
           ) : null}
         </div>
         <div className="flex flex-wrap gap-2">
+          <SaveResearchWalletButton
+            mode="plan"
+            size="sm"
+            label="Save plan to wallet"
+            plan={{
+              planId: plan.id,
+              planYear: data.planYear,
+              name: plan.name,
+              issuerName: plan.issuerName,
+              metalLevel: plan.metalLevel,
+              planType: plan.planType,
+              premiumMonthly: plan.premiumMonthly,
+              xrayPath: planXrayPath(data.planYear, plan.id, data.marketZip),
+              zip: data.marketZip,
+              source: 'plan_xray',
+            }}
+          />
           <SaveCalculatorButton
             calculatorId="aca_plan_explorer"
             title={`Plan X-Ray: ${plan.name}`}
