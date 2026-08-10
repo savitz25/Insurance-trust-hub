@@ -18,6 +18,9 @@ type Props = {
 
 export function AcaMarketplaceGuideView({ guide }: Props) {
   const path = `/guides/${guide.slug}`;
+  const enrollmentLinks = guide.enrollmentLinks ?? [
+    { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+  ];
 
   return (
     <>
@@ -193,16 +196,25 @@ export function AcaMarketplaceGuideView({ guide }: Props) {
             </li>
             <li>
               Complete official eligibility, pricing, and enrollment on{' '}
-              <a
-                href="https://www.healthcare.gov"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-medium text-[#0284C7] hover:underline"
-              >
-                HealthCare.gov
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-              </a>
-              .
+              {enrollmentLinks.map((link, i) => (
+                <span key={link.href}>
+                  {i > 0 ? (
+                    <span className="text-slate-500">
+                      {i === enrollmentLinks.length - 1 ? ' and/or ' : ', '}
+                    </span>
+                  ) : null}
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-medium text-[#0284C7] hover:underline"
+                  >
+                    {link.label}
+                    <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                  </a>
+                </span>
+              ))}
+              . Use the pathway that applies to your state of residence.
             </li>
           </ol>
           {(guide.medicareCountyHref || guide.marketplaceCountyHref) && (

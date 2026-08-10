@@ -52,13 +52,24 @@
 | `/guides/central-jersey-aca-marketplace` | Marketplace insurance Central Jersey |
 | `/guides/north-jersey-aca-marketplace` | ACA plans in North Jersey |
 
+## Northeast — New York metro (shipped)
+
+| URL | Primary intent |
+|-----|----------------|
+| `/guides/new-york-aca-marketplace` | ACA Marketplace New York (statewide) |
+| `/guides/nyc-aca-marketplace` | ACA plans in NYC |
+| `/guides/long-island-aca-marketplace` | Marketplace insurance Long Island |
+| `/guides/westchester-aca-marketplace` | ACA plans in Westchester |
+
+**Official pathway note:** New York is a state-based Marketplace (NY State of Health). Guides set `enrollmentLinks` to NY State of Health + HealthCare.gov; do not frame NY as pure HealthCare.gov-only.
+
 Index: `/guides` (grouped by state)
 
 ## Template
 
 Every guide: hero CTAs → overview → ZIP CTA → what tool shows → cost factors → trust/next steps → FAQ → related guides.
 
-Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, HealthCare.gov.
+Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, official enrollment (HealthCare.gov and/or state Marketplace).
 
 ## Code
 
@@ -68,4 +79,4 @@ Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, H
 
 ## Tier 2 next
 
-Ohio + Columbus / Cleveland.
+Connecticut (statewide + Fairfield / NYC-adjacent), then Ohio + Columbus / Cleveland.

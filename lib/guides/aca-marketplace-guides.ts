@@ -18,7 +18,8 @@ export type AcaMarketplaceGuide = {
     | 'Georgia'
     | 'North Carolina'
     | 'Pennsylvania'
-    | 'New Jersey';
+    | 'New Jersey'
+    | 'New York';
   /** Short regulator name for license re-check copy */
   licenseRegulator: string;
   /** Sample ZIPs for research hints only */
@@ -28,6 +29,12 @@ export type AcaMarketplaceGuide = {
   directoryHref: string;
   medicareCountyHref?: string;
   marketplaceCountyHref?: string;
+  /**
+   * Official enrollment destinations in Trust & next steps.
+   * Defaults to HealthCare.gov when omitted (federal Marketplace states).
+   * State-based Marketplaces (e.g. NY State of Health) should set this explicitly.
+   */
+  enrollmentLinks?: Array<{ href: string; label: string }>;
   overview: string[];
   whoBuys: string[];
   costFactors: string[];
@@ -1368,6 +1375,312 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       'new-jersey-aca-marketplace',
       'central-jersey-aca-marketplace',
       'south-jersey-aca-marketplace',
+    ],
+  },
+  // ── New York cluster (Northeast — NYC / Long Island / Westchester) ───────
+  {
+    slug: 'new-york-aca-marketplace',
+    primaryKeyword: 'ACA Marketplace New York',
+    title: 'New York ACA Marketplace Guide — Research Plans by ZIP (2026)',
+    description:
+      'How to research ACA Marketplace coverage in New York: ZIP-level plan landscape tools, NYC / Long Island / Westchester context, subsidy education, and NY State of Health enrollment next steps. Educational only — no lead selling.',
+    h1: 'New York ACA Marketplace guide',
+    subhead:
+      'A practical research path for New York residents shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll through official New York pathways.',
+    locationLabel: 'New York',
+    stateName: 'New York',
+    licenseRegulator: 'New York DFS',
+    sampleZips: [
+      { zip: '10001', label: 'Manhattan / NYC' },
+      { zip: '11201', label: 'Brooklyn' },
+      { zip: '11550', label: 'Hempstead / Long Island' },
+      { zip: '10601', label: 'White Plains / Westchester' },
+      { zip: '12207', label: 'Albany area' },
+      { zip: '14604', label: 'Rochester area' },
+    ],
+    hubHref: '/hubs/new-york/nyc-newark-jersey-city',
+    hubLabel: 'NYC Metro agents hub',
+    directoryHref: '/hubs/aca',
+    enrollmentLinks: [
+      { href: 'https://nystateofhealth.ny.gov/', label: 'NY State of Health' },
+      { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+    ],
+    overview: [
+      'New York has a large, complex individual health insurance market. Many residents enroll in ACA coverage through NY State of Health, New York’s official state-based Marketplace — not solely through HealthCare.gov as in pure federal Marketplace states.',
+      'People often research by metro region: New York City, Long Island, and Westchester / lower Hudson, plus distinct upstate markets. Plan menus remain ZIP- and county-based, so always research the address where you live.',
+      'Insurance Trust Hub provides educational landscape research (including CMS Marketplace data when available). We do not sell policies, process applications, invent official premiums, or replace NY State of Health.',
+    ],
+    whoBuys: [
+      'People without affordable employer coverage',
+      'Self-employed workers, freelancers, and multi-borough households',
+      'Families leaving Medicaid/CHIP or other coverage',
+      'Early retirees under 65 researching bridge coverage before Medicare',
+    ],
+    costFactors: [
+      'Age and household composition (Marketplace age rating)',
+      'Household income relative to the federal poverty level (premium tax credit education)',
+      'Tobacco use where rating rules apply',
+      'Metal tier (Bronze, Silver, Gold) and deductible / max out-of-pocket design',
+      'County and local issuer competition — NYC, Long Island, Westchester, and upstate menus can differ',
+    ],
+    whatToolShows: [
+      'Approximate plan and issuer counts for your New York ZIP when the CMS Marketplace API is available',
+      'Premium ranges and deductible ranges when CMS returns those fields',
+      'Lower-premium, balanced, and higher-protection research path examples',
+      'Assistance context when you add household income (educational — not an official award)',
+    ],
+    faqs: [
+      {
+        q: 'Does New York use HealthCare.gov or a state Marketplace?',
+        a: 'New York operates NY State of Health, a state-based Marketplace, for individual ACA coverage and related programs. HealthCare.gov remains a useful federal reference, but official eligibility, plan selection, and enrollment for most New Yorkers go through NY State of Health (nystateofhealth.ny.gov). Always confirm current steps on official sites.',
+      },
+      {
+        q: 'Why research by ZIP if I enroll on NY State of Health?',
+        a: 'ZIP and county shape which plans and networks are available. Our research tool helps you understand local plan landscape context (when CMS data loads) before you complete official shopping and enrollment on NY State of Health.',
+      },
+      {
+        q: 'Is a low monthly premium always best in New York?',
+        a: 'Not necessarily. Lower-premium paths often pair with higher deductibles. Silver can matter if cost-sharing reductions may apply. Use total-cost thinking, then verify official prices and assistance on NY State of Health.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, subsidies, and enrollment are determined on NY State of Health (or with a licensed professional you choose).',
+      },
+      {
+        q: 'What about Medicare in New York?',
+        a: 'Medicare is a separate pathway from the ACA Marketplace. If you are 65+ or otherwise Medicare-eligible, use Medicare research tools and Medicare.gov — not Marketplace enrollment alone.',
+      },
+    ],
+    relatedGuides: [
+      'nyc-aca-marketplace',
+      'long-island-aca-marketplace',
+      'westchester-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'nyc-aca-marketplace',
+    primaryKeyword: 'ACA plans in NYC',
+    title: 'ACA Plans in NYC — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in New York City (five boroughs): ZIP landscape tools, cost factors, subsidy education, and NY State of Health next steps. Educational only — no lead selling.',
+    h1: 'ACA Marketplace research in NYC',
+    subhead:
+      'Five-borough shoppers face dense networks and ZIP-level plan variation. Research your local landscape first — then verify and enroll through NY State of Health.',
+    locationLabel: 'New York City',
+    stateName: 'New York',
+    licenseRegulator: 'New York DFS',
+    sampleZips: [
+      { zip: '10001', label: 'Manhattan (midtown area)' },
+      { zip: '10019', label: 'Manhattan (midtown west)' },
+      { zip: '11201', label: 'Brooklyn Heights area' },
+      { zip: '11101', label: 'Long Island City / Queens' },
+      { zip: '10451', label: 'South Bronx area' },
+      { zip: '10301', label: 'Staten Island (St. George area)' },
+    ],
+    hubHref: '/hubs/new-york/nyc-newark-jersey-city',
+    hubLabel: 'NYC Metro agents hub',
+    directoryHref: '/hubs/aca',
+    enrollmentLinks: [
+      { href: 'https://nystateofhealth.ny.gov/', label: 'NY State of Health' },
+      { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+    ],
+    overview: [
+      'New York City covers five boroughs — Manhattan, Brooklyn, Queens, the Bronx, and Staten Island. Residents often compare neighborhoods and networks, but Marketplace menus still key off your ZIP and county of residence.',
+      'NYC is not a pure HealthCare.gov state for most individual ACA shoppers. Official enrollment for many New Yorkers runs through NY State of Health. Treat any “average city premium” as anecdote only — never a permanent fact.',
+      'This guide is educational research from Insurance Trust Hub. It is not a quote engine and does not invent official premiums.',
+    ],
+    whoBuys: [
+      'Gig, creative, and professional workers without employer coverage',
+      'Multi-language households comparing networks across boroughs',
+      'Self-employed residents researching total annual cost',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred providers across boroughs (confirm officially)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for an NYC ZIP when available',
+      'Issuer depth and premium spreads when CMS provides those fields',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'Where do New Yorkers officially enroll in ACA plans?',
+        a: 'Most individual Marketplace enrollment in New York goes through NY State of Health (nystateofhealth.ny.gov), the state’s official Marketplace. HealthCare.gov can help you understand federal context, but complete official shopping and enrollment on the New York pathway unless an official site directs you otherwise.',
+      },
+      {
+        q: 'Do plans differ by borough?',
+        a: 'Availability can vary by ZIP and county within the city. A Manhattan ZIP, a Brooklyn ZIP, and a Staten Island ZIP can surface different landscapes. Always research the ZIP where you live and seek care.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me in NYC?',
+        a: 'No. We provide independent educational research only. Official eligibility, pricing, and enrollment are on NY State of Health (or with a licensed professional you choose).',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: [
+      'new-york-aca-marketplace',
+      'long-island-aca-marketplace',
+      'westchester-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'long-island-aca-marketplace',
+    primaryKeyword: 'Marketplace insurance Long Island',
+    title: 'Marketplace Insurance on Long Island — ACA Research Guide',
+    description:
+      'Research ACA Marketplace coverage on Long Island (Nassau and Suffolk): ZIP landscape tools, cost factors, subsidy education, and NY State of Health next steps. Educational only — no lead selling.',
+    h1: 'ACA Marketplace research on Long Island',
+    subhead:
+      'Nassau and Suffolk households often shop suburban networks and issuer mixes. Use ZIP-level landscape research — then verify official details on NY State of Health.',
+    locationLabel: 'Long Island',
+    stateName: 'New York',
+    licenseRegulator: 'New York DFS',
+    sampleZips: [
+      { zip: '11550', label: 'Hempstead area' },
+      { zip: '11530', label: 'Garden City area' },
+      { zip: '11743', label: 'Huntington area' },
+      { zip: '11701', label: 'Babylon / western Suffolk' },
+      { zip: '11747', label: 'Melville / Route 110 area' },
+      { zip: '11901', label: 'Riverhead / East End area' },
+    ],
+    hubHref: '/hubs/new-york/nyc-newark-jersey-city',
+    hubLabel: 'NYC Metro agents hub',
+    directoryHref: '/hubs/aca',
+    enrollmentLinks: [
+      { href: 'https://nystateofhealth.ny.gov/', label: 'NY State of Health' },
+      { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+    ],
+    overview: [
+      'Long Island research usually centers on Nassau and Suffolk counties — suburban markets with their own hospital systems, commuting patterns, and issuer competition.',
+      'Like the rest of New York, official Marketplace enrollment for many residents runs through NY State of Health, not a pure HealthCare.gov-only pathway. Use educational ZIP research for landscape context, then complete official steps on the state site.',
+      'This guide is educational only. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Suburban households without employer coverage',
+      'Self-employed and small-business owners along the LIE / Route 110 corridors',
+      'Families comparing total cost, not just monthly premium',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age and household size',
+      'Income / FPL position for assistance education',
+      'Metal tier and deductible design',
+      'Whether preferred Long Island providers appear in plan networks (confirm officially)',
+    ],
+    whatToolShows: [
+      'Plan and issuer counts for a Long Island ZIP when CMS data loads',
+      'Premium and deductible ranges when provided',
+      'Lower-premium vs more protective research path examples',
+      'Assistance context if you enter income',
+    ],
+    faqs: [
+      {
+        q: 'Is Long Island on NY State of Health?',
+        a: 'Yes — Nassau and Suffolk residents generally use New York’s official state Marketplace, NY State of Health, for individual ACA enrollment. Confirm current rules and plan catalogs on nystateofhealth.ny.gov.',
+      },
+      {
+        q: 'Nassau vs Suffolk — same plans?',
+        a: 'Not necessarily. County and ZIP can change issuer and network options. Research the ZIP where you live rather than assuming a single “Long Island” menu.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On NY State of Health for official eligibility, pricing, and enrollment, or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'What if the research tool shows no live data?',
+        a: 'We fail closed and label educational fallbacks. We never invent a full plan catalog. Retry later or go directly to NY State of Health for official shopping.',
+      },
+    ],
+    relatedGuides: [
+      'new-york-aca-marketplace',
+      'nyc-aca-marketplace',
+      'westchester-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'westchester-aca-marketplace',
+    primaryKeyword: 'ACA plans in Westchester',
+    title: 'ACA Plans in Westchester — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Westchester and lower Hudson context: ZIP landscape tools, cost factors, subsidy education, and NY State of Health next steps. Educational only — no lead selling.',
+    h1: 'ACA Marketplace research in Westchester',
+    subhead:
+      'Westchester and nearby lower Hudson households often sit next to the NYC market. Keep research on your local ZIP — then verify enrollment on NY State of Health.',
+    locationLabel: 'Westchester',
+    stateName: 'New York',
+    licenseRegulator: 'New York DFS',
+    sampleZips: [
+      { zip: '10601', label: 'White Plains' },
+      { zip: '10583', label: 'Scarsdale / Eastchester area' },
+      { zip: '10701', label: 'Yonkers area' },
+      { zip: '10550', label: 'Mount Vernon area' },
+      { zip: '10573', label: 'Port Chester / Rye area' },
+      { zip: '10520', label: 'Croton / northern Westchester area' },
+    ],
+    hubHref: '/hubs/new-york/nyc-newark-jersey-city',
+    hubLabel: 'NYC Metro agents hub',
+    directoryHref: '/hubs/aca',
+    enrollmentLinks: [
+      { href: 'https://nystateofhealth.ny.gov/', label: 'NY State of Health' },
+      { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+    ],
+    overview: [
+      'Westchester County — and adjacent lower Hudson communities many residents mention in the same breath — is a dense suburban market north of New York City with its own hospital systems and commuting patterns.',
+      'NYC adjacency can influence where people work and receive specialty care, but Marketplace research and New York enrollment rules still key off your New York residence. Official individual ACA pathways typically run through NY State of Health.',
+      'This guide is educational only. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Commuter households without affordable employer coverage',
+      'Self-employed professionals and small-business owners',
+      'Families comparing networks across southern Westchester towns',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred Westchester (and, for some, NYC) providers — confirm officially',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for a Westchester ZIP when available',
+      'Issuer depth and premium spreads when provided',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'Does Westchester use NY State of Health?',
+        a: 'Yes. Westchester residents generally enroll in individual ACA coverage through New York’s official state Marketplace, NY State of Health. Always confirm current steps and official plan prices there.',
+      },
+      {
+        q: 'I work in NYC but live in Westchester — which Marketplace?',
+        a: 'Use your New York home ZIP for Marketplace research and New York enrollment rules. Confirm that preferred city providers are in-network on official plan documents if you receive care in the five boroughs.',
+      },
+      {
+        q: 'Is Westchester more expensive than Long Island or NYC?',
+        a: 'There is no permanent answer. Issuer competition, ages, and income drive outcomes. Compare live landscapes for each ZIP rather than relying on anecdotes.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On NY State of Health for official eligibility, pricing, and enrollment, or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: [
+      'new-york-aca-marketplace',
+      'nyc-aca-marketplace',
+      'long-island-aca-marketplace',
     ],
   },
 ];

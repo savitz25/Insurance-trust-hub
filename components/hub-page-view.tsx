@@ -75,6 +75,13 @@ const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string
     { href: '/guides/pennsylvania-aca-marketplace', label: 'Pennsylvania ACA guide' },
     { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
   ],
+  'nyc-newark-jersey-city': [
+    { href: '/guides/nyc-aca-marketplace', label: 'NYC ACA guide' },
+    { href: '/guides/long-island-aca-marketplace', label: 'Long Island ACA guide' },
+    { href: '/guides/westchester-aca-marketplace', label: 'Westchester ACA guide' },
+    { href: '/guides/new-york-aca-marketplace', label: 'New York ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
 };
 
 export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
