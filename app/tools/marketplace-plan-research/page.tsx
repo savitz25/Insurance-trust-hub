@@ -178,6 +178,56 @@ export default function MarketplacePlanResearchPage() {
             </div>
           </section>
 
+          {/* Local guides */}
+          <section>
+            <h2 className="text-xl font-semibold text-slate-900">Local Marketplace guides</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              State and metro research articles that deep-link into this tool.
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-2 text-sm">
+              <li>
+                <Link
+                  href="/guides/florida-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Florida
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/miami-dade-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Miami-Dade
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/broward-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Broward
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/palm-beach-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Palm Beach
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-slate-700"
+                >
+                  All guides
+                </Link>
+              </li>
+            </ul>
+          </section>
+
           {/* Related tools */}
           <section>
             <h2 className="text-xl font-semibold text-slate-900">Related research tools</h2>

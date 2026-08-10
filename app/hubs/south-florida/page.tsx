@@ -27,17 +27,20 @@ export default function SouthFloridaHubPage() {
             New: CMS county Medicare Intelligence for Miami-Dade, Broward &amp; Palm Beach
           </p>
           <div className="flex flex-wrap gap-3 font-medium text-[#0284C7]">
-            <Link href="/data/counties/miami-dade-fl" className="hover:underline">
-              Miami-Dade
+            <Link href="/guides/miami-dade-aca-marketplace" className="hover:underline">
+              Miami-Dade ACA guide
             </Link>
-            <Link href="/data/counties/broward-fl" className="hover:underline">
-              Broward
+            <Link href="/guides/broward-aca-marketplace" className="hover:underline">
+              Broward ACA guide
             </Link>
-            <Link href="/data/counties/palm-beach-fl" className="hover:underline">
-              Palm Beach
+            <Link href="/guides/palm-beach-aca-marketplace" className="hover:underline">
+              Palm Beach ACA guide
+            </Link>
+            <Link href="/tools/marketplace-plan-research" className="hover:underline">
+              Local plan landscape
             </Link>
             <Link href="/data/counties" className="hover:underline">
-              All dashboards
+              Medicare dashboards
             </Link>
           </div>
         </div>

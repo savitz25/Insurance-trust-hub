@@ -51,6 +51,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/medicare-provider-lookup',
     '/tools/aca-plan-explorer',
     '/tools/marketplace-plan-research',
+    '/guides',
+    '/guides/florida-aca-marketplace',
+    '/guides/miami-dade-aca-marketplace',
+    '/guides/broward-aca-marketplace',
+    '/guides/palm-beach-aca-marketplace',
     '/marketplace',
     '/medicare',
     '/carriers',
@@ -77,6 +82,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             path === '/carriers' ||
             path === '/tools/aca-plan-explorer' ||
             path === '/tools/marketplace-plan-research' ||
+            path.startsWith('/guides') ||
             path.startsWith('/data') ||
             path.startsWith('/tools/cost') ||
             path.startsWith('/calculators/aca') ||

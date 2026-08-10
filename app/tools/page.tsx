@@ -28,7 +28,7 @@ import { cn } from '@/lib/utils';
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Research Center — ACA, Medicare & cost tools',
   description:
-    'Insurance Research Center: ACA Plan Explorer, Medicare market intelligence, carrier research, cost tools, and license verification — no paid placements, no lead selling.',
+    'Insurance Research Center: Marketplace plan research, ACA Plan Explorer, Medicare market intelligence, carrier research, cost tools, and license verification — no paid placements, no lead selling.',
   path: '/tools',
 });
 
@@ -269,6 +269,7 @@ const SITUATIONS = [
     icon: Briefcase,
     title: 'Lost employer coverage',
     routes: [
+      { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
       { href: '/calculators/aca-subsidy', label: 'ACA Savings Planner' },
       { href: '/tools/cost-estimator', label: 'Cost Planner' },
     ],
@@ -277,6 +278,7 @@ const SITUATIONS = [
     icon: Home,
     title: 'Self-employed / no employer plan',
     routes: [
+      { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
       { href: '/calculators/aca-subsidy', label: 'ACA Savings Planner' },
       { href: '/hubs/aca', label: 'ACA specialists' },
     ],
