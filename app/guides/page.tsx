@@ -2,15 +2,20 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
-import { ACA_MARKETPLACE_GUIDES } from '@/lib/guides/aca-marketplace-guides';
-import { MARKETPLACE_FLAGSHIP_PATH } from '@/lib/guides/aca-marketplace-guides';
+import {
+  ACA_MARKETPLACE_GUIDES,
+  MARKETPLACE_FLAGSHIP_PATH,
+  getAcaMarketplaceGuidesByState,
+} from '@/lib/guides/aca-marketplace-guides';
 
 export const metadata: Metadata = buildMetadata({
   title: 'ACA Marketplace Research Guides — State & Metro',
   description:
-    'Educational ACA Marketplace research guides by state and metro. Learn how to research local plan landscapes, then use live ZIP tools. No lead selling — verify on HealthCare.gov.',
+    'Educational ACA Marketplace research guides by state and metro (Florida, Texas, and more). Learn how to research local plan landscapes, then use live ZIP tools. No lead selling — verify on HealthCare.gov.',
   path: '/guides',
 });
+
+const STATES = ['Florida', 'Texas'] as const;
 
 export default function GuidesIndexPage() {
   return (
@@ -35,23 +40,38 @@ export default function GuidesIndexPage() {
         </Link>
       </p>
 
-      <ul className="mt-10 space-y-4">
-        {ACA_MARKETPLACE_GUIDES.map((g) => (
-          <li key={g.slug}>
-            <Link
-              href={`/guides/${g.slug}`}
-              className="block rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/15"
-            >
-              <p className="flex items-center gap-1.5 text-xs font-medium text-[#0284C7]">
-                <MapPin className="h-3.5 w-3.5" aria-hidden />
-                {g.locationLabel}
-              </p>
-              <p className="mt-1 text-lg font-semibold text-slate-900">{g.h1}</p>
-              <p className="mt-1 text-sm text-slate-600 line-clamp-2">{g.description}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {STATES.map((state) => {
+        const guides = getAcaMarketplaceGuidesByState(state);
+        if (!guides.length) return null;
+        return (
+          <section key={state} className="mt-12">
+            <h2 className="text-lg font-semibold text-slate-900">{state}</h2>
+            <ul className="mt-4 space-y-4">
+              {guides.map((g) => (
+                <li key={g.slug}>
+                  <Link
+                    href={`/guides/${g.slug}`}
+                    className="block rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/15"
+                  >
+                    <p className="flex items-center gap-1.5 text-xs font-medium text-[#0284C7]">
+                      <MapPin className="h-3.5 w-3.5" aria-hidden />
+                      {g.locationLabel}
+                    </p>
+                    <p className="mt-1 text-lg font-semibold text-slate-900">{g.h1}</p>
+                    <p className="mt-1 line-clamp-2 text-sm text-slate-600">{g.description}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+
+      {ACA_MARKETPLACE_GUIDES.length === 0 ? null : (
+        <p className="mt-10 text-xs text-slate-500">
+          {ACA_MARKETPLACE_GUIDES.length} guides · more states coming
+        </p>
+      )}
     </div>
   );
 }

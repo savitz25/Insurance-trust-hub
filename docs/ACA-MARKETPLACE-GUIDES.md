@@ -3,7 +3,7 @@
 **Flagship tool:** `/tools/marketplace-plan-research`  
 **Guide base:** `/guides/*`
 
-## Phase 1 (shipped)
+## Phase 1 — Florida (shipped)
 
 | URL | Primary intent |
 |-----|----------------|
@@ -12,7 +12,15 @@
 | `/guides/broward-aca-marketplace` | Marketplace insurance Broward County |
 | `/guides/palm-beach-aca-marketplace` | Silver plan cost Palm Beach (educational framing) |
 
-Index: `/guides`
+## Tier 2A — Texas (shipped)
+
+| URL | Primary intent |
+|-----|----------------|
+| `/guides/texas-aca-marketplace` | ACA Marketplace Texas (statewide) |
+| `/guides/houston-aca-marketplace` | ACA plans in Houston |
+| `/guides/dallas-aca-marketplace` | Marketplace insurance Dallas |
+
+Index: `/guides` (grouped by state)
 
 ## Template
 
@@ -28,4 +36,4 @@ Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, H
 
 ## Tier 2 next
 
-Texas, Georgia, North Carolina, Pennsylvania, Ohio, Michigan (statewide + 1–2 metros each).
+Georgia + Atlanta, then North Carolina, Pennsylvania, Ohio, Michigan.

@@ -189,7 +189,7 @@ export function AcaMarketplaceGuideView({ guide }: Props) {
               <Link href={guide.directoryHref} className="font-medium text-[#0284C7] hover:underline">
                 ACA specialists hub
               </Link>{' '}
-              when you want human help — re-check licenses with Florida DFS.
+              when you want human help — re-check licenses with {guide.licenseRegulator}.
             </li>
             <li>
               Complete official eligibility, pricing, and enrollment on{' '}

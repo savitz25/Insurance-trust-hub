@@ -12,7 +12,9 @@ export type AcaMarketplaceGuide = {
   h1: string;
   subhead: string;
   locationLabel: string;
-  stateName: 'Florida';
+  stateName: 'Florida' | 'Texas';
+  /** Short regulator name for license re-check copy */
+  licenseRegulator: string;
   /** Sample ZIPs for research hints only */
   sampleZips: Array<{ zip: string; label: string }>;
   hubHref: string;
@@ -42,6 +44,7 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       'A practical research path for Floridians shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll on HealthCare.gov.',
     locationLabel: 'Florida',
     stateName: 'Florida',
+    licenseRegulator: 'Florida DFS',
     sampleZips: [
       { zip: '33139', label: 'Miami Beach area' },
       { zip: '33301', label: 'Fort Lauderdale' },
@@ -116,6 +119,7 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       'Miami-Dade is one of Florida’s densest individual health markets. Use local ZIP research to understand plan volume and path types — then confirm everything on HealthCare.gov.',
     locationLabel: 'Miami-Dade County, Florida',
     stateName: 'Florida',
+    licenseRegulator: 'Florida DFS',
     sampleZips: [
       { zip: '33139', label: 'Miami Beach' },
       { zip: '33130', label: 'Brickell / downtown' },
@@ -186,6 +190,7 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       'From Fort Lauderdale coastal ZIPs to inland communities, Broward plan options are local. Start with a ZIP landscape, then verify official details on HealthCare.gov.',
     locationLabel: 'Broward County, Florida',
     stateName: 'Florida',
+    licenseRegulator: 'Florida DFS',
     sampleZips: [
       { zip: '33301', label: 'Fort Lauderdale' },
       { zip: '33308', label: 'Galt Ocean area' },
@@ -254,6 +259,7 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       'Palm Beach County shoppers often ask about Silver plan cost and whether a “balanced” path beats the cheapest premium. Research your ZIP landscape first — then confirm official prices on HealthCare.gov.',
     locationLabel: 'Palm Beach County, Florida',
     stateName: 'Florida',
+    licenseRegulator: 'Florida DFS',
     sampleZips: [
       { zip: '33401', label: 'West Palm Beach' },
       { zip: '33480', label: 'Palm Beach' },
@@ -311,6 +317,209 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       'broward-aca-marketplace',
     ],
   },
+  // ── Texas cluster (Tier 2A) ───────────────────────────────────────────────
+  {
+    slug: 'texas-aca-marketplace',
+    primaryKeyword: 'ACA Marketplace Texas',
+    title: 'Texas ACA Marketplace Guide — Research Plans by ZIP (2026)',
+    description:
+      'How to research ACA Marketplace coverage in Texas: ZIP-level plan landscape tools, cost factors, subsidy education, and HealthCare.gov next steps. Educational only — no lead selling.',
+    h1: 'Texas ACA Marketplace guide',
+    subhead:
+      'A practical research path for Texans shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll on HealthCare.gov.',
+    locationLabel: 'Texas',
+    stateName: 'Texas',
+    licenseRegulator: 'Texas TDI',
+    sampleZips: [
+      { zip: '77002', label: 'Houston downtown' },
+      { zip: '77024', label: 'Memorial / west Houston' },
+      { zip: '75201', label: 'Dallas downtown' },
+      { zip: '75001', label: 'Addison / north Dallas' },
+      { zip: '78701', label: 'Austin' },
+      { zip: '78205', label: 'San Antonio' },
+    ],
+    hubHref: '/hubs/texas/houston',
+    hubLabel: 'Houston insurance agents',
+    directoryHref: '/hubs/aca',
+    marketplaceCountyHref: '/marketplace/tx/harris',
+    overview: [
+      'Texas has a large individual health insurance market. Many residents use the federal Marketplace (HealthCare.gov) during open enrollment or after a qualifying life event.',
+      'Plan menus and issuer competition vary widely between metros such as Houston, Dallas–Fort Worth, Austin, and San Antonio — and even between ZIPs inside the same metro. A statewide average cannot replace a ZIP-level CMS landscape when available.',
+      'This page is educational research from Insurance Trust Hub. We do not sell policies, process applications, or invent official premiums.',
+    ],
+    whoBuys: [
+      'People without affordable employer coverage',
+      'Self-employed workers, contractors, and oil & gas / service-industry households',
+      'Families leaving Medicaid/CHIP or other coverage',
+      'Early retirees under 65 researching bridge coverage before Medicare',
+    ],
+    costFactors: [
+      'Age and household composition (Marketplace age rating)',
+      'Household income relative to the federal poverty level (premium tax credit education)',
+      'Tobacco use where rating rules apply',
+      'Metal tier (Bronze, Silver, Gold) and deductible / max out-of-pocket design',
+      'County and local issuer competition — Houston and Dallas menus can differ substantially',
+    ],
+    whatToolShows: [
+      'Approximate plan and issuer counts for your Texas ZIP when the CMS Marketplace API is available',
+      'Premium ranges and deductible ranges when CMS returns those fields',
+      'Lower-premium, balanced, and higher-protection research path examples',
+      'Assistance context when you add household income (educational — not an official award)',
+    ],
+    faqs: [
+      {
+        q: 'Does Texas use HealthCare.gov or a state exchange?',
+        a: 'Texas uses the federal Marketplace at HealthCare.gov for individual ACA coverage. Always confirm enrollment steps, special enrollment periods, and official plan prices there.',
+      },
+      {
+        q: 'Why do Houston and Dallas options differ?',
+        a: 'Issuers file service areas by county and region. Moving between Harris County and Dallas County — or even across suburban ZIPs — can change which plans and networks appear. Research the ZIP where you will live and seek care.',
+      },
+      {
+        q: 'Is a low monthly premium always best in Texas?',
+        a: 'Not necessarily. Bronze-style paths often pair lower premiums with higher deductibles. Silver can matter if cost-sharing reductions may apply. Use total-cost thinking, then verify on HealthCare.gov.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, subsidies, and enrollment are determined on HealthCare.gov (or with a licensed agent you choose).',
+      },
+      {
+        q: 'What about Medicare in Texas?',
+        a: 'Medicare is a separate pathway from the ACA Marketplace. If you are 65+ or otherwise Medicare-eligible, use Medicare research tools and Medicare.gov — not Marketplace enrollment alone.',
+      },
+    ],
+    relatedGuides: ['houston-aca-marketplace', 'dallas-aca-marketplace'],
+  },
+  {
+    slug: 'houston-aca-marketplace',
+    primaryKeyword: 'ACA plans in Houston',
+    title: 'ACA Plans in Houston — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Houston and Harris County: ZIP-level plan landscape, cost factors, subsidy context, and HealthCare.gov next steps. Educational only.',
+    h1: 'ACA Marketplace research in Houston',
+    subhead:
+      'Houston’s metro spans many ZIPs and care patterns. Use local ZIP research to understand plan volume and path types — then confirm everything on HealthCare.gov.',
+    locationLabel: 'Houston / Harris County, Texas',
+    stateName: 'Texas',
+    licenseRegulator: 'Texas TDI',
+    sampleZips: [
+      { zip: '77002', label: 'Downtown Houston' },
+      { zip: '77024', label: 'Memorial' },
+      { zip: '77057', label: 'Galleria area' },
+      { zip: '77070', label: 'Northwest Houston' },
+      { zip: '77573', label: 'League City area' },
+    ],
+    hubHref: '/hubs/texas/houston',
+    hubLabel: 'Houston insurance agents',
+    directoryHref: '/hubs/aca',
+    marketplaceCountyHref: '/marketplace/tx/harris',
+    overview: [
+      'Houston shoppers often compare network access across a large metro, multilingual service, and whether a lower premium is worth a higher deductible.',
+      'Plan menus can differ by ZIP across Harris County and surrounding suburbs. Treat any statewide “average” as context only — run your own ZIP in the research tool for a current CMS landscape snapshot when available.',
+      'This guide is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Energy, logistics, and service workers without stable employer plans',
+      'Self-employed professionals and small-business households',
+      'Families evaluating Silver vs Bronze tradeoffs',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred hospitals and clinics (confirm on official plan documents)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for a Houston-area ZIP',
+      'Issuer depth and premium spreads when available',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'What ZIP should I use for Houston research?',
+        a: 'Use the ZIP for the home where you will live and primarily seek care. Different Harris County and suburban ZIPs can surface different plan menus.',
+      },
+      {
+        q: 'I work downtown but live in the suburbs — which ZIP?',
+        a: 'Marketplace plan menus are generally based on where you live. Research your home ZIP, then confirm networks cover where you actually receive care.',
+      },
+      {
+        q: 'How is this different from Medicare research in Houston?',
+        a: 'Medicare tools use different CMS extracts for 65+ / Medicare Advantage markets. ACA Marketplace research is for individual/family coverage under 65 (with limited exceptions).',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: ['texas-aca-marketplace', 'dallas-aca-marketplace'],
+  },
+  {
+    slug: 'dallas-aca-marketplace',
+    primaryKeyword: 'Marketplace insurance Dallas',
+    title: 'Marketplace Insurance in Dallas — ACA Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Dallas and North Texas: ZIP landscape tools, cost factors, subsidy education, and HealthCare.gov next steps. Independent research — no lead selling.',
+    h1: 'ACA Marketplace research in Dallas',
+    subhead:
+      'Dallas–Fort Worth is a multi-county metro. Plan options are local by ZIP — start with a landscape research, then verify official details on HealthCare.gov.',
+    locationLabel: 'Dallas / North Texas',
+    stateName: 'Texas',
+    licenseRegulator: 'Texas TDI',
+    sampleZips: [
+      { zip: '75201', label: 'Downtown Dallas' },
+      { zip: '75205', label: 'University Park area' },
+      { zip: '75001', label: 'Addison' },
+      { zip: '75034', label: 'Frisco area' },
+      { zip: '76051', label: 'Grapevine / mid-cities' },
+    ],
+    hubHref: '/hubs/texas/dallas-fort-worth',
+    hubLabel: 'Dallas–Fort Worth insurance agents',
+    directoryHref: '/hubs/aca',
+    marketplaceCountyHref: '/marketplace/tx/dallas',
+    overview: [
+      'Dallas shoppers often compare suburban vs urban ZIPs, network access across DFW, and whether a balanced Silver-style path beats the cheapest premium.',
+      'Issuers may treat Dallas County and surrounding counties differently. Use educational tools for landscape context, then complete official shopping on HealthCare.gov.',
+    ],
+    whoBuys: [
+      'Corporate, logistics, and professional workers without employer coverage',
+      'Self-employed residents researching total cost, not just premium',
+      'Households comparing DFW suburbs before a move',
+    ],
+    costFactors: [
+      'Age and household size',
+      'Income / FPL position for assistance education',
+      'Metal tier and deductible design',
+      'Whether preferred providers appear in plan networks (confirm officially)',
+    ],
+    whatToolShows: [
+      'Plan and issuer counts for a Dallas-area ZIP when CMS data loads',
+      'Premium and deductible ranges when provided',
+      'Lower-premium vs more protective research path examples',
+      'Assistance context if you enter income',
+    ],
+    faqs: [
+      {
+        q: 'Should I research Dallas or Fort Worth separately?',
+        a: 'Use the ZIP for your residence. Dallas County and Tarrant County (Fort Worth) can show different Marketplace menus. Do not assume one downtown ZIP covers the whole metro.',
+      },
+      {
+        q: 'Is Dallas cheaper than Houston?',
+        a: 'There is no permanent answer. Issuer competition, ages, and income drive outcomes. Compare live landscapes for each ZIP rather than relying on anecdotes.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (Texas’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'What if the tool shows no live data?',
+        a: 'We fail closed and label educational fallbacks. We never invent a full plan catalog. Retry later or go directly to HealthCare.gov Window Shopping.',
+      },
+    ],
+    relatedGuides: ['texas-aca-marketplace', 'houston-aca-marketplace'],
+  },
 ];
 
 export function getAcaMarketplaceGuide(slug: string): AcaMarketplaceGuide | undefined {
@@ -319,6 +528,12 @@ export function getAcaMarketplaceGuide(slug: string): AcaMarketplaceGuide | unde
 
 export function getAllAcaMarketplaceGuideSlugs(): string[] {
   return ACA_MARKETPLACE_GUIDES.map((g) => g.slug);
+}
+
+export function getAcaMarketplaceGuidesByState(
+  stateName: AcaMarketplaceGuide['stateName']
+): AcaMarketplaceGuide[] {
+  return ACA_MARKETPLACE_GUIDES.filter((g) => g.stateName === stateName);
 }
 
 export { FLAGSHIP as MARKETPLACE_FLAGSHIP_PATH };

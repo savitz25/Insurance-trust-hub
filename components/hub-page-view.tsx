@@ -26,6 +26,32 @@ const COUNTY_DASHBOARD_BY_HUB_SLUG: Record<string, string> = {
   'miami-fort-lauderdale': 'miami-dade-fl',
 };
 
+/** Reciprocal ACA Marketplace research guides (educational clusters → flagship tool) */
+const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string }>> = {
+  houston: [
+    { href: '/guides/houston-aca-marketplace', label: 'Houston ACA guide' },
+    { href: '/guides/texas-aca-marketplace', label: 'Texas ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+  'dallas-fort-worth': [
+    { href: '/guides/dallas-aca-marketplace', label: 'Dallas ACA guide' },
+    { href: '/guides/texas-aca-marketplace', label: 'Texas ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+  'miami-dade': [
+    { href: '/guides/miami-dade-aca-marketplace', label: 'Miami-Dade ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+  'broward-county': [
+    { href: '/guides/broward-aca-marketplace', label: 'Broward ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+  'palm-beach-county': [
+    { href: '/guides/palm-beach-aca-marketplace', label: 'Palm Beach ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+};
+
 export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
   const { stateSlug: state, slug } = hub;
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
@@ -38,6 +64,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
   const countySummary = countyDashboardSlug
     ? getAllCountySummaries().find((c) => c.slug === countyDashboardSlug)
     : undefined;
+  const acaGuideLinks = ACA_GUIDE_LINKS_BY_HUB[slug];
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -67,6 +94,23 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
           }}
         />
       </div>
+
+      {acaGuideLinks && acaGuideLinks.length > 0 ? (
+        <div className="border-b bg-[#E0F2FE]/80">
+          <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-sm">
+            <p className="font-medium text-[#0A2540]">
+              Research ACA Marketplace plans near {hub.shortName}
+            </p>
+            <div className="flex flex-wrap gap-3 font-medium text-[#0284C7]">
+              {acaGuideLinks.map((l) => (
+                <Link key={l.href} href={l.href} className="hover:underline">
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <section className="border-b bg-gradient-to-br from-primary to-primary/80 py-14 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
