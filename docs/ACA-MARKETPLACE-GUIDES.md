@@ -27,6 +27,14 @@
 | `/guides/georgia-aca-marketplace` | ACA Marketplace Georgia (statewide) |
 | `/guides/atlanta-aca-marketplace` | ACA plans in Atlanta |
 
+## Tier 2C — North Carolina (shipped)
+
+| URL | Primary intent |
+|-----|----------------|
+| `/guides/north-carolina-aca-marketplace` | ACA Marketplace North Carolina (statewide) |
+| `/guides/charlotte-aca-marketplace` | ACA plans in Charlotte |
+| `/guides/research-triangle-aca-marketplace` | Marketplace insurance Raleigh (Raleigh–Durham–Chapel Hill) |
+
 Index: `/guides` (grouped by state)
 
 ## Template
@@ -43,4 +51,4 @@ Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, H
 
 ## Tier 2 next
 
-North Carolina + Charlotte / Research Triangle, then Pennsylvania, Ohio, Michigan.
+Pennsylvania + Philly / Pittsburgh, or Ohio + Columbus / Cleveland.

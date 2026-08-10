@@ -55,6 +55,16 @@ const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string
     { href: '/guides/georgia-aca-marketplace', label: 'Georgia ACA guide' },
     { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
   ],
+  charlotte: [
+    { href: '/guides/charlotte-aca-marketplace', label: 'Charlotte ACA guide' },
+    { href: '/guides/north-carolina-aca-marketplace', label: 'North Carolina ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+  raleigh: [
+    { href: '/guides/research-triangle-aca-marketplace', label: 'Research Triangle ACA guide' },
+    { href: '/guides/north-carolina-aca-marketplace', label: 'North Carolina ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
 };
 
 export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {

@@ -12,7 +12,7 @@ export type AcaMarketplaceGuide = {
   h1: string;
   subhead: string;
   locationLabel: string;
-  stateName: 'Florida' | 'Texas' | 'Georgia';
+  stateName: 'Florida' | 'Texas' | 'Georgia' | 'North Carolina';
   /** Short regulator name for license re-check copy */
   licenseRegulator: string;
   /** Sample ZIPs for research hints only */
@@ -661,6 +661,213 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       },
     ],
     relatedGuides: ['georgia-aca-marketplace'],
+  },
+  // ── North Carolina cluster (Tier 2C) ──────────────────────────────────────
+  {
+    slug: 'north-carolina-aca-marketplace',
+    primaryKeyword: 'ACA Marketplace North Carolina',
+    title: 'North Carolina ACA Marketplace Guide — Research Plans by ZIP (2026)',
+    description:
+      'How to research ACA Marketplace coverage in North Carolina: ZIP-level plan landscape tools, cost factors, subsidy education, and HealthCare.gov next steps. Educational only — no lead selling.',
+    h1: 'North Carolina ACA Marketplace guide',
+    subhead:
+      'A practical research path for North Carolinians shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll on HealthCare.gov.',
+    locationLabel: 'North Carolina',
+    stateName: 'North Carolina',
+    licenseRegulator: 'North Carolina DOI',
+    sampleZips: [
+      { zip: '28202', label: 'Charlotte uptown' },
+      { zip: '27601', label: 'Raleigh downtown' },
+      { zip: '27701', label: 'Durham' },
+      { zip: '27514', label: 'Chapel Hill' },
+      { zip: '27401', label: 'Greensboro' },
+      { zip: '28801', label: 'Asheville' },
+    ],
+    hubHref: '/hubs/north-carolina/charlotte',
+    hubLabel: 'Charlotte insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'North Carolina has a substantial individual health insurance market. Many residents use the federal Marketplace (HealthCare.gov) during open enrollment or after a qualifying life event.',
+      'Plan menus and issuer competition can differ between Charlotte, the Research Triangle (Raleigh–Durham–Chapel Hill), the Triad, and mountain or coastal counties. A statewide average cannot replace a ZIP-level CMS landscape when available.',
+      'This page is educational research from Insurance Trust Hub. We do not sell policies, process applications, or invent official premiums.',
+    ],
+    whoBuys: [
+      'People without affordable employer coverage',
+      'Self-employed workers, contractors, and tech / healthcare-adjacent households',
+      'Families leaving Medicaid/CHIP or other coverage',
+      'Early retirees under 65 researching bridge coverage before Medicare',
+    ],
+    costFactors: [
+      'Age and household composition (Marketplace age rating)',
+      'Household income relative to the federal poverty level (premium tax credit education)',
+      'Tobacco use where rating rules apply',
+      'Metal tier (Bronze, Silver, Gold) and deductible / max out-of-pocket design',
+      'County and local issuer competition — Charlotte and Triangle menus can differ',
+    ],
+    whatToolShows: [
+      'Approximate plan and issuer counts for your North Carolina ZIP when the CMS Marketplace API is available',
+      'Premium ranges and deductible ranges when CMS returns those fields',
+      'Lower-premium, balanced, and higher-protection research path examples',
+      'Assistance context when you add household income (educational — not an official award)',
+    ],
+    faqs: [
+      {
+        q: 'Does North Carolina use HealthCare.gov or a state exchange?',
+        a: 'North Carolina uses the federal Marketplace at HealthCare.gov for individual ACA coverage. Always confirm enrollment steps, special enrollment periods, and official plan prices there.',
+      },
+      {
+        q: 'Why do Charlotte and the Triangle differ?',
+        a: 'Issuers file service areas by county and region. Moving between Mecklenburg County and Wake County — or between urban and rural ZIPs — can change which plans and networks appear. Research the ZIP where you will live and seek care.',
+      },
+      {
+        q: 'Is a low monthly premium always best in North Carolina?',
+        a: 'Not necessarily. Bronze-style paths often pair lower premiums with higher deductibles. Silver can matter if cost-sharing reductions may apply. Use total-cost thinking, then verify on HealthCare.gov.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, subsidies, and enrollment are determined on HealthCare.gov (or with a licensed agent you choose).',
+      },
+      {
+        q: 'What about Medicare in North Carolina?',
+        a: 'Medicare is a separate pathway from the ACA Marketplace. If you are 65+ or otherwise Medicare-eligible, use Medicare research tools and Medicare.gov — not Marketplace enrollment alone.',
+      },
+    ],
+    relatedGuides: ['charlotte-aca-marketplace', 'research-triangle-aca-marketplace'],
+  },
+  {
+    slug: 'charlotte-aca-marketplace',
+    primaryKeyword: 'ACA plans in Charlotte',
+    title: 'ACA Plans in Charlotte — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Charlotte and the greater Mecklenburg area: ZIP-level plan landscape, cost factors, subsidy context, and HealthCare.gov next steps. Educational only.',
+    h1: 'ACA Marketplace research in Charlotte',
+    subhead:
+      'Charlotte’s metro spans multiple counties and care patterns. Use local ZIP research to understand plan volume and path types — then confirm everything on HealthCare.gov.',
+    locationLabel: 'Charlotte, North Carolina',
+    stateName: 'North Carolina',
+    licenseRegulator: 'North Carolina DOI',
+    sampleZips: [
+      { zip: '28202', label: 'Uptown Charlotte' },
+      { zip: '28205', label: 'Plaza Midwood area' },
+      { zip: '28277', label: 'Ballantyne area' },
+      { zip: '28078', label: 'Huntersville' },
+      { zip: '28105', label: 'Matthews area' },
+    ],
+    hubHref: '/hubs/north-carolina/charlotte',
+    hubLabel: 'Charlotte insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'Charlotte shoppers often compare network access across Mecklenburg and surrounding counties, plus whether a lower premium is worth a higher deductible.',
+      'Plan menus can differ by ZIP across the metro and into South Carolina border suburbs for people who live or work across the state line — always use the ZIP of residence for Marketplace research.',
+      'This guide is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Banking, logistics, and professional workers without stable employer plans',
+      'Self-employed professionals and small-business households',
+      'Families evaluating Silver vs Bronze tradeoffs',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred hospitals and clinics (confirm on official plan documents)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for a Charlotte-area ZIP',
+      'Issuer depth and premium spreads when available',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'What ZIP should I use for Charlotte research?',
+        a: 'Use the ZIP for the home where you will live and primarily seek care. Different Mecklenburg and suburban ZIPs can surface different plan menus.',
+      },
+      {
+        q: 'I live in South Carolina but work in Charlotte — which Marketplace?',
+        a: 'Marketplace menus follow your state of residence. Research the ZIP where you live, then confirm networks cover where you receive care. Official rules are on HealthCare.gov.',
+      },
+      {
+        q: 'How is this different from Medicare research in Charlotte?',
+        a: 'Medicare tools use different CMS extracts for 65+ / Medicare Advantage markets. ACA Marketplace research is for individual/family coverage under 65 (with limited exceptions).',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: ['north-carolina-aca-marketplace', 'research-triangle-aca-marketplace'],
+  },
+  {
+    slug: 'research-triangle-aca-marketplace',
+    primaryKeyword: 'Marketplace insurance Raleigh',
+    title: 'Marketplace Insurance in Raleigh — Research Triangle ACA Guide',
+    description:
+      'Research ACA Marketplace coverage across the Research Triangle (Raleigh, Durham, Chapel Hill): ZIP landscape tools, cost factors, subsidy education, and HealthCare.gov next steps. Educational only.',
+    h1: 'ACA Marketplace research in the Research Triangle',
+    subhead:
+      'This guide covers the Raleigh–Durham–Chapel Hill market context. Plan options are local by ZIP — start with a landscape research, then verify official details on HealthCare.gov.',
+    locationLabel: 'Research Triangle (Raleigh–Durham–Chapel Hill), North Carolina',
+    stateName: 'North Carolina',
+    licenseRegulator: 'North Carolina DOI',
+    sampleZips: [
+      { zip: '27601', label: 'Raleigh downtown' },
+      { zip: '27615', label: 'North Raleigh' },
+      { zip: '27701', label: 'Durham' },
+      { zip: '27707', label: 'Southwest Durham' },
+      { zip: '27514', label: 'Chapel Hill' },
+      { zip: '27560', label: 'Morrisville / RTP area' },
+    ],
+    hubHref: '/hubs/north-carolina/raleigh',
+    hubLabel: 'Research Triangle insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'The Research Triangle spans Wake, Durham, Orange, and nearby counties. Shoppers often assume one “Raleigh plan menu” covers Durham and Chapel Hill — in practice, Marketplace availability is still geography-based by ZIP and county.',
+      'University, tech, healthcare, and government-adjacent households frequently research individual coverage between jobs or without employer plans. Use educational tools for landscape context, then complete official shopping on HealthCare.gov.',
+      'Primary search focus for this page is Marketplace insurance in Raleigh; Durham and Chapel Hill are included as part of the same metro research cluster.',
+    ],
+    whoBuys: [
+      'Tech, research, and healthcare workers without employer coverage',
+      'Graduate students, contractors, and self-employed residents',
+      'Households comparing Triangle suburbs before a move',
+      'People evaluating total cost, not just monthly premium',
+    ],
+    costFactors: [
+      'Age and household size',
+      'Income / FPL position for assistance education',
+      'Metal tier and deductible design',
+      'Whether preferred providers appear in plan networks across Wake, Durham, and Orange counties (confirm officially)',
+    ],
+    whatToolShows: [
+      'Plan and issuer counts for a Raleigh, Durham, or Chapel Hill ZIP when CMS data loads',
+      'Premium and deductible ranges when provided',
+      'Lower-premium vs more protective research path examples',
+      'Assistance context if you enter income',
+    ],
+    faqs: [
+      {
+        q: 'Does this page cover Durham and Chapel Hill as well as Raleigh?',
+        a: 'Yes. The Research Triangle guide is written for the Raleigh–Durham–Chapel Hill market context. Always research the specific ZIP where you live — menus can differ across Wake, Durham, and Orange counties.',
+      },
+      {
+        q: 'Should I use a Raleigh or Durham ZIP if I work in RTP?',
+        a: 'Use your home ZIP for Marketplace research. Confirm that preferred clinics near Research Triangle Park are in-network on official plan documents before you enroll.',
+      },
+      {
+        q: 'Is Raleigh cheaper than Charlotte?',
+        a: 'There is no permanent answer. Issuer competition, ages, and income drive outcomes. Compare live landscapes for each ZIP rather than relying on anecdotes.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (North Carolina’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'What if the tool shows no live data?',
+        a: 'We fail closed and label educational fallbacks. We never invent a full plan catalog. Retry later or go directly to HealthCare.gov Window Shopping.',
+      },
+    ],
+    relatedGuides: ['north-carolina-aca-marketplace', 'charlotte-aca-marketplace'],
   },
 ];
 

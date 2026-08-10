@@ -259,6 +259,30 @@ export default function MarketplacePlanResearchPage() {
               </li>
               <li>
                 <Link
+                  href="/guides/north-carolina-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  North Carolina
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/charlotte-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Charlotte
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/research-triangle-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Research Triangle
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/guides"
                   className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-slate-700"
                 >
