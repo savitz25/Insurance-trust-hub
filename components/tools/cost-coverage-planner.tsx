@@ -50,6 +50,10 @@ import {
   ResearchPathCards,
 } from '@/components/marketplace/research-path-cards';
 import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
+import {
+  buildCostPlannerResearchSnapshot,
+  toCalculatorSnapshot,
+} from '@/lib/marketplace/research-snapshot';
 
 const STEPS = [
   { id: 1, label: 'Situation' },
@@ -625,6 +629,9 @@ export function CostCoveragePlanner() {
             landscape={landscape}
             landscapeLoading={landscapeLoading}
             utilization={utilization}
+            ages={ages}
+            householdSize={Math.max(householdSize, ages.length)}
+            tobacco={tobacco}
             showMath={showMath}
             onToggleMath={() => setShowMath((v) => !v)}
             onEditAssumptions={() => setStep(4)}
@@ -672,15 +679,21 @@ function ResultsPanel({
   landscape,
   landscapeLoading,
   utilization,
+  ages,
+  householdSize,
+  tobacco,
   showMath,
   onToggleMath,
   onEditAssumptions,
 }: {
-  result: PlannerResult;
+  result: PlannerResult & { marketplace?: MarketplaceDataSource };
   marketplace: MarketplaceDataSource;
   landscape: LocalMarketplaceLandscape | null;
   landscapeLoading: boolean;
   utilization: UtilizationLevel;
+  ages: number[];
+  householdSize: number;
+  tobacco: boolean;
   showMath: boolean;
   onToggleMath: () => void;
   onEditAssumptions: () => void;
@@ -695,6 +708,16 @@ function ResultsPanel({
   ]
     .filter(Boolean)
     .join(' · ');
+
+  const researchSnap = buildCostPlannerResearchSnapshot({
+    result: { ...result, marketplace },
+    landscape,
+    ages,
+    householdSize,
+    tobacco,
+    utilization,
+  });
+  const saveSnapshot = toCalculatorSnapshot(researchSnap, '/tools/cost-estimator');
 
   return (
     <div className="space-y-8">
@@ -719,33 +742,26 @@ function ResultsPanel({
             ? 'Highlighted path uses your priorities and care use, with local CMS premium anchors when available. Educational ranges — not plan quotes.'
             : 'Highlighted path based on your priorities and care use. Figures are educational ranges — not plan quotes.'}
         </p>
-        <div className="mt-4">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
           <SaveCalculatorButton
             calculatorId="cost_estimator"
             title={saveTitle}
             snapshot={{
-              sourcePath: '/tools/cost-estimator',
-              summaryText,
-              inputs: {
-                zip: result.location.zip,
-                displayLabel: result.location.displayLabel,
-                utilization,
-              },
+              ...saveSnapshot,
+              summaryText: summaryText || saveSnapshot.summaryText,
               outputs: {
+                ...saveSnapshot.outputs,
                 summaryMonthlyNet: result.summaryMonthlyNet,
                 summaryTotalAnnual: result.summaryTotalAnnual,
                 recommendedPathId: result.recommendedPathId,
                 subsidy: result.subsidy,
               },
-              result: {
-                paths: result.paths.map((p) => ({
-                  id: p.id,
-                  label: p.label,
-                  totalAnnualCost: p.totalAnnualCost,
-                })),
-              },
             }}
+            sendEmail
           />
+          <p className="text-xs text-slate-500">
+            Saves a research summary to My Insurance (sign-in for cloud + optional email).
+          </p>
         </div>
       </div>
 

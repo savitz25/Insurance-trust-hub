@@ -52,6 +52,11 @@ export type CalculatorSnapshot = {
   sourcePath?: string;
   /** Full tool result JSON (compact serializable) */
   result?: unknown;
+  /**
+   * Phase 3 — compact Marketplace research payload (cost/subsidy planners).
+   * Prefer reading via extractMarketplaceResearch().
+   */
+  marketplaceResearch?: import('@/lib/marketplace/research-snapshot').MarketplaceResearchSnapshot;
 };
 
 export type SavedCalculatorResultRow = {
@@ -61,6 +66,13 @@ export type SavedCalculatorResultRow = {
   title: string;
   snapshot: CalculatorSnapshot;
   created_at: string;
+  /** Denormalized list fields (optional until migration applied) */
+  zip?: string | null;
+  state?: string | null;
+  county?: string | null;
+  used_live_marketplace?: boolean | null;
+  plan_year?: number | null;
+  updated_at?: string | null;
 };
 
 export type PendingSaveProviderAction = {

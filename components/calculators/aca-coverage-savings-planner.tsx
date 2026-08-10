@@ -39,6 +39,10 @@ import {
   ResearchPathCards,
 } from '@/components/marketplace/research-path-cards';
 import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
+import {
+  buildSubsidyPlannerResearchSnapshot,
+  toCalculatorSnapshot,
+} from '@/lib/marketplace/research-snapshot';
 
 const STEPS = [
   { id: 1, label: 'Location' },
@@ -363,6 +367,10 @@ export function AcaCoverageSavingsPlanner() {
             marketplace={result.marketplace}
             landscape={landscape}
             landscapeLoading={landscapeLoading}
+            ages={ages}
+            householdSize={Math.max(householdSize, ages.length)}
+            tobacco={tobacco}
+            annualIncome={Math.max(0, Number(String(income).replace(/,/g, '')) || 0)}
             showMath={showMath}
             onToggleMath={() => setShowMath((v) => !v)}
           />
@@ -408,13 +416,21 @@ function Results({
   marketplace,
   landscape,
   landscapeLoading,
+  ages,
+  householdSize,
+  tobacco,
+  annualIncome,
   showMath,
   onToggleMath,
 }: {
-  result: SubsidyPlannerResult;
+  result: SubsidyPlannerResult & { marketplace?: MarketplaceDataSource };
   marketplace: MarketplaceDataSource;
   landscape: LocalMarketplaceLandscape | null;
   landscapeLoading: boolean;
+  ages: number[];
+  householdSize: number;
+  tobacco: boolean;
+  annualIncome: number;
   showMath: boolean;
   onToggleMath: () => void;
 }) {
@@ -429,6 +445,16 @@ function Results({
   ]
     .filter(Boolean)
     .join(' · ');
+
+  const researchSnap = buildSubsidyPlannerResearchSnapshot({
+    result: { ...result, marketplace },
+    landscape,
+    ages,
+    householdSize,
+    tobacco,
+    annualIncome,
+  });
+  const saveSnapshot = toCalculatorSnapshot(researchSnap, '/calculators/aca-subsidy');
 
   return (
     <div className="space-y-8">
@@ -452,33 +478,27 @@ function Results({
         {result.incomeConfidenceNote && (
           <p className="mt-2 text-xs text-slate-500">{result.incomeConfidenceNote}</p>
         )}
-        <div className="mt-4">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
           <SaveCalculatorButton
             calculatorId="aca_subsidy"
             title={saveTitle}
             snapshot={{
-              sourcePath: '/calculators/aca-subsidy',
-              summaryText,
-              inputs: {
-                zip: result.location.zip,
-                displayLabel: result.location.displayLabel,
-                fplAmount: result.fplAmount,
-                fplRatio: result.fplRatio,
-              },
+              ...saveSnapshot,
+              summaryText: summaryText || saveSnapshot.summaryText,
               outputs: {
+                ...saveSnapshot.outputs,
                 estimatedPtcMonthly: result.estimatedPtcMonthly,
                 estimatedPtcAnnual: result.estimatedPtcAnnual,
                 fplPercentLabel: result.fplPercentLabel,
                 qualifiesPtc: result.qualifiesPtc,
                 qualifiesCsr: result.qualifiesCsr,
               },
-              result: {
-                assistanceSummary: result.assistanceSummary,
-                cliff: result.cliff,
-                csrSummary: result.csrSummary,
-              },
             }}
+            sendEmail
           />
+          <p className="text-xs text-slate-500">
+            Saves a research summary to My Insurance (sign-in for cloud + optional email).
+          </p>
         </div>
       </div>
 

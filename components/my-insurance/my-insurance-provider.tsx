@@ -91,8 +91,11 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
         snapshot: pending.payload.snapshot,
         sendEmail: true,
       });
-      if (res.ok) toast.success('Calculator result saved to Insurance HQ');
-      else toast.error(res.error);
+      if (res.ok) {
+        toast.success('Saved to Insurance HQ', {
+          description: 'Your plan research is in My Insurance',
+        });
+      } else toast.error(res.error);
       return;
     }
 

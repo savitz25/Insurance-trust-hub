@@ -372,6 +372,12 @@ export type Database = {
           title: string;
           snapshot: Json;
           created_at: string;
+          zip?: string | null;
+          state?: string | null;
+          county?: string | null;
+          used_live_marketplace?: boolean | null;
+          plan_year?: number | null;
+          updated_at?: string;
         };
         Insert: {
           id?: string;
@@ -380,6 +386,12 @@ export type Database = {
           title: string;
           snapshot?: Json;
           created_at?: string;
+          zip?: string | null;
+          state?: string | null;
+          county?: string | null;
+          used_live_marketplace?: boolean | null;
+          plan_year?: number | null;
+          updated_at?: string;
         };
         Update: {
           id?: string;
@@ -388,6 +400,12 @@ export type Database = {
           title?: string;
           snapshot?: Json;
           created_at?: string;
+          zip?: string | null;
+          state?: string | null;
+          county?: string | null;
+          used_live_marketplace?: boolean | null;
+          plan_year?: number | null;
+          updated_at?: string;
         };
         Relationships: [];
       };

@@ -45,6 +45,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { GuestInsuranceHq } from '@/components/my-insurance/guest-insurance-hq';
 import { ResearchWalletPanel } from '@/components/my-insurance/research-wallet-panel';
+import { extractMarketplaceResearch } from '@/lib/marketplace/research-snapshot';
 
 type Props = {
   initial: MyInsuranceDashboardData | null;
@@ -515,62 +516,178 @@ function CloudCalculators({
   rows: NonNullable<MyInsuranceDashboardData['calculatorResults']>;
   onRefresh: () => void;
 }) {
+  const [openId, setOpenId] = useState<string | null>(null);
+
   return (
     <section>
       <div className="mb-4 flex items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
           <Calculator className="h-5 w-5 text-[#0284C7]" />
-          Saved calculator results
+          Saved plan research
         </h2>
         <span className="text-sm text-slate-500">{rows.length}</span>
       </div>
       {rows.length === 0 ? (
-        <div className="flex flex-wrap gap-2">
-          <Button asChild size="sm" variant="outline">
-            <Link href={ACA_SUBSIDY_PATH}>ACA planner</Link>
-          </Button>
-          <Button asChild size="sm" variant="outline">
-            <Link href={COST_ESTIMATOR_PATH}>Cost planner</Link>
-          </Button>
-        </div>
+        <Card className="border-dashed">
+          <CardContent className="flex flex-col items-start gap-3 py-6">
+            <p className="text-sm text-slate-600">No saved research yet</p>
+            <p className="text-xs text-slate-500">
+              Run a planner, then use &ldquo;Save to My Insurance&rdquo; on the results.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Button asChild size="sm" variant="outline">
+                <Link href={COST_ESTIMATOR_PATH}>Cost planner</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <Link href={ACA_SUBSIDY_PATH}>ACA subsidy planner</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       ) : (
         <ul className="divide-y rounded-2xl border bg-white shadow-sm">
           {rows.map((row) => {
-            const summary = (row.snapshot?.summaryText as string | undefined) || row.title;
+            const research = extractMarketplaceResearch(row.snapshot);
+            const summary =
+              research?.costSummary ||
+              research?.assistanceSummary ||
+              (row.snapshot?.summaryText as string | undefined) ||
+              row.title;
             const path = sourcePathForCalc(
               row.calculator_id,
               row.snapshot?.sourcePath as string | undefined
             );
+            const market =
+              research?.marketLabel ||
+              (row.zip
+                ? [row.county, row.state, row.zip].filter(Boolean).join(' · ')
+                : null) ||
+              (typeof row.snapshot?.inputs?.displayLabel === 'string'
+                ? row.snapshot.inputs.displayLabel
+                : null);
+            const planCount =
+              research?.marketSnapshot?.planCount ??
+              (typeof row.snapshot?.outputs?.marketSnapshot === 'object' &&
+              row.snapshot.outputs.marketSnapshot &&
+              typeof (row.snapshot.outputs.marketSnapshot as { planCount?: number })
+                .planCount === 'number'
+                ? (row.snapshot.outputs.marketSnapshot as { planCount: number }).planCount
+                : null);
+            const issuerCount = research?.marketSnapshot?.issuerCount ?? null;
+            const usedLive =
+              research?.usedLiveMarketplace ?? row.used_live_marketplace ?? null;
+            const expanded = openId === row.id;
+            const dateLabel = new Date(row.created_at).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            });
+
             return (
-              <li
-                key={row.id}
-                className="flex flex-col gap-3 p-4 sm:flex-row sm:items-start sm:justify-between"
-              >
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#0284C7]">
-                    {calcLabel(row.calculator_id)}
-                  </p>
-                  <p className="mt-0.5 font-semibold text-slate-900">{row.title}</p>
-                  <p className="mt-1 line-clamp-3 text-sm text-slate-600">{summary}</p>
+              <li key={row.id} className="p-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <p className="text-xs text-slate-500">{dateLabel}</p>
+                    <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-[#0284C7]">
+                      {calcLabel(row.calculator_id)}
+                    </p>
+                    <p className="mt-0.5 font-semibold text-slate-900">{row.title}</p>
+                    {market ? (
+                      <p className="mt-1 text-sm text-slate-600">{market}</p>
+                    ) : null}
+                    <p className="mt-1 line-clamp-2 text-sm text-slate-600">{summary}</p>
+                    <div className="mt-2 flex flex-wrap gap-2 text-[11px]">
+                      {usedLive === true ? (
+                        <span className="rounded-full bg-[#E0F2FE] px-2 py-0.5 font-medium text-[#0A2540]">
+                          Live Marketplace landscape
+                          {planCount != null ? ` · ${planCount} plans` : ''}
+                          {issuerCount != null ? ` · ${issuerCount} issuers` : ''}
+                        </span>
+                      ) : usedLive === false ? (
+                        <span className="rounded-full bg-slate-100 px-2 py-0.5 font-medium text-slate-600">
+                          Educational baseline
+                        </span>
+                      ) : null}
+                      {research?.planYear || row.plan_year ? (
+                        <span className="rounded-full border border-slate-200 px-2 py-0.5 text-slate-600">
+                          Plan year {research?.planYear ?? row.plan_year}
+                        </span>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex shrink-0 flex-wrap gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      type="button"
+                      onClick={() => setOpenId(expanded ? null : row.id)}
+                    >
+                      {expanded ? 'Hide details' : 'View details'}
+                    </Button>
+                    <Button asChild size="sm" variant="outline">
+                      <Link href={path}>Re-run tool</Link>
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      type="button"
+                      className="text-slate-600"
+                      onClick={async () => {
+                        const res = await deleteCalculatorResultAction(row.id);
+                        if (res.ok) {
+                          toast.success('Deleted');
+                          onRefresh();
+                        } else toast.error(res.error);
+                      }}
+                    >
+                      <Trash2 className="mr-1 h-3.5 w-3.5" aria-hidden />
+                      Delete
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex shrink-0 gap-2">
-                  <Button asChild size="sm" variant="outline">
-                    <Link href={path}>Re-run tool</Link>
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={async () => {
-                      const res = await deleteCalculatorResultAction(row.id);
-                      if (res.ok) {
-                        toast.success('Removed');
-                        onRefresh();
-                      } else toast.error(res.error);
-                    }}
-                  >
-                    Remove
-                  </Button>
-                </div>
+                {expanded ? (
+                  <div className="mt-4 space-y-3 rounded-xl border border-slate-100 bg-slate-50/80 p-3 text-sm text-slate-700">
+                    {research?.assistanceSummary ? (
+                      <p>{research.assistanceSummary}</p>
+                    ) : null}
+                    {research?.researchPaths && research.researchPaths.length > 0 ? (
+                      <ul className="space-y-2">
+                        {research.researchPaths.map((p) => (
+                          <li
+                            key={p.id}
+                            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs"
+                          >
+                            <p className="font-semibold text-slate-900">{p.label}</p>
+                            {p.metal ? (
+                              <p className="text-[#0284C7]">{p.metal}-style</p>
+                            ) : null}
+                            {p.premiumMonthly != null ? (
+                              <p className="mt-0.5">
+                                ~${Math.round(p.premiumMonthly).toLocaleString()}/mo
+                                {p.issuerName ? ` · ${p.issuerName}` : ''}
+                              </p>
+                            ) : null}
+                            {p.planName ? (
+                              <p className="text-slate-500">{p.planName}</p>
+                            ) : null}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    <p className="text-xs text-slate-500">
+                      Educational research only — verify final prices and enroll on{' '}
+                      <a
+                        href="https://www.healthcare.gov"
+                        className="font-medium text-[#0284C7] hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        HealthCare.gov
+                      </a>
+                      .
+                    </p>
+                  </div>
+                ) : null}
               </li>
             );
           })}

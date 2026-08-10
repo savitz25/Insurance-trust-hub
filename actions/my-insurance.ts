@@ -496,16 +496,68 @@ export async function saveCalculatorResultAction(input: {
               : '/tools'),
     };
 
-    const { data, error } = await supabase
+    // Denormalized list fields from marketplace research (or inputs)
+    const research = snapshot.marketplaceResearch;
+    const inputs = (snapshot.inputs || {}) as Record<string, unknown>;
+    const zip =
+      research?.zip ||
+      (typeof inputs.zip === 'string' ? inputs.zip : null) ||
+      null;
+    const state =
+      research?.state ||
+      (typeof inputs.state === 'string' ? inputs.state : null) ||
+      null;
+    const county =
+      research?.county ||
+      (typeof inputs.county === 'string' ? inputs.county : null) ||
+      null;
+    const usedLive =
+      research?.usedLiveMarketplace ??
+      (typeof (snapshot.outputs as { usedLiveMarketplace?: boolean } | undefined)
+        ?.usedLiveMarketplace === 'boolean'
+        ? (snapshot.outputs as { usedLiveMarketplace: boolean }).usedLiveMarketplace
+        : null);
+    const planYear =
+      research?.planYear ??
+      (typeof (snapshot.outputs as { planYear?: number } | undefined)?.planYear ===
+      'number'
+        ? (snapshot.outputs as { planYear: number }).planYear
+        : null);
+
+    const insertRow: Record<string, unknown> = {
+      user_id: user.id,
+      calculator_id: input.calculatorId,
+      title,
+      snapshot: snapshot as unknown as Record<string, unknown>,
+      zip,
+      state,
+      county,
+      used_live_marketplace: usedLive,
+      plan_year: planYear,
+      updated_at: new Date().toISOString(),
+    };
+
+    let { data, error } = await supabase
       .from('saved_calculator_results')
-      .insert({
-        user_id: user.id,
-        calculator_id: input.calculatorId,
-        title,
-        snapshot: snapshot as unknown as Record<string, unknown>,
-      })
+      .insert(insertRow)
       .select('id')
       .single();
+
+    // If migration not applied yet, retry without new columns
+    if (error && /column|schema cache|used_live|plan_year/i.test(error.message || '')) {
+      const fallback = await supabase
+        .from('saved_calculator_results')
+        .insert({
+          user_id: user.id,
+          calculator_id: input.calculatorId,
+          title,
+          snapshot: snapshot as unknown as Record<string, unknown>,
+        })
+        .select('id')
+        .single();
+      data = fallback.data;
+      error = fallback.error;
+    }
 
     if (error || !data?.id) {
       console.error('[my-insurance] save calculator', error?.message);
@@ -521,6 +573,11 @@ export async function saveCalculatorResultAction(input: {
         title,
         summaryText: snapshot.summaryText || title,
         sourcePath: snapshot.sourcePath,
+        marketLabel: research?.marketLabel || undefined,
+        usedLiveMarketplace: research?.usedLiveMarketplace,
+        planCount: research?.marketSnapshot?.planCount ?? undefined,
+        issuerCount: research?.marketSnapshot?.issuerCount ?? undefined,
+        planYear: research?.planYear ?? undefined,
       }).catch((err) => console.error('[my-insurance] calc email', err));
     }
 
@@ -555,41 +612,52 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
   const supabase = await insuranceDb();
   await ensureUserProfile(await createClient(), user);
 
-  const [providersRes, basketsRes, calcRes, comparisonsRes, reviewsRes] =
-    await Promise.all([
-      supabase
-        .from('saved_providers')
-        .select('id,user_id,provider_slug,provider_name,notes,created_at')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false }),
-      supabase
-        .from('drug_baskets')
-        .select('id,user_id,name,created_at,updated_at')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: true })
-        .limit(1)
-        .maybeSingle(),
-      supabase
-        .from('saved_calculator_results')
-        .select('id,user_id,calculator_id,title,snapshot,created_at')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(50),
-      supabase
-        .from('provider_comparisons')
-        .select('id,user_id,title,snapshot_json,created_at,updated_at')
-        .eq('user_id', user.id)
-        .order('updated_at', { ascending: false })
-        .limit(20),
-      supabase
-        .from('reviews')
-        .select(
-          'id,provider_id,user_id,author_name,rating,title,content,coverage_type,status,created_at'
-        )
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(50),
-    ]);
+  let calcRes = await supabase
+    .from('saved_calculator_results')
+    .select(
+      'id,user_id,calculator_id,title,snapshot,created_at,zip,state,county,used_live_marketplace,plan_year,updated_at'
+    )
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false })
+    .limit(50);
+
+  if (calcRes.error && /column|schema cache/i.test(calcRes.error.message || '')) {
+    calcRes = await supabase
+      .from('saved_calculator_results')
+      .select('id,user_id,calculator_id,title,snapshot,created_at')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(50);
+  }
+
+  const [providersRes, basketsRes, comparisonsRes, reviewsRes] = await Promise.all([
+    supabase
+      .from('saved_providers')
+      .select('id,user_id,provider_slug,provider_name,notes,created_at')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false }),
+    supabase
+      .from('drug_baskets')
+      .select('id,user_id,name,created_at,updated_at')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: true })
+      .limit(1)
+      .maybeSingle(),
+    supabase
+      .from('provider_comparisons')
+      .select('id,user_id,title,snapshot_json,created_at,updated_at')
+      .eq('user_id', user.id)
+      .order('updated_at', { ascending: false })
+      .limit(20),
+    supabase
+      .from('reviews')
+      .select(
+        'id,provider_id,user_id,author_name,rating,title,content,coverage_type,status,created_at'
+      )
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(50),
+  ]);
 
   if (basketsRes.error) {
     console.error('[my-insurance] dashboard baskets', basketsRes.error.message);

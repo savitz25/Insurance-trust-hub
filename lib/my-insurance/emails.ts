@@ -385,40 +385,69 @@ export async function sendSavedCalculatorEmail(params: {
   title: string;
   summaryText: string;
   sourcePath?: string;
+  marketLabel?: string;
+  usedLiveMarketplace?: boolean;
+  planCount?: number;
+  issuerCount?: number;
+  planYear?: number | null;
 }): Promise<boolean> {
   const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
   const toolUrl = params.sourcePath
     ? `${PRODUCTION_SITE_ORIGIN}${params.sourcePath.startsWith('/') ? params.sourcePath : `/${params.sourcePath}`}`
     : hq;
+  const hcg = 'https://www.healthcare.gov';
+
+  const marketBits: string[] = [];
+  if (params.marketLabel) marketBits.push(params.marketLabel);
+  if (params.planYear) marketBits.push(`plan year ${params.planYear}`);
+  if (params.usedLiveMarketplace && params.planCount != null) {
+    marketBits.push(
+      `~${params.planCount} Marketplace plan${params.planCount === 1 ? '' : 's'}${
+        params.issuerCount != null ? ` · ${params.issuerCount} issuers` : ''
+      }`
+    );
+  } else if (params.usedLiveMarketplace === false) {
+    marketBits.push('educational baselines (no live Marketplace landscape)');
+  }
+
+  const marketHtml = marketBits.length
+    ? `<p style="margin:12px 0 0;color:${BRAND.body};">${escapeHtml(marketBits.join(' · '))}</p>`
+    : '';
 
   const html = buildEmailHtml({
-    preheader: `${params.toolLabel} saved to Insurance HQ`,
-    title: 'Calculator result saved',
+    preheader: `Your ${params.toolLabel} research summary`,
+    title: 'Your InsuranceTrustHub research summary',
     bodyHtml: `<p style="margin:0 0 12px;">
-      <strong style="color:${BRAND.ink};">${escapeHtml(params.toolLabel)}</strong> is in your My Insurance workspace.
+      <strong style="color:${BRAND.ink};">${escapeHtml(params.toolLabel)}</strong> is saved in My Insurance (Insurance HQ).
     </p>
     <p style="margin:0 0 8px;font-weight:600;color:${BRAND.ink};">${escapeHtml(params.title)}</p>
     <p style="margin:0;color:${BRAND.body};">${escapeHtml(params.summaryText)}</p>
+    ${marketHtml}
     <p style="margin:16px 0 0;font-size:13px;color:${BRAND.muted};">
-      Educational estimates only  -  not a quote, enrollment decision, or financial advice.
+      Educational research only — not a quote, enrollment application, or official eligibility determination.
+      Final prices and enrollment: <a href="${hcg}" style="color:${BRAND.primary};">HealthCare.gov</a>.
     </p>`,
-    ctaLabel: 'Open Insurance HQ',
+    ctaLabel: 'Open My Insurance',
     ctaHref: hq,
-    secondaryHtml: `<a href="${toolUrl}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Re-run this tool →</a>`,
+    secondaryHtml: `<a href="${toolUrl}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Re-run this tool →</a>
+      &nbsp;·&nbsp;
+      <a href="${hcg}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">HealthCare.gov →</a>`,
   });
 
   return sendResend({
     to: params.to,
-    subject: `Saved: ${params.toolLabel}  -  My Insurance`,
+    subject: `Your InsuranceTrustHub research summary`,
     html,
     text: [
-      'Calculator result saved',
+      'Your InsuranceTrustHub research summary',
       '',
       params.toolLabel,
       params.title,
       params.summaryText,
+      marketBits.join(' · '),
       '',
-      `Insurance HQ: ${hq}`,
+      'Educational only — verify and enroll on HealthCare.gov.',
+      `My Insurance: ${hq}`,
       BRAND.trustLine,
     ].join('\n'),
   });
