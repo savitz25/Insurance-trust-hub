@@ -11,11 +11,11 @@ import {
 export const metadata: Metadata = buildMetadata({
   title: 'ACA Marketplace Research Guides — State & Metro',
   description:
-    'Educational ACA Marketplace research guides by state and metro (Florida, Texas, Georgia, North Carolina, and more). Learn how to research local plan landscapes, then use live ZIP tools. No lead selling — verify on HealthCare.gov.',
+    'Educational ACA Marketplace research guides by state and metro (Florida, Texas, Georgia, North Carolina, Pennsylvania, and more). Learn how to research local plan landscapes, then use live ZIP tools. No lead selling — verify on HealthCare.gov.',
   path: '/guides',
 });
 
-const STATES = ['Florida', 'Texas', 'Georgia', 'North Carolina'] as const;
+const STATES = ['Florida', 'Texas', 'Georgia', 'North Carolina', 'Pennsylvania'] as const;
 
 export default function GuidesIndexPage() {
   return (

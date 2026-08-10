@@ -35,6 +35,14 @@
 | `/guides/charlotte-aca-marketplace` | ACA plans in Charlotte |
 | `/guides/research-triangle-aca-marketplace` | Marketplace insurance Raleigh (Raleigh–Durham–Chapel Hill) |
 
+## Tier 2D — Pennsylvania (shipped)
+
+| URL | Primary intent |
+|-----|----------------|
+| `/guides/pennsylvania-aca-marketplace` | ACA Marketplace Pennsylvania (statewide) |
+| `/guides/philadelphia-aca-marketplace` | ACA plans in Philadelphia |
+| `/guides/pittsburgh-aca-marketplace` | Marketplace insurance Pittsburgh |
+
 Index: `/guides` (grouped by state)
 
 ## Template
@@ -51,4 +59,4 @@ Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, H
 
 ## Tier 2 next
 
-Pennsylvania + Philly / Pittsburgh, or Ohio + Columbus / Cleveland.
+Ohio + Columbus / Cleveland.

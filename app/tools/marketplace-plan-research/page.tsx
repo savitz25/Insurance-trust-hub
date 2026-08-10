@@ -283,6 +283,30 @@ export default function MarketplacePlanResearchPage() {
               </li>
               <li>
                 <Link
+                  href="/guides/pennsylvania-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Pennsylvania
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/philadelphia-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Philadelphia
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/pittsburgh-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Pittsburgh
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/guides"
                   className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-slate-700"
                 >

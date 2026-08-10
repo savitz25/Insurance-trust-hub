@@ -12,7 +12,7 @@ export type AcaMarketplaceGuide = {
   h1: string;
   subhead: string;
   locationLabel: string;
-  stateName: 'Florida' | 'Texas' | 'Georgia' | 'North Carolina';
+  stateName: 'Florida' | 'Texas' | 'Georgia' | 'North Carolina' | 'Pennsylvania';
   /** Short regulator name for license re-check copy */
   licenseRegulator: string;
   /** Sample ZIPs for research hints only */
@@ -868,6 +868,211 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       },
     ],
     relatedGuides: ['north-carolina-aca-marketplace', 'charlotte-aca-marketplace'],
+  },
+  // ── Pennsylvania cluster (Tier 2D) ────────────────────────────────────────
+  {
+    slug: 'pennsylvania-aca-marketplace',
+    primaryKeyword: 'ACA Marketplace Pennsylvania',
+    title: 'Pennsylvania ACA Marketplace Guide — Research Plans by ZIP (2026)',
+    description:
+      'How to research ACA Marketplace coverage in Pennsylvania: ZIP-level plan landscape tools, cost factors, subsidy education, and HealthCare.gov next steps. Educational only — no lead selling.',
+    h1: 'Pennsylvania ACA Marketplace guide',
+    subhead:
+      'A practical research path for Pennsylvanians shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll on HealthCare.gov.',
+    locationLabel: 'Pennsylvania',
+    stateName: 'Pennsylvania',
+    licenseRegulator: 'Pennsylvania Insurance Department',
+    sampleZips: [
+      { zip: '19103', label: 'Center City Philadelphia' },
+      { zip: '19147', label: 'South Philadelphia area' },
+      { zip: '15222', label: 'Downtown Pittsburgh' },
+      { zip: '15213', label: 'Oakland / universities' },
+      { zip: '17101', label: 'Harrisburg' },
+      { zip: '18101', label: 'Allentown' },
+    ],
+    hubHref: '/hubs/pennsylvania/philadelphia',
+    hubLabel: 'Philadelphia insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'Pennsylvania has a substantial individual health insurance market. Many residents use the federal Marketplace (HealthCare.gov) during open enrollment or after a qualifying life event.',
+      'Plan menus and issuer competition can differ sharply between Greater Philadelphia, Pittsburgh, and smaller markets across the state. A statewide average cannot replace a ZIP-level CMS landscape when available.',
+      'This page is educational research from Insurance Trust Hub. We do not sell policies, process applications, or invent official premiums.',
+    ],
+    whoBuys: [
+      'People without affordable employer coverage',
+      'Self-employed workers, contractors, and healthcare-adjacent households',
+      'Families leaving Medicaid/CHIP or other coverage',
+      'Early retirees under 65 researching bridge coverage before Medicare',
+    ],
+    costFactors: [
+      'Age and household composition (Marketplace age rating)',
+      'Household income relative to the federal poverty level (premium tax credit education)',
+      'Tobacco use where rating rules apply',
+      'Metal tier (Bronze, Silver, Gold) and deductible / max out-of-pocket design',
+      'County and local issuer competition — SEPA and western Pennsylvania menus can differ',
+    ],
+    whatToolShows: [
+      'Approximate plan and issuer counts for your Pennsylvania ZIP when the CMS Marketplace API is available',
+      'Premium ranges and deductible ranges when CMS returns those fields',
+      'Lower-premium, balanced, and higher-protection research path examples',
+      'Assistance context when you add household income (educational — not an official award)',
+    ],
+    faqs: [
+      {
+        q: 'Does Pennsylvania use HealthCare.gov or a state exchange?',
+        a: 'Pennsylvania uses the federal Marketplace at HealthCare.gov for individual ACA coverage. Always confirm enrollment steps, special enrollment periods, and official plan prices there.',
+      },
+      {
+        q: 'Why do Philadelphia and Pittsburgh options differ?',
+        a: 'Issuers file service areas by county and region. Moving between southeastern Pennsylvania and southwestern Pennsylvania can change which plans and networks appear. Research the ZIP where you will live and seek care.',
+      },
+      {
+        q: 'Is a low monthly premium always best in Pennsylvania?',
+        a: 'Not necessarily. Bronze-style paths often pair lower premiums with higher deductibles. Silver can matter if cost-sharing reductions may apply. Use total-cost thinking, then verify on HealthCare.gov.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, subsidies, and enrollment are determined on HealthCare.gov (or with a licensed agent you choose).',
+      },
+      {
+        q: 'What about Medicare in Pennsylvania?',
+        a: 'Medicare is a separate pathway from the ACA Marketplace. If you are 65+ or otherwise Medicare-eligible, use Medicare research tools and Medicare.gov — not Marketplace enrollment alone.',
+      },
+    ],
+    relatedGuides: ['philadelphia-aca-marketplace', 'pittsburgh-aca-marketplace'],
+  },
+  {
+    slug: 'philadelphia-aca-marketplace',
+    primaryKeyword: 'ACA plans in Philadelphia',
+    title: 'ACA Plans in Philadelphia — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Philadelphia and nearby SEPA ZIPs: plan landscape tools, cost factors, subsidy context, and HealthCare.gov next steps. Educational only.',
+    h1: 'ACA Marketplace research in Philadelphia',
+    subhead:
+      'Philadelphia shoppers often compare city and collar-county ZIPs. Use local ZIP research to understand plan volume and path types — then confirm everything on HealthCare.gov.',
+    locationLabel: 'Philadelphia, Pennsylvania',
+    stateName: 'Pennsylvania',
+    licenseRegulator: 'Pennsylvania Insurance Department',
+    sampleZips: [
+      { zip: '19103', label: 'Center City' },
+      { zip: '19147', label: 'South Philly area' },
+      { zip: '19128', label: 'Roxborough area' },
+      { zip: '19149', label: 'Northeast Philly area' },
+      { zip: '19019', label: 'Near Philly / SEPA context' },
+    ],
+    hubHref: '/hubs/pennsylvania/philadelphia',
+    hubLabel: 'Philadelphia insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'Philadelphia is the core of a broader southeastern Pennsylvania (SEPA) labor and care market. Some residents live in collar counties but work in the city — Marketplace menus still follow the ZIP of residence.',
+      'Plan options can differ across neighborhoods and across the city–suburb line. Treat any statewide “average” as context only; run your own ZIP in the research tool for a current CMS landscape snapshot when available.',
+      'This guide focuses primarily on Philadelphia while acknowledging light SEPA commuting context. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Hospitality, healthcare, education, and service workers without stable employer plans',
+      'Self-employed professionals and small-business households',
+      'Families evaluating Silver vs Bronze tradeoffs',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred hospitals and clinics (confirm on official plan documents)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for a Philadelphia-area ZIP',
+      'Issuer depth and premium spreads when available',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'What ZIP should I use for Philadelphia research?',
+        a: 'Use the ZIP for the home where you will live and primarily seek care. Different Philadelphia ZIPs — and nearby SEPA ZIPs — can surface different plan menus.',
+      },
+      {
+        q: 'I live in the suburbs but work in Center City — which ZIP?',
+        a: 'Marketplace plan menus are generally based on where you live. Research your home ZIP, then confirm networks cover where you actually receive care.',
+      },
+      {
+        q: 'How is this different from Medicare research in Philadelphia?',
+        a: 'Medicare tools use different CMS extracts for 65+ / Medicare Advantage markets. ACA Marketplace research is for individual/family coverage under 65 (with limited exceptions).',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (Pennsylvania’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+    ],
+    relatedGuides: ['pennsylvania-aca-marketplace', 'pittsburgh-aca-marketplace'],
+  },
+  {
+    slug: 'pittsburgh-aca-marketplace',
+    primaryKeyword: 'Marketplace insurance Pittsburgh',
+    title: 'Marketplace Insurance in Pittsburgh — ACA Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Pittsburgh and Allegheny County: ZIP landscape tools, cost factors, subsidy education, and HealthCare.gov next steps. Independent research — no lead selling.',
+    h1: 'ACA Marketplace research in Pittsburgh',
+    subhead:
+      'Pittsburgh’s market is western Pennsylvania–focused. Plan options are local by ZIP — start with a landscape research, then verify official details on HealthCare.gov.',
+    locationLabel: 'Pittsburgh, Pennsylvania',
+    stateName: 'Pennsylvania',
+    licenseRegulator: 'Pennsylvania Insurance Department',
+    sampleZips: [
+      { zip: '15222', label: 'Downtown Pittsburgh' },
+      { zip: '15213', label: 'Oakland' },
+      { zip: '15217', label: 'Squirrel Hill area' },
+      { zip: '15237', label: 'North Hills area' },
+      { zip: '15108', label: 'Coraopolis / airport area' },
+    ],
+    hubHref: '/hubs/pennsylvania/pittsburgh',
+    hubLabel: 'Pittsburgh insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'Pittsburgh shoppers often compare urban and suburban Allegheny County ZIPs, network access to major health systems, and whether a balanced Silver-style path beats the cheapest premium.',
+      'Issuer service areas can treat southwestern Pennsylvania differently from SEPA. Use educational tools for landscape context, then complete official shopping on HealthCare.gov.',
+      'This guide stays Pittsburgh-market focused. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Healthcare, education, manufacturing, and professional workers without employer coverage',
+      'Self-employed residents researching total cost, not just premium',
+      'Households comparing city vs North Hills / South Hills suburbs',
+    ],
+    costFactors: [
+      'Age and household size',
+      'Income / FPL position for assistance education',
+      'Metal tier and deductible design',
+      'Whether preferred providers appear in plan networks (confirm officially)',
+    ],
+    whatToolShows: [
+      'Plan and issuer counts for a Pittsburgh-area ZIP when CMS data loads',
+      'Premium and deductible ranges when provided',
+      'Lower-premium vs more protective research path examples',
+      'Assistance context if you enter income',
+    ],
+    faqs: [
+      {
+        q: 'What ZIP should I use for Pittsburgh research?',
+        a: 'Use the ZIP for the home where you will live and primarily seek care. Different Allegheny County and nearby suburban ZIPs can surface different plan menus.',
+      },
+      {
+        q: 'Is Pittsburgh cheaper than Philadelphia?',
+        a: 'There is no permanent answer. Issuer competition, ages, and income drive outcomes. Compare live landscapes for each ZIP rather than relying on anecdotes.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (Pennsylvania’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'What if the tool shows no live data?',
+        a: 'We fail closed and label educational fallbacks. We never invent a full plan catalog. Retry later or go directly to HealthCare.gov Window Shopping.',
+      },
+    ],
+    relatedGuides: ['pennsylvania-aca-marketplace', 'philadelphia-aca-marketplace'],
   },
 ];
 
