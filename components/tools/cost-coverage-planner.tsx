@@ -44,6 +44,11 @@ import {
 } from '@/lib/tools/apply-marketplace-landscape';
 import type { LocalMarketplaceLandscape } from '@/lib/marketplace/plans-search';
 import { MarketplaceHonestyBanner } from '@/components/marketplace/marketplace-honesty-banner';
+import { MarketSnapshot } from '@/components/marketplace/market-snapshot';
+import {
+  LandscapeNarrative,
+  ResearchPathCards,
+} from '@/components/marketplace/research-path-cards';
 import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
 
 const STEPS = [
@@ -617,6 +622,7 @@ export function CostCoveragePlanner() {
           <ResultsPanel
             result={result}
             marketplace={result.marketplace}
+            landscape={landscape}
             landscapeLoading={landscapeLoading}
             utilization={utilization}
             showMath={showMath}
@@ -663,6 +669,7 @@ export function CostCoveragePlanner() {
 function ResultsPanel({
   result,
   marketplace,
+  landscape,
   landscapeLoading,
   utilization,
   showMath,
@@ -671,6 +678,7 @@ function ResultsPanel({
 }: {
   result: PlannerResult;
   marketplace: MarketplaceDataSource;
+  landscape: LocalMarketplaceLandscape | null;
   landscapeLoading: boolean;
   utilization: UtilizationLevel;
   showMath: boolean;
@@ -697,6 +705,8 @@ function ResultsPanel({
           Refreshing local Marketplace landscape…
         </p>
       ) : null}
+      <MarketSnapshot landscape={landscape} />
+      <LandscapeNarrative landscape={landscape} />
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
           Your estimated annual cost picture
@@ -705,8 +715,9 @@ function ResultsPanel({
           Total cost scenarios for {result.location.displayLabel}
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-slate-600">
-          Highlighted path based on your priorities and care use. Figures are educational ranges —
-          not plan quotes.
+          {landscape?.ok
+            ? 'Highlighted path uses your priorities and care use, with local CMS premium anchors when available. Educational ranges — not plan quotes.'
+            : 'Highlighted path based on your priorities and care use. Figures are educational ranges — not plan quotes.'}
         </p>
         <div className="mt-4">
           <SaveCalculatorButton
@@ -783,10 +794,18 @@ function ResultsPanel({
         )}
       </div>
 
+      <ResearchPathCards
+        landscape={landscape}
+        recommendedMetal={result.recommendedPathId}
+      />
+
       <div>
-        <h3 className="text-lg font-semibold text-slate-900">Three paths (not a plan list)</h3>
+        <h3 className="text-lg font-semibold text-slate-900">
+          Total-cost paths (premium + expected care)
+        </h3>
         <p className="mt-1 text-sm text-slate-500">
-          We show metal-tier style scenarios — not named carriers or exact SKUs.
+          Combines local premium anchors (when live) with your care-use assumptions for expected
+          out-of-pocket — still educational, not a plan list.
         </p>
         <div className="mt-4 space-y-3">
           {result.paths.map((path) => {
@@ -828,7 +847,7 @@ function ResultsPanel({
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-slate-500">Deductible band (household-scaled)</dt>
+                    <dt className="text-slate-500">Deductible band</dt>
                     <dd className="font-medium text-slate-800">
                       {formatMoneyRange(path.deductibleRange)}
                     </dd>

@@ -33,6 +33,11 @@ import {
 } from '@/lib/tools/apply-marketplace-landscape';
 import type { LocalMarketplaceLandscape } from '@/lib/marketplace/plans-search';
 import { MarketplaceHonestyBanner } from '@/components/marketplace/marketplace-honesty-banner';
+import { MarketSnapshot } from '@/components/marketplace/market-snapshot';
+import {
+  LandscapeNarrative,
+  ResearchPathCards,
+} from '@/components/marketplace/research-path-cards';
 import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
 
 const STEPS = [
@@ -356,6 +361,7 @@ export function AcaCoverageSavingsPlanner() {
           <Results
             result={result}
             marketplace={result.marketplace}
+            landscape={landscape}
             landscapeLoading={landscapeLoading}
             showMath={showMath}
             onToggleMath={() => setShowMath((v) => !v)}
@@ -400,12 +406,14 @@ export function AcaCoverageSavingsPlanner() {
 function Results({
   result,
   marketplace,
+  landscape,
   landscapeLoading,
   showMath,
   onToggleMath,
 }: {
   result: SubsidyPlannerResult;
   marketplace: MarketplaceDataSource;
+  landscape: LocalMarketplaceLandscape | null;
   landscapeLoading: boolean;
   showMath: boolean;
   onToggleMath: () => void;
@@ -431,6 +439,8 @@ function Results({
           Refreshing local Marketplace landscape…
         </p>
       ) : null}
+      <MarketSnapshot landscape={landscape} />
+      <LandscapeNarrative landscape={landscape} />
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
           Assistance &amp; local cost picture
@@ -550,9 +560,16 @@ function Results({
         )}
       </div>
 
+      <ResearchPathCards
+        landscape={landscape}
+        highlightPathId={result.qualifiesCsr ? 'balanced' : null}
+      />
+
       {/* B + F Local paths */}
       <div>
-        <h3 className="text-lg font-semibold text-slate-900">Local cost paths after assistance</h3>
+        <h3 className="text-lg font-semibold text-slate-900">
+          Cost paths after estimated assistance
+        </h3>
         <p className="mt-1 text-sm text-slate-500">{result.localCostNarrative}</p>
         <div className="mt-4 space-y-3">
           {result.paths.map((path) => (
