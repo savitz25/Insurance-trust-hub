@@ -35,7 +35,7 @@ const FAQ = [
   },
   {
     q: 'What is CSR and why does Silver matter?',
-    a: 'Cost-Sharing Reductions lower deductibles and out-of-pocket costs on Silver plans for many households between about 100% and 250% FPL. CSR does not attach to Bronze or Gold — so the cheapest monthly Bronze can cost more overall if you use care.',
+    a: 'Cost-Sharing Reductions lower deductibles and out-of-pocket costs on Silver plans for many households between about 100% and 250% FPL. CSR does not attach to Bronze or Gold — so the cheapest monthly Bronze can cost more overall if you use care. When live Marketplace data is available, Silver and Bronze paths use local premium landscape context for your ZIP.',
   },
   {
     q: 'Do pre-existing conditions raise my premium?',

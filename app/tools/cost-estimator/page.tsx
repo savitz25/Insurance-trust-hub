@@ -23,7 +23,7 @@ export const metadata: Metadata = buildMetadata({
 const FAQ = [
   {
     q: 'Does this tool give me real plan prices?',
-    a: 'No. It builds educational total-cost scenarios from state-adjusted marketplace averages, age rating, and your utilization assumptions. Official prices and subsidies only come from HealthCare.gov or your state marketplace.',
+    a: 'When the CMS Marketplace API is available, metal-path ranges are anchored to the local plan landscape for your ZIP and household (lowest Bronze / Silver / Gold style premiums and deductible bands). Those are still educational ranges — not quotes or an official award. If the API is unavailable, we fall back to state-adjusted educational baselines. Official prices and eligibility only come from HealthCare.gov or your state marketplace.',
   },
   {
     q: 'Do pre-existing conditions increase my premium here?',

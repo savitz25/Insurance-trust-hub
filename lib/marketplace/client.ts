@@ -57,6 +57,14 @@ function num(v: unknown): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Server-side fetch with timeout, limited retries, and exponential backoff.
+ * Never logs the API key. Retries on 429 / 502 / 503 / timeout only.
+ */
 async function marketplaceFetch(
   path: string,
   init?: RequestInit
@@ -65,34 +73,53 @@ async function marketplaceFetch(
   if (!key) return { ok: false, status: 0, body: 'missing_api_key' };
 
   const url = path.startsWith('http') ? path : `${API_BASE}${path}`;
-  const controller = new AbortController();
-  const t = setTimeout(() => controller.abort(), 28_000);
-  try {
-    const res = await fetch(url, {
-      ...init,
-      signal: controller.signal,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'User-Agent': 'InsuranceTrustHub-PlanExplorer/1.0 (research-only)',
-        ...(init?.headers || {}),
-        // CMS accepts apikey query or header depending on version — send both patterns safely
-        'X-API-KEY': key,
-      },
-    });
-    const body = await res.text();
-    if (!res.ok) return { ok: false, status: res.status, body: body.slice(0, 400) };
+  const maxAttempts = 3;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), 28_000);
     try {
-      return { ok: true, json: JSON.parse(body) };
-    } catch {
-      return { ok: false, status: res.status, body: 'invalid_json' };
+      const res = await fetch(url, {
+        ...init,
+        signal: controller.signal,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'User-Agent': 'InsuranceTrustHub-Research/1.0 (educational-only; no-enrollment)',
+          ...(init?.headers || {}),
+          // CMS accepts apikey query or header depending on version — send both patterns safely
+          'X-API-KEY': key,
+        },
+      });
+      const body = await res.text();
+      if (res.ok) {
+        try {
+          return { ok: true, json: JSON.parse(body) };
+        } catch {
+          return { ok: false, status: res.status, body: 'invalid_json' };
+        }
+      }
+      const retryable = res.status === 429 || res.status === 502 || res.status === 503;
+      if (retryable && attempt < maxAttempts) {
+        const backoff = 400 * 2 ** (attempt - 1) + Math.floor(Math.random() * 200);
+        await sleep(backoff);
+        continue;
+      }
+      return { ok: false, status: res.status, body: body.slice(0, 400) };
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : 'fetch_failed';
+      const isTimeout = msg.includes('abort');
+      if (isTimeout && attempt < maxAttempts) {
+        await sleep(500 * attempt);
+        continue;
+      }
+      return { ok: false, status: 0, body: isTimeout ? 'timeout' : msg };
+    } finally {
+      clearTimeout(t);
     }
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : 'fetch_failed';
-    return { ok: false, status: 0, body: msg.includes('abort') ? 'timeout' : msg };
-  } finally {
-    clearTimeout(t);
   }
+
+  return { ok: false, status: 0, body: 'fetch_failed' };
 }
 
 function withKey(path: string): string {

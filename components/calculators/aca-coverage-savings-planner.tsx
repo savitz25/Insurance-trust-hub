@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
   AlertTriangle,
@@ -9,6 +9,7 @@ import {
   Check,
   ChevronDown,
   Info,
+  Loader2,
   MapPin,
   Sparkles,
 } from 'lucide-react';
@@ -26,6 +27,12 @@ import {
   type PersonInput,
   type SubsidyPlannerResult,
 } from '@/lib/tools/aca-subsidy-planner';
+import {
+  applyLandscapeToSubsidyPlanner,
+  type MarketplaceDataSource,
+} from '@/lib/tools/apply-marketplace-landscape';
+import type { LocalMarketplaceLandscape } from '@/lib/marketplace/plans-search';
+import { MarketplaceHonestyBanner } from '@/components/marketplace/marketplace-honesty-banner';
 import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
 
 const STEPS = [
@@ -48,8 +55,10 @@ export function AcaCoverageSavingsPlanner() {
   const [income, setIncome] = useState('55000');
   const [confidence, setConfidence] = useState<IncomeConfidence>('somewhat');
   const [showMath, setShowMath] = useState(false);
+  const [landscape, setLandscape] = useState<LocalMarketplaceLandscape | null>(null);
+  const [landscapeLoading, setLandscapeLoading] = useState(false);
 
-  const result: SubsidyPlannerResult | null = useMemo(() => {
+  const baseResult: SubsidyPlannerResult | null = useMemo(() => {
     if (step !== 4 || !location) return null;
     const people: PersonInput[] = ages.map((age) => ({
       age,
@@ -64,6 +73,46 @@ export function AcaCoverageSavingsPlanner() {
       incomeConfidence: confidence,
     });
   }, [step, location, ages, tobacco, householdSize, income, confidence]);
+
+  useEffect(() => {
+    if (step !== 4 || !location) {
+      setLandscape(null);
+      return;
+    }
+    let cancelled = false;
+    const annualIncome = Math.max(0, Number(String(income).replace(/,/g, '')) || 0);
+    setLandscapeLoading(true);
+    fetch('/api/marketplace/landscape', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        zip: location.zip,
+        year: ACA_SAVINGS_META.planYear,
+        ages,
+        tobacco,
+        householdIncome: annualIncome,
+        householdSize: Math.max(householdSize, ages.length),
+      }),
+    })
+      .then(async (res) => {
+        const data = (await res.json()) as LocalMarketplaceLandscape;
+        if (!cancelled) setLandscape(data);
+      })
+      .catch(() => {
+        if (!cancelled) setLandscape(null);
+      })
+      .finally(() => {
+        if (!cancelled) setLandscapeLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [step, location, ages, tobacco, householdSize, income]);
+
+  const result = useMemo(() => {
+    if (!baseResult) return null;
+    return applyLandscapeToSubsidyPlanner(baseResult, landscape);
+  }, [baseResult, landscape]);
 
   function onZipChange(v: string) {
     const digits = v.replace(/\D/g, '').slice(0, 5);
@@ -297,7 +346,21 @@ export function AcaCoverageSavingsPlanner() {
           </div>
         )}
 
-        {step === 4 && result && <Results result={result} showMath={showMath} onToggleMath={() => setShowMath((v) => !v)} />}
+        {step === 4 && landscapeLoading && !result && (
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-6 text-sm text-slate-600">
+            <Loader2 className="h-4 w-4 animate-spin text-[#0284C7]" aria-hidden />
+            Loading local Marketplace landscape…
+          </div>
+        )}
+        {step === 4 && result && (
+          <Results
+            result={result}
+            marketplace={result.marketplace}
+            landscapeLoading={landscapeLoading}
+            showMath={showMath}
+            onToggleMath={() => setShowMath((v) => !v)}
+          />
+        )}
 
         {step < 4 && (
           <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-5">
@@ -336,10 +399,14 @@ export function AcaCoverageSavingsPlanner() {
 
 function Results({
   result,
+  marketplace,
+  landscapeLoading,
   showMath,
   onToggleMath,
 }: {
   result: SubsidyPlannerResult;
+  marketplace: MarketplaceDataSource;
+  landscapeLoading: boolean;
   showMath: boolean;
   onToggleMath: () => void;
 }) {
@@ -357,6 +424,13 @@ function Results({
 
   return (
     <div className="space-y-8">
+      <MarketplaceHonestyBanner marketplace={marketplace} />
+      {landscapeLoading ? (
+        <p className="flex items-center gap-2 text-xs text-slate-500">
+          <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
+          Refreshing local Marketplace landscape…
+        </p>
+      ) : null}
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0284C7]">
           Assistance &amp; local cost picture
