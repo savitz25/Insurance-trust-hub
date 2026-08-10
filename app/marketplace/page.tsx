@@ -51,6 +51,13 @@ export default function MarketplaceHubPage() {
             research.
           </p>
           <p className="mt-3 text-sm">
+            <Link
+              href="/tools/marketplace-plan-research"
+              className="text-primary hover:underline"
+            >
+              Research Marketplace plans near you
+            </Link>
+            {' · '}
             <Link href="/tools/aca-plan-explorer" className="text-primary hover:underline">
               Live ACA Plan Explorer
             </Link>

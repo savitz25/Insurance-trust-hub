@@ -10,6 +10,7 @@
 | Home | `/` | **Yes** | Primary hub |
 | Tools hub | `/tools` | **Yes** | Research Center entry |
 | ACA Plan Explorer | `/tools/aca-plan-explorer` | **Yes** | Tool landing only — **no** query-param variants |
+| Marketplace plan research (flagship) | `/tools/marketplace-plan-research` | **Yes** | Canonical ZIP landscape research asset |
 | Marketplace hub | `/marketplace` | **Yes** | ACA research hub |
 | County ACA | `/marketplace/{st}/{county}` | **Conditional** | planCount≥5 & issuerCount≥2 |
 | Plan X-Ray | `/marketplace/plans/{year}/{id}` | **Conditional** | Durable identity + useful fields; **not** mass sitemap |

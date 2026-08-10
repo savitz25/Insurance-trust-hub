@@ -162,6 +162,12 @@ export default async function AcaSubsidyPage({ searchParams }: PageProps) {
               page.
             </p>
             <div className="mt-3 flex flex-wrap gap-3 text-sm">
+              <Link
+                href="/tools/marketplace-plan-research"
+                className="font-medium text-[#0284C7] hover:underline"
+              >
+                Local plan landscape
+              </Link>
               <Link href="/hubs/aca" className="font-medium text-[#0284C7] hover:underline">
                 ACA specialists
               </Link>

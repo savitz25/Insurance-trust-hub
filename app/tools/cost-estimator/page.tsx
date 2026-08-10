@@ -165,6 +165,15 @@ export default async function CostEstimatorPage({ searchParams }: PageProps) {
             </h2>
             <ul className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
               <li>
+                <Link
+                  href="/tools/marketplace-plan-research"
+                  className="font-medium text-[#0284C7] hover:underline"
+                >
+                  Research Marketplace plans near you
+                </Link>
+                <span className="block text-xs text-slate-500">Local plan landscape by ZIP</span>
+              </li>
+              <li>
                 <Link href="/data/plan-complaint-index" className="font-medium text-[#0284C7] hover:underline">
                   Medicare Plan Complaint Index
                 </Link>

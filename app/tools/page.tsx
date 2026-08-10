@@ -38,6 +38,13 @@ function fromTools(href: string) {
 
 const INTENTS = [
   {
+    href: '/tools/marketplace-plan-research',
+    icon: MapPin,
+    title: 'Research Marketplace plans near you',
+    detail: 'Local plan landscape, premium paths, and assistance context by ZIP',
+    cta: 'Local plan landscape',
+  },
+  {
     href: '/calculators/aca-subsidy',
     icon: HeartPulse,
     title: 'Shopping for health insurance',
@@ -70,6 +77,16 @@ const INTENTS = [
 ] as const;
 
 const FLAGSHIPS = [
+  {
+    href: '/tools/marketplace-plan-research',
+    icon: MapPin,
+    badge: 'Flagship · Local landscape',
+    title: 'Research Marketplace plans near you',
+    question: 'What does the local ACA Marketplace landscape look like for my ZIP?',
+    description:
+      'CMS-powered plan counts, issuer context, and lower-premium vs more protective research paths — educational only. Save to My Insurance; enroll on HealthCare.gov.',
+    time: '~1–3 min',
+  },
   {
     href: '/tools/cost-estimator',
     icon: Calculator,

@@ -38,6 +38,12 @@ export const COVERAGE_INTELLIGENCE_INDEXATION: IndexationRow[] = [
     rule: 'Tool landing only — do not index query variants',
   },
   {
+    template: 'Marketplace plan research (flagship)',
+    pathPattern: '/tools/marketplace-plan-research',
+    index: 'yes',
+    rule: 'Canonical public ZIP landscape research asset',
+  },
+  {
     template: 'Marketplace hub',
     pathPattern: '/marketplace',
     index: 'yes',
@@ -291,6 +297,23 @@ export function buildResearchToolJsonLd(opts: {
   };
 }
 
+export function buildFaqPageJsonLd(
+  faqs: Array<{ question: string; answer: string }>
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  };
+}
+
 export function buildResearchPageGraph(opts: {
   path: string;
   name: string;
@@ -298,6 +321,8 @@ export function buildResearchPageGraph(opts: {
   breadcrumbs: BreadcrumbItem[];
   dateModified?: string;
   includeToolSchema?: boolean;
+  /** Only pass FAQs that are visible on the page (accurate content). */
+  faqs?: Array<{ question: string; answer: string }>;
 }) {
   const graph: Record<string, unknown>[] = [
     buildWebPageJsonLd(opts),
@@ -312,6 +337,9 @@ export function buildResearchPageGraph(opts: {
       })
     );
   }
+  if (opts.faqs?.length) {
+    graph.push(buildFaqPageJsonLd(opts.faqs));
+  }
   return {
     '@context': 'https://schema.org',
     '@graph': graph.map((node) => {
@@ -324,6 +352,11 @@ export function buildResearchPageGraph(opts: {
 
 /** Query → template mapping for SEO alignment (documentation + content owners). */
 export const QUERY_TEMPLATE_MAP = [
+  {
+    intent: 'Local Marketplace plan landscape by ZIP',
+    template: 'Marketplace plan research flagship',
+    path: '/tools/marketplace-plan-research',
+  },
   {
     intent: 'Research ACA plans by household ZIP',
     template: 'Plan Explorer',

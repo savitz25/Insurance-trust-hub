@@ -50,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/medicare-plan-finder',
     '/tools/medicare-provider-lookup',
     '/tools/aca-plan-explorer',
+    '/tools/marketplace-plan-research',
     '/marketplace',
     '/medicare',
     '/carriers',
@@ -75,6 +76,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             path === '/marketplace' ||
             path === '/carriers' ||
             path === '/tools/aca-plan-explorer' ||
+            path === '/tools/marketplace-plan-research' ||
             path.startsWith('/data') ||
             path.startsWith('/tools/cost') ||
             path.startsWith('/calculators/aca') ||

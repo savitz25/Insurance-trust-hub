@@ -69,7 +69,7 @@ const DATA_SOURCES = [
   {
     name: 'CMS Marketplace API (ACA Coverage Intelligence)',
     detail:
-      'Plan search, provider network, formulary, and OOPC fields when configured. Plan Explorer, Plan X-Ray, county ACA snapshots, and carrier ACA rollups. Fail closed when data is missing — no invented premiums or matches.',
+      'Plan search, provider network, formulary, and OOPC fields when configured. Flagship local landscape research (/tools/marketplace-plan-research), Plan Explorer, Plan X-Ray, county ACA snapshots, and carrier ACA rollups. Fail closed when data is missing — no invented premiums or matches. Not an eligibility determination or enrollment site.',
   },
   {
     name: 'CMS Medicare extracts (Medicare Intelligence)',
@@ -125,6 +125,12 @@ export default function MethodologyPage() {
           mass thin counties or seed-agency SEO.
         </p>
         <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+          <Link
+            href="/tools/marketplace-plan-research"
+            className="font-medium text-primary hover:underline"
+          >
+            Local plan landscape
+          </Link>
           <Link href="/tools/aca-plan-explorer" className="font-medium text-primary hover:underline">
             ACA Plan Explorer
           </Link>
