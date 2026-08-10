@@ -19,7 +19,8 @@ export type AcaMarketplaceGuide = {
     | 'North Carolina'
     | 'Pennsylvania'
     | 'New Jersey'
-    | 'New York';
+    | 'New York'
+    | 'Connecticut';
   /** Short regulator name for license re-check copy */
   licenseRegulator: string;
   /** Sample ZIPs for research hints only */
@@ -32,7 +33,7 @@ export type AcaMarketplaceGuide = {
   /**
    * Official enrollment destinations in Trust & next steps.
    * Defaults to HealthCare.gov when omitted (federal Marketplace states).
-   * State-based Marketplaces (e.g. NY State of Health) should set this explicitly.
+   * State-based Marketplaces (e.g. NY State of Health, Access Health CT) should set this explicitly.
    */
   enrollmentLinks?: Array<{ href: string; label: string }>;
   overview: string[];
@@ -1681,6 +1682,235 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       'new-york-aca-marketplace',
       'nyc-aca-marketplace',
       'long-island-aca-marketplace',
+    ],
+  },
+  // ── Connecticut cluster (Northeast — Fairfield / Hartford) ───────────────
+  {
+    slug: 'connecticut-aca-marketplace',
+    primaryKeyword: 'ACA Marketplace Connecticut',
+    title: 'Connecticut ACA Marketplace Guide — Research Plans by ZIP (2026)',
+    description:
+      'How to research ACA Marketplace coverage in Connecticut: ZIP-level plan landscape tools, Fairfield and Hartford context, subsidy education, and Access Health CT enrollment next steps. Educational only — no lead selling.',
+    h1: 'Connecticut ACA Marketplace guide',
+    subhead:
+      'A practical research path for Connecticut residents shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll through Access Health CT.',
+    locationLabel: 'Connecticut',
+    stateName: 'Connecticut',
+    licenseRegulator: 'Connecticut DOI',
+    sampleZips: [
+      { zip: '06901', label: 'Stamford / Fairfield County' },
+      { zip: '06830', label: 'Greenwich area' },
+      { zip: '06604', label: 'Bridgeport area' },
+      { zip: '06103', label: 'Hartford' },
+      { zip: '06510', label: 'New Haven area' },
+      { zip: '06320', label: 'New London area' },
+    ],
+    hubHref: '/hubs/connecticut/hartford',
+    hubLabel: 'Hartford metro agents hub',
+    directoryHref: '/hubs/aca',
+    enrollmentLinks: [
+      { href: 'https://www.accesshealthct.com/', label: 'Access Health CT' },
+      { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+    ],
+    overview: [
+      'Connecticut has a concentrated individual health insurance market. Most residents enroll in ACA coverage through Access Health CT, Connecticut’s official state-based Marketplace — not solely through HealthCare.gov as in pure federal Marketplace states.',
+      'Shoppers often research by region: Fairfield County (including Greenwich, Stamford, Norwalk, and Bridgeport area context), the Hartford capital region, and other county markets. Plan menus remain ZIP- and county-based, so always research the address where you live.',
+      'Insurance Trust Hub provides educational landscape research (including CMS Marketplace data when available). We do not sell policies, process applications, invent official premiums, or replace Access Health CT.',
+    ],
+    whoBuys: [
+      'People without affordable employer coverage',
+      'Self-employed workers, contractors, and NYC-adjacent commuter households',
+      'Families leaving Medicaid/CHIP or other coverage',
+      'Early retirees under 65 researching bridge coverage before Medicare',
+    ],
+    costFactors: [
+      'Age and household composition (Marketplace age rating)',
+      'Household income relative to the federal poverty level (premium tax credit education)',
+      'Tobacco use where rating rules apply',
+      'Metal tier (Bronze, Silver, Gold) and deductible / max out-of-pocket design',
+      'County and local issuer competition — Fairfield, Hartford, and coastal menus can differ',
+    ],
+    whatToolShows: [
+      'Approximate plan and issuer counts for your Connecticut ZIP when the CMS Marketplace API is available',
+      'Premium ranges and deductible ranges when CMS returns those fields',
+      'Lower-premium, balanced, and higher-protection research path examples',
+      'Assistance context when you add household income (educational — not an official award)',
+    ],
+    faqs: [
+      {
+        q: 'Does Connecticut use HealthCare.gov or a state Marketplace?',
+        a: 'Connecticut operates Access Health CT, a state-based Marketplace, for individual ACA coverage. HealthCare.gov remains a useful federal reference, but official eligibility, plan selection, and enrollment for most Connecticut residents go through Access Health CT (accesshealthct.com). Always confirm current steps on official sites.',
+      },
+      {
+        q: 'Why research by ZIP if I enroll on Access Health CT?',
+        a: 'ZIP and county shape which plans and networks are available. Our research tool helps you understand local plan landscape context (when CMS data loads) before you complete official shopping and enrollment on Access Health CT.',
+      },
+      {
+        q: 'Is a low monthly premium always best in Connecticut?',
+        a: 'Not necessarily. Lower-premium paths often pair with higher deductibles. Silver can matter if cost-sharing reductions may apply. Use total-cost thinking, then verify official prices and assistance on Access Health CT.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, subsidies, and enrollment are determined on Access Health CT (or with a licensed professional you choose).',
+      },
+      {
+        q: 'What about Medicare in Connecticut?',
+        a: 'Medicare is a separate pathway from the ACA Marketplace. If you are 65+ or otherwise Medicare-eligible, use Medicare research tools and Medicare.gov — not Marketplace enrollment alone.',
+      },
+    ],
+    relatedGuides: [
+      'fairfield-county-aca-marketplace',
+      'hartford-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'fairfield-county-aca-marketplace',
+    primaryKeyword: 'ACA plans in Fairfield County',
+    title: 'ACA Plans in Fairfield County — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Fairfield County, Connecticut (Greenwich, Stamford, Norwalk, Bridgeport area context): ZIP landscape tools, cost factors, and Access Health CT next steps. Educational only — no lead selling.',
+    h1: 'ACA Marketplace research in Fairfield County',
+    subhead:
+      'Fairfield County shoppers often compare shore-line and NYC-adjacent ZIPs. Research your local landscape first — then verify and enroll through Access Health CT.',
+    locationLabel: 'Fairfield County',
+    stateName: 'Connecticut',
+    licenseRegulator: 'Connecticut DOI',
+    sampleZips: [
+      { zip: '06830', label: 'Greenwich area' },
+      { zip: '06901', label: 'Stamford' },
+      { zip: '06854', label: 'Norwalk area' },
+      { zip: '06604', label: 'Bridgeport area' },
+      { zip: '06824', label: 'Fairfield area' },
+      { zip: '06880', label: 'Westport area' },
+    ],
+    hubHref: '/hubs/aca',
+    hubLabel: 'ACA specialists hub',
+    directoryHref: '/hubs/aca',
+    enrollmentLinks: [
+      { href: 'https://www.accesshealthct.com/', label: 'Access Health CT' },
+      { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+    ],
+    overview: [
+      'Fairfield County commonly includes Greenwich, Stamford, Norwalk, Bridgeport, Fairfield, Westport, and neighboring towns along the southwestern Connecticut corridor. Residents often describe the market as NYC-adjacent, but Marketplace rules still key off your Connecticut residence.',
+      'Official individual ACA enrollment for most Connecticut residents runs through Access Health CT, not a pure HealthCare.gov-only pathway. Treat any “average county premium” as anecdote only — never a permanent fact.',
+      'This guide is educational research from Insurance Trust Hub. It is not a quote engine and does not invent official premiums.',
+    ],
+    whoBuys: [
+      'Commuters and dual-state work households without employer coverage',
+      'Self-employed professionals and small-business owners',
+      'Families comparing networks across shore-line towns',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred Fairfield County providers (and, for some, NYC care — confirm officially)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for a Fairfield County ZIP when available',
+      'Issuer depth and premium spreads when CMS provides those fields',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'Does Fairfield County use Access Health CT?',
+        a: 'Yes. Fairfield County residents generally enroll in individual ACA coverage through Connecticut’s official state Marketplace, Access Health CT (accesshealthct.com). Always confirm current steps and official plan prices there.',
+      },
+      {
+        q: 'I work in New York but live in Fairfield County — which Marketplace?',
+        a: 'Use your Connecticut home ZIP for Marketplace research and Connecticut enrollment rules. Confirm that preferred NYC or Westchester providers are in-network on official plan documents if you receive care across the state line.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, pricing, and enrollment are on Access Health CT (or with a licensed professional you choose).',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: [
+      'connecticut-aca-marketplace',
+      'hartford-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'hartford-aca-marketplace',
+    primaryKeyword: 'Marketplace insurance Hartford',
+    title: 'Marketplace Insurance in Hartford — ACA Research Guide',
+    description:
+      'Research ACA Marketplace coverage in the Hartford, Connecticut capital region: ZIP landscape tools, cost factors, subsidy education, and Access Health CT next steps. Educational only — no lead selling.',
+    h1: 'ACA Marketplace research in Hartford',
+    subhead:
+      'Hartford and nearby capital-region towns form Connecticut’s insurance-industry core. Use ZIP-level landscape research — then verify official details on Access Health CT.',
+    locationLabel: 'Hartford',
+    stateName: 'Connecticut',
+    licenseRegulator: 'Connecticut DOI',
+    sampleZips: [
+      { zip: '06103', label: 'Downtown Hartford' },
+      { zip: '06107', label: 'West Hartford area' },
+      { zip: '06108', label: 'East Hartford area' },
+      { zip: '06032', label: 'Farmington area' },
+      { zip: '06066', label: 'Vernon / Rockville area' },
+      { zip: '06457', label: 'Middletown area' },
+    ],
+    hubHref: '/hubs/connecticut/hartford',
+    hubLabel: 'Hartford metro agents hub',
+    directoryHref: '/hubs/aca',
+    enrollmentLinks: [
+      { href: 'https://www.accesshealthct.com/', label: 'Access Health CT' },
+      { href: 'https://www.healthcare.gov', label: 'HealthCare.gov' },
+    ],
+    overview: [
+      'The Hartford market commonly includes the city of Hartford plus nearby communities many residents treat as one research area — West Hartford, East Hartford, Farmington, and broader capital-region towns. Exact boundaries vary; your ZIP and county still determine plan menus.',
+      'Hartford is often called an insurance capital for carrier employment, but individual ACA shopping still follows Access Health CT rules for most residents. Educational ZIP research helps you understand landscape context before official enrollment.',
+      'This guide is educational only. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Insurance-industry and professional workers without employer coverage',
+      'Self-employed residents and small-business owners',
+      'Suburban capital-region families comparing total annual cost',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age and household size',
+      'Income / FPL position for assistance education',
+      'Metal tier and deductible design',
+      'Whether preferred capital-region providers appear in plan networks (confirm officially)',
+    ],
+    whatToolShows: [
+      'Plan and issuer counts for a Hartford-area ZIP when CMS data loads',
+      'Premium and deductible ranges when provided',
+      'Lower-premium vs more protective research path examples',
+      'Assistance context if you enter income',
+    ],
+    faqs: [
+      {
+        q: 'Is Hartford on Access Health CT?',
+        a: 'Yes. Hartford-area residents generally use Connecticut’s official state Marketplace, Access Health CT, for individual ACA enrollment. Confirm current rules and plan catalogs on accesshealthct.com.',
+      },
+      {
+        q: 'Is Hartford more affordable than Fairfield County?',
+        a: 'There is no permanent answer. Issuer competition, ages, and income drive outcomes. Compare live landscapes for each ZIP rather than relying on anecdotes.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On Access Health CT for official eligibility, pricing, and enrollment, or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'What if the research tool shows no live data?',
+        a: 'We fail closed and label educational fallbacks. We never invent a full plan catalog. Retry later or go directly to Access Health CT for official shopping.',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: [
+      'connecticut-aca-marketplace',
+      'fairfield-county-aca-marketplace',
     ],
   },
 ];

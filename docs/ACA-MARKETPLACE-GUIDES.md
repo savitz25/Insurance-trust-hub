@@ -63,6 +63,16 @@
 
 **Official pathway note:** New York is a state-based Marketplace (NY State of Health). Guides set `enrollmentLinks` to NY State of Health + HealthCare.gov; do not frame NY as pure HealthCare.gov-only.
 
+## Northeast — Connecticut (shipped)
+
+| URL | Primary intent |
+|-----|----------------|
+| `/guides/connecticut-aca-marketplace` | ACA Marketplace Connecticut (statewide) |
+| `/guides/fairfield-county-aca-marketplace` | ACA plans in Fairfield County |
+| `/guides/hartford-aca-marketplace` | Marketplace insurance Hartford |
+
+**Official pathway note:** Connecticut is a state-based Marketplace (Access Health CT). Guides set `enrollmentLinks` to Access Health CT + HealthCare.gov; do not frame CT as pure HealthCare.gov-only.
+
 Index: `/guides` (grouped by state)
 
 ## Template
@@ -79,4 +89,4 @@ Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, o
 
 ## Tier 2 next
 
-Connecticut (statewide + Fairfield / NYC-adjacent), then Ohio + Columbus / Cleveland.
+Northeast core complete (NJ / NY / CT). Next: pause for compounding, or Midwest Tier 2 (Ohio + Columbus / Cleveland; Michigan optional).

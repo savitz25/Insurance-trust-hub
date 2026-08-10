@@ -371,6 +371,30 @@ export default function MarketplacePlanResearchPage() {
               </li>
               <li>
                 <Link
+                  href="/guides/connecticut-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Connecticut
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/fairfield-county-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Fairfield County
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/hartford-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Hartford
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/guides"
                   className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-slate-700"
                 >

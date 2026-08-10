@@ -82,6 +82,12 @@ const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string
     { href: '/guides/new-york-aca-marketplace', label: 'New York ACA guide' },
     { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
   ],
+  hartford: [
+    { href: '/guides/hartford-aca-marketplace', label: 'Hartford ACA guide' },
+    { href: '/guides/connecticut-aca-marketplace', label: 'Connecticut ACA guide' },
+    { href: '/guides/fairfield-county-aca-marketplace', label: 'Fairfield County ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
 };
 
 export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
