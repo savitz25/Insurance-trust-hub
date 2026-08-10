@@ -12,7 +12,7 @@ export type AcaMarketplaceGuide = {
   h1: string;
   subhead: string;
   locationLabel: string;
-  stateName: 'Florida' | 'Texas';
+  stateName: 'Florida' | 'Texas' | 'Georgia';
   /** Short regulator name for license re-check copy */
   licenseRegulator: string;
   /** Sample ZIPs for research hints only */
@@ -519,6 +519,148 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       },
     ],
     relatedGuides: ['texas-aca-marketplace', 'houston-aca-marketplace'],
+  },
+  // ── Georgia cluster (Tier 2B) ─────────────────────────────────────────────
+  {
+    slug: 'georgia-aca-marketplace',
+    primaryKeyword: 'ACA Marketplace Georgia',
+    title: 'Georgia ACA Marketplace Guide — Research Plans by ZIP (2026)',
+    description:
+      'How to research ACA Marketplace coverage in Georgia: ZIP-level plan landscape tools, cost factors, subsidy education, and HealthCare.gov next steps. Educational only — no lead selling.',
+    h1: 'Georgia ACA Marketplace guide',
+    subhead:
+      'A practical research path for Georgians shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll on HealthCare.gov.',
+    locationLabel: 'Georgia',
+    stateName: 'Georgia',
+    licenseRegulator: 'Georgia OCI',
+    sampleZips: [
+      { zip: '30303', label: 'Downtown Atlanta' },
+      { zip: '30305', label: 'Buckhead area' },
+      { zip: '30024', label: 'Suwanee / north metro' },
+      { zip: '30080', label: 'Smyrna / Cobb area' },
+      { zip: '31401', label: 'Savannah' },
+      { zip: '30901', label: 'Augusta' },
+    ],
+    hubHref: '/hubs/georgia/atlanta',
+    hubLabel: 'Atlanta insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'Georgia has a significant individual health insurance market. Many residents use the federal Marketplace (HealthCare.gov) during open enrollment or after a qualifying life event.',
+      'Plan menus and issuer competition can differ between metro Atlanta and other regions such as Savannah, Augusta, or smaller counties. A statewide average cannot replace a ZIP-level CMS landscape when available.',
+      'This page is educational research from Insurance Trust Hub. We do not sell policies, process applications, or invent official premiums.',
+    ],
+    whoBuys: [
+      'People without affordable employer coverage',
+      'Self-employed workers, contractors, and gig-economy households',
+      'Families leaving Medicaid/CHIP or other coverage',
+      'Early retirees under 65 researching bridge coverage before Medicare',
+    ],
+    costFactors: [
+      'Age and household composition (Marketplace age rating)',
+      'Household income relative to the federal poverty level (premium tax credit education)',
+      'Tobacco use where rating rules apply',
+      'Metal tier (Bronze, Silver, Gold) and deductible / max out-of-pocket design',
+      'County and local issuer competition — Atlanta-area ZIPs can differ from other Georgia markets',
+    ],
+    whatToolShows: [
+      'Approximate plan and issuer counts for your Georgia ZIP when the CMS Marketplace API is available',
+      'Premium ranges and deductible ranges when CMS returns those fields',
+      'Lower-premium, balanced, and higher-protection research path examples',
+      'Assistance context when you add household income (educational — not an official award)',
+    ],
+    faqs: [
+      {
+        q: 'Does Georgia use HealthCare.gov or a state exchange?',
+        a: 'Georgia uses the federal Marketplace at HealthCare.gov for individual ACA coverage. Always confirm enrollment steps, special enrollment periods, and official plan prices there.',
+      },
+      {
+        q: 'Why do Atlanta and other Georgia regions differ?',
+        a: 'Issuers file service areas by county and region. Moving between metro Atlanta counties — or from Atlanta to coastal or rural Georgia — can change which plans and networks appear. Research the ZIP where you will live and seek care.',
+      },
+      {
+        q: 'Is a low monthly premium always best in Georgia?',
+        a: 'Not necessarily. Bronze-style paths often pair lower premiums with higher deductibles. Silver can matter if cost-sharing reductions may apply. Use total-cost thinking, then verify on HealthCare.gov.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, subsidies, and enrollment are determined on HealthCare.gov (or with a licensed agent you choose).',
+      },
+      {
+        q: 'What about Medicare in Georgia?',
+        a: 'Medicare is a separate pathway from the ACA Marketplace. If you are 65+ or otherwise Medicare-eligible, use Medicare research tools and Medicare.gov — not Marketplace enrollment alone.',
+      },
+    ],
+    relatedGuides: ['atlanta-aca-marketplace'],
+  },
+  {
+    slug: 'atlanta-aca-marketplace',
+    primaryKeyword: 'ACA plans in Atlanta',
+    title: 'ACA Plans in Atlanta — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in metro Atlanta: ZIP-level plan landscape, cost factors, subsidy context, and HealthCare.gov next steps. Educational only — no lead selling.',
+    h1: 'ACA Marketplace research in Atlanta',
+    subhead:
+      'Metro Atlanta spans multiple counties and care patterns. Use local ZIP research to understand plan volume and path types — then confirm everything on HealthCare.gov.',
+    locationLabel: 'Atlanta metro, Georgia',
+    stateName: 'Georgia',
+    licenseRegulator: 'Georgia OCI',
+    sampleZips: [
+      { zip: '30303', label: 'Downtown Atlanta' },
+      { zip: '30305', label: 'Buckhead' },
+      { zip: '30024', label: 'Suwanee / Forsyth area' },
+      { zip: '30080', label: 'Smyrna' },
+      { zip: '30043', label: 'Lawrenceville / Gwinnett' },
+      { zip: '30062', label: 'Marietta area' },
+    ],
+    hubHref: '/hubs/georgia/atlanta',
+    hubLabel: 'Atlanta insurance agents',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'Atlanta shoppers often compare network access across Fulton, DeKalb, Cobb, Gwinnett, and surrounding counties, plus whether a lower premium is worth a higher deductible.',
+      'Plan menus can differ by ZIP across the metro. Treat any statewide “average” as context only — run your own ZIP in the research tool for a current CMS landscape snapshot when available.',
+      'This guide is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Corporate, logistics, and hospitality workers without stable employer plans',
+      'Self-employed professionals and small-business households',
+      'Families evaluating Silver vs Bronze tradeoffs',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred hospitals and clinics (confirm on official plan documents)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for an Atlanta-area ZIP',
+      'Issuer depth and premium spreads when available',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'What ZIP should I use for Atlanta research?',
+        a: 'Use the ZIP for the home where you will live and primarily seek care. Different metro Atlanta counties and suburbs can surface different plan menus.',
+      },
+      {
+        q: 'I work in Midtown but live in Gwinnett — which ZIP?',
+        a: 'Marketplace plan menus are generally based on where you live. Research your home ZIP, then confirm networks cover where you actually receive care.',
+      },
+      {
+        q: 'How is this different from Medicare research in Atlanta?',
+        a: 'Medicare tools use different CMS extracts for 65+ / Medicare Advantage markets. ACA Marketplace research is for individual/family coverage under 65 (with limited exceptions).',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (Georgia’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+    ],
+    relatedGuides: ['georgia-aca-marketplace'],
   },
 ];
 

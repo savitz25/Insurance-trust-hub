@@ -20,6 +20,13 @@
 | `/guides/houston-aca-marketplace` | ACA plans in Houston |
 | `/guides/dallas-aca-marketplace` | Marketplace insurance Dallas |
 
+## Tier 2B — Georgia (shipped)
+
+| URL | Primary intent |
+|-----|----------------|
+| `/guides/georgia-aca-marketplace` | ACA Marketplace Georgia (statewide) |
+| `/guides/atlanta-aca-marketplace` | ACA plans in Atlanta |
+
 Index: `/guides` (grouped by state)
 
 ## Template
@@ -36,4 +43,4 @@ Required links: flagship, cost estimator, ACA subsidy, local hub, methodology, H
 
 ## Tier 2 next
 
-Georgia + Atlanta, then North Carolina, Pennsylvania, Ohio, Michigan.
+North Carolina + Charlotte / Research Triangle, then Pennsylvania, Ohio, Michigan.

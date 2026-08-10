@@ -243,6 +243,22 @@ export default function MarketplacePlanResearchPage() {
               </li>
               <li>
                 <Link
+                  href="/guides/georgia-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Georgia
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/atlanta-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Atlanta
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/guides"
                   className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-slate-700"
                 >

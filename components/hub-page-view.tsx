@@ -50,6 +50,11 @@ const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string
     { href: '/guides/palm-beach-aca-marketplace', label: 'Palm Beach ACA guide' },
     { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
   ],
+  atlanta: [
+    { href: '/guides/atlanta-aca-marketplace', label: 'Atlanta ACA guide' },
+    { href: '/guides/georgia-aca-marketplace', label: 'Georgia ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
 };
 
 export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {

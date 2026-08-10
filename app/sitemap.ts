@@ -59,6 +59,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/guides/texas-aca-marketplace',
     '/guides/houston-aca-marketplace',
     '/guides/dallas-aca-marketplace',
+    '/guides/georgia-aca-marketplace',
+    '/guides/atlanta-aca-marketplace',
     '/marketplace',
     '/medicare',
     '/carriers',
