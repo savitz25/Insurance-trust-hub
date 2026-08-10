@@ -12,7 +12,13 @@ export type AcaMarketplaceGuide = {
   h1: string;
   subhead: string;
   locationLabel: string;
-  stateName: 'Florida' | 'Texas' | 'Georgia' | 'North Carolina' | 'Pennsylvania';
+  stateName:
+    | 'Florida'
+    | 'Texas'
+    | 'Georgia'
+    | 'North Carolina'
+    | 'Pennsylvania'
+    | 'New Jersey';
   /** Short regulator name for license re-check copy */
   licenseRegulator: string;
   /** Sample ZIPs for research hints only */
@@ -1073,6 +1079,296 @@ export const ACA_MARKETPLACE_GUIDES: AcaMarketplaceGuide[] = [
       },
     ],
     relatedGuides: ['pennsylvania-aca-marketplace', 'philadelphia-aca-marketplace'],
+  },
+  // ── New Jersey cluster (Northeast — South / Central / North) ──────────────
+  {
+    slug: 'new-jersey-aca-marketplace',
+    primaryKeyword: 'ACA Marketplace New Jersey',
+    title: 'New Jersey ACA Marketplace Guide — Research Plans by ZIP (2026)',
+    description:
+      'How to research ACA Marketplace coverage in New Jersey: ZIP-level plan landscape tools, South / Central / North region context, subsidy education, and HealthCare.gov next steps. Educational only — no lead selling.',
+    h1: 'New Jersey ACA Marketplace guide',
+    subhead:
+      'A practical research path for New Jersey residents shopping individual-market health coverage — start with your ZIP landscape, then verify and enroll on HealthCare.gov.',
+    locationLabel: 'New Jersey',
+    stateName: 'New Jersey',
+    licenseRegulator: 'New Jersey DOBI',
+    sampleZips: [
+      { zip: '07030', label: 'Hoboken / North Jersey' },
+      { zip: '07102', label: 'Newark area' },
+      { zip: '08901', label: 'New Brunswick / Central' },
+      { zip: '08608', label: 'Trenton area' },
+      { zip: '08002', label: 'Cherry Hill / South' },
+      { zip: '08401', label: 'Atlantic City area' },
+    ],
+    hubHref: '/hubs/aca',
+    hubLabel: 'ACA specialists hub',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'New Jersey has a dense individual health insurance market. Many residents use the federal Marketplace (HealthCare.gov) during open enrollment or after a qualifying life event.',
+      'People often describe the state as South, Central, and North Jersey — informal regions that still shape how shoppers compare networks and care access. Plan menus remain ZIP- and county-based, so always research the address where you live.',
+      'This page is educational research from Insurance Trust Hub. We do not sell policies, process applications, or invent official premiums.',
+    ],
+    whoBuys: [
+      'People without affordable employer coverage',
+      'Self-employed workers, contractors, and commuter households',
+      'Families leaving Medicaid/CHIP or other coverage',
+      'Early retirees under 65 researching bridge coverage before Medicare',
+    ],
+    costFactors: [
+      'Age and household composition (Marketplace age rating)',
+      'Household income relative to the federal poverty level (premium tax credit education)',
+      'Tobacco use where rating rules apply',
+      'Metal tier (Bronze, Silver, Gold) and deductible / max out-of-pocket design',
+      'County and local issuer competition — North, Central, and South Jersey menus can differ',
+    ],
+    whatToolShows: [
+      'Approximate plan and issuer counts for your New Jersey ZIP when the CMS Marketplace API is available',
+      'Premium ranges and deductible ranges when CMS returns those fields',
+      'Lower-premium, balanced, and higher-protection research path examples',
+      'Assistance context when you add household income (educational — not an official award)',
+    ],
+    faqs: [
+      {
+        q: 'Does New Jersey use HealthCare.gov or a state exchange?',
+        a: 'New Jersey uses the federal Marketplace at HealthCare.gov for individual ACA coverage. Always confirm enrollment steps, special enrollment periods, and official plan prices there.',
+      },
+      {
+        q: 'What do people mean by South, Central, and North Jersey?',
+        a: 'They are common consumer regions, not official Marketplace zones. County and ZIP determine plan menus. We publish separate South, Central, and North Jersey guides to match how residents search, then send you to ZIP-level research.',
+      },
+      {
+        q: 'Is a low monthly premium always best in New Jersey?',
+        a: 'Not necessarily. Bronze-style paths often pair lower premiums with higher deductibles. Silver can matter if cost-sharing reductions may apply. Use total-cost thinking, then verify on HealthCare.gov.',
+      },
+      {
+        q: 'Can Insurance Trust Hub enroll me?',
+        a: 'No. We provide independent educational research only. Official eligibility, subsidies, and enrollment are determined on HealthCare.gov (or with a licensed agent you choose).',
+      },
+      {
+        q: 'What about Medicare in New Jersey?',
+        a: 'Medicare is a separate pathway from the ACA Marketplace. If you are 65+ or otherwise Medicare-eligible, use Medicare research tools and Medicare.gov — not Marketplace enrollment alone.',
+      },
+    ],
+    relatedGuides: [
+      'south-jersey-aca-marketplace',
+      'central-jersey-aca-marketplace',
+      'north-jersey-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'south-jersey-aca-marketplace',
+    primaryKeyword: 'ACA plans in South Jersey',
+    title: 'ACA Plans in South Jersey — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in South Jersey (Camden, Burlington, Gloucester, Atlantic, Cape May, Cumberland, Salem area context): ZIP landscape tools, cost factors, and HealthCare.gov next steps. Educational only.',
+    h1: 'ACA Marketplace research in South Jersey',
+    subhead:
+      'South Jersey shoppers often compare shore, suburban, and Philly-adjacent ZIPs. Use local ZIP research for plan volume and path types — then confirm on HealthCare.gov.',
+    locationLabel: 'South Jersey',
+    stateName: 'New Jersey',
+    licenseRegulator: 'New Jersey DOBI',
+    sampleZips: [
+      { zip: '08002', label: 'Cherry Hill area' },
+      { zip: '08003', label: 'Cherry Hill / Voorhees area' },
+      { zip: '08033', label: 'Haddonfield area' },
+      { zip: '08096', label: 'Woodbury / Gloucester area' },
+      { zip: '08401', label: 'Atlantic City area' },
+      { zip: '08204', label: 'Cape May area' },
+    ],
+    hubHref: '/hubs/aca',
+    hubLabel: 'ACA specialists hub',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'South Jersey commonly includes Camden, Burlington, Gloucester, Atlantic, Cape May, Cumberland, and Salem area context. Definitions vary by resident — use them as a map, not a rigid boundary.',
+      'Proximity to Philadelphia can influence where people work and seek care, but Marketplace plan menus still follow your New Jersey ZIP of residence. Keep research NJ-focused for enrollment rules.',
+      'This guide is educational only. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Commuters and suburban households without employer coverage',
+      'Shore-area workers with seasonal or variable income patterns',
+      'Self-employed residents comparing total cost, not just premium',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit across South Jersey and, for some households, SEPA care patterns (confirm officially)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for a South Jersey ZIP',
+      'Issuer depth and premium spreads when available',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'Which counties are “South Jersey”?',
+        a: 'Residents often include Camden, Burlington, Gloucester, Atlantic, Cape May, Cumberland, and Salem area communities. Exact lists vary. Always research the ZIP where you live.',
+      },
+      {
+        q: 'I work in Philadelphia but live in South Jersey — which Marketplace?',
+        a: 'Use your New Jersey home ZIP for Marketplace research and enrollment rules. Confirm that preferred Philly-area providers are in-network on official plan documents if you receive care across the river.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (New Jersey’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: [
+      'new-jersey-aca-marketplace',
+      'central-jersey-aca-marketplace',
+      'north-jersey-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'central-jersey-aca-marketplace',
+    primaryKeyword: 'Marketplace insurance Central Jersey',
+    title: 'Marketplace Insurance in Central Jersey — ACA Research Guide',
+    description:
+      'Research ACA Marketplace coverage in Central Jersey (Middlesex, Mercer, Monmouth, Ocean, Somerset area context): ZIP landscape tools, cost factors, and HealthCare.gov next steps. Educational only.',
+    h1: 'ACA Marketplace research in Central Jersey',
+    subhead:
+      '“Central Jersey” is how many residents describe the middle of the state — even when maps disagree. Research your ZIP for a real plan landscape, then verify on HealthCare.gov.',
+    locationLabel: 'Central Jersey',
+    stateName: 'New Jersey',
+    licenseRegulator: 'New Jersey DOBI',
+    sampleZips: [
+      { zip: '08901', label: 'New Brunswick' },
+      { zip: '08816', label: 'East Brunswick area' },
+      { zip: '08608', label: 'Trenton area' },
+      { zip: '08540', label: 'Princeton area' },
+      { zip: '07701', label: 'Red Bank / Monmouth area' },
+      { zip: '08701', label: 'Lakewood / Ocean area' },
+    ],
+    hubHref: '/hubs/aca',
+    hubLabel: 'ACA specialists hub',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'Central Jersey often includes Middlesex, Mercer, Monmouth, Ocean, and Somerset area context. Residents use the label widely even though official boundaries are fuzzy — that is okay for research framing.',
+      'Plan menus remain ZIP- and county-based. A Princeton ZIP, a shore ZIP, and a Route 1 corridor ZIP can surface different issuer mixes. Use the research tool for your address.',
+      'This guide is educational only. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Pharmaceutical, logistics, and professional workers without employer coverage',
+      'Shore and suburban households comparing networks',
+      'Self-employed residents researching total annual cost',
+      'People evaluating Silver vs Bronze tradeoffs',
+    ],
+    costFactors: [
+      'Age and household size',
+      'Income / FPL position for assistance education',
+      'Metal tier and deductible design',
+      'Whether preferred providers appear in plan networks (confirm officially)',
+    ],
+    whatToolShows: [
+      'Plan and issuer counts for a Central Jersey ZIP when CMS data loads',
+      'Premium and deductible ranges when provided',
+      'Lower-premium vs more protective research path examples',
+      'Assistance context if you enter income',
+    ],
+    faqs: [
+      {
+        q: 'Is Central Jersey a real region?',
+        a: 'Many New Jerseyans say yes — even if cartographers argue. For Marketplace purposes, your county and ZIP matter more than the label. We use “Central Jersey” because that is how people search and talk about the area.',
+      },
+      {
+        q: 'Does Ocean County count as Central or South?',
+        a: 'Definitions vary. Use the ZIP where you live. Shore communities can sit at the edge of informal regions; the research tool keys off geography, not nicknames.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (New Jersey’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'What if the tool shows no live data?',
+        a: 'We fail closed and label educational fallbacks. We never invent a full plan catalog. Retry later or go directly to HealthCare.gov Window Shopping.',
+      },
+    ],
+    relatedGuides: [
+      'new-jersey-aca-marketplace',
+      'south-jersey-aca-marketplace',
+      'north-jersey-aca-marketplace',
+    ],
+  },
+  {
+    slug: 'north-jersey-aca-marketplace',
+    primaryKeyword: 'ACA plans in North Jersey',
+    title: 'ACA Plans in North Jersey — Local Marketplace Research Guide',
+    description:
+      'Research ACA Marketplace coverage in North Jersey (Bergen, Essex, Hudson, Passaic, Morris, Union area context): ZIP landscape tools, cost factors, and HealthCare.gov next steps. Educational only.',
+    h1: 'ACA Marketplace research in North Jersey',
+    subhead:
+      'North Jersey is dense, multi-county, and often NYC-adjacent. Keep Marketplace research on your New Jersey ZIP — then verify official details on HealthCare.gov.',
+    locationLabel: 'North Jersey',
+    stateName: 'New Jersey',
+    licenseRegulator: 'New Jersey DOBI',
+    sampleZips: [
+      { zip: '07030', label: 'Hoboken' },
+      { zip: '07302', label: 'Jersey City' },
+      { zip: '07102', label: 'Newark area' },
+      { zip: '07094', label: 'Secaucus area' },
+      { zip: '07666', label: 'Teaneck / Bergen area' },
+      { zip: '07960', label: 'Morristown / Morris area' },
+    ],
+    hubHref: '/hubs/aca',
+    hubLabel: 'ACA specialists hub',
+    directoryHref: '/hubs/aca',
+    overview: [
+      'North Jersey commonly includes Bergen, Essex, Hudson, Passaic, Morris, and Union area context. It is one of the densest health insurance research markets in the Northeast.',
+      'NYC metro adjacency can influence where people work and receive specialty care, but New Jersey Marketplace enrollment still keys off your NJ residence. Mention of New York is for commuting context only.',
+      'This guide is educational only. It is not a quote engine and does not list permanent official premiums.',
+    ],
+    whoBuys: [
+      'Commuters and multi-language households without employer coverage',
+      'Self-employed professionals and small-business owners',
+      'Families comparing urban Hudson County ZIPs to suburban Bergen or Morris ZIPs',
+      'People newly eligible after a job or coverage change',
+    ],
+    costFactors: [
+      'Age rating and who is on the application',
+      'Income for educational premium tax credit / CSR framing',
+      'Local issuer competition and metal mix in your ZIP',
+      'Network fit for preferred providers in North Jersey (and, for some, NYC — confirm officially)',
+    ],
+    whatToolShows: [
+      'How many Marketplace plans CMS returns for a North Jersey ZIP',
+      'Issuer depth and premium spreads when available',
+      'Example lower-premium vs balanced vs higher-protection paths',
+      'Optional income-based assistance education',
+    ],
+    faqs: [
+      {
+        q: 'Which counties are “North Jersey”?',
+        a: 'Residents often include Bergen, Essex, Hudson, Passaic, Morris, and Union area communities. Exact lists vary. Always research the ZIP where you live.',
+      },
+      {
+        q: 'I work in New York City but live in North Jersey — which Marketplace?',
+        a: 'Use your New Jersey home ZIP for Marketplace research and enrollment rules. Confirm that preferred NYC providers are in-network on official plan documents if you receive care across the river.',
+      },
+      {
+        q: 'Is North Jersey more expensive than South Jersey?',
+        a: 'There is no permanent answer. Issuer competition, ages, and income drive outcomes. Compare live landscapes for each ZIP rather than relying on anecdotes.',
+      },
+      {
+        q: 'Where do I enroll?',
+        a: 'On HealthCare.gov (New Jersey’s federal Marketplace pathway), or with a licensed professional you choose. Insurance Trust Hub does not enroll consumers.',
+      },
+      {
+        q: 'Can I save my research?',
+        a: 'Yes. After you run the Marketplace plan research tool, you can save a summary to My Insurance when signed in. That is a research history feature — not enrollment.',
+      },
+    ],
+    relatedGuides: [
+      'new-jersey-aca-marketplace',
+      'central-jersey-aca-marketplace',
+      'south-jersey-aca-marketplace',
+    ],
   },
 ];
 

@@ -43,6 +43,15 @@
 | `/guides/philadelphia-aca-marketplace` | ACA plans in Philadelphia |
 | `/guides/pittsburgh-aca-marketplace` | Marketplace insurance Pittsburgh |
 
+## Northeast — New Jersey by region (shipped)
+
+| URL | Primary intent |
+|-----|----------------|
+| `/guides/new-jersey-aca-marketplace` | ACA Marketplace New Jersey (statewide) |
+| `/guides/south-jersey-aca-marketplace` | ACA plans in South Jersey |
+| `/guides/central-jersey-aca-marketplace` | Marketplace insurance Central Jersey |
+| `/guides/north-jersey-aca-marketplace` | ACA plans in North Jersey |
+
 Index: `/guides` (grouped by state)
 
 ## Template

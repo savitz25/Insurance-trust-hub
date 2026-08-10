@@ -307,6 +307,38 @@ export default function MarketplacePlanResearchPage() {
               </li>
               <li>
                 <Link
+                  href="/guides/new-jersey-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  New Jersey
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/south-jersey-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  South Jersey
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/central-jersey-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  Central Jersey
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/north-jersey-aca-marketplace"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                >
+                  North Jersey
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/guides"
                   className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-slate-700"
                 >
