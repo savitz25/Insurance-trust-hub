@@ -207,6 +207,3 @@ export async function runSecondaryEnrichment(params: {
     reasons,
   };
 }
-
-// re-export for consumers that import DISCLAIMER name wrong
-export { DISCLAIMER as SECONDARY_SIGNALS_DISCLAIMER_TEXT };
