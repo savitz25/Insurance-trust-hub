@@ -16,7 +16,10 @@ import {
   NAIC_CONSUMER_URL,
   DOI_PATHWAY_HREF,
 } from '@/components/research/empty-coverage-panel';
-import { flLaunchCountyNavRows } from '@/lib/dfs/launch-counties';
+import {
+  countVerifiedFloridaProviders,
+  getLaunchCountyLiveTotals,
+} from '@/lib/dfs/providers-by-county';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -81,6 +84,8 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
+  const launchRows = await getLaunchCountyLiveTotals();
+  const flTotal = await countVerifiedFloridaProviders();
 
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
@@ -100,24 +105,36 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <div className="mt-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Florida launch counties
+            {flTotal > 0 ? (
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · {flTotal.toLocaleString()} verified FL listings
+              </span>
+            ) : null}
           </p>
           <ul className="mt-2 flex flex-wrap gap-2">
-            {flLaunchCountyNavRows().map((row) => (
-              <li key={row.id}>
+            {launchRows.map((row) => (
+              <li key={row.key}>
                 <Link
                   href={row.hubHref}
-                  className="inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                  className={
+                    row.kind === 'aggregate'
+                      ? 'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
+                      : 'inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10'
+                  }
                 >
                   {row.displayName}
+                  <span className="tabular-nums opacity-80">
+                    {row.total.toLocaleString()}
+                  </span>
                 </Link>
               </li>
             ))}
             <li>
               <Link
-                href="/hubs/south-florida"
+                href="/hubs/florida"
                 className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
               >
-                South Florida (tri-county)
+                All Florida hubs
               </Link>
             </li>
           </ul>

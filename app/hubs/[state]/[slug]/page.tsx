@@ -13,6 +13,13 @@ export function generateStaticParams() {
   return getAllHubParams();
 }
 
+function parsePage(raw: string | string[] | undefined): number {
+  const v = Array.isArray(raw) ? raw[0] : raw;
+  const n = Number(v);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return Math.floor(n);
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -22,7 +29,7 @@ export async function generateMetadata({
   const hub = getHubBySlug(state, slug);
   if (!hub) return { title: 'Insurance Hub | Insurance Trust Hub' };
 
-  const inventory = await getHubInventory(hub.slug);
+  const inventory = await getHubInventory(hub.slug, { page: 1 });
   const health = inventory.providers.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -35,14 +42,18 @@ export async function generateMetadata({
 
 export default async function HubPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ state: string; slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { state, slug } = await params;
+  const sp = await searchParams;
   const hub = getHubBySlug(state, slug);
   if (!hub) notFound();
 
-  const inventory = await getHubInventory(hub.slug);
+  const page = parsePage(sp.page);
+  const inventory = await getHubInventory(hub.slug, { page });
 
   return (
     <HubPageView
@@ -51,6 +62,8 @@ export default async function HubPage({
       verifiedTotal={inventory.total}
       inventoryShowing={inventory.showing}
       inventoryPageSize={inventory.pageSize}
+      inventoryPage={inventory.page}
+      inventoryTotalPages={inventory.totalPages}
     />
   );
 }

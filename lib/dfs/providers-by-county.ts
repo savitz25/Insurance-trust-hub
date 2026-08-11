@@ -3,13 +3,9 @@
  *
  * Matching strategy (prefer structured → precise promote tags):
  * 1. contact.launch_county_id / contact.county / contact.county_normalized
- * 2. short_description tags written at promote: "(Duval County)", "(Dade County)", …
+ * 2. short_description tags written at promote: "Duval County", "Dade County", …
  *
- * Diagnosis (why Jacksonville showed ~48):
- * Default page limit was 48 and hub UI treated providers.length as the market total.
- * Matching already hit ~2,000 Duval rows; count was the silent cap, not missing inventory.
- *
- * Totals now use an exact head count with the same filters; cards use HUB_PAGE_SIZE.
+ * Totals use exact head count; cards use HUB_PAGE_SIZE with ?page= pagination.
  */
 
 import type { Provider } from '@/types/provider';
@@ -24,6 +20,8 @@ import {
 } from '@/lib/insurance/trust/provider-trust-state';
 import {
   FL_LAUNCH_COUNTIES,
+  countyMatchOrParts,
+  flLaunchCountyNavRows,
   isFlLaunchHub,
   launchCountiesForHubSlug,
   matchLaunchCounty,
@@ -31,6 +29,8 @@ import {
   type FlLaunchCounty,
   type FlLaunchCountyId,
 } from '@/lib/dfs/launch-counties';
+
+export { countyMatchOrParts };
 
 /** Cards rendered per hub page (explicit cap — not the market total). */
 export const HUB_PAGE_SIZE = 100;
@@ -43,47 +43,11 @@ export type HubInventoryResult = {
   showing: number;
   /** Explicit page size cap */
   pageSize: number;
+  /** 1-based page index */
+  page: number;
+  totalPages: number;
   hubSlug: string;
 };
-
-/**
- * Precise PostgREST or() fragments for a launch county.
- * Prefer "X County" tags — avoid bare city names that overmatch.
- *
- * IMPORTANT: never put raw `()` inside ilike values — PostgREST treats
- * parentheses as filter grouping and the whole .or() fails silently (count 0).
- */
-export function countyMatchOrParts(county: FlLaunchCounty): string[] {
-  const parts: string[] = [];
-  const display = county.displayName;
-
-  // Structured contact (new promotes)
-  parts.push(`contact->>launch_county_id.eq.${county.id}`);
-  // Quote display names with spaces (Palm Beach, Miami-Dade)
-  parts.push(`contact->>county.eq.${display}`);
-  parts.push(
-    `contact->>county_normalized.eq.${county.id.replace(/_/g, '-').toUpperCase()}`
-  );
-
-  // Promote short_description always includes "Duval County" / "Dade County" text
-  parts.push(`short_description.ilike.%${display} County%`);
-
-  for (const a of county.aliases) {
-    const cleaned = a
-      .replace(/COUNTY$/i, '')
-      .replace(/-/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-    if (cleaned.length < 3) continue;
-    const title = cleaned
-      .toLowerCase()
-      .replace(/\b\w/g, (ch) => ch.toUpperCase());
-    if (title.toLowerCase() === display.toLowerCase()) continue;
-    parts.push(`short_description.ilike.%${title} County%`);
-  }
-
-  return [...new Set(parts)];
-}
 
 function hubMatchOrParts(counties: FlLaunchCounty[]): string {
   return counties.flatMap(countyMatchOrParts).join(',');
@@ -126,8 +90,6 @@ export function providerMatchesLaunchCounties(
       }
     }
 
-    // Miami-Dade only: city Miami when county tag present path already covered;
-    // allow city Miami as soft match only if description mentions Florida DFS + not other counties
     if (
       c.id === 'miami_dade' &&
       (city === 'miami' || city === 'miami beach') &&
@@ -161,39 +123,54 @@ async function countVerifiedForCounties(
   return count ?? 0;
 }
 
-/**
- * Full hub inventory: total (exact) + first page of verified cards.
- */
-export async function getHubInventory(
+function emptyInventory(
   hubSlug: string,
-  opts?: { pageSize?: number }
-): Promise<HubInventoryResult> {
-  const pageSize = opts?.pageSize ?? HUB_PAGE_SIZE;
-  const empty: HubInventoryResult = {
+  pageSize: number,
+  page: number
+): HubInventoryResult {
+  return {
     providers: [],
     total: 0,
     showing: 0,
     pageSize,
+    page,
+    totalPages: 0,
     hubSlug,
   };
+}
+
+/**
+ * Full hub inventory: total (exact) + one page of verified cards.
+ */
+export async function getHubInventory(
+  hubSlug: string,
+  opts?: { pageSize?: number; page?: number }
+): Promise<HubInventoryResult> {
+  const pageSize = opts?.pageSize ?? HUB_PAGE_SIZE;
+  const page = Math.max(1, Math.floor(opts?.page ?? 1));
 
   if (!isFlLaunchHub(hubSlug) || !isSupabaseConfigured()) {
-    return empty;
+    return emptyInventory(hubSlug, pageSize, page);
   }
 
   const counties = launchCountiesForHubSlug(hubSlug);
-  if (!counties.length) return empty;
+  if (!counties.length) return emptyInventory(hubSlug, pageSize, page);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return empty;
+    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
 
     const or = hubMatchOrParts(counties);
-    if (!or) return empty;
+    if (!or) return emptyInventory(hubSlug, pageSize, page);
 
     const total = await countVerifiedForCounties(counties);
+    const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
+    const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+    const from = (safePage - 1) * pageSize;
+    // Slight over-fetch so Phase 1 filter still fills the page
+    const overFetch = Math.min(pageSize + 40, 200);
+    const to = from + overFetch - 1;
 
-    const fetchCap = Math.min(Math.max(pageSize * 2, pageSize), 250);
     const { data, error } = await supabase
       .from('providers')
       .select('*')
@@ -201,10 +178,14 @@ export async function getHubInventory(
       .contains('states_licensed', ['FL'])
       .or(or)
       .order('name', { ascending: true })
-      .limit(fetchCap);
+      .range(from, to);
 
     if (error || !data?.length) {
-      return { ...empty, total };
+      return {
+        ...emptyInventory(hubSlug, pageSize, safePage),
+        total,
+        totalPages,
+      };
     }
 
     const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
@@ -213,30 +194,33 @@ export async function getHubInventory(
       .filter((p) => providerMatchesLaunchCounties(p, counties));
 
     const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, providers.length);
+    const safeTotal = Math.max(total, from + providers.length);
 
     return {
       providers,
       total: safeTotal,
       showing: providers.length,
       pageSize,
+      page: safePage,
+      totalPages: Math.max(totalPages, safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0),
       hubSlug,
     };
   } catch {
-    return empty;
+    return emptyInventory(hubSlug, pageSize, page);
   }
 }
 
 /**
- * Verified FL providers for a hub (first page only).
- * Prefer getHubInventory when total is needed for SEO / "showing X of Y".
+ * Verified FL providers for a hub (one page).
+ * Prefer getHubInventory when total / pagination is needed.
  */
 export async function getVerifiedProvidersForHub(
   hubSlug: string,
-  opts?: { limit?: number }
+  opts?: { limit?: number; page?: number }
 ): Promise<Provider[]> {
   const inv = await getHubInventory(hubSlug, {
     pageSize: opts?.limit ?? HUB_PAGE_SIZE,
+    page: opts?.page,
   });
   return inv.providers;
 }
@@ -246,6 +230,43 @@ export async function countVerifiedProvidersForHub(
 ): Promise<number> {
   if (!isFlLaunchHub(hubSlug)) return 0;
   return countVerifiedForCounties(launchCountiesForHubSlug(hubSlug));
+}
+
+export type LaunchNavLiveRow = {
+  key: string;
+  displayName: string;
+  hubSlug: string;
+  hubHref: string;
+  total: number;
+  /** County-scoped vs multi-county aggregate */
+  kind: 'county' | 'aggregate';
+};
+
+/** Live totals for Florida launch county nav (state hub + directory). */
+export async function getLaunchCountyLiveTotals(): Promise<LaunchNavLiveRow[]> {
+  const rows = flLaunchCountyNavRows();
+  const out: LaunchNavLiveRow[] = [];
+  for (const row of rows) {
+    const total = await countVerifiedProvidersForHub(row.hubSlug);
+    out.push({
+      key: row.id,
+      displayName: row.displayName,
+      hubSlug: row.hubSlug,
+      hubHref: row.hubHref,
+      total,
+      kind: 'county',
+    });
+  }
+  const sfl = await countVerifiedProvidersForHub('miami-fort-lauderdale');
+  out.push({
+    key: 'south-florida',
+    displayName: 'South Florida (tri-county)',
+    hubSlug: 'miami-fort-lauderdale',
+    hubHref: '/hubs/south-florida',
+    total: sfl,
+    kind: 'aggregate',
+  });
+  return out;
 }
 
 /** Per-launch-county verified totals (health / QA). */

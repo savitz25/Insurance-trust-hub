@@ -109,6 +109,50 @@ export function primaryHubPathForCounty(county: FlLaunchCounty): string {
 }
 
 /**
+ * Precise PostgREST or() fragments for a launch county.
+ * Never put raw `()` inside ilike values — PostgREST treats them as grouping.
+ */
+export function countyMatchOrParts(county: FlLaunchCounty): string[] {
+  const parts: string[] = [];
+  const display = county.displayName;
+
+  parts.push(`contact->>launch_county_id.eq.${county.id}`);
+  parts.push(`contact->>county.eq.${display}`);
+  parts.push(
+    `contact->>county_normalized.eq.${county.id.replace(/_/g, '-').toUpperCase()}`
+  );
+  parts.push(`short_description.ilike.%${display} County%`);
+
+  for (const a of county.aliases) {
+    const cleaned = a
+      .replace(/COUNTY$/i, '')
+      .replace(/-/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (cleaned.length < 3) continue;
+    const title = cleaned
+      .toLowerCase()
+      .replace(/\b\w/g, (ch) => ch.toUpperCase());
+    if (title.toLowerCase() === display.toLowerCase()) continue;
+    parts.push(`short_description.ilike.%${title} County%`);
+  }
+
+  return [...new Set(parts)];
+}
+
+export function structuredContactForCounty(county: FlLaunchCounty): {
+  county: string;
+  county_normalized: string;
+  launch_county_id: FlLaunchCountyId;
+} {
+  return {
+    county: county.displayName,
+    county_normalized: county.id.replace(/_/g, '-').toUpperCase(),
+    launch_county_id: county.id,
+  };
+}
+
+/**
  * Consumer/ops nav rows for every launch county — keeps Broward in parity with
  * Miami-Dade, Palm Beach, Duval, and Hillsborough.
  */
@@ -128,4 +172,28 @@ export function flLaunchCountyNavRows(): Array<{
       hubHref: primaryHubPathForCounty(c),
     };
   });
+}
+
+/**
+ * Honest inventory scope for launch hubs (metro brand vs county-scoped DFS promote).
+ * Shown on hub pages so consumers know what verified rows cover.
+ */
+export function inventoryScopeNoteForHub(hubSlug: string): string | null {
+  switch (hubSlug) {
+    case 'jacksonville':
+      return 'Verified DFS inventory for this launch is Duval County only. St. Johns, Clay, and Nassau appear as metro context — not full promote coverage yet.';
+    case 'tampa':
+      return 'Verified DFS inventory for this launch is Hillsborough County only. Pinellas and Pasco appear as metro context — not full promote coverage yet.';
+    case 'miami-dade':
+      return 'Verified DFS inventory is scoped to Miami-Dade County (DFS often labels this county as Dade).';
+    case 'broward-county':
+    case 'broward':
+      return 'Verified DFS inventory is scoped to Broward County.';
+    case 'palm-beach-county':
+      return 'Verified DFS inventory is scoped to Palm Beach County.';
+    case 'miami-fort-lauderdale':
+      return 'Verified DFS inventory for South Florida aggregates Miami-Dade, Broward, and Palm Beach counties.';
+    default:
+      return null;
+  }
 }

@@ -19,6 +19,8 @@ import {
   verifiedCountWithHealth,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
+import { HubInventoryPagination } from '@/components/hub-inventory-pagination';
+import { inventoryScopeNoteForHub } from '@/lib/dfs/launch-counties';
 
 interface HubPageViewProps {
   hub: InsuranceHub;
@@ -34,6 +36,9 @@ interface HubPageViewProps {
   inventoryShowing?: number;
   /** Explicit page size cap */
   inventoryPageSize?: number;
+  /** 1-based page index for hub inventory */
+  inventoryPage?: number;
+  inventoryTotalPages?: number;
 }
 
 const COUNTY_DASHBOARD_BY_HUB_SLUG: Record<string, string> = {
@@ -114,6 +119,8 @@ export function HubPageView({
   verifiedTotal,
   inventoryShowing,
   inventoryPageSize,
+  inventoryPage = 1,
+  inventoryTotalPages = 1,
 }: HubPageViewProps) {
   const { stateSlug: state, slug } = hub;
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
@@ -129,6 +136,7 @@ export function HubPageView({
   const pageSize =
     typeof inventoryPageSize === 'number' ? inventoryPageSize : dbProviders.length;
   const isCapped = verifiedCount > showingCount;
+  const inventoryScope = inventoryScopeNoteForHub(hub.slug);
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -217,10 +225,20 @@ export function HubPageView({
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
             {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
           </p>
-          {isCapped && verifiedCount > 0 ? (
+          {verifiedCount > 0 ? (
             <p className="mt-2 text-xs text-primary-foreground/60 max-w-2xl mx-auto">
-              Showing {showingCount} of {verifiedCount.toLocaleString()} verified research
-              listings on this page (page size {pageSize}).
+              {isCapped
+                ? `Showing ${showingCount.toLocaleString()} of ${verifiedCount.toLocaleString()} verified research listings on this page (page ${inventoryPage}${
+                    inventoryTotalPages > 1 ? ` of ${inventoryTotalPages}` : ''
+                  }, ${pageSize} per page).`
+                : `${verifiedCount.toLocaleString()} verified research listing${
+                    verifiedCount === 1 ? '' : 's'
+                  }.`}
+            </p>
+          ) : null}
+          {inventoryScope ? (
+            <p className="mt-2 text-xs text-primary-foreground/55 max-w-2xl mx-auto leading-relaxed">
+              {inventoryScope}
             </p>
           ) : null}
           <div className="mt-6 flex justify-center">
@@ -319,13 +337,18 @@ export function HubPageView({
                     ))}
                   </div>
                 ) : null}
+                {inventoryScope ? (
+                  <p className="mb-4 rounded-lg border border-amber-200/80 bg-amber-50/50 px-3 py-2 text-xs text-muted-foreground leading-relaxed">
+                    {inventoryScope}
+                  </p>
+                ) : null}
                 {dbProviders.length > 0 ? (
                   <>
                     {isCapped ? (
                       <p className="mb-4 text-sm text-muted-foreground">
                         Showing {showingCount.toLocaleString()} of{' '}
                         {verifiedCount.toLocaleString()} verified research listings
-                        {pageSize ? ` (up to ${pageSize} per page)` : ''}.
+                        {pageSize ? ` (${pageSize} per page)` : ''}.
                       </p>
                     ) : null}
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -333,6 +356,13 @@ export function HubPageView({
                         <ProviderCard key={p.id} provider={p} />
                       ))}
                     </div>
+                    <HubInventoryPagination
+                      basePath={path}
+                      page={inventoryPage}
+                      totalPages={inventoryTotalPages}
+                      total={verifiedCount}
+                      pageSize={pageSize}
+                    />
                   </>
                 ) : (
                   <p className="text-sm text-muted-foreground">{EMPTY_MARKET_COPY.section}</p>

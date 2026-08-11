@@ -10,8 +10,15 @@ const hub = getSouthFloridaHub();
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+function parsePage(raw: string | string[] | undefined): number {
+  const v = Array.isArray(raw) ? raw[0] : raw;
+  const n = Number(v);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return Math.floor(n);
+}
+
 export async function generateMetadata(): Promise<Metadata> {
-  const inventory = await getHubInventory(hub.slug);
+  const inventory = await getHubInventory(hub.slug, { page: 1 });
   const health = inventory.providers.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -21,8 +28,14 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default async function SouthFloridaHubPage() {
-  const inventory = await getHubInventory(hub.slug);
+export default async function SouthFloridaHubPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const sp = await searchParams;
+  const page = parsePage(sp.page);
+  const inventory = await getHubInventory(hub.slug, { page });
 
   return (
     <>
@@ -57,6 +70,8 @@ export default async function SouthFloridaHubPage() {
         verifiedTotal={inventory.total}
         inventoryShowing={inventory.showing}
         inventoryPageSize={inventory.pageSize}
+        inventoryPage={inventory.page}
+        inventoryTotalPages={inventory.totalPages}
       />
     </>
   );

@@ -5,9 +5,16 @@ import { getHubsByState, getAllStateSlugs } from '@/lib/hubs/registry';
 import { SITE_URL } from '@/lib/constants';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin } from 'lucide-react';
+import { MapPin, Shield } from 'lucide-react';
+import {
+  countVerifiedFloridaProviders,
+  getLaunchCountyLiveTotals,
+} from '@/lib/dfs/providers-by-county';
+import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 
-export const dynamic = 'force-static';
+/** Florida page reads live inventory totals */
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export function generateStaticParams() {
   return getAllStateSlugs().map((state) => ({ state }));
@@ -22,6 +29,16 @@ export async function generateMetadata({
   const hubs = getHubsByState(state);
   if (!hubs.length) return { title: 'Insurance Hubs' };
   const stateName = hubs[0].stateName;
+
+  if (state === 'florida') {
+    return {
+      title: 'Florida Insurance Research Hubs | DFS-Verified Launch Counties',
+      description:
+        'Florida DFS–verified agency research for Miami-Dade, Broward, Palm Beach, Duval (Jacksonville), and Hillsborough (Tampa). Live inventory totals. Independent research — re-check licenses on official DFS tools.',
+      alternates: { canonical: `${SITE_URL}/hubs/florida` },
+    };
+  }
+
   return {
     title: `Insurance Agents in ${stateName} (2026) | Health Insurance Hubs`,
     description: `Compare ${hubs.length} verified insurance market hubs in ${stateName}. Health insurance specialists for ACA, Medicare, and multi-line coverage.`,
@@ -39,39 +56,147 @@ export default async function StateHubsPage({
   if (!hubs.length) notFound();
 
   const stateName = hubs[0].stateName;
+  const isFlorida = state === 'florida';
+
+  const launchRows = isFlorida ? await getLaunchCountyLiveTotals() : [];
+  const flTotal = isFlorida ? await countVerifiedFloridaProviders() : 0;
+  const launchHubSlugs = new Set(launchRows.map((r) => r.hubSlug));
+
+  // Florida: launch inventory first; other FL hubs remain research context without inventing rows
+  const otherHubs = isFlorida
+    ? hubs.filter((h) => !launchHubSlugs.has(h.slug) && h.slug !== 'miami-fort-lauderdale')
+    : hubs;
 
   return (
     <div className="container mx-auto px-4 py-12">
       <nav className="text-sm text-muted-foreground mb-6">
-        <Link href="/" className="hover:text-foreground">Home</Link>
+        <Link href="/" className="hover:text-foreground">
+          Home
+        </Link>
         {' / '}
-        <Link href="/hubs" className="hover:text-foreground">Hubs</Link>
+        <Link href="/hubs" className="hover:text-foreground">
+          Hubs
+        </Link>
         {' / '}
         <span className="text-foreground">{stateName}</span>
       </nav>
 
-      <h1 className="text-3xl md:text-4xl font-bold">Insurance Hubs in {stateName}</h1>
-      <p className="mt-3 text-muted-foreground max-w-2xl">
-        {hubs.length} verified market{hubs.length !== 1 ? 's' : ''} with health insurance specialist
-        listings. 100% data-driven from state DOI records and public reviews.
+      <h1 className="text-3xl md:text-4xl font-bold">
+        {isFlorida ? 'Florida insurance research hubs' : `Insurance Hubs in ${stateName}`}
+      </h1>
+      <p className="mt-3 text-muted-foreground max-w-2xl leading-relaxed">
+        {isFlorida ? (
+          <>
+            Live Florida DFS–verified inventory for launch counties. Totals below are exact match
+            counts for public research listings — empty markets stay empty. Always re-check licenses
+            on{' '}
+            <a
+              href={FL_DFS_LOOKUP_URL}
+              className="font-medium text-primary underline-offset-2 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Florida DFS
+            </a>
+            . Medicare specialty is never inferred from DFS alone.
+          </>
+        ) : (
+          <>
+            {hubs.length} market{hubs.length !== 1 ? 's' : ''} with research pathways. Verified
+            agency listings appear only when they meet our public research standard.
+          </>
+        )}
       </p>
 
-      <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {hubs.map((hub) => (
+      {isFlorida && (
+        <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-trust">
+                <Shield className="h-3.5 w-3.5" aria-hidden />
+                Launch inventory (live)
+              </p>
+              <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
+                {flTotal.toLocaleString()}
+                <span className="ml-2 text-sm font-medium text-muted-foreground">
+                  verified FL research listings
+                </span>
+              </p>
+            </div>
+            <Link
+              href="/directory?state=FL"
+              className="text-sm font-medium text-primary underline-offset-2 hover:underline"
+            >
+              Browse FL directory →
+            </Link>
+          </div>
+
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {launchRows.map((row) => (
+              <li key={row.key}>
+                <Link
+                  href={row.hubHref}
+                  className="flex h-full flex-col rounded-xl border bg-background p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <h2 className="font-semibold text-foreground">{row.displayName}</h2>
+                    <Badge variant={row.kind === 'aggregate' ? 'outline' : 'success'}>
+                      {row.kind === 'aggregate' ? 'Aggregate' : 'County'}
+                    </Badge>
+                  </div>
+                  <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
+                    {row.total.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-muted-foreground">verified research listings</p>
+                  <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
+                    <MapPin className="h-3 w-3" aria-hidden />
+                    Open hub →
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
+            Jacksonville hub inventory is Duval County only; Tampa hub inventory is Hillsborough only.
+            Other FL counties stay empty until promote — we will not invent listings.
+          </p>
+        </section>
+      )}
+
+      <div className="mt-10">
+        <h2 className="text-lg font-semibold">
+          {isFlorida ? 'Other Florida market hubs' : `All ${stateName} hubs`}
+        </h2>
+        {isFlorida ? (
+          <p className="mt-1 text-sm text-muted-foreground">
+            Research context hubs. Verified agency cards appear only where DFS launch inventory
+            exists.
+          </p>
+        ) : null}
+      </div>
+
+      <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {(isFlorida ? otherHubs : hubs).map((hub) => (
           <Link key={hub.slug} href={`/hubs/${state}/${hub.slug}`}>
             <Card className="h-full hover:shadow-trust-lg transition-shadow">
               <CardContent className="pt-6">
                 <div className="flex justify-between items-start">
                   <h2 className="font-semibold text-lg">{hub.shortName}</h2>
-                  <Badge variant={hub.healthInsuranceDensity === 'very-high' ? 'success' : 'outline'}>
+                  <Badge
+                    variant={
+                      hub.healthInsuranceDensity === 'very-high' ? 'success' : 'outline'
+                    }
+                  >
                     Health
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground mt-1">{hub.msaName}</p>
-                <p className="text-sm text-muted-foreground mt-3 line-clamp-2">{hub.enrollmentHighlight}</p>
+                <p className="text-sm text-muted-foreground mt-3 line-clamp-2">
+                  {hub.enrollmentHighlight}
+                </p>
                 <p className="mt-3 flex items-center gap-1 text-xs text-primary font-medium">
                   <MapPin className="h-3 w-3" />
-                  View specialists →
+                  View market →
                 </p>
               </CardContent>
             </Card>
