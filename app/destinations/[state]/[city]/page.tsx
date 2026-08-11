@@ -200,6 +200,14 @@ export default async function CityDestinationPage({
           )}
         </section>
 
+        <ContinueTrustJourney
+          currentHub="insurance"
+          context={{
+            ...journey,
+            src: journey.src ?? 'insurance',
+            journey: journey.journey ?? 'relocate',
+          }}
+        />
         <JourneySessionSync
           urlContext={{
             ...journey,
@@ -208,7 +216,7 @@ export default async function CityDestinationPage({
           }}
           preferSrc="insurance"
           currentHub="insurance"
-          showContinue
+          silent
         />
       </div>
     </div>

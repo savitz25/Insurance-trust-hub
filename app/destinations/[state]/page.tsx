@@ -23,6 +23,7 @@ import {
 import { JourneyOrientationBanner } from '@/components/network/journey-orientation-banner';
 import { JourneyLandingTracker } from '@/components/network/journey-landing-tracker';
 import { JourneySessionSync } from '@/components/network/journey-session-sync';
+import { ContinueTrustJourney } from '@/components/network/continue-trust-journey';
 
 interface StatePageProps {
   params: Promise<{ state: string }>;
@@ -191,6 +192,19 @@ export default async function StateDestinationPage({
           )}
         </section>
 
+        <ContinueTrustJourney
+          currentHub="insurance"
+          context={{
+            ...journey,
+            src: journey.src ?? 'insurance',
+            journey: journey.journey ?? 'relocate',
+          }}
+          title={
+            journey.intent === 'buy'
+              ? `Buying in ${dest.name}? Research financing next`
+              : `Continue research for ${dest.name}`
+          }
+        />
         <JourneySessionSync
           urlContext={{
             ...journey,
@@ -199,12 +213,7 @@ export default async function StateDestinationPage({
           }}
           preferSrc="insurance"
           currentHub="insurance"
-          showContinue
-          continueTitle={
-            journey.intent === 'buy'
-              ? `Buying in ${dest.name}? Research financing next`
-              : `Continue research for ${dest.name}`
-          }
+          silent
         />
       </div>
     </div>
