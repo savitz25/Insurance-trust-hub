@@ -22,16 +22,19 @@ export type HubPublicSeo = {
 
 export function resolveHubPublicSeo(
   hub: InsuranceHub,
-  canonicalPath?: string
+  canonicalPath?: string,
+  /** Phase 4 — live verified DB count overrides empty hub-agent catalog */
+  verifiedInventory?: { total: number; health?: number }
 ): HubPublicSeo {
   const stats = getHubStats(hub);
   const path = canonicalPath ?? `/hubs/${hub.stateSlug}/${hub.slug}`;
-  // getHubStats.totalAgents is already verified-only inventory
+  const verifiedCount = verifiedInventory?.total ?? stats.totalAgents;
+  const healthCount = verifiedInventory?.health ?? stats.healthSpecialists;
   const meta = buildMarketMetadata({
     marketName: hub.shortName,
     regionLabel: hub.msaName,
-    verifiedCount: stats.totalAgents,
-    healthCount: stats.healthSpecialists,
+    verifiedCount,
+    healthCount,
     path,
   });
 
@@ -39,7 +42,7 @@ export function resolveHubPublicSeo(
     title: meta.title,
     description: meta.description,
     verifiedCount: meta.verifiedCount,
-    healthCount: stats.healthSpecialists,
+    healthCount,
     isEmpty: meta.isEmpty,
     path,
   };
@@ -47,9 +50,10 @@ export function resolveHubPublicSeo(
 
 export function buildHubMetadata(
   hub: InsuranceHub,
-  canonicalPath?: string
+  canonicalPath?: string,
+  verifiedInventory?: { total: number; health?: number }
 ): Metadata {
-  const seo = resolveHubPublicSeo(hub, canonicalPath);
+  const seo = resolveHubPublicSeo(hub, canonicalPath, verifiedInventory);
   const url = `${SITE_URL}${seo.path}`;
 
   return {

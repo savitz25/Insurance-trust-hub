@@ -1,0 +1,143 @@
+# Florida DFS verified inventory pipeline (Phase 4)
+
+## Goal
+
+Ingest public Florida DFS bulk licensing data, normalize it, and **promote only** records that satisfy Phase 1 `resolveProviderTrustState` → `verified` into the public `providers` table.
+
+Public directory/hub surfaces remain **verified-only**. Empty markets stay honest + `noindex`.
+
+## Official source
+
+- Bulk download portal: https://licenseesearch.fldfs.com/BulkDownload  
+- Direct CSV examples (URLs may change; prefer portal):
+  - Business valid licenses: `https://www.myfloridacfo.com/downloads/AAS/LicenseeSearch/AllValidLicensesBusiness.csv`
+  - Individual valid licenses: `https://www.myfloridacfo.com/downloads/AAS/LicenseeSearch/AllValidLicensesIndividual.csv`
+
+**Do not commit multi-hundred-MB CSVs to git.** Store locally under:
+
+```text
+data/dfs-raw/
+```
+
+(gitignored, same pattern as `cms-data/`).
+
+## Required files (first release)
+
+| File | `--type` | Purpose |
+|------|----------|---------|
+| All Valid Licenses – Business | `business` | Agencies / business entities |
+| All Valid Licenses – Individual | `individual` | Individual producers |
+| Active Appointments (optional) | — | Carrier appointments (later enrichment) |
+
+## Launch counties
+
+1. Miami-Dade (DFS may say **Dade**)  
+2. Broward  
+3. Palm Beach  
+4. Duval (Jacksonville)  
+5. Hillsborough (Tampa)
+
+Hub slug mapping: see `lib/dfs/launch-counties.ts`.
+
+## Schema
+
+Migration: `supabase/migrations/20260811120000_florida_dfs_inventory.sql`
+
+| Table | Access |
+|-------|--------|
+| `dfs_import_batches` | service_role only |
+| `dfs_license_raw` | service_role only |
+| `dfs_producers` | service_role only |
+| `dfs_appointments` | service_role only |
+| `dfs_provider_promotions` | service_role only |
+| `providers` (verified) | public read of `verified = true` only (existing RLS) |
+
+Apply migration via Supabase CLI or SQL editor before first import.
+
+## Environment
+
+```bash
+# service role required for import/promotion (never expose to browser)
+export SUPABASE_URL="https://YOUR_PROJECT.supabase.co"
+export SUPABASE_SERVICE_ROLE_KEY="…"
+```
+
+## Commands
+
+```bash
+# 1) Dry-run normalize (no DB) — validates file path + column detection
+npx tsx scripts/dfs/import-dfs-csv.ts \
+  --file data/dfs-raw/AllValidLicensesBusiness.csv \
+  --type business \
+  --dry-run \
+  --limit 1000 \
+  --launch-counties-only
+
+# 2) Import business entities (launch counties only recommended for first pass)
+npx tsx scripts/dfs/import-dfs-csv.ts \
+  --file data/dfs-raw/AllValidLicensesBusiness.csv \
+  --type business \
+  --launch-counties-only
+
+# 3) Import individuals (optional second pass)
+npx tsx scripts/dfs/import-dfs-csv.ts \
+  --file data/dfs-raw/AllValidLicensesIndividual.csv \
+  --type individual \
+  --launch-counties-only
+
+# 4) Promote to public providers (Phase 1 gates)
+npx tsx scripts/dfs/promote-launch-counties.ts --dry-run --limit 20
+npx tsx scripts/dfs/promote-launch-counties.ts --county duval --limit 100
+npx tsx scripts/dfs/promote-launch-counties.ts --limit 500
+```
+
+Package scripts:
+
+```bash
+npm run dfs:import -- --file data/dfs-raw/AllValidLicensesBusiness.csv --type business --dry-run
+npm run dfs:promote -- --dry-run
+npm run check:phase4-dfs
+```
+
+## Promotion criteria (must all pass)
+
+1. Non-seed entity id  
+2. Re-checkable license number (`cleanLicenseNumber`)  
+3. License state `FL`  
+4. Regulator name: **Florida DFS**  
+5. Fresh `source_checked_at` / `license_checked_at`  
+6. `identityMatchAccepted === true` (set at promotion after stable license + name)  
+7. Active / valid status  
+8. Launch-county geography  
+9. Phase 1 `resolveProviderTrustState(provider) === 'verified'`
+
+**Never auto-claim:** Medicare-certified, ratings, reviews, websites (unless later enrichment).
+
+## LOA handling
+
+- Raw LOA strings stored on `dfs_producers.lines_of_authority`  
+- Classified into capabilities: `health`, `life`, `property_casualty`, `personal_lines`, … (`lib/dfs/loa.ts`)  
+- Mapped to directory `categories` / specialties **without** Medicare tags  
+
+## Public field set (v1)
+
+| Show | Field |
+|------|--------|
+| Yes | name, license number, LOAs, city/county, phone (if DFS), verified badge/source/date |
+| Store, don’t feature | email |
+| Later enrichment | website, Google, appointments, CMS Medicare |
+
+## Consumer wiring
+
+- Directory: existing verified filter (`filterVerifiedProviders`)  
+- Launch hubs: `getVerifiedProvidersForHub(hubSlug)` loads FL verified rows tagged with county at promotion  
+- SEO: `buildHubMetadata` / hub stats use live verified counts when providers present → indexable when `verifiedCount > 0`  
+
+## Refresh cadence
+
+- Monthly DFS bulk refresh recommended (or after major regulatory updates)  
+- Re-run import → promote; promotion upserts by slug/license  
+
+## If bulk files are not present in CI
+
+Ship pipeline + docs + dry-run. Ops runs import locally with DFS files; production lights up when `providers.verified` rows exist.

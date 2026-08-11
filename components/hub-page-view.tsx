@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Shield, MapPin, Users, Star, BarChart3 } from 'lucide-react';
 import type { InsuranceHub } from '@/types/agent';
+import type { Provider } from '@/types/provider';
 import {
   getFeaturedHealthAgents,
   getHubStats,
@@ -9,6 +10,7 @@ import {
 import { getCuratedHubConfig } from '@/lib/hubs/data/curated-hubs';
 import { getAllCountySummaries } from '@/lib/insurance/cms/county-summaries';
 import { AgentCard } from '@/components/agent-card';
+import { ProviderCard } from '@/components/provider-card';
 import { HubAgentTable } from '@/components/hub-agent-table';
 import { ZipSearch } from '@/components/zip-search';
 import { HubMatchForm } from '@/components/hub-match-form';
@@ -19,6 +21,7 @@ import { SITE_URL } from '@/lib/constants';
 import { ContextNav } from '@/components/context-nav';
 import {
   EMPTY_MARKET_COPY,
+  filterVerifiedProviders,
   verifiedCountWithHealth,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
@@ -26,6 +29,8 @@ import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
 interface HubPageViewProps {
   hub: InsuranceHub;
   canonicalPath?: string;
+  /** Phase 4 — DFS-promoted verified providers for this market */
+  verifiedProviders?: Provider[];
 }
 
 const COUNTY_DASHBOARD_BY_HUB_SLUG: Record<string, string> = {
@@ -99,23 +104,46 @@ const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string
   ],
 };
 
-export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
+export function HubPageView({
+  hub,
+  canonicalPath,
+  verifiedProviders = [],
+}: HubPageViewProps) {
   const { stateSlug: state, slug } = hub;
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
+  const dbProviders = filterVerifiedProviders(verifiedProviders);
   const allAgents = getPublicAgentsForHub(hub);
   const healthAgents = getFeaturedHealthAgents(hub);
   const otherAgents = allAgents.filter((a) => !a.isHealthFeatured);
-  const stats = getHubStats(hub);
+  const baseStats = getHubStats(hub);
+  // Prefer live verified DB inventory (Phase 4) over empty hub-agent catalog
+  const verifiedCount = dbProviders.length > 0 ? dbProviders.length : baseStats.totalAgents;
+  const healthFromDb = dbProviders.filter((p) =>
+    p.insurance_types?.includes('health')
+  ).length;
+  const healthCount =
+    dbProviders.length > 0 ? healthFromDb : baseStats.healthSpecialists;
+  const stats = {
+    ...baseStats,
+    totalAgents: verifiedCount,
+    healthSpecialists: healthCount,
+    verified: verifiedCount,
+  };
   const curatedConfig = getCuratedHubConfig(hub.slug);
   const countyDashboardSlug = COUNTY_DASHBOARD_BY_HUB_SLUG[slug];
   const countySummary = countyDashboardSlug
     ? getAllCountySummaries().find((c) => c.slug === countyDashboardSlug)
     : undefined;
   const acaGuideLinks = ACA_GUIDE_LINKS_BY_HUB[slug];
-  const seo = resolveHubPublicSeo(hub, path);
+  const seo = resolveHubPublicSeo(hub, path, {
+    total: verifiedCount,
+    health: healthCount,
+  });
   const curatedSummary = curatedConfig
     ? honestCuratedSummary(hub.shortName, stats.totalAgents, curatedConfig.summary)
     : null;
+  const healthProviders = dbProviders.filter((p) => p.insurance_types?.includes('health'));
+  const otherProviders = dbProviders.filter((p) => !p.insurance_types?.includes('health'));
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -265,7 +293,13 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                     </span>
                   ))}
                 </div>
-                {allAgents.length > 0 ? (
+                {dbProviders.length > 0 ? (
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {dbProviders.slice(0, 12).map((p) => (
+                      <ProviderCard key={p.id} provider={p} />
+                    ))}
+                  </div>
+                ) : allAgents.length > 0 ? (
                   <HubAgentTable agents={allAgents} hubName={hub.shortName} />
                 ) : (
                   <p className="text-sm text-muted-foreground">{EMPTY_MARKET_COPY.section}</p>
@@ -278,13 +312,17 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                 Health insurance research listings in {hub.shortName}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {healthAgents.length > 0
-                  ? curatedConfig?.featuredHealthLine && stats.totalAgents > 0
-                    ? curatedConfig.featuredHealthLine
-                    : 'Agencies that meet our public research standard'
+                {healthProviders.length > 0 || healthAgents.length > 0
+                  ? 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
                   : EMPTY_MARKET_COPY.health}
               </p>
-              {healthAgents.length > 0 ? (
+              {healthProviders.length > 0 ? (
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {healthProviders.map((p) => (
+                    <ProviderCard key={p.id} provider={p} />
+                  ))}
+                </div>
+              ) : healthAgents.length > 0 ? (
                 <div className="space-y-5">
                   {healthAgents.map((agent) => (
                     <AgentCard key={agent.id} agent={agent} hubLabel={hub.shortName} />
@@ -304,11 +342,17 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
             <section>
               <h2 className="text-2xl font-bold mb-2">Multi-line agencies</h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {otherAgents.length > 0
+                {otherProviders.length > 0 || otherAgents.length > 0
                   ? `Verified research listings serving ${hub.msaName}`
                   : EMPTY_MARKET_COPY.multiLine}
               </p>
-              {otherAgents.length > 0 ? (
+              {otherProviders.length > 0 ? (
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {otherProviders.map((p) => (
+                    <ProviderCard key={p.id} provider={p} />
+                  ))}
+                </div>
+              ) : otherAgents.length > 0 ? (
                 <div className="space-y-5">
                   {otherAgents.map((agent) => (
                     <AgentCard key={agent.id} agent={agent} hubLabel={hub.shortName} />

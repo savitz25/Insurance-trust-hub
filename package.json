@@ -24,6 +24,9 @@
     "check:phase6b2": "node scripts/check-phase6b2-enrichment.mjs",
     "check:phase1-trust": "tsx scripts/check-phase1-trust-state.ts",
     "check:phase3-compass": "tsx scripts/check-phase3-compass.ts",
+    "check:phase4-dfs": "tsx scripts/check-phase4-dfs.ts",
+    "dfs:import": "tsx scripts/dfs/import-dfs-csv.ts",
+    "dfs:promote": "tsx scripts/dfs/promote-launch-counties.ts",
     "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"

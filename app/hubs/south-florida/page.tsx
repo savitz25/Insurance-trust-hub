@@ -3,12 +3,26 @@ import Link from 'next/link';
 import { HubPageView } from '@/components/hub-page-view';
 import { getSouthFloridaHub } from '@/lib/hubs/specialty-topics';
 import { buildHubMetadata } from '@/lib/hubs/hub-seo';
+import { getVerifiedProvidersForHub } from '@/lib/dfs/providers-by-county';
 
 const hub = getSouthFloridaHub();
 
-export const metadata: Metadata = buildHubMetadata(hub, '/hubs/south-florida');
+export const revalidate = 1800;
 
-export default function SouthFloridaHubPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
+  const health = verifiedProviders.filter((p) =>
+    p.insurance_types?.includes('health')
+  ).length;
+  return buildHubMetadata(hub, '/hubs/south-florida', {
+    total: verifiedProviders.length,
+    health,
+  });
+}
+
+export default async function SouthFloridaHubPage() {
+  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
+
   return (
     <>
       <div className="border-b bg-[#E0F2FE]/80">
@@ -35,7 +49,11 @@ export default function SouthFloridaHubPage() {
           </div>
         </div>
       </div>
-      <HubPageView hub={hub} canonicalPath="/hubs/south-florida" />
+      <HubPageView
+        hub={hub}
+        canonicalPath="/hubs/south-florida"
+        verifiedProviders={verifiedProviders}
+      />
     </>
   );
 }

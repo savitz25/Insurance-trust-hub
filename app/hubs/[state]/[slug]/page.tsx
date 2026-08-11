@@ -3,8 +3,10 @@ import { notFound } from 'next/navigation';
 import { getHubBySlug, getAllHubParams } from '@/lib/hubs/registry';
 import { HubPageView } from '@/components/hub-page-view';
 import { buildHubMetadata } from '@/lib/hubs/hub-seo';
+import { getVerifiedProvidersForHub } from '@/lib/dfs/providers-by-county';
 
-export const dynamic = 'force-static';
+/** Phase 4 — allow verified inventory from Supabase to refresh without full rebuild */
+export const revalidate = 1800;
 
 export function generateStaticParams() {
   return getAllHubParams();
@@ -19,7 +21,15 @@ export async function generateMetadata({
   const hub = getHubBySlug(state, slug);
   if (!hub) return { title: 'Insurance Hub | Insurance Trust Hub' };
 
-  return buildHubMetadata(hub, `/hubs/${state}/${slug}`);
+  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
+  const health = verifiedProviders.filter((p) =>
+    p.insurance_types?.includes('health')
+  ).length;
+
+  return buildHubMetadata(hub, `/hubs/${state}/${slug}`, {
+    total: verifiedProviders.length,
+    health,
+  });
 }
 
 export default async function HubPage({
@@ -31,5 +41,12 @@ export default async function HubPage({
   const hub = getHubBySlug(state, slug);
   if (!hub) notFound();
 
-  return <HubPageView hub={hub} />;
+  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
+
+  return (
+    <HubPageView
+      hub={hub}
+      verifiedProviders={verifiedProviders}
+    />
+  );
 }
