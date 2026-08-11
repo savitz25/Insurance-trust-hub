@@ -20,17 +20,21 @@ export function CrossHubLink({
   href,
   children,
   currentHub = 'insurance',
+  mode = 'public',
   rel,
   ...rest
-}: CrossHubLinkProps) {
-  const resolved = rewriteCrossHubHref(href, true, currentHub);
+}: CrossHubLinkProps & { mode?: 'public' | 'auth' }) {
+  // Stage A′: public research handoffs stay crawlable absolute URLs
+  const resolved =
+    mode === 'auth' ? rewriteCrossHubHref(href, true, currentHub) : href;
   const isHandoff = resolved.startsWith('/api/auth/network-handoff/');
 
   return (
     <a
       href={resolved}
       rel={isHandoff ? undefined : rel ?? 'noopener noreferrer'}
-      data-network-handoff={isHandoff ? 'start' : undefined}
+      data-network-handoff={isHandoff ? 'start' : 'public'}
+      data-journey-link={mode === 'public' ? 'crawlable' : undefined}
       {...rest}
     >
       {children}

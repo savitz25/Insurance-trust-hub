@@ -11,12 +11,18 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { ProviderCard } from '@/components/provider-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { NetworkHandoff } from '@/components/network/network-handoff';
 import {
   EmptyCoveragePanel,
   NAIC_CONSUMER_URL,
   DOI_PATHWAY_HREF,
 } from '@/components/research/empty-coverage-panel';
+import {
+  parseJourneyContext,
+  type JourneyContext,
+} from '@/lib/network/journey-context';
+import { JourneyOrientationBanner } from '@/components/network/journey-orientation-banner';
+import { JourneyLandingTracker } from '@/components/network/journey-landing-tracker';
+import { ContinueTrustJourney } from '@/components/network/continue-trust-journey';
 
 interface CityPageProps {
   params: Promise<{ state: string; city: string }>;
@@ -43,8 +49,16 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
   });
 }
 
-export default async function CityDestinationPage({ params }: CityPageProps) {
+interface CityPagePropsWithSearch extends CityPageProps {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}
+
+export default async function CityDestinationPage({
+  params,
+  searchParams,
+}: CityPagePropsWithSearch) {
   const { state: stateSlug, city: citySlug } = await params;
+  const sp = searchParams ? await searchParams : {};
   const data = getDestinationCity(stateSlug, citySlug);
   if (!data) notFound();
 
@@ -54,9 +68,16 @@ export default async function CityDestinationPage({ params }: CityPageProps) {
     city: city.name,
     limit: 9,
   });
+  const journey: JourneyContext = {
+    ...parseJourneyContext(sp),
+    stateSlug: state.slug,
+    stateCode: state.code,
+    stateName: state.name,
+  };
 
   return (
     <div>
+      <JourneyLandingTracker context={journey} landedOn="destination-city" />
       <div className="border-b bg-muted/20">
         <div className="container mx-auto px-4 py-10 md:py-14">
           <nav className="text-sm text-muted-foreground mb-4">
@@ -74,6 +95,9 @@ export default async function CityDestinationPage({ params }: CityPageProps) {
           {city.population && (
             <p className="mt-2 text-muted-foreground">Population: {city.population}</p>
           )}
+          <div className="mt-4 max-w-2xl">
+            <JourneyOrientationBanner context={journey} />
+          </div>
         </div>
       </div>
 
@@ -175,14 +199,13 @@ export default async function CityDestinationPage({ params }: CityPageProps) {
           )}
         </section>
 
-        <NetworkHandoff
-          context="insurance-destination"
-          geography={{
-            city: city.name,
-            state: state.name,
-            stateCode: state.code,
+        <ContinueTrustJourney
+          currentHub="insurance"
+          context={{
+            ...journey,
+            src: journey.src ?? 'insurance',
+            journey: journey.journey ?? 'relocate',
           }}
-          variant="card"
         />
       </div>
     </div>

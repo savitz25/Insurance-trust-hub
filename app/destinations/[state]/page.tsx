@@ -11,15 +11,22 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { ProviderCard } from '@/components/provider-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { NetworkHandoff } from '@/components/network/network-handoff';
 import {
   EmptyCoveragePanel,
   NAIC_CONSUMER_URL,
   DOI_PATHWAY_HREF,
 } from '@/components/research/empty-coverage-panel';
+import {
+  parseJourneyContext,
+  type JourneyContext,
+} from '@/lib/network/journey-context';
+import { JourneyOrientationBanner } from '@/components/network/journey-orientation-banner';
+import { JourneyLandingTracker } from '@/components/network/journey-landing-tracker';
+import { ContinueTrustJourney } from '@/components/network/continue-trust-journey';
 
 interface StatePageProps {
   params: Promise<{ state: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export function generateStaticParams() {
@@ -38,8 +45,12 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
   });
 }
 
-export default async function StateDestinationPage({ params }: StatePageProps) {
+export default async function StateDestinationPage({
+  params,
+  searchParams,
+}: StatePageProps) {
   const { state: slug } = await params;
+  const sp = searchParams ? await searchParams : {};
   const dest = getDestinationBySlug(slug);
   if (!dest) notFound();
 
@@ -49,8 +60,16 @@ export default async function StateDestinationPage({ params }: StatePageProps) {
     verifiedOnly: false,
   });
 
+  const journey: JourneyContext = {
+    ...parseJourneyContext(sp),
+    stateSlug: dest.slug,
+    stateCode: dest.code,
+    stateName: dest.name,
+  };
+
   return (
     <div>
+      <JourneyLandingTracker context={journey} landedOn="destination-state" />
       <div className="border-b bg-muted/20">
         <div className="container mx-auto px-4 py-10 md:py-14">
           <p className="text-xs font-semibold tracking-widest text-trust uppercase mb-2">
@@ -59,9 +78,12 @@ export default async function StateDestinationPage({ params }: StatePageProps) {
           <h1 className="section-heading">{dest.name} insurance landscape</h1>
           <p className="mt-2 text-lg text-trust font-medium">{dest.tagline}</p>
           <p className="mt-4 max-w-3xl text-muted-foreground leading-relaxed">{dest.description}</p>
-          <Button asChild className="mt-6">
+          <div className="mt-6 max-w-2xl">
+            <JourneyOrientationBanner context={journey} />
+          </div>
+          <Button asChild className="mt-6" variant="outline">
             <Link href={`/directory?state=${dest.code}`}>
-              Find agencies in {dest.name}
+              Browse research listings in {dest.name}
             </Link>
           </Button>
         </div>
@@ -159,11 +181,6 @@ export default async function StateDestinationPage({ params }: StatePageProps) {
                 { href: '/tools/needs-assessment', label: 'Needs assessment' },
                 { href: '/calculators', label: 'Educational calculators' },
               ]}
-              journeyLink={{
-                href: 'https://www.movetrusthub.com/verify-dot',
-                label: 'Research movers if you’re relocating',
-                external: true,
-              }}
             />
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -174,10 +191,18 @@ export default async function StateDestinationPage({ params }: StatePageProps) {
           )}
         </section>
 
-        <NetworkHandoff
-          context="insurance-destination"
-          geography={{ state: dest.name, stateCode: dest.code }}
-          variant="card"
+        <ContinueTrustJourney
+          currentHub="insurance"
+          context={{
+            ...journey,
+            src: journey.src ?? 'insurance',
+            journey: journey.journey ?? 'relocate',
+          }}
+          title={
+            journey.intent === 'buy'
+              ? `Buying in ${dest.name}? Research financing next`
+              : `Continue research for ${dest.name}`
+          }
         />
       </div>
     </div>
