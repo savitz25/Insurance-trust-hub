@@ -49,6 +49,9 @@ export type HubInventoryResult = {
 /**
  * Precise PostgREST or() fragments for a launch county.
  * Prefer "X County" tags — avoid bare city names that overmatch.
+ *
+ * IMPORTANT: never put raw `()` inside ilike values — PostgREST treats
+ * parentheses as filter grouping and the whole .or() fails silently (count 0).
  */
 export function countyMatchOrParts(county: FlLaunchCounty): string[] {
   const parts: string[] = [];
@@ -56,13 +59,13 @@ export function countyMatchOrParts(county: FlLaunchCounty): string[] {
 
   // Structured contact (new promotes)
   parts.push(`contact->>launch_county_id.eq.${county.id}`);
+  // Quote display names with spaces (Palm Beach, Miami-Dade)
   parts.push(`contact->>county.eq.${display}`);
   parts.push(
     `contact->>county_normalized.eq.${county.id.replace(/_/g, '-').toUpperCase()}`
   );
 
-  // Promote short_description: "(Duval County)" / "Duval County"
-  parts.push(`short_description.ilike.%(${display} County)%`);
+  // Promote short_description always includes "Duval County" / "Dade County" text
   parts.push(`short_description.ilike.%${display} County%`);
 
   for (const a of county.aliases) {
@@ -76,7 +79,6 @@ export function countyMatchOrParts(county: FlLaunchCounty): string[] {
       .toLowerCase()
       .replace(/\b\w/g, (ch) => ch.toUpperCase());
     if (title.toLowerCase() === display.toLowerCase()) continue;
-    parts.push(`short_description.ilike.%(${title} County)%`);
     parts.push(`short_description.ilike.%${title} County%`);
   }
 
