@@ -45,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/medicare-gap',
     '/calculators/aca-subsidy',
     '/tools/cost-estimator',
+    '/tools/coverage-compass',
     '/tools/needs-assessment',
     '/tools/license-verification',
     '/tools/medicare-plan-finder',

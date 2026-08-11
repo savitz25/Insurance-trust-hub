@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
       // Consolidate overlapping tools into flagship experiences
       { source: '/tools/aca-eligibility-checker', destination: '/calculators/aca-subsidy', permanent: true },
       { source: '/tools/quote-comparison', destination: '/tools/cost-estimator', permanent: true },
+      // Phase 3 — Coverage Compass canonical URL
+      { source: '/tools/needs-assessment', destination: '/tools/coverage-compass', permanent: true },
     ];
   },
 };

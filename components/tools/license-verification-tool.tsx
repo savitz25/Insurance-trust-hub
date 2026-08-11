@@ -209,7 +209,7 @@ export function LicenseVerificationTool() {
               <Link href="/calculators/aca-subsidy" className="font-medium text-[#0284C7] hover:underline">
                 ACA Coverage &amp; Savings Planner
               </Link>
-              <Link href="/tools/needs-assessment" className="font-medium text-[#0284C7] hover:underline">
+              <Link href="/tools/coverage-compass" className="font-medium text-[#0284C7] hover:underline">
                 Coverage Compass
               </Link>
             </p>

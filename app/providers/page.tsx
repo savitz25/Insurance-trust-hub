@@ -50,7 +50,7 @@ export default async function ProvidersDirectoryPage() {
               widenLinks={[
                 { href: '/directory', label: 'Search directory' },
                 { href: '/tools/license-verification', label: 'Verify a license' },
-                { href: '/tools/needs-assessment', label: 'Needs assessment' },
+                { href: '/tools/coverage-compass', label: 'Coverage Compass' },
                 { href: '/methodology', label: 'Methodology' },
               ]}
             />

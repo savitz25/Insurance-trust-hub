@@ -147,6 +147,7 @@ const ROUTE_RULES: RouteRule[] = [
         '/tools/cost-estimator': 'Cost & Coverage Planner',
         '/tools/medicare-plan-finder': 'Medicare research guide',
         '/tools/needs-assessment': 'Coverage Compass',
+        '/tools/coverage-compass': 'Coverage Compass',
         '/tools/license-verification': 'License verification',
         '/tools/quote-comparison': 'Quote comparison',
         '/tools/aca-eligibility-checker': 'ACA eligibility',

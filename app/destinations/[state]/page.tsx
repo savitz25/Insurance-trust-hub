@@ -179,7 +179,7 @@ export default async function StateDestinationPage({
               ]}
               widenLinks={[
                 { href: '/directory', label: 'Full directory' },
-                { href: '/tools/needs-assessment', label: 'Needs assessment' },
+                { href: '/tools/coverage-compass', label: 'Coverage Compass' },
                 { href: '/calculators', label: 'Educational calculators' },
               ]}
             />

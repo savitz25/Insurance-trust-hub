@@ -182,7 +182,7 @@ export default async function CityDestinationPage({
               ]}
               widenLinks={[
                 { href: `/directory?state=${state.code}`, label: `${state.name} directory` },
-                { href: '/tools/needs-assessment', label: 'Needs assessment' },
+                { href: '/tools/coverage-compass', label: 'Coverage Compass' },
                 { href: '/calculators', label: 'Educational calculators' },
                 { href: '/destinations', label: 'All destinations' },
               ]}

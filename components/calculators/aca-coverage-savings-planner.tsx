@@ -713,7 +713,7 @@ function Results({
           </li>
           <li>
             <Link
-              href="/tools/needs-assessment"
+              href="/tools/coverage-compass"
               className="font-medium text-[#0284C7] hover:underline"
             >
               Coverage Compass

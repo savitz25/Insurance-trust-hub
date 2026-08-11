@@ -305,7 +305,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
   {
     title: 'Coverage need',
     links: [
-      { href: '/tools/needs-assessment', label: 'Coverage Compass' },
+      { href: '/tools/coverage-compass', label: 'Coverage Compass' },
       { href: '/calculators/aca-subsidy', label: 'ACA Savings Planner' },
       { href: '/tools/cost-estimator', label: 'Cost & Coverage Planner' },
       { href: '/medicare', label: 'Medicare research' },

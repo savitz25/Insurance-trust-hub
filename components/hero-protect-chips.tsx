@@ -22,7 +22,7 @@ const PROTECT = [
   },
   {
     label: 'My family',
-    href: '/tools/needs-assessment',
+    href: '/tools/coverage-compass',
     detail: 'Educational needs assessment',
   },
   {

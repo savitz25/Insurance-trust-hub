@@ -51,7 +51,7 @@ const FLAGSHIP_ICONS = {
 const QUICK_BY_QUESTION = {
   need: [
     {
-      href: '/tools/needs-assessment',
+      href: '/tools/coverage-compass',
       icon: ClipboardCheck,
       title: 'Coverage Compass',
       purpose: 'Short pathfinder when you are not sure where to start.',
@@ -176,7 +176,7 @@ const SITUATIONS = [
     icon: Compass,
     title: 'Just researching',
     routes: [
-      { href: '/tools/needs-assessment', label: 'Coverage Compass' },
+      { href: '/tools/coverage-compass', label: 'Coverage Compass' },
       { href: '/data/plan-complaint-index', label: 'Complaint Index' },
       { href: '/methodology', label: 'Methodology' },
     ],

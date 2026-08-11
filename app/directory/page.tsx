@@ -131,7 +131,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               ]}
               widenLinks={[
                 { href: '/directory', label: 'Clear directory home' },
-                { href: '/tools/needs-assessment', label: 'Needs assessment tool' },
+                { href: '/tools/coverage-compass', label: 'Coverage Compass' },
                 { href: '/calculators', label: 'Educational calculators' },
                 { href: '/methodology', label: 'Methodology' },
               ]}

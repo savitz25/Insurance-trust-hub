@@ -31,7 +31,7 @@ export const RESEARCH_QUESTIONS: ResearchQuestion[] = [
     shortTitle: 'Coverage need',
     description:
       'Clarify health, Medicare, home, auto, or other protection goals with educational pathfinders — not a sales quiz.',
-    primary: { href: '/tools/needs-assessment', label: 'Coverage Compass' },
+    primary: { href: '/tools/coverage-compass', label: 'Coverage Compass' },
     links: [
       { href: '/hubs/health-insurance', label: 'Health / ACA overview' },
       { href: '/medicare', label: 'Medicare research path' },
