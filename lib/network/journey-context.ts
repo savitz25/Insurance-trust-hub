@@ -321,10 +321,8 @@ export function resolveSituationSteps(
   } else if (isBuy && !isRelocate) {
     if (currentHub !== 'lender') steps.push(lenderStep('primary'));
     if (currentHub !== 'insurance') steps.push(insuranceStep('secondary'));
-  } else if (
-    currentHub === 'lender' &&
-    (isBuy || journey === 'purchase' || journey === 'coverage')
-  ) {
+  } else if (currentHub === 'lender' && journey === 'coverage') {
+    // Coverage-focused mortgage research → insurance next (purchase already implies isBuy above)
     steps.push(insuranceStep('primary'));
   } else if (currentHub === 'insurance') {
     if (isBuy) steps.push(lenderStep('primary'));
