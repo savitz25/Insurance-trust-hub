@@ -105,13 +105,12 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
   },
   orlando: {
     slug: 'orlando',
-    sectionTitle: 'Central Florida Coverage Area',
+    sectionTitle: 'Central Florida (Orange · Osceola · Seminole)',
     summary:
-      'Market research coverage for across Orange, Osceola, and Seminole counties — 6 with primary or strong Medicare/ACA/health emphasis and 6 multi-line independents (several with group health or cross-sell capabilities). Average Google rating ~4.8–5.0 stars where review volume permits.',
+      'Florida DFS–verified research listings for Orange, Osceola, and Seminole counties (wave 2 promote). Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
     counties: ['Orange', 'Osceola', 'Seminole'],
-    badges: ['Winter Park · Kissimmee · Orlando metro'],
-    featuredHealthLine:
-      'Top 3 featured: The Medicare Dude · Benson Insurance · Insurance Pro Florida',
+    badges: ['Wave 2 inventory', 'FL DFS verified', 'Winter Park · Kissimmee · Orlando'],
+    featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 6,
   },
   jacksonville: {
@@ -126,11 +125,11 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
   },
   tampa: {
     slug: 'tampa',
-    sectionTitle: 'Hillsborough County (Tampa Bay metro)',
+    sectionTitle: 'Tampa Bay (Hillsborough · Pinellas · Pasco)',
     summary:
-      'Florida DFS–verified research listings for Hillsborough County only. Pinellas and Pasco are metro context — not full launch inventory yet. Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
-    counties: ['Hillsborough (inventory)', 'Pinellas (context)', 'Pasco (context)'],
-    badges: ['Launch inventory: Hillsborough', 'FL DFS verified'],
+      'Florida DFS–verified research listings for Hillsborough, Pinellas, and Pasco counties. Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
+    counties: ['Hillsborough', 'Pinellas', 'Pasco'],
+    badges: ['Tampa Bay inventory', 'FL DFS verified'],
     featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 7,
   },

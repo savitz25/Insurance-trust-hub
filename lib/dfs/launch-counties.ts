@@ -1,5 +1,6 @@
 /**
- * Phase 4 — Florida DFS launch geography.
+ * Florida DFS promote geography — wave 1 (SFL + Duval + Hillsborough)
+ * plus wave 2 (Orlando metro + Tampa Bay expansion).
  * DFS often labels Miami-Dade as "Dade".
  */
 
@@ -8,7 +9,14 @@ export type FlLaunchCountyId =
   | 'broward'
   | 'palm_beach'
   | 'duval'
-  | 'hillsborough';
+  | 'hillsborough'
+  | 'orange'
+  | 'osceola'
+  | 'seminole'
+  | 'pinellas'
+  | 'pasco';
+
+export type FlLaunchWave = 1 | 2;
 
 export type FlLaunchCounty = {
   id: FlLaunchCountyId;
@@ -18,6 +26,13 @@ export type FlLaunchCounty = {
   aliases: string[];
   /** Hub slugs that should surface this county’s verified inventory */
   hubSlugs: string[];
+  /** Import/promote wave */
+  wave: FlLaunchWave;
+  /**
+   * Soft cap for public promote volume per county (ops control).
+   * Raise via re-promote after raising cap — never invent rows.
+   */
+  promoteCap: number;
 };
 
 export const FL_DFS_REGULATOR = 'Florida DFS';
@@ -29,7 +44,6 @@ export const FL_LAUNCH_COUNTIES: FlLaunchCounty[] = [
   {
     id: 'miami_dade',
     displayName: 'Miami-Dade',
-    // DFS often labels as Dade; promote tags "(Dade County)" and/or "(Miami-Dade County)"
     aliases: [
       'MIAMI-DADE',
       'MIAMI DADE',
@@ -39,33 +53,91 @@ export const FL_LAUNCH_COUNTIES: FlLaunchCounty[] = [
       'MIAMI DADE COUNTY',
     ],
     hubSlugs: ['miami-dade', 'miami-fort-lauderdale'],
+    wave: 1,
+    promoteCap: 3000,
   },
   {
     id: 'broward',
     displayName: 'Broward',
     aliases: ['BROWARD', 'BROWARD COUNTY'],
-    // Canonical hub is broward-county; /hubs/florida/broward redirects there
     hubSlugs: ['broward-county', 'broward', 'miami-fort-lauderdale'],
+    wave: 1,
+    promoteCap: 2000,
   },
   {
     id: 'palm_beach',
     displayName: 'Palm Beach',
     aliases: ['PALM BEACH', 'PALM BEACH COUNTY', 'PALM-BEACH'],
     hubSlugs: ['palm-beach-county', 'miami-fort-lauderdale'],
+    wave: 1,
+    promoteCap: 2000,
   },
   {
     id: 'duval',
     displayName: 'Duval',
     aliases: ['DUVAL', 'DUVAL COUNTY'],
     hubSlugs: ['jacksonville'],
+    wave: 1,
+    promoteCap: 2000,
   },
   {
     id: 'hillsborough',
     displayName: 'Hillsborough',
     aliases: ['HILLSBOROUGH', 'HILLSBOROUGH COUNTY'],
     hubSlugs: ['tampa'],
+    wave: 1,
+    promoteCap: 2000,
+  },
+  // —— Wave 2: Orlando metro + Tampa Bay expansion ——
+  {
+    id: 'orange',
+    displayName: 'Orange',
+    aliases: ['ORANGE', 'ORANGE COUNTY'],
+    hubSlugs: ['orlando'],
+    wave: 2,
+    promoteCap: 2000,
+  },
+  {
+    id: 'osceola',
+    displayName: 'Osceola',
+    aliases: ['OSCEOLA', 'OSCEOLA COUNTY'],
+    hubSlugs: ['orlando'],
+    wave: 2,
+    promoteCap: 1500,
+  },
+  {
+    id: 'seminole',
+    displayName: 'Seminole',
+    aliases: ['SEMINOLE', 'SEMINOLE COUNTY'],
+    hubSlugs: ['orlando'],
+    wave: 2,
+    promoteCap: 1500,
+  },
+  {
+    id: 'pinellas',
+    displayName: 'Pinellas',
+    aliases: ['PINELLAS', 'PINELLAS COUNTY'],
+    hubSlugs: ['tampa'],
+    wave: 2,
+    promoteCap: 2000,
+  },
+  {
+    id: 'pasco',
+    displayName: 'Pasco',
+    aliases: ['PASCO', 'PASCO COUNTY'],
+    hubSlugs: ['tampa'],
+    wave: 2,
+    promoteCap: 1500,
   },
 ];
+
+export function promoteCapForCounty(id: FlLaunchCountyId): number {
+  return FL_LAUNCH_COUNTIES.find((c) => c.id === id)?.promoteCap ?? 2000;
+}
+
+export function countiesForWave(wave: FlLaunchWave): FlLaunchCounty[] {
+  return FL_LAUNCH_COUNTIES.filter((c) => c.wave === wave);
+}
 
 export function normalizeCountyName(raw: string | null | undefined): string | null {
   if (!raw?.trim()) return null;
@@ -153,14 +225,14 @@ export function structuredContactForCounty(county: FlLaunchCounty): {
 }
 
 /**
- * Consumer/ops nav rows for every launch county — keeps Broward in parity with
- * Miami-Dade, Palm Beach, Duval, and Hillsborough.
+ * Consumer/ops nav rows for every promote county.
  */
 export function flLaunchCountyNavRows(): Array<{
   id: FlLaunchCountyId;
   displayName: string;
   hubHref: string;
   hubSlug: string;
+  wave: FlLaunchWave;
 }> {
   return FL_LAUNCH_COUNTIES.map((c) => {
     const hubSlug =
@@ -170,20 +242,22 @@ export function flLaunchCountyNavRows(): Array<{
       displayName: c.displayName,
       hubSlug,
       hubHref: primaryHubPathForCounty(c),
+      wave: c.wave,
     };
   });
 }
 
 /**
  * Honest inventory scope for launch hubs (metro brand vs county-scoped DFS promote).
- * Shown on hub pages so consumers know what verified rows cover.
  */
 export function inventoryScopeNoteForHub(hubSlug: string): string | null {
   switch (hubSlug) {
     case 'jacksonville':
-      return 'Verified DFS inventory for this launch is Duval County only. St. Johns, Clay, and Nassau appear as metro context — not full promote coverage yet.';
+      return 'Verified DFS inventory for this launch is Duval County. St. Johns, Clay, and Nassau remain metro context until promoted.';
     case 'tampa':
-      return 'Verified DFS inventory for this launch is Hillsborough County only. Pinellas and Pasco appear as metro context — not full promote coverage yet.';
+      return 'Verified DFS inventory for Tampa Bay covers Hillsborough, Pinellas, and Pasco counties (wave 1–2 promote).';
+    case 'orlando':
+      return 'Verified DFS inventory for Central Florida covers Orange, Osceola, and Seminole counties (wave 2 promote).';
     case 'miami-dade':
       return 'Verified DFS inventory is scoped to Miami-Dade County (DFS often labels this county as Dade).';
     case 'broward-county':

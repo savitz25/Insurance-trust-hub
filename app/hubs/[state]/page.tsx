@@ -157,8 +157,9 @@ export default async function StateHubsPage({
             ))}
           </ul>
           <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
-            Jacksonville hub inventory is Duval County only; Tampa hub inventory is Hillsborough only.
-            Other FL counties stay empty until promote — we will not invent listings.
+            Wave 1: Miami-Dade, Broward, Palm Beach, Duval, Hillsborough. Wave 2: Orange, Osceola,
+            Seminole (Orlando), Pinellas, Pasco (Tampa Bay). Other FL counties stay empty until
+            promote — we will not invent listings.
           </p>
         </section>
       )}

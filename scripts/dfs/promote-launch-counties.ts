@@ -2,17 +2,23 @@
  * Phase 4 — promote dfs_producers in launch counties → public providers (Phase 1 gates).
  *
  *   npm run dfs:promote -- --dry-run
- *   npm run dfs:promote -- --limit 50
- *   npm run dfs:promote -- --county duval
+ *   npm run dfs:promote -- --wave 2
+ *   npm run dfs:promote -- --county orange --per-county-limit 2000
+ *   npm run dfs:promote -- --wave 2 --skip-existing
  *
  * Loads .env / .env.local / .env.dfs.local — see docs/LOCAL-ENV.md
+ *
+ * Default: all waves, per-county caps from FL_LAUNCH_COUNTIES.promoteCap,
+ * skip producers already in dfs_provider_promotions.
  */
 
 import { resolve } from 'path';
 import { createClient } from '@supabase/supabase-js';
 import {
   FL_LAUNCH_COUNTIES,
+  countiesForWave,
   type FlLaunchCountyId,
+  type FlLaunchWave,
 } from '../../lib/dfs/launch-counties';
 import {
   assertNotSeedPromotion,
@@ -35,14 +41,30 @@ function hasFlag(name: string): boolean {
 
 async function main() {
   const dryRun = hasFlag('dry-run');
-  const limit = Number(arg('limit') || '0') || 500;
+  /** 0 = no global cap (use per-county caps only) */
+  const globalLimit = Number(arg('limit') || '0') || 0;
+  const perCountyOverride = Number(arg('per-county-limit') || '0') || 0;
   const countyFilter = arg('county') as FlLaunchCountyId | undefined;
+  const waveArg = arg('wave');
+  const skipExisting = !hasFlag('re-promote'); // default skip already-promoted
 
-  const counties = countyFilter
-    ? FL_LAUNCH_COUNTIES.filter((c) => c.id === countyFilter)
-    : FL_LAUNCH_COUNTIES;
+  let counties = FL_LAUNCH_COUNTIES;
+  if (waveArg) {
+    const w = Number(waveArg) as FlLaunchWave;
+    if (w !== 1 && w !== 2) {
+      console.error('--wave must be 1 or 2');
+      process.exit(1);
+    }
+    counties = countiesForWave(w);
+  }
+  if (countyFilter) {
+    counties = FL_LAUNCH_COUNTIES.filter((c) => c.id === countyFilter);
+  }
   if (!counties.length) {
-    console.error('Unknown --county', countyFilter);
+    console.error('No counties selected (check --county / --wave)', {
+      countyFilter,
+      waveArg,
+    });
     process.exit(1);
   }
 
@@ -53,16 +75,13 @@ async function main() {
       JSON.stringify(
         {
           dryRun: true,
-          note: 'No Supabase credentials in env/.env.local — structural dry-run only. Copy .env.example → .env.local for live promote.',
-          targetCounties: counties.map((c) => c.displayName),
-          promotionGates: [
-            'active FL license',
-            're-checkable license number',
-            'Florida DFS regulator provenance',
-            'identityMatchAccepted',
-            'Phase 1 resolveProviderTrustState === verified',
-            'never seed ids',
-          ],
+          note: 'No Supabase credentials — structural dry-run only.',
+          targetCounties: counties.map((c) => ({
+            id: c.id,
+            displayName: c.displayName,
+            wave: c.wave,
+            promoteCap: perCountyOverride || c.promoteCap,
+          })),
         },
         null,
         2
@@ -72,7 +91,6 @@ async function main() {
   }
 
   const { url, serviceRoleKey } = requireSupabaseOpsEnv();
-  // Untyped client: DFS tables are ops-only and not in generated Database types
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const supabase: any = createClient(url, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -84,12 +102,20 @@ async function main() {
     promoted: 0,
     skipped: {} as Record<string, number>,
     byCounty: {} as Record<string, number>,
+    skipExisting,
+    globalLimit: globalLimit || null,
+  };
+
+  const bumpSkip = (k: string) => {
+    stats.skipped[k] = (stats.skipped[k] ?? 0) + 1;
   };
 
   for (const county of counties) {
-    if (stats.promoted >= limit) break;
+    if (globalLimit > 0 && stats.promoted >= globalLimit) break;
 
-    // Query by normalized county aliases (DFS may say DADE vs MIAMI-DADE)
+    const countyCap = perCountyOverride || county.promoteCap;
+    let countyPromoted = 0;
+
     const countyKeys = Array.from(
       new Set(
         county.aliases.map((a) =>
@@ -102,7 +128,6 @@ async function main() {
       )
     );
 
-    // Paginate through all matching producers for this county
     const pageSize = 1000;
     let from = 0;
     const inCounty: DfsProducerRow[] = [];
@@ -124,41 +149,65 @@ async function main() {
       from += pageSize;
     }
 
-    console.log(`County ${county.displayName}: ${inCounty.length} producers in staging`);
+    console.log(
+      `County ${county.displayName} (wave ${county.wave}): ${inCounty.length} producers staged; cap=${countyCap}`
+    );
 
     for (const p of inCounty) {
-      if (stats.promoted >= limit) break;
+      if (globalLimit > 0 && stats.promoted >= globalLimit) break;
+      if (countyPromoted >= countyCap) break;
+
       stats.scanned++;
       const row = p as DfsProducerRow;
+
       try {
         assertNotSeedPromotion(row.id);
       } catch {
-        stats.skipped['seed_id'] = (stats.skipped['seed_id'] ?? 0) + 1;
+        bumpSkip('seed_id');
         continue;
+      }
+
+      if (skipExisting) {
+        const { data: already } = await supabase
+          .from('dfs_provider_promotions')
+          .select('id')
+          .eq('producer_id', row.id)
+          .maybeSingle();
+        if (already?.id) {
+          bumpSkip('already_promoted');
+          continue;
+        }
       }
 
       const evalResult = evaluatePromotionEligibility(row);
       if (!evalResult.ok) {
-        stats.skipped[evalResult.reason] = (stats.skipped[evalResult.reason] ?? 0) + 1;
+        bumpSkip(evalResult.reason);
         continue;
       }
       stats.eligible++;
 
       if (dryRun) {
         stats.promoted++;
+        countyPromoted++;
         stats.byCounty[county.id] = (stats.byCounty[county.id] ?? 0) + 1;
         continue;
       }
 
-      // Upsert provider by slug
       const insert = evalResult.providerInsert;
-      // Tag county in short_description for hub filtering
       insert.short_description = [
         insert.short_description,
         `(${county.displayName} County)`,
       ]
         .filter(Boolean)
         .join(' ');
+
+      // Ensure structured geo on write
+      insert.contact = {
+        ...(insert.contact ?? {}),
+        county: county.displayName,
+        county_normalized: county.id.replace(/_/g, '-').toUpperCase(),
+        launch_county_id: county.id,
+      };
 
       const { data: existing } = await supabase
         .from('providers')
@@ -178,16 +227,14 @@ async function main() {
           .select('id, *')
           .single();
         if (uerr || !updated) {
-          stats.skipped['update_failed'] = (stats.skipped['update_failed'] ?? 0) + 1;
+          bumpSkip('update_failed');
           continue;
         }
         providerId = updated.id;
-        // Belt-and-suspenders: re-check trust after write shape
         const mapped = mapRowToProvider(updated as DbProvider);
         if (!canShowAsVerified(resolveProviderTrustState(mapped))) {
           await supabase.from('providers').update({ verified: false }).eq('id', providerId);
-          stats.skipped['post_write_trust_fail'] =
-            (stats.skipped['post_write_trust_fail'] ?? 0) + 1;
+          bumpSkip('post_write_trust_fail');
           continue;
         }
       } else {
@@ -197,7 +244,7 @@ async function main() {
           .select('id, *')
           .single();
         if (cerr || !created) {
-          stats.skipped['insert_failed'] = (stats.skipped['insert_failed'] ?? 0) + 1;
+          bumpSkip('insert_failed');
           if (cerr) console.error('insert', cerr.message);
           continue;
         }
@@ -205,8 +252,7 @@ async function main() {
         const mapped = mapRowToProvider(created as DbProvider);
         if (!canShowAsVerified(resolveProviderTrustState(mapped))) {
           await supabase.from('providers').update({ verified: false }).eq('id', providerId);
-          stats.skipped['post_write_trust_fail'] =
-            (stats.skipped['post_write_trust_fail'] ?? 0) + 1;
+          bumpSkip('post_write_trust_fail');
           continue;
         }
       }
@@ -221,17 +267,23 @@ async function main() {
             trustState: 'verified',
             license: row.license_number,
             county: county.displayName,
+            wave: county.wave,
           },
         },
         { onConflict: 'producer_id' }
       );
 
       stats.promoted++;
+      countyPromoted++;
       stats.byCounty[county.id] = (stats.byCounty[county.id] ?? 0) + 1;
     }
+
+    console.log(
+      `  → promoted this run for ${county.id}: ${stats.byCounty[county.id] ?? 0}`
+    );
   }
 
-  console.log(JSON.stringify({ dryRun, limit, ...stats }, null, 2));
+  console.log(JSON.stringify({ dryRun, ...stats }, null, 2));
 }
 
 main().catch((e) => {

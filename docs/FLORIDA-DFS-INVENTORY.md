@@ -29,15 +29,33 @@ data/dfs-raw/
 | All Valid Licenses – Individual | `individual` | Individual producers |
 | Active Appointments (optional) | — | Carrier appointments (later enrichment) |
 
-## Launch counties
+## Launch / promote counties
+
+**Wave 1**
 
 1. Miami-Dade (DFS may say **Dade**)  
 2. Broward  
 3. Palm Beach  
 4. Duval (Jacksonville)  
-5. Hillsborough (Tampa)
+5. Hillsborough (Tampa Bay)
 
-Hub slug mapping: see `lib/dfs/launch-counties.ts`.
+**Wave 2**
+
+6. Orange (Orlando)  
+7. Osceola (Orlando)  
+8. Seminole (Orlando)  
+9. Pinellas (Tampa Bay)  
+10. Pasco (Tampa Bay)
+
+Hub slug mapping + per-county promote caps: see `lib/dfs/launch-counties.ts`.
+
+```powershell
+# Import only promote counties (all waves)
+npm run dfs:import -- --file data/dfs-raw/AllValidLicensesBusiness.csv --type business --launch-counties-only
+
+# Promote wave 2 only (skips already-promoted producers)
+npm run dfs:promote -- --wave 2
+```
 
 ## Schema
 

@@ -36,16 +36,29 @@ assert(sql.includes('dfs_provider_promotions'), 'migration missing promotions');
 assert(sql.includes('ENABLE ROW LEVEL SECURITY'), 'migration missing RLS');
 
 // Launch counties
-assert(FL_LAUNCH_COUNTIES.length === 5, 'expected 5 launch counties');
+assert(FL_LAUNCH_COUNTIES.length >= 10, 'expected wave1+wave2 launch counties (>=10)');
 assert(
   FL_LAUNCH_COUNTIES.some((c) => c.id === 'broward'),
   'Broward launch county row required'
+);
+assert(
+  FL_LAUNCH_COUNTIES.some((c) => c.id === 'orange' && c.wave === 2),
+  'Orange wave-2 county required'
+);
+assert(
+  FL_LAUNCH_COUNTIES.some((c) => c.id === 'pinellas' && c.wave === 2),
+  'Pinellas wave-2 county required'
 );
 assert(matchLaunchCounty('Dade')?.id === 'miami_dade', 'Dade → miami_dade');
 assert(matchLaunchCounty('BROWARD COUNTY')?.id === 'broward', 'Broward match');
 assert(matchLaunchCounty('DUVAL COUNTY')?.id === 'duval', 'Duval match');
 assert(matchLaunchCounty('Hillsborough')?.id === 'hillsborough', 'Hillsborough match');
 assert(matchLaunchCounty('Palm Beach')?.id === 'palm_beach', 'Palm Beach match');
+assert(matchLaunchCounty('Orange County')?.id === 'orange', 'Orange match');
+assert(matchLaunchCounty('PINELLAS')?.id === 'pinellas', 'Pinellas match');
+assert(matchLaunchCounty('Osceola')?.id === 'osceola', 'Osceola match');
+assert(matchLaunchCounty('Seminole')?.id === 'seminole', 'Seminole match');
+assert(matchLaunchCounty('Pasco')?.id === 'pasco', 'Pasco match');
 
 // LOA — never medicare
 assert(classifyLoa('Health') === 'health', 'health loa');
