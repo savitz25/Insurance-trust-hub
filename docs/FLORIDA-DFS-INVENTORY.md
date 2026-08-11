@@ -41,7 +41,14 @@ Hub slug mapping: see `lib/dfs/launch-counties.ts`.
 
 ## Schema
 
-Migration: `supabase/migrations/20260811120000_florida_dfs_inventory.sql`
+Migrations (run in order, or run the repair file alone in SQL Editor):
+
+1. `supabase/migrations/20260811115000_ensure_core_providers.sql` — creates `providers` if missing  
+2. `supabase/migrations/20260811120000_florida_dfs_inventory.sql` — DFS staging + promotion bridge  
+3. `supabase/migrations/20260811130000_repair_providers_and_dfs.sql` — **idempotent repair** if you hit `relation "providers" does not exist`
+
+**If Supabase SQL Editor failed with `providers does not exist`:** paste and run **only**  
+`20260811130000_repair_providers_and_dfs.sql` — it creates `providers` then all DFS tables.
 
 | Table | Access |
 |-------|--------|

@@ -1,12 +1,64 @@
--- Phase 4 — Florida DFS verified inventory pipeline (staged + normalized + promotion bridge)
--- Requires providers table (see 20260811115000_ensure_core_providers.sql).
--- Raw import tables: service_role only. Public reads verified providers only.
+-- Repair path for projects that tried Phase 4 DFS migration before core schema.
+-- Idempotent: safe if 20260811115000 / 20260811120000 already applied cleanly.
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
--- ---------------------------------------------------------------------------
--- Import batches
--- ---------------------------------------------------------------------------
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'provider_type') THEN
+    CREATE TYPE provider_type AS ENUM (
+      'independent_agent',
+      'brokerage',
+      'specialist'
+    );
+  END IF;
+END $$;
+
+CREATE TABLE IF NOT EXISTS providers (
+  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  slug                TEXT NOT NULL UNIQUE,
+  name                TEXT NOT NULL,
+  provider_type       provider_type NOT NULL,
+  categories          TEXT[] NOT NULL DEFAULT '{}',
+  states_licensed     TEXT[] NOT NULL DEFAULT '{}',
+  cities              TEXT[] NOT NULL DEFAULT '{}',
+  license_info        JSONB NOT NULL DEFAULT '{}',
+  specialties         TEXT[] NOT NULL DEFAULT '{}',
+  rating              NUMERIC(3, 2) NOT NULL DEFAULT 0 CHECK (rating >= 0 AND rating <= 5),
+  review_count        INTEGER NOT NULL DEFAULT 0 CHECK (review_count >= 0),
+  years_in_business   INTEGER CHECK (years_in_business >= 0),
+  relocation_experience BOOLEAN NOT NULL DEFAULT FALSE,
+  verified            BOOLEAN NOT NULL DEFAULT FALSE,
+  description         TEXT,
+  short_description   TEXT,
+  contact             JSONB NOT NULL DEFAULT '{}',
+  created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_providers_slug ON providers(slug);
+CREATE INDEX IF NOT EXISTS idx_providers_verified ON providers(verified) WHERE verified = TRUE;
+CREATE INDEX IF NOT EXISTS idx_providers_states_licensed ON providers USING GIN(states_licensed);
+
+ALTER TABLE providers ENABLE ROW LEVEL SECURITY;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies
+    WHERE schemaname = 'public'
+      AND tablename = 'providers'
+      AND policyname = 'Public can view verified providers'
+  ) THEN
+    CREATE POLICY "Public can view verified providers"
+      ON providers
+      FOR SELECT
+      TO anon, authenticated
+      USING (verified = TRUE);
+  END IF;
+END $$;
+
+-- DFS staging (same as 20260811120000, IF NOT EXISTS)
 CREATE TABLE IF NOT EXISTS dfs_import_batches (
   id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   source_file     TEXT NOT NULL,
@@ -16,9 +68,6 @@ CREATE TABLE IF NOT EXISTS dfs_import_batches (
   imported_at     TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- ---------------------------------------------------------------------------
--- Raw rows (never public)
--- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS dfs_license_raw (
   id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   batch_id        UUID NOT NULL REFERENCES dfs_import_batches(id) ON DELETE CASCADE,
@@ -29,12 +78,6 @@ CREATE TABLE IF NOT EXISTS dfs_license_raw (
   imported_at     TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_dfs_license_raw_batch ON dfs_license_raw(batch_id);
-CREATE INDEX IF NOT EXISTS idx_dfs_license_raw_entity ON dfs_license_raw(entity_type);
-
--- ---------------------------------------------------------------------------
--- Normalized producers
--- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS dfs_producers (
   id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   entity_type       TEXT NOT NULL CHECK (entity_type IN ('individual', 'business')),
@@ -62,15 +105,6 @@ CREATE TABLE IF NOT EXISTS dfs_producers (
   UNIQUE (entity_type, license_number)
 );
 
-CREATE INDEX IF NOT EXISTS idx_dfs_producers_license ON dfs_producers(license_number);
-CREATE INDEX IF NOT EXISTS idx_dfs_producers_county ON dfs_producers(county_normalized);
-CREATE INDEX IF NOT EXISTS idx_dfs_producers_status ON dfs_producers(license_status);
-CREATE INDEX IF NOT EXISTS idx_dfs_producers_loa ON dfs_producers USING GIN(lines_of_authority);
-CREATE INDEX IF NOT EXISTS idx_dfs_producers_identity ON dfs_producers(identity_key);
-
--- ---------------------------------------------------------------------------
--- Appointments (optional enrichment)
--- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS dfs_appointments (
   id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   producer_id       UUID NOT NULL REFERENCES dfs_producers(id) ON DELETE CASCADE,
@@ -84,20 +118,6 @@ CREATE TABLE IF NOT EXISTS dfs_appointments (
   created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_dfs_appointments_producer ON dfs_appointments(producer_id);
-
--- ---------------------------------------------------------------------------
--- Promotion bridge: dfs_producers → providers
--- Guard: only create if providers exists (created by 20260811115000)
--- ---------------------------------------------------------------------------
-DO $$
-BEGIN
-  IF to_regclass('public.providers') IS NULL THEN
-    RAISE EXCEPTION
-      'relation "providers" does not exist — run migration 20260811115000_ensure_core_providers.sql first (or supabase/schema.sql)';
-  END IF;
-END $$;
-
 CREATE TABLE IF NOT EXISTS dfs_provider_promotions (
   id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   producer_id       UUID NOT NULL UNIQUE REFERENCES dfs_producers(id) ON DELETE CASCADE,
@@ -109,18 +129,12 @@ CREATE TABLE IF NOT EXISTS dfs_provider_promotions (
   UNIQUE (provider_id)
 );
 
+CREATE INDEX IF NOT EXISTS idx_dfs_producers_license ON dfs_producers(license_number);
+CREATE INDEX IF NOT EXISTS idx_dfs_producers_county ON dfs_producers(county_normalized);
 CREATE INDEX IF NOT EXISTS idx_dfs_promotions_county ON dfs_provider_promotions(launch_county);
-CREATE INDEX IF NOT EXISTS idx_dfs_promotions_provider ON dfs_provider_promotions(provider_id);
 
--- ---------------------------------------------------------------------------
--- RLS: raw / staging / promotions not public
--- ---------------------------------------------------------------------------
 ALTER TABLE dfs_import_batches ENABLE ROW LEVEL SECURITY;
 ALTER TABLE dfs_license_raw ENABLE ROW LEVEL SECURITY;
 ALTER TABLE dfs_producers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE dfs_appointments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE dfs_provider_promotions ENABLE ROW LEVEL SECURITY;
-
-COMMENT ON TABLE dfs_license_raw IS 'Phase 4 — Florida DFS raw import rows; never expose publicly';
-COMMENT ON TABLE dfs_producers IS 'Phase 4 — normalized FL DFS producers; promote only when Phase 1 verified gates pass';
-COMMENT ON TABLE dfs_provider_promotions IS 'Phase 4 — bridge from DFS producers to public providers';
