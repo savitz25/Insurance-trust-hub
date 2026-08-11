@@ -20,23 +20,44 @@ function hubAgentToProvider(agent: HubAgent): Provider {
     phone: agent.phone ?? null,
     website: agent.website ?? null,
     license_number: agent.licenseNumber,
-    insurance_types: agent.insuranceTypes,
-    specialties: agent.specialties as Specialty[],
-    rating: agent.rating,
-    review_count: agent.reviewCount,
-    is_verified: agent.isVerified,
-    years_in_business: agent.yearsInBusiness,
-    trust_score: agent.trustScore,
-    local_market_experience: agent.localMarketExperience,
-    avg_response_hours: agent.avgResponseHours,
-    bbb_rating: agent.bbbRating,
+    insurance_types: agent.insuranceTypes ?? [],
+    specialties: (agent.specialties ?? []) as Specialty[],
+    rating: agent.rating ?? 0,
+    review_count: agent.reviewCount ?? 0,
+    is_verified: Boolean(agent.isVerified),
+    years_in_business: agent.yearsInBusiness ?? null,
+    trust_score: agent.trustScore ?? null,
+    local_market_experience: agent.localMarketExperience ?? null,
+    avg_response_hours: agent.avgResponseHours ?? null,
+    bbb_rating: agent.bbbRating ?? null,
   };
 }
 
-export function getHubAgentBySlug(slug: string): Provider | null {
+/** Lazy slug → provider map so provider pages do not rebuild all hubs per request. */
+let hubSlugIndex: Map<string, Provider> | null = null;
+
+function getHubSlugIndex(): Map<string, Provider> {
+  if (hubSlugIndex) return hubSlugIndex;
+  const map = new Map<string, Provider>();
   for (const hub of INSURANCE_HUBS) {
-    const agent = getAgentsForHub(hub).find((a) => a.slug === slug);
-    if (agent) return hubAgentToProvider(agent);
+    try {
+      for (const agent of getAgentsForHub(hub)) {
+        if (!map.has(agent.slug)) {
+          map.set(agent.slug, hubAgentToProvider(agent));
+        }
+      }
+    } catch {
+      // Skip broken hub catalogs — never take down provider routes
+    }
   }
-  return null;
+  hubSlugIndex = map;
+  return map;
+}
+
+export function getHubAgentBySlug(slug: string): Provider | null {
+  try {
+    return getHubSlugIndex().get(slug) ?? null;
+  } catch {
+    return null;
+  }
 }

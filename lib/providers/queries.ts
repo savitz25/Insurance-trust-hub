@@ -68,8 +68,31 @@ export async function getProviders(
 
 export async function getProviderBySlug(slug: string): Promise<Provider | null> {
   try {
+    // Prefer DB research inventory when configured. Hub catalog is legacy seed/pending
+    // and must not short-circuit DB with a hard null when a real row exists.
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = await createClient();
+        const { data, error } = await supabase
+          .from('providers')
+          .select('*')
+          .eq('slug', slug)
+          .maybeSingle();
+
+        if (!error && data) {
+          const provider = mapRowToProvider(data as DbProvider);
+          if (isIndexableListing(toPublicProviderView(provider).listingClass)) {
+            return provider;
+          }
+          // Known DB row that fails promotion gates → unavailable (not-found)
+          return null;
+        }
+      } catch {
+        // Fall through to hub catalog / empty
+      }
+    }
+
     // Hub catalog rows: only serve when they meet indexable research gates.
-    // Incomplete / seed / pending hub agents fail closed (null → not-found).
     const hubAgent = getHubAgentBySlug(slug);
     if (hubAgent) {
       if (
@@ -82,27 +105,7 @@ export async function getProviderBySlug(slug: string): Promise<Provider | null> 
       return hubAgent;
     }
 
-    if (!isSupabaseConfigured()) {
-      // Do not serve seed fallback profiles on public site
-      return null;
-    }
-
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('providers')
-      .select('*')
-      .eq('slug', slug)
-      .maybeSingle();
-
-    if (error || !data) {
-      return null;
-    }
-
-    const provider = mapRowToProvider(data as DbProvider);
-    if (!isIndexableListing(toPublicProviderView(provider).listingClass)) {
-      return null;
-    }
-    return provider;
+    return null;
   } catch {
     // Fail closed — never 500 a consumer profile for bad/incomplete records
     return null;

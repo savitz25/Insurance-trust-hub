@@ -14,9 +14,6 @@ import {
 import { getProviderBySlug } from '@/lib/providers/queries';
 import { getReviewsForProvider, getRatingBreakdown } from '@/lib/providers/reviews';
 import { getProviderLicenseUrl } from '@/lib/providers/license';
-import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
-import { INSURANCE_HUBS } from '@/lib/hubs/registry';
-import { getAgentsForHub } from '@/lib/hubs/agents';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildInsuranceAgencySchema } from '@/lib/seo/schemas';
@@ -40,7 +37,7 @@ import {
   allowContactForm,
   toPublicProviderView,
 } from '@/lib/provenance/public-listing';
-import { toPublicSecondarySignals } from '@/lib/enrichment/pipeline';
+import { toPublicSecondarySignals } from '@/lib/enrichment/public-secondary';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { ProviderSecondarySignals } from '@/components/provider-secondary-signals';
 import { Badge } from '@/components/ui/badge';
@@ -54,11 +51,12 @@ interface ProviderPageProps {
   searchParams?: Promise<{ from?: string }>;
 }
 
+/** Always resolve on demand — incomplete records must fail closed to not-found. */
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
-  // Stage 0: do not prebuild seed / illustrative provider paths
-  void INSURANCE_HUBS;
-  void getAgentsForHub;
-  void FALLBACK_PROVIDERS;
+  // Phase 0: do not prebuild provider paths — resolve on demand, fail closed
   return [];
 }
 
@@ -87,6 +85,16 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
   }
 }
 
+function isNextNotFoundError(err: unknown): boolean {
+  return (
+    typeof err === 'object' &&
+    err !== null &&
+    'digest' in err &&
+    typeof (err as { digest?: unknown }).digest === 'string' &&
+    String((err as { digest: string }).digest).startsWith('NEXT_HTTP_ERROR_FALLBACK')
+  );
+}
+
 export default async function ProviderPage({ params, searchParams }: ProviderPageProps) {
   const { slug } = await params;
   const sp = searchParams ? await searchParams : {};
@@ -94,7 +102,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   let provider: Awaited<ReturnType<typeof getProviderBySlug>> = null;
   try {
     provider = await getProviderBySlug(slug);
-  } catch {
+  } catch (err) {
+    if (isNextNotFoundError(err)) throw err;
     notFound();
   }
   if (!provider) notFound();
@@ -102,7 +111,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   let publicView: ReturnType<typeof toPublicProviderView>;
   try {
     publicView = toPublicProviderView(provider);
-  } catch {
+  } catch (err) {
+    if (isNextNotFoundError(err)) throw err;
     notFound();
   }
 

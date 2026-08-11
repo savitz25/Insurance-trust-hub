@@ -18,11 +18,11 @@ import {
   buildBbbSnapshotFromManual,
   type BbbManualInput,
 } from '@/lib/enrichment/bbb';
-import type { ProviderEnrichment, PublicSecondarySignals } from '@/lib/enrichment/types';
-import { SECONDARY_SIGNALS_DISCLAIMER as DISCLAIMER } from '@/lib/enrichment/types';
+import type { ProviderEnrichment } from '@/lib/enrichment/types';
 import type { Provider } from '@/types/provider';
 import type { Provider as DbProvider, ContactInfo } from '@/types/supabase';
-import { isPlaceholderPhone } from '@/lib/provenance/phone';
+
+export { toPublicSecondarySignals } from '@/lib/enrichment/public-secondary';
 
 export type EnrichmentRunResult = {
   providerId: string;
@@ -40,63 +40,6 @@ function readEnrichment(contact: ContactInfo | null | undefined): ProviderEnrich
 
 export function getProviderEnrichment(provider: Provider): ProviderEnrichment {
   return provider.enrichment ?? {};
-}
-
-export function toPublicSecondarySignals(
-  provider: Provider
-): PublicSecondarySignals | null {
-  const elig = isEligibleForSecondaryEnrichment(provider);
-  if (!elig.eligible) return null;
-
-  const enr = getProviderEnrichment(provider);
-  const g = enr.google;
-  const b = enr.bbb;
-
-  const google =
-    g && g.matchConfidence === 'high'
-      ? {
-          rating: g.rating ?? null,
-          reviewCount: g.reviewCount ?? null,
-          mapsUrl: g.mapsUrl ?? null,
-          checkedAtLabel: formatDate(g.checkedAt),
-          businessStatus: g.businessStatus ?? null,
-        }
-      : null;
-
-  const bbb =
-    b && (b.matchConfidence === 'high' || b.matchConfidence === 'medium')
-      ? {
-          rating: b.rating ?? null,
-          accredited: b.accredited ?? null,
-          profileUrl: b.profileUrl ?? null,
-          checkedAtLabel: formatDate(b.checkedAt),
-        }
-      : null;
-
-  if (!google && !bbb) return null;
-
-  // Sanitize phone leakage: never expose placeholder via enrichment path
-  if (google && g?.formattedPhone && isPlaceholderPhone(g.formattedPhone)) {
-    // phone not in public secondary object — ok
-  }
-
-  return {
-    google,
-    bbb,
-    disclaimer: DISCLAIMER,
-  };
-}
-
-function formatDate(iso?: string | null): string | null {
-  if (!iso) return null;
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return null;
-  return d.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
 }
 
 export async function listEnrichmentEligible(limit = 50): Promise<Provider[]> {
