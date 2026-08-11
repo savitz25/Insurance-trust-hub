@@ -22,6 +22,7 @@ import {
 } from '@/lib/network/journey-context';
 import { JourneyOrientationBanner } from '@/components/network/journey-orientation-banner';
 import { JourneyLandingTracker } from '@/components/network/journey-landing-tracker';
+import { ContinueTrustJourney } from '@/components/network/continue-trust-journey';
 import { JourneySessionSync } from '@/components/network/journey-session-sync';
 
 interface CityPageProps {
