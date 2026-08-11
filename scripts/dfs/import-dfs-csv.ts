@@ -96,17 +96,21 @@ async function main() {
     });
   }
 
-  const rl = createInterface({ input: createReadStream(abs, { encoding: 'utf8' }), crlfDelay: Infinity });
+  const { size: fileSize } = await import('fs').then((fs) => fs.statSync(abs));
+  console.log(`Reading ${abs} (${Math.round(fileSize / 1024 / 1024)} MB)`);
 
   let headers: string[] | null = null;
   let rowNum = 0;
   let normalized = 0;
   let skipped = 0;
   let launchHits = 0;
+  let flushErrors = 0;
   const skipReasons: Record<string, number> = {};
   const batchRows: Record<string, unknown>[] = [];
   const producerUpserts: Record<string, unknown>[] = [];
 
+  // Create batch BEFORE opening the file stream so we don't lose stream data
+  // while awaiting Supabase (stream must only start when the consumer is ready).
   let batchId: string | null = null;
   if (supabase) {
     const { data, error } = await supabase
@@ -126,17 +130,48 @@ async function main() {
     console.log('Batch', batchId);
   }
 
-  for await (const line of rl) {
+  const rl = createInterface({
+    input: createReadStream(abs, { encoding: 'utf8' }),
+    crlfDelay: Infinity,
+  });
+
+  function isHeaderRow(cols: string[]): boolean {
+    // Official FL bulk header starts with License Number (do not match data rows
+    // that merely contain the word "LICENSE" in LOA text).
+    return /^license\s*number$/i.test((cols[0] ?? '').trim());
+  }
+
+  for await (const rawLine of rl) {
+    // Strip UTF-8 BOM if present on first line
+    const line = rawLine.replace(/^\uFEFF/, '');
     if (!line.trim()) continue;
+
+    const cols = parseCsvLine(line);
+
     if (!headers) {
-      headers = parseCsvLine(line);
-      console.log('Columns:', headers.slice(0, 12).join(' | '), headers.length > 12 ? '…' : '');
+      if (!isHeaderRow(cols)) {
+        // Keep scanning until we find the real header (skip junk preambles)
+        continue;
+      }
+      headers = cols.map((h) => h.trim());
+      console.log(
+        'Columns:',
+        headers.slice(0, 12).join(' | '),
+        headers.length > 12 ? '…' : ''
+      );
+      if (!headers.some((h) => /license\s*number/i.test(h))) {
+        console.error('Header row missing License Number column — aborting');
+        process.exit(1);
+      }
       continue;
     }
+
+    // Skip accidental duplicate header rows mid-file
+    if (isHeaderRow(cols)) continue;
+
     rowNum++;
     if (limit && rowNum > limit) break;
 
-    const cols = parseCsvLine(line);
     const row: Record<string, string> = {};
     headers.forEach((h, i) => {
       row[h] = cols[i] ?? '';
@@ -164,7 +199,13 @@ async function main() {
         row_number: rowNum,
         raw: row,
       });
-      producerUpserts.push({
+      // One license can appear on multiple CSV rows (one per LOA). Merge in-batch
+      // so ON CONFLICT upsert does not see the same key twice.
+      const existingIdx = producerUpserts.findIndex(
+        (p) =>
+          p.entity_type === n.entityType && p.license_number === n.licenseNumber
+      );
+      const producerRow = {
         entity_type: n.entityType,
         license_number: n.licenseNumber,
         npn: n.npn,
@@ -185,18 +226,47 @@ async function main() {
         raw_batch_id: batchId,
         identity_key: n.identityKey,
         updated_at: new Date().toISOString(),
-      });
+      };
+      if (existingIdx >= 0) {
+        const prev = producerUpserts[existingIdx] as typeof producerRow;
+        const loas = Array.from(
+          new Set([
+            ...((prev.lines_of_authority as string[]) ?? []),
+            ...n.linesOfAuthority,
+          ])
+        );
+        producerUpserts[existingIdx] = {
+          ...prev,
+          ...producerRow,
+          lines_of_authority: loas,
+          // Prefer non-empty contact fields
+          phone: producerRow.phone || prev.phone,
+          email: producerRow.email || prev.email,
+          city: producerRow.city || prev.city,
+          county: producerRow.county || prev.county,
+          zip: producerRow.zip || prev.zip,
+        };
+      } else {
+        producerUpserts.push(producerRow);
+      }
 
       if (batchRows.length >= 200) {
-        await flush(supabase as never, batchRows, producerUpserts);
+        const err = await flush(supabase, batchRows, producerUpserts);
+        if (err) flushErrors++;
         batchRows.length = 0;
         producerUpserts.length = 0;
       }
     }
   }
 
+  if (!headers) {
+    console.error('Never found a License Number header row in CSV — aborting');
+    process.exit(1);
+  }
+
   if (supabase && batchRows.length) {
-    await flush(supabase as never, batchRows, producerUpserts);
+    const err = await flush(supabase, batchRows, producerUpserts);
+    if (err) flushErrors++;
   }
 
   if (supabase && batchId) {
@@ -216,12 +286,18 @@ async function main() {
         normalized,
         skipped,
         launchCountyHits: launchHits,
+        flushErrors,
         skipReasons,
       },
       null,
       2
     )
   );
+
+  if (flushErrors > 0) {
+    console.error(`Completed with ${flushErrors} flush error batch(es)`);
+    process.exit(1);
+  }
 }
 
 async function flush(
@@ -229,13 +305,21 @@ async function flush(
   supabase: any,
   raw: Record<string, unknown>[],
   producers: Record<string, unknown>[]
-) {
+): Promise<boolean> {
+  let failed = false;
   const { error: e1 } = await supabase.from('dfs_license_raw').insert(raw);
-  if (e1) console.error('raw insert error:', e1.message);
+  if (e1) {
+    console.error('raw insert error:', e1.message);
+    failed = true;
+  }
   const { error: e2 } = await supabase.from('dfs_producers').upsert(producers, {
     onConflict: 'entity_type,license_number',
   });
-  if (e2) console.error('producer upsert error:', e2.message);
+  if (e2) {
+    console.error('producer upsert error:', e2.message);
+    failed = true;
+  }
+  return failed;
 }
 
 main().catch((e) => {

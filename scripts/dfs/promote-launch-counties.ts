@@ -85,26 +85,44 @@ async function main() {
   };
 
   for (const county of counties) {
-    const aliases = county.aliases;
-    // Pull producers whose county_normalized matches any alias token
-    const { data: producers, error } = await supabase
-      .from('dfs_producers')
-      .select('*')
-      .eq('state', 'FL')
-      .limit(5000);
+    if (stats.promoted >= limit) break;
 
-    if (error) {
-      console.error(county.id, error.message);
-      continue;
+    // Query by normalized county aliases (DFS may say DADE vs MIAMI-DADE)
+    const countyKeys = Array.from(
+      new Set(
+        county.aliases.map((a) =>
+          a
+            .toUpperCase()
+            .replace(/COUNTY$/i, '')
+            .replace(/\s+/g, ' ')
+            .trim()
+        )
+      )
+    );
+
+    // Paginate through all matching producers for this county
+    const pageSize = 1000;
+    let from = 0;
+    const inCounty: DfsProducerRow[] = [];
+    for (;;) {
+      const { data: page, error } = await supabase
+        .from('dfs_producers')
+        .select('*')
+        .eq('state', 'FL')
+        .in('county_normalized', countyKeys)
+        .range(from, from + pageSize - 1);
+
+      if (error) {
+        console.error(county.id, error.message);
+        break;
+      }
+      if (!page?.length) break;
+      inCounty.push(...(page as DfsProducerRow[]));
+      if (page.length < pageSize) break;
+      from += pageSize;
     }
 
-    const inCounty = (producers || []).filter((p) => {
-      const cn = (p.county_normalized || p.county || '').toUpperCase();
-      return aliases.some((a) => {
-        const an = a.replace(/\s+COUNTY$/i, '').trim();
-        return cn === an || cn.includes(an) || an.includes(cn);
-      });
-    });
+    console.log(`County ${county.displayName}: ${inCounty.length} producers in staging`);
 
     for (const p of inCounty) {
       if (stats.promoted >= limit) break;
