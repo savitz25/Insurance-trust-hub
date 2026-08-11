@@ -44,6 +44,7 @@ export const SPECIALTY_TOPICS: SpecialtyTopic[] = [
     featuredHubSlugs: [
       { state: 'florida', slug: 'miami-fort-lauderdale', label: 'South Florida' },
       { state: 'florida', slug: 'miami-dade', label: 'Miami-Dade' },
+      { state: 'florida', slug: 'broward-county', label: 'Broward' },
       { state: 'texas', slug: 'houston', label: 'Houston' },
       { state: 'california', slug: 'los-angeles', label: 'Los Angeles' },
       { state: 'new-york', slug: 'nyc-newark-jersey-city', label: 'NYC Metro' },
@@ -72,6 +73,8 @@ export const SPECIALTY_TOPICS: SpecialtyTopic[] = [
     ],
     featuredHubSlugs: [
       { state: 'florida', slug: 'miami-fort-lauderdale', label: 'South Florida' },
+      { state: 'florida', slug: 'miami-dade', label: 'Miami-Dade' },
+      { state: 'florida', slug: 'broward-county', label: 'Broward' },
       { state: 'florida', slug: 'palm-beach-county', label: 'Palm Beach' },
       { state: 'arizona', slug: 'phoenix', label: 'Phoenix' },
       { state: 'texas', slug: 'houston', label: 'Houston' },
@@ -101,6 +104,8 @@ export const SPECIALTY_TOPICS: SpecialtyTopic[] = [
     ],
     featuredHubSlugs: [
       { state: 'florida', slug: 'miami-dade', label: 'Miami-Dade' },
+      { state: 'florida', slug: 'broward-county', label: 'Broward' },
+      { state: 'florida', slug: 'palm-beach-county', label: 'Palm Beach' },
       { state: 'texas', slug: 'dallas-fort-worth', label: 'DFW' },
       { state: 'california', slug: 'los-angeles', label: 'Los Angeles' },
       { state: 'georgia', slug: 'atlanta', label: 'Atlanta' },

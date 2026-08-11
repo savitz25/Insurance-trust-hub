@@ -16,6 +16,7 @@ import {
   NAIC_CONSUMER_URL,
   DOI_PATHWAY_HREF,
 } from '@/components/research/empty-coverage-panel';
+import { flLaunchCountyNavRows } from '@/lib/dfs/launch-counties';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -96,6 +97,31 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           </Link>{' '}
           to build a research shortlist (guest-saved on this device).
         </p>
+        <div className="mt-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Florida launch counties
+          </p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {flLaunchCountyNavRows().map((row) => (
+              <li key={row.id}>
+                <Link
+                  href={row.hubHref}
+                  className="inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                >
+                  {row.displayName}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/hubs/south-florida"
+                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+              >
+                South Florida (tri-county)
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-8">

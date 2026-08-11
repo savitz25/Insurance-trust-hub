@@ -116,6 +116,7 @@ export async function GET() {
   const hubTotals = {
     jacksonville: await countVerifiedProvidersForHub('jacksonville'),
     'miami-dade': await countVerifiedProvidersForHub('miami-dade'),
+    broward: await countVerifiedProvidersForHub('broward-county'),
     'broward-county': await countVerifiedProvidersForHub('broward-county'),
     'palm-beach-county': await countVerifiedProvidersForHub('palm-beach-county'),
     tampa: await countVerifiedProvidersForHub('tampa'),
@@ -125,10 +126,14 @@ export async function GET() {
   };
 
   const jax = await getHubInventory('jacksonville', { pageSize: 5 });
+  const browardInv = await getHubInventory('broward-county', { pageSize: 3 });
   const profile = sampleSlug ? await getProviderBySlug(sampleSlug) : null;
 
   const restOk = restStatus === 200 || restStatus === 206;
-  const countyOk = (byCounty.duval?.total ?? 0) > 100;
+  const countyOk =
+    (byCounty.duval?.total ?? 0) > 100 &&
+    (byCounty.broward?.total ?? 0) > 100 &&
+    (byCounty.miami_dade?.total ?? 0) > 100;
 
   return NextResponse.json({
     ok:
@@ -160,6 +165,13 @@ export async function GET() {
       showing: jax.showing,
       pageSize: jax.pageSize,
       sampleNames: jax.providers.slice(0, 3).map((p) => p.name),
+    },
+    broward: {
+      total: browardInv.total,
+      showing: browardInv.showing,
+      pageSize: browardInv.pageSize,
+      sampleNames: browardInv.providers.slice(0, 3).map((p) => p.name),
+      hubPath: '/hubs/florida/broward-county',
     },
     sampleSlug,
     profileResolves: Boolean(profile),

@@ -44,7 +44,8 @@ export const FL_LAUNCH_COUNTIES: FlLaunchCounty[] = [
     id: 'broward',
     displayName: 'Broward',
     aliases: ['BROWARD', 'BROWARD COUNTY'],
-    hubSlugs: ['broward-county', 'miami-fort-lauderdale'],
+    // Canonical hub is broward-county; /hubs/florida/broward redirects there
+    hubSlugs: ['broward-county', 'broward', 'miami-fort-lauderdale'],
   },
   {
     id: 'palm_beach',
@@ -97,4 +98,34 @@ export function launchCountiesForHubSlug(hubSlug: string): FlLaunchCounty[] {
 
 export function isFlLaunchHub(hubSlug: string): boolean {
   return launchCountiesForHubSlug(hubSlug).length > 0;
+}
+
+/** Primary single-county hub path for a launch county (excludes multi-county aggregates). */
+export function primaryHubPathForCounty(county: FlLaunchCounty): string {
+  const slug =
+    county.hubSlugs.find((s) => s !== 'miami-fort-lauderdale') ??
+    county.hubSlugs[0];
+  return `/hubs/florida/${slug}`;
+}
+
+/**
+ * Consumer/ops nav rows for every launch county — keeps Broward in parity with
+ * Miami-Dade, Palm Beach, Duval, and Hillsborough.
+ */
+export function flLaunchCountyNavRows(): Array<{
+  id: FlLaunchCountyId;
+  displayName: string;
+  hubHref: string;
+  hubSlug: string;
+}> {
+  return FL_LAUNCH_COUNTIES.map((c) => {
+    const hubSlug =
+      c.hubSlugs.find((s) => s !== 'miami-fort-lauderdale') ?? c.hubSlugs[0];
+    return {
+      id: c.id,
+      displayName: c.displayName,
+      hubSlug,
+      hubHref: primaryHubPathForCounty(c),
+    };
+  });
 }

@@ -60,6 +60,14 @@ export default async function PlanComplaintIndexPage({ searchParams }: Props) {
               Miami-Dade
             </Link>
             {' · '}
+            <Link href="/data/counties/broward-fl" className="font-medium text-[#0284C7] hover:underline">
+              Broward
+            </Link>
+            {' · '}
+            <Link href="/data/counties/palm-beach-fl" className="font-medium text-[#0284C7] hover:underline">
+              Palm Beach
+            </Link>
+            {' · '}
             <Link href="/tools" className="font-medium text-[#0284C7] hover:underline">
               Tools
             </Link>

@@ -37,9 +37,15 @@ assert(sql.includes('ENABLE ROW LEVEL SECURITY'), 'migration missing RLS');
 
 // Launch counties
 assert(FL_LAUNCH_COUNTIES.length === 5, 'expected 5 launch counties');
+assert(
+  FL_LAUNCH_COUNTIES.some((c) => c.id === 'broward'),
+  'Broward launch county row required'
+);
 assert(matchLaunchCounty('Dade')?.id === 'miami_dade', 'Dade → miami_dade');
+assert(matchLaunchCounty('BROWARD COUNTY')?.id === 'broward', 'Broward match');
 assert(matchLaunchCounty('DUVAL COUNTY')?.id === 'duval', 'Duval match');
 assert(matchLaunchCounty('Hillsborough')?.id === 'hillsborough', 'Hillsborough match');
+assert(matchLaunchCounty('Palm Beach')?.id === 'palm_beach', 'Palm Beach match');
 
 // LOA — never medicare
 assert(classifyLoa('Health') === 'health', 'health loa');
