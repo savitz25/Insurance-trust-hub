@@ -3,7 +3,6 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { format } from 'date-fns';
 import {
-  BadgeCheck,
   ExternalLink,
   MapPin,
   Phone,
@@ -45,18 +44,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ContextNav } from '@/components/context-nav';
 import { cn } from '@/lib/utils';
+import type { Provider } from '@/types/provider';
 
 interface ProviderPageProps {
   params: Promise<{ slug: string }>;
   searchParams?: Promise<{ from?: string }>;
 }
 
-/** Always resolve on demand — incomplete records must fail closed to not-found. */
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  // Phase 0: do not prebuild provider paths — resolve on demand, fail closed
   return [];
 }
 
@@ -67,67 +65,85 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
     if (!provider) {
       return { title: 'Provider Not Found', robots: { index: false, follow: true } };
     }
-
     const view = toPublicProviderView(provider);
-    // Only index fully verified research listings
-    const indexable = view.listingClass === 'indexable_research';
-
     return buildMetadata({
       title: `${provider.name} — ${provider.city}, ${provider.state} Insurance Research`,
       description:
         provider.short_description ??
         `Research ${provider.name} in ${provider.city}, ${provider.state}. Re-check licenses on official state tools.`,
       path: `/providers/${slug}`,
-      noIndex: !indexable,
+      noIndex: view.listingClass !== 'indexable_research',
     });
   } catch {
     return { title: 'Provider Not Found', robots: { index: false, follow: true } };
   }
 }
 
-function isNextNotFoundError(err: unknown): boolean {
-  return (
-    typeof err === 'object' &&
-    err !== null &&
-    'digest' in err &&
-    typeof (err as { digest?: unknown }).digest === 'string' &&
-    String((err as { digest: string }).digest).startsWith('NEXT_HTTP_ERROR_FALLBACK')
-  );
+/**
+ * Phase 0 fail-closed loader: never throw 500 to consumers.
+ * Incomplete / seed / pending inventory → notFound().
+ */
+async function loadIndexableProvider(slug: string): Promise<Provider | null> {
+  try {
+    const provider = await getProviderBySlug(slug);
+    if (!provider) return null;
+    const view = toPublicProviderView(provider);
+    if (view.listingClass !== 'indexable_research') return null;
+    return provider;
+  } catch {
+    return null;
+  }
 }
 
 export default async function ProviderPage({ params, searchParams }: ProviderPageProps) {
   const { slug } = await params;
   const sp = searchParams ? await searchParams : {};
-
-  let provider: Awaited<ReturnType<typeof getProviderBySlug>> = null;
-  try {
-    provider = await getProviderBySlug(slug);
-  } catch (err) {
-    if (isNextNotFoundError(err)) throw err;
-    notFound();
-  }
+  const provider = await loadIndexableProvider(slug);
   if (!provider) notFound();
 
-  let publicView: ReturnType<typeof toPublicProviderView>;
+  const publicView = toPublicProviderView(provider);
+  const specialties = Array.isArray(provider.specialties) ? provider.specialties : [];
+  const insuranceTypes = Array.isArray(provider.insurance_types)
+    ? provider.insurance_types
+    : [];
+
+  let secondarySignals = null;
   try {
-    publicView = toPublicProviderView(provider);
-  } catch (err) {
-    if (isNextNotFoundError(err)) throw err;
-    notFound();
+    secondarySignals = toPublicSecondarySignals(provider);
+  } catch {
+    secondarySignals = null;
   }
 
-  // Fail closed: seed / pending never render as full consumer profiles
-  if (publicView.listingClass !== 'indexable_research') {
-    notFound();
-  }
-
-  const secondarySignals = toPublicSecondarySignals(provider);
   const showContact = allowContactForm(publicView.listingClass);
-  const reviews = await getReviewsForProvider(slug);
+
+  let reviews: Awaited<ReturnType<typeof getReviewsForProvider>> = [];
+  try {
+    reviews = await getReviewsForProvider(slug);
+  } catch {
+    reviews = [];
+  }
   const breakdown = getRatingBreakdown(reviews);
   const totalBreakdown = Object.values(breakdown).reduce((a, b) => a + b, 0) || 1;
   const licenseUrl = getProviderLicenseUrl(provider);
-  const governmentVerification = resolveGovernmentVerification(provider);
+
+  let governmentVerification;
+  try {
+    governmentVerification = resolveGovernmentVerification(provider);
+  } catch {
+    governmentVerification = {
+      title: 'Government Verification',
+      cmsParticipation: 'pending' as const,
+      cmsParticipationLabel: 'Pending verification',
+      npi: null,
+      medicareNotes: 'Verification data temporarily unavailable.',
+      lastCmsUpdate: new Date().toISOString(),
+      dataSourceLabel: 'State DOI',
+      licenseVerified: false,
+      licenseNumber: provider.license_number,
+      licenseState: provider.state,
+    };
+  }
+
   const trustBreakdown = computeProviderTrustScoreBreakdown({
     bbbRating: provider.bbb_rating,
     isVerified: publicView.verification.showLicenseVerifiedBadge,
@@ -140,11 +156,6 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     googleRating: publicView.showReviews ? publicView.rating : null,
     googleReviewCount: publicView.showReviews ? publicView.reviewCount : null,
   });
-
-  const specialties = Array.isArray(provider.specialties) ? provider.specialties : [];
-  const insuranceTypes = Array.isArray(provider.insurance_types)
-    ? provider.insurance_types
-    : [];
 
   const suitsRelocating =
     specialties.includes('Relocation Experienced') ||
@@ -349,7 +360,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     </li>
                   )}
                   {specialties.includes('Bilingual Services') && (
-                    <li>Bilingual services available for families navigating coverage in a new area.</li>
+                    <li>
+                      Bilingual services available for families navigating coverage in a new area.
+                    </li>
                   )}
                   {provider.years_in_business != null && provider.years_in_business >= 10 && (
                     <li>
@@ -404,24 +417,24 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         ? format(created, 'MMM d, yyyy')
                         : null;
                     return (
-                    <Card key={review.id}>
-                      <CardContent className="pt-6">
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <StarRating rating={review.rating} size="sm" showNumber={false} />
-                          {dateLabel ? (
-                            <span className="text-xs text-muted-foreground">{dateLabel}</span>
-                          ) : null}
-                        </div>
-                        <h3 className="mt-2 font-medium">{review.title}</h3>
-                        <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                          {review.content}
-                        </p>
-                        <p className="mt-3 text-xs text-muted-foreground">
-                          — {review.author}
-                          {review.authorLocation ? ` · ${review.authorLocation}` : ''}
-                        </p>
-                      </CardContent>
-                    </Card>
+                      <Card key={review.id}>
+                        <CardContent className="pt-6">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <StarRating rating={review.rating} size="sm" showNumber={false} />
+                            {dateLabel ? (
+                              <span className="text-xs text-muted-foreground">{dateLabel}</span>
+                            ) : null}
+                          </div>
+                          <h3 className="mt-2 font-medium">{review.title}</h3>
+                          <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                            {review.content}
+                          </p>
+                          <p className="mt-3 text-xs text-muted-foreground">
+                            — {review.author}
+                            {review.authorLocation ? ` · ${review.authorLocation}` : ''}
+                          </p>
+                        </CardContent>
+                      </Card>
                     );
                   })}
                 </div>
