@@ -1,4 +1,7 @@
-# Florida DFS verified inventory pipeline (Phase 4)
+# Florida DFS verified inventory pipeline (Phase 4–5)
+
+Phase 5 agency stabilization notes: `docs/PHASE-5-AGENCY-INVENTORY.md`  
+**Promote default is business/agencies only** (`--entity business`).
 
 ## Goal
 
@@ -114,10 +117,12 @@ npm run dfs:import -- --file data/dfs-raw/AllValidLicensesBusiness.csv --type bu
 # 3) Import individuals (optional)
 npm run dfs:import -- --file data/dfs-raw/AllValidLicensesIndividual.csv --type individual --launch-counties-only
 
-# 4) Promote to public providers (Phase 1 gates)
-npm run dfs:promote -- --dry-run --limit 20
-npm run dfs:promote -- --county duval --limit 100
-npm run dfs:promote -- --limit 500
+# 4) Promote agencies only (Phase 5 default) — Phase 1 gates
+npm run dfs:status
+npm run dfs:promote -- --dry-run --entity business --limit 20
+npm run dfs:promote -- --county duval --entity business --limit 100
+npm run dfs:promote -- --entity business
+# Individuals: do not bulk-promote in Phase 5 (requires --entity all)
 
 # Guards
 npm run check:phase4-dfs

@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { MapPin } from 'lucide-react';
+import { MapPin, Phone, FileBadge } from 'lucide-react';
 import type { Provider } from '@/types/provider';
-import { INSURANCE_TYPES } from '@/lib/constants';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { StarRating } from '@/components/star-rating';
@@ -12,6 +11,7 @@ import {
   canShowAsVerified,
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
+import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import { cn } from '@/lib/utils';
 
 interface ProviderCardProps {
@@ -19,15 +19,24 @@ interface ProviderCardProps {
   className?: string;
 }
 
+/**
+ * Phase 5 agency research card — name, license, LOA tags, city/county,
+ * phone if present, verified badge + source. Never feature email.
+ */
 export function ProviderCard({ provider, className }: ProviderCardProps) {
   // Phase 1: only verified TrustState may render on consumer surfaces
   if (!canShowAsVerified(resolveProviderTrustState(provider))) {
     return null;
   }
   const view = toPublicProviderView(provider);
-  const typeLabels = provider.insurance_types
-    .slice(0, 3)
-    .map((t) => INSURANCE_TYPES.find((it) => it.value === t)?.label ?? t);
+  const loaTags = loaSpecialtyTags(provider.specialties);
+  const locationLine = [
+    provider.city,
+    provider.county ? `${provider.county} County` : null,
+    provider.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
 
   return (
     <Card className={cn('provider-card flex flex-col h-full', className)}>
@@ -44,7 +53,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
             </CardTitle>
             <p className="mt-1.5 flex items-center gap-1 text-sm text-muted-foreground">
               <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              {provider.city}, {provider.state}
+              {locationLine}
             </p>
           </div>
           <InsuranceVerificationBadge verification={view.verification} className="shrink-0" />
@@ -52,11 +61,51 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
       </CardHeader>
 
       <CardContent className="flex-1 space-y-3">
-        {provider.short_description && (
-          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-            {provider.short_description}
+        {view.verification.licenseNumber ? (
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <FileBadge className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+            <span>
+              License{' '}
+              <span className="font-medium text-foreground tabular-nums">
+                {view.verification.licenseNumber}
+              </span>
+              {view.verification.licenseState
+                ? ` · ${view.verification.licenseState}`
+                : ''}
+            </span>
           </p>
-        )}
+        ) : null}
+
+        {view.verification.sourceLabel || view.verification.lastCheckedLabel ? (
+          <p className="text-[11px] leading-relaxed text-muted-foreground">
+            {view.verification.sourceLabel ?? 'State regulator'}
+            {view.verification.lastCheckedLabel
+              ? ` · checked ${view.verification.lastCheckedLabel}`
+              : ''}
+          </p>
+        ) : null}
+
+        {loaTags.length > 0 ? (
+          <div className="flex flex-wrap gap-1.5">
+            {loaTags.map((label) => (
+              <Badge key={label} variant="secondary" className="text-[11px] font-medium">
+                {label}
+              </Badge>
+            ))}
+          </div>
+        ) : null}
+
+        {view.phone ? (
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            <a
+              href={`tel:${view.phone.replace(/\D/g, '')}`}
+              className="hover:text-primary hover:underline"
+            >
+              {view.phone}
+            </a>
+          </p>
+        ) : null}
 
         {view.showReviews && view.rating != null ? (
           <>
@@ -70,22 +119,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
           </>
         ) : (
           <p className="text-xs text-muted-foreground">
-            No independently verified review summary available
-            {view.yearsInBusiness ? ` · ${view.yearsInBusiness} years in business` : ''}
-          </p>
-        )}
-
-        <div className="flex flex-wrap gap-1.5">
-          {typeLabels.map((label) => (
-            <Badge key={label} variant="secondary" className="text-[11px] font-medium">
-              {label}
-            </Badge>
-          ))}
-        </div>
-
-        {provider.specialties.length > 0 && (
-          <p className="text-xs text-muted-foreground">
-            {provider.specialties.slice(0, 2).join(' · ')}
+            Research listing — re-check license status on official tools before you enroll.
           </p>
         )}
       </CardContent>
@@ -100,7 +134,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
           href={`/providers/${provider.slug}`}
           className="text-sm font-medium text-primary hover:underline"
         >
-          Research →
+          Research profile →
         </Link>
       </CardFooter>
     </Card>

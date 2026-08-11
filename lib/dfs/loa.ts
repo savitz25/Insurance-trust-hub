@@ -1,9 +1,10 @@
 /**
- * Phase 4 — Florida DFS lines of authority → consumer categories.
+ * Phase 4–5 — Florida DFS lines of authority → consumer categories / specialty tags.
  * Never map LOA to “Medicare-certified” (requires CMS evidence later).
+ * Never invent carrier appointments from LOA text alone.
  */
 
-import type { InsuranceType } from '@/lib/constants';
+import type { InsuranceType, Specialty } from '@/lib/constants';
 
 /** Normalized LOA capability tags (stored on producer / specialties). */
 export type LoaCapability =
@@ -12,6 +13,7 @@ export type LoaCapability =
   | 'property_casualty'
   | 'personal_lines'
   | 'variable'
+  | 'agency'
   | 'other';
 
 const HEALTH_PATTERNS = [/health/i, /\bh\s*&\s*l\b/i, /accident/i, /disability/i];
@@ -22,13 +24,16 @@ const PC_PATTERNS = [
   /p\s*&\s*c/i,
   /general lines/i,
   /surplus/i,
+  /commercial/i,
 ];
-const PERSONAL_PATTERNS = [/personal lines/i, /auto/i, /homeowners/i, /residential/i];
+const PERSONAL_PATTERNS = [/personal lines/i, /\bauto\b/i, /homeowners/i, /residential/i];
 const VARIABLE_PATTERNS = [/variable/i];
+const AGENCY_PATTERNS = [/\bagency\b/i, /agency customer/i, /customer representative/i];
 
 export function classifyLoa(raw: string): LoaCapability {
   const s = raw.trim();
   if (!s) return 'other';
+  if (AGENCY_PATTERNS.some((p) => p.test(s))) return 'agency';
   if (HEALTH_PATTERNS.some((p) => p.test(s))) return 'health';
   if (LIFE_PATTERNS.some((p) => p.test(s))) return 'life';
   if (PERSONAL_PATTERNS.some((p) => p.test(s))) return 'personal_lines';
@@ -60,21 +65,58 @@ export function capabilitiesToInsuranceTypes(caps: LoaCapability[]): InsuranceTy
   return Array.from(types);
 }
 
-/** Honest specialty labels — never “Medicare Specialists” from DFS alone. */
+/**
+ * Honest specialty labels from DFS LOAs only.
+ * Never “Medicare Specialists” / Medicare-certified from DFS alone.
+ */
 export function capabilitiesToSpecialties(
   caps: LoaCapability[],
   entityType: 'individual' | 'business'
-): string[] {
-  const out: string[] = ['Independent Agency'];
-  if (entityType === 'individual') {
-    out[0] = 'Independent Agent';
+): Specialty[] {
+  const out: Specialty[] = [];
+  if (entityType === 'business' || caps.includes('agency')) {
+    out.push('Agency');
+    out.push('Independent Agency');
+  } else {
+    out.push('Independent Agency');
   }
   if (caps.includes('health')) out.push('Health');
   if (caps.includes('life')) out.push('Life');
-  if (caps.includes('property_casualty') || caps.includes('personal_lines')) {
-    out.push('Personal Lines');
-  }
-  return out;
+  if (caps.includes('property_casualty')) out.push('Property & Casualty');
+  if (caps.includes('personal_lines')) out.push('Personal Lines');
+  // de-dupe while preserving order
+  return Array.from(new Set(out));
+}
+
+/** Consumer-facing LOA chips (stable order). */
+export const LOA_TAG_ORDER: Specialty[] = [
+  'Agency',
+  'Independent Agency',
+  'Health',
+  'Life',
+  'Property & Casualty',
+  'Personal Lines',
+];
+
+/**
+ * Specialty tags that came from DFS LOA classification (safe to show as capability chips).
+ * Excludes editorial specialties like “Medicare Specialists” which must not be implied by DFS.
+ */
+export const LOA_CAPABILITY_TAGS = new Set<string>([
+  'Agency',
+  'Independent Agency',
+  'Health',
+  'Life',
+  'Property & Casualty',
+  'Personal Lines',
+]);
+
+export function loaSpecialtyTags(specialties: string[] | null | undefined): string[] {
+  if (!specialties?.length) return [];
+  const found = specialties.filter((s) => LOA_CAPABILITY_TAGS.has(s));
+  const ordered = LOA_TAG_ORDER.filter((t) => found.includes(t));
+  const rest = found.filter((s) => !(LOA_TAG_ORDER as readonly string[]).includes(s));
+  return [...ordered, ...rest];
 }
 
 export function parseLoaField(raw: string | null | undefined): string[] {

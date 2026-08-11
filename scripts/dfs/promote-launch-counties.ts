@@ -1,15 +1,18 @@
 /**
- * Phase 4 — promote dfs_producers in launch counties → public providers (Phase 1 gates).
+ * Phase 4–5 — promote dfs_producers in launch counties → public providers (Phase 1 gates).
  *
  *   npm run dfs:promote -- --dry-run
  *   npm run dfs:promote -- --wave 2
  *   npm run dfs:promote -- --county orange --per-county-limit 2000
  *   npm run dfs:promote -- --wave 2 --skip-existing
+ *   npm run dfs:promote -- --entity business   (default Phase 5)
+ *   npm run dfs:promote -- --entity all        (legacy; includes individuals)
  *
  * Loads .env / .env.local / .env.dfs.local — see docs/LOCAL-ENV.md
  *
- * Default: all waves, per-county caps from FL_LAUNCH_COUNTIES.promoteCap,
- * skip producers already in dfs_provider_promotions.
+ * Default: agencies/business only, all waves, per-county caps from
+ * FL_LAUNCH_COUNTIES.promoteCap, skip producers already in dfs_provider_promotions.
+ * Do NOT bulk-import individuals in Phase 5.
  */
 
 import { resolve } from 'path';
@@ -47,6 +50,14 @@ async function main() {
   const countyFilter = arg('county') as FlLaunchCountyId | undefined;
   const waveArg = arg('wave');
   const skipExisting = !hasFlag('re-promote'); // default skip already-promoted
+  /** Phase 5 default: business/agencies only */
+  const entityArg = (arg('entity') || 'business').toLowerCase();
+  const entityFilter: 'business' | 'individual' | 'all' =
+    entityArg === 'all' || entityArg === 'both'
+      ? 'all'
+      : entityArg === 'individual' || entityArg === 'individuals'
+        ? 'individual'
+        : 'business';
 
   let counties = FL_LAUNCH_COUNTIES;
   if (waveArg) {
@@ -132,12 +143,15 @@ async function main() {
     let from = 0;
     const inCounty: DfsProducerRow[] = [];
     for (;;) {
-      const { data: page, error } = await supabase
+      let q = supabase
         .from('dfs_producers')
         .select('*')
         .eq('state', 'FL')
-        .in('county_normalized', countyKeys)
-        .range(from, from + pageSize - 1);
+        .in('county_normalized', countyKeys);
+      if (entityFilter !== 'all') {
+        q = q.eq('entity_type', entityFilter);
+      }
+      const { data: page, error } = await q.range(from, from + pageSize - 1);
 
       if (error) {
         console.error(county.id, error.message);
@@ -149,16 +163,37 @@ async function main() {
       from += pageSize;
     }
 
+    // Already promoted in this county (for remaining-under-cap math)
+    const { count: alreadyInCounty } = await supabase
+      .from('dfs_provider_promotions')
+      .select('id', { count: 'exact', head: true })
+      .eq('launch_county', county.id);
+    const promotedBefore = alreadyInCounty ?? 0;
+    // re-promote may refresh existing rows; new inserts still limited by remaining under cap
+    const remainingCap = skipExisting
+      ? Math.max(0, countyCap - promotedBefore)
+      : countyCap;
+
     console.log(
-      `County ${county.displayName} (wave ${county.wave}): ${inCounty.length} producers staged; cap=${countyCap}`
+      `County ${county.displayName} (wave ${county.wave}): ${inCounty.length} ${entityFilter === 'all' ? 'producers' : entityFilter} staged; promotedBefore=${promotedBefore}; remainingCap=${remainingCap}; cap=${countyCap}`
     );
 
     for (const p of inCounty) {
       if (globalLimit > 0 && stats.promoted >= globalLimit) break;
-      if (countyPromoted >= countyCap) break;
+      if (countyPromoted >= remainingCap) break;
 
       stats.scanned++;
       const row = p as DfsProducerRow;
+
+      // Phase 5 belt-and-suspenders: never promote individuals unless --entity all
+      if (entityFilter === 'business' && row.entity_type === 'individual') {
+        bumpSkip('individual_excluded_phase5');
+        continue;
+      }
+      if (entityFilter === 'individual' && row.entity_type === 'business') {
+        bumpSkip('business_excluded');
+        continue;
+      }
 
       try {
         assertNotSeedPromotion(row.id);
@@ -283,7 +318,9 @@ async function main() {
     );
   }
 
-  console.log(JSON.stringify({ dryRun, ...stats }, null, 2));
+  console.log(
+    JSON.stringify({ dryRun, entityFilter, ...stats }, null, 2)
+  );
 }
 
 main().catch((e) => {

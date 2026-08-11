@@ -4,6 +4,10 @@ import { getHubBySlug, getAllHubParams } from '@/lib/hubs/registry';
 import { HubPageView } from '@/components/hub-page-view';
 import { buildHubMetadata } from '@/lib/hubs/hub-seo';
 import { getHubInventory } from '@/lib/dfs/providers-by-county';
+import {
+  parseHubLoaFilter,
+  specialtyMatchesLoaFilter,
+} from '@/components/hub-specialty-filter';
 
 /** Phase 4 — always read live verified inventory (avoid stale empty static shells) */
 export const dynamic = 'force-dynamic';
@@ -53,17 +57,25 @@ export default async function HubPage({
   if (!hub) notFound();
 
   const page = parsePage(sp.page);
+  const loaFilter = parseHubLoaFilter(sp.loa);
   const inventory = await getHubInventory(hub.slug, { page });
+  const filtered =
+    loaFilter === 'all'
+      ? inventory.providers
+      : inventory.providers.filter((p) =>
+          specialtyMatchesLoaFilter(p.specialties, loaFilter)
+        );
 
   return (
     <HubPageView
       hub={hub}
-      verifiedProviders={inventory.providers}
+      verifiedProviders={filtered}
       verifiedTotal={inventory.total}
-      inventoryShowing={inventory.showing}
+      inventoryShowing={filtered.length}
       inventoryPageSize={inventory.pageSize}
       inventoryPage={inventory.page}
       inventoryTotalPages={inventory.totalPages}
+      loaFilter={loaFilter}
     />
   );
 }

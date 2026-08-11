@@ -4,6 +4,10 @@ import { HubPageView } from '@/components/hub-page-view';
 import { getSouthFloridaHub } from '@/lib/hubs/specialty-topics';
 import { buildHubMetadata } from '@/lib/hubs/hub-seo';
 import { getHubInventory } from '@/lib/dfs/providers-by-county';
+import {
+  parseHubLoaFilter,
+  specialtyMatchesLoaFilter,
+} from '@/components/hub-specialty-filter';
 
 const hub = getSouthFloridaHub();
 
@@ -35,7 +39,14 @@ export default async function SouthFloridaHubPage({
 }) {
   const sp = await searchParams;
   const page = parsePage(sp.page);
+  const loaFilter = parseHubLoaFilter(sp.loa);
   const inventory = await getHubInventory(hub.slug, { page });
+  const filtered =
+    loaFilter === 'all'
+      ? inventory.providers
+      : inventory.providers.filter((p) =>
+          specialtyMatchesLoaFilter(p.specialties, loaFilter)
+        );
 
   return (
     <>
@@ -66,12 +77,13 @@ export default async function SouthFloridaHubPage({
       <HubPageView
         hub={hub}
         canonicalPath="/hubs/south-florida"
-        verifiedProviders={inventory.providers}
+        verifiedProviders={filtered}
         verifiedTotal={inventory.total}
-        inventoryShowing={inventory.showing}
+        inventoryShowing={filtered.length}
         inventoryPageSize={inventory.pageSize}
         inventoryPage={inventory.page}
         inventoryTotalPages={inventory.totalPages}
+        loaFilter={loaFilter}
       />
     </>
   );

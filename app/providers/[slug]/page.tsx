@@ -49,6 +49,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ContextNav } from '@/components/context-nav';
 import { cn } from '@/lib/utils';
 import type { Provider } from '@/types/provider';
+import { loaSpecialtyTags } from '@/lib/dfs/loa';
+import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 
 interface ProviderPageProps {
   params: Promise<{ slug: string }>;
@@ -108,9 +110,16 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   // Belt-and-suspenders: never render non-verified profiles
   if (!canShowAsVerified(resolveProviderTrustState(provider))) notFound();
   const specialties = Array.isArray(provider.specialties) ? provider.specialties : [];
+  const loaTags = loaSpecialtyTags(specialties);
   const insuranceTypes = Array.isArray(provider.insurance_types)
     ? provider.insurance_types
     : [];
+  const locationParts = [
+    provider.city,
+    provider.county ? `${provider.county} County` : null,
+    provider.state,
+    provider.zip,
+  ].filter(Boolean);
 
   let secondarySignals = null;
   try {
@@ -255,78 +264,19 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
       <div className="container mx-auto px-4 py-10 md:py-14">
         <div className="grid lg:grid-cols-[1fr_360px] gap-10">
           <div className="space-y-10">
-            {provider.description && (
-              <section>
-                <h2 className="text-xl font-semibold mb-3">About this agency</h2>
-                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                  {provider.description}
-                </p>
-              </section>
-            )}
-
-            <GovernmentVerificationPanel data={governmentVerification} />
-
-            {secondarySignals ? (
-              <ProviderSecondarySignals signals={secondarySignals} />
-            ) : null}
-
             <section>
-              <h2 className="text-xl font-semibold mb-4">License information</h2>
+              <h2 className="text-xl font-semibold mb-3">What they&apos;re licensed for</h2>
               <Card>
-                <CardContent className="pt-6 space-y-3">
-                  {publicView.verification.licenseNumber && (
-                    <p className="text-sm">
-                      <span className="font-medium">License number:</span>{' '}
-                      {publicView.verification.licenseNumber}
-                    </p>
-                  )}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Verify this agency&apos;s license status directly with the {provider.state}{' '}
-                    insurance department before purchasing coverage.
-                  </p>
-                  <Button asChild variant="outline" size="sm" className="gap-2">
-                    <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
-                      Verify license in {provider.state}
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  </Button>
-                  <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
-                    Research listing only — not an endorsement of this agency.
-                  </p>
-                  <TrustMark />
-                </CardContent>
-              </Card>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-4">Service areas & specialties</h2>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-primary" /> Service area
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm">
-                      {provider.city}, {provider.state}
-                      {provider.zip ? ` ${provider.zip}` : ''}
-                    </p>
-                    <Link
-                      href={`/directory?state=${provider.state}&city=${encodeURIComponent(provider.city)}`}
-                      className="mt-2 inline-block text-sm text-primary hover:underline"
-                    >
-                      More agencies in {provider.city} →
-                    </Link>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base flex items-center gap-2">
-                      <Shield className="h-4 w-4 text-primary" /> Coverage types
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
+                <CardContent className="pt-6 space-y-4">
+                  {loaTags.length > 0 ? (
+                    <div className="flex flex-wrap gap-1.5">
+                      {loaTags.map((tag) => (
+                        <Badge key={tag} variant="secondary">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  ) : (
                     <div className="flex flex-wrap gap-1.5">
                       {insuranceTypes.map((t) => (
                         <Badge key={t} variant="secondary">
@@ -334,22 +284,147 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         </Badge>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
-              {specialties.length > 0 && (
-                <p className="mt-4 text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">Specialties:</span>{' '}
-                  {specialties.join(' · ')}
-                </p>
-              )}
-              {publicView.showCarriers && publicView.carriers.length > 0 && (
-                <p className="mt-2 text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">Represented carriers:</span>{' '}
-                  {publicView.carriers.join(', ')}
-                </p>
-              )}
+                  )}
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Capability tags come from Florida DFS lines of authority on the public license
+                    record. We never infer Medicare-certified status or invent carrier appointments
+                    from DFS alone.
+                  </p>
+                  {provider.description ? (
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line border-t pt-4">
+                      {provider.description}
+                    </p>
+                  ) : null}
+                </CardContent>
+              </Card>
             </section>
+
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Where they&apos;re located</h2>
+              <Card>
+                <CardContent className="pt-6 space-y-2">
+                  <p className="text-sm flex items-start gap-2">
+                    <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden />
+                    <span>{locationParts.join(', ')}</span>
+                  </p>
+                  {publicView.phone ? (
+                    <p className="text-sm flex items-center gap-2">
+                      <Phone className="h-4 w-4 text-primary shrink-0" aria-hidden />
+                      <a
+                        href={`tel:${publicView.phone.replace(/\D/g, '')}`}
+                        className="text-primary hover:underline"
+                      >
+                        {publicView.phone}
+                      </a>
+                    </p>
+                  ) : null}
+                  <Link
+                    href={`/directory?state=${provider.state}&city=${encodeURIComponent(provider.city)}`}
+                    className="inline-block text-sm text-primary hover:underline pt-1"
+                  >
+                    More verified agencies in {provider.city} →
+                  </Link>
+                </CardContent>
+              </Card>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold mb-4">How verification was determined</h2>
+              <Card>
+                <CardContent className="pt-6 space-y-3">
+                  {publicView.verification.licenseNumber && (
+                    <p className="text-sm">
+                      <span className="font-medium">License number:</span>{' '}
+                      <span className="tabular-nums">
+                        {publicView.verification.licenseNumber}
+                      </span>
+                    </p>
+                  )}
+                  {publicView.verification.sourceLabel ? (
+                    <p className="text-sm">
+                      <span className="font-medium">Source:</span>{' '}
+                      {publicView.verification.sourceLabel}
+                    </p>
+                  ) : null}
+                  {publicView.verification.lastCheckedLabel ? (
+                    <p className="text-sm">
+                      <span className="font-medium">Last checked:</span>{' '}
+                      {publicView.verification.lastCheckedLabel}
+                    </p>
+                  ) : null}
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {publicView.verification.summary} Public listings require a re-checkable license
+                    number, Florida DFS as regulator, and Phase 1 verified trust gates. Status can
+                    change — always re-check on official tools before you enroll.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild variant="outline" size="sm" className="gap-2">
+                      <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
+                        Verify license in {provider.state}
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    </Button>
+                    {provider.state === 'FL' ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={FL_DFS_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
+                          Florida DFS licensee search
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
+                    Research listing only — not an endorsement, rating, or appointment guarantee.
+                  </p>
+                  <TrustMark />
+                </CardContent>
+              </Card>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Research next steps</h2>
+              <Card>
+                <CardContent className="pt-6">
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>
+                      <Link href="/tools/license-verification" className="text-primary hover:underline">
+                        License verification tool
+                      </Link>{' '}
+                      — re-check state DOI records
+                    </li>
+                    <li>
+                      <Link href="/methodology" className="text-primary hover:underline">
+                        Methodology
+                      </Link>{' '}
+                      — how Insurance Trust Hub verifies listings
+                    </li>
+                    <li>
+                      <Link href="/tools" className="text-primary hover:underline">
+                        Research tools
+                      </Link>{' '}
+                      — marketplace landscape, needs assessment, cost planners
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </section>
+
+            <GovernmentVerificationPanel data={governmentVerification} />
+
+            {secondarySignals ? (
+              <ProviderSecondarySignals signals={secondarySignals} />
+            ) : null}
+
+            {publicView.showCarriers && publicView.carriers.length > 0 && (
+              <section>
+                <h2 className="text-xl font-semibold mb-2">Carrier notes</h2>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-medium text-foreground">Listed when sourced:</span>{' '}
+                  {publicView.carriers.join(', ')}. Appointments (when shown later) are regulatory
+                  snapshots, not endorsements.
+                </p>
+              </section>
+            )}
 
             {suitsRelocating && (
               <section className="rounded-xl border border-trust/30 bg-trust/5 p-6">

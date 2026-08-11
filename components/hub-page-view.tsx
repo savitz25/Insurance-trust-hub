@@ -20,6 +20,10 @@ import {
 } from '@/lib/insurance/trust/provider-trust-state';
 import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
 import { HubInventoryPagination } from '@/components/hub-inventory-pagination';
+import {
+  HubSpecialtyFilter,
+  type HubLoaFilterId,
+} from '@/components/hub-specialty-filter';
 import { inventoryScopeNoteForHub } from '@/lib/dfs/launch-counties';
 
 interface HubPageViewProps {
@@ -39,6 +43,8 @@ interface HubPageViewProps {
   /** 1-based page index for hub inventory */
   inventoryPage?: number;
   inventoryTotalPages?: number;
+  /** Phase 5 LOA specialty chip filter */
+  loaFilter?: HubLoaFilterId;
 }
 
 const COUNTY_DASHBOARD_BY_HUB_SLUG: Record<string, string> = {
@@ -121,6 +127,7 @@ export function HubPageView({
   inventoryPageSize,
   inventoryPage = 1,
   inventoryTotalPages = 1,
+  loaFilter = 'all',
 }: HubPageViewProps) {
   const { stateSlug: state, slug } = hub;
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
@@ -342,13 +349,27 @@ export function HubPageView({
                     {inventoryScope}
                   </p>
                 ) : null}
-                {dbProviders.length > 0 ? (
+                {dbProviders.length > 0 || verifiedCount > 0 ? (
                   <>
                     {isCapped ? (
                       <p className="mb-4 text-sm text-muted-foreground">
                         Showing {showingCount.toLocaleString()} of{' '}
-                        {verifiedCount.toLocaleString()} verified research listings
+                        {verifiedCount.toLocaleString()} verified research agencies
                         {pageSize ? ` (${pageSize} per page)` : ''}.
+                      </p>
+                    ) : verifiedCount > 0 ? (
+                      <p className="mb-4 text-sm text-muted-foreground">
+                        {verifiedCount.toLocaleString()} verified research agenc
+                        {verifiedCount === 1 ? 'y' : 'ies'} in this market.
+                      </p>
+                    ) : null}
+                    {verifiedCount > 0 ? (
+                      <HubSpecialtyFilter basePath={path} active={loaFilter} />
+                    ) : null}
+                    {loaFilter !== 'all' && dbProviders.length === 0 ? (
+                      <p className="mb-4 text-sm text-muted-foreground">
+                        No agencies on this page match that specialty filter. Try All specialties
+                        or another page of the inventory.
                       </p>
                     ) : null}
                     <div className="grid gap-4 sm:grid-cols-2">

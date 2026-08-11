@@ -34,6 +34,11 @@ export const SPECIALTIES = [
   'Life & Annuities',
   'Small Business',
   'Bilingual Services',
+  /** Phase 5 — honest DFS LOA capability tags (never invent Medicare-certified) */
+  'Health',
+  'Life',
+  'Property & Casualty',
+  'Agency',
 ] as const;
 
 export type Specialty = (typeof SPECIALTIES)[number];
