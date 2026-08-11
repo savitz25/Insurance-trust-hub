@@ -13,6 +13,7 @@ import {
   FL_DFS_LOOKUP_URL,
   FL_DFS_REGULATOR,
   FL_DFS_SOURCE_URL,
+  matchLaunchCounty,
 } from '@/lib/dfs/launch-counties';
 import {
   capabilitiesToInsuranceTypes,
@@ -201,6 +202,7 @@ export function evaluatePromotionEligibility(
     ],
   };
 
+  const launchCounty = matchLaunchCounty(county);
   const contact: ContactInfo = {
     phone: producer.phone ?? undefined,
     // email stored only if present — product rule: do not feature in v1 cards
@@ -211,6 +213,19 @@ export function evaluatePromotionEligibility(
       state: 'FL',
       zip: producer.zip || '',
     },
+    // Structured geo for hub matching (preferred over short_description text)
+    ...(launchCounty
+      ? {
+          county: launchCounty.displayName,
+          county_normalized: launchCounty.id.replace(/_/g, '-').toUpperCase(),
+          launch_county_id: launchCounty.id,
+        }
+      : county
+        ? {
+            county: county.trim(),
+            county_normalized: county.trim().toUpperCase().replace(/\s+COUNTY$/i, '').trim(),
+          }
+        : {}),
   };
 
   const providerInsert: DbProviderInsert = {

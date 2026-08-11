@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getHubBySlug, getAllHubParams } from '@/lib/hubs/registry';
 import { HubPageView } from '@/components/hub-page-view';
 import { buildHubMetadata } from '@/lib/hubs/hub-seo';
-import { getVerifiedProvidersForHub } from '@/lib/dfs/providers-by-county';
+import { getHubInventory } from '@/lib/dfs/providers-by-county';
 
 /** Phase 4 — always read live verified inventory (avoid stale empty static shells) */
 export const dynamic = 'force-dynamic';
@@ -22,13 +22,13 @@ export async function generateMetadata({
   const hub = getHubBySlug(state, slug);
   if (!hub) return { title: 'Insurance Hub | Insurance Trust Hub' };
 
-  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
-  const health = verifiedProviders.filter((p) =>
+  const inventory = await getHubInventory(hub.slug);
+  const health = inventory.providers.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
 
   return buildHubMetadata(hub, `/hubs/${state}/${slug}`, {
-    total: verifiedProviders.length,
+    total: inventory.total,
     health,
   });
 }
@@ -42,12 +42,15 @@ export default async function HubPage({
   const hub = getHubBySlug(state, slug);
   if (!hub) notFound();
 
-  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
+  const inventory = await getHubInventory(hub.slug);
 
   return (
     <HubPageView
       hub={hub}
-      verifiedProviders={verifiedProviders}
+      verifiedProviders={inventory.providers}
+      verifiedTotal={inventory.total}
+      inventoryShowing={inventory.showing}
+      inventoryPageSize={inventory.pageSize}
     />
   );
 }

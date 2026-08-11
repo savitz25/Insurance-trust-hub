@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { HubPageView } from '@/components/hub-page-view';
 import { getSouthFloridaHub } from '@/lib/hubs/specialty-topics';
 import { buildHubMetadata } from '@/lib/hubs/hub-seo';
-import { getVerifiedProvidersForHub } from '@/lib/dfs/providers-by-county';
+import { getHubInventory } from '@/lib/dfs/providers-by-county';
 
 const hub = getSouthFloridaHub();
 
@@ -11,18 +11,18 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
-  const health = verifiedProviders.filter((p) =>
+  const inventory = await getHubInventory(hub.slug);
+  const health = inventory.providers.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
   return buildHubMetadata(hub, '/hubs/south-florida', {
-    total: verifiedProviders.length,
+    total: inventory.total,
     health,
   });
 }
 
 export default async function SouthFloridaHubPage() {
-  const verifiedProviders = await getVerifiedProvidersForHub(hub.slug);
+  const inventory = await getHubInventory(hub.slug);
 
   return (
     <>
@@ -53,7 +53,10 @@ export default async function SouthFloridaHubPage() {
       <HubPageView
         hub={hub}
         canonicalPath="/hubs/south-florida"
-        verifiedProviders={verifiedProviders}
+        verifiedProviders={inventory.providers}
+        verifiedTotal={inventory.total}
+        inventoryShowing={inventory.showing}
+        inventoryPageSize={inventory.pageSize}
       />
     </>
   );

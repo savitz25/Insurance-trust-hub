@@ -23,8 +23,17 @@ import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
 interface HubPageViewProps {
   hub: InsuranceHub;
   canonicalPath?: string;
-  /** Phase 4 — DFS-promoted verified providers for this market */
+  /** Phase 4 — DFS-promoted verified providers for this market (page of cards) */
   verifiedProviders?: Provider[];
+  /**
+   * True verified match total for the hub (may exceed rendered cards).
+   * When omitted, falls back to verifiedProviders.length.
+   */
+  verifiedTotal?: number;
+  /** Cards shown on this page */
+  inventoryShowing?: number;
+  /** Explicit page size cap */
+  inventoryPageSize?: number;
 }
 
 const COUNTY_DASHBOARD_BY_HUB_SLUG: Record<string, string> = {
@@ -102,13 +111,24 @@ export function HubPageView({
   hub,
   canonicalPath,
   verifiedProviders = [],
+  verifiedTotal,
+  inventoryShowing,
+  inventoryPageSize,
 }: HubPageViewProps) {
   const { stateSlug: state, slug } = hub;
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
   const dbProviders = filterVerifiedProviders(verifiedProviders);
   const baseStats = getHubStats(hub);
-  // Live verified count = rendered DB rows only (Phase 4). Never fall back to curated seed counts.
-  const verifiedCount = dbProviders.length;
+  // Market total = exact matched inventory (not silent page-size cap)
+  const verifiedCount =
+    typeof verifiedTotal === 'number' && verifiedTotal >= 0
+      ? verifiedTotal
+      : dbProviders.length;
+  const showingCount =
+    typeof inventoryShowing === 'number' ? inventoryShowing : dbProviders.length;
+  const pageSize =
+    typeof inventoryPageSize === 'number' ? inventoryPageSize : dbProviders.length;
+  const isCapped = verifiedCount > showingCount;
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -197,6 +217,12 @@ export function HubPageView({
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
             {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
           </p>
+          {isCapped && verifiedCount > 0 ? (
+            <p className="mt-2 text-xs text-primary-foreground/60 max-w-2xl mx-auto">
+              Showing {showingCount} of {verifiedCount.toLocaleString()} verified research
+              listings on this page (page size {pageSize}).
+            </p>
+          ) : null}
           <div className="mt-6 flex justify-center">
             <ZipSearch defaultZip={hub.zipCodes[0]} className="[&_input]:bg-white [&_button]:bg-trust" />
           </div>
@@ -294,11 +320,20 @@ export function HubPageView({
                   </div>
                 ) : null}
                 {dbProviders.length > 0 ? (
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {dbProviders.map((p) => (
-                      <ProviderCard key={p.id} provider={p} />
-                    ))}
-                  </div>
+                  <>
+                    {isCapped ? (
+                      <p className="mb-4 text-sm text-muted-foreground">
+                        Showing {showingCount.toLocaleString()} of{' '}
+                        {verifiedCount.toLocaleString()} verified research listings
+                        {pageSize ? ` (up to ${pageSize} per page)` : ''}.
+                      </p>
+                    ) : null}
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {dbProviders.map((p) => (
+                        <ProviderCard key={p.id} provider={p} />
+                      ))}
+                    </div>
+                  </>
                 ) : (
                   <p className="text-sm text-muted-foreground">{EMPTY_MARKET_COPY.section}</p>
                 )}

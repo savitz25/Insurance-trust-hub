@@ -48,6 +48,13 @@ export interface ContactInfo {
   email?: string;
   website?: string;
   address?: ContactAddress;
+  /**
+   * Phase 4 — DFS launch geography (structured; preferred over short_description tags).
+   * display e.g. "Duval"; normalized e.g. "DUVAL" / "MIAMI-DADE".
+   */
+  county?: string;
+  county_normalized?: string;
+  launch_county_id?: string;
   /** Phase 6B2 — Google/BBB snapshots nested under contact jsonb */
   enrichment?: import('@/lib/enrichment/types').ProviderEnrichment;
 }

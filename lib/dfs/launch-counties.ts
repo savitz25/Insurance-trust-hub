@@ -29,7 +29,15 @@ export const FL_LAUNCH_COUNTIES: FlLaunchCounty[] = [
   {
     id: 'miami_dade',
     displayName: 'Miami-Dade',
-    aliases: ['MIAMI-DADE', 'MIAMI DADE', 'DADE', 'MIAMI-DADE COUNTY', 'DADE COUNTY'],
+    // DFS often labels as Dade; promote tags "(Dade County)" and/or "(Miami-Dade County)"
+    aliases: [
+      'MIAMI-DADE',
+      'MIAMI DADE',
+      'DADE',
+      'MIAMI-DADE COUNTY',
+      'DADE COUNTY',
+      'MIAMI DADE COUNTY',
+    ],
     hubSlugs: ['miami-dade', 'miami-fort-lauderdale'],
   },
   {

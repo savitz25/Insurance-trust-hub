@@ -5,7 +5,12 @@ import {
   isSupabaseConfigured,
 } from '@/lib/supabase/config';
 import { createPublicClient } from '@/lib/supabase/public';
-import { getVerifiedProvidersForHub } from '@/lib/dfs/providers-by-county';
+import {
+  countVerifiedByLaunchCounty,
+  countVerifiedProvidersForHub,
+  getHubInventory,
+  HUB_PAGE_SIZE,
+} from '@/lib/dfs/providers-by-county';
 import { getProviderBySlug } from '@/lib/providers/queries';
 
 export const dynamic = 'force-dynamic';
@@ -24,7 +29,7 @@ function jwtProjectRef(jwt: string | undefined): string | null {
 }
 
 /**
- * Public inventory probe — confirms anon can read DFS-promoted providers.
+ * Public inventory probe — env match + county match totals.
  * No secrets returned.
  */
 export async function GET() {
@@ -52,7 +57,6 @@ export async function GET() {
     });
   }
 
-  // Raw REST probe (bypass supabase-js shape)
   let restStatus: number | null = null;
   let restCount: string | null = null;
   let restBodySnippet: string | null = null;
@@ -79,20 +83,8 @@ export async function GET() {
   let verifiedFlCount: number | null = null;
   let queryError: string | null = null;
   let sampleSlug: string | null = null;
-  let anyProvidersCount: number | null = null;
 
   if (supabase) {
-    const anyRes = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true });
-    anyProvidersCount = anyRes.count ?? null;
-    if (anyRes.error) {
-      queryError =
-        anyRes.error.message ||
-        anyRes.error.code ||
-        JSON.stringify(anyRes.error);
-    }
-
     const { count, error } = await supabase
       .from('providers')
       .select('id', { count: 'exact', head: true })
@@ -120,15 +112,31 @@ export async function GET() {
     sampleSlug = sample?.slug ?? null;
   }
 
-  const jax = await getVerifiedProvidersForHub('jacksonville', { limit: 5 });
+  const byCounty = await countVerifiedByLaunchCounty();
+  const hubTotals = {
+    jacksonville: await countVerifiedProvidersForHub('jacksonville'),
+    'miami-dade': await countVerifiedProvidersForHub('miami-dade'),
+    'broward-county': await countVerifiedProvidersForHub('broward-county'),
+    'palm-beach-county': await countVerifiedProvidersForHub('palm-beach-county'),
+    tampa: await countVerifiedProvidersForHub('tampa'),
+    'miami-fort-lauderdale': await countVerifiedProvidersForHub(
+      'miami-fort-lauderdale'
+    ),
+  };
+
+  const jax = await getHubInventory('jacksonville', { pageSize: 5 });
   const profile = sampleSlug ? await getProviderBySlug(sampleSlug) : null;
+
+  const restOk = restStatus === 200 || restStatus === 206;
+  const countyOk = (byCounty.duval?.total ?? 0) > 100;
 
   return NextResponse.json({
     ok:
       keyMatchesHost &&
-      restStatus === 200 &&
+      restOk &&
       (verifiedFlCount ?? 0) > 0 &&
-      jax.length > 0,
+      countyOk &&
+      Boolean(profile),
     supabaseConfigured: true,
     supabaseHost: host,
     anonKeyRef: anonRef,
@@ -136,11 +144,23 @@ export async function GET() {
     restStatus,
     restCount,
     restBodySnippet,
-    anyProvidersCount,
     verifiedFlCount,
     queryError,
-    jacksonvilleSample: jax.length,
-    jacksonvilleNames: jax.slice(0, 3).map((p) => p.name),
+    /** Matching strategy + intentional page cap */
+    matching: {
+      strategy:
+        'structured contact.county/launch_county_id when present; else short_description "(X County)" tags from DFS promote; Phase 1 verified-only',
+      hubPageSize: HUB_PAGE_SIZE,
+      note: 'Hub hero/SEO totals use exact match count; cards show first hubPageSize rows with explicit showing X of Y',
+    },
+    byLaunchCounty: byCounty,
+    hubTotals,
+    jacksonville: {
+      total: jax.total,
+      showing: jax.showing,
+      pageSize: jax.pageSize,
+      sampleNames: jax.providers.slice(0, 3).map((p) => p.name),
+    },
     sampleSlug,
     profileResolves: Boolean(profile),
   });

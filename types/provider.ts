@@ -10,6 +10,9 @@ export interface Provider {
   description?: string | null;
   city: string;
   state: string;
+  /** Structured launch county when present (DFS promote contact.county) */
+  county?: string | null;
+  county_normalized?: string | null;
   zip?: string | null;
   phone?: string | null;
   website?: string | null;
