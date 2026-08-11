@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'dallas-fort-worth';
 
-/** 12 verified DFW metro agents — Dallas, Tarrant, Collin, Denton, Ellis */
+/** Curated research catalog (not public verified inventory) — DFW metro agents — Dallas, Tarrant, Collin, Denton, Ellis */
 export const DALLAS_FORT_WORTH_AGENTS: HubAgent[] = [
   {
     id: 'custom-health-plans-dfw',

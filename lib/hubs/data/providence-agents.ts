@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'providence';
 
-/** 12 verified Providence metro agents — Providence County */
+/** Curated research catalog (not public verified inventory) — Providence metro agents — Providence County */
 export const PROVIDENCE_AGENTS: HubAgent[] = [
   {
     id: 'christian-soucy-providence',

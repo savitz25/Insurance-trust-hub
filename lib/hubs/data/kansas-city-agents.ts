@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'kansas-city';
 
-/** 12 verified Kansas City metro agents — Jackson, Clay, Platte (MO) + Johnson, Wyandotte (KS) */
+/** Curated research catalog (not public verified inventory) — Kansas City metro agents — Jackson, Clay, Platte (MO) + Johnson, Wyandotte (KS) */
 export const KANSAS_CITY_AGENTS: HubAgent[] = [
   {
     id: 'jeffrey-slibowski-kansas-city',

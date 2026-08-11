@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'riverside-san-bernardino';
 
-/** 12 verified Inland Empire agents — Riverside, San Bernardino, Ontario, Moreno Valley */
+/** Curated research catalog (not public verified inventory) — Inland Empire agents — Riverside, San Bernardino, Ontario, Moreno Valley */
 export const INLAND_EMPIRE_AGENTS: HubAgent[] = [
   {
     id: 'cynthia-nakaya-inland-empire',

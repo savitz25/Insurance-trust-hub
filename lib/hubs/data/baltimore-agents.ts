@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'baltimore';
 
-/** 12 verified Baltimore metro agents — Baltimore City, Baltimore County */
+/** Curated research catalog (not public verified inventory) — Baltimore metro agents — Baltimore City, Baltimore County */
 export const BALTIMORE_AGENTS: HubAgent[] = [
   {
     id: 'gerard-washington-baltimore',

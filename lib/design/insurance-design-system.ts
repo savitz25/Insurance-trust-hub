@@ -64,123 +64,127 @@ export const INSURANCE_INDEPENDENCE_LINE =
 
 export const INSURANCE_LAYER_LABEL = 'Protection & Coverage';
 
-/** Phase 2 — homepage hero (Protection & Coverage research layer) */
+/** Phase 2 — homepage hero (independent insurance research product) */
 export const INSURANCE_HERO = {
-  eyebrow: 'Insurance Trust Hub  ·  Protection & Coverage',
-  headline: 'Verify. Compare. Protect with confidence.',
+  eyebrow: 'Insurance Trust Hub  ·  Independent research',
+  headline: 'Independent insurance research — for decisions that matter.',
   support:
-    'Independent research for insurance coverage decisions. We surface verified public sources — including DOI and license context — with no paid placements and no lead fees. You decide.',
-  primaryCta: { label: 'Compare coverage', href: '/directory' },
-  secondaryCta: { label: 'Explore guides', href: '/resources' },
+    'Health, Medicare, ACA Marketplace, and verification tools built on public data. No paid placements. No lead fees. Official enrollment stays official. You decide.',
+  primaryCta: { label: 'Open Research Center', href: '/tools' },
+  secondaryCta: {
+    label: 'Marketplace plan research',
+    href: '/tools/marketplace-plan-research',
+  },
   philosophy: 'We cite. You decide.',
-  tagline: 'Cover what counts. Choose well.',
+  tagline: 'Research first. Verify always.',
   networkLine: 'The Protection & Coverage layer of the Ask Trust Hub network.',
   chips: [
-    { id: 'doi', label: 'DOI / license context' },
     { id: 'independent', label: 'Independent research' },
-    { id: 'no-paid', label: 'No paid placements' },
-    { id: 'guidance', label: 'Clear coverage guidance' },
+    { id: 'no-lead', label: 'No lead selling' },
+    { id: 'public-data', label: 'Public data first' },
+    { id: 'verified-only', label: 'Verified listings only' },
   ],
-  searchTitle: 'Find licensed agencies',
-  searchHint: 'Enter a ZIP and optional coverage types to start local research.',
+  searchTitle: 'Start where you live',
+  searchHint:
+    'Enter a ZIP for local Marketplace research — or open the Research Center for the full toolkit.',
 } as const;
 
-/** Phase 3 — homepage sections below the hero */
+/** Phase 2 — featured tools block (three-question product) */
 export const INSURANCE_TOOLS = {
-  eyebrow: 'Key tools',
-  title: 'What you can do here',
+  eyebrow: 'Flagship research tools',
+  title: 'Start with the tools that answer real questions',
   support:
-    'Practical research tools for coverage decisions — not a quote marketplace. Start where you need clarity.',
+    'Marketplace landscapes, cost and subsidy education, and CMS complaint signals — not a quote marketplace.',
   items: [
     {
-      id: 'compare',
-      title: 'Compare coverage',
+      id: 'marketplace',
+      title: 'Marketplace plan research',
       description:
-        'Browse licensed agencies and public signals side-by-side — not paid rankings or sponsored slots.',
-      href: '/directory',
-      cta: 'Open directory',
+        'Local ACA Marketplace landscape by ZIP — plan counts, issuer context, and research paths.',
+      href: '/tools/marketplace-plan-research',
+      cta: 'Research local plans',
     },
     {
-      id: 'verify',
-      title: 'Verify DOI / license',
+      id: 'aca',
+      title: 'ACA Coverage & Savings Planner',
       description:
-        'Use license research tools and public DOI pathways so you can re-check Active status yourself.',
-      href: '/tools/license-verification',
-      cta: 'Verify a license',
+        'Educational premium tax credit and CSR context from ZIP, ages, and income.',
+      href: '/calculators/aca-subsidy',
+      cta: 'Open ACA planner',
     },
     {
-      id: 'guides',
-      title: 'Coverage guides',
+      id: 'cost',
+      title: 'Cost & Coverage Planner',
       description:
-        'Calm, educational articles that explain what matters before you enroll or switch coverage.',
-      href: '/resources',
-      cta: 'Explore guides',
+        'Total annual cost scenarios for health coverage — premium plus expected care use.',
+      href: '/tools/cost-estimator',
+      cta: 'Estimate annual cost',
     },
     {
-      id: 'tools',
-      title: 'Tools & calculators',
+      id: 'complaints',
+      title: 'Plan Complaint Index',
       description:
-        'Educational planners for costs, ACA, Medicare, and related coverage questions.',
-      href: '/calculators',
-      cta: 'Open tools',
+        'CMS complaint measures for Medicare Advantage and Part D contracts — transparent methodology.',
+      href: '/data/plan-complaint-index',
+      cta: 'Open Complaint Index',
     },
   ],
 } as const;
 
 export const INSURANCE_HOW_IT_WORKS = {
-  eyebrow: 'How it works',
-  title: 'Independent research, step by step',
+  eyebrow: 'How research works here',
+  title: 'Three questions. Clear paths. No pressure.',
   support:
-    'A calm path from public records to your decision — with no pressure and no paid placements.',
+    'Every major entry point helps you answer what you need, what exists locally, and how to verify — without inventing inventory.',
   steps: [
     {
       step: '01',
-      title: 'Start with verified public sources',
+      title: 'Clarify coverage need',
       description:
-        'Begin with directory listings and DOI / license context drawn from public research signals we surface.',
+        'Use Coverage Compass, ACA/Medicare paths, and educational planners when you are not sure what to research first.',
     },
     {
       step: '02',
-      title: 'Compare coverage options',
+      title: 'Map options where you live',
       description:
-        'Review agencies and educational tools side-by-side — never sponsored order or lead-fee ranking.',
+        'Marketplace tools, county intelligence, carriers, and hubs. Verified agencies only when real verified inventory exists.',
     },
     {
       step: '03',
-      title: 'Use guides to understand what matters',
+      title: 'Verify before you decide',
       description:
-        'Read clear coverage guidance so you know which questions to ask before you act.',
+        'Complaint Index, license verification, CMS provider signals, and methodology — re-check primary sources yourself.',
     },
     {
       step: '04',
-      title: 'You decide',
+      title: 'Save and continue on your terms',
       description:
-        'Re-check licenses on official DOI pathways, compare offers yourself, and protect with confidence. We cite. You decide.',
+        'My Insurance holds research history. Enrollment stays on HealthCare.gov, state Marketplaces, Medicare.gov, or a licensed professional you choose.',
     },
   ],
 } as const;
 
 export const INSURANCE_TRUST = {
-  eyebrow: 'Trust & methodology',
+  eyebrow: 'Trust principles',
   title: 'Built for confidence — not conversion',
   support:
-    'Insurance Trust Hub is independent research only. We surface verified public sources so you can decide with clearer context.',
+    'Independent research only. Public sources first. Verified agency inventory only when real. Official enrollment pathways remain official.',
   pillars: [
     {
-      title: 'Independent research only',
-      body: 'We do not sell policies, operate a quote marketplace, or sell ranking position.',
+      title: 'No lead selling',
+      body: 'We do not sell quote funnels, ranking slots, or paid introductions.',
     },
     {
-      title: 'Verified public sources',
-      body: 'DOI / license context and other public signals are cited so you can re-check primary records yourself.',
+      title: 'Educational research only',
+      body: 'Tools estimate and explain. They are not insurance advice or enrollment.',
     },
     {
-      title: 'No paid placements or lead fees',
-      body: 'Directory order and research aids are not sold. We do not collect lead fees for introductions.',
+      title: 'Official pathways stay official',
+      body: 'Enrollment remains on HealthCare.gov, state Marketplaces, Medicare.gov, and licensed professionals you choose.',
     },
     {
-      title: 'Clear separation of roles',
-      body: 'Research tools stay on this hub. Any relationship with an external provider is yours to evaluate — not ours to sell.',
+      title: 'Verified inventory only',
+      body: 'Empty markets stay empty. We never invent agencies or fake completeness.',
     },
   ],
   primaryCta: { label: 'Read our methodology', href: '/methodology' },
@@ -191,57 +195,57 @@ export const INSURANCE_TRUST = {
   },
   tertiaryCta: { label: 'About & Trust', href: '/about' },
   philosophy: 'We cite. You decide.',
-  tagline: 'Cover what counts. Choose well.',
+  tagline: 'Research first. Verify always.',
 } as const;
 
 export const INSURANCE_PATHWAYS = {
-  eyebrow: 'Popular pathways',
-  title: 'Where people start',
+  eyebrow: 'Local research',
+  title: 'Options where you live',
   support:
-    'Jump into common coverage types, markets, protection goals, or the tools you are most likely to need next.',
+    'Markets, guides, and ZIP-based tools. Agent directories only surface verified research inventory — empty markets stay honest.',
   coverageTypes: [
-    { label: 'Health', href: '/directory?type=health' },
-    { label: 'Medicare', href: '/directory?type=medicare' },
-    { label: 'Auto', href: '/directory?type=auto' },
-    { label: 'Homeowners', href: '/directory?type=homeowners' },
-    { label: 'Life', href: '/directory?type=life' },
-    { label: 'Renters', href: '/directory?type=renters' },
+    { label: 'Health / ACA', href: '/hubs/health-insurance' },
+    { label: 'Medicare', href: '/medicare' },
+    { label: 'ACA Marketplace', href: '/hubs/aca' },
+    { label: 'Auto (research)', href: '/directory?type=auto' },
+    { label: 'Home (research)', href: '/directory?type=homeowners' },
+    { label: 'Renters (research)', href: '/directory?type=renters' },
   ],
   markets: [
-    { label: 'Florida', href: '/destinations/florida' },
-    { label: 'Texas', href: '/destinations/texas' },
-    { label: 'California', href: '/destinations/california' },
     { label: 'All hubs', href: '/hubs' },
     { label: 'State browser', href: '/hubs/browse' },
+    { label: 'ACA guides', href: '/guides' },
+    { label: 'Marketplace counties', href: '/marketplace' },
+    { label: 'Medicare counties', href: '/data/counties' },
   ],
   goals: [
     {
-      label: 'Protect my family',
-      href: '/resources',
-      detail: 'Guides for personal coverage decisions',
+      label: 'Local Marketplace landscape',
+      href: '/tools/marketplace-plan-research',
+      detail: 'ZIP-based ACA research',
     },
     {
-      label: 'Verify an agency',
+      label: 'Verify a license',
       href: '/tools/license-verification',
-      detail: 'DOI / license research tools',
+      detail: 'Official DOI pathways',
     },
     {
-      label: 'Compare options',
+      label: 'Complaint Index',
+      href: '/data/plan-complaint-index',
+      detail: 'CMS MA / Part D signals',
+    },
+    {
+      label: 'Verified directory',
       href: '/directory',
-      detail: 'Licensed directory research',
-    },
-    {
-      label: 'Estimate costs',
-      href: '/calculators',
-      detail: 'Educational planners and tools',
+      detail: 'Only when real inventory exists',
     },
   ],
   tools: [
-    { label: 'Agency directory', href: '/directory' },
-    { label: 'License verification', href: '/tools/license-verification' },
-    { label: 'Calculators', href: '/calculators' },
+    { label: 'Research Center', href: '/tools' },
     { label: 'My Insurance', href: '/my-insurance' },
     { label: 'Methodology', href: '/methodology' },
+    { label: 'Calculators', href: '/calculators' },
+    { label: 'About & trust', href: '/about' },
   ],
 } as const;
 
@@ -259,16 +263,17 @@ export const INSURANCE_NETWORK_SECTION = {
  * Switch Hub is a separate control.
  */
 export const INSURANCE_HEADER_NAV = [
-  { href: '/directory', label: 'Compare coverage' },
-  { href: '/tools/license-verification', label: 'Verify DOI / license' },
-  { href: '/resources', label: 'Guides' },
-  { href: '/calculators', label: 'Tools' },
+  { href: '/tools', label: 'Research' },
+  { href: '/tools/marketplace-plan-research', label: 'Marketplace' },
+  { href: '/medicare', label: 'Medicare' },
+  { href: '/guides', label: 'Guides' },
+  { href: '/directory', label: 'Directory' },
   { href: '/methodology', label: 'Methodology' },
 ] as const;
 
 export const INSURANCE_HEADER_CTA = {
-  label: 'Compare coverage',
-  href: '/directory',
+  label: 'Research Center',
+  href: '/tools',
 } as const;
 
 /** Network switcher + footer network (sibling hubs + parent Ask) */
@@ -298,35 +303,35 @@ export const INSURANCE_NETWORK_LINKS = [
 
 export const INSURANCE_FOOTER_COLUMNS = [
   {
-    title: 'Research',
+    title: 'Coverage need',
     links: [
-      { href: '/tools', label: 'Research Center' },
+      { href: '/tools/needs-assessment', label: 'Coverage Compass' },
+      { href: '/calculators/aca-subsidy', label: 'ACA Savings Planner' },
+      { href: '/tools/cost-estimator', label: 'Cost & Coverage Planner' },
+      { href: '/medicare', label: 'Medicare research' },
+      { href: '/guides', label: 'ACA guides' },
+    ],
+  },
+  {
+    title: 'Local options',
+    links: [
+      { href: '/tools/marketplace-plan-research', label: 'Marketplace plans near you' },
       { href: '/tools/aca-plan-explorer', label: 'ACA Plan Explorer' },
-      { href: '/marketplace', label: 'Marketplace counties' },
-      { href: '/medicare', label: 'Medicare intelligence' },
+      { href: '/hubs', label: 'Market hubs' },
+      { href: '/directory', label: 'Verified directory' },
       { href: '/carriers', label: 'Carrier research' },
+    ],
+  },
+  {
+    title: 'Verify & trust',
+    links: [
       { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
-      { href: '/directory', label: 'Agency directory' },
-      { href: '/calculators', label: 'Calculators' },
-    ],
-  },
-  {
-    title: 'Trust',
-    links: [
+      { href: '/tools/license-verification', label: 'License verification' },
       { href: '/methodology', label: 'Methodology' },
-      { href: '/about', label: 'About & Trust' },
+      { href: '/my-insurance', label: 'My Insurance' },
       { href: 'https://www.asktrusthub.com/promise', label: 'Independence Policy', external: true },
-      { href: 'https://www.asktrusthub.com/trust', label: 'Trust Center', external: true },
-      { href: '/contact', label: 'Contact' },
-      { href: '/my-insurance', label: 'My Insurance (private)' },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { href: '/privacy', label: 'Privacy Policy' },
-      { href: '/terms', label: 'Terms of Service' },
-      { href: '/about#disclaimer', label: 'Disclaimer' },
+      { href: '/privacy', label: 'Privacy' },
+      { href: '/terms', label: 'Terms' },
     ],
   },
 ] as const;

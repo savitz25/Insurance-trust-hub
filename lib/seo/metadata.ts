@@ -5,12 +5,12 @@ import { brandAsset, BRAND_ICONS, BRAND_LOGO } from '@/lib/brand';
 export { SITE_URL };
 
 export const HOMEPAGE_TITLE =
-  'What Are You Trying to Protect? | Insurance Trust Hub';
+  'Independent Insurance Research | Insurance Trust Hub';
 export const HOMEPAGE_DESCRIPTION =
-  'What are you trying to protect? Research state-licensed insurance agencies by coverage need — health, home, auto, family, relocating. Educational tools. Re-check DOI / NAIC. No paid placements. We do not sell policies.';
+  'Independent insurance research for coverage need, local options, and verification. ACA Marketplace tools, Medicare intelligence, complaint index, and license pathways. No paid placements. No lead selling.';
 
 export const DEFAULT_SITE_DESCRIPTION =
-  'Insurance Trust Hub is an independent research directory of licensed insurance agencies. Verify licenses, compare listings, and use educational coverage tools — not a policy marketplace.';
+  'Insurance Trust Hub is independent insurance research — Marketplace tools, Medicare intelligence, verification pathways, and verified agency listings only when real inventory exists. Not a policy marketplace.';
 
 export const OG_IMAGE = {
   url: brandAsset(BRAND_LOGO.og),

@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = buildMetadata({
   title: 'ACA Marketplace Research Guides — State & Metro',
   description:
-    'Educational ACA Marketplace research guides by state and metro (Florida, Texas, Georgia, North Carolina, Pennsylvania, New Jersey, New York, Connecticut, and more). Learn how to research local plan landscapes, then use live ZIP tools. No lead selling — verify on official Marketplace pathways.',
+    'Educational ACA Marketplace research guides by state and metro. Part of Insurance Trust Hub local options research — then open live Marketplace plan tools. No lead selling. Official enrollment stays on HealthCare.gov or state Marketplaces (e.g. NY State of Health).',
   path: '/guides',
 });
 
@@ -30,17 +30,17 @@ export default function GuidesIndexPage() {
   return (
     <div className="container mx-auto max-w-3xl px-4 py-10 md:py-14">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
-        Research guides
+        Local options · Research guides
       </p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
         ACA Marketplace guides
       </h1>
       <p className="mt-3 text-base leading-relaxed text-slate-600">
-        Local research articles that route into our live Marketplace plan research tool. Educational
-        only — enrollment stays on official Marketplace pathways (HealthCare.gov or state-based
-        Marketplaces such as NY State of Health).
+        Educational guides for what options exist where you live — then route into live Marketplace
+        plan research. Not a quote funnel. Enrollment stays on official pathways (HealthCare.gov or
+        state-based Marketplaces such as NY State of Health).
       </p>
-      <p className="mt-4">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
         <Link
           href={MARKETPLACE_FLAGSHIP_PATH}
           className="inline-flex items-center gap-1 font-medium text-[#0284C7] hover:underline"
@@ -48,7 +48,22 @@ export default function GuidesIndexPage() {
           Research Marketplace plans near you
           <ArrowRight className="h-4 w-4" aria-hidden />
         </Link>
-      </p>
+        <Link href="/tools" className="font-medium text-slate-700 hover:text-[#0284C7] hover:underline">
+          Research Center
+        </Link>
+        <Link
+          href="/calculators/aca-subsidy"
+          className="font-medium text-slate-700 hover:text-[#0284C7] hover:underline"
+        >
+          ACA Savings Planner
+        </Link>
+        <Link
+          href="/data/plan-complaint-index"
+          className="font-medium text-slate-700 hover:text-[#0284C7] hover:underline"
+        >
+          Plan Complaint Index
+        </Link>
+      </div>
 
       {STATES.map((state) => {
         const guides = getAcaMarketplaceGuidesByState(state);

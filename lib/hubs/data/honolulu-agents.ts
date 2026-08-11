@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'honolulu';
 
-/** 12 verified Honolulu metro agents — Honolulu County */
+/** Curated research catalog (not public verified inventory) — Honolulu metro agents — Honolulu County */
 export const HONOLULU_AGENTS: HubAgent[] = [
   {
     id: 'premier-benefit-consultants-honolulu',

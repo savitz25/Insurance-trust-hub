@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'portland';
 
-/** 12 verified Portland metro agents — Multnomah, Washington, Clackamas */
+/** Curated research catalog (not public verified inventory) — Portland metro agents — Multnomah, Washington, Clackamas */
 export const PORTLAND_AGENTS: HubAgent[] = [
   {
     id: 'travis-harmon-portland',

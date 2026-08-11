@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'hartford';
 
-/** 12 verified Hartford metro agents — Hartford, Tolland, Middlesex, New London */
+/** Curated research catalog (not public verified inventory) — Hartford metro agents — Hartford, Tolland, Middlesex, New London */
 export const HARTFORD_AGENTS: HubAgent[] = [
   {
     id: 'michael-andrews-hartford',

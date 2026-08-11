@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'las-vegas';
 
-/** 12 verified Las Vegas metro agents — Clark County */
+/** Curated research catalog (not public verified inventory) — Las Vegas metro agents — Clark County */
 export const LAS_VEGAS_AGENTS: HubAgent[] = [
   {
     id: 'james-oneal-las-vegas',

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'raleigh';
 
-/** 12 verified Research Triangle agents — Wake, Durham, Orange */
+/** Curated research catalog (not public verified inventory) — Research Triangle agents — Wake, Durham, Orange */
 export const RESEARCH_TRIANGLE_AGENTS: HubAgent[] = [
   {
     id: 'health-plans-nc-triangle',

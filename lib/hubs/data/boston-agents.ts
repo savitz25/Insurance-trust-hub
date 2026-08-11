@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'boston';
 
-/** 12 verified Boston metro agents — Suffolk, Middlesex, Essex, Norfolk, Plymouth */
+/** Curated research catalog (not public verified inventory) — Boston metro agents — Suffolk, Middlesex, Essex, Norfolk, Plymouth */
 export const BOSTON_AGENTS: HubAgent[] = [
   {
     id: 'ted-wallus-boston',

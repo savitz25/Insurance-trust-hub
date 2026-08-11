@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'tucson';
 
-/** 12 verified Tucson metro agents — Pima County */
+/** Curated research catalog (not public verified inventory) — Tucson metro agents — Pima County */
 export const TUCSON_AGENTS: HubAgent[] = [
   {
     id: 'eli-roque-tucson',

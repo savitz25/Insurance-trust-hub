@@ -41,8 +41,9 @@ export function Footer() {
               className="mt-2 max-w-md text-sm leading-relaxed"
               style={{ color: INSURANCE_BRAND.white }}
             >
-              Independent research directory for licensed insurance agencies and coverage options.
-              DOI-oriented verification signals. Not an insurer or agency — research tools only.
+              Independent insurance research — coverage need, local options, and verification.
+              Public data first. Verified agency listings only when real inventory exists. Not an
+              insurer or agency.
             </p>
             <p
               className="mt-3 text-xs leading-relaxed"

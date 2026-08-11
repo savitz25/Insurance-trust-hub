@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'memphis';
 
-/** 12 verified Memphis metro agents — Shelby County (Rating Area 6) */
+/** Curated research catalog (not public verified inventory) — Memphis metro agents — Shelby County (Rating Area 6) */
 export const MEMPHIS_AGENTS: HubAgent[] = [
   {
     id: 'sneed-insurance-memphis',

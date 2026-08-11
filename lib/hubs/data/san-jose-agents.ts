@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'san-jose';
 
-/** 12 verified San Jose / Silicon Valley agents — Santa Clara County */
+/** Curated research catalog (not public verified inventory) — San Jose / Silicon Valley agents — Santa Clara County */
 export const SAN_JOSE_AGENTS: HubAgent[] = [
   {
     id: 'gary-church-san-jose',

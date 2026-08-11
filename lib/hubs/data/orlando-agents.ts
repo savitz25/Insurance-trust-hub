@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'orlando';
 
-/** 12 verified Orlando metro agents — Orange, Osceola, Seminole (Central Florida hub) */
+/** Curated research catalog (not public verified inventory) — Orlando metro agents — Orange, Osceola, Seminole (Central Florida hub) */
 export const ORLANDO_AGENTS: HubAgent[] = [
   {
     id: 'medicare-dude-orlando',

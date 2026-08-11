@@ -20,7 +20,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     healthNeeds: ['ACA multilingual enrollment', 'Union and employer transitions', 'Medicaid-to-Medicare bridges', 'Small business group plans'],
     metaTitle: 'Top Verified Insurance Agents in NYC Metro (2026) | Health Insurance Experts',
     metaDescription:
-      'Compare 850+ verified insurance agents in New York-Newark-Jersey City. Health insurance specialists for ACA, Medicare, employer plans, and multi-line coverage. 100% data-driven, no paid placements.',
+      'Research insurance agencies and coverage options in New York-Newark-Jersey City. Verified listings appear only when they meet our public research standard. Health insurance specialists for ACA, Medicare, employer plans, and multi-line coverage. 100% data-driven, no paid placements.',
   },
   {
     slug: 'los-angeles',
@@ -40,7 +40,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     healthNeeds: ['Covered California subsidies', 'Medi-Cal eligibility', 'Entertainment gig economy plans', 'Bilingual enrollment'],
     metaTitle: 'Verified Insurance Agents in Los Angeles (2026) | ACA & Medicare Experts',
     metaDescription:
-      'Find trusted health insurance agents in Los Angeles-Long Beach-Anaheim. ACA marketplace, Medicare, dental, and multi-line agencies verified from state DOI and public reviews.',
+      'Research health insurance options in Los Angeles-Long Beach-Anaheim. Verified listings appear only when they meet our public research standard. ACA marketplace, Medicare, dental, and multi-line agencies verified from state DOI and public reviews.',
   },
   {
     slug: 'chicago',
@@ -67,7 +67,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Chicago Metro (2026) | Cook, DuPage & Lake',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Chicago-Naperville-Elgin. Health, Medicare, ACA, and group specialists across Cook and collar counties — IL DOI verified.',
+      'Research insurance agencies and coverage options in Chicago-Naperville-Elgin. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists across Cook and collar counties — IL DOI verified.',
   },
   {
     slug: 'dallas-fort-worth',
@@ -94,7 +94,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Dallas-Fort Worth (2026) | Dallas, Tarrant & Collin',
     metaDescription:
-      'Compare 12 verified independent insurance agents in DFW. Employer group, ACA, and Medicare specialists across Dallas, Fort Worth, and Collin — TX DOI verified.',
+      'Research insurance agencies and coverage options in DFW. Verified listings appear only when they meet our public research standard. Employer group, ACA, and Medicare specialists across Dallas, Fort Worth, and Collin — TX DOI verified.',
   },
   {
     slug: 'houston',
@@ -121,7 +121,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Houston Metro (2026) | Harris, Fort Bend & Montgomery',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Houston-The Woodlands-Sugar Land. Energy employer benefits, ACA, and Medicare specialists — TX DOI verified.',
+      'Research insurance agencies and coverage options in Houston-The Woodlands-Sugar Land. Verified listings appear only when they meet our public research standard. Energy employer benefits, ACA, and Medicare specialists — TX DOI verified.',
   },
   {
     slug: 'washington-dc',
@@ -148,7 +148,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in DC Metro (2026) | DC, Maryland & Virginia',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Washington-Arlington-Alexandria. FEHB, ACA, Medicare, and group specialists across DC, MD, and VA — multi-state DOI verified.',
+      'Research insurance agencies and coverage options in Washington-Arlington-Alexandria. Verified listings appear only when they meet our public research standard. FEHB, ACA, Medicare, and group specialists across DC, MD, and VA — multi-state DOI verified.',
   },
   {
     slug: 'miami-fort-lauderdale',
@@ -174,7 +174,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in South Florida (2026) | Miami-Dade, Broward & Palm Beach',
     metaDescription:
-      'Compare 12 verified independent insurance agents across Miami-Dade, Broward, and Palm Beach. Medicare Advantage, ACA, supplement plans, and multi-line specialists — 4.9 avg rating, DFS verified.',
+      'Research insurance agencies and coverage options across Miami-Dade, Broward, and Palm Beach. Verified listings appear only when they meet our public research standard. Medicare Advantage, ACA, and multi-line context — DFS-oriented research.',
   },
   {
     slug: 'miami-dade',
@@ -200,7 +200,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Miami-Dade County (2026) | Health & Medicare Experts',
     metaDescription:
-      'Compare verified health insurance agents in Miami-Dade County. Medicare Advantage, ACA, supplement, and group specialists — FL DFS verified, no paid placements.',
+      'Research health insurance options in Miami-Dade County. Verified listings appear only when they meet our public research standard. Medicare Advantage, ACA, supplement, and group specialists — FL DFS verified, no paid placements.',
   },
   {
     slug: 'broward-county',
@@ -226,7 +226,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Broward County (2026) | Fort Lauderdale Health Hub',
     metaDescription:
-      'Find verified health insurance agents in Broward County. Medicare, ACA, and multi-line specialists serving Fort Lauderdale and Hollywood — FL DFS verified.',
+      'Research health insurance options in Broward County. Verified listings appear only when they meet our public research standard. Medicare, ACA, and multi-line specialists serving Fort Lauderdale and Hollywood — FL DFS verified.',
   },
   {
     slug: 'palm-beach-county',
@@ -252,7 +252,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Palm Beach County (2026) | Medicare & ACA Experts',
     metaDescription:
-      'Compare verified insurance agents in Palm Beach County. Medicare supplement, Advantage, and ACA specialists in West Palm Beach and Boca Raton — FL DFS verified.',
+      'Research insurance agencies and coverage options in Palm Beach County. Verified listings appear only when they meet our public research standard. Medicare supplement, Advantage, and ACA specialists in West Palm Beach and Boca Raton — FL DFS verified.',
   },
   {
     slug: 'philadelphia',
@@ -299,7 +299,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Atlanta Metro (2026) | Fulton, DeKalb & Gwinnett',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Atlanta-Sandy Springs-Alpharetta. ACA, Medicare, group health, and multi-line specialists across Fulton, DeKalb, Gwinnett, Cobb — GA OCI verified.',
+      'Research insurance agencies and coverage options in Atlanta-Sandy Springs-Alpharetta. Verified listings appear only when they meet our public research standard. ACA, Medicare, group health, and multi-line specialists across Fulton, DeKalb, Gwinnett, Cobb — GA OCI verified.',
   },
   {
     slug: 'phoenix',
@@ -346,7 +346,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Boston Metro (2026) | Suffolk, Middlesex & Norfolk',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Boston-Cambridge-Newton. Health, Medicare, ACA, and group specialists across Suffolk and collar counties — MA DOI verified.',
+      'Research insurance agencies and coverage options in Boston-Cambridge-Newton. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists across Suffolk and collar counties — MA DOI verified.',
   },
   {
     slug: 'san-francisco',
@@ -393,7 +393,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Inland Empire (2026) | Riverside & San Bernardino',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Riverside-San Bernardino-Ontario. ACA, Medicare, and group specialists — CA DOI verified.',
+      'Research insurance agencies and coverage options in Riverside-San Bernardino-Ontario. Verified listings appear only when they meet our public research standard. ACA, Medicare, and group specialists — CA DOI verified.',
   },
   {
     slug: 'detroit',
@@ -420,7 +420,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Detroit Metro (2026) | Wayne, Oakland & Macomb',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Detroit-Warren-Dearborn. Health, Medicare, ACA, and group specialists across Wayne, Oakland, and Macomb — MI DIFS verified.',
+      'Research insurance agencies and coverage options in Detroit-Warren-Dearborn. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists across Wayne, Oakland, and Macomb — MI DIFS verified.',
   },
   {
     slug: 'seattle',
@@ -447,7 +447,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Seattle Metro (2026) | King, Snohomish & Pierce',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Seattle-Tacoma-Bellevue. Health, Medicare, ACA, and group specialists across Puget Sound — WA OIC verified.',
+      'Research insurance agencies and coverage options in Seattle-Tacoma-Bellevue. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists across Puget Sound — WA OIC verified.',
   },
   // Remaining 35+ hubs (condensed metadata — full agent rosters generated programmatically)
   {
@@ -474,7 +474,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Twin Cities (2026) | Hennepin & Ramsey',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Minneapolis-St. Paul-Bloomington. Health, Medicare, ACA, and group specialists — MN DOC verified.',
+      'Research insurance agencies and coverage options in Minneapolis-St. Verified listings appear only when they meet our public research standard. Paul-Bloomington. Health, Medicare, ACA, and group specialists — MN DOC verified.',
   },
   {
     slug: 'tampa',
@@ -500,7 +500,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Tampa Bay (2026) | Hillsborough, Pinellas & Pasco',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Tampa-St. Petersburg-Clearwater. Medicare, ACA, and multi-line specialists across Hillsborough, Pinellas, and Pasco — DFS verified.',
+      'Research insurance agencies and coverage options in Tampa-St. Verified listings appear only when they meet our public research standard. Petersburg-Clearwater. Medicare, ACA, and multi-line specialists across Hillsborough, Pinellas, and Pasco — DFS verified.',
   },
   {
     slug: 'denver',
@@ -527,7 +527,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Denver Metro (2026) | Denver, Arapahoe & Jefferson',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Denver-Aurora-Lakewood. Health, Medicare, ACA, and group specialists — CO DOI verified.',
+      'Research insurance agencies and coverage options in Denver-Aurora-Lakewood. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — CO DOI verified.',
   },
   {
     slug: 'baltimore',
@@ -554,7 +554,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Baltimore Metro (2026) | Baltimore City & County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Baltimore-Columbia-Towson. Health, Medicare, ACA, and group specialists — MD MIA verified.',
+      'Research insurance agencies and coverage options in Baltimore-Columbia-Towson. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — MD MIA verified.',
   },
   {
     slug: 'st-louis',
@@ -581,7 +581,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in St. Louis Metro (2026) | St. Louis City & County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Greater St. Louis. Health, Medicare, ACA, and group specialists — MO DCI verified.',
+      'Research insurance agencies and coverage options in Greater St. Verified listings appear only when they meet our public research standard. Louis. Health, Medicare, ACA, and group specialists — MO DCI verified.',
   },
   {
     slug: 'orlando',
@@ -607,7 +607,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Orlando Metro (2026) | Orange, Osceola & Seminole',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Orlando-Kissimmee-Sanford. Medicare, ACA, and multi-line specialists in Winter Park, Kissimmee, and Central Florida — DFS verified.',
+      'Research insurance agencies and coverage options in Orlando-Kissimmee-Sanford. Verified listings appear only when they meet our public research standard. Medicare, ACA, and multi-line specialists in Winter Park, Kissimmee, and Central Florida — DFS verified.',
   },
   {
     slug: 'charlotte',
@@ -634,7 +634,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Charlotte Metro (2026) | Mecklenburg & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Charlotte-Concord-Gastonia. Corporate group health, Medicare, ACA, and multi-line specialists — NC DOI verified.',
+      'Research insurance agencies and coverage options in Charlotte-Concord-Gastonia. Verified listings appear only when they meet our public research standard. Corporate group health, Medicare, ACA, and multi-line specialists — NC DOI verified.',
   },
   {
     slug: 'san-antonio',
@@ -661,7 +661,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in San Antonio Metro (2026) | Bexar & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in San Antonio-New Braunfels. Health, Medicare, ACA, and group specialists — TX DOI verified.',
+      'Research insurance agencies and coverage options in San Antonio-New Braunfels. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — TX DOI verified.',
   },
   {
     slug: 'portland',
@@ -688,7 +688,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Portland Metro (2026) | Multnomah & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Portland-Vancouver-Hillsboro. Health, Medicare, ACA, and group specialists — OR DFR verified.',
+      'Research insurance agencies and coverage options in Portland-Vancouver-Hillsboro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OR DFR verified.',
   },
   {
     slug: 'sacramento',
@@ -715,7 +715,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Sacramento Metro (2026) | Sacramento & Placer',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Sacramento-Roseville-Folsom. Health, Medicare, ACA, and group specialists — CA DOI verified.',
+      'Research insurance agencies and coverage options in Sacramento-Roseville-Folsom. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — CA DOI verified.',
   },
   {
     slug: 'pittsburgh',
@@ -742,7 +742,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Pittsburgh Metro (2026) | Allegheny & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Greater Pittsburgh. Health, Medicare, ACA, and group specialists — PA DOI verified.',
+      'Research insurance agencies and coverage options in Greater Pittsburgh. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — PA DOI verified.',
   },
   {
     slug: 'las-vegas',
@@ -769,7 +769,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Las Vegas Metro (2026) | Clark County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Las Vegas-Henderson-Paradise. Health, Medicare, ACA, and group specialists — NV DOI verified.',
+      'Research insurance agencies and coverage options in Las Vegas-Henderson-Paradise. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — NV DOI verified.',
   },
   {
     slug: 'austin',
@@ -796,7 +796,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Austin Metro (2026) | Travis & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Austin-Round Rock-Georgetown. Health, Medicare, ACA, and group specialists — TX DOI verified.',
+      'Research insurance agencies and coverage options in Austin-Round Rock-Georgetown. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — TX DOI verified.',
   },
   {
     slug: 'cincinnati',
@@ -823,7 +823,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Cincinnati Metro (2026) | Hamilton & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Greater Cincinnati. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Greater Cincinnati. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
   },
   {
     slug: 'kansas-city',
@@ -850,7 +850,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Kansas City Metro (2026) | Jackson & Johnson',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Kansas City MO/KS. Health, Medicare, ACA, and group specialists — MO DCI verified.',
+      'Research insurance agencies and coverage options in Kansas City MO/KS. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — MO DCI verified.',
   },
   {
     slug: 'hartford',
@@ -877,7 +877,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Hartford Metro (2026) | Hartford County & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Hartford-East Hartford-Middletown. Health, Medicare, ACA, and group specialists — CT DOI verified.',
+      'Research insurance agencies and coverage options in Hartford-East Hartford-Middletown. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — CT DOI verified.',
   },
   {
     slug: 'des-moines',
@@ -904,7 +904,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Des Moines Metro (2026) | Polk & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Des Moines-West Des Moines. Health, Medicare, ACA, and group specialists — IA Insurance Division verified.',
+      'Research insurance agencies and coverage options in Des Moines-West Des Moines. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — IA Insurance Division verified.',
   },
   {
     slug: 'jacksonville',
@@ -930,7 +930,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Jacksonville (2026) | Duval, St. Johns & Clay',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Jacksonville metro. Medicare, ACA, and multi-line specialists across Duval, St. Johns, Clay, and Nassau — DFS verified.',
+      'Research insurance agencies and coverage options in Jacksonville metro. Verified listings appear only when they meet our public research standard. Medicare, ACA, and multi-line specialists across Duval, St. Johns, Clay, and Nassau — DFS verified.',
   },
   { slug: 'fort-lauderdale', stateSlug: 'florida', stateCode: 'FL', stateName: 'Florida', msaName: 'Fort Lauderdale', shortName: 'Fort Lauderdale', population: 1_900_000, enrollmentHighlight: 'Broward Medicare density and cruise-industry workers', localDescriptor: 'Broward retirees, cruise workers, and yacht-industry professionals', priority: 34, zipCodes: ['33301', '33308', '33004'], healthInsuranceDensity: 'very-high', marketSnapshot: 'Broward County agents specialize in Medicare Advantage, cruise-industry ACA gaps, and coastal property/health bundles.', healthNeeds: ['Medicare Advantage', 'Maritime worker ACA', 'Coastal property'], metaTitle: 'Insurance Agents in Fort Lauderdale (2026)', metaDescription: 'Medicare and health agents in Broward County.' },
   {
@@ -958,7 +958,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in San Jose / Silicon Valley (2026) | Santa Clara County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in San Jose-Sunnyvale-Santa Clara. Health, Medicare, ACA, and group specialists — CA DOI verified.',
+      'Research insurance agencies and coverage options in San Jose-Sunnyvale-Santa Clara. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — CA DOI verified.',
   },
   {
     slug: 'nashville',
@@ -985,7 +985,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Nashville (2026) | Davidson, Williamson & Rutherford',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Nashville metro. Employer group, ACA, and Medicare specialists across Davidson, Williamson, and Rutherford — TN DOI verified.',
+      'Research insurance agencies and coverage options in Nashville metro. Verified listings appear only when they meet our public research standard. Employer group, ACA, and Medicare specialists across Davidson, Williamson, and Rutherford — TN DOI verified.',
   },
   {
     slug: 'chattanooga',
@@ -1012,7 +1012,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Chattanooga (2026) | Hamilton County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Chattanooga. BCBS TN and Alliant Health marketplace, Medicare, and group specialists — TN DOI verified.',
+      'Research insurance agencies and coverage options in Chattanooga. Verified listings appear only when they meet our public research standard. BCBS TN and Alliant Health marketplace, Medicare, and group specialists — TN DOI verified.',
   },
   {
     slug: 'knoxville',
@@ -1039,7 +1039,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Knoxville & Tri-Cities (2026) | Knox, Blount & Washington',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Knoxville and Tri-Cities. Covenant/UT network health, Medicare, and group specialists — TN DOI verified.',
+      'Research insurance agencies and coverage options in Knoxville and Tri-Cities. Verified listings appear only when they meet our public research standard. Covenant/UT network health, Medicare, and group specialists — TN DOI verified.',
   },
   {
     slug: 'raleigh',
@@ -1066,7 +1066,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Research Triangle (2026) | Wake, Durham & Orange',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Raleigh-Cary-Durham. Group health, ACA, Medicare specialists for tech, biotech, and university markets — NC DOI verified.',
+      'Research insurance agencies and coverage options in Raleigh-Cary-Durham. Verified listings appear only when they meet our public research standard. Group health, ACA, Medicare specialists for tech, biotech, and university markets — NC DOI verified.',
   },
   {
     slug: 'greensboro',
@@ -1093,7 +1093,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in The Triad (2026) | Greensboro, Winston-Salem & High Point',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Greensboro-High Point-Winston-Salem. Tiered network health, Medicare, and group specialists — NC DOI verified.',
+      'Research insurance agencies and coverage options in Greensboro-High Point-Winston-Salem. Verified listings appear only when they meet our public research standard. Tiered network health, Medicare, and group specialists — NC DOI verified.',
   },
   {
     slug: 'columbus',
@@ -1120,7 +1120,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Columbus Metro (2026) | Franklin & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Columbus metro. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Columbus metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
   },
   {
     slug: 'indianapolis',
@@ -1147,7 +1147,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Indianapolis Metro (2026) | Marion & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Indianapolis-Carmel-Anderson. Health, Medicare, ACA, and group specialists — IN DOI verified.',
+      'Research insurance agencies and coverage options in Indianapolis-Carmel-Anderson. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — IN DOI verified.',
   },
   {
     slug: 'salt-lake-city',
@@ -1174,7 +1174,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Salt Lake City Metro (2026) | Salt Lake & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Salt Lake-Provo-Orem. Health, Medicare, ACA, and group specialists — UT DOI verified.',
+      'Research insurance agencies and coverage options in Salt Lake-Provo-Orem. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — UT DOI verified.',
   },
   {
     slug: 'milwaukee',
@@ -1201,7 +1201,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Milwaukee Metro (2026) | Milwaukee & Waukesha',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Milwaukee-Waukesha. Health, Medicare, ACA, and group specialists — WI OCI verified.',
+      'Research insurance agencies and coverage options in Milwaukee-Waukesha. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — WI OCI verified.',
   },
   {
     slug: 'oklahoma-city',
@@ -1228,7 +1228,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Oklahoma City Metro (2026) | Oklahoma & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in OKC metro. Health, Medicare, ACA, and group specialists — OK DOI verified.',
+      'Research insurance agencies and coverage options in OKC metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OK DOI verified.',
   },
   {
     slug: 'louisville',
@@ -1255,7 +1255,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Louisville Metro (2026) | Jefferson & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Louisville-Jefferson County. Health, Medicare, ACA, and group specialists — KY DOI verified.',
+      'Research insurance agencies and coverage options in Louisville-Jefferson County. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — KY DOI verified.',
   },
   {
     slug: 'memphis',
@@ -1282,7 +1282,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Memphis (2026) | Shelby County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Memphis metro. Logistics employer benefits, ACA, and Medicare specialists — TN DOI verified.',
+      'Research insurance agencies and coverage options in Memphis metro. Verified listings appear only when they meet our public research standard. Logistics employer benefits, ACA, and Medicare specialists — TN DOI verified.',
   },
   {
     slug: 'richmond',
@@ -1309,7 +1309,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Richmond Metro (2026) | Henrico & Chesterfield',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Richmond metro. Health, Medicare, ACA, and group specialists — VA Bureau of Insurance verified.',
+      'Research insurance agencies and coverage options in Richmond metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — VA Bureau of Insurance verified.',
   },
   {
     slug: 'birmingham',
@@ -1336,7 +1336,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Birmingham Metro (2026) | Jefferson & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Birmingham-Hoover. Health, Medicare, ACA, and group specialists — AL DOI verified.',
+      'Research insurance agencies and coverage options in Birmingham-Hoover. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — AL DOI verified.',
   },
   {
     slug: 'buffalo',
@@ -1363,7 +1363,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Buffalo Metro (2026) | Erie & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Buffalo-Cheektowaga. Health, Medicare, ACA, and group specialists — NY DFS verified.',
+      'Research insurance agencies and coverage options in Buffalo-Cheektowaga. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — NY DFS verified.',
   },
   {
     slug: 'providence',
@@ -1390,7 +1390,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Providence Metro (2026) | Providence, Kent & Bristol',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Providence-Warwick. Health, Medicare, ACA, and group specialists — RI DBR verified.',
+      'Research insurance agencies and coverage options in Providence-Warwick. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — RI DBR verified.',
   },
   {
     slug: 'new-orleans',
@@ -1417,7 +1417,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in New Orleans Metro (2026) | Orleans & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in New Orleans-Metairie. Health, Medicare, ACA, and group specialists — LA DOI verified.',
+      'Research insurance agencies and coverage options in New Orleans-Metairie. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — LA DOI verified.',
   },
   {
     slug: 'honolulu',
@@ -1444,7 +1444,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Honolulu Metro (2026) | Oahu & Honolulu County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Urban Honolulu. Health, Medicare, ACA, and group specialists — HI DCCA verified.',
+      'Research insurance agencies and coverage options in Urban Honolulu. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — HI DCCA verified.',
   },
   {
     slug: 'albuquerque',
@@ -1471,7 +1471,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Albuquerque Metro (2026) | Bernalillo & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Albuquerque. Health, Medicare, ACA, and group specialists — NM OSI verified.',
+      'Research insurance agencies and coverage options in Albuquerque. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — NM OSI verified.',
   },
   {
     slug: 'tucson',
@@ -1498,7 +1498,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Tucson Metro (2026) | Pima County',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Tucson. Health, Medicare, ACA, and group specialists — AZ DIFI verified.',
+      'Research insurance agencies and coverage options in Tucson. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — AZ DIFI verified.',
   },
   {
     slug: 'fresno',
@@ -1525,7 +1525,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Fresno Metro (2026) | Fresno & Central Valley',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Fresno and the Central Valley. Health, Medicare, ACA, and group specialists — CA DOI verified.',
+      'Research insurance agencies and coverage options in Fresno and the Central Valley. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — CA DOI verified.',
   },
   {
     slug: 'omaha',
@@ -1552,7 +1552,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Omaha Metro (2026) | Douglas & Surrounding',
     metaDescription:
-      'Compare 12 verified independent insurance agents in Omaha-Council Bluffs. Health, Medicare, ACA, and group specialists — NE DOI verified.',
+      'Research insurance agencies and coverage options in Omaha-Council Bluffs. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — NE DOI verified.',
   },
 ];
 

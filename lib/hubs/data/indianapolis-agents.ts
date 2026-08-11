@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'indianapolis';
 
-/** 12 verified Indianapolis metro agents — Marion County */
+/** Curated research catalog (not public verified inventory) — Indianapolis metro agents — Marion County */
 export const INDIANAPOLIS_AGENTS: HubAgent[] = [
   {
     id: 'jason-hark-indianapolis',

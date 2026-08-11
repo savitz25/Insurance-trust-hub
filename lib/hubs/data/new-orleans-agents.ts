@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'new-orleans';
 
-/** 12 verified New Orleans metro agents — Orleans Parish */
+/** Curated research catalog (not public verified inventory) — New Orleans metro agents — Orleans Parish */
 export const NEW_ORLEANS_AGENTS: HubAgent[] = [
   {
     id: 'noelle-laderer-new-orleans',

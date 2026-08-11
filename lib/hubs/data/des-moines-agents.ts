@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'des-moines';
 
-/** 12 verified Des Moines metro agents — Polk, Dallas, Warren, Madison */
+/** Curated research catalog (not public verified inventory) — Des Moines metro agents — Polk, Dallas, Warren, Madison */
 export const DES_MOINES_AGENTS: HubAgent[] = [
   {
     id: 'stephen-burgett-des-moines',

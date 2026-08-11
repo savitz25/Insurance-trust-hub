@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'fresno';
 
-/** 12 verified Fresno metro agents — Fresno County */
+/** Curated research catalog (not public verified inventory) — Fresno metro agents — Fresno County */
 export const FRESNO_AGENTS: HubAgent[] = [
   {
     id: 'shawn-yeatts-fresno',

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'denver';
 
-/** 12 verified Denver metro agents — Denver, Arapahoe, Jefferson, Adams */
+/** Curated research catalog (not public verified inventory) — Denver metro agents — Denver, Arapahoe, Jefferson, Adams */
 export const DENVER_AGENTS: HubAgent[] = [
   {
     id: 'voss-speros-denver',

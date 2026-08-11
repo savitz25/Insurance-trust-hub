@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'chicago';
 
-/** 12 verified Chicago metro agents — Cook, DuPage, Lake, Will, Kane */
+/** Curated research catalog (not public verified inventory) — Chicago metro agents — Cook, DuPage, Lake, Will, Kane */
 export const CHICAGO_AGENTS: HubAgent[] = [
   {
     id: 'illinois-health-agents',

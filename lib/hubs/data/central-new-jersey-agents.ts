@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'central-new-jersey';
 
-/** 12 verified Central New Jersey metro agents — Middlesex, Somerset, Mercer, Monmouth, Hunterdon */
+/** Curated research catalog (not public verified inventory) — Central New Jersey metro agents — Middlesex, Somerset, Mercer, Monmouth, Hunterdon */
 export const CENTRAL_NEW_JERSEY_AGENTS: HubAgent[] = [
   {
     id: 'joe-pearson-central-new-jersey',

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'tampa';
 
-/** 12 verified Tampa Bay agents — Hillsborough, Pinellas, Pasco (Gulf Coast hub) */
+/** Curated research catalog (not public verified inventory) — Tampa Bay agents — Hillsborough, Pinellas, Pasco (Gulf Coast hub) */
 export const TAMPA_BAY_AGENTS: HubAgent[] = [
   {
     id: 'healthplan4u-tampa',

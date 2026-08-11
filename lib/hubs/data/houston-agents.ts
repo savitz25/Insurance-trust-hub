@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'houston';
 
-/** 12 verified Houston metro agents — Harris, Fort Bend, Montgomery, Brazoria */
+/** Curated research catalog (not public verified inventory) — Houston metro agents — Harris, Fort Bend, Montgomery, Brazoria */
 export const HOUSTON_AGENTS: HubAgent[] = [
   {
     id: 'selected-benefits-houston',

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'chattanooga';
 
-/** 12 verified Chattanooga market agents — Hamilton County (Rating Area 3) */
+/** Curated research catalog (not public verified inventory) — Chattanooga market agents — Hamilton County (Rating Area 3) */
 export const CHATTANOOGA_AGENTS: HubAgent[] = [
   {
     id: 'atlas-insurance-chattanooga',

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'omaha';
 
-/** 12 verified Omaha metro agents — Douglas County */
+/** Curated research catalog (not public verified inventory) — Omaha metro agents — Douglas County */
 export const OMAHA_AGENTS: HubAgent[] = [
   {
     id: 'christopher-grimmond-omaha',

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'buffalo';
 
-/** 12 verified Buffalo metro agents — Erie County */
+/** Curated research catalog (not public verified inventory) — Buffalo metro agents — Erie County */
 export const BUFFALO_AGENTS: HubAgent[] = [
   {
     id: 'paul-reidenouer-buffalo',

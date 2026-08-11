@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'greensboro';
 
-/** 12 verified Triad agents — Guilford, Forsyth, High Point (Novant/Atrium tiered networks) */
+/** Curated research catalog (not public verified inventory) — Triad agents — Guilford, Forsyth, High Point (Novant/Atrium tiered networks) */
 export const TRIAD_AGENTS: HubAgent[] = [
   {
     id: 'health-plans-nc-triad',

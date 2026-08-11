@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'sacramento';
 
-/** 12 verified Sacramento metro agents — Sacramento, Placer, El Dorado, Yolo */
+/** Curated research catalog (not public verified inventory) — Sacramento metro agents — Sacramento, Placer, El Dorado, Yolo */
 export const SACRAMENTO_AGENTS: HubAgent[] = [
   {
     id: 'quinn-mcnamara-sacramento',

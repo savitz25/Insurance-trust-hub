@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'knoxville';
 
-/** 12 verified Knoxville & Tri-Cities agents — Knox, Blount, Washington (Rating Areas 1 & 2) */
+/** Curated research catalog (not public verified inventory) — Knoxville & Tri-Cities agents — Knox, Blount, Washington (Rating Areas 1 & 2) */
 export const KNOXVILLE_AGENTS: HubAgent[] = [
   {
     id: 'akers-solution-knoxville',

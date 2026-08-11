@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'seattle';
 
-/** 12 verified Seattle / Puget Sound agents — King, Snohomish, Pierce, Kitsap */
+/** Curated research catalog (not public verified inventory) — Seattle / Puget Sound agents — King, Snohomish, Pierce, Kitsap */
 export const SEATTLE_AGENTS: HubAgent[] = [
   {
     id: 'jason-hark-seattle',

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'salt-lake-city';
 
-/** 12 verified Salt Lake City metro agents — Salt Lake, Utah, Davis, Summit */
+/** Curated research catalog (not public verified inventory) — Salt Lake City metro agents — Salt Lake, Utah, Davis, Summit */
 export const SALT_LAKE_CITY_AGENTS: HubAgent[] = [
   {
     id: 'justin-call-salt-lake-city',

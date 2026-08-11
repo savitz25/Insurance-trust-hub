@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'birmingham';
 
-/** 12 verified Birmingham metro agents — Jefferson County */
+/** Curated research catalog (not public verified inventory) — Birmingham metro agents — Jefferson County */
 export const BIRMINGHAM_AGENTS: HubAgent[] = [
   {
     id: 'steve-adlman-birmingham',

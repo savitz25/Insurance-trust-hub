@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'austin';
 
-/** 12 verified Austin metro agents — Travis, Williamson, Hays, Bastrop */
+/** Curated research catalog (not public verified inventory) — Austin metro agents — Travis, Williamson, Hays, Bastrop */
 export const AUSTIN_AGENTS: HubAgent[] = [
   {
     id: 'rodney-powell-austin',

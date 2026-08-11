@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'oklahoma-city';
 
-/** 12 verified Oklahoma City metro agents — Oklahoma, Canadian, Cleveland */
+/** Curated research catalog (not public verified inventory) — Oklahoma City metro agents — Oklahoma, Canadian, Cleveland */
 export const OKLAHOMA_CITY_AGENTS: HubAgent[] = [
   {
     id: 'jason-hark-oklahoma-city',

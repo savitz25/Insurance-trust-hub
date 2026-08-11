@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'columbus';
 
-/** 12 verified Columbus metro agents — Franklin County */
+/** Curated research catalog (not public verified inventory) — Columbus metro agents — Franklin County */
 export const COLUMBUS_AGENTS: HubAgent[] = [
   {
     id: 'brian-moore-columbus',

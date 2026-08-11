@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'miami-fort-lauderdale';
 
-/** 12 verified South Florida agents — Miami-Dade, Broward, Palm Beach (tri-county hub) */
+/** Curated research catalog (not public verified inventory) — South Florida agents — Miami-Dade, Broward, Palm Beach (tri-county hub) */
 export const SOUTH_FLORIDA_AGENTS: HubAgent[] = [
   // ── Featured health specialists (rank 1–3 per hub research) ──
   {

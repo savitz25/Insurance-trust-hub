@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'richmond';
 
-/** 12 verified Richmond metro agents — Henrico & Chesterfield */
+/** Curated research catalog (not public verified inventory) — Richmond metro agents — Henrico & Chesterfield */
 export const RICHMOND_AGENTS: HubAgent[] = [
   {
     id: 'chris-connell-richmond',

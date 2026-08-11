@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'jacksonville';
 
-/** 12 verified Jacksonville metro agents — Duval, St. Johns, Clay, Nassau (Northeast Florida) */
+/** Curated research catalog (not public verified inventory) — Jacksonville metro agents — Duval, St. Johns, Clay, Nassau (Northeast Florida) */
 export const JACKSONVILLE_AGENTS: HubAgent[] = [
   {
     id: 'medicare-dude-jacksonville',

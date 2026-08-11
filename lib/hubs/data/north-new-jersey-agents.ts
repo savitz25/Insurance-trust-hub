@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'north-new-jersey';
 
-/** 12 verified North New Jersey metro agents — Bergen, Essex, Hudson, Passaic, Morris, Sussex, Warren counties */
+/** Curated research catalog (not public verified inventory) — North New Jersey metro agents — Bergen, Essex, Hudson, Passaic, Morris, Sussex, Warren counties */
 export const NORTH_NEW_JERSEY_AGENTS: HubAgent[] = [
   {
     id: 'brian-krantz-north-new-jersey',

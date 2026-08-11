@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'nashville';
 
-/** 12 verified Nashville metro agents — Davidson, Williamson, Rutherford (Rating Area 4) */
+/** Curated research catalog (not public verified inventory) — Nashville metro agents — Davidson, Williamson, Rutherford (Rating Area 4) */
 export const NASHVILLE_AGENTS: HubAgent[] = [
   {
     id: 'jordan-insurance-nashville',

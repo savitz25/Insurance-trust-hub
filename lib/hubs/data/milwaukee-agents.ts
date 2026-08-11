@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'milwaukee';
 
-/** 12 verified Milwaukee metro agents — Milwaukee, Waukesha, Ozaukee, Washington */
+/** Curated research catalog (not public verified inventory) — Milwaukee metro agents — Milwaukee, Waukesha, Ozaukee, Washington */
 export const MILWAUKEE_AGENTS: HubAgent[] = [
   {
     id: 'william-kravit-milwaukee',

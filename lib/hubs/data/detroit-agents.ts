@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'detroit';
 
-/** 12 verified Detroit metro agents — Wayne, Oakland, Macomb */
+/** Curated research catalog (not public verified inventory) — Detroit metro agents — Wayne, Oakland, Macomb */
 export const DETROIT_AGENTS: HubAgent[] = [
   {
     id: 'shaun-abshire-detroit',

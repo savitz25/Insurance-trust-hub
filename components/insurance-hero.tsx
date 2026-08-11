@@ -11,8 +11,7 @@ import {
 
 /**
  * Phase 2 — primary homepage hero.
- * Positions Insurance Trust Hub as independent Protection & Coverage research.
- * Does not include site header/footer (Phase 1).
+ * Independent insurance research product (three-question IA).
  */
 export function InsuranceHero() {
   return (

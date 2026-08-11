@@ -181,7 +181,7 @@ export function Navbar() {
           {myInsuranceBtn}
           <Button size="sm" variant="trust" asChild className="min-h-11 px-2.5 sm:px-3">
             <Link prefetch={false} href={INSURANCE_HEADER_CTA.href}>
-              <span className="sm:hidden">Compare</span>
+              <span className="sm:hidden">Research</span>
               <span className="hidden sm:inline">{INSURANCE_HEADER_CTA.label}</span>
             </Link>
           </Button>

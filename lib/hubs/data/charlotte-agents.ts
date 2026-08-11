@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'charlotte';
 
-/** 12 verified Charlotte metro agents — Mecklenburg, Union, Cabarrus, Gaston */
+/** Curated research catalog (not public verified inventory) — Charlotte metro agents — Mecklenburg, Union, Cabarrus, Gaston */
 export const CHARLOTTE_AGENTS: HubAgent[] = [
   {
     id: 'benefits-bridge-charlotte',

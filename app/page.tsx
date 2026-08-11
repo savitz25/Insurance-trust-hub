@@ -8,10 +8,8 @@ export default function HomePage() {
     <>
       <JsonLd data={buildHomepageGraph()} />
 
-      {/* Phase 2 — primary hero (Protection & Coverage research layer) */}
+      {/* Phase 2 — independent research product (three-question IA) */}
       <InsuranceHero />
-
-      {/* Phase 3 — tools, how it works, trust, pathways, network */}
       <InsuranceLandingSections />
     </>
   );

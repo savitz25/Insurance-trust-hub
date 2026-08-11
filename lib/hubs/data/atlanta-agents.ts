@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'atlanta';
 
-/** 12 verified Atlanta metro agents — Fulton, DeKalb, Gwinnett, Cobb, Clayton */
+/** Curated research catalog (not public verified inventory) — Atlanta metro agents — Fulton, DeKalb, Gwinnett, Cobb, Clayton */
 export const ATLANTA_AGENTS: HubAgent[] = [
   {
     id: 'georgia-health-insurance',

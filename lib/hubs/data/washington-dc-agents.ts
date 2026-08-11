@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'washington-dc';
 
-/** 12 verified DC Metro agents — DC, Montgomery, Prince George's, Arlington, Fairfax */
+/** Curated research catalog (not public verified inventory) — DC Metro agents — DC, Montgomery, Prince George's, Arlington, Fairfax */
 export const WASHINGTON_DC_AGENTS: HubAgent[] = [
   {
     id: 'linda-mcgill-dc',

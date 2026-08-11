@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'albuquerque';
 
-/** 12 verified Albuquerque metro agents — Bernalillo County */
+/** Curated research catalog (not public verified inventory) — Albuquerque metro agents — Bernalillo County */
 export const ALBUQUERQUE_AGENTS: HubAgent[] = [
   {
     id: 'janix-barbosa-llanos-albuquerque',

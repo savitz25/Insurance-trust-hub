@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'cincinnati';
 
-/** 12 verified Cincinnati metro agents — Hamilton, Butler, Clermont, Warren */
+/** Curated research catalog (not public verified inventory) — Cincinnati metro agents — Hamilton, Butler, Clermont, Warren */
 export const CINCINNATI_AGENTS: HubAgent[] = [
   {
     id: 'brian-moore-cincinnati',

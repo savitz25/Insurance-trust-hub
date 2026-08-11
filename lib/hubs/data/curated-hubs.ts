@@ -67,7 +67,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'miami-dade',
     sectionTitle: 'Miami-Dade County Coverage',
     summary:
-      '12 verified independent agencies serving Miami-Dade County — county-local Medicare/ACA specialists prioritized with tri-county partners. FL DFS verified, bilingual EN/ES available.',
+      'Market research coverage for serving Miami-Dade County — county-local Medicare/ACA specialists prioritized with tri-county partners. FL DFS verified, bilingual EN/ES available.',
     counties: ['Miami-Dade'],
     badges: ['Bilingual EN/ES', 'Medicare Advantage hub'],
     featuredHealthLine: 'Top featured: SFIB · The Health Experts · Kaizen Solution Group',
@@ -77,7 +77,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'broward-county',
     sectionTitle: 'Broward County Coverage',
     summary:
-      '12 verified independent agencies serving Broward County — Fort Lauderdale and Hollywood Medicare/ACA specialists with multi-line partners across the I-95 corridor.',
+      'Market research coverage for serving Broward County — Fort Lauderdale and Hollywood Medicare/ACA specialists with multi-line partners across the I-95 corridor.',
     counties: ['Broward'],
     badges: ['Fort Lauderdale · Hollywood · Pembroke Pines'],
     featuredHealthLine: 'Top featured: Medicare Advisors of South Florida · Waxman Insurance · B&B Insurance',
@@ -87,7 +87,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'palm-beach-county',
     sectionTitle: 'Palm Beach County Coverage',
     summary:
-      '12 verified independent agencies serving Palm Beach County — West Palm Beach and Boca Raton retiree Medicare specialists with supplement and Advantage expertise.',
+      'Market research coverage for serving Palm Beach County — West Palm Beach and Boca Raton retiree Medicare specialists with supplement and Advantage expertise.',
     counties: ['Palm Beach'],
     badges: ['West Palm Beach · Boca Raton · Greenacres'],
     featuredHealthLine: 'Top featured: Absolute Best Insurance · Pettineo Insurance · Medicare Sharks',
@@ -97,7 +97,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'miami-fort-lauderdale',
     sectionTitle: 'Tri-County Coverage Area',
     summary:
-      '12 verified independent agencies across Miami-Dade, Broward, and Palm Beach counties — 8 with primary Medicare/ACA/health emphasis and 4 strong multi-line partners. Average Google rating ~4.9 stars across entries with sufficient review volume.',
+      'Market research coverage for across Miami-Dade, Broward, and Palm Beach counties — 8 with primary Medicare/ACA/health emphasis and 4 strong multi-line partners. Average Google rating ~4.9 stars across entries with sufficient review volume.',
     counties: ['Miami-Dade', 'Broward', 'Palm Beach'],
     badges: ['Bilingual EN/ES available'],
     featuredHealthLine:
@@ -108,7 +108,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'orlando',
     sectionTitle: 'Central Florida Coverage Area',
     summary:
-      '12 verified independent agencies across Orange, Osceola, and Seminole counties — 6 with primary or strong Medicare/ACA/health emphasis and 6 multi-line independents (several with group health or cross-sell capabilities). Average Google rating ~4.8–5.0 stars where review volume permits.',
+      'Market research coverage for across Orange, Osceola, and Seminole counties — 6 with primary or strong Medicare/ACA/health emphasis and 6 multi-line independents (several with group health or cross-sell capabilities). Average Google rating ~4.8–5.0 stars where review volume permits.',
     counties: ['Orange', 'Osceola', 'Seminole'],
     badges: ['Winter Park · Kissimmee · Orlando metro'],
     featuredHealthLine:
@@ -119,7 +119,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'jacksonville',
     sectionTitle: 'Northeast Florida Coverage Area',
     summary:
-      '12 verified independent agencies across Duval, St. Johns, Clay, and Nassau counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (several with group health or cross-sell capabilities). Average Google rating ~4.9 stars where review volume permits.',
+      'Market research coverage for across Duval, St. Johns, Clay, and Nassau counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (several with group health or cross-sell capabilities). Average Google rating ~4.9 stars where review volume permits.',
     counties: ['Duval', 'St. Johns', 'Clay', 'Nassau'],
     badges: ['First Coast · Jacksonville metro'],
     featuredHealthLine:
@@ -130,7 +130,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'tampa',
     sectionTitle: 'Tampa Bay Coverage Area',
     summary:
-      '12 verified independent agencies across Hillsborough, Pinellas, and Pasco counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (with health or employee benefits capabilities). Average Google rating ~4.9 stars where review volume permits.',
+      'Market research coverage for across Hillsborough, Pinellas, and Pasco counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (with health or employee benefits capabilities). Average Google rating ~4.9 stars where review volume permits.',
     counties: ['Hillsborough', 'Pinellas', 'Pasco'],
     badges: ['Tampa · St. Petersburg · Clearwater'],
     featuredHealthLine:
@@ -141,7 +141,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'atlanta',
     sectionTitle: 'Metro Atlanta Coverage Area',
     summary:
-      '12 verified independent agencies across Fulton, DeKalb, Gwinnett, Cobb, and Clayton counties — 7 with primary Medicare/ACA/health or group benefits emphasis and 5 multi-line independents. Georgia\'s largest health market with 6–7 competing carriers (Kaiser, Oscar, Anthem, Ambetter, UnitedHealthcare). Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Fulton, DeKalb, Gwinnett, Cobb, and Clayton counties — 7 with primary Medicare/ACA/health or group benefits emphasis and 5 multi-line independents. Georgia\'s largest health market with 6–7 competing carriers (Kaiser, Oscar, Anthem, Ambetter, UnitedHealthcare). Average Google rating ~4.8–5.0 stars.',
     counties: ['Fulton', 'DeKalb', 'Gwinnett', 'Cobb', 'Clayton'],
     badges: ['Georgia Access · Kaiser · Oscar · Ambetter'],
     featuredHealthLine:
@@ -152,7 +152,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'charlotte',
     sectionTitle: 'Charlotte Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Mecklenburg, Union, Cabarrus, and Gaston counties — 7 with large-group, Medicare, or ACA emphasis and 5 multi-line independents. Corporate health battleground for banking, tech, and healthcare with Atrium Health and Oscar Health network alignments. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Mecklenburg, Union, Cabarrus, and Gaston counties — 7 with large-group, Medicare, or ACA emphasis and 5 multi-line independents. Corporate health battleground for banking, tech, and healthcare with Atrium Health and Oscar Health network alignments. Average Google rating ~4.8–5.0 stars.',
     counties: ['Mecklenburg', 'Union', 'Cabarrus', 'Gaston'],
     badges: ['Atrium Health · Oscar · Corporate benefits'],
     featuredHealthLine:
@@ -163,7 +163,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'raleigh',
     sectionTitle: 'Research Triangle Coverage Area',
     summary:
-      '12 verified independent agencies across Wake, Durham, and Orange counties — 7 with employer-sponsored group, ACA, or Medicare capabilities and 5 multi-line independents. Competitive tech, biotech, and university market dominated by BCBSNC and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Wake, Durham, and Orange counties — 7 with employer-sponsored group, ACA, or Medicare capabilities and 5 multi-line independents. Competitive tech, biotech, and university market dominated by BCBSNC and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
     counties: ['Wake', 'Durham', 'Orange'],
     badges: ['BCBSNC · UnitedHealthcare · RTP · UNC/Duke'],
     featuredHealthLine:
@@ -174,7 +174,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'greensboro',
     sectionTitle: 'The Triad Coverage Area',
     summary:
-      '12 verified independent agencies across Guilford and Forsyth counties (Greensboro, Winston-Salem, High Point) — 7 with health/group/Medicare emphasis and 5 multi-line independents. Tiered network expertise around Novant Health and Atrium Health Wake Forest Baptist via BCBSNC Blue Home/Blue Local. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Guilford and Forsyth counties (Greensboro, Winston-Salem, High Point) — 7 with health/group/Medicare emphasis and 5 multi-line independents. Tiered network expertise around Novant Health and Atrium Health Wake Forest Baptist via BCBSNC Blue Home/Blue Local. Average Google rating ~4.8–5.0 stars.',
     counties: ['Guilford', 'Forsyth'],
     badges: ['Novant · Atrium WFB · BCBSNC tiered networks'],
     featuredHealthLine:
@@ -185,7 +185,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'nashville',
     sectionTitle: 'Nashville Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Davidson, Williamson, and Rutherford counties (Rating Area 4) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. Corporate healthcare hub driven by HCA and employer-sponsored volume alongside competitive individual market with Oscar, Cigna, and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Davidson, Williamson, and Rutherford counties (Rating Area 4) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. Corporate healthcare hub driven by HCA and employer-sponsored volume alongside competitive individual market with Oscar, Cigna, and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
     counties: ['Davidson', 'Williamson', 'Rutherford'],
     badges: ['HCA corridor · Oscar · Cigna · UHC'],
     featuredHealthLine:
@@ -196,7 +196,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'memphis',
     sectionTitle: 'Memphis Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Shelby County and surrounding areas (Rating Area 6) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. Logistics-driven economy with FedEx-scale employer volume and competitive individual market featuring Oscar, Cigna, and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Shelby County and surrounding areas (Rating Area 6) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. Logistics-driven economy with FedEx-scale employer volume and competitive individual market featuring Oscar, Cigna, and UnitedHealthcare. Average Google rating ~4.8–5.0 stars.',
     counties: ['Shelby'],
     badges: ['FedEx corridor · Logistics benefits · Narrow networks'],
     featuredHealthLine:
@@ -207,7 +207,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'chattanooga',
     sectionTitle: 'Chattanooga Market Coverage Area',
     summary:
-      '12 verified independent agencies across Hamilton County (Rating Area 3) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. BCBS TN headquarters market with diverse carrier choices including Alliant Health Plans and the state\'s only Platinum-tier marketplace plans. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Hamilton County (Rating Area 3) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. BCBS TN headquarters market with diverse carrier choices including Alliant Health Plans and the state\'s only Platinum-tier marketplace plans. Average Google rating ~4.8–5.0 stars.',
     counties: ['Hamilton'],
     badges: ['BCBS TN HQ · Alliant Health · Platinum-tier ACA'],
     featuredHealthLine:
@@ -218,7 +218,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'knoxville',
     sectionTitle: 'Knoxville & Tri-Cities Coverage Area',
     summary:
-      '12 verified independent agencies across Knox, Blount, and Washington counties (Rating Areas 1 & 2) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. East Tennessee localized networks including Covenant Health and UT Medical Center alongside BCBS TN dominance. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Knox, Blount, and Washington counties (Rating Areas 1 & 2) — 7–8 with primary health/Medicare/ACA/group emphasis and 4–5 multi-line independents. East Tennessee localized networks including Covenant Health and UT Medical Center alongside BCBS TN dominance. Average Google rating ~4.8–5.0 stars.',
     counties: ['Knox', 'Blount', 'Washington'],
     badges: ['Covenant Health · UT Medical Center · BCBS TN'],
     featuredHealthLine:
@@ -229,7 +229,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'chicago',
     sectionTitle: 'Chicago Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Cook County with service to DuPage, Lake, Will, and Kane — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. One of the largest U.S. markets blending employer headquarters, union health funds, and Get Covered Illinois marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Cook County with service to DuPage, Lake, Will, and Kane — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. One of the largest U.S. markets blending employer headquarters, union health funds, and Get Covered Illinois marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
     counties: ['Cook', 'DuPage', 'Lake', 'Will', 'Kane'],
     badges: ['Get Covered Illinois · Union benefits · Bilingual EN/ES'],
     featuredHealthLine:
@@ -240,7 +240,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'dallas-fort-worth',
     sectionTitle: 'DFW Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Dallas and Tarrant counties with service to Collin, Denton, and Ellis — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Fastest-growing large MSA with corporate HQ employer volume and HealthCare.gov individual competition. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Dallas and Tarrant counties with service to Collin, Denton, and Ellis — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Fastest-growing large MSA with corporate HQ employer volume and HealthCare.gov individual competition. Average Google rating ~4.8–5.0 stars.',
     counties: ['Dallas', 'Tarrant', 'Collin', 'Denton', 'Ellis'],
     badges: ['Corporate relocations · BCBS TX · Plano/Frisco growth'],
     featuredHealthLine:
@@ -251,7 +251,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'houston',
     sectionTitle: 'Houston Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Harris County with service to Fort Bend, Montgomery, Brazoria, and Galveston — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Energy, healthcare, and port/logistics employer volume alongside diverse ACA and Medicare demand. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Harris County with service to Fort Bend, Montgomery, Brazoria, and Galveston — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Energy, healthcare, and port/logistics employer volume alongside diverse ACA and Medicare demand. Average Google rating ~4.8–5.0 stars.',
     counties: ['Harris', 'Fort Bend', 'Montgomery', 'Brazoria'],
     badges: ['Texas Medical Center · Energy sector · Bilingual EN/ES'],
     featuredHealthLine:
@@ -262,7 +262,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'washington-dc',
     sectionTitle: 'DC Metro Coverage Area',
     summary:
-      '12 verified independent agencies across DC, Maryland (Montgomery, Prince George\'s), and Virginia (Arlington, Fairfax, Alexandria) — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Federal FEHB, contractor transitions, and tri-jurisdictional marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across DC, Maryland (Montgomery, Prince George\'s), and Virginia (Arlington, Fairfax, Alexandria) — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Federal FEHB, contractor transitions, and tri-jurisdictional marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
     counties: ['District of Columbia', 'Montgomery', 'Prince George\'s', 'Arlington', 'Fairfax'],
     badges: ['FEHB · NoVA tech corridor · DC/MD/VA licensed'],
     featuredHealthLine:
@@ -273,7 +273,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'boston',
     sectionTitle: 'Boston Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Suffolk County with service to Middlesex, Essex, Norfolk, and Plymouth — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Major Northeast market with employer-sponsored plans in education, healthcare, biotech, and finance alongside Health Connector optimization and Medicare demand. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Suffolk County with service to Middlesex, Essex, Norfolk, and Plymouth — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Major Northeast market with employer-sponsored plans in education, healthcare, biotech, and finance alongside Health Connector optimization and Medicare demand. Average Google rating ~4.8–5.0 stars.',
     counties: ['Suffolk', 'Middlesex', 'Essex', 'Norfolk', 'Plymouth'],
     badges: ['Health Connector · Biotech corridor · North & South Shore'],
     featuredHealthLine:
@@ -284,7 +284,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'detroit',
     sectionTitle: 'Detroit Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Wayne, Oakland, and Macomb counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Auto industry employer volume, UAW benefit familiarity, and Michigan marketplace enrollment drive competitive individual and group options. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Wayne, Oakland, and Macomb counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Auto industry employer volume, UAW benefit familiarity, and Michigan marketplace enrollment drive competitive individual and group options. Average Google rating ~4.8–5.0 stars.',
     counties: ['Wayne', 'Oakland', 'Macomb'],
     badges: ['Auto industry benefits · BCBSM · Dearborn corridor'],
     featuredHealthLine:
@@ -295,7 +295,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'seattle',
     sectionTitle: 'Puget Sound Coverage Area',
     summary:
-      '12 verified independent agencies across King County with service to Snohomish, Pierce, and Kitsap — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tech employer benefits, Washington Healthplanfinder enrollment, and contractor 1099 coverage drive competitive Puget Sound options. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across King County with service to Snohomish, Pierce, and Kitsap — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tech employer benefits, Washington Healthplanfinder enrollment, and contractor 1099 coverage drive competitive Puget Sound options. Average Google rating ~4.8–5.0 stars.',
     counties: ['King', 'Snohomish', 'Pierce', 'Kitsap'],
     badges: ['Healthplanfinder · Amazon/Microsoft corridor · Eastside'],
     featuredHealthLine:
@@ -306,7 +306,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'riverside-san-bernardino',
     sectionTitle: 'Inland Empire Coverage Area',
     summary:
-      '12 verified independent agencies across Riverside and San Bernardino counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. LA overflow migration, logistics employment, and affordable Covered California enrollment drive growing Inland Empire demand. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Riverside and San Bernardino counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. LA overflow migration, logistics employment, and affordable Covered California enrollment drive growing Inland Empire demand. Average Google rating ~4.8–5.0 stars.',
     counties: ['Riverside', 'San Bernardino'],
     badges: ['Covered California · Medi-Cal transitions · Bilingual EN/ES'],
     featuredHealthLine:
@@ -317,7 +317,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'minneapolis',
     sectionTitle: 'Twin Cities Coverage Area',
     summary:
-      '12 verified independent agencies across Hennepin and Ramsey counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. MNsure marketplace enrollment, Medtronic/healthcare employer benefits, and Mayo-adjacent corridor expertise. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Hennepin and Ramsey counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. MNsure marketplace enrollment, Medtronic/healthcare employer benefits, and Mayo-adjacent corridor expertise. Average Google rating ~4.8–5.0 stars.',
     counties: ['Hennepin', 'Ramsey'],
     badges: ['MNsure · Healthcare corridor · Edina/St Paul suburbs'],
     featuredHealthLine:
@@ -328,7 +328,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'st-louis',
     sectionTitle: 'Greater St. Louis Coverage Area',
     summary:
-      '12 verified independent agencies across St. Louis City and St. Louis County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Bi-state MO/IL marketplace enrollment, healthcare and manufacturing employer volume, and Arch Brokerage individual health expertise since 1969. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across St. Louis City and St. Louis County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Bi-state MO/IL marketplace enrollment, healthcare and manufacturing employer volume, and Arch Brokerage individual health expertise since 1969. Average Google rating ~4.8–5.0 stars.',
     counties: ['St. Louis City', 'St. Louis County'],
     badges: ['Bi-state MO/IL · Arch Brokerage · Blue Chip Consortium'],
     featuredHealthLine:
@@ -339,7 +339,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'denver',
     sectionTitle: 'Denver Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Denver, Arapahoe, Jefferson, and Adams counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Connect for Health Colorado, relocation-driven ACA demand, and bilingual Medicare expertise. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Denver, Arapahoe, Jefferson, and Adams counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Connect for Health Colorado, relocation-driven ACA demand, and bilingual Medicare expertise. Average Google rating ~4.8–5.0 stars.',
     counties: ['Denver', 'Arapahoe', 'Jefferson', 'Adams'],
     badges: ['Connect for Health CO · Bilingual EN/ES · Relocation corridor'],
     featuredHealthLine:
@@ -350,7 +350,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'baltimore',
     sectionTitle: 'Baltimore Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Baltimore City and Baltimore County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Maryland Health Connection, Johns Hopkins healthcare corridor, and DC commuter benefit transitions. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Baltimore City and Baltimore County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Maryland Health Connection, Johns Hopkins healthcare corridor, and DC commuter benefit transitions. Average Google rating ~4.8–5.0 stars.',
     counties: ['Baltimore City', 'Baltimore County'],
     badges: ['Maryland Health Connection · Hopkins corridor · Mid-Atlantic'],
     featuredHealthLine:
@@ -361,7 +361,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'portland',
     sectionTitle: 'Portland Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Multnomah, Washington, and Clackamas counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Oregon Health Plan marketplace enrollment, cross-river Washington licensing, and tech-corridor ACA demand. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Multnomah, Washington, and Clackamas counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Oregon Health Plan marketplace enrollment, cross-river Washington licensing, and tech-corridor ACA demand. Average Google rating ~4.8–5.0 stars.',
     counties: ['Multnomah', 'Washington', 'Clackamas'],
     badges: ['Oregon marketplace · Cross-river · Progressive healthcare'],
     featuredHealthLine:
@@ -372,7 +372,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'san-antonio',
     sectionTitle: 'San Antonio Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Bexar, Comal, Guadalupe, and Kendall counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Military/TRICARE-adjacent Medicare, bilingual ACA enrollment, and employer-sponsored plan volume. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Bexar, Comal, Guadalupe, and Kendall counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Military/TRICARE-adjacent Medicare, bilingual ACA enrollment, and employer-sponsored plan volume. Average Google rating ~4.8–5.0 stars.',
     counties: ['Bexar', 'Comal', 'Guadalupe', 'Kendall'],
     badges: ['Bilingual EN/ES · Military corridor · Hill Country growth'],
     featuredHealthLine:
@@ -383,7 +383,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'sacramento',
     sectionTitle: 'Sacramento Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Sacramento, Placer, El Dorado, and Yolo counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California, CalPERS-adjacent retirement transitions, and state-capital employer benefits. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Sacramento, Placer, El Dorado, and Yolo counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California, CalPERS-adjacent retirement transitions, and state-capital employer benefits. Average Google rating ~4.8–5.0 stars.',
     counties: ['Sacramento', 'Placer', 'El Dorado', 'Yolo'],
     badges: ['Covered California · State capital · Gold River corridor'],
     featuredHealthLine:
@@ -394,7 +394,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'pittsburgh',
     sectionTitle: 'Greater Pittsburgh Coverage Area',
     summary:
-      '12 verified independent agencies across Allegheny, Beaver, Butler, Washington, and Westmoreland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. UPMC-adjacent healthcare workers, university ACA enrollment, and aging mill-town Medicare demand. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Allegheny, Beaver, Butler, Washington, and Westmoreland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. UPMC-adjacent healthcare workers, university ACA enrollment, and aging mill-town Medicare demand. Average Google rating ~4.8–5.0 stars.',
     counties: ['Allegheny', 'Beaver', 'Butler', 'Washington', 'Westmoreland'],
     badges: ['UPMC corridor · University ACA · South Hills'],
     featuredHealthLine:
@@ -405,7 +405,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'las-vegas',
     sectionTitle: 'Las Vegas Valley Coverage Area',
     summary:
-      '12 verified independent agencies across Clark County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Hospitality-worker ACA demand, retiree Medicare growth, and California relocation health transitions. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Clark County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Hospitality-worker ACA demand, retiree Medicare growth, and California relocation health transitions. Average Google rating ~4.8–5.0 stars.',
     counties: ['Clark'],
     badges: ['Hospitality ACA · Retiree Medicare · Bilingual EN/ES'],
     featuredHealthLine:
@@ -416,7 +416,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'austin',
     sectionTitle: 'Austin Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Travis, Williamson, Hays, and Bastrop counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tech-relocation ACA demand, startup contractor plans, and Hill Country Medicare growth. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Travis, Williamson, Hays, and Bastrop counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tech-relocation ACA demand, startup contractor plans, and Hill Country Medicare growth. Average Google rating ~4.8–5.0 stars.',
     counties: ['Travis', 'Williamson', 'Hays', 'Bastrop'],
     badges: ['Tech relocation · Bilingual EN/ES · Hill Country growth'],
     featuredHealthLine:
@@ -427,7 +427,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'cincinnati',
     sectionTitle: 'Greater Cincinnati Coverage Area',
     summary:
-      '12 verified independent agencies across Hamilton, Butler, Clermont, and Warren counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tri-state OH/KY/IN marketplace enrollment, P&G corridor benefits, and UC Health retiree Medicare. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Hamilton, Butler, Clermont, and Warren counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Tri-state OH/KY/IN marketplace enrollment, P&G corridor benefits, and UC Health retiree Medicare. Average Google rating ~4.8–5.0 stars.',
     counties: ['Hamilton', 'Butler', 'Clermont', 'Warren'],
     badges: ['Tri-state ACA · P&G corridor · Ohio River communities'],
     featuredHealthLine:
@@ -438,7 +438,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'kansas-city',
     sectionTitle: 'Kansas City Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Jackson, Clay, Platte (MO) and Johnson, Wyandotte (KS) — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Bi-state MO/KS marketplace enrollment, logistics employment, and bilingual Medicare expertise. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Jackson, Clay, Platte (MO) and Johnson, Wyandotte (KS) — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Bi-state MO/KS marketplace enrollment, logistics employment, and bilingual Medicare expertise. Average Google rating ~4.8–5.0 stars.',
     counties: ['Jackson', 'Clay', 'Platte', 'Johnson', 'Wyandotte'],
     badges: ['Bi-state MO/KS · Bilingual EN/ES · Logistics corridor'],
     featuredHealthLine:
@@ -449,7 +449,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'hartford',
     sectionTitle: 'Hartford Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Hartford, Tolland, Middlesex, and New London counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Access Health CT enrollment, insurance-industry employment hub, and capital-region group benefits. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Hartford, Tolland, Middlesex, and New London counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Access Health CT enrollment, insurance-industry employment hub, and capital-region group benefits. Average Google rating ~4.8–5.0 stars.',
     counties: ['Hartford', 'Tolland', 'Middlesex', 'New London'],
     badges: ['Access Health CT · Insurance capital · Capital region'],
     featuredHealthLine:
@@ -460,7 +460,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'des-moines',
     sectionTitle: 'Des Moines Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Polk, Dallas, Warren, and Madison counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Iowa marketplace enrollment, insurer-HQ employment corridor, and growing capital-city suburban demand. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Polk, Dallas, Warren, and Madison counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Iowa marketplace enrollment, insurer-HQ employment corridor, and growing capital-city suburban demand. Average Google rating ~4.8–5.0 stars.',
     counties: ['Polk', 'Dallas', 'Warren', 'Madison'],
     badges: ['Iowa marketplace · Insurer HQ corridor · Bilingual EN/ES'],
     featuredHealthLine:
@@ -471,7 +471,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'san-jose',
     sectionTitle: 'Silicon Valley Coverage Area',
     summary:
-      '12 verified independent agencies across Santa Clara County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California high-income cliffs, tech equity transitions, and startup benefits navigation. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Santa Clara County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California high-income cliffs, tech equity transitions, and startup benefits navigation. Average Google rating ~4.8–5.0 stars.',
     counties: ['Santa Clara'],
     badges: ['Silicon Valley · Covered California · Bilingual EN/ES'],
     featuredHealthLine:
@@ -482,7 +482,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'columbus',
     sectionTitle: 'Columbus Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Franklin, Delaware, Fairfield, and Licking counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. State capital employee benefits, Ohio State corridor enrollment, and insurance-industry employment hub. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Franklin, Delaware, Fairfield, and Licking counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. State capital employee benefits, Ohio State corridor enrollment, and insurance-industry employment hub. Average Google rating ~4.8–5.0 stars.',
     counties: ['Franklin', 'Delaware', 'Fairfield', 'Licking'],
     badges: ['State capital · Ohio marketplace · OSU corridor'],
     featuredHealthLine:
@@ -493,7 +493,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'indianapolis',
     sectionTitle: 'Indianapolis Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Marion, Hamilton, Hendricks, Johnson, and Hancock counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Healthcare employment benefits, Indiana marketplace enrollment, and growing capital-city suburban demand. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Marion, Hamilton, Hendricks, Johnson, and Hancock counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Healthcare employment benefits, Indiana marketplace enrollment, and growing capital-city suburban demand. Average Google rating ~4.8–5.0 stars.',
     counties: ['Marion', 'Hamilton', 'Hendricks', 'Johnson', 'Hancock'],
     badges: ['Healthcare corridor · Indiana marketplace · Carmel suburbs'],
     featuredHealthLine:
@@ -504,7 +504,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'salt-lake-city',
     sectionTitle: 'Salt Lake Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Salt Lake, Davis, Weber, and Utah counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Young-family growth, Silicon Slopes tech relocation, and Utah marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Salt Lake, Davis, Weber, and Utah counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Young-family growth, Silicon Slopes tech relocation, and Utah marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
     counties: ['Salt Lake', 'Davis', 'Weber', 'Utah'],
     badges: ['Silicon Slopes · Utah marketplace · Family health plans'],
     featuredHealthLine:
@@ -515,7 +515,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'milwaukee',
     sectionTitle: 'Milwaukee Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Milwaukee, Waukesha, Ozaukee, and Washington counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Manufacturing benefit transitions, Wisconsin marketplace enrollment, and lakefront community Medicare growth. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Milwaukee, Waukesha, Ozaukee, and Washington counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Manufacturing benefit transitions, Wisconsin marketplace enrollment, and lakefront community Medicare growth. Average Google rating ~4.8–5.0 stars.',
     counties: ['Milwaukee', 'Waukesha', 'Ozaukee', 'Washington'],
     badges: ['Manufacturing benefits · Wisconsin marketplace · Lakefront communities'],
     featuredHealthLine:
@@ -526,7 +526,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'oklahoma-city',
     sectionTitle: 'Oklahoma City Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Oklahoma, Canadian, and Cleveland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Energy sector benefits, Tinker AFB military families, and Oklahoma marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Oklahoma, Canadian, and Cleveland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Energy sector benefits, Tinker AFB military families, and Oklahoma marketplace enrollment. Average Google rating ~4.8–5.0 stars.',
     counties: ['Oklahoma', 'Canadian', 'Cleveland'],
     badges: ['Energy sector · Military families · Oklahoma marketplace'],
     featuredHealthLine:
@@ -537,7 +537,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'louisville',
     sectionTitle: 'Louisville Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Jefferson, Oldham, Bullitt, and Shelby counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Healthcare and UPS logistics corridor benefits, Kentucky marketplace enrollment, and Ohio River bi-state commuters. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Jefferson, Oldham, Bullitt, and Shelby counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Healthcare and UPS logistics corridor benefits, Kentucky marketplace enrollment, and Ohio River bi-state commuters. Average Google rating ~4.8–5.0 stars.',
     counties: ['Jefferson', 'Oldham', 'Bullitt', 'Shelby'],
     badges: ['Healthcare corridor · Kentucky marketplace · Ohio River bi-state'],
     featuredHealthLine:
@@ -548,7 +548,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'richmond',
     sectionTitle: 'Richmond Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Henrico, Chesterfield, Hanover, and Goochland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. State capital employee benefits, Virginia marketplace enrollment, and RVA tech-corridor growth. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Henrico, Chesterfield, Hanover, and Goochland counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. State capital employee benefits, Virginia marketplace enrollment, and RVA tech-corridor growth. Average Google rating ~4.8–5.0 stars.',
     counties: ['Henrico', 'Chesterfield', 'Hanover', 'Goochland'],
     badges: ['State capital · Virginia marketplace · RVA tech growth'],
     featuredHealthLine:
@@ -559,7 +559,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'birmingham',
     sectionTitle: 'Birmingham Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Jefferson, Shelby, St. Clair, and Blount counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. UAB healthcare corridor employment, Alabama marketplace enrollment, and Hoover–Homewood suburban growth. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Jefferson, Shelby, St. Clair, and Blount counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. UAB healthcare corridor employment, Alabama marketplace enrollment, and Hoover–Homewood suburban growth. Average Google rating ~4.8–5.0 stars.',
     counties: ['Jefferson', 'Shelby', 'St. Clair', 'Blount'],
     badges: ['UAB healthcare · Alabama marketplace · Hoover suburbs'],
     featuredHealthLine:
@@ -570,7 +570,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'buffalo',
     sectionTitle: 'Buffalo Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Erie, Niagara, Cattaraugus, and Chautauqua counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. NY State of Health enrollment, Buffalo Niagara medical corridor employment, and Canadian border commuter coverage. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Erie, Niagara, Cattaraugus, and Chautauqua counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. NY State of Health enrollment, Buffalo Niagara medical corridor employment, and Canadian border commuter coverage. Average Google rating ~4.8–5.0 stars.',
     counties: ['Erie', 'Niagara', 'Cattaraugus', 'Chautauqua'],
     badges: ['NY State of Health · Medical corridor · Border commuters'],
     featuredHealthLine:
@@ -581,7 +581,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'providence',
     sectionTitle: 'Providence Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Providence, Kent, and Bristol counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. HealthSource RI enrollment, Brown University corridor benefits, and Boston commuter health transitions. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Providence, Kent, and Bristol counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. HealthSource RI enrollment, Brown University corridor benefits, and Boston commuter health transitions. Average Google rating ~4.8–5.0 stars.',
     counties: ['Providence', 'Kent', 'Bristol'],
     badges: ['HealthSource RI · Boston commuters · Coastal communities'],
     featuredHealthLine:
@@ -592,7 +592,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'new-orleans',
     sectionTitle: 'New Orleans Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Orleans, Jefferson, St. Tammany, and Plaquemines parishes — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Louisiana marketplace enrollment, tourism-worker ACA gaps, and hurricane-zone property bundling. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Orleans, Jefferson, St. Tammany, and Plaquemines parishes — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Louisiana marketplace enrollment, tourism-worker ACA gaps, and hurricane-zone property bundling. Average Google rating ~4.8–5.0 stars.',
     counties: ['Orleans', 'Jefferson', 'St. Tammany', 'Plaquemines'],
     badges: ['Louisiana marketplace · Tourism workers · Gulf Coast resilience'],
     featuredHealthLine:
@@ -603,7 +603,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'honolulu',
     sectionTitle: 'Honolulu Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Honolulu County on Oahu — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Hawaii marketplace expertise, military/TRICARE coordination, and island-wide employer health. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Honolulu County on Oahu — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Hawaii marketplace expertise, military/TRICARE coordination, and island-wide employer health. Average Google rating ~4.8–5.0 stars.',
     counties: ['Honolulu'],
     badges: ['Hawaii marketplace · Military/TRICARE · Island-wide service'],
     featuredHealthLine:
@@ -614,7 +614,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'albuquerque',
     sectionTitle: 'Albuquerque Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Bernalillo, Sandoval, Valencia, and Torrance counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. beWellnm marketplace enrollment, Sandia labs corridor benefits, and diverse Native community health needs. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Bernalillo, Sandoval, Valencia, and Torrance counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. beWellnm marketplace enrollment, Sandia labs corridor benefits, and diverse Native community health needs. Average Google rating ~4.8–5.0 stars.',
     counties: ['Bernalillo', 'Sandoval', 'Valencia', 'Torrance'],
     badges: ['beWellnm · Sandia labs · Southwest growth'],
     featuredHealthLine:
@@ -625,7 +625,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'tucson',
     sectionTitle: 'Tucson Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Pima County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Retiree Medicare demand, university and Davis-Monthan military health navigation, and bilingual enrollment support. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Pima County — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Retiree Medicare demand, university and Davis-Monthan military health navigation, and bilingual enrollment support. Average Google rating ~4.8–5.0 stars.',
     counties: ['Pima'],
     badges: ['Retiree destination · University corridor · Bilingual EN/ES available'],
     featuredHealthLine:
@@ -636,7 +636,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'fresno',
     sectionTitle: 'Fresno Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Fresno County and the Central Valley — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California enrollment, agricultural worker Medi-Cal transitions, and Clovis suburban growth. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Fresno County and the Central Valley — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Covered California enrollment, agricultural worker Medi-Cal transitions, and Clovis suburban growth. Average Google rating ~4.8–5.0 stars.',
     counties: ['Fresno', 'Madera', 'Kings', 'Tulare'],
     badges: ['Covered California · Agricultural workforce · Central Valley'],
     featuredHealthLine:
@@ -647,7 +647,7 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'omaha',
     sectionTitle: 'Omaha Metro Coverage Area',
     summary:
-      '12 verified independent agencies across Douglas, Sarpy, Washington, and Cass counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Nebraska marketplace enrollment, insurance-industry employment expertise, and bi-state Council Bluffs coordination. Average Google rating ~4.8–5.0 stars.',
+      'Market research coverage for across Douglas, Sarpy, Washington, and Cass counties — 8 with primary health/Medicare/ACA/group emphasis and 4 multi-line independents. Nebraska marketplace enrollment, insurance-industry employment expertise, and bi-state Council Bluffs coordination. Average Google rating ~4.8–5.0 stars.',
     counties: ['Douglas', 'Sarpy', 'Washington', 'Cass'],
     badges: ['Nebraska marketplace · Insurance industry hub · Bi-state enrollment'],
     featuredHealthLine:

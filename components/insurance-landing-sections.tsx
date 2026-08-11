@@ -2,15 +2,14 @@ import Link from 'next/link';
 import {
   ArrowRight,
   ArrowUpRight,
-  BookOpen,
   Calculator,
-  GitCompare,
   MapPin,
   Scale,
   Shield,
   ShieldCheck,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ResearchQuestions } from '@/components/research-questions';
 import {
   INSURANCE_BRAND,
   INSURANCE_HOW_IT_WORKS,
@@ -22,27 +21,45 @@ import {
   INSURANCE_TOOLS,
   INSURANCE_TRUST,
 } from '@/lib/design/insurance-design-system';
+import { LOCAL_RESEARCH_ENTRY } from '@/lib/product/research-ia';
 
 const TOOL_ICONS = {
-  compare: GitCompare,
-  verify: ShieldCheck,
-  guides: BookOpen,
-  tools: Calculator,
+  marketplace: MapPin,
+  aca: Calculator,
+  cost: Scale,
+  complaints: ShieldCheck,
 } as const;
 
 /**
- * Phase 3 — homepage sections below the hero.
- * Does not include header, footer, or hero.
+ * Phase 2 — homepage sections below the hero (three-question product).
  */
 export function InsuranceLandingSections() {
   return (
     <div data-hub="insurance">
+      <QuestionsSection />
       <ToolsSection />
       <HowItWorksSection />
+      <LocalResearchSection />
       <TrustSection />
       <PathwaysSection />
       <NetworkSection />
     </div>
+  );
+}
+
+function QuestionsSection() {
+  return (
+    <SectionShell
+      id="research-questions"
+      eyebrow="How this product works"
+      title="Three questions. One research product."
+      support="Every major path on Insurance Trust Hub helps you answer coverage need, local options, and verification — without inventing agencies or selling leads."
+      background={INSURANCE_BRAND.white}
+    >
+      <div className="mt-8 sm:mt-10">
+        <ResearchQuestions variant="full" />
+      </div>
+    </SectionShell>
   );
 }
 
@@ -274,6 +291,43 @@ function TrustSection() {
   );
 }
 
+function LocalResearchSection() {
+  return (
+    <SectionShell
+      id="local-research"
+      eyebrow="Where you live"
+      title={LOCAL_RESEARCH_ENTRY.title}
+      support={LOCAL_RESEARCH_ENTRY.support}
+      background={INSURANCE_BRAND.canvas}
+    >
+      <ul className="mt-8 flex flex-wrap gap-2 sm:mt-10">
+        {LOCAL_RESEARCH_ENTRY.links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="inline-flex min-h-11 items-center rounded-full border bg-white px-4 py-2 text-sm font-semibold transition-colors hover:border-[#0284C7]/40 hover:bg-[#E0F2FE]/50"
+              style={{ borderColor: INSURANCE_BRAND.border, color: INSURANCE_BRAND.ink }}
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-6 text-sm" style={{ color: INSURANCE_BRAND.ink }}>
+        Soft path only:{' '}
+        <Link
+          href="/directory"
+          className="font-semibold underline-offset-2 hover:underline"
+          style={{ color: INSURANCE_BRAND.shield }}
+        >
+          verified agency directory
+        </Link>{' '}
+        when real verified inventory exists — never seed or illustrative listings.
+      </p>
+    </SectionShell>
+  );
+}
+
 function PathwaysSection() {
   return (
     <SectionShell
@@ -281,7 +335,7 @@ function PathwaysSection() {
       eyebrow={INSURANCE_PATHWAYS.eyebrow}
       title={INSURANCE_PATHWAYS.title}
       support={INSURANCE_PATHWAYS.support}
-      background={INSURANCE_BRAND.canvas}
+      background={INSURANCE_BRAND.white}
     >
       <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-2 xl:grid-cols-4">
         {/* Coverage types */}

@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'minneapolis';
 
-/** 12 verified Minneapolis-St. Paul metro agents — Hennepin, Ramsey */
+/** Curated research catalog (not public verified inventory) — Minneapolis-St. Paul metro agents — Hennepin, Ramsey */
 export const MINNEAPOLIS_AGENTS: HubAgent[] = [
   {
     id: 'james-romeo-minneapolis',

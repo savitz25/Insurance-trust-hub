@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'louisville';
 
-/** 12 verified Louisville metro agents — Jefferson County */
+/** Curated research catalog (not public verified inventory) — Louisville metro agents — Jefferson County */
 export const LOUISVILLE_AGENTS: HubAgent[] = [
   {
     id: 'kim-ford-louisville',

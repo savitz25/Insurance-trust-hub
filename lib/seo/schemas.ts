@@ -51,15 +51,15 @@ export const websiteSchema = {
 export const homepageServiceSchema = {
   '@type': 'Service',
   '@id': `${SITE_URL}/#insurance-research-directory`,
-  name: 'Insurance Agency Research Directory',
-  serviceType: 'Independent insurance agency research directory',
+  name: 'Independent Insurance Research',
+  serviceType: 'Independent insurance research and educational coverage tools',
   provider: { '@id': `${SITE_URL}/#organization` },
   areaServed: {
     '@type': 'Country',
     name: 'United States',
   },
   description:
-    'Research licensed insurance agencies by state and specialty. Educational Coverage Intelligence for ACA Marketplace and Medicare markets. No paid placements. Not a policy marketplace.',
+    'Independent insurance research for coverage need, local options, and verification — ACA Marketplace tools, Medicare intelligence, and verified agency listings only when real inventory exists. No paid placements. Not a policy marketplace.',
   url: SITE_URL,
 };
 

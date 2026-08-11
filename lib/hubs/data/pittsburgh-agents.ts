@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'pittsburgh';
 
-/** 12 verified Pittsburgh metro agents — Allegheny, Beaver, Butler, Washington, Westmoreland */
+/** Curated research catalog (not public verified inventory) — Pittsburgh metro agents — Allegheny, Beaver, Butler, Washington, Westmoreland */
 export const PITTSBURGH_AGENTS: HubAgent[] = [
   {
     id: 'matthew-gaus-pittsburgh',

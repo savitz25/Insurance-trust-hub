@@ -2,7 +2,7 @@ import type { HubAgent } from '@/types/agent';
 
 const HUB_SLUG = 'san-antonio';
 
-/** 12 verified San Antonio metro agents — Bexar, Comal, Guadalupe, Kendall */
+/** Curated research catalog (not public verified inventory) — San Antonio metro agents — Bexar, Comal, Guadalupe, Kendall */
 export const SAN_ANTONIO_AGENTS: HubAgent[] = [
   {
     id: 'rodney-powell-san-antonio',
