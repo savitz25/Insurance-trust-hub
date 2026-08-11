@@ -8,6 +8,10 @@ import { StarRating } from '@/components/star-rating';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { toPublicProviderView } from '@/lib/provenance/public-listing';
+import {
+  canShowAsVerified,
+  resolveProviderTrustState,
+} from '@/lib/insurance/trust/provider-trust-state';
 import { cn } from '@/lib/utils';
 
 interface ProviderCardProps {
@@ -16,6 +20,10 @@ interface ProviderCardProps {
 }
 
 export function ProviderCard({ provider, className }: ProviderCardProps) {
+  // Phase 1: only verified TrustState may render on consumer surfaces
+  if (!canShowAsVerified(resolveProviderTrustState(provider))) {
+    return null;
+  }
   const view = toPublicProviderView(provider);
   const typeLabels = provider.insurance_types
     .slice(0, 3)

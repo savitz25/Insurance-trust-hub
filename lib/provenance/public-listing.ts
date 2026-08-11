@@ -1,5 +1,6 @@
 /**
- * Phase 6A + 6B1 — public listing honesty for providers & hub agents.
+ * Phase 6A + 6B1 + Phase 1 — public listing honesty for providers & hub agents.
+ * Consumer trust authority: lib/insurance/trust/provider-trust-state.ts
  */
 
 import type { Provider } from '@/types/provider';
@@ -16,6 +17,12 @@ import {
   evaluateProviderPromotion,
   isSeedProviderId,
 } from '@/lib/provenance/promotion';
+import {
+  canShowAsVerified,
+  resolveHubAgentTrustState,
+  resolveProviderTrustState,
+  trustStateFromListingClass,
+} from '@/lib/insurance/trust/provider-trust-state';
 
 export { isSeedProviderId };
 
@@ -26,21 +33,24 @@ export function classifyProviderListing(provider: Provider): PublicListingClass 
 }
 
 export function classifyHubAgentListing(agent: HubAgent): PublicListingClass {
-  if (isSeedProviderId(agent.id) || /-agent-\d+$/.test(agent.id)) return 'seed';
-  const license = cleanLicenseNumber(agent.licenseNumber);
-  if (!license) return 'seed';
-  // Hub agents lack full provenance until backfilled into providers table
-  if (agent.isVerified && license) return 'pending_verification';
-  return 'pending_verification';
+  const state = resolveHubAgentTrustState(agent);
+  if (state === 'verified') return 'indexable_research';
+  if (state === 'pending_verification') return 'pending_verification';
+  return 'seed';
 }
 
 export function isIndexableListing(cls: PublicListingClass): boolean {
-  return cls === 'indexable_research';
+  return canShowAsVerified(trustStateFromListingClass(cls));
+}
+
+/** Prefer resolveProviderTrustState + canShowAsVerified for new call sites. */
+export function isPublicVerifiedProvider(provider: Provider): boolean {
+  return canShowAsVerified(resolveProviderTrustState(provider));
 }
 
 export function allowContactForm(cls: PublicListingClass): boolean {
   if (PROVENANCE_RULES.seedNoContactForm && cls === 'seed') return false;
-  return cls === 'indexable_research';
+  return canShowAsVerified(trustStateFromListingClass(cls));
 }
 
 export type PublicProviderView = {

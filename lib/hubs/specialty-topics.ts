@@ -2,10 +2,7 @@ import type { InsuranceHub } from '@/types/agent';
 import { getHubBySlug, getTopHubs } from '@/lib/hubs/registry';
 import { SOUTH_FLORIDA_AGENTS } from '@/lib/hubs/data/south-florida-agents';
 import type { HubAgent } from '@/types/agent';
-import {
-  classifyHubAgentListing,
-  isIndexableListing,
-} from '@/lib/provenance/public-listing';
+import { filterVerifiedHubAgents } from '@/lib/insurance/trust/provider-trust-state';
 
 export interface SpecialtyTopic {
   slug: string;
@@ -123,10 +120,8 @@ export function getSouthFloridaHub(): InsuranceHub {
 }
 
 export function getSouthFloridaAgents(): HubAgent[] {
-  // Stage 0: public specialty pages never list non-indexable seed inventory
-  return SOUTH_FLORIDA_AGENTS.filter((a) =>
-    isIndexableListing(classifyHubAgentListing(a))
-  );
+  // Phase 1: verified TrustState only
+  return filterVerifiedHubAgents(SOUTH_FLORIDA_AGENTS);
 }
 
 export function getTopicFeaturedHubs(topic: SpecialtyTopic): InsuranceHub[] {

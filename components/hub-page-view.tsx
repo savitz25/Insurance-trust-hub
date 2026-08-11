@@ -20,7 +20,7 @@ import { ContextNav } from '@/components/context-nav';
 import {
   EMPTY_MARKET_COPY,
   verifiedCountWithHealth,
-} from '@/lib/trust/listing-state';
+} from '@/lib/insurance/trust/provider-trust-state';
 import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
 
 interface HubPageViewProps {

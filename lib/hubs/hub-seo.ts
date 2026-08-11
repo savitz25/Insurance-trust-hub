@@ -1,14 +1,15 @@
 /**
- * Phase 0 — honest hub SEO from live verified inventory only.
- * Registry metaTitle/metaDescription may still hold legacy marketing copy;
- * public pages must use these helpers so empty markets never promise counts.
+ * Phase 1 — honest hub SEO from live verified inventory only (shared trust-state).
  */
 
 import type { Metadata } from 'next';
 import type { InsuranceHub } from '@/types/agent';
 import { getHubStats } from '@/lib/hubs/agents';
 import { SITE_URL } from '@/lib/constants';
-import { EMPTY_MARKET_COPY } from '@/lib/trust/listing-state';
+import {
+  EMPTY_MARKET_COPY,
+  buildMarketMetadata,
+} from '@/lib/insurance/trust/provider-trust-state';
 
 export type HubPublicSeo = {
   title: string;
@@ -25,31 +26,21 @@ export function resolveHubPublicSeo(
 ): HubPublicSeo {
   const stats = getHubStats(hub);
   const path = canonicalPath ?? `/hubs/${hub.stateSlug}/${hub.slug}`;
-  const verifiedCount = stats.totalAgents;
-  const healthCount = stats.healthSpecialists;
-  const isEmpty = verifiedCount <= 0;
-
-  if (isEmpty) {
-    return {
-      title: `Insurance research in ${hub.shortName} | Insurance Trust Hub`,
-      description: `We’re still verifying independent insurance agencies in ${hub.shortName} (${hub.msaName}). No verified listings are shown yet. Use state DOI tools and our free research calculators — no paid placements.`,
-      verifiedCount: 0,
-      healthCount: 0,
-      isEmpty: true,
-      path,
-    };
-  }
+  // getHubStats.totalAgents is already verified-only inventory
+  const meta = buildMarketMetadata({
+    marketName: hub.shortName,
+    regionLabel: hub.msaName,
+    verifiedCount: stats.totalAgents,
+    healthCount: stats.healthSpecialists,
+    path,
+  });
 
   return {
-    title: `Insurance agencies in ${hub.shortName} — ${verifiedCount} verified research listings`,
-    description: `Research ${verifiedCount} verified independent insurance agency listing${
-      verifiedCount === 1 ? '' : 's'
-    } in ${hub.msaName}${
-      healthCount > 0 ? ` (${healthCount} health-focused)` : ''
-    }. Re-check licenses with state DOI. Independent research — no paid placements.`,
-    verifiedCount,
-    healthCount,
-    isEmpty: false,
+    title: meta.title,
+    description: meta.description,
+    verifiedCount: meta.verifiedCount,
+    healthCount: stats.healthSpecialists,
+    isEmpty: meta.isEmpty,
     path,
   };
 }

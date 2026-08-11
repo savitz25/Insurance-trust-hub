@@ -36,6 +36,10 @@ import {
   allowContactForm,
   toPublicProviderView,
 } from '@/lib/provenance/public-listing';
+import {
+  canShowAsVerified,
+  resolveProviderTrustState,
+} from '@/lib/insurance/trust/provider-trust-state';
 import { toPublicSecondarySignals } from '@/lib/enrichment/public-secondary';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { ProviderSecondarySignals } from '@/components/provider-secondary-signals';
@@ -65,14 +69,14 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
     if (!provider) {
       return { title: 'Provider Not Found', robots: { index: false, follow: true } };
     }
-    const view = toPublicProviderView(provider);
+    const trust = resolveProviderTrustState(provider);
     return buildMetadata({
       title: `${provider.name} — ${provider.city}, ${provider.state} Insurance Research`,
       description:
         provider.short_description ??
         `Research ${provider.name} in ${provider.city}, ${provider.state}. Re-check licenses on official state tools.`,
       path: `/providers/${slug}`,
-      noIndex: view.listingClass !== 'indexable_research',
+      noIndex: !canShowAsVerified(trust),
     });
   } catch {
     return { title: 'Provider Not Found', robots: { index: false, follow: true } };
@@ -80,15 +84,14 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
 }
 
 /**
- * Phase 0 fail-closed loader: never throw 500 to consumers.
- * Incomplete / seed / pending inventory → notFound().
+ * Phase 1 fail-closed loader: never throw 500 to consumers.
+ * Only verified TrustState profiles render; all else → notFound().
  */
-async function loadIndexableProvider(slug: string): Promise<Provider | null> {
+async function loadVerifiedProvider(slug: string): Promise<Provider | null> {
   try {
     const provider = await getProviderBySlug(slug);
     if (!provider) return null;
-    const view = toPublicProviderView(provider);
-    if (view.listingClass !== 'indexable_research') return null;
+    if (!canShowAsVerified(resolveProviderTrustState(provider))) return null;
     return provider;
   } catch {
     return null;
@@ -98,10 +101,12 @@ async function loadIndexableProvider(slug: string): Promise<Provider | null> {
 export default async function ProviderPage({ params, searchParams }: ProviderPageProps) {
   const { slug } = await params;
   const sp = searchParams ? await searchParams : {};
-  const provider = await loadIndexableProvider(slug);
+  const provider = await loadVerifiedProvider(slug);
   if (!provider) notFound();
 
   const publicView = toPublicProviderView(provider);
+  // Belt-and-suspenders: never render non-verified profiles
+  if (!canShowAsVerified(resolveProviderTrustState(provider))) notFound();
   const specialties = Array.isArray(provider.specialties) ? provider.specialties : [];
   const insuranceTypes = Array.isArray(provider.insurance_types)
     ? provider.insurance_types

@@ -8,14 +8,18 @@ import {
 } from '@/lib/providers/fallback-data';
 import { mapRowToProvider } from '@/lib/providers/map-db-provider';
 import type { Provider as DbProvider } from '@/types/supabase';
-import { isIndexableListing, toPublicProviderView } from '@/lib/provenance/public-listing';
+import {
+  canShowAsVerified,
+  filterVerifiedProviders,
+  resolveProviderTrustState,
+} from '@/lib/insurance/trust/provider-trust-state';
 
 /**
- * Stage 0 / Phase 0 — public directory never returns seed / illustrative inventory.
- * Seed catalog remains available only via getAllFallbackProviders (admin/staging tooling).
+ * Phase 1 — public directory returns verified TrustState only.
+ * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
  */
-function onlyIndexableResearch(providers: Provider[]): Provider[] {
-  return providers.filter((p) => isIndexableListing(toPublicProviderView(p).listingClass));
+function onlyVerifiedResearch(providers: Provider[]): Provider[] {
+  return filterVerifiedProviders(providers);
 }
 
 export async function getProviders(
@@ -59,7 +63,7 @@ export async function getProviders(
       return { providers: [], total: 0 };
     }
 
-    const providers = onlyIndexableResearch(
+    const providers = onlyVerifiedResearch(
       data.map((row) => mapRowToProvider(row as DbProvider))
     );
 
@@ -71,8 +75,8 @@ export async function getProviders(
 
 /**
  * Public provider profile loader.
- * Phase 0: DB indexable_research only — never hydrate hub seed/pending catalogs
- * (those catalogs can OOM serverless and are not consumer-visible inventory).
+ * Phase 1: verified TrustState only — pending/unavailable fail closed to null → not-found.
+ * Never hydrate hub seed catalogs (OOM + not consumer inventory).
  */
 export async function getProviderBySlug(slug: string): Promise<Provider | null> {
   try {
@@ -92,7 +96,7 @@ export async function getProviderBySlug(slug: string): Promise<Provider | null> 
     }
 
     const provider = mapRowToProvider(data as DbProvider);
-    if (!isIndexableListing(toPublicProviderView(provider).listingClass)) {
+    if (!canShowAsVerified(resolveProviderTrustState(provider))) {
       return null;
     }
     return provider;

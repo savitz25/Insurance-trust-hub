@@ -1,11 +1,11 @@
 import type { HubAgent, InsuranceHub } from '@/types/agent';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import { getCuratedHubAgents } from '@/lib/hubs/data/curated-hubs';
-import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
 import {
-  classifyHubAgentListing,
-  isIndexableListing,
-} from '@/lib/provenance/public-listing';
+  filterVerifiedHubAgents,
+  resolveHubAgentTrustState,
+  canShowAsVerified,
+} from '@/lib/insurance/trust/provider-trust-state';
 
 const HEALTH_AGENCY_NAMES = [
   'Summit Health Partners',
@@ -173,13 +173,11 @@ export function getAgentsForHub(hub: InsuranceHub): HubAgent[] {
 }
 
 /**
- * Stage 0 — public hub directories: only indexable research listings.
- * Never surfaces illustrative / seed / pending generated agents.
+ * Phase 1 — public hub directories: verified TrustState only.
+ * Seed / pending hub catalog never renders as research inventory.
  */
 export function getPublicAgentsForHub(hub: InsuranceHub): HubAgent[] {
-  return getAgentsForHub(hub).filter((a) =>
-    isIndexableListing(classifyHubAgentListing(a))
-  );
+  return filterVerifiedHubAgents(getAgentsForHub(hub));
 }
 
 export function getFeaturedHealthAgents(hub: InsuranceHub): HubAgent[] {
@@ -190,8 +188,9 @@ export function getFeaturedHealthAgents(hub: InsuranceHub): HubAgent[] {
 export function getHubStats(hub: InsuranceHub) {
   const agents = getPublicAgentsForHub(hub);
   const healthAgents = agents.filter((a) => a.isHealthFeatured);
-  const verified = agents.filter(
-    (a) => a.isVerified && cleanLicenseNumber(a.licenseNumber)
+  // totalAgents is verified-only; verified count must match rendered cards
+  const verified = agents.filter((a) =>
+    canShowAsVerified(resolveHubAgentTrustState(a))
   ).length;
 
   return {
@@ -200,6 +199,7 @@ export function getHubStats(hub: InsuranceHub) {
     verified,
     avgTrustScore: null as number | null,
     totalReviews: 0,
+    /** @deprecated name kept for call sites; means empty verified inventory */
     seedInventory: agents.length === 0,
   };
 }

@@ -5,6 +5,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { toPublicHubAgentView } from '@/lib/provenance/public-listing';
+import {
+  canShowAsVerified,
+  resolveHubAgentTrustState,
+} from '@/lib/insurance/trust/provider-trust-state';
 import { cn } from '@/lib/utils';
 
 interface AgentCardProps {
@@ -15,11 +19,11 @@ interface AgentCardProps {
 }
 
 export function AgentCard({ agent, rank, hubLabel, className }: AgentCardProps) {
-  const view = toPublicHubAgentView(agent);
-  // Phase 0: seed / non-verified inventory never renders on consumer surfaces
-  if (view.listingClass === 'seed' || view.listingClass === 'pending_verification') {
+  // Phase 1: only verified TrustState may render on consumer surfaces
+  if (!canShowAsVerified(resolveHubAgentTrustState(agent))) {
     return null;
   }
+  const view = toPublicHubAgentView(agent);
   const locationLine = [agent.city, agent.state, agent.county ? `${agent.county} County` : undefined]
     .filter(Boolean)
     .join(' · ');
