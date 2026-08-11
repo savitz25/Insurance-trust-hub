@@ -35,13 +35,35 @@ export type NormalizedDfsProducer = {
   skipReason?: string;
 };
 
+/** Strip Excel formula-style cells: ="12345" or =12345 */
+function cleanCell(raw: string | undefined | null): string {
+  if (raw == null) return '';
+  let s = String(raw).trim();
+  // strip surrounding quotes left by some parsers
+  if (
+    (s.startsWith('"') && s.endsWith('"')) ||
+    (s.startsWith("'") && s.endsWith("'"))
+  ) {
+    s = s.slice(1, -1).trim();
+  }
+  // Excel CSV export: ="value"
+  const excel = s.match(/^=\s*"([^"]*)"\s*$/);
+  if (excel) return excel[1].trim();
+  const excel2 = s.match(/^=\s*(.+)\s*$/);
+  if (excel2 && !s.includes(' ')) return excel2[1].replace(/^"|"$/g, '').trim();
+  return s;
+}
+
 function pick(row: Record<string, string>, keys: string[]): string {
   for (const k of keys) {
-    const direct = row[k];
-    if (direct?.trim()) return direct.trim();
-    // case-insensitive
+    const direct = cleanCell(row[k]);
+    if (direct) return direct;
+    // case-insensitive exact header match
     const found = Object.keys(row).find((rk) => rk.toLowerCase() === k.toLowerCase());
-    if (found && row[found]?.trim()) return row[found].trim();
+    if (found) {
+      const v = cleanCell(row[found]);
+      if (v) return v;
+    }
   }
   return '';
 }
@@ -61,9 +83,12 @@ function normalizeZip(raw: string | null): string | null {
 }
 
 function isActiveStatus(status: string): boolean {
-  const s = status.toLowerCase();
+  const s = status.toLowerCase().trim();
   if (!s) return true; // bulk “valid licenses” files are pre-filtered
-  if (/inactive|expired|revoked|suspended|cancelled|canceled|lapsed/.test(s)) return false;
+  if (/inactive|expired|revoked|suspended|cancelled|canceled|lapsed|terminated/.test(s)) {
+    return false;
+  }
+  // FL bulk uses "VALID"
   return /active|valid|current|licensed/.test(s) || s.length > 0;
 }
 
@@ -82,10 +107,12 @@ export function normalizeDfsRow(
     'License',
     'LICENSE_NUMBER',
   ]);
+  // FL business licenses often look like E041603 — cleanLicenseNumber requires a digit (ok)
   const licenseNumber = cleanLicenseNumber(licenseRaw) ?? '';
 
   const legalName =
     pick(row, [
+      'Full Name',
       'Business Name',
       'BusinessName',
       'DBA Name',
@@ -93,6 +120,7 @@ export function normalizeDfsRow(
       'Name',
       'Agency Name',
       'LICENSEE NAME',
+      'Licensee Name',
     ]) ||
     [pick(row, ['First Name', 'FirstName']), pick(row, ['Last Name', 'LastName'])]
       .filter(Boolean)
@@ -100,9 +128,13 @@ export function normalizeDfsRow(
       .trim();
 
   const displayName =
-    pick(row, ['DBA Name', 'Doing Business As', 'Display Name']) || legalName;
+    pick(row, ['DBA Name', 'Doing Business As', 'Display Name', 'Full Name']) ||
+    legalName;
 
+  // FL bulk: "License TYCL Desc" is the human-readable line of authority
   const loaRaw = pick(row, [
+    'License TYCL Desc',
+    'License TYCL Description',
     'License Type',
     'License Types',
     'Line of Authority',
@@ -111,28 +143,76 @@ export function normalizeDfsRow(
     'Authority',
     'Type',
   ]);
+  const loaCode = pick(row, ['License TYCL', 'TYCL', 'License Type Code']);
   const linesOfAuthority = parseLoaField(loaRaw);
-  // Some files use multi-column LOAs — gather any cell mentioning known keywords
+  if (loaCode && !linesOfAuthority.includes(loaCode)) {
+    // keep human desc primary; code is secondary signal only if desc empty
+  }
+  if (linesOfAuthority.length === 0 && loaCode) {
+    linesOfAuthority.push(loaCode);
+  }
+  // Some files use multi-column LOAs
   if (linesOfAuthority.length === 0) {
     for (const [k, v] of Object.entries(row)) {
-      if (/license|authority|type|line/i.test(k) && v?.trim()) {
-        linesOfAuthority.push(...parseLoaField(v));
+      if (/license|authority|type|line|tycl/i.test(k) && cleanCell(v)) {
+        linesOfAuthority.push(...parseLoaField(cleanCell(v)));
       }
     }
   }
   const uniqueLoas = Array.from(new Set(linesOfAuthority));
   const capabilities = classifyLoas(uniqueLoas);
 
-  const county = pick(row, ['County', 'County Name', 'COUNTY']) || null;
-  const city = pick(row, ['City', 'CITY', 'Mailing City', 'Business City']) || null;
-  const zip = normalizeZip(pick(row, ['Zip', 'ZIP', 'Zip Code', 'Postal Code', 'ZipCode']));
-  const phone = normalizePhone(
-    pick(row, ['Phone', 'Phone Number', 'Business Phone', 'Telephone', 'PHONE'])
+  const county =
+    pick(row, [
+      'Business County',
+      'County',
+      'County Name',
+      'COUNTY',
+      'Mailing County',
+    ]) || null;
+  const city =
+    pick(row, [
+      'Business City',
+      'City',
+      'CITY',
+      'Mailing City',
+    ]) || null;
+  const zip = normalizeZip(
+    pick(row, [
+      'Business Zip',
+      'Zip',
+      'ZIP',
+      'Zip Code',
+      'Postal Code',
+      'ZipCode',
+      'Mailing Zip',
+    ])
   );
-  const email = pick(row, ['Email', 'E-mail', 'Email Address']) || null;
-  const npn = pick(row, ['NPN', 'National Producer Number', 'Npn']) || null;
-  const status = pick(row, ['Status', 'License Status', 'LicenseStatus']) || 'valid';
-  const residentRaw = pick(row, ['Resident', 'Resident Flag', 'FL Resident']);
+  const phone = normalizePhone(
+    pick(row, [
+      'Business Phone',
+      'Phone',
+      'Phone Number',
+      'Telephone',
+      'PHONE',
+    ])
+  );
+  const email =
+    pick(row, ['Email Address', 'Email', 'E-mail', 'Business Email']) || null;
+  const npn = pick(row, [
+    'NPN Number',
+    'NPN',
+    'National Producer Number',
+    'Npn',
+  ]) || null;
+  const status =
+    pick(row, ['License Status', 'Status', 'LicenseStatus']) || 'valid';
+  const residentRaw = pick(row, [
+    'Residency Type',
+    'Resident',
+    'Resident Flag',
+    'FL Resident',
+  ]);
 
   const countyNormalized = normalizeCountyName(county);
   const launch = matchLaunchCounty(county);

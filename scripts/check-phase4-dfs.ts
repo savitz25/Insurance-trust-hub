@@ -66,6 +66,31 @@ assert(!good.skipReason, `unexpected skip: ${good.skipReason}`);
 assert(good.launchCountyId === 'duval', 'launch county on normalize');
 assert(good.phone?.includes('904'), 'phone normalized');
 
+// Official FL bulk column names (Business CSV)
+const flBulk = normalizeDfsRow(
+  {
+    'License Number': 'E041603',
+    'Full Name': 'PEOPLES CHOICE REALTY SERVICES LLC',
+    'NPN Number': '="7410936"',
+    'Residency Type': 'Resident',
+    'License TYCL': '="0251"',
+    'License TYCL Desc': 'HOME WARRANTY',
+    'License Status': 'VALID',
+    'Email Address': 'admin@example.com',
+    'Business Phone': '="8139330677"',
+    'Business City': 'TAMPA',
+    'Business State': 'FL',
+    'Business Zip': '="33614"',
+    'Business County': 'Hillsborough',
+  },
+  'business'
+);
+assert(!flBulk.skipReason, `FL bulk skip: ${flBulk.skipReason}`);
+assert(flBulk.launchCountyId === 'hillsborough', 'Hillsborough launch');
+assert(flBulk.displayName.includes('PEOPLES'), 'Full Name mapped');
+assert(flBulk.npn === '7410936', 'excel NPN stripped');
+assert(flBulk.phone?.includes('813'), 'excel phone stripped');
+
 const badLic = normalizeDfsRow(
   {
     'License Number': 'FL-DFS Active ✅',

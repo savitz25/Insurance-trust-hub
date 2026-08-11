@@ -42,7 +42,22 @@ function parseCsvLine(line: string): string[] {
     } else cur += c;
   }
   out.push(cur);
-  return out.map((s) => s.trim());
+  return out.map((s) => {
+    let v = s.trim();
+    // strip wrapping quotes
+    if (
+      (v.startsWith('"') && v.endsWith('"')) ||
+      (v.startsWith("'") && v.endsWith("'"))
+    ) {
+      v = v.slice(1, -1);
+    }
+    // Excel formula cells: ="12345"
+    const m = v.match(/^=\s*"([^"]*)"\s*$/);
+    if (m) return m[1].trim();
+    const m2 = v.match(/^=\s*(.+)\s*$/);
+    if (m2) return m2[1].replace(/^"|"$/g, '').trim();
+    return v.trim();
+  });
 }
 
 async function main() {
