@@ -1,11 +1,14 @@
 /**
  * Phase 4 — promote dfs_producers in launch counties → public providers (Phase 1 gates).
  *
- *   npx tsx scripts/dfs/promote-launch-counties.ts --dry-run
- *   npx tsx scripts/dfs/promote-launch-counties.ts --limit 50
- *   npx tsx scripts/dfs/promote-launch-counties.ts --county duval
+ *   npm run dfs:promote -- --dry-run
+ *   npm run dfs:promote -- --limit 50
+ *   npm run dfs:promote -- --county duval
+ *
+ * Loads .env / .env.local / .env.dfs.local — see docs/LOCAL-ENV.md
  */
 
+import { resolve } from 'path';
 import { createClient } from '@supabase/supabase-js';
 import {
   FL_LAUNCH_COUNTIES,
@@ -19,6 +22,7 @@ import {
 import { canShowAsVerified, resolveProviderTrustState } from '../../lib/insurance/trust/provider-trust-state';
 import { mapRowToProvider } from '../../lib/providers/map-db-provider';
 import type { Provider as DbProvider } from '../../types/supabase';
+import { loadLocalEnv, requireSupabaseOpsEnv } from '../lib/load-local-env';
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -42,36 +46,33 @@ async function main() {
     process.exit(1);
   }
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) {
-    if (dryRun) {
-      console.log(
-        JSON.stringify(
-          {
-            dryRun: true,
-            note: 'No Supabase credentials — structural dry-run only. Ops must set SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY for live promote.',
-            targetCounties: counties.map((c) => c.displayName),
-            promotionGates: [
-              'active FL license',
-              're-checkable license number',
-              'Florida DFS regulator provenance',
-              'identityMatchAccepted',
-              'Phase 1 resolveProviderTrustState === verified',
-              'never seed ids',
-            ],
-          },
-          null,
-          2
-        )
-      );
-      process.exit(0);
-    }
-    console.error('Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY');
-    process.exit(1);
+  loadLocalEnv(resolve(process.cwd()));
+
+  if (dryRun && !(process.env.SUPABASE_SERVICE_ROLE_KEY || '').trim()) {
+    console.log(
+      JSON.stringify(
+        {
+          dryRun: true,
+          note: 'No Supabase credentials in env/.env.local — structural dry-run only. Copy .env.example → .env.local for live promote.',
+          targetCounties: counties.map((c) => c.displayName),
+          promotionGates: [
+            'active FL license',
+            're-checkable license number',
+            'Florida DFS regulator provenance',
+            'identityMatchAccepted',
+            'Phase 1 resolveProviderTrustState === verified',
+            'never seed ids',
+          ],
+        },
+        null,
+        2
+      )
+    );
+    process.exit(0);
   }
 
-  const supabase = createClient(url, key, {
+  const { url, serviceRoleKey } = requireSupabaseOpsEnv();
+  const supabase = createClient(url, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 

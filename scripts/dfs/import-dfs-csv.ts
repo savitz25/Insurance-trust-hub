@@ -1,12 +1,13 @@
 /**
  * Phase 4 — import Florida DFS bulk CSV into dfs_license_raw + dfs_producers.
  *
- *   npx tsx scripts/dfs/import-dfs-csv.ts --file path/to/AllValidLicensesBusiness.csv --type business
- *   npx tsx scripts/dfs/import-dfs-csv.ts --file path/to/AllValidLicensesIndividual.csv --type individual
+ *   npm run dfs:import -- --file data/dfs-raw/AllValidLicensesBusiness.csv --type business --launch-counties-only
  *   npx tsx scripts/dfs/import-dfs-csv.ts --file ... --type business --dry-run
  *
- * Requires SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (not public anon).
+ * Loads .env / .env.local / .env.dfs.local via scripts/lib/load-local-env.ts
+ * Requires SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL) + SUPABASE_SERVICE_ROLE_KEY.
  * Raw multi-hundred-MB files stay local under data/dfs-raw/ (gitignored).
+ * See docs/LOCAL-ENV.md
  */
 
 import { createReadStream, existsSync } from 'fs';
@@ -14,6 +15,7 @@ import { createInterface } from 'readline';
 import { resolve } from 'path';
 import { createClient } from '@supabase/supabase-js';
 import { normalizeDfsRow, type DfsEntityType } from '../../lib/dfs/normalize';
+import { loadLocalEnv, requireSupabaseOpsEnv } from '../lib/load-local-env';
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -85,17 +87,14 @@ async function main() {
     process.exit(1);
   }
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!dryRun && (!url || !key)) {
-    console.error('Set SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL) and SUPABASE_SERVICE_ROLE_KEY');
-    process.exit(1);
+  loadLocalEnv(resolve(process.cwd()));
+  let supabase: ReturnType<typeof createClient> | null = null;
+  if (!dryRun) {
+    const { url, serviceRoleKey } = requireSupabaseOpsEnv();
+    supabase = createClient(url, serviceRoleKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
   }
-
-  const supabase =
-    !dryRun && url && key
-      ? createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } })
-      : null;
 
   const rl = createInterface({ input: createReadStream(abs, { encoding: 'utf8' }), crlfDelay: Infinity });
 

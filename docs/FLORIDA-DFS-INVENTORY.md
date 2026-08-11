@@ -61,48 +61,47 @@ Migrations (run in order, or run the repair file alone in SQL Editor):
 
 Apply migration via Supabase CLI or SQL editor before first import.
 
-## Environment
+## Environment (local — preferred)
 
-```bash
-# service role required for import/promotion (never expose to browser)
-export SUPABASE_URL="https://YOUR_PROJECT.supabase.co"
-export SUPABASE_SERVICE_ROLE_KEY="…"
+**Do not paste service-role keys into chat.** Use a local env file.
+
+```powershell
+copy .env.example .env.local
+# Edit .env.local:
+#   SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+#   NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+#   SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
+
+```powershell
+npm run dfs:env
+```
+
+Full guide: `docs/LOCAL-ENV.md`
+
+Shell exports still work if you prefer; process env wins over files.
 
 ## Commands
 
-```bash
-# 1) Dry-run normalize (no DB) — validates file path + column detection
-npx tsx scripts/dfs/import-dfs-csv.ts \
-  --file data/dfs-raw/AllValidLicensesBusiness.csv \
-  --type business \
-  --dry-run \
-  --limit 1000 \
-  --launch-counties-only
+```powershell
+# 0) Preflight
+npm run dfs:env
 
-# 2) Import business entities (launch counties only recommended for first pass)
-npx tsx scripts/dfs/import-dfs-csv.ts \
-  --file data/dfs-raw/AllValidLicensesBusiness.csv \
-  --type business \
-  --launch-counties-only
+# 1) Dry-run normalize (no DB)
+npm run dfs:import -- --file data/dfs-raw/AllValidLicensesBusiness.csv --type business --launch-counties-only --dry-run
 
-# 3) Import individuals (optional second pass)
-npx tsx scripts/dfs/import-dfs-csv.ts \
-  --file data/dfs-raw/AllValidLicensesIndividual.csv \
-  --type individual \
-  --launch-counties-only
+# 2) Import business (launch counties)
+npm run dfs:import -- --file data/dfs-raw/AllValidLicensesBusiness.csv --type business --launch-counties-only
+
+# 3) Import individuals (optional)
+npm run dfs:import -- --file data/dfs-raw/AllValidLicensesIndividual.csv --type individual --launch-counties-only
 
 # 4) Promote to public providers (Phase 1 gates)
-npx tsx scripts/dfs/promote-launch-counties.ts --dry-run --limit 20
-npx tsx scripts/dfs/promote-launch-counties.ts --county duval --limit 100
-npx tsx scripts/dfs/promote-launch-counties.ts --limit 500
-```
+npm run dfs:promote -- --dry-run --limit 20
+npm run dfs:promote -- --county duval --limit 100
+npm run dfs:promote -- --limit 500
 
-Package scripts:
-
-```bash
-npm run dfs:import -- --file data/dfs-raw/AllValidLicensesBusiness.csv --type business --dry-run
-npm run dfs:promote -- --dry-run
+# Guards
 npm run check:phase4-dfs
 ```
 
