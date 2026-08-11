@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import { MapPin, ArrowRight } from 'lucide-react';
 import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -11,7 +12,10 @@ import {
   JourneySessionSync,
   ResearchSessionHubRedirect,
 } from '@/components/network/journey-session-sync';
-import { parseJourneyContext } from '@/lib/network/journey-context';
+import {
+  parseJourneyContext,
+  resolveInsuranceLandingPath,
+} from '@/lib/network/journey-context';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance by Destination — State & City Guides for Movers',
@@ -27,6 +31,12 @@ type PageProps = {
 export default async function DestinationsPage({ searchParams }: PageProps) {
   const sp = searchParams ? await searchParams : {};
   const journey = parseJourneyContext(sp);
+
+  // Stage A′ / B.1: never dump known destination geography on the national destinations hub
+  if (journey.stateSlug) {
+    const path = resolveInsuranceLandingPath(journey);
+    redirect(path.startsWith('/') ? path : `/${path}`);
+  }
 
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">

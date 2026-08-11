@@ -44,14 +44,13 @@ export function JourneySessionSync({
   landedOn,
   className,
 }: Props) {
+  // Start from URL/page context so SSR + first paint keep crawlable handoffs.
   const [merged, setMerged] = useState<JourneyContext>(urlContext);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const sessionCtx = sessionToJourneyContext(loadResearchSession());
     const next = mergeJourneyContext(urlContext, sessionCtx);
     setMerged(next);
-    setReady(true);
 
     if (hasJourneyContext(urlContext)) {
       saveResearchSession(next, { preferSrc: urlContext.src ?? preferSrc });
@@ -79,7 +78,7 @@ export function JourneySessionSync({
   );
 
   if (silent || (!showOrientation && !showContinue)) return null;
-  if (!ready || !hasJourneyContext(merged)) return null;
+  if (!hasJourneyContext(merged)) return null;
 
   return (
     <div className={className}>
