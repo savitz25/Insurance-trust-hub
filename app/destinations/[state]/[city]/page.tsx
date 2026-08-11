@@ -22,10 +22,11 @@ import {
 } from '@/lib/network/journey-context';
 import { JourneyOrientationBanner } from '@/components/network/journey-orientation-banner';
 import { JourneyLandingTracker } from '@/components/network/journey-landing-tracker';
-import { ContinueTrustJourney } from '@/components/network/continue-trust-journey';
+import { JourneySessionSync } from '@/components/network/journey-session-sync';
 
 interface CityPageProps {
   params: Promise<{ state: string; city: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export function generateStaticParams() {
@@ -199,13 +200,15 @@ export default async function CityDestinationPage({
           )}
         </section>
 
-        <ContinueTrustJourney
-          currentHub="insurance"
-          context={{
+        <JourneySessionSync
+          urlContext={{
             ...journey,
             src: journey.src ?? 'insurance',
             journey: journey.journey ?? 'relocate',
           }}
+          preferSrc="insurance"
+          currentHub="insurance"
+          showContinue
         />
       </div>
     </div>

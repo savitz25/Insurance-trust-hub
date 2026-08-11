@@ -365,7 +365,7 @@ export function orientationCopy(ctx: JourneyContext): {
   const fromMove = ctx.src === 'move' || ctx.journey === 'relocate';
   if (fromMove && place) {
     return {
-      eyebrow: 'Your relocation research',
+      eyebrow: 'Continuing your relocation research',
       title: `Moving to ${place}`,
       body:
         ctx.intent === 'rent'
@@ -373,6 +373,13 @@ export function orientationCopy(ctx: JourneyContext): {
           : ctx.intent === 'buy'
             ? 'Continue with homeowners and auto coverage research for your destination. Educational only.'
             : 'Continue with coverage research for your destination. Educational only — not a quote marketplace.',
+    };
+  }
+  if (place && (ctx.journey === 'relocate' || ctx.src === 'move')) {
+    return {
+      eyebrow: 'Continuing your relocation research',
+      title: place,
+      body: 'Restored from your recent research session on this browser. Educational only.',
     };
   }
   if (ctx.src === 'lender' && place) {

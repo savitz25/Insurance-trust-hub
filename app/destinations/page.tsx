@@ -7,6 +7,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { NetworkHandoff } from '@/components/network/network-handoff';
 import { NetworkBelongingLine } from '@/components/network/network-belonging-line';
+import {
+  JourneySessionSync,
+  ResearchSessionHubRedirect,
+} from '@/components/network/journey-session-sync';
+import { parseJourneyContext } from '@/lib/network/journey-context';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance by Destination — State & City Guides for Movers',
@@ -15,9 +20,17 @@ export const metadata: Metadata = buildMetadata({
   path: '/destinations',
 });
 
-export default function DestinationsPage() {
+type PageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function DestinationsPage({ searchParams }: PageProps) {
+  const sp = searchParams ? await searchParams : {};
+  const journey = parseJourneyContext(sp);
+
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
+      <ResearchSessionHubRedirect hasUrlState={Boolean(journey.stateSlug)} />
       <div className="max-w-3xl mb-12">
         <h1 className="section-heading">Insurance destinations</h1>
         <NetworkBelongingLine align="left" className="mt-2" />
@@ -26,6 +39,15 @@ export default function DestinationsPage() {
           premiums, and licensed agencies serving the area. Educational content only — always
           verify rates with licensed agents.
         </p>
+        <div className="mt-6">
+          <JourneySessionSync
+            urlContext={journey}
+            preferSrc="insurance"
+            currentHub="insurance"
+            showOrientation
+            showContinue
+          />
+        </div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
