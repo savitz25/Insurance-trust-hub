@@ -72,7 +72,9 @@ async function main() {
   }
 
   const { url, serviceRoleKey } = requireSupabaseOpsEnv();
-  const supabase = createClient(url, serviceRoleKey, {
+  // Untyped client: DFS tables are ops-only and not in generated Database types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const supabase: any = createClient(url, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 

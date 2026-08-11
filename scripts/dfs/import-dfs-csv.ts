@@ -88,7 +88,9 @@ async function main() {
   }
 
   loadLocalEnv(resolve(process.cwd()));
-  let supabase: ReturnType<typeof createClient> | null = null;
+  // Untyped client: DFS tables are ops-only and not in generated Database types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let supabase: any = null;
   if (!dryRun) {
     const { url, serviceRoleKey } = requireSupabaseOpsEnv();
     supabase = createClient(url, serviceRoleKey, {

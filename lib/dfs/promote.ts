@@ -3,7 +3,7 @@
  */
 
 import type { Provider } from '@/types/provider';
-import type { Provider as DbProvider, LicenseInfo, ContactInfo } from '@/types/supabase';
+import type { LicenseInfo, ContactInfo } from '@/types/supabase';
 import {
   canShowAsVerified,
   resolveProviderTrustState,
