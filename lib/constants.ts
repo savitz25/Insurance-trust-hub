@@ -91,10 +91,11 @@ export const US_STATES = [
   { code: 'WY', name: 'Wyoming' },
 ] as const;
 
+/** Homepage trust bar — never invent verified inventory counts. */
 export const TRUST_STATS = [
-  { label: 'Verified Agents', value: '850+' },
-  { label: 'Reviews Analyzed', value: '15,200+' },
-  { label: 'States & Counties', value: '50 States' },
-  { label: 'Market Hubs', value: '57 Hubs' },
+  { label: 'Paid placements', value: 'None' },
+  { label: 'Lead fees', value: 'None' },
+  { label: 'Data posture', value: 'Public records' },
+  { label: 'Market hubs', value: '50+ metros' },
 ] as const;
 

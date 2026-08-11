@@ -1,16 +1,22 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SpecialtyTopicPage } from '@/components/specialty-topic-page';
-import { getSpecialtyTopic } from '@/lib/hubs/specialty-topics';
+import {
+  getSouthFloridaAgents,
+  getSpecialtyTopic,
+} from '@/lib/hubs/specialty-topics';
 import { SITE_URL } from '@/lib/constants';
 
 const topic = getSpecialtyTopic('aca');
 if (!topic) throw new Error('aca topic missing');
 
+const hasListings = topic.filterAgents(getSouthFloridaAgents()).length > 0;
+
 export const metadata: Metadata = {
   title: topic.metaTitle,
   description: topic.metaDescription,
   alternates: { canonical: `${SITE_URL}${topic.path}` },
+  robots: hasListings ? { index: true, follow: true } : { index: false, follow: true },
 };
 
 export default function AcaTopicPage() {

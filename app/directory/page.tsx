@@ -85,8 +85,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
           Search agencies that meet our public research standard. Empty markets stay empty — we do
-          not fill them with illustrative seed listings. Always re-check licensing with your state
-          insurance department.
+          not invent inventory. Always re-check licensing with your state insurance department.
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">

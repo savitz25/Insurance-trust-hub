@@ -82,7 +82,7 @@ export function computeProviderTrustScoreBreakdown(
           label: 'Insufficient verified inputs',
           points: 0,
           detail:
-            'Research Score suppressed — need a re-checkable license number (seed listings never score).',
+            'Research score not published — a re-checkable license number is required.',
         },
       ],
       governmentStanding: 0,

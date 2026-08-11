@@ -1,69 +1,64 @@
-'use client';
-
-import { useState } from 'react';
+import Link from 'next/link';
+import { BookOpen, ExternalLink, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 interface HubMatchFormProps {
   hubName: string;
+  /** When false, omit any soft path that implies local agent contact capacity */
+  hasVerifiedListings?: boolean;
 }
 
 /**
- * Optional research contact — not a quote marketplace or paid lead product.
+ * Phase 0 — research pathways only.
+ * No ZIP+email quote funnels, no “we’ll have someone contact you” lead language.
  */
-export function HubMatchForm({ hubName }: HubMatchFormProps) {
-  const [submitted, setSubmitted] = useState(false);
-
-  if (submitted) {
-    return (
-      <div className="rounded-xl border border-trust/30 bg-trust/5 p-5 text-sm text-foreground">
-        <p className="font-semibold text-trust">Request received</p>
-        <p className="mt-1 text-muted-foreground">
-          We&apos;ll share educational next steps and listed agencies serving {hubName}. Research
-          only — always verify licensing with your state DOI.
-        </p>
-      </div>
-    );
-  }
-
+export function HubMatchForm({
+  hubName,
+  hasVerifiedListings = false,
+}: HubMatchFormProps) {
   return (
-    <form
-      className="rounded-xl border bg-card p-5 shadow-trust space-y-3"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-      }}
-    >
-      <h3 className="font-semibold text-foreground">Request research help for {hubName}</h3>
-      <p className="text-xs text-muted-foreground">
-        Independent directory contact. No paid placements. Not a policy marketplace.
+    <div className="rounded-xl border bg-card p-5 shadow-trust space-y-3">
+      <h3 className="font-semibold text-foreground flex items-center gap-2">
+        <BookOpen className="h-4 w-4 text-primary" aria-hidden />
+        Research {hubName}
+      </h3>
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Independent research tools — not a quote marketplace. No paid placements and no lead fees.
+        Official enrollment stays on government or licensed-agent channels you choose.
       </p>
-      <div>
-        <Label htmlFor="match-zip" className="text-xs">
-          ZIP Code
-        </Label>
-        <Input id="match-zip" placeholder="12345" maxLength={5} required className="mt-1" />
+      <div className="flex flex-col gap-2">
+        <Button asChild variant="trust" className="w-full justify-start">
+          <Link href="/tools/license-verification">
+            <ShieldCheck className="h-4 w-4 mr-2" aria-hidden />
+            License verification
+          </Link>
+        </Button>
+        <Button asChild variant="outline" className="w-full justify-start">
+          <Link href="/tools/marketplace-plan-research">Marketplace plan research</Link>
+        </Button>
+        <Button asChild variant="outline" className="w-full justify-start">
+          <Link href="/calculators/aca-subsidy">ACA subsidy planner</Link>
+        </Button>
+        <Button asChild variant="outline" className="w-full justify-start">
+          <a
+            href="https://www.healthcare.gov"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            HealthCare.gov
+            <ExternalLink className="h-3.5 w-3.5 ml-2" aria-hidden />
+          </a>
+        </Button>
+        {hasVerifiedListings ? (
+          <Button asChild variant="ghost" className="w-full justify-start text-xs">
+            <Link href="/directory">Browse verified research listings</Link>
+          </Button>
+        ) : (
+          <p className="text-[11px] text-muted-foreground leading-relaxed pt-1">
+            We’re still verifying agencies in this market. No verified local listings are shown yet.
+          </p>
+        )}
       </div>
-      <div>
-        <Label htmlFor="match-email" className="text-xs">
-          Email
-        </Label>
-        <Input
-          id="match-email"
-          type="email"
-          placeholder="you@email.com"
-          required
-          className="mt-1"
-        />
-      </div>
-      <Button type="submit" variant="trust" className="w-full">
-        Send research request
-      </Button>
-      <p className="text-[10px] text-muted-foreground leading-relaxed">
-        By submitting, you agree we may follow up with research links for listed agencies in this
-        market. Not insurance advice. Verify all licenses independently.
-      </p>
-    </form>
+    </div>
   );
 }

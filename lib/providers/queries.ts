@@ -67,40 +67,46 @@ export async function getProviders(
 }
 
 export async function getProviderBySlug(slug: string): Promise<Provider | null> {
-  // Hub-generated agents are seed inventory — never public research profiles
-  const hubAgent = getHubAgentBySlug(slug);
-  if (hubAgent) {
-    if (
-      hubAgent.id.startsWith('fallback-') ||
-      hubAgent.id.includes('-agent-') ||
-      !isIndexableListing(toPublicProviderView(hubAgent).listingClass)
-    ) {
+  try {
+    // Hub catalog rows: only serve when they meet indexable research gates.
+    // Incomplete / seed / pending hub agents fail closed (null → not-found).
+    const hubAgent = getHubAgentBySlug(slug);
+    if (hubAgent) {
+      if (
+        hubAgent.id.startsWith('fallback-') ||
+        hubAgent.id.includes('-agent-') ||
+        !isIndexableListing(toPublicProviderView(hubAgent).listingClass)
+      ) {
+        return null;
+      }
+      return hubAgent;
+    }
+
+    if (!isSupabaseConfigured()) {
+      // Do not serve seed fallback profiles on public site
       return null;
     }
-    return hubAgent;
-  }
 
-  if (!isSupabaseConfigured()) {
-    // Do not serve seed fallback profiles on public site
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('providers')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (error || !data) {
+      return null;
+    }
+
+    const provider = mapRowToProvider(data as DbProvider);
+    if (!isIndexableListing(toPublicProviderView(provider).listingClass)) {
+      return null;
+    }
+    return provider;
+  } catch {
+    // Fail closed — never 500 a consumer profile for bad/incomplete records
     return null;
   }
-
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from('providers')
-    .select('*')
-    .eq('slug', slug)
-    .maybeSingle();
-
-  if (error || !data) {
-    return null;
-  }
-
-  const provider = mapRowToProvider(data as DbProvider);
-  if (!isIndexableListing(toPublicProviderView(provider).listingClass)) {
-    return null;
-  }
-  return provider;
 }
 
 export async function searchProviders(

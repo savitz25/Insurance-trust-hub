@@ -146,7 +146,7 @@ export function computeResearchScore(input: SignalInput): {
           points: 0,
           maxPoints: 0,
           detail:
-            'No re-checkable license number on file — Research Score suppressed (not a zero grade).',
+            'No re-checkable license number on file — research score not published (not a zero grade).',
         },
       ],
     };

@@ -17,6 +17,11 @@ import { HowItWorks } from '@/components/how-it-works';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { SITE_URL } from '@/lib/constants';
 import { ContextNav } from '@/components/context-nav';
+import {
+  EMPTY_MARKET_COPY,
+  verifiedCountWithHealth,
+} from '@/lib/trust/listing-state';
+import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
 
 interface HubPageViewProps {
   hub: InsuranceHub;
@@ -107,12 +112,16 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
     ? getAllCountySummaries().find((c) => c.slug === countyDashboardSlug)
     : undefined;
   const acaGuideLinks = ACA_GUIDE_LINKS_BY_HUB[slug];
+  const seo = resolveHubPublicSeo(hub, path);
+  const curatedSummary = curatedConfig
+    ? honestCuratedSummary(hub.shortName, stats.totalAgents, curatedConfig.summary)
+    : null;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: hub.metaTitle,
-    description: hub.metaDescription,
+    name: seo.title,
+    description: seo.description,
     url: `${SITE_URL}${path}`,
     about: {
       '@type': 'Place',
@@ -167,9 +176,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
             Licensed agencies with re-checkable public records for {hub.localDescriptor}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
-            {stats.totalAgents > 0
-              ? `${stats.totalAgents} verified research listings · ${stats.healthSpecialists} health-focused`
-              : 'We’re still verifying agencies for this market — no illustrative seed listings'}
+            {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
           </p>
           <div className="mt-6 flex justify-center">
             <ZipSearch defaultZip={hub.zipCodes[0]} className="[&_input]:bg-white [&_button]:bg-trust" />
@@ -202,7 +209,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                   <p className="text-xs text-muted-foreground">
                     {stats.avgTrustScore != null
                       ? 'Avg research score'
-                      : 'Score suppressed (seed/incomplete)'}
+                      : EMPTY_MARKET_COPY.scoreUnavailable}
                   </p>
                 </div>
               </div>
@@ -238,7 +245,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
               <section>
                 <h2 className="text-2xl font-bold mb-2">{curatedConfig.sectionTitle}</h2>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  {curatedConfig.summary}
+                  {curatedSummary}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {curatedConfig.counties.map((county) => (
@@ -261,10 +268,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                 {allAgents.length > 0 ? (
                   <HubAgentTable agents={allAgents} hubName={hub.shortName} />
                 ) : (
-                  <p className="text-sm text-muted-foreground">
-                    We’re still verifying agencies for this market. No illustrative seed listings are
-                    shown.
-                  </p>
+                  <p className="text-sm text-muted-foreground">{EMPTY_MARKET_COPY.section}</p>
                 )}
               </section>
             )}
@@ -275,9 +279,10 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
                 {healthAgents.length > 0
-                  ? curatedConfig?.featuredHealthLine ??
-                    'Agencies that meet our public research standard'
-                  : 'We’re still verifying health-focused agencies for this market. We will not show illustrative seed listings.'}
+                  ? curatedConfig?.featuredHealthLine && stats.totalAgents > 0
+                    ? curatedConfig.featuredHealthLine
+                    : 'Agencies that meet our public research standard'
+                  : EMPTY_MARKET_COPY.health}
               </p>
               {healthAgents.length > 0 ? (
                 <div className="space-y-5">
@@ -287,7 +292,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                 </div>
               ) : (
                 <p className="rounded-xl border border-dashed bg-muted/30 px-4 py-6 text-sm text-muted-foreground">
-                  No verified health-specialist listings yet for {hub.shortName}. Use{' '}
+                  {EMPTY_MARKET_COPY.health} Use{' '}
                   <a href="/tools/license-verification" className="text-primary hover:underline">
                     license verification
                   </a>{' '}
@@ -301,7 +306,7 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
               <p className="text-sm text-muted-foreground mb-6">
                 {otherAgents.length > 0
                   ? `Verified research listings serving ${hub.msaName}`
-                  : 'No verified multi-line agency listings yet — honesty over fake completeness.'}
+                  : EMPTY_MARKET_COPY.multiLine}
               </p>
               {otherAgents.length > 0 ? (
                 <div className="space-y-5">
@@ -314,7 +319,10 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <HubMatchForm hubName={hub.shortName} />
+            <HubMatchForm
+              hubName={hub.shortName}
+              hasVerifiedListings={stats.totalAgents > 0}
+            />
             <div className="rounded-xl border bg-secondary/30 p-5 text-sm space-y-3">
               <h3 className="font-semibold">Why Local Matters</h3>
               <p className="text-muted-foreground text-xs leading-relaxed">

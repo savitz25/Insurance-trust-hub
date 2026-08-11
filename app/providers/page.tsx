@@ -14,7 +14,7 @@ import { NetworkResearchStandard } from '@/components/network/network-research-s
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Agencies Directory — Verified Research Listings',
   description:
-    'Browse independently verified insurance agency research listings. Empty markets are shown honestly — never illustrative seed agencies.',
+    'Browse independently verified insurance agency research listings. Empty markets are shown honestly — no invented inventory.',
   path: '/providers',
 });
 
@@ -26,9 +26,8 @@ export default async function ProvidersDirectoryPage() {
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-3xl md:text-4xl font-bold">Insurance agencies directory</h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">
-          Public listings include only agencies that meet our research standard. We do not backfill
-          empty markets with illustrative or seed agencies. Re-check state DOI / NIPR tools before
-          contacting anyone.
+          Public listings include only agencies that meet our research standard. We do not invent
+          inventory for empty markets. Re-check state DOI / NIPR tools before contacting anyone.
         </p>
         <div className="mt-6 max-w-2xl">
           <NetworkResearchStandard />
@@ -39,7 +38,7 @@ export default async function ProvidersDirectoryPage() {
             <EmptyCoveragePanel
               variant="unmapped"
               title="We’re still verifying this market"
-              description="No agencies currently meet our public research standard for this directory. Prefer honesty over coverage — we will not show illustrative seed listings."
+              description="No agencies currently meet our public research standard for this directory. Prefer honesty over coverage — no invented inventory."
               primarySources={[
                 { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
                 {

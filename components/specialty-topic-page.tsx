@@ -63,7 +63,9 @@ export function SpecialtyTopicPage({ topic }: SpecialtyTopicPageProps) {
         <section>
           <h2 className="text-2xl font-bold mb-2">{topic.title} research listings</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Only agencies that meet our public research standard — never illustrative seed listings
+            {agents.length > 0
+              ? 'Only agencies that meet our public research standard'
+              : 'We’re still verifying agencies for this specialty. No verified listings are shown yet.'}
           </p>
           {agents.length > 0 ? (
             <div className="space-y-5">
@@ -73,7 +75,8 @@ export function SpecialtyTopicPage({ topic }: SpecialtyTopicPageProps) {
             </div>
           ) : (
             <p className="rounded-xl border border-dashed bg-muted/30 px-4 py-6 text-sm text-muted-foreground">
-              We’re still verifying agencies for this specialty. Prefer honesty over coverage.
+              We’re still verifying agencies for this specialty. No verified listings are shown yet.
+              Use license verification and official Marketplace / Medicare tools in the meantime.
             </p>
           )}
         </section>

@@ -64,29 +64,53 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProviderPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const provider = await getProviderBySlug(slug);
-  if (!provider) return { title: 'Provider Not Found' };
+  try {
+    const provider = await getProviderBySlug(slug);
+    if (!provider) {
+      return { title: 'Provider Not Found', robots: { index: false, follow: true } };
+    }
 
-  const view = toPublicProviderView(provider);
-  const seed = view.listingClass === 'seed';
+    const view = toPublicProviderView(provider);
+    // Only index fully verified research listings
+    const indexable = view.listingClass === 'indexable_research';
 
-  return buildMetadata({
-    title: `${provider.name} — ${provider.city}, ${provider.state} Insurance Research`,
-    description:
-      provider.short_description ??
-      `Research ${provider.name} in ${provider.city}, ${provider.state}. Re-check licenses on official state tools.`,
-    path: `/providers/${slug}`,
-    noIndex: seed,
-  });
+    return buildMetadata({
+      title: `${provider.name} — ${provider.city}, ${provider.state} Insurance Research`,
+      description:
+        provider.short_description ??
+        `Research ${provider.name} in ${provider.city}, ${provider.state}. Re-check licenses on official state tools.`,
+      path: `/providers/${slug}`,
+      noIndex: !indexable,
+    });
+  } catch {
+    return { title: 'Provider Not Found', robots: { index: false, follow: true } };
+  }
 }
 
 export default async function ProviderPage({ params, searchParams }: ProviderPageProps) {
   const { slug } = await params;
   const sp = searchParams ? await searchParams : {};
-  const provider = await getProviderBySlug(slug);
+
+  let provider: Awaited<ReturnType<typeof getProviderBySlug>> = null;
+  try {
+    provider = await getProviderBySlug(slug);
+  } catch {
+    notFound();
+  }
   if (!provider) notFound();
 
-  const publicView = toPublicProviderView(provider);
+  let publicView: ReturnType<typeof toPublicProviderView>;
+  try {
+    publicView = toPublicProviderView(provider);
+  } catch {
+    notFound();
+  }
+
+  // Fail closed: seed / pending never render as full consumer profiles
+  if (publicView.listingClass !== 'indexable_research') {
+    notFound();
+  }
+
   const secondarySignals = toPublicSecondarySignals(provider);
   const showContact = allowContactForm(publicView.listingClass);
   const reviews = await getReviewsForProvider(slug);
@@ -95,24 +119,28 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const licenseUrl = getProviderLicenseUrl(provider);
   const governmentVerification = resolveGovernmentVerification(provider);
   const trustBreakdown = computeProviderTrustScoreBreakdown({
-    bbbRating: publicView.listingClass === 'seed' ? null : provider.bbb_rating,
+    bbbRating: provider.bbb_rating,
     isVerified: publicView.verification.showLicenseVerifiedBadge,
     yearsInBusiness: publicView.yearsInBusiness,
     cmsParticipation: governmentVerification.cmsParticipation,
     hasNpi: Boolean(governmentVerification.npi),
     isMedicareSpecialist: providerIsMedicareSpecialist(provider),
     licenseNumber: provider.license_number,
-    isSeed: publicView.listingClass === 'seed',
+    isSeed: false,
     googleRating: publicView.showReviews ? publicView.rating : null,
     googleReviewCount: publicView.showReviews ? publicView.reviewCount : null,
   });
 
+  const specialties = Array.isArray(provider.specialties) ? provider.specialties : [];
+  const insuranceTypes = Array.isArray(provider.insurance_types)
+    ? provider.insurance_types
+    : [];
+
   const suitsRelocating =
-    publicView.listingClass !== 'seed' &&
-    (provider.specialties.includes('Relocation Experienced') ||
-      provider.specialties.includes('Medicare Specialists') ||
-      provider.specialties.includes('Bilingual Services') ||
-      (publicView.yearsInBusiness != null && publicView.yearsInBusiness >= 10));
+    specialties.includes('Relocation Experienced') ||
+    specialties.includes('Medicare Specialists') ||
+    specialties.includes('Bilingual Services') ||
+    (publicView.yearsInBusiness != null && publicView.yearsInBusiness >= 10);
 
   return (
     <>
@@ -133,9 +161,6 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <Badge variant="secondary">
                   {provider.city}, {provider.state}
                 </Badge>
-                {publicView.listingClass === 'seed' ? (
-                  <Badge variant="outline">Seed listing — not verified research</Badge>
-                ) : null}
               </div>
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{provider.name}</h1>
               {provider.short_description && (
@@ -174,7 +199,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     ? `License ${publicView.verification.licenseNumber}`
                     : undefined
                 }
-                lines={provider.insurance_types?.map(String)}
+                lines={insuranceTypes.map(String)}
                 defaultStatus="shortlisted"
               />
               <CompareProviderButton
@@ -223,10 +248,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               <h2 className="text-xl font-semibold mb-4">License information</h2>
               <Card>
                 <CardContent className="pt-6 space-y-3">
-                  {provider.license_number && (
+                  {publicView.verification.licenseNumber && (
                     <p className="text-sm">
                       <span className="font-medium">License number:</span>{' '}
-                      {provider.license_number}
+                      {publicView.verification.licenseNumber}
                     </p>
                   )}
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -277,7 +302,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   </CardHeader>
                   <CardContent>
                     <div className="flex flex-wrap gap-1.5">
-                      {provider.insurance_types.map((t) => (
+                      {insuranceTypes.map((t) => (
                         <Badge key={t} variant="secondary">
                           {INSURANCE_TYPES.find((it) => it.value === t)?.label ?? t}
                         </Badge>
@@ -286,10 +311,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   </CardContent>
                 </Card>
               </div>
-              {provider.specialties.length > 0 && (
+              {specialties.length > 0 && (
                 <p className="mt-4 text-sm text-muted-foreground">
                   <span className="font-medium text-foreground">Specialties:</span>{' '}
-                  {provider.specialties.join(' · ')}
+                  {specialties.join(' · ')}
                 </p>
               )}
               {publicView.showCarriers && publicView.carriers.length > 0 && (
@@ -307,13 +332,13 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   Why this provider may suit relocating families
                 </h2>
                 <ul className="mt-4 space-y-2 text-sm text-muted-foreground leading-relaxed list-disc pl-5">
-                  {provider.specialties.includes('Independent Agency') && (
+                  {specialties.includes('Independent Agency') && (
                     <li>
                       Independent agency model — can shop multiple carriers when you move to a new
                       state.
                     </li>
                   )}
-                  {provider.specialties.includes('Bilingual Services') && (
+                  {specialties.includes('Bilingual Services') && (
                     <li>Bilingual services available for families navigating coverage in a new area.</li>
                   )}
                   {provider.years_in_business != null && provider.years_in_business >= 10 && (
@@ -362,14 +387,20 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <p className="text-muted-foreground text-sm">No published reviews yet.</p>
               ) : (
                 <div className="space-y-4">
-                  {reviews.map((review) => (
+                  {reviews.map((review) => {
+                    const created = review.createdAt ? new Date(review.createdAt) : null;
+                    const dateLabel =
+                      created && !Number.isNaN(created.getTime())
+                        ? format(created, 'MMM d, yyyy')
+                        : null;
+                    return (
                     <Card key={review.id}>
                       <CardContent className="pt-6">
                         <div className="flex flex-wrap items-center justify-between gap-2">
                           <StarRating rating={review.rating} size="sm" showNumber={false} />
-                          <span className="text-xs text-muted-foreground">
-                            {format(new Date(review.createdAt), 'MMM d, yyyy')}
-                          </span>
+                          {dateLabel ? (
+                            <span className="text-xs text-muted-foreground">{dateLabel}</span>
+                          ) : null}
                         </div>
                         <h3 className="mt-2 font-medium">{review.title}</h3>
                         <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
@@ -381,7 +412,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         </p>
                       </CardContent>
                     </Card>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </section>
@@ -411,7 +443,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       providerSlug={provider.slug}
                       providerName={provider.name}
                       defaultState={provider.state}
-                      defaultInsuranceType={provider.insurance_types[0]}
+                      defaultInsuranceType={insuranceTypes[0]}
                     />
                   </>
                 ) : (

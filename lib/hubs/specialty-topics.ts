@@ -29,14 +29,14 @@ export const SPECIALTY_TOPICS: SpecialtyTopic[] = [
     slug: 'health-insurance',
     path: '/hubs/health-insurance',
     title: 'Health Insurance Agents',
-    metaTitle: 'Health Insurance Agents by Market (2026) | ACA, Medicare & Group Plans',
+    metaTitle: 'Health Insurance Research by Market | ACA, Medicare & Group Plans',
     metaDescription:
-      'Find verified health insurance agents across 54 U.S. markets. ACA marketplace, Medicare Advantage, employer group plans — DOI verified, no paid placements.',
-    h1: 'Health Insurance Specialists Nationwide',
+      'Independent health insurance research across U.S. markets — ACA Marketplace, Medicare, and employer group context. Verified listings only when they meet our public research standard. No paid placements.',
+    h1: 'Health Insurance Research Nationwide',
     subtitle: 'ACA · Medicare · Employer Group · Dental/Vision',
     focus: 'health',
     marketSnapshot:
-      'Health insurance is a primary research focus of Insurance Trust Hub market pages. We surface agencies that meet our public research standard — never by advertising spend, and never with illustrative seed listings.',
+      'Health insurance is a primary research focus of Insurance Trust Hub market pages. We only surface agencies that meet our public research standard — never by advertising spend, and never with invented inventory.',
     healthNeeds: [
       'ACA marketplace enrollment and subsidies',
       'Medicare Advantage vs supplement comparison',
@@ -58,14 +58,14 @@ export const SPECIALTY_TOPICS: SpecialtyTopic[] = [
     slug: 'medicare',
     path: '/hubs/medicare',
     title: 'Medicare Insurance Agents',
-    metaTitle: 'Medicare Insurance Agents (2026) | Advantage, Supplement & Part D',
+    metaTitle: 'Medicare Insurance Research | Advantage, Supplement & Part D',
     metaDescription:
-      'Compare verified Medicare agents for Advantage, Medigap supplement, and Part D plans. South Florida, Sun Belt, and national metro specialists — DFS/DOI verified.',
-    h1: 'Medicare Insurance Specialists',
+      'Medicare research pathways for Advantage, Medigap, and Part D. Use official CMS tools and our educational guides. Verified agency listings appear only when they meet our research standard.',
+    h1: 'Medicare Insurance Research',
     subtitle: 'Medicare Advantage · Medigap · Part D · Dual-Eligible',
     focus: 'medicare',
     marketSnapshot:
-      'Medicare enrollment peaks in South Florida, Arizona, and Texas Sun Belt markets. Our featured agents specialize in side-by-side Advantage vs supplement comparisons, network adequacy for preferred hospitals, and bilingual counseling for diverse senior populations.',
+      'Medicare enrollment peaks in South Florida, Arizona, and Texas Sun Belt markets. Use official CMS tools alongside our educational guides. We list agencies only when they meet our public research standard — empty markets stay empty.',
     healthNeeds: [
       'Medicare Advantage plan comparison',
       'Medigap supplement selection',
@@ -87,14 +87,14 @@ export const SPECIALTY_TOPICS: SpecialtyTopic[] = [
     slug: 'aca',
     path: '/hubs/aca',
     title: 'ACA Marketplace Agents',
-    metaTitle: 'ACA / Obamacare Insurance Agents (2026) | Marketplace Enrollment Help',
+    metaTitle: 'ACA Marketplace Research | HealthCare.gov Pathways',
     metaDescription:
-      'Find verified ACA marketplace agents for HealthCare.gov and state exchanges. Subsidy optimization, special enrollment periods, and family plan guidance.',
-    h1: 'ACA Marketplace Insurance Agents',
-    subtitle: 'Obamacare · Subsidies · Special Enrollment · Family Plans',
+      'Educational ACA Marketplace research — subsidies, special enrollment, and plan tiers. Start with HealthCare.gov or your state exchange. Verified agency listings only when research-standard inventory exists.',
+    h1: 'ACA Marketplace Research',
+    subtitle: 'Marketplace · Subsidies · Special Enrollment · Family Plans',
     focus: 'aca',
     marketSnapshot:
-      'ACA marketplace enrollment requires understanding subsidy cliffs, network narrowness, and special enrollment triggers. Featured agents help families compare Silver, Gold, and Bronze tiers while verifying hospital and specialist networks in your ZIP code.',
+      'ACA marketplace enrollment requires understanding subsidy cliffs, network narrowness, and special enrollment triggers. Use HealthCare.gov or your state exchange for enrollment. We list agencies only when they meet our public research standard.',
     healthNeeds: [
       'Premium tax credit optimization',
       'Special enrollment period eligibility',
