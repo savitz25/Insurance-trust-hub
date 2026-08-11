@@ -55,16 +55,11 @@ interface ProviderPageProps {
 }
 
 export async function generateStaticParams() {
-  const hubSlugs = INSURANCE_HUBS.flatMap((hub) =>
-    getAgentsForHub(hub).map((a) => ({ slug: a.slug }))
-  );
-  const fallback = FALLBACK_PROVIDERS.map((p) => ({ slug: p.slug }));
-  const seen = new Set<string>();
-  return [...fallback, ...hubSlugs].filter((p) => {
-    if (seen.has(p.slug)) return false;
-    seen.add(p.slug);
-    return true;
-  });
+  // Stage 0: do not prebuild seed / illustrative provider paths
+  void INSURANCE_HUBS;
+  void getAgentsForHub;
+  void FALLBACK_PROVIDERS;
+  return [];
 }
 
 export async function generateMetadata({ params }: ProviderPageProps): Promise<Metadata> {
@@ -196,7 +191,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               {provider.website && (
                 <Button asChild className="gap-2">
                   <a href={provider.website} target="_blank" rel="noopener noreferrer">
-                    <Globe className="h-4 w-4" /> Website
+                    <Globe className="h-4 w-4" /> Visit website
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 </Button>
@@ -406,24 +401,30 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               </CardHeader>
               <CardContent>
                 {showContact ? (
-                  <LeadForm
-                    providerSlug={provider.slug}
-                    providerName={provider.name}
-                    defaultState={provider.state}
-                    defaultInsuranceType={provider.insurance_types[0]}
-                  />
+                  <>
+                    <p className="mb-4 text-xs text-muted-foreground leading-relaxed">
+                      Direct options first: call the listed number or visit the agency website. The
+                      form below only relays a message to this agency — it is not a quote funnel and
+                      does not affect rankings.
+                    </p>
+                    <LeadForm
+                      providerSlug={provider.slug}
+                      providerName={provider.name}
+                      defaultState={provider.state}
+                      defaultInsuranceType={provider.insurance_types[0]}
+                    />
+                  </>
                 ) : (
                   <div className="space-y-3 text-sm text-muted-foreground">
                     <p>
-                      Contact forms are disabled on seed or unverified listings (research-only
-                      policy). Use official state tools to re-check licenses before sharing personal
-                      data.
+                      Contact forms are available only on independently verified research listings.
+                      Use official state tools to re-check licenses before sharing personal data.
                     </p>
                     <Button asChild variant="trust" className="w-full">
                       <Link href="/tools/license-verification">Verify a license</Link>
                     </Button>
                     <Button asChild variant="outline" className="w-full">
-                      <Link href="/methodology">How we score research</Link>
+                      <Link href="/methodology">Research methodology</Link>
                     </Button>
                   </div>
                 )}

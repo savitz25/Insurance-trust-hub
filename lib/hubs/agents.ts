@@ -2,6 +2,10 @@ import type { HubAgent, InsuranceHub } from '@/types/agent';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import { getCuratedHubAgents } from '@/lib/hubs/data/curated-hubs';
 import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
+import {
+  classifyHubAgentListing,
+  isIndexableListing,
+} from '@/lib/provenance/public-listing';
 
 const HEALTH_AGENCY_NAMES = [
   'Summit Health Partners',
@@ -134,6 +138,10 @@ function sortAgents(agents: HubAgent[]): HubAgent[] {
   });
 }
 
+/**
+ * All agents including generated seed inventory (admin / internal tooling only).
+ * Public UIs must use getPublicAgentsForHub.
+ */
 export function getAgentsForHub(hub: InsuranceHub): HubAgent[] {
   const curated = getCuratedHubAgents(hub.slug);
   if (curated) {
@@ -142,7 +150,7 @@ export function getAgentsForHub(hub: InsuranceHub): HubAgent[] {
 
   const agents: HubAgent[] = [];
 
-  // 4-6 featured health specialists
+  // Generated inventory — seed class only; not for public directories
   const healthCount = hub.healthInsuranceDensity === 'very-high' ? 6 : 4;
   for (let i = 0; i < healthCount; i++) {
     const name = HEALTH_AGENCY_NAMES[(hub.priority + i) % HEALTH_AGENCY_NAMES.length];
@@ -155,7 +163,6 @@ export function getAgentsForHub(hub: InsuranceHub): HubAgent[] {
     );
   }
 
-  // 6-10 multi-line agencies
   const multiCount = hub.priority <= 15 ? 8 : 6;
   for (let i = 0; i < multiCount; i++) {
     const name = MULTILINE_NAMES[(hub.priority + i) % MULTILINE_NAMES.length];
@@ -165,18 +172,24 @@ export function getAgentsForHub(hub: InsuranceHub): HubAgent[] {
   return sortAgents(agents);
 }
 
+/**
+ * Stage 0 — public hub directories: only indexable research listings.
+ * Never surfaces illustrative / seed / pending generated agents.
+ */
+export function getPublicAgentsForHub(hub: InsuranceHub): HubAgent[] {
+  return getAgentsForHub(hub).filter((a) =>
+    isIndexableListing(classifyHubAgentListing(a))
+  );
+}
+
 export function getFeaturedHealthAgents(hub: InsuranceHub): HubAgent[] {
-  const curated = getCuratedHubAgents(hub.slug);
-  const limit = curated
-    ? curated.filter((a) => a.isHealthFeatured).length
-    : 6;
-  return getAgentsForHub(hub).filter((a) => a.isHealthFeatured).slice(0, limit);
+  const publicAgents = getPublicAgentsForHub(hub);
+  return publicAgents.filter((a) => a.isHealthFeatured);
 }
 
 export function getHubStats(hub: InsuranceHub) {
-  const agents = getAgentsForHub(hub);
+  const agents = getPublicAgentsForHub(hub);
   const healthAgents = agents.filter((a) => a.isHealthFeatured);
-  // Phase 6A: only count hard-verified when license number is re-checkable
   const verified = agents.filter(
     (a) => a.isVerified && cleanLicenseNumber(a.licenseNumber)
   ).length;
@@ -185,9 +198,8 @@ export function getHubStats(hub: InsuranceHub) {
     totalAgents: agents.length,
     healthSpecialists: healthAgents.length,
     verified,
-    /** Suppressed for seed hubs — not a public research score */
     avgTrustScore: null as number | null,
     totalReviews: 0,
-    seedInventory: verified === 0,
+    seedInventory: agents.length === 0,
   };
 }

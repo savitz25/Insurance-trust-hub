@@ -152,16 +152,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Phase 6A/6B1: only indexable_research (license + source + checkedAt + verified)
-  // FALLBACK seed catalog never qualifies — empty until Supabase promotions land.
-  const providers: MetadataRoute.Sitemap = FALLBACK_PROVIDERS.filter((p) =>
-    isIndexableListing(classifyProviderListing(p))
-  ).map((provider) => ({
-    url: `${site}/providers/${provider.slug}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }));
+  // Stage 0: never sitemap seed/fallback catalog — only live promoted inventory would qualify
+  const providers: MetadataRoute.Sitemap = [];
+  void FALLBACK_PROVIDERS;
+  void isIndexableListing;
+  void classifyProviderListing;
 
   const hubStates = getAllStateSlugs().map((state) => ({
     url: `${site}/hubs/${state}`,

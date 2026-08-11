@@ -39,7 +39,7 @@ export function SpecialtyTopicPage({ topic }: SpecialtyTopicPageProps) {
         <div className="container mx-auto px-4 text-center">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm">
             <Shield className="h-4 w-4" />
-            Verified · Independent · Licensed Only
+            Research standard · No seed listings
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">{topic.h1}</h1>
           <p className="mt-2 text-lg text-primary-foreground/80">{topic.subtitle}</p>
@@ -61,15 +61,21 @@ export function SpecialtyTopicPage({ topic }: SpecialtyTopicPageProps) {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-2">Featured {topic.title}</h2>
+          <h2 className="text-2xl font-bold mb-2">{topic.title} research listings</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Top verified agents from high-volume markets — FL DFS / state DOI verified
+            Only agencies that meet our public research standard — never illustrative seed listings
           </p>
-          <div className="space-y-5">
-            {agents.map((agent, i) => (
-              <AgentCard key={agent.id} agent={agent} rank={i + 1} hubLabel="South Florida" />
-            ))}
-          </div>
+          {agents.length > 0 ? (
+            <div className="space-y-5">
+              {agents.map((agent) => (
+                <AgentCard key={agent.id} agent={agent} hubLabel="South Florida" />
+              ))}
+            </div>
+          ) : (
+            <p className="rounded-xl border border-dashed bg-muted/30 px-4 py-6 text-sm text-muted-foreground">
+              We’re still verifying agencies for this specialty. Prefer honesty over coverage.
+            </p>
+          )}
         </section>
 
         <section>

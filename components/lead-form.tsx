@@ -68,8 +68,8 @@ export function LeadForm({
         <h2 className="text-xl font-semibold">Message sent</h2>
         <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
           {providerName
-            ? `Thank you. ${providerName} or a licensed agent in your area may contact you. Always re-verify their state DOI license before sharing sensitive information.`
-            : 'Thank you. A licensed agent may contact you. Always re-verify state DOI licensing before sharing sensitive information.'}
+            ? `Thank you. Your message was relayed to ${providerName}. This does not affect rankings or directory order. Always re-verify their state DOI license before sharing sensitive information.`
+            : 'Thank you. Your message was relayed to the agency. This does not affect rankings or directory order. Always re-verify state DOI licensing before sharing sensitive information.'}
         </p>
       </Card>
     );
@@ -160,8 +160,9 @@ export function LeadForm({
           onCheckedChange={(checked) => setValue('consent', checked === true, { shouldValidate: true })}
         />
         <Label htmlFor="lead-consent" className="text-sm font-normal cursor-pointer leading-relaxed">
-          I agree to be contacted by a listed agency about coverage options. Insurance Trust Hub
-          does not sell policies or paid placements.{' '}
+          I agree that Insurance Trust Hub may relay this contact request to the listed agency. This
+          is not a quote marketplace: we do not sell your request as a lead, rankings are not
+          affected, and we do not sell policies.{' '}
           <Link href="/privacy" className="underline underline-offset-2">
             Privacy Policy
           </Link>
@@ -186,10 +187,14 @@ export function LeadForm({
           </>
         ) : (
           <>
-            <Send className="h-4 w-4" /> Send contact request
+            <Send className="h-4 w-4" /> Contact agency
           </>
         )}
       </Button>
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Optional relay only. Prefer phone or website on the profile when listed. We do not auction
+        this request.
+      </p>
     </form>
   );
 }

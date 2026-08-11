@@ -84,8 +84,9 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <h1 className="section-heading">Insurance agency directory</h1>
         <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
-          Search licensed independent and captive agencies by location, coverage type, and customer
-          ratings. Always verify licensing with your state insurance department.
+          Search agencies that meet our public research standard. Empty markets stay empty — we do
+          not fill them with illustrative seed listings. Always re-check licensing with your state
+          insurance department.
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">
@@ -117,8 +118,8 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               }
               description={
                 state || query || type || specialty
-                  ? 'No listings match the current filters. Broaden the search or clear filters — empty results are not filled with unrelated national spam.'
-                  : 'This research directory is expanding. Empty here does not mean unlicensed agents do not exist — verify on state DOI / NAIC tools.'
+                  ? 'No verified research listings match the current filters. Broaden the search or clear filters — we will not backfill with seed agencies.'
+                  : 'We’re still verifying markets for the public directory. Empty here does not mean unlicensed agents do not exist — verify on state DOI / NAIC tools.'
               }
               placeLabel={state || query || undefined}
               primarySources={[

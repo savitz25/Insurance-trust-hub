@@ -5,17 +5,26 @@ import { createClient } from '@/lib/supabase/server';
 import {
   FALLBACK_PROVIDERS,
   getFallbackProviderBySlug,
-  searchFallbackProviders,
 } from '@/lib/providers/fallback-data';
 import { getHubAgentBySlug } from '@/lib/hubs/agent-lookup';
 import { mapRowToProvider } from '@/lib/providers/map-db-provider';
 import type { Provider as DbProvider } from '@/types/supabase';
+import { isIndexableListing, toPublicProviderView } from '@/lib/provenance/public-listing';
+
+/**
+ * Stage 0 — public directory never returns seed / illustrative inventory.
+ * Seed catalog remains available only via getAllFallbackProviders (admin/staging tooling).
+ */
+function onlyIndexableResearch(providers: Provider[]): Provider[] {
+  return providers.filter((p) => isIndexableListing(toPublicProviderView(p).listingClass));
+}
 
 export async function getProviders(
   filters: ProviderFilters = {}
 ): Promise<{ providers: Provider[]; total: number }> {
   if (!isSupabaseConfigured()) {
-    return searchFallbackProviders(filters);
+    // Prefer honest empty state over seed listings on public surfaces
+    return { providers: [], total: 0 };
   }
 
   const supabase = await createClient();
@@ -44,23 +53,36 @@ export async function getProviders(
   const limit = filters.limit ?? 24;
   query = query.range(offset, offset + limit - 1);
 
-  const { data, count, error } = await query;
+  const { data, error } = await query;
 
   if (error || !data) {
-    return searchFallbackProviders(filters);
+    return { providers: [], total: 0 };
   }
 
-  const providers = data.map((row) => mapRowToProvider(row as DbProvider));
+  const providers = onlyIndexableResearch(
+    data.map((row) => mapRowToProvider(row as DbProvider))
+  );
 
-  return { providers, total: count ?? providers.length };
+  return { providers, total: providers.length };
 }
 
 export async function getProviderBySlug(slug: string): Promise<Provider | null> {
+  // Hub-generated agents are seed inventory — never public research profiles
   const hubAgent = getHubAgentBySlug(slug);
-  if (hubAgent) return hubAgent;
+  if (hubAgent) {
+    if (
+      hubAgent.id.startsWith('fallback-') ||
+      hubAgent.id.includes('-agent-') ||
+      !isIndexableListing(toPublicProviderView(hubAgent).listingClass)
+    ) {
+      return null;
+    }
+    return hubAgent;
+  }
 
   if (!isSupabaseConfigured()) {
-    return getFallbackProviderBySlug(slug) ?? null;
+    // Do not serve seed fallback profiles on public site
+    return null;
   }
 
   const supabase = await createClient();
@@ -71,10 +93,14 @@ export async function getProviderBySlug(slug: string): Promise<Provider | null> 
     .maybeSingle();
 
   if (error || !data) {
-    return getFallbackProviderBySlug(slug) ?? null;
+    return null;
   }
 
-  return mapRowToProvider(data as DbProvider);
+  const provider = mapRowToProvider(data as DbProvider);
+  if (!isIndexableListing(toPublicProviderView(provider).listingClass)) {
+    return null;
+  }
+  return provider;
 }
 
 export async function searchProviders(
@@ -83,6 +109,12 @@ export async function searchProviders(
   return getProviders(filters);
 }
 
+/** Staging/admin only — never call from public directory UIs */
 export function getAllFallbackProviders(): Provider[] {
   return FALLBACK_PROVIDERS;
+}
+
+/** @deprecated Prefer getFallbackProviderBySlug only in admin tooling */
+export function getSeedProviderBySlug(slug: string): Provider | undefined {
+  return getFallbackProviderBySlug(slug);
 }

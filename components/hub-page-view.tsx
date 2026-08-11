@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { Shield, MapPin, Users, Star, BarChart3 } from 'lucide-react';
 import type { InsuranceHub } from '@/types/agent';
-import { getAgentsForHub, getFeaturedHealthAgents, getHubStats } from '@/lib/hubs/agents';
+import {
+  getFeaturedHealthAgents,
+  getHubStats,
+  getPublicAgentsForHub,
+} from '@/lib/hubs/agents';
 import { getCuratedHubConfig } from '@/lib/hubs/data/curated-hubs';
 import { getAllCountySummaries } from '@/lib/insurance/cms/county-summaries';
 import { AgentCard } from '@/components/agent-card';
@@ -93,7 +97,7 @@ const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string
 export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
   const { stateSlug: state, slug } = hub;
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
-  const allAgents = getAgentsForHub(hub);
+  const allAgents = getPublicAgentsForHub(hub);
   const healthAgents = getFeaturedHealthAgents(hub);
   const otherAgents = allAgents.filter((a) => !a.isHealthFeatured);
   const stats = getHubStats(hub);
@@ -163,11 +167,9 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
             Licensed agencies with re-checkable public records for {hub.localDescriptor}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
-            {stats.totalAgents} agencies listed · {stats.healthSpecialists} health-focused ·{' '}
-            {stats.verified} with re-checkable verified license numbers
-            {stats.seedInventory
-              ? ' · Research inventory may be incomplete — missing data is better than invented verification'
-              : ''}
+            {stats.totalAgents > 0
+              ? `${stats.totalAgents} verified research listings · ${stats.healthSpecialists} health-focused`
+              : 'We’re still verifying agencies for this market — no illustrative seed listings'}
           </p>
           <div className="mt-6 flex justify-center">
             <ZipSearch defaultZip={hub.zipCodes[0]} className="[&_input]:bg-white [&_button]:bg-trust" />
@@ -256,40 +258,58 @@ export function HubPageView({ hub, canonicalPath }: HubPageViewProps) {
                     </span>
                   ))}
                 </div>
-                <HubAgentTable agents={allAgents} hubName={hub.shortName} />
+                {allAgents.length > 0 ? (
+                  <HubAgentTable agents={allAgents} hubName={hub.shortName} />
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    We’re still verifying agencies for this market. No illustrative seed listings are
+                    shown.
+                  </p>
+                )}
               </section>
             )}
 
             <section>
               <h2 className="text-2xl font-bold mb-2">
-                Health Insurance Specialists in {hub.shortName}
+                Health insurance research listings in {hub.shortName}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {curatedConfig?.featuredHealthLine ??
-                  '60% health emphasis · Featured Medicare/ACA agencies · Diverse-population brokers'}
+                {healthAgents.length > 0
+                  ? curatedConfig?.featuredHealthLine ??
+                    'Agencies that meet our public research standard'
+                  : 'We’re still verifying health-focused agencies for this market. We will not show illustrative seed listings.'}
               </p>
-              <div className="space-y-5">
-                {healthAgents.map((agent, i) => (
-                  <AgentCard key={agent.id} agent={agent} rank={i + 1} hubLabel={hub.shortName} />
-                ))}
-              </div>
+              {healthAgents.length > 0 ? (
+                <div className="space-y-5">
+                  {healthAgents.map((agent) => (
+                    <AgentCard key={agent.id} agent={agent} hubLabel={hub.shortName} />
+                  ))}
+                </div>
+              ) : (
+                <p className="rounded-xl border border-dashed bg-muted/30 px-4 py-6 text-sm text-muted-foreground">
+                  No verified health-specialist listings yet for {hub.shortName}. Use{' '}
+                  <a href="/tools/license-verification" className="text-primary hover:underline">
+                    license verification
+                  </a>{' '}
+                  and state DOI tools while we expand verified research inventory.
+                </p>
+              )}
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-2">Full Directory — Multi-Line Agencies</h2>
+              <h2 className="text-2xl font-bold mb-2">Multi-line agencies</h2>
               <p className="text-sm text-muted-foreground mb-6">
-                Home, auto, life, and commercial partners serving {hub.msaName}
+                {otherAgents.length > 0
+                  ? `Verified research listings serving ${hub.msaName}`
+                  : 'No verified multi-line agency listings yet — honesty over fake completeness.'}
               </p>
-              <div className="space-y-5">
-                {otherAgents.map((agent, i) => (
-                  <AgentCard
-                    key={agent.id}
-                    agent={agent}
-                    rank={healthAgents.length + i + 1}
-                    hubLabel={hub.shortName}
-                  />
-                ))}
-              </div>
+              {otherAgents.length > 0 ? (
+                <div className="space-y-5">
+                  {otherAgents.map((agent) => (
+                    <AgentCard key={agent.id} agent={agent} hubLabel={hub.shortName} />
+                  ))}
+                </div>
+              ) : null}
             </section>
           </div>
 

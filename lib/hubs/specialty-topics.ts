@@ -2,6 +2,10 @@ import type { InsuranceHub } from '@/types/agent';
 import { getHubBySlug, getTopHubs } from '@/lib/hubs/registry';
 import { SOUTH_FLORIDA_AGENTS } from '@/lib/hubs/data/south-florida-agents';
 import type { HubAgent } from '@/types/agent';
+import {
+  classifyHubAgentListing,
+  isIndexableListing,
+} from '@/lib/provenance/public-listing';
 
 export interface SpecialtyTopic {
   slug: string;
@@ -32,7 +36,7 @@ export const SPECIALTY_TOPICS: SpecialtyTopic[] = [
     subtitle: 'ACA · Medicare · Employer Group · Dental/Vision',
     focus: 'health',
     marketSnapshot:
-      'Health insurance is the primary focus of every Insurance Trust Hub market page. We rank independent agents by licensing verification, review sentiment, Medicare/ACA specialization, and local market experience — never by advertising spend.',
+      'Health insurance is a primary research focus of Insurance Trust Hub market pages. We surface agencies that meet our public research standard — never by advertising spend, and never with illustrative seed listings.',
     healthNeeds: [
       'ACA marketplace enrollment and subsidies',
       'Medicare Advantage vs supplement comparison',
@@ -119,7 +123,10 @@ export function getSouthFloridaHub(): InsuranceHub {
 }
 
 export function getSouthFloridaAgents(): HubAgent[] {
-  return SOUTH_FLORIDA_AGENTS;
+  // Stage 0: public specialty pages never list non-indexable seed inventory
+  return SOUTH_FLORIDA_AGENTS.filter((a) =>
+    isIndexableListing(classifyHubAgentListing(a))
+  );
 }
 
 export function getTopicFeaturedHubs(topic: SpecialtyTopic): InsuranceHub[] {
