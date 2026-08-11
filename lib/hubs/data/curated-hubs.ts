@@ -67,41 +67,40 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'miami-dade',
     sectionTitle: 'Miami-Dade County Coverage',
     summary:
-      'Market research coverage for serving Miami-Dade County — county-local Medicare/ACA specialists prioritized with tri-county partners. FL DFS verified, bilingual EN/ES available.',
+      'Florida DFS–verified research listings for Miami-Dade County. Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
     counties: ['Miami-Dade'],
-    badges: ['Bilingual EN/ES', 'Medicare Advantage hub'],
-    featuredHealthLine: 'Top featured: SFIB · The Health Experts · Kaizen Solution Group',
+    badges: ['FL DFS verified', 'Bilingual EN/ES available'],
+    featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 8,
   },
   'broward-county': {
     slug: 'broward-county',
     sectionTitle: 'Broward County Coverage',
     summary:
-      'Market research coverage for serving Broward County — Fort Lauderdale and Hollywood Medicare/ACA specialists with multi-line partners across the I-95 corridor.',
+      'Florida DFS–verified research listings for Broward County. Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
     counties: ['Broward'],
-    badges: ['Fort Lauderdale · Hollywood · Pembroke Pines'],
-    featuredHealthLine: 'Top featured: Medicare Advisors of South Florida · Waxman Insurance · B&B Insurance',
+    badges: ['Fort Lauderdale · Hollywood · Pembroke Pines', 'FL DFS verified'],
+    featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 8,
   },
   'palm-beach-county': {
     slug: 'palm-beach-county',
     sectionTitle: 'Palm Beach County Coverage',
     summary:
-      'Market research coverage for serving Palm Beach County — West Palm Beach and Boca Raton retiree Medicare specialists with supplement and Advantage expertise.',
+      'Florida DFS–verified research listings for Palm Beach County. Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
     counties: ['Palm Beach'],
-    badges: ['West Palm Beach · Boca Raton · Greenacres'],
-    featuredHealthLine: 'Top featured: Absolute Best Insurance · Pettineo Insurance · Medicare Sharks',
+    badges: ['West Palm Beach · Boca Raton · Greenacres', 'FL DFS verified'],
+    featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 8,
   },
   'miami-fort-lauderdale': {
     slug: 'miami-fort-lauderdale',
     sectionTitle: 'Tri-County Coverage Area',
     summary:
-      'Market research coverage for across Miami-Dade, Broward, and Palm Beach counties — 8 with primary Medicare/ACA/health emphasis and 4 strong multi-line partners. Average Google rating ~4.9 stars across entries with sufficient review volume.',
+      'Florida DFS–verified research listings across Miami-Dade, Broward, and Palm Beach counties. Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
     counties: ['Miami-Dade', 'Broward', 'Palm Beach'],
-    badges: ['Bilingual EN/ES available'],
-    featuredHealthLine:
-      'Top 3 featured: SFIB · Absolute Best Insurance · Medicare Advisors of South Florida',
+    badges: ['Bilingual EN/ES available', 'FL DFS verified'],
+    featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 8,
   },
   orlando: {
@@ -119,22 +118,20 @@ export const CURATED_HUB_CONFIG: Record<string, CuratedHubConfig> = {
     slug: 'jacksonville',
     sectionTitle: 'Northeast Florida Coverage Area',
     summary:
-      'Market research coverage for across Duval, St. Johns, Clay, and Nassau counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (several with group health or cross-sell capabilities). Average Google rating ~4.9 stars where review volume permits.',
+      'Florida DFS–verified research listings for the Jacksonville metro (Duval County launch inventory). Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
     counties: ['Duval', 'St. Johns', 'Clay', 'Nassau'],
-    badges: ['First Coast · Jacksonville metro'],
-    featuredHealthLine:
-      'Top 3 featured: The Medicare Dude · Florida Life & Health Exchange · Green Ins',
+    badges: ['First Coast · Jacksonville metro', 'FL DFS verified'],
+    featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 7,
   },
   tampa: {
     slug: 'tampa',
     sectionTitle: 'Tampa Bay Coverage Area',
     summary:
-      'Market research coverage for across Hillsborough, Pinellas, and Pasco counties — 7 with primary or strong Medicare/ACA/health emphasis and 5 multi-line independents (with health or employee benefits capabilities). Average Google rating ~4.9 stars where review volume permits.',
+      'Florida DFS–verified research listings for Tampa Bay (Hillsborough County launch inventory). Independent research only — re-check licenses on official DFS tools. Medicare specialty is never inferred from DFS alone.',
     counties: ['Hillsborough', 'Pinellas', 'Pasco'],
-    badges: ['Tampa · St. Petersburg · Clearwater'],
-    featuredHealthLine:
-      'Top 3 featured: HealthPlan4U · Affordable Insurance Team · The Medicare Dude',
+    badges: ['Tampa · St. Petersburg · Clearwater', 'FL DFS verified'],
+    featuredHealthLine: 'Browse verified research listings below',
     healthFeaturedLimit: 7,
   },
   atlanta: {

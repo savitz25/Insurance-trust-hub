@@ -17,10 +17,13 @@ import {
   DOI_PATHWAY_HREF,
 } from '@/components/research/empty-coverage-panel';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Agency Directory — Search Licensed Agents by State',
   description:
-    'Search licensed insurance agencies by state, coverage type, rating, and specialty. Independent research directory — re-check DOI licensing before you enroll.',
+    'Search Florida DFS–verified research listings and other verified agencies by state, coverage type, and specialty. Independent research directory — re-check DOI licensing before you enroll.',
   path: '/directory',
 });
 

@@ -5,8 +5,9 @@ import { HubPageView } from '@/components/hub-page-view';
 import { buildHubMetadata } from '@/lib/hubs/hub-seo';
 import { getVerifiedProvidersForHub } from '@/lib/dfs/providers-by-county';
 
-/** Phase 4 — allow verified inventory from Supabase to refresh without full rebuild */
-export const revalidate = 1800;
+/** Phase 4 — always read live verified inventory (avoid stale empty static shells) */
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export function generateStaticParams() {
   return getAllHubParams();
