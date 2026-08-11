@@ -120,6 +120,7 @@ export async function GET() {
     'broward-county': await countVerifiedProvidersForHub('broward-county'),
     'palm-beach-county': await countVerifiedProvidersForHub('palm-beach-county'),
     tampa: await countVerifiedProvidersForHub('tampa'),
+    orlando: await countVerifiedProvidersForHub('orlando'),
     'miami-fort-lauderdale': await countVerifiedProvidersForHub(
       'miami-fort-lauderdale'
     ),
