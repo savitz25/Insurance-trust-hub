@@ -82,11 +82,13 @@ npm run dfs:enrich-places-loop -- --dry-run --batch-size 25 --max-batches 3
 # Live full SFL pass (default gates)
 npm run dfs:enrich-places-loop -- --confirm --batch-size 100 --delay-ms 300
 
-# Resume after stop / interrupt
-npm run dfs:enrich-places-loop -- --confirm --start-offset 250 --batch-size 100 --delay-ms 300
-# or
+# Resume after stop / interrupt (preferred with default only-missing)
 npm run dfs:enrich-places-loop -- --confirm --resume
-npm run dfs:enrich-places-loop -- --confirm --resume-from-log scripts/output/places-loop-progress.json
+# only-missing rebuilds the pool (high matches out; prior attempts sorted last),
+# so resume starts at offset 0 over remaining unattempted work.
+# Explicit offset (stable only if you disable only-missing / use include-enriched carefully):
+npm run dfs:enrich-places-loop -- --confirm --start-offset 500 --batch-size 100 --delay-ms 300
+npm run dfs:enrich-places-loop -- --confirm --resume-from-log scripts/output/places-loop-2026-08-12T16-08-23-566Z.json
 ```
 
 ### Default quality gates

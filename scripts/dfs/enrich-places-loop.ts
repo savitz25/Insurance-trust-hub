@@ -9,8 +9,14 @@
  * Progress: scripts/output/places-loop-progress.json
  */
 
-import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'fs';
-import { resolve } from 'path';
+import {
+  mkdirSync,
+  writeFileSync,
+  readFileSync,
+  existsSync,
+  readdirSync,
+} from 'fs';
+import { resolve, basename } from 'path';
 import { createClient } from '@supabase/supabase-js';
 import {
   isGooglePlacesConfigured,
@@ -134,6 +140,60 @@ function loadProgress(path: string): ProgressFile | null {
   }
 }
 
+/** Batch log (places-loop-*.json) or progress file → next walk offset. */
+function offsetFromAnyLog(
+  raw: Record<string, unknown> | ProgressFile | null,
+  defaultBatchSize: number
+): number | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const p = raw as ProgressFile & {
+    batches?: Array<{ offset?: number; limit?: number }>;
+    config?: { batchSize?: number };
+  };
+  if (typeof p.nextOffset === 'number' && Number.isFinite(p.nextOffset)) {
+    // Prefer nextOffset only when prior run actually advanced.
+    if (
+      (typeof p.batchesCompleted === 'number' && p.batchesCompleted > 0) ||
+      p.nextOffset > 0 ||
+      p.status === 'stopped' ||
+      p.status === 'completed'
+    ) {
+      return Math.max(0, p.nextOffset);
+    }
+  }
+  if (Array.isArray(p.batches) && p.batches.length > 0) {
+    const last = p.batches[p.batches.length - 1]!;
+    const lim =
+      typeof last.limit === 'number'
+        ? last.limit
+        : p.config?.batchSize || defaultBatchSize;
+    const off = typeof last.offset === 'number' ? last.offset : 0;
+    return off + lim;
+  }
+  if (
+    typeof p.lastCompletedOffset === 'number' &&
+    p.lastCompletedOffset >= 0
+  ) {
+    return p.lastCompletedOffset + (p.batchSize || defaultBatchSize);
+  }
+  return null;
+}
+
+function latestBatchLogPath(): string | null {
+  const dir = resolve(process.cwd(), 'scripts/output');
+  if (!existsSync(dir)) return null;
+  const files = readdirSync(dir)
+    .filter(
+      (f) =>
+        f.startsWith('places-loop-') &&
+        f.endsWith('.json') &&
+        f !== 'places-loop-progress.json'
+    )
+    .sort();
+  if (!files.length) return null;
+  return resolve(dir, files[files.length - 1]!);
+}
+
 function rateOk(
   batch: PlacesBatchResult,
   minMatch: number,
@@ -194,25 +254,81 @@ async function main() {
   }
 
   let startOffset = Math.max(num('start-offset', 0), 0);
+  let resumeSeed: ProgressFile | null = null;
   const resumeLog = arg('resume-from-log');
+  const wantResume = hasFlag('resume') || Boolean(resumeLog);
+
   if (resumeLog) {
-    const prev = loadProgress(resolve(process.cwd(), resumeLog));
-    if (prev && typeof prev.nextOffset === 'number') {
-      startOffset = prev.nextOffset;
-      console.log(`Resuming from log nextOffset=${startOffset}`);
-    } else if (prev && typeof prev.lastCompletedOffset === 'number' && prev.lastCompletedOffset >= 0) {
-      startOffset = prev.lastCompletedOffset + (prev.batchSize || batchSize);
-      console.log(`Resuming after lastCompletedOffset → startOffset=${startOffset}`);
+    const logPath = resolve(process.cwd(), resumeLog);
+    const prev = loadProgress(logPath) as ProgressFile | null;
+    resumeSeed = prev;
+    const fromLog = offsetFromAnyLog(
+      prev as unknown as Record<string, unknown>,
+      batchSize
+    );
+    if (fromLog != null) {
+      startOffset = fromLog;
+      console.log(
+        `Resuming from log ${basename(logPath)} → offset ${startOffset}`
+      );
+    } else {
+      console.warn(
+        `resume-from-log: could not derive offset from ${logPath}; using ${startOffset}`
+      );
     }
-  } else if (!hasFlag('start-offset') && existsSync(PROGRESS_PATH())) {
-    const prev = loadProgress(PROGRESS_PATH());
-    if (prev?.status === 'running' && typeof prev.nextOffset === 'number') {
-      // only auto-hint, don't auto-resume unless --resume
-      if (hasFlag('resume')) {
-        startOffset = prev.nextOffset;
-        console.log(`--resume: continuing at offset ${startOffset}`);
+  } else if (wantResume && !hasFlag('start-offset')) {
+    // --resume: prefer progress file (stopped | running | completed), else latest batch log
+    let prev = loadProgress(PROGRESS_PATH());
+    let from = offsetFromAnyLog(
+      prev as unknown as Record<string, unknown> | null,
+      batchSize
+    );
+    if (
+      from == null ||
+      (prev &&
+        prev.batchesCompleted === 0 &&
+        prev.nextOffset === 0 &&
+        prev.status === 'running')
+    ) {
+      const latest = latestBatchLogPath();
+      if (latest) {
+        const logPrev = loadProgress(latest);
+        const fromLog = offsetFromAnyLog(
+          logPrev as unknown as Record<string, unknown> | null,
+          batchSize
+        );
+        if (fromLog != null) {
+          prev = logPrev;
+          from = fromLog;
+          console.log(
+            `--resume: progress empty/reset; using ${basename(latest)}`
+          );
+        }
       }
     }
+    resumeSeed = prev;
+    if (from != null) {
+      startOffset = from;
+      console.log(
+        `--resume: derived walk offset ${startOffset} (status=${prev?.status ?? 'n/a'})`
+      );
+    } else {
+      console.warn('--resume: no progress/log offset found; starting at 0');
+      startOffset = 0;
+    }
+  }
+
+  // only-missing rebuilds the eligible pool: high matches drop out, prior
+  // places_* attempts sort last. Absolute offsets from a prior full pool are
+  // not stable — continue at 0 over remaining unattempted first.
+  if (wantResume && onlyMissing && !hasFlag('start-offset')) {
+    if (startOffset > 0) {
+      console.log(
+        `--resume + only-missing: remapping startOffset ${startOffset} → 0 ` +
+          `(pool filters high matches; unattempted sorted first)`
+      );
+    }
+    startOffset = 0;
   }
 
   loadLocalEnv(resolve(process.cwd()));
@@ -266,6 +382,19 @@ async function main() {
     maxErrorRate,
     maxAmbiguousRate,
   });
+  // Carry cumulative totals when resuming (best-effort from progress shape).
+  if (
+    resumeSeed?.cumulative &&
+    typeof resumeSeed.cumulative.processed === 'number' &&
+    resumeSeed.cumulative.processed > 0
+  ) {
+    progress.cumulative = { ...resumeSeed.cumulative };
+    progress.startedAt = resumeSeed.startedAt || progress.startedAt;
+    if (Array.isArray(resumeSeed.perBatch) && resumeSeed.perBatch.length) {
+      progress.perBatch = [...resumeSeed.perBatch];
+      progress.batchesCompleted = resumeSeed.perBatch.length;
+    }
+  }
   progress.nextOffset = startOffset;
   writeProgress(progress);
 
@@ -447,8 +576,12 @@ async function main() {
         progressFile: PROGRESS_PATH(),
         batchLogFile: batchLogPath,
         resumeHint:
-          progress.status === 'stopped' || progress.nextOffset < eligible.length
-            ? `npm run dfs:enrich-places-loop -- --confirm --start-offset ${progress.nextOffset} --batch-size ${batchSize} --delay-ms ${delayMs}`
+          progress.status === 'stopped' ||
+          progress.nextOffset < eligible.length ||
+          onlyMissing
+            ? onlyMissing
+              ? `npm run dfs:enrich-places-loop -- --confirm --resume`
+              : `npm run dfs:enrich-places-loop -- --confirm --start-offset ${progress.nextOffset} --batch-size ${batchSize} --delay-ms ${delayMs}`
             : null,
       },
       null,
