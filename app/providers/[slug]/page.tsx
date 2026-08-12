@@ -7,7 +7,6 @@ import {
   MapPin,
   Phone,
   Globe,
-  Shield,
   Users,
 } from 'lucide-react';
 import { getProviderBySlug } from '@/lib/providers/queries';

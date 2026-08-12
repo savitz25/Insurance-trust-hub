@@ -10,12 +10,14 @@ const HUB_HOME: Record<HubLinkId, string> = {
   move: '/my-move',
   insurance: '/my-insurance',
   lender: '/my-lending',
+  contractor: '/',
 };
 
 const HUB_BLURB: Record<HubLinkId, string> = {
   move: 'Moving directory · FMCSA research',
   insurance: 'Insurance research · plans & agents',
   lender: 'Lending research · NMLS lenders',
+  contractor: 'Contractor research · licensed trades',
 };
 
 const ACTIVE_HUB: HubLinkId = 'insurance';
