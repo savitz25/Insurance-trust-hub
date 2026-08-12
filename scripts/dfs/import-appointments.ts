@@ -2,9 +2,10 @@
  * Phase 6A — import Florida DFS Active Appointments (Business) into dfs_appointments.
  *
  *   npm run dfs:import-appointments -- --file data/dfs-raw/AllActiveAppointmentsBusiness.csv
- *   npm run dfs:import-appointments -- --file ... --launch-counties-only --dry-run --limit 100
+ *   npm run dfs:import-appointments -- --file ... --dry-run --limit 100
+ *   npm run dfs:import-appointments -- --file ... --refresh   # delete prior matched rows then re-import
  *
- * Match rule: license number → dfs_producers (business). Unmatched rows skipped (counted).
+ * Match rule: license keys → dfs_producers (business). Unmatched skipped (counted).
  * Does not create public providers.
  */
 
@@ -15,6 +16,7 @@ import { createClient } from '@supabase/supabase-js';
 import {
   normalizeAppointmentRow,
   isActiveStatus,
+  appointmentLicenseKeys,
 } from '../../lib/dfs/appointments';
 import { loadLocalEnv, requireSupabaseOpsEnv } from '../lib/load-local-env';
 
@@ -71,10 +73,11 @@ async function main() {
   const limit = Number(arg('limit') || '0') || 0;
   const launchOnly = hasFlag('launch-counties-only');
   const activeOnly = !hasFlag('include-inactive');
+  const refresh = hasFlag('refresh');
 
   if (!file) {
     console.error(
-      'Usage: npm run dfs:import-appointments -- --file data/dfs-raw/AllActiveAppointmentsBusiness.csv [--launch-counties-only] [--dry-run] [--limit N]'
+      'Usage: npm run dfs:import-appointments -- --file data/dfs-raw/AllActiveAppointmentsBusiness.csv [--launch-counties-only] [--refresh] [--dry-run] [--limit N]'
     );
     console.error(
       'Download: https://www.myfloridacfo.com/downloads/AAS/LicenseeSearch/AllActiveAppointmentsBusiness.csv'
@@ -120,6 +123,7 @@ async function main() {
 
   // License → producer_id cache for business entities
   const producerByLicense = new Map<string, string>();
+  let producerRows = 0;
   {
     let from = 0;
     const page = 1000;
@@ -134,15 +138,47 @@ async function main() {
         break;
       }
       if (!data?.length) break;
+      producerRows += data.length;
       for (const r of data) {
-        if (r.license_number) {
-          producerByLicense.set(String(r.license_number).toUpperCase(), r.id);
+        if (!r.license_number) continue;
+        for (const key of appointmentLicenseKeys(r.license_number)) {
+          producerByLicense.set(key, r.id);
         }
       }
       if (data.length < page) break;
       from += page;
     }
-    console.log(`Cached ${producerByLicense.size} business producers for match`);
+    console.log(
+      `Cached ${producerByLicense.size} license keys from ${producerRows} business producers`
+    );
+  }
+
+  if (refresh && !dryRun) {
+    console.log('Refresh: clearing existing dfs_appointments rows…');
+    // Chunked delete to avoid timeouts
+    for (;;) {
+      const { data: ids, error } = await supabase
+        .from('dfs_appointments')
+        .select('id')
+        .limit(500);
+      if (error) {
+        console.error('refresh delete list', error.message);
+        break;
+      }
+      if (!ids?.length) break;
+      const { error: dErr } = await supabase
+        .from('dfs_appointments')
+        .delete()
+        .in(
+          'id',
+          ids.map((r: { id: string }) => r.id)
+        );
+      if (dErr) {
+        console.error('refresh delete', dErr.message);
+        break;
+      }
+    }
+    console.log('Refresh: staging table cleared for re-import');
   }
 
   let headers: string[] = [];
@@ -264,7 +300,11 @@ async function main() {
       continue;
     }
 
-    const producerId = producerByLicense.get(n.licenseNumber.toUpperCase());
+    let producerId: string | undefined;
+    for (const key of appointmentLicenseKeys(n.licenseNumber)) {
+      producerId = producerByLicense.get(key);
+      if (producerId) break;
+    }
     if (!producerId) {
       bump('no_producer_match');
       continue;
@@ -273,10 +313,11 @@ async function main() {
     buffer.push({
       producer_id: producerId,
       license_number: n.licenseNumber,
-      appointing_entity_number: n.appointingEntityNumber,
+      license_key: n.licenseKey,
+      appointing_entity_number: n.appointingEntityNumber || '',
       appointing_entity_name: n.appointingEntityName,
       carrier_name: n.appointingEntityName,
-      appointment_type: n.appointmentTypeDesc || n.appointmentType,
+      appointment_type: n.appointmentTypeDesc || n.appointmentType || '',
       appointment_status: n.appointmentStatus,
       effective_date: n.effectiveDate,
       expiration_date: n.expirationDate,

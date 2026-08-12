@@ -31,9 +31,11 @@
     "dfs:backfill-county": "tsx scripts/dfs/backfill-provider-county.ts",
     "dfs:import-appointments": "tsx scripts/dfs/import-appointments.ts",
     "dfs:attach-appointments": "tsx scripts/dfs/attach-appointments.ts",
+    "dfs:ensure-appointments-schema": "tsx scripts/dfs/ensure-appointments-schema.ts",
     "dfs:env": "tsx scripts/dfs/check-env.ts",
     "check:phase5-agency": "tsx scripts/check-phase5-agency.ts",
     "check:phase6a-appointments": "tsx scripts/check-phase6a-appointments.ts",
+    "check:phase6b-appointments": "tsx scripts/check-phase6b-appointments.ts",
     "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"

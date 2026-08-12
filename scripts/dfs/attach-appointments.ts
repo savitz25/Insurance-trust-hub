@@ -1,9 +1,9 @@
 /**
- * Phase 6A — attach appointment snapshots to promoted verified providers.
+ * Phase 6A/6B — attach appointment snapshots to promoted verified providers.
  *
  *   npm run dfs:attach-appointments -- --dry-run
  *   npm run dfs:attach-appointments -- --wave 2
- *   npm run dfs:attach-appointments -- --limit 50
+ *   npm run dfs:attach-appointments -- --refresh   # also clear snapshot when no longer matched
  *
  * Only providers with dfs_provider_promotions rows receive snapshots.
  * Never creates providers. Never invents appointments.
@@ -11,7 +11,10 @@
 
 import { resolve } from 'path';
 import { createClient } from '@supabase/supabase-js';
-import { buildAppointmentSnapshot } from '../../lib/dfs/appointments';
+import {
+  buildAppointmentSnapshot,
+  isActiveStatus,
+} from '../../lib/dfs/appointments';
 import {
   FL_LAUNCH_COUNTIES,
   countiesForWave,
@@ -33,6 +36,8 @@ async function main() {
   const limit = Number(arg('limit') || '0') || 0;
   const waveArg = arg('wave');
   const countyFilter = arg('county');
+  /** When set, strip appointment_snapshot from promoted agencies with no match */
+  const refresh = hasFlag('refresh') || hasFlag('clear-stale');
 
   let countyIds: string[] | null = null;
   if (waveArg) {
@@ -60,7 +65,6 @@ async function main() {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  // Load promotions
   let promos: Array<{
     producer_id: string;
     provider_id: string;
@@ -92,14 +96,14 @@ async function main() {
   if (limit > 0) promos = promos.slice(0, limit);
   console.log(`Promotions loaded: ${promos.length}`);
 
-  // Producer → provider map
   const producerToProvider = new Map<string, string>();
+  const allProviderIds = new Set<string>();
   for (const p of promos) {
     producerToProvider.set(p.producer_id, p.provider_id);
+    allProviderIds.add(p.provider_id);
   }
   const producerIds = [...producerToProvider.keys()];
 
-  // Load all appointments for these producers (batched)
   type ApptRow = {
     producer_id: string;
     appointing_entity_name?: string | null;
@@ -121,7 +125,6 @@ async function main() {
       )
       .in('producer_id', slice);
     if (error) {
-      // base schema may lack appointing_entity_name
       const { data: data2, error: e2 } = await supabase
         .from('dfs_appointments')
         .select(
@@ -145,14 +148,21 @@ async function main() {
       }
     }
     if ((i / chunkSize) % 10 === 0) {
-      console.log(`  appointments loaded through promo ${Math.min(i + chunkSize, producerIds.length)}/${producerIds.length}`);
+      console.log(
+        `  appointments loaded through promo ${Math.min(i + chunkSize, producerIds.length)}/${producerIds.length}`
+      );
     }
   }
 
   console.log(`Producers with any appointments: ${byProducer.size}`);
 
-  // Load provider contacts for those with appointments
-  const providerIds = [
+  // Prefer active rows when building snapshot inputs (keep inactive only if no active)
+  for (const [pid, rows] of byProducer) {
+    const active = rows.filter((r) => isActiveStatus(r.appointment_status));
+    if (active.length) byProducer.set(pid, active);
+  }
+
+  const providerIdsWithAppts = [
     ...new Set(
       [...byProducer.keys()]
         .map((pid) => producerToProvider.get(pid))
@@ -160,9 +170,14 @@ async function main() {
     ),
   ];
 
+  // Load contacts for all promoted providers when refreshing stale snapshots
+  const contactTargetIds = refresh
+    ? [...allProviderIds]
+    : providerIdsWithAppts;
+
   const contacts = new Map<string, Record<string, unknown>>();
-  for (let i = 0; i < providerIds.length; i += chunkSize) {
-    const slice = providerIds.slice(i, i + chunkSize);
+  for (let i = 0; i < contactTargetIds.length; i += chunkSize) {
+    const slice = contactTargetIds.slice(i, i + chunkSize);
     const { data, error } = await supabase
       .from('providers')
       .select('id, contact, verified')
@@ -179,9 +194,9 @@ async function main() {
 
   let attached = 0;
   let updated = 0;
+  let cleared = 0;
   let errors = 0;
   const asOf = new Date().toISOString();
-  const noAppointments = promos.length - byProducer.size;
 
   for (const [producerId, appts] of byProducer) {
     const providerId = producerToProvider.get(producerId);
@@ -215,6 +230,7 @@ async function main() {
       errors++;
     } else {
       updated++;
+      contacts.set(providerId, contact);
     }
 
     if (updated % 500 === 0 && updated > 0) {
@@ -222,17 +238,45 @@ async function main() {
     }
   }
 
+  // Clear stale snapshots when refreshing
+  if (refresh) {
+    const withAppt = new Set(providerIdsWithAppts);
+    for (const providerId of allProviderIds) {
+      if (withAppt.has(providerId)) continue;
+      const prev = contacts.get(providerId);
+      if (!prev || !prev.appointment_snapshot) continue;
+      if (dryRun) {
+        cleared++;
+        continue;
+      }
+      const { appointment_snapshot: _drop, ...rest } = prev;
+      const { error: uerr } = await supabase
+        .from('providers')
+        .update({
+          contact: rest,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', providerId)
+        .eq('verified', true);
+      if (uerr) errors++;
+      else cleared++;
+    }
+  }
+
   console.log(
     JSON.stringify(
       {
         dryRun,
+        refresh,
         promotions: promos.length,
         withAppointments: attached,
-        withoutAppointments: Math.max(0, noAppointments),
+        withoutAppointments: Math.max(0, promos.length - byProducer.size),
         providersUpdated: updated,
+        snapshotsCleared: cleared,
         errors,
         wave: waveArg ?? 'all',
         county: countyFilter ?? null,
+        snapshotSchemaVersion: 2,
       },
       null,
       2

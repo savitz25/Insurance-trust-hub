@@ -76,6 +76,10 @@ export async function getProviders(
     if (filters.query) {
       query = query.or(`name.ilike.%${filters.query}%,description.ilike.%${filters.query}%`);
     }
+    // Research convenience only — not a quality rank
+    if (filters.hasAppointmentSnapshot) {
+      query = query.not('contact->appointment_snapshot', 'is', null);
+    }
 
     query = query.order('name', { ascending: true });
     const offset = filters.offset ?? 0;

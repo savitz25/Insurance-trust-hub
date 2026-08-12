@@ -68,6 +68,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const type = getParam(params, 'type') as InsuranceType | '';
   const specialty = getParam(params, 'specialty') as Specialty | '';
   const verifiedOnly = getParam(params, 'verified') === 'true';
+  const hasAppointmentSnapshot = getParam(params, 'appointments') === 'true';
   const minRating = getParam(params, 'minRating');
   const sort = getParam(params, 'sort') || 'rating';
   const view = getParam(params, 'view') || 'grid';
@@ -78,6 +79,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     insuranceType: type || undefined,
     specialty: specialty || undefined,
     verifiedOnly,
+    hasAppointmentSnapshot,
     minRating: minRating ? Number(minRating) : undefined,
     limit: 48,
   });

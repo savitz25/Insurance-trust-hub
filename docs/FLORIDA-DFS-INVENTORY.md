@@ -154,7 +154,7 @@ npm run check:phase4-dfs
 |------|--------|
 | Yes | name, license number, LOAs, city/county, phone (if DFS), verified badge/source/date |
 | Store, don’t feature | email |
-| Phase 6A appointments | `docs/PHASE-6A-APPOINTMENTS.md` · `npm run dfs:import-appointments` · `npm run dfs:attach-appointments` |
+| Phase 6A/6B appointments | `docs/PHASE-6A-APPOINTMENTS.md` · `docs/PHASE-6B-APPOINTMENTS.md` · `npm run dfs:import-appointments` · `npm run dfs:attach-appointments -- --refresh` |
 | Later enrichment | website, Google, CMS Medicare |
 
 ## Consumer wiring

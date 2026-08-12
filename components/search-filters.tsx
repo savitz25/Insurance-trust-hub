@@ -25,6 +25,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
   const insuranceType = searchParams.get('type') ?? '';
   const specialty = searchParams.get('specialty') ?? '';
   const verifiedOnly = searchParams.get('verified') === 'true';
+  const hasAppointments = searchParams.get('appointments') === 'true';
   const minRating = searchParams.get('minRating') ?? '';
 
   const updateParams = useCallback(
@@ -54,6 +55,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
       specialty: (formData.get('specialty') as string) || null,
       minRating: (formData.get('minRating') as string) || null,
       verified: formData.get('verified') === 'on' ? 'true' : null,
+      appointments: formData.get('appointments') === 'on' ? 'true' : null,
     });
   }
 
@@ -152,6 +154,26 @@ export function SearchFilters({ className }: SearchFiltersProps) {
         <Label htmlFor="filter-verified" className="text-sm font-normal cursor-pointer">
           Verified agencies only
         </Label>
+      </div>
+
+      <div className="space-y-1">
+        <div className="flex items-center gap-2">
+          <Checkbox
+            id="filter-appointments"
+            name="appointments"
+            defaultChecked={hasAppointments}
+          />
+          <Label
+            htmlFor="filter-appointments"
+            className="text-sm font-normal cursor-pointer"
+          >
+            Has DFS appointment snapshot
+          </Label>
+        </div>
+        <p className="text-[11px] text-muted-foreground leading-snug pl-6">
+          Research convenience only — not a quality rank or paid placement. Snapshot may be
+          incomplete or outdated.
+        </p>
       </div>
 
       <div className="flex gap-2 pt-1">

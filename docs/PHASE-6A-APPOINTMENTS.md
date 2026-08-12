@@ -77,3 +77,14 @@ No section when empty. No card ranking by appointment count.
 - Inventing appointments  
 - Preferred-carrier / top-carrier ranking  
 - Medicare-certified from appointments alone  
+
+## Hardening (Phase 6B)
+
+See **[PHASE-6B-APPOINTMENTS.md](./PHASE-6B-APPOINTMENTS.md)** for:
+
+- Extended schema / `license_key`  
+- Stronger match + carrier dedupe  
+- Snapshot schemaVersion 2  
+- Refresh cadence (`--refresh`)  
+- Optional directory research filter  
+
