@@ -19,8 +19,10 @@ import {
 import {
   countVerifiedFloridaProviders,
   countVerifiedTexasProviders,
+  countVerifiedNewJerseyProviders,
   getLaunchCountyLiveTotals,
   getTxLaunchMarketLiveTotals,
+  getNjLaunchRegionLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 
@@ -91,9 +93,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const isList = view === 'list';
   const launchRows = await getLaunchCountyLiveTotals();
   const txHubRows = await getTxLaunchMarketLiveTotals();
+  const njHubRows = await getNjLaunchRegionLiveTotals();
   const flTotal = await countVerifiedFloridaProviders();
   const txTotal = await countVerifiedTexasProviders();
+  const njTotal = await countVerifiedNewJerseyProviders();
   const browsingTx = state === 'TX';
+  const browsingNj = state === 'NJ';
 
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
@@ -127,6 +132,21 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             ) : null}
           </Link>
           <Link
+            href="/directory?state=NJ&verified=true"
+            className={
+              browsingNj
+                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+            }
+          >
+            New Jersey (DOBI)
+            {njTotal > 0 ? (
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {njTotal.toLocaleString()}
+              </span>
+            ) : null}
+          </Link>
+          <Link
             href="/directory?state=FL&verified=true"
             className={
               state === 'FL'
@@ -147,6 +167,43 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           >
             All verified
           </Link>
+        </div>
+        <div className="mt-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            New Jersey launch hubs
+            {njTotal > 0 ? (
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · {njTotal.toLocaleString()} verified NJ listings
+              </span>
+            ) : (
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · pipeline ready (import when organization export available)
+              </span>
+            )}
+          </p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {njHubRows.map((row) => (
+              <li key={row.key}>
+                <Link
+                  href={row.hubHref}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                >
+                  {row.displayName}
+                  <span className="tabular-nums opacity-80">
+                    {row.total.toLocaleString()}
+                  </span>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/guides/new-jersey-aca-marketplace"
+                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+              >
+                NJ ACA guides
+              </Link>
+            </li>
+          </ul>
         </div>
         <div className="mt-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

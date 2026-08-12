@@ -276,6 +276,13 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified TDI inventory for this launch is Wave-1 Austin / Travis–area agencies (city/ZIP match from Texas TDI open data).';
     case 'san-antonio':
       return 'Verified TDI inventory for this launch is Wave-1 San Antonio / Bexar–area agencies (city/ZIP match from Texas TDI open data).';
+    // —— Phase 9 New Jersey DOBI ——
+    case 'south-new-jersey':
+      return 'Verified DOBI inventory for this launch is Wave-1 South Jersey agencies (Camden, Burlington, Gloucester, Atlantic, Cape May, Cumberland, Salem area — city/county/ZIP match). Organization/agency entities only.';
+    case 'central-new-jersey':
+      return 'Verified DOBI inventory for this launch is Wave-1 Central Jersey agencies (Middlesex, Mercer, Monmouth, Ocean, Somerset area — city/county/ZIP match). Organization/agency entities only.';
+    case 'north-new-jersey':
+      return 'Verified DOBI inventory for this launch is Wave-1 North Jersey agencies (Bergen, Essex, Hudson, Passaic, Morris, Union + northwest counties — city/county/ZIP match). Organization/agency entities only.';
     default:
       return null;
   }

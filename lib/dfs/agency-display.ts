@@ -61,6 +61,41 @@ export function localHubPathForProvider(provider: Provider): {
   label: string;
 } | null {
   const st = (provider.state || '').toUpperCase();
+  if (st === 'NJ') {
+    const city = (provider.city || '').toLowerCase();
+    const county = (provider.county || '').toLowerCase();
+    if (
+      /camden|cherry hill|burlington|gloucester|atlantic|cape may|cumberland|salem|vineland/.test(
+        city + ' ' + county
+      )
+    ) {
+      return {
+        href: '/hubs/new-jersey/south-new-jersey',
+        label: 'South Jersey agency hub',
+      };
+    }
+    if (
+      /middlesex|mercer|monmouth|ocean|somerset|princeton|trenton|new brunswick|toms river|lakewood/.test(
+        city + ' ' + county
+      )
+    ) {
+      return {
+        href: '/hubs/new-jersey/central-new-jersey',
+        label: 'Central Jersey agency hub',
+      };
+    }
+    if (
+      /bergen|essex|hudson|passaic|morris|union|newark|jersey city|hoboken|paterson|morristown/.test(
+        city + ' ' + county
+      )
+    ) {
+      return {
+        href: '/hubs/new-jersey/north-new-jersey',
+        label: 'North Jersey agency hub',
+      };
+    }
+    return { href: '/hubs/new-jersey', label: 'New Jersey insurance hubs' };
+  }
   if (st === 'TX') {
     const city = (provider.city || '').toLowerCase();
     if (/houston|sugar land|katy|pasadena|pearland|the woodlands/.test(city)) {

@@ -52,6 +52,7 @@ import type { Provider } from '@/types/provider';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 import { TX_TDI_LOOKUP_URL, TX_TDI_REGULATOR } from '@/lib/tdi/launch-markets';
+import { NJ_DOBI_LOOKUP_URL, NJ_DOBI_REGULATOR } from '@/lib/nj/launch-regions';
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
@@ -143,12 +144,15 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   );
   const isTexas = (provider.state || '').toUpperCase() === 'TX';
   const isFlorida = (provider.state || '').toUpperCase() === 'FL';
+  const isNewJersey = (provider.state || '').toUpperCase() === 'NJ';
   const npn = extractNpnFromNotes(provider.license_notes);
   const regulatorName = isTexas
     ? TX_TDI_REGULATOR
-    : isFlorida
-      ? 'Florida DFS'
-      : publicView.verification.sourceLabel || 'State insurance department';
+    : isNewJersey
+      ? NJ_DOBI_REGULATOR
+      : isFlorida
+        ? 'Florida DFS'
+        : publicView.verification.sourceLabel || 'State insurance department';
 
   let secondarySignals = null;
   try {
@@ -320,9 +324,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     {agencyCapabilitySummary(provider)}{' '}
                     {isTexas
                       ? 'Texas Department of Insurance (TDI) is the license source of truth for this research listing.'
-                      : isFlorida
-                        ? 'Florida DFS is the license source of truth for this research listing.'
-                        : `${regulatorName} is the license source of truth for this research listing.`}
+                      : isNewJersey
+                        ? 'New Jersey Department of Banking and Insurance (DOBI) is the license source of truth for this research listing.'
+                        : isFlorida
+                          ? 'Florida DFS is the license source of truth for this research listing.'
+                          : `${regulatorName} is the license source of truth for this research listing.`}
                   </p>
                 </CardContent>
               </Card>
@@ -418,7 +424,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <CardContent className="pt-6 space-y-3">
                   <p className="text-sm">
                     <span className="font-medium">Regulator:</span> {regulatorName}
-                    {isTexas ? ' (TDI)' : null}
+                    {isTexas ? ' (TDI)' : isNewJersey ? ' (DOBI)' : null}
                   </p>
                   {publicView.verification.licenseNumber && (
                     <p className="text-sm">
@@ -452,7 +458,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     can change — always re-check on official tools before you enroll.
                     {isTexas
                       ? ' Medicare-certified status is never inferred from TDI agency open data alone. Agency/business entities only in this inventory.'
-                      : null}
+                      : isNewJersey
+                        ? ' Medicare-certified status is never inferred from DOBI organization data alone. Agency/business entities only in this inventory.'
+                        : null}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
@@ -477,6 +485,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         </a>
                       </Button>
                     ) : null}
+                    {isNewJersey ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={NJ_DOBI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
+                          New Jersey DOBI licensee search
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
                   </div>
                   <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
                     Research listing only — not an endorsement, rating, or appointment guarantee.
@@ -494,8 +510,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     {publicView.phone ? (
                       <li>
                         Call the listed phone number and re-confirm identity against the{' '}
-                        {isTexas ? 'TDI' : isFlorida ? 'DFS' : 'state'} license number before sharing
-                        personal data.
+                        {isTexas
+                          ? 'TDI'
+                          : isNewJersey
+                            ? 'DOBI'
+                            : isFlorida
+                              ? 'DFS'
+                              : 'state'}{' '}
+                        license number before sharing personal data.
                       </li>
                     ) : null}
                     {provider.website ? (

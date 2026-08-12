@@ -18,6 +18,11 @@ const LOOKUP_URLS: Record<string, { department: string; lookupUrl: string; notes
     department: 'Texas Department of Insurance',
     lookupUrl: 'https://www.tdi.texas.gov/agent/index.html',
   },
+  NJ: {
+    department: 'New Jersey Department of Banking and Insurance',
+    lookupUrl: 'https://www.state.nj.us/dobi/DOBI_LicSearch/index.html',
+    notes: 'Interactive licensee search; bulk organization export may require OPRA/SBS/NIPR.',
+  },
   CA: {
     department: 'California Department of Insurance',
     lookupUrl: 'https://www.insurance.ca.gov/01-consumers/102-help-adv/',

@@ -145,11 +145,14 @@ export function HubPageView({
   const isCapped = verifiedCount > showingCount;
   const inventoryScope = inventoryScopeNoteForHub(hub.slug);
   const isTexasHub = hub.stateCode === 'TX' || hub.stateSlug === 'texas';
+  const isNewJerseyHub = hub.stateCode === 'NJ' || hub.stateSlug === 'new-jersey';
   const regulatorLabel = isTexasHub
     ? 'Texas Department of Insurance (TDI)'
-    : hub.stateCode === 'FL'
-      ? 'Florida DFS'
-      : 'state insurance department';
+    : isNewJerseyHub
+      ? 'New Jersey DOBI'
+      : hub.stateCode === 'FL'
+        ? 'Florida DFS'
+        : 'state insurance department';
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -229,7 +232,9 @@ export function HubPageView({
             <Shield className="h-4 w-4" />
             {isTexasHub
               ? 'Independent research · Re-check Texas TDI licenses'
-              : 'Independent research · Re-check state licenses'}
+              : isNewJerseyHub
+                ? 'Independent research · Re-check New Jersey DOBI licenses'
+                : 'Independent research · Re-check state licenses'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
             Research insurance agencies in {hub.shortName}
@@ -237,7 +242,9 @@ export function HubPageView({
           <p className="mt-2 text-lg text-primary-foreground/80">
             {isTexasHub
               ? `Verified Texas TDI agency research listings for ${hub.localDescriptor}`
-              : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
+              : isNewJerseyHub
+                ? `Verified New Jersey DOBI agency research listings for ${hub.localDescriptor}`
+                : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
             {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
@@ -380,7 +387,7 @@ export function HubPageView({
                       <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                         Independent research only — re-check {regulatorLabel} before you enroll.
                         Counts are verified listings only (no seed inventory)
-                        {isTexasHub
+                        {isTexasHub || isNewJerseyHub
                           ? '. Agency/business entities only; not a bulk individual agent list.'
                           : '.'}
                       </p>
@@ -392,7 +399,9 @@ export function HubPageView({
                         note={
                           isTexasHub
                             ? 'Specialty tags come from Texas TDI license types / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from TDI alone.'
-                            : undefined
+                            : isNewJerseyHub
+                              ? 'Specialty tags come from New Jersey DOBI organization lines / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from DOBI alone.'
+                              : undefined
                         }
                       />
                     ) : null}

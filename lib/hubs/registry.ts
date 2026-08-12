@@ -2,6 +2,82 @@ import type { InsuranceHub } from '@/types/agent';
 
 /** 50+ priority MSA/city hubs — health insurance emphasis in every market */
 export const INSURANCE_HUBS: InsuranceHub[] = [
+  /** Phase 9 — New Jersey regional agency research hubs (aligned with ACA guides) */
+  {
+    slug: 'north-new-jersey',
+    stateSlug: 'new-jersey',
+    stateCode: 'NJ',
+    stateName: 'New Jersey',
+    msaName: 'North Jersey',
+    shortName: 'North Jersey',
+    population: 4_200_000,
+    enrollmentHighlight: 'Dense multi-county market with NYC-adjacent commuting patterns',
+    localDescriptor: 'Bergen, Essex, Hudson, Passaic, Morris, and Union area residents',
+    priority: 12,
+    zipCodes: ['07030', '07302', '07102', '07094', '07666', '07960'],
+    healthInsuranceDensity: 'very-high',
+    marketSnapshot:
+      'North Jersey is one of the densest insurance research markets in the Northeast. Verified agency inventory (when promoted) is sourced from New Jersey DOBI organization license data — agencies and business entities only, not a bulk individual agent dump.',
+    healthNeeds: [
+      'HealthCare.gov individual marketplace',
+      'Employer group transitions',
+      'Medicare research (not inferred from DOBI alone)',
+      'Multi-line agency shopping',
+    ],
+    metaTitle: 'Insurance Agencies in North Jersey (2026) | NJ DOBI Research',
+    metaDescription:
+      'Research verified insurance agencies in North Jersey. Listings appear only when they meet our public research standard — New Jersey DOBI organization licenses, no seed inventory.',
+  },
+  {
+    slug: 'central-new-jersey',
+    stateSlug: 'new-jersey',
+    stateCode: 'NJ',
+    stateName: 'New Jersey',
+    msaName: 'Central Jersey',
+    shortName: 'Central Jersey',
+    population: 2_800_000,
+    enrollmentHighlight: 'Shore, Route 1 corridor, and capital-region coverage transitions',
+    localDescriptor: 'Middlesex, Mercer, Monmouth, Ocean, and Somerset area residents',
+    priority: 13,
+    zipCodes: ['08901', '08816', '08608', '08540', '07701', '08701'],
+    healthInsuranceDensity: 'high',
+    marketSnapshot:
+      'Central Jersey is how many residents describe the middle of the state. Verified agency research listings (when promoted) use New Jersey DOBI organization data with Wave-1 region matching — not invented inventory.',
+    healthNeeds: [
+      'HealthCare.gov ZIP landscape research',
+      'Shore and suburban networks',
+      'Small business and professional group plans',
+      'Medicare education pathways',
+    ],
+    metaTitle: 'Insurance Agencies in Central Jersey (2026) | NJ DOBI Research',
+    metaDescription:
+      'Research verified insurance agencies in Central Jersey. Independent research listings from New Jersey DOBI organization licenses when promoted — re-check DOBI before you enroll.',
+  },
+  {
+    slug: 'south-new-jersey',
+    stateSlug: 'new-jersey',
+    stateCode: 'NJ',
+    stateName: 'New Jersey',
+    msaName: 'South Jersey',
+    shortName: 'South Jersey',
+    population: 1_900_000,
+    enrollmentHighlight: 'Shore, suburban, and Philly-adjacent ZIP research patterns',
+    localDescriptor: 'Camden, Burlington, Gloucester, Atlantic, Cape May, Cumberland, and Salem area residents',
+    priority: 14,
+    zipCodes: ['08002', '08054', '08096', '08401', '08204', '08360'],
+    healthInsuranceDensity: 'high',
+    marketSnapshot:
+      'South Jersey shoppers often compare shore, suburban, and Philly-adjacent ZIPs. Verified agency inventory (when promoted) is scoped from New Jersey DOBI organization license data — Marketplace enrollment still keys off NJ residence.',
+    healthNeeds: [
+      'HealthCare.gov individual marketplace',
+      'Shore community networks',
+      'Philly-adjacent care patterns (confirm officially)',
+      'Multi-line agency research',
+    ],
+    metaTitle: 'Insurance Agencies in South Jersey (2026) | NJ DOBI Research',
+    metaDescription:
+      'Research verified insurance agencies in South Jersey. Listings appear only when they meet our public research standard from New Jersey DOBI organization data.',
+  },
   {
     slug: 'nyc-newark-jersey-city',
     stateSlug: 'new-york',

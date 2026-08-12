@@ -33,6 +33,10 @@ import {
   isTxLaunchHub,
   launchMarketsForHubSlug,
 } from '@/lib/tdi/launch-markets';
+import {
+  isNjLaunchHub,
+  launchRegionsForHubSlug,
+} from '@/lib/nj/launch-regions';
 
 export { countyMatchOrParts };
 
@@ -219,6 +223,81 @@ async function getTxHubInventory(
   }
 }
 
+async function getNjHubInventory(
+  hubSlug: string,
+  pageSize: number,
+  page: number
+): Promise<HubInventoryResult> {
+  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  const regions = launchRegionsForHubSlug(hubSlug);
+  if (!regions.length) return emptyInventory(hubSlug, pageSize, page);
+
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+
+    const regionIds = regions.map((r) => r.id);
+    const orParts = regionIds
+      .map((id) => `contact->>launch_market_id.eq.${id}`)
+      .concat(regionIds.map((id) => `contact->>launch_county_id.eq.${id}`));
+    const or = orParts.join(',');
+
+    const { count, error: cErr } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['NJ'])
+      .or(or);
+
+    const total = cErr ? 0 : count ?? 0;
+    const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
+    const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+    const from = (safePage - 1) * pageSize;
+    const overFetch = Math.min(pageSize + 40, 200);
+    const to = from + overFetch - 1;
+
+    const { data, error } = await supabase
+      .from('providers')
+      .select('*')
+      .eq('verified', true)
+      .contains('states_licensed', ['NJ'])
+      .or(or)
+      .order('name', { ascending: true })
+      .range(from, to);
+
+    if (error || !data?.length) {
+      return {
+        ...emptyInventory(hubSlug, pageSize, safePage),
+        total,
+        totalPages,
+      };
+    }
+
+    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
+    const verified = filterVerifiedProviders(mapped)
+      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
+      .filter((p) => p.state?.toUpperCase() === 'NJ');
+
+    const providers = verified.slice(0, pageSize);
+    const safeTotal = Math.max(total, from + providers.length);
+
+    return {
+      providers,
+      total: safeTotal,
+      showing: providers.length,
+      pageSize,
+      page: safePage,
+      totalPages: Math.max(
+        totalPages,
+        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
+      ),
+      hubSlug,
+    };
+  } catch {
+    return emptyInventory(hubSlug, pageSize, page);
+  }
+}
+
 /**
  * Full hub inventory: total (exact) + one page of verified cards.
  */
@@ -231,6 +310,9 @@ export async function getHubInventory(
 
   if (isTxLaunchHub(hubSlug)) {
     return getTxHubInventory(hubSlug, pageSize, page);
+  }
+  if (isNjLaunchHub(hubSlug)) {
+    return getNjHubInventory(hubSlug, pageSize, page);
   }
 
   if (!isFlLaunchHub(hubSlug) || !isSupabaseConfigured()) {
@@ -314,6 +396,10 @@ export async function countVerifiedProvidersForHub(
 ): Promise<number> {
   if (isTxLaunchHub(hubSlug)) {
     const inv = await getTxHubInventory(hubSlug, 1, 1);
+    return inv.total;
+  }
+  if (isNjLaunchHub(hubSlug)) {
+    const inv = await getNjHubInventory(hubSlug, 1, 1);
     return inv.total;
   }
   if (!isFlLaunchHub(hubSlug)) return 0;
@@ -428,6 +514,63 @@ export async function countVerifiedTexasProviders(): Promise<number> {
   } catch {
     return 0;
   }
+}
+
+/** Total verified NJ providers (directory honesty). */
+export async function countVerifiedNewJerseyProviders(): Promise<number> {
+  if (!isSupabaseConfigured()) return 0;
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return 0;
+    const { count, error } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['NJ']);
+    if (error) return 0;
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Live totals for New Jersey Wave-1 hub nav (directory). */
+export async function getNjLaunchRegionLiveTotals(): Promise<LaunchNavLiveRow[]> {
+  const hubs: Array<{
+    key: string;
+    displayName: string;
+    hubSlug: string;
+    hubHref: string;
+    kind: 'county' | 'aggregate';
+  }> = [
+    {
+      key: 'north-new-jersey',
+      displayName: 'North Jersey',
+      hubSlug: 'north-new-jersey',
+      hubHref: '/hubs/new-jersey/north-new-jersey',
+      kind: 'county',
+    },
+    {
+      key: 'central-new-jersey',
+      displayName: 'Central Jersey',
+      hubSlug: 'central-new-jersey',
+      hubHref: '/hubs/new-jersey/central-new-jersey',
+      kind: 'county',
+    },
+    {
+      key: 'south-new-jersey',
+      displayName: 'South Jersey',
+      hubSlug: 'south-new-jersey',
+      hubHref: '/hubs/new-jersey/south-new-jersey',
+      kind: 'county',
+    },
+  ];
+  const out: LaunchNavLiveRow[] = [];
+  for (const h of hubs) {
+    const total = await countVerifiedProvidersForHub(h.hubSlug);
+    out.push({ ...h, total });
+  }
+  return out;
 }
 
 /** Live totals for Texas Wave-1 hub nav (directory). */
