@@ -30,7 +30,7 @@ data/dfs-raw/
 |------|----------|---------|
 | All Valid Licenses – Business | `business` | Agencies / business entities |
 | All Valid Licenses – Individual | `individual` | Individual producers |
-| Active Appointments (optional) | — | Carrier appointments (later enrichment) |
+| Active Appointments – Business | appointment | Phase 6A carrier appointment enrichment |
 
 ## Launch / promote counties
 
@@ -154,7 +154,8 @@ npm run check:phase4-dfs
 |------|--------|
 | Yes | name, license number, LOAs, city/county, phone (if DFS), verified badge/source/date |
 | Store, don’t feature | email |
-| Later enrichment | website, Google, appointments, CMS Medicare |
+| Phase 6A appointments | `docs/PHASE-6A-APPOINTMENTS.md` · `npm run dfs:import-appointments` · `npm run dfs:attach-appointments` |
+| Later enrichment | website, Google, CMS Medicare |
 
 ## Consumer wiring
 

@@ -29,6 +29,7 @@ export function mapRowToProvider(row: DbProvider): Provider {
     state: address?.state ?? row.states_licensed[0] ?? '',
     county: contact.county ?? null,
     county_normalized: contact.county_normalized ?? null,
+    appointment_snapshot: contact.appointment_snapshot ?? null,
     zip: address?.zip ?? null,
     phone: contact.phone ?? null,
     website: contact.website ?? null,

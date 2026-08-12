@@ -4,7 +4,7 @@ Place official CSV exports here (not committed):
 
 - `AllValidLicensesBusiness.csv`
 - `AllValidLicensesIndividual.csv`
-- Optional appointment files
+- AllActiveAppointmentsBusiness.csv (Phase 6A — do not commit; ~20MB)
 
 Download: https://licenseesearch.fldfs.com/BulkDownload
 

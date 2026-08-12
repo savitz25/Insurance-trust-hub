@@ -57,6 +57,11 @@ export interface ContactInfo {
   launch_county_id?: string;
   /** Phase 6B2 — Google/BBB snapshots nested under contact jsonb */
   enrichment?: import('@/lib/enrichment/types').ProviderEnrichment;
+  /**
+   * Phase 6A — Florida DFS appointment regulatory snapshot (denormalized for public read).
+   * Not an endorsement; never used for ranking.
+   */
+  appointment_snapshot?: import('@/lib/dfs/appointments').ProviderAppointmentSnapshot;
 }
 
 export type Database = {

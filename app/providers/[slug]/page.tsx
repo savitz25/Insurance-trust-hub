@@ -43,6 +43,7 @@ import {
 import { toPublicSecondarySignals } from '@/lib/enrichment/public-secondary';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { ProviderSecondarySignals } from '@/components/provider-secondary-signals';
+import { ProviderAppointmentSnapshotSection } from '@/components/provider-appointment-snapshot';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -298,6 +299,13 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 </CardContent>
               </Card>
             </section>
+
+            {provider.appointment_snapshot &&
+            provider.appointment_snapshot.totalCount > 0 ? (
+              <ProviderAppointmentSnapshotSection
+                snapshot={provider.appointment_snapshot}
+              />
+            ) : null}
 
             <section>
               <h2 className="text-xl font-semibold mb-3">Where they&apos;re located</h2>

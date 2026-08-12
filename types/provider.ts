@@ -41,6 +41,11 @@ export interface Provider {
   carriers?: string[];
   /** Phase 6B2 secondary snapshots (Google/BBB) — never license authority */
   enrichment?: ProviderEnrichment | null;
+  /**
+   * Phase 6A — DFS appointment regulatory snapshot when attached.
+   * Display only; never a quality rank or Medicare claim.
+   */
+  appointment_snapshot?: import('@/lib/dfs/appointments').ProviderAppointmentSnapshot | null;
   created_at?: string;
   updated_at?: string;
 }

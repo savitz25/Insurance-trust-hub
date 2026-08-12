@@ -29,8 +29,11 @@
     "dfs:promote": "tsx scripts/dfs/promote-launch-counties.ts",
     "dfs:status": "tsx scripts/dfs/inventory-status.ts",
     "dfs:backfill-county": "tsx scripts/dfs/backfill-provider-county.ts",
+    "dfs:import-appointments": "tsx scripts/dfs/import-appointments.ts",
+    "dfs:attach-appointments": "tsx scripts/dfs/attach-appointments.ts",
     "dfs:env": "tsx scripts/dfs/check-env.ts",
     "check:phase5-agency": "tsx scripts/check-phase5-agency.ts",
+    "check:phase6a-appointments": "tsx scripts/check-phase6a-appointments.ts",
     "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"
