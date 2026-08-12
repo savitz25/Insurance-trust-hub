@@ -71,6 +71,70 @@ npm run dfs:enrich-places-sfl -- --include-enriched --limit 25 --dry-run
 
 Logs: `scripts/output/places-sfl-pilot-*.json` (accepted/rejected samples + stats).
 
+## Auto-batch loop (quality-gated)
+
+Walks the full eligible SFL pool in sequential batches and **stops** if quality collapses.
+
+```powershell
+# Dry-run 3 small batches (no writes)
+npm run dfs:enrich-places-loop -- --dry-run --batch-size 25 --max-batches 3
+
+# Live full SFL pass (default gates)
+npm run dfs:enrich-places-loop -- --confirm --batch-size 100 --delay-ms 300
+
+# Resume after stop / interrupt
+npm run dfs:enrich-places-loop -- --confirm --start-offset 250 --batch-size 100 --delay-ms 300
+# or
+npm run dfs:enrich-places-loop -- --confirm --resume
+npm run dfs:enrich-places-loop -- --confirm --resume-from-log scripts/output/places-loop-progress.json
+```
+
+### Default quality gates
+
+| Gate | Default | Stop when |
+|------|---------|-----------|
+| `min-match-rate` | **0.15** | batch match rate &lt; 15% |
+| `max-error-rate` | **0.05** | batch error rate &gt; 5% |
+| `max-ambiguous-rate` | **0.10** | batch ambiguous rate &gt; 10% |
+| auth failures | — | any 401/403/INVALID_KEY-style errors |
+
+Optional: `--fail-on-empty-batch`, `--max-batches=N`, `--county=broward`.
+
+### Progress files
+
+| File | Role |
+|------|------|
+| `scripts/output/places-loop-progress.json` | Live progress: `nextOffset`, cumulative totals, per-batch summaries, `stopReason` |
+| `scripts/output/places-loop-YYYYMMDD-….json` | Full run log with batch detail |
+
+Progress shape (simplified):
+
+```json
+{
+  "scope": "south_florida",
+  "batchSize": 100,
+  "lastCompletedOffset": 100,
+  "nextOffset": 200,
+  "batchesCompleted": 2,
+  "cumulative": { "processed": 200, "matched": 60, "written": 60 },
+  "perBatch": [{ "offset": 0, "matchRate": 0.32, "errorRate": 0 }],
+  "status": "running|completed|stopped",
+  "stopReason": null
+}
+```
+
+### Interpreting stop reasons
+
+| `stopReason` | Meaning |
+|--------------|---------|
+| `match_rate_breach: …` | Batch accept rate too low — inspect names / API / data quality |
+| `error_rate_breach: …` | Write or API errors spike |
+| `auth_failure: …` | Fix `GOOGLE_PLACES_API_KEY` before resuming |
+| `max_batches_reached` | Intentional cap |
+| `pool_exhausted` | No more eligible rows (success end mid-empty) |
+
+Soft warnings (non-blocking): matched legal names lacking insurance/title/agency keywords — listed for 6C-2 false-positive tuning.
+
 ## Inspect quality
 
 1. Open log file → `acceptedSample` / `rejectedSample`  
@@ -99,4 +163,6 @@ Logs: `scripts/output/places-sfl-pilot-*.json` (accepted/rejected samples + stat
 | `lib/enrichment/google-places.ts` | Places API client |
 | `lib/enrichment/match.ts` | Strict identity scoring |
 | `lib/enrichment/places-pilot.ts` | SFL selection + contact merge |
-| `scripts/dfs/enrich-places-south-florida.ts` | Ops pilot runner |
+| `scripts/dfs/enrich-places-south-florida.ts` | Single-batch pilot runner |
+| `scripts/dfs/enrich-places-loop.ts` | Auto-batch loop + quality gates |
+| `scripts/dfs/lib/places-batch-core.ts` | Shared batch execution |

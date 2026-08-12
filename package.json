@@ -33,6 +33,7 @@
     "dfs:attach-appointments": "tsx scripts/dfs/attach-appointments.ts",
     "dfs:ensure-appointments-schema": "tsx scripts/dfs/ensure-appointments-schema.ts",
     "dfs:enrich-places-sfl": "tsx scripts/dfs/enrich-places-south-florida.ts",
+    "dfs:enrich-places-loop": "tsx scripts/dfs/enrich-places-loop.ts",
     "dfs:env": "tsx scripts/dfs/check-env.ts",
     "check:phase6c-places": "tsx scripts/check-phase6c-places.ts",
     "check:phase5-agency": "tsx scripts/check-phase5-agency.ts",

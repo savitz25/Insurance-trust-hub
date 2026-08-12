@@ -19,6 +19,8 @@ function must(rel: string) {
 must('lib/enrichment/google-places.ts');
 must('lib/enrichment/places-pilot.ts');
 must('scripts/dfs/enrich-places-south-florida.ts');
+must('scripts/dfs/enrich-places-loop.ts');
+must('scripts/dfs/lib/places-batch-core.ts');
 must('docs/PHASE-6C-PLACES-ENRICHMENT.md');
 
 const places = read('lib/enrichment/google-places.ts');
@@ -43,6 +45,17 @@ if (!/--confirm/.test(script) && !/confirm/.test(script)) {
 }
 if (!/dry-run|dryRun/.test(script)) {
   errors.push('pilot script must support dry-run');
+}
+
+const loop = read('scripts/dfs/enrich-places-loop.ts');
+if (!/min-match-rate|minMatchRate/.test(loop)) {
+  errors.push('loop must enforce min-match-rate gate');
+}
+if (!/places-loop-progress/.test(loop)) {
+  errors.push('loop must write progress file');
+}
+if (!/start-offset|nextOffset/.test(loop)) {
+  errors.push('loop must support resume via offset');
 }
 
 const sec = read('components/provider-secondary-signals.tsx');
