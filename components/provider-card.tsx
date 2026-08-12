@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MapPin, Phone, FileBadge } from 'lucide-react';
+import { MapPin, Phone, FileBadge, Globe, Building2 } from 'lucide-react';
 import type { Provider } from '@/types/provider';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -12,6 +12,7 @@ import {
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
+import { extractDbaFromName } from '@/lib/dfs/agency-display';
 import { cn } from '@/lib/utils';
 
 interface ProviderCardProps {
@@ -20,16 +21,17 @@ interface ProviderCardProps {
 }
 
 /**
- * Phase 5 agency research card — name, license, LOA tags, city/county,
- * phone if present, verified badge + source. Never feature email.
+ * Phase 5/7 agency research card — name, license, LOA tags, city/county,
+ * phone if present, verified badge. Website/rating secondary only.
+ * Never feature email. Never rank by Google rating or appointments.
  */
 export function ProviderCard({ provider, className }: ProviderCardProps) {
-  // Phase 1: only verified TrustState may render on consumer surfaces
   if (!canShowAsVerified(resolveProviderTrustState(provider))) {
     return null;
   }
   const view = toPublicProviderView(provider);
   const loaTags = loaSpecialtyTags(provider.specialties);
+  const { dba } = extractDbaFromName(provider.name);
   const locationLine = [
     provider.city,
     provider.county ? `${provider.county} County` : null,
@@ -37,6 +39,9 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
   ]
     .filter(Boolean)
     .join(', ');
+  const hasAppts =
+    Boolean(provider.appointment_snapshot?.totalCount) &&
+    (provider.appointment_snapshot?.totalCount ?? 0) > 0;
 
   return (
     <Card className={cn('provider-card flex flex-col h-full', className)}>
@@ -51,6 +56,12 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
                 {provider.name}
               </Link>
             </CardTitle>
+            {dba ? (
+              <p className="mt-1 text-xs text-muted-foreground">
+                Also known as / DBA:{' '}
+                <span className="font-medium text-foreground/90">{dba}</span>
+              </p>
+            ) : null}
             <p className="mt-1.5 flex items-center gap-1 text-sm text-muted-foreground">
               <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {locationLine}
@@ -95,6 +106,14 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
           </div>
         ) : null}
 
+        {hasAppts ? (
+          <p className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+            <Building2 className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            DFS appointment snapshot on profile
+            <span className="opacity-70">(regulatory, not a rank)</span>
+          </p>
+        ) : null}
+
         {view.phone ? (
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -107,16 +126,31 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
           </p>
         ) : null}
 
+        {provider.website?.trim() ? (
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Globe className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            <a
+              href={provider.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary hover:underline truncate"
+            >
+              Website on file
+            </a>
+            <span className="opacity-70">· secondary signal</span>
+          </p>
+        ) : null}
+
         {view.showReviews && view.rating != null ? (
-          <>
-            <StarRating rating={view.rating} size="sm" />
-            <p className="text-xs text-muted-foreground">
-              {view.reviewCount} review{view.reviewCount !== 1 ? 's' : ''}
-              {view.yearsInBusiness
-                ? ` · ${view.yearsInBusiness} years in business`
-                : ''}
+          <div className="pt-0.5 border-t border-border/50">
+            <p className="text-[10px] uppercase tracking-wide text-muted-foreground mb-1">
+              Third-party public rating
             </p>
-          </>
+            <StarRating rating={view.rating} size="sm" />
+            <p className="text-[11px] text-muted-foreground mt-0.5">
+              {view.reviewCount} review{view.reviewCount !== 1 ? 's' : ''} · not an ITH ranking
+            </p>
+          </div>
         ) : (
           <p className="text-xs text-muted-foreground">
             Research listing — re-check license status on official tools before you enroll.

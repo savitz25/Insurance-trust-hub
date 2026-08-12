@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { HubLoaFilterId } from '@/components/hub-specialty-filter';
 
 type HubInventoryPaginationProps = {
   /** Path without query, e.g. /hubs/florida/jacksonville */
@@ -9,16 +10,26 @@ type HubInventoryPaginationProps = {
   totalPages: number;
   total: number;
   pageSize: number;
+  /** Preserve specialty filter across pages */
+  loaFilter?: HubLoaFilterId;
   className?: string;
 };
 
-function pageHref(basePath: string, page: number): string {
-  if (page <= 1) return basePath;
-  return `${basePath}?page=${page}`;
+function pageHref(
+  basePath: string,
+  page: number,
+  loaFilter?: HubLoaFilterId
+): string {
+  const params = new URLSearchParams();
+  if (loaFilter && loaFilter !== 'all') params.set('loa', loaFilter);
+  if (page > 1) params.set('page', String(page));
+  const q = params.toString();
+  return q ? `${basePath}?${q}` : basePath;
 }
 
 /**
  * Explicit hub listing pagination — never silent-caps the market total.
+ * Preserves ?loa= specialty filter.
  */
 export function HubInventoryPagination({
   basePath,
@@ -26,6 +37,7 @@ export function HubInventoryPagination({
   totalPages,
   total,
   pageSize,
+  loaFilter = 'all',
   className,
 }: HubInventoryPaginationProps) {
   if (totalPages <= 1 || total <= pageSize) return null;
@@ -54,7 +66,7 @@ export function HubInventoryPagination({
       <div className="flex flex-wrap items-center gap-2">
         {prev != null ? (
           <Link
-            href={pageHref(basePath, prev)}
+            href={pageHref(basePath, prev, loaFilter)}
             className="inline-flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted"
             rel="prev"
           >
@@ -69,7 +81,7 @@ export function HubInventoryPagination({
         )}
         {next != null ? (
           <Link
-            href={pageHref(basePath, next)}
+            href={pageHref(basePath, next, loaFilter)}
             className="inline-flex items-center gap-1 rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10"
             rel="next"
           >

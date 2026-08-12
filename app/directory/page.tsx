@@ -20,6 +20,7 @@ import {
   countVerifiedFloridaProviders,
   getLaunchCountyLiveTotals,
 } from '@/lib/dfs/providers-by-county';
+import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -144,13 +145,18 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
       </div>
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="lg:sticky lg:top-24 lg:self-start space-y-4">
           <Suspense fallback={<div className="skeleton h-96 rounded-xl" />}>
             <SearchFilters />
           </Suspense>
         </aside>
 
         <div>
+          <DirectorySpecialtyChips
+            activeSpecialty={specialty}
+            activeState={state}
+            className="mb-6 rounded-xl border bg-card p-4"
+          />
           <Suspense fallback={null}>
             <DirectoryControls total={total} className="mb-6" />
           </Suspense>

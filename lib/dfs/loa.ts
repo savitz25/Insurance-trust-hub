@@ -14,6 +14,8 @@ export type LoaCapability =
   | 'personal_lines'
   | 'variable'
   | 'agency'
+  | 'title'
+  | 'public_adjuster'
   | 'other';
 
 const HEALTH_PATTERNS = [/health/i, /\bh\s*&\s*l\b/i, /accident/i, /disability/i];
@@ -29,10 +31,14 @@ const PC_PATTERNS = [
 const PERSONAL_PATTERNS = [/personal lines/i, /\bauto\b/i, /homeowners/i, /residential/i];
 const VARIABLE_PATTERNS = [/variable/i];
 const AGENCY_PATTERNS = [/\bagency\b/i, /agency customer/i, /customer representative/i];
+const TITLE_PATTERNS = [/\btitle\b/i, /escrow/i];
+const ADJUSTER_PATTERNS = [/public\s*adjust/i, /\badjuster\b/i, /adjusting/i];
 
 export function classifyLoa(raw: string): LoaCapability {
   const s = raw.trim();
   if (!s) return 'other';
+  if (TITLE_PATTERNS.some((p) => p.test(s))) return 'title';
+  if (ADJUSTER_PATTERNS.some((p) => p.test(s))) return 'public_adjuster';
   if (AGENCY_PATTERNS.some((p) => p.test(s))) return 'agency';
   if (HEALTH_PATTERNS.some((p) => p.test(s))) return 'health';
   if (LIFE_PATTERNS.some((p) => p.test(s))) return 'life';
@@ -84,6 +90,8 @@ export function capabilitiesToSpecialties(
   if (caps.includes('life')) out.push('Life');
   if (caps.includes('property_casualty')) out.push('Property & Casualty');
   if (caps.includes('personal_lines')) out.push('Personal Lines');
+  if (caps.includes('title')) out.push('Title');
+  if (caps.includes('public_adjuster')) out.push('Public Adjuster');
   // de-dupe while preserving order
   return Array.from(new Set(out));
 }
@@ -96,6 +104,8 @@ export const LOA_TAG_ORDER: Specialty[] = [
   'Life',
   'Property & Casualty',
   'Personal Lines',
+  'Title',
+  'Public Adjuster',
 ];
 
 /**
@@ -109,6 +119,8 @@ export const LOA_CAPABILITY_TAGS = new Set<string>([
   'Life',
   'Property & Casualty',
   'Personal Lines',
+  'Title',
+  'Public Adjuster',
 ]);
 
 export function loaSpecialtyTags(specialties: string[] | null | undefined): string[] {

@@ -52,6 +52,12 @@ import { cn } from '@/lib/utils';
 import type { Provider } from '@/types/provider';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
+import {
+  extractDbaFromName,
+  loaPlainLanguageForTags,
+  localHubPathForProvider,
+  agencyCapabilitySummary,
+} from '@/lib/dfs/agency-display';
 
 interface ProviderPageProps {
   params: Promise<{ slug: string }>;
@@ -112,6 +118,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   if (!canShowAsVerified(resolveProviderTrustState(provider))) notFound();
   const specialties = Array.isArray(provider.specialties) ? provider.specialties : [];
   const loaTags = loaSpecialtyTags(specialties);
+  const loaBlurbs = loaPlainLanguageForTags(loaTags);
+  const { legalName, dba } = extractDbaFromName(provider.name);
+  const localHub = localHubPathForProvider(provider);
   const insuranceTypes = Array.isArray(provider.insurance_types)
     ? provider.insurance_types
     : [];
@@ -121,6 +130,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     provider.state,
     provider.zip,
   ].filter(Boolean);
+  const hasHighConfidenceWebsite = Boolean(
+    provider.website?.trim() &&
+      provider.enrichment?.google?.matchConfidence === 'high'
+  );
 
   let secondarySignals = null;
   try {
@@ -198,29 +211,36 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   {provider.city}, {provider.state}
                 </Badge>
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{provider.name}</h1>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+                {dba ? legalName : provider.name}
+              </h1>
+              {dba ? (
+                <p className="mt-2 text-base text-muted-foreground">
+                  Doing business as{' '}
+                  <span className="font-semibold text-foreground">{dba}</span>
+                </p>
+              ) : null}
+              <p className="mt-2 text-sm text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1">
+                <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                {locationParts.join(' · ')}
+                <span className="text-muted-foreground/80">· Florida agency research profile</span>
+              </p>
+              {loaTags.length > 0 ? (
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {loaTags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="font-medium">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              ) : null}
               {provider.short_description && (
-                <p className="mt-3 text-lg text-muted-foreground leading-relaxed">
+                <p className="mt-3 text-base text-muted-foreground leading-relaxed">
                   {provider.short_description}
                 </p>
               )}
-              <div className="mt-4 flex flex-wrap items-center gap-4">
-                {publicView.showReviews && publicView.rating != null ? (
-                  <>
-                    <StarRating rating={publicView.rating} size="lg" />
-                    <span className="text-sm text-muted-foreground">
-                      {publicView.reviewCount} review
-                      {publicView.reviewCount !== 1 ? 's' : ''}
-                    </span>
-                  </>
-                ) : (
-                  <span className="text-sm text-muted-foreground">
-                    No independently verified review summary available
-                  </span>
-                )}
-              </div>
               <p className="mt-2 text-xs text-muted-foreground max-w-xl">
-                {publicView.verification.summary}
+                {publicView.verification.summary} Research dossier — not an endorsement or ranking.
               </p>
             </div>
 
@@ -250,7 +270,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 </Button>
               )}
               {provider.website && (
-                <Button asChild className="gap-2">
+                <Button asChild className="gap-2" variant={hasHighConfidenceWebsite ? 'default' : 'outline'}>
                   <a href={provider.website} target="_blank" rel="noopener noreferrer">
                     <Globe className="h-4 w-4" /> Visit website
                     <ExternalLink className="h-3.5 w-3.5" />
@@ -265,6 +285,30 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
       <div className="container mx-auto px-4 py-10 md:py-14">
         <div className="grid lg:grid-cols-[1fr_360px] gap-10">
           <div className="space-y-10">
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Who they are</h2>
+              <Card>
+                <CardContent className="pt-6 space-y-3 text-sm">
+                  <p>
+                    <span className="font-medium">Legal / listed name:</span>{' '}
+                    {dba ? legalName : provider.name}
+                  </p>
+                  {dba ? (
+                    <p>
+                      <span className="font-medium">DBA:</span> {dba}
+                    </p>
+                  ) : null}
+                  <p>
+                    <span className="font-medium">Location:</span> {locationParts.join(', ')}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {agencyCapabilitySummary(provider)} Florida DFS is the license source of truth
+                    for this research listing.
+                  </p>
+                </CardContent>
+              </Card>
+            </section>
+
             <section>
               <h2 className="text-xl font-semibold mb-3">What they&apos;re licensed for</h2>
               <Card>
@@ -286,10 +330,23 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       ))}
                     </div>
                   )}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Capability tags come from Florida DFS lines of authority on the public license
-                    record. We never infer Medicare-certified status or invent carrier appointments
-                    from DFS alone.
+                  {loaBlurbs.length > 0 ? (
+                    <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
+                      {loaBlurbs.map(({ tag, blurb }) => (
+                        <li key={tag}>
+                          <span className="font-medium text-foreground">{tag}:</span> {blurb}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Capability tags come from Florida DFS lines of authority on the public license
+                      record when available.
+                    </p>
+                  )}
+                  <p className="text-sm text-muted-foreground leading-relaxed border-t pt-4">
+                    We never invent Medicare-certified status from DFS alone, never invent websites,
+                    and never treat carrier appointments as quality rankings.
                   </p>
                   {provider.description ? (
                     <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line border-t pt-4">
@@ -390,10 +447,28 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">Research next steps</h2>
+              <h2 className="text-xl font-semibold mb-3">How to research further</h2>
               <Card>
                 <CardContent className="pt-6">
                   <ul className="space-y-2 text-sm text-muted-foreground">
+                    {publicView.phone ? (
+                      <li>
+                        Call the listed phone number and re-confirm identity against the DFS license
+                        number before sharing personal data.
+                      </li>
+                    ) : null}
+                    {provider.website ? (
+                      <li>
+                        Visit the website on file (secondary public signal — not part of DFS
+                        verification).
+                      </li>
+                    ) : null}
+                    {provider.appointment_snapshot?.totalCount ? (
+                      <li>
+                        Review the appointment regulatory snapshot above, then re-check carriers on
+                        Florida DFS.
+                      </li>
+                    ) : null}
                     <li>
                       <Link href="/tools/license-verification" className="text-primary hover:underline">
                         License verification tool
@@ -406,11 +481,28 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       </Link>{' '}
                       — how Insurance Trust Hub verifies listings
                     </li>
+                    {localHub ? (
+                      <li>
+                        <Link href={localHub.href} className="text-primary hover:underline">
+                          {localHub.label}
+                        </Link>{' '}
+                        — more verified agencies in this market
+                      </li>
+                    ) : null}
                     <li>
                       <Link href="/tools" className="text-primary hover:underline">
                         Research tools
                       </Link>{' '}
                       — marketplace landscape, needs assessment, cost planners
+                    </li>
+                    <li>
+                      <Link
+                        href={`/directory?state=${provider.state}&verified=true`}
+                        className="text-primary hover:underline"
+                      >
+                        Agency directory
+                      </Link>{' '}
+                      — filter by specialty / state
                     </li>
                   </ul>
                 </CardContent>

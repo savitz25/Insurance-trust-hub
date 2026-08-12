@@ -351,25 +351,37 @@ export function HubPageView({
                 ) : null}
                 {dbProviders.length > 0 || verifiedCount > 0 ? (
                   <>
-                    {isCapped ? (
-                      <p className="mb-4 text-sm text-muted-foreground">
-                        Showing {showingCount.toLocaleString()} of{' '}
-                        {verifiedCount.toLocaleString()} verified research agencies
-                        {pageSize ? ` (${pageSize} per page)` : ''}.
-                      </p>
-                    ) : verifiedCount > 0 ? (
-                      <p className="mb-4 text-sm text-muted-foreground">
+                    <div className="mb-4 rounded-xl border bg-card p-4 shadow-sm">
+                      <p className="text-sm font-semibold text-foreground">
                         {verifiedCount.toLocaleString()} verified research agenc
-                        {verifiedCount === 1 ? 'y' : 'ies'} in this market.
+                        {verifiedCount === 1 ? 'y' : 'ies'} in this market
                       </p>
-                    ) : null}
+                      {isCapped ? (
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Showing {showingCount.toLocaleString()} of{' '}
+                          {verifiedCount.toLocaleString()} on this page
+                          {pageSize ? ` (${pageSize} per page)` : ''}
+                          {inventoryTotalPages > 1
+                            ? ` · page ${inventoryPage} of ${inventoryTotalPages}`
+                            : ''}
+                          .
+                        </p>
+                      ) : null}
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                        Independent research only — re-check Florida DFS before you enroll. Counts
+                        are verified listings only (no seed inventory).
+                      </p>
+                    </div>
                     {verifiedCount > 0 ? (
                       <HubSpecialtyFilter basePath={path} active={loaFilter} />
                     ) : null}
-                    {loaFilter !== 'all' && dbProviders.length === 0 ? (
+                    {loaFilter !== 'all' ? (
                       <p className="mb-4 text-sm text-muted-foreground">
-                        No agencies on this page match that specialty filter. Try All specialties
-                        or another page of the inventory.
+                        Specialty filter applied to this page: {showingCount.toLocaleString()} match
+                        {showingCount === 1 ? '' : 'es'}
+                        {dbProviders.length === 0
+                          ? '. Try All specialties or another inventory page.'
+                          : ' on the current page (filter is page-scoped and shareable via ?loa=).'}
                       </p>
                     ) : null}
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -383,6 +395,7 @@ export function HubPageView({
                       totalPages={inventoryTotalPages}
                       total={verifiedCount}
                       pageSize={pageSize}
+                      loaFilter={loaFilter}
                     />
                   </>
                 ) : (
@@ -458,19 +471,29 @@ export function HubPageView({
               </div>
             </div>
             <div className="rounded-xl border p-5 text-sm">
-              <h3 className="font-semibold mb-2">Filter by Coverage</h3>
+              <h3 className="font-semibold mb-2">Specialty filters</h3>
+              <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+                Use LOA chips above the listings, or open the directory with a specialty.
+              </p>
               <div className="flex flex-wrap gap-2">
-                {['Health/Medicare/ACA', 'Auto', 'Home', 'Life', 'Commercial', 'Independent'].map(
-                  (f) => (
-                    <Link
-                      key={f}
-                      href={`/directory?state=${hub.stateCode}&q=${encodeURIComponent(f.split('/')[0])}`}
-                      className="rounded-full border px-2.5 py-1 text-xs hover:bg-primary/5"
-                    >
-                      {f}
-                    </Link>
-                  )
-                )}
+                {(
+                  [
+                    ['Health', 'Health'],
+                    ['Life', 'Life'],
+                    ['Property & Casualty', 'Property & Casualty'],
+                    ['Personal Lines', 'Personal Lines'],
+                    ['Agency', 'Agency'],
+                    ['Title', 'Title'],
+                  ] as const
+                ).map(([label, specialty]) => (
+                  <Link
+                    key={label}
+                    href={`/directory?state=${hub.stateCode}&specialty=${encodeURIComponent(specialty)}&verified=true`}
+                    className="rounded-full border px-2.5 py-1 text-xs hover:bg-primary/5"
+                  >
+                    {label}
+                  </Link>
+                ))}
               </div>
             </div>
           </aside>

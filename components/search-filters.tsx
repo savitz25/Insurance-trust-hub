@@ -119,15 +119,45 @@ export function SearchFilters({ className }: SearchFiltersProps) {
 
         <div>
           <Label htmlFor="filter-specialty" className="text-xs text-muted-foreground mb-1.5 block">
-            Specialty
+            Specialty (DFS LOA tags first)
           </Label>
           <Select id="filter-specialty" name="specialty" defaultValue={specialty}>
             <option value="">All specialties</option>
-            {SPECIALTIES.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
+            <optgroup label="Florida DFS capability tags">
+              {[
+                'Health',
+                'Life',
+                'Property & Casualty',
+                'Personal Lines',
+                'Agency',
+                'Title',
+                'Public Adjuster',
+                'Independent Agency',
+              ].map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="Other research tags">
+              {SPECIALTIES.filter(
+                (s) =>
+                  ![
+                    'Health',
+                    'Life',
+                    'Property & Casualty',
+                    'Personal Lines',
+                    'Agency',
+                    'Title',
+                    'Public Adjuster',
+                    'Independent Agency',
+                  ].includes(s)
+              ).map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </optgroup>
           </Select>
         </div>
 
