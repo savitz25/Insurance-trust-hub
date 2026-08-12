@@ -62,7 +62,11 @@ export const TX_LAUNCH_MARKETS: TxLaunchMarket[] = [
     ],
     zipPrefixes: ['770', '772', '773', '774', '775'],
     hubSlugs: ['houston'],
-    promoteCap: 2500,
+    /**
+     * Phase 8B — raised from 2,500 so hubs are dense but not statewide dumps.
+     * Residual staged agencies stay in tdi_producers; re-promote with skip-existing.
+     */
+    promoteCap: 3500,
   },
   {
     id: 'dallas',
@@ -91,7 +95,8 @@ export const TX_LAUNCH_MARKETS: TxLaunchMarket[] = [
     ],
     zipPrefixes: ['750', '751', '752', '753'],
     hubSlugs: ['dallas-fort-worth'],
-    promoteCap: 2500,
+    /** Phase 8B — raised from 2,500; DFW hub also includes fort_worth market. */
+    promoteCap: 3500,
   },
   {
     id: 'fort_worth',

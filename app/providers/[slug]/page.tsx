@@ -51,12 +51,20 @@ import { cn } from '@/lib/utils';
 import type { Provider } from '@/types/provider';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
+import { TX_TDI_LOOKUP_URL, TX_TDI_REGULATOR } from '@/lib/tdi/launch-markets';
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
   localHubPathForProvider,
   agencyCapabilitySummary,
 } from '@/lib/dfs/agency-display';
+
+function extractNpnFromNotes(notes: string | null | undefined): string | null {
+  if (!notes) return null;
+  const m = notes.match(/\bNPN\s+([0-9A-Za-z-]+)\b/i);
+  if (!m?.[1] || /^n\/?a$/i.test(m[1])) return null;
+  return m[1];
+}
 
 interface ProviderPageProps {
   params: Promise<{ slug: string }>;
@@ -133,6 +141,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     provider.website?.trim() &&
       provider.enrichment?.google?.matchConfidence === 'high'
   );
+  const isTexas = (provider.state || '').toUpperCase() === 'TX';
+  const isFlorida = (provider.state || '').toUpperCase() === 'FL';
+  const npn = extractNpnFromNotes(provider.license_notes);
+  const regulatorName = isTexas
+    ? TX_TDI_REGULATOR
+    : isFlorida
+      ? 'Florida DFS'
+      : publicView.verification.sourceLabel || 'State insurance department';
 
   let secondarySignals = null;
   try {
@@ -302,9 +318,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
                     {agencyCapabilitySummary(provider)}{' '}
-                    {(provider.state || '').toUpperCase() === 'TX'
-                      ? 'Texas TDI is the license source of truth for this research listing.'
-                      : 'Florida DFS is the license source of truth for this research listing.'}
+                    {isTexas
+                      ? 'Texas Department of Insurance (TDI) is the license source of truth for this research listing.'
+                      : isFlorida
+                        ? 'Florida DFS is the license source of truth for this research listing.'
+                        : `${regulatorName} is the license source of truth for this research listing.`}
                   </p>
                 </CardContent>
               </Card>
@@ -398,6 +416,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               <h2 className="text-xl font-semibold mb-4">How verification was determined</h2>
               <Card>
                 <CardContent className="pt-6 space-y-3">
+                  <p className="text-sm">
+                    <span className="font-medium">Regulator:</span> {regulatorName}
+                    {isTexas ? ' (TDI)' : null}
+                  </p>
                   {publicView.verification.licenseNumber && (
                     <p className="text-sm">
                       <span className="font-medium">License number:</span>{' '}
@@ -406,6 +428,12 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       </span>
                     </p>
                   )}
+                  {npn ? (
+                    <p className="text-sm">
+                      <span className="font-medium">NPN:</span>{' '}
+                      <span className="tabular-nums">{npn}</span>
+                    </p>
+                  ) : null}
                   {publicView.verification.sourceLabel ? (
                     <p className="text-sm">
                       <span className="font-medium">Source:</span>{' '}
@@ -414,14 +442,17 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   ) : null}
                   {publicView.verification.lastCheckedLabel ? (
                     <p className="text-sm">
-                      <span className="font-medium">Last checked:</span>{' '}
+                      <span className="font-medium">As of / last checked:</span>{' '}
                       {publicView.verification.lastCheckedLabel}
                     </p>
                   ) : null}
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {publicView.verification.summary} Public listings require a re-checkable license
-                    number, Florida DFS as regulator, and Phase 1 verified trust gates. Status can
-                    change — always re-check on official tools before you enroll.
+                    number, {regulatorName} as regulator, and Phase 1 verified trust gates. Status
+                    can change — always re-check on official tools before you enroll.
+                    {isTexas
+                      ? ' Medicare-certified status is never inferred from TDI agency open data alone. Agency/business entities only in this inventory.'
+                      : null}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
@@ -430,7 +461,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     </Button>
-                    {provider.state === 'FL' ? (
+                    {isFlorida ? (
                       <Button asChild variant="ghost" size="sm" className="gap-2">
                         <a href={FL_DFS_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
                           Florida DFS licensee search
@@ -438,13 +469,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         </a>
                       </Button>
                     ) : null}
-                    {provider.state === 'TX' ? (
+                    {isTexas ? (
                       <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a
-                          href="https://www.tdi.texas.gov/agent/index.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <a href={TX_TDI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
                           Texas TDI agent lookup
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
@@ -466,8 +493,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {publicView.phone ? (
                       <li>
-                        Call the listed phone number and re-confirm identity against the DFS license
-                        number before sharing personal data.
+                        Call the listed phone number and re-confirm identity against the{' '}
+                        {isTexas ? 'TDI' : isFlorida ? 'DFS' : 'state'} license number before sharing
+                        personal data.
                       </li>
                     ) : null}
                     {provider.website ? (

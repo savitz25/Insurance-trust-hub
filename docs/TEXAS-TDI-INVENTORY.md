@@ -46,13 +46,22 @@ Logic: `lib/tdi/qualifications.ts` (+ reuses `lib/dfs/loa` specialty surface).
 
 ## Wave 1 launch markets
 
-| Market id | Display | Hub slug(s) | Cap (default) |
-|-----------|---------|-------------|-----------------|
-| `houston` | Houston / Harris | `/hubs/texas/houston` | 2500 |
-| `dallas` | Dallas / Dallas County | `/hubs/texas/dallas-fort-worth` | 2500 |
+| Market id | Display | Hub slug(s) | Cap (Phase 8B) |
+|-----------|---------|-------------|----------------|
+| `houston` | Houston / Harris | `/hubs/texas/houston` | **3500** |
+| `dallas` | Dallas / Dallas County | `/hubs/texas/dallas-fort-worth` | **3500** |
 | `fort_worth` | Fort Worth / Tarrant | `/hubs/texas/dallas-fort-worth` | 2000 |
 | `austin` | Austin / Travis | `/hubs/texas/austin` | 2000 |
 | `san_antonio` | San Antonio / Bexar | `/hubs/texas/san-antonio` | 2000 |
+
+### Cap policy (Phase 8B)
+
+- Caps keep each hub **dense and usable**, not a dump of every residual staged TX agency.
+- Houston/Dallas raised **2,500 → 3,500** after first live promote hit the floor while staged residual remained.
+- Fort Worth / Austin / San Antonio remain at 2,000 (first pass under-cap).
+- **Dallas–Fort Worth hub** is an aggregate of `dallas` + `fort_worth` markets — copy and scope notes say so.
+- Residual `tdi_producers` rows stay staged; raise caps + `npm run tdi:promote -- --market houston` (skip-existing) to fill.
+- Do **not** promote statewide residual into a single hub.
 
 Matching order: **city list → county aliases → ZIP 3-digit prefix**.  
 Documented limitation: many non-title rows have **no county**.
@@ -92,13 +101,19 @@ npm run tdi:promote -- --dry-run --market houston --limit 25
 # 5) Live promote (skip already-promoted by default)
 npm run tdi:promote -- --market all
 npm run tdi:promote -- --market dallas --limit 100
+
+# 6) After raising caps (Phase 8B), fill residual without re-writing existing
+npm run tdi:promote -- --market houston
+npm run tdi:promote -- --market dallas
 ```
 
-## Consumer surfaces
+## Consumer surfaces (Phase 8B polish)
 
 - Hubs: `/hubs/texas/houston`, `/hubs/texas/dallas-fort-worth`, `/hubs/texas/austin`, `/hubs/texas/san-antonio`
-- Directory: `/directory?state=TX&verified=true`
-- Profiles: same research-dossier polish as FL; verification source = Texas TDI
+  - TDI framing, specialty chips (`?loa=`), Showing X of Y pagination, scope notes
+  - DFW explicitly aggregates Dallas + Fort Worth markets
+- Directory: `/directory?state=TX&verified=true` — first-class TX chip + launch hub nav
+- Profiles: research dossier; **Regulator = Texas Department of Insurance (TDI)**; NPN when present in license notes; no Medicare-from-TDI claims
 
 ## Limitations
 

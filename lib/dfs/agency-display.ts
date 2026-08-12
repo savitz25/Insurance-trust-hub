@@ -27,20 +27,20 @@ export function extractDbaFromName(name: string): {
 /** Plain-language blurbs for LOA capability chips (research only). */
 export const LOA_PLAIN_LANGUAGE: Record<string, string> = {
   Agency:
-    'Licensed as an agency entity (or agency customer representative) under Florida DFS.',
+    'Licensed as an agency entity (or agency customer representative) on the public regulator record.',
   'Independent Agency':
     'Business/agency listing — may place coverage with multiple carriers when appointed.',
   Health:
-    'Florida DFS lines of authority include health (and related accident/disability when reported).',
-  Life: 'Florida DFS lines of authority include life and/or annuities when reported.',
+    'Reported lines of authority include health (and related accident/disability when present on the public record).',
+  Life: 'Reported lines of authority include life and/or annuities when present on the public record.',
   'Property & Casualty':
-    'Florida DFS lines of authority include property and/or casualty (P&C) when reported.',
+    'Reported lines of authority include property and/or casualty (P&C) when present on the public record.',
   'Personal Lines':
-    'Florida DFS lines of authority include personal lines (e.g. auto/home-style authority when reported).',
+    'Reported lines of authority include personal lines (e.g. auto/home-style authority when present).',
   Title:
-    'Florida DFS lines of authority include title insurance when reported on the license record.',
+    'Reported lines of authority include title insurance when present on the license record.',
   'Public Adjuster':
-    'Florida DFS lines of authority include public adjuster authority when reported.',
+    'Reported lines of authority include public adjuster authority when present on the license record.',
 };
 
 export function loaPlainLanguageForTags(tags: string[]): Array<{

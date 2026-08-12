@@ -18,7 +18,9 @@ import {
 } from '@/components/research/empty-coverage-panel';
 import {
   countVerifiedFloridaProviders,
+  countVerifiedTexasProviders,
   getLaunchCountyLiveTotals,
+  getTxLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 
@@ -88,7 +90,10 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
   const launchRows = await getLaunchCountyLiveTotals();
+  const txHubRows = await getTxLaunchMarketLiveTotals();
   const flTotal = await countVerifiedFloridaProviders();
+  const txTotal = await countVerifiedTexasProviders();
+  const browsingTx = state === 'TX';
 
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
@@ -105,6 +110,89 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           </Link>{' '}
           to build a research shortlist (guest-saved on this device).
         </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link
+            href="/directory?state=TX&verified=true"
+            className={
+              browsingTx
+                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+            }
+          >
+            Texas (TDI)
+            {txTotal > 0 ? (
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {txTotal.toLocaleString()}
+              </span>
+            ) : null}
+          </Link>
+          <Link
+            href="/directory?state=FL&verified=true"
+            className={
+              state === 'FL'
+                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                : 'inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
+            }
+          >
+            Florida (DFS)
+            {flTotal > 0 ? (
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {flTotal.toLocaleString()}
+              </span>
+            ) : null}
+          </Link>
+          <Link
+            href="/directory?verified=true"
+            className="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+          >
+            All verified
+          </Link>
+        </div>
+        <div className="mt-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Texas launch hubs
+            {txTotal > 0 ? (
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · {txTotal.toLocaleString()} verified TX listings
+              </span>
+            ) : null}
+          </p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {txHubRows.map((row) => (
+              <li key={row.key}>
+                <Link
+                  href={row.hubHref}
+                  className={
+                    row.kind === 'aggregate'
+                      ? 'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
+                      : 'inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10'
+                  }
+                >
+                  {row.displayName}
+                  <span className="tabular-nums opacity-80">
+                    {row.total.toLocaleString()}
+                  </span>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/directory?state=TX&verified=true"
+                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+              >
+                Browse TX directory
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/hubs/texas"
+                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+              >
+                All Texas hubs
+              </Link>
+            </li>
+          </ul>
+        </div>
         <div className="mt-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Florida launch counties

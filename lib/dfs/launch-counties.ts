@@ -267,6 +267,15 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified DFS inventory is scoped to Palm Beach County.';
     case 'miami-fort-lauderdale':
       return 'Verified DFS inventory for South Florida aggregates Miami-Dade, Broward, and Palm Beach counties.';
+    // —— Phase 8 Texas TDI ——
+    case 'houston':
+      return 'Verified TDI inventory for this launch is Wave-1 Houston / Harris–area agencies (city/ZIP match from Texas TDI open data). County is sparse on TDI rows except title agencies. Promote caps limit density — not a full statewide dump.';
+    case 'dallas-fort-worth':
+      return 'Verified TDI inventory for Dallas–Fort Worth aggregates Wave-1 Dallas (Dallas County area) and Fort Worth (Tarrant area) markets. Metro branding is DFW; promotion is market-scoped with caps, not every TX licensee.';
+    case 'austin':
+      return 'Verified TDI inventory for this launch is Wave-1 Austin / Travis–area agencies (city/ZIP match from Texas TDI open data).';
+    case 'san-antonio':
+      return 'Verified TDI inventory for this launch is Wave-1 San Antonio / Bexar–area agencies (city/ZIP match from Texas TDI open data).';
     default:
       return null;
   }

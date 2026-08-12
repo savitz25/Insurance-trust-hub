@@ -411,3 +411,67 @@ export async function countVerifiedFloridaProviders(): Promise<number> {
     return 0;
   }
 }
+
+/** Total verified TX providers (directory honesty). */
+export async function countVerifiedTexasProviders(): Promise<number> {
+  if (!isSupabaseConfigured()) return 0;
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return 0;
+    const { count, error } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['TX']);
+    if (error) return 0;
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Live totals for Texas Wave-1 hub nav (directory). */
+export async function getTxLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]> {
+  const hubs: Array<{
+    key: string;
+    displayName: string;
+    hubSlug: string;
+    hubHref: string;
+    kind: 'county' | 'aggregate';
+  }> = [
+    {
+      key: 'houston',
+      displayName: 'Houston',
+      hubSlug: 'houston',
+      hubHref: '/hubs/texas/houston',
+      kind: 'county',
+    },
+    {
+      key: 'dallas-fort-worth',
+      displayName: 'Dallas–Fort Worth',
+      hubSlug: 'dallas-fort-worth',
+      hubHref: '/hubs/texas/dallas-fort-worth',
+      kind: 'aggregate',
+    },
+    {
+      key: 'austin',
+      displayName: 'Austin',
+      hubSlug: 'austin',
+      hubHref: '/hubs/texas/austin',
+      kind: 'county',
+    },
+    {
+      key: 'san-antonio',
+      displayName: 'San Antonio',
+      hubSlug: 'san-antonio',
+      hubHref: '/hubs/texas/san-antonio',
+      kind: 'county',
+    },
+  ];
+  const out: LaunchNavLiveRow[] = [];
+  for (const h of hubs) {
+    const total = await countVerifiedProvidersForHub(h.hubSlug);
+    out.push({ ...h, total });
+  }
+  return out;
+}
