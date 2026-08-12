@@ -85,10 +85,22 @@ npm run nj:import -- --file scripts/nj/fixtures/nj-agencies-sample.csv --launch-
 # Live import when ops file exists
 npm run nj:import -- --file data/nj-raw/agencies.csv --launch-regions-only
 
-# Promote
-npm run nj:promote -- --dry-run --region north_jersey --limit 25
+# Promote (supports --region south|central|north|all)
+npm run nj:promote -- --dry-run --region north --limit 25
+npm run nj:promote -- --region south --limit 50 --skip-existing
 npm run nj:promote -- --region all
 ```
+
+### Promote gates
+
+Promote only when **all** are true:
+
+- organization / agency entity (`entity_type = business`)
+- active / valid when status or expiration is present
+- state = NJ
+- Wave-1 launch-region geography match
+- Phase 1 `resolveProviderTrustState` → verified
+
 
 ## Consumer surfaces
 

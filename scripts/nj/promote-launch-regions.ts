@@ -2,8 +2,9 @@
  * Phase 9 — promote nj_producers in Wave-1 regions → public providers.
  *
  *   npm run nj:promote -- --dry-run
+ *   npm run nj:promote -- --region south --limit 50
  *   npm run nj:promote -- --region south_jersey --limit 50
- *   npm run nj:promote -- --region all
+ *   npm run nj:promote -- --region all --skip-existing
  */
 
 import { resolve } from 'path';
@@ -33,6 +34,21 @@ function hasFlag(name: string): boolean {
   return process.argv.includes(`--${name}`);
 }
 
+/** Accept south|central|north or full south_jersey|… ids. */
+function resolveRegionArg(raw: string): NjLaunchRegionId | 'all' | null {
+  const v = raw.toLowerCase().trim();
+  if (!v || v === 'all') return 'all';
+  const aliases: Record<string, NjLaunchRegionId> = {
+    south: 'south_jersey',
+    south_jersey: 'south_jersey',
+    central: 'central_jersey',
+    central_jersey: 'central_jersey',
+    north: 'north_jersey',
+    north_jersey: 'north_jersey',
+  };
+  return aliases[v] ?? null;
+}
+
 async function main() {
   const dryRun = hasFlag('dry-run');
   const globalLimit = Number(arg('limit') || '0') || 0;
@@ -41,11 +57,16 @@ async function main() {
 
   let regions = NJ_LAUNCH_REGIONS;
   if (regionArg !== 'all') {
-    const r = regionById(regionArg as NjLaunchRegionId);
-    if (!r) {
+    const resolved = resolveRegionArg(regionArg);
+    if (!resolved || resolved === 'all') {
       console.error(
-        '--region must be south_jersey|central_jersey|north_jersey|all'
+        '--region must be south|central|north|all (or south_jersey|central_jersey|north_jersey)'
       );
+      process.exit(1);
+    }
+    const r = regionById(resolved);
+    if (!r) {
+      console.error(`Unknown region: ${resolved}`);
       process.exit(1);
     }
     regions = [r];
