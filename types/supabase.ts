@@ -55,6 +55,8 @@ export interface ContactInfo {
   county?: string;
   county_normalized?: string;
   launch_county_id?: string;
+  /** Phase 8 — Texas TDI launch market id (houston, dallas, fort_worth, austin, san_antonio) */
+  launch_market_id?: string;
   /** Phase 6B2 — Google/BBB snapshots nested under contact jsonb */
   enrichment?: import('@/lib/enrichment/types').ProviderEnrichment;
   /**

@@ -29,6 +29,10 @@ import {
   type FlLaunchCounty,
   type FlLaunchCountyId,
 } from '@/lib/dfs/launch-counties';
+import {
+  isTxLaunchHub,
+  launchMarketsForHubSlug,
+} from '@/lib/tdi/launch-markets';
 
 export { countyMatchOrParts };
 
@@ -139,6 +143,82 @@ function emptyInventory(
   };
 }
 
+async function getTxHubInventory(
+  hubSlug: string,
+  pageSize: number,
+  page: number
+): Promise<HubInventoryResult> {
+  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  const markets = launchMarketsForHubSlug(hubSlug);
+  if (!markets.length) return emptyInventory(hubSlug, pageSize, page);
+
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+
+    const marketIds = markets.map((m) => m.id);
+    // Prefer structured contact.launch_market_id (Phase 8 promote)
+    const orParts = marketIds
+      .map((id) => `contact->>launch_market_id.eq.${id}`)
+      .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
+    const or = orParts.join(',');
+
+    const { count, error: cErr } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['TX'])
+      .or(or);
+
+    const total = cErr ? 0 : count ?? 0;
+    const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
+    const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+    const from = (safePage - 1) * pageSize;
+    const overFetch = Math.min(pageSize + 40, 200);
+    const to = from + overFetch - 1;
+
+    const { data, error } = await supabase
+      .from('providers')
+      .select('*')
+      .eq('verified', true)
+      .contains('states_licensed', ['TX'])
+      .or(or)
+      .order('name', { ascending: true })
+      .range(from, to);
+
+    if (error || !data?.length) {
+      return {
+        ...emptyInventory(hubSlug, pageSize, safePage),
+        total,
+        totalPages,
+      };
+    }
+
+    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
+    const verified = filterVerifiedProviders(mapped)
+      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
+      .filter((p) => p.state?.toUpperCase() === 'TX');
+
+    const providers = verified.slice(0, pageSize);
+    const safeTotal = Math.max(total, from + providers.length);
+
+    return {
+      providers,
+      total: safeTotal,
+      showing: providers.length,
+      pageSize,
+      page: safePage,
+      totalPages: Math.max(
+        totalPages,
+        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
+      ),
+      hubSlug,
+    };
+  } catch {
+    return emptyInventory(hubSlug, pageSize, page);
+  }
+}
+
 /**
  * Full hub inventory: total (exact) + one page of verified cards.
  */
@@ -148,6 +228,10 @@ export async function getHubInventory(
 ): Promise<HubInventoryResult> {
   const pageSize = opts?.pageSize ?? HUB_PAGE_SIZE;
   const page = Math.max(1, Math.floor(opts?.page ?? 1));
+
+  if (isTxLaunchHub(hubSlug)) {
+    return getTxHubInventory(hubSlug, pageSize, page);
+  }
 
   if (!isFlLaunchHub(hubSlug) || !isSupabaseConfigured()) {
     return emptyInventory(hubSlug, pageSize, page);
@@ -228,6 +312,10 @@ export async function getVerifiedProvidersForHub(
 export async function countVerifiedProvidersForHub(
   hubSlug: string
 ): Promise<number> {
+  if (isTxLaunchHub(hubSlug)) {
+    const inv = await getTxHubInventory(hubSlug, 1, 1);
+    return inv.total;
+  }
   if (!isFlLaunchHub(hubSlug)) return 0;
   return countVerifiedForCounties(launchCountiesForHubSlug(hubSlug));
 }

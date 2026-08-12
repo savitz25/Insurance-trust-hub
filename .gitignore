@@ -45,6 +45,10 @@ yarn-error.log*
 # Florida DFS bulk CSVs (hundreds of MB) — never commit
 /data/dfs-raw/**
 !/data/dfs-raw/README.md
+/data/tdi-raw/**
+!/data/tdi-raw/README.md
+/data/tx-raw/**
+!/data/tx-raw/README.md
 
 # Ops enrichment run logs
 /scripts/output/**

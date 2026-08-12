@@ -301,8 +301,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     <span className="font-medium">Location:</span> {locationParts.join(', ')}
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    {agencyCapabilitySummary(provider)} Florida DFS is the license source of truth
-                    for this research listing.
+                    {agencyCapabilitySummary(provider)}{' '}
+                    {(provider.state || '').toUpperCase() === 'TX'
+                      ? 'Texas TDI is the license source of truth for this research listing.'
+                      : 'Florida DFS is the license source of truth for this research listing.'}
                   </p>
                 </CardContent>
               </Card>
@@ -432,6 +434,18 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       <Button asChild variant="ghost" size="sm" className="gap-2">
                         <a href={FL_DFS_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
                           Florida DFS licensee search
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
+                    {provider.state === 'TX' ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a
+                          href="https://www.tdi.texas.gov/agent/index.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Texas TDI agent lookup
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </Button>

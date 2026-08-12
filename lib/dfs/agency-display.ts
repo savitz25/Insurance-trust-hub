@@ -55,12 +55,41 @@ export function loaPlainLanguageForTags(tags: string[]): Array<{
     .filter((x) => x.blurb);
 }
 
-/** Soft local hub path for FL launch counties (research navigation only). */
+/** Soft local hub path for FL / TX launch markets (research navigation only). */
 export function localHubPathForProvider(provider: Provider): {
   href: string;
   label: string;
 } | null {
-  if ((provider.state || '').toUpperCase() !== 'FL') return null;
+  const st = (provider.state || '').toUpperCase();
+  if (st === 'TX') {
+    const city = (provider.city || '').toLowerCase();
+    if (/houston|sugar land|katy|pasadena|pearland|the woodlands/.test(city)) {
+      return { href: '/hubs/texas/houston', label: 'Houston agency hub' };
+    }
+    if (/dallas|plano|irving|garland|richardson|mesquite/.test(city)) {
+      return {
+        href: '/hubs/texas/dallas-fort-worth',
+        label: 'Dallas–Fort Worth agency hub',
+      };
+    }
+    if (/fort worth|arlington|euless|bedford|grapevine/.test(city)) {
+      return {
+        href: '/hubs/texas/dallas-fort-worth',
+        label: 'Dallas–Fort Worth agency hub',
+      };
+    }
+    if (/austin|round rock|cedar park|georgetown|pflugerville/.test(city)) {
+      return { href: '/hubs/texas/austin', label: 'Austin agency hub' };
+    }
+    if (/san antonio|new braunfels|schertz/.test(city)) {
+      return {
+        href: '/hubs/texas/san-antonio',
+        label: 'San Antonio agency hub',
+      };
+    }
+    return { href: '/hubs/texas', label: 'Texas insurance hubs' };
+  }
+  if (st !== 'FL') return null;
   const matched = matchLaunchCounty(
     provider.county_normalized || provider.county
   );
