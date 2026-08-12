@@ -24,7 +24,7 @@ export function ProviderSecondarySignals({
           {signals.google ? (
             <div className="rounded-lg border bg-muted/20 px-3 py-3">
               <p className="font-medium text-foreground">
-                Google rating snapshot
+                Google public data (third-party)
                 {signals.google.checkedAtLabel
                   ? ` as of ${signals.google.checkedAtLabel}`
                   : ''}
@@ -37,17 +37,33 @@ export function ProviderSecondarySignals({
                   ? ` · Status: ${signals.google.businessStatus}`
                   : ''}
               </p>
-              {signals.google.mapsUrl ? (
-                <a
-                  href={signals.google.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-1 text-primary hover:underline"
-                >
-                  View on Google Maps
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </a>
-              ) : null}
+              <p className="mt-1 text-xs text-muted-foreground">
+                Not an InsuranceTrustHub ranking or endorsement.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-3">
+                {signals.google.website ? (
+                  <a
+                    href={signals.google.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-primary hover:underline"
+                  >
+                    Website (from Google)
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                ) : null}
+                {signals.google.mapsUrl ? (
+                  <a
+                    href={signals.google.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-primary hover:underline"
+                  >
+                    View on Google Maps
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                ) : null}
+              </div>
             </div>
           ) : null}
 

@@ -17,6 +17,9 @@ export type ExternalBusinessCandidate = {
   placeId?: string | null;
   profileUrl?: string | null;
   businessStatus?: string | null;
+  /** Google Places types / primaryType when available */
+  types?: string[] | null;
+  primaryType?: string | null;
 };
 
 export type MatchResult = {
@@ -140,6 +143,26 @@ export function scoreBusinessMatch(
   ) {
     score -= 10;
     reasons.push(`Business status: ${candidate.businessStatus}`);
+  }
+
+  // Soft insurance / finance type signal from Places
+  const types = [
+    ...(candidate.types ?? []),
+    candidate.primaryType ?? '',
+  ]
+    .filter(Boolean)
+    .map((t) => t.toLowerCase());
+  if (types.some((t) => /insurance|finance|financial|accounting/.test(t))) {
+    score += 8;
+    reasons.push('Places type suggests insurance/finance');
+  } else if (
+    types.length > 0 &&
+    types.every((t) =>
+      /restaurant|food|lodging|church|school|park|gas_station|bar|cafe/.test(t)
+    )
+  ) {
+    score -= 30;
+    reasons.push('Places type looks unrelated to insurance');
   }
 
   // Name-only floor: never accept without locality or phone/web corroboration

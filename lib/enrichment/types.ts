@@ -52,6 +52,7 @@ export type PublicSecondarySignals = {
     rating: number | null;
     reviewCount: number | null;
     mapsUrl: string | null;
+    website: string | null;
     checkedAtLabel: string | null;
     businessStatus: string | null;
   } | null;
@@ -65,7 +66,7 @@ export type PublicSecondarySignals = {
 };
 
 export const SECONDARY_SIGNALS_DISCLAIMER =
-  'Secondary consumer signals — not a state license determination. Snapshots may change; re-check sources before buying coverage.';
+  'Public web signals are from third-party sources (e.g. Google) and are not part of license verification. Snapshots may change; re-check sources before buying coverage.';
 
 export const ENRICHMENT_RULES = {
   onlyIndexableResearch: true,

@@ -1,6 +1,7 @@
 /**
- * Phase 6B2 — Google Places Text API (New) client.
+ * Google Places API (New) client for agency enrichment.
  * Runs only when GOOGLE_PLACES_API_KEY is set. Never invents matches.
+ * Phase 6C: retries, rate-limit spacing, insurance-type soft signals, directory URL reject.
  */
 
 import type { Provider } from '@/types/provider';
@@ -8,11 +9,39 @@ import type { ExternalBusinessCandidate } from '@/lib/enrichment/match';
 import type { GooglePlacesSnapshot } from '@/lib/enrichment/types';
 import { pickBestMatch } from '@/lib/enrichment/match';
 
-const PLACES_SEARCH =
-  'https://places.googleapis.com/v1/places:searchText';
+const PLACES_SEARCH = 'https://places.googleapis.com/v1/places:searchText';
+
+/** Soft-reject websites that are directories / social, not agency sites */
+const DIRECTORY_HOST_RE =
+  /(^|\.)(yelp|facebook|fb\.com|instagram|linkedin|twitter|x\.com|tiktok|yellowpages|yp\.com|bbb\.org|angi|homeadvisor|mapquest|foursquare|nextdoor|superpages|manta|hotfrog|chamberofcommerce|google\.com\/maps)\b/i;
+
+const INSURANCE_PLACE_TYPES = new Set([
+  'insurance_agency',
+  'insurance_agent',
+  'finance',
+  'financial_consultant',
+  'accounting',
+  'tax_preparation_service',
+  'real_estate_agency',
+  'lawyer',
+  'point_of_interest',
+  'establishment',
+]);
 
 export function isGooglePlacesConfigured(): boolean {
   return Boolean(process.env.GOOGLE_PLACES_API_KEY?.trim());
+}
+
+export function isDirectoryOrSocialWebsite(url: string | null | undefined): boolean {
+  if (!url?.trim()) return false;
+  try {
+    const host = new URL(url.startsWith('http') ? url : `https://${url}`).hostname
+      .replace(/^www\./, '')
+      .toLowerCase();
+    return DIRECTORY_HOST_RE.test(host);
+  } catch {
+    return true;
+  }
 }
 
 type PlacesTextSearchResponse = {
@@ -26,6 +55,8 @@ type PlacesTextSearchResponse = {
     rating?: number;
     userRatingCount?: number;
     businessStatus?: string;
+    types?: string[];
+    primaryType?: string;
     addressComponents?: Array<{
       longText?: string;
       shortText?: string;
@@ -34,13 +65,15 @@ type PlacesTextSearchResponse = {
   }>;
 };
 
-function extractState(components?: PlacesTextSearchResponse['places'] extends
-  | (infer P)[]
-  | undefined
-  ? P extends { addressComponents?: infer C }
-    ? C
+function extractState(
+  components?: PlacesTextSearchResponse['places'] extends
+    | (infer P)[]
+    | undefined
+    ? P extends { addressComponents?: infer C }
+      ? C
+      : never
     : never
-  : never): string | null {
+): string | null {
   if (!Array.isArray(components)) return null;
   const admin = components.find((c) =>
     c.types?.includes('administrative_area_level_1')
@@ -48,67 +81,118 @@ function extractState(components?: PlacesTextSearchResponse['places'] extends
   return admin?.shortText ?? null;
 }
 
-function extractCity(components?: PlacesTextSearchResponse['places'] extends
-  | (infer P)[]
-  | undefined
-  ? P extends { addressComponents?: infer C }
-    ? C
+function extractCity(
+  components?: PlacesTextSearchResponse['places'] extends
+    | (infer P)[]
+    | undefined
+    ? P extends { addressComponents?: infer C }
+      ? C
+      : never
     : never
-  : never): string | null {
+): string | null {
   if (!Array.isArray(components)) return null;
   const locality = components.find((c) => c.types?.includes('locality'));
   return locality?.longText ?? null;
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function fetchWithRetry(
+  url: string,
+  init: RequestInit,
+  attempts = 3
+): Promise<Response> {
+  let last: Response | null = null;
+  for (let i = 0; i < attempts; i++) {
+    last = await fetch(url, init);
+    if (last.ok) return last;
+    if (last.status === 429 || last.status >= 500) {
+      await sleep(400 * Math.pow(2, i) + Math.random() * 200);
+      continue;
+    }
+    return last;
+  }
+  return last!;
+}
+
+export type PlacesSearchResult =
+  | { ok: true; snapshot: GooglePlacesSnapshot }
+  | {
+      ok: false;
+      reason: string;
+      status: 'no_match' | 'ambiguous' | 'skipped' | 'error';
+      candidates?: number;
+    };
+
 /**
  * Search Places and return high-confidence snapshot or skip reasons.
  */
 export async function fetchGooglePlacesSnapshot(
-  provider: Provider
-): Promise<
-  | { ok: true; snapshot: GooglePlacesSnapshot }
-  | { ok: false; reason: string; candidates?: number }
-> {
+  provider: Provider,
+  opts?: { requestDelayMs?: number }
+): Promise<PlacesSearchResult> {
   const key = process.env.GOOGLE_PLACES_API_KEY?.trim();
   if (!key) {
-    return { ok: false, reason: 'GOOGLE_PLACES_API_KEY not configured' };
+    return {
+      ok: false,
+      reason: 'GOOGLE_PLACES_API_KEY not configured',
+      status: 'skipped',
+    };
   }
 
-  const query = [provider.name, provider.city, provider.state, 'insurance']
+  if (opts?.requestDelayMs && opts.requestDelayMs > 0) {
+    await sleep(opts.requestDelayMs);
+  }
+
+  const query = [
+    provider.name,
+    'insurance',
+    provider.city,
+    provider.county,
+    provider.state || 'FL',
+  ]
     .filter(Boolean)
     .join(' ');
 
   let data: PlacesTextSearchResponse;
   try {
-    const res = await fetch(PLACES_SEARCH, {
+    const res = await fetchWithRetry(PLACES_SEARCH, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': key,
         'X-Goog-FieldMask':
-          'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.websiteUri,places.googleMapsUri,places.rating,places.userRatingCount,places.businessStatus,places.addressComponents',
+          'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.websiteUri,places.googleMapsUri,places.rating,places.userRatingCount,places.businessStatus,places.addressComponents,places.types,places.primaryType',
       },
       body: JSON.stringify({
         textQuery: query,
         maxResultCount: 5,
         languageCode: 'en',
+        regionCode: 'US',
       }),
     });
     if (!res.ok) {
       const body = await res.text();
-      return { ok: false, reason: `Places API ${res.status}: ${body.slice(0, 200)}` };
+      return {
+        ok: false,
+        reason: `Places API ${res.status}: ${body.slice(0, 200)}`,
+        status: 'error',
+      };
     }
     data = (await res.json()) as PlacesTextSearchResponse;
   } catch (e) {
     return {
       ok: false,
       reason: e instanceof Error ? e.message : 'Places fetch failed',
+      status: 'error',
     };
   }
 
   const places = data.places ?? [];
   if (!places.length) {
-    return { ok: false, reason: 'No Places results', candidates: 0 };
+    return { ok: false, reason: 'No Places results', status: 'no_match', candidates: 0 };
   }
 
   const candidates: ExternalBusinessCandidate[] = places.map((p) => ({
@@ -121,6 +205,8 @@ export async function fetchGooglePlacesSnapshot(
     placeId: p.id,
     profileUrl: p.googleMapsUri,
     businessStatus: p.businessStatus,
+    types: p.types,
+    primaryType: p.primaryType,
   }));
 
   const { best, match, ambiguous } = pickBestMatch(provider, candidates);
@@ -128,6 +214,7 @@ export async function fetchGooglePlacesSnapshot(
     return {
       ok: false,
       reason: `Ambiguous Places match: ${match.reasons.join('; ')}`,
+      status: 'ambiguous',
       candidates: candidates.length,
     };
   }
@@ -135,11 +222,18 @@ export async function fetchGooglePlacesSnapshot(
     return {
       ok: false,
       reason: `Weak Places match (confidence=${match.confidence}): ${match.reasons.join('; ')}`,
+      status: 'no_match',
       candidates: candidates.length,
     };
   }
 
   const place = places.find((p) => p.id === best.placeId) ?? places[0]!;
+  let website = place.websiteUri ?? null;
+  if (website && isDirectoryOrSocialWebsite(website)) {
+    // Soft reject: keep match for rating/place_id but do not publish directory URL as website
+    website = null;
+  }
+
   const checkedAt = new Date().toISOString();
 
   const snapshot: GooglePlacesSnapshot = {
@@ -147,7 +241,7 @@ export async function fetchGooglePlacesSnapshot(
     rating: place.rating ?? null,
     reviewCount: place.userRatingCount ?? null,
     formattedPhone: place.nationalPhoneNumber ?? null,
-    website: place.websiteUri ?? null,
+    website,
     formattedAddress: place.formattedAddress ?? null,
     mapsUrl: place.googleMapsUri ?? null,
     businessStatus: place.businessStatus ?? null,
@@ -161,3 +255,5 @@ export async function fetchGooglePlacesSnapshot(
 
   return { ok: true, snapshot };
 }
+
+export { INSURANCE_PLACE_TYPES };

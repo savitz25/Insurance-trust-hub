@@ -38,6 +38,7 @@ export function toPublicSecondarySignals(
           rating: g.rating ?? null,
           reviewCount: g.reviewCount ?? null,
           mapsUrl: g.mapsUrl ?? null,
+          website: g.website ?? null,
           checkedAtLabel: formatDate(g.checkedAt),
           businessStatus: g.businessStatus ?? null,
         }
