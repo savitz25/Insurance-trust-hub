@@ -22,8 +22,20 @@ Product philosophy unchanged:
 ### Apply status (ops)
 
 1. Open Supabase SQL Editor for inventory project (`gojyhmbo…`).  
-2. Paste and run **both** migrations if not already applied.  
-3. Probe:
+2. If you already hit `ERROR 23505` on `idx_dfs_appointments_dedupe`, run **only**:
+
+   `supabase/migrations/20260812131000_phase6b_dedupe_fix.sql`
+
+   That script deletes duplicate appointment rows, then creates the unique index  
+   on `(producer_id, entity#, type, carrier name)` — empty entity numbers alone  
+   are too coarse (many `SERVICE WARRANTY` rows).
+
+3. Otherwise paste and run in order:
+   - `20260812120000_phase6a_appointments.sql` (extended columns)
+   - `20260812130000_phase6b_appointments_hardening.sql` (includes dedupe + index)
+   - or just the dedupe fix if 6B partially applied
+
+4. Probe:
 
 ```powershell
 npm run dfs:ensure-appointments-schema
