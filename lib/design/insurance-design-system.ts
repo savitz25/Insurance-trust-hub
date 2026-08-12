@@ -299,6 +299,13 @@ export const INSURANCE_NETWORK_LINKS = [
     href: 'https://www.lendertrusthub.com',
     blurb: 'NMLS lenders & financing tools',
   },
+  {
+    id: 'contractor' as const,
+    label: 'Contractor Trust Hub',
+    shortLabel: 'Contractor',
+    href: 'https://www.contractortrusthub.com',
+    blurb: 'Florida contractor license verification & project planning',
+  },
 ] as const;
 
 export const INSURANCE_FOOTER_COLUMNS = [

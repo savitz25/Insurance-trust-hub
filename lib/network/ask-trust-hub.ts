@@ -29,4 +29,10 @@ export const NETWORK_HUBS = [
     proseName: 'Lender Trust Hub',
     url: 'https://www.lendertrusthub.com',
   },
+  {
+    id: 'contractor' as const,
+    shortLabel: 'Contractor',
+    proseName: 'Contractor Trust Hub',
+    url: 'https://www.contractortrusthub.com',
+  },
 ] as const;

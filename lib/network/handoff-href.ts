@@ -3,24 +3,27 @@
  * Cross-hub always uses same-origin /start (guest-safe plain 307 without code).
  */
 
-export type HubLinkId = 'move' | 'insurance' | 'lender';
+export type HubLinkId = 'move' | 'insurance' | 'lender' | 'contractor';
 
 const HUB_URL: Record<HubLinkId, string> = {
   move: 'https://www.movetrusthub.com',
   insurance: 'https://www.insurancetrusthub.com',
   lender: 'https://www.lendertrusthub.com',
+  contractor: 'https://www.contractortrusthub.com',
 };
 
 const HUB_HOME: Record<HubLinkId, string> = {
   move: '/my-move',
   insurance: '/my-insurance',
   lender: '/my-lending',
+  contractor: '/',
 };
 
 const HOST_TO_HUB: Array<{ fragment: string; id: HubLinkId }> = [
   { fragment: 'movetrusthub.com', id: 'move' },
   { fragment: 'insurancetrusthub.com', id: 'insurance' },
   { fragment: 'lendertrusthub.com', id: 'lender' },
+  { fragment: 'contractortrusthub.com', id: 'contractor' },
 ];
 
 export function networkHandoffStartHref(to: HubLinkId, next?: string): string {

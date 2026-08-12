@@ -4,7 +4,7 @@ import { createHash, randomBytes } from 'crypto';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { isSupabaseAdminConfigured } from '@/lib/supabase/config';
 
-export type NetworkHubId = 'move' | 'insurance' | 'lender' | 'ask';
+export type NetworkHubId = 'move' | 'insurance' | 'lender' | 'contractor' | 'ask';
 
 export const HANDOFF_TTL_SECONDS = 90;
 export const HANDOFF_RATE_LIMIT_PER_MINUTE = 10;
@@ -13,6 +13,7 @@ export const HUB_ORIGINS: Record<NetworkHubId, string> = {
   move: 'https://www.movetrusthub.com',
   insurance: 'https://www.insurancetrusthub.com',
   lender: 'https://www.lendertrusthub.com',
+  contractor: 'https://www.contractortrusthub.com',
   ask: 'https://www.asktrusthub.com',
 };
 
@@ -20,6 +21,7 @@ export const HUB_DEFAULT_PATH: Record<NetworkHubId, string> = {
   move: '/my-move',
   insurance: '/my-insurance',
   lender: '/my-lending',
+  contractor: '/',
   ask: '/',
 };
 
@@ -27,7 +29,13 @@ export const HUB_DEFAULT_PATH: Record<NetworkHubId, string> = {
 export const CURRENT_HUB: NetworkHubId = 'insurance';
 
 export function isNetworkHubId(v: string | null | undefined): v is NetworkHubId {
-  return v === 'move' || v === 'insurance' || v === 'lender' || v === 'ask';
+  return (
+    v === 'move' ||
+    v === 'insurance' ||
+    v === 'lender' ||
+    v === 'contractor' ||
+    v === 'ask'
+  );
 }
 
 export function hashHandoffCode(code: string): string {
