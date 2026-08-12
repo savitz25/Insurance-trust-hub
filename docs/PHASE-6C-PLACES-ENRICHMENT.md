@@ -39,7 +39,7 @@ Never mutates: `license_info`, `verified`, launch county fields, appointment_sna
 
 ## Match rules (fail closed)
 
-Accept only **high** confidence from `scoreBusinessMatch` + `pickBestMatch`:
+Accept only **high** confidence from `scoreBusinessMatch` + `pickBestMatch`, then **Phase 6C-2 FP gate**:
 
 - Strong name similarity  
 - FL + city/locality compatible  
@@ -48,6 +48,38 @@ Accept only **high** confidence from `scoreBusinessMatch` + `pickBestMatch`:
 - Soft boost for insurance/finance Places types; soft reject food/lodging-only types  
 - Directory/social websites (Yelp, Facebook, …) not written as agency website  
 
+### False-positive gate (6C-2)
+
+Module: `lib/enrichment/places-fp-gate.ts` — runs **after** identity scoring, **before** write.
+
+| Rule | Behavior |
+|------|----------|
+| Hard non-target Places types | Reject `car_dealer`, `motorcycle_dealer`, contractors, `real_estate_agency`, food/lodging-only, etc. (exceptional rescue only if legal name is strongly insurance-domain + very high score + phone) |
+| Weak insurance name | Legal name lacks insurance/title/agency/adjuster/… keywords → require insurance/finance type and/or strong name+geo / phone corroboration; reject phone-primary weak DBAs without insurance type |
+| Corporate carrier domains | Do **not** write `progressive.com` / `geico.com` / … to `contact.website` unless legal name looks like a local carrier agency pattern; placeId/rating may still store |
+| Credit union / bank | Name looks like CU/bank without explicit insurance signals → reject website + match |
+
+**Rejected classes (examples):** auto/motorcycle dealers, HVAC/roofing contractors, realty offices, credit unions without insurance signals, carrier corporate landing pages as agency websites.
+
+**Still accepted (examples):** local insurance agencies, title/escrow agencies, public adjusters with insurance-like Places types + name/geo/phone.
+
+Soft-warning taxonomy (logged, not always blocking):
+
+`possible_non_agency_type` · `weak_insurance_name` · `contractor_or_trade` · `dealer_automotive` · `realty` · `financial_institution` · `carrier_corporate_domain`
+
+Offline QA: `npx tsx scripts/dfs/qa-places-fp-gate.ts`
+
+### Cleanup mode (conservative)
+
+```powershell
+# List suspicious websites already written (SFL default)
+npm run dfs:cleanup-places-fp -- --dry-run
+
+# Clear website only (DFS/verified untouched; audit note in skipReasons)
+npm run dfs:cleanup-places-fp -- --confirm
+```
+
+Heuristic only (carrier domains + dealer/contractor/realty/bank legal names). Does **not** re-fetch Places for full re-score.
 ## Commands
 
 ```powershell
@@ -135,7 +167,15 @@ Progress shape (simplified):
 | `max_batches_reached` | Intentional cap |
 | `pool_exhausted` | No more eligible rows (success end mid-empty) |
 
-Soft warnings (non-blocking): matched legal names lacking insurance/title/agency keywords — listed for 6C-2 false-positive tuning.
+Soft warnings use the 6C-2 taxonomy (`fp:weak_insurance_name`, etc.) for ops review.
+
+After the FP gate ships, resume remaining SFL pool with the **same** loop thresholds (do not lower min-match-rate for throughput):
+
+```powershell
+npm run dfs:enrich-places-loop -- --confirm --resume
+# or full live pass
+npm run dfs:enrich-places-loop -- --confirm --batch-size 100 --delay-ms 300
+```
 
 ## Inspect quality
 
@@ -151,12 +191,13 @@ Soft warnings (non-blocking): matched legal names lacking insurance/title/agency
 - Rating/reviews: secondary signals only — labeled third-party, **not** ITH ranking  
 - Hubs: **never** sorted by Google rating  
 
-## Expand after pilot (6C-2)
+## Expand after pilot (post 6C-2)
 
-1. Review accept rate + false positives from logs  
-2. Raise `--limit` or drop `--only-missing` carefully  
-3. Add counties: `hillsborough`, `pinellas`, `pasco`, `orange`, `osceola`, `seminole` in `lib/enrichment/places-pilot.ts`  
-4. Same match gates — do not relax for volume  
+1. Run cleanup dry-run, then optional `--confirm` website clears  
+2. Resume SFL loop with FP gate active  
+3. Review soft-warning codes + reject samples  
+4. Add counties carefully in `lib/enrichment/places-pilot.ts`  
+5. Same match + FP gates — do not relax for volume  
 
 ## Related code
 
@@ -164,7 +205,10 @@ Soft warnings (non-blocking): matched legal names lacking insurance/title/agency
 |------|------|
 | `lib/enrichment/google-places.ts` | Places API client |
 | `lib/enrichment/match.ts` | Strict identity scoring |
+| `lib/enrichment/places-fp-gate.ts` | 6C-2 false-positive gate |
 | `lib/enrichment/places-pilot.ts` | SFL selection + contact merge |
 | `scripts/dfs/enrich-places-south-florida.ts` | Single-batch pilot runner |
 | `scripts/dfs/enrich-places-loop.ts` | Auto-batch loop + quality gates |
 | `scripts/dfs/lib/places-batch-core.ts` | Shared batch execution |
+| `scripts/dfs/cleanup-places-fp-websites.ts` | Conservative website cleanup |
+| `scripts/dfs/qa-places-fp-gate.ts` | Offline accept/reject samples |

@@ -8,6 +8,12 @@ import type { Provider } from '@/types/provider';
 import type { ExternalBusinessCandidate } from '@/lib/enrichment/match';
 import type { GooglePlacesSnapshot } from '@/lib/enrichment/types';
 import { pickBestMatch } from '@/lib/enrichment/match';
+import {
+  evaluatePlacesFalsePositiveGate,
+  formatPlacesFpWarnings,
+  isMajorCarrierCorporateUrl,
+  INSURANCE_SIGNAL_PLACE_TYPES,
+} from '@/lib/enrichment/places-fp-gate';
 
 const PLACES_SEARCH = 'https://places.googleapis.com/v1/places:searchText';
 
@@ -15,15 +21,9 @@ const PLACES_SEARCH = 'https://places.googleapis.com/v1/places:searchText';
 const DIRECTORY_HOST_RE =
   /(^|\.)(yelp|facebook|fb\.com|instagram|linkedin|twitter|x\.com|tiktok|yellowpages|yp\.com|bbb\.org|angi|homeadvisor|mapquest|foursquare|nextdoor|superpages|manta|hotfrog|chamberofcommerce|google\.com\/maps)\b/i;
 
+/** Agency-adjacent types only (realty removed — handled by FP gate). */
 const INSURANCE_PLACE_TYPES = new Set([
-  'insurance_agency',
-  'insurance_agent',
-  'finance',
-  'financial_consultant',
-  'accounting',
-  'tax_preparation_service',
-  'real_estate_agency',
-  'lawyer',
+  ...INSURANCE_SIGNAL_PLACE_TYPES,
   'point_of_interest',
   'establishment',
 ]);
@@ -227,14 +227,39 @@ export async function fetchGooglePlacesSnapshot(
     };
   }
 
+  // Phase 6C-2 — false-positive gate (after scoring, before write)
+  const fp = evaluatePlacesFalsePositiveGate(provider, best, match);
+  if (!fp.acceptMatch) {
+    const warn = formatPlacesFpWarnings(fp.softWarnings);
+    return {
+      ok: false,
+      reason: `FP gate reject: ${fp.rejectReason ?? 'false_positive'}${
+        warn ? ` [${warn}]` : ''
+      }; ${match.reasons.join('; ')}`,
+      status: 'no_match',
+      candidates: candidates.length,
+    };
+  }
+
   const place = places.find((p) => p.id === best.placeId) ?? places[0]!;
   let website = place.websiteUri ?? null;
   if (website && isDirectoryOrSocialWebsite(website)) {
     // Soft reject: keep match for rating/place_id but do not publish directory URL as website
     website = null;
   }
+  if (website && (!fp.allowWebsite || isMajorCarrierCorporateUrl(website))) {
+    website = null;
+  }
 
   const checkedAt = new Date().toISOString();
+  const fpNotes = [
+    ...match.reasons,
+    ...fp.notes,
+    formatPlacesFpWarnings(fp.softWarnings),
+    fp.websiteRejectReason,
+  ]
+    .filter(Boolean)
+    .join('; ');
 
   const snapshot: GooglePlacesSnapshot = {
     placeId: place.id,
@@ -250,7 +275,7 @@ export async function fetchGooglePlacesSnapshot(
     sourceUrl: place.googleMapsUri,
     method: 'automated',
     matchConfidence: match.confidence,
-    matchNotes: match.reasons.join('; '),
+    matchNotes: fpNotes,
   };
 
   return { ok: true, snapshot };

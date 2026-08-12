@@ -145,16 +145,28 @@ export function scoreBusinessMatch(
     reasons.push(`Business status: ${candidate.businessStatus}`);
   }
 
-  // Soft insurance / finance type signal from Places
+  // Soft insurance / finance type signal from Places (not realty/dealer)
   const types = [
     ...(candidate.types ?? []),
     candidate.primaryType ?? '',
   ]
     .filter(Boolean)
     .map((t) => t.toLowerCase());
-  if (types.some((t) => /insurance|finance|financial|accounting/.test(t))) {
-    score += 8;
+  if (types.some((t) => /insurance_agency|insurance_agent|insurance\b/.test(t))) {
+    score += 10;
     reasons.push('Places type suggests insurance/finance');
+  } else if (types.some((t) => /finance|financial_consultant|accounting/.test(t))) {
+    score += 6;
+    reasons.push('Places type suggests insurance/finance');
+  } else if (
+    types.some((t) =>
+      /car_dealer|motorcycle_dealer|roofing_contractor|general_contractor|real_estate_agency|restaurant|lodging|hotel/.test(
+        t
+      )
+    )
+  ) {
+    score -= 35;
+    reasons.push('Places type looks unrelated to insurance');
   } else if (
     types.length > 0 &&
     types.every((t) =>

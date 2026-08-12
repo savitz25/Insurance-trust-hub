@@ -18,9 +18,11 @@ function must(rel: string) {
 
 must('lib/enrichment/google-places.ts');
 must('lib/enrichment/places-pilot.ts');
+must('lib/enrichment/places-fp-gate.ts');
 must('scripts/dfs/enrich-places-south-florida.ts');
 must('scripts/dfs/enrich-places-loop.ts');
 must('scripts/dfs/lib/places-batch-core.ts');
+must('scripts/dfs/cleanup-places-fp-websites.ts');
 must('docs/PHASE-6C-PLACES-ENRICHMENT.md');
 
 const places = read('lib/enrichment/google-places.ts');
@@ -29,6 +31,20 @@ if (!/isDirectoryOrSocialWebsite/.test(places)) {
 }
 if (!/fetchWithRetry|429/.test(places)) {
   errors.push('Places client should retry on 429/5xx');
+}
+if (!/evaluatePlacesFalsePositiveGate|places-fp-gate/.test(places)) {
+  errors.push('Places client must run 6C-2 FP gate before accept');
+}
+
+const fp = read('lib/enrichment/places-fp-gate.ts');
+if (!/HARD_REJECT_PLACE_TYPES|car_dealer|real_estate_agency/.test(fp)) {
+  errors.push('FP gate must hard-reject non-agency place types');
+}
+if (!/carrier_corporate_domain|MAJOR_CARRIER/.test(fp)) {
+  errors.push('FP gate must handle carrier corporate domains');
+}
+if (!/weak_insurance_name/.test(fp)) {
+  errors.push('FP gate soft-warning taxonomy missing weak_insurance_name');
 }
 
 const pilot = read('lib/enrichment/places-pilot.ts');

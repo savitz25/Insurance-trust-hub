@@ -7,6 +7,7 @@ import type { Provider } from '@/types/provider';
 import type { ContactInfo } from '@/types/supabase';
 import type { GooglePlacesSnapshot, ProviderEnrichment } from '@/lib/enrichment/types';
 import { isDirectoryOrSocialWebsite } from '@/lib/enrichment/google-places';
+import { isMajorCarrierCorporateUrl } from '@/lib/enrichment/places-fp-gate';
 import { isPlaceholderPhone } from '@/lib/provenance/phone';
 
 export const SFL_LAUNCH_COUNTY_IDS = [
@@ -61,6 +62,7 @@ export function applyPlacesMatchToContact(
   if (
     snapshot.website &&
     !isDirectoryOrSocialWebsite(snapshot.website) &&
+    !isMajorCarrierCorporateUrl(snapshot.website) &&
     !next.website?.trim()
   ) {
     next.website = snapshot.website;

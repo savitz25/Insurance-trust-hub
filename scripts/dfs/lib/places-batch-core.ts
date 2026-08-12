@@ -12,6 +12,10 @@ import {
   isGooglePlacesConfigured,
 } from '../../../lib/enrichment/google-places';
 import {
+  hasInsuranceNameKeywords,
+  type PlacesFpWarningCode,
+} from '../../../lib/enrichment/places-fp-gate';
+import {
   SFL_LAUNCH_COUNTY_IDS,
   applyPlacesMatchToContact,
   recordPlacesAttempt,
@@ -46,6 +50,7 @@ export type PlacesBatchResult = {
     website: string | null;
     scoreNote: string;
     softWarning?: string;
+    softWarningCodes?: PlacesFpWarningCode[];
   }>;
   rejectedSample: Array<{
     name: string;
@@ -53,7 +58,12 @@ export type PlacesBatchResult = {
     status: string;
     reason: string;
   }>;
-  softWarningMatched: Array<{ name: string; slug: string; website: string | null }>;
+  softWarningMatched: Array<{
+    name: string;
+    slug: string;
+    website: string | null;
+    codes?: PlacesFpWarningCode[];
+  }>;
 };
 
 export function isAuthFailureReason(reason: string): boolean {
@@ -64,9 +74,21 @@ export function isAuthFailureReason(reason: string): boolean {
 
 /** Soft QA list: legal name lacks insurance-ish keywords (not auto-excluded). */
 export function lacksInsuranceNameKeywords(name: string): boolean {
-  return !/\b(insurance|ins\.|title|agency|broker|surety|adjust|underwrit|financial|life|health|benefits)\b/i.test(
-    name
-  );
+  return !hasInsuranceNameKeywords(name);
+}
+
+/** Parse fp:code tokens from matchNotes. */
+export function extractFpWarningCodes(
+  notes: string | null | undefined
+): PlacesFpWarningCode[] {
+  if (!notes) return [];
+  const codes: PlacesFpWarningCode[] = [];
+  const re = /fp:(possible_non_agency_type|weak_insurance_name|contractor_or_trade|dealer_automotive|realty|financial_institution|carrier_corporate_domain)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(notes))) {
+    codes.push(m[1] as PlacesFpWarningCode);
+  }
+  return [...new Set(codes)];
 }
 
 export type SupabaseOps = ReturnType<typeof createClient>;
@@ -212,13 +234,14 @@ export async function runPlacesBatch(params: {
 
     if (result.ok) {
       stats.matched++;
+      const codes = extractFpWarningCodes(result.snapshot.matchNotes);
+      if (lacksInsuranceNameKeywords(provider.name) && !codes.includes('weak_insurance_name')) {
+        codes.push('weak_insurance_name');
+      }
       const soft =
-        lacksInsuranceNameKeywords(provider.name) &&
-        !result.snapshot.matchNotes?.includes('insurance/finance')
-          ? 'legal name lacks insurance/title/agency keywords'
-          : lacksInsuranceNameKeywords(provider.name)
-            ? 'legal name lacks insurance/title/agency keywords (type still insurance-like)'
-            : undefined;
+        codes.length > 0
+          ? codes.map((c) => `fp:${c}`).join(',')
+          : undefined;
 
       accepted.push({
         name: provider.name,
@@ -226,12 +249,14 @@ export async function runPlacesBatch(params: {
         website: result.snapshot.website ?? null,
         scoreNote: result.snapshot.matchNotes ?? 'high',
         softWarning: soft,
+        softWarningCodes: codes.length ? codes : undefined,
       });
       if (soft) {
         softWarningMatched.push({
           name: provider.name,
           slug: provider.slug,
           website: result.snapshot.website ?? null,
+          codes,
         });
       }
 
