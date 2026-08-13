@@ -72,6 +72,9 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
       </CardHeader>
 
       <CardContent className="flex-1 space-y-3">
+        <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+          Research listing
+        </p>
         {view.verification.licenseNumber ? (
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <FileBadge className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />

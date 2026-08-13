@@ -485,6 +485,7 @@ export function HubPageView({
             <HubMatchForm
               hubName={hub.shortName}
               hasVerifiedListings={stats.totalAgents > 0}
+              directoryHref={`/directory?state=${hub.stateCode}&verified=true`}
             />
             <div className="rounded-xl border bg-secondary/30 p-5 text-sm space-y-3">
               <h3 className="font-semibold">Why Local Matters</h3>

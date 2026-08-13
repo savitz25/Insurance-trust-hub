@@ -118,6 +118,93 @@ export const FLAGSHIP_RESEARCH_TOOLS = [
   },
 ] as const;
 
+/** Phase 18 — five highest-intent consumer jobs. */
+export const PRIMARY_CONSUMER_JOBS = [
+  {
+    id: 'aca',
+    label: 'ACA / health coverage',
+    detail: 'See the Marketplace landscape where you live.',
+    href: '/tools/marketplace-plan-research',
+    secondaryHref: '/tools/coverage-compass',
+    secondaryLabel: 'Not sure? Coverage Compass',
+  },
+  {
+    id: 'medicare',
+    label: 'Medicare / turning 65',
+    detail: 'CMS-backed research path, not ACA Marketplace tools.',
+    href: '/medicare',
+    secondaryHref: '/tools/medicare-provider-lookup',
+    secondaryLabel: 'Provider lookup',
+  },
+  {
+    id: 'verify',
+    label: 'Verify a license',
+    detail: 'Official state DOI lookup before you share personal data.',
+    href: '/tools/license-verification',
+    secondaryHref: '/directory?verified=true',
+    secondaryLabel: 'Verified directory',
+  },
+  {
+    id: 'agencies',
+    label: 'Licensed agencies near me',
+    detail: 'Research listings only where official inventory exists.',
+    href: '/directory?verified=true',
+    secondaryHref: '/hubs',
+    secondaryLabel: 'Market hubs',
+  },
+  {
+    id: 'cost',
+    label: 'Cost / subsidy context',
+    detail: 'Educational estimates before you talk to anyone.',
+    href: '/calculators/aca-subsidy',
+    secondaryHref: '/tools/cost-estimator',
+    secondaryLabel: 'Annual cost planner',
+  },
+] as const;
+
+/** Launch hubs known to have promoted inventory — still gated by live state counts. */
+export const LIVE_LAUNCH_HUBS = [
+  { href: '/hubs/south-florida', label: 'South Florida', state: 'FL' as const },
+  { href: '/hubs/florida/jacksonville', label: 'Jacksonville', state: 'FL' as const },
+  { href: '/hubs/texas/houston', label: 'Houston', state: 'TX' as const },
+  { href: '/hubs/ohio/columbus', label: 'Columbus', state: 'OH' as const },
+  { href: '/hubs/nevada/las-vegas', label: 'Las Vegas', state: 'NV' as const },
+  { href: '/hubs/vermont/burlington', label: 'Burlington', state: 'VT' as const },
+] as const;
+
+export const RECOMMENDED_FIRST_PATH = [
+  {
+    step: '1',
+    label: 'Name the coverage question',
+    href: '/tools/coverage-compass',
+    cta: 'Coverage Compass',
+  },
+  {
+    step: '2',
+    label: 'See options where you live',
+    href: '/tools/marketplace-plan-research',
+    cta: 'Marketplace landscape',
+  },
+  {
+    step: '3',
+    label: 'Estimate cost or subsidy',
+    href: '/calculators/aca-subsidy',
+    cta: 'ACA savings planner',
+  },
+  {
+    step: '4',
+    label: 'Verify before you decide',
+    href: '/tools/license-verification',
+    cta: 'License verification',
+  },
+] as const;
+
+export const STATES_WITH_VERIFIED_INVENTORY = ['FL', 'TX', 'OH', 'NV', 'VT'] as const;
+
+export function guideHasVerifiedInventory(stateName: string): boolean {
+  return stateName === 'Florida' || stateName === 'Texas';
+}
+
 export const LOCAL_RESEARCH_ENTRY = {
   title: 'Research where you live',
   support:

@@ -6,6 +6,7 @@ interface HubMatchFormProps {
   hubName: string;
   /** When false, omit any soft path that implies local agent contact capacity */
   hasVerifiedListings?: boolean;
+  directoryHref?: string;
 }
 
 /**
@@ -15,6 +16,7 @@ interface HubMatchFormProps {
 export function HubMatchForm({
   hubName,
   hasVerifiedListings = false,
+  directoryHref = '/directory?verified=true',
 }: HubMatchFormProps) {
   return (
     <div className="rounded-xl border bg-card p-5 shadow-trust space-y-3">
@@ -37,7 +39,10 @@ export function HubMatchForm({
           <Link href="/tools/marketplace-plan-research">Marketplace plan research</Link>
         </Button>
         <Button asChild variant="outline" className="w-full justify-start">
-          <Link href="/calculators/aca-subsidy">ACA subsidy planner</Link>
+          <Link href="/calculators/aca-subsidy">Estimate ACA savings</Link>
+        </Button>
+        <Button asChild variant="outline" className="w-full justify-start">
+          <Link href="/tools/cost-estimator">Estimate annual cost</Link>
         </Button>
         <Button asChild variant="outline" className="w-full justify-start">
           <a
@@ -51,7 +56,7 @@ export function HubMatchForm({
         </Button>
         {hasVerifiedListings ? (
           <Button asChild variant="ghost" className="w-full justify-start text-xs">
-            <Link href="/directory">Browse verified research listings</Link>
+            <Link href={directoryHref}>Browse verified research listings</Link>
           </Button>
         ) : (
           <p className="text-[11px] text-muted-foreground leading-relaxed pt-1">

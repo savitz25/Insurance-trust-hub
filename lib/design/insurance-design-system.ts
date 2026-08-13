@@ -268,6 +268,7 @@ export const INSURANCE_HEADER_NAV = [
   { href: '/medicare', label: 'Medicare' },
   { href: '/guides', label: 'Guides' },
   { href: '/directory', label: 'Directory' },
+  { href: '/data/plan-complaint-index', label: 'Data' },
   { href: '/methodology', label: 'Methodology' },
 ] as const;
 

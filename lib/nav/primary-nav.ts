@@ -49,8 +49,8 @@ export const DIRECTORY_NAV: PrimaryNavLink[] = [
 
 /** Shield Blue CTA — independent directory tone (no lead-gen / free quotes). */
 export const NAV_CTA = {
-  href: '/directory',
-  label: 'Compare coverage',
+  href: '/tools',
+  label: 'Research Center',
 } as const;
 
 export function navLinkActive(href: string, pathname: string | null | undefined): boolean {

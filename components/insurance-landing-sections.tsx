@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { DirectoryLiveCounts } from '@/components/directory-live-counts';
+import { LiveLaunchHubs } from '@/components/live-launch-hubs';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -327,6 +328,9 @@ function LocalResearchSection() {
         {' '}
         (Florida DFS, Texas TDI, Ohio ODI, Nevada DOI, and Vermont DFR research listings).
       </p>
+      <Suspense fallback={null}>
+        <LiveLaunchHubs />
+      </Suspense>
       <Suspense fallback={null}>
         <DirectoryLiveCounts />
       </Suspense>

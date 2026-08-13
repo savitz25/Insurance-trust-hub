@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight, BookOpen, Shield } from 'lucide-react';
 import { ZipSearch } from '@/components/zip-search';
+import { ConsumerJobPaths } from '@/components/consumer-job-paths';
 import { Button } from '@/components/ui/button';
 import {
   INSURANCE_BRAND,
@@ -69,7 +70,9 @@ export function InsuranceHero() {
               {INSURANCE_HERO.networkLine}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <ConsumerJobPaths className="mt-6" />
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link href={INSURANCE_HERO.primaryCta.href} className="w-full sm:w-auto">
                 <Button
                   size="lg"

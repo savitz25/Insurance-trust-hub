@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import type { AcaMarketplaceGuide } from '@/lib/guides/aca-marketplace-guides';
 import { MARKETPLACE_FLAGSHIP_PATH } from '@/lib/guides/aca-marketplace-guides';
+import { guideHasVerifiedInventory } from '@/lib/product/research-ia';
 import { Button } from '@/components/ui/button';
 import { ContextNav } from '@/components/context-nav';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
@@ -184,15 +185,35 @@ export function AcaMarketplaceGuideView({ guide }: Props) {
               page.
             </li>
             <li>
-              Browse{' '}
-              <Link href={guide.hubHref} className="font-medium text-[#0284C7] hover:underline">
-                {guide.hubLabel}
-              </Link>{' '}
-              or the{' '}
-              <Link href={guide.directoryHref} className="font-medium text-[#0284C7] hover:underline">
-                ACA specialists hub
-              </Link>{' '}
-              when you want human help — re-check licenses with {guide.licenseRegulator}.
+              {guideHasVerifiedInventory(guide.stateName) ? (
+                <>
+                  Browse verified research listings in{' '}
+                  <Link href={guide.hubHref} className="font-medium text-[#0284C7] hover:underline">
+                    {guide.hubLabel}
+                  </Link>{' '}
+                  or the{' '}
+                  <Link
+                    href={
+                      guide.stateName === 'Florida'
+                        ? '/directory?state=FL&verified=true'
+                        : '/directory?state=TX&verified=true'
+                    }
+                    className="font-medium text-[#0284C7] hover:underline"
+                  >
+                    verified {guide.stateName} directory
+                  </Link>
+                  . Re-check licenses with {guide.licenseRegulator}.
+                </>
+              ) : (
+                <>
+                  Continue with educational{' '}
+                  <Link href={guide.hubHref} className="font-medium text-[#0284C7] hover:underline">
+                    {guide.hubLabel}
+                  </Link>{' '}
+                  context — we do not invent local agency inventory for this state. Re-check licenses
+                  with {guide.licenseRegulator}.
+                </>
+              )}
             </li>
             <li>
               Complete official eligibility, pricing, and enrollment on{' '}

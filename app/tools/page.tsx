@@ -21,6 +21,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { withReturnContext } from '@/lib/navigation/context-nav';
 import { ContextNav } from '@/components/context-nav';
 import { ResearchQuestions } from '@/components/research-questions';
+import { RecommendedResearchPath } from '@/components/recommended-research-path';
 import { CMS_COMPLAINT_DATASET_META } from '@/lib/insurance/cms/complaint-rankings';
 import { getProviderSearchMeta } from '@/lib/insurance/cms/provider-search';
 import { ACA_SAVINGS_META } from '@/lib/tools/aca-subsidy-planner';
@@ -71,12 +72,6 @@ const QUICK_BY_QUESTION = {
   ],
   options: [
     {
-      href: '/tools/aca-plan-explorer',
-      icon: Compass,
-      title: 'Live ACA Plan Explorer',
-      purpose: 'Research CMS Marketplace plans by ZIP and ages.',
-    },
-    {
       href: '/marketplace',
       icon: MapPin,
       title: 'County ACA intelligence',
@@ -104,7 +99,13 @@ const QUICK_BY_QUESTION = {
       href: '/directory?verified=true',
       icon: Users,
       title: 'Verified agency directory',
-      purpose: 'Florida, Texas, and Ohio verified agencies. Empty markets stay empty.',
+      purpose: 'FL, TX, OH, NV, and VT research listings. Empty markets stay empty.',
+    },
+    {
+      href: '/tools/aca-plan-explorer',
+      icon: Compass,
+      title: 'Live ACA Plan Explorer',
+      purpose: 'Deeper CMS plan table — start with Marketplace plan research first.',
     },
   ],
   verify: [
@@ -239,6 +240,8 @@ export default function ToolsPage() {
       </div>
 
       <div className="container mx-auto max-w-5xl space-y-16 px-4 py-10 md:py-14">
+        <RecommendedResearchPath linkFrom={fromTools} />
+
         {/* THREE QUESTIONS */}
         <section aria-labelledby="three-questions">
           <h2 id="three-questions" className="text-xl font-semibold text-slate-900">
@@ -258,7 +261,8 @@ export default function ToolsPage() {
             Featured research tools
           </h2>
           <p className="mt-1 text-sm text-slate-500">
-            Flagship depth across need, local options, and verification.
+            Four flagships. ACA Savings Planner and Cost Planner are two views of cost and
+            assistance — not competing quote tools.
           </p>
           <div className="mt-6 space-y-4">
             {FLAGSHIP_RESEARCH_TOOLS.map((tool) => {
@@ -406,7 +410,7 @@ export default function ToolsPage() {
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
-              href={fromTools('/directory')}
+              href={fromTools('/directory?verified=true')}
               className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#0284C7] px-5 text-sm font-semibold text-white hover:bg-[#1E3A8A]"
             >
               Open directory

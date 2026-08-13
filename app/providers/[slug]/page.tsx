@@ -524,10 +524,38 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       </li>
                     ) : null}
                     <li>
-                      <Link href="/tools" className="text-primary hover:underline">
-                        Research tools
+                      <Link
+                        href="/tools/marketplace-plan-research"
+                        className="text-primary hover:underline"
+                      >
+                        Marketplace plan research
                       </Link>{' '}
-                      — marketplace landscape, needs assessment, cost planners
+                      — local ACA landscape by ZIP
+                    </li>
+                    <li>
+                      <Link href="/calculators/aca-subsidy" className="text-primary hover:underline">
+                        ACA savings planner
+                      </Link>
+                      {' · '}
+                      <Link href="/tools/cost-estimator" className="text-primary hover:underline">
+                        Cost planner
+                      </Link>{' '}
+                      — educational estimates only
+                    </li>
+                    <li>
+                      <Link
+                        href="/data/plan-complaint-index"
+                        className="text-primary hover:underline"
+                      >
+                        Plan Complaint Index
+                      </Link>{' '}
+                      — CMS complaint measures
+                    </li>
+                    <li>
+                      <Link href="/tools" className="text-primary hover:underline">
+                        Research Center
+                      </Link>{' '}
+                      — Coverage Compass and the full toolkit
                     </li>
                     <li>
                       <Link
