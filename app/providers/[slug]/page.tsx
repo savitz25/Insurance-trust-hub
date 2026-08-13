@@ -54,6 +54,7 @@ import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 import { TX_TDI_LOOKUP_URL, TX_TDI_REGULATOR } from '@/lib/tdi/launch-markets';
 import { NJ_DOBI_LOOKUP_URL, NJ_DOBI_REGULATOR } from '@/lib/nj/launch-regions';
 import { OH_ODI_LOOKUP_URL, OH_ODI_REGULATOR } from '@/lib/odi/launch-markets';
+import { NC_DOI_LOOKUP_URL, NC_DOI_REGULATOR } from '@/lib/nc/launch-markets';
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
@@ -147,6 +148,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const isFlorida = (provider.state || '').toUpperCase() === 'FL';
   const isNewJersey = (provider.state || '').toUpperCase() === 'NJ';
   const isOhio = (provider.state || '').toUpperCase() === 'OH';
+  const isNorthCarolina = (provider.state || '').toUpperCase() === 'NC';
   const npn = extractNpnFromNotes(provider.license_notes);
   const regulatorName = isTexas
     ? TX_TDI_REGULATOR
@@ -154,9 +156,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
       ? OH_ODI_REGULATOR
       : isNewJersey
         ? NJ_DOBI_REGULATOR
-        : isFlorida
-          ? 'Florida DFS'
-          : publicView.verification.sourceLabel || 'State insurance department';
+        : isNorthCarolina
+          ? NC_DOI_REGULATOR
+          : isFlorida
+            ? 'Florida DFS'
+            : publicView.verification.sourceLabel || 'State insurance department';
 
   let secondarySignals = null;
   try {
@@ -332,9 +336,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         ? 'Ohio Department of Insurance (ODI) is the license source of truth for this research listing.'
                         : isNewJersey
                           ? 'New Jersey Department of Banking and Insurance (DOBI) is the license source of truth for this research listing.'
-                          : isFlorida
-                            ? 'Florida DFS is the license source of truth for this research listing.'
-                            : `${regulatorName} is the license source of truth for this research listing.`}
+                          : isNorthCarolina
+                            ? 'North Carolina Department of Insurance (NC DOI) is the license source of truth for this research listing.'
+                            : isFlorida
+                              ? 'Florida DFS is the license source of truth for this research listing.'
+                              : `${regulatorName} is the license source of truth for this research listing.`}
                   </p>
                 </CardContent>
               </Card>
@@ -378,13 +384,24 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                           ? 'Texas TDI license types / qualifications'
                           : isNewJersey
                             ? 'New Jersey DOBI organization lines'
-                            : 'Florida DFS lines of authority'}{' '}
+                            : isNorthCarolina
+                              ? 'North Carolina DOI / SBS license types / lines of authority'
+                              : 'Florida DFS lines of authority'}{' '}
                       on the public license record when available.
                     </p>
                   )}
                   <p className="text-sm text-muted-foreground leading-relaxed border-t pt-4">
                     We never invent Medicare-certified status from{' '}
-                    {isOhio ? 'ODI' : isTexas ? 'TDI' : isNewJersey ? 'DOBI' : 'DFS'} alone, never
+                    {isOhio
+                      ? 'ODI'
+                      : isTexas
+                        ? 'TDI'
+                        : isNewJersey
+                          ? 'DOBI'
+                          : isNorthCarolina
+                            ? 'NC DOI'
+                            : 'DFS'}{' '}
+                    alone, never
                     invent websites, and never treat carrier appointments as quality rankings.
                   </p>
                   {provider.description ? (
@@ -438,7 +455,15 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <CardContent className="pt-6 space-y-3">
                   <p className="text-sm">
                     <span className="font-medium">Regulator:</span> {regulatorName}
-                    {isTexas ? ' (TDI)' : isOhio ? ' (ODI)' : isNewJersey ? ' (DOBI)' : null}
+                    {isTexas
+                      ? ' (TDI)'
+                      : isOhio
+                        ? ' (ODI)'
+                        : isNewJersey
+                          ? ' (DOBI)'
+                          : isNorthCarolina
+                            ? ' (NC DOI)'
+                            : null}
                   </p>
                   {publicView.verification.licenseNumber && (
                     <p className="text-sm">
@@ -476,7 +501,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         ? ' Medicare-certified status is never inferred from DOBI organization data alone. Agency/business entities only in this inventory.'
                         : isOhio
                           ? ' Medicare-certified status is never inferred from ODI agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the ODI mailing-list export.'
-                          : null}
+                          : isNorthCarolina
+                            ? ' Medicare-certified status is never inferred from NC DOI / SBS agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the SBS export.'
+                            : null}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
@@ -517,6 +544,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         </a>
                       </Button>
                     ) : null}
+                    {isNorthCarolina ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={NC_DOI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
+                          North Carolina DOI / SBS licensee search
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
                   </div>
                   <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
                     Research listing only — not an endorsement, rating, or appointment guarantee.
@@ -540,16 +575,26 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                             ? 'DOBI'
                             : isOhio
                               ? 'ODI'
-                              : isFlorida
-                                ? 'DFS'
-                                : 'state'}{' '}
+                              : isNorthCarolina
+                                ? 'NC DOI'
+                                : isFlorida
+                                  ? 'DFS'
+                                  : 'state'}{' '}
                         license number before sharing personal data.
                       </li>
                     ) : null}
                     {provider.website ? (
                       <li>
                         Visit the website on file (secondary public signal — not part of{' '}
-                        {isOhio ? 'ODI' : isTexas ? 'TDI' : isNewJersey ? 'DOBI' : 'DFS'}{' '}
+                        {isOhio
+                          ? 'ODI'
+                          : isTexas
+                            ? 'TDI'
+                            : isNewJersey
+                              ? 'DOBI'
+                              : isNorthCarolina
+                                ? 'NC DOI'
+                                : 'DFS'}{' '}
                         verification).
                       </li>
                     ) : null}
@@ -562,7 +607,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                             ? ' Texas TDI'
                             : isNewJersey
                               ? ' New Jersey DOBI'
-                              : ' Florida DFS'}
+                              : isNorthCarolina
+                                ? ' North Carolina DOI'
+                                : ' Florida DFS'}
                         .
                       </li>
                     ) : null}

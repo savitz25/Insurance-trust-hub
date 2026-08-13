@@ -39,7 +39,9 @@ const LOOKUP_URLS: Record<string, { department: string; lookupUrl: string; notes
   },
   NC: {
     department: 'North Carolina Department of Insurance',
-    lookupUrl: 'https://www.ncdoi.gov/consumers/helpful-links',
+    lookupUrl: 'https://sbs.naic.org/solar-external-lookup/lookup/licensee?jurisdiction=NC',
+    notes:
+      'Official SBS licensee lookup. Bulk agency lists: NC DOI SBS Report Generator (business entities only; paid per-row).',
   },
   IL: {
     department: 'Illinois Department of Insurance',

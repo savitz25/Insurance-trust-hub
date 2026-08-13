@@ -53,6 +53,8 @@ yarn-error.log*
 !/data/nj-raw/README.md
 /data/ohio-raw/**
 !/data/ohio-raw/README.md
+/data/nc-raw/**
+!/data/nc-raw/README.md
 
 # Ops enrichment run logs
 /scripts/output/**

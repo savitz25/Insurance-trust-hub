@@ -1172,6 +1172,31 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
       'Research insurance agencies and coverage options in Greensboro-High Point-Winston-Salem. Verified listings appear only when they meet our public research standard. Tiered network health, Medicare, and group specialists — NC DOI verified.',
   },
   {
+    slug: 'wilmington',
+    stateSlug: 'north-carolina',
+    stateCode: 'NC',
+    stateName: 'North Carolina',
+    msaName: 'Wilmington',
+    shortName: 'Wilmington',
+    population: 300_000,
+    enrollmentHighlight: 'Coastal New Hanover market — seasonal coverage and port-adjacent employment',
+    localDescriptor: 'Wrightsville and Carolina Beach households, port employers, and New Hanover retirees',
+    priority: 46,
+    zipCodes: ['28401', '28403', '28405', '28409', '28412'],
+    healthInsuranceDensity: 'moderate',
+    marketSnapshot:
+      'Wilmington / New Hanover is a smaller coastal research market. Verified agency listings appear only when they meet our public research standard from North Carolina DOI business-entity data — not invented inventory.',
+    healthNeeds: [
+      'Coastal ACA marketplace research',
+      'Medicare education pathways',
+      'Small-group and professional coverage',
+      'Seasonal / relocation coverage transitions',
+    ],
+    metaTitle: 'Insurance Agencies in Wilmington NC (2026) | New Hanover Research',
+    metaDescription:
+      'Research verified insurance agencies in Wilmington and New Hanover County. Listings appear only when they meet our public research standard — North Carolina DOI organization licenses.',
+  },
+  {
     slug: 'columbus',
     stateSlug: 'ohio',
     stateCode: 'OH',

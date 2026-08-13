@@ -296,6 +296,15 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified ODI inventory for this launch is Wave-1 Akron / Summit–area agencies (city/county/ZIP match). Business entities only.';
     case 'dayton':
       return 'Verified ODI inventory for this launch is Wave-1 Dayton / Montgomery–area agencies (city/county/ZIP match). Business entities only.';
+    // —— Phase 13 North Carolina DOI ——
+    case 'charlotte':
+      return 'Verified NC DOI inventory for this launch is Wave-1 Charlotte / Mecklenburg–area agencies (city/county/ZIP match). Agency/business entities only.';
+    case 'raleigh':
+      return 'Verified NC DOI inventory for this launch is Wave-1 Research Triangle agencies (Wake, Durham, and Orange — city/county/ZIP match). Agency/business entities only.';
+    case 'greensboro':
+      return 'Verified NC DOI inventory for this launch is Wave-1 Greensboro / Guilford agencies (city/county/ZIP match). Agency/business entities only.';
+    case 'wilmington':
+      return 'Verified NC DOI inventory for this launch is Wave-1 Wilmington / New Hanover agencies (city/county/ZIP match). Agency/business entities only.';
     default:
       return null;
   }
