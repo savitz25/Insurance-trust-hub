@@ -173,6 +173,21 @@ export const SEO_CLUSTERS: SeoCluster[] = [
     guides: [],
     sampleZips: [{ zip: '02108', label: 'Boston' }],
   },
+  {
+    id: 'jackson',
+    hubSlugs: ['jackson'],
+    hubPath: '/hubs/mississippi/jackson',
+    stateCode: 'MS',
+    marketName: 'Jackson',
+    queryFocus: 'licensed insurance agencies in Jackson Mississippi',
+    title: 'Licensed insurance agencies in Jackson | Mississippi MID research',
+    description:
+      'Independent Mississippi Insurance Department (MID)–verified agency research for Jackson metro. Insurance Producer Entity listings only. Re-check licenses on official MID tools.',
+    h1: 'Research licensed insurance agencies in Jackson',
+    directoryHref: '/directory?state=MS&verified=true',
+    guides: [],
+    sampleZips: [{ zip: '39201', label: 'Jackson' }],
+  },
 ];
 
 const BY_SLUG = new Map<string, SeoCluster>();
@@ -232,6 +247,7 @@ export function marketplaceClusterChips(): SeoClusterLink[] {
     { href: '/hubs/nevada/las-vegas', label: 'Las Vegas agencies' },
     { href: '/hubs/vermont/burlington', label: 'Burlington agencies' },
     { href: '/hubs/massachusetts/boston', label: 'Boston agencies' },
+    { href: '/hubs/mississippi/jackson', label: 'Jackson agencies' },
     { href: '/hubs/ohio/columbus', label: 'Columbus agencies' },
     { href: '/guides/florida-aca-marketplace', label: 'Florida ACA guide' },
     { href: '/guides/houston-aca-marketplace', label: 'Houston ACA guide' },

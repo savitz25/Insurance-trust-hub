@@ -10,6 +10,7 @@ Live official-regulator agency/firm inventory. Quality and honesty over new stat
 | Nevada | Nevada Division of Insurance (NV DOI) | NV-address firms |
 | Vermont | Vermont Department of Financial Regulation (VT DFR) | Local firms only (small) |
 | Massachusetts | Massachusetts Division of Insurance (MA DOI) | Pipeline live; Wave-1 empty until official agency lists are imported |
+| Mississippi | Mississippi Insurance Department (MID) | Wave-1 Insurance Producer Entity agencies (MS address) |
 
 North Carolina DOI pipeline exists but is not promoted until a paid SBS export is purchased.
 

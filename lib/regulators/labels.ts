@@ -11,6 +11,7 @@ import { NC_DOI_LOOKUP_URL } from '@/lib/nc/launch-markets';
 import { NV_DOI_LOOKUP_URL } from '@/lib/nv/launch-markets';
 import { VT_DFR_LOOKUP_URL } from '@/lib/vt/launch-markets';
 import { MA_DOI_LOOKUP_URL } from '@/lib/ma/launch-markets';
+import { MS_MID_LOOKUP_URL } from '@/lib/ms/launch-markets';
 
 export type RegulatorProfile = {
   code: string;
@@ -122,6 +123,18 @@ const PROFILES: Record<string, RegulatorProfile> = {
     profileKicker: 'Massachusetts agency research profile',
     allowsLeadForm: false,
   },
+  MS: {
+    code: 'MS',
+    label: 'Mississippi Insurance Department (MID)',
+    short: 'MID',
+    lookupUrl: MS_MID_LOOKUP_URL,
+    lookupLinkLabel: 'Mississippi MID licensee search',
+    loaSource: 'Mississippi MID Insurance Producer Entity license',
+    inventoryNote:
+      ' Insurance Producer Entity / business agencies only in this inventory. Out-of-state headquarters are not shown on local Mississippi hubs. Lines of authority are not listed on the MID entity export.',
+    profileKicker: 'Mississippi agency research profile',
+    allowsLeadForm: false,
+  },
 };
 
 export function normalizeStateCode(raw?: string | null): string {
@@ -193,12 +206,14 @@ export function getDirectoryStateIntro(state?: string | null): string {
       return 'Vermont Department of Financial Regulation (VT DFR)–verified agency research listings. Firms only — not a bulk individual producer list. Empty markets stay empty. Always re-check licenses on official VT DFR / SBS tools.';
     case 'MA':
       return 'Massachusetts Division of Insurance (MA DOI)–verified agency research listings. Agencies and business entities only — not licensed companies or carriers. Empty markets stay empty. Always re-check licenses on official MA DOI / SBS tools.';
+    case 'MS':
+      return 'Mississippi Insurance Department (MID)–verified agency research listings. Insurance Producer Entity / business agencies only. Empty markets stay empty. Always re-check licenses on official MID tools.';
     case 'NC':
       return 'North Carolina Department of Insurance (NC DOI)–verified agency research listings. Agency/business entities only. Empty markets stay empty. Always re-check licenses on official NC DOI / SBS tools.';
     case 'NJ':
       return 'New Jersey DOBI–verified agency research listings. Always re-check licenses on official DOBI tools.';
     default:
-      return 'Verified research listings only — Florida DFS, Texas TDI, Ohio ODI, Nevada DOI, Vermont DFR, and Massachusetts DOI. North Carolina DOI appears when promoted. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.';
+      return 'Verified research listings only — Florida DFS, Texas TDI, Ohio ODI, Nevada DOI, Vermont DFR, Massachusetts DOI, and Mississippi MID. North Carolina DOI appears when promoted. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.';
   }
 }
 

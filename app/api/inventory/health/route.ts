@@ -12,6 +12,7 @@ import {
   countVerifiedNevadaProviders,
   countVerifiedVermontProviders,
   countVerifiedMassachusettsProviders,
+  countVerifiedMississippiProviders,
   countVerifiedProvidersForHub,
   getHubInventory,
   HUB_PAGE_SIZE,
@@ -138,6 +139,9 @@ export async function GET() {
     boston: await countVerifiedProvidersForHub('boston'),
     worcester: await countVerifiedProvidersForHub('worcester'),
     springfield: await countVerifiedProvidersForHub('springfield'),
+    jackson: await countVerifiedProvidersForHub('jackson'),
+    'gulfport-biloxi': await countVerifiedProvidersForHub('gulfport-biloxi'),
+    hattiesburg: await countVerifiedProvidersForHub('hattiesburg'),
   };
 
   const jax = await getHubInventory('jacksonville', { pageSize: 5 });
@@ -149,6 +153,7 @@ export async function GET() {
   const verifiedNvCount = await countVerifiedNevadaProviders();
   const verifiedVtCount = await countVerifiedVermontProviders();
   const verifiedMaCount = await countVerifiedMassachusettsProviders();
+  const verifiedMsCount = await countVerifiedMississippiProviders();
 
   const restOk = restStatus === 200 || restStatus === 206;
   const countyOk =
@@ -179,6 +184,7 @@ export async function GET() {
     verifiedNvCount,
     verifiedVtCount,
     verifiedMaCount,
+    verifiedMsCount,
     byState: {
       FL: verifiedFlCount,
       TX: verifiedTxCount,
@@ -186,6 +192,7 @@ export async function GET() {
       NV: verifiedNvCount,
       VT: verifiedVtCount,
       MA: verifiedMaCount,
+      MS: verifiedMsCount,
     },
     queryError,
     /** Matching strategy + intentional page cap */

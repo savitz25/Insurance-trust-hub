@@ -73,6 +73,7 @@ const expectedLabels: Record<string, string> = {
   NV: 'Nevada Division of Insurance (NV DOI)',
   VT: 'Vermont Department of Financial Regulation (VT DFR)',
   MA: 'Massachusetts Division of Insurance (MA DOI)',
+  MS: 'Mississippi Insurance Department (MID)',
 };
 for (const [code, label] of Object.entries(expectedLabels)) {
   if (getRegulatorLabel(code) !== label) {
@@ -97,8 +98,13 @@ if (!/never inferred from VT DFR/.test(getMedicareNonClaim('VT'))) {
 if (!/never inferred from NV DOI/.test(getMedicareNonClaim('NV'))) {
   errors.push('NV Medicare non-claim');
 }
-if (allowsRegulatorLeadForm('NV') || allowsRegulatorLeadForm('VT') || allowsRegulatorLeadForm('MA')) {
-  errors.push('NV/VT/MA must not allow lead forms');
+if (
+  allowsRegulatorLeadForm('NV') ||
+  allowsRegulatorLeadForm('VT') ||
+  allowsRegulatorLeadForm('MA') ||
+  allowsRegulatorLeadForm('MS')
+) {
+  errors.push('NV/VT/MA/MS must not allow lead forms');
 }
 if (!allowsRegulatorLeadForm('FL') || !allowsRegulatorLeadForm('TX')) {
   errors.push('FL/TX lead-form policy should stay unchanged');
@@ -114,16 +120,21 @@ if (/when promoted/.test(getDirectoryStateIntro('VT'))) {
 }
 
 const dir = read('app/directory/page.tsx');
-if (!/vtTotal > 0/.test(dir) || !/nvTotal > 0/.test(dir) || !/maTotal > 0/.test(dir)) {
-  errors.push('directory must gate NV/VT/MA chips on live verified count');
+if (!/vtTotal > 0/.test(dir) || !/nvTotal > 0/.test(dir) || !/maTotal > 0/.test(dir) || !/msTotal > 0/.test(dir)) {
+  errors.push('directory must gate NV/VT/MA/MS chips on live verified count');
 }
 if (!/getDirectoryStateIntro/.test(dir)) {
   errors.push('directory should use shared state intro helper');
 }
 
 const chips = read('components/directory-live-counts.tsx');
-if (!/Vermont \(VT DFR\)/.test(chips) || !/Nevada \(NV DOI\)/.test(chips) || !/Massachusetts \(MA DOI\)/.test(chips)) {
-  errors.push('homepage chips missing NV/VT/MA labels');
+if (
+  !/Vermont \(VT DFR\)/.test(chips) ||
+  !/Nevada \(NV DOI\)/.test(chips) ||
+  !/Massachusetts \(MA DOI\)/.test(chips) ||
+  !/Mississippi \(MID\)/.test(chips)
+) {
+  errors.push('homepage chips missing NV/VT/MA/MS labels');
 }
 if (!/\.filter\(\(row\) => row\.total > 0\)/.test(chips)) {
   errors.push('homepage chips must hide zero-count states');

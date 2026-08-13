@@ -326,6 +326,19 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified MA DOI inventory for this launch is Wave-1 Worcester agencies with a Massachusetts address. Agencies/business entities only.';
     case 'springfield':
       return 'Verified MA DOI inventory for this launch is Wave-1 Springfield / Hampden agencies with a Massachusetts address. Agencies/business entities only.';
+    // —— Phase 24 Mississippi MID ——
+    case 'jackson':
+      return 'Verified MID inventory for this launch is Wave-1 Jackson metro Insurance Producer Entity agencies with a Mississippi address (Hinds / Madison / Rankin cities). Not a bulk individual producer list.';
+    case 'gulfport-biloxi':
+      return 'Verified MID inventory for this launch is Wave-1 Gulf Coast agencies (Gulfport, Biloxi, Ocean Springs, and nearby) with a Mississippi address. Insurance Producer Entity only.';
+    case 'hattiesburg':
+      return 'Verified MID inventory for this launch is Wave-1 Hattiesburg agencies with a Mississippi address. Insurance Producer Entity only.';
+    case 'southaven':
+      return 'Verified MID inventory for this launch is Wave-1 Southaven / DeSoto agencies with a Mississippi address. Insurance Producer Entity only — not Tennessee Memphis agencies.';
+    case 'tupelo':
+      return 'Verified MID inventory for this launch is Wave-1 Tupelo agencies with a Mississippi address. Insurance Producer Entity only.';
+    case 'meridian':
+      return 'Verified MID inventory for this launch is Wave-1 Meridian agencies with a Mississippi address. Insurance Producer Entity only.';
     default:
       return null;
   }

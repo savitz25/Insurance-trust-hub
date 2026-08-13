@@ -7,7 +7,7 @@ import { INSURANCE_BRAND } from '@/lib/design/insurance-design-system';
  * Fail-soft: cached helper returns zeros and this renders nothing.
  */
 export async function DirectoryLiveCounts() {
-  const { fl, tx, oh, nc, nv, vt, ma } = await getCachedVerifiedLaunchCounts();
+  const { fl, tx, oh, nc, nv, vt, ma, ms } = await getCachedVerifiedLaunchCounts();
   const rows = [
     {
       label: 'Florida (DFS)',
@@ -43,6 +43,11 @@ export async function DirectoryLiveCounts() {
       label: 'Massachusetts (MA DOI)',
       href: '/directory?state=MA&verified=true',
       total: ma,
+    },
+    {
+      label: 'Mississippi (MID)',
+      href: '/directory?state=MS&verified=true',
+      total: ms,
     },
   ].filter((row) => row.total > 0);
 

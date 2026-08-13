@@ -61,6 +61,8 @@ yarn-error.log*
 !/data/vt-raw/README.md
 /data/ma-raw/**
 !/data/ma-raw/README.md
+/data/ms-raw/**
+!/data/ms-raw/README.md
 
 # Ops enrichment run logs
 /scripts/output/**

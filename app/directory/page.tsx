@@ -27,6 +27,7 @@ import {
   getNvLaunchMarketLiveTotals,
   getVtLaunchMarketLiveTotals,
   getMaLaunchMarketLiveTotals,
+  getMsLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
@@ -130,10 +131,18 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
-  const { fl: flTotal, tx: txTotal, oh: ohTotal, nc: ncTotal, nv: nvTotal, vt: vtTotal, ma: maTotal } =
-    await getCachedVerifiedLaunchCounts();
+  const {
+    fl: flTotal,
+    tx: txTotal,
+    oh: ohTotal,
+    nc: ncTotal,
+    nv: nvTotal,
+    vt: vtTotal,
+    ma: maTotal,
+    ms: msTotal,
+  } = await getCachedVerifiedLaunchCounts();
   const njTotal = await countVerifiedNewJerseyProviders();
-  const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows, vtHubRows, maHubRows] =
+  const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows, vtHubRows, maHubRows, msHubRows] =
     await Promise.all([
       flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
       txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
@@ -143,6 +152,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
       nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
       vtTotal > 0 ? getVtLaunchMarketLiveTotals() : Promise.resolve([]),
       maTotal > 0 ? getMaLaunchMarketLiveTotals() : Promise.resolve([]),
+      msTotal > 0 ? getMsLaunchMarketLiveTotals() : Promise.resolve([]),
     ]);
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';
@@ -151,6 +161,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const browsingNv = state === 'NV';
   const browsingVt = state === 'VT';
   const browsingMa = state === 'MA';
+  const browsingMs = state === 'MS';
   const browsingFl = state === 'FL';
   const browsingAllVerified = !state;
 
@@ -254,6 +265,21 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
+          {msTotal > 0 ? (
+            <Link
+              href="/directory?state=MS&verified=true"
+              className={
+                browsingMs
+                  ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                  : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+              }
+            >
+              Mississippi (MID)
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {msTotal.toLocaleString()}
+              </span>
+            </Link>
+          ) : null}
           {nvTotal > 0 ? (
             <Link
               href="/directory?state=NV&verified=true"
@@ -348,6 +374,49 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                   className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
                 >
                   All Massachusetts hubs
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
+        {msTotal > 0 ? (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Mississippi launch hubs
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · {msTotal.toLocaleString()} verified MS listings
+              </span>
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {msHubRows
+                .filter((row) => row.total > 0)
+                .map((row) => (
+                  <li key={row.key}>
+                    <Link
+                      href={row.hubHref}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                    >
+                      {row.displayName}
+                      <span className="tabular-nums opacity-80">
+                        {row.total.toLocaleString()}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              <li>
+                <Link
+                  href="/directory?state=MS&verified=true"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+                >
+                  Browse MS directory
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hubs/mississippi"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+                >
+                  All Mississippi hubs
                 </Link>
               </li>
             </ul>
