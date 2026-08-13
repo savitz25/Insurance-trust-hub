@@ -9,8 +9,11 @@ Live official-regulator agency/firm inventory. Quality and honesty over new stat
 | Ohio | Ohio Department of Insurance (ODI) | Wave 1 live |
 | Nevada | Nevada Division of Insurance (NV DOI) | NV-address firms |
 | Vermont | Vermont Department of Financial Regulation (VT DFR) | Local firms only (small) |
+| Massachusetts | Massachusetts Division of Insurance (MA DOI) | Pipeline live; Wave-1 empty until official agency lists are imported |
 
 North Carolina DOI pipeline exists but is not promoted until a paid SBS export is purchased.
+
+The Mass.gov **licensed companies** CSV is carriers/reinsurers, not agencies — it is parsed and fail-closed. See `docs/MASSACHUSETTS-DOI-INVENTORY.md`.
 
 ## Display helpers
 

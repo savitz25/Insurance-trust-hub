@@ -158,6 +158,21 @@ export const SEO_CLUSTERS: SeoCluster[] = [
     guides: [],
     sampleZips: [{ zip: '05401', label: 'Burlington' }],
   },
+  {
+    id: 'boston',
+    hubSlugs: ['boston'],
+    hubPath: '/hubs/massachusetts/boston',
+    stateCode: 'MA',
+    marketName: 'Boston',
+    queryFocus: 'licensed insurance agencies in Boston Massachusetts',
+    title: 'Licensed insurance agencies in Boston | Massachusetts DOI research',
+    description:
+      'Independent Massachusetts Division of Insurance (MA DOI)–verified agency research for Greater Boston / Suffolk. Agencies only — not licensed companies or carriers. Re-check licenses on official MA DOI / SBS tools.',
+    h1: 'Research licensed insurance agencies in Boston',
+    directoryHref: '/directory?state=MA&verified=true',
+    guides: [],
+    sampleZips: [{ zip: '02108', label: 'Boston' }],
+  },
 ];
 
 const BY_SLUG = new Map<string, SeoCluster>();
@@ -216,6 +231,7 @@ export function marketplaceClusterChips(): SeoClusterLink[] {
     { href: '/hubs/texas/houston', label: 'Houston agencies' },
     { href: '/hubs/nevada/las-vegas', label: 'Las Vegas agencies' },
     { href: '/hubs/vermont/burlington', label: 'Burlington agencies' },
+    { href: '/hubs/massachusetts/boston', label: 'Boston agencies' },
     { href: '/hubs/ohio/columbus', label: 'Columbus agencies' },
     { href: '/guides/florida-aca-marketplace', label: 'Florida ACA guide' },
     { href: '/guides/houston-aca-marketplace', label: 'Houston ACA guide' },

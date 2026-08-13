@@ -319,6 +319,13 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified VT DFR inventory for this launch is Wave-1 Montpelier / central Vermont firms with a Vermont address. Agencies/firms only.';
     case 'rutland':
       return 'Verified VT DFR inventory for this launch is Wave-1 Rutland / southern Vermont firms with a Vermont address. Agencies/firms only.';
+    // —— Phase 23 Massachusetts DOI ——
+    case 'boston':
+      return 'Verified MA DOI inventory for this launch is Wave-1 Greater Boston / Suffolk agencies with a Massachusetts address. Agencies/business entities only — licensed companies and carriers are not listed as agencies.';
+    case 'worcester':
+      return 'Verified MA DOI inventory for this launch is Wave-1 Worcester agencies with a Massachusetts address. Agencies/business entities only.';
+    case 'springfield':
+      return 'Verified MA DOI inventory for this launch is Wave-1 Springfield / Hampden agencies with a Massachusetts address. Agencies/business entities only.';
     default:
       return null;
   }

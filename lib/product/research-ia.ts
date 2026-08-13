@@ -170,6 +170,7 @@ export const LIVE_LAUNCH_HUBS = [
   { href: '/hubs/ohio/columbus', label: 'Columbus', state: 'OH' as const },
   { href: '/hubs/nevada/las-vegas', label: 'Las Vegas', state: 'NV' as const },
   { href: '/hubs/vermont/burlington', label: 'Burlington', state: 'VT' as const },
+  { href: '/hubs/massachusetts/boston', label: 'Boston', state: 'MA' as const },
 ] as const;
 
 export const RECOMMENDED_FIRST_PATH = [
@@ -199,7 +200,7 @@ export const RECOMMENDED_FIRST_PATH = [
   },
 ] as const;
 
-export const STATES_WITH_VERIFIED_INVENTORY = ['FL', 'TX', 'OH', 'NV', 'VT'] as const;
+export const STATES_WITH_VERIFIED_INVENTORY = ['FL', 'TX', 'OH', 'NV', 'VT', 'MA'] as const;
 
 export function guideHasVerifiedInventory(stateName: string): boolean {
   return stateName === 'Florida' || stateName === 'Texas';

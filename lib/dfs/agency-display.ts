@@ -8,6 +8,7 @@ import { matchLaunchCounty } from '@/lib/dfs/launch-counties';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import { matchNvLaunchMarket } from '@/lib/nv/launch-markets';
 import { matchVtLaunchMarket } from '@/lib/vt/launch-markets';
+import { matchMaLaunchMarket } from '@/lib/ma/launch-markets';
 import { getRegulatorLabel } from '@/lib/regulators/labels';
 
 /** Extract DBA when legal name embeds "DBA …" (common on DFS business names). */
@@ -66,12 +67,26 @@ export function loaPlainLanguageForTags(tags: string[]): Array<{
   });
 }
 
-/** Soft local hub path for FL / TX / NJ / OH / NV / VT launch markets. */
+/** Soft local hub path for FL / TX / NJ / OH / NV / VT / MA launch markets. */
 export function localHubPathForProvider(provider: Provider): {
   href: string;
   label: string;
 } | null {
   const st = (provider.state || '').toUpperCase();
+  if (st === 'MA') {
+    const m = matchMaLaunchMarket({
+      city: provider.city,
+      zip: provider.zip,
+      hqState: 'MA',
+    });
+    if (m?.hubSlugs[0]) {
+      return {
+        href: `/hubs/massachusetts/${m.hubSlugs[0]}`,
+        label: `${m.displayName} agency hub`,
+      };
+    }
+    return { href: '/hubs/massachusetts', label: 'Massachusetts insurance hubs' };
+  }
   if (st === 'VT') {
     const m = matchVtLaunchMarket({
       city: provider.city,

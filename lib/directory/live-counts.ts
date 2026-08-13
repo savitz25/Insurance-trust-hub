@@ -6,6 +6,7 @@ import {
   countVerifiedNorthCarolinaProviders,
   countVerifiedNevadaProviders,
   countVerifiedVermontProviders,
+  countVerifiedMassachusettsProviders,
 } from '@/lib/dfs/providers-by-county';
 
 export type VerifiedLaunchCounts = {
@@ -15,17 +16,19 @@ export type VerifiedLaunchCounts = {
   nc: number;
   nv: number;
   vt: number;
+  ma: number;
 };
 
 async function loadVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
   try {
-    const [fl, tx, oh, nc, nv, vt] = await Promise.all([
+    const [fl, tx, oh, nc, nv, vt, ma] = await Promise.all([
       countVerifiedFloridaProviders(),
       countVerifiedTexasProviders(),
       countVerifiedOhioProviders(),
       countVerifiedNorthCarolinaProviders(),
       countVerifiedNevadaProviders(),
       countVerifiedVermontProviders(),
+      countVerifiedMassachusettsProviders(),
     ]);
     return {
       fl: Number.isFinite(fl) ? fl : 0,
@@ -34,15 +37,16 @@ async function loadVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
       nc: Number.isFinite(nc) ? nc : 0,
       nv: Number.isFinite(nv) ? nv : 0,
       vt: Number.isFinite(vt) ? vt : 0,
+      ma: Number.isFinite(ma) ? ma : 0,
     };
   } catch {
-    return { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0 };
+    return { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0, ma: 0 };
   }
 }
 
 /** Homepage / directory chips — 5-minute cache, fail soft to zeros. */
 export const getCachedVerifiedLaunchCounts = unstable_cache(
   loadVerifiedLaunchCounts,
-  ['ith-verified-launch-counts-v4'],
+  ['ith-verified-launch-counts-v5'],
   { revalidate: 300 }
 );

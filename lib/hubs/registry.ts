@@ -411,7 +411,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     zipCodes: ['02108', '02139', '02458', '02134', '01803', '02171', '01902'],
     healthInsuranceDensity: 'very-high',
     marketSnapshot:
-      'Boston Metro across Suffolk, Middlesex, Essex, Norfolk, and Plymouth is a major Northeast insurance market with high-volume employer-sponsored plans in education, healthcare, biotech, and finance, competitive individual/ACA offerings via Massachusetts Health Connector, and robust Medicare demand. Independent brokers optimize plan choices beyond minimum state requirements and guide biotech employer transitions and aging suburban supplement decisions.',
+      'Boston / Suffolk is Massachusetts Wave-1 agency research. Verified listings appear only when Massachusetts Division of Insurance agency/business-entity records with a local address meet our public research standard — licensed companies and carriers are not listed as agencies. Health Connector and Medicare education remain research context, not inferred specialties.',
     healthNeeds: [
       'Massachusetts Health Connector optimization',
       'Biotech & hospital employer transitions',
@@ -420,9 +420,57 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
       'North Shore & South Shore suburban enrollment',
       'Tufts/MGB network alignments',
     ],
-    metaTitle: 'Insurance Agents in Boston Metro (2026) | Suffolk, Middlesex & Norfolk',
+    metaTitle: 'Insurance Agencies in Boston MA (2026) | MA DOI Research',
     metaDescription:
-      'Research insurance agencies and coverage options in Boston-Cambridge-Newton. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists across Suffolk and collar counties — MA DOI verified.',
+      'Research verified insurance agencies in Greater Boston. Listings appear only when they meet our public research standard — Massachusetts Division of Insurance agency licenses, not carriers.',
+  },
+  {
+    slug: 'worcester',
+    stateSlug: 'massachusetts',
+    stateCode: 'MA',
+    stateName: 'Massachusetts',
+    msaName: 'Worcester',
+    shortName: 'Worcester',
+    population: 500_000,
+    enrollmentHighlight: 'Central Massachusetts — honest empty if no promoted agencies',
+    localDescriptor: 'Worcester and nearby Worcester County households',
+    priority: 51,
+    zipCodes: ['01608', '01602', '01604'],
+    healthInsuranceDensity: 'high',
+    marketSnapshot:
+      'Worcester is a Wave-1 Massachusetts research hub. Verified listings appear only when MA DOI agency records with a Worcester-area address meet our public research standard.',
+    healthNeeds: [
+      'Massachusetts Health Connector research',
+      'Medicare education pathways',
+      'Small-group and professional coverage',
+    ],
+    metaTitle: 'Insurance Agencies in Worcester MA (2026) | MA DOI Research',
+    metaDescription:
+      'Research verified insurance agencies in Worcester. Listings appear only when they meet our public research standard — Massachusetts Division of Insurance.',
+  },
+  {
+    slug: 'springfield',
+    stateSlug: 'massachusetts',
+    stateCode: 'MA',
+    stateName: 'Massachusetts',
+    msaName: 'Springfield',
+    shortName: 'Springfield',
+    population: 460_000,
+    enrollmentHighlight: 'Hampden County — honest empty if no promoted agencies',
+    localDescriptor: 'Springfield, Chicopee, Holyoke, and nearby Hampden County households',
+    priority: 52,
+    zipCodes: ['01103', '01020', '01040'],
+    healthInsuranceDensity: 'high',
+    marketSnapshot:
+      'Springfield / Hampden is a Wave-1 Massachusetts research hub. Verified listings appear only when MA DOI agency records with a local address meet our public research standard.',
+    healthNeeds: [
+      'Western Massachusetts Health Connector research',
+      'Medicare education pathways',
+      'Small-group coverage',
+    ],
+    metaTitle: 'Insurance Agencies in Springfield MA (2026) | MA DOI Research',
+    metaDescription:
+      'Research verified insurance agencies in Springfield and Hampden County. Listings appear only when they meet our public research standard — Massachusetts Division of Insurance.',
   },
   {
     slug: 'san-francisco',

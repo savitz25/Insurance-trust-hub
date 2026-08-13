@@ -17,12 +17,15 @@ import {
   getNvLaunchMarketLiveTotals,
   countVerifiedVermontProviders,
   getVtLaunchMarketLiveTotals,
+  countVerifiedMassachusettsProviders,
+  getMaLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 import { OH_ODI_LOOKUP_URL } from '@/lib/odi/launch-markets';
 import { NC_DOI_LOOKUP_URL } from '@/lib/nc/launch-markets';
 import { NV_DOI_LOOKUP_URL } from '@/lib/nv/launch-markets';
 import { VT_DFR_LOOKUP_URL } from '@/lib/vt/launch-markets';
+import { MA_DOI_LOOKUP_URL } from '@/lib/ma/launch-markets';
 
 /** Florida page reads live inventory totals */
 export const dynamic = 'force-dynamic';
@@ -78,6 +81,15 @@ export async function generateMetadata({
     };
   }
 
+  if (state === 'massachusetts') {
+    return {
+      title: 'Massachusetts Insurance Research Hubs | MA DOI-Verified Launch Markets',
+      description:
+        'Massachusetts Division of Insurance (MA DOI)–verified agency research for Boston, Worcester, and Springfield. Agencies only — not licensed companies or carriers. Independent research — re-check licenses on official MA DOI / SBS tools.',
+      alternates: { canonical: `${SITE_URL}/hubs/massachusetts` },
+    };
+  }
+
   if (state === 'nevada') {
     return {
       title: 'Nevada Insurance Research Hubs | NV DOI-Verified Launch Markets',
@@ -109,22 +121,26 @@ export default async function StateHubsPage({
   const isNorthCarolina = state === 'north-carolina';
   const isNevada = state === 'nevada';
   const isVermont = state === 'vermont';
+  const isMassachusetts = state === 'massachusetts';
 
   const launchRows = isFlorida ? await getLaunchCountyLiveTotals() : [];
   const ohLaunchRows = isOhio ? await getOhLaunchMarketLiveTotals() : [];
   const ncLaunchRows = isNorthCarolina ? await getNcLaunchMarketLiveTotals() : [];
   const nvLaunchRows = isNevada ? await getNvLaunchMarketLiveTotals() : [];
   const vtLaunchRows = isVermont ? await getVtLaunchMarketLiveTotals() : [];
+  const maLaunchRows = isMassachusetts ? await getMaLaunchMarketLiveTotals() : [];
   const flTotal = isFlorida ? await countVerifiedFloridaProviders() : 0;
   const ohTotal = isOhio ? await countVerifiedOhioProviders() : 0;
   const ncTotal = isNorthCarolina ? await countVerifiedNorthCarolinaProviders() : 0;
   const nvTotal = isNevada ? await countVerifiedNevadaProviders() : 0;
   const vtTotal = isVermont ? await countVerifiedVermontProviders() : 0;
+  const maTotal = isMassachusetts ? await countVerifiedMassachusettsProviders() : 0;
   const launchHubSlugs = new Set(launchRows.map((r) => r.hubSlug));
   const ohHubSlugs = new Set(ohLaunchRows.map((r) => r.hubSlug));
   const ncHubSlugs = new Set(ncLaunchRows.map((r) => r.hubSlug));
   const nvHubSlugs = new Set(nvLaunchRows.map((r) => r.hubSlug));
   const vtHubSlugs = new Set(vtLaunchRows.map((r) => r.hubSlug));
+  const maHubSlugs = new Set(maLaunchRows.map((r) => r.hubSlug));
 
   // Launch inventory first; other hubs remain research context without inventing rows
   const otherHubs = isFlorida
@@ -137,7 +153,9 @@ export default async function StateHubsPage({
           ? hubs.filter((h) => !nvHubSlugs.has(h.slug))
           : isVermont
             ? hubs.filter((h) => !vtHubSlugs.has(h.slug))
-            : hubs;
+            : isMassachusetts
+              ? hubs.filter((h) => !maHubSlugs.has(h.slug))
+              : hubs;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -164,7 +182,9 @@ export default async function StateHubsPage({
                 ? 'Nevada insurance research hubs'
                 : isVermont
                   ? 'Vermont insurance research hubs'
-                  : `Insurance Hubs in ${stateName}`}
+                  : isMassachusetts
+                    ? 'Massachusetts insurance research hubs'
+                    : `Insurance Hubs in ${stateName}`}
       </h1>
       <p className="mt-3 text-muted-foreground max-w-2xl leading-relaxed">
         {isFlorida ? (
@@ -244,6 +264,22 @@ export default async function StateHubsPage({
               VT DFR / SBS licensee lookup
             </a>
             . Agencies/firms only. Medicare specialty is never inferred from VT DFR alone.
+          </>
+        ) : isMassachusetts ? (
+          <>
+            Live Massachusetts Division of Insurance (MA DOI)–verified inventory for Wave-1
+            launch markets. Agencies and business entities only — licensed companies and
+            carriers are not listed as agencies. Empty markets stay empty. Always re-check
+            licenses on the{' '}
+            <a
+              href={MA_DOI_LOOKUP_URL}
+              className="font-medium text-primary underline-offset-2 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              MA DOI / SBS licensee lookup
+            </a>
+            . Medicare specialty is never inferred from MA DOI alone.
           </>
         ) : (
           <>
@@ -472,6 +508,62 @@ export default async function StateHubsPage({
             Wave 1: Burlington / Chittenden, Montpelier / Washington County, Rutland / southern
             Vermont. Vermont-addressed agencies and firms only — out-of-state headquarters stay
             off city hubs. This is a small inventory. We will not invent listings.
+          </p>
+        </section>
+      )}
+
+      {isMassachusetts && (
+        <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-trust">
+                <Shield className="h-3.5 w-3.5" aria-hidden />
+                Launch inventory (live)
+              </p>
+              <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
+                {maTotal.toLocaleString()}
+                <span className="ml-2 text-sm font-medium text-muted-foreground">
+                  verified MA research listings
+                </span>
+              </p>
+            </div>
+            <Link
+              href="/directory?state=MA&verified=true"
+              className="text-sm font-medium text-primary underline-offset-2 hover:underline"
+            >
+              Browse MA directory →
+            </Link>
+          </div>
+
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {maLaunchRows.map((row) => (
+              <li key={row.key}>
+                <Link
+                  href={row.hubHref}
+                  className="flex h-full flex-col rounded-xl border bg-background p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <h2 className="font-semibold text-foreground">{row.displayName}</h2>
+                    <Badge variant="success">Market</Badge>
+                  </div>
+                  <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
+                    {row.total.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-muted-foreground">verified research listings</p>
+                  <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
+                    <MapPin className="h-3 w-3" aria-hidden />
+                    Open hub →
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
+            Wave 1: Greater Boston / Suffolk, Worcester, Springfield / Hampden. Massachusetts
+            agencies and business entities only — licensed companies, carriers, and reinsurers
+            are not promoted as agencies. Out-of-state headquarters stay off city hubs. Empty
+            markets stay empty until official agency lists are imported. We will not invent
+            listings.
           </p>
         </section>
       )}

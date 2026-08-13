@@ -93,6 +93,18 @@ const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string
     { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
     { href: '/directory?state=VT&verified=true', label: 'Vermont directory' },
   ],
+  boston: [
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+    { href: '/directory?state=MA&verified=true', label: 'Massachusetts directory' },
+  ],
+  worcester: [
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+    { href: '/directory?state=MA&verified=true', label: 'Massachusetts directory' },
+  ],
+  springfield: [
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+    { href: '/directory?state=MA&verified=true', label: 'Massachusetts directory' },
+  ],
   houston: [
     { href: '/guides/houston-aca-marketplace', label: 'Houston ACA guide' },
     { href: '/guides/texas-aca-marketplace', label: 'Texas ACA guide' },
@@ -195,13 +207,15 @@ export function HubPageView({
   const isNorthCarolinaHub = hub.stateCode === 'NC' || hub.stateSlug === 'north-carolina';
   const isNevadaHub = hub.stateCode === 'NV' || hub.stateSlug === 'nevada';
   const isVermontHub = hub.stateCode === 'VT' || hub.stateSlug === 'vermont';
+  const isMassachusettsHub = hub.stateCode === 'MA' || hub.stateSlug === 'massachusetts';
   const isFirmOnlyHub =
     isTexasHub ||
     isNewJerseyHub ||
     isOhioHub ||
     isNorthCarolinaHub ||
     isNevadaHub ||
-    isVermontHub;
+    isVermontHub ||
+    isMassachusettsHub;
   const regulatorLabel = getRegulatorLabel(hub.stateCode);
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
