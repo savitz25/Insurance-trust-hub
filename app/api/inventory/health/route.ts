@@ -8,6 +8,7 @@ import { createPublicClient } from '@/lib/supabase/public';
 import {
   countVerifiedByLaunchCounty,
   countVerifiedOhioProviders,
+  countVerifiedTexasProviders,
   countVerifiedNevadaProviders,
   countVerifiedVermontProviders,
   countVerifiedProvidersForHub,
@@ -130,11 +131,19 @@ export async function GET() {
     columbus: await countVerifiedProvidersForHub('columbus'),
     cleveland: await countVerifiedProvidersForHub('cleveland'),
     cincinnati: await countVerifiedProvidersForHub('cincinnati'),
+    houston: await countVerifiedProvidersForHub('houston'),
+    'las-vegas': await countVerifiedProvidersForHub('las-vegas'),
+    burlington: await countVerifiedProvidersForHub('burlington'),
   };
 
   const jax = await getHubInventory('jacksonville', { pageSize: 5 });
   const browardInv = await getHubInventory('broward-county', { pageSize: 3 });
   const profile = sampleSlug ? await getProviderBySlug(sampleSlug) : null;
+
+  const verifiedTxCount = await countVerifiedTexasProviders();
+  const verifiedOhCount = await countVerifiedOhioProviders();
+  const verifiedNvCount = await countVerifiedNevadaProviders();
+  const verifiedVtCount = await countVerifiedVermontProviders();
 
   const restOk = restStatus === 200 || restStatus === 206;
   const countyOk =
@@ -142,13 +151,16 @@ export async function GET() {
     (byCounty.broward?.total ?? 0) > 100 &&
     (byCounty.miami_dade?.total ?? 0) > 100;
 
-  return NextResponse.json({
+  return NextResponse.json(
+    {
     ok:
       keyMatchesHost &&
       restOk &&
       (verifiedFlCount ?? 0) > 0 &&
       countyOk &&
-      Boolean(profile),
+      Boolean(profile) &&
+      hubTotals.jacksonville > 100 &&
+      hubTotals['miami-fort-lauderdale'] > 100,
     supabaseConfigured: true,
     supabaseHost: host,
     anonKeyRef: anonRef,
@@ -157,9 +169,17 @@ export async function GET() {
     restCount,
     restBodySnippet,
     verifiedFlCount,
-    verifiedOhCount: await countVerifiedOhioProviders(),
-    verifiedNvCount: await countVerifiedNevadaProviders(),
-    verifiedVtCount: await countVerifiedVermontProviders(),
+    verifiedTxCount,
+    verifiedOhCount,
+    verifiedNvCount,
+    verifiedVtCount,
+    byState: {
+      FL: verifiedFlCount,
+      TX: verifiedTxCount,
+      OH: verifiedOhCount,
+      NV: verifiedNvCount,
+      VT: verifiedVtCount,
+    },
     queryError,
     /** Matching strategy + intentional page cap */
     matching: {
@@ -185,5 +205,7 @@ export async function GET() {
     },
     sampleSlug,
     profileResolves: Boolean(profile),
-  });
+    },
+    { headers: { 'Cache-Control': 'no-store, max-age=0' } }
+  );
 }

@@ -7,9 +7,9 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { INSURANCE_HUBS } from '@/lib/hubs/registry';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Health Insurance Hubs — 50+ U.S. Markets',
+  title: 'Insurance Research Hubs — U.S. Markets',
   description:
-    'Explore verified insurance agent hubs across 50+ U.S. metros. Health insurance specialists for ACA, Medicare, employer plans, and multi-line coverage. 100% data-driven.',
+    'Research insurance market hubs across U.S. metros. Verified agency listings appear only when official-regulator inventory meets our public research standard. Empty markets stay empty.',
   path: '/hubs',
 });
 
@@ -19,14 +19,15 @@ export default function HubsPage() {
       <section className="border-b bg-gradient-to-br from-primary/5 via-background to-trust/5 py-14 md:py-20">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <p className="text-xs font-semibold tracking-[0.2em] text-trust uppercase mb-3">
-            100% data-driven · No paid placements
+            Independent research · No paid placements
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-foreground">
-            Health Insurance Hubs Across America
+            Insurance research hubs
           </h1>
           <p className="mt-4 text-muted-foreground text-lg">
-            {INSURANCE_HUBS.length} verified market hubs featuring health insurance specialists in
-            every high-volume MSA. Search by ZIP or browse by state.
+            {INSURANCE_HUBS.length} market research hubs. Verified agency cards appear only where
+            official-regulator inventory has been promoted — empty markets stay empty. Search by ZIP
+            or browse by state.
           </p>
           <div className="mt-8 flex justify-center">
             <ZipSearch />

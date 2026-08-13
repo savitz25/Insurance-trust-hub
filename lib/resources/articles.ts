@@ -538,7 +538,7 @@ export const ARTICLES: Article[] = [
       { href: '/calculators/aca-subsidy', label: 'ACA Subsidy Calculator' },
       { href: '/resources/how-to-choose-insurance-agent', label: 'How to Choose an Agent' },
       { href: '/tools/coverage-compass', label: 'Coverage Compass' },
-      { href: '/directory', label: 'Browse Verified Agents' },
+      { href: '/directory?verified=true', label: 'Browse verified research listings' },
     ],
   },
 ];

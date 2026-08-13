@@ -566,7 +566,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     zipCodes: ['33602', '33701', '34677', '33544', '33764'],
     healthInsuranceDensity: 'very-high',
     marketSnapshot:
-      'Tampa Bay rivals South Florida in Medicare density across Hillsborough, Pinellas, and Pasco counties. Independent brokers like HealthPlan4U and Affordable Insurance Team serve Tampa seniors with 17+ carrier comparisons, while multi-line agencies with 2,000+ reviews shop 80+ carriers alongside VA-adjacent navigation and hurricane-season property/health bundling.',
+      'Tampa Bay has high Medicare density across Hillsborough, Pinellas, and Pasco counties. Verified research listings appear only when Florida DFS agency records meet our public standard. VA-adjacent and hurricane-season coverage research is common here — we do not invent carrier counts or review totals.',
     healthNeeds: [
       'Medicare Advantage (Hillsborough/Pinellas networks)',
       'VA/TRICARE coordination',
@@ -1117,7 +1117,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     zipCodes: ['32202', '32225', '32003', '32259', '32082'],
     healthInsuranceDensity: 'high',
     marketSnapshot:
-      'Jacksonville combines military and TRICARE navigation, logistics-worker ACA enrollment, and growing Medicare demand across Duval County. Independent brokers with exceptional review volume — including 2,000+ Google ratings — shop 80+ carriers alongside dedicated Medicare agencies with BBB A+ accreditation serving St. Johns, Clay, and Nassau counties.',
+      'Jacksonville combines military and TRICARE navigation, logistics-worker ACA enrollment, and growing Medicare demand across Duval County. Verified research listings appear only when Florida DFS agency records meet our public standard. St. Johns, Clay, and Nassau remain metro context until promoted.',
     healthNeeds: [
       'Medicare Advantage (Duval networks)',
       'Military/TRICARE transitions',

@@ -16,7 +16,7 @@ import { ContextNav } from '@/components/context-nav';
 import {
   EMPTY_MARKET_COPY,
   filterVerifiedProviders,
-  verifiedCountWithHealth,
+  verifiedCountLabel,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { honestCuratedSummary, resolveHubPublicSeo } from '@/lib/hubs/hub-seo';
 import { HubInventoryPagination } from '@/components/hub-inventory-pagination';
@@ -257,7 +257,7 @@ export function HubPageView({
             {`Verified ${regulatorLabel} research listings for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
-            {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
+            {verifiedCountLabel(verifiedCount)}
           </p>
           {verifiedCount > 0 ? (
             <p className="mt-2 text-xs text-primary-foreground/60 max-w-2xl mx-auto">

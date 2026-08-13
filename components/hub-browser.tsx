@@ -13,8 +13,8 @@ export function HubBrowser() {
         <div className="rounded-xl border bg-secondary/30 p-4">
           <h3 className="font-semibold text-sm mb-2">U.S. Hub Browser</h3>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            {INSURANCE_HUBS.length} verified market hubs across {stateSlugs.length} states. Select a
-            state to explore MSAs with health insurance specialist listings.
+            {INSURANCE_HUBS.length} research hubs across {stateSlugs.length} states. Verified agency
+            listings appear only where promoted inventory exists.
           </p>
           <div className="mt-4 aspect-[4/3] rounded-lg bg-primary/5 border border-dashed border-primary/20 flex items-center justify-center text-xs text-muted-foreground text-center p-4">
             Interactive U.S. map — click a state to filter hubs below. Integrate with us-atlas or

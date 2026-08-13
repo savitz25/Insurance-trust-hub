@@ -9,9 +9,10 @@ import {
   specialtyMatchesLoaFilter,
 } from '@/components/hub-specialty-filter';
 
-/** Phase 4 — always read live verified inventory (avoid stale empty static shells) */
+/** Phase 4/17 — always read live verified inventory (avoid stale empty static shells) */
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 export function generateStaticParams() {
   return getAllHubParams();
@@ -34,13 +35,9 @@ export async function generateMetadata({
   if (!hub) return { title: 'Insurance Hub | Insurance Trust Hub' };
 
   const inventory = await getHubInventory(hub.slug, { page: 1 });
-  const health = inventory.providers.filter((p) =>
-    p.insurance_types?.includes('health')
-  ).length;
 
   return buildHubMetadata(hub, `/hubs/${state}/${slug}`, {
     total: inventory.total,
-    health,
   });
 }
 

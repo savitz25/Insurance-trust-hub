@@ -13,6 +13,7 @@ const hub = getSouthFloridaHub();
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 function parsePage(raw: string | string[] | undefined): number {
   const v = Array.isArray(raw) ? raw[0] : raw;
@@ -23,12 +24,8 @@ function parsePage(raw: string | string[] | undefined): number {
 
 export async function generateMetadata(): Promise<Metadata> {
   const inventory = await getHubInventory(hub.slug, { page: 1 });
-  const health = inventory.providers.filter((p) =>
-    p.insurance_types?.includes('health')
-  ).length;
   return buildHubMetadata(hub, '/hubs/south-florida', {
     total: inventory.total,
-    health,
   });
 }
 

@@ -86,7 +86,7 @@ export function ZipSearch({ className, defaultZip = '' }: ZipSearchProps) {
         })}
       </div>
       <p className="mt-2 text-xs leading-relaxed" style={{ color: INSURANCE_BRAND.ink }}>
-        Local research only — ranked by public signals, never sponsored placements.
+        Local research only — never sponsored placements. Not a ranked marketplace.
       </p>
     </form>
   );
