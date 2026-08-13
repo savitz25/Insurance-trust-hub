@@ -53,6 +53,7 @@ import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 import { TX_TDI_LOOKUP_URL, TX_TDI_REGULATOR } from '@/lib/tdi/launch-markets';
 import { NJ_DOBI_LOOKUP_URL, NJ_DOBI_REGULATOR } from '@/lib/nj/launch-regions';
+import { OH_ODI_LOOKUP_URL, OH_ODI_REGULATOR } from '@/lib/odi/launch-markets';
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
@@ -145,14 +146,17 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const isTexas = (provider.state || '').toUpperCase() === 'TX';
   const isFlorida = (provider.state || '').toUpperCase() === 'FL';
   const isNewJersey = (provider.state || '').toUpperCase() === 'NJ';
+  const isOhio = (provider.state || '').toUpperCase() === 'OH';
   const npn = extractNpnFromNotes(provider.license_notes);
   const regulatorName = isTexas
     ? TX_TDI_REGULATOR
     : isNewJersey
       ? NJ_DOBI_REGULATOR
-      : isFlorida
-        ? 'Florida DFS'
-        : publicView.verification.sourceLabel || 'State insurance department';
+      : isOhio
+        ? OH_ODI_REGULATOR
+        : isFlorida
+          ? 'Florida DFS'
+          : publicView.verification.sourceLabel || 'State insurance department';
 
   let secondarySignals = null;
   try {
@@ -326,9 +330,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       ? 'Texas Department of Insurance (TDI) is the license source of truth for this research listing.'
                       : isNewJersey
                         ? 'New Jersey Department of Banking and Insurance (DOBI) is the license source of truth for this research listing.'
-                        : isFlorida
-                          ? 'Florida DFS is the license source of truth for this research listing.'
-                          : `${regulatorName} is the license source of truth for this research listing.`}
+                        : isOhio
+                          ? 'Ohio Department of Insurance (ODI) is the license source of truth for this research listing.'
+                          : isFlorida
+                            ? 'Florida DFS is the license source of truth for this research listing.'
+                            : `${regulatorName} is the license source of truth for this research listing.`}
                   </p>
                 </CardContent>
               </Card>
@@ -365,13 +371,21 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     </ul>
                   ) : (
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Capability tags come from Florida DFS lines of authority on the public license
-                      record when available.
+                      Capability tags come from{' '}
+                      {isOhio
+                        ? 'Ohio ODI license types / lines of authority'
+                        : isTexas
+                          ? 'Texas TDI license types / qualifications'
+                          : isNewJersey
+                            ? 'New Jersey DOBI organization lines'
+                            : 'Florida DFS lines of authority'}{' '}
+                      on the public license record when available.
                     </p>
                   )}
                   <p className="text-sm text-muted-foreground leading-relaxed border-t pt-4">
-                    We never invent Medicare-certified status from DFS alone, never invent websites,
-                    and never treat carrier appointments as quality rankings.
+                    We never invent Medicare-certified status from{' '}
+                    {isOhio ? 'ODI' : isTexas ? 'TDI' : isNewJersey ? 'DOBI' : 'DFS'} alone, never
+                    invent websites, and never treat carrier appointments as quality rankings.
                   </p>
                   {provider.description ? (
                     <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line border-t pt-4">
@@ -424,7 +438,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <CardContent className="pt-6 space-y-3">
                   <p className="text-sm">
                     <span className="font-medium">Regulator:</span> {regulatorName}
-                    {isTexas ? ' (TDI)' : isNewJersey ? ' (DOBI)' : null}
+                    {isTexas ? ' (TDI)' : isNewJersey ? ' (DOBI)' : isOhio ? ' (ODI)' : null}
                   </p>
                   {publicView.verification.licenseNumber && (
                     <p className="text-sm">
@@ -460,7 +474,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       ? ' Medicare-certified status is never inferred from TDI agency open data alone. Agency/business entities only in this inventory.'
                       : isNewJersey
                         ? ' Medicare-certified status is never inferred from DOBI organization data alone. Agency/business entities only in this inventory.'
-                        : null}
+                        : isOhio
+                          ? ' Medicare-certified status is never inferred from ODI agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the ODI mailing-list export.'
+                          : null}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
@@ -493,6 +509,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         </a>
                       </Button>
                     ) : null}
+                    {isOhio ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={OH_ODI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
+                          Ohio ODI agent/agency locator
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
                   </div>
                   <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
                     Research listing only — not an endorsement, rating, or appointment guarantee.
@@ -514,22 +538,32 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                           ? 'TDI'
                           : isNewJersey
                             ? 'DOBI'
-                            : isFlorida
-                              ? 'DFS'
-                              : 'state'}{' '}
+                            : isOhio
+                              ? 'ODI'
+                              : isFlorida
+                                ? 'DFS'
+                                : 'state'}{' '}
                         license number before sharing personal data.
                       </li>
                     ) : null}
                     {provider.website ? (
                       <li>
-                        Visit the website on file (secondary public signal — not part of DFS
+                        Visit the website on file (secondary public signal — not part of{' '}
+                        {isOhio ? 'ODI' : isTexas ? 'TDI' : isNewJersey ? 'DOBI' : 'DFS'}{' '}
                         verification).
                       </li>
                     ) : null}
                     {provider.appointment_snapshot?.totalCount ? (
                       <li>
                         Review the appointment regulatory snapshot above, then re-check carriers on
-                        Florida DFS.
+                        {isOhio
+                          ? ' Ohio ODI'
+                          : isTexas
+                            ? ' Texas TDI'
+                            : isNewJersey
+                              ? ' New Jersey DOBI'
+                              : ' Florida DFS'}
+                        .
                       </li>
                     ) : null}
                     <li>

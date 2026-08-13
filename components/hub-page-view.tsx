@@ -146,13 +146,16 @@ export function HubPageView({
   const inventoryScope = inventoryScopeNoteForHub(hub.slug);
   const isTexasHub = hub.stateCode === 'TX' || hub.stateSlug === 'texas';
   const isNewJerseyHub = hub.stateCode === 'NJ' || hub.stateSlug === 'new-jersey';
+  const isOhioHub = hub.stateCode === 'OH' || hub.stateSlug === 'ohio';
   const regulatorLabel = isTexasHub
     ? 'Texas Department of Insurance (TDI)'
     : isNewJerseyHub
       ? 'New Jersey DOBI'
-      : hub.stateCode === 'FL'
-        ? 'Florida DFS'
-        : 'state insurance department';
+      : isOhioHub
+        ? 'Ohio Department of Insurance (ODI)'
+        : hub.stateCode === 'FL'
+          ? 'Florida DFS'
+          : 'state insurance department';
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -234,7 +237,9 @@ export function HubPageView({
               ? 'Independent research · Re-check Texas TDI licenses'
               : isNewJerseyHub
                 ? 'Independent research · Re-check New Jersey DOBI licenses'
-                : 'Independent research · Re-check state licenses'}
+                : isOhioHub
+                  ? 'Independent research · Re-check Ohio ODI licenses'
+                  : 'Independent research · Re-check state licenses'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
             Research insurance agencies in {hub.shortName}
@@ -244,7 +249,9 @@ export function HubPageView({
               ? `Verified Texas TDI agency research listings for ${hub.localDescriptor}`
               : isNewJerseyHub
                 ? `Verified New Jersey DOBI agency research listings for ${hub.localDescriptor}`
-                : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
+                : isOhioHub
+                  ? `Verified Ohio Department of Insurance (ODI) agency research listings for ${hub.localDescriptor}`
+                  : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
             {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
@@ -387,7 +394,7 @@ export function HubPageView({
                       <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                         Independent research only — re-check {regulatorLabel} before you enroll.
                         Counts are verified listings only (no seed inventory)
-                        {isTexasHub || isNewJerseyHub
+                        {isTexasHub || isNewJerseyHub || isOhioHub
                           ? '. Agency/business entities only; not a bulk individual agent list.'
                           : '.'}
                       </p>
@@ -401,7 +408,9 @@ export function HubPageView({
                             ? 'Specialty tags come from Texas TDI license types / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from TDI alone.'
                             : isNewJerseyHub
                               ? 'Specialty tags come from New Jersey DOBI organization lines / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from DOBI alone.'
-                              : undefined
+                              : isOhioHub
+                                ? 'Specialty tags come from Ohio ODI license types / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from ODI alone.'
+                                : undefined
                         }
                       />
                     ) : null}
@@ -440,7 +449,13 @@ export function HubPageView({
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
                 {healthProviders.length > 0
-                  ? 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
+                  ? isOhioHub
+                    ? 'Agencies that meet our public research standard (Ohio Department of Insurance–verified). Medicare specialty is never inferred from ODI alone.'
+                    : isTexasHub
+                      ? 'Agencies that meet our public research standard (Texas TDI–verified when listed). Medicare specialty is never inferred from TDI alone.'
+                      : isNewJerseyHub
+                        ? 'Agencies that meet our public research standard (New Jersey DOBI–verified when listed). Medicare specialty is never inferred from DOBI alone.'
+                        : 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
                   : EMPTY_MARKET_COPY.health}
               </p>
               {healthProviders.length > 0 ? (

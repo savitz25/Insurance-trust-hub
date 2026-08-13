@@ -1,4 +1,6 @@
-# Ohio ODI Agency Inventory (Phase 10)
+# Ohio ODI Agency Inventory (Phase 10 / 10B)
+
+Phase 10B polish: ODI-specific hub/profile/directory wording (no DFS/TDI bleed).
 
 Agencies / **business entities** only. No bulk individual producers.  
 Phase 1 `resolveProviderTrustState` → `verified` required before public promote.  

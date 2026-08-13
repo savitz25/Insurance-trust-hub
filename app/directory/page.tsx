@@ -34,7 +34,7 @@ export const revalidate = 0;
 export const metadata: Metadata = buildMetadata({
   title: 'Insurance Agency Directory — Search Licensed Agents by State',
   description:
-    'Search Florida DFS–verified research listings and other verified agencies by state, coverage type, and specialty. Independent research directory — re-check DOI licensing before you enroll.',
+    'Search Florida DFS–, Texas TDI–, and Ohio ODI–verified agency research listings by state, coverage type, and specialty. Independent research directory — re-check DOI licensing before you enroll.',
   path: '/directory',
 });
 
@@ -111,8 +111,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <h1 className="section-heading">Insurance agency directory</h1>
         <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
-          Search agencies that meet our public research standard. Empty markets stay empty — we do
-          not invent inventory. Always re-check licensing with your state insurance department.
+          {browsingOh
+            ? 'Ohio Department of Insurance (ODI)–verified agency research listings. Agency/business entities only. Empty markets stay empty — we do not invent inventory. Always re-check licenses on the official ODI locator.'
+            : browsingTx
+              ? 'Texas Department of Insurance (TDI)–verified agency research listings. Always re-check licenses on official TDI tools.'
+              : 'Search agencies that meet our public research standard. Empty markets stay empty — we do not invent inventory. Always re-check licensing with your state insurance department.'}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">

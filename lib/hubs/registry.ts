@@ -899,7 +899,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Cincinnati Metro (2026) | Hamilton & Surrounding',
     metaDescription:
-      'Research insurance agencies and coverage options in Greater Cincinnati. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Greater Cincinnati. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — Ohio Department of Insurance (ODI) verified.',
   },
   {
     slug: 'kansas-city',
@@ -1196,7 +1196,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Columbus Metro (2026) | Franklin & Surrounding',
     metaDescription:
-      'Research insurance agencies and coverage options in Columbus metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Columbus metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — Ohio Department of Insurance (ODI) verified.',
   },
   {
     slug: 'cleveland',
@@ -1223,7 +1223,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Cleveland Metro (2026) | Cuyahoga & Surrounding',
     metaDescription:
-      'Research insurance agencies and coverage options in Cleveland-Elyria. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Cleveland-Elyria. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — Ohio Department of Insurance (ODI) verified.',
   },
   {
     slug: 'toledo',
@@ -1249,7 +1249,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Toledo Metro (2026) | Lucas & Surrounding',
     metaDescription:
-      'Research insurance agencies and coverage options in Toledo metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Toledo metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — Ohio Department of Insurance (ODI) verified.',
   },
   {
     slug: 'akron',
@@ -1275,7 +1275,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Akron Metro (2026) | Summit & Surrounding',
     metaDescription:
-      'Research insurance agencies and coverage options in Akron metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Akron metro. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — Ohio Department of Insurance (ODI) verified.',
   },
   {
     slug: 'dayton',
@@ -1301,7 +1301,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agents in Dayton Metro (2026) | Montgomery & Surrounding',
     metaDescription:
-      'Research insurance agencies and coverage options in Dayton-Kettering. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — OH DOI verified.',
+      'Research insurance agencies and coverage options in Dayton-Kettering. Verified listings appear only when they meet our public research standard. Health, Medicare, ACA, and group specialists — Ohio Department of Insurance (ODI) verified.',
   },
   {
     slug: 'indianapolis',

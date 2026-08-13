@@ -55,12 +55,36 @@ export function loaPlainLanguageForTags(tags: string[]): Array<{
     .filter((x) => x.blurb);
 }
 
-/** Soft local hub path for FL / TX launch markets (research navigation only). */
+/** Soft local hub path for FL / TX / NJ / OH launch markets (research navigation only). */
 export function localHubPathForProvider(provider: Provider): {
   href: string;
   label: string;
 } | null {
   const st = (provider.state || '').toUpperCase();
+  if (st === 'OH') {
+    const city = (provider.city || '').toLowerCase();
+    const county = (provider.county || '').toLowerCase();
+    const blob = `${city} ${county}`;
+    if (/columbus|franklin|dublin|westerville|hilliard|gahanna/.test(blob)) {
+      return { href: '/hubs/ohio/columbus', label: 'Columbus agency hub' };
+    }
+    if (/cleveland|cuyahoga|lakewood|parma|euclid|shaker/.test(blob)) {
+      return { href: '/hubs/ohio/cleveland', label: 'Cleveland agency hub' };
+    }
+    if (/cincinnati|hamilton|mason|west chester|blue ash/.test(blob)) {
+      return { href: '/hubs/ohio/cincinnati', label: 'Cincinnati agency hub' };
+    }
+    if (/toledo|lucas|maumee|sylvania|perrysburg/.test(blob)) {
+      return { href: '/hubs/ohio/toledo', label: 'Toledo agency hub' };
+    }
+    if (/akron|summit|stow|cuyahoga falls|hudson/.test(blob)) {
+      return { href: '/hubs/ohio/akron', label: 'Akron agency hub' };
+    }
+    if (/dayton|montgomery|kettering|beavercreek|centerville/.test(blob)) {
+      return { href: '/hubs/ohio/dayton', label: 'Dayton agency hub' };
+    }
+    return { href: '/hubs/ohio', label: 'Ohio insurance hubs' };
+  }
   if (st === 'NJ') {
     const city = (provider.city || '').toLowerCase();
     const county = (provider.county || '').toLowerCase();
@@ -186,8 +210,17 @@ export function localHubPathForProvider(provider: Provider): {
 
 export function agencyCapabilitySummary(provider: Provider): string {
   const tags = loaSpecialtyTags(provider.specialties);
+  const st = (provider.state || '').toUpperCase();
+  const record =
+    st === 'OH'
+      ? 'Ohio Department of Insurance (ODI) record'
+      : st === 'TX'
+        ? 'Texas TDI record'
+        : st === 'NJ'
+          ? 'New Jersey DOBI record'
+          : 'Florida DFS record';
   if (!tags.length) {
-    return 'License specialties are listed when reported on the public Florida DFS record.';
+    return `License specialties are listed when reported on the public ${record}.`;
   }
   return `Reported capability tags: ${tags.join(', ')}.`;
 }
