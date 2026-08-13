@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useTransition } from 'react';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { INSURANCE_TYPES, SPECIALTIES, US_STATES } from '@/lib/constants';
+import { DIRECTORY_SPECIALTIES } from '@/lib/directory/params';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -48,20 +49,23 @@ export function SearchFilters({ className }: SearchFiltersProps) {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const nextState = (formData.get('state') as string) || null;
     updateParams({
       q: (formData.get('q') as string) || null,
-      state: (formData.get('state') as string) || null,
+      state: nextState,
       type: (formData.get('type') as string) || null,
       specialty: (formData.get('specialty') as string) || null,
       minRating: (formData.get('minRating') as string) || null,
-      verified: formData.get('verified') === 'on' ? 'true' : 'true',
-      appointments: formData.get('appointments') === 'on' ? 'true' : null,
+      verified: 'true',
+      appointments:
+        nextState === 'FL' && formData.get('appointments') === 'on' ? 'true' : null,
+      page: null,
     });
   }
 
   function clearFilters() {
     startTransition(() => {
-      router.push('/directory');
+      router.push('/directory?verified=true');
     });
   }
 
@@ -94,12 +98,19 @@ export function SearchFilters({ className }: SearchFiltersProps) {
             State
           </Label>
           <Select id="filter-state" name="state" defaultValue={state}>
-            <option value="">All states</option>
-            {US_STATES.map((s) => (
-              <option key={s.code} value={s.code}>
-                {s.name}
-              </option>
-            ))}
+            <option value="">All verified</option>
+            <optgroup label="Verified inventory">
+              <option value="FL">Florida</option>
+              <option value="TX">Texas</option>
+              <option value="OH">Ohio</option>
+            </optgroup>
+            <optgroup label="Other states">
+              {US_STATES.filter((s) => !['FL', 'TX', 'OH'].includes(s.code)).map((s) => (
+                <option key={s.code} value={s.code}>
+                  {s.name}
+                </option>
+              ))}
+            </optgroup>
           </Select>
         </div>
 
@@ -119,21 +130,12 @@ export function SearchFilters({ className }: SearchFiltersProps) {
 
         <div>
           <Label htmlFor="filter-specialty" className="text-xs text-muted-foreground mb-1.5 block">
-            Specialty (license capability tags)
+            Specialty
           </Label>
           <Select id="filter-specialty" name="specialty" defaultValue={specialty}>
             <option value="">All specialties</option>
-            <optgroup label="Florida DFS capability tags">
-              {[
-                'Health',
-                'Life',
-                'Property & Casualty',
-                'Personal Lines',
-                'Agency',
-                'Title',
-                'Public Adjuster',
-                'Independent Agency',
-              ].map((s) => (
+            <optgroup label="License capability tags">
+              {DIRECTORY_SPECIALTIES.map((s) => (
                 <option key={s} value={s}>
                   {s}
                 </option>
@@ -141,17 +143,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
             </optgroup>
             <optgroup label="Other research tags">
               {SPECIALTIES.filter(
-                (s) =>
-                  ![
-                    'Health',
-                    'Life',
-                    'Property & Casualty',
-                    'Personal Lines',
-                    'Agency',
-                    'Title',
-                    'Public Adjuster',
-                    'Independent Agency',
-                  ].includes(s)
+                (s) => !(DIRECTORY_SPECIALTIES as readonly string[]).includes(s)
               ).map((s) => (
                 <option key={s} value={s}>
                   {s}
@@ -186,25 +178,27 @@ export function SearchFilters({ className }: SearchFiltersProps) {
         </Label>
       </div>
 
-      <div className="space-y-1">
-        <div className="flex items-center gap-2">
-          <Checkbox
-            id="filter-appointments"
-            name="appointments"
-            defaultChecked={hasAppointments}
-          />
-          <Label
-            htmlFor="filter-appointments"
-            className="text-sm font-normal cursor-pointer"
-          >
-            Has appointment snapshot
-          </Label>
+      {state === 'FL' ? (
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="filter-appointments"
+              name="appointments"
+              defaultChecked={hasAppointments}
+            />
+            <Label
+              htmlFor="filter-appointments"
+              className="text-sm font-normal cursor-pointer"
+            >
+              Has Florida appointment snapshot
+            </Label>
+          </div>
+          <p className="text-[11px] text-muted-foreground leading-snug pl-6">
+            Florida DFS research convenience only — not nationwide coverage, a quality
+            rank, or paid placement. Snapshot may be incomplete or outdated.
+          </p>
         </div>
-        <p className="text-[11px] text-muted-foreground leading-snug pl-6">
-          Research convenience only — not a quality rank or paid placement. Snapshot may be
-          incomplete or outdated.
-        </p>
-      </div>
+      ) : null}
 
       <div className="flex gap-2 pt-1">
         <Button type="submit" disabled={isPending} className="flex-1">

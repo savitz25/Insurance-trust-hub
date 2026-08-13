@@ -10,12 +10,16 @@ import { cn } from '@/lib/utils';
 interface DirectoryControlsProps {
   total: number;
   showing?: number;
+  page?: number;
+  pageSize?: number;
   className?: string;
 }
 
 export function DirectoryControls({
   total,
   showing,
+  page = 1,
+  pageSize,
   className,
 }: DirectoryControlsProps) {
   const router = useRouter();
@@ -24,11 +28,20 @@ export function DirectoryControls({
 
   const sort = searchParams.get('sort') ?? 'name';
   const view = searchParams.get('view') ?? 'grid';
+  const from =
+    pageSize && total > 0 ? (page - 1) * pageSize + 1 : showing ? 1 : 0;
+  const to =
+    pageSize && total > 0
+      ? Math.min(page * pageSize, total)
+      : showing ?? total;
+  const showRange = total > 0 && (typeof showing === 'number' ? showing < total : page > 1);
 
   function updateParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
     if (value) params.set(key, value);
     else params.delete(key);
+    params.delete('page');
+    params.set('verified', 'true');
     startTransition(() => {
       router.push(`/directory?${params.toString()}`);
     });
@@ -37,11 +50,11 @@ export function DirectoryControls({
   return (
     <div className={cn('flex flex-col sm:flex-row sm:items-center justify-between gap-4', className)}>
       <p className="text-sm text-muted-foreground">
-        {typeof showing === 'number' && showing < total ? (
+        {showRange ? (
           <>
             Showing{' '}
             <span className="font-semibold text-foreground">
-              {showing.toLocaleString()}
+              {from.toLocaleString()}–{to.toLocaleString()}
             </span>{' '}
             of{' '}
             <span className="font-semibold text-foreground">

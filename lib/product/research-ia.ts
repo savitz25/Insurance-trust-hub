@@ -127,7 +127,7 @@ export const LOCAL_RESEARCH_ENTRY = {
     { href: '/hubs', label: 'Market hubs' },
     { href: '/guides', label: 'Local ACA guides' },
     { href: '/data/counties', label: 'County Medicare data' },
-    { href: '/directory', label: 'Verified directory' },
+    { href: '/directory?verified=true', label: 'Verified directory' },
   ],
 } as const;
 

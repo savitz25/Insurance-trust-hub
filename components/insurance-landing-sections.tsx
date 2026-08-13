@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
+import { DirectoryLiveCounts } from '@/components/directory-live-counts';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -325,6 +327,9 @@ function LocalResearchSection() {
         {' '}
         (Florida DFS, Texas TDI, Ohio ODI research listings).
       </p>
+      <Suspense fallback={null}>
+        <DirectoryLiveCounts />
+      </Suspense>
     </SectionShell>
   );
 }

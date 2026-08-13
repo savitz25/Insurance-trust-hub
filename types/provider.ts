@@ -60,6 +60,8 @@ export interface ProviderFilters {
   query?: string;
   limit?: number;
   offset?: number;
+  /** Server sort for paginated directory. Default name — not a quality rank. */
+  sort?: 'name' | 'rating' | 'reviews';
   /**
    * Research convenience only — agencies with a DFS appointment snapshot attached.
    * Does not imply quality, ranking, or paid placement.

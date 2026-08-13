@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SearchFilters } from '@/components/search-filters';
 import { DirectoryControls } from '@/components/directory-controls';
+import { DirectoryPagination } from '@/components/directory-pagination';
 import { ProviderCard } from '@/components/provider-card';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { searchProviders } from '@/lib/providers/queries';
@@ -17,16 +18,20 @@ import {
   DOI_PATHWAY_HREF,
 } from '@/components/research/empty-coverage-panel';
 import {
-  countVerifiedFloridaProviders,
-  countVerifiedTexasProviders,
   countVerifiedNewJerseyProviders,
-  countVerifiedOhioProviders,
   getLaunchCountyLiveTotals,
   getTxLaunchMarketLiveTotals,
   getNjLaunchRegionLiveTotals,
   getOhLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
+import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
+import {
+  DIRECTORY_PAGE_SIZE,
+  parseDirectoryPage,
+  directoryTotalPages,
+  clampDirectoryPage,
+} from '@/lib/directory/params';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -78,12 +83,15 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const specialty = getParam(params, 'specialty') as Specialty | '';
   // Phase 11A — public directory is always verified research (legacy verified=false ignored)
   const verifiedOnly = getParam(params, 'verified') !== 'false';
-  const hasAppointmentSnapshot = getParam(params, 'appointments') === 'true';
+  const hasAppointmentSnapshot = state === 'FL' && getParam(params, 'appointments') === 'true';
   const minRating = getParam(params, 'minRating');
   const sort = getParam(params, 'sort') || 'name';
   const view = getParam(params, 'view') || 'grid';
+  const requestedPage = parseDirectoryPage(getParam(params, 'page'));
+  const serverSort =
+    sort === 'rating' || sort === 'reviews' ? sort : ('name' as const);
 
-  const { providers: rawProviders, total } = await searchProviders({
+  let { providers: rawProviders, total } = await searchProviders({
     query: query || undefined,
     state: state || undefined,
     insuranceType: type || undefined,
@@ -91,24 +99,55 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     verifiedOnly: true,
     hasAppointmentSnapshot,
     minRating: minRating ? Number(minRating) : undefined,
-    limit: 48,
+    sort: serverSort,
+    limit: DIRECTORY_PAGE_SIZE,
+    offset: (requestedPage - 1) * DIRECTORY_PAGE_SIZE,
   });
+
+  const totalPages = directoryTotalPages(total, DIRECTORY_PAGE_SIZE);
+  const page = clampDirectoryPage(requestedPage, totalPages);
+  if (page !== requestedPage && total > 0) {
+    const retry = await searchProviders({
+      query: query || undefined,
+      state: state || undefined,
+      insuranceType: type || undefined,
+      specialty: specialty || undefined,
+      verifiedOnly: true,
+      hasAppointmentSnapshot,
+      minRating: minRating ? Number(minRating) : undefined,
+      sort: serverSort,
+      limit: DIRECTORY_PAGE_SIZE,
+      offset: (page - 1) * DIRECTORY_PAGE_SIZE,
+    });
+    rawProviders = retry.providers;
+    total = retry.total;
+  }
 
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
-  const launchRows = await getLaunchCountyLiveTotals();
-  const txHubRows = await getTxLaunchMarketLiveTotals();
-  const njHubRows = await getNjLaunchRegionLiveTotals();
-  const ohHubRows = await getOhLaunchMarketLiveTotals();
-  const flTotal = await countVerifiedFloridaProviders();
-  const txTotal = await countVerifiedTexasProviders();
-  const ohTotal = await countVerifiedOhioProviders();
+  const { fl: flTotal, tx: txTotal, oh: ohTotal } = await getCachedVerifiedLaunchCounts();
   const njTotal = await countVerifiedNewJerseyProviders();
+  const [launchRows, txHubRows, ohHubRows, njHubRows] = await Promise.all([
+    flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
+    txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
+    ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
+    njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
+  ]);
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';
   const browsingNj = state === 'NJ';
   const browsingFl = state === 'FL';
   const browsingAllVerified = !state;
+
+  const filterParams: Record<string, string> = {};
+  if (query) filterParams.q = query;
+  if (state) filterParams.state = state;
+  if (type) filterParams.type = type;
+  if (specialty) filterParams.specialty = specialty;
+  if (minRating) filterParams.minRating = minRating;
+  if (sort && sort !== 'name') filterParams.sort = sort;
+  if (view && view !== 'grid') filterParams.view = view;
+  if (hasAppointmentSnapshot) filterParams.appointments = 'true';
 
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
@@ -131,51 +170,51 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           to build a research shortlist (guest-saved on this device).
         </p>
         <div className="mt-4 flex flex-wrap gap-2" role="navigation" aria-label="Verified state filters">
-          <Link
-            href="/directory?state=FL&verified=true"
-            className={
-              browsingFl
-                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
-                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
-            }
-          >
-            Florida (DFS)
-            {flTotal > 0 ? (
+          {flTotal > 0 ? (
+            <Link
+              href="/directory?state=FL&verified=true"
+              className={
+                browsingFl
+                  ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                  : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+              }
+            >
+              Florida (DFS)
               <span className="ml-1.5 tabular-nums opacity-90">
                 {flTotal.toLocaleString()}
               </span>
-            ) : null}
-          </Link>
-          <Link
-            href="/directory?state=TX&verified=true"
-            className={
-              browsingTx
-                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
-                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
-            }
-          >
-            Texas (TDI)
-            {txTotal > 0 ? (
+            </Link>
+          ) : null}
+          {txTotal > 0 ? (
+            <Link
+              href="/directory?state=TX&verified=true"
+              className={
+                browsingTx
+                  ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                  : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+              }
+            >
+              Texas (TDI)
               <span className="ml-1.5 tabular-nums opacity-90">
                 {txTotal.toLocaleString()}
               </span>
-            ) : null}
-          </Link>
-          <Link
-            href="/directory?state=OH&verified=true"
-            className={
-              browsingOh
-                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
-                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
-            }
-          >
-            Ohio (ODI)
-            {ohTotal > 0 ? (
+            </Link>
+          ) : null}
+          {ohTotal > 0 ? (
+            <Link
+              href="/directory?state=OH&verified=true"
+              className={
+                browsingOh
+                  ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                  : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+              }
+            >
+              Ohio (ODI)
               <span className="ml-1.5 tabular-nums opacity-90">
                 {ohTotal.toLocaleString()}
               </span>
-            ) : null}
-          </Link>
+            </Link>
+          ) : null}
           <Link
             href="/directory?verified=true"
             className={
@@ -202,170 +241,162 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </Link>
           ) : null}
         </div>
-        <div className="mt-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            New Jersey launch hubs
-            {njTotal > 0 ? (
+        {njTotal > 0 ? (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              New Jersey launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
                 · {njTotal.toLocaleString()} verified NJ listings
               </span>
-            ) : (
-              <span className="ml-2 font-normal normal-case tracking-normal">
-                · pipeline ready (import when organization export available)
-              </span>
-            )}
-          </p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {njHubRows.map((row) => (
-              <li key={row.key}>
-                <Link
-                  href={row.hubHref}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
-                >
-                  {row.displayName}
-                  <span className="tabular-nums opacity-80">
-                    {row.total.toLocaleString()}
-                  </span>
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link
-                href="/guides/new-jersey-aca-marketplace"
-                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
-              >
-                NJ ACA guides
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="mt-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Texas launch hubs
-            {txTotal > 0 ? (
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {njHubRows
+                .filter((row) => row.total > 0)
+                .map((row) => (
+                  <li key={row.key}>
+                    <Link
+                      href={row.hubHref}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                    >
+                      {row.displayName}
+                      <span className="tabular-nums opacity-80">
+                        {row.total.toLocaleString()}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ) : null}
+        {txTotal > 0 ? (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Texas launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
                 · {txTotal.toLocaleString()} verified TX listings
               </span>
-            ) : null}
-          </p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {txHubRows.map((row) => (
-              <li key={row.key}>
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {txHubRows
+                .filter((row) => row.total > 0)
+                .map((row) => (
+                  <li key={row.key}>
+                    <Link
+                      href={row.hubHref}
+                      className={
+                        row.kind === 'aggregate'
+                          ? 'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
+                          : 'inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10'
+                      }
+                    >
+                      {row.displayName}
+                      <span className="tabular-nums opacity-80">
+                        {row.total.toLocaleString()}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              <li>
                 <Link
-                  href={row.hubHref}
-                  className={
-                    row.kind === 'aggregate'
-                      ? 'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
-                      : 'inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10'
-                  }
+                  href="/directory?state=TX&verified=true"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
                 >
-                  {row.displayName}
-                  <span className="tabular-nums opacity-80">
-                    {row.total.toLocaleString()}
-                  </span>
+                  Browse TX directory
                 </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                href="/directory?state=TX&verified=true"
-                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
-              >
-                Browse TX directory
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/hubs/texas"
-                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
-              >
-                All Texas hubs
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="mt-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Ohio launch hubs
-            {ohTotal > 0 ? (
+              <li>
+                <Link
+                  href="/hubs/texas"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+                >
+                  All Texas hubs
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
+        {ohTotal > 0 ? (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Ohio launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
                 · {ohTotal.toLocaleString()} verified OH listings
               </span>
-            ) : (
-              <span className="ml-2 font-normal normal-case tracking-normal">
-                · pipeline ready (import when ODI agency export available)
-              </span>
-            )}
-          </p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {ohHubRows.map((row) => (
-              <li key={row.key}>
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {ohHubRows
+                .filter((row) => row.total > 0)
+                .map((row) => (
+                  <li key={row.key}>
+                    <Link
+                      href={row.hubHref}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                    >
+                      {row.displayName}
+                      <span className="tabular-nums opacity-80">
+                        {row.total.toLocaleString()}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              <li>
                 <Link
-                  href={row.hubHref}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                  href="/directory?state=OH&verified=true"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
                 >
-                  {row.displayName}
-                  <span className="tabular-nums opacity-80">
-                    {row.total.toLocaleString()}
-                  </span>
+                  Browse OH directory
                 </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                href="/directory?state=OH&verified=true"
-                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
-              >
-                Browse OH directory
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/hubs/ohio"
-                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
-              >
-                All Ohio hubs
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="mt-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Florida launch counties
-            {flTotal > 0 ? (
+              <li>
+                <Link
+                  href="/hubs/ohio"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+                >
+                  All Ohio hubs
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
+        {flTotal > 0 ? (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Florida launch counties
               <span className="ml-2 font-normal normal-case tracking-normal">
                 · {flTotal.toLocaleString()} verified FL listings
               </span>
-            ) : null}
-          </p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {launchRows.map((row) => (
-              <li key={row.key}>
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {launchRows
+                .filter((row) => row.total > 0)
+                .map((row) => (
+                  <li key={row.key}>
+                    <Link
+                      href={row.hubHref}
+                      className={
+                        row.kind === 'aggregate'
+                          ? 'inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
+                          : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10'
+                      }
+                    >
+                      {row.displayName}
+                      <span className="tabular-nums opacity-80">
+                        {row.total.toLocaleString()}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              <li>
                 <Link
-                  href={row.hubHref}
-                  className={
-                    row.kind === 'aggregate'
-                      ? 'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
-                      : 'inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10'
-                  }
+                  href="/hubs/florida"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
                 >
-                  {row.displayName}
-                  <span className="tabular-nums opacity-80">
-                    {row.total.toLocaleString()}
-                  </span>
+                  All Florida hubs
                 </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                href="/hubs/florida"
-                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
-              >
-                All Florida hubs
-              </Link>
-            </li>
-          </ul>
-        </div>
+            </ul>
+          </div>
+        ) : null}
       </div>
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-8">
@@ -378,15 +409,17 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <div>
           <DirectorySpecialtyChips
             activeSpecialty={specialty}
-            activeState={state}
+            searchParams={filterParams}
             className="mb-6 rounded-xl border bg-card p-4"
           />
           <Suspense fallback={null}>
             <DirectoryControls
-            total={total}
-            showing={providers.length}
-            className="mb-6"
-          />
+              total={total}
+              showing={providers.length}
+              page={page}
+              pageSize={DIRECTORY_PAGE_SIZE}
+              className="mb-6"
+            />
           </Suspense>
 
           {providers.length === 0 ? (
@@ -412,7 +445,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                 },
               ]}
               widenLinks={[
-                { href: '/directory', label: 'Clear directory home' },
+                { href: '/directory?verified=true', label: 'Clear directory home' },
                 { href: '/tools/coverage-compass', label: 'Coverage Compass' },
                 { href: '/calculators', label: 'Educational calculators' },
                 { href: '/methodology', label: 'Methodology' },
@@ -424,17 +457,27 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               }}
             />
           ) : (
-            <div
-              className={cn(
-                isList
-                  ? 'flex flex-col gap-4'
-                  : 'grid sm:grid-cols-2 xl:grid-cols-3 gap-5'
-              )}
-            >
-              {providers.map((provider) => (
-                <ProviderCard key={provider.id} provider={provider} />
-              ))}
-            </div>
+            <>
+              <div
+                id="directory-results"
+                className={cn(
+                  isList
+                    ? 'flex flex-col gap-4'
+                    : 'grid sm:grid-cols-2 xl:grid-cols-3 gap-5'
+                )}
+              >
+                {providers.map((provider) => (
+                  <ProviderCard key={provider.id} provider={provider} />
+                ))}
+              </div>
+              <DirectoryPagination
+                page={page}
+                totalPages={totalPages}
+                total={total}
+                pageSize={DIRECTORY_PAGE_SIZE}
+                searchParams={filterParams}
+              />
+            </>
           )}
         </div>
       </div>

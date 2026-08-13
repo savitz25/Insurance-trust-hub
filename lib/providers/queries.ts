@@ -61,11 +61,21 @@ export async function getProviders(
       query = query.not('contact->appointment_snapshot', 'is', null);
     }
 
-    query = query.order('name', { ascending: true });
+    if (filters.sort === 'rating') {
+      query = query
+        .order('rating', { ascending: false })
+        .order('name', { ascending: true });
+    } else if (filters.sort === 'reviews') {
+      query = query
+        .order('review_count', { ascending: false })
+        .order('name', { ascending: true });
+    } else {
+      query = query.order('name', { ascending: true });
+    }
     const offset = filters.offset ?? 0;
     const limit = filters.limit ?? 24;
-    // Over-fetch slightly so Phase 1 trust filter still fills the page
-    query = query.range(offset, offset + Math.max(limit * 2, limit) - 1);
+    // Exact page range — over-fetch would skip/duplicate rows across pages
+    query = query.range(offset, offset + Math.max(limit, 1) - 1);
 
     const { data, error, count } = await query;
 
