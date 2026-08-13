@@ -30,6 +30,12 @@ import {
   getLoaSourcePhrase,
   getRegulatorLabel,
 } from '@/lib/regulators/labels';
+import { ResearchThisMarket } from '@/components/research-this-market';
+import { clusterForHubSlug, clusterForPath } from '@/lib/seo/seo-clusters';
+import {
+  buildBreadcrumbListJsonLd,
+  buildWebPageJsonLd,
+} from '@/lib/seo/research-seo';
 
 interface HubPageViewProps {
   hub: InsuranceHub;
@@ -61,6 +67,32 @@ const COUNTY_DASHBOARD_BY_HUB_SLUG: Record<string, string> = {
 
 /** Reciprocal ACA Marketplace research guides (educational clusters → flagship tool) */
 const ACA_GUIDE_LINKS_BY_HUB: Record<string, Array<{ href: string; label: string }>> = {
+  jacksonville: [
+    { href: '/guides/florida-aca-marketplace', label: 'Florida ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+  'miami-fort-lauderdale': [
+    { href: '/guides/miami-dade-aca-marketplace', label: 'Miami-Dade ACA guide' },
+    { href: '/guides/broward-aca-marketplace', label: 'Broward ACA guide' },
+    { href: '/guides/palm-beach-aca-marketplace', label: 'Palm Beach ACA guide' },
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+  ],
+  'las-vegas': [
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+    { href: '/directory?state=NV&verified=true', label: 'Nevada directory' },
+  ],
+  reno: [
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+    { href: '/directory?state=NV&verified=true', label: 'Nevada directory' },
+  ],
+  columbus: [
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+    { href: '/directory?state=OH&verified=true', label: 'Ohio directory' },
+  ],
+  burlington: [
+    { href: '/tools/marketplace-plan-research', label: 'Local plan landscape' },
+    { href: '/directory?state=VT&verified=true', label: 'Vermont directory' },
+  ],
   houston: [
     { href: '/guides/houston-aca-marketplace', label: 'Houston ACA guide' },
     { href: '/guides/texas-aca-marketplace', label: 'Texas ACA guide' },
@@ -192,23 +224,46 @@ export function HubPageView({
     total: verifiedCount,
     health: healthCount,
   });
+  const cluster = clusterForPath(path) || clusterForHubSlug(hub.slug);
   const curatedSummary = curatedConfig
     ? honestCuratedSummary(hub.shortName, stats.totalAgents, curatedConfig.summary)
     : null;
   const healthProviders = dbProviders.filter((p) => p.insurance_types?.includes('health'));
   const otherProviders = dbProviders.filter((p) => !p.insurance_types?.includes('health'));
 
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Hubs', path: '/hubs' },
+    { name: hub.stateName, path: `/hubs/${state}` },
+    { name: hub.shortName, path },
+  ];
+  const jsonLdNodes: Record<string, unknown>[] = [
+    buildWebPageJsonLd({
+      path,
+      name: seo.title,
+      description: seo.description,
+    }),
+    buildBreadcrumbListJsonLd(breadcrumbs),
+  ];
+  if (dbProviders.length > 0) {
+    jsonLdNodes.push({
+      '@type': 'ItemList',
+      name: `Verified research listings in ${hub.shortName}`,
+      numberOfItems: verifiedCount,
+      itemListElement: dbProviders.slice(0, 20).map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: p.name,
+        url: `${SITE_URL}/providers/${p.slug}`,
+      })),
+    });
+  }
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: seo.title,
-    description: seo.description,
-    url: `${SITE_URL}${path}`,
-    about: {
-      '@type': 'Place',
-      name: hub.msaName,
-      address: { '@type': 'PostalAddress', addressRegion: hub.stateCode, addressCountry: 'US' },
-    },
+    '@graph': jsonLdNodes.map((node) => {
+      const { ['@context']: _c, ...rest } = node;
+      return rest;
+    }),
   };
 
   return (
@@ -251,7 +306,9 @@ export function HubPageView({
             Independent research · Re-check {regulatorLabel} licenses
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
-            Research insurance agencies in {hub.shortName}
+            {verifiedCount > 0 && cluster
+              ? cluster.h1
+              : `Research insurance agencies in ${hub.shortName}`}
           </h1>
           <p className="mt-2 text-lg text-primary-foreground/80">
             {`Verified ${regulatorLabel} research listings for ${hub.localDescriptor}`}
@@ -337,6 +394,8 @@ export function HubPageView({
                 </div>
               ) : null}
             </section>
+
+            {cluster && verifiedCount > 0 ? <ResearchThisMarket cluster={cluster} /> : null}
 
             {(curatedConfig || dbProviders.length > 0) && (
               <section>

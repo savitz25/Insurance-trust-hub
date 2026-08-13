@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/constants';
+import { isPrioritySitemapPath, SEO_CLUSTERS } from '@/lib/seo/seo-clusters';
 import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { ARTICLES } from '@/lib/resources/articles';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
@@ -99,21 +100,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       path === ''
         ? 1
-        : path === '/tools' ||
-            path === '/medicare' ||
-            path === '/marketplace' ||
-            path === '/carriers' ||
-            path === '/tools/aca-plan-explorer' ||
-            path === '/tools/marketplace-plan-research' ||
-            path.startsWith('/guides') ||
-            path.startsWith('/data') ||
-            path.startsWith('/tools/cost') ||
-            path.startsWith('/calculators/aca') ||
-            path.includes('provider-lookup') ||
-            path.includes('complaint') ||
-            path === '/methodology'
+        : isPrioritySitemapPath(path)
           ? 0.95
-          : 0.8,
+          : path === '/tools' ||
+              path === '/medicare' ||
+              path === '/marketplace' ||
+              path === '/methodology'
+            ? 0.9
+            : 0.75,
   }));
 
   const browseStates = getAllStateSlugs().map((state) => ({
@@ -166,11 +160,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  const hubPages = INSURANCE_HUBS.map((hub) => ({
-    url: `${site}/hubs/${hub.stateSlug}/${hub.slug}`,
+  const hubPages = INSURANCE_HUBS.map((hub) => {
+    const path = `/hubs/${hub.stateSlug}/${hub.slug}`;
+    return {
+      url: `${site}${path}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: isPrioritySitemapPath(path) ? 0.92 : 0.55,
+    };
+  });
+
+  const clusterCanonicals = SEO_CLUSTERS.filter(
+    (c) => !INSURANCE_HUBS.some((h) => `/hubs/${h.stateSlug}/${h.slug}` === c.hubPath)
+  ).map((c) => ({
+    url: `${site}${c.hubPath}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
-    priority: hub.priority <= 15 ? 0.85 : hub.priority >= 55 ? 0.88 : 0.7,
+    priority: 0.94,
   }));
 
   // Phase 10: curated county ACA pages only (quality list — not all US counties).
@@ -221,6 +227,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...browseStates,
     ...hubStates,
     ...hubPages,
+    ...clusterCanonicals,
     ...marketplaceCounties,
     ...medicareCounties,
     ...medicareContracts,

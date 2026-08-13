@@ -10,6 +10,7 @@ import {
   EMPTY_MARKET_COPY,
   buildMarketMetadata,
 } from '@/lib/insurance/trust/provider-trust-state';
+import { clusterForHubSlug, clusterForPath } from '@/lib/seo/seo-clusters';
 
 export type HubPublicSeo = {
   title: string;
@@ -37,10 +38,19 @@ export function resolveHubPublicSeo(
     healthCount,
     path,
   });
+  const cluster = clusterForPath(path) || clusterForHubSlug(hub.slug);
+  const title =
+    !meta.isEmpty && cluster
+      ? cluster.title
+      : meta.title;
+  const description =
+    !meta.isEmpty && cluster
+      ? cluster.description
+      : meta.description;
 
   return {
-    title: meta.title,
-    description: meta.description,
+    title,
+    description,
     verifiedCount: meta.verifiedCount,
     healthCount,
     isEmpty: meta.isEmpty,

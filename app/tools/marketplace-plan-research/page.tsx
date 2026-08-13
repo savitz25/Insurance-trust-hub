@@ -19,6 +19,7 @@ import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { FlagshipPlanResearch } from '@/components/marketplace/flagship-plan-research';
 import { isMarketplaceApiConfigured } from '@/lib/marketplace/client';
 import { MARKETPLACE_PLAN_YEAR_DEFAULT } from '@/lib/marketplace/types';
+import { marketplaceClusterChips } from '@/lib/seo/seo-clusters';
 
 const PATH = '/tools/marketplace-plan-research';
 const TITLE =
@@ -401,6 +402,27 @@ export default function MarketplacePlanResearchPage() {
                   All guides
                 </Link>
               </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-900">
+              Live verified agency hubs
+            </h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Continue into licensed-agency research only where official inventory exists.
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-2 text-sm">
+              {marketplaceClusterChips().map((chip) => (
+                <li key={chip.href}>
+                  <Link
+                    href={chip.href}
+                    className="rounded-full border border-slate-200 bg-white px-3 py-1.5 font-medium text-[#0284C7] hover:border-[#0284C7]/40"
+                  >
+                    {chip.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </section>
 
