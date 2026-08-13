@@ -7,6 +7,7 @@ import {
 import { createPublicClient } from '@/lib/supabase/public';
 import {
   countVerifiedByLaunchCounty,
+  countVerifiedOhioProviders,
   countVerifiedProvidersForHub,
   getHubInventory,
   HUB_PAGE_SIZE,
@@ -124,6 +125,9 @@ export async function GET() {
     'miami-fort-lauderdale': await countVerifiedProvidersForHub(
       'miami-fort-lauderdale'
     ),
+    columbus: await countVerifiedProvidersForHub('columbus'),
+    cleveland: await countVerifiedProvidersForHub('cleveland'),
+    cincinnati: await countVerifiedProvidersForHub('cincinnati'),
   };
 
   const jax = await getHubInventory('jacksonville', { pageSize: 5 });
@@ -151,6 +155,7 @@ export async function GET() {
     restCount,
     restBodySnippet,
     verifiedFlCount,
+    verifiedOhCount: await countVerifiedOhioProviders(),
     queryError,
     /** Matching strategy + intentional page cap */
     matching: {

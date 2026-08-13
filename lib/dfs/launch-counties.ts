@@ -283,6 +283,19 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified DOBI inventory for this launch is Wave-1 Central Jersey agencies (Middlesex, Mercer, Monmouth, Ocean, Somerset area — city/county/ZIP match). Organization/agency entities only.';
     case 'north-new-jersey':
       return 'Verified DOBI inventory for this launch is Wave-1 North Jersey agencies (Bergen, Essex, Hudson, Passaic, Morris, Union + northwest counties — city/county/ZIP match). Organization/agency entities only.';
+    // —— Phase 10 Ohio ODI ——
+    case 'columbus':
+      return 'Verified ODI inventory for this launch is Wave-1 Columbus / Franklin–area agencies (city/county/ZIP match). Business entities only.';
+    case 'cleveland':
+      return 'Verified ODI inventory for this launch is Wave-1 Cleveland / Cuyahoga–area agencies (city/county/ZIP match). Business entities only.';
+    case 'cincinnati':
+      return 'Verified ODI inventory for this launch is Wave-1 Cincinnati / Hamilton–area agencies (city/county/ZIP match). Business entities only.';
+    case 'toledo':
+      return 'Verified ODI inventory for this launch is Wave-1 Toledo / Lucas–area agencies (city/county/ZIP match). Business entities only.';
+    case 'akron':
+      return 'Verified ODI inventory for this launch is Wave-1 Akron / Summit–area agencies (city/county/ZIP match). Business entities only.';
+    case 'dayton':
+      return 'Verified ODI inventory for this launch is Wave-1 Dayton / Montgomery–area agencies (city/county/ZIP match). Business entities only.';
     default:
       return null;
   }

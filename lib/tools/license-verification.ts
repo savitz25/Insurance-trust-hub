@@ -23,6 +23,12 @@ const LOOKUP_URLS: Record<string, { department: string; lookupUrl: string; notes
     lookupUrl: 'https://www.state.nj.us/dobi/DOBI_LicSearch/index.html',
     notes: 'Interactive licensee search; bulk organization export may require OPRA/SBS/NIPR.',
   },
+  OH: {
+    department: 'Ohio Department of Insurance',
+    lookupUrl:
+      'https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/AgentSearch.mvc/DisplaySearch',
+    notes: 'Agent/agency locator. Bulk agency lists: ODI Mailing List tool (business entities only).',
+  },
   CA: {
     department: 'California Department of Insurance',
     lookupUrl: 'https://www.insurance.ca.gov/01-consumers/102-help-adv/',

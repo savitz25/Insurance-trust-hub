@@ -34,6 +34,10 @@ import {
   launchMarketsForHubSlug,
 } from '@/lib/tdi/launch-markets';
 import {
+  isOhLaunchHub,
+  launchMarketsForHubSlug as launchOhMarketsForHubSlug,
+} from '@/lib/odi/launch-markets';
+import {
   isNjLaunchHub,
   launchRegionsForHubSlug,
 } from '@/lib/nj/launch-regions';
@@ -298,6 +302,81 @@ async function getNjHubInventory(
   }
 }
 
+async function getOhHubInventory(
+  hubSlug: string,
+  pageSize: number,
+  page: number
+): Promise<HubInventoryResult> {
+  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  const markets = launchOhMarketsForHubSlug(hubSlug);
+  if (!markets.length) return emptyInventory(hubSlug, pageSize, page);
+
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+
+    const marketIds = markets.map((m) => m.id);
+    const orParts = marketIds
+      .map((id) => `contact->>launch_market_id.eq.${id}`)
+      .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
+    const or = orParts.join(',');
+
+    const { count, error: cErr } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['OH'])
+      .or(or);
+
+    const total = cErr ? 0 : count ?? 0;
+    const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
+    const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+    const from = (safePage - 1) * pageSize;
+    const overFetch = Math.min(pageSize + 40, 200);
+    const to = from + overFetch - 1;
+
+    const { data, error } = await supabase
+      .from('providers')
+      .select('*')
+      .eq('verified', true)
+      .contains('states_licensed', ['OH'])
+      .or(or)
+      .order('name', { ascending: true })
+      .range(from, to);
+
+    if (error || !data?.length) {
+      return {
+        ...emptyInventory(hubSlug, pageSize, safePage),
+        total,
+        totalPages,
+      };
+    }
+
+    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
+    const verified = filterVerifiedProviders(mapped)
+      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
+      .filter((p) => p.state?.toUpperCase() === 'OH');
+
+    const providers = verified.slice(0, pageSize);
+    const safeTotal = Math.max(total, from + providers.length);
+
+    return {
+      providers,
+      total: safeTotal,
+      showing: providers.length,
+      pageSize,
+      page: safePage,
+      totalPages: Math.max(
+        totalPages,
+        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
+      ),
+      hubSlug,
+    };
+  } catch {
+    return emptyInventory(hubSlug, pageSize, page);
+  }
+}
+
 /**
  * Full hub inventory: total (exact) + one page of verified cards.
  */
@@ -313,6 +392,9 @@ export async function getHubInventory(
   }
   if (isNjLaunchHub(hubSlug)) {
     return getNjHubInventory(hubSlug, pageSize, page);
+  }
+  if (isOhLaunchHub(hubSlug)) {
+    return getOhHubInventory(hubSlug, pageSize, page);
   }
 
   if (!isFlLaunchHub(hubSlug) || !isSupabaseConfigured()) {
@@ -400,6 +482,10 @@ export async function countVerifiedProvidersForHub(
   }
   if (isNjLaunchHub(hubSlug)) {
     const inv = await getNjHubInventory(hubSlug, 1, 1);
+    return inv.total;
+  }
+  if (isOhLaunchHub(hubSlug)) {
+    const inv = await getOhHubInventory(hubSlug, 1, 1);
     return inv.total;
   }
   if (!isFlLaunchHub(hubSlug)) return 0;
@@ -514,6 +600,84 @@ export async function countVerifiedTexasProviders(): Promise<number> {
   } catch {
     return 0;
   }
+}
+
+/** Total verified OH providers (directory honesty). */
+export async function countVerifiedOhioProviders(): Promise<number> {
+  if (!isSupabaseConfigured()) return 0;
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return 0;
+    const { count, error } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['OH']);
+    if (error) return 0;
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Live totals for Ohio Wave-1 hub nav (directory). */
+export async function getOhLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]> {
+  const hubs: Array<{
+    key: string;
+    displayName: string;
+    hubSlug: string;
+    hubHref: string;
+    kind: 'county' | 'aggregate';
+  }> = [
+    {
+      key: 'columbus',
+      displayName: 'Columbus',
+      hubSlug: 'columbus',
+      hubHref: '/hubs/ohio/columbus',
+      kind: 'county',
+    },
+    {
+      key: 'cleveland',
+      displayName: 'Cleveland',
+      hubSlug: 'cleveland',
+      hubHref: '/hubs/ohio/cleveland',
+      kind: 'county',
+    },
+    {
+      key: 'cincinnati',
+      displayName: 'Cincinnati',
+      hubSlug: 'cincinnati',
+      hubHref: '/hubs/ohio/cincinnati',
+      kind: 'county',
+    },
+    {
+      key: 'toledo',
+      displayName: 'Toledo',
+      hubSlug: 'toledo',
+      hubHref: '/hubs/ohio/toledo',
+      kind: 'county',
+    },
+    {
+      key: 'akron',
+      displayName: 'Akron',
+      hubSlug: 'akron',
+      hubHref: '/hubs/ohio/akron',
+      kind: 'county',
+    },
+    {
+      key: 'dayton',
+      displayName: 'Dayton',
+      hubSlug: 'dayton',
+      hubHref: '/hubs/ohio/dayton',
+      kind: 'county',
+    },
+  ];
+  const out: LaunchNavLiveRow[] = [];
+  for (const h of hubs) {
+    const total = await countVerifiedProvidersForHub(h.hubSlug);
+    out.push({ ...h, total });
+  }
+  return out;
 }
 
 /** Total verified NJ providers (directory honesty). */

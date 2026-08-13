@@ -20,9 +20,11 @@ import {
   countVerifiedFloridaProviders,
   countVerifiedTexasProviders,
   countVerifiedNewJerseyProviders,
+  countVerifiedOhioProviders,
   getLaunchCountyLiveTotals,
   getTxLaunchMarketLiveTotals,
   getNjLaunchRegionLiveTotals,
+  getOhLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 
@@ -94,10 +96,13 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const launchRows = await getLaunchCountyLiveTotals();
   const txHubRows = await getTxLaunchMarketLiveTotals();
   const njHubRows = await getNjLaunchRegionLiveTotals();
+  const ohHubRows = await getOhLaunchMarketLiveTotals();
   const flTotal = await countVerifiedFloridaProviders();
   const txTotal = await countVerifiedTexasProviders();
   const njTotal = await countVerifiedNewJerseyProviders();
+  const ohTotal = await countVerifiedOhioProviders();
   const browsingTx = state === 'TX';
+  const browsingOh = state === 'OH';
   const browsingNj = state === 'NJ';
 
   return (
@@ -143,6 +148,21 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             {njTotal > 0 ? (
               <span className="ml-1.5 tabular-nums opacity-90">
                 {njTotal.toLocaleString()}
+              </span>
+            ) : null}
+          </Link>
+          <Link
+            href="/directory?state=OH&verified=true"
+            className={
+              browsingOh
+                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+            }
+          >
+            Ohio (ODI)
+            {ohTotal > 0 ? (
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {ohTotal.toLocaleString()}
               </span>
             ) : null}
           </Link>
@@ -246,6 +266,51 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                 className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
               >
                 All Texas hubs
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="mt-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Ohio launch hubs
+            {ohTotal > 0 ? (
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · {ohTotal.toLocaleString()} verified OH listings
+              </span>
+            ) : (
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · pipeline ready (import when ODI agency export available)
+              </span>
+            )}
+          </p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {ohHubRows.map((row) => (
+              <li key={row.key}>
+                <Link
+                  href={row.hubHref}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                >
+                  {row.displayName}
+                  <span className="tabular-nums opacity-80">
+                    {row.total.toLocaleString()}
+                  </span>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/directory?state=OH&verified=true"
+                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+              >
+                Browse OH directory
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/hubs/ohio"
+                className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+              >
+                All Ohio hubs
               </Link>
             </li>
           </ul>
