@@ -84,7 +84,12 @@ if (!/cost-estimator/.test(hubForm) || !/marketplace-plan-research/.test(hubForm
 }
 
 const profile = read('app/providers/[slug]/page.tsx');
-if (!/marketplace-plan-research/.test(profile) || !/plan-complaint-index/.test(profile)) {
+const continueCluster = read('lib/providers/continue-cluster.ts');
+if (
+  !/ContinueClusterResearch/.test(profile) ||
+  !/marketplace-plan-research/.test(continueCluster) ||
+  !/plan-complaint-index/.test(continueCluster)
+) {
   errors.push('profiles must continue into flagship research tools');
 }
 

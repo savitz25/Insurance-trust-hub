@@ -44,18 +44,26 @@ export const LOA_PLAIN_LANGUAGE: Record<string, string> = {
     'Reported lines of authority include title insurance when present on the license record.',
   'Public Adjuster':
     'Reported lines of authority include public adjuster authority when present on the license record.',
+  Variable:
+    'Reported lines of authority include variable life or variable annuity authority when present on the public record.',
 };
+
+const UNMAPPED_LOA =
+  'Shown as reported on the public license record. We do not add meaning beyond that tag, and never infer Medicare network status from it.';
 
 export function loaPlainLanguageForTags(tags: string[]): Array<{
   tag: string;
   blurb: string;
+  mapped: boolean;
 }> {
-  return tags
-    .map((tag) => ({
+  return tags.map((tag) => {
+    const mapped = Boolean(LOA_PLAIN_LANGUAGE[tag]);
+    return {
       tag,
-      blurb: LOA_PLAIN_LANGUAGE[tag] ?? '',
-    }))
-    .filter((x) => x.blurb);
+      blurb: LOA_PLAIN_LANGUAGE[tag] ?? UNMAPPED_LOA,
+      mapped,
+    };
+  });
 }
 
 /** Soft local hub path for FL / TX / NJ / OH / NV / VT launch markets. */

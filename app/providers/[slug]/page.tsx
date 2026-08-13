@@ -62,9 +62,11 @@ import {
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
-  localHubPathForProvider,
   agencyCapabilitySummary,
 } from '@/lib/dfs/agency-display';
+import { resolveLicenseFreshness } from '@/lib/providers/license-freshness';
+import { continueClusterForProvider } from '@/lib/providers/continue-cluster';
+import { ContinueClusterResearch } from '@/components/profile/continue-cluster-research';
 
 function extractNpnFromNotes(notes: string | null | undefined): string | null {
   if (!notes) return null;
@@ -134,7 +136,6 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const loaTags = loaSpecialtyTags(specialties);
   const loaBlurbs = loaPlainLanguageForTags(loaTags);
   const { legalName, dba } = extractDbaFromName(provider.name);
-  const localHub = localHubPathForProvider(provider);
   const insuranceTypes = Array.isArray(provider.insurance_types)
     ? provider.insurance_types
     : [];
@@ -155,6 +156,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     'State insurance department';
   const regulatorShort = getRegulatorShortLabel(provider.state);
   const npn = extractNpnFromNotes(provider.license_notes);
+  const freshness = resolveLicenseFreshness(provider.license_checked_at);
+  const continueCluster = continueClusterForProvider(provider);
 
   let secondarySignals = null;
   try {
@@ -232,6 +235,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <Badge variant="secondary">
                   {provider.city}, {provider.state}
                 </Badge>
+                {freshness.badge ? (
+                  <Badge variant={freshness.kind === 'stale' ? 'outline' : 'secondary'}>
+                    {freshness.badge}
+                  </Badge>
+                ) : null}
               </div>
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
                 {dba ? legalName : provider.name}
@@ -310,6 +318,74 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
         <div className="grid lg:grid-cols-[1fr_360px] gap-10">
           <div className="space-y-10">
             <section>
+              <h2 className="text-xl font-semibold mb-4">How verified</h2>
+              <Card>
+                <CardContent className="pt-6 space-y-3">
+                  <p className="text-sm">
+                    <span className="font-medium">Regulator:</span> {regulatorName}
+                  </p>
+                  {publicView.verification.licenseNumber && (
+                    <p className="text-sm">
+                      <span className="font-medium">License number:</span>{' '}
+                      <span className="tabular-nums">
+                        {publicView.verification.licenseNumber}
+                      </span>
+                    </p>
+                  )}
+                  {npn ? (
+                    <p className="text-sm">
+                      <span className="font-medium">NPN:</span>{' '}
+                      <span className="tabular-nums">{npn}</span>
+                    </p>
+                  ) : null}
+                  {publicView.verification.sourceLabel ? (
+                    <p className="text-sm">
+                      <span className="font-medium">Source:</span>{' '}
+                      {publicView.verification.sourceLabel}
+                    </p>
+                  ) : null}
+                  {publicView.verification.lastCheckedLabel ? (
+                    <p className="text-sm">
+                      <span className="font-medium">As of / last checked:</span>{' '}
+                      {publicView.verification.lastCheckedLabel}
+                    </p>
+                  ) : null}
+                  {freshness.badge ? (
+                    <p className="text-sm">
+                      <span className="font-medium">Freshness:</span> {freshness.badge}
+                    </p>
+                  ) : null}
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {freshness.note} {publicView.verification.summary} This listing is research
+                    context — not a recommendation or ranking. Public listings require a
+                    re-checkable license number, {regulatorName} as regulator, and Phase 1 verified
+                    trust gates. {getMedicareNonClaim(provider.state)}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild variant="outline" size="sm" className="gap-2">
+                      <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
+                        Verify license in {provider.state}
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    </Button>
+                    {regulator ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={regulator.lookupUrl} target="_blank" rel="noopener noreferrer">
+                          {regulator.lookupLinkLabel}
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
+                    Research listing only — not an endorsement, rating, or appointment guarantee.
+                  </p>
+                  <TrustMark />
+                </CardContent>
+              </Card>
+            </section>
+
+            <section>
               <h2 className="text-xl font-semibold mb-3">Who they are</h2>
               <Card>
                 <CardContent className="pt-6 space-y-3 text-sm">
@@ -356,9 +432,13 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   )}
                   {loaBlurbs.length > 0 ? (
                     <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
-                      {loaBlurbs.map(({ tag, blurb }) => (
+                      {loaBlurbs.map(({ tag, blurb, mapped }) => (
                         <li key={tag}>
-                          <span className="font-medium text-foreground">{tag}:</span> {blurb}
+                          <span className="font-medium text-foreground">{tag}</span>
+                          {!mapped ? (
+                            <span className="text-xs uppercase tracking-wide"> · regulator tag</span>
+                          ) : null}
+                          : {blurb}
                         </li>
                       ))}
                     </ul>
@@ -380,13 +460,6 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 </CardContent>
               </Card>
             </section>
-
-            {provider.appointment_snapshot &&
-            provider.appointment_snapshot.totalCount > 0 ? (
-              <ProviderAppointmentSnapshotSection
-                snapshot={provider.appointment_snapshot}
-              />
-            ) : null}
 
             <section>
               <h2 className="text-xl font-semibold mb-3">Where they&apos;re located</h2>
@@ -417,165 +490,20 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               </Card>
             </section>
 
-            <section>
-              <h2 className="text-xl font-semibold mb-4">How verification was determined</h2>
-              <Card>
-                <CardContent className="pt-6 space-y-3">
-                  <p className="text-sm">
-                    <span className="font-medium">How verified:</span> {regulatorName}
-                  </p>
-                  {publicView.verification.licenseNumber && (
-                    <p className="text-sm">
-                      <span className="font-medium">License number:</span>{' '}
-                      <span className="tabular-nums">
-                        {publicView.verification.licenseNumber}
-                      </span>
-                    </p>
-                  )}
-                  {npn ? (
-                    <p className="text-sm">
-                      <span className="font-medium">NPN:</span>{' '}
-                      <span className="tabular-nums">{npn}</span>
-                    </p>
-                  ) : null}
-                  {publicView.verification.sourceLabel ? (
-                    <p className="text-sm">
-                      <span className="font-medium">Source:</span>{' '}
-                      {publicView.verification.sourceLabel}
-                    </p>
-                  ) : null}
-                  {publicView.verification.lastCheckedLabel ? (
-                    <p className="text-sm">
-                      <span className="font-medium">As of / last checked:</span>{' '}
-                      {publicView.verification.lastCheckedLabel}
-                    </p>
-                  ) : null}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {publicView.verification.summary} Public listings require a re-checkable license
-                    number, {regulatorName} as regulator, and Phase 1 verified trust gates. Status
-                    can change — always re-check on official tools before you enroll.{' '}
-                    {getMedicareNonClaim(provider.state)}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Button asChild variant="outline" size="sm" className="gap-2">
-                      <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
-                        Verify license in {provider.state}
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                    </Button>
-                    {regulator ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={regulator.lookupUrl} target="_blank" rel="noopener noreferrer">
-                          {regulator.lookupLinkLabel}
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
-                    Research listing only — not an endorsement, rating, or appointment guarantee.
-                  </p>
-                  <TrustMark />
-                </CardContent>
-              </Card>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold mb-3">How to research further</h2>
-              <Card>
-                <CardContent className="pt-6">
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {publicView.phone ? (
-                      <li>
-                        Call the listed phone number and re-confirm identity against the{' '}
-                        {regulatorShort} license number before sharing personal data.
-                      </li>
-                    ) : null}
-                    {provider.website ? (
-                      <li>
-                        Visit the website on file (secondary public signal — not part of{' '}
-                        {regulatorShort} verification).
-                      </li>
-                    ) : null}
-                    {provider.appointment_snapshot?.totalCount ? (
-                      <li>
-                        Review the appointment regulatory snapshot above, then re-check carriers on{' '}
-                        {regulatorName}.
-                      </li>
-                    ) : null}
-                    <li>
-                      <Link href="/tools/license-verification" className="text-primary hover:underline">
-                        License verification tool
-                      </Link>{' '}
-                      — re-check state DOI records
-                    </li>
-                    <li>
-                      <Link href="/methodology" className="text-primary hover:underline">
-                        Methodology
-                      </Link>{' '}
-                      — how Insurance Trust Hub verifies listings
-                    </li>
-                    {localHub ? (
-                      <li>
-                        <Link href={localHub.href} className="text-primary hover:underline">
-                          {localHub.label}
-                        </Link>{' '}
-                        — more verified agencies in this market
-                      </li>
-                    ) : null}
-                    <li>
-                      <Link
-                        href="/tools/marketplace-plan-research"
-                        className="text-primary hover:underline"
-                      >
-                        Marketplace plan research
-                      </Link>{' '}
-                      — local ACA landscape by ZIP
-                    </li>
-                    <li>
-                      <Link href="/calculators/aca-subsidy" className="text-primary hover:underline">
-                        ACA savings planner
-                      </Link>
-                      {' · '}
-                      <Link href="/tools/cost-estimator" className="text-primary hover:underline">
-                        Cost planner
-                      </Link>{' '}
-                      — educational estimates only
-                    </li>
-                    <li>
-                      <Link
-                        href="/data/plan-complaint-index"
-                        className="text-primary hover:underline"
-                      >
-                        Plan Complaint Index
-                      </Link>{' '}
-                      — CMS complaint measures
-                    </li>
-                    <li>
-                      <Link href="/tools" className="text-primary hover:underline">
-                        Research Center
-                      </Link>{' '}
-                      — Coverage Compass and the full toolkit
-                    </li>
-                    <li>
-                      <Link
-                        href={`/directory?state=${provider.state}&verified=true`}
-                        className="text-primary hover:underline"
-                      >
-                        Agency directory
-                      </Link>{' '}
-                      — filter by specialty / state
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </section>
-
-            <GovernmentVerificationPanel data={governmentVerification} />
+            {provider.appointment_snapshot &&
+            provider.appointment_snapshot.totalCount > 0 ? (
+              <ProviderAppointmentSnapshotSection
+                snapshot={provider.appointment_snapshot}
+              />
+            ) : null}
 
             {secondarySignals ? (
               <ProviderSecondarySignals signals={secondarySignals} />
             ) : null}
+
+            <ContinueClusterResearch cluster={continueCluster} />
+
+            <GovernmentVerificationPanel data={governmentVerification} />
 
             {publicView.showCarriers && publicView.carriers.length > 0 && (
               <section>
@@ -620,6 +548,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               </section>
             )}
 
+            {reviews.length > 0 ? (
+            <>
             <section>
               <h2 className="text-xl font-semibold mb-4">Rating breakdown</h2>
               <Card>
@@ -682,6 +612,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 </div>
               )}
             </section>
+            </>
+            ) : null}
 
             <section>
               <h2 className="text-xl font-semibold mb-4">Write a review</h2>
