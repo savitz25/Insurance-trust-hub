@@ -312,6 +312,13 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified NV DOI inventory for this launch is Wave-1 Reno / Washoe firms with a Nevada address (Sparks included). Agency/producer firms only.';
     case 'carson-city':
       return 'Verified NV DOI inventory for this launch is Wave-1 Carson City firms with a Nevada address. Agency/producer firms only.';
+    // —— Phase 15 Vermont DFR ——
+    case 'burlington':
+      return 'Verified VT DFR inventory for this launch is Wave-1 Burlington / Chittenden firms with a Vermont address. Agencies/firms only — not a bulk individual producer list.';
+    case 'montpelier':
+      return 'Verified VT DFR inventory for this launch is Wave-1 Montpelier / central Vermont firms with a Vermont address. Agencies/firms only.';
+    case 'rutland':
+      return 'Verified VT DFR inventory for this launch is Wave-1 Rutland / southern Vermont firms with a Vermont address. Agencies/firms only.';
     default:
       return null;
   }

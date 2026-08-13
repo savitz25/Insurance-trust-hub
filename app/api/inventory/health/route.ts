@@ -9,6 +9,7 @@ import {
   countVerifiedByLaunchCounty,
   countVerifiedOhioProviders,
   countVerifiedNevadaProviders,
+  countVerifiedVermontProviders,
   countVerifiedProvidersForHub,
   getHubInventory,
   HUB_PAGE_SIZE,
@@ -158,6 +159,7 @@ export async function GET() {
     verifiedFlCount,
     verifiedOhCount: await countVerifiedOhioProviders(),
     verifiedNvCount: await countVerifiedNevadaProviders(),
+    verifiedVtCount: await countVerifiedVermontProviders(),
     queryError,
     /** Matching strategy + intentional page cap */
     matching: {

@@ -49,6 +49,10 @@ import {
   isNvLaunchHub,
   launchMarketsForHubSlug as launchNvMarketsForHubSlug,
 } from '@/lib/nv/launch-markets';
+import {
+  isVtLaunchHub,
+  launchMarketsForHubSlug as launchVtMarketsForHubSlug,
+} from '@/lib/vt/launch-markets';
 
 export { countyMatchOrParts };
 
@@ -535,6 +539,81 @@ async function getNvHubInventory(
   }
 }
 
+async function getVtHubInventory(
+  hubSlug: string,
+  pageSize: number,
+  page: number
+): Promise<HubInventoryResult> {
+  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  const markets = launchVtMarketsForHubSlug(hubSlug);
+  if (!markets.length) return emptyInventory(hubSlug, pageSize, page);
+
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+
+    const marketIds = markets.map((m) => m.id);
+    const orParts = marketIds
+      .map((id) => `contact->>launch_market_id.eq.${id}`)
+      .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
+    const or = orParts.join(',');
+
+    const { count, error: cErr } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['VT'])
+      .or(or);
+
+    const total = cErr ? 0 : count ?? 0;
+    const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
+    const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+    const from = (safePage - 1) * pageSize;
+    const overFetch = Math.min(pageSize + 40, 200);
+    const to = from + overFetch - 1;
+
+    const { data, error } = await supabase
+      .from('providers')
+      .select('*')
+      .eq('verified', true)
+      .contains('states_licensed', ['VT'])
+      .or(or)
+      .order('name', { ascending: true })
+      .range(from, to);
+
+    if (error || !data?.length) {
+      return {
+        ...emptyInventory(hubSlug, pageSize, safePage),
+        total,
+        totalPages,
+      };
+    }
+
+    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
+    const verified = filterVerifiedProviders(mapped)
+      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
+      .filter((p) => p.state?.toUpperCase() === 'VT');
+
+    const providers = verified.slice(0, pageSize);
+    const safeTotal = Math.max(total, from + providers.length);
+
+    return {
+      providers,
+      total: safeTotal,
+      showing: providers.length,
+      pageSize,
+      page: safePage,
+      totalPages: Math.max(
+        totalPages,
+        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
+      ),
+      hubSlug,
+    };
+  } catch {
+    return emptyInventory(hubSlug, pageSize, page);
+  }
+}
+
 /**
  * Full hub inventory: total (exact) + one page of verified cards.
  */
@@ -559,6 +638,9 @@ export async function getHubInventory(
   }
   if (isNvLaunchHub(hubSlug)) {
     return getNvHubInventory(hubSlug, pageSize, page);
+  }
+  if (isVtLaunchHub(hubSlug)) {
+    return getVtHubInventory(hubSlug, pageSize, page);
   }
 
   if (!isFlLaunchHub(hubSlug) || !isSupabaseConfigured()) {
@@ -658,6 +740,10 @@ export async function countVerifiedProvidersForHub(
   }
   if (isNvLaunchHub(hubSlug)) {
     const inv = await getNvHubInventory(hubSlug, 1, 1);
+    return inv.total;
+  }
+  if (isVtLaunchHub(hubSlug)) {
+    const inv = await getVtHubInventory(hubSlug, 1, 1);
     return inv.total;
   }
   if (!isFlLaunchHub(hubSlug)) return 0;
@@ -962,6 +1048,63 @@ export async function getNvLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]>
       displayName: 'Carson City',
       hubSlug: 'carson-city',
       hubHref: '/hubs/nevada/carson-city',
+      kind: 'county',
+    },
+  ];
+  const out: LaunchNavLiveRow[] = [];
+  for (const h of hubs) {
+    const total = await countVerifiedProvidersForHub(h.hubSlug);
+    out.push({ ...h, total });
+  }
+  return out;
+}
+
+/** Total verified VT providers (directory honesty). */
+export async function countVerifiedVermontProviders(): Promise<number> {
+  if (!isSupabaseConfigured()) return 0;
+  try {
+    const supabase = createPublicClient();
+    if (!supabase) return 0;
+    const { count, error } = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['VT']);
+    if (error) return 0;
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Live totals for Vermont Wave-1 hub nav (directory). */
+export async function getVtLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]> {
+  const hubs: Array<{
+    key: string;
+    displayName: string;
+    hubSlug: string;
+    hubHref: string;
+    kind: 'county' | 'aggregate';
+  }> = [
+    {
+      key: 'burlington',
+      displayName: 'Burlington',
+      hubSlug: 'burlington',
+      hubHref: '/hubs/vermont/burlington',
+      kind: 'county',
+    },
+    {
+      key: 'montpelier',
+      displayName: 'Montpelier',
+      hubSlug: 'montpelier',
+      hubHref: '/hubs/vermont/montpelier',
+      kind: 'county',
+    },
+    {
+      key: 'rutland',
+      displayName: 'Rutland',
+      hubSlug: 'rutland',
+      hubHref: '/hubs/vermont/rutland',
       kind: 'county',
     },
   ];

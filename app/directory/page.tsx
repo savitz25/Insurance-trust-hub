@@ -25,6 +25,7 @@ import {
   getOhLaunchMarketLiveTotals,
   getNcLaunchMarketLiveTotals,
   getNvLaunchMarketLiveTotals,
+  getVtLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
@@ -127,22 +128,25 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
-  const { fl: flTotal, tx: txTotal, oh: ohTotal, nc: ncTotal, nv: nvTotal } =
+  const { fl: flTotal, tx: txTotal, oh: ohTotal, nc: ncTotal, nv: nvTotal, vt: vtTotal } =
     await getCachedVerifiedLaunchCounts();
   const njTotal = await countVerifiedNewJerseyProviders();
-  const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows] = await Promise.all([
-    flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
-    txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
-    ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
-    njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
-    ncTotal > 0 ? getNcLaunchMarketLiveTotals() : Promise.resolve([]),
-    nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
-  ]);
+  const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows, vtHubRows] =
+    await Promise.all([
+      flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
+      txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
+      ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
+      njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
+      ncTotal > 0 ? getNcLaunchMarketLiveTotals() : Promise.resolve([]),
+      nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
+      vtTotal > 0 ? getVtLaunchMarketLiveTotals() : Promise.resolve([]),
+    ]);
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';
   const browsingNj = state === 'NJ';
   const browsingNc = state === 'NC';
   const browsingNv = state === 'NV';
+  const browsingVt = state === 'VT';
   const browsingFl = state === 'FL';
   const browsingAllVerified = !state;
 
@@ -172,7 +176,9 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                   ? 'North Carolina Department of Insurance (NC DOI)–verified agency research listings. Agency/business entities only. Empty markets stay empty. Always re-check licenses on official NC DOI / SBS tools.'
                   : browsingNv
                     ? 'Nevada Division of Insurance (NV DOI)–verified firm research listings. Agency/producer firms with a Nevada address. Empty markets stay empty. Always re-check licenses on official NV DOI / SBS tools.'
-                    : 'Verified research listings only — Florida DFS, Texas TDI, Ohio ODI, and (when promoted) North Carolina DOI and Nevada DOI agency inventory. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.'}
+                    : browsingVt
+                      ? 'Vermont Department of Financial Regulation (VT DFR)–verified agency research listings. Firms only — not a bulk individual producer list. Empty markets stay empty. Always re-check licenses on official VT DFR / SBS tools.'
+                      : 'Verified research listings only — Florida DFS, Texas TDI, Ohio ODI, Nevada DOI, and (when promoted) North Carolina DOI and Vermont DFR agency inventory. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.'}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">
@@ -223,6 +229,21 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               Ohio (ODI)
               <span className="ml-1.5 tabular-nums opacity-90">
                 {ohTotal.toLocaleString()}
+              </span>
+            </Link>
+          ) : null}
+          {vtTotal > 0 ? (
+            <Link
+              href="/directory?state=VT&verified=true"
+              className={
+                browsingVt
+                  ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                  : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+              }
+            >
+              Vermont (VT DFR)
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {vtTotal.toLocaleString()}
               </span>
             </Link>
           ) : null}
@@ -282,6 +303,49 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </Link>
           ) : null}
         </div>
+        {vtTotal > 0 ? (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Vermont launch hubs
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · {vtTotal.toLocaleString()} verified VT listings
+              </span>
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {vtHubRows
+                .filter((row) => row.total > 0)
+                .map((row) => (
+                  <li key={row.key}>
+                    <Link
+                      href={row.hubHref}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                    >
+                      {row.displayName}
+                      <span className="tabular-nums opacity-80">
+                        {row.total.toLocaleString()}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              <li>
+                <Link
+                  href="/directory?state=VT&verified=true"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+                >
+                  Browse VT directory
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hubs/vermont"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+                >
+                  All Vermont hubs
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
         {nvTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

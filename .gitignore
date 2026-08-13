@@ -57,6 +57,8 @@ yarn-error.log*
 !/data/nc-raw/README.md
 /data/nv-raw/**
 !/data/nv-raw/README.md
+/data/vt-raw/**
+!/data/vt-raw/README.md
 
 # Ops enrichment run logs
 /scripts/output/**

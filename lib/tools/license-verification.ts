@@ -37,6 +37,12 @@ const LOOKUP_URLS: Record<string, { department: string; lookupUrl: string; notes
     department: 'New York Department of Financial Services',
     lookupUrl: 'https://myportal.dfs.ny.gov/web/guest-applications',
   },
+  VT: {
+    department: 'Vermont Department of Financial Regulation',
+    lookupUrl: 'https://sbs.naic.org/solar-external-lookup/lookup/licensee?jurisdiction=VT',
+    notes:
+      'Official SBS licensee lookup. Quarterly lists: DFR spreadsheet document type (firms promoted; individuals staged only).',
+  },
   NV: {
     department: 'Nevada Division of Insurance',
     lookupUrl: 'https://sbs.naic.org/solar-external-lookup/lookup/licensee?jurisdiction=NV',

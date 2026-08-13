@@ -56,6 +56,7 @@ import { NJ_DOBI_LOOKUP_URL, NJ_DOBI_REGULATOR } from '@/lib/nj/launch-regions';
 import { OH_ODI_LOOKUP_URL, OH_ODI_REGULATOR } from '@/lib/odi/launch-markets';
 import { NC_DOI_LOOKUP_URL, NC_DOI_REGULATOR } from '@/lib/nc/launch-markets';
 import { NV_DOI_LOOKUP_URL, NV_DOI_REGULATOR } from '@/lib/nv/launch-markets';
+import { VT_DFR_LOOKUP_URL, VT_DFR_REGULATOR } from '@/lib/vt/launch-markets';
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
@@ -151,6 +152,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const isOhio = (provider.state || '').toUpperCase() === 'OH';
   const isNorthCarolina = (provider.state || '').toUpperCase() === 'NC';
   const isNevada = (provider.state || '').toUpperCase() === 'NV';
+  const isVermont = (provider.state || '').toUpperCase() === 'VT';
   const npn = extractNpnFromNotes(provider.license_notes);
   const regulatorName = isTexas
     ? TX_TDI_REGULATOR
@@ -162,9 +164,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
           ? NC_DOI_REGULATOR
           : isNevada
             ? NV_DOI_REGULATOR
-            : isFlorida
-              ? 'Florida DFS'
-              : publicView.verification.sourceLabel || 'State insurance department';
+            : isVermont
+              ? VT_DFR_REGULATOR
+              : isFlorida
+                ? 'Florida DFS'
+                : publicView.verification.sourceLabel || 'State insurance department';
 
   let secondarySignals = null;
   try {
@@ -344,7 +348,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                             ? 'North Carolina Department of Insurance (NC DOI) is the license source of truth for this research listing.'
                             : isNevada
                               ? 'Nevada Division of Insurance (NV DOI) is the license source of truth for this research listing.'
-                              : isFlorida
+                              : isVermont
+                                ? 'Vermont Department of Financial Regulation (VT DFR) is the license source of truth for this research listing.'
+                                : isFlorida
                               ? 'Florida DFS is the license source of truth for this research listing.'
                               : `${regulatorName} is the license source of truth for this research listing.`}
                   </p>
@@ -517,7 +523,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                             ? ' Medicare-certified status is never inferred from NC DOI / SBS agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the SBS export.'
                             : isNevada
                               ? ' Medicare-certified status is never inferred from NV DOI firm type alone. Firms/agencies only in this inventory — not a bulk individual producer list. Out-of-state headquarters are not shown on local Nevada hubs.'
-                              : null}
+                              : isVermont
+                                ? ' Medicare-certified status is never inferred from VT DFR data alone. Agencies/firms only — individuals from the quarterly list are not promoted. Out-of-state headquarters are not shown on local Vermont hubs.'
+                                : null}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
@@ -570,6 +578,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       <Button asChild variant="ghost" size="sm" className="gap-2">
                         <a href={NV_DOI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
                           Nevada DOI / SBS licensee search
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
+                    {isVermont ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={VT_DFR_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
+                          Vermont DFR / SBS licensee search
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </Button>

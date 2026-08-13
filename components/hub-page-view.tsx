@@ -157,6 +157,7 @@ export function HubPageView({
   const isOhioHub = hub.stateCode === 'OH' || hub.stateSlug === 'ohio';
   const isNorthCarolinaHub = hub.stateCode === 'NC' || hub.stateSlug === 'north-carolina';
   const isNevadaHub = hub.stateCode === 'NV' || hub.stateSlug === 'nevada';
+  const isVermontHub = hub.stateCode === 'VT' || hub.stateSlug === 'vermont';
   const regulatorLabel = isTexasHub
     ? 'Texas Department of Insurance (TDI)'
     : isOhioHub
@@ -167,9 +168,11 @@ export function HubPageView({
           ? 'North Carolina Department of Insurance (NC DOI)'
           : isNevadaHub
             ? 'Nevada Division of Insurance (NV DOI)'
-            : hub.stateCode === 'FL'
-              ? 'Florida DFS'
-              : 'state insurance department';
+            : isVermontHub
+              ? 'Vermont Department of Financial Regulation (VT DFR)'
+              : hub.stateCode === 'FL'
+                ? 'Florida DFS'
+                : 'state insurance department';
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -257,7 +260,9 @@ export function HubPageView({
                     ? 'Independent research · Re-check North Carolina DOI licenses'
                     : isNevadaHub
                       ? 'Independent research · Re-check Nevada DOI licenses'
-                      : 'Independent research · Re-check state licenses'}
+                      : isVermontHub
+                        ? 'Independent research · Re-check Vermont DFR licenses'
+                        : 'Independent research · Re-check state licenses'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
             Research insurance agencies in {hub.shortName}
@@ -273,7 +278,9 @@ export function HubPageView({
                     ? `Verified North Carolina Department of Insurance (NC DOI) agency research listings for ${hub.localDescriptor}`
                     : isNevadaHub
                       ? `Verified Nevada Division of Insurance (NV DOI) firm research listings for ${hub.localDescriptor}`
-                      : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
+                      : isVermontHub
+                        ? `Verified Vermont DFR agency research listings for ${hub.localDescriptor}`
+                        : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
             {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
@@ -416,7 +423,12 @@ export function HubPageView({
                       <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                         Independent research only — re-check {regulatorLabel} before you enroll.
                         Counts are verified research listings only
-                        {isTexasHub || isNewJerseyHub || isOhioHub || isNorthCarolinaHub || isNevadaHub
+                        {isTexasHub ||
+                        isNewJerseyHub ||
+                        isOhioHub ||
+                        isNorthCarolinaHub ||
+                        isNevadaHub ||
+                        isVermontHub
                           ? '. Agency/business entities only; not a bulk individual agent list.'
                           : '.'}
                       </p>
@@ -436,7 +448,9 @@ export function HubPageView({
                                   ? 'Specialty tags come from North Carolina DOI / SBS license types / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from NC DOI alone.'
                                   : isNevadaHub
                                     ? 'Specialty tags come from Nevada DOI firm license types when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from NV DOI alone.'
-                                    : undefined
+                                    : isVermontHub
+                                      ? 'Specialty tags come from Vermont DFR license class / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from VT DFR alone.'
+                                      : undefined
                         }
                       />
                     ) : null}
@@ -485,7 +499,9 @@ export function HubPageView({
                           ? 'Agencies that meet our public research standard (North Carolina DOI–verified when listed). Medicare specialty is never inferred from NC DOI alone.'
                           : isNevadaHub
                             ? 'Firms that meet our public research standard (Nevada DOI–verified when listed). Medicare specialty is never inferred from NV DOI firm type alone.'
-                            : 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
+                            : isVermontHub
+                              ? 'Agencies that meet our public research standard (Vermont DFR–verified when listed). Medicare specialty is never inferred from VT DFR alone.'
+                              : 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
                   : EMPTY_MARKET_COPY.health}
               </p>
               {healthProviders.length > 0 ? (
