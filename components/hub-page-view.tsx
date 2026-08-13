@@ -25,6 +25,11 @@ import {
   type HubLoaFilterId,
 } from '@/components/hub-specialty-filter';
 import { inventoryScopeNoteForHub } from '@/lib/dfs/launch-counties';
+import {
+  formatHubPopulation,
+  getLoaSourcePhrase,
+  getRegulatorLabel,
+} from '@/lib/regulators/labels';
 
 interface HubPageViewProps {
   hub: InsuranceHub;
@@ -158,21 +163,14 @@ export function HubPageView({
   const isNorthCarolinaHub = hub.stateCode === 'NC' || hub.stateSlug === 'north-carolina';
   const isNevadaHub = hub.stateCode === 'NV' || hub.stateSlug === 'nevada';
   const isVermontHub = hub.stateCode === 'VT' || hub.stateSlug === 'vermont';
-  const regulatorLabel = isTexasHub
-    ? 'Texas Department of Insurance (TDI)'
-    : isOhioHub
-      ? 'Ohio Department of Insurance (ODI)'
-      : isNewJerseyHub
-        ? 'New Jersey DOBI'
-        : isNorthCarolinaHub
-          ? 'North Carolina Department of Insurance (NC DOI)'
-          : isNevadaHub
-            ? 'Nevada Division of Insurance (NV DOI)'
-            : isVermontHub
-              ? 'Vermont Department of Financial Regulation (VT DFR)'
-              : hub.stateCode === 'FL'
-                ? 'Florida DFS'
-                : 'state insurance department';
+  const isFirmOnlyHub =
+    isTexasHub ||
+    isNewJerseyHub ||
+    isOhioHub ||
+    isNorthCarolinaHub ||
+    isNevadaHub ||
+    isVermontHub;
+  const regulatorLabel = getRegulatorLabel(hub.stateCode);
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -250,37 +248,13 @@ export function HubPageView({
         <div className="container mx-auto px-4 text-center">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm">
             <Shield className="h-4 w-4" />
-            {isTexasHub
-              ? 'Independent research · Re-check Texas TDI licenses'
-              : isOhioHub
-                ? 'Independent research · Re-check Ohio ODI licenses'
-                : isNewJerseyHub
-                  ? 'Independent research · Re-check New Jersey DOBI licenses'
-                  : isNorthCarolinaHub
-                    ? 'Independent research · Re-check North Carolina DOI licenses'
-                    : isNevadaHub
-                      ? 'Independent research · Re-check Nevada DOI licenses'
-                      : isVermontHub
-                        ? 'Independent research · Re-check Vermont DFR licenses'
-                        : 'Independent research · Re-check state licenses'}
+            Independent research · Re-check {regulatorLabel} licenses
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
             Research insurance agencies in {hub.shortName}
           </h1>
           <p className="mt-2 text-lg text-primary-foreground/80">
-            {isTexasHub
-              ? `Verified Texas TDI agency research listings for ${hub.localDescriptor}`
-              : isOhioHub
-                ? `Verified Ohio Department of Insurance (ODI) agency research listings for ${hub.localDescriptor}`
-                : isNewJerseyHub
-                  ? `Verified New Jersey DOBI agency research listings for ${hub.localDescriptor}`
-                  : isNorthCarolinaHub
-                    ? `Verified North Carolina Department of Insurance (NC DOI) agency research listings for ${hub.localDescriptor}`
-                    : isNevadaHub
-                      ? `Verified Nevada Division of Insurance (NV DOI) firm research listings for ${hub.localDescriptor}`
-                      : isVermontHub
-                        ? `Verified Vermont DFR agency research listings for ${hub.localDescriptor}`
-                        : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
+            {`Verified ${regulatorLabel} research listings for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
             {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
@@ -316,7 +290,7 @@ export function HubPageView({
               <div className="mt-4 grid sm:grid-cols-3 gap-4">
                 <div className="rounded-lg border p-4 text-center">
                   <Users className="h-5 w-5 mx-auto text-primary mb-1" />
-                  <p className="text-lg font-bold">{(hub.population / 1_000_000).toFixed(1)}M</p>
+                  <p className="text-lg font-bold">{formatHubPopulation(hub.population)}</p>
                   <p className="text-xs text-muted-foreground">Metro population</p>
                 </div>
                 <div className="rounded-lg border p-4 text-center">
@@ -423,12 +397,7 @@ export function HubPageView({
                       <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                         Independent research only — re-check {regulatorLabel} before you enroll.
                         Counts are verified research listings only
-                        {isTexasHub ||
-                        isNewJerseyHub ||
-                        isOhioHub ||
-                        isNorthCarolinaHub ||
-                        isNevadaHub ||
-                        isVermontHub
+                        {isFirmOnlyHub
                           ? '. Agency/business entities only; not a bulk individual agent list.'
                           : '.'}
                       </p>
@@ -437,21 +406,7 @@ export function HubPageView({
                       <HubSpecialtyFilter
                         basePath={path}
                         active={loaFilter}
-                        note={
-                          isTexasHub
-                            ? 'Specialty tags come from Texas TDI license types / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from TDI alone.'
-                            : isOhioHub
-                              ? 'Specialty tags come from Ohio ODI license types / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from ODI alone.'
-                              : isNewJerseyHub
-                                ? 'Specialty tags come from New Jersey DOBI organization lines / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from DOBI alone.'
-                                : isNorthCarolinaHub
-                                  ? 'Specialty tags come from North Carolina DOI / SBS license types / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from NC DOI alone.'
-                                  : isNevadaHub
-                                    ? 'Specialty tags come from Nevada DOI firm license types when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from NV DOI alone.'
-                                    : isVermontHub
-                                      ? 'Specialty tags come from Vermont DFR license class / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from VT DFR alone.'
-                                      : undefined
-                        }
+                        note={`Specialty tags come from ${getLoaSourcePhrase(hub.stateCode)} when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from ${regulatorLabel} alone.`}
                       />
                     ) : null}
                     {loaFilter !== 'all' ? (
@@ -489,19 +444,7 @@ export function HubPageView({
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
                 {healthProviders.length > 0
-                  ? isOhioHub
-                    ? 'Agencies that meet our public research standard (Ohio Department of Insurance–verified). Medicare specialty is never inferred from ODI alone.'
-                    : isTexasHub
-                      ? 'Agencies that meet our public research standard (Texas TDI–verified when listed). Medicare specialty is never inferred from TDI alone.'
-                      : isNewJerseyHub
-                        ? 'Agencies that meet our public research standard (New Jersey DOBI–verified when listed). Medicare specialty is never inferred from DOBI alone.'
-                        : isNorthCarolinaHub
-                          ? 'Agencies that meet our public research standard (North Carolina DOI–verified when listed). Medicare specialty is never inferred from NC DOI alone.'
-                          : isNevadaHub
-                            ? 'Firms that meet our public research standard (Nevada DOI–verified when listed). Medicare specialty is never inferred from NV DOI firm type alone.'
-                            : isVermontHub
-                              ? 'Agencies that meet our public research standard (Vermont DFR–verified when listed). Medicare specialty is never inferred from VT DFR alone.'
-                              : 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
+                  ? `Agencies that meet our public research standard (${regulatorLabel}–verified when listed). Medicare specialty is never inferred from ${regulatorLabel} alone.`
                   : EMPTY_MARKET_COPY.health}
               </p>
               {healthProviders.length > 0 ? (

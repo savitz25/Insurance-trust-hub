@@ -6,6 +6,9 @@
 import type { Provider } from '@/types/provider';
 import { matchLaunchCounty } from '@/lib/dfs/launch-counties';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
+import { matchNvLaunchMarket } from '@/lib/nv/launch-markets';
+import { matchVtLaunchMarket } from '@/lib/vt/launch-markets';
+import { getRegulatorLabel } from '@/lib/regulators/labels';
 
 /** Extract DBA when legal name embeds "DBA …" (common on DFS business names). */
 export function extractDbaFromName(name: string): {
@@ -55,12 +58,40 @@ export function loaPlainLanguageForTags(tags: string[]): Array<{
     .filter((x) => x.blurb);
 }
 
-/** Soft local hub path for FL / TX / NJ / OH launch markets (research navigation only). */
+/** Soft local hub path for FL / TX / NJ / OH / NV / VT launch markets. */
 export function localHubPathForProvider(provider: Provider): {
   href: string;
   label: string;
 } | null {
   const st = (provider.state || '').toUpperCase();
+  if (st === 'VT') {
+    const m = matchVtLaunchMarket({
+      city: provider.city,
+      zip: provider.zip,
+      hqState: 'VT',
+    });
+    if (m?.hubSlugs[0]) {
+      return {
+        href: `/hubs/vermont/${m.hubSlugs[0]}`,
+        label: `${m.displayName} agency hub`,
+      };
+    }
+    return { href: '/hubs/vermont', label: 'Vermont insurance hubs' };
+  }
+  if (st === 'NV') {
+    const m = matchNvLaunchMarket({
+      city: provider.city,
+      zip: provider.zip,
+      hqState: 'NV',
+    });
+    if (m?.hubSlugs[0]) {
+      return {
+        href: `/hubs/nevada/${m.hubSlugs[0]}`,
+        label: `${m.displayName} agency hub`,
+      };
+    }
+    return { href: '/hubs/nevada', label: 'Nevada insurance hubs' };
+  }
   if (st === 'OH') {
     const city = (provider.city || '').toLowerCase();
     const county = (provider.county || '').toLowerCase();
@@ -210,15 +241,7 @@ export function localHubPathForProvider(provider: Provider): {
 
 export function agencyCapabilitySummary(provider: Provider): string {
   const tags = loaSpecialtyTags(provider.specialties);
-  const st = (provider.state || '').toUpperCase();
-  const record =
-    st === 'OH'
-      ? 'Ohio Department of Insurance (ODI) record'
-      : st === 'TX'
-        ? 'Texas TDI record'
-        : st === 'NJ'
-          ? 'New Jersey DOBI record'
-          : 'Florida DFS record';
+  const record = `${getRegulatorLabel(provider.state)} record`;
   if (!tags.length) {
     return `License specialties are listed when reported on the public ${record}.`;
   }

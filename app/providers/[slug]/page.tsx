@@ -50,13 +50,15 @@ import { ContextNav } from '@/components/context-nav';
 import { cn } from '@/lib/utils';
 import type { Provider } from '@/types/provider';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
-import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
-import { TX_TDI_LOOKUP_URL, TX_TDI_REGULATOR } from '@/lib/tdi/launch-markets';
-import { NJ_DOBI_LOOKUP_URL, NJ_DOBI_REGULATOR } from '@/lib/nj/launch-regions';
-import { OH_ODI_LOOKUP_URL, OH_ODI_REGULATOR } from '@/lib/odi/launch-markets';
-import { NC_DOI_LOOKUP_URL, NC_DOI_REGULATOR } from '@/lib/nc/launch-markets';
-import { NV_DOI_LOOKUP_URL, NV_DOI_REGULATOR } from '@/lib/nv/launch-markets';
-import { VT_DFR_LOOKUP_URL, VT_DFR_REGULATOR } from '@/lib/vt/launch-markets';
+import {
+  allowsRegulatorLeadForm,
+  getLoaSourcePhrase,
+  getMedicareNonClaim,
+  getRegulatorProfile,
+  getRegulatorShortLabel,
+  getResearchProfileKicker,
+  getVerificationExplanation,
+} from '@/lib/regulators/labels';
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
@@ -146,29 +148,13 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     provider.website?.trim() &&
       provider.enrichment?.google?.matchConfidence === 'high'
   );
-  const isTexas = (provider.state || '').toUpperCase() === 'TX';
-  const isFlorida = (provider.state || '').toUpperCase() === 'FL';
-  const isNewJersey = (provider.state || '').toUpperCase() === 'NJ';
-  const isOhio = (provider.state || '').toUpperCase() === 'OH';
-  const isNorthCarolina = (provider.state || '').toUpperCase() === 'NC';
-  const isNevada = (provider.state || '').toUpperCase() === 'NV';
-  const isVermont = (provider.state || '').toUpperCase() === 'VT';
+  const regulator = getRegulatorProfile(provider.state);
+  const regulatorName =
+    regulator?.label ||
+    publicView.verification.sourceLabel ||
+    'State insurance department';
+  const regulatorShort = getRegulatorShortLabel(provider.state);
   const npn = extractNpnFromNotes(provider.license_notes);
-  const regulatorName = isTexas
-    ? TX_TDI_REGULATOR
-    : isOhio
-      ? OH_ODI_REGULATOR
-      : isNewJersey
-        ? NJ_DOBI_REGULATOR
-        : isNorthCarolina
-          ? NC_DOI_REGULATOR
-          : isNevada
-            ? NV_DOI_REGULATOR
-            : isVermont
-              ? VT_DFR_REGULATOR
-              : isFlorida
-                ? 'Florida DFS'
-                : publicView.verification.sourceLabel || 'State insurance department';
 
   let secondarySignals = null;
   try {
@@ -177,7 +163,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     secondarySignals = null;
   }
 
-  const showContact = allowContactForm(publicView.listingClass);
+  const showContact =
+    allowContactForm(publicView.listingClass) && allowsRegulatorLeadForm(provider.state);
 
   let reviews: Awaited<ReturnType<typeof getReviewsForProvider>> = [];
   try {
@@ -258,7 +245,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               <p className="mt-2 text-sm text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1">
                 <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden />
                 {locationParts.join(' · ')}
-                <span className="text-muted-foreground/80">· Florida agency research profile</span>
+                <span className="text-muted-foreground/80">
+                  · {getResearchProfileKicker(provider.state)}
+                </span>
               </p>
               {loaTags.length > 0 ? (
                 <div className="mt-3 flex flex-wrap gap-1.5">
@@ -338,21 +327,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
                     {agencyCapabilitySummary(provider)}{' '}
-                    {isTexas
-                      ? 'Texas Department of Insurance (TDI) is the license source of truth for this research listing.'
-                      : isOhio
-                        ? 'Ohio Department of Insurance (ODI) is the license source of truth for this research listing.'
-                        : isNewJersey
-                          ? 'New Jersey Department of Banking and Insurance (DOBI) is the license source of truth for this research listing.'
-                          : isNorthCarolina
-                            ? 'North Carolina Department of Insurance (NC DOI) is the license source of truth for this research listing.'
-                            : isNevada
-                              ? 'Nevada Division of Insurance (NV DOI) is the license source of truth for this research listing.'
-                              : isVermont
-                                ? 'Vermont Department of Financial Regulation (VT DFR) is the license source of truth for this research listing.'
-                                : isFlorida
-                              ? 'Florida DFS is the license source of truth for this research listing.'
-                              : `${regulatorName} is the license source of truth for this research listing.`}
+                    {getVerificationExplanation(provider.state, regulatorName)}
                   </p>
                 </CardContent>
               </Card>
@@ -389,35 +364,12 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     </ul>
                   ) : (
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Capability tags come from{' '}
-                      {isOhio
-                        ? 'Ohio ODI license types / lines of authority'
-                        : isTexas
-                          ? 'Texas TDI license types / qualifications'
-                          : isNewJersey
-                            ? 'New Jersey DOBI organization lines'
-                            : isNorthCarolina
-                              ? 'North Carolina DOI / SBS license types / lines of authority'
-                              : isNevada
-                                ? 'Nevada DOI firm license types'
-                                : 'Florida DFS lines of authority'}{' '}
-                      on the public license record when available.
+                      Capability tags come from {getLoaSourcePhrase(provider.state)} on the public
+                      license record when available.
                     </p>
                   )}
                   <p className="text-sm text-muted-foreground leading-relaxed border-t pt-4">
-                    We never invent Medicare-certified status from{' '}
-                    {isOhio
-                      ? 'ODI'
-                      : isTexas
-                        ? 'TDI'
-                        : isNewJersey
-                          ? 'DOBI'
-                          : isNorthCarolina
-                            ? 'NC DOI'
-                            : isNevada
-                              ? 'NV DOI'
-                              : 'DFS'}{' '}
-                    alone, never
+                    We never invent Medicare-certified status from {regulatorShort} alone, never
                     invent websites, and never treat carrier appointments as quality rankings.
                   </p>
                   {provider.description ? (
@@ -470,18 +422,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               <Card>
                 <CardContent className="pt-6 space-y-3">
                   <p className="text-sm">
-                    <span className="font-medium">Regulator:</span> {regulatorName}
-                    {isTexas
-                      ? ' (TDI)'
-                      : isOhio
-                        ? ' (ODI)'
-                        : isNewJersey
-                          ? ' (DOBI)'
-                          : isNorthCarolina
-                            ? ' (NC DOI)'
-                            : isNevada
-                              ? ' (NV DOI)'
-                              : null}
+                    <span className="font-medium">How verified:</span> {regulatorName}
                   </p>
                   {publicView.verification.licenseNumber && (
                     <p className="text-sm">
@@ -512,20 +453,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {publicView.verification.summary} Public listings require a re-checkable license
                     number, {regulatorName} as regulator, and Phase 1 verified trust gates. Status
-                    can change — always re-check on official tools before you enroll.
-                    {isTexas
-                      ? ' Medicare-certified status is never inferred from TDI agency open data alone. Agency/business entities only in this inventory.'
-                      : isNewJersey
-                        ? ' Medicare-certified status is never inferred from DOBI organization data alone. Agency/business entities only in this inventory.'
-                        : isOhio
-                          ? ' Medicare-certified status is never inferred from ODI agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the ODI mailing-list export.'
-                          : isNorthCarolina
-                            ? ' Medicare-certified status is never inferred from NC DOI / SBS agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the SBS export.'
-                            : isNevada
-                              ? ' Medicare-certified status is never inferred from NV DOI firm type alone. Firms/agencies only in this inventory — not a bulk individual producer list. Out-of-state headquarters are not shown on local Nevada hubs.'
-                              : isVermont
-                                ? ' Medicare-certified status is never inferred from VT DFR data alone. Agencies/firms only — individuals from the quarterly list are not promoted. Out-of-state headquarters are not shown on local Vermont hubs.'
-                                : null}
+                    can change — always re-check on official tools before you enroll.{' '}
+                    {getMedicareNonClaim(provider.state)}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
@@ -534,58 +463,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     </Button>
-                    {isFlorida ? (
+                    {regulator ? (
                       <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={FL_DFS_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
-                          Florida DFS licensee search
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                    {isTexas ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={TX_TDI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
-                          Texas TDI agent lookup
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                    {isNewJersey ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={NJ_DOBI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
-                          New Jersey DOBI licensee search
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                    {isOhio ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={OH_ODI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
-                          Ohio ODI agent/agency locator
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                    {isNorthCarolina ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={NC_DOI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
-                          North Carolina DOI / SBS licensee search
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                    {isNevada ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={NV_DOI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
-                          Nevada DOI / SBS licensee search
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                    {isVermont ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={VT_DFR_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
-                          Vermont DFR / SBS licensee search
+                        <a href={regulator.lookupUrl} target="_blank" rel="noopener noreferrer">
+                          {regulator.lookupLinkLabel}
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </Button>
@@ -607,54 +488,19 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     {publicView.phone ? (
                       <li>
                         Call the listed phone number and re-confirm identity against the{' '}
-                        {isTexas
-                          ? 'TDI'
-                          : isNewJersey
-                            ? 'DOBI'
-                            : isOhio
-                              ? 'ODI'
-                              : isNorthCarolina
-                                ? 'NC DOI'
-                                : isNevada
-                                  ? 'NV DOI'
-                                  : isFlorida
-                                    ? 'DFS'
-                                    : 'state'}{' '}
-                        license number before sharing personal data.
+                        {regulatorShort} license number before sharing personal data.
                       </li>
                     ) : null}
                     {provider.website ? (
                       <li>
                         Visit the website on file (secondary public signal — not part of{' '}
-                        {isOhio
-                          ? 'ODI'
-                          : isTexas
-                            ? 'TDI'
-                            : isNewJersey
-                              ? 'DOBI'
-                              : isNorthCarolina
-                                ? 'NC DOI'
-                                : isNevada
-                                  ? 'NV DOI'
-                                  : 'DFS'}{' '}
-                        verification).
+                        {regulatorShort} verification).
                       </li>
                     ) : null}
                     {provider.appointment_snapshot?.totalCount ? (
                       <li>
-                        Review the appointment regulatory snapshot above, then re-check carriers on
-                        {isOhio
-                          ? ' Ohio ODI'
-                          : isTexas
-                            ? ' Texas TDI'
-                            : isNewJersey
-                              ? ' New Jersey DOBI'
-                              : isNorthCarolina
-                                ? ' North Carolina DOI'
-                                : isNevada
-                                  ? ' Nevada DOI'
-                                  : ' Florida DFS'}
-                        .
+                        Review the appointment regulatory snapshot above, then re-check carriers on{' '}
+                        {regulatorName}.
                       </li>
                     ) : null}
                     <li>

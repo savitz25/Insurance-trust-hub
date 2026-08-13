@@ -65,7 +65,7 @@ export function DirectorySpecialtyChips({
         })}
       </div>
       <p className="text-[11px] text-muted-foreground">
-        License capability tags when mapped from Florida DFS, Texas TDI, or Ohio ODI.
+        License capability tags when mapped from Florida DFS, Texas TDI, Ohio ODI, Nevada DOI, or Vermont DFR.
         Zero matches stay empty. Shareable via ?specialty=.
       </p>
     </div>

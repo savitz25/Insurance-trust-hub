@@ -29,6 +29,7 @@ import {
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
+import { getDirectoryStateIntro } from '@/lib/regulators/labels';
 import {
   DIRECTORY_PAGE_SIZE,
   parseDirectoryPage,
@@ -166,19 +167,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <h1 className="section-heading">Insurance agency directory</h1>
         <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
-          {browsingOh
-            ? 'Ohio Department of Insurance (ODI)–verified agency research listings. Agency/business entities only. Empty markets stay empty. Always re-check licenses on the official ODI locator.'
-            : browsingTx
-              ? 'Texas Department of Insurance (TDI)–verified agency research listings. Always re-check licenses on official TDI tools.'
-              : browsingFl
-                ? 'Florida DFS–verified agency research listings. Always re-check licenses on official DFS tools.'
-                : browsingNc
-                  ? 'North Carolina Department of Insurance (NC DOI)–verified agency research listings. Agency/business entities only. Empty markets stay empty. Always re-check licenses on official NC DOI / SBS tools.'
-                  : browsingNv
-                    ? 'Nevada Division of Insurance (NV DOI)–verified firm research listings. Agency/producer firms with a Nevada address. Empty markets stay empty. Always re-check licenses on official NV DOI / SBS tools.'
-                    : browsingVt
-                      ? 'Vermont Department of Financial Regulation (VT DFR)–verified agency research listings. Firms only — not a bulk individual producer list. Empty markets stay empty. Always re-check licenses on official VT DFR / SBS tools.'
-                      : 'Verified research listings only — Florida DFS, Texas TDI, Ohio ODI, Nevada DOI, and (when promoted) North Carolina DOI and Vermont DFR agency inventory. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.'}
+          {getDirectoryStateIntro(state)}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">
@@ -631,7 +620,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               }
               description={
                 state || query || type || specialty
-                  ? 'No verified research listings match the current filters. Broaden the search, try another state (Florida, Texas, Ohio), or use research tools. We will not invent listings to fill this view.'
+                  ? 'No verified research listings match the current filters. Broaden the search, try another live state (Florida, Texas, Ohio, Nevada, Vermont), or use research tools. We will not invent listings to fill this view.'
                   : 'No agencies currently meet our public research standard for this view. That does not mean unlicensed agents do not exist — verify on official state DOI / NAIC tools.'
               }
               placeLabel={state || query || undefined}

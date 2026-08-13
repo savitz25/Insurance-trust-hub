@@ -325,7 +325,7 @@ function LocalResearchSection() {
           verified agency directory
         </Link>
         {' '}
-        (Florida DFS, Texas TDI, Ohio ODI research listings).
+        (Florida DFS, Texas TDI, Ohio ODI, Nevada DOI, and Vermont DFR research listings).
       </p>
       <Suspense fallback={null}>
         <DirectoryLiveCounts />
