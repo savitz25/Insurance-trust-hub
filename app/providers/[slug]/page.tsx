@@ -55,6 +55,7 @@ import { TX_TDI_LOOKUP_URL, TX_TDI_REGULATOR } from '@/lib/tdi/launch-markets';
 import { NJ_DOBI_LOOKUP_URL, NJ_DOBI_REGULATOR } from '@/lib/nj/launch-regions';
 import { OH_ODI_LOOKUP_URL, OH_ODI_REGULATOR } from '@/lib/odi/launch-markets';
 import { NC_DOI_LOOKUP_URL, NC_DOI_REGULATOR } from '@/lib/nc/launch-markets';
+import { NV_DOI_LOOKUP_URL, NV_DOI_REGULATOR } from '@/lib/nv/launch-markets';
 import {
   extractDbaFromName,
   loaPlainLanguageForTags,
@@ -149,6 +150,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const isNewJersey = (provider.state || '').toUpperCase() === 'NJ';
   const isOhio = (provider.state || '').toUpperCase() === 'OH';
   const isNorthCarolina = (provider.state || '').toUpperCase() === 'NC';
+  const isNevada = (provider.state || '').toUpperCase() === 'NV';
   const npn = extractNpnFromNotes(provider.license_notes);
   const regulatorName = isTexas
     ? TX_TDI_REGULATOR
@@ -158,9 +160,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
         ? NJ_DOBI_REGULATOR
         : isNorthCarolina
           ? NC_DOI_REGULATOR
-          : isFlorida
-            ? 'Florida DFS'
-            : publicView.verification.sourceLabel || 'State insurance department';
+          : isNevada
+            ? NV_DOI_REGULATOR
+            : isFlorida
+              ? 'Florida DFS'
+              : publicView.verification.sourceLabel || 'State insurance department';
 
   let secondarySignals = null;
   try {
@@ -338,7 +342,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                           ? 'New Jersey Department of Banking and Insurance (DOBI) is the license source of truth for this research listing.'
                           : isNorthCarolina
                             ? 'North Carolina Department of Insurance (NC DOI) is the license source of truth for this research listing.'
-                            : isFlorida
+                            : isNevada
+                              ? 'Nevada Division of Insurance (NV DOI) is the license source of truth for this research listing.'
+                              : isFlorida
                               ? 'Florida DFS is the license source of truth for this research listing.'
                               : `${regulatorName} is the license source of truth for this research listing.`}
                   </p>
@@ -386,7 +392,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                             ? 'New Jersey DOBI organization lines'
                             : isNorthCarolina
                               ? 'North Carolina DOI / SBS license types / lines of authority'
-                              : 'Florida DFS lines of authority'}{' '}
+                              : isNevada
+                                ? 'Nevada DOI firm license types'
+                                : 'Florida DFS lines of authority'}{' '}
                       on the public license record when available.
                     </p>
                   )}
@@ -400,7 +408,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                           ? 'DOBI'
                           : isNorthCarolina
                             ? 'NC DOI'
-                            : 'DFS'}{' '}
+                            : isNevada
+                              ? 'NV DOI'
+                              : 'DFS'}{' '}
                     alone, never
                     invent websites, and never treat carrier appointments as quality rankings.
                   </p>
@@ -463,7 +473,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                           ? ' (DOBI)'
                           : isNorthCarolina
                             ? ' (NC DOI)'
-                            : null}
+                            : isNevada
+                              ? ' (NV DOI)'
+                              : null}
                   </p>
                   {publicView.verification.licenseNumber && (
                     <p className="text-sm">
@@ -503,7 +515,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                           ? ' Medicare-certified status is never inferred from ODI agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the ODI mailing-list export.'
                           : isNorthCarolina
                             ? ' Medicare-certified status is never inferred from NC DOI / SBS agency data alone. Agency/business entities only in this inventory. NPN is shown when present on the SBS export.'
-                            : null}
+                            : isNevada
+                              ? ' Medicare-certified status is never inferred from NV DOI firm type alone. Firms/agencies only in this inventory — not a bulk individual producer list. Out-of-state headquarters are not shown on local Nevada hubs.'
+                              : null}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
@@ -552,6 +566,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                         </a>
                       </Button>
                     ) : null}
+                    {isNevada ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={NV_DOI_LOOKUP_URL} target="_blank" rel="noopener noreferrer">
+                          Nevada DOI / SBS licensee search
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
                   </div>
                   <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
                     Research listing only — not an endorsement, rating, or appointment guarantee.
@@ -577,9 +599,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                               ? 'ODI'
                               : isNorthCarolina
                                 ? 'NC DOI'
-                                : isFlorida
-                                  ? 'DFS'
-                                  : 'state'}{' '}
+                                : isNevada
+                                  ? 'NV DOI'
+                                  : isFlorida
+                                    ? 'DFS'
+                                    : 'state'}{' '}
                         license number before sharing personal data.
                       </li>
                     ) : null}
@@ -594,7 +618,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                               ? 'DOBI'
                               : isNorthCarolina
                                 ? 'NC DOI'
-                                : 'DFS'}{' '}
+                                : isNevada
+                                  ? 'NV DOI'
+                                  : 'DFS'}{' '}
                         verification).
                       </li>
                     ) : null}
@@ -609,7 +635,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                               ? ' New Jersey DOBI'
                               : isNorthCarolina
                                 ? ' North Carolina DOI'
-                                : ' Florida DFS'}
+                                : isNevada
+                                  ? ' Nevada DOI'
+                                  : ' Florida DFS'}
                         .
                       </li>
                     ) : null}

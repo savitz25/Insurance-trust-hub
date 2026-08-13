@@ -24,6 +24,7 @@ import {
   getNjLaunchRegionLiveTotals,
   getOhLaunchMarketLiveTotals,
   getNcLaunchMarketLiveTotals,
+  getNvLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
@@ -126,20 +127,22 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
-  const { fl: flTotal, tx: txTotal, oh: ohTotal, nc: ncTotal } =
+  const { fl: flTotal, tx: txTotal, oh: ohTotal, nc: ncTotal, nv: nvTotal } =
     await getCachedVerifiedLaunchCounts();
   const njTotal = await countVerifiedNewJerseyProviders();
-  const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows] = await Promise.all([
+  const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows] = await Promise.all([
     flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
     txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
     ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
     njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
     ncTotal > 0 ? getNcLaunchMarketLiveTotals() : Promise.resolve([]),
+    nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
   ]);
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';
   const browsingNj = state === 'NJ';
   const browsingNc = state === 'NC';
+  const browsingNv = state === 'NV';
   const browsingFl = state === 'FL';
   const browsingAllVerified = !state;
 
@@ -167,7 +170,9 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                 ? 'Florida DFS–verified agency research listings. Always re-check licenses on official DFS tools.'
                 : browsingNc
                   ? 'North Carolina Department of Insurance (NC DOI)–verified agency research listings. Agency/business entities only. Empty markets stay empty. Always re-check licenses on official NC DOI / SBS tools.'
-                  : 'Verified research listings only — Florida DFS, Texas TDI, Ohio ODI, and (when promoted) North Carolina DOI agency inventory. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.'}
+                  : browsingNv
+                    ? 'Nevada Division of Insurance (NV DOI)–verified firm research listings. Agency/producer firms with a Nevada address. Empty markets stay empty. Always re-check licenses on official NV DOI / SBS tools.'
+                    : 'Verified research listings only — Florida DFS, Texas TDI, Ohio ODI, and (when promoted) North Carolina DOI and Nevada DOI agency inventory. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.'}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">
@@ -221,6 +226,21 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
+          {nvTotal > 0 ? (
+            <Link
+              href="/directory?state=NV&verified=true"
+              className={
+                browsingNv
+                  ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                  : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+              }
+            >
+              Nevada (NV DOI)
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {nvTotal.toLocaleString()}
+              </span>
+            </Link>
+          ) : null}
           {ncTotal > 0 ? (
             <Link
               href="/directory?state=NC&verified=true"
@@ -262,6 +282,49 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </Link>
           ) : null}
         </div>
+        {nvTotal > 0 ? (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Nevada launch hubs
+              <span className="ml-2 font-normal normal-case tracking-normal">
+                · {nvTotal.toLocaleString()} verified NV listings
+              </span>
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {nvHubRows
+                .filter((row) => row.total > 0)
+                .map((row) => (
+                  <li key={row.key}>
+                    <Link
+                      href={row.hubHref}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-trust/30 bg-trust/5 px-3 py-1 text-xs font-semibold text-trust hover:bg-trust/10"
+                    >
+                      {row.displayName}
+                      <span className="tabular-nums opacity-80">
+                        {row.total.toLocaleString()}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              <li>
+                <Link
+                  href="/directory?state=NV&verified=true"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+                >
+                  Browse NV directory
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hubs/nevada"
+                  className="inline-flex rounded-full border px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+                >
+                  All Nevada hubs
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
         {ncTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

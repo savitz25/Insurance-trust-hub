@@ -156,6 +156,7 @@ export function HubPageView({
   const isNewJerseyHub = hub.stateCode === 'NJ' || hub.stateSlug === 'new-jersey';
   const isOhioHub = hub.stateCode === 'OH' || hub.stateSlug === 'ohio';
   const isNorthCarolinaHub = hub.stateCode === 'NC' || hub.stateSlug === 'north-carolina';
+  const isNevadaHub = hub.stateCode === 'NV' || hub.stateSlug === 'nevada';
   const regulatorLabel = isTexasHub
     ? 'Texas Department of Insurance (TDI)'
     : isOhioHub
@@ -164,9 +165,11 @@ export function HubPageView({
         ? 'New Jersey DOBI'
         : isNorthCarolinaHub
           ? 'North Carolina Department of Insurance (NC DOI)'
-          : hub.stateCode === 'FL'
-            ? 'Florida DFS'
-            : 'state insurance department';
+          : isNevadaHub
+            ? 'Nevada Division of Insurance (NV DOI)'
+            : hub.stateCode === 'FL'
+              ? 'Florida DFS'
+              : 'state insurance department';
   const healthFromDb = dbProviders.filter((p) =>
     p.insurance_types?.includes('health')
   ).length;
@@ -252,7 +255,9 @@ export function HubPageView({
                   ? 'Independent research · Re-check New Jersey DOBI licenses'
                   : isNorthCarolinaHub
                     ? 'Independent research · Re-check North Carolina DOI licenses'
-                    : 'Independent research · Re-check state licenses'}
+                    : isNevadaHub
+                      ? 'Independent research · Re-check Nevada DOI licenses'
+                      : 'Independent research · Re-check state licenses'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
             Research insurance agencies in {hub.shortName}
@@ -266,7 +271,9 @@ export function HubPageView({
                   ? `Verified New Jersey DOBI agency research listings for ${hub.localDescriptor}`
                   : isNorthCarolinaHub
                     ? `Verified North Carolina Department of Insurance (NC DOI) agency research listings for ${hub.localDescriptor}`
-                    : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
+                    : isNevadaHub
+                      ? `Verified Nevada Division of Insurance (NV DOI) firm research listings for ${hub.localDescriptor}`
+                      : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
             {verifiedCountWithHealth(stats.totalAgents, stats.healthSpecialists)}
@@ -409,7 +416,7 @@ export function HubPageView({
                       <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                         Independent research only — re-check {regulatorLabel} before you enroll.
                         Counts are verified research listings only
-                        {isTexasHub || isNewJerseyHub || isOhioHub || isNorthCarolinaHub
+                        {isTexasHub || isNewJerseyHub || isOhioHub || isNorthCarolinaHub || isNevadaHub
                           ? '. Agency/business entities only; not a bulk individual agent list.'
                           : '.'}
                       </p>
@@ -427,7 +434,9 @@ export function HubPageView({
                                 ? 'Specialty tags come from New Jersey DOBI organization lines / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from DOBI alone.'
                                 : isNorthCarolinaHub
                                   ? 'Specialty tags come from North Carolina DOI / SBS license types / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from NC DOI alone.'
-                                  : undefined
+                                  : isNevadaHub
+                                    ? 'Specialty tags come from Nevada DOI firm license types when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from NV DOI alone.'
+                                    : undefined
                         }
                       />
                     ) : null}
@@ -474,7 +483,9 @@ export function HubPageView({
                         ? 'Agencies that meet our public research standard (New Jersey DOBI–verified when listed). Medicare specialty is never inferred from DOBI alone.'
                         : isNorthCarolinaHub
                           ? 'Agencies that meet our public research standard (North Carolina DOI–verified when listed). Medicare specialty is never inferred from NC DOI alone.'
-                          : 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
+                          : isNevadaHub
+                            ? 'Firms that meet our public research standard (Nevada DOI–verified when listed). Medicare specialty is never inferred from NV DOI firm type alone.'
+                            : 'Agencies that meet our public research standard (Florida DFS–verified when listed). Medicare specialty is never inferred from DFS alone.'
                   : EMPTY_MARKET_COPY.health}
               </p>
               {healthProviders.length > 0 ? (

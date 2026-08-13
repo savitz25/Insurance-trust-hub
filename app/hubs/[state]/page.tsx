@@ -13,10 +13,13 @@ import {
   getLaunchCountyLiveTotals,
   getOhLaunchMarketLiveTotals,
   getNcLaunchMarketLiveTotals,
+  countVerifiedNevadaProviders,
+  getNvLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 import { OH_ODI_LOOKUP_URL } from '@/lib/odi/launch-markets';
 import { NC_DOI_LOOKUP_URL } from '@/lib/nc/launch-markets';
+import { NV_DOI_LOOKUP_URL } from '@/lib/nv/launch-markets';
 
 /** Florida page reads live inventory totals */
 export const dynamic = 'force-dynamic';
@@ -63,6 +66,15 @@ export async function generateMetadata({
     };
   }
 
+  if (state === 'nevada') {
+    return {
+      title: 'Nevada Insurance Research Hubs | NV DOI-Verified Launch Markets',
+      description:
+        'Nevada Division of Insurance (NV DOI)–verified firm research for Las Vegas, Reno, and Carson City. Live inventory totals when promoted. Independent research — re-check licenses on official NV DOI / SBS tools.',
+      alternates: { canonical: `${SITE_URL}/hubs/nevada` },
+    };
+  }
+
   return {
     title: `Insurance Agents in ${stateName} (2026) | Health Insurance Hubs`,
     description: `Compare ${hubs.length} verified insurance market hubs in ${stateName}. Health insurance specialists for ACA, Medicare, and multi-line coverage.`,
@@ -83,16 +95,20 @@ export default async function StateHubsPage({
   const isFlorida = state === 'florida';
   const isOhio = state === 'ohio';
   const isNorthCarolina = state === 'north-carolina';
+  const isNevada = state === 'nevada';
 
   const launchRows = isFlorida ? await getLaunchCountyLiveTotals() : [];
   const ohLaunchRows = isOhio ? await getOhLaunchMarketLiveTotals() : [];
   const ncLaunchRows = isNorthCarolina ? await getNcLaunchMarketLiveTotals() : [];
+  const nvLaunchRows = isNevada ? await getNvLaunchMarketLiveTotals() : [];
   const flTotal = isFlorida ? await countVerifiedFloridaProviders() : 0;
   const ohTotal = isOhio ? await countVerifiedOhioProviders() : 0;
   const ncTotal = isNorthCarolina ? await countVerifiedNorthCarolinaProviders() : 0;
+  const nvTotal = isNevada ? await countVerifiedNevadaProviders() : 0;
   const launchHubSlugs = new Set(launchRows.map((r) => r.hubSlug));
   const ohHubSlugs = new Set(ohLaunchRows.map((r) => r.hubSlug));
   const ncHubSlugs = new Set(ncLaunchRows.map((r) => r.hubSlug));
+  const nvHubSlugs = new Set(nvLaunchRows.map((r) => r.hubSlug));
 
   // Launch inventory first; other hubs remain research context without inventing rows
   const otherHubs = isFlorida
@@ -101,7 +117,9 @@ export default async function StateHubsPage({
       ? hubs.filter((h) => !ohHubSlugs.has(h.slug))
       : isNorthCarolina
         ? hubs.filter((h) => !ncHubSlugs.has(h.slug))
-        : hubs;
+        : isNevada
+          ? hubs.filter((h) => !nvHubSlugs.has(h.slug))
+          : hubs;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -124,7 +142,9 @@ export default async function StateHubsPage({
             ? 'Ohio insurance research hubs'
             : isNorthCarolina
               ? 'North Carolina insurance research hubs'
-              : `Insurance Hubs in ${stateName}`}
+              : isNevada
+                ? 'Nevada insurance research hubs'
+                : `Insurance Hubs in ${stateName}`}
       </h1>
       <p className="mt-3 text-muted-foreground max-w-2xl leading-relaxed">
         {isFlorida ? (
@@ -173,6 +193,22 @@ export default async function StateHubsPage({
             </a>
             . Agency/business entities only. Medicare specialty is never inferred from NC DOI
             alone.
+          </>
+        ) : isNevada ? (
+          <>
+            Live Nevada Division of Insurance (NV DOI)–verified inventory for Wave-1 launch
+            markets. Totals below are exact match counts for public research listings — empty
+            markets stay empty. Always re-check licenses on the{' '}
+            <a
+              href={NV_DOI_LOOKUP_URL}
+              className="font-medium text-primary underline-offset-2 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              NV DOI / SBS licensee lookup
+            </a>
+            . Nevada-addressed producer/agency firms only. Medicare specialty is never inferred
+            from NV DOI firm type alone.
           </>
         ) : (
           <>
@@ -293,6 +329,60 @@ export default async function StateHubsPage({
               NC ACA guides
             </Link>
             .
+          </p>
+        </section>
+      )}
+
+      {isNevada && (
+        <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-trust">
+                <Shield className="h-3.5 w-3.5" aria-hidden />
+                Launch inventory (live)
+              </p>
+              <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
+                {nvTotal.toLocaleString()}
+                <span className="ml-2 text-sm font-medium text-muted-foreground">
+                  verified NV research listings
+                </span>
+              </p>
+            </div>
+            <Link
+              href="/directory?state=NV&verified=true"
+              className="text-sm font-medium text-primary underline-offset-2 hover:underline"
+            >
+              Browse NV directory →
+            </Link>
+          </div>
+
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {nvLaunchRows.map((row) => (
+              <li key={row.key}>
+                <Link
+                  href={row.hubHref}
+                  className="flex h-full flex-col rounded-xl border bg-background p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <h2 className="font-semibold text-foreground">{row.displayName}</h2>
+                    <Badge variant="success">Market</Badge>
+                  </div>
+                  <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
+                    {row.total.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-muted-foreground">verified research listings</p>
+                  <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
+                    <MapPin className="h-3 w-3" aria-hidden />
+                    Open hub →
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
+            Wave 1: Las Vegas / Clark (includes Henderson), Reno / Washoe, Carson City.
+            Nevada-addressed producer and agency firms only — out-of-state headquarters stay in
+            staging. We will not invent listings.
           </p>
         </section>
       )}

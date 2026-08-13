@@ -305,6 +305,13 @@ export function inventoryScopeNoteForHub(hubSlug: string): string | null {
       return 'Verified NC DOI inventory for this launch is Wave-1 Greensboro / Guilford agencies (city/county/ZIP match). Agency/business entities only.';
     case 'wilmington':
       return 'Verified NC DOI inventory for this launch is Wave-1 Wilmington / New Hanover agencies (city/county/ZIP match). Agency/business entities only.';
+    // —— Phase 14 Nevada DOI ——
+    case 'las-vegas':
+      return 'Verified NV DOI inventory for this launch is Wave-1 Las Vegas / Clark firms with a Nevada address (Henderson included). Agency/producer firms only — not a dump of out-of-state HQ licenses.';
+    case 'reno':
+      return 'Verified NV DOI inventory for this launch is Wave-1 Reno / Washoe firms with a Nevada address (Sparks included). Agency/producer firms only.';
+    case 'carson-city':
+      return 'Verified NV DOI inventory for this launch is Wave-1 Carson City firms with a Nevada address. Agency/producer firms only.';
     default:
       return null;
   }

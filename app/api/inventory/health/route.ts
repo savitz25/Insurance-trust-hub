@@ -8,6 +8,7 @@ import { createPublicClient } from '@/lib/supabase/public';
 import {
   countVerifiedByLaunchCounty,
   countVerifiedOhioProviders,
+  countVerifiedNevadaProviders,
   countVerifiedProvidersForHub,
   getHubInventory,
   HUB_PAGE_SIZE,
@@ -156,6 +157,7 @@ export async function GET() {
     restBodySnippet,
     verifiedFlCount,
     verifiedOhCount: await countVerifiedOhioProviders(),
+    verifiedNvCount: await countVerifiedNevadaProviders(),
     queryError,
     /** Matching strategy + intentional page cap */
     matching: {
