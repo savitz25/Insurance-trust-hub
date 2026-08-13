@@ -26,7 +26,7 @@ export const INSURANCE_HUBS: InsuranceHub[] = [
     ],
     metaTitle: 'Insurance Agencies in North Jersey (2026) | NJ DOBI Research',
     metaDescription:
-      'Research verified insurance agencies in North Jersey. Listings appear only when they meet our public research standard — New Jersey DOBI organization licenses, no seed inventory.',
+      'Research verified insurance agencies in North Jersey. Listings appear only when they meet our public research standard — New Jersey DOBI organization licenses.',
   },
   {
     slug: 'central-new-jersey',

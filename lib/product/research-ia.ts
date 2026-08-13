@@ -57,7 +57,7 @@ export const RESEARCH_QUESTIONS: ResearchQuestion[] = [
       { href: '/data/counties', label: 'County Medicare dashboards' },
       { href: '/carriers', label: 'Carrier intelligence' },
       { href: '/hubs', label: 'Market hubs' },
-      { href: '/directory', label: 'Verified agency directory' },
+      { href: '/directory?verified=true', label: 'Verified agency directory' },
       { href: '/tools/aca-plan-explorer', label: 'Live ACA Plan Explorer' },
     ],
   },

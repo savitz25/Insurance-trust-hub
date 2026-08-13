@@ -13,8 +13,6 @@ import {
   filterVerifiedProviders,
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
-import { FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
-
 /**
  * Phase 1 — public directory returns verified TrustState only.
  * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
@@ -23,27 +21,11 @@ function onlyVerifiedResearch(providers: Provider[]): Provider[] {
   return filterVerifiedProviders(providers);
 }
 
-/** Prefer FL launch-county rows when browsing without a state filter. */
-function prioritizeLaunchFlorida(providers: Provider[]): Provider[] {
-  const launchNeedles = FL_LAUNCH_COUNTIES.flatMap((c) => [
-    c.displayName.toLowerCase(),
-    ...c.aliases.map((a) => a.toLowerCase().replace(/\s+county$/, '').trim()),
-  ]);
-  const score = (p: Provider) => {
-    const blob = `${p.short_description ?? ''} ${p.state ?? ''}`.toLowerCase();
-    if (p.state?.toUpperCase() !== 'FL' && !blob.includes('florida')) return 0;
-    if (launchNeedles.some((n) => n && blob.includes(n))) return 2;
-    if (p.state?.toUpperCase() === 'FL') return 1;
-    return 0;
-  };
-  return [...providers].sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name));
-}
-
 export async function getProviders(
   filters: ProviderFilters = {}
 ): Promise<{ providers: Provider[]; total: number }> {
   if (!isSupabaseConfigured()) {
-    // Prefer honest empty state over seed listings on public surfaces
+    // Prefer honest empty state over unpublished catalog rows on public surfaces
     return { providers: [], total: 0 };
   }
 
@@ -51,7 +33,7 @@ export async function getProviders(
     const supabase = createPublicClient();
     if (!supabase) return { providers: [], total: 0 };
 
-    // Public directory: verified research rows only (no seed cards)
+    // Public directory: verified research rows only
     let query = supabase
       .from('providers')
       .select('*', { count: 'exact' })
@@ -59,10 +41,8 @@ export async function getProviders(
 
     if (filters.state) {
       query = query.contains('states_licensed', [filters.state.toUpperCase()]);
-    } else {
-      // Default browse: launch FL inventory first (still filterable by state)
-      query = query.contains('states_licensed', ['FL']);
     }
+    // Phase 11A: no-state browse is all verified research (FL/TX/OH first-class).
     if (filters.city) {
       query = query.contains('cities', [filters.city]);
     }
@@ -93,13 +73,9 @@ export async function getProviders(
       return { providers: [], total: 0 };
     }
 
-    let providers = onlyVerifiedResearch(
+    const providers = onlyVerifiedResearch(
       data.map((row) => mapRowToProvider(row as DbProvider))
-    );
-    if (!filters.state) {
-      providers = prioritizeLaunchFlorida(providers);
-    }
-    providers = providers.slice(0, limit);
+    ).slice(0, limit);
 
     return { providers, total: count ?? providers.length };
   } catch {

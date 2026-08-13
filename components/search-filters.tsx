@@ -24,7 +24,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
   const state = searchParams.get('state') ?? '';
   const insuranceType = searchParams.get('type') ?? '';
   const specialty = searchParams.get('specialty') ?? '';
-  const verifiedOnly = searchParams.get('verified') === 'true';
+  const verifiedOnly = searchParams.get('verified') !== 'false';
   const hasAppointments = searchParams.get('appointments') === 'true';
   const minRating = searchParams.get('minRating') ?? '';
 
@@ -54,7 +54,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
       type: (formData.get('type') as string) || null,
       specialty: (formData.get('specialty') as string) || null,
       minRating: (formData.get('minRating') as string) || null,
-      verified: formData.get('verified') === 'on' ? 'true' : null,
+      verified: formData.get('verified') === 'on' ? 'true' : 'true',
       appointments: formData.get('appointments') === 'on' ? 'true' : null,
     });
   }
@@ -119,7 +119,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
 
         <div>
           <Label htmlFor="filter-specialty" className="text-xs text-muted-foreground mb-1.5 block">
-            Specialty (DFS LOA tags first)
+            Specialty (license capability tags)
           </Label>
           <Select id="filter-specialty" name="specialty" defaultValue={specialty}>
             <option value="">All specialties</option>
@@ -182,7 +182,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
           defaultChecked={verifiedOnly}
         />
         <Label htmlFor="filter-verified" className="text-sm font-normal cursor-pointer">
-          Verified agencies only
+          Verified research listings only (default)
         </Label>
       </div>
 
@@ -197,7 +197,7 @@ export function SearchFilters({ className }: SearchFiltersProps) {
             htmlFor="filter-appointments"
             className="text-sm font-normal cursor-pointer"
           >
-            Has DFS appointment snapshot
+            Has appointment snapshot
           </Label>
         </div>
         <p className="text-[11px] text-muted-foreground leading-snug pl-6">

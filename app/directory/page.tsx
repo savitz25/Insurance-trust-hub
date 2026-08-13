@@ -32,9 +32,9 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Insurance Agency Directory — Search Licensed Agents by State',
+  title: 'Insurance Agency Directory — Verified Research Listings (FL · TX · OH)',
   description:
-    'Search Florida DFS–, Texas TDI–, and Ohio ODI–verified agency research listings by state, coverage type, and specialty. Independent research directory — re-check DOI licensing before you enroll.',
+    'Browse verified insurance agency research listings for Florida (DFS), Texas (TDI), and Ohio (ODI). Independent research — re-check state licensing before you enroll.',
   path: '/directory',
 });
 
@@ -63,8 +63,10 @@ function sortProviders(providers: Provider[], sort: string, query: string): Prov
         return score(b) - score(a);
       });
     case 'rating':
-    default:
       return sorted.sort((a, b) => b.rating - a.rating);
+    case 'name':
+    default:
+      return sorted.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
   }
 }
 
@@ -74,10 +76,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const state = getParam(params, 'state');
   const type = getParam(params, 'type') as InsuranceType | '';
   const specialty = getParam(params, 'specialty') as Specialty | '';
-  const verifiedOnly = getParam(params, 'verified') === 'true';
+  // Phase 11A — public directory is always verified research (legacy verified=false ignored)
+  const verifiedOnly = getParam(params, 'verified') !== 'false';
   const hasAppointmentSnapshot = getParam(params, 'appointments') === 'true';
   const minRating = getParam(params, 'minRating');
-  const sort = getParam(params, 'sort') || 'rating';
+  const sort = getParam(params, 'sort') || 'name';
   const view = getParam(params, 'view') || 'grid';
 
   const { providers: rawProviders, total } = await searchProviders({
@@ -85,7 +88,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     state: state || undefined,
     insuranceType: type || undefined,
     specialty: specialty || undefined,
-    verifiedOnly,
+    verifiedOnly: true,
     hasAppointmentSnapshot,
     minRating: minRating ? Number(minRating) : undefined,
     limit: 48,
@@ -99,11 +102,13 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const ohHubRows = await getOhLaunchMarketLiveTotals();
   const flTotal = await countVerifiedFloridaProviders();
   const txTotal = await countVerifiedTexasProviders();
-  const njTotal = await countVerifiedNewJerseyProviders();
   const ohTotal = await countVerifiedOhioProviders();
+  const njTotal = await countVerifiedNewJerseyProviders();
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';
   const browsingNj = state === 'NJ';
+  const browsingFl = state === 'FL';
+  const browsingAllVerified = !state;
 
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
@@ -112,10 +117,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
           {browsingOh
-            ? 'Ohio Department of Insurance (ODI)–verified agency research listings. Agency/business entities only. Empty markets stay empty — we do not invent inventory. Always re-check licenses on the official ODI locator.'
+            ? 'Ohio Department of Insurance (ODI)–verified agency research listings. Agency/business entities only. Empty markets stay empty. Always re-check licenses on the official ODI locator.'
             : browsingTx
               ? 'Texas Department of Insurance (TDI)–verified agency research listings. Always re-check licenses on official TDI tools.'
-              : 'Search agencies that meet our public research standard. Empty markets stay empty — we do not invent inventory. Always re-check licensing with your state insurance department.'}
+              : browsingFl
+                ? 'Florida DFS–verified agency research listings. Always re-check licenses on official DFS tools.'
+                : 'Verified research listings only — Florida DFS, Texas TDI, and Ohio ODI agency inventory. Empty filters stay empty. Always re-check licensing on official state tools before you enroll.'}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">
@@ -123,7 +130,22 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           </Link>{' '}
           to build a research shortlist (guest-saved on this device).
         </p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-2" role="navigation" aria-label="Verified state filters">
+          <Link
+            href="/directory?state=FL&verified=true"
+            className={
+              browsingFl
+                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
+            }
+          >
+            Florida (DFS)
+            {flTotal > 0 ? (
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {flTotal.toLocaleString()}
+              </span>
+            ) : null}
+          </Link>
           <Link
             href="/directory?state=TX&verified=true"
             className={
@@ -136,21 +158,6 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             {txTotal > 0 ? (
               <span className="ml-1.5 tabular-nums opacity-90">
                 {txTotal.toLocaleString()}
-              </span>
-            ) : null}
-          </Link>
-          <Link
-            href="/directory?state=NJ&verified=true"
-            className={
-              browsingNj
-                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
-                : 'inline-flex rounded-full border border-trust/30 bg-trust/5 px-3 py-1.5 text-xs font-semibold text-trust hover:bg-trust/10'
-            }
-          >
-            New Jersey (DOBI)
-            {njTotal > 0 ? (
-              <span className="ml-1.5 tabular-nums opacity-90">
-                {njTotal.toLocaleString()}
               </span>
             ) : null}
           </Link>
@@ -170,26 +177,30 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             ) : null}
           </Link>
           <Link
-            href="/directory?state=FL&verified=true"
-            className={
-              state === 'FL'
-                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
-                : 'inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary'
-            }
-          >
-            Florida (DFS)
-            {flTotal > 0 ? (
-              <span className="ml-1.5 tabular-nums opacity-90">
-                {flTotal.toLocaleString()}
-              </span>
-            ) : null}
-          </Link>
-          <Link
             href="/directory?verified=true"
-            className="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary/40"
+            className={
+              browsingAllVerified
+                ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                : 'inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary/40'
+            }
           >
             All verified
           </Link>
+          {njTotal > 0 ? (
+            <Link
+              href="/directory?state=NJ&verified=true"
+              className={
+                browsingNj
+                  ? 'inline-flex rounded-full border border-primary bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground'
+                  : 'inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary/40'
+              }
+            >
+              New Jersey (DOBI)
+              <span className="ml-1.5 tabular-nums opacity-90">
+                {njTotal.toLocaleString()}
+              </span>
+            </Link>
+          ) : null}
         </div>
         <div className="mt-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -371,7 +382,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             className="mb-6 rounded-xl border bg-card p-4"
           />
           <Suspense fallback={null}>
-            <DirectoryControls total={total} className="mb-6" />
+            <DirectoryControls
+            total={total}
+            showing={providers.length}
+            className="mb-6"
+          />
           </Suspense>
 
           {providers.length === 0 ? (
@@ -384,8 +399,8 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               }
               description={
                 state || query || type || specialty
-                  ? 'No verified research listings match the current filters. Broaden the search or clear filters — we will not backfill with seed agencies.'
-                  : 'We’re still verifying markets for the public directory. Empty here does not mean unlicensed agents do not exist — verify on state DOI / NAIC tools.'
+                  ? 'No verified research listings match the current filters. Broaden the search, try another state (Florida, Texas, Ohio), or use research tools. We will not invent listings to fill this view.'
+                  : 'No agencies currently meet our public research standard for this view. That does not mean unlicensed agents do not exist — verify on official state DOI / NAIC tools.'
               }
               placeLabel={state || query || undefined}
               primarySources={[

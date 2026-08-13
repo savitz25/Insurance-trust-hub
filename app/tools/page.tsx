@@ -101,10 +101,10 @@ const QUICK_BY_QUESTION = {
       purpose: 'Local research pages — verified agencies only when inventory is real.',
     },
     {
-      href: '/directory',
+      href: '/directory?verified=true',
       icon: Users,
       title: 'Verified agency directory',
-      purpose: 'Empty markets stay empty. No seed listings.',
+      purpose: 'Florida, Texas, and Ohio verified agencies. Empty markets stay empty.',
     },
   ],
   verify: [

@@ -9,15 +9,20 @@ import { cn } from '@/lib/utils';
 
 interface DirectoryControlsProps {
   total: number;
+  showing?: number;
   className?: string;
 }
 
-export function DirectoryControls({ total, className }: DirectoryControlsProps) {
+export function DirectoryControls({
+  total,
+  showing,
+  className,
+}: DirectoryControlsProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  const sort = searchParams.get('sort') ?? 'rating';
+  const sort = searchParams.get('sort') ?? 'name';
   const view = searchParams.get('view') ?? 'grid';
 
   function updateParam(key: string, value: string) {
@@ -32,8 +37,26 @@ export function DirectoryControls({ total, className }: DirectoryControlsProps) 
   return (
     <div className={cn('flex flex-col sm:flex-row sm:items-center justify-between gap-4', className)}>
       <p className="text-sm text-muted-foreground">
-        <span className="font-semibold text-foreground">{total}</span> agenc
-        {total === 1 ? 'y' : 'ies'} found
+        {typeof showing === 'number' && showing < total ? (
+          <>
+            Showing{' '}
+            <span className="font-semibold text-foreground">
+              {showing.toLocaleString()}
+            </span>{' '}
+            of{' '}
+            <span className="font-semibold text-foreground">
+              {total.toLocaleString()}
+            </span>{' '}
+            verified research listings
+          </>
+        ) : (
+          <>
+            <span className="font-semibold text-foreground">
+              {total.toLocaleString()}
+            </span>{' '}
+            verified research listing{total === 1 ? '' : 's'}
+          </>
+        )}
         {isPending && <span className="ml-2 text-xs">Updating…</span>}
       </p>
 
@@ -46,9 +69,10 @@ export function DirectoryControls({ total, className }: DirectoryControlsProps) 
             className="w-[160px]"
             aria-label="Sort agencies"
           >
-            <option value="rating">Top rated</option>
-            <option value="reviews">Most reviews</option>
+            <option value="name">Name A–Z</option>
             <option value="relevance">Relevance</option>
+            <option value="rating">Third-party rating (not an ITH rank)</option>
+            <option value="reviews">Review count</option>
           </Select>
         </div>
 

@@ -46,6 +46,7 @@
     "odi:import": "tsx scripts/odi/import-agencies.ts",
     "odi:promote": "tsx scripts/odi/promote-launch-markets.ts",
     "check:phase10-odi": "tsx scripts/check-phase10-odi.ts",
+    "check:phase11-directory": "tsx scripts/check-phase11-directory.ts",
     "check:phase6c-places": "tsx scripts/check-phase6c-places.ts",
     "check:phase5-agency": "tsx scripts/check-phase5-agency.ts",
     "check:phase6a-appointments": "tsx scripts/check-phase6a-appointments.ts",

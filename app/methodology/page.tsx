@@ -122,7 +122,7 @@ export default function MethodologyPage() {
         <p className="mt-1.5 leading-relaxed text-muted-foreground">
           Plan Explorer, Marketplace county pages, Medicare hub, contracts, and carrier profiles use
           CMS-backed extracts and labeled educational estimates only. Quality-gated indexation — no
-          mass thin counties or seed-agency SEO.
+          mass thin-county directories.
         </p>
         <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
           <Link

@@ -316,13 +316,14 @@ function LocalResearchSection() {
       <p className="mt-6 text-sm" style={{ color: INSURANCE_BRAND.ink }}>
         Soft path only:{' '}
         <Link
-          href="/directory"
+          href="/directory?verified=true"
           className="font-semibold underline-offset-2 hover:underline"
           style={{ color: INSURANCE_BRAND.shield }}
         >
           verified agency directory
-        </Link>{' '}
-        when real verified inventory exists — never seed or illustrative listings.
+        </Link>
+        {' '}
+        (Florida DFS, Texas TDI, Ohio ODI research listings).
       </p>
     </SectionShell>
   );

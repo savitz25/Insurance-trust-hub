@@ -47,7 +47,7 @@ export function DirectorySpecialtyChips({
   return (
     <div className={cn('space-y-2', className)}>
       <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-        Specialty (DFS LOA tags)
+        Specialty (license capability tags)
       </p>
       <div className="flex flex-wrap gap-2" role="navigation" aria-label="Directory specialty">
         {HUB_LOA_FILTERS.map((f) => {

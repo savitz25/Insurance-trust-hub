@@ -182,10 +182,10 @@ export function resolveInsuranceVerification(params: {
 
   return {
     level: 'identity_located',
-    badgeLabel: 'Listing only',
+    badgeLabel: 'License number pending',
     badgeVariant: 'pending',
     summary:
-      'Directory identity only — no license number on this listing yet. Confirm licensing on the state regulator site before sharing personal data.',
+      'No re-checkable license number is shown on this listing yet. Confirm licensing on the official state regulator site before sharing personal data.',
     licenseNumber: null,
     licenseState,
     statusLabel: 'Not shown',

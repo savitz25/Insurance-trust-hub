@@ -149,10 +149,10 @@ export function HubPageView({
   const isOhioHub = hub.stateCode === 'OH' || hub.stateSlug === 'ohio';
   const regulatorLabel = isTexasHub
     ? 'Texas Department of Insurance (TDI)'
-    : isNewJerseyHub
-      ? 'New Jersey DOBI'
-      : isOhioHub
-        ? 'Ohio Department of Insurance (ODI)'
+    : isOhioHub
+      ? 'Ohio Department of Insurance (ODI)'
+      : isNewJerseyHub
+        ? 'New Jersey DOBI'
         : hub.stateCode === 'FL'
           ? 'Florida DFS'
           : 'state insurance department';
@@ -235,10 +235,10 @@ export function HubPageView({
             <Shield className="h-4 w-4" />
             {isTexasHub
               ? 'Independent research · Re-check Texas TDI licenses'
-              : isNewJerseyHub
-                ? 'Independent research · Re-check New Jersey DOBI licenses'
-                : isOhioHub
-                  ? 'Independent research · Re-check Ohio ODI licenses'
+              : isOhioHub
+                ? 'Independent research · Re-check Ohio ODI licenses'
+                : isNewJerseyHub
+                  ? 'Independent research · Re-check New Jersey DOBI licenses'
                   : 'Independent research · Re-check state licenses'}
           </p>
           <h1 className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto">
@@ -247,10 +247,10 @@ export function HubPageView({
           <p className="mt-2 text-lg text-primary-foreground/80">
             {isTexasHub
               ? `Verified Texas TDI agency research listings for ${hub.localDescriptor}`
-              : isNewJerseyHub
-                ? `Verified New Jersey DOBI agency research listings for ${hub.localDescriptor}`
-                : isOhioHub
-                  ? `Verified Ohio Department of Insurance (ODI) agency research listings for ${hub.localDescriptor}`
+              : isOhioHub
+                ? `Verified Ohio Department of Insurance (ODI) agency research listings for ${hub.localDescriptor}`
+                : isNewJerseyHub
+                  ? `Verified New Jersey DOBI agency research listings for ${hub.localDescriptor}`
                   : `Licensed agencies with re-checkable public records for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
@@ -393,7 +393,7 @@ export function HubPageView({
                       ) : null}
                       <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                         Independent research only — re-check {regulatorLabel} before you enroll.
-                        Counts are verified listings only (no seed inventory)
+                        Counts are verified research listings only
                         {isTexasHub || isNewJerseyHub || isOhioHub
                           ? '. Agency/business entities only; not a bulk individual agent list.'
                           : '.'}
@@ -406,10 +406,10 @@ export function HubPageView({
                         note={
                           isTexasHub
                             ? 'Specialty tags come from Texas TDI license types / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from TDI alone.'
-                            : isNewJerseyHub
-                              ? 'Specialty tags come from New Jersey DOBI organization lines / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from DOBI alone.'
-                              : isOhioHub
-                                ? 'Specialty tags come from Ohio ODI license types / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from ODI alone.'
+                            : isOhioHub
+                              ? 'Specialty tags come from Ohio ODI license types / lines of authority when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from ODI alone.'
+                              : isNewJerseyHub
+                                ? 'Specialty tags come from New Jersey DOBI organization lines / qualifications when mapped. Shareable URL uses ?loa=. Medicare-certified is never inferred from DOBI alone.'
                                 : undefined
                         }
                       />

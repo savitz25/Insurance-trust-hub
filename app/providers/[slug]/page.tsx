@@ -150,10 +150,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const npn = extractNpnFromNotes(provider.license_notes);
   const regulatorName = isTexas
     ? TX_TDI_REGULATOR
-    : isNewJersey
-      ? NJ_DOBI_REGULATOR
-      : isOhio
-        ? OH_ODI_REGULATOR
+    : isOhio
+      ? OH_ODI_REGULATOR
+      : isNewJersey
+        ? NJ_DOBI_REGULATOR
         : isFlorida
           ? 'Florida DFS'
           : publicView.verification.sourceLabel || 'State insurance department';
@@ -328,10 +328,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     {agencyCapabilitySummary(provider)}{' '}
                     {isTexas
                       ? 'Texas Department of Insurance (TDI) is the license source of truth for this research listing.'
-                      : isNewJersey
-                        ? 'New Jersey Department of Banking and Insurance (DOBI) is the license source of truth for this research listing.'
-                        : isOhio
-                          ? 'Ohio Department of Insurance (ODI) is the license source of truth for this research listing.'
+                      : isOhio
+                        ? 'Ohio Department of Insurance (ODI) is the license source of truth for this research listing.'
+                        : isNewJersey
+                          ? 'New Jersey Department of Banking and Insurance (DOBI) is the license source of truth for this research listing.'
                           : isFlorida
                             ? 'Florida DFS is the license source of truth for this research listing.'
                             : `${regulatorName} is the license source of truth for this research listing.`}
@@ -438,7 +438,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <CardContent className="pt-6 space-y-3">
                   <p className="text-sm">
                     <span className="font-medium">Regulator:</span> {regulatorName}
-                    {isTexas ? ' (TDI)' : isNewJersey ? ' (DOBI)' : isOhio ? ' (ODI)' : null}
+                    {isTexas ? ' (TDI)' : isOhio ? ' (ODI)' : isNewJersey ? ' (DOBI)' : null}
                   </p>
                   {publicView.verification.licenseNumber && (
                     <p className="text-sm">
