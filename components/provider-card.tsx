@@ -4,7 +4,7 @@ import type { Provider } from '@/types/provider';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { StarRating } from '@/components/star-rating';
-import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
+import { SaveProviderButtonLazy } from '@/components/my-insurance/save-provider-button-lazy';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { toPublicProviderView } from '@/lib/provenance/public-listing';
 import {
@@ -162,7 +162,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
       </CardContent>
 
       <CardFooter className="flex flex-wrap items-center justify-between gap-2 pt-0">
-        <SaveProviderButton
+        <SaveProviderButtonLazy
           providerSlug={provider.slug}
           providerName={provider.name}
           city={provider.city}

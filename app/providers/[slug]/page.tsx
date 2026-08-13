@@ -15,15 +15,14 @@ import { getProviderLicenseUrl } from '@/lib/providers/license';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildInsuranceAgencySchema } from '@/lib/seo/schemas';
+import nextDynamic from 'next/dynamic';
 import { INSURANCE_TYPES } from '@/lib/constants';
-import { LeadForm } from '@/components/lead-form';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { TrustMark } from '@/components/network/trust-mark';
 import { BeforeYouReachOut } from '@/components/research/before-you-reach-out';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
 import { CompareProviderButton } from '@/components/my-insurance/compare-provider-button';
-import { WriteReviewForm } from '@/components/my-insurance/write-review-form';
 import { GovernmentVerificationPanel } from '@/components/insurance/cms/government-verification-panel';
 import { TrustScoreBreakdownPanel } from '@/components/insurance/cms/trust-score-breakdown';
 import {
@@ -69,6 +68,13 @@ import { continueClusterForProvider } from '@/lib/providers/continue-cluster';
 import { ContinueClusterResearch } from '@/components/profile/continue-cluster-research';
 import { SaveResearchSessionButton } from '@/components/my-insurance/save-research-session-button';
 import { localHubPathForProvider } from '@/lib/dfs/agency-display';
+
+const LeadForm = nextDynamic(() =>
+  import('@/components/lead-form').then((m) => m.LeadForm)
+);
+const WriteReviewForm = nextDynamic(() =>
+  import('@/components/my-insurance/write-review-form').then((m) => m.WriteReviewForm)
+);
 
 function extractNpnFromNotes(notes: string | null | undefined): string | null {
   if (!notes) return null;

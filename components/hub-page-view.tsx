@@ -507,11 +507,16 @@ export function HubPageView({
                   : EMPTY_MARKET_COPY.health}
               </p>
               {healthProviders.length > 0 ? (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {healthProviders.map((p) => (
-                    <ProviderCard key={p.id} provider={p} />
-                  ))}
-                </div>
+                <p className="rounded-xl border bg-card px-4 py-4 text-sm text-muted-foreground">
+                  {healthProviders.length.toLocaleString()} listing
+                  {healthProviders.length === 1 ? '' : 's'} on this page include a health-related
+                  license tag.{' '}
+                  <Link href={`${path}?loa=health`} className="font-medium text-primary hover:underline">
+                    Filter this hub to Health
+                  </Link>
+                  {' · '}
+                  Medicare-certified is never inferred from {regulatorLabel} alone.
+                </p>
               ) : (
                 <p className="rounded-xl border border-dashed bg-muted/30 px-4 py-6 text-sm text-muted-foreground">
                   {EMPTY_MARKET_COPY.health} Use{' '}
@@ -531,11 +536,11 @@ export function HubPageView({
                   : EMPTY_MARKET_COPY.multiLine}
               </p>
               {otherProviders.length > 0 ? (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {otherProviders.map((p) => (
-                    <ProviderCard key={p.id} provider={p} />
-                  ))}
-                </div>
+                <p className="text-sm text-muted-foreground">
+                  {otherProviders.length.toLocaleString()} listing
+                  {otherProviders.length === 1 ? '' : 's'} on this page are not health-tagged.
+                  Use the specialty chips above — we do not duplicate the full card list here.
+                </p>
               ) : null}
             </section>
           </div>

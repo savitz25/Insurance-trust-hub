@@ -45,7 +45,7 @@ if (!/SaveProviderButton/.test(profile)) {
   errors.push('provider profile missing save CTA');
 }
 
-const marketplace = read('components/marketplace/flagship-plan-research.tsx');
+const marketplace = read('components/marketplace/flagship-plan-results.tsx');
 if (!/SaveCalculatorButton/.test(marketplace) || !/marketplace_research/.test(marketplace)) {
   errors.push('Marketplace Plan Research must save as marketplace_research');
 }
