@@ -67,6 +67,8 @@ import {
 import { resolveLicenseFreshness } from '@/lib/providers/license-freshness';
 import { continueClusterForProvider } from '@/lib/providers/continue-cluster';
 import { ContinueClusterResearch } from '@/components/profile/continue-cluster-research';
+import { SaveResearchSessionButton } from '@/components/my-insurance/save-research-session-button';
+import { localHubPathForProvider } from '@/lib/dfs/agency-display';
 
 function extractNpnFromNotes(notes: string | null | undefined): string | null {
   if (!notes) return null;
@@ -158,6 +160,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   const npn = extractNpnFromNotes(provider.license_notes);
   const freshness = resolveLicenseFreshness(provider.license_checked_at);
   const continueCluster = continueClusterForProvider(provider);
+  const localHub = localHubPathForProvider(provider);
 
   let secondarySignals = null;
   try {
@@ -293,6 +296,18 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               <CompareProviderButton
                 providerSlug={provider.slug}
                 providerName={provider.name}
+              />
+              <SaveResearchSessionButton
+                session={{
+                  title: `${provider.name} research session`,
+                  source: 'profile',
+                  providerSlug: provider.slug,
+                  providerName: provider.name,
+                  hubPath: localHub?.href ?? null,
+                  directoryHref: `/directory?state=${provider.state}&verified=true`,
+                  resumeHref: `/providers/${provider.slug}`,
+                  plannerHref: '/calculators/aca-subsidy',
+                }}
               />
               {publicView.phone && (
                 <Button asChild variant="outline" className="gap-2">

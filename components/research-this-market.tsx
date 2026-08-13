@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { SeoCluster } from '@/lib/seo/seo-clusters';
 import { clusterResearchLinks } from '@/lib/seo/seo-clusters';
+import { SaveResearchSessionButton } from '@/components/my-insurance/save-research-session-button';
 
 /**
  * Phase 19 — compact research module on priority hubs.
@@ -19,6 +20,19 @@ export function ResearchThisMarket({ cluster }: { cluster: SeoCluster }) {
         Educational next steps for {cluster.marketName}. Official enrollment stays on .gov
         pathways. Agency listings appear only when verified.
       </p>
+      <div className="mt-3">
+        <SaveResearchSessionButton
+          label="Save this market to My Insurance"
+          session={{
+            title: `${cluster.marketName} market research`,
+            source: 'hub',
+            hubPath: cluster.hubPath,
+            directoryHref: cluster.directoryHref,
+            resumeHref: cluster.hubPath,
+            plannerHref: '/calculators/aca-subsidy',
+          }}
+        />
+      </div>
       <ul className="mt-3 flex flex-wrap gap-2">
         {links.map((l) => (
           <li key={l.href}>

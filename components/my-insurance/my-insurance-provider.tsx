@@ -17,10 +17,13 @@ import {
   listSavedProviderSlugsAction,
   mergeGuestCalculatorSnapshotsAction,
   mergeGuestProvidersAction,
+  mergeGuestResearchSessionsAction,
   saveCalculatorResultAction,
   saveDrugBasketAction,
   saveProviderAction,
+  saveResearchSessionAction,
 } from '@/actions/my-insurance';
+import { guestSessionsForMerge } from '@/lib/my-insurance/session-storage';
 import {
   collectLocalProvidersForMerge,
   importCloudProvidersIntoLocal,
@@ -100,6 +103,14 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       return;
     }
 
+    if (pending.type === 'research_session') {
+      const res = await saveResearchSessionAction(pending.payload, { sendEmail: true });
+      if (res.ok) {
+        toast.success('Research session saved to Insurance HQ');
+      } else toast.error(res.error);
+      return;
+    }
+
     if (pending.type === 'drug_basket') {
       const res = await saveDrugBasketAction({
         items: pending.payload.items,
@@ -175,6 +186,15 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       }
     } catch {
       /* local research remains on device */
+    }
+
+    try {
+      const sessions = guestSessionsForMerge();
+      if (sessions.length > 0) {
+        await mergeGuestResearchSessionsAction(sessions);
+      }
+    } catch {
+      /* guest sessions stay on device */
     }
 
     // Cloud → local (additive only onto active plan)

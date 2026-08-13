@@ -41,6 +41,8 @@ import { useRouter } from 'next/navigation';
 import { GuestInsuranceHq } from '@/components/my-insurance/guest-insurance-hq';
 import { ResearchWalletPanel } from '@/components/my-insurance/research-wallet-panel';
 import { SavedResearchPanel } from '@/components/my-insurance/saved-research-panel';
+import { ResearchSessionsPanel } from '@/components/my-insurance/research-sessions-panel';
+import { FreshnessAttention } from '@/components/my-insurance/freshness-attention';
 
 type Props = {
   initial: MyInsuranceDashboardData | null;
@@ -124,6 +126,10 @@ export function MyInsuranceDashboard({ initial }: Props) {
 
       {/* Core agency shortlist passport â€” same for guest and signed-in */}
       <GuestInsuranceHq />
+
+      <ResearchSessionsPanel cloudRows={data?.researchSessions ?? []} />
+
+      {user ? <FreshnessAttention items={data?.freshnessItems ?? []} /> : null}
 
       <SavedResearchPanel cloudRows={data?.calculatorResults ?? []} />
 

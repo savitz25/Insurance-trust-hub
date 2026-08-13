@@ -271,6 +271,56 @@ export async function sendWelcomeEmail(params: { to: string }): Promise<boolean>
   });
 }
 
+export async function sendResearchSessionEmail(params: {
+  to: string;
+  title: string;
+  resumeHref: string;
+  providerName?: string | null;
+}): Promise<boolean> {
+  const hq = `${PRODUCTION_SITE_ORIGIN}/my-insurance`;
+  const resume = params.resumeHref.startsWith('http')
+    ? params.resumeHref
+    : `${PRODUCTION_SITE_ORIGIN}${params.resumeHref.startsWith('/') ? params.resumeHref : `/${params.resumeHref}`}`;
+  const html = buildEmailHtml({
+    preheader: 'Your research session was saved to Insurance HQ.',
+    title: 'Research session saved',
+    bodyHtml: `<p style="margin:0 0 12px;">
+      <strong style="color:${BRAND.ink};">${escapeHtml(params.title)}</strong> is in your
+      research passport${params.providerName ? ` (includes ${escapeHtml(params.providerName)})` : ''}.
+    </p>
+    <p style="margin:0;">
+      Resume anytime from Insurance HQ. Re-check licenses on official state DOI tools and enroll only
+      on HealthCare.gov or your state marketplace. This is a research summary — not a quote or a lead.
+    </p>`,
+    ctaLabel: 'Open Insurance HQ',
+    ctaHref: hq,
+    secondaryHtml: `<a href="${resume}" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">Resume this research →</a>
+      <span style="color:${BRAND.faint};"> · </span>
+      <a href="https://www.healthcare.gov" style="color:${BRAND.primary};font-weight:600;text-decoration:none;">HealthCare.gov</a>`,
+  });
+  return sendResend({
+    to: params.to,
+    subject: `Saved research: ${params.title} — My Insurance`,
+    html,
+    text: [
+      'Research session saved',
+      '',
+      params.title,
+      params.providerName ? `Agency: ${params.providerName}` : '',
+      '',
+      `Resume: ${resume}`,
+      `Insurance HQ: ${hq}`,
+      'HealthCare.gov: https://www.healthcare.gov',
+      '',
+      'Re-check licenses on official state DOI tools. Not a quote or a lead.',
+      '',
+      BRAND.trustLine,
+    ]
+      .filter(Boolean)
+      .join('\n'),
+  });
+}
+
 export async function sendSavedProviderEmail(params: {
   to: string;
   providerName: string;

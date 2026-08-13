@@ -60,6 +60,7 @@
     "check:phase18-journey": "tsx scripts/check-phase18-journey.ts",
     "check:phase19-seo": "tsx scripts/check-phase19-seo.ts",
     "check:phase20-profiles": "tsx scripts/check-phase20-profiles.ts",
+    "check:phase21-passport": "tsx scripts/check-phase21-passport.ts",
     "check:phase11-directory": "tsx scripts/check-phase11-directory.ts",
     "check:phase12-my-insurance": "tsx scripts/check-phase12-my-insurance.ts",
     "check:phase6c-places": "tsx scripts/check-phase6c-places.ts",

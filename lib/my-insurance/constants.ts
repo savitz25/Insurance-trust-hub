@@ -106,6 +106,7 @@ export function authCallbackUrl(nextPath: string, origin?: string): string {
 export const AUTH_CALLBACK_URL = `${HUB_CANONICAL_ORIGIN}${AUTH_CALLBACK_PATH}`;
 
 export const GUEST_SAVED_PROVIDERS_KEY = 'ith-my-insurance-saved-providers-v1';
+export const GUEST_RESEARCH_SESSIONS_KEY = 'ith-research-sessions-v1';
 /** Spec storage key for CoveragePlan + SavedProvider blob */
 export const MY_INSURANCE_STORE_KEY = 'ith:my-insurance:v1';
 /** Pre-spec key; still read once then rewritten to MY_INSURANCE_STORE_KEY */

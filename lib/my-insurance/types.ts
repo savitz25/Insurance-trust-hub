@@ -101,10 +101,47 @@ export type PendingSaveBasketAction = {
   };
 };
 
+export type ResearchSessionSource = 'profile' | 'hub' | 'marketplace' | 'compass';
+
+export type ResearchSessionInput = {
+  title: string;
+  source: ResearchSessionSource;
+  providerSlug?: string | null;
+  providerName?: string | null;
+  hubPath?: string | null;
+  directoryHref?: string | null;
+  marketplaceZip?: string | null;
+  plannerHref?: string | null;
+  resumeHref: string;
+  note?: string | null;
+};
+
+export type ResearchSessionRow = ResearchSessionInput & {
+  id: string;
+  user_id?: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type LicenseFreshnessItem = {
+  providerSlug: string;
+  providerName: string;
+  licenseCheckedAt: string | null;
+  days: number | null;
+  kind: 'stale' | 'fresh' | 'unknown';
+  regulatorLookupUrl: string | null;
+};
+
+export type PendingSaveSessionAction = {
+  type: 'research_session';
+  payload: ResearchSessionInput;
+};
+
 export type PendingSaveAction =
   | PendingSaveProviderAction
   | PendingSaveCalculatorAction
-  | PendingSaveBasketAction;
+  | PendingSaveBasketAction
+  | PendingSaveSessionAction;
 
 export type GuestSavedProvider = {
   providerSlug: string;
@@ -152,6 +189,8 @@ export type MyInsuranceDashboardData = {
   calculatorResults: SavedCalculatorResultRow[];
   comparisons: ComparisonWithItems[];
   myReviews: MyInsuranceReviewRow[];
+  researchSessions: ResearchSessionRow[];
+  freshnessItems: LicenseFreshnessItem[];
   email: string | null;
 };
 

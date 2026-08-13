@@ -10,6 +10,7 @@ Independent research workspace on `www.insurancetrusthub.com`.
 | 2 | Drug baskets, calculator result saves |
 | 3 | Shortlist compare tray, saved comparisons, auth reviews |
 | Marketplace 3 | Plan research saves (cost + ACA subsidy + landscape provenance) |
+| 21 | Research sessions, license freshness reminders, optional save-receipt email |
 
 ## Schema
 
@@ -18,12 +19,27 @@ Independent research workspace on `www.insurancetrusthub.com`.
 - `saved_calculator_results` (+ optional `zip`, `state`, `county`, `used_live_marketplace`, `plan_year`, `updated_at`)
 - `provider_comparisons` / `provider_comparison_items` (Phase 3)
 - `reviews` (+ optional `user_id`, `coverage_type`)  -  new reviews default **pending**
+- `research_sessions` (Phase 21 research passport)
 
 Migrations:
 - `20260728120000_my_insurance.sql`
 - `20260728200000_my_insurance_phase3.sql`
 - `20260806120000_ensure_drug_baskets.sql` (idempotent re-apply of drug basket tables + RLS)
 - `20260810200000_saved_calculator_marketplace_meta.sql` (list columns for Marketplace research saves)
+- `20260818120000_research_sessions.sql` (research passport sessions + RLS)
+
+### Research sessions (Phase 21)
+
+A session is a research pointer — provider, hub, directory, Marketplace ZIP, planner — not a lead.
+
+| Layer | Role |
+|-------|------|
+| Guest | `localStorage` `ith-research-sessions-v1` |
+| Cloud | `research_sessions` (own rows only) |
+| CTA | `SaveResearchSessionButton` on profiles + priority hubs |
+| HQ | Research sessions + license freshness list |
+
+Signed-out: local draft + auth modal; after login, pending session completes. Signed-in: cloud save + best-effort Resend summary (no promo drip). Freshness flags saved agencies whose license as-of date is older than 90 days.
 
 ### Marketplace plan research saves
 

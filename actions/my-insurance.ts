@@ -15,8 +15,11 @@ import type {
   DrugBasketItemRow,
   DrugBasketWithItems,
   GuestSavedProvider,
+  LicenseFreshnessItem,
   MyInsuranceDashboardData,
   MyInsuranceReviewRow,
+  ResearchSessionInput,
+  ResearchSessionRow,
   SavedCalculatorResultRow,
   SavedProviderRow,
 } from '@/lib/my-insurance/types';
@@ -31,10 +34,13 @@ import {
   sendComparisonSummaryEmail,
   sendDrugBasketEmail,
   sendReviewSubmittedEmail,
+  sendResearchSessionEmail,
   sendSavedCalculatorEmail,
   sendSavedProviderEmail,
   sendWelcomeEmail,
 } from '@/lib/my-insurance/emails';
+import { resolveLicenseFreshness } from '@/lib/providers/license-freshness';
+import { getRegulatorProfile } from '@/lib/regulators/labels';
 import { getProviderBySlug } from '@/lib/providers/queries';
 // provider lookup for reviews
 
@@ -658,6 +664,88 @@ export async function deleteCalculatorResultAction(
   }
 }
 
+export async function saveResearchSessionAction(
+  input: ResearchSessionInput,
+  opts?: { sendEmail?: boolean }
+): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    const supabase = await insuranceDb();
+    await ensureUserProfile(await createClient(), user);
+    const title = input.title.trim().slice(0, 160) || 'Saved research session';
+    const resumeHref = input.resumeHref.trim() || '/my-insurance';
+    const { data, error } = await supabase
+      .from('research_sessions')
+      .insert({
+        user_id: user.id,
+        title,
+        source: input.source,
+        provider_slug: input.providerSlug || null,
+        provider_name: input.providerName || null,
+        hub_path: input.hubPath || null,
+        directory_href: input.directoryHref || null,
+        marketplace_zip: input.marketplaceZip || null,
+        planner_href: input.plannerHref || null,
+        resume_href: resumeHref,
+        note: input.note?.trim().slice(0, 280) || null,
+      })
+      .select('id')
+      .single();
+    if (error || !data) {
+      console.error('[my-insurance] save session', error?.message);
+      return { ok: false, error: 'Could not save research session' };
+    }
+    revalidatePath(MY_INSURANCE_PATH);
+    if (opts?.sendEmail !== false && user.email) {
+      void sendResearchSessionEmail({
+        to: user.email,
+        title,
+        resumeHref,
+        providerName: input.providerName,
+      }).catch((err) => console.error('[my-insurance] session email', err));
+    }
+    return { ok: true, id: data.id as string };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
+}
+
+export async function deleteResearchSessionAction(
+  id: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    const supabase = await insuranceDb();
+    const { error } = await supabase
+      .from('research_sessions')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', user.id);
+    if (error) return { ok: false, error: 'Could not delete session' };
+    revalidatePath(MY_INSURANCE_PATH);
+    return { ok: true };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
+}
+
+export async function mergeGuestResearchSessionsAction(
+  guests: ResearchSessionInput[]
+): Promise<{ ok: true; merged: number } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    if (!guests.length) return { ok: true, merged: 0 };
+    let merged = 0;
+    for (const g of guests.slice(0, 20)) {
+      const res = await saveResearchSessionAction(g, { sendEmail: false });
+      if (res.ok) merged += 1;
+    }
+    return { ok: true, merged };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
+}
+
 export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboardData | null> {
   const user = await getAuthenticatedUser();
   if (!user) return null;
@@ -682,7 +770,7 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
       .limit(50);
   }
 
-  const [providersRes, basketsRes, comparisonsRes, reviewsRes] = await Promise.all([
+  const [providersRes, basketsRes, comparisonsRes, reviewsRes, sessionsRes] = await Promise.all([
     supabase
       .from('saved_providers')
       .select('id,user_id,provider_slug,provider_name,notes,created_at')
@@ -709,6 +797,14 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
       .eq('user_id', user.id)
       .order('created_at', { ascending: false })
       .limit(50),
+    supabase
+      .from('research_sessions')
+      .select(
+        'id,user_id,title,source,provider_slug,provider_name,hub_path,directory_href,marketplace_zip,planner_href,resume_href,note,created_at,updated_at'
+      )
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(40),
   ]);
 
   if (basketsRes.error) {
@@ -781,9 +877,59 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
   if (reviewsRes.error) {
     console.error('[my-insurance] dashboard reviews', reviewsRes.error.message);
   }
+  if (sessionsRes.error && !/schema cache|does not exist/i.test(sessionsRes.error.message || '')) {
+    console.error('[my-insurance] dashboard sessions', sessionsRes.error.message);
+  }
+
+  const savedProviders = (providersRes.data ?? []) as SavedProviderRow[];
+  const freshnessItems: LicenseFreshnessItem[] = [];
+  const slugs = savedProviders.map((p) => p.provider_slug).filter(Boolean);
+  if (slugs.length) {
+    const { data: licenseRows } = await supabase
+      .from('providers')
+      .select('slug,name,license_info,states_licensed')
+      .in('slug', slugs.slice(0, 50));
+    for (const row of licenseRows ?? []) {
+      const checkedAt = row.license_info?.licenses?.[0]?.checkedAt ?? null;
+      const fresh = resolveLicenseFreshness(checkedAt);
+      if (fresh.kind !== 'stale') continue;
+      const state = Array.isArray(row.states_licensed) ? row.states_licensed[0] : null;
+      const regulator = getRegulatorProfile(state);
+      freshnessItems.push({
+        providerSlug: row.slug,
+        providerName:
+          row.name ||
+          savedProviders.find((p) => p.provider_slug === row.slug)?.provider_name ||
+          row.slug,
+        licenseCheckedAt: checkedAt,
+        days: fresh.days,
+        kind: 'stale',
+        regulatorLookupUrl: regulator?.lookupUrl ?? null,
+      });
+    }
+  }
+
+  const researchSessions: ResearchSessionRow[] = (sessionsRes.error ? [] : sessionsRes.data ?? []).map(
+    (row: Record<string, unknown>) => ({
+      id: String(row.id),
+      user_id: String(row.user_id ?? ''),
+      title: String(row.title ?? 'Saved research'),
+      source: (row.source as ResearchSessionRow['source']) || 'profile',
+      providerSlug: (row.provider_slug as string) || null,
+      providerName: (row.provider_name as string) || null,
+      hubPath: (row.hub_path as string) || null,
+      directoryHref: (row.directory_href as string) || null,
+      marketplaceZip: (row.marketplace_zip as string) || null,
+      plannerHref: (row.planner_href as string) || null,
+      resumeHref: String(row.resume_href ?? '/my-insurance'),
+      note: (row.note as string) || null,
+      created_at: String(row.created_at),
+      updated_at: String(row.updated_at ?? row.created_at),
+    })
+  );
 
   return {
-    savedProviders: (providersRes.data ?? []) as SavedProviderRow[],
+    savedProviders,
     drugBasket,
     calculatorResults: (calcRes.data ?? []).map(
       (row: SavedCalculatorResultRow & { snapshot?: unknown }) => ({
@@ -793,6 +939,8 @@ export async function getMyInsuranceDashboardData(): Promise<MyInsuranceDashboar
     ) as SavedCalculatorResultRow[],
     comparisons,
     myReviews,
+    researchSessions,
+    freshnessItems,
     email: user.email ?? null,
   };
 }
