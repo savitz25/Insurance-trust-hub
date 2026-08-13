@@ -29,8 +29,8 @@ type Props = {
   size?: 'default' | 'sm';
   onSaved?: () => void;
   /**
-   * When true (default for marketplace research), signed-out users get auth modal
-   * and pending cloud save. Local device snapshot still stored.
+   * When true, signed-out users also get the auth modal after a local save.
+   * Default false — browse/tools stay usable; sign-in is optional for cloud.
    */
   requireSignInForCloud?: boolean;
   /** Best-effort research summary email after cloud save (default true when signed in) */
@@ -48,7 +48,7 @@ export function SaveCalculatorButton({
   className,
   size = 'default',
   onSaved,
-  requireSignInForCloud = true,
+  requireSignInForCloud = false,
   sendEmail = true,
 }: Props) {
   const mi = useMyInsuranceOptional();
@@ -90,26 +90,36 @@ export function SaveCalculatorButton({
       return;
     }
 
-    // Signed out → prompt auth for cloud; still keep local draft
-    if (requireSignInForCloud && !mi?.user) {
-      saveLocalDevice();
-      stashPendingSaveAction({
-        type: 'calculator',
-        payload: { calculatorId, title, snapshot },
-      });
-      stashPostLoginRedirect(MY_INSURANCE_PATH);
-      if (mi?.openAuth) {
-        mi.openAuth({ context: 'general', redirectPath: MY_INSURANCE_PATH });
-      }
-      toast.message('Sign in to save to Insurance HQ', {
-        description: 'A copy is on this device. After sign-in we finish cloud save.',
-      });
-      return;
-    }
-
     setSaving(true);
     try {
       if (!saveLocalDevice()) return;
+
+      if (!mi?.user) {
+        stashPendingSaveAction({
+          type: 'calculator',
+          payload: { calculatorId, title, snapshot },
+        });
+        stashPostLoginRedirect(MY_INSURANCE_PATH);
+        setSaved(true);
+        onSaved?.();
+        if (requireSignInForCloud && mi?.openAuth) {
+          mi.openAuth({ context: 'general', redirectPath: MY_INSURANCE_PATH });
+          toast.message('Sign in to sync this research', {
+            description: 'A copy is already on this device.',
+          });
+          return;
+        }
+        toast.success('Saved to My Insurance', {
+          description: 'On this device. Sign in anytime to sync across devices.',
+          action: {
+            label: 'Open HQ',
+            onClick: () => {
+              window.location.href = MY_INSURANCE_PATH;
+            },
+          },
+        });
+        return;
+      }
 
       if (mi?.user) {
         const res = await saveCalculatorResultAction({
@@ -139,19 +149,6 @@ export function SaveCalculatorButton({
         });
         return;
       }
-
-      // Guest path without requireSignIn
-      setSaved(true);
-      onSaved?.();
-      toast.success('Saved to My Insurance', {
-        description: 'On your coverage plan · this device',
-        action: {
-          label: 'View report',
-          onClick: () => {
-            window.location.href = '/my-insurance/report';
-          },
-        },
-      });
     } finally {
       setSaving(false);
     }

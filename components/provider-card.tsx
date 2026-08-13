@@ -162,7 +162,17 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
         <SaveProviderButton
           providerSlug={provider.slug}
           providerName={provider.name}
-          className="text-xs"
+          city={provider.city}
+          state={provider.state}
+          licenseSummary={
+            view.verification.licenseNumber
+              ? `License ${view.verification.licenseNumber}`
+              : undefined
+          }
+          lines={loaTags}
+          defaultStatus="researching"
+          compact
+          className="min-h-11"
         />
         <Link
           href={`/providers/${provider.slug}`}

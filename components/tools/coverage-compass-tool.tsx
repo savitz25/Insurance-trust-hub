@@ -25,7 +25,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { SaveToolSnapshotButton } from '@/components/my-insurance/save-tool-snapshot-button';
+import { SaveCalculatorButton } from '@/components/my-insurance/save-calculator-button';
 import { cn } from '@/lib/utils';
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -249,25 +249,29 @@ export function CoverageCompassTool() {
             ) : null}
 
             <div className="flex flex-wrap gap-3 border-t border-slate-100 pt-5">
-              <SaveToolSnapshotButton
-                toolId="needs-assessment"
+              <SaveCalculatorButton
+                calculatorId="needs_assessment"
                 title={`Coverage Compass · ${result.situationLabel}`}
-                summary={[
-                  result.summary,
-                  result.zip ? `ZIP ${result.zip}` : null,
-                  result.recommendedPathIds.join(', '),
-                ]
-                  .filter(Boolean)
-                  .join(' · ')}
-                href="/tools/coverage-compass"
-                payload={{
-                  version: result.version,
-                  situationKey: result.situationKey,
-                  zip: result.zip,
-                  recommendedPathIds: result.recommendedPathIds,
-                  primaryPathId: result.primaryPathId,
-                  createdAt: result.createdAt,
+                snapshot={{
+                  summaryText: [
+                    result.summary,
+                    result.zip ? `ZIP ${result.zip}` : null,
+                  ]
+                    .filter(Boolean)
+                    .join(' · '),
+                  sourcePath: '/tools/coverage-compass',
+                  inputs: {
+                    zip: result.zip,
+                    situationKey: result.situationKey,
+                    situationLabel: result.situationLabel,
+                  },
+                  outputs: {
+                    recommendedPathIds: result.recommendedPathIds,
+                    primaryPathId: result.primaryPathId,
+                    educational: true,
+                  },
                 }}
+                sendEmail
               />
               <Button type="button" variant="outline" onClick={reset} className="min-h-[44px]">
                 Start over

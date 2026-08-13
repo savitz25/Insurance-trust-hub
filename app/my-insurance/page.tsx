@@ -28,9 +28,9 @@ export default async function MyInsurancePage() {
           My Insurance
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-          Research wallet for coverage decisions — shortlisted plans, doctors, prescriptions, and
-          market context. Works on this device without signing in; magic link restores across
-          devices. Contents are private research, not leads.
+          Your research passport — saved agencies and saved tool results. Works on this device
+          without signing in. Sign in only if you want the same shortlist on another device.
+          Contents are private research, not leads.
         </p>
         <p className="mt-2 text-xs text-slate-500">
           Research only · Not an endorsement · Not a claims portal · Part of the Ask Trust Hub
@@ -45,7 +45,7 @@ export default async function MyInsurancePage() {
           </div>
         </Suspense>
         <p className="mt-3 text-sm text-slate-500">
-          <Link href="/directory" className="font-medium text-[#0284C7] hover:underline">
+          <Link href="/directory?verified=true" className="font-medium text-[#0284C7] hover:underline">
             Directory
           </Link>
           {' · '}

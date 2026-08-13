@@ -15,6 +15,7 @@ import {
   ensureUserProfileAction,
   getMyInsuranceDashboardData,
   listSavedProviderSlugsAction,
+  mergeGuestCalculatorSnapshotsAction,
   mergeGuestProvidersAction,
   saveCalculatorResultAction,
   saveDrugBasketAction,
@@ -156,6 +157,24 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       if (res.ok && res.merged > 0) {
         importedToCloud = res.merged;
       }
+    }
+
+    try {
+      const { getToolSnapshots } = await import('@/lib/my-insurance/storage');
+      const snaps = getToolSnapshots();
+      if (snaps.length > 0) {
+        await mergeGuestCalculatorSnapshotsAction(
+          snaps.map((s) => ({
+            toolId: s.toolId,
+            title: s.title,
+            summary: s.summary,
+            href: s.href,
+            payload: s.payload,
+          }))
+        );
+      }
+    } catch {
+      /* local research remains on device */
     }
 
     // Cloud → local (additive only onto active plan)

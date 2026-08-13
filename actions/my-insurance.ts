@@ -493,7 +493,11 @@ export async function saveCalculatorResultAction(input: {
             ? '/tools/aca-plan-explorer'
             : input.calculatorId === 'cost_estimator'
               ? '/tools/cost-estimator'
-              : '/tools'),
+              : input.calculatorId === 'marketplace_research'
+                ? '/tools/marketplace-plan-research'
+                : input.calculatorId === 'needs_assessment'
+                  ? '/tools/coverage-compass'
+                  : '/tools'),
     };
 
     // Denormalized list fields from marketplace research (or inputs)
@@ -582,6 +586,54 @@ export async function saveCalculatorResultAction(input: {
     }
 
     return { ok: true, id: data.id as string };
+  } catch {
+    return { ok: false, error: 'Sign in required' };
+  }
+}
+
+export type GuestCalculatorSnapshotInput = {
+  toolId: string;
+  title: string;
+  summary: string;
+  href: string;
+  payload?: Record<string, unknown>;
+};
+
+/** Import guest device research into cloud. Skips titles already saved. No email. */
+export async function mergeGuestCalculatorSnapshotsAction(
+  snaps: GuestCalculatorSnapshotInput[]
+): Promise<{ ok: true; merged: number } | { ok: false; error: string }> {
+  try {
+    const user = await requireAuthenticatedUser();
+    if (!snaps.length) return { ok: true, merged: 0 };
+    const { mapToolIdToCalculatorId } = await import('@/lib/my-insurance/types');
+    let merged = 0;
+    const dash = await getMyInsuranceDashboardData();
+    const existing = new Set(
+      (dash?.calculatorResults ?? []).map(
+        (r) => `${r.calculator_id}::${(r.title || '').trim().toLowerCase()}`
+      )
+    );
+    for (const snap of snaps) {
+      const calculatorId = mapToolIdToCalculatorId(snap.toolId);
+      const key = `${calculatorId}::${(snap.title || '').trim().toLowerCase()}`;
+      if (existing.has(key)) continue;
+      const res = await saveCalculatorResultAction({
+        calculatorId,
+        title: snap.title,
+        snapshot: {
+          summaryText: snap.summary,
+          sourcePath: snap.href,
+          inputs: snap.payload ?? {},
+        },
+        sendEmail: false,
+      });
+      if (res.ok) {
+        existing.add(key);
+        merged += 1;
+      }
+    }
+    return { ok: true, merged };
   } catch {
     return { ok: false, error: 'Sign in required' };
   }

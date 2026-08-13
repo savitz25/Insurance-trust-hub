@@ -174,11 +174,11 @@ export function GuestInsuranceHq() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       {/* Secondary rooms — Setup · Report · Compare (one HQ home, not second nav homes) */}
       <nav
         aria-label="My Insurance sections"
-        className="flex flex-wrap gap-2"
+        className="order-1 flex flex-wrap gap-2"
       >
         <Button asChild size="sm" variant="outline" className="gap-1.5">
           <Link href="/my-insurance/plans">
@@ -226,8 +226,12 @@ export function GuestInsuranceHq() {
         )}
       </nav>
 
-      <Card className="border-[#E0F2FE] shadow-sm">
-        <CardHeader className="pb-3">
+      <details className="order-3 rounded-2xl border border-[#E0F2FE] bg-white shadow-sm">
+        <summary className="cursor-pointer list-none px-6 py-4 text-sm font-semibold text-slate-800">
+          Plan settings (optional) · guest-saved on this device
+        </summary>
+      <Card className="border-0 shadow-none">
+        <CardHeader className="pb-3 pt-0">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">
@@ -366,7 +370,7 @@ export function GuestInsuranceHq() {
               <Link href="/my-insurance/setup">Guided setup</Link>
             </Button>
             <Button type="button" variant="outline" asChild>
-              <Link href="/directory">
+              <Link href="/directory?verified=true">
                 <Plus className="mr-1.5 h-4 w-4" aria-hidden />
                 Browse directory
               </Link>
@@ -386,7 +390,9 @@ export function GuestInsuranceHq() {
           ) : null}
         </CardContent>
       </Card>
+      </details>
 
+      <div className="order-2 space-y-6">
       {providers.length === 0 ? (
         <Card className="shadow-sm">
           <CardContent className="py-10 text-center">
@@ -397,7 +403,7 @@ export function GuestInsuranceHq() {
               {SHORTLIST_CAP}).
             </p>
             <Button asChild className="mt-4 bg-[#0284C7] hover:bg-[#1E3A8A]">
-              <Link href="/directory">Find licensed agencies</Link>
+              <Link href="/directory?verified=true">Browse verified directory</Link>
             </Button>
           </CardContent>
         </Card>
@@ -496,7 +502,9 @@ export function GuestInsuranceHq() {
           </Card>
         </>
       )}
+      </div>
 
+      <div className="order-4 space-y-6">
       {fullPanel ? (
         <ShortlistFullPanel
           shortlisted={fullPanel.shortlisted}
@@ -553,6 +561,7 @@ export function GuestInsuranceHq() {
         <div className="mt-2">
           <TrustMark />
         </div>
+      </div>
       </div>
     </div>
   );
@@ -620,14 +629,22 @@ function ProviderList({
             >
               {p.providerName}
             </Link>
-            <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs text-slate-500">
+            <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">
               {p.city || p.state ? (
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="h-3 w-3" aria-hidden />
                   {[p.city, p.state].filter(Boolean).join(', ')}
                 </span>
               ) : null}
-              {p.licenseSummary ? <span>{p.licenseSummary}</span> : null}
+              {p.licenseSummary ? (
+                <span className="inline-flex items-center rounded-full bg-[#E0F2FE] px-2 py-0.5 font-medium text-[#0A2540]">
+                  {p.licenseSummary}
+                </span>
+              ) : (
+                <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 font-medium text-slate-600">
+                  Verified research listing
+                </span>
+              )}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">

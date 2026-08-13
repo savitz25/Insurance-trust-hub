@@ -43,7 +43,8 @@ export type CalculatorToolId =
   | 'aca_subsidy'
   | 'aca_plan_explorer'
   | 'cost_estimator'
-  | 'needs_assessment';
+  | 'needs_assessment'
+  | 'marketplace_research';
 
 export type CalculatorSnapshot = {
   inputs?: Record<string, unknown>;
@@ -158,5 +159,15 @@ export const CALCULATOR_LABELS: Record<CalculatorToolId, string> = {
   aca_subsidy: 'ACA Coverage & Savings Planner',
   aca_plan_explorer: 'Live ACA Plan Explorer',
   cost_estimator: 'Insurance Cost & Coverage Planner',
-  needs_assessment: 'Coverage Compass / Needs Assessment',
+  needs_assessment: 'Coverage Compass',
+  marketplace_research: 'Marketplace Plan Research',
 };
+
+export function mapToolIdToCalculatorId(toolId: string): CalculatorToolId {
+  const id = toolId.trim().toLowerCase().replace(/-/g, '_');
+  if (id === 'aca_subsidy') return 'aca_subsidy';
+  if (id === 'aca_plan_explorer') return 'aca_plan_explorer';
+  if (id === 'cost_estimator') return 'cost_estimator';
+  if (id === 'marketplace_research' || id === 'marketplace') return 'marketplace_research';
+  return 'needs_assessment';
+}

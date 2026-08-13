@@ -106,14 +106,18 @@ export function FlagshipPlanResearch() {
     });
     const merged = applyLandscapeToCostPlanner(base, landscape);
     marketplace = merged.marketplace;
-    const research = buildCostPlannerResearchSnapshot({
-      result: merged,
-      landscape,
-      ages: [age],
-      householdSize: 1,
-      tobacco: false,
-      utilization: 'moderate',
-    });
+    const research = {
+      ...buildCostPlannerResearchSnapshot({
+        result: merged,
+        landscape,
+        ages: [age],
+        householdSize: 1,
+        tobacco: false,
+        utilization: 'moderate',
+      }),
+      toolKey: 'marketplace_research' as const,
+      toolLabel: 'Marketplace Plan Research',
+    };
     saveSnapshot = toCalculatorSnapshot(research, '/tools/marketplace-plan-research');
     saveTitle = `Marketplace research · ${loc.displayLabel}`;
   }
@@ -217,7 +221,7 @@ export function FlagshipPlanResearch() {
             <div className="flex flex-wrap gap-2">
               {saveSnapshot ? (
                 <SaveCalculatorButton
-                  calculatorId="cost_estimator"
+                  calculatorId="marketplace_research"
                   title={saveTitle}
                   snapshot={saveSnapshot}
                   sendEmail

@@ -22,7 +22,10 @@ import {
 } from '@/lib/my-insurance/storage';
 import type { ProviderResearchStatus, SavedProvider } from '@/lib/my-insurance/plan-types';
 import { PROVIDER_STATUS_OPTIONS } from '@/lib/my-insurance/plan-types';
-import { removeGuestProvider } from '@/lib/my-insurance/guest-storage';
+import {
+  removeGuestProvider,
+  stashPendingSaveAction,
+} from '@/lib/my-insurance/guest-storage';
 import { ShortlistFullPanel } from '@/components/my-insurance/shortlist-full-panel';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -117,10 +120,13 @@ export function SaveProviderButton({
       });
     } else if (result.created) {
       toast.success('Saved to My Insurance', {
-        description:
-          result.provider.status === 'researching'
-            ? 'Added under Researching · this device'
-            : 'Added to shortlist · this device',
+        description: mi?.user
+          ? result.provider.status === 'researching'
+            ? 'Added under Researching · synced to your account'
+            : 'Added to shortlist · synced to your account'
+          : result.provider.status === 'researching'
+            ? 'Added under Researching on this device · sign in to sync'
+            : 'Added to shortlist on this device · sign in to sync',
         action: {
           label: 'Open HQ',
           onClick: () => {
@@ -152,6 +158,11 @@ export function SaveProviderButton({
           await saveProviderAction({ providerSlug, providerName });
           mi.markProviderSaved(providerSlug);
         }
+      } else {
+        stashPendingSaveAction({
+          type: 'provider',
+          payload: { providerSlug, providerName },
+        });
       }
       const result = upsertSavedProvider({
         ...baseInput,
@@ -202,7 +213,7 @@ export function SaveProviderButton({
           size={compact ? 'sm' : 'sm'}
           onClick={handlePrimaryClick}
           disabled={busy || mi?.loading}
-          className={cn('gap-1.5', compact && 'h-8 text-xs')}
+          className={cn('gap-1.5 min-h-11', compact && 'text-xs')}
           aria-pressed={saved}
           aria-expanded={saved ? manageOpen : undefined}
         >
