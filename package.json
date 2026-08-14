@@ -42,6 +42,7 @@
     "dfs:env": "tsx scripts/dfs/check-env.ts",
     "tdi:import": "tsx scripts/tdi/import-agencies.ts",
     "tdi:promote": "tsx scripts/tdi/promote-launch-markets.ts",
+    "tdi:audit-nonresident-tx": "tsx scripts/tdi/audit-nonresident-tx.ts",
     "check:phase8-tdi": "tsx scripts/check-phase8-tdi.ts",
     "nj:import": "tsx scripts/nj/import-agencies.ts",
     "nj:promote": "tsx scripts/nj/promote-launch-regions.ts",
