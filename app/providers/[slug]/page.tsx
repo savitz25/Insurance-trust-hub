@@ -157,12 +157,17 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     provider.website?.trim() &&
       provider.enrichment?.google?.matchConfidence === 'high'
   );
-  const regulator = getRegulatorProfile(provider.state);
+  const licenseJurisdiction = (
+    provider.license_state ||
+    provider.state ||
+    ''
+  ).toUpperCase();
+  const regulator = getRegulatorProfile(licenseJurisdiction);
   const regulatorName =
     regulator?.label ||
     publicView.verification.sourceLabel ||
     'State insurance department';
-  const regulatorShort = getRegulatorShortLabel(provider.state);
+  const regulatorShort = getRegulatorShortLabel(licenseJurisdiction);
   const npn = extractNpnFromNotes(provider.license_notes);
   const freshness = resolveLicenseFreshness(provider.license_checked_at);
   const continueCluster = continueClusterForProvider(provider);
@@ -176,7 +181,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   }
 
   const showContact =
-    allowContactForm(publicView.listingClass) && allowsRegulatorLeadForm(provider.state);
+    allowContactForm(publicView.listingClass) &&
+    allowsRegulatorLeadForm(licenseJurisdiction);
 
   let reviews: Awaited<ReturnType<typeof getReviewsForProvider>> = [];
   try {
@@ -263,7 +269,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden />
                 {locationParts.join(' · ')}
                 <span className="text-muted-foreground/80">
-                  · {getResearchProfileKicker(provider.state)}
+                  · {getResearchProfileKicker(licenseJurisdiction)}
                 </span>
               </p>
               {loaTags.length > 0 ? (
@@ -310,7 +316,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   providerSlug: provider.slug,
                   providerName: provider.name,
                   hubPath: localHub?.href ?? null,
-                  directoryHref: `/directory?state=${provider.state}&verified=true`,
+                  directoryHref: `/directory?state=${licenseJurisdiction}&verified=true`,
                   resumeHref: `/providers/${provider.slug}`,
                   plannerHref: '/calculators/aca-subsidy',
                 }}
@@ -380,12 +386,20 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     {freshness.note} {publicView.verification.summary} This listing is research
                     context — not a recommendation or ranking. Public listings require a
                     re-checkable license number, {regulatorName} as regulator, and Phase 1 verified
-                    trust gates. {getMedicareNonClaim(provider.state)}
+                    trust gates. {getMedicareNonClaim(licenseJurisdiction)}
                   </p>
+                  {provider.residency === 'non_resident' ? (
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      NV-licensed (non-resident).
+                      {provider.home_address_state
+                        ? ` Home office state on file: ${provider.home_address_state} (address metadata only — not a verified ${provider.home_address_state} license).`
+                        : ' Home office is outside Nevada. That address is metadata only, not a second verified license.'}
+                    </p>
+                  ) : null}
                   <div className="flex flex-wrap gap-2">
                     <Button asChild variant="outline" size="sm" className="gap-2">
                       <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
-                        Verify license in {provider.state}
+                        Verify license in {licenseJurisdiction}
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     </Button>
@@ -424,7 +438,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
                     {agencyCapabilitySummary(provider)}{' '}
-                    {getVerificationExplanation(provider.state, regulatorName)}
+                    {getVerificationExplanation(licenseJurisdiction, regulatorName)}
                   </p>
                 </CardContent>
               </Card>
@@ -465,7 +479,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     </ul>
                   ) : (
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Capability tags come from {getLoaSourcePhrase(provider.state)} on the public
+                      Capability tags come from {getLoaSourcePhrase(licenseJurisdiction)} on the public
                       license record when available.
                     </p>
                   )}
@@ -502,7 +516,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     </p>
                   ) : null}
                   <Link
-                    href={`/directory?state=${provider.state}&city=${encodeURIComponent(provider.city)}`}
+                    href={`/directory?state=${licenseJurisdiction}&verified=true`}
                     className="inline-block text-sm text-primary hover:underline pt-1"
                   >
                     More verified agencies in {provider.city} →
@@ -562,7 +576,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     </li>
                   )}
                   <li>
-                    Licensed in {provider.state} — confirm reciprocity and new-policy timelines
+                    Licensed in {licenseJurisdiction} — confirm reciprocity and new-policy timelines
                     before your move date.
                   </li>
                 </ul>

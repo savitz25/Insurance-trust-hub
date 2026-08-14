@@ -14,12 +14,17 @@ import { normalizeFirmLicenseType } from '@/lib/nv/firm-types';
 export function classifyNvFirmType(raw: string): LoaCapability {
   const s = normalizeFirmLicenseType(raw);
   if (!s) return 'other';
+  if (/medicare/i.test(s)) return 'other';
   if (/title/i.test(s)) return 'title';
   if (/public adjuster/i.test(s)) return 'public_adjuster';
   if (/independent adjuster|appraiser/i.test(s)) return 'other';
   if (/producer firm|surplus lines|managing general|insurance consultant/i.test(s)) {
     return 'agency';
   }
+  if (/accident|health|sickness|disability/i.test(s)) return 'health';
+  if (/\blife\b|annuit/i.test(s)) return 'life';
+  if (/personal lines/i.test(s)) return 'personal_lines';
+  if (/property|casualty|p\s*&\s*c/i.test(s)) return 'property_casualty';
   return 'other';
 }
 

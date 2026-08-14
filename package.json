@@ -52,6 +52,7 @@
     "nc:promote": "tsx scripts/nc/promote-launch-markets.ts",
     "check:phase13-nc": "tsx scripts/check-phase13-nc.ts",
     "nv:import": "tsx scripts/nv/import-agencies.ts",
+    "nv:import-firms": "tsx scripts/nv/import-agencies.ts",
     "nv:promote": "tsx scripts/nv/promote-launch-markets.ts",
     "check:phase14-nv": "tsx scripts/check-phase14-nv.ts",
     "vt:import": "tsx scripts/vt/import-agencies.ts",

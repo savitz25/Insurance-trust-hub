@@ -1,6 +1,8 @@
 /**
- * Phase 14 — promote NV DOI firms → public providers (Phase 1 trust gates).
- * Default: consumer-relevant firm types with a Nevada physical address.
+ * Phase 14 / NV-1 — promote NV DOI firms → public providers (Phase 1 trust gates).
+ * NV-licensed firms (resident and non-resident) belong in the NV directory.
+ * Home-office state is metadata only — never a second verified jurisdiction.
+ * Local hubs still require an NV street address + city/ZIP match.
  */
 
 import type { Provider } from '@/types/provider';
@@ -18,6 +20,7 @@ import {
   marketById,
   type NvLaunchMarketId,
 } from '@/lib/nv/launch-markets';
+import { inferNvResidency } from '@/lib/nv/normalize';
 import { isPromoteEligibleFirmType } from '@/lib/nv/firm-types';
 import {
   nvCapabilitiesToInsuranceTypes,
@@ -46,9 +49,13 @@ export type NvProducerRow = {
   phone: string | null;
   email: string | null;
   nv_address: boolean;
+  residency?: 'resident' | 'non_resident' | null;
+  home_address_state?: string | null;
   launch_market_id: string | null;
   source_checked_at: string;
 };
+
+export type NvPromoteMarketId = NvLaunchMarketId | 'statewide';
 
 export type DbProviderInsert = {
   slug: string;
@@ -68,7 +75,7 @@ export type DbProviderInsert = {
 };
 
 export type PromoteCandidateResult =
-  | { ok: true; providerInsert: DbProviderInsert; trustState: 'verified'; marketId: NvLaunchMarketId }
+  | { ok: true; providerInsert: DbProviderInsert; trustState: 'verified'; marketId: NvPromoteMarketId }
   | { ok: false; reason: string };
 
 function candidateToTrustProbe(
@@ -111,9 +118,6 @@ export function evaluateNvPromotionEligibility(
   if (!producer.license_number?.trim()) {
     return { ok: false, reason: 'missing_license_number' };
   }
-  if (!producer.nv_address || (producer.hq_state || '').toUpperCase() !== 'NV') {
-    return { ok: false, reason: 'out_of_state_hq' };
-  }
   const types = producer.license_types?.length
     ? producer.license_types
     : [producer.firm_license_type].filter(Boolean);
@@ -148,9 +152,7 @@ export function evaluateNvPromotionEligibility(
   if ((opts?.requireLaunchMarket ?? true) && !market) {
     return { ok: false, reason: 'not_launch_market' };
   }
-  if (!market) {
-    return { ok: false, reason: 'not_launch_market' };
-  }
+  const marketId: NvPromoteMarketId = market?.id ?? 'statewide';
 
   const checkedAt = producer.source_checked_at || (opts?.now ?? new Date()).toISOString();
   const probe = candidateToTrustProbe(producer, {
@@ -167,20 +169,35 @@ export function evaluateNvPromotionEligibility(
   const specialties = nvCapabilitiesToSpecialties(caps);
   const name = producer.display_name || producer.legal_name;
   const city = cityDisplay(producer.city) || producer.city || '';
-  const county = market.primaryCounty;
+  const hqState = (producer.hq_state || '').toUpperCase().slice(0, 2);
+  const residency =
+    producer.residency ||
+    inferNvResidency(producer.firm_license_type || types.join(' '), hqState);
+  const homeState =
+    producer.home_address_state ||
+    (hqState && hqState !== 'NV' ? hqState : null);
+  const county = market?.primaryCounty;
+  const addressState = hqState || 'NV';
 
   const short = [
-    `Nevada DOI–licensed firm`,
-    city ? `in ${city}` : null,
+    residency === 'non_resident' ? 'NV-licensed (non-resident)' : 'Nevada DOI–licensed firm',
+    city ? `office in ${city}` : null,
+    homeState && homeState !== 'NV' ? `(home office ${homeState})` : null,
     county ? `(${county})` : null,
-    '— verified research listing. Re-check license status on official NV DOI / SBS tools.',
+    '— verified Nevada research listing. Re-check license status on official NV DOI / SBS tools.',
   ]
     .filter(Boolean)
     .join(' ');
 
   const description = [
-    `${name} appears in Nevada Division of Insurance (NV DOI) firm license data (Firms by License Type).`,
+    `${name} appears in Nevada Division of Insurance (NV DOI) firm license data.`,
     types.length ? `Firm license type(s): ${types.join('; ')}.` : null,
+    producer.qualifications?.length
+      ? `Qualification(s) on file: ${producer.qualifications.join('; ')}.`
+      : null,
+    residency === 'non_resident'
+      ? `NV-licensed non-resident firm. Home office state on file: ${homeState || addressState || 'unknown'} (address metadata only — not a verified ${homeState || 'home-state'} license).`
+      : null,
     producer.expiration_date ? `Expiration on file: ${producer.expiration_date}.` : null,
     'This listing is for independent research only. We do not sell insurance, take lead fees, or rank by payment or email presence.',
     'Medicare specialty claims are not inferred from NV DOI firm type alone.',
@@ -199,7 +216,7 @@ export function evaluateNvPromotionEligibility(
         source: NV_DOI_REGULATOR,
         checkedAt,
         method: 'automated',
-        notes: `Imported from ${NV_DOI_HOME_URL}; firm type ${types.join('; ')}; identity match accepted for promotion.`,
+        notes: `Imported from ${NV_DOI_HOME_URL}; firm type ${types.join('; ')}; residency=${residency}; home_address_state=${homeState ?? 'n/a'}; identity match accepted for promotion. NV license only — home state is not a second verified jurisdiction.`,
         status: 'verified',
         identityMatchAccepted: true,
       },
@@ -209,7 +226,7 @@ export function evaluateNvPromotionEligibility(
         at: checkedAt,
         method: 'automated',
         action: 'phase14_nvdoi_promote',
-        notes: `market=${market.id}; hq_state=${producer.hq_state}; types=${types.join('|')}`,
+        notes: `market=${marketId}; hq_state=${producer.hq_state}; residency=${residency}; types=${types.join('|')}`,
         license_number: producer.license_number,
       },
     ],
@@ -220,14 +237,16 @@ export function evaluateNvPromotionEligibility(
     email: producer.email || undefined,
     address: {
       street: producer.address || '',
-      city: city || 'Nevada',
-      state: 'NV',
+      city: city || (addressState === 'NV' ? 'Nevada' : city) || '',
+      state: addressState || 'NV',
       zip: producer.zip || '',
     },
-    county,
-    county_normalized: county.toUpperCase(),
-    launch_county_id: market.id,
-    launch_market_id: market.id,
+    county: county || undefined,
+    county_normalized: county ? county.toUpperCase() : undefined,
+    launch_county_id: market?.id,
+    launch_market_id: market?.id,
+    residency,
+    home_address_state: homeState || undefined,
   };
 
   const providerInsert: DbProviderInsert = {
@@ -251,7 +270,7 @@ export function evaluateNvPromotionEligibility(
     ok: true,
     providerInsert,
     trustState: 'verified',
-    marketId: market.id,
+    marketId,
   };
 }
 

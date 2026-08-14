@@ -56,7 +56,7 @@ if (!/nvTotal > 0/.test(dir) || !/state=NV&verified=true/.test(dir)) {
 }
 
 const pkg = read('package.json');
-if (!/nv:import/.test(pkg) || !/nv:promote/.test(pkg)) {
+if (!/nv:import/.test(pkg) || !/nv:import-firms/.test(pkg) || !/nv:promote/.test(pkg)) {
   errors.push('package.json missing nv npm scripts');
 }
 
@@ -104,6 +104,7 @@ const firm = normalizeNvFirmRow({
   originalIssueDate: '03/01/2016',
   expirationDate: '03/01/2028',
   firmLicenseType: 'Resident Producer Firm',
+  qualification: '',
   sheet: 'csv',
   rowNumber: 4,
 });
@@ -135,11 +136,18 @@ const outOfState = normalizeNvFirmRow({
   originalIssueDate: '01/01/2014',
   expirationDate: '01/01/2028',
   firmLicenseType: 'Non-Resident Producer Firm',
+  qualification: 'Casualty',
   sheet: 'csv',
   rowNumber: 20,
 });
-if (outOfState.promoteEligible || outOfState.launchMarketId) {
-  errors.push('CA HQ non-resident firm must be staged only');
+if (!outOfState.promoteEligible) {
+  errors.push('NV-licensed non-resident firm must be promote-eligible for the NV directory');
+}
+if (outOfState.launchMarketId) {
+  errors.push('CA HQ must not receive a local Nevada hub');
+}
+if (outOfState.residency !== 'non_resident' || outOfState.homeAddressState !== 'CA') {
+  errors.push('CA HQ must store non-resident + home_address_state CA');
 }
 
 const merged = mergeNvProducers([firm, { ...firm, qualifications: ['Resident Producer Firm'] }]);
@@ -173,6 +181,43 @@ if (elig.ok && elig.providerInsert.specialties.some((s) => /medicare/i.test(s)))
 }
 if (elig.ok && elig.providerInsert.contact.phone !== '702-635-4354') {
   errors.push('promoted contact must keep phone');
+}
+
+const nrElig = evaluateNvPromotionEligibility({
+  id: 'nv-test-nr',
+  entity_type: 'business',
+  license_number: '14983001',
+  legal_name: 'California HQ Broker Inc',
+  display_name: 'California HQ Broker Inc',
+  firm_license_type: 'Non-Resident Producer Firm',
+  license_types: ['Non-Resident Producer Firm'],
+  qualifications: ['Non-Resident Producer Firm', 'Casualty'],
+  license_status: 'active',
+  issue_date: '2014-01-01',
+  expiration_date: '2028-01-01',
+  address: '1 Market St',
+  city: 'San Francisco',
+  hq_state: 'CA',
+  zip: '94105',
+  phone: '415-555-0909',
+  email: 'ca@broker.example',
+  nv_address: false,
+  launch_market_id: null,
+  source_checked_at: new Date().toISOString(),
+}, { requireLaunchMarket: false });
+if (!nrElig.ok) {
+  errors.push(`non-resident promote failed: ${'reason' in nrElig ? nrElig.reason : ''}`);
+}
+if (nrElig.ok) {
+  if (nrElig.providerInsert.states_licensed.join() !== 'NV') {
+    errors.push('non-resident must only list NV as licensed jurisdiction');
+  }
+  if (nrElig.providerInsert.license_info.licenses.some((l) => l.state !== 'NV')) {
+    errors.push('must not invent a home-state license row');
+  }
+  if (nrElig.marketId !== 'statewide') {
+    errors.push('non-resident without NV address should be statewide, not a city hub');
+  }
 }
 
 const headerRow = rowFromCells(['License ', 'Name'], 'Resident Producer Firm', 't', 1);

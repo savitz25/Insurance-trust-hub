@@ -19,7 +19,7 @@ export function continueClusterForProvider(provider: Provider): ContinueClusterR
     clusterForHubSlug(localHub?.href.split('/').pop() || '') ||
     null;
   const regulator = getRegulatorProfile(provider.state);
-  const state = (provider.state || '').toUpperCase();
+  const state = (provider.license_state || provider.state || '').toUpperCase();
 
   const links: SeoClusterLink[] = [];
   if (localHub) {

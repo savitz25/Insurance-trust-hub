@@ -35,11 +35,22 @@ export type NormalizedNvProducer = {
   phone: string | null;
   email: string | null;
   nvAddress: boolean;
+  residency: 'resident' | 'non_resident';
+  homeAddressState: string | null;
   launchMarketId: NvLaunchMarketId | null;
   promoteEligible: boolean;
   identityKey: string;
   skipReason?: string;
 };
+
+export function inferNvResidency(
+  firmType: string,
+  hqState: string
+): 'resident' | 'non_resident' {
+  if (/non-?resident/i.test(firmType)) return 'non_resident';
+  if (hqState && hqState !== 'NV') return 'non_resident';
+  return 'resident';
+}
 
 function parseDate(raw: string): string | null {
   if (!raw?.trim()) return null;
@@ -91,6 +102,8 @@ function emptySkip(reason: string, licenseNumber = ''): NormalizedNvProducer {
     phone: null,
     email: null,
     nvAddress: false,
+    residency: 'non_resident',
+    homeAddressState: null,
     launchMarketId: null,
     promoteEligible: false,
     identityKey: '',
@@ -122,11 +135,12 @@ export function normalizeNvFirmRow(row: NvFirmRawRow): NormalizedNvProducer {
     zip,
     hqState,
   });
-  const capabilities = classifyNvStrings([firmType]);
+  const quals = [firmType, row.qualification].filter(Boolean);
+  const capabilities = classifyNvStrings(quals);
+  const residency = inferNvResidency(firmType, hqState);
+  const homeAddressState = hqState && hqState !== 'NV' ? hqState : null;
   const promoteEligible =
-    isPromoteEligibleFirmType(firmType) &&
-    nvAddress &&
-    licenseStatus !== 'expired';
+    isPromoteEligibleFirmType(firmType) && licenseStatus !== 'expired';
 
   return {
     entityType: 'business',
@@ -134,8 +148,8 @@ export function normalizeNvFirmRow(row: NvFirmRawRow): NormalizedNvProducer {
     legalName,
     displayName: legalName,
     firmLicenseType: firmType,
-    licenseTypes: [firmType],
-    qualifications: [firmType],
+    licenseTypes: [firmType].filter(Boolean),
+    qualifications: quals,
     capabilities,
     licenseStatus,
     issueDate,
@@ -147,6 +161,8 @@ export function normalizeNvFirmRow(row: NvFirmRawRow): NormalizedNvProducer {
     phone: cleanPhone(row.phone),
     email: cleanEmail(row.email),
     nvAddress,
+    residency,
+    homeAddressState,
     launchMarketId: market?.id ?? null,
     promoteEligible,
     identityKey: `nvdoi:firm:${licenseNumber.toUpperCase()}`,
@@ -158,14 +174,20 @@ export function mergeNvProducers(rows: NormalizedNvProducer[]): NormalizedNvProd
   if (!good.length) return null;
   const base = { ...good[0]! };
   const types = new Set<string>();
+  const quals = new Set<string>(base.qualifications);
   for (const r of good) {
     r.licenseTypes.forEach((t) => types.add(t));
+    r.qualifications.forEach((q) => quals.add(q));
     if (!base.phone && r.phone) base.phone = r.phone;
     if (!base.email && r.email) base.email = r.email;
     if (!base.address && r.address) base.address = r.address;
     if (!base.city && r.city) base.city = r.city;
     if (!base.zip && r.zip) base.zip = r.zip;
     if (r.nvAddress) base.nvAddress = true;
+    if (r.residency === 'resident') base.residency = 'resident';
+    if (r.homeAddressState && !base.homeAddressState) {
+      base.homeAddressState = r.homeAddressState;
+    }
     if (r.expirationDate) {
       if (!base.expirationDate || r.expirationDate > base.expirationDate) {
         base.expirationDate = r.expirationDate;
@@ -182,8 +204,8 @@ export function mergeNvProducers(rows: NormalizedNvProducer[]): NormalizedNvProd
     base.firmLicenseType = [...types].join('; ');
   }
   base.licenseTypes = [...types];
-  base.qualifications = [...types];
-  base.capabilities = classifyNvStrings(base.licenseTypes);
+  base.qualifications = [...quals];
+  base.capabilities = classifyNvStrings(base.qualifications);
   const market = matchNvLaunchMarket({
     city: base.city,
     zip: base.zip,
@@ -192,7 +214,6 @@ export function mergeNvProducers(rows: NormalizedNvProducer[]): NormalizedNvProd
   base.launchMarketId = market?.id ?? null;
   base.promoteEligible =
     base.licenseTypes.some((t) => isPromoteEligibleFirmType(t)) &&
-    base.nvAddress &&
     base.licenseStatus !== 'expired';
   base.identityKey = `nvdoi:firm:${base.licenseNumber.toUpperCase()}`;
   return base;

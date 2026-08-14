@@ -73,7 +73,7 @@ export function localHubPathForProvider(provider: Provider): {
   href: string;
   label: string;
 } | null {
-  const st = (provider.state || '').toUpperCase();
+  const st = (provider.license_state || provider.state || '').toUpperCase();
   if (st === 'MS') {
     const m = matchMsLaunchMarket({
       city: provider.city,

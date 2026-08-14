@@ -1,14 +1,19 @@
 /**
- * Phase 14 — import NV DOI Firms-by-License-Type workbook/CSV.
+ * Phase 14 / NV-1 — import NV DOI firm workbooks (license type + qualifications).
  *
- *   npm run nv:import -- --file data/nv-raw/nv_raw-firms_License_type.csv --dry-run
- *   npm run nv:import -- --file data/nv-raw/nv_raw-firms_License_type.xlsx --launch-markets-only
- *   npm run nv:import -- --file scripts/nv/fixtures/nv-firms-sample.csv --launch-markets-only --dry-run
+ *   npm run nv:import-firms -- --dir data/nv-raw --dry-run
+ *   npm run nv:import -- --file data/nv-raw/nv_raw_Firms_License.xlsx --confirm
+ * Individual producer lists are skipped.
  */
 
+import { mkdirSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { createClient } from '@supabase/supabase-js';
-import { parseNvFirmsFile } from '../../lib/nv/parse-workbook';
+import {
+  isNvIndividualProducerFile,
+  listNvFirmFiles,
+  parseNvFirmsFile,
+} from '../../lib/nv/parse-workbook';
 import {
   mergeNvProducers,
   normalizeNvFirmRow,
@@ -34,19 +39,37 @@ function hasFlag(name: string): boolean {
 
 async function main() {
   const dryRun = hasFlag('dry-run');
+  const confirm = hasFlag('confirm');
   const launchOnly = hasFlag('launch-markets-only');
   const limit = Number(arg('limit') || '0') || 0;
   const file = arg('file');
+  const dir = arg('dir');
 
-  if (!file) {
+  if (!dryRun && !confirm) {
+    console.error('Refusing to write without --dry-run or --confirm');
+    process.exit(1);
+  }
+
+  const files: string[] = [];
+  if (file) {
+    const absOne = resolve(file);
+    if (isNvIndividualProducerFile(absOne)) {
+      console.error(`Refusing individual producer list: ${absOne}`);
+      process.exit(1);
+    }
+    files.push(absOne);
+  }
+  if (dir) files.push(...listNvFirmFiles(resolve(dir)));
+
+  if (!files.length) {
     console.error(
-      'Usage: npm run nv:import -- --file data/nv-raw/nv_raw-firms_License_type.csv [--launch-markets-only] [--dry-run] [--limit N]\n' +
-        `Ops export: ${NV_DOI_REPORTS_URL} → Firms by License Type`
+      'Usage: npm run nv:import-firms -- --dir data/nv-raw [--dry-run|--confirm]\n' +
+        `Ops export: ${NV_DOI_REPORTS_URL} → Firms by License Type / Firms by Qualification`
     );
     process.exit(1);
   }
 
-  const abs = resolve(file);
+  const abs = files.join('; ');
   loadLocalEnv(resolve(process.cwd()));
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let supabase: any = null;
@@ -57,13 +80,16 @@ async function main() {
     });
   }
 
-  console.log(`Reading ${abs}`);
-  let parsed;
-  try {
-    parsed = await parseNvFirmsFile(abs);
-  } catch (e) {
-    console.error(e instanceof Error ? e.message : e);
-    process.exit(1);
+  let parsed: Awaited<ReturnType<typeof parseNvFirmsFile>> = [];
+  for (const one of files) {
+    console.log(`Reading ${one}`);
+    try {
+      const part = await parseNvFirmsFile(one);
+      parsed = parsed.concat(part);
+    } catch (e) {
+      console.error(e instanceof Error ? e.message : e);
+      process.exit(1);
+    }
   }
   if (limit) parsed = parsed.slice(0, limit);
 
@@ -148,7 +174,9 @@ async function main() {
       .insert({
         source_file: abs,
         source_label: 'nv_doi_firms',
-        notes: launchOnly ? 'launch-markets-only filter' : null,
+        notes: [launchOnly ? 'launch-markets-only' : null, `files=${files.length}`]
+          .filter(Boolean)
+          .join(',') || null,
         row_count: parsed.length,
       })
       .select('id')
@@ -208,17 +236,22 @@ async function main() {
     }
   }
 
-  console.log(
-    JSON.stringify(
-      {
+  const residentSplit = { resident: 0, non_resident: 0 };
+  for (const m of merged) {
+    residentSplit[m.residency]++;
+  }
+
+  const report = {
         dryRun,
         launchMarketsOnly: launchOnly,
+        files,
         sourceRows: parsed.length,
         skipped,
         skipReasons,
         uniqueLicensesMerged: merged.length,
         nvAddress,
         outOfStateHq,
+        residentSplit,
         phonesPreserved: phones,
         emailsPreserved: emails,
         byFirmLicenseType: byType,
@@ -227,11 +260,19 @@ async function main() {
         samples,
         upserted: dryRun ? 0 : upserted,
         batchId,
-      },
-      null,
-      2
-    )
-  );
+      };
+
+  try {
+    mkdirSync(resolve('scripts/output'), { recursive: true });
+    writeFileSync(
+      resolve(`scripts/output/nv-import-${Date.now()}.json`),
+      JSON.stringify(report, null, 2)
+    );
+  } catch {
+    /* ignore log write */
+  }
+
+  console.log(JSON.stringify(report, null, 2));
 }
 
 main().catch((e) => {

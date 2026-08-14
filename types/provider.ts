@@ -31,6 +31,9 @@ export interface Provider {
   license_notes?: string | null;
   /** Operator accepted name/identity match before attach */
   license_identity_match_accepted?: boolean | null;
+  /** NV-1 — NV license residency. Home office state is not a second verified license. */
+  residency?: 'resident' | 'non_resident' | null;
+  home_address_state?: string | null;
   /** Medicare NPI when known from verified CMS data — never invent */
   npi?: string | null;
   years_in_business?: number | null;

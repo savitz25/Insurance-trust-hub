@@ -1,12 +1,16 @@
 /**
- * Parse NV DOI "Firms by License Type" workbook / CSV.
- * Section headers: "Firm License Type : Independent Adjuster"
+ * Parse NV DOI firm workbooks / CSV.
+ * Section headers:
+ *   Firm License Type : Independent Adjuster
+ *   Qualification : Casualty
  * apply to following data rows until the next section header.
  */
 
 import { createReadStream, existsSync, readFileSync } from 'fs';
 import { createInterface } from 'readline';
-import { extname } from 'path';
+import { basename, extname, join, resolve } from 'path';
+import { spawnSync } from 'child_process';
+import { tmpdir } from 'os';
 
 export type NvFirmRawRow = {
   license: string;
@@ -20,9 +24,21 @@ export type NvFirmRawRow = {
   originalIssueDate: string;
   expirationDate: string;
   firmLicenseType: string;
+  qualification: string;
   sheet: string;
   rowNumber: number;
 };
+
+export function isNvIndividualProducerFile(pathOrName: string): boolean {
+  const n = basename(pathOrName).toLowerCase();
+  return /producer.?list/.test(n) && !/firm/.test(n);
+}
+
+export function isNvFirmSourceFile(pathOrName: string): boolean {
+  const n = basename(pathOrName).toLowerCase();
+  if (isNvIndividualProducerFile(n)) return false;
+  return /firm/.test(n) && /\.(csv|xlsx|xls)$/i.test(n);
+}
 
 function parseCsvLine(line: string): string[] {
   const out: string[] = [];
@@ -51,6 +67,13 @@ export function extractFirmLicenseType(cell: string): string | null {
   return m[1]!.trim();
 }
 
+export function extractQualification(cell: string): string | null {
+  const s = (cell || '').replace(/\s+/g, ' ').trim();
+  const m = s.match(/^Qualification\s*:\s*(.+)$/i);
+  if (!m) return null;
+  return m[1]!.trim();
+}
+
 function isColumnHeaderRow(cols: string[]): boolean {
   const first = (cols[0] || '').replace(/\s+/g, ' ').trim().toLowerCase();
   return first === 'license' || first.startsWith('license ');
@@ -62,59 +85,151 @@ function looksLikeLicense(raw: string): boolean {
   return /\d/.test(s) && s.length >= 3 && s.length <= 20;
 }
 
+type ColMap = {
+  license: number;
+  name: number;
+  address: number;
+  city: number;
+  state: number;
+  zip: number;
+  phone: number;
+  email: number;
+  issue: number;
+  exp: number;
+};
+
+const DEFAULT_COL_MAP: ColMap = {
+  license: 0,
+  name: 1,
+  address: 2,
+  city: 3,
+  state: 4,
+  zip: 5,
+  phone: 6,
+  email: 7,
+  issue: 8,
+  exp: 9,
+};
+
+export function headerColMap(cols: string[]): ColMap | null {
+  if (!isColumnHeaderRow(cols)) return null;
+  const norm = cols.map((c) => c.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim());
+  const idx = (re: RegExp, fallback: number) => {
+    const i = norm.findIndex((h) => re.test(h));
+    return i >= 0 ? i : fallback;
+  };
+  const exp = idx(/expir|renewal/, 9);
+  const issue = idx(/original issue|issue date/, 8);
+  return {
+    license: idx(/^license$/, 0),
+    name: idx(/^name$/, 1),
+    address: idx(/^address$/, 2),
+    city: idx(/^city$/, 3),
+    state: idx(/^state$/, 4),
+    zip: idx(/^zip/, 5),
+    phone: idx(/^phone/, 6),
+    email: idx(/^email/, 7),
+    issue,
+    exp,
+  };
+}
+
+function cellAt(cols: string[], i: number): string {
+  return (cols[i] || '').trim();
+}
+
 export function rowFromCells(
   cols: string[],
   firmLicenseType: string,
   sheet: string,
-  rowNumber: number
+  rowNumber: number,
+  colMap: ColMap = DEFAULT_COL_MAP,
+  qualification = ''
 ): NvFirmRawRow | null {
-  const license = (cols[0] || '').trim();
+  const license = cellAt(cols, colMap.license);
   if (!looksLikeLicense(license)) return null;
-  const name = (cols[1] || '').trim();
+  const name = cellAt(cols, colMap.name);
   if (!name) return null;
   return {
     license,
     name,
-    address: (cols[2] || '').trim(),
-    city: (cols[3] || '').trim(),
-    state: (cols[4] || '').trim(),
-    zip: (cols[5] || '').trim(),
-    phone: (cols[6] || '').trim(),
-    email: (cols[7] || '').trim(),
-    originalIssueDate: (cols[8] || '').trim(),
-    expirationDate: (cols[9] || '').trim(),
+    address: cellAt(cols, colMap.address),
+    city: cellAt(cols, colMap.city),
+    state: cellAt(cols, colMap.state),
+    zip: cellAt(cols, colMap.zip),
+    phone: cellAt(cols, colMap.phone),
+    email: cellAt(cols, colMap.email),
+    originalIssueDate: cellAt(cols, colMap.issue),
+    expirationDate: cellAt(cols, colMap.exp),
     firmLicenseType,
+    qualification,
     sheet,
     rowNumber,
   };
 }
 
-export function parseNvFirmsCsvSync(absPath: string): NvFirmRawRow[] {
-  const text = readFileSync(absPath, 'utf8');
+function defaultFirmTypeFromName(absPath: string): string {
+  const n = basename(absPath).toLowerCase();
+  if (/non-resident|nonresident/.test(n) && /firm/.test(n)) {
+    return 'Non-Resident Producer Firm';
+  }
+  return '';
+}
+
+function ingestMatrix(
+  lines: string[][],
+  sheet: string,
+  fallbackFirmType: string
+): NvFirmRawRow[] {
   const rows: NvFirmRawRow[] = [];
-  let firmType = '';
-  let rowNumber = 0;
-  for (const rawLine of text.split(/\r?\n/)) {
-    const line = rawLine.replace(/^\uFEFF/, '');
-    if (!line.trim()) continue;
-    rowNumber++;
-    const cols = parseCsvLine(line);
-    const headerType = extractFirmLicenseType(cols[0] || '') || extractFirmLicenseType(line);
+  let firmType = fallbackFirmType;
+  let qualification = '';
+  let colMap = DEFAULT_COL_MAP;
+  lines.forEach((cols, idx) => {
+    if (!cols.some((c) => c?.trim())) return;
+    const blob = cols.filter(Boolean).join(' ');
+    const headerType = extractFirmLicenseType(cols[0] || '') || extractFirmLicenseType(blob);
     if (headerType) {
       firmType = headerType;
-      continue;
+      return;
     }
-    if (isColumnHeaderRow(cols)) continue;
-    const row = rowFromCells(cols, firmType, 'csv', rowNumber);
+    const qual = extractQualification(cols[0] || '') || extractQualification(blob);
+    if (qual) {
+      qualification = qual;
+      if (!firmType) firmType = fallbackFirmType;
+      return;
+    }
+    const mapped = headerColMap(cols);
+    if (mapped) {
+      colMap = mapped;
+      return;
+    }
+    const row = rowFromCells(
+      cols,
+      firmType,
+      sheet,
+      idx + 1,
+      colMap,
+      qualification
+    );
     if (row) rows.push(row);
-  }
+  });
   return rows;
 }
 
+export function parseNvFirmsCsvSync(absPath: string): NvFirmRawRow[] {
+  const text = readFileSync(absPath, 'utf8');
+  const lines: string[][] = [];
+  for (const rawLine of text.split(/\r?\n/)) {
+    const line = rawLine.replace(/^\uFEFF/, '');
+    if (!line.trim()) continue;
+    lines.push(parseCsvLine(line));
+  }
+  return ingestMatrix(lines, 'csv', defaultFirmTypeFromName(absPath));
+}
+
 export async function parseNvFirmsCsv(absPath: string): Promise<NvFirmRawRow[]> {
-  const rows: NvFirmRawRow[] = [];
-  let firmType = '';
-  let rowNumber = 0;
+  const lines: string[][] = [];
   const rl = createInterface({
     input: createReadStream(absPath, { encoding: 'utf8' }),
     crlfDelay: Infinity,
@@ -122,18 +237,9 @@ export async function parseNvFirmsCsv(absPath: string): Promise<NvFirmRawRow[]> 
   for await (const rawLine of rl) {
     const line = rawLine.replace(/^\uFEFF/, '');
     if (!line.trim()) continue;
-    rowNumber++;
-    const cols = parseCsvLine(line);
-    const headerType = extractFirmLicenseType(cols[0] || '') || extractFirmLicenseType(line);
-    if (headerType) {
-      firmType = headerType;
-      continue;
-    }
-    if (isColumnHeaderRow(cols)) continue;
-    const row = rowFromCells(cols, firmType, 'csv', rowNumber);
-    if (row) rows.push(row);
+    lines.push(parseCsvLine(line));
   }
-  return rows;
+  return ingestMatrix(lines, 'csv', defaultFirmTypeFromName(absPath));
 }
 
 function excelDateToIso(value: unknown): string {
@@ -180,29 +286,37 @@ export async function parseNvFirmsXlsx(absPath: string): Promise<NvFirmRawRow[]>
       raw: false,
       defval: '',
     }) as unknown[][];
-    let firmType = '';
-    matrix.forEach((line, idx) => {
-      const cols = (line ?? []).map((c) =>
-        c instanceof Date ? excelDateToIso(c) : String(c ?? '').trim()
-      );
-      if (!cols.some((c) => c)) return;
-      const headerType =
-        extractFirmLicenseType(cols[0] || '') ||
-        extractFirmLicenseType(cols.filter(Boolean).join(' '));
-      if (headerType) {
-        firmType = headerType;
-        return;
-      }
-      if (isColumnHeaderRow(cols)) return;
-      const row = rowFromCells(cols, firmType, sheetName, idx + 1);
-      if (row) {
-        row.originalIssueDate = excelDateToIso(row.originalIssueDate) || row.originalIssueDate;
-        row.expirationDate = excelDateToIso(row.expirationDate) || row.expirationDate;
-        rows.push(row);
-      }
-    });
+    const fallback = defaultFirmTypeFromName(absPath);
+    const parsed = ingestMatrix(
+      matrix.map((line) =>
+        (line ?? []).map((c) =>
+          c instanceof Date ? excelDateToIso(c) : String(c ?? '').trim()
+        )
+      ),
+      sheetName,
+      fallback
+    );
+    for (const row of parsed) {
+      row.originalIssueDate = excelDateToIso(row.originalIssueDate) || row.originalIssueDate;
+      row.expirationDate = excelDateToIso(row.expirationDate) || row.expirationDate;
+      rows.push(row);
+    }
   }
   return rows;
+}
+
+function convertXlsxToCsv(absXlsx: string): string {
+  const script = resolve(process.cwd(), 'scripts/vt/xlsx-to-csv.py');
+  if (!existsSync(script)) throw new Error(`Missing ${script}`);
+  const out = join(tmpdir(), `nv-doi-${Date.now()}-${basename(absXlsx)}.csv`);
+  const res = spawnSync('python', [script, absXlsx, out], {
+    encoding: 'utf8',
+    maxBuffer: 32 * 1024 * 1024,
+  });
+  if (res.status !== 0) {
+    throw new Error(res.stderr || res.stdout || 'xlsx-to-csv failed');
+  }
+  return out;
 }
 
 export async function parseNvFirmsFile(absPath: string): Promise<NvFirmRawRow[]> {
@@ -211,7 +325,11 @@ export async function parseNvFirmsFile(absPath: string): Promise<NvFirmRawRow[]>
   }
   const ext = extname(absPath).toLowerCase();
   if (ext === '.xlsx' || ext === '.xls') {
-    return parseNvFirmsXlsx(absPath);
+    try {
+      return await parseNvFirmsXlsx(absPath);
+    } catch {
+      return parseNvFirmsCsv(convertXlsxToCsv(absPath));
+    }
   }
   if (ext === '.csv') {
     return parseNvFirmsCsv(absPath);
@@ -219,4 +337,17 @@ export async function parseNvFirmsFile(absPath: string): Promise<NvFirmRawRow[]>
   const head = readFileSync(absPath, { encoding: 'utf8' }).slice(0, 80);
   if (head.includes('PK')) return parseNvFirmsXlsx(absPath);
   return parseNvFirmsCsv(absPath);
+}
+
+export function listNvFirmFiles(dir: string): string[] {
+  if (!existsSync(dir)) return [];
+  const { readdirSync } = require('fs') as typeof import('fs');
+  let files = readdirSync(dir).filter((f) => isNvFirmSourceFile(f));
+  const hasXlsxLicense = files.some(
+    (f) => /firm/i.test(f) && /license/i.test(f) && /\.xlsx$/i.test(f)
+  );
+  if (hasXlsxLicense) {
+    files = files.filter((f) => !(/firm/i.test(f) && /license/i.test(f) && /\.csv$/i.test(f)));
+  }
+  return files.map((f) => join(dir, f));
 }

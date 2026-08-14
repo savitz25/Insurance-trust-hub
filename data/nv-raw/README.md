@@ -1,13 +1,19 @@
 # Nevada DOI firm exports (gitignored)
 
-Place official **Firms by License Type** files here:
+Place official **firm** downloads here:
 
 ```text
-data/nv-raw/nv_raw-firms_License_type.xlsx
-data/nv-raw/nv_raw-firms_License_type.csv
+data/nv-raw/nv_raw_Firms_License.xlsx
+data/nv-raw/nv_raw_non-resident_firms_qualification.xlsx
 ```
 
-Do **not** use `Resident_Producer_List.xlsx` for Phase 14 (individuals).
+Do **not** import individual producer lists in NV-1:
 
-Acquisition: https://di.nv.gov/nv/r/doi/reports-and-lookups/home  
+```text
+Resident_Producer_List.xlsx
+nv_raw_resident_producer_list.xlsx
+nv_raw_non-resident_producer_list.xlsx
+```
+
+Source: https://di.nv.gov/nv/r/doi/reports-and-lookups/home  
 See `docs/NEVADA-DOI-INVENTORY.md`.

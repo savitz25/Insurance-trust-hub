@@ -7,7 +7,7 @@ Live official-regulator agency/firm inventory. Quality and honesty over new stat
 | Florida | Florida Department of Financial Services (DFS) | Mature launch counties |
 | Texas | Texas Department of Insurance (TDI) | Dense metros |
 | Ohio | Ohio Department of Insurance (ODI) | Wave 1 live |
-| Nevada | Nevada Division of Insurance (NV DOI) | NV-address firms |
+| Nevada | Nevada Division of Insurance (NV DOI) | NV-licensed firms (resident + non-resident); hubs stay NV-address |
 | Vermont | Vermont Department of Financial Regulation (VT DFR) | Local firms only (small) |
 | Massachusetts | Massachusetts Division of Insurance (MA DOI) | Pipeline live; Wave-1 empty until official agency lists are imported |
 | Mississippi | Mississippi Insurance Department (MID) | Wave-1 Insurance Producer Entity agencies (MS address) |

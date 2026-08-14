@@ -47,6 +47,9 @@ export function mapRowToProvider(row: DbProvider): Provider {
     license_method: license?.method ?? null,
     license_notes: license?.notes ?? null,
     license_identity_match_accepted: license?.identityMatchAccepted ?? null,
+    residency: (contact as { residency?: 'resident' | 'non_resident' }).residency ?? null,
+    home_address_state:
+      (contact as { home_address_state?: string }).home_address_state ?? null,
     years_in_business: row.years_in_business,
     bbb_rating: enrichment?.bbb?.rating ?? undefined,
     enrichment,

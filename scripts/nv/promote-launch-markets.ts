@@ -1,9 +1,9 @@
 /**
- * Phase 14 — promote nv_producers in Wave-1 launch markets → public providers.
+ * Phase 14 / NV-1 — promote nv_producers → public NV-licensed firms.
  *
- *   npm run nv:promote -- --dry-run
- *   npm run nv:promote -- --market las-vegas --limit 50
- *   npm run nv:promote -- --market reno --skip-existing
+ *   npm run nv:promote -- --dry-run --metro las-vegas
+ *   npm run nv:promote -- --metro all --confirm
+ *   npm run nv:promote -- --metro remainder --confirm
  */
 
 import { resolve } from 'path';
@@ -35,18 +35,28 @@ function hasFlag(name: string): boolean {
 
 async function main() {
   const dryRun = hasFlag('dry-run');
+  const confirm = hasFlag('confirm');
   const globalLimit = Number(arg('limit') || '0') || 0;
-  const marketArg = (arg('market') || 'all').toLowerCase();
+  const marketArg = (arg('metro') || arg('market') || 'all').toLowerCase();
   const skipExisting = hasFlag('skip-existing') || !hasFlag('re-promote');
+  const includeRemainder = marketArg === 'all' || marketArg === 'remainder';
+
+  if (!dryRun && !confirm) {
+    console.error('Refusing to write without --dry-run or --confirm');
+    process.exit(1);
+  }
 
   let markets = NV_LAUNCH_MARKETS;
-  if (marketArg !== 'all') {
+  if (marketArg !== 'all' && marketArg !== 'remainder') {
     const m = marketById(marketArg as NvLaunchMarketId);
     if (!m) {
-      console.error('--market must be las-vegas|reno|carson-city|all');
+      console.error('--metro must be las-vegas|reno|carson-city|remainder|all');
       process.exit(1);
     }
     markets = [m];
+  }
+  if (marketArg === 'remainder') {
+    markets = [];
   }
 
   loadLocalEnv(resolve(process.cwd()));
@@ -275,7 +285,163 @@ async function main() {
     }
   }
 
-  console.log(JSON.stringify({ dryRun, skipExisting, ...stats }, null, 2));
+  const STATEWIDE_CAP = 20_000;
+  if (includeRemainder && (globalLimit === 0 || stats.promoted < globalLimit)) {
+    const pageSize = 500;
+    let from = 0;
+    let remainderPromoted = 0;
+    for (;;) {
+      if (globalLimit > 0 && stats.promoted >= globalLimit) break;
+      if (remainderPromoted >= STATEWIDE_CAP) break;
+      const { data, error } = await supabase
+        .from('nv_producers')
+        .select('*')
+        .eq('entity_type', 'business')
+        .is('launch_market_id', null)
+        .order('license_number', { ascending: true })
+        .range(from, from + pageSize - 1);
+      if (error) {
+        console.error('statewide', error.message);
+        break;
+      }
+      if (!data?.length) break;
+      for (const row of data as NvProducerRow[]) {
+        if (globalLimit > 0 && stats.promoted >= globalLimit) break;
+        if (remainderPromoted >= STATEWIDE_CAP) break;
+        stats.scanned++;
+        if (skipExisting) {
+          const { data: existing } = await supabase
+            .from('nv_provider_promotions')
+            .select('id')
+            .eq('producer_id', row.id)
+            .maybeSingle();
+          if (existing) {
+            bump('already_promoted');
+            continue;
+          }
+        }
+        const result = evaluateNvPromotionEligibility(row, {
+          identityMatchAccepted: true,
+          requireLaunchMarket: false,
+        });
+        if (!result.ok) {
+          bump(result.reason);
+          continue;
+        }
+        stats.eligible++;
+        if (dryRun) {
+          stats.promoted++;
+          remainderPromoted++;
+          stats.byMarket.statewide = (stats.byMarket.statewide ?? 0) + 1;
+          if (stats.samples.length < 12) {
+            stats.samples.push({
+              name: result.providerInsert.name,
+              slug: result.providerInsert.slug,
+              market: 'statewide',
+              type: row.firm_license_type,
+            });
+          }
+          continue;
+        }
+        try {
+          assertNotSeedPromotion(row.id);
+        } catch {
+          bump('seed_guard');
+          continue;
+        }
+        const insert = result.providerInsert;
+        const { data: existingSlug } = await supabase
+          .from('providers')
+          .select('id, slug')
+          .eq('slug', insert.slug)
+          .maybeSingle();
+        let providerId: string;
+        if (existingSlug?.id) {
+          const { error: upErr } = await supabase
+            .from('providers')
+            .update({
+              name: insert.name,
+              categories: insert.categories,
+              states_licensed: insert.states_licensed,
+              cities: insert.cities,
+              license_info: insert.license_info,
+              specialties: insert.specialties,
+              verified: true,
+              description: insert.description,
+              short_description: insert.short_description,
+              contact: insert.contact,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', existingSlug.id);
+          if (upErr) {
+            bump(`update_error:${upErr.message.slice(0, 40)}`);
+            continue;
+          }
+          providerId = existingSlug.id;
+        } else {
+          const { data: created, error: insErr } = await supabase
+            .from('providers')
+            .insert({
+              slug: insert.slug,
+              name: insert.name,
+              provider_type: insert.provider_type,
+              categories: insert.categories,
+              states_licensed: insert.states_licensed,
+              cities: insert.cities,
+              license_info: insert.license_info,
+              specialties: insert.specialties,
+              rating: 0,
+              review_count: 0,
+              verified: true,
+              description: insert.description,
+              short_description: insert.short_description,
+              contact: insert.contact,
+            })
+            .select('id')
+            .single();
+          if (insErr || !created) {
+            bump(`insert_error:${insErr?.message?.slice(0, 40) ?? 'unknown'}`);
+            continue;
+          }
+          providerId = created.id;
+        }
+        const { error: bridgeErr } = await supabase.from('nv_provider_promotions').upsert(
+          {
+            producer_id: row.id,
+            provider_id: providerId,
+            launch_market: 'statewide',
+            promoted_by: 'phase_nv1_doi_pipeline',
+            trust_snapshot: {
+              trustState: 'verified',
+              market: 'statewide',
+              residency: result.providerInsert.contact.residency ?? null,
+              home_address_state: result.providerInsert.contact.home_address_state ?? null,
+            },
+          },
+          { onConflict: 'producer_id' }
+        );
+        if (bridgeErr) {
+          bump(`bridge_error:${bridgeErr.message.slice(0, 40)}`);
+          continue;
+        }
+        stats.promoted++;
+        remainderPromoted++;
+        stats.byMarket.statewide = (stats.byMarket.statewide ?? 0) + 1;
+        if (stats.samples.length < 12) {
+          stats.samples.push({
+            name: insert.name,
+            slug: insert.slug,
+            market: 'statewide',
+            type: row.firm_license_type,
+          });
+        }
+      }
+      if (data.length < pageSize) break;
+      from += pageSize;
+    }
+  }
+
+  console.log(JSON.stringify({ dryRun, skipExisting, includeRemainder, ...stats }, null, 2));
 }
 
 main().catch((e) => {
