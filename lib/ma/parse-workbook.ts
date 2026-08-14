@@ -4,7 +4,7 @@
  * XLSX via scripts/vt/xlsx-to-csv.py (openpyxl).
  */
 
-import { createReadStream, existsSync, readdirSync } from 'fs';
+import { createReadStream, existsSync, readFileSync, readdirSync } from 'fs';
 import { createInterface } from 'readline';
 import { extname, join, resolve, basename } from 'path';
 import { spawnSync } from 'child_process';
@@ -191,7 +191,6 @@ function parseLines(text: string, sourceFile: string): MaRawRow[] {
 }
 
 export function parseMaCsvSync(absPath: string): MaRawRow[] {
-  const { readFileSync } = require('fs') as typeof import('fs');
   return parseLines(readFileSync(absPath, 'utf8'), basename(absPath));
 }
 

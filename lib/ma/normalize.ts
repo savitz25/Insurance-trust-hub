@@ -177,7 +177,7 @@ export function normalizeMaLicenseRow(row: MaRawRow): NormalizedMaProducer {
       ? countyRaw
       : inferMaCounty(row.city);
   const issueDate = parseDate(row.issueDate);
-  let expirationDate = parseDate(row.expirationDate);
+  const expirationDate = parseDate(row.expirationDate);
   let licenseStatus = (row.licenseStatus || 'active').trim().toLowerCase();
   if (isExpired(expirationDate)) licenseStatus = 'expired';
 

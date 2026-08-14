@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
@@ -8,15 +7,10 @@ import { Footer } from '@/components/footer';
 import { AskNetworkBar } from '@/components/network/ask-network-bar';
 import { MyInsuranceShell } from '@/components/my-insurance/my-insurance-shell';
 import { HubLastLocationBridge } from '@/components/network/hub-last-location-bridge';
+import { InsurancePwaProvider } from '@/components/pwa/insurance-pwa-provider';
 import { rootLayoutMetadata } from '@/lib/seo/metadata';
 import { ASK_NETWORK_STANDARD_VERSION } from '@/lib/network/standard-version';
 import './globals.css';
-
-const InsurancePwaProvider = dynamic(
-  () =>
-    import('@/components/pwa/insurance-pwa-provider').then((m) => m.InsurancePwaProvider),
-  { ssr: false }
-);
 
 const inter = Inter({
   subsets: ['latin'],
