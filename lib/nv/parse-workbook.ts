@@ -6,7 +6,7 @@
  * apply to following data rows until the next section header.
  */
 
-import { createReadStream, existsSync, readFileSync } from 'fs';
+import { createReadStream, existsSync, readFileSync, readdirSync } from 'fs';
 import { createInterface } from 'readline';
 import { basename, extname, join, resolve } from 'path';
 import { spawnSync } from 'child_process';
@@ -341,7 +341,6 @@ export async function parseNvFirmsFile(absPath: string): Promise<NvFirmRawRow[]>
 
 export function listNvFirmFiles(dir: string): string[] {
   if (!existsSync(dir)) return [];
-  const { readdirSync } = require('fs') as typeof import('fs');
   let files = readdirSync(dir).filter((f) => isNvFirmSourceFile(f));
   const hasXlsxLicense = files.some(
     (f) => /firm/i.test(f) && /license/i.test(f) && /\.xlsx$/i.test(f)
