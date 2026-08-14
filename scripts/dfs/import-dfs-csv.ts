@@ -66,12 +66,18 @@ async function main() {
   const file = arg('file');
   const type = (arg('type') || 'business') as DfsEntityType;
   const dryRun = hasFlag('dry-run');
+  const confirm = hasFlag('confirm');
   const limit = Number(arg('limit') || '0') || 0;
   const launchOnly = hasFlag('launch-counties-only');
 
+  if (!dryRun && !confirm) {
+    console.error('Refusing to write without --dry-run or --confirm');
+    process.exit(1);
+  }
+
   if (!file) {
     console.error(
-      'Usage: npx tsx scripts/dfs/import-dfs-csv.ts --file <csv> --type business|individual [--dry-run] [--limit N] [--launch-counties-only]'
+      'Usage: npm run dfs:import -- --file <csv> --type business [--dry-run|--confirm] [--launch-counties-only]'
     );
     process.exit(1);
   }
@@ -107,6 +113,9 @@ async function main() {
   let skipped = 0;
   let launchHits = 0;
   let flushErrors = 0;
+  let residentYes = 0;
+  let residentNo = 0;
+  let nonFlHq = 0;
   const skipReasons: Record<string, number> = {};
   const batchRows: Record<string, unknown>[] = [];
   const producerUpserts: Record<string, unknown>[] = [];
@@ -120,7 +129,7 @@ async function main() {
       .insert({
         source_file: abs,
         entity_type: type,
-        notes: launchOnly ? 'launch-counties-only filter' : null,
+        notes: launchOnly ? 'launch-counties-only filter' : 'fl2-statewide-business',
       })
       .select('id')
       .single();
@@ -191,6 +200,9 @@ async function main() {
       continue;
     }
     if (n.launchCountyId) launchHits++;
+    if (n.residentFlag === true) residentYes++;
+    else if (n.residentFlag === false) residentNo++;
+    if (n.state && n.state !== 'FL') nonFlHq++;
     normalized++;
 
     if (supabase && batchId) {
@@ -284,10 +296,14 @@ async function main() {
         dryRun,
         file: abs,
         type,
+        launchCountiesOnly: launchOnly,
         dataRows: rowNum,
         normalized,
         skipped,
         launchCountyHits: launchHits,
+        residentYes,
+        residentNo,
+        nonFlHq,
         flushErrors,
         skipReasons,
       },

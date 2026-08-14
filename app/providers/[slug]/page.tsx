@@ -390,10 +390,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   </p>
                   {provider.residency === 'non_resident' ? (
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      NV-licensed (non-resident).
+                      {licenseJurisdiction || 'State'}-licensed (non-resident).
                       {provider.home_address_state
                         ? ` Home office state on file: ${provider.home_address_state} (address metadata only — not a verified ${provider.home_address_state} license).`
-                        : ' Home office is outside Nevada. That address is metadata only, not a second verified license.'}
+                        : ' Home office is outside the license state. That address is metadata only, not a second verified license.'}
                     </p>
                   ) : null}
                   <div className="flex flex-wrap gap-2">

@@ -39,6 +39,7 @@ export type DfsProducerRow = {
   zip: string | null;
   phone: string | null;
   email: string | null;
+  resident_flag?: boolean | null;
   source_checked_at: string;
 };
 
@@ -121,9 +122,6 @@ export function evaluatePromotionEligibility(
   if (!producer.license_number?.trim()) {
     return { ok: false, reason: 'missing_license_number' };
   }
-  if ((producer.state || 'FL').toUpperCase() !== 'FL') {
-    return { ok: false, reason: 'not_florida' };
-  }
   if (/inactive|expired|revoked|suspended/i.test(producer.license_status || '')) {
     return { ok: false, reason: 'inactive_status' };
   }
@@ -154,12 +152,20 @@ export function evaluatePromotionEligibility(
   const name = producer.display_name || producer.legal_name;
   const city = producer.city || '';
   const county = producer.county;
+  const hqState = (producer.state || 'FL').toUpperCase().slice(0, 2) || 'FL';
+  const flAddress = hqState === 'FL';
+  const residency: 'resident' | 'non_resident' =
+    producer.resident_flag === false || !flAddress ? 'non_resident' : 'resident';
+  const homeState = !flAddress ? hqState : null;
 
   const short = [
-    `Florida DFS-licensed ${entityType === 'business' ? 'agency' : 'producer'}`,
-    city ? `in ${city}` : null,
-    county ? `(${county} County)` : null,
-    '— verified research listing. Re-check license status on official DFS tools.',
+    residency === 'non_resident'
+      ? 'FL-licensed (non-resident)'
+      : `Florida DFS-licensed ${entityType === 'business' ? 'agency' : 'producer'}`,
+    city ? `office in ${city}` : null,
+    homeState ? `(home office ${homeState})` : null,
+    flAddress && county ? `(${county} County)` : null,
+    '— verified Florida research listing. Re-check license status on official DFS tools.',
   ]
     .filter(Boolean)
     .join(' ');
@@ -168,6 +174,9 @@ export function evaluatePromotionEligibility(
     `${name} appears in Florida DFS valid license bulk data.`,
     producer.lines_of_authority?.length
       ? `Reported lines of authority: ${producer.lines_of_authority.join('; ')}.`
+      : null,
+    residency === 'non_resident'
+      ? `FL-licensed non-resident firm. Home office state on file: ${homeState || hqState} (address metadata only — not a verified ${homeState || 'home-state'} license).`
       : null,
     'This listing is for independent research only. We do not sell insurance, take lead fees, or rank by payment.',
     'Medicare specialty claims are not inferred from DFS alone.',
@@ -186,7 +195,7 @@ export function evaluatePromotionEligibility(
         source: FL_DFS_REGULATOR,
         checkedAt,
         method: 'automated',
-        notes: `Imported from ${FL_DFS_SOURCE_URL}; identity match accepted for promotion.`,
+        notes: `Imported from ${FL_DFS_SOURCE_URL}; residency=${residency}; home_address_state=${homeState ?? 'n/a'}; identity match accepted for promotion. FL license only — home state is not a second verified jurisdiction.`,
         status: 'verified',
         identityMatchAccepted: true,
       },
@@ -202,25 +211,25 @@ export function evaluatePromotionEligibility(
     ],
   };
 
-  const launchCounty = matchLaunchCounty(county);
+  const launchCounty = flAddress ? matchLaunchCounty(county) : null;
   const contact: ContactInfo = {
     phone: producer.phone ?? undefined,
-    // email stored only if present — product rule: do not feature in v1 cards
     email: producer.email ?? undefined,
     address: {
       street: '',
-      city: city || 'Florida',
-      state: 'FL',
+      city: city || (flAddress ? 'Florida' : city) || '',
+      state: hqState,
       zip: producer.zip || '',
     },
-    // Structured geo for hub matching (preferred over short_description text)
+    residency,
+    home_address_state: homeState || undefined,
     ...(launchCounty
       ? {
           county: launchCounty.displayName,
           county_normalized: launchCounty.id.replace(/_/g, '-').toUpperCase(),
           launch_county_id: launchCounty.id,
         }
-      : county
+      : flAddress && county
         ? {
             county: county.trim(),
             county_normalized: county.trim().toUpperCase().replace(/\s+COUNTY$/i, '').trim(),

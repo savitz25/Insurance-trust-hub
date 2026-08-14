@@ -30,10 +30,29 @@ export type NormalizedDfsProducer = {
   phone: string | null;
   email: string | null;
   residentFlag: boolean | null;
+  /** Physical HQ from Business State — not a second license. */
+  homeAddressState: string | null;
   identityKey: string;
   launchCountyId: string | null;
   skipReason?: string;
 };
+
+export function parseDfsResidency(raw: string | null | undefined): boolean | null {
+  const s = (raw ?? '').trim().toLowerCase();
+  if (!s) return null;
+  if (/^non[-\s]?resident/.test(s) || s === 'nr') return false;
+  if (/^resident/.test(s) || /^(y|yes|true|1)$/.test(s)) return true;
+  if (/^(n|no|false|0)$/.test(s)) return false;
+  return null;
+}
+
+export function normalizeHqState(raw: string | null | undefined): string | null {
+  const s = (raw ?? '').trim().toUpperCase();
+  if (!s) return null;
+  if (s === 'FLORIDA' || s === 'FLA') return 'FL';
+  if (/^[A-Z]{2}$/.test(s)) return s;
+  return s.slice(0, 2) || null;
+}
 
 /** Strip Excel formula-style cells: ="12345" or =12345 */
 function cleanCell(raw: string | undefined | null): string {
@@ -213,101 +232,72 @@ export function normalizeDfsRow(
     'Resident Flag',
     'FL Resident',
   ]);
+  const hqState =
+    normalizeHqState(
+      pick(row, ['Business State', 'BusinessState', 'State', 'ST', 'Mailing State'])
+    ) || 'FL';
+  const residentFlag = parseDfsResidency(residentRaw);
+  const homeAddressState = hqState !== 'FL' ? hqState : null;
 
   const countyNormalized = normalizeCountyName(county);
-  const launch = matchLaunchCounty(county);
+  const launch = hqState === 'FL' ? matchLaunchCounty(county) : null;
+
+  const baseFields = {
+    entityType,
+    licenseNumber,
+    npn: npn || null,
+    legalName: legalName || 'Unknown',
+    displayName: displayName || legalName || 'Unknown',
+    licenseStatus: status,
+    linesOfAuthority: uniqueLoas,
+    capabilities,
+    city,
+    county,
+    countyNormalized,
+    state: hqState,
+    zip,
+    phone,
+    email: email || null,
+    residentFlag,
+    homeAddressState,
+    launchCountyId: launch?.id ?? null,
+  };
 
   if (!licenseNumber) {
     return {
-      entityType,
+      ...baseFields,
       licenseNumber: '',
-      npn: npn || null,
-      legalName: legalName || 'Unknown',
-      displayName: displayName || legalName || 'Unknown',
-      licenseStatus: status,
-      linesOfAuthority: uniqueLoas,
-      capabilities,
-      city,
-      county,
-      countyNormalized,
-      state: 'FL',
-      zip,
-      phone,
-      email: email || null,
-      residentFlag: residentRaw ? /y|yes|true|1/i.test(residentRaw) : null,
       identityKey: `missing-license:${entityType}:${legalName}`,
-      launchCountyId: launch?.id ?? null,
       skipReason: 'missing_recheckable_license_number',
     };
   }
 
   if (!legalName && !displayName) {
     return {
-      entityType,
-      licenseNumber,
-      npn: npn || null,
+      ...baseFields,
       legalName: 'Unknown',
       displayName: 'Unknown',
-      licenseStatus: status,
-      linesOfAuthority: uniqueLoas,
-      capabilities,
-      city,
-      county,
-      countyNormalized,
-      state: 'FL',
-      zip,
-      phone,
-      email: email || null,
-      residentFlag: null,
       identityKey: `fl:${entityType}:${licenseNumber}`,
-      launchCountyId: launch?.id ?? null,
       skipReason: 'missing_name',
     };
   }
 
   if (!isActiveStatus(status)) {
     return {
-      entityType,
-      licenseNumber,
-      npn: npn || null,
+      ...baseFields,
       legalName,
       displayName: displayName || legalName,
-      licenseStatus: status,
-      linesOfAuthority: uniqueLoas,
-      capabilities,
-      city,
-      county,
-      countyNormalized,
-      state: 'FL',
-      zip,
-      phone,
-      email: email || null,
-      residentFlag: null,
       identityKey: `fl:${entityType}:${licenseNumber}`,
-      launchCountyId: launch?.id ?? null,
       skipReason: 'inactive_status',
     };
   }
 
   return {
-    entityType,
-    licenseNumber,
-    npn: npn || null,
+    ...baseFields,
     legalName,
     displayName: displayName || legalName,
     licenseStatus: status.toLowerCase() || 'valid',
-    linesOfAuthority: uniqueLoas,
-    capabilities,
-    city,
-    county,
-    countyNormalized,
-    state: 'FL',
-    zip,
-    phone,
-    email: email || null,
-    residentFlag: residentRaw ? /y|yes|true|1/i.test(residentRaw) : null,
     identityKey: `fl:${entityType}:${licenseNumber}`,
-    launchCountyId: launch?.id ?? null,
   };
 }
 

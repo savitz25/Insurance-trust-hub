@@ -7,7 +7,7 @@ import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { classifyLoa, classifyLoas, capabilitiesToInsuranceTypes } from '../lib/dfs/loa';
 import { matchLaunchCounty, FL_LAUNCH_COUNTIES } from '../lib/dfs/launch-counties';
-import { normalizeDfsRow } from '../lib/dfs/normalize';
+import { normalizeDfsRow, parseDfsResidency } from '../lib/dfs/normalize';
 import {
   assertNotSeedPromotion,
   evaluatePromotionEligibility,
@@ -109,6 +109,29 @@ assert(flBulk.launchCountyId === 'hillsborough', 'Hillsborough launch');
 assert(flBulk.displayName.includes('PEOPLES'), 'Full Name mapped');
 assert(flBulk.npn === '7410936', 'excel NPN stripped');
 assert(flBulk.phone?.includes('813'), 'excel phone stripped');
+assert(flBulk.residentFlag === true, 'Residency Type Resident must parse true');
+assert(flBulk.state === 'FL', 'FL Business State stored');
+assert(parseDfsResidency('Non-Resident') === false, 'Non-Resident parse');
+assert(parseDfsResidency('Resident') === true, 'Resident parse');
+
+const nr = normalizeDfsRow(
+  {
+    'License Number': 'E088014',
+    'Full Name': 'WAL-MART.COM USA LLC',
+    'Residency Type': 'Non-Resident',
+    'License Status': 'VALID',
+    'Business City': 'BRISBANE',
+    'Business State': 'CA',
+    'Business County': '',
+    'License TYCL Desc': 'Health',
+  },
+  'business'
+);
+assert(!nr.skipReason, `non-resident skip: ${nr.skipReason}`);
+assert(nr.state === 'CA', 'Business State CA persisted');
+assert(nr.residentFlag === false, 'Non-Resident flag');
+assert(nr.launchCountyId === null, 'non-FL HQ must not get a launch county');
+assert(nr.homeAddressState === 'CA', 'home_address_state CA');
 
 const badLic = normalizeDfsRow(
   {
@@ -151,6 +174,28 @@ if (ok.ok) {
   );
   // email may be stored on contact but product v1 does not require featuring it
   assert(ok.providerInsert.contact.phone, 'phone public candidate');
+  assert(ok.providerInsert.states_licensed.join() === 'FL', 'FL license jurisdiction only');
+}
+
+const nrRow: DfsProducerRow = {
+  ...producer,
+  id: '22222222-2222-2222-2222-222222222222',
+  license_number: 'E088014',
+  legal_name: 'WAL-MART.COM USA LLC',
+  display_name: 'WAL-MART.COM USA LLC',
+  city: 'BRISBANE',
+  county: null,
+  county_normalized: null,
+  state: 'CA',
+  resident_flag: false,
+};
+const nrOk = evaluatePromotionEligibility(nrRow);
+assert(nrOk.ok === true, `non-resident should promote to FL directory: ${!nrOk.ok ? nrOk.reason : ''}`);
+if (nrOk.ok) {
+  assert(nrOk.providerInsert.states_licensed.join() === 'FL', 'non-resident licensed only in FL');
+  assert(nrOk.providerInsert.license_info.licenses.every((l) => l.state === 'FL'), 'no home-state license');
+  assert(nrOk.providerInsert.contact.residency === 'non_resident', 'contact residency');
+  assert(nrOk.providerInsert.contact.launch_county_id == null, 'non-resident must not attach to a hub');
 }
 
 // Seed cannot promote

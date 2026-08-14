@@ -108,7 +108,7 @@ Public `providers.contact.address.state` is still written `FL`, so they are not 
 4. Hubs unchanged: launch-county / FL address only.
 5. Idempotent `--dry-run` / `--confirm` / skip-existing. Do not invent NC/CA/TX licenses.
 
-Until then, `/directory?state=FL` is launch-county Florida-address inventory, not all FL-licensed firms.
+**FL-2 implemented** — see `docs/FL-2-DIRECTORY.md`. Full business import (no `--launch-counties-only`) plus `--scope directory-statewide` promote. Hubs unchanged.
 
 ## Command
 
