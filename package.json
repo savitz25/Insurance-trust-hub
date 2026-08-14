@@ -28,6 +28,7 @@
     "dfs:import": "tsx scripts/dfs/import-dfs-csv.ts",
     "dfs:promote": "tsx scripts/dfs/promote-launch-counties.ts",
     "dfs:status": "tsx scripts/dfs/inventory-status.ts",
+    "dfs:audit-nonresident-fl": "tsx scripts/dfs/audit-nonresident-fl.ts",
     "dfs:backfill-county": "tsx scripts/dfs/backfill-provider-county.ts",
     "dfs:import-appointments": "tsx scripts/dfs/import-appointments.ts",
     "dfs:attach-appointments": "tsx scripts/dfs/attach-appointments.ts",
