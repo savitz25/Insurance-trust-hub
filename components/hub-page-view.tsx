@@ -28,6 +28,7 @@ import { inventoryScopeNoteForHub } from '@/lib/dfs/launch-counties';
 import {
   formatHubPopulation,
   getLoaSourcePhrase,
+  regulatorHasLoaSpecialtyTags,
   getRegulatorLabel,
 } from '@/lib/regulators/labels';
 import { ResearchThisMarket } from '@/components/research-this-market';
@@ -347,11 +348,11 @@ export function HubPageView({
           {verifiedCount > 0 ? (
             <p className="mt-2 text-xs text-primary-foreground/60 max-w-2xl mx-auto">
               {isCapped
-                ? `Showing ${showingCount.toLocaleString()} of ${verifiedCount.toLocaleString()} verified research listings on this page (page ${inventoryPage}${
+                ? `Showing ${showingCount.toLocaleString()} of ${verifiedCount.toLocaleString()} verified agencies on this page (page ${inventoryPage}${
                     inventoryTotalPages > 1 ? ` of ${inventoryTotalPages}` : ''
                   }, ${pageSize} per page).`
-                : `${verifiedCount.toLocaleString()} verified research listing${
-                    verifiedCount === 1 ? '' : 's'
+                : `${verifiedCount.toLocaleString()} verified agenc${
+                    verifiedCount === 1 ? 'y' : 'ies'
                   }.`}
             </p>
           ) : null}
@@ -473,7 +474,7 @@ export function HubPageView({
                       {isCapped ? (
                         <p className="mt-1 text-sm text-muted-foreground">
                           Showing {showingCount.toLocaleString()} of{' '}
-                          {verifiedCount.toLocaleString()} on this page
+                          {verifiedCount.toLocaleString()} verified agencies on this page
                           {pageSize ? ` (${pageSize} per page)` : ''}
                           {inventoryTotalPages > 1
                             ? ` · page ${inventoryPage} of ${inventoryTotalPages}`
@@ -489,7 +490,8 @@ export function HubPageView({
                           : '.'}
                       </p>
                     </div>
-                    {verifiedCount > 0 ? (
+                    {verifiedCount > 0 &&
+                    regulatorHasLoaSpecialtyTags(hub.stateCode) ? (
                       <HubSpecialtyFilter
                         basePath={path}
                         active={loaFilter}
@@ -539,10 +541,14 @@ export function HubPageView({
                   {healthProviders.length.toLocaleString()} listing
                   {healthProviders.length === 1 ? '' : 's'} on this page include a health-related
                   license tag.{' '}
-                  <Link href={`${path}?loa=health`} className="font-medium text-primary hover:underline">
-                    Filter this hub to Health
-                  </Link>
-                  {' · '}
+                  {regulatorHasLoaSpecialtyTags(hub.stateCode) ? (
+                    <>
+                      <Link href={`${path}?loa=health`} className="font-medium text-primary hover:underline">
+                        Filter this hub to Health
+                      </Link>
+                      {' · '}
+                    </>
+                  ) : null}
                   Medicare-certified is never inferred from {regulatorLabel} alone.
                 </p>
               ) : (

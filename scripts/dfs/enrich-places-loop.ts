@@ -1,12 +1,11 @@
 /**
- * Phase 6C — Auto-batch Places enrichment loop (South Florida pilot).
+ * Phase 25 — Auto-batch Places enrichment loop (Florida verified agencies).
  *
- *   npm run dfs:enrich-places-loop -- --dry-run --batch-size 25 --max-batches 3
- *   npm run dfs:enrich-places-loop -- --confirm --batch-size 100 --delay-ms 300
- *   npm run dfs:enrich-places-loop -- --confirm --start-offset 250
+ *   npm run dfs:enrich-places-loop -- --limit 50 --batch-size 25
+ *   npm run dfs:enrich-places-loop -- --confirm --batch-size 50 --max-batches 2
+ *   npm run dfs:enrich-places-loop -- --scope sfl --confirm --resume
  *
- * Quality gates stop the run if match rate collapses or errors spike.
- * Progress: scripts/output/places-loop-progress.json
+ * Strict matcher + quality gates. Progress: scripts/output/places-loop-progress.json
  */
 
 import {
@@ -24,10 +23,12 @@ import {
 import type { SflCountyId } from '../../lib/enrichment/places-pilot';
 import { loadLocalEnv, requireSupabaseOpsEnv } from '../lib/load-local-env';
 import {
+  loadFlEligibleProviders,
   loadSflEligibleProviders,
   runPlacesBatch,
   type PlacesBatchResult,
 } from './lib/places-batch-core';
+import { evaluatePlacesBatchGates } from '../../lib/enrichment/places-quality-gates';
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -70,6 +71,7 @@ type BatchSummary = {
 type ProgressFile = {
   scope: string;
   county: string;
+  strict: boolean;
   batchSize: number;
   delayMs: number;
   onlyMissing: boolean;
@@ -95,12 +97,21 @@ type ProgressFile = {
   startedAt: string;
   updatedAt: string;
   status: 'running' | 'completed' | 'stopped';
+  /** Spec snapshot aliases (ops-friendly) */
+  offset: number;
+  processed: number;
+  matched: number;
+  noMatch: number;
+  ambiguous: number;
+  errors: number;
+  lastBatchAt: string | null;
+  stoppedReason: string | null;
 };
 
 const PROGRESS_PATH = () =>
   resolve(process.cwd(), 'scripts/output/places-loop-progress.json');
 
-function emptyProgress(cfg: Omit<ProgressFile, 'perBatch' | 'cumulative' | 'lastCompletedOffset' | 'nextOffset' | 'batchesCompleted' | 'stopReason' | 'startedAt' | 'updatedAt' | 'status'>): ProgressFile {
+function emptyProgress(cfg: Omit<ProgressFile, 'perBatch' | 'cumulative' | 'lastCompletedOffset' | 'nextOffset' | 'batchesCompleted' | 'stopReason' | 'startedAt' | 'updatedAt' | 'status' | 'offset' | 'processed' | 'matched' | 'noMatch' | 'ambiguous' | 'errors' | 'lastBatchAt' | 'stoppedReason'>): ProgressFile {
   const now = new Date().toISOString();
   return {
     ...cfg,
@@ -121,6 +132,14 @@ function emptyProgress(cfg: Omit<ProgressFile, 'perBatch' | 'cumulative' | 'last
     startedAt: now,
     updatedAt: now,
     status: 'running',
+    offset: 0,
+    processed: 0,
+    matched: 0,
+    noMatch: 0,
+    ambiguous: 0,
+    errors: 0,
+    lastBatchAt: null,
+    stoppedReason: null,
   };
 }
 
@@ -128,6 +147,14 @@ function writeProgress(p: ProgressFile) {
   const outDir = resolve(process.cwd(), 'scripts/output');
   mkdirSync(outDir, { recursive: true });
   p.updatedAt = new Date().toISOString();
+  p.offset = p.nextOffset;
+  p.processed = p.cumulative.processed;
+  p.matched = p.cumulative.matched;
+  p.noMatch = p.cumulative.no_match;
+  p.ambiguous = p.cumulative.ambiguous;
+  p.errors = p.cumulative.errors;
+  p.lastBatchAt = p.perBatch[p.perBatch.length - 1]?.at ?? null;
+  p.stoppedReason = p.stopReason;
   writeFileSync(PROGRESS_PATH(), JSON.stringify(p, null, 2), 'utf8');
 }
 
@@ -201,37 +228,12 @@ function rateOk(
   maxAmb: number,
   failOnEmpty: boolean
 ): { ok: boolean; reason?: string } {
-  if (batch.stats.authFailures > 0) {
-    return {
-      ok: false,
-      reason: `auth_failure: ${batch.stats.authFailures} Places auth/key failures in batch`,
-    };
-  }
-  if (failOnEmpty && batch.stats.processed === 0) {
-    return { ok: false, reason: 'empty_batch: processed=0 while gate fail-on-empty-batch set' };
-  }
-  if (batch.stats.processed === 0) {
-    return { ok: true }; // natural end of pool
-  }
-  if (batch.matchRate < minMatch) {
-    return {
-      ok: false,
-      reason: `match_rate_breach: ${(batch.matchRate * 100).toFixed(1)}% < min ${(minMatch * 100).toFixed(1)}%`,
-    };
-  }
-  if (batch.errorRate > maxErr) {
-    return {
-      ok: false,
-      reason: `error_rate_breach: ${(batch.errorRate * 100).toFixed(1)}% > max ${(maxErr * 100).toFixed(1)}%`,
-    };
-  }
-  if (batch.ambiguousRate > maxAmb) {
-    return {
-      ok: false,
-      reason: `ambiguous_rate_breach: ${(batch.ambiguousRate * 100).toFixed(1)}% > max ${(maxAmb * 100).toFixed(1)}%`,
-    };
-  }
-  return { ok: true };
+  return evaluatePlacesBatchGates(batch, {
+    minMatchRate: minMatch,
+    maxErrorRate: maxErr,
+    maxAmbiguousRate: maxAmb,
+    failOnEmpty,
+  });
 }
 
 async function main() {
@@ -239,16 +241,25 @@ async function main() {
   const dryRun = hasFlag('dry-run') || !confirm;
   const batchSize = Math.min(Math.max(num('batch-size', 100), 1), 500);
   const maxBatches = num('max-batches', 0); // 0 = unlimited
+  const poolLimit = Math.max(num('limit', 0), 0);
   const delayMs = Math.max(num('delay-ms', 300), 0);
-  const minMatchRate = num('min-match-rate', 0.15);
+  const minMatchRate = num('min-match-rate', 0.18);
   const maxErrorRate = num('max-error-rate', 0.05);
   const maxAmbiguousRate = num('max-ambiguous-rate', 0.1);
   const failOnEmpty = hasFlag('fail-on-empty-batch');
+  const scopeRaw = (arg('scope') || 'fl').toLowerCase();
+  const scope = scopeRaw === 'sfl' || scopeRaw === 'south-florida' ? 'sfl' : 'fl';
   const countyRaw = (arg('county') || 'all').toLowerCase() as SflCountyId;
+  const strict = !hasFlag('no-strict');
   const onlyMissing =
-    arg('only-missing') !== 'false' && !hasFlag('include-enriched');
+    arg('only-missing') !== 'false' &&
+    !hasFlag('include-enriched') &&
+    !hasFlag('refresh');
 
-  if (!['all', 'miami_dade', 'broward', 'palm_beach'].includes(countyRaw)) {
+  if (
+    scope === 'sfl' &&
+    !['all', 'miami_dade', 'broward', 'palm_beach'].includes(countyRaw)
+  ) {
     console.error('--county must be miami_dade | broward | palm_beach | all');
     process.exit(1);
   }
@@ -350,11 +361,14 @@ async function main() {
         mode: dryRun || !confirm ? 'dry-run' : 'live',
         confirm,
         placesConfigured: placesReady,
+        scope,
         county: countyRaw,
+        strict,
         onlyMissing,
         batchSize,
         startOffset,
         maxBatches: maxBatches || 'unlimited',
+        poolLimit: poolLimit || null,
         delayMs,
         gates: { minMatchRate, maxErrorRate, maxAmbiguousRate, failOnEmpty },
       },
@@ -363,16 +377,19 @@ async function main() {
     )
   );
 
-  const eligible = await loadSflEligibleProviders(
-    supabase,
-    countyRaw,
-    onlyMissing
-  );
+  let eligible =
+    scope === 'sfl'
+      ? await loadSflEligibleProviders(supabase, countyRaw, onlyMissing)
+      : await loadFlEligibleProviders(supabase, onlyMissing);
+  if (poolLimit > 0 && eligible.length > poolLimit) {
+    eligible = eligible.slice(0, poolLimit);
+  }
   console.log(`Eligible pool size: ${eligible.length}`);
 
   const progress = emptyProgress({
-    scope: 'south_florida',
-    county: countyRaw,
+    scope: scope === 'sfl' ? 'south_florida' : 'florida',
+    county: scope === 'sfl' ? countyRaw : 'fl',
+    strict,
     batchSize,
     delayMs,
     onlyMissing,
@@ -451,6 +468,7 @@ async function main() {
       confirm,
       dryRun: dryRun || !confirm,
       delayMs,
+      strict,
     });
 
     batchLog.batches.push(result);
@@ -590,7 +608,7 @@ async function main() {
   );
 
   if (progress.status === 'stopped') {
-    process.exitCode = 2;
+    process.exit(2);
   }
 }
 

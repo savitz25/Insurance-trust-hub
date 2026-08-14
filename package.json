@@ -34,6 +34,8 @@
     "dfs:ensure-appointments-schema": "tsx scripts/dfs/ensure-appointments-schema.ts",
     "dfs:enrich-places-sfl": "tsx scripts/dfs/enrich-places-south-florida.ts",
     "dfs:enrich-places-loop": "tsx scripts/dfs/enrich-places-loop.ts",
+    "dfs:enrich-places-loop:status": "tsx scripts/dfs/enrich-places-loop-status.ts",
+    "check:phase25": "tsx scripts/check-phase25.ts",
     "dfs:cleanup-places-fp": "tsx scripts/dfs/cleanup-places-fp-websites.ts",
     "dfs:qa-places-fp": "tsx scripts/dfs/qa-places-fp-gate.ts",
     "dfs:env": "tsx scripts/dfs/check-env.ts",

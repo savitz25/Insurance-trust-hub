@@ -155,6 +155,28 @@ const REALTY_NAME_RE =
 const CARRIER_LOCAL_AGENCY_RE =
   /\b(state\s*farm|allstate|farmers|nationwide|progressive|geico|liberty\s*mutual|american\s*family|erie\s*insurance|auto[- ]?owners)\b/i;
 
+export type PlacesFpGateOptions = {
+  /**
+   * Phase 25 default for the auto-loop.
+   * Weak names without insurance/finance Places types are rejected even on phone match.
+   * Carrier corporate homepages without an agency-path signal reject the whole match.
+   */
+  strict?: boolean;
+};
+
+export function hasLocalAgencyWebsitePath(url: string | null | undefined): boolean {
+  if (!url?.trim()) return false;
+  try {
+    const u = new URL(url.startsWith('http') ? url : `https://${url}`);
+    const path = `${u.pathname}${u.search}`.toLowerCase();
+    return /\/(agent|agency|agencies|find-an-agent|findanagent|local-agent|localagent|office|producer|locator)\b/.test(
+      path
+    );
+  } catch {
+    return false;
+  }
+}
+
 function hostOf(url: string | null | undefined): string | null {
   if (!url?.trim()) return null;
   try {
@@ -176,6 +198,40 @@ function collectTypes(candidate: ExternalBusinessCandidate): string[] {
 
 export function hasInsuranceNameKeywords(name: string): boolean {
   return INSURANCE_NAME_RE.test(name ?? '');
+}
+
+/** DFS often stores `LEGAL LLC DBA AGENCY NAME` — prefer the public DBA for Places. */
+export function extractDbaName(legalName: string): string | null {
+  const m = (legalName ?? '').match(/\bD\/?B\/?A\b[:\s]+(.+)$/i);
+  const dba = m?.[1]?.replace(/[.,]+$/, '').trim() ?? '';
+  return dba.length >= 3 ? dba : null;
+}
+
+export function preferredPlacesQueryName(legalName: string): string {
+  const dba = extractDbaName(legalName);
+  if (dba && (hasInsuranceNameKeywords(dba) || !hasInsuranceNameKeywords(legalName))) {
+    return dba;
+  }
+  return legalName;
+}
+
+/**
+ * Legal names we will never accept in strict mode — skip Places (quota)
+ * rather than filling the first A–Z batches with auto dealers / CUs.
+ */
+export function isHopelessNonAgencyLegalName(legalName: string): boolean {
+  const name = legalName ?? '';
+  if (hasInsuranceNameKeywords(name) || (extractDbaName(name) && hasInsuranceNameKeywords(extractDbaName(name)!))) {
+    return false;
+  }
+  if (FINANCIAL_INSTITUTION_NAME_RE.test(name)) return true;
+  if (DEALER_NAME_RE.test(name)) return true;
+  if (CONTRACTOR_NAME_RE.test(name)) return true;
+  if (REALTY_NAME_RE.test(name)) return true;
+  if (/\b(auto\s*(market|trader|sales|mall|world)|used\s+cars?|motorcycle)\b/i.test(name)) {
+    return true;
+  }
+  return false;
 }
 
 export function isMajorCarrierCorporateHost(host: string | null | undefined): boolean {
@@ -281,8 +337,10 @@ function hasInsuranceTypeSignal(match: MatchResult, types: string[]): boolean {
 export function evaluatePlacesFalsePositiveGate(
   provider: Provider,
   candidate: ExternalBusinessCandidate,
-  match: MatchResult
+  match: MatchResult,
+  opts?: PlacesFpGateOptions
 ): PlacesFpGateResult {
+  const strict = opts?.strict !== false;
   const notes: string[] = [];
   const softWarnings = new Set<PlacesFpWarningCode>();
   const legalName = provider.name ?? '';
@@ -389,6 +447,21 @@ export function evaluatePlacesFalsePositiveGate(
       };
     }
 
+    // Phase 25 strict: no insurance keywords + no insurance/finance type → reject
+    // even when phone matches (motorcycle dealers / contractors sharing a number).
+    if (strict && !insuranceType) {
+      return {
+        acceptMatch: false,
+        allowWebsite: false,
+        rejectReason:
+          'fp_gate strict: weak name and no insurance/finance Places type (phone match insufficient)',
+        softWarnings: [...softWarnings],
+        notes: [
+          'Strict: legal name lacks insurance|agency|title|broker keywords and Places types are not insurance/finance',
+        ],
+      };
+    }
+
     // Phone-only weak DBA without insurance type → reject (common FP pattern)
     if (
       hasPhoneMatch(match) &&
@@ -438,13 +511,28 @@ export function evaluatePlacesFalsePositiveGate(
   if (isMajorCarrierCorporateHost(host)) {
     softWarnings.add('carrier_corporate_domain');
     const localAgencyPattern = CARRIER_LOCAL_AGENCY_RE.test(legalName);
-    if (!localAgencyPattern) {
+    const agencyPath = hasLocalAgencyWebsitePath(candidate.website ?? null);
+    if (strict && !localAgencyPattern && !agencyPath) {
+      return {
+        acceptMatch: false,
+        allowWebsite: false,
+        rejectReason:
+          'fp_gate strict: carrier consumer portal homepage without agency path',
+        softWarnings: [...softWarnings],
+        notes: [`Rejected carrier host ${host} (no /agent|/agency path)`],
+      };
+    }
+    if (!localAgencyPattern && !agencyPath) {
       allowWebsite = false;
       websiteRejectReason =
         'fp_gate carrier corporate domain — not writing website (placeId/rating may remain)';
       notes.push(`Website suppressed: carrier host ${host}`);
     } else {
-      notes.push(`Carrier host ${host} kept — legal name looks like local carrier agency`);
+      notes.push(
+        `Carrier host ${host} kept — ${
+          localAgencyPattern ? 'legal name looks like local carrier agency' : 'agency path on URL'
+        }`
+      );
     }
   }
 

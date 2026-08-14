@@ -13,6 +13,8 @@ import {
 } from '../../../lib/enrichment/google-places';
 import {
   hasInsuranceNameKeywords,
+  isHopelessNonAgencyLegalName,
+  extractDbaName,
   type PlacesFpWarningCode,
 } from '../../../lib/enrichment/places-fp-gate';
 import {
@@ -93,6 +95,37 @@ export function extractFpWarningCodes(
 
 export type SupabaseOps = ReturnType<typeof createClient>;
 
+function placesAttemptedRank(p: Provider): number {
+  return p.enrichment?.skipReasons?.some((r) => r.startsWith('places_')) ||
+    p.enrichment?.google?.matchConfidence === 'high'
+    ? 1
+    : 0;
+}
+
+function insuranceNameRank(p: Provider): number {
+  const dba = extractDbaName(p.name);
+  return hasInsuranceNameKeywords(p.name) || (dba ? hasInsuranceNameKeywords(dba) : false)
+    ? 0
+    : 1;
+}
+
+export function isPlacesLoopCandidate(p: Provider, onlyMissing: boolean): boolean {
+  const elig = isEligibleForSecondaryEnrichment(p);
+  if (!elig.eligible) return false;
+  if (!p.name?.trim() || !p.city?.trim()) return false;
+  if (isHopelessNonAgencyLegalName(p.name)) return false;
+  return providerNeedsPlacesEnrichment(p, onlyMissing);
+}
+
+export function rankPlacesEligible(providers: Provider[]): Provider[] {
+  return [...providers].sort(
+    (a, b) =>
+      placesAttemptedRank(a) - placesAttemptedRank(b) ||
+      insuranceNameRank(a) - insuranceNameRank(b) ||
+      a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+  );
+}
+
 export async function loadSflEligibleProviders(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   supabase: any,
@@ -153,27 +186,46 @@ export async function loadSflEligibleProviders(
     }
   }
 
-  const filtered = candidates
-    .map(mapRowToProvider)
-    .filter((p) => {
-      const elig = isEligibleForSecondaryEnrichment(p);
-      if (!elig.eligible) return false;
-      if (!p.name?.trim() || !p.city?.trim()) return false;
-      return providerNeedsPlacesEnrichment(p, onlyMissing);
-    });
+  return rankPlacesEligible(
+    candidates
+      .map(mapRowToProvider)
+      .filter((p) => isPlacesLoopCandidate(p, onlyMissing))
+  );
+}
 
-  // Prefer never-attempted Places rows first so loop quality gates are not
-  // immediately tripped by re-processing prior hard no_match failures.
-  const placesAttempted = (p: Provider) =>
-    p.enrichment?.skipReasons?.some((r) => r.startsWith('places_')) ||
-    p.enrichment?.google?.matchConfidence === 'high'
-      ? 1
-      : 0;
+/**
+ * Phase 25 — all Florida verified agencies (not only South Florida).
+ */
+export async function loadFlEligibleProviders(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  supabase: any,
+  onlyMissing: boolean
+): Promise<Provider[]> {
+  const candidates: DbProvider[] = [];
+  let from = 0;
+  const page = 500;
+  for (;;) {
+    const { data, error } = await supabase
+      .from('providers')
+      .select('*')
+      .eq('verified', true)
+      .contains('states_licensed', ['FL'])
+      .order('name', { ascending: true })
+      .range(from, from + page - 1);
+    if (error) {
+      console.warn('FL provider page failed:', error.message);
+      break;
+    }
+    if (!data?.length) break;
+    candidates.push(...(data as DbProvider[]));
+    if (data.length < page) break;
+    from += page;
+  }
 
-  return filtered.sort(
-    (a, b) =>
-      placesAttempted(a) - placesAttempted(b) ||
-      a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+  return rankPlacesEligible(
+    candidates
+      .map(mapRowToProvider)
+      .filter((p) => isPlacesLoopCandidate(p, onlyMissing))
   );
 }
 
@@ -186,9 +238,18 @@ export async function runPlacesBatch(params: {
   confirm: boolean;
   dryRun: boolean;
   delayMs: number;
+  strict?: boolean;
 }): Promise<PlacesBatchResult> {
-  const { supabase, providers, offset, limit, confirm, dryRun, delayMs } =
-    params;
+  const {
+    supabase,
+    providers,
+    offset,
+    limit,
+    confirm,
+    dryRun,
+    delayMs,
+    strict = true,
+  } = params;
   const slice = providers.slice(offset, offset + limit);
   const placesReady = isGooglePlacesConfigured();
 
@@ -223,6 +284,7 @@ export async function runPlacesBatch(params: {
 
     const result = await fetchGooglePlacesSnapshot(provider, {
       requestDelayMs: delayMs,
+      strict,
     });
 
     const { data: row } = await supabase

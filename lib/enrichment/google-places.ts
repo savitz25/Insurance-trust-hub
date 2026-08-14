@@ -12,6 +12,7 @@ import {
   evaluatePlacesFalsePositiveGate,
   formatPlacesFpWarnings,
   isMajorCarrierCorporateUrl,
+  preferredPlacesQueryName,
   INSURANCE_SIGNAL_PLACE_TYPES,
 } from '@/lib/enrichment/places-fp-gate';
 
@@ -131,7 +132,7 @@ export type PlacesSearchResult =
  */
 export async function fetchGooglePlacesSnapshot(
   provider: Provider,
-  opts?: { requestDelayMs?: number }
+  opts?: { requestDelayMs?: number; strict?: boolean }
 ): Promise<PlacesSearchResult> {
   const key = process.env.GOOGLE_PLACES_API_KEY?.trim();
   if (!key) {
@@ -146,8 +147,12 @@ export async function fetchGooglePlacesSnapshot(
     await sleep(opts.requestDelayMs);
   }
 
+  const queryName = preferredPlacesQueryName(provider.name);
+  const scoreProvider =
+    queryName !== provider.name ? { ...provider, name: queryName } : provider;
+
   const query = [
-    provider.name,
+    queryName,
     'insurance',
     provider.city,
     provider.county,
@@ -209,7 +214,7 @@ export async function fetchGooglePlacesSnapshot(
     primaryType: p.primaryType,
   }));
 
-  const { best, match, ambiguous } = pickBestMatch(provider, candidates);
+  const { best, match, ambiguous } = pickBestMatch(scoreProvider, candidates);
   if (ambiguous) {
     return {
       ok: false,
@@ -228,7 +233,9 @@ export async function fetchGooglePlacesSnapshot(
   }
 
   // Phase 6C-2 — false-positive gate (after scoring, before write)
-  const fp = evaluatePlacesFalsePositiveGate(provider, best, match);
+  const fp = evaluatePlacesFalsePositiveGate(scoreProvider, best, match, {
+    strict: opts?.strict !== false,
+  });
   if (!fp.acceptMatch) {
     const warn = formatPlacesFpWarnings(fp.softWarnings);
     return {

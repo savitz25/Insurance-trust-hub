@@ -168,6 +168,15 @@ export function scoreBusinessMatch(
     score -= 35;
     reasons.push('Places type looks unrelated to insurance');
   } else if (
+    types.some((t) =>
+      /car_repair|auto_parts|food|restaurant|lodging|hotel|bar|cafe|church|school|park|gas_station/.test(
+        t
+      )
+    )
+  ) {
+    score -= 30;
+    reasons.push('Places type looks unrelated to insurance');
+  } else if (
     types.length > 0 &&
     types.every((t) =>
       /restaurant|food|lodging|church|school|park|gas_station|bar|cafe/.test(t)

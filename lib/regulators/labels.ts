@@ -183,6 +183,17 @@ export function getLoaSourcePhrase(state?: string | null): string {
   );
 }
 
+/**
+ * Specialty chips only when the source file maps lines of authority.
+ * Mississippi MID entity export has no LOA column — do not invent filters.
+ */
+export function regulatorHasLoaSpecialtyTags(state?: string | null): boolean {
+  const code = normalizeStateCode(state);
+  if (!code) return true; // all-states directory: mixed inventory
+  if (code === 'MS') return false;
+  return Boolean(getRegulatorProfile(code));
+}
+
 export function getResearchProfileKicker(state?: string | null): string {
   return getRegulatorProfile(state)?.profileKicker ?? 'Agency research profile';
 }

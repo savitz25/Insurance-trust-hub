@@ -6,7 +6,11 @@
 import type { Provider } from '../../types/provider';
 import type { ExternalBusinessCandidate } from '../../lib/enrichment/match';
 import { scoreBusinessMatch } from '../../lib/enrichment/match';
-import { evaluatePlacesFalsePositiveGate } from '../../lib/enrichment/places-fp-gate';
+import {
+  evaluatePlacesFalsePositiveGate,
+  isHopelessNonAgencyLegalName,
+  preferredPlacesQueryName,
+} from '../../lib/enrichment/places-fp-gate';
 
 function stubProvider(partial: Partial<Provider> & { name: string; city: string }): Provider {
   return {
@@ -162,9 +166,26 @@ const cases: Case[] = [
     },
   },
   {
-    label: 'Carrier corporate domain website strip',
-    expectAccept: true,
-    expectWebsite: false,
+    label: 'Weak name + phone + no insurance type (strict reject)',
+    expectAccept: false,
+    provider: stubProvider({
+      name: 'SUNSHINE HOLDINGS LLC',
+      city: 'Miami',
+      phone: '3055550888',
+    }),
+    candidate: {
+      name: 'Sunshine Holdings',
+      phone: '3055550888',
+      city: 'Miami',
+      state: 'FL',
+      website: 'https://sunshineholdings.example',
+      types: ['establishment', 'point_of_interest'],
+      primaryType: 'establishment',
+    },
+  },
+  {
+    label: 'Carrier corporate homepage strict reject',
+    expectAccept: false,
     provider: stubProvider({
       name: 'SUNSHINE INSURANCE AGENCY INC',
       city: 'Miami',
@@ -202,17 +223,7 @@ for (const c of cases) {
     (c.expectAccept && websiteOk === c.expectWebsite) ||
     (!c.expectAccept && true);
 
-  // For carrier case: accept match but website stripped
-  let pass = acceptPass;
-  if (c.label.includes('Carrier corporate')) {
-    pass =
-      match.accept &&
-      fp.acceptMatch &&
-      fp.allowWebsite === false &&
-      c.expectWebsite === false;
-  } else {
-    pass = acceptPass && (c.expectWebsite === undefined || websitePass);
-  }
+  const pass = acceptPass && (c.expectWebsite === undefined || websitePass);
 
   const status = pass ? 'PASS' : 'FAIL';
   if (!pass) failed++;
@@ -225,8 +236,37 @@ for (const c of cases) {
   );
 }
 
+if (isHopelessNonAgencyLegalName('121 FINANCIAL CREDIT UNION')) {
+  console.log('[PASS] hopeless skip: credit union');
+} else {
+  failed++;
+  console.log('[FAIL] hopeless skip: credit union');
+}
+if (isHopelessNonAgencyLegalName('#1 USA AUTO MARKET')) {
+  console.log('[PASS] hopeless skip: auto market');
+} else {
+  failed++;
+  console.log('[FAIL] hopeless skip: auto market');
+}
+if (!isHopelessNonAgencyLegalName('BEE INSURANCE INC')) {
+  console.log('[PASS] hopeless skip: real agency kept');
+} else {
+  failed++;
+  console.log('[FAIL] hopeless skip: real agency kept');
+}
+
+const dbaQ = preferredPlacesQueryName(
+  '07CARRERA, LLC DBA FIGUEROA INSURANCE AGENCY'
+);
+if (dbaQ === 'FIGUEROA INSURANCE AGENCY') {
+  console.log('[PASS] DBA query name');
+} else {
+  failed++;
+  console.log(`[FAIL] DBA query name got ${dbaQ}`);
+}
+
 if (failed) {
-  console.error(`QA FAILED: ${failed}/${cases.length}`);
+  console.error(`QA FAILED: ${failed}/${cases.length} (+ helper checks)`);
   process.exit(1);
 }
-console.log(`QA OK: ${cases.length}/${cases.length}`);
+console.log(`QA OK: ${cases.length}/${cases.length} + helper checks`);

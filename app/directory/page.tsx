@@ -31,7 +31,11 @@ import {
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
-import { getDirectoryStateIntro } from '@/lib/regulators/labels';
+import {
+  getDirectoryStateIntro,
+  regulatorHasLoaSpecialtyTags,
+} from '@/lib/regulators/labels';
+import { parseHubLoaFilter } from '@/components/hub-specialty-filter';
 import {
   DIRECTORY_PAGE_SIZE,
   parseDirectoryPage,
@@ -86,7 +90,18 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const query = getParam(params, 'q');
   const state = getParam(params, 'state');
   const type = getParam(params, 'type') as InsuranceType | '';
-  const specialty = getParam(params, 'specialty') as Specialty | '';
+  const loaAlias = parseHubLoaFilter(getParam(params, 'loa'));
+  const loaSpecialtyMap: Record<string, Specialty> = {
+    health: 'Health',
+    life: 'Life',
+    pc: 'Property & Casualty',
+    personal: 'Personal Lines',
+    agency: 'Agency',
+    title: 'Title',
+    adjuster: 'Public Adjuster',
+  };
+  const specialty = (getParam(params, 'specialty') ||
+    (loaAlias !== 'all' ? loaSpecialtyMap[loaAlias] ?? '' : '')) as Specialty | '';
   // Phase 11A — public directory is always verified research (legacy verified=false ignored)
   const verifiedOnly = getParam(params, 'verified') !== 'false';
   const hasAppointmentSnapshot = state === 'FL' && getParam(params, 'appointments') === 'true';
@@ -725,11 +740,18 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         </aside>
 
         <div>
-          <DirectorySpecialtyChips
-            activeSpecialty={specialty}
-            searchParams={filterParams}
-            className="mb-6 rounded-xl border bg-card p-4"
-          />
+          {regulatorHasLoaSpecialtyTags(state || null) ? (
+            <DirectorySpecialtyChips
+              activeSpecialty={specialty}
+              searchParams={filterParams}
+              className="mb-6 rounded-xl border bg-card p-4"
+            />
+          ) : (
+            <p className="mb-6 rounded-xl border bg-muted/20 px-4 py-3 text-xs text-muted-foreground">
+              This state&apos;s source file does not include lines of authority. Specialty chips
+              are hidden so we do not invent filters.
+            </p>
+          )}
           <Suspense fallback={null}>
             <DirectoryControls
               total={total}
