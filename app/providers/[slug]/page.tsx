@@ -208,7 +208,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
       dataSourceLabel: 'State DOI',
       licenseVerified: false,
       licenseNumber: provider.license_number,
-      licenseState: provider.state,
+      licenseState: provider.license_state || provider.state,
     };
   }
 

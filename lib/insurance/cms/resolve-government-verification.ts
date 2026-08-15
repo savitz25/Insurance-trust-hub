@@ -94,7 +94,7 @@ export function resolveGovernmentVerification(provider: Provider): GovernmentVer
     dataSourceLabel,
     licenseVerified: provider.is_verified,
     licenseNumber: provider.license_number,
-    licenseState: provider.state,
+    licenseState: provider.license_state || provider.state,
   };
 }
 
