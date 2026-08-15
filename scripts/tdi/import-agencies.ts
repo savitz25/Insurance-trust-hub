@@ -1,9 +1,12 @@
 /**
- * Phase 8 — import Texas TDI agencies CSV into tdi_license_raw + tdi_producers.
+ * Phase 8 / TX-2 — import Texas TDI agencies CSV into tdi_license_raw + tdi_producers.
  *
- *   npm run tdi:import -- --file data/tdi-raw/agencies.csv --dry-run
- *   npm run tdi:import -- --file data/tdi-raw/agencies.csv --launch-markets-only
- *   npm run tdi:import -- --download --launch-markets-only --limit 5000
+ *   npm run tdi:import -- --file data/tdi-raw/tdi-agencies.csv --dry-run
+ *   npm run tdi:import -- --file data/tdi-raw/tdi-agencies.csv --confirm
+ *   npm run tdi:import -- --file data/tdi-raw/tdi-agencies.csv --launch-markets-only --confirm
+ *
+ * Default stages every active TX-licensed agency (any HQ). `--launch-markets-only`
+ * still limits to TX-address launch metros. Writes require --dry-run or --confirm.
  *
  * Source: https://data.texas.gov/dataset/.../3yqc-fcdt
  */
@@ -69,9 +72,15 @@ async function downloadCsv(dest: string): Promise<void> {
 
 async function main() {
   const dryRun = hasFlag('dry-run');
+  const confirm = hasFlag('confirm');
   const launchOnly = hasFlag('launch-markets-only');
   const limit = Number(arg('limit') || '0') || 0;
   let file = arg('file');
+
+  if (!dryRun && !confirm) {
+    console.error('Refusing to write without --dry-run or --confirm');
+    process.exit(1);
+  }
 
   if (hasFlag('download')) {
     const dest = resolve(
@@ -84,8 +93,8 @@ async function main() {
 
   if (!file) {
     console.error(
-      'Usage: npm run tdi:import -- --file data/tdi-raw/agencies.csv [--launch-markets-only] [--dry-run] [--limit N]\n' +
-        '   or: npm run tdi:import -- --download --launch-markets-only'
+      'Usage: npm run tdi:import -- --file data/tdi-raw/tdi-agencies.csv [--dry-run|--confirm] [--launch-markets-only] [--limit N]\n' +
+        '   or: npm run tdi:import -- --download --dry-run'
     );
     process.exit(1);
   }
@@ -126,7 +135,7 @@ async function main() {
       .insert({
         source_file: abs,
         source_label: 'texas_tdi_agencies',
-        notes: launchOnly ? 'launch-markets-only filter' : null,
+        notes: launchOnly ? 'launch-markets-only filter' : 'tx2-statewide',
       })
       .select('id')
       .single();
@@ -184,11 +193,6 @@ async function main() {
       skipReasons[n.skipReason] = (skipReasons[n.skipReason] ?? 0) + 1;
       continue;
     }
-    if (n.state !== 'TX') {
-      skipped++;
-      skipReasons['not_texas'] = (skipReasons['not_texas'] ?? 0) + 1;
-      continue;
-    }
     if (launchOnly && !n.launchMarketId) {
       skipped++;
       skipReasons['not_launch_market'] = (skipReasons['not_launch_market'] ?? 0) + 1;
@@ -219,9 +223,13 @@ async function main() {
   }
 
   const byMarket: Record<string, number> = {};
+  const hq = { tx: 0, nonTx: 0, blank: 0 };
   for (const m of merged) {
     const k = m.launchMarketId ?? 'none';
     byMarket[k] = (byMarket[k] ?? 0) + 1;
+    if (m.state === 'TX') hq.tx++;
+    else if (m.state) hq.nonTx++;
+    else hq.blank++;
   }
 
   let upserted = 0;
@@ -266,23 +274,31 @@ async function main() {
       .eq('id', batchId);
   }
 
-  console.log(
-    JSON.stringify(
-      {
-        dryRun,
-        launchMarketsOnly: launchOnly,
-        sourceRows: rowNum,
-        skipped,
-        skipReasons,
-        uniqueLicensesMerged: merged.length,
-        byMarket,
-        upserted: dryRun ? 0 : upserted,
-        batchId,
-      },
-      null,
-      2
-    )
+  const summary = {
+    dryRun,
+    confirm,
+    launchMarketsOnly: launchOnly,
+    notes: launchOnly ? 'launch-markets-only filter' : 'tx2-statewide',
+    sourceRows: rowNum,
+    skipped,
+    skipReasons,
+    uniqueLicensesMerged: merged.length,
+    hq,
+    byMarket,
+    upserted: dryRun ? 0 : upserted,
+    batchId,
+  };
+
+  const outDir = resolve(process.cwd(), 'scripts/output');
+  mkdirSync(outDir, { recursive: true });
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  writeFileSync(
+    resolve(outDir, `tdi-import-${dryRun ? 'dry-run' : 'confirm'}-${stamp}.json`),
+    JSON.stringify(summary, null, 2),
+    'utf8'
   );
+
+  console.log(JSON.stringify(summary, null, 2));
 }
 
 main().catch((e) => {

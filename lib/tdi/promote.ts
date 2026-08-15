@@ -1,5 +1,7 @@
 /**
- * Phase 8 — promote TDI agencies → public providers (Phase 1 trust gates).
+ * Phase 8 / TX-2 — promote TDI agencies → public providers (Phase 1 trust gates).
+ * Directory = any active TX-licensed agency (any HQ). Hubs = TX address + launch metro.
+ * Home-office state is metadata only — never a second verified jurisdiction.
  * Business entities only.
  */
 
@@ -23,7 +25,7 @@ import {
   tdiCapabilitiesToSpecialties,
   classifyTdiStrings,
 } from '@/lib/tdi/qualifications';
-import { slugifyTdiProducer } from '@/lib/tdi/normalize';
+import { inferTxResidency, slugifyTdiProducer } from '@/lib/tdi/normalize';
 import type { LoaCapability } from '@/lib/dfs/loa';
 
 export type TdiProducerRow = {
@@ -65,8 +67,10 @@ export type DbProviderInsert = {
   contact: ContactInfo;
 };
 
+export type TdiPromoteMarketId = TxLaunchMarketId | 'statewide';
+
 export type PromoteCandidateResult =
-  | { ok: true; providerInsert: DbProviderInsert; trustState: 'verified'; marketId: TxLaunchMarketId }
+  | { ok: true; providerInsert: DbProviderInsert; trustState: 'verified'; marketId: TdiPromoteMarketId }
   | { ok: false; reason: string };
 
 function candidateToTrustProbe(
@@ -109,9 +113,6 @@ export function evaluateTdiPromotionEligibility(
   if (!producer.license_number?.trim()) {
     return { ok: false, reason: 'missing_license_number' };
   }
-  if ((producer.state || 'TX').toUpperCase() !== 'TX') {
-    return { ok: false, reason: 'not_texas' };
-  }
   if (/inactive|expired|revoked|suspended|cancelled|canceled|lapsed/i.test(
     producer.license_status || ''
   )) {
@@ -128,20 +129,26 @@ export function evaluateTdiPromotionEligibility(
     return { ok: false, reason: 'missing_name' };
   }
 
-  const market =
-    (producer.launch_market_id && marketById(producer.launch_market_id)) ||
-    matchTxLaunchMarket({
-      county: producer.county,
-      city: producer.city,
-      zip: producer.zip,
-    });
+  const hqState = (producer.state || '').trim().toUpperCase().slice(0, 2);
+  const txHq = hqState === 'TX';
+  const market = txHq
+    ? (producer.launch_market_id && marketById(producer.launch_market_id)) ||
+      matchTxLaunchMarket({
+        county: producer.county,
+        city: producer.city,
+        zip: producer.zip,
+        hqState,
+      }) ||
+      null
+    : null;
 
-  if ((opts?.requireLaunchMarket ?? true) && !market) {
+  const requireLaunch = opts?.requireLaunchMarket ?? true;
+  if (requireLaunch && !market) {
     return { ok: false, reason: 'not_launch_market' };
   }
-  if (!market) {
-    return { ok: false, reason: 'not_launch_market' };
-  }
+
+  const marketId: TdiPromoteMarketId = requireLaunch && market ? market.id : 'statewide';
+  const attachHub = requireLaunch && Boolean(market);
 
   const checkedAt =
     producer.source_checked_at || (opts?.now ?? new Date()).toISOString();
@@ -164,13 +171,20 @@ export function evaluateTdiPromotionEligibility(
   const specialties = tdiCapabilitiesToSpecialties(caps);
   const name = producer.display_name || producer.legal_name;
   const city = producer.city || '';
-  const county = producer.county || market.primaryCounty;
+  const residency = inferTxResidency(hqState);
+  const homeState = residency === 'non_resident' ? hqState : null;
+  const county = attachHub
+    ? producer.county || market?.primaryCounty || null
+    : txHq
+      ? producer.county
+      : null;
 
   const short = [
-    `Texas TDI–licensed agency`,
-    city ? `in ${city}` : null,
-    county ? `(${county} County)` : null,
-    '— verified research listing. Re-check license status on official TDI tools.',
+    residency === 'non_resident' ? 'TX-licensed (non-resident)' : 'Texas TDI–licensed agency',
+    city ? `office in ${city}` : null,
+    homeState ? `(home office ${homeState})` : null,
+    attachHub && county ? `(${county} County)` : null,
+    '— verified Texas research listing. Re-check license status on official TDI tools.',
   ]
     .filter(Boolean)
     .join(' ');
@@ -182,6 +196,9 @@ export function evaluateTdiPromotionEligibility(
       : null,
     producer.qualifications?.length
       ? `Qualification(s): ${producer.qualifications.join('; ')}.`
+      : null,
+    residency === 'non_resident'
+      ? `TX-licensed non-resident firm. Home office state on file: ${homeState || hqState} (address metadata only — not a verified ${homeState || 'home-state'} license).`
       : null,
     'This listing is for independent research only. We do not sell insurance, take lead fees, or rank by payment.',
     'Medicare specialty claims are not inferred from TDI agency data alone.',
@@ -200,7 +217,7 @@ export function evaluateTdiPromotionEligibility(
         source: TX_TDI_REGULATOR,
         checkedAt,
         method: 'automated',
-        notes: `Imported from ${TX_TDI_SOURCE_URL}; NPN ${producer.npn ?? 'n/a'}; identity match accepted for promotion.`,
+        notes: `Imported from ${TX_TDI_SOURCE_URL}; NPN ${producer.npn ?? 'n/a'}; residency=${residency ?? 'unknown'}; home_address_state=${homeState ?? 'n/a'}; identity match accepted for promotion. TX license only — home state is not a second verified jurisdiction.`,
         status: 'verified',
         identityMatchAccepted: true,
       },
@@ -209,8 +226,8 @@ export function evaluateTdiPromotionEligibility(
       {
         at: checkedAt,
         method: 'automated',
-        action: 'phase8_tdi_promote',
-        notes: `market=${market.id}; county=${county ?? 'unknown'}`,
+        action: attachHub ? 'phase8_tdi_promote' : 'phase_tx2_directory',
+        notes: `market=${marketId}; hq_state=${hqState || 'blank'}; residency=${residency ?? 'unknown'}`,
         license_number: producer.license_number,
       },
     ],
@@ -219,17 +236,31 @@ export function evaluateTdiPromotionEligibility(
   const contact: ContactInfo = {
     address: {
       street: '',
-      city: city || 'Texas',
-      state: 'TX',
+      city: city || (txHq ? 'Texas' : city) || '',
+      state: hqState || '',
       zip: producer.zip || '',
     },
-    county: county,
-    county_normalized: (producer.county_normalized || county)
-      .toUpperCase()
-      .replace(/\s+COUNTY$/i, '')
-      .trim(),
-    launch_county_id: market.id,
-    launch_market_id: market.id,
+    residency: residency ?? undefined,
+    home_address_state: homeState || undefined,
+    ...(attachHub && market
+      ? {
+          county: county || market.primaryCounty,
+          county_normalized: (producer.county_normalized || county || market.primaryCounty)
+            .toUpperCase()
+            .replace(/\s+COUNTY$/i, '')
+            .trim(),
+          launch_county_id: market.id,
+          launch_market_id: market.id,
+        }
+      : txHq && county
+        ? {
+            county: county.trim(),
+            county_normalized: (producer.county_normalized || county)
+              .toUpperCase()
+              .replace(/\s+COUNTY$/i, '')
+              .trim(),
+          }
+        : {}),
   };
 
   const providerInsert: DbProviderInsert = {
@@ -253,7 +284,7 @@ export function evaluateTdiPromotionEligibility(
     ok: true,
     providerInsert,
     trustState: 'verified',
-    marketId: market.id,
+    marketId,
   };
 }
 

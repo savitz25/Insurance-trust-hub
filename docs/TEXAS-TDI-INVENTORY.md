@@ -30,7 +30,7 @@ Florida DFS inventory is unchanged.
 | `license_issue_date` | `issue_date` | |
 | `expiration_date` | `expiration_date` | Expired → not promoted |
 | `city` | `city` | Primary geo for launch markets |
-| `state` | `state` | Promote requires `TX` |
+| `state` | `state` | HQ / home-office state. Blank stays blank (not TX, not non-resident proof). License jurisdiction is always TX. |
 | `pstl_cd` | `zip` | First 5 digits |
 | `county` | `county` | **Sparse** — mainly title agencies |
 
@@ -82,29 +82,30 @@ Apply migration in Supabase SQL Editor or CLI before first live import.
 
 ## Commands
 
+See also **[TX-2-DIRECTORY.md](./TX-2-DIRECTORY.md)** (statewide directory vs local hubs).
+
 ```powershell
 # Preflight (same Supabase service role as DFS ops)
 npm run dfs:env
+npm run check:phase8-tdi
 
-# 1) Download open data (or save CSV manually to data/tdi-raw/agencies.csv)
-npm run tdi:import -- --download
+# 1) Download open data (or save CSV manually to data/tdi-raw/tdi-agencies.csv)
+npm run tdi:import -- --download --dry-run
 
 # 2) Dry-run normalize (fixture, no DB)
-npm run tdi:import -- --file scripts/tdi/fixtures/tdi-agencies-sample.csv --launch-markets-only --dry-run
+npm run tdi:import -- --file scripts/tdi/fixtures/tdi-agencies-sample.csv --dry-run
 
-# 3) Import launch markets only
-npm run tdi:import -- --file data/tdi-raw/agencies.csv --launch-markets-only
+# 3) Full import — TX-licensed agencies, any HQ (writes need --confirm)
+npm run tdi:import -- --file data/tdi-raw/tdi-agencies.csv --dry-run
+npm run tdi:import -- --file data/tdi-raw/tdi-agencies.csv --confirm
 
-# 4) Promote dry-run
-npm run tdi:promote -- --dry-run --market houston --limit 25
+# 4) Directory statewide (skip-existing; does not flood hubs)
+npm run tdi:promote -- --scope directory-statewide --dry-run --limit 50
+npm run tdi:promote -- --scope directory-statewide --confirm
 
-# 5) Live promote (skip already-promoted by default)
-npm run tdi:promote -- --market all
-npm run tdi:promote -- --market dallas --limit 100
-
-# 6) After raising caps (Phase 8B), fill residual without re-writing existing
-npm run tdi:promote -- --market houston
-npm run tdi:promote -- --market dallas
+# 5) Hubs only (TX address + launch metro)
+npm run tdi:promote -- --scope launch-metros --market houston --dry-run --limit 25
+npm run tdi:promote -- --scope launch-metros --confirm
 ```
 
 ## Consumer surfaces (Phase 8B polish)
@@ -119,7 +120,7 @@ npm run tdi:promote -- --market dallas
 
 1. **County sparse** — mostly title agencies; metro matching uses city + ZIP.  
 2. **One row per qualification** in source — import merges by license number.  
-3. **Non-TX rows** appear in the open dataset (resident agencies elsewhere) — filtered on import/promote.  
+3. **Non-TX HQ** agencies are TX-licensed and belong in `/directory?state=TX` (TX-2). They do **not** appear on Houston/Dallas/etc. hubs. Blank `State` is unknown HQ, not non-resident proof.  
 4. **No individuals** in Phase 8.  
 5. **No Places / appointments** in Phase 8A.  
 6. **Expiration** — expired licenses are not promoted.

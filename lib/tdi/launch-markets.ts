@@ -199,12 +199,20 @@ export function zipPrefix3(zip: string | null | undefined): string {
   return digits.slice(0, 3);
 }
 
-/** Resolve Wave-1 launch market from county / city / ZIP. */
+/**
+ * Resolve Wave-1 launch market from county / city / ZIP.
+ * Out-of-state HQ never maps to a Texas hub (Houston, CA ≠ Houston, TX).
+ * Blank HQ is unknown — callers must not treat it as Texas-address proof.
+ */
 export function matchTxLaunchMarket(input: {
   county?: string | null;
   city?: string | null;
   zip?: string | null;
+  hqState?: string | null;
 }): TxLaunchMarket | null {
+  const hq = (input.hqState || '').toUpperCase().trim().slice(0, 2);
+  if (hq && hq !== 'TX') return null;
+
   const county = normalizeCountyName(input.county);
   const city = normalizeCityName(input.city);
   const z3 = zipPrefix3(input.zip);

@@ -31,10 +31,26 @@ export type NormalizedTdiProducer = {
   countyNormalized: string | null;
   state: string;
   zip: string | null;
+  /** Inferred from HQ State only. Blank HQ → null (not non-resident proof). */
+  residency: 'resident' | 'non_resident' | null;
+  homeAddressState: string | null;
   launchMarketId: TxLaunchMarketId | null;
   identityKey: string;
   skipReason?: string;
 };
+
+/**
+ * HQ State → residency metadata. Blank / invalid is unknown, not non-resident.
+ * Never infers a home-state license.
+ */
+export function inferTxResidency(
+  hqState: string | null | undefined
+): 'resident' | 'non_resident' | null {
+  const s = (hqState || '').toUpperCase().trim().slice(0, 2);
+  if (s === 'TX') return 'resident';
+  if (/^[A-Z]{2}$/.test(s)) return 'non_resident';
+  return null;
+}
 
 function cleanCell(raw: string | undefined | null): string {
   if (raw == null) return '';
@@ -127,7 +143,10 @@ export function normalizeTdiAgencyRow(
     'County (if title agency)',
     'County',
   ]);
-  const state = (pick(row, ['state', 'State']) || 'TX').toUpperCase().slice(0, 2);
+  const stateRaw = pick(row, ['state', 'State']).toUpperCase().trim();
+  /** Blank HQ is unknown, not proof of non-residency. Do not default to TX. */
+  const state = stateRaw.slice(0, 2);
+  const txAddress = state === 'TX';
   const zip = normalizeZip(pick(row, ['pstl_cd', 'Postal code', 'Postal Code', 'Zip', 'ZIP']));
   const issueDate = parseDate(
     pick(row, ['license_issue_date', 'Issue date', 'Issue Date'])
@@ -146,11 +165,16 @@ export function normalizeTdiAgencyRow(
   const city = cityRaw ? normalizeCityName(cityRaw) : null;
   const county = countyRaw || null;
   const countyNormalized = county ? normalizeCountyName(county) : null;
-  const market = matchTxLaunchMarket({
-    county,
-    city: cityRaw,
-    zip,
-  });
+  const residency = inferTxResidency(state);
+  const homeAddressState = residency === 'non_resident' ? state : null;
+  const market = txAddress
+    ? matchTxLaunchMarket({
+        county,
+        city: cityRaw,
+        zip,
+        hqState: state,
+      })
+    : null;
 
   const licenseTypes = licenseType ? [licenseType] : [];
   const qualifications = qualification ? [qualification] : [];
@@ -177,6 +201,8 @@ export function normalizeTdiAgencyRow(
     countyNormalized,
     state,
     zip,
+    residency,
+    homeAddressState,
     launchMarketId: market?.id ?? null,
     identityKey: `tdi:biz:${licenseNumber.toUpperCase()}`,
   };
@@ -202,8 +228,10 @@ function emptySkip(
     city: null,
     county: null,
     countyNormalized: null,
-    state: 'TX',
+    state: '',
     zip: null,
+    residency: null,
+    homeAddressState: null,
     launchMarketId: null,
     identityKey: '',
     skipReason: reason,
@@ -229,6 +257,7 @@ export function mergeTdiProducers(
     }
     if (!base.city && r.city) base.city = r.city;
     if (!base.zip && r.zip) base.zip = r.zip;
+    if (!base.state && r.state) base.state = r.state;
     if (!base.orgType && r.orgType) base.orgType = r.orgType;
     if (r.expirationDate) {
       if (
@@ -252,12 +281,18 @@ export function mergeTdiProducers(
     ...base.qualifications,
   ]);
   // Re-resolve market after merge (county may appear on title row only)
-  const market = matchTxLaunchMarket({
-    county: base.county,
-    city: base.city,
-    zip: base.zip,
-  });
+  const market =
+    base.state === 'TX'
+      ? matchTxLaunchMarket({
+          county: base.county,
+          city: base.city,
+          zip: base.zip,
+          hqState: base.state,
+        })
+      : null;
   base.launchMarketId = market?.id ?? null;
+  base.residency = inferTxResidency(base.state);
+  base.homeAddressState = base.residency === 'non_resident' ? base.state : null;
   base.identityKey = `tdi:biz:${base.licenseNumber.toUpperCase()}`;
   return base;
 }

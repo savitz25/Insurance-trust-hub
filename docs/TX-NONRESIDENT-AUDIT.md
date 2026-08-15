@@ -90,17 +90,15 @@ Alpine, McAllen, Brownsville, Tyler, Port Arthur, etc. — 4,666 firms. Separate
 | Hubs | NV street address | Launch county + FL HQ | Launch metro + `state=TX` |
 | Non-resident HQ | Included in directory | Included after FL-2 | **Never staged** |
 
-## Recommendation (not implemented)
+## Recommendation — **implemented (TX-2)**
 
-**TX-2** if product wants NV-1 / FL-2 parity:
+See `docs/TX-2-DIRECTORY.md`. Implemented on `main`:
 
-1. Remove import `not_texas` skip (still require a TX license number from the TDI agencies file).
-2. Persist HQ `state` + city; do not default blank to TX without documenting it.
+1. Removed import `not_texas` skip (still require a TX license number from the TDI agencies file).
+2. Persist HQ `state` + city; blank stays blank (not non-resident proof).
 3. Promote `--scope directory-statewide`: active TX-licensed agencies, any HQ, `states_licensed=['TX']` only, home state metadata.
 4. Hubs: keep `state=TX` + launch market. Do not attach non-TX HQ to Houston/DFW cards.
 5. Idempotent `--dry-run` / `--confirm`, skip-existing. No FL/CA verified licenses.
-
-Do not start TX-2 writes while FL-2 statewide promote is still running.
 
 ## Command
 
