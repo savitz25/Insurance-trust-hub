@@ -1,6 +1,51 @@
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { loadListingRequestsForAdmin } from '@/lib/admin/listing-requests';
+import {
+  loadListingRequestsForAdmin,
+  type ListingRequestDiagnostic,
+} from '@/lib/admin/listing-requests';
+
+function DiagnosticPanel({
+  diagnostic,
+  error,
+}: {
+  diagnostic: ListingRequestDiagnostic;
+  error: string | null;
+}) {
+  const hostsDiffer =
+    diagnostic.supabaseUrlHost &&
+    diagnostic.nextPublicHost &&
+    diagnostic.supabaseUrlHost !== diagnostic.nextPublicHost;
+
+  return (
+    <div className="mt-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+      <p className="font-medium">Admin diagnostic (no secrets)</p>
+      {error ? <p className="mt-1">{error}</p> : null}
+      {hostsDiffer ? (
+        <p className="mt-1">
+          SUPABASE_URL host and NEXT_PUBLIC_SUPABASE_URL host differ. This read uses SUPABASE_URL
+          first.
+        </p>
+      ) : null}
+      <dl className="mt-2 grid gap-1 font-mono text-xs sm:grid-cols-2">
+        <div>hostUsed: {diagnostic.hostUsed ?? '—'}</div>
+        <div>SUPABASE_URL: {diagnostic.supabaseUrlHost ?? 'unset'}</div>
+        <div>NEXT_PUBLIC_SUPABASE_URL: {diagnostic.nextPublicHost ?? 'unset'}</div>
+        <div>httpStatus: {diagnostic.httpStatus ?? '—'}</div>
+        <div>contentRange: {diagnostic.contentRange ?? '—'}</div>
+        <div>rowCount: {diagnostic.rowCount}</div>
+        <div>jwtRole: {diagnostic.jwtRole ?? '—'}</div>
+        <div>jwtRef: {diagnostic.jwtRef ?? '—'}</div>
+        <div>serviceRoleConfigured: {diagnostic.serviceRoleConfigured ? 'yes' : 'no'}</div>
+        <div>parseOk: {diagnostic.parseOk ? 'yes' : 'no'}</div>
+        <div className="sm:col-span-2">path: {diagnostic.requestPath}</div>
+        <div className="sm:col-span-2 whitespace-pre-wrap break-all">
+          errorBody: {diagnostic.errorBody ?? '—'}
+        </div>
+      </dl>
+    </div>
+  );
+}
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -15,7 +60,7 @@ const ALL_STATUSES = [
 ] as const;
 
 export default async function AdminListingRequestsPage() {
-  const { rows, error, openByEmail } = await loadListingRequestsForAdmin();
+  const { rows, error, openByEmail, diagnostic } = await loadListingRequestsForAdmin();
   const byStatus = Object.fromEntries(ALL_STATUSES.map((s) => [s, 0])) as Record<
     string,
     number
@@ -36,10 +81,8 @@ export default async function AdminListingRequestsPage() {
         {rows.length ? ` · ${rows.length} total` : ''}
       </p>
 
-      {error ? (
-        <p className="mt-4 rounded-lg border border-destructive/40 bg-destructive/5 px-4 py-3 text-sm text-destructive">
-          Could not load requests: {error}
-        </p>
+      {error || rows.length === 0 ? (
+        <DiagnosticPanel diagnostic={diagnostic} error={error} />
       ) : null}
 
       <div className="mt-8 overflow-x-auto rounded-xl border">

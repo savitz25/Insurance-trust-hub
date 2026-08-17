@@ -12,11 +12,17 @@ export default async function AdminListingRequestDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { row, error } = await loadListingRequestByIdForAdmin(id);
+  const { row, error, diagnostic } = await loadListingRequestByIdForAdmin(id);
   if (error) {
     return (
       <div className="max-w-3xl">
         <p className="text-sm text-destructive">Could not load request: {error}</p>
+        <pre className="mt-3 overflow-auto rounded-lg border bg-muted/40 p-3 text-xs">
+          hostUsed={diagnostic.hostUsed}
+          {'\n'}httpStatus={diagnostic.httpStatus}
+          {'\n'}jwtRole={diagnostic.jwtRole}
+          {'\n'}errorBody={diagnostic.errorBody}
+        </pre>
       </div>
     );
   }
