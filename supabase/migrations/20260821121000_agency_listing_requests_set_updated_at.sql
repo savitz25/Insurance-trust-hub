@@ -2,20 +2,20 @@
 -- from schema.sql. Safe to run if 20260821120000 created the table and
 -- then failed on the trigger.
 
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION public.set_updated_at()
 RETURNS TRIGGER
 LANGUAGE plpgsql
-AS $$
+AS $set_updated_at$
 BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
-$$;
+$set_updated_at$;
 
 DROP TRIGGER IF EXISTS agency_listing_requests_updated_at ON agency_listing_requests;
 CREATE TRIGGER agency_listing_requests_updated_at
   BEFORE UPDATE ON agency_listing_requests
-  FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+  FOR EACH ROW EXECUTE PROCEDURE public.set_updated_at();
 
 ALTER TABLE agency_listing_requests ENABLE ROW LEVEL SECURITY;
 

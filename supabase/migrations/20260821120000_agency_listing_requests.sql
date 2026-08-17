@@ -5,15 +5,15 @@
 --
 -- Production may not have schema.sql helpers. Define set_updated_at here.
 
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION public.set_updated_at()
 RETURNS TRIGGER
 LANGUAGE plpgsql
-AS $$
+AS $set_updated_at$
 BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
-$$;
+$set_updated_at$;
 
 CREATE TABLE IF NOT EXISTS agency_listing_requests (
   id                        UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -64,7 +64,7 @@ CREATE INDEX IF NOT EXISTS idx_agency_listing_requests_state
 DROP TRIGGER IF EXISTS agency_listing_requests_updated_at ON agency_listing_requests;
 CREATE TRIGGER agency_listing_requests_updated_at
   BEFORE UPDATE ON agency_listing_requests
-  FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+  FOR EACH ROW EXECUTE PROCEDURE public.set_updated_at();
 
 ALTER TABLE agency_listing_requests ENABLE ROW LEVEL SECURITY;
 
