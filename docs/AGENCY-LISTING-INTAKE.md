@@ -35,7 +35,15 @@ Table: `agency_listing_requests`
 
 Statuses: `received` | `needs_info` | `verifying` | `approved` | `rejected` | `withdrawn`
 
-RLS: public INSERT of `received` only. No public SELECT of PII. Admin UI uses the service role.
+RLS: public INSERT of `received` only. **No public SELECT of PII.**
+
+Admin list (`/admin/listing-requests`) is a server page (`force-dynamic`). After the shared-secret admin cookie is checked, it reads rows with `SUPABASE_SERVICE_ROLE_KEY` via PostgREST (same path as `GET /admin/api/listing-requests`). It lists every status. It does not use the anon key and must not add a public SELECT policy.
+
+If the SQL table exists but the admin page is empty, reload the PostgREST schema cache:
+
+```sql
+NOTIFY pgrst, 'reload schema';
+```
 
 Linked `provider_id` is set only on approve.
 

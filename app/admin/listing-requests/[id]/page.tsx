@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getAdminListingRequest } from '@/lib/admin/queries';
+import { loadListingRequestByIdForAdmin } from '@/lib/admin/listing-requests';
 import { ListingRequestOpsForm } from './listing-request-ops-form';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function AdminListingRequestDetailPage({
   params,
@@ -9,7 +12,14 @@ export default async function AdminListingRequestDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const row = await getAdminListingRequest(id);
+  const { row, error } = await loadListingRequestByIdForAdmin(id);
+  if (error) {
+    return (
+      <div className="max-w-3xl">
+        <p className="text-sm text-destructive">Could not load request: {error}</p>
+      </div>
+    );
+  }
   if (!row) notFound();
 
   return (

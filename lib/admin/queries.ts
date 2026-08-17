@@ -229,31 +229,15 @@ export async function getAdminLeads(): Promise<AdminLeadRow[]> {
 }
 
 export async function getAdminListingRequests(): Promise<AgencyListingRequest[]> {
-  if (!isSupabaseAdminConfigured()) {
-    return [];
-  }
-
-  const supabase = createAdminClient();
-  const { data, error } = await supabase
-    .from('agency_listing_requests')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(200);
-
-  if (error || !data) return [];
-  return data;
+  const { loadListingRequestsForAdmin } = await import('@/lib/admin/listing-requests');
+  const result = await loadListingRequestsForAdmin();
+  return result.rows;
 }
 
 export async function getAdminListingRequest(
   id: string
 ): Promise<AgencyListingRequest | null> {
-  if (!isSupabaseAdminConfigured()) return null;
-  const supabase = createAdminClient();
-  const { data, error } = await supabase
-    .from('agency_listing_requests')
-    .select('*')
-    .eq('id', id)
-    .maybeSingle();
-  if (error || !data) return null;
-  return data;
+  const { loadListingRequestByIdForAdmin } = await import('@/lib/admin/listing-requests');
+  const result = await loadListingRequestByIdForAdmin(id);
+  return result.row;
 }

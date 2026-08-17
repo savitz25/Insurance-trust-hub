@@ -3,7 +3,10 @@
  * Never import service-role keys in client components.
  */
 export function getSupabaseUrl(): string | undefined {
-  return process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  return (
+    process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() ||
+    process.env.SUPABASE_URL?.trim()
+  );
 }
 
 export function getSupabaseAnonKey(): string | undefined {
