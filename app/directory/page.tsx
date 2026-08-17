@@ -204,6 +204,13 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           </Link>{' '}
           to build a research shortlist (guest-saved on this device).
         </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Licensed agency not shown?{' '}
+          <Link href="/claim-listing" className="font-semibold text-primary underline-offset-2 hover:underline">
+            Request a listing
+          </Link>
+          . We publish only after an official state license check. Not paid placement.
+        </p>
         <div className="mt-4 flex flex-wrap gap-2" role="navigation" aria-label="Verified state filters">
           {flTotal > 0 ? (
             <Link

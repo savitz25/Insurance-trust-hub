@@ -91,6 +91,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // My Insurance wallet is noindex (personal workspace) — not in sitemap
     '/about',
     '/contact',
+    '/claim-listing',
     '/privacy',
     '/terms',
   ].map((path) => ({

@@ -59,6 +59,12 @@ const LOOKUP_URLS: Record<string, { department: string; lookupUrl: string; notes
     department: 'Illinois Department of Insurance',
     lookupUrl: 'https://www.insurance.illinois.gov/Producer/ProducerHome',
   },
+  MO: {
+    department: 'Missouri Department of Commerce and Insurance',
+    lookupUrl: 'https://sbs.naic.org/solar-external-lookup/lookup/licensee?jurisdiction=MO',
+    notes:
+      'Official SBS licensee lookup. Missouri has no ITH bulk inventory; agency listings require a manual claim plus official confirmation.',
+  },
 };
 
 const NAIC_FALLBACK = 'https://content.naic.org/consumer.htm';

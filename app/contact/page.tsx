@@ -22,8 +22,13 @@ export default function ContactPage() {
             Contact us
           </h1>
           <p className="mt-3 text-muted-foreground leading-relaxed max-w-xl">
-            Questions about listings, data corrections, or partnerships? Send a message and we&apos;ll
-            respond within 2–5 business days. For insurance quotes, use our{' '}
+            Questions about data corrections or partnerships? Send a message and we&apos;ll
+            respond within 2–5 business days. To request a verified agency listing, use{' '}
+            <a href="/claim-listing" className="text-primary hover:underline">
+              Request a listing
+            </a>
+            {' '}
+            (license number required). For insurance quotes, use our{' '}
             <a href="/directory" className="text-primary hover:underline">agency directory</a>.
           </p>
           <div className="mt-8">

@@ -4,7 +4,7 @@ import { isSupabaseAdminConfigured } from '@/lib/supabase/config';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { getAllFallbackProviders } from '@/lib/providers/queries';
 import { dbProviderToForm } from '@/lib/admin/provider-mapper';
-import type { ReviewStatus } from '@/types/supabase';
+import type { AgencyListingRequest, ReviewStatus } from '@/types/supabase';
 
 export interface AdminStats {
   providers: number;
@@ -226,4 +226,34 @@ export async function getAdminLeads(): Promise<AdminLeadRow[]> {
     createdAt: row.created_at,
     providerName: (row.providers as { name: string } | null)?.name,
   }));
+}
+
+export async function getAdminListingRequests(): Promise<AgencyListingRequest[]> {
+  if (!isSupabaseAdminConfigured()) {
+    return [];
+  }
+
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('agency_listing_requests')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(200);
+
+  if (error || !data) return [];
+  return data;
+}
+
+export async function getAdminListingRequest(
+  id: string
+): Promise<AgencyListingRequest | null> {
+  if (!isSupabaseAdminConfigured()) return null;
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('agency_listing_requests')
+    .select('*')
+    .eq('id', id)
+    .maybeSingle();
+  if (error || !data) return null;
+  return data;
 }

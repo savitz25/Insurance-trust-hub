@@ -10,6 +10,14 @@ export type ProviderType = 'independent_agent' | 'brokerage' | 'specialist';
 
 export type ReviewStatus = 'pending' | 'approved' | 'rejected';
 
+export type AgencyListingRequestStatus =
+  | 'received'
+  | 'needs_info'
+  | 'verifying'
+  | 'approved'
+  | 'rejected'
+  | 'withdrawn';
+
 export interface LicenseEntry {
   state: string;
   license_number: string;
@@ -222,6 +230,107 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: 'leads_provider_id_fkey';
+            columns: ['provider_id'];
+            isOneToOne: false;
+            referencedRelation: 'providers';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      agency_listing_requests: {
+        Row: {
+          id: string;
+          created_at: string;
+          updated_at: string;
+          status: AgencyListingRequestStatus;
+          legal_name: string;
+          dba_name: string | null;
+          license_state: string;
+          license_number: string | null;
+          npn: string | null;
+          street: string | null;
+          city: string | null;
+          address_state: string | null;
+          zip: string | null;
+          phone: string | null;
+          work_email: string;
+          website: string | null;
+          lines_of_authority: string[];
+          authorized: boolean;
+          notes: string | null;
+          source: string;
+          submitter_name: string | null;
+          claimed_signals: Json;
+          ops_notes: string | null;
+          rejection_reason: string | null;
+          verified_license_state: string | null;
+          verified_license_number: string | null;
+          verified_at: string | null;
+          provider_id: string | null;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          status?: AgencyListingRequestStatus;
+          legal_name: string;
+          dba_name?: string | null;
+          license_state: string;
+          license_number?: string | null;
+          npn?: string | null;
+          street?: string | null;
+          city?: string | null;
+          address_state?: string | null;
+          zip?: string | null;
+          phone?: string | null;
+          work_email: string;
+          website?: string | null;
+          lines_of_authority?: string[];
+          authorized?: boolean;
+          notes?: string | null;
+          source?: string;
+          submitter_name?: string | null;
+          claimed_signals?: Json;
+          ops_notes?: string | null;
+          rejection_reason?: string | null;
+          verified_license_state?: string | null;
+          verified_license_number?: string | null;
+          verified_at?: string | null;
+          provider_id?: string | null;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          status?: AgencyListingRequestStatus;
+          legal_name?: string;
+          dba_name?: string | null;
+          license_state?: string;
+          license_number?: string | null;
+          npn?: string | null;
+          street?: string | null;
+          city?: string | null;
+          address_state?: string | null;
+          zip?: string | null;
+          phone?: string | null;
+          work_email?: string;
+          website?: string | null;
+          lines_of_authority?: string[];
+          authorized?: boolean;
+          notes?: string | null;
+          source?: string;
+          submitter_name?: string | null;
+          claimed_signals?: Json;
+          ops_notes?: string | null;
+          rejection_reason?: string | null;
+          verified_license_state?: string | null;
+          verified_license_number?: string | null;
+          verified_at?: string | null;
+          provider_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'agency_listing_requests_provider_id_fkey';
             columns: ['provider_id'];
             isOneToOne: false;
             referencedRelation: 'providers';
@@ -464,6 +573,12 @@ export type ReviewUpdate = Database['public']['Tables']['reviews']['Update'];
 export type Lead = Database['public']['Tables']['leads']['Row'];
 export type LeadInsert = Database['public']['Tables']['leads']['Insert'];
 export type LeadUpdate = Database['public']['Tables']['leads']['Update'];
+
+export type AgencyListingRequest = Database['public']['Tables']['agency_listing_requests']['Row'];
+export type AgencyListingRequestInsert =
+  Database['public']['Tables']['agency_listing_requests']['Insert'];
+export type AgencyListingRequestUpdate =
+  Database['public']['Tables']['agency_listing_requests']['Update'];
 
 export type AdminProfile = Database['public']['Tables']['admin_profiles']['Row'];
 export type AdminProfileInsert = Database['public']['Tables']['admin_profiles']['Insert'];

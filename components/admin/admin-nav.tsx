@@ -22,6 +22,7 @@ const LINKS = [
   { href: '/admin/enrichment', label: 'Google/BBB', icon: Sparkles },
   { href: '/admin/reviews', label: 'Reviews', icon: MessageSquare },
   { href: '/admin/leads', label: 'Leads', icon: Users },
+  { href: '/admin/listing-requests', label: 'Listing requests', icon: BadgeCheck },
 ] as const;
 
 export function AdminNav() {

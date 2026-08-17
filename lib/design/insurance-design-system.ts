@@ -335,6 +335,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
     links: [
       { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
       { href: '/tools/license-verification', label: 'License verification' },
+      { href: '/claim-listing', label: 'Request a listing' },
       { href: '/methodology', label: 'Methodology' },
       { href: '/my-insurance', label: 'My Insurance' },
       { href: 'https://www.asktrusthub.com/promise', label: 'Independence Policy', external: true },

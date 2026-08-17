@@ -74,7 +74,7 @@ export default function AboutPage() {
             {
               step: '4',
               title: 'Ongoing corrections',
-              text: 'Agencies and consumers can report outdated data via our contact form. Corrections are processed within 5–10 business days.',
+              text: 'Agencies request a listing at /claim-listing with a state license number. We verify official records before any public profile. Consumers can report outdated data via the contact form.',
             },
           ].map((item) => (
             <Card key={item.step}>

@@ -2,11 +2,14 @@
 
 import { adminLoginSchema, adminProviderSchema } from '@/lib/validations/admin';
 import {
+  approveListingRequest,
   createProvider,
   deleteProvider,
   moderateReview,
+  updateListingRequestStatus,
   updateProvider,
 } from '@/lib/admin/mutations';
+import type { AgencyListingRequestStatus } from '@/types/supabase';
 import { schemaToFormData } from '@/lib/admin/provider-mapper';
 import type { ReviewStatus } from '@/types/supabase';
 
@@ -68,6 +71,41 @@ export async function moderateReviewAction(
     return {
       success: false,
       error: err instanceof Error ? err.message : 'Unable to update review',
+    };
+  }
+}
+
+export async function updateListingRequestStatusAction(input: {
+  id: string;
+  status: AgencyListingRequestStatus;
+  opsNotes?: string;
+  rejectionReason?: string;
+}): Promise<AdminActionResult> {
+  try {
+    await updateListingRequestStatus(input);
+    return { success: true };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Unable to update request',
+    };
+  }
+}
+
+export async function approveListingRequestAction(input: {
+  id: string;
+  verifiedLicenseNumber: string;
+  verifiedLicenseState: string;
+  identityMatchAccepted: boolean;
+  opsNotes?: string;
+}): Promise<AdminActionResult> {
+  try {
+    const row = await approveListingRequest(input);
+    return { success: true, id: row.providerId, slug: row.slug };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Unable to approve request',
     };
   }
 }
