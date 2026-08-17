@@ -1,9 +1,6 @@
--- Agency listing intake (manual claim + ops verification).
--- Public directory remains verified-only. This table stores requests, not listings.
--- PII: no public SELECT. Writes go through the server action (service role)
--- or a locked anon INSERT of status=received only.
---
--- Production may not have schema.sql helpers. Define set_updated_at here.
+-- Repair: production Insurance Supabase did not have set_updated_at()
+-- from schema.sql. Safe to run if 20260821120000 created the table and
+-- then failed on the trigger.
 
 CREATE OR REPLACE FUNCTION set_updated_at()
 RETURNS TRIGGER
@@ -14,52 +11,6 @@ BEGIN
   RETURN NEW;
 END;
 $$;
-
-CREATE TABLE IF NOT EXISTS agency_listing_requests (
-  id                        UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  created_at                TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at                TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  status                    TEXT NOT NULL DEFAULT 'received'
-                              CHECK (status IN (
-                                'received',
-                                'needs_info',
-                                'verifying',
-                                'approved',
-                                'rejected',
-                                'withdrawn'
-                              )),
-  legal_name                TEXT NOT NULL,
-  dba_name                  TEXT,
-  license_state             TEXT NOT NULL,
-  license_number            TEXT,
-  npn                       TEXT,
-  street                    TEXT,
-  city                      TEXT,
-  address_state             TEXT,
-  zip                       TEXT,
-  phone                     TEXT,
-  work_email                TEXT NOT NULL,
-  website                   TEXT,
-  lines_of_authority        TEXT[] NOT NULL DEFAULT '{}',
-  authorized                BOOLEAN NOT NULL DEFAULT FALSE,
-  notes                     TEXT,
-  source                    TEXT NOT NULL DEFAULT 'claim_form',
-  submitter_name            TEXT,
-  claimed_signals           JSONB NOT NULL DEFAULT '{}',
-  ops_notes                 TEXT,
-  rejection_reason          TEXT,
-  verified_license_state    TEXT,
-  verified_license_number   TEXT,
-  verified_at               TIMESTAMPTZ,
-  provider_id               UUID REFERENCES providers(id) ON DELETE SET NULL
-);
-
-CREATE INDEX IF NOT EXISTS idx_agency_listing_requests_status
-  ON agency_listing_requests (status, created_at DESC);
-CREATE INDEX IF NOT EXISTS idx_agency_listing_requests_email
-  ON agency_listing_requests (work_email);
-CREATE INDEX IF NOT EXISTS idx_agency_listing_requests_state
-  ON agency_listing_requests (license_state);
 
 DROP TRIGGER IF EXISTS agency_listing_requests_updated_at ON agency_listing_requests;
 CREATE TRIGGER agency_listing_requests_updated_at
@@ -75,14 +26,9 @@ CREATE POLICY "Public can submit listing requests"
   TO anon, authenticated
   WITH CHECK (status = 'received');
 
--- No public SELECT / UPDATE / DELETE. Admin UI uses service_role.
-
 COMMENT ON TABLE agency_listing_requests IS
   'Agency claim / listing requests. Not a public directory. Verified providers are created only after official license confirmation.';
 
--- Pilot inbound email (2026-08-17): Matt Briegel / BBS Insurance (MO).
--- Official MO DOI / SBS lookup was not confirmable from this environment.
--- Website-published license numbers are recorded as claims, not verification.
 INSERT INTO agency_listing_requests (
   id,
   status,
