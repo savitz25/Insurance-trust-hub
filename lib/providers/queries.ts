@@ -13,6 +13,9 @@ import {
   filterVerifiedProviders,
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
+import { countyMatchOrParts, FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
+import { providerMatchesLaunchCounties } from '@/lib/dfs/providers-by-county';
+import { looksLikeZip } from '@/lib/tools/zip-resolve';
 /**
  * Phase 1 — public directory returns verified TrustState only.
  * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
@@ -39,22 +42,34 @@ export async function getProviders(
       .select('*', { count: 'exact' })
       .eq('verified', true);
 
-    if (filters.state) {
-      query = query.contains('states_licensed', [filters.state.toUpperCase()]);
+    const stateCode = filters.state?.trim().toUpperCase();
+    const launchCounty = filters.launchCountyId
+      ? FL_LAUNCH_COUNTIES.find((c) => c.id === filters.launchCountyId)
+      : undefined;
+    // Never treat a ZIP as a name/description ILIKE.
+    const nameQuery =
+      filters.query && !looksLikeZip(filters.query) ? filters.query.trim() : '';
+
+    if (stateCode) {
+      query = query.contains('states_licensed', [stateCode]);
+    }
+    if (launchCounty) {
+      const or = countyMatchOrParts(launchCounty).join(',');
+      if (or) query = query.or(or);
     }
     // Phase 11A: no-state browse is all verified research (FL/TX/OH first-class).
     if (filters.city) {
       query = query.contains('cities', [filters.city]);
     }
     if (filters.minRating) query = query.gte('rating', filters.minRating);
-    if (filters.insuranceType) {
+    if (filters.insuranceType && !filters.insuranceType.includes(',')) {
       query = query.contains('categories', [filters.insuranceType]);
     }
     if (filters.specialty) {
       query = query.contains('specialties', [filters.specialty]);
     }
-    if (filters.query) {
-      query = query.or(`name.ilike.%${filters.query}%,description.ilike.%${filters.query}%`);
+    if (nameQuery) {
+      query = query.or(`name.ilike.%${nameQuery}%,description.ilike.%${nameQuery}%`);
     }
     // Research convenience only — not a quality rank
     if (filters.hasAppointmentSnapshot) {
@@ -83,9 +98,21 @@ export async function getProviders(
       return { providers: [], total: 0 };
     }
 
-    const providers = onlyVerifiedResearch(
+    let providers = onlyVerifiedResearch(
       data.map((row) => mapRowToProvider(row as DbProvider))
-    ).slice(0, limit);
+    );
+
+    if (stateCode) {
+      providers = providers.filter((p) => {
+        const licensed = (p.license_state || p.state || '').toUpperCase();
+        return licensed === stateCode;
+      });
+    }
+    if (launchCounty) {
+      providers = providers.filter((p) => providerMatchesLaunchCounties(p, [launchCounty]));
+    }
+
+    providers = providers.slice(0, limit);
 
     return { providers, total: count ?? providers.length };
   } catch {

@@ -61,6 +61,10 @@ export interface ProviderFilters {
   verifiedOnly?: boolean;
   minRating?: number;
   query?: string;
+  /** 5-digit ZIP — resolve to geo; never ILIKE against name */
+  zip?: string;
+  /** FL DFS launch county id (contact.launch_county_id) */
+  launchCountyId?: string;
   limit?: number;
   offset?: number;
   /** Server sort for paginated directory. Default name — not a quality rank. */

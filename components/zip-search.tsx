@@ -22,10 +22,15 @@ export function ZipSearch({ className, defaultZip = '' }: ZipSearchProps) {
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (zip.trim()) params.set('zip', zip.trim().slice(0, 5));
-    if (types.length) params.set('type', types.join(','));
+    const digits = zip.trim().slice(0, 5);
+    if (digits) params.set('zip', digits);
+    params.set('verified', 'true');
+    if (types.length === 1) params.set('type', types[0]!);
+    else if (types.includes('health') || types.includes('medicare')) {
+      params.set('specialty', 'Health');
+    }
     const query = params.toString();
-    router.push(query ? `/directory?${query}` : '/directory');
+    router.push(query ? `/directory?${query}` : '/directory?verified=true');
   }
 
   function toggleType(value: string) {

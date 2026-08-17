@@ -7,6 +7,7 @@ import { DirectoryPagination } from '@/components/directory-pagination';
 import { ProviderCard } from '@/components/provider-card';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { searchProviders } from '@/lib/providers/queries';
+import type { ProviderFilters } from '@/types/provider';
 import { buildMetadata } from '@/lib/seo/metadata';
 import type { Provider } from '@/types/provider';
 import type { InsuranceType, Specialty } from '@/lib/constants';
@@ -42,6 +43,7 @@ import {
   directoryTotalPages,
   clampDirectoryPage,
 } from '@/lib/directory/params';
+import { looksLikeZip, resolveDirectoryZip } from '@/lib/directory/zip-geo';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -87,9 +89,21 @@ function sortProviders(providers: Provider[], sort: string, query: string): Prov
 
 export default async function DirectoryPage({ searchParams }: DirectoryPageProps) {
   const params = await searchParams;
-  const query = getParam(params, 'q');
-  const state = getParam(params, 'state');
-  const type = getParam(params, 'type') as InsuranceType | '';
+  const rawQuery = getParam(params, 'q');
+  const zipParam = getParam(params, 'zip') || (looksLikeZip(rawQuery) ? rawQuery : '');
+  const zipGeo = resolveDirectoryZip(zipParam);
+  const query = looksLikeZip(rawQuery) ? '' : rawQuery;
+  const state = getParam(params, 'state') || zipGeo?.stateCode || '';
+  const typeRaw = getParam(params, 'type');
+  const typeTokens = typeRaw
+    .split(',')
+    .map((t) => t.trim().toLowerCase())
+    .filter(Boolean);
+  const type = (
+    typeTokens.length === 1 && !typeTokens[0]!.includes(',')
+      ? typeTokens[0]
+      : ''
+  ) as InsuranceType | '';
   const loaAlias = parseHubLoaFilter(getParam(params, 'loa'));
   const loaSpecialtyMap: Record<string, Specialty> = {
     health: 'Health',
@@ -100,8 +114,13 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     title: 'Title',
     adjuster: 'Public Adjuster',
   };
+  const wantHealthLoa =
+    typeTokens.includes('health') ||
+    typeTokens.includes('medicare') ||
+    getParam(params, 'specialty') === 'Health';
   const specialty = (getParam(params, 'specialty') ||
-    (loaAlias !== 'all' ? loaSpecialtyMap[loaAlias] ?? '' : '')) as Specialty | '';
+    (loaAlias !== 'all' ? loaSpecialtyMap[loaAlias] ?? '' : '') ||
+    (wantHealthLoa && zipGeo ? 'Health' : '')) as Specialty | '';
   // Phase 11A — public directory is always verified research (legacy verified=false ignored)
   const verifiedOnly = getParam(params, 'verified') !== 'false';
   const hasAppointmentSnapshot = state === 'FL' && getParam(params, 'appointments') === 'true';
@@ -111,34 +130,43 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const requestedPage = parseDirectoryPage(getParam(params, 'page'));
   const serverSort =
     sort === 'rating' || sort === 'reviews' ? sort : ('name' as const);
+  const pageSize = zipGeo ? 48 : DIRECTORY_PAGE_SIZE;
 
-  let { providers: rawProviders, total } = await searchProviders({
+  const searchArgs = (specialtyOverride?: Specialty | ''): ProviderFilters => ({
     query: query || undefined,
     state: state || undefined,
+    zip: zipGeo?.zip,
+    launchCountyId: zipGeo?.launchCounty?.id,
     insuranceType: type || undefined,
-    specialty: specialty || undefined,
+    specialty: (specialtyOverride ?? specialty) || undefined,
     verifiedOnly: true,
     hasAppointmentSnapshot,
     minRating: minRating ? Number(minRating) : undefined,
     sort: serverSort,
-    limit: DIRECTORY_PAGE_SIZE,
-    offset: (requestedPage - 1) * DIRECTORY_PAGE_SIZE,
+    limit: pageSize,
+    offset: (requestedPage - 1) * pageSize,
   });
 
-  const totalPages = directoryTotalPages(total, DIRECTORY_PAGE_SIZE);
+  let loaFallback = false;
+  let { providers: rawProviders, total } = zipParam && !zipGeo
+    ? { providers: [], total: 0 }
+    : await searchProviders(searchArgs());
+
+  if (zipGeo && specialty && total === 0) {
+    const retryLocal = await searchProviders(searchArgs(''));
+    if (retryLocal.total > 0) {
+      rawProviders = retryLocal.providers;
+      total = retryLocal.total;
+      loaFallback = true;
+    }
+  }
+
+  const totalPages = directoryTotalPages(total, pageSize);
   const page = clampDirectoryPage(requestedPage, totalPages);
   if (page !== requestedPage && total > 0) {
     const retry = await searchProviders({
-      query: query || undefined,
-      state: state || undefined,
-      insuranceType: type || undefined,
-      specialty: specialty || undefined,
-      verifiedOnly: true,
-      hasAppointmentSnapshot,
-      minRating: minRating ? Number(minRating) : undefined,
-      sort: serverSort,
-      limit: DIRECTORY_PAGE_SIZE,
-      offset: (page - 1) * DIRECTORY_PAGE_SIZE,
+      ...searchArgs(loaFallback ? '' : specialty),
+      offset: (page - 1) * pageSize,
     });
     rawProviders = retry.providers;
     total = retry.total;
@@ -146,6 +174,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
+  const skipLaunchFanout = Boolean(zipGeo || zipParam);
   const {
     fl: flTotal,
     tx: txTotal,
@@ -155,20 +184,24 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     vt: vtTotal,
     ma: maTotal,
     ms: msTotal,
-  } = await getCachedVerifiedLaunchCounts();
-  const njTotal = await countVerifiedNewJerseyProviders();
+  } = skipLaunchFanout
+    ? { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0, ma: 0, ms: 0 }
+    : await getCachedVerifiedLaunchCounts();
+  const njTotal = skipLaunchFanout ? 0 : await countVerifiedNewJerseyProviders();
   const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows, vtHubRows, maHubRows, msHubRows] =
-    await Promise.all([
-      flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
-      txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
-      ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
-      njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
-      ncTotal > 0 ? getNcLaunchMarketLiveTotals() : Promise.resolve([]),
-      nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
-      vtTotal > 0 ? getVtLaunchMarketLiveTotals() : Promise.resolve([]),
-      maTotal > 0 ? getMaLaunchMarketLiveTotals() : Promise.resolve([]),
-      msTotal > 0 ? getMsLaunchMarketLiveTotals() : Promise.resolve([]),
-    ]);
+    skipLaunchFanout
+      ? [[], [], [], [], [], [], [], [], []]
+      : await Promise.all([
+          flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
+          txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
+          ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
+          njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
+          ncTotal > 0 ? getNcLaunchMarketLiveTotals() : Promise.resolve([]),
+          nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
+          vtTotal > 0 ? getVtLaunchMarketLiveTotals() : Promise.resolve([]),
+          maTotal > 0 ? getMaLaunchMarketLiveTotals() : Promise.resolve([]),
+          msTotal > 0 ? getMsLaunchMarketLiveTotals() : Promise.resolve([]),
+        ]);
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';
   const browsingNj = state === 'NJ';
@@ -182,6 +215,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
   const filterParams: Record<string, string> = {};
   if (query) filterParams.q = query;
+  if (zipGeo?.zip) filterParams.zip = zipGeo.zip;
   if (state) filterParams.state = state;
   if (type) filterParams.type = type;
   if (specialty) filterParams.specialty = specialty;
@@ -196,8 +230,28 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <h1 className="section-heading">Insurance agency directory</h1>
         <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
-          {getDirectoryStateIntro(state)}
+          {zipGeo
+            ? `ZIP ${zipGeo.zip} maps to ${zipGeo.displayLabel}. Showing verified agencies in that geography only — not a nationwide name search.`
+            : getDirectoryStateIntro(state)}
         </p>
+        {zipGeo?.hubHref ? (
+          <p className="mt-2 text-sm text-muted-foreground">
+            Prefer the county hub:{' '}
+            <Link
+              href={zipGeo.hubHref}
+              className="font-semibold text-primary underline-offset-2 hover:underline"
+            >
+              {zipGeo.countyName || zipGeo.stateName} verified listings
+            </Link>
+            .
+          </p>
+        ) : null}
+        {loaFallback ? (
+          <p className="mt-2 text-sm text-muted-foreground">
+            This extract does not reliably tag Health / Medicare lines of authority for every
+            local agency. Showing the verified local list instead of an empty specialty filter.
+          </p>
+        ) : null}
         <p className="mt-2 text-sm text-muted-foreground">
           <Link href="/my-insurance" className="font-semibold text-primary underline-offset-2 hover:underline">
             Save agencies to My Insurance
@@ -764,25 +818,33 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               total={total}
               showing={providers.length}
               page={page}
-              pageSize={DIRECTORY_PAGE_SIZE}
+              pageSize={pageSize}
               className="mb-6"
             />
           </Suspense>
 
           {providers.length === 0 ? (
             <EmptyCoveragePanel
-              variant={query || state || type || specialty || verifiedOnly || minRating ? 'filtered' : 'unmapped'}
+              variant={query || state || type || specialty || zipParam || verifiedOnly || minRating ? 'filtered' : 'unmapped'}
               title={
-                state || query
-                  ? 'No agencies match your filters'
-                  : 'No agencies match these criteria yet'
+                zipParam && !zipGeo
+                  ? `ZIP ${zipParam} is not in a mapped inventory county`
+                  : zipGeo
+                    ? `No verified agencies in ${zipGeo.displayLabel} for these filters`
+                    : state || query
+                      ? 'No agencies match your filters'
+                      : 'No agencies match these criteria yet'
               }
               description={
-                state || query || type || specialty
-                  ? 'No verified research listings match the current filters. Broaden the search, try another live state (Florida, Texas, Ohio, Nevada, Vermont), or use research tools. We will not invent listings to fill this view.'
-                  : 'No agencies currently meet our public research standard for this view. That does not mean unlicensed agents do not exist — verify on official state DOI / NAIC tools.'
+                zipParam && !zipGeo
+                  ? 'We will not invent agencies for an unmapped ZIP. Use license verification, request a listing, or start from the Research Center.'
+                  : zipGeo
+                    ? `No verified research listings match this ZIP geography${specialty ? ' and specialty' : ''}. That does not mean unlicensed agencies do not exist. We will not invent listings.`
+                    : state || query || type || specialty
+                      ? 'No verified research listings match the current filters. Broaden the search, try another live state (Florida, Texas, Ohio, Nevada, Vermont), or use research tools. We will not invent listings to fill this view.'
+                      : 'No agencies currently meet our public research standard for this view. That does not mean unlicensed agents do not exist — verify on official state DOI / NAIC tools.'
               }
-              placeLabel={state || query || undefined}
+              placeLabel={zipGeo?.displayLabel || state || query || zipParam || undefined}
               primarySources={[
                 { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
                 {
@@ -793,8 +855,9 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               ]}
               widenLinks={[
                 { href: '/directory?verified=true', label: 'Clear directory home' },
+                { href: '/tools', label: 'Research Center' },
+                { href: '/claim-listing', label: 'Request a listing' },
                 { href: '/tools/coverage-compass', label: 'Coverage Compass' },
-                { href: '/calculators', label: 'Educational calculators' },
                 { href: '/methodology', label: 'Methodology' },
               ]}
               journeyLink={{
@@ -821,7 +884,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                 page={page}
                 totalPages={totalPages}
                 total={total}
-                pageSize={DIRECTORY_PAGE_SIZE}
+                pageSize={pageSize}
                 searchParams={filterParams}
               />
             </>

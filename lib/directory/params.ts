@@ -33,6 +33,7 @@ export function clampDirectoryPage(page: number, totalPages: number): number {
 
 const PRESERVE_KEYS = [
   'q',
+  'zip',
   'state',
   'type',
   'specialty',

@@ -148,8 +148,20 @@ const ZIP_COUNTY: Record<
   '33470': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
   '33483': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
   '33484': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33486': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
   '33487': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33432': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33434': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33408': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33409': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33412': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33413': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33446': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33472': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33473': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33480': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
   '33496': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
+  '33498': { county: 'Palm Beach', state: 'FL', dashboardSlug: 'palm-beach-fl' },
   // Other FL metros
   '32801': { county: 'Orange', state: 'FL' },
   '33602': { county: 'Hillsborough', state: 'FL' },
@@ -312,6 +324,10 @@ function stateFromPrefix(zip: string): string | null {
 
 export function normalizeZip(input: string): string {
   return input.replace(/\D/g, '').slice(0, 5);
+}
+
+export function looksLikeZip(input: string | null | undefined): boolean {
+  return normalizeZip(input || '').length === 5 && /^\d{5}$/.test(normalizeZip(input || ''));
 }
 
 export function resolveZip(input: string): ZipLocation | null {
