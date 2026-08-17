@@ -32,6 +32,12 @@ import {
   getRegulatorLabel,
 } from '@/lib/regulators/labels';
 import { ResearchThisMarket } from '@/components/research-this-market';
+import {
+  EmptyCoveragePanel,
+  DOI_PATHWAY_HREF,
+  NAIC_CONSUMER_URL,
+} from '@/components/research/empty-coverage-panel';
+import { emptyInventoryBody, emptyInventoryHeadline } from '@/lib/research/empty-inventory';
 import { clusterForHubSlug, clusterForPath } from '@/lib/seo/seo-clusters';
 import {
   buildBreadcrumbListJsonLd,
@@ -507,11 +513,28 @@ export function HubPageView({
                           : ' on the current page (filter is page-scoped and shareable via ?loa=).'}
                       </p>
                     ) : null}
+                    {dbProviders.length === 0 && loaFilter !== 'all' ? (
+                      <EmptyCoveragePanel
+                        variant="filtered"
+                        title={emptyInventoryHeadline('agencies', `${hub.shortName} · this specialty`)}
+                        description={emptyInventoryBody('filtered')}
+                        placeLabel={hub.shortName}
+                        primarySources={[
+                          { href: DOI_PATHWAY_HREF, label: 'License verification' },
+                        ]}
+                        widenLinks={[
+                          { href: path, label: 'All specialties in this hub' },
+                          { href: '/directory?verified=true', label: 'Verified directory' },
+                          { href: '/claim-listing', label: 'Request a listing' },
+                        ]}
+                      />
+                    ) : (
                     <div className="grid gap-4 sm:grid-cols-2">
                       {dbProviders.map((p) => (
                         <ProviderCard key={p.id} provider={p} />
                       ))}
                     </div>
+                    )}
                     <HubInventoryPagination
                       basePath={path}
                       page={inventoryPage}
@@ -522,7 +545,26 @@ export function HubPageView({
                     />
                   </>
                 ) : (
-                  <p className="text-sm text-muted-foreground">{EMPTY_MARKET_COPY.section}</p>
+                  <EmptyCoveragePanel
+                    variant="unmapped"
+                    title={emptyInventoryHeadline('agencies', hub.shortName)}
+                    description={emptyInventoryBody('unmapped')}
+                    placeLabel={hub.shortName}
+                    primarySources={[
+                      { href: DOI_PATHWAY_HREF, label: 'License verification' },
+                      {
+                        href: NAIC_CONSUMER_URL,
+                        label: 'NAIC consumer tools',
+                        external: true,
+                      },
+                    ]}
+                    widenLinks={[
+                      { href: '/directory?verified=true', label: 'Verified directory' },
+                      { href: '/tools', label: 'Research Center' },
+                      { href: '/claim-listing', label: 'Request a listing' },
+                      { href: '/guides', label: 'Guides' },
+                    ]}
+                  />
                 )}
               </section>
             )}

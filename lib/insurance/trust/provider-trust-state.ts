@@ -34,20 +34,20 @@ export const VERIFIED_REQUIREMENTS = [
   'Verified promote flag (is_verified / isVerified true)',
 ] as const;
 
-/** Honest empty-market / empty-directory copy. */
+/** Honest empty-market / empty-directory copy. Network rule: docs/EMPTY-STATE-STANDARD.md */
 export const EMPTY_MARKET_COPY = {
   hero:
-    'We’re still verifying agencies in this market. No verified listings are shown yet.',
+    "No verified agencies match this market yet. We're expanding from official sources.",
   section:
-    'We’re still verifying agencies for this market. No verified listings are shown yet.',
+    "No verified agencies match this market yet. We only publish after official license checks — we won't invent listings.",
   health:
-    'No verified health-specialist listings yet. Use license verification and official Marketplace tools while we expand verified research inventory.',
+    "No verified health-specialist listings match this view yet. Use license verification and Marketplace tools while we expand from official sources.",
   multiLine:
-    'No verified multi-line agency listings yet — honesty over fake completeness.',
+    "No verified multi-line agency listings match this view yet — we won't invent listings to fill this page.",
   scoreLabel: 'Research score',
   scoreUnavailable: 'Not available yet',
   directoryEmpty:
-    'No agencies currently meet our public research standard. Empty markets stay empty — we will not invent inventory.',
+    "No verified agencies match this view yet. We won't invent listings to fill this page.",
 } as const;
 
 const TRUST_LABELS: Record<TrustState, string> = {

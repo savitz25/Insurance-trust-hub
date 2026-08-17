@@ -40,8 +40,8 @@ export default async function ProvidersDirectoryPage() {
           <div className="mt-10">
             <EmptyCoveragePanel
               variant="unmapped"
-              title="We’re still verifying this market"
-              description="No agencies currently meet our public research standard for this directory. Prefer honesty over coverage — no invented inventory."
+              title="No verified agencies match this directory view yet"
+              description="We only publish research listings backed by official sources. Coverage is growing state by state. This view stays empty until that data is live and checked — we won't invent results."
               primarySources={[
                 { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
                 {
@@ -53,7 +53,8 @@ export default async function ProvidersDirectoryPage() {
               widenLinks={[
                 { href: '/directory', label: 'Search directory' },
                 { href: '/tools/license-verification', label: 'Verify a license' },
-                { href: '/tools/coverage-compass', label: 'Coverage Compass' },
+                { href: '/tools', label: 'Research Center' },
+                { href: '/claim-listing', label: 'Request a listing' },
                 { href: '/methodology', label: 'Methodology' },
               ]}
             />

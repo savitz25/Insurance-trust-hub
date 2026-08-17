@@ -166,8 +166,8 @@ export default async function StateDestinationPage({
           {providers.length === 0 ? (
             <EmptyCoveragePanel
               variant="unmapped"
-              title={`No agencies listed for ${dest.name} yet`}
-              description="We have not listed agencies for this destination guide. Use DOI / NAIC tools to verify any agent, and educational calculators while coverage expands."
+              title={`No verified agencies match ${dest.name} yet`}
+              description="We only publish research listings backed by official sources. Coverage is growing state by state. This view stays empty until that data is live and checked — we won't invent results."
               placeLabel={dest.name}
               primarySources={[
                 { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
@@ -179,8 +179,9 @@ export default async function StateDestinationPage({
               ]}
               widenLinks={[
                 { href: '/directory', label: 'Full directory' },
+                { href: '/tools', label: 'Research Center' },
+                { href: '/claim-listing', label: 'Request a listing' },
                 { href: '/tools/coverage-compass', label: 'Coverage Compass' },
-                { href: '/calculators', label: 'Educational calculators' },
               ]}
             />
           ) : (

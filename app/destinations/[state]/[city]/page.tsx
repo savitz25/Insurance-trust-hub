@@ -169,8 +169,8 @@ export default async function CityDestinationPage({
           {providers.length === 0 ? (
             <EmptyCoveragePanel
               variant="unmapped"
-              title={`No agencies listed in ${city.name} yet`}
-              description={`We have not listed agencies for ${city.name}, ${state.code} in this guide. Coverage is expanding — verify any agent on state DOI records before you enroll.`}
+              title={`No verified agencies match ${city.name}, ${state.code} yet`}
+              description="We only publish research listings backed by official sources. Coverage is growing market by market. This view stays empty until that data is live and checked — we won't invent results."
               placeLabel={`${city.name}, ${state.code}`}
               primarySources={[
                 { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
@@ -182,8 +182,8 @@ export default async function CityDestinationPage({
               ]}
               widenLinks={[
                 { href: `/directory?state=${state.code}`, label: `${state.name} directory` },
-                { href: '/tools/coverage-compass', label: 'Coverage Compass' },
-                { href: '/calculators', label: 'Educational calculators' },
+                { href: '/tools', label: 'Research Center' },
+                { href: '/claim-listing', label: 'Request a listing' },
                 { href: '/destinations', label: 'All destinations' },
               ]}
               journeyLink={{

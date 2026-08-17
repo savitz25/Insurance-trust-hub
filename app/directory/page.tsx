@@ -19,6 +19,11 @@ import {
   DOI_PATHWAY_HREF,
 } from '@/components/research/empty-coverage-panel';
 import {
+  LIVE_DIRECTORY_STATES,
+  classifyDirectoryEmpty,
+  directoryEmptyCopy,
+} from '@/lib/research/empty-inventory';
+import {
   countVerifiedNewJerseyProviders,
   getLaunchCountyLiveTotals,
   getTxLaunchMarketLiveTotals,
@@ -223,6 +228,21 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   if (sort && sort !== 'name') filterParams.sort = sort;
   if (view && view !== 'grid') filterParams.view = view;
   if (hasAppointmentSnapshot) filterParams.appointments = 'true';
+
+  const emptyVariant = classifyDirectoryEmpty({
+    zipRaw: zipParam || undefined,
+    zipResolved: Boolean(zipGeo),
+    launchCounty: Boolean(zipGeo?.launchCounty),
+    liveState: Boolean(state && LIVE_DIRECTORY_STATES.has(state.toUpperCase())),
+  });
+  const emptyCopy = directoryEmptyCopy({
+    variant: emptyVariant,
+    zipRaw: zipParam || undefined,
+    zipLabel: zipGeo?.displayLabel,
+    state: state || undefined,
+    specialty: specialty || undefined,
+    query: query || undefined,
+  });
 
   return (
     <div className="container mx-auto px-4 py-10 md:py-14">
@@ -825,26 +845,10 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
           {providers.length === 0 ? (
             <EmptyCoveragePanel
-              variant={query || state || type || specialty || zipParam || verifiedOnly || minRating ? 'filtered' : 'unmapped'}
-              title={
-                zipParam && !zipGeo
-                  ? `ZIP ${zipParam} is not in a mapped inventory county`
-                  : zipGeo
-                    ? `No verified agencies in ${zipGeo.displayLabel} for these filters`
-                    : state || query
-                      ? 'No agencies match your filters'
-                      : 'No agencies match these criteria yet'
-              }
-              description={
-                zipParam && !zipGeo
-                  ? 'We will not invent agencies for an unmapped ZIP. Use license verification, request a listing, or start from the Research Center.'
-                  : zipGeo
-                    ? `No verified research listings match this ZIP geography${specialty ? ' and specialty' : ''}. That does not mean unlicensed agencies do not exist. We will not invent listings.`
-                    : state || query || type || specialty
-                      ? 'No verified research listings match the current filters. Broaden the search, try another live state (Florida, Texas, Ohio, Nevada, Vermont), or use research tools. We will not invent listings to fill this view.'
-                      : 'No agencies currently meet our public research standard for this view. That does not mean unlicensed agents do not exist — verify on official state DOI / NAIC tools.'
-              }
-              placeLabel={zipGeo?.displayLabel || state || query || zipParam || undefined}
+              variant={emptyCopy.variant}
+              title={emptyCopy.headline}
+              description={emptyCopy.body}
+              placeLabel={emptyCopy.placeLabel}
               primarySources={[
                 { href: DOI_PATHWAY_HREF, label: 'License verification guide' },
                 {
@@ -854,11 +858,14 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                 },
               ]}
               widenLinks={[
-                { href: '/directory?verified=true', label: 'Clear directory home' },
+                ...(zipGeo?.hubHref
+                  ? [{ href: zipGeo.hubHref, label: `${zipGeo.countyName || zipGeo.stateName} hub` }]
+                  : []),
+                { href: '/directory?verified=true', label: 'Clear filters / directory home' },
                 { href: '/tools', label: 'Research Center' },
                 { href: '/claim-listing', label: 'Request a listing' },
                 { href: '/tools/coverage-compass', label: 'Coverage Compass' },
-                { href: '/methodology', label: 'Methodology' },
+                { href: '/guides', label: 'Guides' },
               ]}
               journeyLink={{
                 href: 'https://www.movetrusthub.com/verify-dot',

@@ -3,6 +3,10 @@ import Link from 'next/link';
 import { MapPin, ExternalLink } from 'lucide-react';
 import { TrustMark } from '@/components/network/trust-mark';
 import { cn } from '@/lib/utils';
+import {
+  EMPTY_INVENTORY_FOOTER,
+  EMPTY_INVENTORY_HONESTY,
+} from '@/lib/research/empty-inventory';
 
 export type EmptyCoverageLink = {
   href: string;
@@ -51,9 +55,14 @@ export function EmptyCoveragePanel({
       </p>
       {variant === 'unmapped' ? (
         <p className="mx-auto mt-2 max-w-lg text-xs text-muted-foreground">
-          Coverage is expanding. We do not invent agencies to fill empty markets.
+          We&apos;re expanding from official sources. No fake launch dates — this page stays
+          empty until checked inventory is live.
         </p>
-      ) : null}
+      ) : (
+        <p className="mx-auto mt-2 max-w-lg text-xs text-muted-foreground">
+          Inventory may exist for a wider view. Clear specialty or open the state / county hub.
+        </p>
+      )}
 
       {primarySources.length > 0 ? (
         <div className="mt-6">
@@ -118,9 +127,8 @@ export function EmptyCoveragePanel({
 
       {children}
 
-      <p className="mt-6 text-xs text-muted-foreground">
-        Research only · Not an endorsement · Part of the Ask Trust Hub network
-      </p>
+      <p className="mt-6 text-xs font-medium text-foreground/80">{EMPTY_INVENTORY_HONESTY}</p>
+      <p className="mt-1 text-xs text-muted-foreground">{EMPTY_INVENTORY_FOOTER}</p>
       <div className="mt-2 flex justify-center">
         <TrustMark />
       </div>
