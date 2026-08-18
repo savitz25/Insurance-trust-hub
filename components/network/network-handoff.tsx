@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowUpRight } from 'lucide-react';
 import {
   resolveLifeJourney,
@@ -6,7 +8,24 @@ import {
 } from '@/lib/network/life-journey';
 import { TrustMark } from '@/components/network/trust-mark';
 import { CrossHubLink } from '@/components/network/cross-hub-link';
+import { trackJourneyHandoff } from '@/lib/analytics/journey-events';
 import { cn } from '@/lib/utils';
+
+function destFromHref(href: string): 'move' | 'lender' | null {
+  if (href.includes('movetrusthub.com')) return 'move';
+  if (href.includes('lendertrusthub.com')) return 'lender';
+  return null;
+}
+
+function onInsuranceHandoffClick(href: string) {
+  const dest = destFromHref(href);
+  if (!dest) return;
+  trackJourneyHandoff({
+    from_hub: 'insurance',
+    to_hub: dest,
+    journey: dest === 'move' ? 'relocate' : 'purchase',
+  });
+}
 
 export type NetworkHandoffProps = {
   context: LifeJourneyContext;
@@ -49,6 +68,7 @@ export function NetworkHandoff({
               href={link.href}
               currentHub="insurance"
               className="inline-flex items-center gap-1 font-semibold text-foreground underline-offset-2 hover:underline"
+              onClick={() => onInsuranceHandoffClick(link.href)}
             >
               {link.label}
               <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
@@ -83,6 +103,7 @@ export function NetworkHandoff({
               href={link.href}
               currentHub="insurance"
               className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg border border-border/80 bg-background px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-primary/30 hover:bg-muted/40 sm:w-auto"
+              onClick={() => onInsuranceHandoffClick(link.href)}
             >
               {link.label}
               <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
