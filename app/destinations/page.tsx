@@ -97,9 +97,15 @@ export default async function DestinationsPage({ searchParams }: PageProps) {
         </Button>
       </div>
 
-      <div className="mt-12 max-w-2xl mx-auto">
-        <NetworkHandoff context="insurance-destination" variant="card" />
-      </div>
+      {journey.src === 'move' ||
+      journey.src === 'lender' ||
+      journey.journey === 'relocate' ||
+      journey.journey === 'purchase' ||
+      journey.intent === 'buy' ? (
+        <div className="mt-12 max-w-2xl mx-auto">
+          <NetworkHandoff context="insurance-destination" variant="card" />
+        </div>
+      ) : null}
     </div>
   );
 }

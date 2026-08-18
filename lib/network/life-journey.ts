@@ -56,14 +56,11 @@ export function resolveLifeJourney(
   switch (context) {
     case 'insurance-home':
       return {
-        label,
+        label: 'Continue your research',
         body: place
-          ? `If you’re relocating or buying near ${place}, financing and the move are related research steps on specialist Trust Hubs.`
-          : 'If you’re relocating or buying, financing and the move are related research steps on specialist Trust Hubs.',
-        links: [
-          { href: lenderHref(geography), label: 'Research NMLS-verified lenders' },
-          { href: MOVE_VERIFY, label: 'Research licensed movers' },
-        ],
+          ? `Coverage research for ${place} stays on Insurance Trust Hub. Financing or a move is only the next step when that decision is already part of this journey.`
+          : 'Coverage research stays on Insurance Trust Hub. Financing or a move is only the next step when that decision is already part of this journey.',
+        links: [],
       };
     case 'insurance-renters':
       return {
@@ -75,13 +72,13 @@ export function resolveLifeJourney(
       };
     case 'insurance-destination':
       return {
-        label,
+        label: 'Continue your research',
         body: place
-          ? `If you’re relocating to ${place} — or buying there — research movers and, if purchase, lenders on the specialist hubs.`
-          : 'If you’re relocating or buying, research movers and lenders on the specialist hubs.',
+          ? `Continue the same life event in ${place}. Return to your moving plan if you are relocating, or to lender research if you are still buying.`
+          : 'Continue the same life event. Return to your moving plan if you are relocating, or to lender research if you are still buying.',
         links: [
-          { href: MOVE_VERIFY, label: 'Research licensed movers' },
-          { href: lenderHref(geography), label: 'Research NMLS-verified lenders' },
+          { href: MOVE_VERIFY, label: 'Return to your moving plan' },
+          { href: lenderHref(geography), label: 'Continue your home-buying research' },
         ],
       };
     default: {

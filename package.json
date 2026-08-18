@@ -20,6 +20,7 @@
     "brand:final-logo": "node scripts/run-logo-install.cjs",
     "ops:license-report": "node scripts/ops-license-backfill-report.mjs",
     "check:phase6a": "node scripts/check-phase6a-integrity.mjs",
+    "check:journey-v21": "node scripts/check-journey-v21.mjs",
     "check:phase6b1": "node scripts/check-phase6b1-promotion.mjs",
     "check:phase6b2": "node scripts/check-phase6b2-enrichment.mjs",
     "check:phase1-trust": "tsx scripts/check-phase1-trust-state.ts",
