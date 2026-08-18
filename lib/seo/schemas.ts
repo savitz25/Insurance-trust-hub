@@ -31,6 +31,9 @@ export const organizationSchema = {
     'https://www.asktrusthub.com',
     'https://www.movetrusthub.com',
     'https://www.lendertrusthub.com',
+    'https://www.contractortrusthub.com',
+    'https://www.seniortrusthub.com',
+    'https://www.investortrusthub.com',
   ],
 };
 

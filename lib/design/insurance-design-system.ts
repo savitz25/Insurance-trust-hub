@@ -284,7 +284,14 @@ export const INSURANCE_NETWORK_LINKS = [
     label: 'Ask Trust Hub',
     shortLabel: 'Ask',
     href: 'https://www.asktrusthub.com',
-    blurb: 'Parent knowledge & concierge layer',
+    blurb: 'Parent research & standards layer',
+  },
+  {
+    id: 'insurance' as const,
+    label: 'Insurance Trust Hub',
+    shortLabel: 'Insurance',
+    href: 'https://www.insurancetrusthub.com',
+    blurb: 'State DOI / NAIC coverage research',
   },
   {
     id: 'move' as const,
@@ -305,7 +312,21 @@ export const INSURANCE_NETWORK_LINKS = [
     label: 'Contractor Trust Hub',
     shortLabel: 'Contractor',
     href: 'https://www.contractortrusthub.com',
-    blurb: 'Florida contractor license verification & project planning',
+    blurb: 'State licensing-board contractor research',
+  },
+  {
+    id: 'senior' as const,
+    label: 'SeniorTrustHub',
+    shortLabel: 'Senior',
+    href: 'https://www.seniortrusthub.com',
+    blurb: 'CMS / supported state senior-care research',
+  },
+  {
+    id: 'investor' as const,
+    label: 'InvestorTrustHub',
+    shortLabel: 'Investor',
+    href: 'https://www.investortrusthub.com',
+    blurb: 'SEC / IARD investment-firm research',
   },
 ] as const;
 

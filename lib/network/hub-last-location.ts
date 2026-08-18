@@ -6,7 +6,13 @@
  * restores its saved path (or stays on homepage if none).
  */
 
-export type SpecialistHubId = 'move' | 'lender' | 'insurance' | 'contractor';
+export type SpecialistHubId =
+  | 'move'
+  | 'lender'
+  | 'insurance'
+  | 'contractor'
+  | 'senior'
+  | 'investor';
 
 export const HUB_RESUME_PARAM = 'hub_resume';
 
@@ -15,6 +21,8 @@ export const HUB_HOME: Record<SpecialistHubId, string> = {
   lender: 'https://www.lendertrusthub.com',
   insurance: 'https://www.insurancetrusthub.com',
   contractor: 'https://www.contractortrusthub.com',
+  senior: 'https://www.seniortrusthub.com',
+  investor: 'https://www.investortrusthub.com',
 };
 
 function storageKey(hubId: SpecialistHubId): string {
@@ -22,7 +30,14 @@ function storageKey(hubId: SpecialistHubId): string {
 }
 
 export function isSpecialistHubId(id: string): id is SpecialistHubId {
-  return id === 'move' || id === 'lender' || id === 'insurance' || id === 'contractor';
+  return (
+    id === 'move' ||
+    id === 'lender' ||
+    id === 'insurance' ||
+    id === 'contractor' ||
+    id === 'senior' ||
+    id === 'investor'
+  );
 }
 
 /** Safe in-hub path only (pathname + search). Invalid → null. */

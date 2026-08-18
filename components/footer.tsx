@@ -70,7 +70,7 @@ export function Footer() {
               Network
             </h4>
             <ul className="space-y-2.5 text-sm" style={{ color: INSURANCE_BRAND.white }}>
-              {INSURANCE_NETWORK_LINKS.map((hub) => (
+              {INSURANCE_NETWORK_LINKS.filter((hub) => hub.id !== 'insurance').map((hub) => (
                 <li key={hub.id}>
                   <a
                     href={hub.href}

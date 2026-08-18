@@ -82,6 +82,20 @@ async function runStart(
     };
   }
   const toHub = toRaw as NetworkHubId;
+  if (toHub === 'senior' || toHub === 'investor' || toHub === 'ask') {
+    const direct = new URL(
+      next?.startsWith('/') ? next : HUB_DEFAULT_PATH[toHub],
+      HUB_ORIGINS[toHub]
+    ).toString();
+    return {
+      ok: false as const,
+      reason: 'direct_navigation',
+      fallbackUrl: direct,
+      hasCookie,
+      hasBearer,
+      toHub,
+    };
+  }
   const fallbackUrl = new URL(
     next?.startsWith('/') ? next : HUB_DEFAULT_PATH[toHub],
     HUB_ORIGINS[toHub]

@@ -4,7 +4,14 @@ import { createHash, randomBytes } from 'crypto';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { isSupabaseAdminConfigured } from '@/lib/supabase/config';
 
-export type NetworkHubId = 'move' | 'insurance' | 'lender' | 'contractor' | 'ask';
+export type NetworkHubId =
+  | 'move'
+  | 'insurance'
+  | 'lender'
+  | 'contractor'
+  | 'senior'
+  | 'investor'
+  | 'ask';
 
 export const HANDOFF_TTL_SECONDS = 90;
 export const HANDOFF_RATE_LIMIT_PER_MINUTE = 10;
@@ -14,6 +21,8 @@ export const HUB_ORIGINS: Record<NetworkHubId, string> = {
   insurance: 'https://www.insurancetrusthub.com',
   lender: 'https://www.lendertrusthub.com',
   contractor: 'https://www.contractortrusthub.com',
+  senior: 'https://www.seniortrusthub.com',
+  investor: 'https://www.investortrusthub.com',
   ask: 'https://www.asktrusthub.com',
 };
 
@@ -22,6 +31,8 @@ export const HUB_DEFAULT_PATH: Record<NetworkHubId, string> = {
   insurance: '/my-insurance',
   lender: '/my-lending',
   contractor: '/',
+  senior: '/',
+  investor: '/',
   ask: '/',
 };
 
@@ -34,6 +45,8 @@ export function isNetworkHubId(v: string | null | undefined): v is NetworkHubId 
     v === 'insurance' ||
     v === 'lender' ||
     v === 'contractor' ||
+    v === 'senior' ||
+    v === 'investor' ||
     v === 'ask'
   );
 }
