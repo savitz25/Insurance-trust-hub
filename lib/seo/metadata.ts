@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { brandAsset, BRAND_ICONS, BRAND_LOGO } from '@/lib/brand';
+import { BRAND_ASSET_VERSION, BRAND_ICONS } from '@/lib/brand';
+import {
+  SHARE_HUB,
+  resolveShareOrigin,
+  shareOgImageAbsoluteUrl,
+} from '@/lib/seo/share-hub';
 
-export { SITE_URL };
+export { SITE_URL, SHARE_HUB };
 
 export const HOMEPAGE_TITLE =
   'Independent Insurance Research | Insurance Trust Hub';
@@ -13,10 +18,10 @@ export const DEFAULT_SITE_DESCRIPTION =
   'Insurance Trust Hub is independent insurance research — Marketplace tools, Medicare intelligence, verification pathways, and verified agency listings only when real inventory exists. Not a policy marketplace.';
 
 export const OG_IMAGE = {
-  url: brandAsset(BRAND_LOGO.og),
-  width: 1200,
-  height: 630,
-  alt: 'Insurance Trust Hub — independent licensed agency directory',
+  url: shareOgImageAbsoluteUrl(resolveShareOrigin(), `v=${BRAND_ASSET_VERSION}`),
+  width: SHARE_HUB.ogWidth,
+  height: SHARE_HUB.ogHeight,
+  alt: SHARE_HUB.ogAlt,
 } as const;
 
 export function buildOpenGraph(
@@ -30,7 +35,7 @@ export function buildOpenGraph(
   return {
     title: overrides.title ?? HOMEPAGE_TITLE,
     description: overrides.description ?? HOMEPAGE_DESCRIPTION,
-    url: overrides.url ?? SITE_URL,
+    url: overrides.url ?? resolveShareOrigin(),
     siteName: SITE_NAME,
     type: overrides.type ?? 'website',
     locale: 'en-US',
@@ -45,10 +50,10 @@ export function buildTwitter(
   } = {}
 ): NonNullable<Metadata['twitter']> {
   return {
-    card: 'summary_large_image',
+    card: SHARE_HUB.twitterCard,
     title: overrides.title ?? HOMEPAGE_TITLE,
     description: overrides.description ?? HOMEPAGE_DESCRIPTION,
-    images: [OG_IMAGE.url],
+    images: [{ url: OG_IMAGE.url, alt: SHARE_HUB.ogAlt }],
   };
 }
 
@@ -61,7 +66,8 @@ export interface BuildMetadataOptions {
 }
 
 export function buildMetadata(options: BuildMetadataOptions): Metadata {
-  const url = options.path ? `${SITE_URL}${options.path}` : SITE_URL;
+  const origin = resolveShareOrigin();
+  const url = options.path ? `${origin}${options.path}` : origin;
 
   return {
     title: options.title,
@@ -93,7 +99,8 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
 }
 
 export const rootLayoutMetadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(resolveShareOrigin()),
+  alternates: { canonical: `${resolveShareOrigin()}/` },
   applicationName: SITE_NAME,
   creator: SITE_NAME,
   publisher: SITE_NAME,
