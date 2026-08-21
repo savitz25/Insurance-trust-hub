@@ -14,6 +14,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
+    "test": "node scripts/assert-share-002.mjs",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "brand:favicons": "node scripts/install-ith-favicon.mjs",

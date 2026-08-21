@@ -238,6 +238,16 @@ async function main() {
         left: Math.floor((1200 - lm.width) / 2),
         top: Math.floor((630 - lm.height) / 2),
       },
+      {
+        input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <text x="1136" y="70" fill="#7DD3FC" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="end">ASK TRUST HUB NETWORK</text>
+  <rect x="64" y="540" width="1072" height="2" fill="#0284C7"/>
+  <text x="64" y="582" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="22">Independent insurance research</text>
+  <text x="1136" y="582" fill="#7DD3FC" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="end">insurancetrusthub.com</text>
+</svg>`),
+        left: 0,
+        top: 0,
+      },
     ])
     .png({ compressionLevel: 9 })
     .toFile(join(BRAND, 'insurance-trust-hub-og.png'));
