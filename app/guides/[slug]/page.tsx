@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { shareRouteOgImage } from '@/lib/seo/share-hub';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildResearchPageGraph } from '@/lib/seo/research-seo';
 import {
@@ -19,11 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = getAcaMarketplaceGuide(slug);
   if (!guide) return { title: 'Guide not found' };
+  const og = shareRouteOgImage(`/guides/${slug}`, guide.h1 || guide.title);
   return buildMetadata({
     title: guide.title,
     description: guide.description,
     path: `/guides/${slug}`,
     type: 'article',
+    imageUrl: og.url,
+    imageAlt: og.alt,
   });
 }
 
