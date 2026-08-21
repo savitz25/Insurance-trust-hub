@@ -13,6 +13,7 @@ import { getProviderBySlug } from '@/lib/providers/queries';
 import { getReviewsForProvider, getRatingBreakdown } from '@/lib/providers/reviews';
 import { getProviderLicenseUrl } from '@/lib/providers/license';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { shareRouteOgImage } from '@/lib/seo/share-hub';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildInsuranceAgencySchema } from '@/lib/seo/schemas';
 import nextDynamic from 'next/dynamic';
@@ -103,13 +104,22 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
       return { title: 'Provider Not Found', robots: { index: false, follow: true } };
     }
     const trust = resolveProviderTrustState(provider);
+    const verified = canShowAsVerified(trust);
+    const og = verified
+      ? shareRouteOgImage(
+          `/providers/${slug}`,
+          `${provider.name} — insurance research on InsuranceTrustHub`,
+        )
+      : null;
     return buildMetadata({
       title: `${provider.name} — ${provider.city}, ${provider.state} Insurance Research`,
       description:
         provider.short_description ??
         `Research ${provider.name} in ${provider.city}, ${provider.state}. Re-check licenses on official state tools.`,
       path: `/providers/${slug}`,
-      noIndex: !canShowAsVerified(trust),
+      noIndex: !verified,
+      imageUrl: og?.url,
+      imageAlt: og?.alt,
     });
   } catch {
     return { title: 'Provider Not Found', robots: { index: false, follow: true } };

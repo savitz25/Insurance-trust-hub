@@ -8,6 +8,7 @@ import {
 } from '@/lib/destinations/data';
 import { searchProviders } from '@/lib/providers/queries';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { shareRouteOgImage } from '@/lib/seo/share-hub';
 import { ProviderCard } from '@/components/provider-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -39,10 +40,13 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
   const dest = getDestinationBySlug(slug);
   if (!dest) return { title: 'Destination Not Found' };
 
+  const og = shareRouteOgImage(`/destinations/${slug}`, `${dest.name} insurance research`);
   return buildMetadata({
     title: `${dest.name} Insurance Guide — Coverage, Costs & Local Agents`,
     description: dest.description,
     path: `/destinations/${slug}`,
+    imageUrl: og.url,
+    imageAlt: og.alt,
   });
 }
 

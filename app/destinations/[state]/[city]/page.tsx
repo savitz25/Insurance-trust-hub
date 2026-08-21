@@ -8,6 +8,7 @@ import {
 } from '@/lib/destinations/data';
 import { searchProviders } from '@/lib/providers/queries';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { shareRouteOgImage } from '@/lib/seo/share-hub';
 import { ProviderCard } from '@/components/provider-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -44,10 +45,16 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
   const data = getDestinationCity(stateSlug, citySlug);
   if (!data) return { title: 'City Not Found' };
 
+  const og = shareRouteOgImage(
+    `/destinations/${stateSlug}/${citySlug}`,
+    `${data.city.name}, ${data.state.code} insurance research`,
+  );
   return buildMetadata({
     title: `${data.city.name}, ${data.state.code} Insurance — Local Agents & Premium Guide`,
     description: `Insurance guidance for ${data.city.name}, ${data.state.name}. Compare local agencies, average premiums, and coverage considerations.`,
     path: `/destinations/${stateSlug}/${citySlug}`,
+    imageUrl: og.url,
+    imageAlt: og.alt,
   });
 }
 

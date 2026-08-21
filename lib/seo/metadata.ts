@@ -30,8 +30,18 @@ export function buildOpenGraph(
     description?: string;
     url?: string;
     type?: 'website' | 'article';
+    imageUrl?: string;
+    imageAlt?: string;
   } = {}
 ): NonNullable<Metadata['openGraph']> {
+  const image = overrides.imageUrl
+    ? {
+        url: overrides.imageUrl,
+        width: SHARE_HUB.ogWidth,
+        height: SHARE_HUB.ogHeight,
+        alt: overrides.imageAlt || SHARE_HUB.ogAlt,
+      }
+    : OG_IMAGE;
   return {
     title: overrides.title ?? HOMEPAGE_TITLE,
     description: overrides.description ?? HOMEPAGE_DESCRIPTION,
@@ -39,7 +49,7 @@ export function buildOpenGraph(
     siteName: SITE_NAME,
     type: overrides.type ?? 'website',
     locale: 'en-US',
-    images: [OG_IMAGE],
+    images: [image],
   };
 }
 
@@ -47,13 +57,17 @@ export function buildTwitter(
   overrides: {
     title?: string;
     description?: string;
+    imageUrl?: string;
+    imageAlt?: string;
   } = {}
 ): NonNullable<Metadata['twitter']> {
+  const imageUrl = overrides.imageUrl || OG_IMAGE.url;
+  const imageAlt = overrides.imageAlt || SHARE_HUB.ogAlt;
   return {
     card: SHARE_HUB.twitterCard,
     title: overrides.title ?? HOMEPAGE_TITLE,
     description: overrides.description ?? HOMEPAGE_DESCRIPTION,
-    images: [{ url: OG_IMAGE.url, alt: SHARE_HUB.ogAlt }],
+    images: [{ url: imageUrl, alt: imageAlt }],
   };
 }
 
@@ -63,6 +77,8 @@ export interface BuildMetadataOptions {
   path?: string;
   type?: 'website' | 'article';
   noIndex?: boolean;
+  imageUrl?: string;
+  imageAlt?: string;
 }
 
 export function buildMetadata(options: BuildMetadataOptions): Metadata {
@@ -78,10 +94,14 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
       description: options.description,
       url,
       type: options.type,
+      imageUrl: options.imageUrl,
+      imageAlt: options.imageAlt,
     }),
     twitter: buildTwitter({
       title: options.title,
       description: options.description,
+      imageUrl: options.imageUrl,
+      imageAlt: options.imageAlt,
     }),
     robots: options.noIndex
       ? { index: false, follow: false }

@@ -53,3 +53,14 @@ export function shareOgImageAbsoluteUrl(
   const q = cacheQuery.startsWith('?') ? cacheQuery : `?${cacheQuery}`;
   return `${base}${SHARE_HUB.ogImagePath}${q}`;
 }
+
+/** Stable contextual OG URL. Nested opengraph-image.tsx paths are hashed by Next and 404. */
+export function shareRouteOgImage(routePath: string, alt?: string) {
+  const path = (routePath.startsWith('/') ? routePath : `/${routePath}`).replace(/\/$/, '');
+  return {
+    url: `${SHARE_HUB.origin}${path}/share-og`,
+    width: SHARE_HUB.ogWidth,
+    height: SHARE_HUB.ogHeight,
+    alt: alt || SHARE_HUB.ogAlt,
+  };
+}

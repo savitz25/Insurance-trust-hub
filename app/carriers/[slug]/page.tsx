@@ -4,6 +4,7 @@ import { ContextNav } from '@/components/context-nav';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { CarrierIntelligenceView } from '@/components/carriers/carrier-intelligence-view';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { shareRouteOgImage } from '@/lib/seo/share-hub';
 import { getCarrierBySlug, CARRIER_REGISTRY, carrierPath } from '@/lib/carriers/registry';
 import { loadCarrierIntelligence } from '@/lib/carriers/rollup';
 import { JsonLd } from '@/lib/seo/json-ld';
@@ -36,11 +37,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     displayName: entry.displayName,
     indexable: Boolean(data?.indexable),
   });
+  const og = shareRouteOgImage(path, `${entry.displayName} — insurance research on InsuranceTrustHub`);
   return buildMetadata({
     title: m.title,
     description: m.description,
     path,
     noIndex: !data?.indexable,
+    imageUrl: og.url,
+    imageAlt: og.alt,
   });
 }
 
