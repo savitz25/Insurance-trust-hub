@@ -151,6 +151,7 @@ export const rootLayoutMetadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
       { url: BRAND_ICONS.faviconIco, sizes: 'any' },
       { url: BRAND_ICONS.favicon16, sizes: '16x16', type: 'image/png' },
       { url: BRAND_ICONS.favicon32, sizes: '32x32', type: 'image/png' },

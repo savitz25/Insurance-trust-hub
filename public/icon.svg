@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36" role="img" aria-label="Insurance Trust Hub mark">
+  <path d="M9 5H5v26h4" fill="none" stroke="#0284C7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M27 5h4v26h-4" fill="none" stroke="#0284C7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="18" y1="11.2" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <line x1="12.2" y1="18" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <line x1="23.8" y1="18" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <line x1="18" y1="24.8" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <circle cx="18" cy="18" r="2.1" fill="#0A2540"/>
+  <circle cx="18" cy="10.2" r="2.5" fill="#F86008"/>
+  <circle cx="11.2" cy="18" r="2.5" fill="#3B82F6"/>
+  <circle cx="24.8" cy="18" r="2.5" fill="#14B8A6"/>
+  <circle cx="18" cy="25.8" r="2.5" fill="#8B5CF6"/>
+</svg>
