@@ -4,12 +4,12 @@ import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
-import { AskNetworkBar } from '@/components/network/ask-network-bar';
 import { MyInsuranceShell } from '@/components/my-insurance/my-insurance-shell';
 import { HubLastLocationBridge } from '@/components/network/hub-last-location-bridge';
 import { InsurancePwaProvider } from '@/components/pwa/insurance-pwa-provider';
 import { rootLayoutMetadata } from '@/lib/seo/metadata';
 import { ASK_NETWORK_STANDARD_VERSION } from '@/lib/network/standard-version';
+import { TH_CHASSIS_VERSION } from '@/lib/design/trusthub-visual-standard';
 import './globals.css';
 
 const inter = Inter({
@@ -44,13 +44,13 @@ export default function RootLayout({
         className={`${inter.variable} font-sans antialiased pt-[env(safe-area-inset-top)] bg-[#F8FAFC] text-[#1E293B]`}
         data-hub="insurance"
         data-network-standard={ASK_NETWORK_STANDARD_VERSION}
+        data-th-chassis={TH_CHASSIS_VERSION}
       >
         {/* network-standard: {ASK_NETWORK_STANDARD_VERSION} */}
         <MyInsuranceShell>
           <HubLastLocationBridge hubId="insurance" />
-          <AskNetworkBar />
           <Navbar />
-          <main className="min-h-[calc(100vh-5rem)] pb-[env(safe-area-inset-bottom)]">
+          <main id="main-content" className="min-h-[calc(100vh-5rem)] pb-[env(safe-area-inset-bottom)]">
             {children}
           </main>
           <Footer />

@@ -1,0 +1,69 @@
+{
+  "origin": "https://www.insurancetrusthub.com",
+  "report": {
+    "desktop1440": {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "overflowX": false,
+      "header": {
+        "x": 0,
+        "y": 57,
+        "w": 1440,
+        "h": 81
+      },
+      "networkBar": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 57
+      },
+      "logo": {
+        "x": 96,
+        "y": 73,
+        "w": 240,
+        "h": 48
+      },
+      "switchHub": {
+        "x": 1263,
+        "y": 8,
+        "w": 81,
+        "h": 40
+      },
+      "stackedChrome": 138
+    },
+    "mobile390": {
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "overflowX": false,
+      "header": {
+        "x": 0,
+        "y": 57,
+        "w": 390,
+        "h": 65
+      },
+      "networkBar": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 57
+      },
+      "logo": {
+        "x": 16,
+        "y": 65,
+        "w": 160,
+        "h": 48
+      },
+      "switchHub": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "stackedChrome": 122
+    }
+  }
+}
