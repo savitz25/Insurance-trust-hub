@@ -1,14 +1,15 @@
 # Ask Network Discovery — Insurance Trust Hub pilot
 
-**Status:** PILOT / NOT YET CONSUMED BY ASK PRODUCTION
+**Status:** PILOT / NOT YET CONSUMED BY ASK PRODUCTION  
+**Amendment:** ASK-SEARCH-INSURANCE-001.1 (provider legitimacy + classification quality)
 
 This document describes the InsuranceTrustHub-only discovery source and the
 read-only `ask-network-discovery-v1` export. It does **not** modify AskTrustHub,
 copy the feed into Ask, create Ask APIs, create Universal Search UI, deploy, or
 create production sync jobs.
 
-Generated from `providers` + curated `CARRIER_REGISTRY` at git
-`fb9db9c90c6fa0b3e425e71a112e6a483403bf8c`.
+Generated from `providers` + curated `CARRIER_REGISTRY`. Fingerprint and counts
+are recorded in `data/network-discovery/insurance-discovery-pilot.report.json`.
 
 ## Source architecture
 
@@ -132,11 +133,39 @@ A provider is eligible only if all of:
 5. Slug matches `[a-z0-9]+(?:-[a-z0-9]+)*`
 6. Canonical HTTPS profile URL on `www.insurancetrusthub.com`
 7. Stable identity (DOI/NPN/UUID as above)
+8. **Discovery legitimacy** (`evaluateDiscoveryLegitimacy`) — consumer-facing insurance entity
 
 Carriers: registry slug + display name + `/carriers/{slug}` URL.
 
-156 rows failed on missing/malformed slug. Seed/unverified rows never enter
-the public directory and are ineligible here.
+### Discovery legitimacy gate (001.1)
+
+Answers: *Is this a defensible consumer-facing insurance entity for Ask?*
+
+| Fail reason | Rule (source fields only) |
+| --- | --- |
+| `title_or_adjuster_only` | Specialties title/adjuster-only **or** license type title-agency / adjuster class |
+| `incidental_license_holder` | License type automobile/home warranty **or** incidental primary-business name (dealer/realty/…) **without** insurance-name tokens |
+| `unsupported_license_class` | Other excluded class text (TPA, reinsurer, insurer, appraiser, …) |
+| `insufficient_insurance_business_evidence` | No consumer agency specialty and no insurance-name evidence |
+
+Positive signals: insurance/agency/broker name tokens, captive carrier-local agency names, or consumer specialties (Agency, P&C, Personal Lines, Health, Life) when the name is not incidental.
+
+**Not used:** Premium/payment, ratings, reviews, popularity, subjective quality.
+
+**Does not mutate** `providers`. Fail closed at discovery export only.
+
+### AutoNation Chevrolet Coral Gables
+
+| Field | Value |
+| --- | --- |
+| License | FL `A000425` |
+| License type | **AUTOMOBILE WARRANTY** |
+| Stored type | `brokerage` (DFS business promote) |
+| Categories | `homeowners`, `auto` (promote LOA → personal_lines → both) |
+| Classification | **INCIDENTAL_LICENSE_HOLDER** |
+| Discovery | ineligible |
+
+Verified DOI license ≠ consumer insurance agency for Ask “homeowners agencies” queries.
 
 ## Pilot selection
 

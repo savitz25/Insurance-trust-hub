@@ -2,24 +2,27 @@
   "banner": "PILOT / NOT YET CONSUMED BY ASK PRODUCTION",
   "schema_version": "ask-network-discovery-v1",
   "hub": "insurance",
-  "source_version": "git:fb9db9c90c6fa0b3e425e71a112e6a483403bf8c|providers:105520|updated:2026-08-17T16:52:20.394332+00:00|carriers:14",
-  "git_sha": "fb9db9c90c6fa0b3e425e71a112e6a483403bf8c",
+  "amendment": "ASK-SEARCH-INSURANCE-001.1",
+  "source_version": "git:088378ea533bcd7ffc04aadb0fbeee5353829a5c|providers:106372|updated:2026-08-15T18:15:12.013556+00:00|carriers:14",
+  "git_sha": "088378ea533bcd7ffc04aadb0fbeee5353829a5c",
+  "prior_fingerprint": "e8bfad58d39a4ad92d6b90328782e81b42d16c4d210eaf47c4c1a50a828b68ed",
   "counts": {
-    "source": 105534,
-    "providers": 105520,
+    "source": 106386,
+    "providers": 106372,
     "carriers_registry": 14,
-    "eligible": 105378,
-    "ineligible": 156,
+    "eligible": 94197,
+    "ineligible": 12189,
     "selected": 180,
-    "dfs_npn_rows": 0
+    "dfs_npn_rows": 0,
+    "prior_eligible": 105378
   },
   "provider_type_counts": {
-    "brokerage": 105520
+    "brokerage": 106372
   },
   "entity_counts_source": {
     "agencies": 0,
     "agents": 0,
-    "brokerages": 105520,
+    "brokerages": 106372,
     "carriers": 14,
     "medicare": 0,
     "other": 0
@@ -33,8 +36,64 @@
     "other": 0
   },
   "ineligible_reasons": {
-    "missing_slug": 156,
-    "malformed_profile_url": 156
+    "incidental_license_holder": 8803,
+    "missing_slug": 123,
+    "malformed_profile_url": 123,
+    "title_or_adjuster_only": 3184,
+    "unsupported_license_class": 99
+  },
+  "legitimacy_sample": {
+    "sample_size": 374,
+    "buckets": {
+      "CLEAR_INSURANCE_AGENCY_OR_BROKERAGE": 202,
+      "INSURANCE_RELATED_BUT_AMBIGUOUS": 157,
+      "INCIDENTAL_LICENSE_HOLDER": 11,
+      "NON_INSURANCE_BUSINESS": 0,
+      "TITLE_OR_ADJUSTER_ONLY": 4,
+      "INSUFFICIENT_EVIDENCE": 0
+    }
+  },
+  "autonation_audit": {
+    "id": "c70cdb16-06ac-4b35-8b56-ca6ebe042516",
+    "name": "ABRAHAM CHEVROLET - MIAMI INC DBA AUTONATION CHEVROLET CORAL GABLES",
+    "slug": "abraham-chevrolet-miami-inc-dba-autonation-chevrolet-coral-g-a000425",
+    "provider_type": "brokerage",
+    "categories": [
+      "homeowners",
+      "auto"
+    ],
+    "specialties": [
+      "Independent Agency",
+      "Personal Lines"
+    ],
+    "license": {
+      "type": "AUTOMOBILE WARRANTY",
+      "notes": "Imported from https://licenseesearch.fldfs.com/BulkDownload; identity match accepted for promotion.",
+      "state": "FL",
+      "method": "automated",
+      "source": "Florida DFS",
+      "status": "verified",
+      "checkedAt": "2026-08-11T18:02:50.536+00:00",
+      "license_number": "A000425",
+      "verification_url": "https://licenseesearch.fldfs.com/",
+      "identityMatchAccepted": true
+    },
+    "legitimacy": {
+      "ok": false,
+      "bucket": "INCIDENTAL_LICENSE_HOLDER",
+      "reason": "incidental_license_holder",
+      "signals": [
+        "incidental_primary_business_name",
+        "consumer_agency_specialty",
+        "excluded_license_class_text"
+      ]
+    },
+    "classification": "INCIDENTAL_LICENSE_HOLDER"
+  },
+  "miami_homeowners_regression": {
+    "match_count": 0,
+    "names": [],
+    "autonation_present": false
   },
   "medicare_readiness": "UNSUPPORTED",
   "query_readiness": [
@@ -46,29 +105,17 @@
     },
     {
       "query": "homeowners insurance agencies Miami FL",
-      "match_count": 1,
-      "matches": [
-        {
-          "network_id": "insurance:doi:FL:A000425",
-          "display_name": "ABRAHAM CHEVROLET - MIAMI INC DBA AUTONATION CHEVROLET CORAL GABLES",
-          "entity_type": "insurance_brokerage",
-          "reasons": [
-            "entity_type_match",
-            "category_match",
-            "physical_city",
-            "physical_state"
-          ]
-        }
-      ],
+      "match_count": 0,
+      "matches": [],
       "notes": "Requires explicit homeowners category and physical Miami, FL. Statewide FL license is not a Miami office."
     },
     {
       "query": "auto insurance agencies Texas",
-      "match_count": 36,
+      "match_count": 27,
       "matches": [
         {
-          "network_id": "insurance:doi:TX:10027",
-          "display_name": "AL BOENKER INSURANCE AGENCY INC",
+          "network_id": "insurance:doi:TX:10030",
+          "display_name": "A R SCHELL & SON AGENCY INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -77,8 +124,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10065",
-          "display_name": "TOSH INSURANCE AGENCY INC",
+          "network_id": "insurance:doi:TX:10051",
+          "display_name": "THE MICHAEL KENTOR COMPANY",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -87,8 +134,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10081",
-          "display_name": "DON LEE CLU INC",
+          "network_id": "insurance:doi:TX:10110",
+          "display_name": "SWBC INSURANCE SERVICES, INC.",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -97,8 +144,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10083",
-          "display_name": "AFFORDABLE INDIVIDUAL MEDICAL INSURANCE AGENCY, INC.",
+          "network_id": "insurance:doi:TX:10128",
+          "display_name": "PIPKIN & PIPKIN INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -107,8 +154,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10103",
-          "display_name": "LEON MARTIN INSURANCE AGENCY,P C",
+          "network_id": "insurance:doi:TX:10273",
+          "display_name": "WILLIAM R. SKEETERS, INC.",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -117,8 +164,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10139",
-          "display_name": "MCKENZIE AGENCY INC",
+          "network_id": "insurance:doi:TX:10335",
+          "display_name": "SJJS INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -127,8 +174,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10143",
-          "display_name": "STRUCTURED ANNUITIES INC",
+          "network_id": "insurance:doi:TX:10398",
+          "display_name": "BROKERAGE STORE, INC., THE",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -137,8 +184,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10187",
-          "display_name": "THOMPSON-HICKS LTD",
+          "network_id": "insurance:doi:TX:10407",
+          "display_name": "THE BLACKBURN INSURANCE AGENCY INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -147,8 +194,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10194",
-          "display_name": "JEFFREY R MEWHIRTER INS AGENCY INC",
+          "network_id": "insurance:doi:TX:10428",
+          "display_name": "Awesome Insurance Agency, Inc.",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -157,8 +204,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10199",
-          "display_name": "GENE MCWHORTER INSURANCE AGENCY INC",
+          "network_id": "insurance:doi:TX:10433",
+          "display_name": "PLANNED FINANCIAL INVESTMENTS INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -167,8 +214,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10242",
-          "display_name": "RICHARD E MARTIN CLU A PROF CORP",
+          "network_id": "insurance:doi:TX:10452",
+          "display_name": "AMM INSURANCE AGENCY, INC.",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -177,8 +224,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10255",
-          "display_name": "JARVIS R HAYNES, INC.",
+          "network_id": "insurance:doi:TX:10455",
+          "display_name": "BURGE CENTEX INC.",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -187,8 +234,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10280",
-          "display_name": "EDINBURG INSURANCE AGENCY",
+          "network_id": "insurance:doi:TX:10492",
+          "display_name": "PRENEED SYSTEMS L L P",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -197,8 +244,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10344",
-          "display_name": "JILL MATHEWS INSURANCE AGENT INC.",
+          "network_id": "insurance:doi:TX:10503",
+          "display_name": "BENEPLACE, LLC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -207,8 +254,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10372",
-          "display_name": "CHURCHWELL AGENCY,INC.",
+          "network_id": "insurance:doi:TX:10506",
+          "display_name": "TURPIN & TURPIN INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -217,8 +264,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10401",
-          "display_name": "INTERNATIONAL WEALTH MANAGEMENT, INC.",
+          "network_id": "insurance:doi:TX:10526",
+          "display_name": "MOORE BENEFITS INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -227,8 +274,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10451",
-          "display_name": "INSURANCE ONE MANAGEMENT INC",
+          "network_id": "insurance:doi:TX:10532",
+          "display_name": "ATLAS INSURANCE AGENCY INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -237,8 +284,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10496",
-          "display_name": "ADELANTE INTERNATIONAL INCORPORATED",
+          "network_id": "insurance:doi:TX:10539",
+          "display_name": "HERTEL INSURORS GROUP LLP",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -247,8 +294,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10537",
-          "display_name": "BLEIER AND ASSOCIATES INC",
+          "network_id": "insurance:doi:TX:10573",
+          "display_name": "AMERICAN HALLMARK INSURANCE SERVICES, INC.",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -257,8 +304,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10567",
-          "display_name": "CRIDER INSURANCE SERVICES INC",
+          "network_id": "insurance:doi:TX:10579",
+          "display_name": "MARK MOON INSURANCE AGENCY INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -267,8 +314,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10571",
-          "display_name": "HUTCHERSON CORP",
+          "network_id": "insurance:doi:TX:10598",
+          "display_name": "ABC/ASSOCIATED BENEFIT CONSULTANTS INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -277,8 +324,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10637",
-          "display_name": "SOUTH TEXAS BENEFITS LLC",
+          "network_id": "insurance:doi:TX:10623",
+          "display_name": "FIRST INDEMNITY INSURANCE AGENCY OF TEXAS INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -287,8 +334,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10638",
-          "display_name": "MIKE BLANCHARDS INSURANCE SERVICES INC",
+          "network_id": "insurance:doi:TX:10628",
+          "display_name": "WARREN EMPLOYEE BENEFITS CO",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -297,8 +344,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10641",
-          "display_name": "MIDLAND INSURANCE SERVICES INC",
+          "network_id": "insurance:doi:TX:10681",
+          "display_name": "IMPERIAL GENERAL AGENCY OF TEXAS INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -307,8 +354,8 @@
           ]
         },
         {
-          "network_id": "insurance:doi:TX:10655",
-          "display_name": "HCB INSURANCE AGENCY INC",
+          "network_id": "insurance:doi:TX:10695",
+          "display_name": "CAREINGTON INTERNATIONAL CORPORATION",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -321,11 +368,41 @@
     },
     {
       "query": "insurance agencies Dallas TX",
-      "match_count": 1,
+      "match_count": 4,
       "matches": [
         {
-          "network_id": "insurance:doi:NV:1012968",
-          "display_name": "Triumph Ins Group Inc",
+          "network_id": "insurance:doi:TX:10273",
+          "display_name": "WILLIAM R. SKEETERS, INC.",
+          "entity_type": "insurance_brokerage",
+          "reasons": [
+            "entity_type_match",
+            "physical_city",
+            "physical_state"
+          ]
+        },
+        {
+          "network_id": "insurance:doi:TX:10526",
+          "display_name": "MOORE BENEFITS INC",
+          "entity_type": "insurance_brokerage",
+          "reasons": [
+            "entity_type_match",
+            "physical_city",
+            "physical_state"
+          ]
+        },
+        {
+          "network_id": "insurance:doi:TX:10573",
+          "display_name": "AMERICAN HALLMARK INSURANCE SERVICES, INC.",
+          "entity_type": "insurance_brokerage",
+          "reasons": [
+            "entity_type_match",
+            "physical_city",
+            "physical_state"
+          ]
+        },
+        {
+          "network_id": "insurance:doi:TX:10623",
+          "display_name": "FIRST INDEMNITY INSURANCE AGENCY OF TEXAS INC",
           "entity_type": "insurance_brokerage",
           "reasons": [
             "entity_type_match",
@@ -360,17 +437,17 @@
     "membership_drift": 0,
     "identity_drift": 0,
     "content_fingerprint_drift": 0,
-    "fingerprint_a": "e8bfad58d39a4ad92d6b90328782e81b42d16c4d210eaf47c4c1a50a828b68ed",
-    "fingerprint_b": "e8bfad58d39a4ad92d6b90328782e81b42d16c4d210eaf47c4c1a50a828b68ed"
+    "fingerprint_a": "f3c3588439bba150b779ef547f5c8f0ab1891e8382b327187e3fa8503a4ed874",
+    "fingerprint_b": "f3c3588439bba150b779ef547f5c8f0ab1891e8382b327187e3fa8503a4ed874"
   },
   "timings": {
-    "load_ms": 98101,
-    "normalize_ms": 2879,
-    "eligibility_ms": 2879,
-    "validation_ms": 62,
-    "export_ms": 7,
-    "total_ms": 101049
+    "load_ms": 61755,
+    "normalize_ms": 1978,
+    "eligibility_ms": 1978,
+    "validation_ms": 16,
+    "export_ms": 1,
+    "total_ms": 63750
   },
-  "fingerprint": "e8bfad58d39a4ad92d6b90328782e81b42d16c4d210eaf47c4c1a50a828b68ed",
+  "fingerprint": "f3c3588439bba150b779ef547f5c8f0ab1891e8382b327187e3fa8503a4ed874",
   "feed_path": "data/network-discovery/insurance-discovery-pilot.v1.json"
 }

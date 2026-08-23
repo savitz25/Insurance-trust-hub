@@ -117,7 +117,12 @@ export type IneligibilityReason =
   | 'wrong_host'
   | 'identity_incomplete'
   | 'unsupported_entity_class'
-  | 'carrier_is_resource';
+  | 'carrier_is_resource'
+  /** ASK-SEARCH-INSURANCE-001.1 legitimacy gate */
+  | 'incidental_license_holder'
+  | 'title_or_adjuster_only'
+  | 'unsupported_license_class'
+  | 'insufficient_insurance_business_evidence';
 
 export type EligibilityRecord = {
   source_table: 'providers' | 'carrier_registry';

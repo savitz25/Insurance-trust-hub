@@ -9,6 +9,11 @@ import { CARRIER_REGISTRY } from '../lib/carriers/registry';
 import { evaluateProviderEligibility } from '../lib/network-discovery/eligibility';
 import { mapProviderEntityType } from '../lib/network-discovery/entity-type';
 import {
+  evaluateDiscoveryLegitimacy,
+  hasIncidentalPrimaryBusinessName,
+  hasInsuranceNameEvidence,
+} from '../lib/network-discovery/legitimacy';
+import {
   compareStability,
   fingerprintEntities,
 } from '../lib/network-discovery/fingerprint';
@@ -203,6 +208,82 @@ assert(agentElig.entity?.medicare_category === true, 'medicare category flag fro
 
 const brokerageElig = evaluateProviderEligibility(miamiAgency);
 assert(brokerageElig.entity?.entity_type === 'insurance_brokerage', 'brokerage distinction');
+assert(brokerageElig.eligible, 'legitimate agency remains eligible');
+
+// --- legitimacy gate (ASK-SEARCH-INSURANCE-001.1) ---
+const autoNation = fixtureProvider({
+  id: uuid(6),
+  slug: 'abraham-chevrolet-miami-inc-dba-autonation-chevrolet-coral-g-a000425',
+  name: 'ABRAHAM CHEVROLET - MIAMI INC DBA AUTONATION CHEVROLET CORAL GABLES',
+  provider_type: 'brokerage',
+  categories: ['auto', 'homeowners'],
+  specialties: ['Agency', 'Independent Agency', 'Personal Lines'],
+  states_licensed: ['FL'],
+  cities: ['MIAMI'],
+  license_info: {
+    licenses: [
+      {
+        state: 'FL',
+        license_number: 'A000425',
+        type: 'AUTOMOBILE WARRANTY',
+        verification_url: 'https://licenseesearch.fldfs.com/',
+        source: 'Florida DFS',
+        checkedAt: '2026-08-01T00:00:00.000Z',
+        method: 'automated',
+        identityMatchAccepted: true,
+        status: 'verified',
+      },
+    ],
+  },
+  contact: {
+    address: { street: '', city: 'MIAMI', state: 'FL', zip: '33134' },
+    county: 'Miami-Dade',
+  },
+});
+assert(
+  hasIncidentalPrimaryBusinessName(autoNation.name),
+  'AutoNation name flagged as incidental primary business'
+);
+assert(
+  !hasInsuranceNameEvidence(autoNation.name),
+  'AutoNation name lacks insurance-agency tokens'
+);
+const autoNationLegit = evaluateDiscoveryLegitimacy(autoNation);
+assert(!autoNationLegit.ok, 'AutoNation legitimacy fail-closed');
+assert(
+  autoNationLegit.bucket === 'INCIDENTAL_LICENSE_HOLDER',
+  'AutoNation classified incidental license holder'
+);
+assert(
+  autoNationLegit.reason === 'incidental_license_holder',
+  'AutoNation incidental reason code'
+);
+const autoNationElig = evaluateProviderEligibility(autoNation);
+assert(!autoNationElig.eligible, 'AutoNation excluded from discovery eligibility');
+assert(
+  autoNationElig.reasons.includes('incidental_license_holder'),
+  'AutoNation ineligible reason recorded'
+);
+
+const titleOnly = fixtureProvider({
+  id: uuid(7),
+  slug: 'bay-title-only',
+  name: 'Bay Area Title Company',
+  provider_type: 'brokerage',
+  categories: ['health'],
+  specialties: ['Title'],
+  license_info: fixtureLicense('FL', 'T700007'),
+});
+assert(
+  evaluateDiscoveryLegitimacy(titleOnly).reason === 'title_or_adjuster_only',
+  'title-only held'
+);
+assert(!evaluateProviderEligibility(titleOnly).eligible, 'title-only ineligible');
+
+assert(
+  evaluateDiscoveryLegitimacy(miamiAgency).ok,
+  'Coastal Miami Agency passes legitimacy'
+);
 
 // --- geography ---
 const phys = extractPhysicalLocation({

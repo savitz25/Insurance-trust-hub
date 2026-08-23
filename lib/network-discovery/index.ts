@@ -5,6 +5,7 @@ export * from '@/lib/network-discovery/identity';
 export * from '@/lib/network-discovery/categories';
 export * from '@/lib/network-discovery/entity-type';
 export * from '@/lib/network-discovery/eligibility';
+export * from '@/lib/network-discovery/legitimacy';
 export * from '@/lib/network-discovery/normalize';
 export * from '@/lib/network-discovery/fingerprint';
 export * from '@/lib/network-discovery/validate';

@@ -9,6 +9,7 @@ import {
   normalizeCarrierEntry,
   normalizeProviderRow,
 } from '@/lib/network-discovery/normalize';
+import { evaluateDiscoveryLegitimacy } from '@/lib/network-discovery/legitimacy';
 import type {
   DiscoveryEntity,
   EligibilityRecord,
@@ -94,6 +95,13 @@ export function evaluateProviderEligibility(
     // UUID fallback is allowed only when a re-checkable license exists
     // on a verified row. Bare UUID without license is identity_incomplete.
     reasons.push('identity_incomplete');
+  }
+
+  // ASK-SEARCH-INSURANCE-001.1 — consumer-facing legitimacy (fail closed).
+  // Does not mutate providers; discovery_status held/ineligible only.
+  const legitimacy = evaluateDiscoveryLegitimacy(row);
+  if (!legitimacy.ok && legitimacy.reason) {
+    reasons.push(legitimacy.reason);
   }
 
   return finish('providers', row.id, reasons, normalized.entity);
