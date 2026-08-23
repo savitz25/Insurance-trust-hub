@@ -1,0 +1,42 @@
+{
+  "task": "ASK-SEARCH-INSURANCE-001",
+  "banner": "PILOT / NOT YET CONSUMED BY ASK PRODUCTION",
+  "canonical_source": "providers",
+  "secondary_source": "lib/carriers/registry.ts CARRIER_REGISTRY",
+  "not_sources": [
+    "hub agent catalogs",
+    "dfs_producers / tdi_producers staging tables",
+    "ppef npi index"
+  ],
+  "git_sha": "fb9db9c90c6fa0b3e425e71a112e6a483403bf8c",
+  "counts": {
+    "providers": 105520,
+    "carriers_registry": 14,
+    "source": 105534,
+    "eligible": 105378,
+    "ineligible": 156,
+    "selected": 180
+  },
+  "provider_type_counts": {
+    "brokerage": 105520,
+    "independent_agent": 0,
+    "specialist": 0
+  },
+  "medicare_entity_class": "UNSUPPORTED",
+  "identity": {
+    "primary": "insurance:doi:{ST}:{license}",
+    "carrier": "insurance:carrier:{slug}",
+    "npn_on_providers": false
+  },
+  "profile_url": {
+    "host": "www.insurancetrusthub.com",
+    "provider": "https://www.insurancetrusthub.com/providers/{slug}",
+    "carrier": "https://www.insurancetrusthub.com/carriers/{slug}"
+  },
+  "external_calls": {
+    "google_places": 0,
+    "llm": 0,
+    "external_geocoding": 0,
+    "new_enrichment_apis": 0
+  }
+}
