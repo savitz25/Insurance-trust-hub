@@ -16,6 +16,8 @@ import {
 import { countyMatchOrParts, FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
 import { providerMatchesLaunchCounties } from '@/lib/dfs/providers-by-county';
 import { looksLikeZip } from '@/lib/tools/zip-resolve';
+import { evaluateDiscoveryLegitimacy } from '@/lib/network-discovery/legitimacy';
+import { physicalCityMatches } from '@/lib/ask-handoff/city-match';
 /**
  * Phase 1 — public directory returns verified TrustState only.
  * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
@@ -98,8 +100,14 @@ export async function getProviders(
       return { providers: [], total: 0 };
     }
 
+    // ASK-SEARCH-INSURANCE-001.1 — fail closed on incidental license holders
+    // (e.g. AUTOMOBILE WARRANTY dealerships) before public directory mapping.
+    const legitimateRows = (data as DbProvider[]).filter(
+      (row) => evaluateDiscoveryLegitimacy(row).ok
+    );
+
     let providers = onlyVerifiedResearch(
-      data.map((row) => mapRowToProvider(row as DbProvider))
+      legitimateRows.map((row) => mapRowToProvider(row))
     );
 
     if (stateCode) {
@@ -111,10 +119,22 @@ export async function getProviders(
     if (launchCounty) {
       providers = providers.filter((p) => providerMatchesLaunchCounties(p, [launchCounty]));
     }
+    // Exact physical city (Ask handoff / optional directory city=).
+    // Does not treat licensed/service state as city presence.
+    if (filters.city?.trim()) {
+      providers = providers.filter((p) => physicalCityMatches(p.city, filters.city));
+    }
 
     providers = providers.slice(0, limit);
 
-    return { providers, total: count ?? providers.length };
+    // After legitimacy + city post-filters, prefer filtered length over raw count
+    // when we dropped rows (avoids overstating totals that include incidental holders).
+    const adjustedTotal =
+      legitimateRows.length < (data as DbProvider[]).length || filters.city
+        ? Math.max(providers.length, legitimateRows.length)
+        : (count ?? providers.length);
+
+    return { providers, total: adjustedTotal };
   } catch {
     return { providers: [], total: 0 };
   }

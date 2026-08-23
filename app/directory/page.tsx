@@ -49,6 +49,11 @@ import {
   clampDirectoryPage,
 } from '@/lib/directory/params';
 import { looksLikeZip, resolveDirectoryZip } from '@/lib/directory/zip-geo';
+import {
+  parseInsuranceAskSearchContext,
+  buildAskBackLabel,
+  serializeAskSearchContext,
+} from '@/lib/ask-handoff';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -94,12 +99,22 @@ function sortProviders(providers: Provider[], sort: string, query: string): Prov
 
 export default async function DirectoryPage({ searchParams }: DirectoryPageProps) {
   const params = await searchParams;
+  const askCtx = parseInsuranceAskSearchContext(params);
   const rawQuery = getParam(params, 'q');
-  const zipParam = getParam(params, 'zip') || (looksLikeZip(rawQuery) ? rawQuery : '');
+  // Ask handoffs never carry free-text query — ignore q when src=ask
+  const zipParam =
+    getParam(params, 'zip') ||
+    askCtx?.zip ||
+    (!askCtx && looksLikeZip(rawQuery) ? rawQuery : '');
   const zipGeo = resolveDirectoryZip(zipParam);
-  const query = looksLikeZip(rawQuery) ? '' : rawQuery;
-  const state = getParam(params, 'state') || zipGeo?.stateCode || '';
-  const typeRaw = getParam(params, 'type');
+  const query = askCtx ? '' : looksLikeZip(rawQuery) ? '' : rawQuery;
+  const state =
+    getParam(params, 'state') ||
+    askCtx?.state ||
+    zipGeo?.stateCode ||
+    '';
+  const cityParam = getParam(params, 'city') || askCtx?.city || '';
+  const typeRaw = getParam(params, 'type') || askCtx?.category || '';
   const typeTokens = typeRaw
     .split(',')
     .map((t) => t.trim().toLowerCase())
@@ -137,12 +152,16 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     sort === 'rating' || sort === 'reviews' ? sort : ('name' as const);
   const pageSize = zipGeo ? 48 : DIRECTORY_PAGE_SIZE;
 
+  // Medicare category from Ask must not silently become health specialty
+  const askBlocksMedicareCategory = askCtx?.category === 'medicare' || askCtx?.unsupported === 'medicare_agent';
+
   const searchArgs = (specialtyOverride?: Specialty | ''): ProviderFilters => ({
     query: query || undefined,
     state: state || undefined,
+    city: cityParam || undefined,
     zip: zipGeo?.zip,
     launchCountyId: zipGeo?.launchCounty?.id,
-    insuranceType: type || undefined,
+    insuranceType: askBlocksMedicareCategory ? undefined : type || undefined,
     specialty: (specialtyOverride ?? specialty) || undefined,
     verifiedOnly: true,
     hasAppointmentSnapshot,
@@ -153,9 +172,10 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   });
 
   let loaFallback = false;
-  let { providers: rawProviders, total } = zipParam && !zipGeo
-    ? { providers: [], total: 0 }
-    : await searchProviders(searchArgs());
+  let { providers: rawProviders, total } =
+    askBlocksMedicareCategory || (zipParam && !zipGeo)
+      ? { providers: [] as Provider[], total: 0 }
+      : await searchProviders(searchArgs());
 
   if (zipGeo && specialty && total === 0) {
     const retryLocal = await searchProviders(searchArgs(''));
@@ -222,12 +242,22 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   if (query) filterParams.q = query;
   if (zipGeo?.zip) filterParams.zip = zipGeo.zip;
   if (state) filterParams.state = state;
+  if (cityParam) filterParams.city = cityParam;
   if (type) filterParams.type = type;
   if (specialty) filterParams.specialty = specialty;
   if (minRating) filterParams.minRating = minRating;
   if (sort && sort !== 'name') filterParams.sort = sort;
   if (view && view !== 'grid') filterParams.view = view;
   if (hasAppointmentSnapshot) filterParams.appointments = 'true';
+  if (askCtx) {
+    filterParams.src = 'ask';
+    if (askCtx.entityType) filterParams.entity = askCtx.entityType;
+    if (askCtx.category) filterParams.category = askCtx.category;
+    if (askCtx.county) filterParams.county = askCtx.county;
+    if (askCtx.journey) filterParams.journey = askCtx.journey;
+    if (askCtx.intent) filterParams.intent = askCtx.intent;
+    if (askCtx.sid) filterParams.sid = askCtx.sid;
+  }
 
   const emptyVariant = classifyDirectoryEmpty({
     zipRaw: zipParam || undefined,
@@ -249,10 +279,18 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
       <div className="max-w-3xl mb-10">
         <h1 className="section-heading">Insurance agency directory</h1>
         <NetworkBelongingLine align="left" className="mt-2" />
+        {askCtx ? (
+          <p className="mt-3 rounded-lg border border-[#0284C7]/25 bg-[#0284C7]/5 px-3 py-2 text-sm text-[#0A2540]">
+            Preloaded from AskTrustHub — {buildAskBackLabel(askCtx).replace(/^←\s*Back to\s+/i, '')}.
+            Filters below match structured search context (not a retyped query).
+          </p>
+        ) : null}
         <p className="mt-3 text-muted-foreground leading-relaxed">
           {zipGeo
             ? `ZIP ${zipGeo.zip} maps to ${zipGeo.displayLabel}. Showing verified agencies in that geography only — not a nationwide name search.`
-            : getDirectoryStateIntro(state)}
+            : cityParam && state
+              ? `Showing verified agencies with a physical city match for ${cityParam.replace(/-/g, ' ')}, ${state}. Statewide license alone is not treated as a city office.`
+              : getDirectoryStateIntro(state)}
         </p>
         {zipGeo?.hubHref ? (
           <p className="mt-2 text-sm text-muted-foreground">
@@ -884,7 +922,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                 )}
               >
                 {providers.map((provider) => (
-                  <ProviderCard key={provider.id} provider={provider} />
+                  <ProviderCard
+                    key={provider.id}
+                    provider={provider}
+                    profileQuery={askCtx ? serializeAskSearchContext(askCtx) : undefined}
+                  />
                 ))}
               </div>
               <DirectoryPagination

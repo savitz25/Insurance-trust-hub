@@ -18,6 +18,8 @@ import { cn } from '@/lib/utils';
 interface ProviderCardProps {
   provider: Provider;
   className?: string;
+  /** Optional allowlisted query string (e.g. Ask handoff) — never free-text query */
+  profileQuery?: string;
 }
 
 /**
@@ -25,7 +27,7 @@ interface ProviderCardProps {
  * phone if present, verified badge. Website/rating secondary only.
  * Never feature email. Never rank by Google rating or appointments.
  */
-export function ProviderCard({ provider, className }: ProviderCardProps) {
+export function ProviderCard({ provider, className, profileQuery }: ProviderCardProps) {
   if (!canShowAsVerified(resolveProviderTrustState(provider))) {
     return null;
   }
@@ -42,6 +44,9 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
   const hasAppts =
     Boolean(provider.appointment_snapshot?.totalCount) &&
     (provider.appointment_snapshot?.totalCount ?? 0) > 0;
+  const profileHref = profileQuery
+    ? `/providers/${provider.slug}?${profileQuery.replace(/^\?/, '')}`
+    : `/providers/${provider.slug}`;
 
   return (
     <Card className={cn('provider-card flex flex-col h-full', className)}>
@@ -50,7 +55,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
           <div className="min-w-0 flex-1">
             <CardTitle className="text-lg leading-snug">
               <Link
-                href={`/providers/${provider.slug}`}
+                href={profileHref}
                 className="hover:text-primary transition-colors"
               >
                 {provider.name}

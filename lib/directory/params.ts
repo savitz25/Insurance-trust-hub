@@ -41,6 +41,15 @@ const PRESERVE_KEYS = [
   'sort',
   'view',
   'appointments',
+  /** Ask handoff allowlist (ASK-SEARCH-INSURANCE-002) */
+  'src',
+  'entity',
+  'category',
+  'city',
+  'county',
+  'journey',
+  'intent',
+  'sid',
 ] as const;
 
 /**

@@ -12,6 +12,8 @@ import {
   buildMedicareRollup,
   listMedicareEvidencedCarrierSlugs,
 } from '@/lib/carriers/rollup';
+import { parseInsuranceAskSearchContext } from '@/lib/ask-handoff';
+import { EmptyCoveragePanel, NAIC_CONSUMER_URL } from '@/components/research/empty-coverage-panel';
 
 const META = RESEARCH_META.carriersHub;
 
@@ -21,7 +23,17 @@ export const metadata: Metadata = buildMetadata({
   path: '/carriers',
 });
 
-export default function CarriersIndexPage() {
+type Props = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function CarriersIndexPage({ searchParams }: Props) {
+  const params = searchParams ? await searchParams : {};
+  const askCtx = parseInsuranceAskSearchContext(params);
+  const askWantsGeo = Boolean(askCtx?.state || askCtx?.city || askCtx?.zip);
+  // Carrier registry has no safe authoritative geography — Ask geo filters → honest zero.
+  const askGeoEmpty = Boolean(askCtx && askCtx.entityType === 'insurance_carrier' && askWantsGeo);
+
   const evidenced = new Set(listMedicareEvidencedCarrierSlugs());
   const jsonLd = buildResearchPageGraph({
     path: '/carriers',
@@ -54,8 +66,29 @@ export default function CarriersIndexPage() {
       </div>
 
       <div className="container mx-auto max-w-4xl px-4 py-10 space-y-6">
+        {askCtx ? (
+          <p className="rounded-lg border border-[#0284C7]/25 bg-[#0284C7]/5 px-3 py-2 text-sm text-[#0A2540]">
+            Preloaded from AskTrustHub — insurance carrier research
+            {askCtx.state ? ` · state context ${askCtx.state}` : ''}.
+          </p>
+        ) : null}
+        {askGeoEmpty ? (
+          <EmptyCoveragePanel
+            variant="unmapped"
+            title={`No verified carriers matched ${askCtx?.state || 'that location'} yet`}
+            description="The curated carrier registry does not publish safe state/city geography for Ask Universal Search. We will not infer carrier location from brand names. Browse organization-level carrier research below, or return to agency directory filters."
+            placeLabel={askCtx?.state || undefined}
+            primarySources={[
+              { href: NAIC_CONSUMER_URL, label: 'NAIC consumer resources', external: true },
+            ]}
+            widenLinks={[
+              { href: '/carriers', label: 'Clear Ask geo / all carriers' },
+              { href: '/directory?verified=true', label: 'Browse verified agencies' },
+            ]}
+          />
+        ) : null}
         <ul className="grid sm:grid-cols-2 gap-3">
-          {CARRIER_REGISTRY.map((c) => {
+          {(askGeoEmpty ? [] : CARRIER_REGISTRY).map((c) => {
             const med = buildMedicareRollup(c);
             return (
               <li key={c.slug}>

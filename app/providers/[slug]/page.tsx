@@ -49,6 +49,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ContextNav } from '@/components/context-nav';
 import { cn } from '@/lib/utils';
 import type { Provider } from '@/types/provider';
+import {
+  parseInsuranceAskSearchContext,
+  buildAskBackLabel,
+  buildAskBackShortLabel,
+  buildAskDirectoryHref,
+} from '@/lib/ask-handoff';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import {
   allowsRegulatorLeadForm,
@@ -86,7 +92,7 @@ function extractNpnFromNotes(notes: string | null | undefined): string | null {
 
 interface ProviderPageProps {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ from?: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export const dynamic = 'force-dynamic';
@@ -144,6 +150,9 @@ async function loadVerifiedProvider(slug: string): Promise<Provider | null> {
 export default async function ProviderPage({ params, searchParams }: ProviderPageProps) {
   const { slug } = await params;
   const sp = searchParams ? await searchParams : {};
+  const askCtx = parseInsuranceAskSearchContext(sp);
+  const fromRaw = sp.from;
+  const from = Array.isArray(fromRaw) ? fromRaw[0] : fromRaw;
   const provider = await loadVerifiedProvider(slug);
   if (!provider) notFound();
 
@@ -249,9 +258,18 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
         <div className="container mx-auto px-4 py-10 md:py-14">
           <ContextNav
             pathname={`/providers/${slug}`}
-            from={sp.from}
+            from={typeof from === 'string' ? from : undefined}
             currentLabel={provider.name}
             className="mb-5"
+            backOverride={
+              askCtx
+                ? {
+                    href: buildAskDirectoryHref(askCtx),
+                    label: buildAskBackLabel(askCtx),
+                    shortLabel: buildAskBackShortLabel(askCtx),
+                  }
+                : undefined
+            }
           />
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
             <div className="max-w-3xl">

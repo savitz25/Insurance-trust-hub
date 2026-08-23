@@ -19,6 +19,8 @@ export default function robots(): MetadataRoute.Robots {
           '/auth/',
           '/my-insurance/',
           '/my-insurance',
+          '/from-ask',
+          '/from-ask/',
         ],
       },
     ],
