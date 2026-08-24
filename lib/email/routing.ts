@@ -10,7 +10,7 @@
  */
 
 /** Public brand address published on site (footer, contact, privacy, terms). */
-export const PUBLIC_CONTACT_EMAIL = 'hello@insurancetrusthub.com' as const;
+export const PUBLIC_CONTACT_EMAIL = 'hello@asktrusthub.com' as const;
 
 /**
  * Monitored human inbox for Insurance operations.

@@ -16,7 +16,7 @@ export const BRAND = {
   shortName: 'ITH',
   domain: 'insurancetrusthub.com',
   url: 'https://www.insurancetrusthub.com',
-  email: 'hello@insurancetrusthub.com',
+  email: 'hello@asktrusthub.com',
   tagline: INSURANCE_TAGLINE,
   colors: INSURANCE_BRAND,
 } as const;

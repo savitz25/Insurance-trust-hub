@@ -1,6 +1,6 @@
 # Insurance Trust Hub — Email Routing
 
-**Public brand address:** `hello@insurancetrusthub.com`  
+**Public network address:** `hello@asktrusthub.com`
 **Monitored operator inbox:** `info@movetrusthub.com` (Google Workspace)  
 **Inbound forwarder:** ImprovMX  
 **Outbound transactional:** Resend  
@@ -72,7 +72,7 @@ node scripts/improvmx-dns.mjs verify
 | Contact form | Resend → operator inbox; Reply-To = visitor |
 | Lead form | DB + Resend → operator; Reply-To = visitor |
 | My Insurance mail | From brand `hello@` via Resend |
-| Footer / mailto | `hello@insurancetrusthub.com` |
+| Footer / mailto | `hello@asktrusthub.com` |
 
 Code: `lib/email/routing.ts`, `lib/email/resend.ts`, `lib/actions/contact.ts`, `lib/actions/leads.ts`.
 

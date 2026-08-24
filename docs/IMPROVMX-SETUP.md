@@ -21,7 +21,7 @@ contact@insurancetrusthub.com   → info@movetrusthub.com
 *@insurancetrusthub.com         → info@movetrusthub.com
 ```
 
-**Published on site:** `hello@insurancetrusthub.com` only (footer, contact, legal).  
+**Published on site:** `hello@asktrusthub.com` only (footer, contact, legal).
 `contact@` and catch-all exist for delivery robustness; they are not required in public UI.
 
 ---
@@ -126,7 +126,7 @@ Confirm in **`info@movetrusthub.com`** (inbox + spam). Check ImprovMX logs if av
 
 | Surface | Address |
 |---------|---------|
-| Footer / contact / privacy / terms / schema | `hello@insurancetrusthub.com` |
+| Footer / contact / privacy / terms / schema | `hello@asktrusthub.com` |
 | Form notifications (Resend TO) | `info@movetrusthub.com` via `OPERATOR_INBOX` |
 | Resend From | `Insurance Trust Hub <hello@insurancetrusthub.com>` |
 

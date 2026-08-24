@@ -38,7 +38,7 @@ const BRAND = {
   bg: '#F8FAFC',
   card: '#FFFFFF',
   ice: '#E0F2FE',
-  supportEmail: 'hello@insurancetrusthub.com',
+  supportEmail: 'hello@asktrusthub.com',
   trustLine: 'Independent research workspace — no paid placements, no lead selling.',
   independenceUrl: 'https://www.asktrusthub.com/promise',
 } as const;
