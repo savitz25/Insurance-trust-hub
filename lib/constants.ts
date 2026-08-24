@@ -1,7 +1,7 @@
 export const SITE_NAME = 'InsuranceTrustHub';
 export const SITE_URL = 'https://www.insurancetrusthub.com';
 /** Public brand contact — inbound requires MX forward (see docs/EMAIL-ROUTING.md). */
-export const SITE_EMAIL = 'hello@insurancetrusthub.com';
+export const SITE_EMAIL = 'hello@asktrusthub.com';
 
 export const DISCLAIMER =
   'Independent directory. Not affiliated with any insurance carrier, agency, or agent. All information is for research purposes only. Always verify licensing directly with your state\'s Department of Insurance, NAIC, or official sources before engaging any provider.';
