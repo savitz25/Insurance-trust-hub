@@ -41,6 +41,9 @@ export function buildAskDirectoryHref(ctx: InsuranceAskSearchContext): string {
   // Product category — never infer medicare from health
   if (ctx.category && ctx.category !== 'medicare') {
     p.set('type', ctx.category);
+    // Preserve the structured handoff key so profile links and Back to Results
+    // retain the original category alongside the directory's internal filter.
+    p.set('category', ctx.category);
   }
   if (ctx.entityType) p.set('entity', ctx.entityType);
   if (ctx.journey) p.set('journey', ctx.journey);

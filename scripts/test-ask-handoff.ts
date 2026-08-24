@@ -90,6 +90,7 @@ assert(autoTx.kind === 'directory', 'auto TX → directory');
 assert(autoTx.href.includes('/directory'), 'directory path');
 assert(autoTx.href.includes('state=TX'), 'state preloaded');
 assert(autoTx.href.includes('type=auto'), 'category→type');
+assert(autoTx.href.includes('category=auto'), 'structured category retained for profile Back');
 assert(!autoTx.href.includes('q='), 'no free-text q');
 
 const carriersFl = resolveAskHandoffDestination(
@@ -181,6 +182,7 @@ const href = buildAskDirectoryHref({
 });
 assert(href.startsWith('/directory?'), 'directory href');
 assert(href.includes('type=homeowners'), 'homeowners type');
+assert(href.includes('category=homeowners'), 'homeowners structured category retained');
 assert(href.includes('city=miami'), 'city param');
 assert(!href.includes('type=medicare'), 'no medicare type widen');
 

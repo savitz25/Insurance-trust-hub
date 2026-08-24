@@ -142,7 +142,6 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     (loaAlias !== 'all' ? loaSpecialtyMap[loaAlias] ?? '' : '') ||
     (wantHealthLoa && zipGeo ? 'Health' : '')) as Specialty | '';
   // Phase 11A — public directory is always verified research (legacy verified=false ignored)
-  const verifiedOnly = getParam(params, 'verified') !== 'false';
   const hasAppointmentSnapshot = state === 'FL' && getParam(params, 'appointments') === 'true';
   const minRating = getParam(params, 'minRating');
   const sort = getParam(params, 'sort') || 'name';
@@ -155,10 +154,10 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   // Medicare category from Ask must not silently become health specialty
   const askBlocksMedicareCategory = askCtx?.category === 'medicare' || askCtx?.unsupported === 'medicare_agent';
 
-  const searchArgs = (specialtyOverride?: Specialty | ''): ProviderFilters => ({
+  const searchArgs = (specialtyOverride?: Specialty | '', cityOverride = cityParam): ProviderFilters => ({
     query: query || undefined,
     state: state || undefined,
-    city: cityParam || undefined,
+    city: cityOverride || undefined,
     zip: zipGeo?.zip,
     launchCountyId: zipGeo?.launchCounty?.id,
     insuranceType: askBlocksMedicareCategory ? undefined : type || undefined,
@@ -172,6 +171,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   });
 
   let loaFallback = false;
+  let askCityFallback = false;
   let { providers: rawProviders, total } =
     askBlocksMedicareCategory || (zipParam && !zipGeo)
       ? { providers: [] as Provider[], total: 0 }
@@ -186,11 +186,20 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     }
   }
 
+  if (askCtx && cityParam && state && total === 0 && !zipGeo) {
+    const statewide = await searchProviders(searchArgs(loaFallback ? '' : specialty, ''));
+    if (statewide.total > 0) {
+      rawProviders = statewide.providers;
+      total = statewide.total;
+      askCityFallback = true;
+    }
+  }
+
   const totalPages = directoryTotalPages(total, pageSize);
   const page = clampDirectoryPage(requestedPage, totalPages);
   if (page !== requestedPage && total > 0) {
     const retry = await searchProviders({
-      ...searchArgs(loaFallback ? '' : specialty),
+      ...searchArgs(loaFallback ? '' : specialty, askCityFallback ? '' : cityParam),
       offset: (page - 1) * pageSize,
     });
     rawProviders = retry.providers;
@@ -288,6 +297,8 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <p className="mt-3 text-muted-foreground leading-relaxed">
           {zipGeo
             ? `ZIP ${zipGeo.zip} maps to ${zipGeo.displayLabel}. Showing verified agencies in that geography only — not a nationwide name search.`
+            : askCityFallback && cityParam && state
+              ? `No verified physical-city matches were found for ${cityParam.replace(/-/g, ' ')}, ${state}. Showing verified ${state} agencies with statewide evidence instead; these are not described as ${cityParam.replace(/-/g, ' ')} offices.`
             : cityParam && state
               ? `Showing verified agencies with a physical city match for ${cityParam.replace(/-/g, ' ')}, ${state}. Statewide license alone is not treated as a city office.`
               : getDirectoryStateIntro(state)}
