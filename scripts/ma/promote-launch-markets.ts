@@ -18,6 +18,10 @@ import {
   type MaProducerRow,
 } from '../../lib/ma/promote';
 import { loadLocalEnv, requireSupabaseOpsEnv } from '../lib/load-local-env';
+import {
+  licenseIdentityFromPromoteInsert,
+  resolveLegacyProviderWrite,
+} from '../../lib/providers/safe-provider-write';
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -184,14 +188,21 @@ async function main() {
         }
 
         const insert = result.providerInsert;
+        const ident = licenseIdentityFromPromoteInsert(insert);
         const { data: existingSlug } = await supabase
           .from('providers')
-          .select('id, slug')
+          .select('id, slug, license_info')
           .eq('slug', insert.slug)
           .maybeSingle();
+        const writePlan = resolveLegacyProviderWrite({
+          candidateSlug: insert.slug,
+          licenseState: ident.licenseState,
+          licenseNumber: ident.licenseNumber,
+          existingBySlug: existingSlug ?? null,
+        });
 
         let providerId: string;
-        if (existingSlug?.id) {
+        if (writePlan.action === 'update') {
           const { error: upErr } = await supabase
             .from('providers')
             .update({
@@ -207,17 +218,17 @@ async function main() {
               contact: insert.contact,
               updated_at: new Date().toISOString(),
             })
-            .eq('id', existingSlug.id);
+            .eq('id', writePlan.id);
           if (upErr) {
             bump(`update_error:${upErr.message.slice(0, 40)}`);
             continue;
           }
-          providerId = existingSlug.id;
+          providerId = writePlan.id;
         } else {
           const { data: created, error: insErr } = await supabase
             .from('providers')
             .insert({
-              slug: insert.slug,
+              slug: writePlan.slug,
               name: insert.name,
               provider_type: insert.provider_type,
               categories: insert.categories,
@@ -262,7 +273,7 @@ async function main() {
         if (stats.samples.length < 12) {
           stats.samples.push({
             name: insert.name,
-            slug: insert.slug,
+            slug: writePlan.slug,
             market: market.id,
           });
         }

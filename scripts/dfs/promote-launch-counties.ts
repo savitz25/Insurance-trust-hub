@@ -6,7 +6,7 @@
  *   npm run dfs:promote -- --county orange --per-county-limit 2000
  *   npm run dfs:promote -- --wave 2 --skip-existing
  *   npm run dfs:promote -- --entity business   (default Phase 5)
- *   npm run dfs:promote -- --entity all        (legacy; includes individuals)
+ *   npm run dfs:promote -- --entity all        (individuals still cannot publish)
  *
  * Loads .env / .env.local / .env.dfs.local — see docs/LOCAL-ENV.md
  *
@@ -30,6 +30,10 @@ import {
 } from '../../lib/dfs/promote';
 import { canShowAsVerified, resolveProviderTrustState } from '../../lib/insurance/trust/provider-trust-state';
 import { mapRowToProvider } from '../../lib/providers/map-db-provider';
+import {
+  licenseIdentityFromPromoteInsert,
+  resolveLegacyProviderWrite,
+} from '../../lib/providers/safe-provider-write';
 import type { Provider as DbProvider } from '../../types/supabase';
 import { loadLocalEnv, requireSupabaseOpsEnv } from '../lib/load-local-env';
 
@@ -258,21 +262,29 @@ async function main() {
         launch_county_id: county.id,
       };
 
+      const ident = licenseIdentityFromPromoteInsert(insert);
       const { data: existing } = await supabase
         .from('providers')
-        .select('id, slug')
+        .select('id, slug, license_info')
         .eq('slug', insert.slug)
         .maybeSingle();
+      const writePlan = resolveLegacyProviderWrite({
+        candidateSlug: insert.slug,
+        licenseState: ident.licenseState,
+        licenseNumber: ident.licenseNumber,
+        existingBySlug: existing ?? null,
+      });
+      const insertPayload = { ...insert, slug: writePlan.slug };
 
       let providerId: string;
-      if (existing?.id) {
+      if (writePlan.action === 'update') {
         const { data: updated, error: uerr } = await supabase
           .from('providers')
           .update({
-            ...insert,
+            ...insertPayload,
             updated_at: new Date().toISOString(),
           })
-          .eq('id', existing.id)
+          .eq('id', writePlan.id)
           .select('id, *')
           .single();
         if (uerr || !updated) {
@@ -289,7 +301,7 @@ async function main() {
       } else {
         const { data: created, error: cerr } = await supabase
           .from('providers')
-          .insert(insert)
+          .insert(insertPayload)
           .select('id, *')
           .single();
         if (cerr || !created) {
@@ -385,17 +397,25 @@ async function main() {
           continue;
         }
         const insert = evalResult.providerInsert;
+        const ident = licenseIdentityFromPromoteInsert(insert);
         const { data: existing } = await supabase
           .from('providers')
-          .select('id, slug')
+          .select('id, slug, license_info')
           .eq('slug', insert.slug)
           .maybeSingle();
+        const writePlan = resolveLegacyProviderWrite({
+          candidateSlug: insert.slug,
+          licenseState: ident.licenseState,
+          licenseNumber: ident.licenseNumber,
+          existingBySlug: existing ?? null,
+        });
+        const insertPayload = { ...insert, slug: writePlan.slug };
         let providerId: string;
-        if (existing?.id) {
+        if (writePlan.action === 'update') {
           const { data: updated, error: uerr } = await supabase
             .from('providers')
-            .update({ ...insert, updated_at: new Date().toISOString() })
-            .eq('id', existing.id)
+            .update({ ...insertPayload, updated_at: new Date().toISOString() })
+            .eq('id', writePlan.id)
             .select('id, *')
             .single();
           if (uerr || !updated) {
@@ -406,7 +426,7 @@ async function main() {
         } else {
           const { data: created, error: cerr } = await supabase
             .from('providers')
-            .insert(insert)
+            .insert(insertPayload)
             .select('id')
             .single();
           if (cerr || !created) {

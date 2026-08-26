@@ -22,6 +22,7 @@ import {
   type LoaCapability,
 } from '@/lib/dfs/loa';
 import { slugifyProducer, type NormalizedDfsProducer } from '@/lib/dfs/normalize';
+import { mayPromoteToPublicProvider } from '@/lib/national/publication';
 
 export type DfsProducerRow = {
   id: string;
@@ -118,6 +119,12 @@ export function evaluatePromotionEligibility(
 ): PromoteCandidateResult {
   if (isSeedProviderId(producer.id)) {
     return { ok: false, reason: 'seed_entity_id' };
+  }
+  const publication = mayPromoteToPublicProvider({
+    entityType: producer.entity_type,
+  });
+  if (!publication.ok) {
+    return { ok: false, reason: publication.reason };
   }
   if (!producer.license_number?.trim()) {
     return { ok: false, reason: 'missing_license_number' };

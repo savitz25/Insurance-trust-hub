@@ -21,6 +21,11 @@ export interface Provider {
   rating: number;
   review_count: number;
   is_verified: boolean;
+  /**
+   * All license_info.licenses entries when mapped from DB.
+   * Display fields below still use licenses[0] until INS-NAT-009.
+   */
+  licenses?: import('@/types/supabase').LicenseEntry[];
   license_number?: string | null;
   /** Phase 6B1 provenance — required with license for hard verified / indexable */
   license_state?: string | null;

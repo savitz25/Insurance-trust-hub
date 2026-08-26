@@ -2,12 +2,17 @@ import type { Provider } from '@/types/provider';
 import type { Provider as DbProvider } from '@/types/supabase';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import type { ProviderEnrichment } from '@/lib/enrichment/types';
+import {
+  allLicenseEntries,
+  primaryLicenseEntry,
+} from '@/lib/providers/license-entries';
 
 /** Map Supabase provider row → public Provider (shared by queries + ops). */
 export function mapRowToProvider(row: DbProvider): Provider {
   const contact = row.contact ?? {};
   const address = contact.address;
-  const license = row.license_info?.licenses?.[0];
+  const licenses = allLicenseEntries(row.license_info);
+  const license = primaryLicenseEntry(row.license_info);
   const enrichment = (contact as { enrichment?: ProviderEnrichment }).enrichment ?? null;
 
   // Prefer provenance-labeled Google snapshot for display rating when present
@@ -39,6 +44,8 @@ export function mapRowToProvider(row: DbProvider): Provider {
     rating: useGoogleSnap ? Number(g!.rating) : 0,
     review_count: useGoogleSnap ? Number(g!.reviewCount ?? 0) : 0,
     is_verified: row.verified,
+    /** Legacy display fields — first JSON license only. Full set is `licenses`. */
+    licenses,
     license_number: license?.license_number ?? null,
     license_state: license?.state ?? null,
     license_source: license?.source ?? null,
