@@ -127,14 +127,17 @@ async function fetchAll<T>(
   const page = 1000;
   let from = 0;
   while (rows.length < total) {
-    let q = sb.from(table).select(select).range(from, from + page - 1);
+    let q = sb.from(table).select(select).order('id', { ascending: true }).range(from, from + page - 1);
     if (eq) q = q.eq(eq[0], eq[1]);
     const { data, error } = await q;
     if (error) throw new Error(`${table}: ${error.message}`);
     const batch = (data ?? []) as T[];
     if (!batch.length) break;
     rows.push(...batch);
-    from += page;
+    from += batch.length;
+  }
+  if (rows.length !== total) {
+    throw new Error(`${table} fetch incomplete: got ${rows.length} expected ${total}`);
   }
   return rows;
 }
@@ -203,24 +206,40 @@ async function main() {
   }
 
   console.log('Loading person and agency NPNs…');
-  const personRows = await fetchAll<{ id: string; npn: string | null; identity_notes: string | null }>(
+  const personRows = await fetchAll<{ id: string; npn: string | null }>(
     sb,
     'national_entities',
-    'id,npn,identity_notes',
+    'id,npn',
     ['entity_kind', 'person']
   );
   const personByNpn = new Map<string, { id: string; states: string[] }>();
+  const personById = new Map<string, string>();
   for (const r of personRows) {
     const n = normalizeNpn(r.npn);
     if (!n) continue;
-    let states: string[] = [];
-    try {
-      const notes = r.identity_notes ? JSON.parse(r.identity_notes) : null;
-      if (Array.isArray(notes?.states)) states = notes.states.map((s: string) => String(s).toUpperCase());
-    } catch {
-      states = [];
+    personByNpn.set(n, { id: r.id, states: [] });
+    personById.set(r.id, n);
+  }
+  let existingCmsProbe = -1;
+  {
+    const probe = await sb.from('cms_marketplace_observations').select('id', { count: 'exact', head: true });
+    if (!probe.error) existingCmsProbe = probe.count ?? 0;
+  }
+  if (existingCmsProbe <= 0) {
+    const credRows = await fetchAll<{ entity_id: string | null; jurisdiction: string }>(
+      sb,
+      'license_credentials',
+      'id,entity_id,jurisdiction',
+      ['entity_kind', 'person']
+    );
+    for (const c of credRows) {
+      if (!c.entity_id) continue;
+      const npn = personById.get(c.entity_id);
+      if (!npn) continue;
+      const rec = personByNpn.get(npn);
+      const st = String(c.jurisdiction || '').toUpperCase().slice(0, 2);
+      if (rec && st && !rec.states.includes(st)) rec.states.push(st);
     }
-    personByNpn.set(n, { id: r.id, states });
   }
   const agencyRows = await fetchAll<{ npn: string | null }>(
     sb,
@@ -457,38 +476,39 @@ async function main() {
     if (st.includes('VT')) vtMatches += 1;
   }
 
-  console.log('Health LOA cross-check for current-year CMS matches…');
-  const currentEntityIds = [...currentRegNpns]
-    .map((n) => personByNpn.get(n)?.id)
-    .filter((id): id is string => Boolean(id));
-  const healthMatched = new Set<string>();
-  for (const part of chunk(currentEntityIds, 100)) {
-    const { data, error } = await sb
-      .from('loa_observations')
-      .select('entity_id,consumer_group')
-      .in('entity_id', part);
-    if (error) throw new Error(error.message);
-    for (const r of data ?? []) {
-      if (r.entity_id && String(r.consumer_group || '').includes('HEALTH')) {
-        healthMatched.add(String(r.entity_id));
+  let cmsCurrentAndHealth = 0;
+  let cmsCurrentNoHealth = 0;
+  const healthPersonsGraph = 410170;
+  let healthNoCmsCurrent = healthPersonsGraph;
+  if (existingCmsProbe <= 0) {
+    console.log('Health LOA cross-check for current-year CMS matches…');
+    const currentEntityIds = [...currentRegNpns]
+      .map((n) => personByNpn.get(n)?.id)
+      .filter((id): id is string => Boolean(id));
+    const healthMatched = new Set<string>();
+    for (const part of chunk(currentEntityIds, 100)) {
+      const { data, error } = await sb
+        .from('loa_observations')
+        .select('entity_id,consumer_group')
+        .in('entity_id', part);
+      if (error) throw new Error(error.message);
+      for (const r of data ?? []) {
+        if (r.entity_id && String(r.consumer_group || '').includes('HEALTH')) {
+          healthMatched.add(String(r.entity_id));
+        }
       }
     }
+    cmsCurrentAndHealth = healthMatched.size;
+    cmsCurrentNoHealth = currentRegNpns.size - cmsCurrentAndHealth;
+    healthNoCmsCurrent = Math.max(0, healthPersonsGraph - cmsCurrentAndHealth);
   }
-  const cmsCurrentAndHealth = healthMatched.size;
-  const cmsCurrentNoHealth = currentRegNpns.size - cmsCurrentAndHealth;
-  const healthPersonsGraph = 410170;
-  const healthNoCmsCurrent = Math.max(0, healthPersonsGraph - cmsCurrentAndHealth);
 
   if (personByNpn.size < 690000) {
     console.error(JSON.stringify({ halt: 'person_npn_map_incomplete', loaded: personByNpn.size }));
     process.exit(1);
   }
 
-  let existingCms = -1;
-  {
-    const probe = await sb.from('cms_marketplace_observations').select('id', { count: 'exact', head: true });
-    if (!probe.error) existingCms = probe.count ?? 0;
-  }
+  const existingCms = existingCmsProbe;
 
   const summary = {
     task: 'INS-NAT-011',
