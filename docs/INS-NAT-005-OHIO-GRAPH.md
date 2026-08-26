@@ -152,7 +152,20 @@ Do not treat 81,943 as the US insurance-agency market. NV/MS remain provisional.
 - `scripts/national/classify-dry-run.ts` Ohio overlay
 - `docs/INS-NAT-005-GRAPH-SQL-EDITOR.md`
 
-Tests: INS-NAT-003 C1–C13 PASS; INS-NAT-005 PASS.
+Tests: INS-NAT-003 C1–C13 PASS; INS-NAT-005 OH1–OH9 PASS.
+
+### Status / freshness capability (no current-agency headline)
+
+| Source | Status column | Expiration | Issue | Extract meaning | Capability |
+|--------|---------------|------------|-------|-----------------|------------|
+| FL | Yes — DFS `valid` 98,614 / `valid - probation` 8. No expiration on `dfs_producers`. | No | No | All Valid Licenses Business | **CURRENT_AT_OBSERVATION_ONLY** |
+| TX | Inferred active/expired from expiration (not an official TDI status token). 47,454 / 1,279. | 100% | 100% | Open-data agencies; some expired remain staged | **CURRENT_CAPABLE** (date-based only) |
+| OH | Adapter defaulted `active` for every row — **not** regulator status (CSV had no Status). | 100% (mailing list) | 100% | Current mailing-list snapshot | **CURRENT_AT_OBSERVATION_ONLY** |
+| NV | 19,751 active / 128 expired; expiration 100% | 100% | 100% | Firms-by-type export | **STATUS_INCOMPLETE** (and identity provisional) |
+| VT | DFR license status 1,983 active / 1 expired | 100% | 100% | Quarterly licensee list | **CURRENT_CAPABLE** |
+| MS | 10,613 active / 30 expired; issue 0% | 100% | 0% | Producer entity list | **STATUS_INCOMPLETE** (and identity provisional) |
+
+Do not treat import recency, `verified`, or `license_checked_at` as regulator-active. No national current-agency headline.
 
 ---
 

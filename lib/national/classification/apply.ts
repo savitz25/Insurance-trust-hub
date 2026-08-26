@@ -225,6 +225,17 @@ export type ResearchDenominators = {
   definitions: Record<string, string>;
 };
 
+/** Confirmed-NPN core backfill eligibility. Does not write. */
+export function isProposedConfirmedCore(entity: EntityClassification): boolean {
+  return (
+    entity.identityKind === 'npn' &&
+    Boolean(entity.npn) &&
+    entity.identityConfidence !== 'REVIEW_REQUIRED' &&
+    entity.coreAgencyEligible &&
+    !entity.classificationUnknown
+  );
+}
+
 export function researchDenominators(
   credentials: ClassifiedCredential[],
   entities: EntityClassification[]

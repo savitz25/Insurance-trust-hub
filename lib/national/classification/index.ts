@@ -36,6 +36,7 @@ export {
   collectRawTypes,
   credentialIsCurrent,
   identityKeyFor,
+  isProposedConfirmedCore,
   researchDenominators,
   rollupEntityClassification,
   snapshotSourceEvidence,

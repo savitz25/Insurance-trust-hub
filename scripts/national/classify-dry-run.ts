@@ -5,7 +5,11 @@
 import { createReadStream, writeFileSync, existsSync, readFileSync } from 'fs';
 import { createHash } from 'crypto';
 import { createInterface } from 'readline';
-import { classifyAndRollup, researchDenominators } from '../../lib/national/classification';
+import {
+  classifyAndRollup,
+  isProposedConfirmedCore,
+  researchDenominators,
+} from '../../lib/national/classification';
 import { floridaRepeatedNpnMetrics } from '../../lib/national/metrics';
 import { normalizeNpn } from '../../lib/national/npn';
 import { compareLegalNames } from '../../lib/national/names';
@@ -213,14 +217,7 @@ async function main() {
   const mixed = entities.filter((e) => e.mixedCredential);
   const mixedCore = mixed.filter((e) => e.coreAgencyEligible);
 
-  const proposed = entities.filter((e) => {
-    if (e.identityKind !== 'npn') return false;
-    if (e.identityConfidence === 'REVIEW_REQUIRED') return false;
-    if (!e.coreAgencyEligible) return false;
-    if (e.classificationUnknown) return false;
-    if (!e.npn) return false;
-    return true;
-  });
+  const proposed = entities.filter(isProposedConfirmedCore);
 
   const proposedCreds = credentials.filter((c) => {
     if (!c.npn) return false;
