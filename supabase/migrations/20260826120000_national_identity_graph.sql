@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS national_entities (
   created_at         TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at         TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   CONSTRAINT national_entities_identity_anchor CHECK (
-    (identity_kind = 'npn' AND npn IS NOT NULL AND provisional_key IS NULL)
+    (identity_kind = 'npn' AND npn IS NOT NULL)
     OR
-    (identity_kind = 'provisional' AND provisional_key IS NOT NULL)
+    (identity_kind = 'provisional' AND provisional_key IS NOT NULL AND npn IS NULL)
   )
 );
 
@@ -118,7 +118,18 @@ CREATE TABLE IF NOT EXISTS license_credentials (
   regulator               TEXT NOT NULL,
   license_number          TEXT NOT NULL,
   license_class           TEXT,
-  license_namespace       TEXT NOT NULL DEFAULT 'producer',
+  license_namespace       TEXT NOT NULL DEFAULT 'producer'
+                            CHECK (license_namespace IN (
+                              'producer',
+                              'bail_bond',
+                              'adjuster',
+                              'title',
+                              'warranty',
+                              'surplus_lines',
+                              'tpa',
+                              'limited_lines',
+                              'other'
+                            )),
   -- Regulator-reported status (independent of Trust Hub freshness)
   regulatory_status       regulatory_status NOT NULL DEFAULT 'unknown',
   issue_date              DATE,
@@ -139,7 +150,7 @@ CREATE TABLE IF NOT EXISTS license_credentials (
 );
 
 COMMENT ON TABLE license_credentials IS
-  'State-specific credentials. Unique per jurisdiction + entity_kind + license_number. entity_id NULL = UNRESOLVED national identity.';
+  'State-specific credentials. Unique per jurisdiction + entity_kind + license_namespace + license_number. entity_id NULL = UNATTACHED/UNRESOLVED (ambiguous source identity). Provisional entities own credentials that are real but lack NPN.';
 
 COMMENT ON COLUMN license_credentials.regulatory_status IS
   'What the source last said about the license. Never derived from Trust Hub checked-at age.';
@@ -150,9 +161,12 @@ COMMENT ON COLUMN license_credentials.source_observed_at IS
 COMMENT ON COLUMN license_credentials.ingested_at IS
   'When Trust Hub ingested or last checked this credential. Stale ingested_at ≠ expired license.';
 
--- Same number may exist as person vs agency in one state (FL DFS).
+-- Person vs agency may share a displayed number (FL DFS).
+-- Distinct credential families (producer vs bail_bond vs adjuster vs title)
+-- may share a displayed number in future sources; namespace is normalized,
+-- never free-text license_class.
 CREATE UNIQUE INDEX IF NOT EXISTS idx_license_credentials_natural
-  ON license_credentials (jurisdiction, entity_kind, license_number);
+  ON license_credentials (jurisdiction, entity_kind, license_namespace, license_number);
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_license_credentials_source_record
   ON license_credentials (source_dataset, source_record_id)

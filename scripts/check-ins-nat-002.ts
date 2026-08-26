@@ -541,6 +541,181 @@ function agency(partial: Partial<SourceCredentialInput> & Pick<
   assert(census.crossState.overlaps['FL+TX'] === 2, 'census FL+TX NPNs include 70003 and 70006');
 }
 
+// ---------------------------------------------------------------------------
+// K1 — same credential re-import is idempotent
+// ---------------------------------------------------------------------------
+{
+  const g = new NationalGraph();
+  const row = agency({
+    sourceDataset: 'florida_dfs',
+    sourceRecordId: 'k1',
+    jurisdiction: 'FL',
+    licenseNumber: 'L777',
+    npn: '80001',
+    legalName: 'Idempotent Agency',
+    licenseClass: 'AGENCY LICENSE',
+  });
+  g.ingest(row);
+  g.ingest({ ...row, sourceObservedAt: '2026-08-20T00:00:00.000Z' });
+  assert(g.credentials.length === 1, 'K1 one credential after reimport');
+  assert(g.entities.length === 1, 'K1 one entity after reimport');
+}
+
+// ---------------------------------------------------------------------------
+// K2 — same displayed number, two namespaces, do not collapse
+// ---------------------------------------------------------------------------
+{
+  const g = new NationalGraph();
+  g.ingest(
+    agency({
+      sourceDataset: 'florida_dfs',
+      sourceRecordId: 'k2a',
+      jurisdiction: 'FL',
+      licenseNumber: '9999',
+      npn: '80002',
+      legalName: 'Namespace Agency',
+      licenseNamespace: 'producer',
+      licenseClass: 'AGENCY LICENSE',
+    })
+  );
+  g.ingest(
+    agency({
+      sourceDataset: 'florida_dfs',
+      sourceRecordId: 'k2b',
+      jurisdiction: 'FL',
+      licenseNumber: '9999',
+      npn: '80002',
+      legalName: 'Namespace Agency',
+      licenseNamespace: 'bail_bond',
+      licenseClass: 'BAIL BOND AGENCY LICENSE',
+    })
+  );
+  assert(g.credentials.length === 2, 'K2 two credentials');
+  assert(g.entities.length === 1, 'K2 one NPN entity');
+  assert(
+    new Set(g.credentials.map((c) => c.licenseNamespace)).size === 2,
+    'K2 distinct namespaces'
+  );
+}
+
+// ---------------------------------------------------------------------------
+// K3 — same jurisdiction + namespace + number cannot duplicate
+// ---------------------------------------------------------------------------
+{
+  const g = new NationalGraph();
+  const row = agency({
+    sourceDataset: 'texas_tdi',
+    sourceRecordId: 'k3a',
+    jurisdiction: 'TX',
+    licenseNumber: 'TX-NS-1',
+    npn: '80003',
+    legalName: 'No Dup Agency',
+    licenseClass: 'General Lines Agency',
+  });
+  g.ingest(row);
+  g.ingest({ ...row, sourceRecordId: 'k3b' });
+  assert(g.credentials.length === 1, 'K3 duplicate natural key rejected/idempotent');
+}
+
+// ---------------------------------------------------------------------------
+// P1 — missing NPN, clear source identity → provisional
+// ---------------------------------------------------------------------------
+{
+  const g = new NationalGraph();
+  const r = g.ingest(
+    agency({
+      sourceDataset: 'nevada_doi',
+      sourceRecordId: 'p1',
+      jurisdiction: 'NV',
+      licenseNumber: 'NV-P1',
+      npn: null,
+      legalName: 'Clear Source Firm LLC',
+      licenseClass: 'Resident Producer Firm',
+    })
+  );
+  assert(r.entity?.identityKind === 'provisional', 'P1 provisional entity');
+  assert(r.credential.entityId === r.entity?.id, 'P1 credential attached to provisional');
+  assert(r.identityConfidence === 'UNRESOLVED', 'P1 national identity unresolved');
+}
+
+// ---------------------------------------------------------------------------
+// P2 — ambiguous source identity → unattached
+// ---------------------------------------------------------------------------
+{
+  const g = new NationalGraph();
+  const r = g.ingest(
+    agency({
+      sourceDataset: 'mississippi_mid',
+      sourceRecordId: 'p2',
+      jurisdiction: 'MS',
+      licenseNumber: 'MS-P2',
+      npn: null,
+      legalName: '   ',
+      licenseClass: 'Insurance Producer Entity',
+    })
+  );
+  assert(r.entity == null, 'P2 no entity');
+  assert(r.credential.entityId == null, 'P2 credential unattached');
+  assert(r.identityConfidence === 'UNRESOLVED', 'P2 unresolved');
+  assert(g.entities.length === 0, 'P2 no provisional invented');
+}
+
+// ---------------------------------------------------------------------------
+// P3 — provisional later receives compatible NPN → upgrade, no duplicate
+// ---------------------------------------------------------------------------
+{
+  const g = new NationalGraph();
+  const base = agency({
+    sourceDataset: 'florida_dfs',
+    sourceRecordId: 'p3',
+    jurisdiction: 'FL',
+    licenseNumber: 'L-P3',
+    npn: null,
+    legalName: 'Upgradeable Agency LLC',
+    licenseClass: 'AGENCY LICENSE',
+  });
+  const first = g.ingest(base);
+  const second = g.ingest({ ...base, npn: '80004' });
+  assert(first.entity?.id === second.entity?.id, 'P3 same entity');
+  assert(second.entity?.identityKind === 'npn', 'P3 upgraded to npn');
+  assert(second.entity?.npn === '80004', 'P3 NPN set');
+  assert(g.entities.length === 1, 'P3 no duplicate national identity');
+  assert(second.identityConfidence === 'CONFIRMED', 'P3 confirmed after upgrade');
+}
+
+// ---------------------------------------------------------------------------
+// P4 — provisional later receives conflicting NPN/name evidence
+// ---------------------------------------------------------------------------
+{
+  const g = new NationalGraph();
+  g.ingest(
+    agency({
+      sourceDataset: 'texas_tdi',
+      sourceRecordId: 'p4-existing',
+      jurisdiction: 'TX',
+      licenseNumber: 'TX-P4A',
+      npn: '80005',
+      legalName: 'Alpha Holdings LLC',
+      licenseClass: 'General Lines Agency',
+    })
+  );
+  const prov = agency({
+    sourceDataset: 'florida_dfs',
+    sourceRecordId: 'p4-prov',
+    jurisdiction: 'FL',
+    licenseNumber: 'L-P4',
+    npn: null,
+    legalName: 'Beta Unrelated Company Inc',
+    licenseClass: 'AGENCY LICENSE',
+  });
+  g.ingest(prov);
+  const clash = g.ingest({ ...prov, npn: '80005' });
+  assert(clash.identityConfidence === 'REVIEW_REQUIRED', 'P4 review required');
+  assert(clash.entity?.identityKind === 'provisional', 'P4 remains provisional');
+  assert(clash.entity?.npn == null, 'P4 did not silently take conflicting NPN');
+  assert(g.entities.filter((e) => e.npn === '80005').length === 1, 'P4 no silent merge');
+}
+
 if (errors.length) {
   console.error('INS-NAT-002 FAIL');
   for (const e of errors) console.error(' -', e);
@@ -563,6 +738,13 @@ console.log(
         'T9 individual publication gate',
         'T10 freshness vs regulator status',
         'proof cohort FL/TX/OH/VT',
+        'K1 idempotent reimport',
+        'K2 namespace does not collapse',
+        'K3 natural key uniqueness',
+        'P1 provisional for clear missing NPN',
+        'P2 unattached for ambiguous identity',
+        'P3 provisional NPN upgrade',
+        'P4 provisional conflicting NPN',
       ],
       legacyLicenseFirstOnlyPaths: LEGACY_LICENSE_FIRST_ONLY_PATHS,
     },

@@ -49,7 +49,7 @@ export type LicenseCredential = {
   regulator: string;
   licenseNumber: string;
   licenseClass: string | null;
-  licenseNamespace: string;
+  licenseNamespace: import('./credential-namespace').LicenseNamespace;
   regulatoryStatus: RegulatoryStatus;
   issueDate: string | null;
   effectiveDate: string | null;
@@ -128,6 +128,8 @@ export type SourceCredentialInput = {
   regulator: string;
   licenseNumber: string;
   licenseClass?: string | null;
+  licenseTypes?: string[] | null;
+  licenseNamespace?: import('./credential-namespace').LicenseNamespace | null;
   legalName: string;
   displayName?: string | null;
   regulatoryStatus?: RegulatoryStatus | string | null;

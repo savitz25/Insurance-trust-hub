@@ -7,6 +7,8 @@ import { compareLegalNames } from './names';
 import { normalizeNpn } from './npn';
 import { mapSourceStatus } from './freshness';
 import { consumerGroupFromOfficialLoa } from './loa';
+import { resolveLicenseNamespace } from './credential-namespace';
+import type { LicenseNamespace } from './credential-namespace';
 import type {
   ContactObservation,
   ContactObservationKind,
@@ -33,13 +35,37 @@ function normJurisdiction(raw: string): string {
   return String(raw || '').trim().toUpperCase().slice(0, 2);
 }
 
-function provisionalKey(input: SourceCredentialInput): string {
+function namespaceOf(input: SourceCredentialInput): LicenseNamespace {
+  if (input.licenseNamespace) return input.licenseNamespace;
+  return resolveLicenseNamespace({
+    licenseClass: input.licenseClass,
+    licenseTypes: input.licenseTypes,
+    linesOfAuthority: input.loas?.map((l) => l.officialText),
+    licenseNumber: input.licenseNumber,
+  });
+}
+
+function provisionalKey(
+  input: SourceCredentialInput,
+  ns: LicenseNamespace,
+  jurisdiction: string,
+  licenseNumber: string
+): string {
   return [
     input.sourceDataset,
-    normJurisdiction(input.jurisdiction),
+    jurisdiction,
     input.entityKind,
-    normLicense(input.licenseNumber),
+    ns,
+    licenseNumber,
   ].join(':');
+}
+
+/** Clear source identity: real entity described; national NPN may still be missing. */
+export function sourceIdentityIsClear(input: SourceCredentialInput): boolean {
+  const lic = normLicense(input.licenseNumber);
+  const name = (input.legalName || input.displayName || '').trim();
+  const jur = normJurisdiction(input.jurisdiction);
+  return Boolean(lic && name && input.entityKind && jur.length === 2);
 }
 
 export class NationalGraph {
@@ -87,80 +113,65 @@ export class NationalGraph {
   ingest(input: SourceCredentialInput): IngestResult {
     const jurisdiction = normJurisdiction(input.jurisdiction);
     const licenseNumber = normLicense(input.licenseNumber);
+    const ns = namespaceOf(input);
     const npn = normalizeNpn(input.npn ?? null);
-    const existingCred = this.credentials.find(
-      (c) =>
-        c.jurisdiction === jurisdiction &&
-        c.entityKind === input.entityKind &&
-        c.licenseNumber === licenseNumber
-    );
-
     const ingestedAt = input.ingestedAt || this.nowIso;
     const sourceObservedAt = input.sourceObservedAt || ingestedAt;
 
-    if (existingCred) {
-      if (
-        npn &&
-        existingCred.entityId &&
-        this.entities.find((e) => e.id === existingCred.entityId)?.npn &&
-        this.entities.find((e) => e.id === existingCred.entityId)?.npn !== npn
-      ) {
-        const conflict = this.addConflict({
-          npn,
-          entityKind: input.entityKind,
-          reason: 'same_license_different_npn',
-          leftSourceDataset: existingCred.sourceDataset,
-          leftSourceRecordId: existingCred.sourceRecordId,
-          leftName: null,
-          rightSourceDataset: input.sourceDataset,
-          rightSourceRecordId: input.sourceRecordId,
-          rightName: input.legalName,
-          existingEntityId: existingCred.entityId,
-        });
-        return {
-          entity: this.entities.find((e) => e.id === existingCred.entityId) ?? null,
-          credential: existingCred,
-          identityConfidence: 'REVIEW_REQUIRED',
-          createdEntity: false,
-          conflict,
-        };
-      }
-      this.attachContacts(existingCred.entityId, input);
-      this.attachLoas(existingCred, input);
-      this.maybeBridge(input, existingCred.entityId, existingCred.attributionConfidence);
+    if (!licenseNumber || !jurisdiction || !input.entityKind) {
       return {
-        entity:
-          this.entities.find((e) => e.id === existingCred.entityId) ?? null,
-        credential: existingCred,
-        identityConfidence: existingCred.attributionConfidence,
+        entity: null,
+        credential: this.unattachedStub(input, ns, jurisdiction, licenseNumber, ingestedAt),
+        identityConfidence: 'UNRESOLVED',
         createdEntity: false,
         conflict: null,
       };
     }
 
-    const resolved = this.resolveEntity(input, npn);
-    const credential: LicenseCredential = {
-      id: this.next('cred'),
-      entityId: resolved.entity?.id ?? null,
-      entityKind: input.entityKind,
+    const existingCred = this.credentials.find(
+      (c) =>
+        c.jurisdiction === jurisdiction &&
+        c.entityKind === input.entityKind &&
+        c.licenseNamespace === ns &&
+        c.licenseNumber === licenseNumber
+    );
+
+    if (existingCred) {
+      return this.reimportExisting(existingCred, input, npn);
+    }
+
+    if (!sourceIdentityIsClear(input)) {
+      const credential = this.makeCredential({
+        input,
+        ns,
+        jurisdiction,
+        licenseNumber,
+        entityId: null,
+        confidence: 'UNRESOLVED',
+        ingestedAt,
+        sourceObservedAt,
+      });
+      this.credentials.push(credential);
+      return {
+        entity: null,
+        credential,
+        identityConfidence: 'UNRESOLVED',
+        createdEntity: false,
+        conflict: null,
+      };
+    }
+
+    const resolved = this.resolveEntity(input, npn, ns, jurisdiction, licenseNumber);
+    const credential = this.makeCredential({
+      input,
+      ns,
       jurisdiction,
-      regulator: input.regulator,
       licenseNumber,
-      licenseClass: input.licenseClass ?? null,
-      licenseNamespace: 'producer',
-      regulatoryStatus: mapSourceStatus(input.regulatoryStatus),
-      issueDate: input.issueDate ?? null,
-      effectiveDate: input.effectiveDate ?? null,
-      expirationDate: input.expirationDate ?? null,
-      renewalDate: null,
-      terminationDate: null,
-      sourceDataset: input.sourceDataset,
-      sourceRecordId: input.sourceRecordId,
-      sourceUrl: input.sourceUrl ?? null,
-      sourceObservedAt,
+      entityId: resolved.entity?.id ?? null,
+      confidence: resolved.confidence,
       ingestedAt,
-      attributionConfidence: resolved.confidence,
-    };
+      sourceObservedAt,
+    });
     this.credentials.push(credential);
     this.attachLoas(credential, input);
     if (resolved.entity) {
@@ -176,9 +187,209 @@ export class NationalGraph {
     };
   }
 
-  private resolveEntity(
+  private makeCredential(args: {
+    input: SourceCredentialInput;
+    ns: LicenseNamespace;
+    jurisdiction: string;
+    licenseNumber: string;
+    entityId: string | null;
+    confidence: IdentityConfidence;
+    ingestedAt: string;
+    sourceObservedAt: string;
+  }): LicenseCredential {
+    return {
+      id: this.next('cred'),
+      entityId: args.entityId,
+      entityKind: args.input.entityKind,
+      jurisdiction: args.jurisdiction,
+      regulator: args.input.regulator,
+      licenseNumber: args.licenseNumber,
+      licenseClass: args.input.licenseClass ?? null,
+      licenseNamespace: args.ns,
+      regulatoryStatus: mapSourceStatus(args.input.regulatoryStatus),
+      issueDate: args.input.issueDate ?? null,
+      effectiveDate: args.input.effectiveDate ?? null,
+      expirationDate: args.input.expirationDate ?? null,
+      renewalDate: null,
+      terminationDate: null,
+      sourceDataset: args.input.sourceDataset,
+      sourceRecordId: args.input.sourceRecordId,
+      sourceUrl: args.input.sourceUrl ?? null,
+      sourceObservedAt: args.sourceObservedAt,
+      ingestedAt: args.ingestedAt,
+      attributionConfidence: args.confidence,
+    };
+  }
+
+  private unattachedStub(
+    input: SourceCredentialInput,
+    ns: LicenseNamespace,
+    jurisdiction: string,
+    licenseNumber: string,
+    ingestedAt: string
+  ): LicenseCredential {
+    return {
+      id: this.next('cred'),
+      entityId: null,
+      entityKind: input.entityKind,
+      jurisdiction,
+      regulator: input.regulator,
+      licenseNumber,
+      licenseClass: input.licenseClass ?? null,
+      licenseNamespace: ns,
+      regulatoryStatus: mapSourceStatus(input.regulatoryStatus),
+      issueDate: null,
+      effectiveDate: null,
+      expirationDate: null,
+      renewalDate: null,
+      terminationDate: null,
+      sourceDataset: input.sourceDataset,
+      sourceRecordId: input.sourceRecordId,
+      sourceUrl: input.sourceUrl ?? null,
+      sourceObservedAt: ingestedAt,
+      ingestedAt,
+      attributionConfidence: 'UNRESOLVED',
+    };
+  }
+
+  private reimportExisting(
+    existingCred: LicenseCredential,
     input: SourceCredentialInput,
     npn: string | null
+  ): IngestResult {
+    const attached = this.entities.find((e) => e.id === existingCred.entityId) ?? null;
+
+    if (
+      npn &&
+      attached?.npn &&
+      attached.npn !== npn
+    ) {
+      const conflict = this.addConflict({
+        npn,
+        entityKind: input.entityKind,
+        reason: 'same_license_different_npn',
+        leftSourceDataset: existingCred.sourceDataset,
+        leftSourceRecordId: existingCred.sourceRecordId,
+        leftName: attached.legalName,
+        rightSourceDataset: input.sourceDataset,
+        rightSourceRecordId: input.sourceRecordId,
+        rightName: input.legalName,
+        existingEntityId: attached.id,
+      });
+      return {
+        entity: attached,
+        credential: existingCred,
+        identityConfidence: 'REVIEW_REQUIRED',
+        createdEntity: false,
+        conflict,
+      };
+    }
+
+    if (npn && attached?.identityKind === 'provisional') {
+      const upgraded = this.upgradeProvisional(attached, npn, input);
+      existingCred.entityId = upgraded.entity?.id ?? attached.id;
+      existingCred.attributionConfidence = upgraded.confidence;
+      if (upgraded.entity) {
+        this.attachContacts(upgraded.entity.id, input);
+      }
+      this.attachLoas(existingCred, input);
+      return {
+        entity: upgraded.entity,
+        credential: existingCred,
+        identityConfidence: upgraded.confidence,
+        createdEntity: false,
+        conflict: upgraded.conflict,
+      };
+    }
+
+    this.attachContacts(existingCred.entityId, input);
+    this.attachLoas(existingCred, input);
+    this.maybeBridge(input, existingCred.entityId, existingCred.attributionConfidence);
+    return {
+      entity: attached,
+      credential: existingCred,
+      identityConfidence: existingCred.attributionConfidence,
+      createdEntity: false,
+      conflict: null,
+    };
+  }
+
+  private upgradeProvisional(
+    provisional: NationalEntity,
+    npn: string,
+    input: SourceCredentialInput
+  ): {
+    entity: NationalEntity | null;
+    confidence: IdentityConfidence;
+    conflict: IdentityConflict | null;
+  } {
+    const nameCmp = compareLegalNames(provisional.legalName, input.legalName);
+    if (nameCmp === 'conflict') {
+      const conflict = this.addConflict({
+        npn,
+        entityKind: input.entityKind,
+        reason: 'provisional_upgrade_name_conflict',
+        leftSourceDataset: null,
+        leftSourceRecordId: null,
+        leftName: provisional.legalName,
+        rightSourceDataset: input.sourceDataset,
+        rightSourceRecordId: input.sourceRecordId,
+        rightName: input.legalName,
+        existingEntityId: provisional.id,
+      });
+      return { entity: provisional, confidence: 'REVIEW_REQUIRED', conflict };
+    }
+
+    const existingNpn = this.findByNpn(provisional.entityKind, npn);
+    if (existingNpn && existingNpn.id !== provisional.id) {
+      const cmp = compareLegalNames(existingNpn.legalName, input.legalName);
+      if (cmp === 'conflict') {
+        const conflict = this.addConflict({
+          npn,
+          entityKind: input.entityKind,
+          reason: 'provisional_upgrade_npn_name_conflict',
+          leftSourceDataset: null,
+          leftSourceRecordId: null,
+          leftName: existingNpn.legalName,
+          rightSourceDataset: input.sourceDataset,
+          rightSourceRecordId: input.sourceRecordId,
+          rightName: input.legalName,
+          existingEntityId: existingNpn.id,
+        });
+        return { entity: provisional, confidence: 'REVIEW_REQUIRED', conflict };
+      }
+      return { entity: existingNpn, confidence: 'CONFIRMED', conflict: null };
+    }
+
+    if (input.entityKind !== provisional.entityKind) {
+      const conflict = this.addConflict({
+        npn,
+        entityKind: input.entityKind,
+        reason: 'provisional_upgrade_entity_kind_conflict',
+        leftSourceDataset: null,
+        leftSourceRecordId: null,
+        leftName: provisional.legalName,
+        rightSourceDataset: input.sourceDataset,
+        rightSourceRecordId: input.sourceRecordId,
+        rightName: input.legalName,
+        existingEntityId: provisional.id,
+      });
+      return { entity: provisional, confidence: 'REVIEW_REQUIRED', conflict };
+    }
+
+    provisional.identityKind = 'npn';
+    provisional.npn = npn;
+    provisional.identityConfidence = 'CONFIRMED';
+    provisional.identityNotes = 'upgraded from provisional with compatible authoritative NPN';
+    return { entity: provisional, confidence: 'CONFIRMED', conflict: null };
+  }
+
+  private resolveEntity(
+    input: SourceCredentialInput,
+    npn: string | null,
+    ns: LicenseNamespace,
+    jurisdiction: string,
+    licenseNumber: string
   ): {
     entity: NationalEntity | null;
     confidence: IdentityConfidence;
@@ -188,7 +399,7 @@ export class NationalGraph {
     const displayName = input.displayName || input.legalName || 'Unknown';
 
     if (!npn) {
-      const key = provisionalKey(input);
+      const key = provisionalKey(input, ns, jurisdiction, licenseNumber);
       const existing = this.findByProvisional(input.entityKind, key);
       if (existing) {
         return {
@@ -207,7 +418,8 @@ export class NationalGraph {
         legalName: input.legalName || displayName,
         displayName,
         identityConfidence: 'UNRESOLVED',
-        identityNotes: 'provisional: missing or invalid NPN; not merged by name/address',
+        identityNotes:
+          'provisional: clear source identity, missing NPN; never merged by name/address',
       };
       this.entities.push(entity);
       return {

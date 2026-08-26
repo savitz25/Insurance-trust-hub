@@ -26,6 +26,14 @@ Migration fingerprint `ins-nat-002-v1`. Apply in Supabase SQL Editor (additive, 
 
 All RLS enabled, no public policies.
 
+## Credential natural key (INS-NAT-004)
+
+`(jurisdiction, entity_kind, license_namespace, license_number)`
+
+`license_namespace` is a closed set (`producer`, `bail_bond`, `adjuster`, `title`, `warranty`, `surplus_lines`, `tpa`, `limited_lines`, `other`). Not free-text class.
+
+Existing DOI tables unique on license number per entity type (zero in-state duplicates). Namespace is for future distinct credential families that can share a displayed number.
+
 ## Identity
 
 | Situation | Result |
@@ -33,8 +41,12 @@ All RLS enabled, no public policies.
 | Valid NPN + same entity kind + compatible name | CONFIRMED attach to one entity |
 | Valid NPN + radical name conflict | REVIEW_REQUIRED; credential unattached |
 | Valid NPN + person vs agency | REVIEW_REQUIRED; not merged |
-| Missing / invalid NPN | Provisional entity keyed by `source:jurisdiction:kind:license` |
+| Clear source identity, missing NPN | **Provisional entity** owns the credential |
+| Ambiguous source (no license # or no name) | **Unattached / UNRESOLVED** credential; no entity |
 | Name, address, phone, DBA | Never identity keys |
+| Two provisionals | Never auto-merge |
+| Provisional later gets compatible NPN | Upgrade in place (or attach to existing compatible NPN entity) |
+| Provisional later gets conflicting NPN/name/kind | REVIEW_REQUIRED; stays provisional |
 
 ## Freshness
 
