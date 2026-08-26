@@ -77,9 +77,21 @@ export class NationalGraph {
   bridges: ProviderEntityBridge[] = [];
   private seq = 0;
   private nowIso: string;
+  private credByKey = new Map<string, LicenseCredential>();
+  private entityByNpn = new Map<string, NationalEntity>();
+  private entityByProvisional = new Map<string, NationalEntity>();
 
   constructor(now?: Date) {
     this.nowIso = (now ?? new Date()).toISOString();
+  }
+
+  private credKey(
+    jurisdiction: string,
+    entityKind: NationalEntityKind,
+    ns: string,
+    licenseNumber: string
+  ): string {
+    return `${jurisdiction}|${entityKind}|${ns}|${licenseNumber}`;
   }
 
   private next(prefix: string): string {
@@ -88,16 +100,14 @@ export class NationalGraph {
   }
 
   findByNpn(kind: NationalEntityKind, npn: string): NationalEntity | undefined {
-    return this.entities.find((e) => e.entityKind === kind && e.npn === npn);
+    return this.entityByNpn.get(`${kind}|${npn}`);
   }
 
   findByProvisional(
     kind: NationalEntityKind,
     key: string
   ): NationalEntity | undefined {
-    return this.entities.find(
-      (e) => e.entityKind === kind && e.provisionalKey === key
-    );
+    return this.entityByProvisional.get(`${kind}|${key}`);
   }
 
   credentialsForEntity(entityId: string): LicenseCredential[] {
@@ -128,12 +138,8 @@ export class NationalGraph {
       };
     }
 
-    const existingCred = this.credentials.find(
-      (c) =>
-        c.jurisdiction === jurisdiction &&
-        c.entityKind === input.entityKind &&
-        c.licenseNamespace === ns &&
-        c.licenseNumber === licenseNumber
+    const existingCred = this.credByKey.get(
+      this.credKey(jurisdiction, input.entityKind, ns, licenseNumber)
     );
 
     if (existingCred) {
@@ -152,6 +158,10 @@ export class NationalGraph {
         sourceObservedAt,
       });
       this.credentials.push(credential);
+      this.credByKey.set(
+        this.credKey(jurisdiction, input.entityKind, ns, licenseNumber),
+        credential
+      );
       return {
         entity: null,
         credential,
@@ -173,6 +183,10 @@ export class NationalGraph {
       sourceObservedAt,
     });
     this.credentials.push(credential);
+    this.credByKey.set(
+      this.credKey(jurisdiction, input.entityKind, ns, licenseNumber),
+      credential
+    );
     this.attachLoas(credential, input);
     if (resolved.entity) {
       this.attachContacts(resolved.entity.id, input);
@@ -381,6 +395,7 @@ export class NationalGraph {
     provisional.npn = npn;
     provisional.identityConfidence = 'CONFIRMED';
     provisional.identityNotes = 'upgraded from provisional with compatible authoritative NPN';
+    this.entityByNpn.set(`${provisional.entityKind}|${npn}`, provisional);
     return { entity: provisional, confidence: 'CONFIRMED', conflict: null };
   }
 
@@ -422,6 +437,7 @@ export class NationalGraph {
           'provisional: clear source identity, missing NPN; never merged by name/address',
       };
       this.entities.push(entity);
+      this.entityByProvisional.set(`${input.entityKind}|${key}`, entity);
       return {
         entity,
         confidence: 'UNRESOLVED',
@@ -461,7 +477,10 @@ export class NationalGraph {
       };
     }
 
-    const otherKind = this.entities.find((e) => e.npn === npn && e.entityKind !== input.entityKind);
+    const otherKind = (['person', 'agency', 'carrier'] as const)
+      .filter((k) => k !== input.entityKind)
+      .map((k) => this.entityByNpn.get(`${k}|${npn}`))
+      .find((e): e is NationalEntity => Boolean(e));
     if (otherKind) {
       const conflict = this.addConflict({
         npn,
@@ -495,6 +514,7 @@ export class NationalGraph {
       identityNotes: null,
     };
     this.entities.push(entity);
+    this.entityByNpn.set(`${input.entityKind}|${npn}`, entity);
     return {
       entity,
       confidence: 'CONFIRMED',
