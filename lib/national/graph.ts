@@ -616,9 +616,17 @@ export class NationalGraph {
   }
 
   stats() {
-    const multiState = this.entities.filter(
-      (e) => this.jurisdictionsForEntity(e.id).length >= 2
-    );
+    const jurisdictions = new Map<string, Set<string>>();
+    for (const c of this.credentials) {
+      if (!c.entityId) continue;
+      const set = jurisdictions.get(c.entityId) ?? new Set();
+      set.add(c.jurisdiction);
+      jurisdictions.set(c.entityId, set);
+    }
+    let multiStateEntities = 0;
+    for (const set of jurisdictions.values()) {
+      if (set.size >= 2) multiStateEntities += 1;
+    }
     return {
       sourceCredentials: this.credentials.length,
       nationalEntities: this.entities.length,
@@ -627,7 +635,7 @@ export class NationalGraph {
       carriers: this.entities.filter((e) => e.entityKind === 'carrier').length,
       credentials: this.credentials.length,
       uniqueStates: Array.from(new Set(this.credentials.map((c) => c.jurisdiction))).sort(),
-      multiStateEntities: multiState.length,
+      multiStateEntities,
       provisionalIdentities: this.entities.filter((e) => e.identityKind === 'provisional')
         .length,
       reviewRequiredConflicts: this.conflicts.length,
