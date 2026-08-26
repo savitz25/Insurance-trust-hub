@@ -302,8 +302,143 @@ put('OH', OH_SRC, [''], {
   elig: 'unknown_pending_classification',
   core: false,
   conf: 'UNRESOLVED',
-  source: 'ODI business-entity mailing list; license type not present on odi_producers',
-  notes: 'Ohio unknowns remain unknown. Do not assume major-lines core agency. Official ODI classes include major lines, limited lines, MGA, surplus, title, bail, TPA, public adjuster.',
+  source: 'ODI business-entity mailing list; empty class when no per-type report joined',
+  notes: 'Empty Ohio class remains unknown. Do not assume major-lines. Do not infer from legal name or from FL/TX/VT class.',
+});
+
+put('OH', OH_SRC, ['Major Lines'], {
+  ns: 'producer',
+  role: 'core_producer_agency',
+  product: 'core_agency',
+  elig: 'core_agency_eligible',
+  core: true,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type “Major Lines”; https://insurance.ohio.gov/agents-and-agencies/business-entity/major-lines--business-entity; ORC 3905.06',
+  notes: 'Ordinary producer business entity. LOAs (life, A&H, property, casualty, personal, variable) are qualifications, not a different agency class.',
+});
+
+put(
+  'OH',
+  OH_SRC,
+  [
+    'Limited Lines',
+    'Limited Lines Portable Electronics',
+    'Limited Lines Self-Service Storage',
+  ],
+  {
+    ns: 'limited_lines',
+    role: 'ancillary_distributor',
+    product: 'ancillary_distribution',
+    elig: 'ancillary_only',
+    core: false,
+    conf: 'CONFIRMED',
+    source: 'ODI mailing-list Licensing Type limited-lines family; https://insurance.ohio.gov/agents-and-agencies/business-entity/limited-lines-business-entity; OAC 3901-5-09',
+    notes: 'Credit, crop, funeral, portable electronics, rental car, self-service storage, travel. Not core agencies.',
+  }
+);
+
+put('OH', OH_SRC, ['Managing General Agent'], {
+  ns: 'producer',
+  role: 'specialty_producer',
+  product: 'specialty_insurance',
+  elig: 'specialty_only',
+  core: false,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type “Managing General Agent”; INS3250 MGA application',
+  notes: 'MGA is specialty wholesale, not the core retail-agency denominator.',
+});
+
+put('OH', OH_SRC, ['Surplus Lines'], {
+  ns: 'surplus_lines',
+  role: 'specialty_producer',
+  product: 'specialty_insurance',
+  elig: 'specialty_only',
+  core: false,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type “Surplus Lines”; ODI surplus lines business-entity page',
+  notes: 'Surplus lines specialty.',
+});
+
+put('OH', OH_SRC, ['Title', 'Title Insurance Marketing Rep'], {
+  ns: 'title',
+  role: 'title_agency',
+  product: 'title',
+  elig: 'title_only',
+  core: false,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type Title / Title Insurance Marketing Rep',
+  notes: 'Title is a specialty class, not a core P&C/life agency.',
+});
+
+put('OH', OH_SRC, ['Surety Bail Bond'], {
+  ns: 'bail_bond',
+  role: 'bail_agency',
+  product: 'bail',
+  elig: 'bail_only',
+  core: false,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type “Surety Bail Bond”; ODI surety bail bond business-entity page',
+  notes: 'Bail is retained but never core-agency denominator.',
+});
+
+put('OH', OH_SRC, ['Public Insurance Adjuster', 'Public Insurance Adjuster Agent'], {
+  ns: 'adjuster',
+  role: 'claims_adjuster',
+  product: 'claims_service',
+  elig: 'claims_only',
+  core: false,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type public insurance adjuster; NIPR Ohio public insurance adjuster',
+  notes: 'Claims service, not a producer agency.',
+});
+
+put('OH', OH_SRC, ['Third Party Administrator'], {
+  ns: 'tpa',
+  role: 'tpa',
+  product: 'tpa',
+  elig: 'tpa_only',
+  core: false,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type “Third Party Administrator”',
+  notes: 'TPA is administration, not a retail agency.',
+});
+
+put(
+  'OH',
+  OH_SRC,
+  ['Reinsurance Intermediary Broker', 'Reinsurance Intermediary Manager', 'Viatical Settlement Broker'],
+  {
+    ns: 'other',
+    role: 'specialty_producer',
+    product: 'specialty_insurance',
+    elig: 'specialty_only',
+    core: false,
+    conf: 'CONFIRMED',
+    source: 'ODI mailing-list Licensing Types for reinsurance intermediaries and viatical settlement brokers',
+    notes: 'Specialty wholesale / life settlement. Not core retail agencies.',
+  }
+);
+
+put('OH', OH_SRC, ['Navigator'], {
+  ns: 'other',
+  role: 'unknown',
+  product: 'out_of_scope',
+  elig: 'out_of_scope',
+  core: false,
+  conf: 'CONFIRMED',
+  source: 'ODI mailing-list Licensing Type “Navigator”',
+  notes: 'ACA navigator is not an insurance agency.',
+});
+
+put('OH', OH_SRC, ['Temporary'], {
+  ns: 'other',
+  role: 'unknown',
+  product: 'unknown',
+  elig: 'unknown_pending_classification',
+  core: false,
+  conf: 'REVIEW_REQUIRED',
+  source: 'ODI mailing-list Licensing Type “Temporary”',
+  notes: 'Temporary licenses are not confirmed core agencies.',
 });
 
 put('NV', NV_SRC, ['Resident Producer Firm', 'Non-Resident Producer Firm'], {

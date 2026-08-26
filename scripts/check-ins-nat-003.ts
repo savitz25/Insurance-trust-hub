@@ -371,7 +371,7 @@ function cred(
     sourceDataset: 'florida_dfs',
     rawType: 'HOME WARRANTY',
   });
-  assert(v1.registryVersion === '1.0.0', 'C12 registry version pinned on entry');
+  assert(v1.registryVersion === CLASSIFICATION_REGISTRY_VERSION, 'C12 registry version pinned on entry');
 }
 
 // ---------------------------------------------------------------------------
@@ -402,7 +402,7 @@ function cred(
 }
 
 // Registry / policy sanity
-assert(SOURCE_OFFICIAL_SUPPORT.OH.notes.includes('UNKNOWN'), 'Ohio official note');
+assert(SOURCE_OFFICIAL_SUPPORT.OH.notes.toLowerCase().includes('do not infer'), 'Ohio official note');
 assert(SOURCE_OFFICIAL_SUPPORT.NV.notes.toLowerCase().includes('provisional'), 'NV provisional note');
 assert(SOURCE_OFFICIAL_SUPPORT.MS.notes.toLowerCase().includes('provisional'), 'MS provisional note');
 

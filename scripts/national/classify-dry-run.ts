@@ -2,7 +2,7 @@
  * INS-NAT-003 classification dry-run. No DB writes, no graph backfill.
  *   npx tsx scripts/national/classify-dry-run.ts
  */
-import { createReadStream, writeFileSync } from 'fs';
+import { createReadStream, writeFileSync, existsSync, readFileSync } from 'fs';
 import { createHash } from 'crypto';
 import { createInterface } from 'readline';
 import { classifyAndRollup, researchDenominators } from '../../lib/national/classification';
@@ -20,9 +20,14 @@ const JSONL =
   process.env.INS_NAT_004_JSONL ||
   'C:/Users/Michael.Savitsky/agent-tools/ins-nat-004-staging.jsonl';
 
+const OHIO_CLASSES =
+  process.env.INS_NAT_005_ODI_CLASSES ||
+  'C:/Users/Michael.Savitsky/agent-tools/odi-mailing-npn-classes.json';
+
 const OUT =
+  process.env.INS_NAT_005_OUT ||
   process.env.INS_NAT_003_OUT ||
-  'C:/Users/Michael.Savitsky/agent-tools/ins-nat-003-dry-run.json';
+  'C:/Users/Michael.Savitsky/agent-tools/ins-nat-005-dry-run.json';
 
 type Raw = ClassificationInput & {
   sourceTable?: string;
@@ -46,20 +51,41 @@ function top(counter: Map<string, number>, n = 15) {
 
 async function main() {
   const rows = await load(JSONL);
-  const inputs: ClassificationInput[] = rows.map((r) => ({
-    sourceDataset: r.sourceDataset,
-    sourceRecordId: r.sourceRecordId,
-    jurisdiction: r.jurisdiction,
-    entityKind: r.entityKind,
-    licenseNumber: r.licenseNumber,
-    legalName: r.legalName,
-    npn: r.npn,
-    licenseClass: r.licenseClass,
-    licenseTypes: r.licenseTypes,
-    loas: r.loas,
-    regulatoryStatus: r.regulatoryStatus ?? null,
-    published: false,
-  }));
+  let ohioOverlay = 0;
+  let ohioMap: Record<string, { classes?: string[] }> = {};
+  if (existsSync(OHIO_CLASSES)) {
+    ohioMap = JSON.parse(readFileSync(OHIO_CLASSES, 'utf8')) as Record<
+      string,
+      { classes?: string[] }
+    >;
+  }
+  const inputs: ClassificationInput[] = rows.map((r) => {
+    let licenseClass = r.licenseClass ?? null;
+    let licenseTypes = r.licenseTypes ?? [];
+    if (r.sourceDataset === 'ohio_odi') {
+      const npn = String(r.npn || r.licenseNumber || '').trim();
+      const hit = ohioMap[npn];
+      if (hit?.classes?.length) {
+        licenseTypes = hit.classes;
+        licenseClass = hit.classes[0] ?? null;
+        ohioOverlay += 1;
+      }
+    }
+    return {
+      sourceDataset: r.sourceDataset,
+      sourceRecordId: r.sourceRecordId,
+      jurisdiction: r.jurisdiction,
+      entityKind: r.entityKind,
+      licenseNumber: r.licenseNumber,
+      legalName: r.legalName,
+      npn: r.npn,
+      licenseClass,
+      licenseTypes,
+      loas: r.loas,
+      regulatoryStatus: r.regulatoryStatus ?? null,
+      published: false,
+    };
+  });
 
   const nameConflictNpns = new Set<string>();
   const npnNames = new Map<string, string[]>();

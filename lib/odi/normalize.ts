@@ -173,7 +173,14 @@ export function normalizeOdiAgencyRow(
     'Qualifications',
     'LOA',
   ]);
-  const npn = pick(row, ['NPN', 'npn', 'National Producer Number']) || null;
+  const npn =
+    pick(row, [
+      'NPN',
+      'npn',
+      'National Producer Number',
+      'NATIONALPROVIDERNUMBER',
+      'NationalProviderNumber',
+    ]) || null;
 
   const cityRaw = pick(row, ['City', 'city', 'Business City']);
   const countyRaw = pick(row, ['County', 'county', 'Business County']);

@@ -44,7 +44,7 @@ export const CORE_AGENCY_DEFINITION = {
     'A motor club, funeral/cemetery seller, discount health program, or other out-of-scope licensee.',
     'An individual producer (separate entity kind; public profiles remain gated).',
     'One licensed store location of a national retailer.',
-    'An Ohio row whose license class was not recovered from the official mailing list.',
+    'An Ohio row whose official ODI license type was not recovered from a per-type mailing-list join.',
   ],
 };
 
@@ -82,7 +82,7 @@ export const SOURCE_OFFICIAL_SUPPORT: Record<string, OfficialSourceSupport> = {
       'ODI also licenses limited lines, MGA, surplus lines, title, public insurance adjuster, surety bail bond, TPA, reinsurance intermediaries',
       'Mailing list: https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/MailingList.mvc',
     ],
-    notes: 'Staging odi_producers.license_types and qualifications are empty for all 5,306 rows. Official class exists at ODI but was not imported. Remain UNKNOWN_PENDING_CLASSIFICATION. Do not infer class from legal name.',
+    notes: 'Original 2026-08-13 import used a mixed ODI mailing-list CSV that has no license-type column (class is a report filter). Recover class by generating official per-type Business Entity mailing lists and joining on NPN. Do not infer class from legal name or from another state.',
   },
   NV: {
     regulator: 'Nevada Division of Insurance',

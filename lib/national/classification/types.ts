@@ -7,7 +7,8 @@
 import type { LicenseNamespace } from '../credential-namespace';
 import type { IdentityConfidence, NationalEntityKind, RegulatoryStatus } from '../types';
 
-export const CLASSIFICATION_REGISTRY_VERSION = '1.0.0';
+/** Overlay version. 1.1.0 adds official Ohio mailing-list license types. */
+export const CLASSIFICATION_REGISTRY_VERSION = '1.1.0';
 
 export type ClassificationConfidence =
   | 'CONFIRMED'

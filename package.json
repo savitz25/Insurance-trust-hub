@@ -14,7 +14,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "test": "node scripts/assert-share-002.mjs && node scripts/assert-share-003.mjs && node scripts/assert-visual-005.mjs && tsx scripts/check-ins-nat-002.ts && tsx scripts/check-ins-nat-003.ts",
+    "test": "node scripts/assert-share-002.mjs && node scripts/assert-share-003.mjs && node scripts/assert-visual-005.mjs && tsx scripts/check-ins-nat-002.ts && tsx scripts/check-ins-nat-003.ts && tsx scripts/check-ins-nat-005.ts",
     "assert:visual": "node scripts/assert-visual-005.mjs",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
@@ -85,7 +85,9 @@
     "check:phase6b-appointments": "tsx scripts/check-phase6b-appointments.ts",
     "check:ins-nat-002": "tsx scripts/check-ins-nat-002.ts",
     "check:ins-nat-003": "tsx scripts/check-ins-nat-003.ts",
+    "check:ins-nat-005": "tsx scripts/check-ins-nat-005.ts",
     "national:classify-dry-run": "tsx scripts/national/classify-dry-run.ts",
+    "national:ohio-class-join": "tsx scripts/national/ohio-class-join.ts",
     "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"
