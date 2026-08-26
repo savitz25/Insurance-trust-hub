@@ -80,6 +80,8 @@ export class NationalGraph {
   private credByKey = new Map<string, LicenseCredential>();
   private entityByNpn = new Map<string, NationalEntity>();
   private entityByProvisional = new Map<string, NationalEntity>();
+  private loaKeys = new Set<string>();
+  private contactKeys = new Set<string>();
 
   constructor(now?: Date) {
     this.nowIso = (now ?? new Date()).toISOString();
@@ -535,13 +537,9 @@ export class NationalGraph {
     for (const loa of input.loas ?? []) {
       const official = loa.officialText.trim();
       if (!official) continue;
-      const dup = this.loas.some(
-        (x) =>
-          x.credentialId === credential.id &&
-          x.sourceDataset === input.sourceDataset &&
-          x.officialText.toUpperCase() === official.toUpperCase()
-      );
-      if (dup) continue;
+      const loaKey = `${credential.id}|${input.sourceDataset}|${official.toUpperCase()}`;
+      if (this.loaKeys.has(loaKey)) continue;
+      this.loaKeys.add(loaKey);
       this.loas.push({
         id: this.next('loa'),
         entityId: credential.entityId,
@@ -577,14 +575,9 @@ export class NationalGraph {
     for (const [kind, raw] of pairs) {
       const value = String(raw || '').trim();
       if (!value) continue;
-      const dup = this.contacts.some(
-        (c) =>
-          c.entityId === entityId &&
-          c.contactKind === kind &&
-          c.sourceDataset === input.sourceDataset &&
-          c.value.toUpperCase() === value.toUpperCase()
-      );
-      if (dup) continue;
+      const ckey = `${entityId}|${kind}|${input.sourceDataset}|${value.toUpperCase()}`;
+      if (this.contactKeys.has(ckey)) continue;
+      this.contactKeys.add(ckey);
       const businessContact = kind === 'email' || kind === 'phone' || kind === 'website';
       this.contacts.push({
         id: this.next('ctc'),
