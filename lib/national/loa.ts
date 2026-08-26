@@ -55,6 +55,7 @@ export type ConsumerFilterReadiness =
 export type LoaExtractInput = {
   jurisdiction: string;
   sourceDataset: string;
+  entityKind?: 'person' | 'agency' | 'carrier' | null;
   licenseTypes?: string[] | null;
   qualifications?: string[] | null;
   linesOfAuthority?: string[] | null;
@@ -109,6 +110,7 @@ export function sourceFieldRole(args: {
   jurisdiction: string;
   sourceDataset: string;
   field: string;
+  entityKind?: 'person' | 'agency' | 'carrier' | null;
 }): SourceFieldRole {
   const jur = String(args.jurisdiction || '').trim().toUpperCase().slice(0, 2);
   const ds = String(args.sourceDataset || '').trim().toLowerCase();
@@ -116,6 +118,7 @@ export function sourceFieldRole(args: {
     .trim()
     .toLowerCase()
     .replace(/[\s-]+/g, '_');
+  const kind = args.entityKind || null;
 
   if (
     ds.includes('appointment') ||
@@ -126,6 +129,15 @@ export function sourceFieldRole(args: {
   }
   if (field === 'consumer_group' || field === 'consumer_category' || field === 'specialty') {
     return 'CONSUMER_CATEGORY';
+  }
+  // Florida individual TYCL Desc is the official product-authority field.
+  // Florida agency TYCL Desc remains credential class (AGENCY LICENSE, warranty, …).
+  if (
+    jur === 'FL' &&
+    kind === 'person' &&
+    (field === 'lines_of_authority' || field === 'license_tycl_desc')
+  ) {
+    return 'OFFICIAL_LOA';
   }
   if (jur === 'FL' && (field === 'lines_of_authority' || field === 'license_tycl_desc' || field === 'license_class')) {
     return 'CREDENTIAL_CLASS';
@@ -275,6 +287,7 @@ function classSet(values: string[] | null | undefined): Set<string> {
 export function extractOfficialLoas(input: LoaExtractInput): LoaExtractResult {
   const jurisdiction = String(input.jurisdiction || '').trim().toUpperCase().slice(0, 2);
   const sourceDataset = String(input.sourceDataset || '').trim().toLowerCase();
+  const entityKind = input.entityKind ?? null;
   const observations: ExtractedLoa[] = [];
   const skipped: SkippedLoaTerm[] = [];
   const seen = new Set<string>();
@@ -292,7 +305,7 @@ export function extractOfficialLoas(input: LoaExtractInput): LoaExtractResult {
   ) => {
     const officialText = text.trim();
     if (!officialText) return;
-    const role = sourceFieldRole({ jurisdiction, sourceDataset, field });
+    const role = sourceFieldRole({ jurisdiction, sourceDataset, field, entityKind });
     if (role === 'APPOINTMENT_TYPE') {
       skip(officialText, role, 'appointment_type_not_loa');
       return;
@@ -309,7 +322,10 @@ export function extractOfficialLoas(input: LoaExtractInput): LoaExtractResult {
       skip(officialText, role, 'unrecognized_source_field');
       return;
     }
-    if (classSet(input.licenseTypes).has(officialText.toUpperCase())) {
+    // Florida individual TYCL is both class and product authority — do not drop it.
+    const flPersonOfficial =
+      jurisdiction === 'FL' && entityKind === 'person' && role === 'OFFICIAL_LOA';
+    if (!flPersonOfficial && classSet(input.licenseTypes).has(officialText.toUpperCase())) {
       skip(officialText, 'CREDENTIAL_CLASS', 'qualification_duplicates_license_type');
       return;
     }
