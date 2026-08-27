@@ -82,7 +82,7 @@ const BLANK_TYPE: Record<string, string> = {
 
 const ROOT = resolve(process.cwd());
 const execute = process.argv.includes('--execute');
-const applySchemaFlag = process.argv.includes('--apply-schema') || execute;
+const applySchemaFlag = process.argv.includes('--apply-schema');
 
 function chunk<T>(arr: T[], n: number): T[][] {
   const out: T[][] = [];
@@ -620,21 +620,21 @@ async function main() {
   }
 
   let ready = await schemaReady(sb);
-  if (!ready) {
-    if (!applySchemaFlag) {
-      throw new Error('schema_not_ready; pass --apply-schema --execute');
-    }
-    report.schema = await applyCarrierIdentityMigration();
-    for (let i = 0; i < 8 && !ready; i += 1) {
-      await sleep(2000);
-      ready = await schemaReady(sb);
-    }
-    if (!ready) {
-      throw new Error('schema_applied_but_postgrest_cache_not_ready');
-    }
-  } else {
-    report.schema = { applied: false, alreadyPresent: true, method: 'already_present' };
+  for (let i = 0; i < 6 && !ready; i += 1) {
+    await sleep(2000);
+    ready = await schemaReady(sb);
   }
+  if (!ready) {
+    if (applySchemaFlag) {
+      throw new Error(
+        'schema_not_ready_and_apply_schema_forbidden: migration was applied in SQL Editor; do not re-apply via DATABASE_URL. Reload PostgREST schema cache (NOTIFY pgrst, reload schema) and retry --execute.'
+      );
+    }
+    throw new Error(
+      'schema_not_ready: wait for PostgREST schema cache after SQL Editor apply; do not re-run the migration'
+    );
+  }
+  report.schema = { applied: false, alreadyPresent: true, method: 'already_present' };
 
   const legalKeys = await pageKeys(sb, 'legal_insurer');
   const groupKeys = await pageKeys(sb, 'insurance_group');

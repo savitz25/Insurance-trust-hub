@@ -1,0 +1,153 @@
+{
+  "task": "INS-NAT-FINAL-002B",
+  "runId": "ins-nat-final-002b-2026-08-27T2043Z",
+  "execute": true,
+  "at": "2026-08-27T20:43:59.957Z",
+  "source": {
+    "product": "LOC-JUN-2026",
+    "zipSha256": "baabd84b0c4d546865e9b28c2e54d7ac1f40146192f5dc0e37eb5e5e0440a260",
+    "parserFingerprint": "9fdc197f2dad28ee9a274b404d9ace58a3be5c9de9a12257ba821f26b71dc39e",
+    "dryRunFingerprint": "bad17e96dce6286cdee6e66b84d9fbd8b8e1eeb59834c6996ba3a27319ada50f",
+    "observedAt": "2026-08-27T00:00:00.000Z",
+    "transform": "ins-nat-final-002b.v1"
+  },
+  "baseline": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "carriers": 13461,
+    "credentials": 1531158,
+    "appointedBy": 989,
+    "providers": 170499,
+    "fl": 11944,
+    "tx": 1517,
+    "txConfirmed": 1510,
+    "txUnresolved": [
+      "14348",
+      "16806",
+      "38466",
+      "62472",
+      "70335",
+      "91413",
+      "95175"
+    ],
+    "flCoincidence": 17
+  },
+  "predicted": {
+    "legalInsurers": 6185,
+    "groups": 720,
+    "brands": 14,
+    "identifiers": 6905,
+    "memberships": 3844,
+    "membershipOrphans": 1,
+    "appointerResolvesTo": 0,
+    "usesBrand": 0
+  },
+  "statusCounts": {
+    "0": 7,
+    "1": 5531,
+    "4": 78,
+    "6": 569
+  },
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishLegalInsurer": false,
+    "mayPublishGroup": false,
+    "mayPublishBrand": false,
+    "mayPublishCarrier": false
+  },
+  "schema": {
+    "applied": false,
+    "alreadyPresent": true,
+    "method": "already_present"
+  },
+  "writes": {
+    "legalInsurersInserted": 6185,
+    "groupsInserted": 720,
+    "brandsInserted": 14,
+    "identifiersInserted": 6905,
+    "identifiersSkipped": 0,
+    "aliasesInserted": 168,
+    "membershipsInserted": 3844,
+    "membershipsSkipped": 0,
+    "appointerResolvesTo": 0,
+    "usesBrand": 0
+  },
+  "after": {
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "carrier": 13461,
+    "agency": 82071,
+    "person": 1029860,
+    "identifiers": 6905,
+    "naicCocode": 6185,
+    "naicGroup": 720,
+    "memberOfGroup": 3844,
+    "usesBrand": 0,
+    "appointerResolvesTo": 0,
+    "appointedBy": 989,
+    "credentials": 1531158,
+    "providers": 170499,
+    "fl": 11944,
+    "tx": 1517
+  },
+  "qa": {
+    "americanGeneralLife": {
+      "id": "d3e63b94-542f-4994-a5c2-0c6b4f66a89d",
+      "entity_kind": "legal_insurer",
+      "provisional_key": "legal-insurer:naic:60488",
+      "legal_name": "AMERICAN GEN LIFE INS CO",
+      "identity_confidence": "CONFIRMED"
+    },
+    "allstateInsCo": {
+      "id": "21930728-f721-49fb-b1dc-e960df4efb80",
+      "entity_kind": "legal_insurer",
+      "provisional_key": "legal-insurer:naic:19232",
+      "legal_name": "ALLSTATE INS CO",
+      "identity_confidence": "CONFIRMED"
+    },
+    "allstateGroup": {
+      "id": "3187162b-f5c6-4482-b991-12c79834280e",
+      "entity_kind": "insurance_group",
+      "provisional_key": "insurance-group:naic:8",
+      "legal_name": "ALLSTATE INS GRP",
+      "identity_confidence": "CONFIRMED"
+    },
+    "cvsGroup": {
+      "id": "5e9a9c6d-8f1c-4ffa-9b95-af6c79dddc03",
+      "entity_kind": "insurance_group",
+      "provisional_key": "insurance-group:naic:1",
+      "legal_name": "CVS GRP",
+      "identity_confidence": "CONFIRMED"
+    },
+    "liquidation": {
+      "id": "d35664b1-7961-4d70-a331-c5d04a7d0fec",
+      "entity_kind": "legal_insurer",
+      "provisional_key": "legal-insurer:naic:44725",
+      "legal_name": "1ST AUTO & CAS INS CO",
+      "identity_confidence": "CONFIRMED"
+    },
+    "farmersMutInsAssnA": {
+      "id": "9ec401af-d85d-438d-987f-ac47821fbee0",
+      "entity_kind": "legal_insurer",
+      "provisional_key": "legal-insurer:naic:14115",
+      "legal_name": "FARMERS MUT INS ASSN",
+      "identity_confidence": "CONFIRMED"
+    },
+    "farmersMutInsAssnB": {
+      "id": "5f352311-0d3d-49c6-8425-5e2232204cd9",
+      "entity_kind": "legal_insurer",
+      "provisional_key": "legal-insurer:naic:14681",
+      "legal_name": "FARMERS MUT INS ASSN",
+      "identity_confidence": "CONFIRMED"
+    },
+    "flAppointerUnchanged": true,
+    "txAppointerUnchanged": true,
+    "layersSeparate": true
+  },
+  "holds": [
+    "GPNM_MEMBER_WITHOUT_COMPANY_LISTING group=4944 cocode=17686 name=US LAW SHIELD LEGAL EXPENSE INS CORP",
+    "membership_unresolved 4944|17686"
+  ],
+  "errors": []
+}

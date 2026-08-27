@@ -8,12 +8,13 @@ Does **not** start INS-NAT-FINAL-003. Does **not** write `APPOINTER_RESOLVES_TO`
 node node_modules\tsx\dist\cli.mjs scripts/check-ins-nat-final-002.ts
 node node_modules\tsx\dist\cli.mjs scripts/check-ins-nat-final-002b.ts
 node node_modules\tsx\dist\cli.mjs scripts/national/ingest-carrier-identity.ts
-# schema apply requires DATABASE_URL (session pooler or direct Postgres URI)
-node node_modules\tsx\dist\cli.mjs scripts/national/ingest-carrier-identity.ts --apply-schema --execute
 node node_modules\tsx\dist\cli.mjs scripts/national/ingest-carrier-identity.ts --execute
 ```
 
-Second `--execute` must insert 0 new legal insurers / groups / memberships.
+Schema was applied once in the Supabase SQL Editor. `--execute` must **not** re-apply the migration.
+
+Production first execute: `ins-nat-final-002b-2026-08-27T2043Z`  
+Idempotent second execute: `ins-nat-final-002b-2026-08-27T2044Z` (0 new legal insurers / groups / brands / identifiers / memberships).
 
 ## Locked source
 
