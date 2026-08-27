@@ -1,0 +1,81 @@
+{
+  "task": "INS-NAT-FINAL-002B",
+  "runId": "ins-nat-final-002b-2026-08-27T2033Z",
+  "execute": false,
+  "at": "2026-08-27T20:33:25.897Z",
+  "source": {
+    "product": "LOC-JUN-2026",
+    "zipSha256": "baabd84b0c4d546865e9b28c2e54d7ac1f40146192f5dc0e37eb5e5e0440a260",
+    "parserFingerprint": "9fdc197f2dad28ee9a274b404d9ace58a3be5c9de9a12257ba821f26b71dc39e",
+    "dryRunFingerprint": "bad17e96dce6286cdee6e66b84d9fbd8b8e1eeb59834c6996ba3a27319ada50f",
+    "observedAt": "2026-08-27T00:00:00.000Z",
+    "transform": "ins-nat-final-002b.v1"
+  },
+  "baseline": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "carriers": 13461,
+    "credentials": 1531158,
+    "appointedBy": 989,
+    "providers": 170499,
+    "fl": 11944,
+    "tx": 1517,
+    "txConfirmed": 1510,
+    "txUnresolved": [
+      "14348",
+      "16806",
+      "38466",
+      "62472",
+      "70335",
+      "91413",
+      "95175"
+    ],
+    "flCoincidence": 17
+  },
+  "predicted": {
+    "legalInsurers": 6185,
+    "groups": 720,
+    "brands": 14,
+    "identifiers": 6905,
+    "memberships": 3844,
+    "membershipOrphans": 1,
+    "appointerResolvesTo": 0,
+    "usesBrand": 0
+  },
+  "statusCounts": {
+    "0": 7,
+    "1": 5531,
+    "4": 78,
+    "6": 569
+  },
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishLegalInsurer": false,
+    "mayPublishGroup": false,
+    "mayPublishBrand": false,
+    "mayPublishCarrier": false
+  },
+  "schema": {
+    "applied": false,
+    "alreadyPresent": false,
+    "method": "none"
+  },
+  "writes": {
+    "legalInsurersInserted": 0,
+    "groupsInserted": 0,
+    "brandsInserted": 0,
+    "identifiersInserted": 0,
+    "identifiersSkipped": 0,
+    "aliasesInserted": 0,
+    "membershipsInserted": 0,
+    "membershipsSkipped": 0,
+    "appointerResolvesTo": 0,
+    "usesBrand": 0
+  },
+  "after": {},
+  "qa": {},
+  "holds": [
+    "GPNM_MEMBER_WITHOUT_COMPANY_LISTING group=4944 cocode=17686 name=US LAW SHIELD LEGAL EXPENSE INS CORP"
+  ],
+  "errors": []
+}

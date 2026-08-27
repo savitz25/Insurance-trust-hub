@@ -6,7 +6,13 @@
 
 ## Gate
 
-**Do not apply** unless a later controlled ops gate explicitly says to. This task prepares the additive schema only.
+INS-NAT-FINAL-002B is the controlled apply gate. Apply **once**, then ingest with `--execute`.
+
+After apply, if PostgREST still reports `PGRST205` for the new tables:
+
+```sql
+NOTIFY pgrst, 'reload schema';
+```
 
 ## Additive confirmation
 
