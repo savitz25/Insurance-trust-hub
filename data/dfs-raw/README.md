@@ -5,6 +5,7 @@ Place official CSV exports here (not committed):
 - `AllValidLicensesBusiness.csv`
 - `AllValidLicensesIndividual.csv`
 - AllActiveAppointmentsBusiness.csv (Phase 6A — do not commit; ~20MB)
+- AllActiveAppointmentsIndividual(A-C).csv … (T-Z).csv (INS-NAT-013 — store under agent-tools/ins-nat-013, do not commit)
 
 Download: https://licenseesearch.fldfs.com/BulkDownload
 
