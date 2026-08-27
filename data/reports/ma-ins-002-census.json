@@ -1,0 +1,142 @@
+{
+  "task": "MA-INS-002",
+  "runId": "ma-ins-002-2026-08-27T19-36-42-070Z",
+  "execute": true,
+  "startedAt": "2026-08-27T19:36:42.072Z",
+  "sourceSha256": "B5DBEB1DCA9B0AF88FBC041927AFF6FCD150508B9995B19BF418B25476BE48BD",
+  "baseline": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "carriers": 13461,
+    "credentials": 1531158,
+    "maCredentials": 7187,
+    "providers": 170499,
+    "associatedWith": 52827
+  },
+  "held": {
+    "validNpn": 1961,
+    "malformed": [
+      {
+        "sourceRow": 9138,
+        "npnRaw": "9950",
+        "name": "International Medical Administrors, Inc.",
+        "licenseNo": "9950",
+        "verdict": "UNRESOLVED_SOURCE_IDENTIFIER",
+        "note": "4-digit value equals LICENSE_NO; not padded to NPN"
+      }
+    ]
+  },
+  "rawHits": {
+    "dfs_producers": 0,
+    "vt_producers": 0,
+    "ms_producers": 0,
+    "ma_producers": 0,
+    "tdi_producers": 0,
+    "nj_producers": 0,
+    "nv_producers": 0,
+    "nc_producers": 0,
+    "odi_producers": 0
+  },
+  "cmsNpnHitsNotType": 23,
+  "census": {
+    "BUSINESS_ENTITY": 0,
+    "INDIVIDUAL": 0,
+    "OTHER": 0,
+    "REVIEW_REQUIRED": 0,
+    "UNRESOLVED": 1961
+  },
+  "predicted": {
+    "newAgencies": 0,
+    "newPersons": 0,
+    "newCredentials": 0,
+    "newLoasAgencies": 0,
+    "newLoasPersons": 0,
+    "newContactsAgencies": 0,
+    "newContactsPersons": 0,
+    "worksFor": 0,
+    "indexableWrites": 0,
+    "carrierChanges": 0
+  },
+  "collisionsHeld": {
+    "email": 56,
+    "phone": 57,
+    "address": 75,
+    "name": 0
+  },
+  "sourcesUsed": [
+    {
+      "table": "dfs_producers",
+      "source": "florida_dfs",
+      "authority": "Florida DFS licensee extract entity_type",
+      "typeField": "entity_type",
+      "hits": 0
+    },
+    {
+      "table": "vt_producers",
+      "source": "vermont_dfr",
+      "authority": "Vermont DFR licensee extract entity_type",
+      "typeField": "entity_type",
+      "hits": 0
+    },
+    {
+      "table": "ms_producers",
+      "source": "mississippi_mid",
+      "authority": "Mississippi MID licensee extract entity_type",
+      "typeField": "entity_type",
+      "hits": 0
+    },
+    {
+      "table": "ma_producers",
+      "source": "massachusetts_doi_wave1",
+      "authority": "MA DOI Wave-1 staging entity_type (if populated)",
+      "typeField": "entity_type",
+      "hits": 0
+    },
+    {
+      "table": "tdi_producers",
+      "source": "texas_tdi_agencies",
+      "authority": "TDI agencies-and-businesses extract (business-only official list)",
+      "typeField": "implied_business_extract",
+      "hits": 0
+    },
+    {
+      "table": "nj_producers",
+      "source": "new_jersey_dobi",
+      "authority": "NJ DOBI agency/business extract (business-only official list)",
+      "typeField": "implied_business_extract",
+      "hits": 0
+    },
+    {
+      "table": "nv_producers",
+      "source": "nevada_doi",
+      "authority": "Nevada DOI firm extract (business-only official list)",
+      "typeField": "implied_business_extract",
+      "hits": 0
+    },
+    {
+      "table": "nc_producers",
+      "source": "north_carolina_doi",
+      "authority": "NC DOI agency extract (business-only official list)",
+      "typeField": "implied_business_extract",
+      "hits": 0
+    },
+    {
+      "table": "odi_producers",
+      "source": "ohio_odi",
+      "authority": "Ohio ODI agency extract (business-only official list)",
+      "typeField": "implied_business_extract",
+      "hits": 0
+    }
+  ],
+  "sbsBulk": false,
+  "nipr": false,
+  "publication": {
+    "newAgencyAutoIndex": false,
+    "personPublic": false,
+    "massachusettsRoute": false
+  },
+  "followUpPra": true,
+  "fingerprints": {
+    "resolution": "20f0eedfaa52c5ca56c7ede6435efa46efc2e2015811e460dfe62027503928d9"
+  }
+}

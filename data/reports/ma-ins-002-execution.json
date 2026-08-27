@@ -1,0 +1,39 @@
+{
+  "executed": true,
+  "runId": "ma-ins-002-2026-08-27T19-33-48-097Z",
+  "startedAt": "2026-08-27T19:33:48.098Z",
+  "completedAt": "2026-08-27T19:36:05.478Z",
+  "census": {
+    "BUSINESS_ENTITY": 128,
+    "INDIVIDUAL": 0,
+    "OTHER": 0,
+    "REVIEW_REQUIRED": 0,
+    "UNRESOLVED": 1961
+  },
+  "insertedEntitiesAgency": 128,
+  "insertedEntitiesPerson": 0,
+  "insertedCreds": 128,
+  "insertedLoas": 324,
+  "insertedContacts": 384,
+  "baseline": {
+    "agencies": 81943,
+    "persons": 1029860,
+    "carriers": 13461,
+    "credentials": 1531030,
+    "maCredentials": 7059,
+    "providers": 170499,
+    "associatedWith": 52827
+  },
+  "after": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "carriers": 13461,
+    "credentials": 1531158,
+    "maCredentials": 7187,
+    "providers": 170499,
+    "associatedWith": 52827
+  },
+  "fingerprints": {
+    "resolution": "a467c2a187ccb483c368338891b47574c9e7cb7c6d34a26d93c5424246c99485"
+  }
+}
