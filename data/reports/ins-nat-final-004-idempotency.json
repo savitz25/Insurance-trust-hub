@@ -1,0 +1,6 @@
+{
+  "task": "INS-NAT-FINAL-004",
+  "runId": "ins-nat-final-004-2026-08-27T2143Z",
+  "writes": { "inserted": 0, "skipped": 5966 },
+  "after": { "regulatoryEvidence": 5966, "agencies": 82071, "legalInsurer": 6185, "providers": 170499 }
+}

@@ -1,0 +1,54 @@
+{
+  "task": "INS-NAT-FINAL-004",
+  "runId": "ins-nat-final-004-2026-08-27T2139Z",
+  "execute": false,
+  "at": "2026-08-27T21:39:16.231Z",
+  "source": {
+    "id": "pa9u-9s9w",
+    "title": "Complaint indexes and policy counts for insurance companies",
+    "authority": "Texas Department of Insurance",
+    "portal": "https://data.texas.gov/dataset/Complaint-indexes-and-policy-counts-for-insurance-/pa9u-9s9w",
+    "csv": "https://data.texas.gov/api/views/pa9u-9s9w/rows.csv?accessType=DOWNLOAD",
+    "sourceDataset": "tdi_complaint_indexes",
+    "family": "COMPLAINT",
+    "subtype": "CONFIRMED_COMPLAINT_INDEX",
+    "observedAt": "2026-08-27T00:00:00.000Z",
+    "localCsv": "C:\\Users\\Michael.Savitsky\\insurance-visual-005\\data\\tdi-raw\\tdi-complaint-indexes.csv",
+    "csvSha256": "1fa7a354f125ad14e24a0735f09288966005f8515da2dcea59323f7089f49d24",
+    "rows": 5966
+  },
+  "baseline": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "carriers": 13461,
+    "credentials": 1531158,
+    "providers": 170499,
+    "regulatoryEvidence": 0,
+    "cms": 1300108
+  },
+  "census": {
+    "sourceRows": 5966,
+    "distinctEvents": 5966,
+    "duplicates": 0,
+    "confirmed": 5713,
+    "reviewRequired": 0,
+    "unresolved": 253,
+    "publicationEnabled": false
+  },
+  "predicted": {
+    "insert": 5966,
+    "attachConfirmed": 5713,
+    "unresolvedStored": 253,
+    "newEntities": 0,
+    "providerWrites": 0
+  },
+  "writes": {
+    "inserted": 0,
+    "skipped": 0
+  },
+  "after": {},
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "task": "INS-NAT-FINAL-004",
+  "runId": "ins-nat-final-004-2026-08-27T2140Z",
+  "source": {
+    "id": "pa9u-9s9w",
+    "csvSha256": "1fa7a354f125ad14e24a0735f09288966005f8515da2dcea59323f7089f49d24",
+    "rows": 5966
+  },
+  "census": {
+    "distinctEvents": 5966,
+    "confirmedAttached": 5713,
+    "reviewRequired": 0,
+    "unresolvedUnattached": 253
+  },
+  "production": {
+    "regulatory_evidence": 5966,
+    "publicationEnabled": false,
+    "family": "COMPLAINT",
+    "subtype": "CONFIRMED_COMPLAINT_INDEX",
+    "is_final": false
+  },
+  "identityUnchanged": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "legalInsurer": 6185,
+    "providers": 170499,
+    "cms": 1300108
+  }
+}

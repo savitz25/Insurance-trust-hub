@@ -1,22 +1,9 @@
-# Texas TDI raw data (gitignored except this README)
+# Texas TDI raw (gitignored except this README)
 
-Place open-data exports here. Do **not** commit multi-MB CSVs.
+INS-NAT-FINAL-004 complaint indexes:
 
-## Download
-
-Agency portal: https://data.texas.gov/dataset/Insurance-agencies-and-businesses-approved-to-mana/3yqc-fcdt
-
-Individuals (INS-NAT-012): https://data.texas.gov/dataset/Insurance-agents-adjusters-and-people-approved-to-/kxv3-diwf
-
-Associations (non-appointment): https://data.texas.gov/dataset/Business-relationships-between-agents-agencies-adj/kvqi-vsrr
-
-```powershell
-# Option A — ops download script
-npm run tdi:import -- --download
-
-# Option B — direct CSV
-# https://data.texas.gov/api/views/3yqc-fcdt/rows.csv?accessType=DOWNLOAD
-# Save as: data/tdi-raw/agencies.csv
+```text
+data/tdi-raw/tdi-complaint-indexes.csv
 ```
 
-Fixture for parser QA (committed): `fixtures/tdi-agencies-sample.csv` under `scripts/tdi/fixtures/`.
+Official: https://data.texas.gov/dataset/Complaint-indexes-and-policy-counts-for-insurance-/pa9u-9s9w
