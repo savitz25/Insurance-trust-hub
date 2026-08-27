@@ -4,7 +4,11 @@ Place open-data exports here. Do **not** commit multi-MB CSVs.
 
 ## Download
 
-Portal: https://data.texas.gov/dataset/Insurance-agencies-and-businesses-approved-to-mana/3yqc-fcdt
+Agency portal: https://data.texas.gov/dataset/Insurance-agencies-and-businesses-approved-to-mana/3yqc-fcdt
+
+Individuals (INS-NAT-012): https://data.texas.gov/dataset/Insurance-agents-adjusters-and-people-approved-to-/kxv3-diwf
+
+Associations (non-appointment): https://data.texas.gov/dataset/Business-relationships-between-agents-agencies-adj/kvqi-vsrr
 
 ```powershell
 # Option A — ops download script

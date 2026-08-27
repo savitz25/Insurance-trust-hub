@@ -14,7 +14,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "test": "node scripts/assert-share-002.mjs && node scripts/assert-share-003.mjs && node scripts/assert-visual-005.mjs && tsx scripts/check-ins-nat-002.ts && tsx scripts/check-ins-nat-003.ts && tsx scripts/check-ins-nat-005.ts && tsx scripts/check-ins-nat-006.ts && tsx scripts/check-ins-nat-007.ts && tsx scripts/check-ins-nat-008.ts && tsx scripts/check-ins-nat-009.ts && tsx scripts/check-ins-nat-010.ts && tsx scripts/check-ins-nat-011.ts",
+    "test": "node scripts/assert-share-002.mjs && node scripts/assert-share-003.mjs && node scripts/assert-visual-005.mjs && tsx scripts/check-ins-nat-002.ts && tsx scripts/check-ins-nat-003.ts && tsx scripts/check-ins-nat-005.ts && tsx scripts/check-ins-nat-006.ts && tsx scripts/check-ins-nat-007.ts && tsx scripts/check-ins-nat-008.ts && tsx scripts/check-ins-nat-009.ts && tsx scripts/check-ins-nat-010.ts && tsx scripts/check-ins-nat-011.ts && tsx scripts/check-ins-nat-012.ts",
     "assert:visual": "node scripts/assert-visual-005.mjs",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
@@ -100,6 +100,8 @@
     "national:backfill-persons": "tsx scripts/national/backfill-individual-producers.ts",
     "check:ins-nat-011": "tsx scripts/check-ins-nat-011.ts",
     "national:backfill-cms": "tsx scripts/national/backfill-cms-marketplace.ts",
+    "check:ins-nat-012": "tsx scripts/check-ins-nat-012.ts",
+    "national:backfill-tx-persons": "tsx scripts/national/backfill-tx-individuals.ts",
     "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema"

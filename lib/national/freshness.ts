@@ -14,6 +14,22 @@ export type CredentialFreshnessView = {
   regulatorExpiredByDate: boolean;
 };
 
+/**
+ * Texas individual file has issue/expiration dates, not a status column.
+ * Expiration relative to the official Socrata snapshot — never ingest time.
+ */
+export function txStatusFromOfficialExpiration(
+  expirationDate: string | null | undefined,
+  sourceObservedAt: Date
+): RegulatoryStatus {
+  if (!expirationDate) return 'unknown';
+  const d = new Date(`${expirationDate}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return 'unknown';
+  const observed = new Date(sourceObservedAt);
+  observed.setUTCHours(0, 0, 0, 0);
+  return d.getTime() < observed.getTime() ? 'expired' : 'active';
+}
+
 export function mapSourceStatus(raw: string | null | undefined): RegulatoryStatus {
   const s = String(raw || '').toLowerCase().trim();
   if (!s) return 'unknown';

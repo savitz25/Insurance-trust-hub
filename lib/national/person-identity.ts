@@ -31,6 +31,53 @@ export function isVtIndividualProducerClass(raw: string | null | undefined): boo
   return String(raw || '').trim().toLowerCase() === 'insurance producer';
 }
 
+/** Official TDI individual license types in the national person core cohort. */
+const TX_CORE_LICENSE = new Set([
+  'GENERAL LINES AGENT',
+  'LIFE AGENT',
+  'PERS LINES PROP AND CAS AGENT',
+]);
+
+/** Producer-adjacent TDI classes — census only; not execute-eligible. */
+const TX_HIGH_CONFIDENCE_LICENSE = new Set([
+  'COUNTY MUTUAL AGENT',
+  'LIFE AGT NOT EXCEEDING $25,000',
+]);
+
+const TX_EXCLUDE_LICENSE =
+  /adjuster|escrow|\btitle\b|limited lines|pre-?need|surplus|managing general|\bmga\b|risk manager|specialty insurance|life stlmnt|life stlmt|reinsurance|\btemp(?:\.|orary)?\b|emergency/i;
+
+function normTxLicenseType(raw: string | null | undefined): string {
+  return String(raw || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toUpperCase();
+}
+
+/** CONFIRMED Texas core individual producers (General Lines / Life / Personal Lines). */
+export function isTxIndividualCoreProducerLicense(raw: string | null | undefined): boolean {
+  const t = normTxLicenseType(raw);
+  if (!t) return false;
+  if (TX_EXCLUDE_LICENSE.test(t)) return false;
+  return TX_CORE_LICENSE.has(t);
+}
+
+export function isTxIndividualHighConfidenceProducerLicense(
+  raw: string | null | undefined
+): boolean {
+  const t = normTxLicenseType(raw);
+  if (!t) return false;
+  if (TX_EXCLUDE_LICENSE.test(t)) return false;
+  return TX_HIGH_CONFIDENCE_LICENSE.has(t);
+}
+
+export function isTxIndividualExcludedLicense(raw: string | null | undefined): boolean {
+  const t = normTxLicenseType(raw);
+  if (!t) return false;
+  if (TX_CORE_LICENSE.has(t) || TX_HIGH_CONFIDENCE_LICENSE.has(t)) return false;
+  return TX_EXCLUDE_LICENSE.test(t);
+}
+
 export function personContactPublicEligible(): boolean {
   return PERSON_CONTACT_PUBLIC_ELIGIBLE_DEFAULT;
 }
