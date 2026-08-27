@@ -1,0 +1,101 @@
+{
+  "task": "INS-NAT-FINAL-002",
+  "officialSources": [
+    {
+      "id": "naic_loc_jun_2026",
+      "authority": "National Association of Insurance Commissioners",
+      "product": "LOC-JUN-2026",
+      "title": "2026 June Detailed Listings of Companies",
+      "page": "https://content.naic.org/publications",
+      "url": "https://content.naic.org/sites/default/files/publication-detail-list-companies-2026-jun.zip",
+      "localZip": "C:\\Users\\Michael.Savitsky\\insurance-visual-005\\data\\naic-raw\\publication-detail-list-companies-2026-jun.zip",
+      "zipSha256": "baabd84b0c4d546865e9b28c2e54d7ac1f40146192f5dc0e37eb5e5e0440a260",
+      "zipBytes": 7658271,
+      "extractedDir": "C:\\Users\\Michael.Savitsky\\insurance-visual-005\\data\\naic-raw\\loc-jun-2026",
+      "files": [
+        "ALAL.csv",
+        "ALAL.pdf",
+        "ALNM.csv",
+        "ALNM.pdf",
+        "COMB.csv",
+        "COMB.pdf",
+        "CONM.csv",
+        "CONM.pdf",
+        "FRAT.csv",
+        "FRAT.pdf",
+        "GPAL.csv",
+        "GPAL.pdf",
+        "GPNM.csv",
+        "GPNM.pdf",
+        "HLTH.csv",
+        "HLTH.pdf",
+        "LIFE.csv",
+        "LIFE.pdf",
+        "NAAL.csv",
+        "NAAL.pdf",
+        "NANM.csv",
+        "NANM.pdf",
+        "ORBE.csv",
+        "ORBE.pdf",
+        "PLAL.csv",
+        "PLAL.pdf",
+        "PLNM.csv",
+        "PLNM.pdf",
+        "PROP.csv",
+        "PROP.pdf",
+        "TILE.csv",
+        "TILE.pdf"
+      ],
+      "fileCounts": {
+        "PROP.csv": 3646,
+        "LIFE.csv": 1136,
+        "HLTH.csv": 1099,
+        "TILE.csv": 73,
+        "FRAT.csv": 72,
+        "ORBE.csv": 159,
+        "GPAL.csv": 720,
+        "GPNM.csv": 3845
+      },
+      "parserFingerprint": "9fdc197f2dad28ee9a274b404d9ace58a3be5c9de9a12257ba821f26b71dc39e",
+      "role": "canonical_legal_insurer_and_group_codes"
+    },
+    {
+      "id": "florida_dfs_appointing_entity_number",
+      "authority": "Florida Department of Financial Services",
+      "role": "state_appointing_entity_namespace_not_naic",
+      "note": "Appointing Entity Number is distinct from NAIC Company Code. Digit coincidence is not a crosswalk."
+    },
+    {
+      "id": "texas_tdi_bupb_23s9",
+      "authority": "Texas Department of Insurance",
+      "portal": "https://data.texas.gov/dataset/Active-insurance-company-appointments-for-agents-a/bupb-23s9",
+      "role": "state_appointing_entity_naic_id_company_or_group",
+      "note": "TDI NAIC ID is official TX appointing identifier for a company or group. Validated against NAIC LOC before legal-insurer resolution."
+    },
+    {
+      "id": "massachusetts_doi_licensed_companies",
+      "authority": "Massachusetts Division of Insurance",
+      "role": "state_licensed_company_naic_supplement",
+      "note": "Fail-closed as agencies. Used only as a NAIC CoCode observation source when the file is present."
+    },
+    {
+      "id": "cms_medicare_contract_org",
+      "authority": "Centers for Medicare & Medicaid Services",
+      "role": "plan_contract_organization_not_forced_to_legal_insurer"
+    },
+    {
+      "id": "curated_consumer_brand_registry",
+      "authority": "InsuranceTrustHub product registry (not a regulator)",
+      "role": "consumer_brand_candidates_review_required",
+      "count": 14
+    }
+  ],
+  "excluded": [
+    "NIPR (restricted/commercial)",
+    "AM Best commercial identity",
+    "Name similarity merge",
+    "Florida OIR market intelligence / FL-INS-000+"
+  ],
+  "at": "2026-08-27T20:16:05.879Z",
+  "fingerprint": "9fdc197f2dad28ee9a274b404d9ace58a3be5c9de9a12257ba821f26b71dc39e"
+}

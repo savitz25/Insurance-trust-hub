@@ -13,9 +13,16 @@ export const PUBLIC_PERSON_PROFILES_ENABLED = false;
 export const INDIVIDUAL_PUBLICATION_DISABLED_REASON =
   'individual_publication_disabled';
 
+const UNPUBLISHED_KINDS: ReadonlySet<NationalEntityKind> = new Set([
+  'carrier',
+  'legal_insurer',
+  'insurance_group',
+  'consumer_brand',
+]);
+
 export function mayPublishEntityKind(kind: NationalEntityKind): boolean {
   if (kind === 'person') return PUBLIC_PERSON_PROFILES_ENABLED;
-  if (kind === 'carrier') return false;
+  if (UNPUBLISHED_KINDS.has(kind)) return false;
   return true;
 }
 

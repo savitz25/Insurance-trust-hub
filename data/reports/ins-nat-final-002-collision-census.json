@@ -1,0 +1,163 @@
+{
+  "task": "INS-NAT-FINAL-002",
+  "classes": {
+    "sameCoCodeConflictingNames": 0,
+    "groupCodeEqualsCoCode": 0,
+    "duplicateGroupMemberships": 0,
+    "flDfsDigitsCoincideWithCoCode": 17,
+    "txIdMatchesBothCoCodeAndGroup": 0,
+    "txSixDigitNotCoCode": 0,
+    "sameLegalNameDifferentCoCodes": 29,
+    "brandRegistryNotLegalInsurer": 14
+  },
+  "samples": {
+    "sameCoCodeConflictingNames": [],
+    "groupCodeEqualsCoCode": [],
+    "flDigitCoincidence": [
+      "10003",
+      "10005",
+      "10006",
+      "10015",
+      "10017",
+      "10023",
+      "21040",
+      "24180",
+      "24830",
+      "25186",
+      "26271",
+      "29300",
+      "31062",
+      "32301",
+      "60016",
+      "60111",
+      "66001"
+    ],
+    "txCollisions": [],
+    "txUnmatched": [
+      "14348",
+      "16806",
+      "38466",
+      "62472",
+      "70335",
+      "91413",
+      "95175"
+    ],
+    "sameNameDifferentCoCodes": [
+      {
+        "name": "AMERICAN INTEGRITY INS CO",
+        "cocodes": [
+          "10197",
+          "12841"
+        ]
+      },
+      {
+        "name": "AMERICAN MUT INS ASSN",
+        "cocodes": [
+          "12616",
+          "15319"
+        ]
+      },
+      {
+        "name": "DRIVERS INS CO",
+        "cocodes": [
+          "10645",
+          "19011"
+        ]
+      },
+      {
+        "name": "FARMERS MUT AID ASSN",
+        "cocodes": [
+          "10303",
+          "92291"
+        ]
+      },
+      {
+        "name": "FARMERS MUT FIRE INS CO",
+        "cocodes": [
+          "12382",
+          "28738"
+        ]
+      },
+      {
+        "name": "FARMERS MUT INS ASSN",
+        "cocodes": [
+          "14115",
+          "14681",
+          "15396",
+          "15397",
+          "15398",
+          "15399",
+          "15400"
+        ]
+      },
+      {
+        "name": "FARMERS MUT INS CO",
+        "cocodes": [
+          "10304",
+          "12383",
+          "14244",
+          "40070"
+        ]
+      },
+      {
+        "name": "FIRST MUT INS CO",
+        "cocodes": [
+          "10821",
+          "43877"
+        ]
+      },
+      {
+        "name": "GERMAN MUT INS ASSN",
+        "cocodes": [
+          "14341",
+          "15406",
+          "15408"
+        ]
+      },
+      {
+        "name": "GREAT REPUBLIC INS CO",
+        "cocodes": [
+          "18660",
+          "71269"
+        ]
+      },
+      {
+        "name": "HEARTLAND MUT INS CO",
+        "cocodes": [
+          "11766",
+          "12468",
+          "17287"
+        ]
+      },
+      {
+        "name": "HIGHLAND MUT INS CO",
+        "cocodes": [
+          "13882",
+          "17132"
+        ]
+      },
+      {
+        "name": "HOME MUT INS CO",
+        "cocodes": [
+          "15119",
+          "15822"
+        ]
+      },
+      {
+        "name": "INTEGRITY INS CO",
+        "cocodes": [
+          "11584",
+          "14303"
+        ]
+      },
+      {
+        "name": "INTREPID INS CO",
+        "cocodes": [
+          "10749",
+          "28266"
+        ]
+      }
+    ]
+  },
+  "at": "2026-08-27T20:16:05.879Z"
+}

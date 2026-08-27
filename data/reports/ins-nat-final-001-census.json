@@ -1,0 +1,77 @@
+{
+  "task": "INS-NAT-FINAL-001",
+  "at": "2026-08-27T19:47:13.232Z",
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishPerson": false,
+    "mayPublishCarrier": false,
+    "mayPublishAgency": true
+  },
+  "entities": {
+    "agency": 82071,
+    "person": 1029860,
+    "carrier": 13461
+  },
+  "credentials": {
+    "total": 1531158,
+    "person": 1413804,
+    "agency": 117354,
+    "fl": 750316,
+    "tx": 718894,
+    "vt": 50514,
+    "oh": 4247,
+    "nv": 0,
+    "nj": 0,
+    "nc": 0,
+    "ma": 7187,
+    "ms": 0
+  },
+  "loas": {
+    "total": 1791158,
+    "txTdi": 50348,
+    "txTdiIndividual": 733324,
+    "vt": 20,
+    "ma": 19177
+  },
+  "relationships": {
+    "associatedWith": 52827,
+    "appointedBy": 989,
+    "flAppointedTo": null,
+    "txAppointedTo": null
+  },
+  "contacts": {
+    "total": 144864,
+    "email": 65174,
+    "phone": 64323,
+    "physical": 7985,
+    "mailing": 6809,
+    "website": 0,
+    "ma": 21561
+  },
+  "cms": {
+    "total": 1300108,
+    "attached": 731990,
+    "unattached": 530887,
+    "kindConflict": 37231
+  },
+  "evidence": {
+    "regulatory": 0,
+    "certification": 0,
+    "conflicts": 0,
+    "bridges": 0
+  },
+  "public": {
+    "providers": 170499
+  },
+  "staging": {
+    "dfsProducers": 98622,
+    "tdiProducers": 48733,
+    "vtProducers": 1984,
+    "odiProducers": 5306,
+    "nvProducers": 19879,
+    "njProducers": 0,
+    "ncProducers": 0,
+    "msProducers": 10643,
+    "maProducers": 0
+  }
+}

@@ -3,7 +3,13 @@
  * In-memory model mirrors supabase/migrations/20260826120000_national_identity_graph.sql.
  */
 
-export type NationalEntityKind = 'person' | 'agency' | 'carrier';
+export type NationalEntityKind =
+  | 'person'
+  | 'agency'
+  | 'carrier'
+  | 'legal_insurer'
+  | 'insurance_group'
+  | 'consumer_brand';
 export type NationalIdentityKind = 'npn' | 'provisional';
 export type IdentityConfidence =
   | 'CONFIRMED'

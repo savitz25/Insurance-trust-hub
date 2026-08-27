@@ -1,0 +1,719 @@
+{
+  "task": "INS-NAT-FINAL-002",
+  "productionWrites": 0,
+  "migrationApplied": false,
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishPerson": false,
+    "mayPublishAgency": true,
+    "mayPublishCarrier": false,
+    "mayPublishLegalInsurer": false,
+    "mayPublishGroup": false,
+    "mayPublishBrand": false,
+    "publicCopy": {
+      "legalInsurer": "Legal regulated insurer",
+      "naic": "NAIC company code",
+      "group": "Insurance group",
+      "brand": "Consumer brand",
+      "appointer": "Appointing entity reported by state regulator"
+    }
+  },
+  "naicListing": {
+    "product": "LOC-JUN-2026",
+    "parserFingerprint": "9fdc197f2dad28ee9a274b404d9ace58a3be5c9de9a12257ba821f26b71dc39e",
+    "sourceRows": 6185,
+    "distinctCoCodes": 6185,
+    "distinctGroupCodes": 720,
+    "memberships": 3845,
+    "statusCounts": {
+      "0": 7,
+      "1": 5531,
+      "4": 78,
+      "6": 569
+    },
+    "fileCounts": {
+      "PROP.csv": 3646,
+      "LIFE.csv": 1136,
+      "HLTH.csv": 1099,
+      "TILE.csv": 73,
+      "FRAT.csv": 72,
+      "ORBE.csv": 159,
+      "GPAL.csv": 720,
+      "GPNM.csv": 3845
+    }
+  },
+  "legalInsurers": {
+    "sourceRows": 6185,
+    "distinctNaic": 6185,
+    "canonicalCandidates": 6185,
+    "confirmed": 6185,
+    "reviewRequired": 0,
+    "collisions": 0
+  },
+  "insuranceGroups": {
+    "groups": 720,
+    "withMembers": 713,
+    "memberships": 3845
+  },
+  "consumerBrands": {
+    "brands": 14,
+    "confidence": "REVIEW_REQUIRED",
+    "legalInsurerMappingsForced": 0
+  },
+  "flDfs": {
+    "total": 11944,
+    "unresolved": 11927,
+    "reviewRequiredDigitCoincidence": 17,
+    "coincidentalCoCodes": [
+      "10003",
+      "10005",
+      "10006",
+      "10015",
+      "10017",
+      "10023",
+      "21040",
+      "24180",
+      "24830",
+      "25186",
+      "26271",
+      "29300",
+      "31062",
+      "32301",
+      "60016",
+      "60111",
+      "66001"
+    ]
+  },
+  "txTdi": {
+    "productionEntities": {
+      "total": 1517,
+      "confirmedLegalInsurer": 1510,
+      "confirmedGroup": 0,
+      "highConfidence": 0,
+      "reviewRequired": 0,
+      "unresolved": 7,
+      "length": {
+        "four": 0,
+        "five": 1517,
+        "six": 0,
+        "other": 0
+      },
+      "unmatchedIds": [
+        "14348",
+        "16806",
+        "38466",
+        "62472",
+        "70335",
+        "91413",
+        "95175"
+      ],
+      "collisions": []
+    },
+    "sourceCsv": {
+      "path": "C:/Users/Michael.Savitsky/agent-tools/ins-nat-014/tdi-individual-appointments.csv",
+      "rows": 4403401,
+      "missingNaic": 231,
+      "distinctIds": 1521
+    }
+  },
+  "maLicensedCompanies": {
+    "path": "C:/Users/Michael.Savitsky/insurance-trust-hub/data/ma-raw/Mass_licensed_companies.csv",
+    "rows": 2696,
+    "distinctCoCodes": 1694,
+    "overlapWithLoc": 1666,
+    "sample": [
+      {
+        "cocode": "16835",
+        "name": "Accredited Specialty Insurance Company",
+        "companyType": "Accredited Reinsurer"
+      },
+      {
+        "cocode": "24899",
+        "name": "Alea North America Insurance Company",
+        "companyType": "Accredited Reinsurer"
+      },
+      {
+        "cocode": "19489",
+        "name": "Allied World Assurance Company (U.S.), Inc.",
+        "companyType": "Accredited Reinsurer"
+      },
+      {
+        "cocode": "17091",
+        "name": "AM Specialty Insurance Company",
+        "companyType": "Accredited Reinsurer"
+      },
+      {
+        "cocode": "10348",
+        "name": "Arch Reinsurance Company",
+        "companyType": "Accredited Reinsurer"
+      },
+      {
+        "cocode": "10717",
+        "name": "Aspen Specialty Insurance Company",
+        "companyType": "Accredited Reinsurer"
+      },
+      {
+        "cocode": "33758",
+        "name": "Associated Industries of Mass. Mutual Ins. Co.",
+        "companyType": "Accredited Reinsurer"
+      },
+      {
+        "cocode": "17520",
+        "name": "Beazley Excess and Surplus Insurance, Inc.",
+        "companyType": "Accredited Reinsurer"
+      }
+    ],
+    "fixtureOnly": false
+  },
+  "cms": {
+    "exactNaic": 0,
+    "organizationNameOnly": 358,
+    "brandOnly": 213,
+    "unresolved": 0,
+    "distinctOrgNames": 242,
+    "distinctContracts": 571,
+    "sampleBrand": [
+      {
+        "name": "Humana",
+        "slug": "humana",
+        "contractId": "H0028"
+      },
+      {
+        "name": "Wellcare",
+        "slug": "wellcare",
+        "contractId": "H0074"
+      },
+      {
+        "name": "Wellcare",
+        "slug": "wellcare",
+        "contractId": "H0111"
+      },
+      {
+        "name": "UnitedHealthcare",
+        "slug": "unitedhealthcare",
+        "contractId": "H0169"
+      },
+      {
+        "name": "Wellcare",
+        "slug": "wellcare",
+        "contractId": "H0174"
+      },
+      {
+        "name": "UnitedHealthcare",
+        "slug": "unitedhealthcare",
+        "contractId": "H0251"
+      },
+      {
+        "name": "Humana",
+        "slug": "humana",
+        "contractId": "H0292"
+      },
+      {
+        "name": "UnitedHealthcare",
+        "slug": "unitedhealthcare",
+        "contractId": "H0294"
+      },
+      {
+        "name": "UnitedHealthcare",
+        "slug": "unitedhealthcare",
+        "contractId": "H0321"
+      },
+      {
+        "name": "Wellcare By Allwell",
+        "slug": "wellcare",
+        "contractId": "H0351"
+      },
+      {
+        "name": "Cigna HealthCare",
+        "slug": "cigna",
+        "contractId": "H0354"
+      },
+      {
+        "name": "UnitedHealthcare",
+        "slug": "unitedhealthcare",
+        "contractId": "H0432"
+      }
+    ]
+  },
+  "identityCounts": {
+    "CONFIRMED": 8415,
+    "HIGH_CONFIDENCE": 0,
+    "REVIEW_REQUIRED": 31,
+    "UNRESOLVED": 11934
+  },
+  "predicted": {
+    "entities": {
+      "legalInsurer": 6185,
+      "insuranceGroup": 720,
+      "consumerBrand": 14,
+      "flAppointingExisting": 11944,
+      "txAppointingExisting": 1517,
+      "otherExistingCarriers": 0
+    },
+    "identifiers": {
+      "naicCocode": 6185,
+      "naicGroupCode": 720,
+      "flDfsAppointing": 11944,
+      "txTdiNaicId": 1517
+    },
+    "relationships": {
+      "memberOfGroup": 3845,
+      "appointerResolvesToConfirmed": 1510,
+      "usesBrand": 0
+    },
+    "holds": {
+      "flAppointingRemainUnresolvedToLegal": 11944,
+      "txUnmatched": 7,
+      "txReviewRequired": 0,
+      "cmsNoExactNaic": true,
+      "nameOnlyNeverConfirmed": true,
+      "fuzzyMerge": false,
+      "regulatoryEvidenceTraversalReviewRequired": false
+    }
+  },
+  "qa": {
+    "majorPc": [
+      {
+        "companyName": "ALLSTATE INS CO",
+        "domicile": "IL",
+        "groupCode": "8",
+        "cocode": "19232",
+        "fein": "36-0719665",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "ALLSTATE INS CO,IL,8,19232,36-0719665,N,,,1,3100 SANDERS ROAD, SUI,NORTHBROOK,IL,60062-7154,847-402-5000"
+      },
+      {
+        "companyName": "MID STATE FARMERS MUT INS CO",
+        "domicile": "IN",
+        "groupCode": null,
+        "cocode": "92293",
+        "fein": "35-0303370",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "MID STATE FARMERS MUT INS CO,IN,,92293,35-0303370,N,,,1,1008 LINCOLN HWY E,NEW HAVEN,IN,46774,"
+      },
+      {
+        "companyName": "STATE FARM CLASSIC INS CO",
+        "domicile": "IL",
+        "groupCode": "176",
+        "cocode": "17133",
+        "fein": "87-1066498",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "STATE FARM CLASSIC INS CO,IL,176,17133,87-1066498,N,,,1,ONE STATE FARM PLAZA,BLOOMINGTON,IL,61710,309-766-2311"
+      },
+      {
+        "companyName": "STATE FARM CNTY MUT INS CO OF TX",
+        "domicile": "TX",
+        "groupCode": "176",
+        "cocode": "26816",
+        "fein": "75-1070025",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "STATE FARM CNTY MUT INS CO OF TX,TX,176,26816,75-1070025,N,,,1,1251 STATE STREET, SUI,RICHARDSON,TX,75082,972-732-5000"
+      },
+      {
+        "companyName": "STATE FARM FIRE & CAS CO",
+        "domicile": "IL",
+        "groupCode": "176",
+        "cocode": "25143",
+        "fein": "37-0533080",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "STATE FARM FIRE & CAS CO,IL,176,25143,37-0533080,N,,,1,ONE STATE FARM PLAZA,BLOOMINGTON,IL,61710,309-766-2311"
+      },
+      {
+        "companyName": "STATE FARM FL INS CO",
+        "domicile": "FL",
+        "groupCode": "176",
+        "cocode": "10739",
+        "fein": "36-4261774",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "STATE FARM FL INS CO,FL,176,10739,36-4261774,N,,,1,215 S. MONROE ST.,TALLAHASSEE,FL,32301,850-577-5600"
+      },
+      {
+        "companyName": "STATE FARM GEN INS CO",
+        "domicile": "IL",
+        "groupCode": "176",
+        "cocode": "25151",
+        "fein": "37-0815476",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "STATE FARM GEN INS CO,IL,176,25151,37-0815476,N,,,1,ONE STATE FARM PLAZA,BLOOMINGTON,IL,61710,309-766-2311"
+      },
+      {
+        "companyName": "STATE FARM GUAR INS CO",
+        "domicile": "IL",
+        "groupCode": "176",
+        "cocode": "12251",
+        "fein": "20-2035381",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "PROP.csv",
+        "rawLine": "STATE FARM GUAR INS CO,IL,176,12251,20-2035381,N,,,1,ONE STATE FARM PLAZA,BLOOMINGTON,IL,61710,309-766-2311"
+      }
+    ],
+    "majorHealth": [
+      {
+        "companyName": "AETNA BETTER HLTH INC (LA CORP)",
+        "domicile": "LA",
+        "groupCode": "1",
+        "cocode": "15616",
+        "fein": "80-0629718",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "AETNA BETTER HLTH INC (LA CORP),LA,1,15616,80-0629718,N,,,1,2400 VETERANS MEMORIAL,KENNER,LA,70062,504-667-4461"
+      },
+      {
+        "companyName": "AETNA BETTER HLTH OF KY INS CO",
+        "domicile": "KY",
+        "groupCode": "1",
+        "cocode": "15761",
+        "fein": "47-3279217",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "AETNA BETTER HLTH OF KY INS CO,KY,1,15761,47-3279217,N,,,1,9900 CORPORATE CAMPUS,LOUISVILLE,KY,40223,800-627-4702"
+      },
+      {
+        "companyName": "AETNA BETTER HLTH OF OK INC",
+        "domicile": "OK",
+        "groupCode": "1",
+        "cocode": "15919",
+        "fein": "81-1143850",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "AETNA BETTER HLTH OF OK INC,OK,1,15919,81-1143850,N,,,1,1425 UNION MEETING ROA,BLUE BELL,PA,19422,800-872-3862"
+      },
+      {
+        "companyName": "AETNA HLTH & LIFE INS CO",
+        "domicile": "CT",
+        "groupCode": "1",
+        "cocode": "78700",
+        "fein": "06-0876836",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "AETNA HLTH & LIFE INS CO,CT,1,78700,06-0876836,N,,,1,151 FARMINGTON AVENUE,HARTFORD,CT,6156,800-872-3862"
+      },
+      {
+        "companyName": "AETNA HLTH INS CO",
+        "domicile": "PA",
+        "groupCode": "1",
+        "cocode": "72052",
+        "fein": "23-2710210",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "AETNA HLTH INS CO,PA,1,72052,23-2710210,N,,,1,1425 UNION MEETING ROA,BLUE BELL,PA,19422,800-872-3862"
+      },
+      {
+        "companyName": "AETNA HLTH INS CO OF NY",
+        "domicile": "NY",
+        "groupCode": "1",
+        "cocode": "84450",
+        "fein": "57-0805126",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "AETNA HLTH INS CO OF NY,NY,1,84450,57-0805126,N,,,1,151 FARMINGTON AVENUE,HARTFORD,CT,6156,800-872-3862"
+      },
+      {
+        "companyName": "BANNER HLTH & AETNA HLTH INS CO",
+        "domicile": "AZ",
+        "groupCode": "1",
+        "cocode": "16058",
+        "fein": "81-5281115",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "BANNER HLTH & AETNA HLTH INS CO,AZ,1,16058,81-5281115,N,,,1,9501 EAST SHEA BOULEVA,SCOTTSDALE,AZ,85260,602-659-1100"
+      },
+      {
+        "companyName": "HUMANA INS CO",
+        "domicile": "KY",
+        "groupCode": "119",
+        "cocode": "73288",
+        "fein": "39-1263473",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "HUMANA INS CO,KY,119,73288,39-1263473,N,,,1,101 EAST MAIN STREET,LOUISVILLE,KY,40202,502-580-1000"
+      }
+    ],
+    "majorLife": [
+      {
+        "companyName": "MASSACHUSETTS MUT LIFE INS CO",
+        "domicile": "MA",
+        "groupCode": "435",
+        "cocode": "65935",
+        "fein": "04-1590850",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "MASSACHUSETTS MUT LIFE INS CO,MA,435,65935,04-1590850,N,,,1,1295 STATE STREET,SPRINGFIELD,MA,1111,413-788-8411"
+      },
+      {
+        "companyName": "METROPOLITAN LIFE INS CO",
+        "domicile": "NY",
+        "groupCode": "241",
+        "cocode": "65978",
+        "fein": "13-5581829",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "METROPOLITAN LIFE INS CO,NY,241,65978,13-5581829,N,,,1,200 PARK AVENUE,NEW YORK,NY,10166,212-578-2211"
+      },
+      {
+        "companyName": "PRUDENTIAL INS CO OF AMER",
+        "domicile": "NJ",
+        "groupCode": "304",
+        "cocode": "68241",
+        "fein": "22-1211670",
+        "statusCode": "1",
+        "statusLabel": "active",
+        "sourceFile": "LIFE.csv",
+        "rawLine": "PRUDENTIAL INS CO OF AMER,NJ,304,68241,22-1211670,N,,,1,751 BROAD STREET,NEWARK,NJ,07102-3777,877-301-1212"
+      }
+    ],
+    "multiSubsidiaryBrand": {
+      "allstate": 58,
+      "cvsAetna": 59
+    },
+    "similarNamesDifferentCodes": [
+      {
+        "name": "AMERICAN INTEGRITY INS CO",
+        "cocodes": [
+          "10197",
+          "12841"
+        ]
+      },
+      {
+        "name": "AMERICAN MUT INS ASSN",
+        "cocodes": [
+          "12616",
+          "15319"
+        ]
+      },
+      {
+        "name": "DRIVERS INS CO",
+        "cocodes": [
+          "10645",
+          "19011"
+        ]
+      },
+      {
+        "name": "FARMERS MUT AID ASSN",
+        "cocodes": [
+          "10303",
+          "92291"
+        ]
+      },
+      {
+        "name": "FARMERS MUT FIRE INS CO",
+        "cocodes": [
+          "12382",
+          "28738"
+        ]
+      }
+    ],
+    "historicalOrInactive": [
+      {
+        "cocode": "44725",
+        "name": "1ST AUTO & CAS INS CO",
+        "status": "liquidation_or_liquidated"
+      },
+      {
+        "cocode": "28010",
+        "name": "ABBEY CAS INS CO OF DC",
+        "status": "liquidation_or_liquidated"
+      },
+      {
+        "cocode": "10807",
+        "name": "ACCC INS CO",
+        "status": "liquidation_or_liquidated"
+      },
+      {
+        "cocode": "14134",
+        "name": "ACCESS HOME INS CO",
+        "status": "liquidation_or_liquidated"
+      },
+      {
+        "cocode": "11711",
+        "name": "ACCESS INS CO",
+        "status": "liquidation_or_liquidated"
+      },
+      {
+        "cocode": "24619",
+        "name": "AEQUICAP INS CO",
+        "status": "liquidation_or_liquidated"
+      },
+      {
+        "cocode": "42609",
+        "name": "AFFIRMATIVE INS CO",
+        "status": "liquidation_or_liquidated"
+      },
+      {
+        "cocode": "12020",
+        "name": "AG AIRGROUP INS INC",
+        "status": "liquidation_or_liquidated"
+      }
+    ],
+    "floridaAppointerNotNaic": {
+      "confidence": "UNRESOLVED",
+      "flKey": "carrier:fl-dfs:02932",
+      "targetKind": null,
+      "targetKey": null,
+      "reason": "fl_dfs_number_is_not_naic_cocode",
+      "coincidentalCoCode": null
+    },
+    "texasAppointer": {
+      "confidence": "CONFIRMED",
+      "txKey": "carrier:tx-tdi-naic:60488",
+      "targetKind": "legal_insurer",
+      "targetKey": "legal-insurer:naic:60488",
+      "reason": "tdi_naic_id_equals_official_cocode"
+    },
+    "brandHumana": {
+      "slug": "humana",
+      "displayName": "Humana",
+      "aliases": [
+        "Humana Inc."
+      ],
+      "medicareNameMatchers": [
+        {},
+        {}
+      ],
+      "acaIssuerMatchers": [
+        {}
+      ]
+    },
+    "groupCvs": {
+      "kind": "insurance_group",
+      "provisionalKey": "insurance-group:naic:1",
+      "groupCode": "1",
+      "groupName": "CVS GRP",
+      "identityConfidence": "CONFIRMED",
+      "memberCoCodes": [
+        "11183",
+        "12193",
+        "12321",
+        "12328",
+        "12575",
+        "13174",
+        "13735",
+        "13980",
+        "14043",
+        "14053",
+        "14229",
+        "14408",
+        "15097",
+        "15098",
+        "15611",
+        "15616",
+        "15761",
+        "15805",
+        "15827",
+        "15919",
+        "16058",
+        "16059",
+        "16072",
+        "16194",
+        "16242",
+        "16558",
+        "16979",
+        "17352",
+        "17852",
+        "60054",
+        "63444",
+        "68500",
+        "72052",
+        "74160",
+        "78700",
+        "81973",
+        "84450",
+        "90328",
+        "95040",
+        "95088",
+        "95094",
+        "95109",
+        "95114",
+        "95173",
+        "95234",
+        "95241",
+        "95287",
+        "95318",
+        "95407",
+        "95408",
+        "95489",
+        "95490",
+        "95517",
+        "95756",
+        "95910",
+        "95925",
+        "95935",
+        "96377",
+        "96555"
+      ],
+      "memberCount": 59
+    },
+    "allstateInsCo": {
+      "kind": "legal_insurer",
+      "provisionalKey": "legal-insurer:naic:19232",
+      "cocode": "19232",
+      "legalName": "ALLSTATE INS CO",
+      "identityConfidence": "CONFIRMED",
+      "reason": "official_naic_cocode",
+      "groupCode": "8",
+      "statusCodes": [
+        "1"
+      ],
+      "sourceFiles": [
+        "PROP.csv"
+      ]
+    },
+    "allstateIndemnity": {
+      "kind": "legal_insurer",
+      "provisionalKey": "legal-insurer:naic:19240",
+      "cocode": "19240",
+      "legalName": "ALLSTATE IND CO",
+      "identityConfidence": "CONFIRMED",
+      "reason": "official_naic_cocode",
+      "groupCode": "8",
+      "statusCodes": [
+        "1"
+      ],
+      "sourceFiles": [
+        "PROP.csv"
+      ]
+    },
+    "distinctLegalNotCollapsed": true
+  },
+  "production": {
+    "carrierEntities": 13461,
+    "error": null
+  },
+  "semanticSafety": {
+    "brandEqualsLegal": false,
+    "groupEqualsLegal": false,
+    "appointerEqualsLegalUntilResolved": false,
+    "flDfsEqualsNaic": false,
+    "txNamespaceAssumedCoCode": false,
+    "nameOnlyConfirmed": false,
+    "fuzzyMerge": false,
+    "regulatoryEvidenceCrossesReviewRequired": false
+  },
+  "at": "2026-08-27T20:16:05.879Z",
+  "fingerprint": "bad17e96dce6286cdee6e66b84d9fbd8b8e1eeb59834c6996ba3a27319ada50f"
+}
