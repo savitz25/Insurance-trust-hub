@@ -1,0 +1,16 @@
+{
+  "task": "INS-NAT-FINAL-003",
+  "collisions": {
+    "oneAppointerMultipleCoCodes": 0,
+    "multipleAppointersSameCoCode": 0,
+    "missingTargetLegalInsurer": 0,
+    "groupCompanyAmbiguity": 0,
+    "identifierFormatAnomalies": {
+      "txNotFiveDigit": 0,
+      "flSixDigit": 10878,
+      "flFiveDigit": 1066
+    },
+    "flDigitCoincidence": 17
+  },
+  "at": "2026-08-27T21:24:12.621Z"
+}

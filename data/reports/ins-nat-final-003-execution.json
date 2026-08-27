@@ -1,0 +1,41 @@
+{
+  "task": "INS-NAT-FINAL-003",
+  "runId": "ins-nat-final-003-2026-08-27T2123Z",
+  "execute": true,
+  "at": "2026-08-27T21:23:43.952Z",
+  "transform": "ins-nat-final-003.v1",
+  "writes": {
+    "inserted": 1510,
+    "skipped": 0
+  },
+  "after": {
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "carrier": 13461,
+    "agency": 82071,
+    "person": 1029860,
+    "appointerResolvesTo": 1510,
+    "usesBrand": 0,
+    "memberOfGroup": 3844,
+    "credentials": 1531158,
+    "providers": 170499,
+    "fl": 11944,
+    "tx": 1517
+  },
+  "tx": {
+    "appointers": 1517,
+    "confirmed": 1510,
+    "unresolved": 7,
+    "unresolvedIds": ["14348", "16806", "38466", "62472", "70335", "91413", "95175"]
+  },
+  "fl": {
+    "appointers": 11944,
+    "confirmed": 0,
+    "highConfidence": 0,
+    "reviewRequired": 17,
+    "unresolved": 11927
+  },
+  "fingerprint": "e97121b8ae800f2e679f0432f7612ba2b1475f4fcf07c3b322c7b73ed5bf1e6c",
+  "errors": []
+}

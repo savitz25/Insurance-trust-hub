@@ -1,0 +1,132 @@
+{
+  "task": "INS-NAT-FINAL-003",
+  "runId": "ins-nat-final-003-2026-08-27T2124Z",
+  "execute": true,
+  "at": "2026-08-27T21:24:12.621Z",
+  "transform": "ins-nat-final-003.v1",
+  "schema": {
+    "applied": false,
+    "alreadyPresent": true
+  },
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishCarrier": false,
+    "mayPublishLegalInsurer": false
+  },
+  "confirmedSignalsForbidden": true,
+  "baseline": {
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "naicCocode": 6185,
+    "naicGroup": 720,
+    "memberOfGroup": 3844,
+    "appointerResolvesTo": 1510,
+    "usesBrand": 0,
+    "agency": 82071,
+    "person": 1029860,
+    "carrier": 13461,
+    "credentials": 1531158,
+    "providers": 170499
+  },
+  "source": {
+    "locProduct": "LOC-JUN-2026",
+    "parserFingerprint": "9fdc197f2dad28ee9a274b404d9ace58a3be5c9de9a12257ba821f26b71dc39e",
+    "zipSha256": "baabd84b0c4d546865e9b28c2e54d7ac1f40146192f5dc0e37eb5e5e0440a260"
+  },
+  "tx": {
+    "appointers": 1517,
+    "confirmed": 1510,
+    "unresolved": 7,
+    "unresolvedIds": [
+      "14348",
+      "16806",
+      "38466",
+      "62472",
+      "70335",
+      "91413",
+      "95175"
+    ],
+    "holds": 0
+  },
+  "fl": {
+    "appointers": 11944,
+    "confirmed": 0,
+    "highConfidence": 0,
+    "reviewRequired": 17,
+    "unresolved": 11927,
+    "officialSameRecordNaicField": false,
+    "sourcesInvestigated": [
+      "DFS All Active Appointments Individual/Business CSVs — Appointing Entity Number + Name only",
+      "dfs_appointments staging — no NAIC column",
+      "Official DFS glossary — Appointing Entity Number ≠ Florida Company Code ≠ NAIC Company Code",
+      "OIR companysearch.floir.gov — Florida Company Code or NAIC Company Code (not DFS appointing number)",
+      "No OIR/DFS bulk file in-repo with appointing_entity_number + NAIC on the same record"
+    ]
+  },
+  "predicted": {
+    "appointerResolvesTo": 1510,
+    "newEntities": 0,
+    "newIdentifiers": 0,
+    "providerWrites": 0,
+    "usesBrand": 0
+  },
+  "collisions": {
+    "oneAppointerMultipleCoCodes": 0,
+    "multipleAppointersSameCoCode": 0,
+    "missingTargetLegalInsurer": 0,
+    "groupCompanyAmbiguity": 0,
+    "identifierFormatAnomalies": {
+      "txNotFiveDigit": 0,
+      "flSixDigit": 10878,
+      "flFiveDigit": 1066
+    },
+    "flDigitCoincidence": 17
+  },
+  "fingerprint": "e97121b8ae800f2e679f0432f7612ba2b1475f4fcf07c3b322c7b73ed5bf1e6c",
+  "writes": {
+    "inserted": 0,
+    "skipped": 0
+  },
+  "after": {
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "carrier": 13461,
+    "agency": 82071,
+    "person": 1029860,
+    "appointerResolvesTo": 1510,
+    "usesBrand": 0,
+    "memberOfGroup": 3844,
+    "credentials": 1531158,
+    "providers": 170499,
+    "fl": 11944,
+    "tx": 1517
+  },
+  "qa": {
+    "tx60488": {
+      "found": true,
+      "relationship_type": "APPOINTER_RESOLVES_TO",
+      "status": "CONFIRMED"
+    },
+    "tx19232": {
+      "found": true,
+      "relationship_type": "APPOINTER_RESOLVES_TO",
+      "status": "CONFIRMED"
+    },
+    "tx73288": {
+      "found": true,
+      "relationship_type": "APPOINTER_RESOLVES_TO",
+      "status": "CONFIRMED"
+    },
+    "tx65935": {
+      "found": true,
+      "relationship_type": "APPOINTER_RESOLVES_TO",
+      "status": "CONFIRMED"
+    },
+    "txUnresolved14348": true,
+    "flUnbridged02932": true,
+    "flCoincidence10003": true
+  },
+  "errors": []
+}
