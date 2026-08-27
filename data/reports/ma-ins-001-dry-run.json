@@ -1,0 +1,103 @@
+{
+  "task": "MA-INS-001",
+  "runId": "ma-ins-001-2026-08-27T19-14-31-125Z",
+  "transformVersion": "ma-ins-001.v1",
+  "execute": true,
+  "startedAt": "2026-08-27T19:14:31.126Z",
+  "source": {
+    "file": "ma-doi-regulatory-2026-08.csv",
+    "bytes": 2129415,
+    "sha256": "B5DBEB1DCA9B0AF88FBC041927AFF6FCD150508B9995B19BF418B25476BE48BD",
+    "semanticFingerprint": "c42e7fb2252dcd835641bb274e6baed0b491dc571e811936c0be9f6b70135c40",
+    "rows": 9151,
+    "distinctNpn": 9148
+  },
+  "baseline": {
+    "agencies": 81943,
+    "persons": 1029860,
+    "carriers": 13461,
+    "credentials": 1531030,
+    "maCredentials": 7059,
+    "maLoas": 18853,
+    "maContacts": 21177,
+    "providers": 170499,
+    "associatedWith": 52827
+  },
+  "cohort": {
+    "confirmedExistingAgencies": 7059,
+    "heldNetNewNpn": 2089,
+    "malformedNpn": 1
+  },
+  "predicted": {
+    "newAgencies": 0,
+    "newPeople": 0,
+    "worksFor": 0,
+    "credentials": 7059,
+    "loas": 18853,
+    "contacts": 21177,
+    "domicileObservations": 7059,
+    "heldNetNew": 2089,
+    "malformedNpn": 1
+  },
+  "loa": {
+    "relationships": 18853,
+    "distinct": 8,
+    "agenciesWithMultiple": 6566,
+    "top": [
+      [
+        "Casualty",
+        4508
+      ],
+      [
+        "Property",
+        4490
+      ],
+      [
+        "Life",
+        4242
+      ],
+      [
+        "Accident & Health or Sickness",
+        4123
+      ],
+      [
+        "Personal Lines",
+        893
+      ],
+      [
+        "Variable Life & Variable Annuity",
+        414
+      ],
+      [
+        "Travel",
+        161
+      ],
+      [
+        "Credit",
+        22
+      ]
+    ]
+  },
+  "domicile": {
+    "MA": 493,
+    "FL": 722,
+    "NY": 642,
+    "CA": 604,
+    "TX": 441,
+    "NJ": 311,
+    "other": 3845,
+    "blank": 1
+  },
+  "contacts": {
+    "phone": 7059,
+    "email": 7059,
+    "address": 7059,
+    "total": 21177,
+    "agencies": 7059
+  },
+  "publication": {
+    "massachusettsRoute": false,
+    "personIndexing": false,
+    "sitemapRobots": false
+  }
+}

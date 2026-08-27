@@ -94,6 +94,8 @@ const DATASET_JURISDICTION: Record<string, string> = {
   vermont_dfr: 'VT',
   nevada_doi: 'NV',
   mississippi_mid: 'MS',
+  massachusetts_doi: 'MA',
+  massachusetts_doi_regulatory: 'MA',
 };
 
 /** Fields that are appointment type, never LOA. */
@@ -146,6 +148,9 @@ export function sourceFieldRole(args: {
     return 'CREDENTIAL_CLASS';
   }
   if (field === 'qualifications' || field === 'qualification' || field === 'loa_name' || field === 'loa') {
+    return 'OFFICIAL_LOA';
+  }
+  if (jur === 'MA' && field === 'lines_of_authority') {
     return 'OFFICIAL_LOA';
   }
   return 'UNKNOWN_NOT_LOA';
@@ -367,7 +372,9 @@ export function extractOfficialLoas(input: LoaExtractInput): LoaExtractResult {
   }
 
   const loaAttribution: LoaAttribution =
-    jurisdiction === 'TX' || jurisdiction === 'VT' ? 'CONFIRMED' : 'HIGH_CONFIDENCE';
+    jurisdiction === 'TX' || jurisdiction === 'VT' || jurisdiction === 'MA'
+      ? 'CONFIRMED'
+      : 'HIGH_CONFIDENCE';
   for (const t of uniqueTerms(input.qualifications)) {
     consider(t, 'qualifications', loaAttribution);
   }

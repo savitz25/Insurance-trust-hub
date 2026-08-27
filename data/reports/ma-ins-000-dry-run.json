@@ -1,0 +1,428 @@
+{
+  "task": "MA-INS-000",
+  "execute": false,
+  "productionWrite": false,
+  "publicationGate": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "personPublicationBlocked": true
+  },
+  "source": {
+    "originalOperatorPath": "C:\\Users\\Michael.Savitsky\\investor-trust-hub\\data\\raw\\Henry_August 2026.csv",
+    "originalFilename": "Henry_August 2026.csv",
+    "canonicalPath": "C:/Users/Michael.Savitsky/insurance-visual-005/data/ma-raw/ma-doi-regulatory-2026-08.csv",
+    "canonicalFilename": "ma-doi-regulatory-2026-08.csv",
+    "format": "csv",
+    "encoding": "utf-8-no-bom",
+    "bytes": 2129415,
+    "sha256": "B5DBEB1DCA9B0AF88FBC041927AFF6FCD150508B9995B19BF418B25476BE48BD",
+    "modified": "2026-08-27T18:00:57.367Z",
+    "sheets": "n/a (csv)",
+    "headerLine": "LAST_NAME_OR_BUSINESS_NAME,NPN,PHONE1,BUSINESS_EMAIL,DOMICILE_STATE,LICENSE_NO,LICENSE_STATUS,LICENSE_CLASS,LICENSE_FIRST_ACTIVE_DATE,LICENSE_EXPIRATION_DATE,LOA_NAME,BUS_ADDRESS1,BUS_ADDRESS2,BUS_ADDRESS3,BUSINESS_CITY,BUSINESS_STATE_ABBR,BUSINESS_ZIP_EXCEL,",
+    "columns": [
+      "LAST_NAME_OR_BUSINESS_NAME",
+      "NPN",
+      "PHONE1",
+      "BUSINESS_EMAIL",
+      "DOMICILE_STATE",
+      "LICENSE_NO",
+      "LICENSE_STATUS",
+      "LICENSE_CLASS",
+      "LICENSE_FIRST_ACTIVE_DATE",
+      "LICENSE_EXPIRATION_DATE",
+      "LOA_NAME",
+      "BUS_ADDRESS1",
+      "BUS_ADDRESS2",
+      "BUS_ADDRESS3",
+      "BUSINESS_CITY",
+      "BUSINESS_STATE_ABBR",
+      "BUSINESS_ZIP_EXCEL",
+      ""
+    ],
+    "columnCount": 17
+  },
+  "provenance": {
+    "agencyLikely": "Massachusetts Division of Insurance",
+    "requestReference": "UNRESOLVED — filename Henry_August 2026; no recovered request ID",
+    "receivedDate": "2026-08-27",
+    "asOfDate": "UNRESOLVED — August 2026 in filename; no official as-of column",
+    "completeness": "UNRESOLVED — not proven complete census; Insurance Producer rows with mixed domicile; all observed statuses Active in this extract pending audit totals"
+  },
+  "raw": {
+    "dataRows": 9151,
+    "blankRows": 0,
+    "malformedRows": 0,
+    "duplicateFullRows": 0,
+    "validParsed": 9151
+  },
+  "grain": {
+    "grain": "LICENSE_PLUS_LOA_SET",
+    "explanation": "Each source row is one Massachusetts producer license with a LOA_NAME cell that may list one or more comma-separated official lines of authority. Rows are not 1:1 with entities. Distinct NPN is the entity denominator. Distinct LICENSE_NO (with class) is the credential denominator. Split LOA_NAME values are LOA observations.",
+    "uniqueLicenses": 9148,
+    "sourceRows": 9151,
+    "loaRelationships": 25918
+  },
+  "counts": {
+    "distinctNpn": 9148,
+    "distinctLicenses": 9149,
+    "uniqueNpnLicenseClass": 9148,
+    "licenseLoaRelationships": 25918,
+    "distinctLoas": 9,
+    "sourceRows": 9151
+  },
+  "entityPopulation": {
+    "businessCandidatesDistinctNpn": 4428,
+    "personCandidatesDistinctNpn": 108,
+    "unresolvedEntityType": 40,
+    "reviewRequiredEntityType": 9111,
+    "confirmedBusiness": 0,
+    "confirmedPerson": 0,
+    "note": "No official entity-type column. Name-token hints are REVIEW_REQUIRED, never CONFIRMED."
+  },
+  "licenses": {
+    "rowLevelActive": 9151,
+    "rowLevelInactive": 0,
+    "rowLevelUnknown": 0,
+    "uniqueLicenseActive": 9148,
+    "uniqueLicenseInactive": 0,
+    "statusDistribution": {
+      "Active": 9151
+    },
+    "classDistribution": {
+      "Insurance Producer": 9151
+    }
+  },
+  "loas": {
+    "distinct": 9,
+    "relationshipCount": 25918,
+    "top": [
+      [
+        "Casualty",
+        6075
+      ],
+      [
+        "Property",
+        6053
+      ],
+      [
+        "Life",
+        5746
+      ],
+      [
+        "Accident & Health or Sickness",
+        5500
+      ],
+      [
+        "Personal Lines",
+        1705
+      ],
+      [
+        "Variable Life & Variable Annuity",
+        549
+      ],
+      [
+        "Travel",
+        252
+      ],
+      [
+        "Credit",
+        43
+      ],
+      [
+        "Property & Casualty",
+        1
+      ]
+    ],
+    "licensesWithMultipleLoas": 8527,
+    "npnWithMultipleLoas": 8526
+  },
+  "domicile": {
+    "massachusettsUniqueLicenses": 2044,
+    "nonMassachusettsUniqueLicenses": 7103,
+    "blank": 1,
+    "byState": [
+      [
+        "MA",
+        2044
+      ],
+      [
+        "FL",
+        733
+      ],
+      [
+        "NY",
+        703
+      ],
+      [
+        "CA",
+        631
+      ],
+      [
+        "TX",
+        450
+      ],
+      [
+        "NJ",
+        336
+      ],
+      [
+        "CT",
+        319
+      ],
+      [
+        "IL",
+        304
+      ],
+      [
+        "PA",
+        302
+      ],
+      [
+        "DE",
+        249
+      ],
+      [
+        "MI",
+        244
+      ],
+      [
+        "OH",
+        215
+      ],
+      [
+        "GA",
+        198
+      ],
+      [
+        "AZ",
+        171
+      ],
+      [
+        "NC",
+        164
+      ],
+      [
+        "NH",
+        152
+      ],
+      [
+        "RI",
+        149
+      ],
+      [
+        "VA",
+        139
+      ],
+      [
+        "MD",
+        138
+      ],
+      [
+        "MO",
+        127
+      ],
+      [
+        "MN",
+        111
+      ],
+      [
+        "TN",
+        104
+      ],
+      [
+        "IN",
+        103
+      ],
+      [
+        "CO",
+        100
+      ],
+      [
+        "UT",
+        96
+      ],
+      [
+        "KS",
+        77
+      ],
+      [
+        "ME",
+        74
+      ],
+      [
+        "NV",
+        73
+      ],
+      [
+        "WI",
+        73
+      ],
+      [
+        "WA",
+        72
+      ],
+      [
+        "SC",
+        72
+      ],
+      [
+        "IA",
+        59
+      ],
+      [
+        "NE",
+        51
+      ],
+      [
+        "KY",
+        46
+      ],
+      [
+        "AL",
+        44
+      ],
+      [
+        "OR",
+        38
+      ],
+      [
+        "OK",
+        35
+      ],
+      [
+        "LA",
+        34
+      ],
+      [
+        "AR",
+        22
+      ],
+      [
+        "VT",
+        18
+      ],
+      [
+        "MS",
+        16
+      ],
+      [
+        "DC",
+        15
+      ],
+      [
+        "MT",
+        10
+      ],
+      [
+        "ID",
+        7
+      ],
+      [
+        "WY",
+        6
+      ],
+      [
+        "WV",
+        6
+      ],
+      [
+        "ND",
+        6
+      ],
+      [
+        "SD",
+        6
+      ],
+      [
+        "PR",
+        3
+      ],
+      [
+        "HI",
+        3
+      ],
+      [
+        "NM",
+        1
+      ],
+      [
+        "AK",
+        1
+      ],
+      [
+        "(blank)",
+        1
+      ]
+    ],
+    "licensedInMaDomiciled": {
+      "FL": 733,
+      "TX": 450,
+      "CA": 631,
+      "NY": 703,
+      "NJ": 336
+    }
+  },
+  "identity": {
+    "CONFIRMED": 7059,
+    "HIGH_CONFIDENCE": 0,
+    "REVIEW_REQUIRED": 0,
+    "UNRESOLVED": 2089
+  },
+  "graphMatch": {
+    "exactExistingPersonNpn": 0,
+    "exactExistingAgencyNpn": 7059,
+    "exactExistingCarrierNpn": 0,
+    "netNewNpn": 2089,
+    "reviewRequiredNpn": 0,
+    "matchedExisting": 7059,
+    "existingMaCredentialsInGraph": 0,
+    "baseline": {
+      "agencies": 81943,
+      "persons": 1029860,
+      "carriers": 13461,
+      "credentials": 1523971,
+      "maCredentials": 0,
+      "maProducers": 0,
+      "providers": 170499
+    }
+  },
+  "predicted": {
+    "newEntities": 2089,
+    "entityInserts": 0,
+    "noteEntityInserts": "Net-new NPNs are candidates only. Entity type is REVIEW_REQUIRED without official type. MA-INS-000 does not insert entities.",
+    "credentialInserts": 9148,
+    "loaInserts": 25913,
+    "contactInserts": 27444,
+    "relationshipInserts": 0,
+    "updates": 0,
+    "newMaStateRelationshipsOnExisting": 7059,
+    "worksForInserts": 0
+  },
+  "publication": {
+    "REVIEW_REQUIRED": 2089,
+    "READY_FOR_GRAPH": 7059
+  },
+  "currentness": {
+    "entitiesWithGe1Active": 9148,
+    "entitiesOnlyInactive": 0
+  },
+  "quality": {
+    "expBeforeActive": 0,
+    "invalidEmail": 0,
+    "invalidPhone": 0,
+    "blankBusinessState": 0,
+    "zipUnusable": 0,
+    "duplicateLicenseLoaRows": -16767,
+    "multiLicenseSameNpn": 0
+  },
+  "fingerprints": {
+    "credentials": "c42e7fb2252dcd835641bb274e6baed0b491dc571e811936c0be9f6b70135c40"
+  },
+  "collisions": {
+    "sameNpnDifferentNames": 0,
+    "sameLicenseMultipleNpn": 0,
+    "sameEmailMultipleNpn": 525,
+    "samePhoneMultipleNpn": 452,
+    "sameAddrMultipleNpn": 472,
+    "sameNameMultipleNpn": 3
+  }
+}

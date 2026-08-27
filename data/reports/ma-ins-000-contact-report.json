@@ -1,0 +1,17 @@
+{
+  "rowsWithPhone": 9151,
+  "distinctPhones": 8196,
+  "rowsWithEmail": 9151,
+  "distinctEmails": 7620,
+  "rowsWithAddress": 9151,
+  "distinctAddresses": 8359,
+  "predictedObservations": {
+    "phone": 9148,
+    "email": 9148,
+    "address": 9148,
+    "entitiesEnriched": 9148
+  },
+  "invalidEmail": 0,
+  "invalidPhone": 0,
+  "note": "Business address reported to Massachusetts regulator — not assumed HQ"
+}

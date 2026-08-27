@@ -1,0 +1,17 @@
+{
+  "sameNpnDifferentNames": 0,
+  "sameLicenseMultipleNpn": 0,
+  "sameEmailMultipleNpn": 525,
+  "samePhoneMultipleNpn": 452,
+  "sameAddressMultipleNpn": 472,
+  "sameNameMultipleNpn": 3,
+  "licenseStatusConflict": 0,
+  "licenseExpirationConflict": 0,
+  "malformedNpn": 1,
+  "scientificNotationNpn": 0,
+  "missingNpn": 0,
+  "samples": {
+    "sameNpnDifferentNames": [],
+    "sameLicenseMultipleNpn": []
+  }
+}
