@@ -1,0 +1,11 @@
+{
+  "EXPECTED": 1897,
+  "EXISTING_CORRECT": 0,
+  "INSERTED": 0,
+  "MISSING": 1897,
+  "STALE_EXTRA": 0,
+  "WRONG_TARGET": 0,
+  "DUPLICATE": 0,
+  "schema_blocked": false,
+  "note": "Identifier ingest requires additive CHECK for scheme fl_oir_company_code. SQL in docs/florida/FL-INS-002-SQL-EDITOR.md."
+}

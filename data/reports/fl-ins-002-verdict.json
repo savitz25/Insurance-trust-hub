@@ -1,0 +1,10 @@
+{
+  "status": "PARTIAL \u2014 SPECIFIC BLOCKER",
+  "blocker": "SQL Editor required to add fl_oir_company_code to national_entity_identifiers.scheme CHECK",
+  "source_acquired": true,
+  "companies": 3972,
+  "confirmed_naic_matches": 1959,
+  "appointer_resolves_to_fl": 0,
+  "legal_insurers": 6185,
+  "started_003": false
+}

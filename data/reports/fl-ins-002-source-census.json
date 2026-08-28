@@ -1,0 +1,243 @@
+{
+  "task": "FL-INS-002",
+  "at": "2026-08-28T16:51:52.848792+00:00",
+  "authority": "Florida Office of Insurance Regulation",
+  "dataset": "florida_oir_active_company_search",
+  "url": "https://companysearch.floir.gov/",
+  "retrieval_method": "official Active Company Search XML File export by company type (empty name)",
+  "source_as_of": "live OIR Active Company Search at retrieval",
+  "retrieved_at": "2026-08-28T16:51:52.848792+00:00",
+  "combined_sha256": "147c46d11008d64a71bf99dc1f8d40eb0f989ba84837d3cb36df36d2965c4b55",
+  "xml_files": 52,
+  "address_rows": 16693,
+  "company_grain": "Florida Company Code (fallback NAIC, then name+type)",
+  "total_companies": 3972,
+  "distinct_florida_company_codes": 3972,
+  "records_with_naic": 1965,
+  "records_without_naic": 2007,
+  "distinct_naic": 1932,
+  "zero_record_types": [
+    "COMMERCIAL SELF-INSURANCE TRUST FUND",
+    "DONOR ANNUITY",
+    "MEDICARE PLUS CHOICE PROV. SPONSORED ORG (MPC-PSO)",
+    "PROVIDER SERVICE NETWORK"
+  ],
+  "coverage_limitations": [
+    "Active Company Search only \u2014 withdrawn/inactive/rehab/receivership generally absent",
+    "No DFS Appointing Entity Number field",
+    "No NAIC group code field",
+    "No explicit authorization-status enum beyond presence in Active search",
+    "Address rows are not duplicate companies"
+  ],
+  "refresh_method": "re-download XML by company type from companysearch.floir.gov",
+  "type_address_rows": [
+    [
+      "PROPERTY AND CASUALTY INSURER",
+      4587
+    ],
+    [
+      "LIFE AND HEALTH INSURER",
+      2269
+    ],
+    [
+      "THIRD PARTY ADMINISTRATOR",
+      1788
+    ],
+    [
+      "RISK PURCHASING GROUP",
+      1736
+    ],
+    [
+      "SURPLUS LINES",
+      861
+    ],
+    [
+      "RISK RETENTION GROUP",
+      772
+    ],
+    [
+      "MOTOR VEHICLE SERVICE AGREEMENT COMPANY",
+      500
+    ],
+    [
+      "LOCAL GOVERNMENT UNIT PAYEE/SELF-INSURER",
+      455
+    ],
+    [
+      "SURPLUS LINES - FEDERALLY AUTHORIZED",
+      360
+    ],
+    [
+      "SERVICE WARRANTY ASSOCIATION",
+      326
+    ],
+    [
+      "HEALTH MAINTENANCE ORGANIZATION (HMO)",
+      277
+    ],
+    [
+      "ACCREDITED REINSURER",
+      269
+    ],
+    [
+      "PHARMACY BENEFIT MANAGER",
+      263
+    ],
+    [
+      "PREMIUM FINANCE COMPANY",
+      260
+    ],
+    [
+      "CONTINUING CARE RETIREMENT COMMUNITY (CCRC)",
+      221
+    ],
+    [
+      "FRATERNAL BENEFIT SOCIETY",
+      190
+    ],
+    [
+      "HOME WARRANTY ASSOCIATION",
+      183
+    ],
+    [
+      "DISCOUNT PLAN ORGANIZATION (F/K/A DISCOUNT MEDICAL PLAN ORGANIZATION)",
+      163
+    ],
+    [
+      "TITLE INSURANCE",
+      160
+    ],
+    [
+      "RECIPROCAL",
+      157
+    ],
+    [
+      "RECIPROCAL JURISDICTION REINSURER",
+      113
+    ],
+    [
+      "VIATICAL SETTLEMENT PROVIDER",
+      72
+    ],
+    [
+      "CHURCH (BENEFIT ORGANIZATION)",
+      68
+    ],
+    [
+      "PRE-PAID LIMITED HEALTH SERVICE ORGANIZATION",
+      65
+    ],
+    [
+      "FISCAL INTERMEDIARY SERVICES ORGANIZATION",
+      56
+    ],
+    [
+      "RATING ORGANIZATION",
+      53
+    ],
+    [
+      "MOTOR VEHICLE MANUFACTURER",
+      52
+    ],
+    [
+      "CERTIFIED REINSURER",
+      50
+    ],
+    [
+      "LEGAL EXPENSE INSURANCE",
+      48
+    ],
+    [
+      "ADVISORY ORGANIZATION",
+      42
+    ],
+    [
+      "OFFSHORE INSURER",
+      40
+    ],
+    [
+      "TRUSTEED REINSURERS",
+      33
+    ],
+    [
+      "LIFE EXPECTANCY PROVIDER",
+      32
+    ],
+    [
+      "SERVICE WARRANTY MANUFACTURER",
+      27
+    ],
+    [
+      "RESIDUAL MARKET",
+      21
+    ],
+    [
+      "SERVICE COMPANY",
+      17
+    ],
+    [
+      "MEDICAL MALPRACTICE SELF-INSURANCE FUND",
+      15
+    ],
+    [
+      "CAPTIVE",
+      12
+    ],
+    [
+      "LOCAL GOVERNMENT SELF-INSURANCE FUND",
+      11
+    ],
+    [
+      "SURPLUS LINES - AVIATION/WET MARINE",
+      10
+    ],
+    [
+      "INDUSTRIAL INSURED CAPTIVE INSURER",
+      8
+    ],
+    [
+      "MULTIPLE EMPLOYER WELFARE ARRANGEMENT",
+      8
+    ],
+    [
+      "PRE-PAID HEALTH CLINIC",
+      8
+    ],
+    [
+      "GROUP SELF-INSURANCE FUND",
+      6
+    ],
+    [
+      "ASSESSABLE MUTUAL",
+      5
+    ],
+    [
+      "HEALTH FLEX PLAN",
+      5
+    ],
+    [
+      "ELECTRIC COOPERATIVE SELF-INSURANCE FUND",
+      4
+    ],
+    [
+      "INDEPENDENT EDUCATIONAL SELF-INSURANCE FUND",
+      4
+    ],
+    [
+      "OTHER INSURANCE RELATED ENTITY",
+      4
+    ],
+    [
+      "SERVICE WARRANTY ASSOCIATION - NONRESIDENT",
+      3
+    ],
+    [
+      "CORPORATION NOT-FOR-PROFIT SELF-INSURANCE FUNDS",
+      2
+    ],
+    [
+      "PUBLIC HOUSING AUTHORITY SELF-INSURANCE FUNDS",
+      2
+    ]
+  ]
+}

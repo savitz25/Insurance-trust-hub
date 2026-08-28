@@ -58,6 +58,7 @@ export const IDENTIFIER_SCHEME = {
   NAIC_GROUP_CODE: 'naic_group_code',
   FEIN: 'fein',
   FL_DFS_APPOINTING: 'fl_dfs_appointing_entity_number',
+  FL_OIR_COMPANY_CODE: 'fl_oir_company_code',
   TX_TDI_NAIC_ID: 'tx_tdi_naic_id',
   CMS_CONTRACT_ID: 'cms_medicare_contract_id',
   CMS_HIOS_ISSUER_ID: 'cms_hios_issuer_id',

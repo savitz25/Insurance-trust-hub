@@ -1,0 +1,59 @@
+{
+  "exact_national_matches": 1959,
+  "distinct_matched_naic": 1928,
+  "new_proven_legal_insurers": 0,
+  "new_naic_candidates_held": 6,
+  "new_naic_sample": [
+    {
+      "naic": "14034",
+      "name": "DAVINCI REINSURANCE LTD.",
+      "fl_code": "04777",
+      "type": "CERTIFIED REINSURER",
+      "class": "REVIEW_REQUIRED"
+    },
+    {
+      "naic": "38172",
+      "name": "NATIONAL GUARANTY INSURANCE COMPANY OF VERMONT",
+      "fl_code": "08752",
+      "type": "INDUSTRIAL INSURED CAPTIVE INSURER",
+      "class": "REVIEW_REQUIRED"
+    },
+    {
+      "naic": "14034",
+      "name": "DAVINCI REINSURANCE LTD.",
+      "fl_code": "54251",
+      "type": "RECIPROCAL JURISDICTION REINSURER",
+      "class": "REVIEW_REQUIRED"
+    },
+    {
+      "naic": "17974",
+      "name": "VISION INSURANCE EXCHANGE",
+      "fl_code": "94555",
+      "type": "RECIPROCAL",
+      "class": "REVIEW_REQUIRED"
+    },
+    {
+      "naic": "17677",
+      "name": "BOLD RISK RETENTION GROUP, INC.",
+      "fl_code": "88913",
+      "type": "RISK RETENTION GROUP",
+      "class": "REVIEW_REQUIRED"
+    },
+    {
+      "naic": "14034",
+      "name": "DAVINCI REINSURANCE LTD.",
+      "fl_code": "07097",
+      "type": "TRUSTEED REINSURERS",
+      "class": "REVIEW_REQUIRED"
+    }
+  ],
+  "review_required": 6,
+  "high_confidence_no_naic": 2007,
+  "unresolved": 0,
+  "match_basis": "exact_naic_cocode_same_official_record",
+  "joins": {
+    "CONFIRMED": 1959,
+    "HIGH_CONFIDENCE_CANDIDATE": 2007,
+    "REVIEW_REQUIRED": 6
+  }
+}

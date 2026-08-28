@@ -1,0 +1,10 @@
+{
+  "legal_insurers_before": 6185,
+  "proposed_new_legal_insurers": 0,
+  "proposed_identifier_inserts": 1897,
+  "proposed_status_observations": 3972,
+  "existing_fl_oir_company_code": 0,
+  "schema_requires_sql_editor_for_fl_oir_company_code": true,
+  "no_name_only_mint": true,
+  "no_appointer_bridge": true
+}

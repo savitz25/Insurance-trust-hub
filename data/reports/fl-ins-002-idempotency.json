@@ -1,0 +1,9 @@
+{
+  "execute": false,
+  "first_run_identifier_inserts": 0,
+  "schema_blocked": false,
+  "second_run_expected": "blocked_until_sql",
+  "appointer_resolves_to_writes": 0,
+  "legal_insurer_entity_writes": 0,
+  "pass": true
+}

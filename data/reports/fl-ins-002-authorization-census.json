@@ -1,0 +1,236 @@
+{
+  "source_status": "ACTIVE_IN_OIR_COMPANY_SEARCH",
+  "all_records": 3972,
+  "inactive_in_this_file": 0,
+  "withdrawn_in_this_file": 0,
+  "receivership_in_this_file": 0,
+  "note": "Presence in Active Company Search is not an enforcement event. Status \u2260 finding.",
+  "domestic_home_state_FL": 587,
+  "foreign_or_other_home_state": 3385,
+  "type_census": [
+    [
+      "PROPERTY AND CASUALTY INSURER",
+      917
+    ],
+    [
+      "RISK PURCHASING GROUP",
+      498
+    ],
+    [
+      "LIFE AND HEALTH INSURER",
+      451
+    ],
+    [
+      "THIRD PARTY ADMINISTRATOR",
+      419
+    ],
+    [
+      "LOCAL GOVERNMENT UNIT PAYEE/SELF-INSURER",
+      271
+    ],
+    [
+      "SURPLUS LINES",
+      159
+    ],
+    [
+      "RISK RETENTION GROUP",
+      156
+    ],
+    [
+      "MOTOR VEHICLE SERVICE AGREEMENT COMPANY",
+      124
+    ],
+    [
+      "SURPLUS LINES - FEDERALLY AUTHORIZED",
+      92
+    ],
+    [
+      "SERVICE WARRANTY ASSOCIATION",
+      83
+    ],
+    [
+      "CONTINUING CARE RETIREMENT COMMUNITY (CCRC)",
+      77
+    ],
+    [
+      "PHARMACY BENEFIT MANAGER",
+      69
+    ],
+    [
+      "PREMIUM FINANCE COMPANY",
+      69
+    ],
+    [
+      "RECIPROCAL JURISDICTION REINSURER",
+      61
+    ],
+    [
+      "ACCREDITED REINSURER",
+      54
+    ],
+    [
+      "HOME WARRANTY ASSOCIATION",
+      49
+    ],
+    [
+      "HEALTH MAINTENANCE ORGANIZATION (HMO)",
+      46
+    ],
+    [
+      "DISCOUNT PLAN ORGANIZATION (F/K/A DISCOUNT MEDICAL PLAN ORGANIZATION)",
+      41
+    ],
+    [
+      "FRATERNAL BENEFIT SOCIETY",
+      36
+    ],
+    [
+      "RECIPROCAL",
+      32
+    ],
+    [
+      "TITLE INSURANCE",
+      32
+    ],
+    [
+      "CERTIFIED REINSURER",
+      25
+    ],
+    [
+      "OFFSHORE INSURER",
+      21
+    ],
+    [
+      "CHURCH (BENEFIT ORGANIZATION)",
+      20
+    ],
+    [
+      "PRE-PAID LIMITED HEALTH SERVICE ORGANIZATION",
+      16
+    ],
+    [
+      "VIATICAL SETTLEMENT PROVIDER",
+      16
+    ],
+    [
+      "FISCAL INTERMEDIARY SERVICES ORGANIZATION",
+      15
+    ],
+    [
+      "MOTOR VEHICLE MANUFACTURER",
+      15
+    ],
+    [
+      "ADVISORY ORGANIZATION",
+      13
+    ],
+    [
+      "RATING ORGANIZATION",
+      13
+    ],
+    [
+      "TRUSTEED REINSURERS",
+      12
+    ],
+    [
+      "LEGAL EXPENSE INSURANCE",
+      11
+    ],
+    [
+      "SERVICE WARRANTY MANUFACTURER",
+      9
+    ],
+    [
+      "LIFE EXPECTANCY PROVIDER",
+      8
+    ],
+    [
+      "RESIDUAL MARKET",
+      5
+    ],
+    [
+      "LOCAL GOVERNMENT SELF-INSURANCE FUND",
+      4
+    ],
+    [
+      "MEDICAL MALPRACTICE SELF-INSURANCE FUND",
+      4
+    ],
+    [
+      "SERVICE COMPANY",
+      4
+    ],
+    [
+      "SURPLUS LINES - AVIATION/WET MARINE",
+      4
+    ],
+    [
+      "CAPTIVE",
+      3
+    ],
+    [
+      "INDUSTRIAL INSURED CAPTIVE INSURER",
+      3
+    ],
+    [
+      "GROUP SELF-INSURANCE FUND",
+      2
+    ],
+    [
+      "MULTIPLE EMPLOYER WELFARE ARRANGEMENT",
+      2
+    ],
+    [
+      "PRE-PAID HEALTH CLINIC",
+      2
+    ],
+    [
+      "SERVICE WARRANTY ASSOCIATION - NONRESIDENT",
+      2
+    ],
+    [
+      "ASSESSABLE MUTUAL",
+      1
+    ],
+    [
+      "CORPORATION NOT-FOR-PROFIT SELF-INSURANCE FUNDS",
+      1
+    ],
+    [
+      "ELECTRIC COOPERATIVE SELF-INSURANCE FUND",
+      1
+    ],
+    [
+      "HEALTH FLEX PLAN",
+      1
+    ],
+    [
+      "INDEPENDENT EDUCATIONAL SELF-INSURANCE FUND",
+      1
+    ],
+    [
+      "OTHER INSURANCE RELATED ENTITY",
+      1
+    ],
+    [
+      "PUBLIC HOUSING AUTHORITY SELF-INSURANCE FUNDS",
+      1
+    ]
+  ],
+  "bucket_census": {
+    "REINSURER": 152,
+    "OTHER_REGULATED": 191,
+    "P_AND_C": 956,
+    "SELF_INSURANCE": 285,
+    "ADMINISTRATOR_INTERMEDIARY": 572,
+    "FRATERNAL": 36,
+    "HEALTH_HMO": 65,
+    "WARRANTY_SERVICE": 286,
+    "RISK_RETENTION_SPECIALTY": 665,
+    "LIFE_HEALTH": 451,
+    "SURPLUS_LINES": 276,
+    "RESIDUAL_MARKET": 5,
+    "TITLE": 32
+  },
+  "admitted_insurer_candidate_confirmed": 1522
+}
