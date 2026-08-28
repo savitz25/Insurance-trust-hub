@@ -1,0 +1,178 @@
+{
+  "task": "INS-NAT-FINAL-006",
+  "at": "2026-08-28T14:43:51.753Z",
+  "entities": {
+    "agency": 82071,
+    "person": 1029860,
+    "carrier": 13461,
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "flAppointing": 11944,
+    "txAppointing": 1517,
+    "agencyConfirmed": 82071,
+    "personConfirmed": 1029860
+  },
+  "credentials": {
+    "total": 1531158,
+    "person": 1413804,
+    "agency": 117354,
+    "FL": 750316,
+    "TX": 718894,
+    "VT": 50514,
+    "OH": 4247,
+    "MA": 7187,
+    "NV": 0,
+    "NJ": 0,
+    "NC": 0,
+    "MS": 0
+  },
+  "loas": {
+    "total": 1791158,
+    "texas_tdi": 50348,
+    "texas_tdi_individual": 733324,
+    "vermont_dfr": 20,
+    "massachusetts_doi_regulatory": 19177
+  },
+  "relationships": {
+    "APPOINTED_TO": -1,
+    "appointed_by": 989,
+    "ASSOCIATED_WITH": 52827,
+    "APPOINTER_RESOLVES_TO": 1510,
+    "MEMBER_OF_GROUP": 3844,
+    "USES_BRAND": 0,
+    "flAppointedTo": -1,
+    "txAppointedTo": -1,
+    "note": "Person APPOINTED_TO live unfiltered/source counts timed out in PostgREST (same as FINAL-001). Family exists: FL+TX individual appointment ingest. Agency appointed_by=989 live."
+  },
+  "contacts": {
+    "total": 144864,
+    "email": 65174,
+    "phone": 64323,
+    "physical_address": 7985,
+    "mailing_address": 6809,
+    "website": 0,
+    "publicEligible": 122730
+  },
+  "cms": {
+    "total": 1300108,
+    "attached": 731990,
+    "unattached": 530887,
+    "kindConflict": 37231
+  },
+  "evidence": {
+    "total": 5966,
+    "complaint": 5966,
+    "subtype": 5966,
+    "internalOnly": 5966,
+    "confirmed": 5713,
+    "unresolved": 253,
+    "review": 0,
+    "isFinalTrue": 0,
+    "attachedUnresolved": 0,
+    "unattachedConfirmed": 0,
+    "unresolvedNullEntity": 253
+  },
+  "publicTables": {
+    "providers": 170499,
+    "bridges": 37515,
+    "conflicts": 0
+  },
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "PUBLIC_REGULATORY_EVIDENCE_ENABLED": false,
+    "LEGAL_INSURER_DISPLAY_DECISION": "INTERNAL_ONLY",
+    "mayPublishPerson": false,
+    "mayPublishAgency": true,
+    "mayPublishCarrier": false,
+    "mayPublishLegalInsurer": false,
+    "mayPublishGroup": false,
+    "mayPublishBrand": false,
+    "publicGraphAgencies": 0,
+    "publicPeople": 0,
+    "publicLegalInsurers": 0,
+    "publicGroups": 0,
+    "publicBrands": 0,
+    "sitemapPeople": false,
+    "sitemapChanges": false,
+    "robotsChanges": false
+  },
+  "semantics": {
+    "complaintIsFinalOrder": false,
+    "complaintIsEnforcementFinding": false,
+    "complaintZeroIsCleanRecord": false,
+    "personToAgency": false,
+    "agencyToPerson": false,
+    "legalToBrand": false,
+    "legalToGroup": false,
+    "affiliationInherits": false,
+    "legalInsurerOnAgencyReport": false,
+    "cmsRegistrationIsNotLicense": true,
+    "nameOnlyBridges": false,
+    "flDfsNumberIsNaic": false,
+    "trustReportVersion": "insurance-agency-trust-report-v1",
+    "trustReportModules": [
+      "Identity",
+      "Business / contact information",
+      "State credentials",
+      "License status",
+      "License classes",
+      "Lines of Authority",
+      "Appointments",
+      "Multi-state footprint",
+      "CMS Marketplace evidence",
+      "Regulatory & Enforcement History",
+      "Sources & freshness"
+    ]
+  },
+  "unresolvedHeld": {
+    "txUnresolvedAppointerIds": [
+      "14348",
+      "16806",
+      "38466",
+      "62472",
+      "70335",
+      "91413",
+      "95175"
+    ],
+    "flDigitCoincidences": [
+      "10003",
+      "10005",
+      "10006",
+      "10015",
+      "10017",
+      "10023",
+      "21040",
+      "24180",
+      "24830",
+      "25186",
+      "26271",
+      "29300",
+      "31062",
+      "32301",
+      "60016",
+      "60111",
+      "66001"
+    ],
+    "gpnmCocodeHold": "17686",
+    "maHeldNpns": 1961
+  },
+  "bridges": {
+    "production": 37515,
+    "expected": 37515,
+    "existingCorrect": 37515,
+    "missing": 0,
+    "staleExtra": 0,
+    "wrongTarget": 0,
+    "duplicate": 0,
+    "reviewRequired": 0,
+    "unresolved": 0,
+    "nonExactNpn": 0,
+    "zeroDelta": true
+  },
+  "agenciesPaged": {
+    "count": 82071,
+    "withNpn": 82071,
+    "confirmed": 82071
+  }
+}

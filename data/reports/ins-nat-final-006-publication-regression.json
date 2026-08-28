@@ -1,0 +1,16 @@
+{
+  "providers": 170499,
+  "graphAgencies": 82071,
+  "publicGraphAgencies": 0,
+  "publicPeople": 0,
+  "publicLegalInsurers": 0,
+  "publicGroups": 0,
+  "publicBrands": 0,
+  "bridges": 37515,
+  "sitemapChanges": false,
+  "robotsChanges": false,
+  "newRoutes": false,
+  "PUBLIC_PERSON_PROFILES_ENABLED": false,
+  "PUBLIC_REGULATORY_EVIDENCE_ENABLED": false,
+  "LEGAL_INSURER_DISPLAY_DECISION": "INTERNAL_ONLY"
+}

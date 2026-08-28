@@ -1,0 +1,19 @@
+{
+  "task": "INS-NAT-FINAL-006",
+  "at": "2026-08-28T14:43:51.753Z",
+  "verdict": "NATIONAL COMPLETE",
+  "mustCompleteBeforeFlorida": [],
+  "fiftyStateRequired": false,
+  "floridaCompatibility": "PASS",
+  "florida": "NOT STARTED",
+  "nextTask": "FL-INS-000 — FLORIDA FORENSIC INVENTORY / PUBLICATION BASELINE",
+  "bridges": {
+    "production": 37515,
+    "expected": 37515,
+    "missing": 0,
+    "staleExtra": 0,
+    "wrongTarget": 0,
+    "duplicate": 0,
+    "zeroDelta": true
+  }
+}
