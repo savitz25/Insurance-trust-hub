@@ -677,7 +677,7 @@ COMMENT ON TABLE national_entity_identifiers IS
             "proposed_identifier_inserts": len(proposed_ids),
             "proposed_status_observations": len(companies),
             "existing_fl_oir_company_code": preflight["fl_oir_company_code"],
-            "schema_requires_sql_editor_for_fl_oir_company_code": True,
+            "schema_requires_sql_editor_for_fl_oir_company_code": False,
             "no_name_only_mint": True,
             "no_appointer_bridge": True,
         },
@@ -751,7 +751,7 @@ COMMENT ON TABLE national_entity_identifiers IS
                 writes["identifiers_skipped"] += len(part)
             else:
                 writes["identifiers_inserted"] += len(rows)
-        dump("fl-ins-002-sql-editor.md".replace(".md", "-attempt.json"), writes)
+        dump("fl-ins-002-execution.json" if writes["identifiers_inserted"] else "fl-ins-002-execution-second.json", writes)
 
     after = {
         "providers": count_rows(base, key, "providers"),
@@ -800,27 +800,29 @@ COMMENT ON TABLE national_entity_identifiers IS
         "WRONG_TARGET": 0,
         "DUPLICATE": 0,
         "schema_blocked": writes["schema_blocked"],
-        "note": "Identifier ingest requires additive CHECK for scheme fl_oir_company_code. SQL in docs/florida/FL-INS-002-SQL-EDITOR.md.",
+        "note": "fl_oir_company_code CHECK applied. Safe 1:1 CONFIRMED inserts only; multi-FL-code NAIC held.",
     }
     dump("fl-ins-002-reconciliation.json", recon)
     dump(
         "fl-ins-002-idempotency.json",
         {
             "execute": execute,
-            "first_run_identifier_inserts": writes["identifiers_inserted"],
+            "this_run_identifier_inserts": writes["identifiers_inserted"],
+            "this_run_identifier_skipped": writes["identifiers_skipped"],
+            "production_fl_oir_company_code": after["fl_oir_company_code"],
+            "expected": expected_ids,
             "schema_blocked": writes["schema_blocked"],
-            "second_run_expected": 0 if after["fl_oir_company_code"] == expected_ids else "blocked_until_sql",
+            "second_run_expected_inserts": 0,
             "appointer_resolves_to_writes": 0,
             "legal_insurer_entity_writes": 0,
-            "pass": (not execute) or (writes["identifiers_inserted"] == 0 and not writes["schema_blocked"]) or writes["schema_blocked"],
+            "pass": (not execute)
+            or (
+                writes["schema_blocked"] is False
+                and after["fl_oir_company_code"] == expected_ids
+                and after["legal_insurers"] == preflight["legal_insurers"]
+                and after["appointer_resolves_to_fl"] == 0
+            ),
         },
-    )
-
-    (ROOT / "docs" / "florida" / "FL-INS-002-SQL-EDITOR.md").write_text(
-        "# FL-INS-002 SQL Editor\n\nApply **before** identifier ingest. No provider/publication changes.\n\n```sql\n"
-        + schema_sql
-        + "```\n",
-        encoding="utf-8",
     )
 
     verdict = {

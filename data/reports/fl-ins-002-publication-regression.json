@@ -14,7 +14,7 @@
     "uses_brand": 0,
     "bridges": 37515,
     "naic_cocode": 6185,
-    "fl_oir_company_code": 0
+    "fl_oir_company_code": 1897
   },
   "after": {
     "providers": 170499,
@@ -25,7 +25,7 @@
     "appointed_by": 2680,
     "appointer_resolves_to_fl": 0,
     "bridges": 37515,
-    "fl_oir_company_code": 0
+    "fl_oir_company_code": 1897
   },
   "public_legal_insurers": 0,
   "public_groups": 0,

@@ -1,6 +1,6 @@
 {
   "task": "FL-INS-002",
-  "execute": false,
+  "execute": true,
   "tests": {
     "pass": true,
     "fails": [],
@@ -8,7 +8,7 @@
   },
   "source_companies": 3972,
   "CONFIRMED_naic_matches": 1959,
-  "proposed_identifier_inserts": 1897,
+  "proposed_identifier_inserts": 0,
   "proposed_new_legal_insurers": 0,
   "proposed_appointer_resolves_to": 0,
   "proposed_member_of_group": 0,

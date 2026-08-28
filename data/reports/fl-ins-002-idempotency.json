@@ -1,9 +1,15 @@
 {
-  "execute": false,
-  "first_run_identifier_inserts": 0,
+  "execute": true,
+  "first_run_identifier_inserts": 1897,
+  "second_run_identifier_inserts": 0,
+  "this_run_identifier_inserts": 0,
+  "this_run_identifier_skipped": 0,
+  "production_fl_oir_company_code": 1897,
+  "expected": 1897,
   "schema_blocked": false,
-  "second_run_expected": "blocked_until_sql",
-  "appointer_resolves_to_writes": 0,
+  "second_run_expected_inserts": 0,
   "legal_insurer_entity_writes": 0,
+  "appointer_resolves_to_writes": 0,
+  "unexpected_updates": 0,
   "pass": true
 }

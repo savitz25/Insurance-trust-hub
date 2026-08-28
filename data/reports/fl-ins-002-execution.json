@@ -1,0 +1,11 @@
+{
+  "task": "FL-INS-002B",
+  "run": "first",
+  "identifiers_inserted": 1897,
+  "identifiers_skipped": 0,
+  "contacts_inserted": 0,
+  "legal_insurer_entities_inserted": 0,
+  "appointer_resolves_to_inserted": 0,
+  "schema_blocked": false,
+  "schema_error": null
+}

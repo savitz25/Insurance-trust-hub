@@ -1,6 +1,6 @@
 {
-  "status": "PARTIAL \u2014 SPECIFIC BLOCKER",
-  "blocker": "SQL Editor required to add fl_oir_company_code to national_entity_identifiers.scheme CHECK",
+  "status": "COMPLETE \u2014 FLORIDA OIR COMPANY / NAIC SPINE INGESTED",
+  "blocker": null,
   "source_acquired": true,
   "companies": 3972,
   "confirmed_naic_matches": 1959,

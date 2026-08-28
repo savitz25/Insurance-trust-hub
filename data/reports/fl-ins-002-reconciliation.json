@@ -1,11 +1,11 @@
 {
   "EXPECTED": 1897,
-  "EXISTING_CORRECT": 0,
+  "EXISTING_CORRECT": 1897,
   "INSERTED": 0,
-  "MISSING": 1897,
+  "MISSING": 0,
   "STALE_EXTRA": 0,
   "WRONG_TARGET": 0,
   "DUPLICATE": 0,
   "schema_blocked": false,
-  "note": "Identifier ingest requires additive CHECK for scheme fl_oir_company_code. SQL in docs/florida/FL-INS-002-SQL-EDITOR.md."
+  "note": "fl_oir_company_code CHECK applied. Safe 1:1 CONFIRMED inserts only; multi-FL-code NAIC held."
 }

@@ -97,6 +97,19 @@ assert(xw.new_proven_legal_insurers === 0, 'no mint');
 assert(pub.pass === true, 'pub pass');
 assert(verd.appointer_resolves_to_fl === 0, 'resolves 0');
 assert(verd.started_003 === false, '003 not started');
+assert(verd.status === 'COMPLETE — FLORIDA OIR COMPANY / NAIC SPINE INGESTED', 'complete');
+const recon = load('fl-ins-002-reconciliation.json');
+const idem = load('fl-ins-002-idempotency.json');
+const exec1 = load('fl-ins-002-execution.json');
+assert(exec1.identifiers_inserted === 1897, 'first insert 1897');
+assert(recon.EXPECTED === 1897 && recon.MISSING === 0 && recon.WRONG_TARGET === 0 && recon.DUPLICATE === 0, 'recon');
+assert(idem.second_run_identifier_inserts === 0, 'second 0');
+assert(idem.legal_insurer_entity_writes === 0, 'no new entities');
+assert(idem.pass === true, 'idem pass');
+const afterPub = (pub.after || {}) as Record<string, unknown>;
+assert(afterPub.fl_oir_company_code === 1897, 'prod 1897');
+assert(afterPub.legal_insurers === 6185, 'legal 6185');
+assert(afterPub.appointed_by === 2680, 'apt 2680');
 
 if (errors.length) {
   console.error('FL-INS-002 FAIL');

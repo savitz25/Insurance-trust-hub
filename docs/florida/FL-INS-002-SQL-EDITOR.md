@@ -1,14 +1,11 @@
 # FL-INS-002 SQL Editor
 
-**STOP before `fl_oir_company_code` identifier ingest until this is applied.**
-
-The live `national_entity_identifiers.scheme` CHECK does not yet include `fl_oir_company_code`. No DATABASE_URL in this environment. Apply in SQL Editor, then re-run:
-
-`python scripts/national/fl-ins-002.py --execute`
-
-Does not alter `providers`, publication, NAIC uniqueness, or `APPOINTER_RESOLVES_TO`.
+**Applied** in Supabase SQL Editor before FL-INS-002B identifier ingest. Do not re-apply unless the CHECK is missing. No provider/publication changes.
 
 ```sql
+-- FL-INS-002 additive identifier scheme. Apply in SQL Editor before identifier ingest.
+-- Does not alter providers, publication, or NAIC uniqueness.
+
 ALTER TABLE national_entity_identifiers
   DROP CONSTRAINT IF EXISTS national_entity_identifiers_scheme_check;
 
