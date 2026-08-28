@@ -1,0 +1,13 @@
+{
+  "task": "FL-INS-004",
+  "execute": true,
+  "at": "2026-08-28T18:00:35.642609+00:00",
+  "writes": {
+    "inserted": 12,
+    "skipped": 0,
+    "errors": []
+  },
+  "payloads": 12,
+  "fresh": 12,
+  "columns_family": true
+}

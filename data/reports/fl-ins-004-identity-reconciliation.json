@@ -1,0 +1,14 @@
+{
+  "task": "FL-INS-004",
+  "CONFIRMED": 0,
+  "HIGH_CONFIDENCE": 0,
+  "REVIEW_REQUIRED": 0,
+  "UNRESOLVED": 3465,
+  "receiver_unresolved": 12,
+  "listing_unresolved_not_ingested": 3453,
+  "crn_unresolved_not_acquired": 0,
+  "name_only_attach": 0,
+  "non_insurer_forced_to_legal_insurer": 0,
+  "fl_oir_map_size": 1897,
+  "legal_insurers": 6185
+}

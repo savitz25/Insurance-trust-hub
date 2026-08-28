@@ -1,0 +1,89 @@
+{
+  "task": "FL-INS-004",
+  "at": "2026-08-28T18:01:52.819634+00:00",
+  "sources": [
+    {
+      "id": "dfs_crn",
+      "authority": "Florida DFS",
+      "url": "https://apps.fldfs.com/civilremedy/",
+      "search": "https://apps.fldfs.com/civilremedy/SearchFiling.aspx",
+      "retrieval": "ASP.NET interactive search",
+      "date": "2026-08-28",
+      "sha256_home": "e818c59d42d6818f20e1580b8545d6f7e7823a1f318f59ff3d704f4754496686",
+      "sha256_search": "2aa1364ffd765de83bc2b8cdea811e21f53beb617a3a39d65fc60052154fdd08",
+      "records": 0,
+      "documents": 0,
+      "class": "PUBLIC_RECORDS_REQUEST",
+      "family": "CIVIL_REMEDY_NOTICE"
+    },
+    {
+      "id": "oir_market_pc",
+      "authority": "Florida OIR",
+      "url": "https://floir.gov/property-casualty/property-and-casualty-market-regulation",
+      "retrieval": "published HTML listing",
+      "date": "2026-08-28",
+      "sha256": "4b5c67111e9dee0b3ef4e145c1c096159579a350a61ee17d898d4af8543fe375",
+      "records": 819,
+      "family": "MARKET_CONDUCT_EXAM + CONSENT_ORDER mixed listing"
+    },
+    {
+      "id": "oir_market_lh",
+      "authority": "Florida OIR",
+      "url": "https://floir.gov/life-health/life-and-health-market-regulation",
+      "retrieval": "published HTML listing",
+      "date": "2026-08-28",
+      "sha256": "5b9182f1a021d67db10a5e12549fdb232d25c37a85ba91dc7376d3942203faf3",
+      "records": 728,
+      "family": "MARKET_CONDUCT_EXAM + CONSENT_ORDER mixed listing"
+    },
+    {
+      "id": "oir_financial_pc",
+      "authority": "Florida OIR",
+      "url": "https://floir.gov/property-casualty/property-casualty-financial-oversight",
+      "retrieval": "published HTML listing",
+      "date": "2026-08-28",
+      "sha256": "c5d3df684634563844af72a9a19a037b4bdb4d515ff4f9f4f0cadb606570099f",
+      "records": 882,
+      "family": "FINANCIAL_EXAM"
+    },
+    {
+      "id": "oir_financial_lh",
+      "authority": "Florida OIR",
+      "url": "https://floir.gov/life-health/life-and-health-financial-oversight",
+      "retrieval": "published HTML listing or missing",
+      "date": "2026-08-28",
+      "sha256": "0295a26c6f4ac38b6ed0dd7b23380ca7b6e6239deb8be162676d90c84d332d6c",
+      "records": 178,
+      "family": "FINANCIAL_EXAM"
+    },
+    {
+      "id": "oir_orders_memoranda",
+      "authority": "Florida OIR",
+      "url": "https://floir.gov/resources-and-reports/orders-and-memoranda",
+      "retrieval": "published HTML listing",
+      "date": "2026-08-28",
+      "sha256": "6e9ccf71e6ae40203035870aa29b945274e71bb45d7d7a8565dab88d4f9b8710",
+      "records": 846,
+      "family": "FINAL_ORDER / CONSENT_ORDER / ADMINISTRATIVE_ACTION"
+    },
+    {
+      "id": "dfs_receiver",
+      "authority": "Florida DFS Division of Rehabilitation and Liquidation",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies",
+      "retrieval": "official open-company HTML list + detail pages",
+      "date": "2026-08-28",
+      "sha256_list": "1bf34f2c81005d9a734a80a720dccd9af1e5fe570a6c7a8f2b2fa8f7a959333a",
+      "records": 12,
+      "documents": 12,
+      "family": "LIQUIDATION / REHABILITATION / RECEIVERSHIP"
+    }
+  ],
+  "not_in_scope": [
+    "Citizens",
+    "CHOICES",
+    "IRFS",
+    "FSLSO",
+    "NFIP",
+    "agent discipline"
+  ]
+}

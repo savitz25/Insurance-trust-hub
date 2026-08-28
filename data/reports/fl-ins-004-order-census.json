@@ -1,0 +1,71 @@
+{
+  "task": "FL-INS-004",
+  "at": "2026-08-28T18:01:52.819634+00:00",
+  "pages": [
+    {
+      "url": "https://floir.gov/resources-and-reports/orders-and-memoranda",
+      "final_url": "https://floir.gov/resources-and-reports/orders-and-memoranda",
+      "status": 200,
+      "sha256": "6e9ccf71e6ae40203035870aa29b945274e71bb45d7d7a8565dab88d4f9b8710",
+      "pdfs": 846
+    },
+    {
+      "mixed_from_market_listings": 540
+    }
+  ],
+  "records": 1386,
+  "final": 1273,
+  "nonfinal": 113,
+  "kinds": {
+    "CONSENT_ORDER": 1228,
+    "FINAL_ORDER": 45,
+    "ADMINISTRATIVE_ACTION": 113
+  },
+  "attached": 0,
+  "held_unattached": 1386,
+  "reason_unattached": "listing title/URL only; no NAIC or Florida Company Code on the listing page",
+  "pending_is_final": false,
+  "ingested": 0,
+  "sample": [
+    {
+      "title": "Amelia Finance LLC Consent Order (3/26/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/amelia-finance-llc-executed-consent-order-324090-24.pdf",
+      "kind": "CONSENT_ORDER"
+    },
+    {
+      "title": "ATHOME Insurance Company Consent Order (6/11/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/athome-insurance-company.pdf",
+      "kind": "CONSENT_ORDER"
+    },
+    {
+      "title": "Fire Insurance Exchange Consent Order (3/4/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/322689-24-fire-insurance-exchange-consent-order.pdf",
+      "kind": "CONSENT_ORDER"
+    },
+    {
+      "title": "First Premium, Inc. Consent Order (02/19/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/first-premium-inc-co-321738-24.pdf",
+      "kind": "CONSENT_ORDER"
+    },
+    {
+      "title": "Focus Finance LLC Consent Order (02/05/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/320759-23-focus-finance-llc-consent-order.pdf",
+      "kind": "CONSENT_ORDER"
+    },
+    {
+      "title": "Gateway Insurance Company Consent Order (5/28/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/326788-24-gateway-insurance-company-consent-order.pdf",
+      "kind": "CONSENT_ORDER"
+    },
+    {
+      "title": "GOTOPREMIUMFINANCE Consent Order (01/10/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/314252-23-gotopremiumfinance-consent-order.pdf",
+      "kind": "CONSENT_ORDER"
+    },
+    {
+      "title": "Granada Indemnity Company Consent Order (5/9/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/granada-indemnity-company-co-326789-24.pdf",
+      "kind": "CONSENT_ORDER"
+    }
+  ]
+}

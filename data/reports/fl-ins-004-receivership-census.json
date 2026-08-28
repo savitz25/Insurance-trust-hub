@@ -1,0 +1,211 @@
+{
+  "task": "FL-INS-004",
+  "at": "2026-08-28T18:01:52.819634+00:00",
+  "list_url": "https://www.myfloridacfo.com/division/receiver/companies",
+  "list_status": 200,
+  "list_sha256": "1bf34f2c81005d9a734a80a720dccd9af1e5fe570a6c7a8f2b2fa8f7a959333a",
+  "final_url": "https://www.myfloridacfo.com/division/receiver/companies",
+  "receivership": 12,
+  "rehabilitation": 0,
+  "liquidation": 12,
+  "generic_receivership_only": 0,
+  "attached": 0,
+  "held": 12,
+  "ingested_predicted": 0,
+  "not_conduct_violation": true,
+  "liquidation_separate_from_receivership": true,
+  "companies": [
+    {
+      "detail_id": "555",
+      "name": "AMERICAN CAPITAL ASSURANCE CORP",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2021 CA 0641",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/555",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "5614ad515ff7d4161038005b83a5f76f1d89889d7b19d176e6dd2e4deb7d4140"
+    },
+    {
+      "detail_id": "558",
+      "name": "AVATAR PROPERTY AND CASUALTY INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2022 CA 000366",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/558",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "cc385497c7b73f76257663a9ae5193a86ed74e55456c0c88f82b16a68452b7df"
+    },
+    {
+      "detail_id": "562",
+      "name": "FEDNAT INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2022 CA 001688",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/562",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "eca9e8312e1a7aa03294e0fbcd908393e7f119a6349da9bf489fb683791a9512"
+    },
+    {
+      "detail_id": "553",
+      "name": "FLORIDA SPECIALTY INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2019 CA 002328",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/553",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "a67c2d0ac50a38aef5e9fc8ff3c245d65afc050c9e5b9e7490ed2772499931f7"
+    },
+    {
+      "detail_id": "550",
+      "name": "GUARANTEE INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2017 CA 2421",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/550",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "7f8b121e1defa56b70b5bda6ff95be287016c8840eb3a2a3a413ee122abd2ce5"
+    },
+    {
+      "detail_id": "556",
+      "name": "GULFSTREAM PROPERTY AND CASUALTY INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2021 CA 001308",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/556",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "dc50af57575cc1e9d123ebf62227955a68b5f31200ad923b5ed9b48de3f40d54"
+    },
+    {
+      "detail_id": "545",
+      "name": "PHYSICIANS UNITED PLAN, INC.",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2014 CA 1472",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/545",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "47799f4b7d9488607ddd077e114eb08778a27265fbef4f4162b420f26a259678"
+    },
+    {
+      "detail_id": "559",
+      "name": "SOUTHERN FIDELITY INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2022 CA 001008",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/559",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "99b7872284068d299179118c17a043941f8cd0fe5faacb314ffa76ff689972ed"
+    },
+    {
+      "detail_id": "557",
+      "name": "ST. JOHNS INSURANCE COMPANY, INC.",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2022 CA 0316",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/557",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "0b24395c0fe365d7a04db7ef45fe826841fffa71bfe51485c74ef5a0333d7511"
+    },
+    {
+      "detail_id": "563",
+      "name": "UNITED PROPERTY &amp; CASUALTY INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2023 CA 000320",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/563",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "e05b1db86d5f997f2811dd09527a9ab0d9510cd07cf9db4d4131a8554093e618"
+    },
+    {
+      "detail_id": "561",
+      "name": "WESTON PROPERTY &amp; CASUALTY INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2022 CA 001378",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/561",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "8fc24f2a8abcc4caaf60f1e0eb35020b234a06564bfc4a5c9f46491f639b376e"
+    },
+    {
+      "detail_id": "554",
+      "name": "WINDHAVEN INSURANCE COMPANY",
+      "status": "Liquidation",
+      "family": "LIQUIDATION",
+      "case_number": "2019 CA 002861",
+      "url": "https://www.myfloridacfo.com/division/receiver/companies/detail/554",
+      "has_naic": false,
+      "has_fl_company_code": false,
+      "identity": {
+        "confidence": "UNRESOLVED",
+        "attach": false,
+        "match_basis": "name_only_adverse_identity_rejected"
+      },
+      "detail_sha256": "fb7114f37a3b3de799ebdd67f3a1933d8d5666fd36163e4c7defe24c4ba13f69"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "task": "FL-INS-004",
+  "at": "2026-08-28T18:01:52.819634+00:00",
+  "portal": "https://apps.fldfs.com/civilremedy/",
+  "search": "https://apps.fldfs.com/civilremedy/SearchFiling.aspx",
+  "home_status": 200,
+  "search_status": 200,
+  "home_sha256": "e818c59d42d6818f20e1580b8545d6f7e7823a1f318f59ff3d704f4754496686",
+  "search_sha256": "2aa1364ffd765de83bc2b8cdea811e21f53beb617a3a39d65fc60052154fdd08",
+  "retrieval": "interactive ASP.NET search; no public bulk/CSV/API",
+  "class": "PUBLIC_RECORDS_REQUEST",
+  "raw": 0,
+  "relevant": 0,
+  "attached": 0,
+  "review": 0,
+  "unresolved": 0,
+  "distinct_insurers": 0,
+  "fields": {
+    "dfs_file_number": true,
+    "insurer_name": true,
+    "naic": false,
+    "florida_company_code": false,
+    "download": false
+  },
+  "dfs_does_not_adjudicate": true,
+  "family": "CIVIL_REMEDY_NOTICE",
+  "is_final": false,
+  "not_finding": true,
+  "not_final_order": true,
+  "name_only_attach": false,
+  "ingested": 0,
+  "final_urls": {
+    "home": "https://apps.fldfs.com/civilremedy/",
+    "search": "https://apps.fldfs.com/civilremedy/SearchFiling.aspx"
+  }
+}

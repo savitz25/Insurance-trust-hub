@@ -1,0 +1,65 @@
+{
+  "task": "FL-INS-004",
+  "at": "2026-08-28T18:01:52.819634+00:00",
+  "pages": [
+    {
+      "label": "pc",
+      "url": "https://floir.gov/property-casualty/property-casualty-financial-oversight",
+      "final_url": "https://floir.gov/property-casualty/property-casualty-financial-oversight",
+      "status": 200,
+      "sha256": "c5d3df684634563844af72a9a19a037b4bdb4d515ff4f9f4f0cadb606570099f",
+      "pdfs": 882
+    },
+    {
+      "label": "lh",
+      "url": "https://floir.gov/life-health/life-and-health-financial-oversight",
+      "final_url": "https://floir.gov/life-health/life-and-health-financial-oversight",
+      "status": 200,
+      "sha256": "0295a26c6f4ac38b6ed0dd7b23380ca7b6e6239deb8be162676d90c84d332d6c",
+      "pdfs": 178
+    }
+  ],
+  "reports": 1060,
+  "attached": 0,
+  "distinct_insurers": 0,
+  "held_unattached": 1060,
+  "reason_unattached": "listing title/URL only; no NAIC or Florida Company Code on the listing page; name-only attach forbidden",
+  "family": "FINANCIAL_EXAM",
+  "not_market_conduct_exam": true,
+  "exam_existence_is_misconduct": false,
+  "ingested": 0,
+  "sample": [
+    {
+      "title": "OIR-D0-1431",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/oir-d0-1431-(2).pdf"
+    },
+    {
+      "title": "OIR-D0-516",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/oir-d0-516-(4).pdf"
+    },
+    {
+      "title": "OIR-A1-1229",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/oir-a1-1229.pdf"
+    },
+    {
+      "title": "OIR-D0-1433",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/oir-d0-1433---final.pdf"
+    },
+    {
+      "title": "OIR-A1-1615",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/oir-a1-1615.pdf"
+    },
+    {
+      "title": "OIR-A1-2116",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/form-oir-a1-2116-(amended)-(5).pdf"
+    },
+    {
+      "title": "OIR-C1-2116",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/oir-c1-2116-(2).pdf"
+    },
+    {
+      "title": "OIR-C1-2117",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/p-c-financial-oversight/p-c-forms/oir-c1-2117-(3).pdf"
+    }
+  ]
+}

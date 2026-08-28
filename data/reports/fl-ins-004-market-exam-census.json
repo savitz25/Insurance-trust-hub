@@ -1,0 +1,66 @@
+{
+  "task": "FL-INS-004",
+  "at": "2026-08-28T18:01:52.819634+00:00",
+  "pages": [
+    {
+      "label": "pc",
+      "url": "https://floir.gov/property-casualty/property-and-casualty-market-regulation",
+      "final_url": "https://floir.gov/property-casualty/property-and-casualty-market-regulation",
+      "status": 200,
+      "sha256": "4b5c67111e9dee0b3ef4e145c1c096159579a350a61ee17d898d4af8543fe375",
+      "pdfs": 819
+    },
+    {
+      "label": "lh",
+      "url": "https://floir.gov/life-health/life-and-health-market-regulation",
+      "final_url": "https://floir.gov/life-health/life-and-health-market-regulation",
+      "status": 200,
+      "sha256": "5b9182f1a021d67db10a5e12549fdb232d25c37a85ba91dc7376d3942203faf3",
+      "pdfs": 728
+    }
+  ],
+  "reports": 1007,
+  "attached": 0,
+  "distinct_insurers": 0,
+  "non_insurer_listings": 68,
+  "held_unattached": 1007,
+  "reason_unattached": "listing title/URL only; no NAIC or Florida Company Code on the listing page; name-only attach forbidden",
+  "family": "MARKET_CONDUCT_EXAM",
+  "not_financial_exam": true,
+  "exam_existence_is_misconduct": false,
+  "ingested": 0,
+  "sample": [
+    {
+      "title": "Associated Acceptance of Florida (01/13/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/associated-acceptance-of-florida-(01-13-2026).pdf"
+    },
+    {
+      "title": "Citation Finance Co, Inc. (05/15/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/2-pfc-final-report_-citation-finance.pdf"
+    },
+    {
+      "title": "Classicplan Premium Financing (02/05/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/final-report-classicplan_2-5-26.pdf"
+    },
+    {
+      "title": "Coral Finance Company (01/13/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/2-amended-final-report---coral-finance.pdf"
+    },
+    {
+      "title": "Del Rio Discount Corporation (01/15/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/2-del-rio-final-exam-report-1-15-26.pdf"
+    },
+    {
+      "title": "Finanz (02/27/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/finanz-llc---2022-2024-pfc-exam-final-report_02-27-26.pdf"
+    },
+    {
+      "title": "HNO Premium Finance Corp. (03/03/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/final-report-hno.pdf"
+    },
+    {
+      "title": "Honor Capital Corporation (02/18/2026)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2026/2-honor-capital-corp-final-rpt_02-18-2026.pdf"
+    }
+  ]
+}

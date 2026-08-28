@@ -1,0 +1,26 @@
+{
+  "task": "FL-INS-004",
+  "execute": true,
+  "EXPECTED_RECEIVER": 12,
+  "EXISTING_RECEIVER": 12,
+  "INSERTED": 0,
+  "PREDICTED_INSERT": 0,
+  "SKIPPED": 12,
+  "MISSING": 0,
+  "WRONG_TARGET": 0,
+  "DUPLICATE": 12,
+  "ATTACHED": 0,
+  "UNATTACHED_STORED": 12,
+  "CRN_INGESTED": 0,
+  "MARKET_EXAM_INGESTED": 0,
+  "FINANCIAL_EXAM_INGESTED": 0,
+  "ORDER_INGESTED": 0,
+  "florida_evidence_rows": 12,
+  "tdi_complaints_unchanged": true,
+  "total_regulatory_evidence": 5978,
+  "writes": {
+    "inserted": 0,
+    "skipped": 12,
+    "errors": []
+  }
+}

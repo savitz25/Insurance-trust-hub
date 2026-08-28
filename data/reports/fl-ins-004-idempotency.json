@@ -1,0 +1,11 @@
+{
+  "execute": true,
+  "predicted_insert": 0,
+  "inserted": 0,
+  "skipped": 12,
+  "first_run_inserted": 12,
+  "second_run_inserts": 0,
+  "pass": true,
+  "unique_key": "source_dataset,record_identifier",
+  "expected_equals_production": true
+}
