@@ -1,0 +1,114 @@
+{
+  "task": "FL-INS-000",
+  "at": "2026-08-28T15:02:46.840Z",
+  "note": "Do not combine incompatible grains.",
+  "denominators": [
+    {
+      "id": "fl_person_credentials",
+      "label": "Florida licensed persons (credential grain)",
+      "grain": "license_credentials row",
+      "filter": "jurisdiction=FL AND entity_kind=person",
+      "count": 691127,
+      "source": "national graph / DFS individual licenses",
+      "not": "unique person entities"
+    },
+    {
+      "id": "fl_agency_credentials",
+      "label": "Florida licensed agencies (credential grain)",
+      "grain": "license_credentials row",
+      "filter": "jurisdiction=FL AND entity_kind=agency",
+      "count": 59189,
+      "source": "national graph / DFS business licenses",
+      "not": "unique agency entities"
+    },
+    {
+      "id": "fl_credentials_total",
+      "label": "Florida credentials all kinds",
+      "grain": "license_credentials row",
+      "count": 750316
+    },
+    {
+      "id": "dfs_staged_business",
+      "label": "DFS staged business producers",
+      "grain": "dfs_producers row",
+      "count": 98622,
+      "note": "0 individual rows in this table"
+    },
+    {
+      "id": "fl_appointers",
+      "label": "Florida appointing entities",
+      "grain": "national_entities carrier:fl-dfs:",
+      "count": 11944
+    },
+    {
+      "id": "legal_insurers_national",
+      "label": "Legal insurers (national NAIC spine)",
+      "grain": "national_entities legal_insurer",
+      "count": 6185,
+      "note": "Florida-authorized OIR subset not yet ingested"
+    },
+    {
+      "id": "citizens_agencies",
+      "label": "Citizens-related agencies",
+      "grain": "Citizens appointed agent",
+      "count": null,
+      "status": "ACQUIRE_NOW"
+    },
+    {
+      "id": "nfip_registry_agencies",
+      "label": "NFIP Agency Registry listings",
+      "grain": "registry listing (NPN when present)",
+      "count": null,
+      "status": "ACQUIRE_NOW",
+      "wording": "Listed in FEMA/NFIP Agency Registry"
+    },
+    {
+      "id": "fl_adjuster_credentials",
+      "label": "Florida adjuster-namespace credentials",
+      "grain": "license_credentials license_namespace=adjuster",
+      "count": 112,
+      "note": "Includes public/independent until class split"
+    },
+    {
+      "id": "surplus_lines_namespace",
+      "label": "FL surplus_lines namespace credentials",
+      "grain": "license_credentials",
+      "count": 0,
+      "note": "Surplus agents currently in producer namespace; FSLSO eligibility is insurer grain"
+    },
+    {
+      "id": "carrier_regulatory_evidence_fl",
+      "label": "Florida-sourced regulatory_evidence",
+      "grain": "regulatory_evidence row",
+      "count": 0
+    },
+    {
+      "id": "market_conduct_exams",
+      "count": 0,
+      "status": "ACQUIRE_NOW"
+    },
+    {
+      "id": "financial_exams",
+      "count": 0,
+      "status": "ACQUIRE_NOW"
+    },
+    {
+      "id": "crns",
+      "count": null,
+      "status": "ACQUIRE_NOW",
+      "family": "ALLEGATION_OR_NOTICE / CIVIL_REMEDY_NOTICE"
+    },
+    {
+      "id": "citizens_policy_counts",
+      "count": null,
+      "status": "ACQUIRE_NOW",
+      "source": "OIR Market Intelligence / Citizens"
+    },
+    {
+      "id": "rate_filings",
+      "count": null,
+      "status": "ACQUIRE_NOW",
+      "source": "IRFS"
+    }
+  ]
+}

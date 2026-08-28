@@ -1,0 +1,23 @@
+{
+  "task": "FL-INS-000",
+  "at": "2026-08-28T15:02:46.840Z",
+  "massPublish": false,
+  "people": "OFF",
+  "legalInsurerPages": "INTERNAL_ONLY",
+  "publicGraphAgencies": 0,
+  "publicPeople": 0,
+  "publicLegalInsurers": 0,
+  "publicGroups": 0,
+  "publicBrands": 0,
+  "providers": 170499,
+  "bridgesConfirmed": 37515,
+  "sitemapChanges": false,
+  "robotsChanges": false,
+  "newRoutes": false,
+  "classes": {
+    "READY_FOR_PROFILE_ENRICHMENT": "existing public provider + CONFIRMED exact-NPN bridge + FL credential; not an index expansion",
+    "INTERNAL_ONLY": "graph-only agencies, persons, legal insurers, appointers",
+    "REVIEW_REQUIRED": "NPN collisions; 17 FL digit-coincidence appointers; name-only CRN",
+    "NOT_READY": "missing NPN or credential"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "task": "FL-INS-000",
+  "at": "2026-08-28T15:02:46.840Z",
+  "acquisition": {
+    "AVAILABLE_NOW": [
+      "DFS-LIC-BIZ",
+      "DFS-LIC-IND",
+      "DFS-APT-IND",
+      "DFS-APT-BIZ",
+      "CMS",
+      "NAIC-LOC",
+      "national_graph_FL_credentials"
+    ],
+    "ACQUIRE_NOW": [
+      "DFS-APT-COUNTY",
+      "OIR-SEARCH",
+      "OIR-IRFS",
+      "OIR-CHOICES",
+      "OIR-MKT",
+      "OIR-EXAM",
+      "OIR-RCVR",
+      "CIT-AGENT",
+      "CIT-ELIG",
+      "FSLSO-ELIG",
+      "FSLSO-PREM",
+      "NFIP-REG",
+      "CRN",
+      "DFS-DISC"
+    ],
+    "PUBLIC_RECORDS_REQUEST": [],
+    "MANUAL_ONLY": ["DFS-PORTAL", "SUNBIZ", "OIR-SEARCH interactive"],
+    "BLOCKED": [],
+    "PAID_RESTRICTED": [],
+    "DEFERRED": ["DFS-CE", "DFS-EOB", "FHCF"]
+  },
+  "clocks": {
+    "dfs_licenses": "Licensee Search bulk Last-Modified (portal)",
+    "dfs_appointments_individual": "2026-08-27T06:27:45Z",
+    "oir_company": "live interactive; no bulk as-of in graph",
+    "citizens": "unacquired",
+    "choices": "latest approved rate filing (illustrative)",
+    "irfs": "filing date 2001-present",
+    "nfip": "registry revalidation ~6 months",
+    "cms": "plan year on cms_marketplace_observations",
+    "enforcement": "unacquired",
+    "exams": "unacquired",
+    "crn": "filing accepted date on DFS CRN"
+  },
+  "production": {
+    "flCredentialRows": 750316,
+    "flPersonCredentials": 691127,
+    "flAgencyCredentials": 59189,
+    "flAppointers": 11944,
+    "flAppointerResolvesTo": 0,
+    "floridaRegulatoryEvidence": 0,
+    "dfsProducersBusiness": 98622,
+    "dfsAppointmentsStaging": 30486
+  }
+}

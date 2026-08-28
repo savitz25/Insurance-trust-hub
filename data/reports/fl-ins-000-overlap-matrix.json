@@ -1,0 +1,73 @@
+{
+  "task": "FL-INS-000",
+  "at": "2026-08-28T15:02:46.840Z",
+  "note": "No double-counting. Null = not yet ingested.",
+  "overlaps": [
+    {
+      "id": "person_credential_x_agency_association",
+      "left": "FL person credentials 691127",
+      "right": "ASSOCIATED_WITH 52827 national",
+      "count": null,
+      "note": "Association is national person↔agency; not all FL"
+    },
+    {
+      "id": "agency_credential_x_public_provider",
+      "left": "FL agency credentials 59189",
+      "right": "public providers 170499 / DFS promotions 98622",
+      "count": null,
+      "bridge": "CONFIRMED exact-NPN provider_entity_bridges 37515 national"
+    },
+    {
+      "id": "agency_x_cms",
+      "note": "CMS attaches to person NPN; agency CMS only if entity_id=agency. KIND_CONFLICT if NPN owned by other kind.",
+      "cmsKindConflict": 37231
+    },
+    {
+      "id": "person_x_cms",
+      "cmsAttached": 731990,
+      "cmsUnattached": 530887
+    },
+    {
+      "id": "agency_x_nfip",
+      "count": null,
+      "status": "ACQUIRE_NOW",
+      "join": "exact NPN only"
+    },
+    {
+      "id": "agency_x_citizens",
+      "count": null,
+      "status": "ACQUIRE_NOW"
+    },
+    {
+      "id": "legal_insurer_x_oir",
+      "nationalLegalInsurers": 6185,
+      "oirIngest": 0
+    },
+    {
+      "id": "legal_insurer_x_citizens_takeout",
+      "count": null,
+      "status": "ACQUIRE_NOW"
+    },
+    {
+      "id": "legal_insurer_x_choices",
+      "count": null,
+      "status": "ACQUIRE_NOW",
+      "note": "Illustrative rates, not a license"
+    },
+    {
+      "id": "legal_insurer_x_irfs",
+      "count": null,
+      "status": "ACQUIRE_NOW"
+    },
+    {
+      "id": "surplus_lines_x_admitted",
+      "rule": "Never the same publication class",
+      "surplusNamespaceFl": 0
+    },
+    {
+      "id": "public_adjuster_x_producer_same_npn",
+      "adjusterNamespaceFl": 112,
+      "rule": "Same NPN may hold multiple credentials; namespaces stay separate"
+    }
+  ]
+}

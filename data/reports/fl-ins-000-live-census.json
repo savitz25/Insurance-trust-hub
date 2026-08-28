@@ -1,0 +1,92 @@
+{
+  "task": "FL-INS-000",
+  "at": "2026-08-28T15:02:46.840Z",
+  "national": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "carrier": 13461,
+    "credentials": 1531158,
+    "loas": 1791158,
+    "associatedWith": 52827,
+    "appointedBy": 989,
+    "appointerResolvesTo": 1510,
+    "memberOfGroup": 3844,
+    "cms": 1300108,
+    "contacts": 144864,
+    "evidence": 5966,
+    "bridges": 37515,
+    "providers": 170499
+  },
+  "flCredentials": {
+    "total": 750316,
+    "person": 691127,
+    "agency": 59189,
+    "producer": 749457,
+    "adjuster": 112,
+    "surplus_lines": 0,
+    "title": 7,
+    "bail_bond": 2,
+    "warranty": 259,
+    "tpa": 0,
+    "limited_lines": 463,
+    "other": 16
+  },
+  "appointers": {
+    "fl": 11944,
+    "tx": 1517,
+    "flResolvesTo": 0,
+    "txResolvesTo": 1510,
+    "flDigitCoincidences": 17,
+    "flUnresolved": 11927
+  },
+  "staging": {
+    "dfsProducers": 98622,
+    "dfsProducersBusiness": 98622,
+    "dfsProducersIndividual": 0,
+    "dfsAppointments": 30486,
+    "dfsPromotions": 98622
+  },
+  "publicFl": {
+    "providers": 170499,
+    "providersFl": 98622,
+    "providersFlVerified": 98622,
+    "bridges": 37515
+  },
+  "contacts": {
+    "total": 144864,
+    "publicEligible": 122730,
+    "florida_dfs": 113793
+  },
+  "cms": {
+    "total": 1300108,
+    "attached": 731990,
+    "unattached": 530887,
+    "kindConflict": 37231
+  },
+  "evidence": {
+    "total": 5966,
+    "complaint": 5966,
+    "floridaRows": 0
+  },
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "PUBLIC_REGULATORY_EVIDENCE_ENABLED": false,
+    "LEGAL_INSURER_DISPLAY_DECISION": "INTERNAL_ONLY",
+    "mayPublishPerson": false,
+    "mayPublishLegalInsurer": false,
+    "mayPublishGroup": false,
+    "mayPublishBrand": false,
+    "mayPublishCarrier": false,
+    "publicGraphAgencies": 0,
+    "publicPeople": 0,
+    "publicLegalInsurers": 0,
+    "sitemapChanges": false,
+    "robotsChanges": false,
+    "newRoutes": false,
+    "trustReportVersion": "insurance-agency-trust-report-v1"
+  },
+  "note": "Inventory only. No graph writes. No publication changes."
+}
