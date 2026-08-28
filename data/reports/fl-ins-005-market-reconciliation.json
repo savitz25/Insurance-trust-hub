@@ -1,0 +1,13 @@
+{
+  "schema_ready": false,
+  "sql_editor": "docs/florida/FL-INS-005-SQL-EDITOR.md",
+  "EXPECTED": 0,
+  "EXISTING_CORRECT": 0,
+  "INSERTED": 0,
+  "MISSING": 0,
+  "WRONG_TARGET": 0,
+  "DUPLICATE": 0,
+  "REVIEW_REQUIRED": 0,
+  "UNRESOLVED": 1474,
+  "blocked_reason": "market_intelligence_observations does not exist"
+}

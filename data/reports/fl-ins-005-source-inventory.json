@@ -1,0 +1,45 @@
+{
+  "task": "FL-INS-005",
+  "at": "2026-08-28T18:30:32.969702+00:00",
+  "sources": [
+    {
+      "id": "mir",
+      "url": "https://floir.gov/tools-and-data/residential-market-share-reports",
+      "period": "2026-06",
+      "sha256": "586e37b982fbf67c71cf13e1150f01ce906a3c3dc86a48dfa69b4c9a046db8b5"
+    },
+    {
+      "id": "choices",
+      "url": "https://floir.gov/consumers/choices-rate-comparison-search",
+      "class": "INTERACTIVE_NO_BULK"
+    },
+    {
+      "id": "irfs",
+      "url": "https://irfssearch.floir.gov/",
+      "sha256": "31dccb622dcdb22e4e41552de2a816183d17935b680e999c36e40effdcebec20",
+      "cap": 2500
+    },
+    {
+      "id": "citizens",
+      "url": "https://www.citizensfla.com/",
+      "class": "OFFICIAL_DATED_PIF_HOLD"
+    },
+    {
+      "id": "fslso",
+      "url": "https://www.fslso.com/compliance/eligible-insurers",
+      "eligible_xml_companies": 275
+    },
+    {
+      "id": "nfip",
+      "url": "https://www.floodsmart.gov/flood-insurance-agencies",
+      "public_rows": 1474,
+      "npn_public": false
+    }
+  ],
+  "excluded": [
+    "DFS county appointments",
+    "Google Places",
+    "rankings",
+    "Trust Scores"
+  ]
+}

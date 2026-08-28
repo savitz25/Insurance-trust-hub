@@ -1,0 +1,10 @@
+{
+  "status": "PARTIAL \u2014 SQL EDITOR REQUIRED FOR market_intelligence_observations",
+  "started_006": false,
+  "schema_ready": false,
+  "writes": {
+    "inserted": 0,
+    "skipped": 0,
+    "refused": true
+  }
+}

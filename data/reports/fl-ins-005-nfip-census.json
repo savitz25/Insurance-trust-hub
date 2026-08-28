@@ -1,0 +1,37 @@
+{
+  "task": "FL-INS-005",
+  "at": "2026-08-28T18:30:32.969702+00:00",
+  "registry_rows_public_list": 1474,
+  "public_list_note": "floodsmart.gov/flood-insurance-agencies paginated list; agency name/address/phone/email/principal name; NPN not displayed",
+  "grain": "agency listing with a named principal agent; both NPNs collected at enrollment, not published on the list",
+  "agencies": 1474,
+  "people": "principal agent name only on public cards",
+  "exact_npn_attaches": 0,
+  "held": 1474,
+  "safe_copy": "Listed in FEMA/NFIP Agency Registry.",
+  "not_certified": true,
+  "fira_training_separate": true,
+  "pages": [
+    {
+      "url": "https://agents.floodsmart.gov/agency-registry",
+      "final_url": "https://agents.floodsmart.gov/agency-registry",
+      "status": 200,
+      "sha256": "149026f8a1537d30fc6c65d7383d9c8ec3ad937fd41c271748635493ab2fef20",
+      "has_npn": true
+    },
+    {
+      "url": "https://www.floodsmart.gov/flood-insurance-agencies",
+      "final_url": "https://www.floodsmart.gov/flood-insurance-agencies",
+      "status": 200,
+      "sha256": "7ccc3ccb57221a75a154237f5f8f2d4565856f6b89de5bc64d4722207581bc39",
+      "has_npn": false
+    }
+  ],
+  "RAW": 1474,
+  "RELEVANT": 1474,
+  "IDENTIFIABLE": 0,
+  "ATTACHABLE": 0,
+  "UNRESOLVED": 1474,
+  "ingested": 0,
+  "class": "PUBLIC_LIST_NO_NPN"
+}

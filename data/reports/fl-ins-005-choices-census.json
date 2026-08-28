@@ -1,0 +1,72 @@
+{
+  "task": "FL-INS-005",
+  "at": "2026-08-28T18:30:32.969702+00:00",
+  "products": [
+    "homeowners",
+    "private_passenger_auto",
+    "medigap",
+    "small_group_health"
+  ],
+  "sample_profiles": "three pre-defined homeowners and auto examples; Medigap/small-group interactive",
+  "companies": "interactive; trade-secret companies omitted",
+  "geographies": "Florida counties",
+  "periods": "most recent approved rate filings feeding the tool; not a dated bulk extract",
+  "bulk": false,
+  "is_quote": false,
+  "safe_copy": "Sample premium shown in Florida OIR CHOICES for this profile and location.",
+  "RAW": 0,
+  "RELEVANT": 0,
+  "IDENTIFIABLE": 0,
+  "ATTACHABLE": 0,
+  "AGGREGATE": 0,
+  "UNRESOLVED": 0,
+  "pages": [
+    {
+      "label": "hub",
+      "url": "https://floir.gov/consumers/choices-rate-comparison-search",
+      "final_url": "https://floir.gov/consumers/choices-rate-comparison-search",
+      "status": 200,
+      "sha256": "4ec98d69bdc24bc9a6d89c869cdd9bee679b2542808f23927244ad2d916511f5",
+      "illustrative": true,
+      "trade_secret_note": false
+    },
+    {
+      "label": "homeowners",
+      "url": "https://choices.floir.gov/pandc/homeowners",
+      "final_url": "https://choices.floir.gov/pandc/homeowners",
+      "status": 200,
+      "sha256": "1de8a413e567182dd0a8f5578e311e4c05eb08f5c1aadf33c45136d909411abc",
+      "illustrative": true,
+      "trade_secret_note": true
+    },
+    {
+      "label": "auto",
+      "url": "https://choices.fldfs.com/pandc/auto",
+      "final_url": "https://choices.floir.gov/pandc/auto",
+      "status": 200,
+      "sha256": "5cf198f7c9f722474c44c8488d66d8739d4b673284ce0308bf144ef4dbb8d08a",
+      "illustrative": true,
+      "trade_secret_note": true
+    },
+    {
+      "label": "medigap",
+      "url": "https://choices.floir.gov/mcws/CWSSearch",
+      "final_url": "https://choices.floir.gov/mcws/CWSSearch",
+      "status": 200,
+      "sha256": "4f9376dd1d8a4a0a6333cd2530999bfe5636597663c8176389e04bfdaed2360e",
+      "illustrative": false,
+      "trade_secret_note": false
+    },
+    {
+      "label": "small_group",
+      "url": "https://choices.fldfs.com/landh/SmallGroup",
+      "final_url": "https://choices.floir.gov/landh/SmallGroup",
+      "status": 200,
+      "sha256": "9d53714eaf652138fc494fc19a6d4348269e9069209ddb4b8b27283fb488de36",
+      "illustrative": true,
+      "trade_secret_note": false
+    }
+  ],
+  "ingested": 0,
+  "class": "INTERACTIVE_NO_BULK"
+}

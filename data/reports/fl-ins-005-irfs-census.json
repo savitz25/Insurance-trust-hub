@@ -1,0 +1,33 @@
+{
+  "task": "FL-INS-005",
+  "at": "2026-08-28T18:30:32.969702+00:00",
+  "url": "https://irfssearch.floir.gov/",
+  "final_url": "https://irfssearch.floir.gov/",
+  "status": 200,
+  "sha256": "31dccb622dcdb22e4e41552de2a816183d17935b680e999c36e40effdcebec20",
+  "filings_from": "2001-01-05",
+  "search_cap": 2500,
+  "identity_fields": {
+    "file_log_number": true,
+    "company_name": true,
+    "fein": true,
+    "naic": true,
+    "naic_group": true
+  },
+  "rate_fields": {
+    "requested": true,
+    "approved": true
+  },
+  "grain": "file log number = one filing; multiple documents requested as one filing PDF",
+  "status_values": "Final Action filter present; do not infer APPROVED from mere presence",
+  "partition_strategy": "Date Filed + Line of Business + Filing Type to stay under 2500",
+  "exhaustive_statewide": false,
+  "RAW": 0,
+  "RELEVANT": 0,
+  "IDENTIFIABLE": 0,
+  "ATTACHABLE": 0,
+  "UNRESOLVED": 0,
+  "ingested": 0,
+  "class": "SEARCH_CAP_2500_NO_BULK_DUMP",
+  "disclaimer": "Displayed rate changes may not fully reflect increases and decreases due to claims of trade secret"
+}

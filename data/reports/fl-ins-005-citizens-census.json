@@ -1,0 +1,47 @@
+{
+  "task": "FL-INS-005",
+  "at": "2026-08-28T18:30:32.969702+00:00",
+  "residual_market": true,
+  "not_general_licensure": true,
+  "dated_policy_count_official_extract": null,
+  "note": "Secondary 2026 counts exist (e.g. board remarks). This task does not reuse undated/secondary counts. Official Detail-by-Product-Line PDFs are published under citizensfla.com/documents; latest proven official URL in FL-INS-000 era was time-stamped. Hold statewide PIF until the current official dated PDF is captured in fl-market-raw.",
+  "takeout": "2026 personal-lines depopulation calendar is official; offer \u2260 assumption",
+  "agent_authorization": "not acquired as DFS-license replacement; exact NPN only if a public NPN file exists",
+  "pages": [
+    {
+      "url": "https://www.citizensfla.com/",
+      "final_url": "https://www.citizensfla.com/",
+      "status": 200,
+      "sha256": "b5ae6b49545c10001deb4e204acf62f05a648c201605864eb7e5596e852868fc",
+      "bytes": 205279,
+      "content_type": "html"
+    },
+    {
+      "url": "https://www.citizensfla.com/reports",
+      "final_url": "https://www.citizensfla.com/reports",
+      "status": 200,
+      "sha256": "1b032429ca240c1d29f2ffce2571e8c13ddbd5fd48a28a068ec91a8f4e677038",
+      "bytes": 260544,
+      "content_type": "html"
+    },
+    {
+      "url": "https://www.citizensfla.com/web/public/snapshot",
+      "error": "https://www.citizensfla.com/web/public/snapshot: HTTP Error 404: "
+    },
+    {
+      "url": "https://www.citizensfla.com/documents/20702/30188300/20251130+Detail+by+Product+Line.pdf",
+      "final_url": "https://www.citizensfla.com/documents/20702/30188300/20251130+Detail+by+Product+Line.pdf",
+      "status": 200,
+      "sha256": "55a6506aca7996fe78e4114919e710b2bb87c7812def972feee24ccb7f14fc51",
+      "bytes": 148578,
+      "content_type": "pdf"
+    }
+  ],
+  "RAW": 0,
+  "RELEVANT": 0,
+  "ATTACHABLE": 0,
+  "AGGREGATE": 0,
+  "UNRESOLVED": 0,
+  "ingested": 0,
+  "class": "OFFICIAL_DATED_PIF_HOLD"
+}

@@ -67,6 +67,8 @@ yarn-error.log*
 !/data/ms-raw/README.md
 /data/naic-raw/**
 !/data/naic-raw/README.md
+/data/fl-market-raw/**
+!/data/fl-market-raw/README.md
 
 # Ops enrichment run logs
 /scripts/output/**

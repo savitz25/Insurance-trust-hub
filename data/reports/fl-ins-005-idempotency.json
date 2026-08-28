@@ -1,0 +1,7 @@
+{
+  "execute": false,
+  "inserted": 0,
+  "second_run_inserts": 0,
+  "pass": true,
+  "note": "zero writes until SQL Editor table exists; then name-only MIR/NFIP still unattached"
+}

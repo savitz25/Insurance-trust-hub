@@ -1,0 +1,63 @@
+{
+  "task": "FL-INS-005",
+  "at": "2026-08-28T18:30:32.969702+00:00",
+  "eligible_source": "OIR company search Surplus Lines XML (FL-INS-002) + FSLSO index of OIR directories",
+  "eligible_insurers": 275,
+  "with_naic": 227,
+  "without_naic": 48,
+  "premium": "July 2026 monthly snapshot PDF acquired; company ranking table is source-defined, not a TrustHub ranking",
+  "policy_counts": "present on monthly PDF at market/line grain",
+  "lines": "top lines on monthly PDF",
+  "geography": "statewide on monthly PDF; county/ZIP not in this snapshot",
+  "eligibility_is_admitted": false,
+  "xml": {
+    "files": {
+      "surplus_lines": {
+        "exists": true,
+        "sha256": "81e79d265a58edb572b2e23dc41d70c3f8ed22d25270dc49c77da03caf2ae42d",
+        "records": 861,
+        "bytes": 329225
+      },
+      "federally_authorized": {
+        "exists": true,
+        "sha256": "77987ef09f3a34f47c769818605de7550f1ed04a058b8cd1924ba498fe264c26",
+        "records": 360,
+        "bytes": 145324
+      },
+      "aviation_wet_marine": {
+        "exists": true,
+        "sha256": "ce8885e54a6e5f384d0889c8e722ef4cc89efdcad6fc7006bf3beaa76be9fe1d",
+        "records": 10,
+        "bytes": 3869
+      }
+    },
+    "with_naic": 227,
+    "without_naic": 48,
+    "companies": 275
+  },
+  "pages": [
+    {
+      "url": "https://www.fslso.com/compliance/eligible-insurers",
+      "final_url": "https://www.fslso.com/compliance/eligible-insurers",
+      "status": 200,
+      "sha256": "3e3664f590323390b1d62bfebfcc76c91cc243691c76e114e91cc97b531c7ae1",
+      "bytes": 51227,
+      "pdf": false
+    },
+    {
+      "url": "https://www.fslso.com/docs/default-source/uploadedfiles/reports/fl-monthly-premium-report/monthly-fl-premium-report.pdf?sfvrsn=83e04a04_223",
+      "final_url": "https://www.fslso.com/docs/default-source/uploadedfiles/reports/fl-monthly-premium-report/monthly-fl-premium-report.pdf?sfvrsn=83e04a04_223",
+      "status": 200,
+      "sha256": "60907cb8a4fac60a9f1c1bd3ba23269945a4d8749e1a7cbd2f2937f5af6f44ad",
+      "bytes": 1340102,
+      "pdf": true
+    }
+  ],
+  "RAW": 275,
+  "RELEVANT": 275,
+  "IDENTIFIABLE": 227,
+  "ATTACHABLE": 227,
+  "UNRESOLVED": 48,
+  "ingested": 0,
+  "schema_block": true
+}
