@@ -2,14 +2,23 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ZipSearch } from '@/components/zip-search';
 import { HomeIntelChecklist } from '@/components/home/home-intel-checklist';
+import { HomeIntelEvents } from '@/components/home/home-intel-events';
 import type { Finding, InsuranceHomeIntelV1, Metric } from '@/lib/national/home-intel';
 import { INSURANCE_BRAND, INSURANCE_INDEPENDENCE_LINE } from '@/lib/design/insurance-design-system';
 
 function Trace({ metric }: { metric: Metric }) {
   return (
     <details className="mt-2">
-      <summary className="cursor-pointer py-2 text-sm font-semibold text-[#0284C7]">Trace this number</summary>
+      <summary
+        className="inline-flex min-h-11 cursor-pointer items-center py-2 text-sm font-semibold text-[#0284C7]"
+        data-intel-event="insurance_intel_trace_number"
+      >
+        Trace this number
+      </summary>
       <div className="space-y-1 text-sm text-[#1E293B]">
+        <p>
+          <strong>Metric.</strong> {metric.id} — {metric.label}
+        </p>
         <p>
           <strong>Entity class.</strong> {metric.entityClass}
         </p>
@@ -29,6 +38,9 @@ function Trace({ metric }: { metric: Metric }) {
         </p>
         <p>
           <strong>As-of.</strong> {metric.asOf}
+        </p>
+        <p>
+          <strong>Retrieved / generated.</strong> {metric.generatedAt}
         </p>
         <p>
           <strong>Limitation.</strong> {metric.limitation}
@@ -86,7 +98,12 @@ function Bars({ finding }: { finding: Finding }) {
         </div>
       </figure>
       <details className="mt-3">
-        <summary className="cursor-pointer py-2 text-sm font-semibold text-[#0284C7]">Explain this chart</summary>
+        <summary
+          className="inline-flex min-h-11 cursor-pointer items-center py-2 text-sm font-semibold text-[#0284C7]"
+          data-intel-event="insurance_intel_explain_chart"
+        >
+          Explain this chart
+        </summary>
         <div className="space-y-2 text-sm text-[#1E293B]">
           <p>
             <strong>What am I looking at?</strong> {finding.chartCaption}
@@ -126,6 +143,7 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
 
   return (
     <div data-hub="insurance">
+      <HomeIntelEvents />
       <section
         className="border-b"
         style={{ borderColor: INSURANCE_BRAND.border, background: `linear-gradient(165deg, #fff 0%, ${INSURANCE_BRAND.canvas} 55%, ${INSURANCE_BRAND.ice} 100%)` }}
@@ -146,12 +164,12 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
           <p className="mt-3 text-sm font-medium text-[#0A2540]">{INSURANCE_INDEPENDENCE_LINE}</p>
           <p className="mt-1 text-sm font-medium text-[#0A2540]">Understand the market. Verify the evidence. You decide.</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a href="#record">
+            <a href="#record" data-intel-event="insurance_intel_explore">
               <Button size="lg" variant="trust" className="h-12 w-full sm:w-auto">
                 Explore Insurance Intelligence
               </Button>
             </a>
-            <Link href="/directory">
+            <Link href="/directory" data-intel-event="insurance_intel_research_agency">
               <Button size="lg" variant="outline" className="h-12 w-full sm:w-auto">
                 Research licensed agencies
               </Button>
@@ -302,6 +320,7 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
               <Link
                 key={row.state}
                 href={row.href}
+                data-intel-event="insurance_intel_state_click"
                 className="min-h-11 rounded-lg border border-[#E2E8F0] p-3 text-sm text-[#0A2540] no-underline"
                 style={{
                   background: `color-mix(in srgb, #0284C7 ${Math.round((row.credentialRows / maxGeo) * 35)}%, #fff)`,

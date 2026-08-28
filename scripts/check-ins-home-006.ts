@@ -86,12 +86,22 @@ assert(page.includes('/directory'), 'agency CTA');
 assert(!/Research a professional/i.test(page), 'no live professional CTA');
 assert(!/Loading insurance intelligence/i.test(page), 'no loading shell');
 assert(page.includes('/florida'), 'Florida explorer link');
+assert(
+  a.tools.some((t) => t.href === '/my-insurance/compare'),
+  'compare session linked'
+);
+assert(page.includes('insurance_intel_explore'), 'intel explore event');
+assert(page.includes('Retrieved / generated'), 'trace retrieval clock');
 assert(!page.includes("href: '/texas'"), 'no fake texas route');
 for (const phrase of FORBIDDEN_HOME_COPY) {
   const hit = page.toLowerCase().includes(phrase);
-  if (hit && phrase !== 'trust score') assert(false, `forbidden copy: ${phrase}`);
+  if (!hit) continue;
+  if (phrase === 'trust score' || phrase === 'paid ranking') continue;
+  assert(false, `forbidden copy: ${phrase}`);
 }
+assert(/no paid rankings/i.test(src('app/page.tsx')), 'editorial no-paid-rankings sentence');
 assert(!page.toLowerCase().includes('agent score'), 'no agent score');
+assert(!/\bwinner\b/i.test(page), 'no winner ranking');
 assert(src('app/page.tsx').includes("path: '/'"), 'homepage metadata path');
 assert(src('lib/seo/metadata.ts').includes('index: true'), 'index/follow helper intact');
 

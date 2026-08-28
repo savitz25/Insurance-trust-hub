@@ -19,9 +19,12 @@ export const FORBIDDEN_HOME_COPY = [
   'complaint grade',
   'safety grade',
   'best insurer',
+  'top agent',
   'top agents',
   'most trusted',
   'safest insurer',
+  'paid ranking',
+  'recommended carrier',
   'get a quote',
   'free quotes',
 ] as const;
@@ -357,7 +360,7 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
     })),
     evidenceCoverage: [
       { family: 'Identity', status: 'Partial', note: 'Agency/person/legal-insurer identities exist in the graph; public profiles are gated.' },
-      { family: 'Licensing', status: 'State-dependent', note: 'Credential rows for FL, TX, VT, MA, OH source families in this extract.' },
+      { family: 'State licensing', status: 'State-dependent', note: 'Credential rows for FL, TX, VT, MA, OH source families in this extract.' },
       { family: 'Lines of authority', status: 'Source-limited', note: 'LOA rows exist for some state sources; not a unified national codebook.' },
       { family: 'Appointments / affiliations', status: 'Partial', note: 'Some appointed_by and ASSOCIATED_WITH edges exist. Appointment ≠ employment or NAIC identity.' },
       { family: 'Regulatory history', status: 'Source-limited', note: 'Complaint observations exist as INTERNAL_ONLY. Not a national enforcement census.' },
@@ -376,9 +379,9 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
     federalOverlays: [
       {
         id: 'cms-marketplace',
-        label: 'CMS Marketplace',
+        label: 'CMS Marketplace evidence — Plan Year 2026',
         status: 'Partial',
-        note: `${fmt(marketplace)} observations. Not a state license.`,
+        note: `${fmt(marketplace)} observations. Appears in source-defined Marketplace registration evidence. Not a state license and not “Marketplace Certified.”`,
       },
       {
         id: 'medicare',
@@ -521,6 +524,7 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
       { href: '/methodology', label: 'Methodology', note: 'How verification and research work here.' },
       { href: '/carriers', label: 'Carrier research (public-data rollups)', note: 'Existing Medicare-evidenced carrier research. Not 6,185 public legal-insurer pages.' },
       { href: '/my-insurance', label: 'My Insurance', note: 'Save research. Not a quote funnel.' },
+      { href: '/my-insurance/compare', label: 'Compare saved options', note: 'Existing My Insurance compare session. Not a ranking board.' },
     ],
     checklist: [
       { id: 'identity', label: 'Verify identity (legal name, not only a brand)', href: '/directory' },
