@@ -1,19 +1,14 @@
 {
-  "task": "FL-INS-001",
-  "firstExecute": {
-    "at": "2026-08-28T15:47:43.646Z",
-    "appointedByInserted": 2563,
-    "appointedBySkipped": 0,
-    "graphAppointedBy": 3552
-  },
-  "secondExecute": {
-    "at": "2026-08-28T15:49:43.115Z",
-    "inserted": 0,
-    "skipped": 6242,
-    "graphAppointedBy": 5243
-  },
-  "zeroDeltaInserts": true,
-  "contactsInserted": 0,
-  "loaInserted": 0,
-  "personAppointmentInserted": 0
+  "execute": true,
+  "first_canonical_run_inserts": 1691,
+  "first_canonical_carrier_inserts": 86,
+  "conflicting_pipe_grain_rows_deleted": 2563,
+  "cleanup_reason": "Parallel FL-INS-001 writer used source_record_id license|number|tycl|issueDate, which is not the declared grain (license + appointing entity number + appointment type desc). Those rows duplicated canonical UUID/fl-dfs-biz observations. Deleted after writing fl-ins-001-cleanup-before.json.",
+  "second_run_inserts": 0,
+  "second_run_carrier_inserts": 0,
+  "unexpected_updates": 0,
+  "duplicate_relationships": 0,
+  "wrong_targets": 0,
+  "source_clock_metadata_updates": 0,
+  "pass": true
 }

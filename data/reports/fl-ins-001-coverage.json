@@ -1,0 +1,106 @@
+{
+  "canonical_florida_agencies": 56939,
+  "canonical_agencies_with_ge1_fl_appointment": 1628,
+  "canonical_fl_credentialed_with_appointment": 1605,
+  "canonical_fl_credentialed_without_appointment": 55334,
+  "appointment_observations_expected": 2678,
+  "distinct_appointers_used": 501,
+  "distribution": {
+    "1": 1302,
+    "2-5": 295,
+    "6-10": 18,
+    "11-25": 7,
+    "26+": 6
+  },
+  "currency": {
+    "CURRENT": 2675,
+    "HISTORICAL": 3
+  },
+  "appointment_types_preserved": [
+    [
+      "MANAGING GENERAL AGENT",
+      1682
+    ],
+    [
+      "AUTOMOBILE WARRANTY",
+      311
+    ],
+    [
+      "CREDIT",
+      300
+    ],
+    [
+      "SERVICE WARRANTY",
+      90
+    ],
+    [
+      "REINSURANCE INTERMEDIARY BROKER",
+      74
+    ],
+    [
+      "HOME WARRANTY",
+      45
+    ],
+    [
+      "NON-RESIDENT TRAVEL INSURANCE",
+      40
+    ],
+    [
+      "REINSURANCE INTERMEDIARY MANAGER",
+      34
+    ],
+    [
+      "IN-TRANSIT & STORAGE PERS PROP",
+      30
+    ],
+    [
+      "RESIDENT TRAVEL INSURANCE",
+      24
+    ],
+    [
+      "RESIDENT TRAVEL LOCATION APPOINTMENT",
+      9
+    ],
+    [
+      "NONRESIDENT TITLE AGENCY",
+      8
+    ],
+    [
+      "NON-RESIDENT TRAVEL LOCATION APPOINTMENT",
+      8
+    ],
+    [
+      "NONRESIDENT CREDIT INSURANCE AGENT",
+      7
+    ],
+    [
+      "NON-RES PORTABLE ELECTRONICS OR EYEWEAR LEAD-AGENT",
+      5
+    ],
+    [
+      "NON RESIDENT MOTOR VEHICLE RENTAL",
+      5
+    ],
+    [
+      "TITLE INS AGENCY - CORP OR FIRM",
+      3
+    ],
+    [
+      "BAIL BOND AGENCY LICENSE",
+      3
+    ]
+  ],
+  "not_loa": true,
+  "not_ranked": true,
+  "appointer_coverage": {
+    "total_fl_appointers": 12030,
+    "appointers_in_agency_appointment_graph": 501,
+    "newly_minted_this_task_agency_spine_only": 86,
+    "preexisting_fl_appointers_now_with_agency_rel": 415,
+    "appointers_with_zero_canonical_agency_relationships": 11529,
+    "person_only_approx": 11529,
+    "both_approx": 415,
+    "agency_only_approx": 86,
+    "note": "Absence of an agency relationship does not mean inactive. Person APPOINTED_TO was not read to create agency appointments. The 86 newly minted carrier:fl-dfs keys did not exist on the person appointment spine; 11,529 remaining FL appointers have person-spine identity and no canonical agency appointed_by."
+  }
+}

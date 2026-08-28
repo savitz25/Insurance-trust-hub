@@ -1,62 +1,25 @@
 {
   "task": "FL-INS-001",
+  "at": "2026-08-28T15:51:52.499889+00:00",
   "execute": true,
-  "at": "2026-08-28T15:49:43.115Z",
-  "tyclIsNotLoa": true,
-  "sources": {
-    "portal": "https://licenseesearch.fldfs.com/BulkDownload",
-    "businessLicenses": {
-      "path": "C:\\Users\\Michael.Savitsky\\insurance-trust-hub\\data\\dfs-raw\\AllValidLicensesBusiness.csv",
-      "sha256": "2043c4ad7bf7306483ac88f462e8f6382c5f8ae1484102147e55db11d11ad070",
-      "bytes": 26445494,
-      "lines": 104375,
-      "dataRows": 104374
-    },
-    "individualLicenses": {
-      "path": "C:\\Users\\Michael.Savitsky\\insurance-trust-hub\\data\\dfs-raw\\AllValidLicensesIndividual.csv",
-      "sha256": "49322f971ea71d9df4c7eeda58418a0882a600f931b1011ea51856273d15332a",
-      "bytes": 337095405,
-      "lines": 1231539,
-      "dataRows": 1231538
-    },
-    "businessAppointments": {
-      "path": "C:\\Users\\Michael.Savitsky\\insurance-visual-005\\data\\dfs-raw\\AllActiveAppointmentsBusiness.csv",
-      "sha256": "5aea3fadbc39ce13a89d7953a289af17f46cb46f1658eb85005c5429063df3eb",
-      "bytes": 19620868,
-      "lines": 59406,
-      "dataRows": 59405
-    },
-    "individualAppointmentsDir": "C:\\Users\\Michael.Savitsky\\agent-tools\\ins-nat-013",
-    "countyAppointments": "EXCLUDED"
-  },
-  "preflight": {
-    "flPersonCreds": 691127,
-    "flAgencyCreds": 59189,
-    "flLoas": -1,
-    "appointedBy": 3552,
-    "appointerResolvesTo": 1510,
-    "providers": 170499,
-    "bridges": 37515,
-    "agencies": 82071,
-    "persons": 1029860
-  },
-  "agencyAppointments": {
-    "sourceRows": 59405,
-    "expectedConfirmed": 6242,
-    "skipNoNpn": 25,
-    "skipNoAgency": 53138,
-    "skipNoAppointer": 0,
-    "graphBefore": 3552
-  },
-  "publication": {
-    "PUBLIC_PERSON_PROFILES_ENABLED": false,
-    "mayPublishPerson": false,
-    "mayPublishLegalInsurer": false,
-    "sitemapChanges": false,
-    "robotsChanges": false
-  },
-  "writes": {
-    "inserted": 0,
-    "skipped": 0
-  }
+  "starting_sha": "5c8a951d26b5f13efa73d193d61449cf5543f4e3",
+  "providers": 170499,
+  "agencies": 82071,
+  "persons": 1029860,
+  "carriers": 13547,
+  "legal_insurers": 6185,
+  "groups": 720,
+  "brands": 14,
+  "fl_appointers": 12030,
+  "appointed_by": 2680,
+  "appointed_by_fl": 2680,
+  "appointer_resolves_to": 1510,
+  "appointer_resolves_to_fl": 0,
+  "associated_with": 52827,
+  "fl_agency_credentials": 59189,
+  "fl_agency_unknown": 59189,
+  "dfs_producers_business": 98622,
+  "dfs_appointments": 30486,
+  "bridges": 37515,
+  "loa_florida_dfs": 0
 }

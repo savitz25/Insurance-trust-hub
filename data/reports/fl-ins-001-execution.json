@@ -1,0 +1,34 @@
+{
+  "task": "FL-INS-001",
+  "starting_sha": "5c8a951d26b5f13efa73d193d61449cf5543f4e3",
+  "production": "gojyhmbojbwbpiamoktq",
+  "source": {
+    "file": "AllActiveAppointmentsBusiness.csv",
+    "url": "https://www.myfloridacfo.com/downloads/AAS/LicenseeSearch/AllActiveAppointmentsBusiness.csv",
+    "portal": "https://licenseesearch.fldfs.com/BulkDownload",
+    "last_modified": "Fri, 28 Aug 2026 06:41:20 GMT",
+    "sha256": "a9b0d609d69b59b7264007d854e7c61beb75984225b60312122cc6e7a77cc12d",
+    "bytes": 19620868,
+    "data_rows": 59405,
+    "unique_license_number_type": 55829
+  },
+  "writes": {
+    "relationships_inserted": 1691,
+    "carriers_inserted": 86,
+    "relationships_updated": 0,
+    "relationships_deleted_conflicting_grain": 2563,
+    "skipped_unresolved": 53151,
+    "skipped_review_required": 0
+  },
+  "final": {
+    "appointed_by_total": 2680,
+    "appointed_by_florida_dfs_appointments": 2680,
+    "fl_appointers": 12030,
+    "providers": 170499,
+    "agencies": 82071,
+    "persons": 1029860,
+    "legal_insurers": 6185,
+    "APPOINTER_RESOLVES_TO": 1510,
+    "APPOINTER_RESOLVES_TO_fl": 0
+  }
+}

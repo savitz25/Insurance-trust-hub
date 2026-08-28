@@ -1,0 +1,146 @@
+{
+  "file": "C:\\Users\\Michael.Savitsky\\insurance-visual-005\\data\\dfs-raw\\AllActiveAppointmentsBusiness.csv",
+  "headers": [
+    "License Number",
+    "Full Name",
+    "NPN Number",
+    "Residency Type",
+    "Appointing Entity Number",
+    "Appointing Entity Name",
+    "Appointment TYCL",
+    "Appointment TYCL Desc",
+    "Appointment Status",
+    "Appointment Issue Date",
+    "Appointment Expiration Date",
+    "Email Address",
+    "AIC License Number - Bar Number",
+    "AIC Full Name",
+    "Business Phone",
+    "Business Address1",
+    "Business Address2",
+    "Business City",
+    "Business State",
+    "Business Zip",
+    "Business County",
+    "Mailing Address",
+    "Mailing Address2",
+    "Mailing City",
+    "Mailing State",
+    "Mailing Zip"
+  ],
+  "sha256": "a9b0d609d69b59b7264007d854e7c61beb75984225b60312122cc6e7a77cc12d",
+  "last_modified": "Fri, 28 Aug 2026 06:41:20 GMT",
+  "url": "https://www.myfloridacfo.com/downloads/AAS/LicenseeSearch/AllActiveAppointmentsBusiness.csv",
+  "portal": "https://licenseesearch.fldfs.com/BulkDownload",
+  "authority": "Florida Department of Financial Services \u2014 Agent & Agency Services",
+  "data_rows": 59405,
+  "unique_license_number_type": 55829,
+  "duplicate_keys": 26,
+  "duplicate_extra_rows": 3576,
+  "status": [
+    [
+      "ACTIVE",
+      59405
+    ]
+  ],
+  "type_top": [
+    [
+      "AUTOMOBILE WARRANTY",
+      23140
+    ],
+    [
+      "SERVICE WARRANTY",
+      15203
+    ],
+    [
+      "PORTABLE ELECTRONICS OR EYEWEAR - AGENT",
+      4203
+    ],
+    [
+      "TITLE INS AGENCY - CORP OR FIRM",
+      3786
+    ],
+    [
+      "NON-RESIDENT TRAVEL LOCATION APPOINTMENT",
+      2749
+    ],
+    [
+      "IN-TRANSIT & STORAGE PERS PROP",
+      1829
+    ],
+    [
+      "MANAGING GENERAL AGENT",
+      1757
+    ],
+    [
+      "HOME WARRANTY",
+      1664
+    ],
+    [
+      "NONRESIDENT TITLE AGENCY",
+      992
+    ],
+    [
+      "CREDIT",
+      975
+    ],
+    [
+      "RESIDENT TRAVEL INSURANCE",
+      838
+    ],
+    [
+      "RESIDENT TRAVEL LOCATION APPOINTMENT",
+      833
+    ],
+    [
+      "BAIL BOND AGENCY LICENSE",
+      579
+    ],
+    [
+      "NON-RES PORTABLE ELECTRONICS OR EYEWEAR - AGENT",
+      188
+    ],
+    [
+      "NONRESIDENT CREDIT INSURANCE AGENT",
+      180
+    ],
+    [
+      "NON-RESIDENT TRAVEL INSURANCE",
+      146
+    ],
+    [
+      "REINSURANCE INTERMEDIARY BROKER",
+      126
+    ],
+    [
+      "RESIDENT MOTOR VEHICLE RENTAL",
+      86
+    ],
+    [
+      "NON-RES PORTABLE ELECTRONICS OR EYEWEAR LEAD-AGENT",
+      51
+    ],
+    [
+      "REINSURANCE INTERMEDIARY MANAGER",
+      49
+    ],
+    [
+      "PORTABLE ELECTRONICS OR EYEWEAR LEAD - AGENT",
+      21
+    ],
+    [
+      "NON RESIDENT MOTOR VEHICLE RENTAL",
+      10
+    ]
+  ],
+  "npn_blank_rows": 25,
+  "appointing_number_blank_rows": 0,
+  "distinct_npn": 17640,
+  "distinct_license": 31338,
+  "distinct_appointing_entity_number": 741,
+  "dedupe_grain": "license_number + appointing_entity_number + appointment_type (TYCL Desc)",
+  "dedupe_rule": "Administrative repeats collapsed; latest expiration then latest issue then last file order.",
+  "not_unique_on": "agency_id + appointer_id only",
+  "currentness": "All Active Appointments \u2014 Business; every source row Appointment Status=ACTIVE",
+  "county_file_ingested": false
+}

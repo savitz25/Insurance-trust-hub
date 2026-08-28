@@ -1,0 +1,19 @@
+{
+  "EXPECTED": 2678,
+  "EXISTING_CORRECT": 2678,
+  "INSERTED": 0,
+  "MISSING": 0,
+  "STALE_EXTRA": 2,
+  "WRONG_TARGET": 0,
+  "DUPLICATE": 0,
+  "MULTI_LICENSE_SAME_NPN_TYPE": 521,
+  "missing_samples": [],
+  "stale_extra_samples": [
+    "d01506dc-23e0-4deb-8f18-f0bfd27df865|d7324865-d949-4da9-820a-d4726803d829|appointed_by|florida_dfs_appointments|0bca1467-e529-406f-803e-1d0a4d61cdda",
+    "d4dfa7ea-7c0f-4382-abb5-46493eb5e39e|be933e54-806e-4373-9d4d-5ff8295b868a|appointed_by|florida_dfs_appointments|d4c23301-7129-4c93-a1a7-9bfa5928810a"
+  ],
+  "stale_extra_reason": "Rows in graph whose source_record_id is not in the current All Active unique grain. All Active absence is not treated as a proven termination; retained, not deleted.",
+  "deleted": 0,
+  "updated": 0,
+  "skipped_wrong_target_collision": 0
+}

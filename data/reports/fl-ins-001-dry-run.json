@@ -1,0 +1,62 @@
+{
+  "task": "FL-INS-001",
+  "execute": false,
+  "source_appointment_rows": 59405,
+  "unique_relationship_observations": 55829,
+  "canonical_agency_matched_rows": 2678,
+  "already_existing_correct": 2678,
+  "new_inserts": 0,
+  "new_carrier_inserts": 0,
+  "review_required_agency": 0,
+  "unresolved_agency_identity": 53151,
+  "unknown_appointer_identity": 0,
+  "review_required_appointer_rows": 0,
+  "duplicate_source_rows_collapsed": 3576,
+  "existing_stale_or_wrong": 2,
+  "skipped_wrong_target_collision": 0,
+  "unmatched_license_still_npn_joined": 0,
+  "provider_writes_predicted": 0,
+  "legal_insurer_writes_predicted": 0,
+  "appointer_resolves_to_writes_predicted": 0,
+  "agency_entity_writes_predicted": 0,
+  "person_entity_writes_predicted": 0,
+  "loa_writes_predicted": 0,
+  "contact_writes_predicted": 0,
+  "county_file_ingested": false,
+  "name_only_agency_match": false,
+  "fuzzy_match": false,
+  "person_to_agency_inheritance": false,
+  "associated_with_inheritance": false,
+  "legal_insurer_attachment": false,
+  "duplicate_canonical_agency_created": false,
+  "new_public_profile": false,
+  "sitemap_changes": false,
+  "dry_run_pass": true,
+  "halt_if_providers_changed": false,
+  "identity": {
+    "CONFIRMED": 2678,
+    "UNRESOLVED": 53151
+  },
+  "businesses": {
+    "appointment_bearing": 31338,
+    "CONFIRMED": 2086,
+    "REVIEW_REQUIRED": 0,
+    "UNRESOLVED": 29252
+  },
+  "existing_audit": {
+    "CURRENT_CONFIRMED": 2678,
+    "STALE": 2,
+    "DUPLICATE": 0,
+    "MULTI_LICENSE_SAME_NPN_TYPE": 521
+  },
+  "needed_carriers": 501,
+  "existing_carriers_reused": 501,
+  "new_carriers": 0,
+  "fl_confirmed_appointer_resolves_to": 0,
+  "resolves_to_total": 1510,
+  "tests": {
+    "pass": true,
+    "fails": [],
+    "n": 15
+  }
+}

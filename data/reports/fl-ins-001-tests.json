@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "results": [
+    {"id": 1, "name": "exact NPN agency match succeeds", "pass": true},
+    {"id": 2, "name": "missing NPN agency stays unresolved", "pass": true},
+    {"id": 3, "name": "duplicate agency NPN blocks write", "pass": true, "note": "0 collisions in production NPN index"},
+    {"id": 4, "name": "exact appointer number reuse", "pass": true, "note": "415 existing carrier:fl-dfs keys reused; 86 minted"},
+    {"id": 5, "name": "no legal insurer attach", "pass": true, "note": "to_entity_id is carrier:fl-dfs:* only"},
+    {"id": 6, "name": "no name appointer bridge", "pass": true},
+    {"id": 7, "name": "person appointment does not propagate", "pass": true, "note": "APPOINTED_TO not read"},
+    {"id": 8, "name": "ASSOCIATED_WITH does not propagate appointment", "pass": true},
+    {"id": 9, "name": "appointment type != LOA", "pass": true, "note": "loa_observations florida_dfs still 0"},
+    {"id": 10, "name": "existing correct relationship retained", "pass": true, "note": "987 of original 989 CURRENT_CONFIRMED"},
+    {"id": 11, "name": "duplicate source row handled deterministically", "pass": true, "note": "3576 extra rows collapsed on 26 keys"},
+    {"id": 12, "name": "multi-appointment agency preserved", "pass": true, "note": "326 agencies with 2+ observations"},
+    {"id": 13, "name": "unknown agency credential status does not mean inactive", "pass": true, "note": "59189 unknown; none suppressed"},
+    {"id": 14, "name": "review-required agency relationship not written", "pass": true, "note": "REVIEW_REQUIRED=0"},
+    {"id": 15, "name": "unresolved relationship not written", "pass": true, "note": "53151 held"},
+    {"id": 16, "name": "no provider changes", "pass": true, "note": "170499 before and after"},
+    {"id": 17, "name": "no public graph agency publication", "pass": true},
+    {"id": 18, "name": "no person publication", "pass": true},
+    {"id": 19, "name": "no insurer publication", "pass": true},
+    {"id": 20, "name": "second run zero-delta", "pass": true, "note": "inserts=0 updates=0"},
+    {"id": 21, "name": "expected=production reconciliation", "pass": true, "note": "MISSING=0 WRONG_TARGET=0 DUPLICATE=0 STALE_EXTRA=2 retained"}
+  ]
+}

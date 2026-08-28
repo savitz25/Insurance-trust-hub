@@ -1,0 +1,68 @@
+{
+  "n": 5243,
+  "schemes": {
+    "uuid": 997,
+    "pipe_license_number_tycl_date": 2563,
+    "fl-dfs-biz": 1683
+  },
+  "tasks": {
+    "INS-NAT-007": 989,
+    "FL-INS-001": 4254
+  },
+  "samples": {
+    "uuid": {
+      "id": "3279cded-f21f-44b0-b8bf-571a7dc8d840",
+      "source_record_id": "5cb8d813-9962-408b-833c-adc0d3e3191a",
+      "created_at": "2026-08-26T18:42:52.383771+00:00",
+      "task": "INS-NAT-007",
+      "raw_keys": [
+        "appointingEntityName",
+        "appointingEntityNumber",
+        "appointmentStatus",
+        "appointmentType",
+        "appointmentTypeGroup",
+        "confidence",
+        "currency",
+        "jurisdiction",
+        "task"
+      ]
+    },
+    "pipe_license_number_tycl_date": {
+      "id": "f671688d-d11c-4efd-934e-6aa3109cfbd3",
+      "source_record_id": "L092510|06063|0060|2/1/2024 12:00:00 AM",
+      "created_at": "2026-08-28T15:47:48.392362+00:00",
+      "task": "FL-INS-001",
+      "raw_keys": [
+        "appointmentStatus",
+        "appointmentType",
+        "confidence",
+        "notLoa",
+        "task"
+      ]
+    },
+    "fl-dfs-biz": {
+      "id": "ff03d98f-75cb-4fc3-909e-f8395eedb739",
+      "source_record_id": "fl-dfs-biz:A189901|06200|CREDIT",
+      "created_at": "2026-08-28T15:49:41.158502+00:00",
+      "task": "FL-INS-001",
+      "raw_keys": [
+        "appointingEntityName",
+        "appointingEntityNumber",
+        "appointmentStatus",
+        "appointmentTycl",
+        "appointmentType",
+        "appointmentTypeGroup",
+        "confidence",
+        "currency",
+        "jurisdiction",
+        "licenseNumber",
+        "notLegalInsurer",
+        "notLoa",
+        "notPersonInherited",
+        "npn",
+        "sourceFile",
+        "task"
+      ]
+    }
+  }
+}

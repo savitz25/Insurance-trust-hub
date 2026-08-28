@@ -1,16 +1,124 @@
 {
   "task": "FL-INS-001",
-  "personIdentity": "exact NPN",
-  "agencyIdentity": "exact NPN",
-  "nameMerge": false,
-  "newPersonEntities": 0,
-  "newAgencyEntities": 0,
-  "flAppointerResolvesTo": 0,
-  "txAppointerResolvesTo": 1510,
-  "promotion": {
-    "AGENCY_LICENSE_source_rows": 58642,
-    "graph_fl_agency_credentials": 59189,
-    "newCanonicalCreated": 0,
-    "held": "warranty, limited-lines, title, bail, adjuster firms — not core agencies"
-  }
+  "canonical_agency_npn_index": 82071,
+  "npn_collisions": 0,
+  "collision_samples": {},
+  "csv_distinct_npn": 17640,
+  "row_join": {
+    "CONFIRMED": 2678,
+    "UNRESOLVED": 53151
+  },
+  "businesses_by_license": {
+    "appointment_bearing": 31338,
+    "CONFIRMED": 2086,
+    "REVIEW_REQUIRED": 0,
+    "UNRESOLVED": 29252
+  },
+  "dfs_business_producers": 98622,
+  "fl_agency_credentials": 59189,
+  "fl_agency_entities": 56939,
+  "fl_agency_unknown_status": 59189,
+  "unknown_status_does_not_suppress_appointment": true,
+  "hold_unresolved_no_weak_entities": true,
+  "review_appointer_numbers": [],
+  "existing_989_audit": {
+    "CURRENT_CONFIRMED": 987,
+    "STALE": 2,
+    "WRONG_TARGET": 0,
+    "DUPLICATE": 0,
+    "OTHER": 0,
+    "MULTI_LICENSE_SAME_NPN_TYPE_in_full_production_set": 521,
+    "note": "Original INS-NAT-007 989: 987 still in current All Active unique grain; 2 retained HISTORICAL/absent from 2026-08-28 file (L122529 NPN 20746809 expired 2026-06-30; L129553 NPN 21454535 Inspectra not in current All Active)."
+  },
+  "existing_989_samples": {
+    "CURRENT_CONFIRMED": [
+      {
+        "id": "3279cded-f21f-44b0-b8bf-571a7dc8d840",
+        "from": "d8820a4e-9cf4-4f17-9844-b192235e866e",
+        "to": "9a3121df-4930-416f-b0a3-7682ea3ac873",
+        "source_record_id": "5cb8d813-9962-408b-833c-adc0d3e3191a",
+        "join": {
+          "action": "attach",
+          "confidence": "CONFIRMED",
+          "npn": "8095372",
+          "agency_id": "d8820a4e-9cf4-4f17-9844-b192235e866e"
+        }
+      },
+      {
+        "id": "a2a7e1c0-e987-4e4a-8e7e-ff429360d6cb",
+        "from": "0dfaff49-11bd-4739-afb5-0fdf03b10e31",
+        "to": "e779efa3-674a-43a9-939b-a87f38992301",
+        "source_record_id": "ae9f34b2-b9c2-4c5d-a447-8c735062cf36",
+        "join": {
+          "action": "attach",
+          "confidence": "CONFIRMED",
+          "npn": "8096578",
+          "agency_id": "0dfaff49-11bd-4739-afb5-0fdf03b10e31"
+        }
+      },
+      {
+        "id": "eeb826db-b42c-456b-a490-6b6446c1c4a0",
+        "from": "2e1a2b2c-0666-4631-bc94-7cb035ab4d6f",
+        "to": "e779efa3-674a-43a9-939b-a87f38992301",
+        "source_record_id": "ebd54ee1-5406-4618-9422-7ce2ccf8c707",
+        "join": {
+          "action": "attach",
+          "confidence": "CONFIRMED",
+          "npn": "9925542",
+          "agency_id": "2e1a2b2c-0666-4631-bc94-7cb035ab4d6f"
+        }
+      },
+      {
+        "id": "cf5d6727-ad81-4bc4-b776-7b0ebf3b9ece",
+        "from": "b2dc9319-b820-4da9-a212-5742916dc170",
+        "to": "0081705f-e981-499e-9025-a3a46dbfe0f3",
+        "source_record_id": "d90383d2-7cf1-449e-9917-3de0f64c99fb",
+        "join": {
+          "action": "attach",
+          "confidence": "CONFIRMED",
+          "npn": "3007633",
+          "agency_id": "b2dc9319-b820-4da9-a212-5742916dc170"
+        }
+      },
+      {
+        "id": "449cd24d-e1c0-4adf-b4ae-1615bf41441b",
+        "from": "5c6f306b-9b72-4793-91f5-6445c5c73ae6",
+        "to": "eaf7ffea-eec6-4af5-bc36-67e8fb61b5f5",
+        "source_record_id": "d40b488b-ff5d-4b66-8486-6b1075b888b8",
+        "join": {
+          "action": "attach",
+          "confidence": "CONFIRMED",
+          "npn": "3993517",
+          "agency_id": "5c6f306b-9b72-4793-91f5-6445c5c73ae6"
+        }
+      }
+    ],
+    "STALE": [
+      {
+        "id": "31c6fbf8-3b84-4eb6-9baa-c750fc77c473",
+        "from": "d4dfa7ea-7c0f-4382-abb5-46493eb5e39e",
+        "to": "be933e54-806e-4373-9d4d-5ff8295b868a",
+        "source_record_id": "d4c23301-7129-4c93-a1a7-9bfa5928810a",
+        "join": {
+          "action": "attach",
+          "confidence": "CONFIRMED",
+          "npn": "20746809",
+          "agency_id": "d4dfa7ea-7c0f-4382-abb5-46493eb5e39e"
+        }
+      },
+      {
+        "id": "ea5441f1-97a6-4137-a2bd-74e0ae37e656",
+        "from": "d01506dc-23e0-4deb-8f18-f0bfd27df865",
+        "to": "d7324865-d949-4da9-820a-d4726803d829",
+        "source_record_id": "0bca1467-e529-406f-803e-1d0a4d61cdda",
+        "join": {
+          "action": "attach",
+          "confidence": "CONFIRMED",
+          "npn": "21454535",
+          "agency_id": "d01506dc-23e0-4deb-8f18-f0bfd27df865"
+        }
+      }
+    ]
+  },
+  "existing_duplicate_logical": 0
 }
