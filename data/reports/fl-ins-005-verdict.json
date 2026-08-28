@@ -1,10 +1,14 @@
 {
-  "status": "PARTIAL \u2014 SQL EDITOR REQUIRED FOR market_intelligence_observations",
+  "status": "COMPLETE \u2014 FLORIDA INSURANCE MARKET INTELLIGENCE INGESTED",
   "started_006": false,
-  "schema_ready": false,
+  "schema_ready": true,
   "writes": {
     "inserted": 0,
-    "skipped": 0,
-    "refused": true
-  }
+    "skipped": 1409,
+    "refused": false,
+    "predicted": 0,
+    "payloads": 1409,
+    "errors": []
+  },
+  "complete": true
 }

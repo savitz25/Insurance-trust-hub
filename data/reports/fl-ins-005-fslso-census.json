@@ -1,6 +1,6 @@
 {
   "task": "FL-INS-005",
-  "at": "2026-08-28T18:30:32.969702+00:00",
+  "at": "2026-08-28T18:45:00.768869+00:00",
   "eligible_source": "OIR company search Surplus Lines XML (FL-INS-002) + FSLSO index of OIR directories",
   "eligible_insurers": 275,
   "with_naic": 227,
@@ -58,6 +58,8 @@
   "IDENTIFIABLE": 227,
   "ATTACHABLE": 227,
   "UNRESOLVED": 48,
-  "ingested": 0,
-  "schema_block": true
+  "ingested": 275,
+  "schema_block": false,
+  "attached": 227,
+  "held": 48
 }

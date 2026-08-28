@@ -1,7 +1,6 @@
 # FL-INS-005 SQL Editor
 
-**Required before any production market-observation writes.**  
-**Not applied in this task.** Do not apply until ingest is ready with deterministic identity or explicit aggregate rows.
+**Applied** in Supabase SQL Editor before FL-INS-005B ingest. Do not re-apply unless the table is missing.
 
 Does not alter `providers`, publication flags, Trust Scores, or existing NAIC uniqueness.
 

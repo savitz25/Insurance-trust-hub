@@ -1,13 +1,29 @@
 {
-  "schema_ready": false,
+  "schema_ready": true,
   "sql_editor": "docs/florida/FL-INS-005-SQL-EDITOR.md",
-  "EXPECTED": 0,
-  "EXISTING_CORRECT": 0,
+  "EXPECTED": 1409,
+  "EXISTING_CORRECT": 1409,
   "INSERTED": 0,
   "MISSING": 0,
   "WRONG_TARGET": 0,
   "DUPLICATE": 0,
   "REVIEW_REQUIRED": 0,
-  "UNRESOLVED": 1474,
-  "blocked_reason": "market_intelligence_observations does not exist"
+  "UNRESOLVED": 1522,
+  "mir_attached_companies": 162,
+  "mir_held_companies": 0,
+  "fslso_attached": 227,
+  "fslso_held": 48,
+  "payloads": 1409,
+  "fresh": 0,
+  "family_counts": {
+    "POLICIES_IN_FORCE": 486,
+    "WRITTEN_PREMIUM": 486,
+    "AGGREGATE_MARKET": 162,
+    "SURPLUS_LINES_ELIGIBILITY": 275
+  },
+  "dataset_counts": {
+    "florida_oir_mir_2026_06": 1134,
+    "florida_oir_surplus_lines_eligibility": 275
+  },
+  "blocked_reason": null
 }

@@ -127,14 +127,19 @@ assert(after.appointer_resolves_to_fl === 0, 'resolves 0');
 assert(after.bridges === 37515, 'bridges');
 assert(pub.rankings === false && pub.trust_score_changed === false, 'no rank/score');
 assert(recon.WRONG_TARGET === 0 && recon.DUPLICATE === 0, 'recon');
-assert(idem.pass === true && idem.inserted === 0, '20 zero-delta / no writes');
-assert(idem.second_run_inserts === 0, '20b');
-assert(recon.INSERTED === 0, '21 expected=prod 0 writes');
-assert(String(verd.status).includes('PARTIAL'), 'partial until SQL/identity');
+assert(idem.pass === true, '20 idempotency');
+assert(idem.second_run_inserts === 0, '20 second execute 0');
+assert((idem.first_run_inserted as number) > 0, '20 first insert');
+assert(Number(after.market_obs) > 0, '21 production observations');
+assert(String(verd.status).includes('COMPLETE'), 'complete');
 assert(verd.started_006 === false, 'no 006');
 assert(nfip.exact_npn_attaches === 0, 'nfip npn 0');
 assert(irfs.search_cap === 2500, 'irfs cap');
-assert(mir.ingested === 0, 'mir not ingested name-only');
+assert((mir.distinct_naic as number) === 162, 'mir 162 naic');
+assert(choicesPremiumIsQuote() === false, 'choices not quote');
+const cit = load('fl-ins-005-citizens-census.json');
+assert(cit.dated_policy_count_official_extract == null, 'no stale citizens pif');
+assert(cit.ingested === 0, 'citizens not ingested');
 
 if (errors.length) {
   console.error('FL-INS-005 FAIL');

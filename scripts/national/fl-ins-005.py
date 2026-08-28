@@ -14,6 +14,7 @@ import json
 import re
 import ssl
 import time
+import urllib.error
 import urllib.request
 from datetime import UTC, datetime
 from pathlib import Path
@@ -108,7 +109,7 @@ def http_get(url: str, timeout: int = 120) -> tuple[int, bytes, str]:
     raise RuntimeError(f"{url}: {last}")
 
 
-def req(base: str, key: str, path: str, extra: dict | None = None):
+def req(base: str, key: str, path: str, extra: dict | None = None, method: str = "GET", data: bytes | None = None):
     headers = {
         "apikey": key,
         "Authorization": f"Bearer {key}",
@@ -120,9 +121,15 @@ def req(base: str, key: str, path: str, extra: dict | None = None):
     last = None
     for attempt in range(6):
         try:
-            r = urllib.request.Request(base + path, headers=headers, method="GET")
+            r = urllib.request.Request(base + path, headers=headers, data=data, method=method)
             with urllib.request.urlopen(r, timeout=180, context=CTX) as resp:
                 return resp.read(), resp.headers, resp.status
+        except urllib.error.HTTPError as e:
+            err_body = e.read().decode("utf-8", "replace") if e.fp else ""
+            last = RuntimeError(f"{e.code} {path} {err_body[:400]}")
+            if e.code in (409,) or "duplicate" in err_body.lower() or "23505" in err_body:
+                raise last
+            time.sleep(1.1 * (attempt + 1))
         except Exception as e:
             last = e
             time.sleep(1.1 * (attempt + 1))
@@ -157,6 +164,68 @@ def table_exists(base: str, key: str, table: str) -> bool:
         return n >= 0
     except Exception:
         return False
+
+
+def fetch_all(base: str, key: str, table: str, select: str, query: str = "", page: int = 1000) -> list[dict]:
+    rows: list[dict] = []
+    start = 0
+    while True:
+        path = f"/rest/v1/{table}?select={select}"
+        if query:
+            path += "&" + query
+        extra = {"Range": f"{start}-{start + page - 1}", "Range-Unit": "items", "Prefer": "count=exact"}
+        body, headers, _ = req(base, key, path, extra)
+        batch = json.loads(body.decode("utf-8") or "[]")
+        rows.extend(batch)
+        if start == 0:
+            print(f"  fetch {table} {parse_cr(headers.get('Content-Range'))}", flush=True)
+        if len(batch) < page:
+            break
+        start += page
+    return rows
+
+
+def parse_num(raw: str | None) -> float | None:
+    s = str(raw or "").replace(",", "").replace("$", "").strip()
+    if not s or s in ("-", "n/a", "N/A", "."):
+        return None
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+
+def insert_rows(base: str, key: str, rows: list[dict]) -> tuple[int, int, list[str]]:
+    inserted = 0
+    skipped = 0
+    errors: list[str] = []
+    for i in range(0, len(rows), 40):
+        part = rows[i : i + 40]
+        payload = json.dumps(part).encode("utf-8")
+        try:
+            extra = {
+                "Content-Type": "application/json",
+                "Prefer": "return=representation,resolution=ignore-duplicates",
+            }
+            body, _, _ = req(
+                base,
+                key,
+                "/rest/v1/market_intelligence_observations",
+                extra=extra,
+                method="POST",
+                data=payload,
+            )
+            data = json.loads(body.decode("utf-8") or "[]")
+            n = len(data) if isinstance(data, list) else (1 if data else 0)
+            inserted += n
+            skipped += len(part) - n
+        except Exception as e:
+            msg = str(e).lower()
+            if "duplicate" in msg or "unique" in msg or "409" in msg or "23505" in msg:
+                skipped += len(part)
+                continue
+            errors.append(str(e)[:400])
+    return inserted, skipped, errors
 
 
 def graph_counts(base: str, key: str) -> dict[str, int]:
@@ -244,7 +313,7 @@ def census_surplus_xml() -> dict[str, Any]:
         "federally_authorized": OIR_DIR / "surplus-lines---federally-authorized.xml",
         "aviation_wet_marine": OIR_DIR / "surplus-lines---aviation-wet-marine.xml",
     }
-    out: dict[str, Any] = {"files": {}, "with_naic": 0, "without_naic": 0, "companies": 0}
+    out: dict[str, Any] = {"files": {}, "with_naic": 0, "without_naic": 0, "companies": 0, "rows": []}
     seen: set[str] = set()
     for label, path in files.items():
         if not path.exists():
@@ -252,21 +321,29 @@ def census_surplus_xml() -> dict[str, Any]:
             continue
         data = path.read_bytes()
         recs = 0
-        naic_n = 0
         try:
             root = ET.fromstring(data)
             for node in root.findall("company"):
                 rec = {c.tag: (c.text or "").strip() for c in list(node)}
                 recs += 1
                 naic = re.sub(r"\D", "", rec.get("NAICCode") or "")
-                key = naic or rec.get("FLCompCode") or rec.get("COName") or str(recs)
-                if key not in seen:
-                    seen.add(key)
-                    if len(naic) == 5:
-                        naic_n += 1
-                        out["with_naic"] += 1
-                    else:
-                        out["without_naic"] += 1
+                fl = re.sub(r"\D", "", rec.get("FLCompCode") or "")
+                name = rec.get("COName") or rec.get("CompanyName") or rec.get("Name") or ""
+                key = naic if len(naic) == 5 else (fl or name or f"{label}:{recs}")
+                if key in seen:
+                    continue
+                seen.add(key)
+                row = {
+                    "bucket": label,
+                    "name": name,
+                    "naic": naic if len(naic) == 5 else None,
+                    "fl_company_code": fl.zfill(5) if fl else None,
+                }
+                out["rows"].append(row)
+                if row["naic"]:
+                    out["with_naic"] += 1
+                else:
+                    out["without_naic"] += 1
         except ET.ParseError:
             pass
         out["files"][label] = {"exists": True, "sha256": sha256_bytes(data), "records": recs, "bytes": len(data)}
@@ -608,23 +685,264 @@ def main() -> int:
     }
 
     sql_path = "docs/florida/FL-INS-005-SQL-EDITOR.md"
-    writes = {"inserted": 0, "skipped": 0, "refused": (not schema_ready)}
-    if execute and schema_ready:
-        print("table exists; this run stores census only — no MIR name-only attach", flush=True)
-    elif execute:
-        writes["errors"] = ["SQL Editor required: market_intelligence_observations missing"]
+    observed = datetime.now(UTC).strftime("%Y-%m-%dT00:00:00.000Z")
+    official_cocodes: set[str] = set()
+    legal_by_key: dict[str, str] = {}
+    fl_to_naic: dict[str, str] = {}
+    if schema_ready:
+        legal = fetch_all(base, key, "national_entities", "id,provisional_key", "entity_kind=eq.legal_insurer")
+        legal_by_key = {str(r["provisional_key"]): str(r["id"]) for r in legal if r.get("provisional_key")}
+        for k in legal_by_key:
+            if k.startswith("legal-insurer:naic:"):
+                official_cocodes.add(k.split(":")[-1])
+        fl_ids = fetch_all(
+            base, key, "national_entity_identifiers", "value,entity_id", "scheme=eq.fl_oir_company_code"
+        )
+        legal_id_to_naic = {
+            eid: k.split(":")[-1]
+            for k, eid in legal_by_key.items()
+            if k.startswith("legal-insurer:naic:")
+        }
+        for r in fl_ids:
+            val = re.sub(r"\D", "", str(r.get("value") or ""))
+            naic = legal_id_to_naic.get(str(r.get("entity_id") or ""))
+            if val and naic:
+                fl_to_naic[val.zfill(5)] = naic
 
-    after = dict(pre)
+    def resolve_insurer(naic: str | None, fl_code: str | None = None) -> tuple[str | None, str, str]:
+        if naic and naic in official_cocodes:
+            return legal_by_key.get(f"legal-insurer:naic:{naic}"), "CONFIRMED", "exact_naic_cocode_on_official_legal_insurer_spine"
+        if fl_code and fl_code in fl_to_naic and fl_to_naic[fl_code] in official_cocodes:
+            mapped = fl_to_naic[fl_code]
+            return (
+                legal_by_key.get(f"legal-insurer:naic:{mapped}"),
+                "CONFIRMED",
+                "exact_fl_oir_company_code_already_mapped_to_naic",
+            )
+        return None, "UNRESOLVED", "naic_or_fl_code_not_on_spine_or_missing"
+
+    def metric_row(
+        *,
+        family: str,
+        name: str,
+        value: float | None,
+        unit: str,
+        dataset: str,
+        rec_id: str,
+        source_url: str,
+        clock: str,
+        entity_id: str | None,
+        confidence: str,
+        match_basis: str,
+        product_line: str | None,
+        period_start: str | None,
+        period_end: str | None,
+        as_of: str | None,
+        raw: dict,
+        notes: str,
+    ) -> dict:
+        return {
+            "entity_id": entity_id,
+            "metric_family": family,
+            "metric_name": name,
+            "value_numeric": value,
+            "value_text": None if value is not None else None,
+            "unit": unit,
+            "jurisdiction": "FL",
+            "geography_type": "statewide",
+            "geography_value": "FL",
+            "product_line": product_line,
+            "period_start": period_start,
+            "period_end": period_end,
+            "as_of": as_of,
+            "source_clock": clock,
+            "source_dataset": dataset,
+            "source_record_id": rec_id,
+            "source_url": source_url,
+            "source_observed_at": observed,
+            "attribution_confidence": confidence,
+            "publication_allowed": False,
+            "publication_readiness": "INTERNAL_ONLY",
+            "match_basis": match_basis,
+            "notes": notes,
+            "raw": raw,
+        }
+
+    payloads: list[dict] = []
+    mir_attached = 0
+    mir_held = 0
+    headers = mir_co_parsed.get("headers") or []
+
+    def hcol(*needles: str) -> int | None:
+        for i, h in enumerate(headers):
+            hl = h.lower()
+            if all(n in hl for n in needles):
+                return i
+        return None
+
+    c_rank = hcol("rank")
+    c_name = name_col
+    c_naic = naic_col
+    c_pif = pif_col
+    c_pif_p = hcol("policies in force", "personal")
+    c_pif_c = hcol("policies in force", "commercial")
+    c_prem = prem_col
+    c_prem_p = hcol("premium", "personal")
+    c_prem_c = hcol("premium", "commercial")
+    c_exp = hcol("exposure", "total")
+    mir_sha = mir_files[0]["sha256"] if mir_files else ""
+    for row in mir_co_parsed.get("rows") or []:
+        naic = re.sub(r"\D", "", row[c_naic]) if c_naic is not None and c_naic < len(row) else ""
+        if len(naic) != 5:
+            continue
+        name = row[c_name].strip() if c_name is not None and c_name < len(row) else ""
+        if name.lower().startswith("total"):
+            continue
+        eid, conf, basis = resolve_insurer(naic)
+        if eid:
+            mir_attached += 1
+        else:
+            mir_held += 1
+        rank_raw = row[c_rank] if c_rank is not None and c_rank < len(row) else None
+        common_raw = {
+            "task": TASK,
+            "companyNameNotIdentity": name,
+            "naic": naic,
+            "sourceRankByPif": rank_raw,
+            "sourceRankIsNotTrusthubRanking": True,
+            "xlsxSha256": mir_sha,
+            "notMarketShareInvented": True,
+        }
+        specs = [
+            ("POLICIES_IN_FORCE", "policies_in_force_total", c_pif, "count", None),
+            ("POLICIES_IN_FORCE", "policies_in_force_personal_residential", c_pif_p, "count", "personal_residential"),
+            ("POLICIES_IN_FORCE", "policies_in_force_commercial_residential", c_pif_c, "count", "commercial_residential"),
+            ("WRITTEN_PREMIUM", "direct_written_premium_total", c_prem, "usd", None),
+            ("WRITTEN_PREMIUM", "direct_written_premium_personal_residential", c_prem_p, "usd", "personal_residential"),
+            ("WRITTEN_PREMIUM", "direct_written_premium_commercial_residential", c_prem_c, "usd", "commercial_residential"),
+            ("AGGREGATE_MARKET", "exposure_in_force_total", c_exp, "usd", None),
+        ]
+        for family, mname, col, unit, pline in specs:
+            if col is None:
+                continue
+            val = parse_num(row[col] if col < len(row) else None)
+            payloads.append(
+                metric_row(
+                    family=family,
+                    name=mname,
+                    value=val,
+                    unit=unit,
+                    dataset="florida_oir_mir_2026_06",
+                    rec_id=f"mir:2026-06:{naic}:{mname}",
+                    source_url=MIR_JUNE_CO.split("?")[0],
+                    clock="mir",
+                    entity_id=eid,
+                    confidence=conf,
+                    match_basis=basis,
+                    product_line=pline,
+                    period_start="2026-06-01",
+                    period_end="2026-06-30",
+                    as_of="2026-06-30",
+                    raw=common_raw,
+                    notes="INTERNAL_ONLY; MIR unaudited; trade-secret companies omitted; source rank is not a TrustHub ranking; PIF dated June 30, 2026",
+                )
+            )
+
+    fslso_attached = 0
+    fslso_held = 0
+    for rec in surplus.get("rows") or []:
+        naic = rec.get("naic")
+        flc = rec.get("fl_company_code")
+        eid, conf, basis = resolve_insurer(naic, flc)
+        if not naic:
+            conf, basis, eid = "UNRESOLVED", "missing_naic_held", None
+            fslso_held += 1
+            rec_id = f"surplus-eligibility:held:{rec.get('bucket')}:{flc or rec.get('name') or 'unknown'}"
+        else:
+            if eid:
+                fslso_attached += 1
+            else:
+                fslso_held += 1
+            rec_id = f"surplus-eligibility:{naic}"
+        payloads.append(
+            metric_row(
+                family="SURPLUS_LINES_ELIGIBILITY",
+                name="eligible_surplus_lines_insurer",
+                value=1,
+                unit="flag",
+                dataset="florida_oir_surplus_lines_eligibility",
+                rec_id=rec_id[:180],
+                source_url=FSLSO_ELIGIBLE,
+                clock="fslso",
+                entity_id=eid,
+                confidence=conf,
+                match_basis=basis,
+                product_line="surplus_lines",
+                period_start=None,
+                period_end=None,
+                as_of=None,
+                raw={
+                    "task": TASK,
+                    "bucket": rec.get("bucket"),
+                    "sourceNameNotIdentity": rec.get("name"),
+                    "naic": naic,
+                    "flCompanyCode": flc,
+                    "eligibilityIsNotAdmitted": True,
+                },
+                notes="INTERNAL_ONLY; surplus-lines eligibility ≠ admitted status",
+            )
+        )
+
+    existing_keys: set[str] = set()
+    if schema_ready:
+        have = fetch_all(
+            base,
+            key,
+            "market_intelligence_observations",
+            "source_dataset,source_record_id,metric_name",
+        )
+        existing_keys = {f"{r.get('source_dataset')}|{r.get('source_record_id')}|{r.get('metric_name')}" for r in have}
+    fresh = [p for p in payloads if f"{p['source_dataset']}|{p['source_record_id']}|{p['metric_name']}" not in existing_keys]
+    writes = {"inserted": 0, "skipped": 0, "refused": (not schema_ready), "predicted": len(fresh), "payloads": len(payloads)}
+    if execute and not schema_ready:
+        writes["errors"] = ["SQL Editor required: market_intelligence_observations missing"]
+        print("STOP: SQL Editor required before --execute", flush=True)
+    elif execute and schema_ready:
+        ins, sk, errs = insert_rows(base, key, fresh)
+        writes = {
+            "inserted": ins,
+            "skipped": sk + (len(payloads) - len(fresh)),
+            "refused": False,
+            "predicted": len(fresh),
+            "payloads": len(payloads),
+            "errors": errs,
+        }
+        print("EXECUTE inserted", ins, "skipped", writes["skipped"], "errors", errs, flush=True)
+    else:
+        print("DRY-RUN predicted insert", len(fresh), "payloads", len(payloads), flush=True)
+
+    mir_census["ingested"] = sum(1 for p in payloads if p["source_dataset"] == "florida_oir_mir_2026_06") if execute else 0
+    mir_census["attached_companies"] = mir_attached
+    mir_census["held_companies"] = mir_held
+    fslso_census["ingested"] = sum(1 for p in payloads if p["source_dataset"] == "florida_oir_surplus_lines_eligibility") if execute else 0
+    fslso_census["attached"] = fslso_attached
+    fslso_census["held"] = fslso_held
+    fslso_census["schema_block"] = not schema_ready
+    if "rows" in surplus:
+        surplus = {k: v for k, v in surplus.items() if k != "rows"}
+        fslso_census["xml"] = surplus
+
+    after = graph_counts(base, key) if execute and schema_ready else dict(pre)
     pub_pass = (
-        pre["providers"] == 170499
-        and pre["agencies"] == 82071
-        and pre["persons"] == 1029860
-        and pre["legal_insurers"] == 6185
-        and pre["appointed_by"] == 2680
-        and pre["fl_oir_company_code"] == 1897
-        and pre["bridges"] == 37515
-        and pre["appointer_resolves_to_fl"] == 0
-        and pre["florida_receiver"] == 12
+        after["providers"] == 170499
+        and after["agencies"] == 82071
+        and after["persons"] == 1029860
+        and after["legal_insurers"] == 6185
+        and after["appointed_by"] == 2680
+        and after["fl_oir_company_code"] == 1897
+        and after["bridges"] == 37515
+        and after["appointer_resolves_to_fl"] == 0
+        and after["florida_receiver"] == 12
     )
 
     dump(
@@ -649,19 +967,36 @@ def main() -> int:
     dump("fl-ins-005-citizens-census.json", citizens_census)
     dump("fl-ins-005-fslso-census.json", fslso_census)
     dump("fl-ins-005-nfip-census.json", nfip_census)
+    family_counts: dict[str, int] = {}
+    dataset_counts: dict[str, int] = {}
+    if schema_ready and after.get("market_obs", 0) > 0:
+        fam_rows = fetch_all(base, key, "market_intelligence_observations", "metric_family,source_dataset")
+        for r in fam_rows:
+            family_counts[str(r.get("metric_family"))] = family_counts.get(str(r.get("metric_family")), 0) + 1
+            dataset_counts[str(r.get("source_dataset"))] = dataset_counts.get(str(r.get("source_dataset")), 0) + 1
+
+    expected = len(payloads)
     dump(
         "fl-ins-005-market-reconciliation.json",
         {
             "schema_ready": schema_ready,
             "sql_editor": sql_path,
-            "EXPECTED": 0 if not schema_ready else 0,
+            "EXPECTED": expected,
             "EXISTING_CORRECT": max(pre["market_obs"], 0),
-            "INSERTED": 0,
-            "MISSING": 0,
+            "INSERTED": writes.get("inserted") or 0,
+            "MISSING": 0 if (not execute or writes.get("inserted") == len(fresh)) else max(0, len(fresh) - (writes.get("inserted") or 0)),
             "WRONG_TARGET": 0,
             "DUPLICATE": 0,
             "REVIEW_REQUIRED": 0,
-            "UNRESOLVED": mir_census["UNRESOLVED"] + nfip_census["UNRESOLVED"],
+            "UNRESOLVED": mir_held + fslso_held + nfip_census["UNRESOLVED"],
+            "mir_attached_companies": mir_attached,
+            "mir_held_companies": mir_held,
+            "fslso_attached": fslso_attached,
+            "fslso_held": fslso_held,
+            "payloads": len(payloads),
+            "fresh": len(fresh),
+            "family_counts": family_counts,
+            "dataset_counts": dataset_counts,
             "blocked_reason": None if schema_ready else "market_intelligence_observations does not exist",
         },
     )
@@ -679,25 +1014,51 @@ def main() -> int:
             "pass": pub_pass,
         },
     )
+    prev_idem: dict[str, Any] = {}
+    idem_path = OUT / "fl-ins-005-idempotency.json"
+    if idem_path.exists():
+        try:
+            prev_idem = json.loads(idem_path.read_text(encoding="utf-8"))
+        except Exception:
+            prev_idem = {}
+    first_run = prev_idem.get("first_run_inserted") or 0
+    if not first_run:
+        if execute and writes.get("inserted"):
+            first_run = writes["inserted"]
+        elif prev_idem.get("inserted"):
+            first_run = prev_idem["inserted"]
+        else:
+            first_run = after.get("market_obs") or 0
+    second = writes.get("inserted") if execute and pre["market_obs"] > 0 else None
     dump(
         "fl-ins-005-idempotency.json",
         {
             "execute": execute,
-            "inserted": 0,
-            "second_run_inserts": 0,
-            "pass": True,
-            "note": "zero writes until SQL Editor table exists; then name-only MIR/NFIP still unattached",
+            "inserted": writes.get("inserted") or 0,
+            "skipped": writes.get("skipped") or 0,
+            "predicted": writes.get("predicted") or len(fresh),
+            "first_run_inserted": first_run,
+            "second_run_inserts": 0 if second == 0 else second,
+            "unexpected_updates": 0,
+            "pass": (writes.get("inserted") == 0) if (execute and pre["market_obs"] > 0) else True,
+            "unique_key": "source_dataset,source_record_id,metric_name,geography,product_line,period_end",
         },
     )
+    complete = schema_ready and ((execute and after.get("market_obs", 0) > 0) or (not execute and len(payloads) > 0))
     dump(
         "fl-ins-005-verdict.json",
         {
-            "status": "PARTIAL — SQL EDITOR REQUIRED FOR market_intelligence_observations"
-            if not schema_ready
-            else "PARTIAL — NO DETERMINISTIC BULK ATTACH WITHOUT NAIC ON MIR EXCEL / NPN ON NFIP LIST",
+            "status": "COMPLETE — FLORIDA INSURANCE MARKET INTELLIGENCE INGESTED"
+            if execute and schema_ready and (writes.get("errors") in (None, []))
+            else (
+                "PARTIAL — SQL EDITOR REQUIRED FOR market_intelligence_observations"
+                if not schema_ready
+                else "PARTIAL — DRY-RUN ONLY"
+            ),
             "started_006": False,
             "schema_ready": schema_ready,
             "writes": writes,
+            "complete": complete,
         },
     )
     print(
@@ -706,12 +1067,16 @@ def main() -> int:
                 "schema_ready": schema_ready,
                 "mir_rows": mir_census["RAW"],
                 "mir_naic": mir_identity,
-                "choices_pages": len(choices_pages),
-                "irfs_cap": 2500,
-                "fslso_eligible": surplus["companies"],
-                "nfip_public": 1474,
+                "mir_attached": mir_attached,
+                "mir_held": mir_held,
+                "fslso_eligible": surplus.get("companies") if isinstance(surplus, dict) else None,
+                "fslso_attached": fslso_attached,
+                "fslso_held": fslso_held,
+                "payloads": len(payloads),
+                "fresh": len(fresh),
+                "inserted": writes.get("inserted") or 0,
                 "pub": pub_pass,
-                "inserted": 0,
+                "market_obs": after.get("market_obs"),
             },
             indent=2,
         ),

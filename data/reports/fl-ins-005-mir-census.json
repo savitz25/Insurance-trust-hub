@@ -1,10 +1,10 @@
 {
   "task": "FL-INS-005",
-  "at": "2026-08-28T18:30:32.969702+00:00",
+  "at": "2026-08-28T18:45:00.768869+00:00",
   "portal": "https://floir.gov/tools-and-data/residential-market-share-reports",
   "wizard": "https://qsrng.floir.gov/",
   "portal_sha256": "64ded2e948933f39a63dd8594825f56a2879f8ebe5ab9ad86c2aa05a516302ce",
-  "wizard_sha256": "d93cf628da1c904492c527342e032adb5ad9a7479ea20d9330b810cc17bdbfca",
+  "wizard_sha256": "4e18fcadb99bfb397064260565b73236d9f5d5cc9f09a33d59f8bede2df86786",
   "period": "2026-06",
   "period_start": "2026-06-01",
   "period_end": "2026-06-30",
@@ -387,6 +387,8 @@
   "share_column": null,
   "geography": "statewide in published Excel; county/ZIP via MIR wizard (not bulk-dumped here)",
   "product": "personal and commercial residential",
-  "ingested": 0,
-  "hold_reason": null
+  "ingested": 1134,
+  "hold_reason": null,
+  "attached_companies": 162,
+  "held_companies": 0
 }

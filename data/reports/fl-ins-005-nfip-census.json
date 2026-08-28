@@ -1,6 +1,6 @@
 {
   "task": "FL-INS-005",
-  "at": "2026-08-28T18:30:32.969702+00:00",
+  "at": "2026-08-28T18:45:00.768869+00:00",
   "registry_rows_public_list": 1474,
   "public_list_note": "floodsmart.gov/flood-insurance-agencies paginated list; agency name/address/phone/email/principal name; NPN not displayed",
   "grain": "agency listing with a named principal agent; both NPNs collected at enrollment, not published on the list",

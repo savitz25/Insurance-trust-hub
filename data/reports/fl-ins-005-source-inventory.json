@@ -1,6 +1,6 @@
 {
   "task": "FL-INS-005",
-  "at": "2026-08-28T18:30:32.969702+00:00",
+  "at": "2026-08-28T18:45:00.768869+00:00",
   "sources": [
     {
       "id": "mir",
@@ -16,7 +16,7 @@
     {
       "id": "irfs",
       "url": "https://irfssearch.floir.gov/",
-      "sha256": "31dccb622dcdb22e4e41552de2a816183d17935b680e999c36e40effdcebec20",
+      "sha256": "6eade055ee3db80b3a0d5d7f701c670c268f273fb93df023d221326ceab7a0b0",
       "cap": 2500
     },
     {

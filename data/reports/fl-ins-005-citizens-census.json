@@ -1,6 +1,6 @@
 {
   "task": "FL-INS-005",
-  "at": "2026-08-28T18:30:32.969702+00:00",
+  "at": "2026-08-28T18:45:00.768869+00:00",
   "residual_market": true,
   "not_general_licensure": true,
   "dated_policy_count_official_extract": null,
@@ -12,16 +12,16 @@
       "url": "https://www.citizensfla.com/",
       "final_url": "https://www.citizensfla.com/",
       "status": 200,
-      "sha256": "b5ae6b49545c10001deb4e204acf62f05a648c201605864eb7e5596e852868fc",
-      "bytes": 205279,
+      "sha256": "6ee68beffcb25099e3197f748e763e7f3b826e51f5e0904042910a6694aca22c",
+      "bytes": 203937,
       "content_type": "html"
     },
     {
       "url": "https://www.citizensfla.com/reports",
       "final_url": "https://www.citizensfla.com/reports",
       "status": 200,
-      "sha256": "1b032429ca240c1d29f2ffce2571e8c13ddbd5fd48a28a068ec91a8f4e677038",
-      "bytes": 260544,
+      "sha256": "20ce6798946ecabeb01b57efe872c034018d4aea2a4ff3cf09bb577260c34aee",
+      "bytes": 261852,
       "content_type": "html"
     },
     {
