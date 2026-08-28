@@ -1,0 +1,15 @@
+{
+  "census": {
+    "publicProviders": 170499,
+    "providersWithNpn": 52746,
+    "graphAgencies": 82071,
+    "graphAgenciesWithNpn": 82071,
+    "exactNpnMatches": 48138,
+    "confirmed1to1": 37515,
+    "reviewRequired": 10623,
+    "unresolved": 122361,
+    "unmatchedProviders": 122361,
+    "unmatchedGraphAgencies": 39624
+  },
+  "at": "2026-08-28T13:12:36.541Z"
+}

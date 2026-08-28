@@ -1,0 +1,553 @@
+{
+  "version": "insurance-agency-trust-report-v1",
+  "regulatoryEvidence": [],
+  "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency.",
+  "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+  "footprintCopy": "Licensed in 2 jurisdictions in the sources currently included.",
+  "limitations": [
+    "Official records can change. Re-check licenses on the state regulator site.",
+    "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+    "Research currently includes the official sources listed below as of the source date on each record.",
+    "CMS Marketplace registration is not a state license.",
+    "Lines of authority are source-reported terminology, not product expertise.",
+    "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+    "Legal-insurer complaint statistics are not inherited by agency profiles."
+  ],
+  "qaReports": [
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "2c5f3d5b-9914-4f23-b276-d1d809515deb",
+        "kind": "agency",
+        "npn": "21505383",
+        "legalName": "WRIGHT & MAURER, INC.",
+        "displayName": "WRIGHT & MAURER, INC.",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "TX",
+          "licenseNumber": "3323112",
+          "licenseClass": "General Lines Agency",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "texas_tdi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [
+        {
+          "officialText": "Property and Casualty",
+          "officialCode": null,
+          "sourceDataset": "texas_tdi"
+        }
+      ],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "TX"
+      ],
+      "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "texas_tdi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    },
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "f3bcf815-dc27-4cc4-a88b-f15505f11ad1",
+        "kind": "agency",
+        "npn": "21693296",
+        "legalName": "MARK WILSON LLC",
+        "displayName": "MARK WILSON LLC",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "TX",
+          "licenseNumber": "3377140",
+          "licenseClass": "General Lines Agency",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "texas_tdi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [
+        {
+          "officialText": "Property and Casualty",
+          "officialCode": null,
+          "sourceDataset": "texas_tdi"
+        },
+        {
+          "officialText": "Life, Accident, Health & HMO",
+          "officialCode": null,
+          "sourceDataset": "texas_tdi"
+        }
+      ],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "TX"
+      ],
+      "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "texas_tdi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    },
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "4592d12b-7447-4363-9837-39ba98382206",
+        "kind": "agency",
+        "npn": "21523741",
+        "legalName": "AOK INSURANCE AGENCY, LLC",
+        "displayName": "AOK INSURANCE AGENCY, LLC",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "OH",
+          "licenseNumber": "21523741",
+          "licenseClass": "Major Lines",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "ohio_odi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [
+        {
+          "kind": "mailing_address",
+          "value": "33644 GLORIA AVE, NORTH RIDGEVILLE, OH, 44039",
+          "sourceDataset": "ohio_odi",
+          "publicEligible": true
+        }
+      ],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "OH"
+      ],
+      "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "ohio_odi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    },
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "ce9655ff-aecc-4d16-b9a8-23ddb29b7c45",
+        "kind": "agency",
+        "npn": "15976381",
+        "legalName": "GORI ENTERPRISES, LLC",
+        "displayName": "GORI ENTERPRISES, LLC",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "TX",
+          "licenseNumber": "1650913",
+          "licenseClass": "General Lines Agency",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "texas_tdi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [
+        {
+          "officialText": "Property and Casualty",
+          "officialCode": null,
+          "sourceDataset": "texas_tdi"
+        }
+      ],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "TX"
+      ],
+      "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "texas_tdi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    },
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "455779d3-1686-4390-b03d-1aba16e725fe",
+        "kind": "agency",
+        "npn": "8441495",
+        "legalName": "CREATIVE RETIREMENT PLANNING LLC",
+        "displayName": "CREATIVE RETIREMENT PLANNING LLC",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "OH",
+          "licenseNumber": "8441495",
+          "licenseClass": "Major Lines",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "ohio_odi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [
+        {
+          "kind": "mailing_address",
+          "value": "411 WOLF LEDGES PKWY, AKRON, OH, 44311",
+          "sourceDataset": "ohio_odi",
+          "publicEligible": true
+        }
+      ],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "OH"
+      ],
+      "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "ohio_odi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    },
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "25c34ee1-ed72-4358-8c20-660984ff97a6",
+        "kind": "agency",
+        "npn": "21404598",
+        "legalName": "AMERICAN INSURANCE AGENCY LLC,",
+        "displayName": "AMERICAN INSURANCE AGENCY LLC,",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "FL",
+          "licenseNumber": "L130082",
+          "licenseClass": "AGENCY LICENSE",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "florida_dfs",
+          "sourceObservedAt": null
+        },
+        {
+          "jurisdiction": "TX",
+          "licenseNumber": "3287514",
+          "licenseClass": "General Lines Agency",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "texas_tdi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [
+        {
+          "officialText": "Property and Casualty",
+          "officialCode": null,
+          "sourceDataset": "texas_tdi"
+        }
+      ],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [
+        {
+          "kind": "email",
+          "value": "inderhpr@gmail.com",
+          "sourceDataset": "florida_dfs",
+          "publicEligible": true
+        },
+        {
+          "kind": "phone",
+          "value": "+13179953312",
+          "sourceDataset": "florida_dfs",
+          "publicEligible": true
+        }
+      ],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "FL",
+        "TX"
+      ],
+      "footprintCopy": "Licensed in 2 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "florida_dfs",
+          "asOf": null
+        },
+        {
+          "authority": "State insurance regulator",
+          "dataset": "texas_tdi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    },
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "47323e8f-b3ef-4265-819d-2a2556090be0",
+        "kind": "agency",
+        "npn": "7993820",
+        "legalName": "HOWARD & HOWARD ENTERPRISES, LLC,",
+        "displayName": "HOWARD & HOWARD ENTERPRISES, LLC,",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "FL",
+          "licenseNumber": "L120226",
+          "licenseClass": "AGENCY LICENSE",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "florida_dfs",
+          "sourceObservedAt": null
+        },
+        {
+          "jurisdiction": "TX",
+          "licenseNumber": "2507627",
+          "licenseClass": "General Lines Agency",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "texas_tdi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [
+        {
+          "officialText": "Life, Accident, Health & HMO",
+          "officialCode": null,
+          "sourceDataset": "texas_tdi"
+        }
+      ],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [
+        {
+          "kind": "email",
+          "value": "office@howardandhoward.net",
+          "sourceDataset": "florida_dfs",
+          "publicEligible": true
+        },
+        {
+          "kind": "phone",
+          "value": "+14052558663",
+          "sourceDataset": "florida_dfs",
+          "publicEligible": true
+        }
+      ],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "FL",
+        "TX"
+      ],
+      "footprintCopy": "Licensed in 2 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "florida_dfs",
+          "asOf": null
+        },
+        {
+          "authority": "State insurance regulator",
+          "dataset": "texas_tdi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    },
+    {
+      "version": "insurance-agency-trust-report-v1",
+      "entity": {
+        "id": "84bd7427-8549-431c-a5cd-ce43035dc0ab",
+        "kind": "agency",
+        "npn": "19845658",
+        "legalName": "T-NGO BROTHERS LLC",
+        "displayName": "T-NGO BROTHERS LLC",
+        "identityConfidence": "CONFIRMED"
+      },
+      "credentials": [
+        {
+          "jurisdiction": "TX",
+          "licenseNumber": "2648168",
+          "licenseClass": "General Lines Agency",
+          "regulatoryStatus": "unknown",
+          "issueDate": null,
+          "expirationDate": null,
+          "sourceDataset": "texas_tdi",
+          "sourceObservedAt": null
+        }
+      ],
+      "loas": [
+        {
+          "officialText": "Property and Casualty",
+          "officialCode": null,
+          "sourceDataset": "texas_tdi"
+        }
+      ],
+      "appointments": [],
+      "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+      "cms": [],
+      "contacts": [],
+      "regulatoryEvidence": [],
+      "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+      "jurisdictions": [
+        "TX"
+      ],
+      "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+      "sources": [
+        {
+          "authority": "State insurance regulator",
+          "dataset": "texas_tdi",
+          "asOf": null
+        }
+      ],
+      "limitations": [
+        "Official records can change. Re-check licenses on the state regulator site.",
+        "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+        "Research currently includes the official sources listed below as of the source date on each record.",
+        "CMS Marketplace registration is not a state license.",
+        "Lines of authority are source-reported terminology, not product expertise.",
+        "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+        "Legal-insurer complaint statistics are not inherited by agency profiles."
+      ],
+      "readiness": "READY_FOR_PUBLIC_PROFILE"
+    }
+  ],
+  "gates": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "PUBLIC_REGULATORY_EVIDENCE_ENABLED": false,
+    "LEGAL_INSURER_DISPLAY_DECISION": "INTERNAL_ONLY",
+    "mayPublishPerson": false,
+    "mayPublishLegalInsurer": false,
+    "mayPublishGroup": false,
+    "mayPublishBrand": false,
+    "legalInsurerEvidenceOnAgency": false,
+    "complaintPublishExample": {
+      "ok": false,
+      "reason": "regulatory_evidence_publication_disabled"
+    }
+  }
+}

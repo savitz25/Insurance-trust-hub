@@ -1,0 +1,737 @@
+{
+  "task": "INS-NAT-FINAL-005",
+  "execute": false,
+  "at": "2026-08-28T12:59:37.496Z",
+  "preflight": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "legalInsurer": 6185,
+    "insuranceGroup": 720,
+    "consumerBrand": 14,
+    "credentials": 1531158,
+    "providers": 170499,
+    "regulatoryEvidence": 5966,
+    "confirmedEvidence": 5713,
+    "unresolvedEvidence": 253,
+    "appointerResolvesTo": 1510,
+    "bridges": 0
+  },
+  "schema": {
+    "evidenceFamilyColumns": false,
+    "migration": "supabase/migrations/20260827180000_regulatory_evidence_foundation.sql",
+    "backfill": {
+      "updated": 0,
+      "skipped": 0,
+      "schemaReady": false
+    },
+    "sqlEditorRequired": true
+  },
+  "census": {
+    "publicProviders": 170499,
+    "providersWithNpn": 58064,
+    "graphAgencies": 82071,
+    "graphAgenciesWithNpn": 82071,
+    "exactNpnMatches": 52771,
+    "confirmed1to1": 42871,
+    "reviewRequired": 9900,
+    "unresolved": 117728,
+    "unmatchedProviders": 117728,
+    "unmatchedGraphAgencies": 54563
+  },
+  "readiness": {
+    "READY_FOR_PUBLIC_PROFILE": 82071,
+    "INTERNAL_ONLY": 0,
+    "REVIEW_REQUIRED": 0,
+    "NOT_READY": 0,
+    "publicGraphAgenciesPublished": 0,
+    "legalInsurerPages": "INTERNAL_ONLY"
+  },
+  "predictedBridges": 42871,
+  "writes": {
+    "inserted": 0,
+    "skipped": 0
+  },
+  "publicationRegression": {
+    "providersBefore": 170499,
+    "providersAfter": 170499,
+    "indexableProvidersUnchanged": true,
+    "graphAgenciesBefore": 82071,
+    "graphAgenciesAfter": 82071,
+    "publicGraphAgenciesBefore": 0,
+    "publicGraphAgenciesAfter": 0,
+    "sitemapChanges": false,
+    "robotsChanges": false,
+    "newRoutes": false,
+    "publicPeople": 0,
+    "publicLegalInsurers": 0,
+    "publicGroups": 0,
+    "publicBrands": 0
+  },
+  "sampleReport": {
+    "version": "insurance-agency-trust-report-v1",
+    "regulatoryEvidence": [],
+    "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency.",
+    "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+    "footprintCopy": "Licensed in 2 jurisdictions in the sources currently included.",
+    "limitations": [
+      "Official records can change. Re-check licenses on the state regulator site.",
+      "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+      "Research currently includes the official sources listed below as of the source date on each record.",
+      "CMS Marketplace registration is not a state license.",
+      "Lines of authority are source-reported terminology, not product expertise.",
+      "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+      "Legal-insurer complaint statistics are not inherited by agency profiles."
+    ],
+    "qaReports": [
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "c26584de-9726-4a1c-8324-b26a4651cf17",
+          "kind": "agency",
+          "npn": "20282033",
+          "legalName": "SEF SOLUTIONS LLC",
+          "displayName": "SEF SOLUTIONS LLC",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "2818612",
+            "licenseClass": "General Lines Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Life, Accident, Health & HMO",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      },
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "9d85298c-bb30-41b4-acc7-f421373381ff",
+          "kind": "agency",
+          "npn": "4636385",
+          "legalName": "THOMAS BETTI & ASSOCIATES INC,",
+          "displayName": "THOMAS BETTI & ASSOCIATES INC,",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "FL",
+            "licenseNumber": "L112095",
+            "licenseClass": "AGENCY LICENSE",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "florida_dfs",
+            "sourceObservedAt": null
+          },
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "1805430",
+            "licenseClass": "Life Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Life Agent/Agency",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [
+          {
+            "kind": "email",
+            "value": "thomasbetti@allstate.com",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          },
+          {
+            "kind": "phone",
+            "value": "+19077466970",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          }
+        ],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "FL",
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 2 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "florida_dfs",
+            "asOf": null
+          },
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      },
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "ff4eaf90-be35-46b0-a6bd-bbba648120cf",
+          "kind": "agency",
+          "npn": "17973994",
+          "legalName": "J. M. JACOBSON INSURANCE AGENCY, INC.",
+          "displayName": "J. M. JACOBSON INSURANCE AGENCY, INC.",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "2818973",
+            "licenseClass": "General Lines Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Property and Casualty",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      },
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "6321aec8-b1b8-4566-9ef7-7fc022f64151",
+          "kind": "agency",
+          "npn": "19816787",
+          "legalName": "JIM INSUR LLC",
+          "displayName": "JIM INSUR LLC",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "2819349",
+            "licenseClass": "General Lines Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Life, Accident, Health & HMO",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      },
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "1eb0ec7e-ff1d-4538-b2f3-6f92b13022ff",
+          "kind": "agency",
+          "npn": "18099923",
+          "legalName": "VAUGHN FINANCIAL & INSURANCE SERVICES LLC,",
+          "displayName": "VAUGHN FINANCIAL & INSURANCE SERVICES LLC,",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "FL",
+            "licenseNumber": "L136356",
+            "licenseClass": "AGENCY LICENSE",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "florida_dfs",
+            "sourceObservedAt": null
+          },
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "2822959",
+            "licenseClass": "General Lines Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Life, Accident, Health & HMO",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          },
+          {
+            "officialText": "Property and Casualty",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [
+          {
+            "kind": "email",
+            "value": "tom@vginsure.com",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          },
+          {
+            "kind": "phone",
+            "value": "+17602772575",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          }
+        ],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "FL",
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 2 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "florida_dfs",
+            "asOf": null
+          },
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      },
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "a675bb80-319f-4025-a517-90c8eaa3a7c8",
+          "kind": "agency",
+          "npn": "19195637",
+          "legalName": "HUMANITAS LLC",
+          "displayName": "HUMANITAS LLC",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "2819915",
+            "licenseClass": "Life Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Life Agent/Agency",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 1 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      },
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "8cfb440e-ae2a-4a62-b9d1-918a5d128bf5",
+          "kind": "agency",
+          "npn": "18941657",
+          "legalName": "BIRCH BENEFITS, LLC",
+          "displayName": "BIRCH BENEFITS, LLC",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "FL",
+            "licenseNumber": "L106352",
+            "licenseClass": "AGENCY LICENSE",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "florida_dfs",
+            "sourceObservedAt": null
+          },
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "2819997",
+            "licenseClass": "General Lines Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          },
+          {
+            "jurisdiction": "MA",
+            "licenseNumber": "3001839886",
+            "licenseClass": "Insurance Producer",
+            "regulatoryStatus": "active",
+            "issueDate": "2022-03-17",
+            "expirationDate": "2027-03-17",
+            "sourceDataset": "massachusetts_doi_regulatory",
+            "sourceObservedAt": "2026-08-27T00:00:00+00:00"
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Life, Accident, Health & HMO",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          },
+          {
+            "officialText": "Accident & Health or Sickness",
+            "officialCode": null,
+            "sourceDataset": "massachusetts_doi_regulatory"
+          },
+          {
+            "officialText": "Life",
+            "officialCode": null,
+            "sourceDataset": "massachusetts_doi_regulatory"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [
+          {
+            "kind": "email",
+            "value": "pkain@birchbenefits.com",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          },
+          {
+            "kind": "phone",
+            "value": "+16102137030",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          }
+        ],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "FL",
+          "MA",
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 3 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "florida_dfs",
+            "asOf": null
+          },
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          },
+          {
+            "authority": "State insurance regulator",
+            "dataset": "massachusetts_doi_regulatory",
+            "asOf": "2026-08-27T00:00:00+00:00"
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      },
+      {
+        "version": "insurance-agency-trust-report-v1",
+        "entity": {
+          "id": "c310537e-5722-49eb-90eb-c0cc52f81940",
+          "kind": "agency",
+          "npn": "1040655",
+          "legalName": "NATIONAL MARINE UNDERWRITERS, INC.",
+          "displayName": "NATIONAL MARINE UNDERWRITERS, INC.",
+          "identityConfidence": "CONFIRMED"
+        },
+        "credentials": [
+          {
+            "jurisdiction": "FL",
+            "licenseNumber": "L026039",
+            "licenseClass": "AGENCY LICENSE",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "florida_dfs",
+            "sourceObservedAt": null
+          },
+          {
+            "jurisdiction": "TX",
+            "licenseNumber": "14199",
+            "licenseClass": "General Lines Agency",
+            "regulatoryStatus": "unknown",
+            "issueDate": null,
+            "expirationDate": null,
+            "sourceDataset": "texas_tdi",
+            "sourceObservedAt": null
+          },
+          {
+            "jurisdiction": "MA",
+            "licenseNumber": "1040655",
+            "licenseClass": "Insurance Producer",
+            "regulatoryStatus": "active",
+            "issueDate": "2003-01-09",
+            "expirationDate": "2027-01-09",
+            "sourceDataset": "massachusetts_doi_regulatory",
+            "sourceObservedAt": "2026-08-27T00:00:00+00:00"
+          }
+        ],
+        "loas": [
+          {
+            "officialText": "Property and Casualty",
+            "officialCode": null,
+            "sourceDataset": "texas_tdi"
+          },
+          {
+            "officialText": "Casualty",
+            "officialCode": null,
+            "sourceDataset": "massachusetts_doi_regulatory"
+          },
+          {
+            "officialText": "Personal Lines",
+            "officialCode": null,
+            "sourceDataset": "massachusetts_doi_regulatory"
+          },
+          {
+            "officialText": "Property",
+            "officialCode": null,
+            "sourceDataset": "massachusetts_doi_regulatory"
+          }
+        ],
+        "appointments": [],
+        "appointmentCoverageNote": "Appointment coverage in currently included sources is incomplete. Missing appointment rows are not evidence of zero appointments.",
+        "cms": [],
+        "contacts": [
+          {
+            "kind": "email",
+            "value": "dxwalsh@intactinsurance.com",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          },
+          {
+            "kind": "phone",
+            "value": "+18002628467",
+            "sourceDataset": "florida_dfs",
+            "publicEligible": true
+          }
+        ],
+        "regulatoryEvidence": [],
+        "regulatoryNote": "Legal-insurer complaint statistics are not shown on agency Trust Reports. Agency regulatory evidence appears only when the respondent is the agency. Complaint Data is not a final order or enforcement finding.",
+        "jurisdictions": [
+          "FL",
+          "MA",
+          "TX"
+        ],
+        "footprintCopy": "Licensed in 3 jurisdictions in the sources currently included.",
+        "sources": [
+          {
+            "authority": "State insurance regulator",
+            "dataset": "florida_dfs",
+            "asOf": null
+          },
+          {
+            "authority": "State insurance regulator",
+            "dataset": "texas_tdi",
+            "asOf": null
+          },
+          {
+            "authority": "State insurance regulator",
+            "dataset": "massachusetts_doi_regulatory",
+            "asOf": "2026-08-27T00:00:00+00:00"
+          }
+        ],
+        "limitations": [
+          "Official records can change. Re-check licenses on the state regulator site.",
+          "Source coverage varies by jurisdiction. Missing data is not evidence of absence.",
+          "Research currently includes the official sources listed below as of the source date on each record.",
+          "CMS Marketplace registration is not a state license.",
+          "Lines of authority are source-reported terminology, not product expertise.",
+          "Complaint data does not by itself establish a regulatory violation or enforcement finding.",
+          "Legal-insurer complaint statistics are not inherited by agency profiles."
+        ],
+        "readiness": "READY_FOR_PUBLIC_PROFILE"
+      }
+    ],
+    "gates": {
+      "PUBLIC_PERSON_PROFILES_ENABLED": false,
+      "PUBLIC_REGULATORY_EVIDENCE_ENABLED": false,
+      "LEGAL_INSURER_DISPLAY_DECISION": "INTERNAL_ONLY",
+      "mayPublishPerson": false,
+      "mayPublishLegalInsurer": false,
+      "mayPublishGroup": false,
+      "mayPublishBrand": false,
+      "legalInsurerEvidenceOnAgency": false,
+      "complaintPublishExample": {
+        "ok": false,
+        "reason": "regulatory_evidence_publication_disabled"
+      }
+    }
+  },
+  "errors": []
+}

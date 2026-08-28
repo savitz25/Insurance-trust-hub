@@ -43,6 +43,8 @@ import { toPublicSecondarySignals } from '@/lib/enrichment/public-secondary';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
 import { ProviderSecondarySignals } from '@/components/provider-secondary-signals';
 import { ProviderAppointmentSnapshotSection } from '@/components/provider-appointment-snapshot';
+import { AgencyTrustReportSection } from '@/components/agency-trust-report';
+import { loadAgencyTrustReportForProvider } from '@/lib/national/load-agency-trust-report';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -220,6 +222,13 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
       licenseNumber: provider.license_number,
       licenseState: provider.license_state || provider.state,
     };
+  }
+
+  let agencyTrustReport = null;
+  try {
+    agencyTrustReport = await loadAgencyTrustReportForProvider(provider.id);
+  } catch {
+    agencyTrustReport = null;
   }
 
   const trustBreakdown = computeProviderTrustScoreBreakdown({
@@ -534,6 +543,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                 </CardContent>
               </Card>
             </section>
+
+            {agencyTrustReport ? (
+              <AgencyTrustReportSection report={agencyTrustReport} />
+            ) : null}
 
             {provider.appointment_snapshot &&
             provider.appointment_snapshot.totalCount > 0 ? (

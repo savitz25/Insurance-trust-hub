@@ -1,6 +1,40 @@
+# INS-NAT-FINAL-005 — SQL Editor copy (apply once)
+
+## File
+
+`supabase/migrations/20260827180000_regulatory_evidence_foundation.sql`
+
+## Gate
+
+INS-NAT-FINAL-005 is the controlled apply + backfill gate. Apply **once**, then:
+
+```text
+npx tsx scripts/national/run-ins-nat-final-005.ts --execute
+```
+
+After apply, if PostgREST still reports `PGRST204` for `evidence_family`:
+
+```sql
+NOTIFY pgrst, 'reload schema';
+```
+
+## Additive confirmation
+
+- `ALTER TABLE regulatory_evidence ADD COLUMN IF NOT EXISTS …` only
+- unique index on `(source_dataset, record_identifier)`
+- RLS remains enabled
+- **no** `ALTER TABLE providers`
+- **no** `DROP`
+- **no** provider / indexability trigger
+- **no** sitemap
+- **no** public rendering trigger (`publication_readiness` defaults to `NOT_READY`; backfill sets TDI rows to `INTERNAL_ONLY`)
+
+## Paste
+
+```sql
 -- INS-NAT-FINAL-004 — Additive expansion of regulatory_evidence.
--- INS-NAT-FINAL-005 is the controlled SQL Editor apply + backfill gate.
 -- Does NOT alter providers. Does NOT drop columns. Does NOT publish evidence.
+-- Apply in SQL Editor under a later gate if ingest needs first-class columns.
 -- Current ingest stores taxonomy in raw JSONB on the existing stub table.
 --
 -- Fingerprint: ins-nat-final-004-v1
@@ -34,3 +68,16 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_regulatory_evidence_source_record
   ON regulatory_evidence (source_dataset, record_identifier);
 
 ALTER TABLE regulatory_evidence ENABLE ROW LEVEL SECURITY;
+
+NOTIFY pgrst, 'reload schema';
+```
+
+## Expected impact
+
+| Object | Change |
+|--------|--------|
+| `public.providers` | none (170,499) |
+| `regulatory_evidence` rows | 5,966 unchanged until `--execute` backfill |
+| person / agency identity | none |
+| Florida rollout | none |
+| Public rendering | none |
