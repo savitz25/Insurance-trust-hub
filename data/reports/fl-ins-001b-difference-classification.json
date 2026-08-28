@@ -1,0 +1,34 @@
+{
+  "task": "FL-INS-001B",
+  "at": "2026-08-28T16:11:59.806Z",
+  "startingDifference1691": 1691,
+  "explained": true,
+  "classification": {
+    "LEGITIMATE_PREEXISTING": 987,
+    "LEGITIMATE_OTHER_SOURCE": 0,
+    "LEGITIMATE_OTHER_JURISDICTION": 0,
+    "FL_CONFIRMED_BUT_OMITTED_FROM_PRIOR_BASELINE": 1691,
+    "DUPLICATE": 0,
+    "STALE_EXTRA": 2,
+    "WRONG_TARGET": 0,
+    "UNKNOWN": 0,
+    "note": "Live 2680 = 989 INS-NAT-007 (2026-08-26 UUID grain; 987 still in current All Active + 2 retained historical) + 1691 FL-INS-001 (2026-08-28). The original 1,691 “difference vs 3,552” is the parallel FL-INS-001 CONFIRMED insert set. The 2,563 composite-grain rows from run-fl-ins-001.ts were deleted as conflicting grain of the same DFS Business source and are not live. KEEP all 2,680."
+  },
+  "liveByTask": {
+    "FL-INS-001": 1691,
+    "INS-NAT-007": 989
+  },
+  "preexisting989": {
+    "count": 989,
+    "represented": "Entire national appointed_by table after INS-NAT-007 (2026-08-26). Verified-core DFS business appointments only. 100% Florida. Not a Florida subset undercount.",
+    "stillInCurrentFile": 987,
+    "retainedHistorical": 2
+  },
+  "flIns001Inserts": {
+    "reportedByTsRunnerThenDeletedAsConflictingGrain": 2563,
+    "survivingParallelWriterInserts": 1691,
+    "correctedValue": 1691
+  },
+  "transient5243": "989 + 2563 + 1691 while two writers overlapped; 2563 later deleted",
+  "why3552WasWrong": "3,552 assumed the 2,563 composite-grain inserts would remain and ignored the parallel 1,691-row writer. After conflicting-grain cleanup, production is 989 + 1,691 = 2,680."
+}

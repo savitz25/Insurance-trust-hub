@@ -1,0 +1,15 @@
+{
+  "status": "COMPLETE — FLORIDA AGENCY APPOINTMENT COUNT RECONCILED",
+  "live": 2680,
+  "florida": 2680,
+  "nonFlorida": 0,
+  "keep": 2680,
+  "dataChanges": {
+    "inserted": 0,
+    "updated": 0,
+    "deleted": 0
+  },
+  "semanticSafety": "PASS",
+  "nextTask": "FL-INS-002 — OIR COMPANY MASTER / NAIC CONFIRMED CROSSWALK",
+  "startedNext": false
+}

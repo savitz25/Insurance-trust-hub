@@ -1,0 +1,90 @@
+{
+  "task": "FL-INS-001B",
+  "at": "2026-08-28T16:11:59.806Z",
+  "live": 2680,
+  "florida_dfs_appointments": 2680,
+  "fl_appointer_targets": 2680,
+  "non_florida": 0,
+  "byDataset": {
+    "florida_dfs_appointments": 2680
+  },
+  "byTask": {
+    "FL-INS-001": 1691,
+    "INS-NAT-007": 989
+  },
+  "byFromKind": {
+    "agency": 2680
+  },
+  "byToKind": {
+    "carrier": 2680
+  },
+  "byToNs": {
+    "fl-dfs": 2680
+  },
+  "byDay": {
+    "2026-08-28": 1691,
+    "2026-08-26": 989
+  },
+  "byGrain": {
+    "fl_dfs_biz_prefix": 1683,
+    "uuid_appointment_id": 997
+  },
+  "byConfidence": {
+    "CONFIRMED": 2680
+  },
+  "byMatchMethod": {
+    "exact_npn": 2680
+  },
+  "byJurisdiction": {
+    "FL": 2680
+  },
+  "uuidRecord": 997,
+  "pipeRecord": 0,
+  "distinctAgencyAppointerPairs": 2117,
+  "pairsWithMultipleRows": 81,
+  "math": {
+    "prior989": 989,
+    "flIns001InsertsReportedByTsRunner": 2563,
+    "expected3552Was": 3552,
+    "parallelFlIns001Inserts": 1691,
+    "transient5243": 5243,
+    "conflictingGrainDeleted": 2563,
+    "live": 2680,
+    "check989plus1691": 2680,
+    "differenceVs3552IfLiveWere5243": 1691,
+    "differenceVs3552Now": -872
+  },
+  "classification": {
+    "LEGITIMATE_PREEXISTING": 987,
+    "LEGITIMATE_OTHER_SOURCE": 0,
+    "LEGITIMATE_OTHER_JURISDICTION": 0,
+    "FL_CONFIRMED_BUT_OMITTED_FROM_PRIOR_BASELINE": 1691,
+    "DUPLICATE": 0,
+    "STALE_EXTRA": 2,
+    "WRONG_TARGET": 0,
+    "UNKNOWN": 0,
+    "note": "Live 2680 = 989 INS-NAT-007 (2026-08-26 UUID grain; 987 still in current All Active + 2 retained historical) + 1691 FL-INS-001 (2026-08-28). The original 1,691 “difference vs 3,552” is the parallel FL-INS-001 CONFIRMED insert set. The 2,563 composite-grain rows from run-fl-ins-001.ts were deleted as conflicting grain of the same DFS Business source and are not live. KEEP all 2,680."
+  },
+  "publication": {
+    "providers": 170499,
+    "agencies": 82071,
+    "persons": 1029860,
+    "bridges": 37515,
+    "publicGraphAgencies": 0,
+    "publicPersons": 0,
+    "publicLegalInsurers": 0,
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishPerson": false,
+    "mayPublishLegalInsurer": false,
+    "sitemapSha256": "c3339e2e38eeabc81afa57c1b41f8a53839f8f21c309b2e10f9e9f2896f9db99",
+    "robotsSha256": "9dc801dcd8e1e39d67848955c92a1197e6865beea3ca668f75d232304ff49c84",
+    "sitemapHasFloridaRoute": false,
+    "sitemapChanges": false,
+    "robotsChanges": false
+  },
+  "dataChanges": {
+    "inserted": 0,
+    "updated": 0,
+    "deleted": 0
+  }
+}

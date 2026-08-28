@@ -1,0 +1,31 @@
+{
+  "task": "FL-INS-001B",
+  "at": "2026-08-28T16:11:59.806Z",
+  "expected": {
+    "providers": 170499,
+    "agencies": 82071,
+    "persons": 1029860,
+    "bridges": 37515,
+    "publicGraphAgencies": 0,
+    "publicPersons": 0,
+    "publicLegalInsurers": 0
+  },
+  "live": {
+    "providers": 170499,
+    "agencies": 82071,
+    "persons": 1029860,
+    "bridges": 37515,
+    "publicGraphAgencies": 0,
+    "publicPersons": 0,
+    "publicLegalInsurers": 0,
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishPerson": false,
+    "mayPublishLegalInsurer": false,
+    "sitemapSha256": "c3339e2e38eeabc81afa57c1b41f8a53839f8f21c309b2e10f9e9f2896f9db99",
+    "robotsSha256": "9dc801dcd8e1e39d67848955c92a1197e6865beea3ca668f75d232304ff49c84",
+    "sitemapHasFloridaRoute": false,
+    "sitemapChanges": false,
+    "robotsChanges": false
+  },
+  "pass": true
+}

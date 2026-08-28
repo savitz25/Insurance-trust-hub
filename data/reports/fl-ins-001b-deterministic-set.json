@@ -1,0 +1,60 @@
+{
+  "task": "FL-INS-001B",
+  "at": "2026-08-28T16:11:59.806Z",
+  "sourceRows": 59405,
+  "uniqueGrains": 55829,
+  "grain": "license_number + appointing_entity_number + appointment_type (TYCL Desc)",
+  "administrativeDupKeys": 26,
+  "administrativeExtraRowsCollapsed": 3576,
+  "skipNoNpn": 25,
+  "skipNoAgency": 53126,
+  "skipReview": 0,
+  "skipNoAppointerNum": 0,
+  "expectedConfirmed": 2678,
+  "expectedWithExistingAppointerEntity": 2678,
+  "skipNoAppointerEntity": 0,
+  "PRODUCTION_CORRECT": 2678,
+  "MISSING": 0,
+  "STALE_EXTRA": 2,
+  "STALE_EXTRA_RETAINED": 2,
+  "WRONG_TARGET": 0,
+  "DUPLICATE": 0,
+  "officialObservationDuplicates": 0,
+  "matchMethodUsed": {
+    "obs_license_number_type": 2678
+  },
+  "missingSamples": [],
+  "staleExtraIds": [
+    {
+      "id": "31c6fbf8-3b84-4eb6-9baa-c750fc77c473",
+      "from_entity_id": "d4dfa7ea-7c0f-4382-abb5-46493eb5e39e",
+      "to_entity_id": "be933e54-806e-4373-9d4d-5ff8295b868a",
+      "source_record_id": "d4c23301-7129-4c93-a1a7-9bfa5928810a",
+      "task": "INS-NAT-007",
+      "created_at": "2026-08-26T18:42:53.658358+00:00",
+      "license": "L122529",
+      "number": "390998",
+      "type": "REINSURANCE INTERMEDIARY BROKER",
+      "status": "HISTORICAL",
+      "retain": true,
+      "reason": "Absent from 2026-08-28 All Active Business file; absence is not a proven termination. INS-NAT-007 historical evidence."
+    },
+    {
+      "id": "ea5441f1-97a6-4137-a2bd-74e0ae37e656",
+      "from_entity_id": "d01506dc-23e0-4deb-8f18-f0bfd27df865",
+      "to_entity_id": "d7324865-d949-4da9-820a-d4726803d829",
+      "source_record_id": "0bca1467-e529-406f-803e-1d0a4d61cdda",
+      "task": "INS-NAT-007",
+      "created_at": "2026-08-26T18:42:53.658358+00:00",
+      "license": "L129553",
+      "number": "420130",
+      "type": "REINSURANCE INTERMEDIARY BROKER",
+      "status": "CURRENT",
+      "retain": true,
+      "reason": "Absent from 2026-08-28 All Active Business file; absence is not a proven termination. INS-NAT-007 historical evidence."
+    }
+  ],
+  "wrongTargetSamples": [],
+  "zeroDelta": true,
+  "staleRetainedExplicitly": true
+}

@@ -1,0 +1,18 @@
+{
+  "task": "FL-INS-001B",
+  "at": "2026-08-28T16:11:59.806Z",
+  "graphUniqueness": "from_entity_id + to_entity_id + relationship_type + source_dataset + source_record_id",
+  "officialObservationGrain": "license_number + appointing_entity_number + appointment_type (TYCL Desc)",
+  "notCollapsedTo": "agency_id + appointer_id only",
+  "distinctAgencyAppointerPairs": 2117,
+  "pairsWithMultipleRows": 81,
+  "keepMultiRowPairs": true,
+  "reason": "Multiple rows for the same agency+appointer are distinct official observations (appointment class / license / source record). Do not collapse.",
+  "uuidRecord": 997,
+  "pipeRecord": 0,
+  "byGrain": {
+    "fl_dfs_biz_prefix": 1683,
+    "uuid_appointment_id": 997
+  },
+  "liveEqualsPreexistingPlusFlIns001": true
+}
