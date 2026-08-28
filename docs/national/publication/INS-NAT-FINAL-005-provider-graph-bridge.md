@@ -30,14 +30,21 @@ Name, address, phone, email, website, and brand are never bridge keys.
 
 ## Agency publication readiness
 
-Classified for all graph agencies. **Not an index trigger.**
+Classified for all graph agencies. **Not an index trigger.**  
+INS-NAT-FINAL-005B: `hasCredential` means at least one `license_credentials` row for the agency. NPN alone is insufficient.
 
-- `READY_FOR_PUBLIC_PROFILE` — CONFIRMED identity, unique NPN, official credential identity
-- `INTERNAL_ONLY` — identity not CONFIRMED
+- `READY_FOR_PUBLIC_PROFILE` — `entity_kind=agency`, canonical NPN, identity CONFIRMED, ≥1 official credential, no kind collision
+- `INTERNAL_ONLY` — NPN + credential but identity not CONFIRMED
 - `REVIEW_REQUIRED` — collision or review identity
-- `NOT_READY` — missing NPN / credential
+- `NOT_READY` — missing NPN or missing official credential
 
-Public graph agencies published this task: **0**. Existing provider pages may load the Trust Report only through a CONFIRMED bridge.
+Appointments, CMS, contacts, and multi-state footprint are optional enrichment, not readiness gates.
+
+Public graph agencies published: **0**. Existing provider pages may load the Trust Report only through a CONFIRMED exact-NPN bridge that is in the deterministic expected set. Stale extras are deleted in FINAL-005B.
+
+## Bridge reconciliation (FINAL-005B)
+
+Production must equal the deterministic CONFIRMED 1:1 set. Stale extras from unordered pagination are deleted by id (never truncate). Wrong targets are updated. Missing CONFIRMED pairs are inserted. Second reconciliation must be zero-delta.
 
 ## Routes
 

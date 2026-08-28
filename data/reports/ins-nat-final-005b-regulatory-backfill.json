@@ -1,0 +1,39 @@
+{
+  "task": "INS-NAT-FINAL-005B",
+  "schemaVisible": true,
+  "publicationEnabled": false,
+  "complaintPublish": {
+    "ok": false,
+    "reason": "regulatory_evidence_publication_disabled"
+  },
+  "firstExecute": {
+    "at": "2026-08-28T14:00:47.377Z",
+    "updated": 5966,
+    "skipped": 0,
+    "idempotencyPass": {
+      "updated": 0,
+      "skipped": 5966
+    }
+  },
+  "secondExecute": {
+    "at": "2026-08-28T14:14:24.558Z",
+    "updated": 0,
+    "skipped": 5966,
+    "idempotencyPass": {
+      "updated": 0,
+      "skipped": 5966
+    }
+  },
+  "after": {
+    "total": 5966,
+    "complaint": 5966,
+    "subtype": 5966,
+    "internalOnly": 5966,
+    "confirmed": 5713,
+    "unresolved": 253,
+    "review": 0,
+    "isFinalTrue": 0,
+    "attachedUnresolved": 0,
+    "unattachedConfirmed": 0
+  }
+}

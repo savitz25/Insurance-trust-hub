@@ -1,0 +1,40 @@
+{
+  "count": 1092,
+  "deleted": 1092,
+  "reason": "not_in_deterministic_confirmed_set",
+  "capturedAt": "2026-08-28T14:00:45.179Z",
+  "productionBefore": 38607,
+  "expected": 37515,
+  "existingCorrectAtCapture": 37515,
+  "missing": 0,
+  "wrongTarget": 0,
+  "duplicates": 0,
+  "matchMethod": "exact_npn",
+  "confidence": "CONFIRMED",
+  "source": "INS-NAT-FINAL-005 unordered first insert leftovers",
+  "note": "All 1,092 stale extras were deleted in the first 005B execute (writes.deleted=1092). Row-level provider_id/entity_id listing was written then overwritten by the zero-delta second execute (staleExtra=0). Production no longer contains these rows. Summary below is the immutable first-execute reconciliation.",
+  "rows": [],
+  "firstExecuteProof": {
+    "before": {
+      "production": 38607,
+      "expected": 37515,
+      "existingCorrect": 37515,
+      "missing": 0,
+      "staleExtra": 1092,
+      "wrongTarget": 0,
+      "duplicate": 0
+    },
+    "writes": {
+      "inserted": 0,
+      "updated": 0,
+      "deleted": 1092
+    },
+    "after": {
+      "production": 37515,
+      "staleExtra": 0,
+      "missing": 0,
+      "wrongTarget": 0,
+      "duplicate": 0
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "task": "INS-NAT-FINAL-005B",
+  "at": "2026-08-28T14:14:22.394Z",
+  "previousLogic": "hasCredential = Boolean(agency.npn)",
+  "correctedLogic": "hasCredential = agency has at least one license_credentials row; NPN alone is insufficient",
+  "criteria": {
+    "READY_FOR_PUBLIC_PROFILE": "entity_kind=agency, canonical NPN, identity CONFIRMED, ≥1 license_credentials, no kind collision",
+    "INTERNAL_ONLY": "NPN + credential but identity not CONFIRMED",
+    "REVIEW_REQUIRED": "kind/identity collision or identity REVIEW_REQUIRED",
+    "NOT_READY": "missing NPN or missing official credential"
+  },
+  "agencies": 82071,
+  "agenciesWithNpn": 82071,
+  "agenciesWithCredential": 82071,
+  "READY_FOR_PUBLIC_PROFILE": 82071,
+  "INTERNAL_ONLY": 0,
+  "REVIEW_REQUIRED": 0,
+  "NOT_READY": 0,
+  "publicGraphAgenciesPublished": 0
+}
