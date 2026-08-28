@@ -116,7 +116,7 @@ assert(!/Inserted \*\*2,563\*\*/.test(apt), 'contract not 2563-as-final');
 assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'people off');
 assert(mayPublishEntityKind('person') === false, 'person gate');
 assert(mayPublishEntityKind('legal_insurer') === false, 'legal gate');
-assert(!/\/florida['"`]/.test(sitemap), 'no sitemap florida');
+assert((sitemap.match(/['"`]\/florida['"`]/g) || []).length <= 1, '007 /florida only');
 
 const pub = load('fl-ins-001c-publication-regression.json');
 const live = pub.live as Record<string, unknown>;

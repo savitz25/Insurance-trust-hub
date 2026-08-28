@@ -1,0 +1,9 @@
+{
+  "task": "FL-INS-007",
+  "tests": 25,
+  "pass": true,
+  "command": "tsx scripts/check-fl-ins-007.ts",
+  "typecheck": true,
+  "check_fl_ins_006": true,
+  "check_fl_ins_000_sitemap_allowance": true
+}

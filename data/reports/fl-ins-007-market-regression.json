@@ -1,0 +1,15 @@
+{
+  "mir_insurers": 162,
+  "pif_personal": 7606205,
+  "pif_commercial": 29073,
+  "pif_total_displayed": 7635278,
+  "pif_stored_rank_unused": 13104,
+  "rank_rendered_as_pif": false,
+  "premium_display": "22,818,050,792.33",
+  "fslso_eligible": 275,
+  "fslso_attached": 227,
+  "fslso_unresolved": 48,
+  "eligibility_is_admitted": false,
+  "citizens_rendered_count": null,
+  "pass": true
+}

@@ -73,7 +73,7 @@ assert(flDfsNumberIsNaic() === false, 'T15 appointer not insurer');
 assert(classifyFlDfsTycl('AGENCY LICENSE').confidence === 'CONFIRMED', 'identity');
 assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'T18 people');
 assert(mayPublishEntityKind('person') === false, 'T18 person gate');
-assert(!/\/florida['"`]/.test(sitemap), 'T18 sitemap');
+assert((sitemap.match(/['"`]\/florida['"`]/g) || []).length <= 1, 'T18 /florida only');
 assert(src.includes('--execute'), 'execute gate');
 assert(!/\.from\(\s*['"]providers['"]\s*\)\.(insert|update|upsert|delete)/i.test(src), 'no provider writes');
 assert(

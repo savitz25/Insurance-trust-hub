@@ -45,6 +45,8 @@ import { ProviderSecondarySignals } from '@/components/provider-secondary-signal
 import { ProviderAppointmentSnapshotSection } from '@/components/provider-appointment-snapshot';
 import { AgencyTrustReportSection } from '@/components/agency-trust-report';
 import { loadAgencyTrustReportForProvider } from '@/lib/national/load-agency-trust-report';
+import { classifyFloridaProfileModules } from '@/lib/national/fl-profile-modules';
+import { FloridaProfileModulesSection } from '@/components/florida/florida-profile-modules';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -547,6 +549,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
             {agencyTrustReport ? (
               <AgencyTrustReportSection report={agencyTrustReport} />
             ) : null}
+
+            <FloridaProfileModulesSection
+              modules={classifyFloridaProfileModules(agencyTrustReport)}
+            />
 
             {provider.appointment_snapshot &&
             provider.appointment_snapshot.totalCount > 0 ? (

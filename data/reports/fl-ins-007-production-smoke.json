@@ -1,0 +1,7 @@
+{
+  "host": "https://www.insurancetrusthub.com",
+  "checkedAt": null,
+  "routes": {},
+  "note": "Filled after deploy to origin/main.",
+  "pass": false
+}

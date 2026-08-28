@@ -1,7 +1,7 @@
 {
   "version": "insurance-fl-state-intel-v1",
   "task": "FL-INS-006",
-  "generatedAt": "2026-08-28T19:48:20.877877+00:00",
+  "generatedAt": "2026-08-28T20:30:20.729969+00:00",
   "asOf": "production-live",
   "sourceClocks": {
     "dfs_agency_credentials": "source_observed_at_absent",

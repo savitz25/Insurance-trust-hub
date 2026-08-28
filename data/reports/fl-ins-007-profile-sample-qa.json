@@ -1,0 +1,36 @@
+{
+  "live_population_expanded": false,
+  "readiness": {
+    "FL_CREDENTIAL_READY": 14834,
+    "FL_APPOINTMENT_READY": 613,
+    "CMS_NOT_READY": 0,
+    "MIR_NOT_ENTITY_COMPATIBLE": 0,
+    "SURPLUS_NOT_ENTITY_COMPATIBLE": 0,
+    "FL_REGULATORY_NOT_DETERMINISTICALLY_LINKED": 0,
+    "NFIP_NOT_DETERMINISTICALLY_LINKED": 0
+  },
+  "fixtures": [
+    {
+      "id": "credential-only",
+      "renders_credential": true,
+      "renders_appointment": false,
+      "unknown_status_shown_as_active": false
+    },
+    {
+      "id": "credential-plus-appointment",
+      "renders_credential": true,
+      "renders_appointment": true,
+      "legal_insurer_named": false
+    },
+    {
+      "id": "no-florida-evidence",
+      "renders_credential": false,
+      "renders_appointment": false,
+      "false_zero": false
+    }
+  ],
+  "cms_leakage": false,
+  "nfip_leakage": false,
+  "regulatory_clean_record_claim": false,
+  "pass": true
+}

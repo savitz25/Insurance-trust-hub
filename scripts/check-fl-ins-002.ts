@@ -84,7 +84,7 @@ assert(FL_DIGIT_COINCIDENCES.length === 17, '17 coincidences');
 assert(!/APPOINTER_RESOLVES_TO/.test(py) || /remains 0/.test(py), 'no appointer write');
 assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'people');
 assert(mayPublishEntityKind('legal_insurer') === false, '16 legal public 0');
-assert(!/\/florida['"`]/.test(sitemap), '20 no sitemap florida');
+assert((sitemap.match(/['"`]\/florida['"`]/g) || []).length <= 1, '20 /florida only');
 assert(py.includes('--execute'), 'execute gate');
 
 const census = load('fl-ins-002-source-census.json');

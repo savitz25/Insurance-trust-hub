@@ -1,0 +1,19 @@
+{
+  "agencies": "56,939",
+  "persons": "691,126",
+  "oir_active": "3,972",
+  "oir_with_naic": "1,965",
+  "mir_insurers": "162",
+  "pif_personal": "7,606,205",
+  "pif_commercial": "29,073",
+  "pif_total": "7,635,278",
+  "premium_total": "22,818,050,792.33",
+  "surplus_eligible": "275",
+  "nfip_cards": "1,474",
+  "liquidations": "12",
+  "market_conduct": "1,007",
+  "financial_exams": "1,060",
+  "orders": "1,386",
+  "rank_field_rendered_as_pif": false,
+  "fingerprint": "8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93"
+}

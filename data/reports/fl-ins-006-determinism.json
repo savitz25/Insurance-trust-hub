@@ -19,48 +19,12 @@
       "readiness_cms": 0,
       "readiness_apt": 613
     },
-    "canonical_fingerprint": {
-      "agencies": 82071,
-      "persons": 1029860,
-      "cred_agency": 59189,
-      "cred_person": 691127,
-      "fl_agency_ids": 56939,
-      "person_ids": 691126,
-      "appointed_by": 2680,
-      "appointed_to": 2962397,
-      "mir_pif": 7635278.0,
-      "mir_premium": 22818050792.33,
-      "mir_exposure": 4265747865189.6,
-      "mir_insurers": 162,
-      "fslso_attached": 227,
-      "readiness_cred": 14834,
-      "readiness_cms": 0,
-      "readiness_apt": 613
-    },
     "sha256": "0dcb19841df1215c76b9fd2fb467995a65e04073c36bbcb837ed6f2964e0d489",
     "db_writes": 0
   },
   "run2": {
-    "generatedAt": "2026-08-28T19:48:20.877877+00:00",
+    "generatedAt": "2026-08-28T20:30:20.729969+00:00",
     "fingerprint": {
-      "agencies": 82071,
-      "persons": 1029860,
-      "cred_agency": 59189,
-      "cred_person": 691127,
-      "fl_agency_ids": 56939,
-      "person_ids": 691126,
-      "appointed_by": 2680,
-      "appointed_to": 2962397,
-      "mir_pif": 7635278.0,
-      "mir_premium": 22818050792.33,
-      "mir_exposure": 4265747865189.6,
-      "mir_insurers": 162,
-      "fslso_attached": 227,
-      "readiness_cred": 14834,
-      "readiness_cms": 0,
-      "readiness_apt": 613
-    },
-    "canonical_fingerprint": {
       "agencies": 82071,
       "persons": 1029860,
       "cred_agency": 59189,
@@ -104,5 +68,5 @@
   "raw_sha_equal": false,
   "db_writes": 0,
   "pass": true,
-  "note": "Run1 stored unrounded IEEE premium; run2 stored round(premium, 2). After rounding MIR dollar fields to 2 decimals, fingerprints match. No DB writes."
+  "note": "Substantive metrics compared after rounding MIR dollar fields to 2 decimals. generatedAt differs by run; clocks and cohort totals must match."
 }

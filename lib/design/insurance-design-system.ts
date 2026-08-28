@@ -355,6 +355,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
     title: 'Verify & trust',
     links: [
       { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
+      { href: '/florida', label: 'Florida insurance research' },
       { href: '/tools/license-verification', label: 'License verification' },
       { href: '/claim-listing', label: 'Request a listing' },
       { href: '/methodology', label: 'Methodology' },

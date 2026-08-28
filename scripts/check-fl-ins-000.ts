@@ -39,7 +39,7 @@ assert(!/\.from\([^)]+\)\.(insert|update|upsert|delete)/i.test(src), 'read-only'
 assert(/No mass publication/i.test(src), 'no mass pub');
 assert(/No Trust Scores/i.test(intel) && /No “best insurer.”/i.test(intel), 'no scores');
 assert(/No route|Design only/i.test(intel), 'no /florida route');
-assert(!/\/florida['"`]/.test(sitemap), 'no sitemap florida');
+assert((sitemap.match(/['"`]\/florida['"`]/g) || []).length <= 1, '007 /florida only');
 assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'people off');
 assert(PUBLIC_REGULATORY_EVIDENCE_ENABLED === false, 'evidence off');
 assert(LEGAL_INSURER_DISPLAY_DECISION === 'INTERNAL_ONLY', 'legal off');

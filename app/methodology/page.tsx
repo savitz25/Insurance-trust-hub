@@ -111,6 +111,12 @@ export default function MethodologyPage() {
         sources, verification, tools vs directory, cadence, and limits. Part of the Ask Trust Hub
         network — common ownership, separated research and listing order, no paid placements.
       </p>
+      <p className="mt-3 text-sm">
+        <Link href="/florida" className="font-medium text-primary hover:underline">
+          Florida insurance research, licensing &amp; market data
+        </Link>
+        <span className="text-muted-foreground"> — DFS, OIR, MIR, and source-clock methodology.</span>
+      </p>
       <div className="mt-4">
         <TrustMark />
       </div>

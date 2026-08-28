@@ -79,7 +79,7 @@ assert(src.includes('APPOINTER_RESOLVES_TO') === false || /not started/i.test(sr
 assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'people off');
 assert(mayPublishEntityKind('person') === false, 'person gate');
 assert(mayPublishEntityKind('legal_insurer') === false, 'legal gate');
-assert(!/\/florida['"`]/.test(sitemap), 'no sitemap florida');
+assert((sitemap.match(/['"`]\/florida['"`]/g) || []).length <= 1, '007 /florida only');
 assert(AGENCY_CARRIER_APPOINTMENT_TYPE === 'appointed_by', 'agency type');
 assert(
   decideAgencyAppointmentJoin({ npn: '1234567', agencyIdsForNpn: ['a'] }).confidence === 'CONFIRMED',

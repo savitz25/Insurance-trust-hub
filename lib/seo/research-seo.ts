@@ -104,6 +104,12 @@ export const COVERAGE_INTELLIGENCE_INDEXATION: IndexationRow[] = [
     rule: 'Same quality gates; prefer /medicare canonical paths',
   },
   {
+    template: 'Florida insurance intelligence',
+    pathPattern: '/florida',
+    index: 'yes',
+    rule: 'FL-INS-007 publication gate — snapshot v1, no rankings, no mass-publish',
+  },
+  {
     template: 'Methodology / About / Privacy / Terms',
     pathPattern: '/methodology, /about, /privacy, /terms',
     index: 'yes',
