@@ -1,7 +1,31 @@
 {
   "host": "https://www.insurancetrusthub.com",
-  "checkedAt": null,
-  "routes": {},
-  "note": "Filled after deploy to origin/main.",
-  "pass": false
+  "checkedAt": "2026-08-28T20:45:00+00:00",
+  "deployment": "f8a8d8527b806f7b8f7e031c336b7fcc6ec2a784",
+  "routes": {
+    "/": 200,
+    "/florida": 200,
+    "/directory": 200,
+    "/providers": 200,
+    "/sitemap.xml": 200,
+    "/robots.txt": 200,
+    "/people": 404,
+    "/legal-insurers": 404,
+    "/providers/007-bail-bonds-b000136": 200,
+    "/providers/24-hour-bail-by-phone-llc-b000452": 200,
+    "/providers/a-s-a-p-bail-bonds-llc-b000642": 200
+  },
+  "florida_body": {
+    "56,939": true,
+    "7,635,278": true,
+    "22,818,050,792.33": true,
+    "13,104_as_pif": false,
+    "Best Florida": false
+  },
+  "sitemap_florida_entries": 1,
+  "sitemap_person_paths": 0,
+  "profile_cms_leakage": false,
+  "profile_clean_record_claim": false,
+  "hydration_errors_observed": false,
+  "pass": true
 }
