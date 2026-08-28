@@ -1,4 +1,6 @@
 {
+  "artifact_status": "INTERMEDIATE_HISTORICAL",
+  "note": "One-time conflicting-grain cleanup. Rerun must scan live rows; expected remaining wrong-grain 0 and expected deletion 0. Final production 2,680.",
   "deleted": 2563,
   "remaining": 2680,
   "schemes": {

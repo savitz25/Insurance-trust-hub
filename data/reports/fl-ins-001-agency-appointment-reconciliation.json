@@ -1,4 +1,7 @@
 {
+  "artifact_status": "SUPERSEDED",
+  "superseded_by": "data/reports/fl-ins-001-final.json",
+  "note": "TypeScript runner snapshot used uncollapsed CSV rows plus license|appointer|tycl|issueDate grain. Canonical EXPECTED CURRENT is 2,678; PRODUCTION is 2,680 (2 retained historical). Do not treat 6,242 or 3,552 as the final total.",
   "sourceRows": 59405,
   "expectedConfirmed": 6242,
   "skipNoNpn": 25,

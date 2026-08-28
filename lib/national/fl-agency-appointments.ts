@@ -111,5 +111,43 @@ export function sourceDedupeKey(input: {
   return `${input.licenseNumber}|${input.appointingEntityNumber}|${input.appointmentType}`;
 }
 
+/** Official graph source_record_id when staging UUID is unavailable. */
+export function flDfsBizSourceRecordId(input: {
+  licenseNumber: string;
+  appointingEntityNumber: string;
+  appointmentType: string;
+}): string {
+  return `fl-dfs-biz:${sourceDedupeKey(input)}`;
+}
+
+/** INS-NAT-007 rows absent from the 2026-08-28 All Active file. Not proven terminations. */
+export const RETAINED_HISTORICAL_APPOINTED_BY_IDS = [
+  '31c6fbf8-3b84-4eb6-9baa-c750fc77c473',
+  'ea5441f1-97a6-4137-a2bd-74e0ae37e656',
+] as const;
+
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export function isUuidSourceRecordId(id: string | null | undefined): boolean {
+  return UUID_RE.test(String(id || ''));
+}
+
+/**
+ * Transient TypeScript writer grain: license|appointer|tycl|issueDate.
+ * Canonical grains are staging UUID or fl-dfs-biz:{license}|{number}|{type}.
+ */
+export function isConflictingPipeGrain(sourceRecordId: string | null | undefined): boolean {
+  const id = String(sourceRecordId || '');
+  if (!id) return false;
+  if (id.startsWith('fl-dfs-biz:')) return false;
+  if (isUuidSourceRecordId(id)) return false;
+  return id.split('|').length >= 4;
+}
+
+export function mayDeleteAppointedById(id: string): boolean {
+  return !(RETAINED_HISTORICAL_APPOINTED_BY_IDS as readonly string[]).includes(id);
+}
+
 export { appointmentCurrency };
 export type { AppointmentCurrency };

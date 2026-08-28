@@ -13,6 +13,17 @@ import {
 import { AGENCY_CARRIER_APPOINTMENT_TYPE, PERSON_CARRIER_APPOINTMENT_TYPE } from '../lib/national/fl-individual-appointments';
 import { flDfsNumberIsNaic } from '../lib/national/appointer-crosswalk';
 import { normalizeNpn } from '../lib/national/npn';
+import {
+  decideAgencyAppointmentJoin,
+  sourceDedupeKey,
+  isConflictingPipeGrain,
+  agencyAppointmentUsesName,
+  agencyAppointmentUsesFuzzy,
+  personAppointmentInheritsToAgency,
+  associatedWithInheritsAppointment,
+  appointmentTypeIsLoa,
+  RETAINED_HISTORICAL_APPOINTED_BY_IDS,
+} from '../lib/national/fl-agency-appointments';
 
 const errors: string[] = [];
 function assert(c: unknown, m: string) {
@@ -21,7 +32,9 @@ function assert(c: unknown, m: string) {
 
 const root = join(__dirname, '..');
 const src = readFileSync(join(root, 'scripts/national/run-fl-ins-001.ts'), 'utf8');
+const py = readFileSync(join(root, 'scripts/national/fl-ins-001.py'), 'utf8');
 const sitemap = readFileSync(join(root, 'app/sitemap.ts'), 'utf8');
+const finalDoc = readFileSync(join(root, 'docs/florida/FL-INS-001-final.md'), 'utf8');
 
 assert(existsSync(join(root, 'lib/national/fl-dfs-tycl.ts')), 'lib');
 assert(existsSync(join(root, 'docs/florida/FL-INS-001-dfs-credential-contract.md')), 'doc contract');
@@ -63,6 +76,32 @@ assert(mayPublishEntityKind('person') === false, 'T18 person gate');
 assert(!/\/florida['"`]/.test(sitemap), 'T18 sitemap');
 assert(src.includes('--execute'), 'execute gate');
 assert(!/\.from\(\s*['"]providers['"]\s*\)\.(insert|update|upsert|delete)/i.test(src), 'no provider writes');
+assert(
+  decideAgencyAppointmentJoin({ npn: '7410936', agencyIdsForNpn: ['ag'] }).confidence === 'CONFIRMED',
+  'exact npn'
+);
+assert(agencyAppointmentUsesName() === false, 'no name identity');
+assert(agencyAppointmentUsesFuzzy() === false, 'no fuzzy identity');
+assert(
+  sourceDedupeKey({
+    licenseNumber: 'L1',
+    appointingEntityNumber: '02956',
+    appointmentType: 'MANAGING GENERAL AGENT',
+  }) === 'L1|02956|MANAGING GENERAL AGENT',
+  'grain 3-part'
+);
+assert(isConflictingPipeGrain('L092510|06063|0060|2/1/2024 12:00:00 AM') === true, 'old 4-part grain');
+assert(isConflictingPipeGrain('fl-dfs-biz:L1|02956|MANAGING GENERAL AGENT') === false, 'canonical not conflicting');
+assert(personAppointmentInheritsToAgency() === false, 'person non-inherit');
+assert(associatedWithInheritsAppointment() === false, 'associated_with non-inherit');
+assert(appointmentTypeIsLoa() === false, 'apt != loa');
+assert(RETAINED_HISTORICAL_APPOINTED_BY_IDS.length === 2, '2 historical');
+assert(/does not insert appointed_by/i.test(src) || /does not insert/i.test(src), 'ts no insert');
+assert(!/recordId:\s*\[lic,\s*num,\s*tycl,\s*issue/.test(src), 'ts retired 4-part grain');
+assert(py.includes('live_wrong_grain_ids'), 'py live cleanup');
+assert(py.includes('RETAINED_HISTORICAL_IDS'), 'py retain historical');
+assert(!/wrong_ids = \[.{10,}/.test(py), 'py no hardcoded cleanup list');
+assert(/2,678/.test(finalDoc) && /2,680/.test(finalDoc), 'final lock');
 
 if (errors.length) {
   console.error('FL-INS-001 FAIL');

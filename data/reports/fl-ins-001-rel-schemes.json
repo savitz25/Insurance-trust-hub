@@ -1,4 +1,6 @@
 {
+  "artifact_status": "INTERMEDIATE_HISTORICAL",
+  "note": "Transient overlap 989 + 2,563 + 1,691 = 5,243. Wrong-grain 2,563 later deleted. Final production is 2,680 with pipe grain 0. See fl-ins-001-final.json.",
   "n": 5243,
   "schemes": {
     "uuid": 997,

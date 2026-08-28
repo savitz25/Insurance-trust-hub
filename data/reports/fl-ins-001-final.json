@@ -1,0 +1,72 @@
+{
+  "task": "FL-INS-001",
+  "authority": "FL-INS-001C canonical lock",
+  "at": "2026-08-28T16:30:23.924Z",
+  "artifact_status": "AUTHORITATIVE_FINAL",
+  "EXPECTED_CURRENT": 2678,
+  "RETAINED_HISTORICAL": 2,
+  "PRODUCTION": 2680,
+  "MISSING": 0,
+  "WRONG_TARGET": 0,
+  "DUPLICATE": 0,
+  "STALE_EXTRA_RETAINED": 2,
+  "wrong_grain_live": 0,
+  "grain": "license_number + appointing_entity_number + appointment_type (TYCL Desc)",
+  "not_collapsed_to": "agency_id + appointer_id only",
+  "retained_historical_ids": [
+    "31c6fbf8-3b84-4eb6-9baa-c750fc77c473",
+    "ea5441f1-97a6-4137-a2bd-74e0ae37e656"
+  ],
+  "baseline": {
+    "sourceRows": 59405,
+    "expectedCurrent": 2678,
+    "retainedHistorical": 2,
+    "productionAppointedBy": 2680,
+    "canonicalAgenciesWithGe1FlAppointment": 1628,
+    "flCredentialedAmongThose": 1605,
+    "flCredentialedAgenciesWithoutAppointmentEvidence": 55334,
+    "unresolvedCurrentAppointmentGrainsHeld": 53126
+  },
+  "production": {
+    "appointed_by_total": 2680,
+    "florida_appointed_by": 2680,
+    "non_florida": 0,
+    "expected_current": 2678,
+    "retained_historical": 2,
+    "retained_historical_ids": [
+      "31c6fbf8-3b84-4eb6-9baa-c750fc77c473",
+      "ea5441f1-97a6-4137-a2bd-74e0ae37e656"
+    ],
+    "MISSING": 0,
+    "WRONG_TARGET": 0,
+    "DUPLICATE": 0,
+    "wrong_grain_live": 0,
+    "fl_appointers": 12030,
+    "APPOINTER_RESOLVES_TO": 1510,
+    "APPOINTER_RESOLVES_TO_fl": 0
+  },
+  "publication": {
+    "providers": 170499,
+    "agencies": 82071,
+    "persons": 1029860,
+    "bridges": 37515,
+    "publicGraphAgencies": 0,
+    "publicPersons": 0,
+    "publicLegalInsurers": 0,
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishPerson": false,
+    "mayPublishLegalInsurer": false,
+    "sitemapSha256": "c3339e2e38eeabc81afa57c1b41f8a53839f8f21c309b2e10f9e9f2896f9db99",
+    "robotsSha256": "9dc801dcd8e1e39d67848955c92a1197e6865beea3ca668f75d232304ff49c84",
+    "sitemapHasFloridaRoute": false,
+    "sitemapChanges": false,
+    "robotsChanges": false,
+    "newPublicRoutes": 0
+  },
+  "data_writes_this_task": {
+    "inserted": 0,
+    "updated": 0,
+    "deleted": 0
+  },
+  "pass": true
+}

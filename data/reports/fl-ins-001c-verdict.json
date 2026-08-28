@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETE — FL-INS-001 SOURCE CONTROL / PRODUCTION RECONCILED",
+  "pass": true,
+  "production": {
+    "appointed_by_total": 2680,
+    "florida_appointed_by": 2680,
+    "non_florida": 0,
+    "expected_current": 2678,
+    "retained_historical": 2,
+    "retained_historical_ids": [
+      "31c6fbf8-3b84-4eb6-9baa-c750fc77c473",
+      "ea5441f1-97a6-4137-a2bd-74e0ae37e656"
+    ],
+    "MISSING": 0,
+    "WRONG_TARGET": 0,
+    "DUPLICATE": 0,
+    "wrong_grain_live": 0,
+    "fl_appointers": 12030,
+    "APPOINTER_RESOLVES_TO": 1510,
+    "APPOINTER_RESOLVES_TO_fl": 0
+  },
+  "dataWrites": {
+    "inserted": 0,
+    "updated": 0,
+    "deleted": 0
+  },
+  "nextTask": "FL-INS-002 — OIR COMPANY MASTER / NAIC CONFIRMED CROSSWALK",
+  "startedNext": false
+}

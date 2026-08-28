@@ -4,6 +4,12 @@
  *   npx tsx scripts/national/run-fl-ins-001.ts
  *   npx tsx scripts/national/run-fl-ins-001.ts --execute
  *
+ * TYCL census remains here. Canonical agency appointment writes are
+ * scripts/national/fl-ins-001.py (license + appointing number + type).
+ * --execute on this file only scans live conflicting four-part pipe grain
+ * and deletes currently present wrong-grain rows (expected 0). It does not
+ * re-insert license|appointer|tycl|issueDate rows.
+ *
  * Does not mint LOAs from TYCL. Does not publish. Does not start OIR.
  */
 import { createHash } from 'crypto';
@@ -17,6 +23,11 @@ import { PUBLIC_PERSON_PROFILES_ENABLED, mayPublishEntityKind } from '../../lib/
 import { AGENCY_CARRIER_APPOINTMENT_TYPE } from '../../lib/national/fl-individual-appointments';
 import { carrierProvisionalKey } from '../../lib/national/carrier-identity';
 import { normalizeAppointingEntityNumber } from '../../lib/national/carrier-identity';
+import {
+  isConflictingPipeGrain,
+  mayDeleteAppointedById,
+  RETAINED_HISTORICAL_APPOINTED_BY_IDS,
+} from '../../lib/national/fl-agency-appointments';
 import {
   classifyFlDfsTycl,
   cleanDfsCell,
@@ -359,15 +370,17 @@ async function main() {
       const lic = cleanDfsCell(rec['License Number']);
       const tycl = cleanDfsCell(rec['Appointment TYCL']);
       const issue = cleanDfsCell(rec['Appointment Issue Date']) || null;
+      const type = cleanDfsCell(rec['Appointment TYCL Desc']);
       expected.push({
         agencyId,
         appointerId,
-        recordId: [lic, num, tycl, issue || ''].join('|'),
-        type: cleanDfsCell(rec['Appointment TYCL Desc']),
+        recordId: `fl-dfs-biz:${lic}|${num}|${type}`,
+        type,
         status: cleanDfsCell(rec['Appointment Status']),
         issue,
         exp: cleanDfsCell(rec['Appointment Expiration Date']) || null,
       });
+      void tycl;
     }
   }
   void skipKind;
@@ -404,24 +417,15 @@ async function main() {
     writes: { inserted: 0, skipped: 0 },
   };
 
-  writeFileSync(join(OUT, 'fl-ins-001-preflight.json'), JSON.stringify(report, null, 2));
-  writeFileSync(
-    join(OUT, 'fl-ins-001-agency-appointment-reconciliation.json'),
-    JSON.stringify(report.agencyAppointments, null, 2)
-  );
+  writeFileSync(join(OUT, 'fl-ins-001-ts-preflight.json'), JSON.stringify(report, null, 2));
 
-  if (!execute) {
-    console.log(JSON.stringify({ ...report, note: 'DRY-RUN. Re-run --execute to insert CONFIRMED appointed_by.' }, null, 2));
-    return;
-  }
-
-  const existing = new Set<string>();
+  const liveWrong: Array<{ id: string; source_record_id: string | null }> = [];
   {
     let last: string | null = null;
     for (;;) {
       let q = sb
         .from('national_relationships')
-        .select('id,from_entity_id,to_entity_id,source_record_id')
+        .select('id,source_record_id')
         .eq('relationship_type', AGENCY_CARRIER_APPOINTMENT_TYPE)
         .eq('source_dataset', 'florida_dfs_appointments')
         .order('id')
@@ -432,65 +436,64 @@ async function main() {
       const rows = data ?? [];
       if (!rows.length) break;
       for (const r of rows) {
-        existing.add(`${r.from_entity_id}|${r.to_entity_id}|${r.source_record_id}`);
+        const id = String(r.id);
+        if (
+          isConflictingPipeGrain(r.source_record_id) &&
+          mayDeleteAppointedById(id)
+        ) {
+          liveWrong.push({ id, source_record_id: r.source_record_id });
+        }
       }
       last = String(rows[rows.length - 1]!.id);
       if (rows.length < 1000) break;
     }
   }
 
-  let inserted = 0;
-  let skipped = 0;
-  const fresh = expected.filter((e) => !existing.has(`${e.agencyId}|${e.appointerId}|${e.recordId}`));
-  skipped = expected.length - fresh.length;
-  for (const part of chunk(fresh, 80)) {
-    const payload = part.map((e) => ({
-      from_entity_id: e.agencyId,
-      to_entity_id: e.appointerId,
-      relationship_type: AGENCY_CARRIER_APPOINTMENT_TYPE,
-      status: e.status || null,
-      effective_date: null,
-      termination_date: null,
-      source_dataset: 'florida_dfs_appointments',
-      source_record_id: e.recordId,
-      source_observed_at: new Date().toISOString(),
-      raw: {
-        task: 'FL-INS-001',
-        appointmentType: e.type,
-        appointmentStatus: e.status,
-        notLoa: true,
-        confidence: 'CONFIRMED',
-      },
-    }));
-    const { data, error } = await sb.from('national_relationships').insert(payload).select('id');
-    if (error) {
-      if (!/duplicate|unique/i.test(error.message)) throw new Error(error.message);
-      skipped += part.length;
-      continue;
+  let deletedWrongGrain = 0;
+  if (execute && liveWrong.length) {
+    for (const part of chunk(liveWrong, 50)) {
+      const ids = part.map((r) => r.id);
+      const { error } = await sb.from('national_relationships').delete().in('id', ids);
+      if (error) throw new Error(error.message);
+      deletedWrongGrain += ids.length;
     }
-    inserted += data?.length ?? 0;
   }
-  report.writes = { inserted, skipped };
-  const after = await count(sb, 'national_relationships', [['relationship_type', 'appointed_by']]);
+
+  const note =
+    'Canonical agency appointment writer is scripts/national/fl-ins-001.py. This TypeScript runner does not insert appointed_by (the license|appointer|tycl|issueDate grain is retired). --execute only deletes currently live conflicting four-part pipe-grain rows; expected 0.';
+  report.writes = { inserted: 0, skipped: expected.length, deletedWrongGrain };
   writeFileSync(
-    join(OUT, execute && inserted === 0 ? 'fl-ins-001-idempotency.json' : 'fl-ins-001-agency-appointment-reconciliation.json'),
-    JSON.stringify({ ...report.agencyAppointments, writes: report.writes, graphAfter: after }, null, 2)
-  );
-  writeFileSync(
-    join(OUT, 'fl-ins-001-publication-regression.json'),
+    join(OUT, 'fl-ins-001-ts-wrong-grain-scan.json'),
     JSON.stringify(
       {
-        providers: await count(sb, 'providers'),
-        publicGraphAgencies: 0,
-        publicPeople: 0,
-        sitemapChanges: false,
-        robotsChanges: false,
+        liveWrongGrain: liveWrong.length,
+        deletedWrongGrain,
+        retainedHistoricalIds: [...RETAINED_HISTORICAL_APPOINTED_BY_IDS],
+        execute,
+        note,
       },
       null,
       2
     )
   );
-  console.log(JSON.stringify({ ...report, graphAppointedByAfter: after }, null, 2));
+
+  if (!execute) {
+    console.log(JSON.stringify({ ...report, liveWrongGrain: liveWrong.length, note }, null, 2));
+    return;
+  }
+
+  console.log(
+    JSON.stringify(
+      {
+        ...report,
+        liveWrongGrain: liveWrong.length,
+        deletedWrongGrain,
+        note,
+      },
+      null,
+      2
+    )
+  );
 }
 
 main().catch((e) => {

@@ -1,0 +1,51 @@
+{
+  "task": "FL-INS-001C",
+  "at": "2026-08-28T16:30:23.924Z",
+  "AUTHORITATIVE_FINAL": [
+    "data/reports/fl-ins-001-final.json",
+    "docs/florida/FL-INS-001-final.md",
+    "data/reports/fl-ins-001-appointment-reconciliation.json",
+    "data/reports/fl-ins-001-coverage.json",
+    "docs/florida/FL-INS-001-agency-appointment-contract.md",
+    "docs/florida/FL-INS-001-source-audit.md",
+    "docs/florida/FL-INS-001B-appointed-by-reconciliation.md"
+  ],
+  "INTERMEDIATE_HISTORICAL": [
+    {
+      "path": "data/reports/fl-ins-001-rel-schemes.json",
+      "figures": "n=5243 during overlapping writers"
+    },
+    {
+      "path": "data/reports/fl-ins-001-cleanup-before.json",
+      "figures": "2563 conflicting-grain IDs at cleanup time"
+    },
+    {
+      "path": "data/reports/fl-ins-001-cleanup-after.json",
+      "figures": "deleted 2563; remaining 2680"
+    },
+    {
+      "path": "data/reports/fl-ins-001-execution.json",
+      "figures": "relationships_deleted_conflicting_grain 2563; inserted 1691"
+    },
+    {
+      "path": "data/reports/fl-ins-001-idempotency.json",
+      "figures": "records first canonical inserts 1691 and historical 2563 cleanup"
+    },
+    {
+      "path": "data/reports/fl-ins-001b-appointed-by-census.json",
+      "figures": "explains 5243/3552/2563 as history; live 2680"
+    }
+  ],
+  "SUPERSEDED": [
+    {
+      "path": "data/reports/fl-ins-001-agency-appointment-reconciliation.json",
+      "figures": "expectedConfirmed 6242 / graphBefore 3552 from uncollapsed TypeScript grain",
+      "superseded_by": "data/reports/fl-ins-001-final.json"
+    },
+    {
+      "path": "docs/florida/FL-INS-001-appointment-contract.md",
+      "figures": "previously stated inserted 2563 and graph 3552 as if final",
+      "superseded_by": "docs/florida/FL-INS-001-final.md"
+    }
+  ]
+}

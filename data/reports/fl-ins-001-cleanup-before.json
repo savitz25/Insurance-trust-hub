@@ -1,4 +1,6 @@
 {
+  "artifact_status": "INTERMEDIATE_HISTORICAL",
+  "note": "Historical ID list from the one-time 2,563 conflicting-grain cleanup. Do not replay unconditionally. Live scan must find currently present four-part pipe-grain rows; expected 0.",
   "reason": "Conflicting FL-INS-001 source_record_id grain license|number|tycl|issueDate. Declared grain is license + appointing_entity_number + appointment type description. These 2563 rows duplicate canonical UUID/fl-dfs-biz observations and were not the original INS-NAT-007 989. All Active absence is unrelated. Delete is source-safe.",
   "count": 2563,
   "ids": [

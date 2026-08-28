@@ -4,6 +4,8 @@ Task: expand the canonical **agency** appointment graph from the Florida DFS **A
 
 Status: **COMPLETE**. New relationships are **INTERNAL** graph evidence. No new public module, route, sitemap, or indexability.
 
+Canonical production lock (FL-INS-001C): **EXPECTED CURRENT 2,678 + RETAINED HISTORICAL 2 = PRODUCTION 2,680**. See `docs/florida/FL-INS-001-final.md`.
+
 ## Identity
 
 | Rule | Contract |

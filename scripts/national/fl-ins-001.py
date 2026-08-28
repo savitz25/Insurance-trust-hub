@@ -155,6 +155,34 @@ def decide_agency_join(npn: str | None, agency_ids: list[str]) -> dict:
     return {"action": "attach", "confidence": "CONFIRMED", "npn": n, "agency_id": agency_ids[0]}
 
 
+UUID_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.I)
+RETAINED_HISTORICAL_IDS = {
+    "31c6fbf8-3b84-4eb6-9baa-c750fc77c473",
+    "ea5441f1-97a6-4137-a2bd-74e0ae37e656",
+}
+
+
+def is_conflicting_pipe_grain(source_record_id: str | None) -> bool:
+    """Retired TypeScript grain license|appointer|tycl|issueDate. Not UUID, not fl-dfs-biz:."""
+    rid = str(source_record_id or "")
+    if not rid or rid.startswith("fl-dfs-biz:"):
+        return False
+    if UUID_RE.match(rid):
+        return False
+    return rid.count("|") >= 3
+
+
+def live_wrong_grain_ids(rows: list[dict]) -> list[str]:
+    out: list[str] = []
+    for r in rows:
+        rid = str(r.get("id") or "")
+        if not rid or rid in RETAINED_HISTORICAL_IDS:
+            continue
+        if is_conflicting_pipe_grain(str(r.get("source_record_id") or "")):
+            out.append(rid)
+    return out
+
+
 def dump(name: str, obj: Any) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / name
@@ -308,7 +336,11 @@ def run_contract_tests() -> dict:
     ok(r["action"] == "hold", "15_unresolved_not_written")
     # duplicate source row deterministic: later expiration wins conceptually
     ok(parse_date("6/30/2028 12:00:00 AM") == "2028-06-30", "11_date_parse")
-    return {"pass": not fails, "fails": fails, "n": 15}
+    ok(is_conflicting_pipe_grain("L092510|06063|0060|2/1/2024 12:00:00 AM"), "conflicting_pipe")
+    ok(not is_conflicting_pipe_grain("fl-dfs-biz:L092510|06063|MANAGING GENERAL AGENT"), "canonical_fl_dfs_biz")
+    ok(not is_conflicting_pipe_grain("5cb8d813-9962-408b-833c-adc0d3e3191a"), "uuid_not_conflicting")
+    ok("31c6fbf8-3b84-4eb6-9baa-c750fc77c473" in RETAINED_HISTORICAL_IDS, "retain_historical")
+    return {"pass": not fails, "fails": fails, "n": 19}
 
 
 def load_csv() -> tuple[list[dict], dict]:
@@ -936,6 +968,24 @@ def main() -> int:
         return 0
 
     print("EXECUTE 1", flush=True)
+    wrong_ids = live_wrong_grain_ids(existing_fl)
+    deleted_wrong = 0
+    if wrong_ids:
+        print(f"  live conflicting pipe-grain rows={len(wrong_ids)} (expected 0 after 001B)", flush=True)
+        drop = set(wrong_ids)
+        for rid in wrong_ids:
+            req(base, key, f"/rest/v1/national_relationships?id=eq.{rid}", method="DELETE")
+            deleted_wrong += 1
+        existing_fl = [r for r in existing_fl if str(r.get("id")) not in drop]
+        existing_by_5 = {
+            k: v for k, v in existing_by_5.items() if str(v.get("id")) not in drop
+        }
+        existing_by_record = {
+            k: v for k, v in existing_by_record.items() if str(v.get("id")) not in drop
+        }
+        print(f"  deleted conflicting pipe-grain={deleted_wrong}", flush=True)
+    else:
+        print("  live conflicting pipe-grain rows=0; cleanup no-op", flush=True)
     # mint carriers
     carriers_inserted = 0
     fresh = [needed_carriers[k] for k in new_carrier_keys]
