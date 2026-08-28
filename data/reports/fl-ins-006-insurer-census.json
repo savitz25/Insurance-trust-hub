@@ -1,0 +1,13 @@
+{
+  "national_legal_insurers": 6185,
+  "oir_active_companies": 3972,
+  "oir_with_naic": 1965,
+  "oir_without_naic": 2007,
+  "exact_national_oir_match_rows": 1959,
+  "exact_national_oir_distinct_naic": 1928,
+  "safe_fl_oir_company_code": 1897,
+  "mir_exact_insurers": 162,
+  "fslso_exact_naic_attached": 227,
+  "do_not_sum_overlapping_populations": true,
+  "public_legal_insurers": 0
+}

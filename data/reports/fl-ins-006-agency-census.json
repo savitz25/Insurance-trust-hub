@@ -1,0 +1,53 @@
+{
+  "canonical_agencies": 82071,
+  "fl_credential_rows": 59189,
+  "distinct_agencies_with_fl_credential": 56939,
+  "with_confirmed_provider_bridge": 14834,
+  "with_ge1_fl_appointed_by": 1630,
+  "fl_credentialed_without_appointment": 55332,
+  "namespace": {
+    "producer": 58330,
+    "bail_bond": 2,
+    "adjuster": 112,
+    "title": 7,
+    "warranty": 259,
+    "surplus_lines": 0,
+    "tpa": 0,
+    "limited_lines": 463,
+    "other": 16
+  },
+  "regulatory_status": {
+    "active": 0,
+    "inactive": 0,
+    "expired": 0,
+    "suspended": 0,
+    "revoked": 0,
+    "cancelled": 0,
+    "unknown": 59189
+  },
+  "license_class": {
+    "AGENCY LICENSE": 58223,
+    "CREDIT": 383,
+    "AUTOMOBILE WARRANTY": 152,
+    "INDEPENDENT ADJUSTING FIRM": 108,
+    "MANAGING GENERAL AGENT": 107,
+    "SERVICE WARRANTY": 71,
+    "HOME WARRANTY": 36,
+    "IN-TRANSIT & STORAGE PERS PROP": 33,
+    "NON-RESIDENT TRAVEL INSURANCE": 23,
+    "REINSURANCE INTERMEDIARY BROKER": 12,
+    "RESIDENT TRAVEL INSURANCE": 11,
+    "NONRESIDENT CREDIT INSURANCE AGENT": 7,
+    "PUBLIC ADJUSTING FIRM": 4,
+    "REINSURANCE INTERMEDIARY MANAGER": 4,
+    "NON-RES PORTABLE ELECTRONICS OR EYEWEAR LEAD-AGENT": 4,
+    "NONRESIDENT TITLE AGENCY": 4,
+    "TITLE INS AGENCY - CORP OR FIRM": 3,
+    "BAIL BOND AGENCY LICENSE": 2,
+    "NON RESIDENT MOTOR VEHICLE RENTAL": 2
+  },
+  "unknown_status_not_inferred_inactive": 59189,
+  "public_provider_overlap_confirmed_bridge": 14834,
+  "source_clock": "source_observed_at_absent",
+  "not_quality": true
+}

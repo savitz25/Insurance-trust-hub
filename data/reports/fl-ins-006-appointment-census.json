@@ -1,0 +1,26 @@
+{
+  "florida_appointed_by": 2680,
+  "distinct_agencies": 1630,
+  "distinct_appointers": 503,
+  "status": {
+    "CURRENT": 2675,
+    "HISTORICAL": 5
+  },
+  "source_dataset": {
+    "florida_dfs_appointments": 2680
+  },
+  "retained_historical_rows": 1,
+  "retained_historical_ids": [
+    "31c6fbf8-3b84-4eb6-9baa-c750fc77c473",
+    "ea5441f1-97a2-4137-a2bd-74e0ae37e656"
+  ],
+  "current_source_rows": 2679,
+  "person_APPOINTED_TO": 2962397,
+  "fl_dfs_appointers": 12030,
+  "FL_APPOINTER_RESOLVES_TO": 0,
+  "digit_coincidences_review_required": 17,
+  "limitation": "Florida DFS appointment evidence is stored at the DFS appointing-entity identifier level. Public DFS/OIR sources do not currently provide a deterministic crosswalk from that identifier to NAIC legal-insurer identity.",
+  "not_quality": true,
+  "not_employment": true,
+  "county_appointments_not_ingested": true
+}

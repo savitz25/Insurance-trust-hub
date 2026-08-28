@@ -1,0 +1,18 @@
+{
+  "dfs_agency_credentials": "source_observed_at_absent",
+  "dfs_individual_credentials": "source_observed_at_absent",
+  "dfs_business_appointments": "florida_dfs_appointments",
+  "dfs_individual_appointments": "florida_dfs_individual_appointments",
+  "oir_active_company_search": "2026-08-28T17:15:48.851158+00:00",
+  "mir": "2026-06-01/2026-06-30 as_of 2026-06-30",
+  "fslso_eligibility": "oir surplus-lines XML (FL-INS-002) + eligibility observations",
+  "cms_marketplace": 1300108,
+  "florida_regulatory_catalogs": "listing census FL-INS-004; 12 receiver rows stored",
+  "dfs_receiver_list": "2026-08-28 open liquidations",
+  "choices": "interactive; no bulk as-of",
+  "irfs": "public search 2001-01-05\u2013present; cap 2500",
+  "citizens": "DATA_PENDING_CURRENT_OFFICIAL_SOURCE",
+  "nfip": "public list 1474 cards; NPN absent",
+  "independent": true,
+  "no_combined_undated_headline": true
+}

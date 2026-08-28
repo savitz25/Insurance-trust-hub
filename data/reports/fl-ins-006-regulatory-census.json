@@ -1,0 +1,17 @@
+{
+  "stored_florida_rows": 12,
+  "family": "LIQUIDATION",
+  "attached": 0,
+  "internal_only": true,
+  "catalog_market_conduct_unattached": 1007,
+  "catalog_financial_exam_unattached": 1060,
+  "catalog_orders_unattached": 1386,
+  "liquidation_is_not_misconduct": true,
+  "missing_is_not_clean": true,
+  "open_receiver_companies": 12,
+  "forbidden": [
+    "12 insurers failed",
+    "12 bad insurers",
+    "clean regulatory record"
+  ]
+}

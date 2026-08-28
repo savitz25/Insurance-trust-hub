@@ -1,0 +1,51 @@
+{
+  "canonical_persons": 1029860,
+  "fl_credential_rows": 691127,
+  "distinct_persons_with_fl_producer_or_other_credential": 691126,
+  "namespace": {
+    "producer": 691127,
+    "bail_bond": 0,
+    "adjuster": 0,
+    "title": 0,
+    "warranty": 0,
+    "surplus_lines": 0,
+    "tpa": 0,
+    "limited_lines": 0,
+    "other": 0
+  },
+  "regulatory_status": {
+    "active": 691127,
+    "inactive": 0,
+    "expired": 0,
+    "suspended": 0,
+    "revoked": 0,
+    "cancelled": 0,
+    "unknown": 0
+  },
+  "license_class_top": {
+    "NONRESIDENT HEALTH": 138529,
+    "LIFE INCL VAR ANNUITY & HEALTH": 126557,
+    "LIFE INCL VARIABLE ANNUITY": 84442,
+    "NONRES LIFE & VARIABLE ANNUITY": 82976,
+    "NONRES GEN LINES (PROP & CAS)": 76458,
+    "NONRES LIFE, HEALTH, & VAR ANN": 45782,
+    "NONRES PERSONAL LINES AGENT": 38589,
+    "GENERAL LINES (PROP & CAS)": 38294,
+    "HEALTH": 34669,
+    "PERSONAL LINES AGENT": 17630,
+    "LIFE & HEALTH": 3253,
+    "LIFE": 1914,
+    "NONRESIDENT LIFE & HEALTH": 1364,
+    "NONRESIDENT LIFE": 643,
+    "VARIABLE ANNUITY": 22,
+    "MILITARY REG (LIFE INSURANCE)": 4,
+    "TEMPORARY GENERAL LINES (PROP & CAS)": 1
+  },
+  "license_class_distinct": 17,
+  "fl_person_appointments_APPOINTED_TO": 2962397,
+  "distinct_persons_with_fl_appointment": 495293,
+  "person_appointment_source": "INS-NAT-013 locked census; not rewritten",
+  "do_not_flatten_to_insurance_agents": true,
+  "public_people": 0,
+  "source_clock": "source_observed_at_absent"
+}

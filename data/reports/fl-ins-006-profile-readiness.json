@@ -1,0 +1,15 @@
+{
+  "public_providers": 170499,
+  "confirmed_provider_graph_bridges": 37515,
+  "READY_FOR_FL_CREDENTIAL_MODULE": 14834,
+  "READY_FOR_FL_APPOINTMENT_MODULE": 613,
+  "READY_FOR_FL_MARKET_MODULE": 0,
+  "READY_FOR_CMS_MODULE": 0,
+  "READY_FOR_SURPLUS_MODULE": 0,
+  "READY_FOR_FL_REGULATORY_MODULE": 0,
+  "NFIP_deterministic": 0,
+  "unresolved_not_counted_ready": true,
+  "legal_insurer_pages": 0,
+  "public_people": 0,
+  "no_mass_publish": true
+}
