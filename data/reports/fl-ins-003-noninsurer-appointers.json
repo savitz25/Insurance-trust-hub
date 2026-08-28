@@ -1,0 +1,20 @@
+{
+  "official_non_insurer_count": null,
+  "diagnostic_only": {
+    "name_looks_like_agency_diagnostic_only": 21,
+    "name_looks_like_insurer_diagnostic_only": 340,
+    "unknown_name_diagnostic_only": 325,
+    "name_looks_like_warranty_diagnostic_only": 48,
+    "name_looks_like_government_diagnostic_only": 1,
+    "name_looks_like_self_insurer_or_rrg_diagnostic_only": 6
+  },
+  "activity_diagnostic": {
+    "reinsurance_intermediary_activity": 160,
+    "mga_appointment_activity": 333,
+    "warranty_or_limited_appointment_activity": 193,
+    "title_appointment_activity": 27,
+    "other_or_mixed_appointment_activity": 25,
+    "bail_appointment_activity": 3
+  },
+  "note": "Cannot prove non-insurer vs insurer without official entity-type on the appointer. Do not force legal-insurer attach."
+}

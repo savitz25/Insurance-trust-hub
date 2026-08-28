@@ -1,0 +1,11 @@
+{
+  "same_record_dfs_plus_naic": 0,
+  "same_record_dfs_plus_fl_company_code": 0,
+  "same_record_dfs_plus_fein": 0,
+  "two_step_unique_fein": 0,
+  "dfs_appointer_fein_available": false,
+  "oir_fein_populated": 3503,
+  "oir_fein_collisions": 140,
+  "confirmed_candidates": [],
+  "writes_allowed": 0
+}

@@ -1,0 +1,57 @@
+{
+  "rows": [
+    {
+      "naic": "14034",
+      "oir_names": [
+        "DAVINCI REINSURANCE LTD.",
+        "DAVINCI REINSURANCE LTD.",
+        "DAVINCI REINSURANCE LTD."
+      ],
+      "oir_types": [
+        "CERTIFIED REINSURER",
+        "RECIPROCAL JURISDICTION REINSURER",
+        "TRUSTEED REINSURERS"
+      ],
+      "in_loc_jun_2026": false,
+      "class": "SPECIAL_ENTITY_TYPE",
+      "note": "OIR type is reinsurer/captive/reciprocal/RRG; CoCode not on ingested LOC company files used for the 6,185 spine."
+    },
+    {
+      "naic": "38172",
+      "oir_names": [
+        "NATIONAL GUARANTY INSURANCE COMPANY OF VERMONT"
+      ],
+      "oir_types": [
+        "INDUSTRIAL INSURED CAPTIVE INSURER"
+      ],
+      "in_loc_jun_2026": false,
+      "class": "SPECIAL_ENTITY_TYPE",
+      "note": "OIR type is reinsurer/captive/reciprocal/RRG; CoCode not on ingested LOC company files used for the 6,185 spine."
+    },
+    {
+      "naic": "17974",
+      "oir_names": [
+        "VISION INSURANCE EXCHANGE"
+      ],
+      "oir_types": [
+        "RECIPROCAL"
+      ],
+      "in_loc_jun_2026": false,
+      "class": "SPECIAL_ENTITY_TYPE",
+      "note": "OIR type is reinsurer/captive/reciprocal/RRG; CoCode not on ingested LOC company files used for the 6,185 spine."
+    },
+    {
+      "naic": "17677",
+      "oir_names": [
+        "BOLD RISK RETENTION GROUP, INC."
+      ],
+      "oir_types": [
+        "RISK RETENTION GROUP"
+      ],
+      "in_loc_jun_2026": true,
+      "class": "CLOCK_DELTA",
+      "note": "Present in NAIC LOC CONM listing but not in ingested 6,185 legal-insurer spine (RRG)."
+    }
+  ],
+  "do_not_mint_to_enable_bridge": true
+}

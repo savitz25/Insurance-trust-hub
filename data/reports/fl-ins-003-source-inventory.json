@@ -1,0 +1,83 @@
+{
+  "task": "FL-INS-003",
+  "at": "2026-08-28T17:32:42.990022+00:00",
+  "sources": [
+    {
+      "source": "DFS All Active Appointments \u2014 Business CSV",
+      "url": "https://licenseesearch.fldfs.com/BulkDownload",
+      "authority": "Florida DFS Agent & Agency Services",
+      "class": "NO_RELEVANT_IDENTIFIER",
+      "fields": [
+        "License Number",
+        "Full Name",
+        "NPN Number",
+        "Residency Type",
+        "Appointing Entity Number",
+        "Appointing Entity Name",
+        "Appointment TYCL",
+        "Appointment TYCL Desc",
+        "Appointment Status",
+        "Appointment Issue Date",
+        "Appointment Expiration Date",
+        "Email Address",
+        "AIC License Number - Bar Number",
+        "AIC Full Name",
+        "Business Phone",
+        "Business Address1",
+        "Business Address2",
+        "Business City",
+        "Business State",
+        "Business Zip",
+        "Business County",
+        "Mailing Address",
+        "Mailing Address2",
+        "Mailing City",
+        "Mailing State",
+        "Mailing Zip"
+      ],
+      "has_appointing_entity_number": true,
+      "has_naic": false,
+      "has_fein": false,
+      "has_fl_company_code": false,
+      "same_record_bridge_possible": false,
+      "note": "Appointing Entity Number + Name only. No NAIC, FEIN, or Florida Company Code on the appointer."
+    },
+    {
+      "source": "OIR Active Company Search XML",
+      "url": "https://companysearch.floir.gov/",
+      "authority": "Florida Office of Insurance Regulation",
+      "class": "NO_RELEVANT_IDENTIFIER",
+      "fields": [
+        "name",
+        "FLCompCode",
+        "NAICCode",
+        "fein",
+        "compType",
+        "address",
+        "phone"
+      ],
+      "has_appointing_entity_number": false,
+      "same_record_bridge_possible": false,
+      "note": "Has FEIN + FL code + NAIC. No DFS Appointing Entity Number."
+    },
+    {
+      "source": "DFS-H2-501 Appointment Exception Form",
+      "url": "https://www.myfloridacfo.com/docs-sf/insurance-agents-and-agency-services-libraries/agents-docs/licensure/forms/dfs-h2-501.pdf",
+      "authority": "Florida DFS",
+      "class": "MANUAL_ONLY",
+      "same_record_bridge_possible": false,
+      "note": "Form labels a field 'Company Code' as OIR insurer company code. That is not the bulk Appointing Entity Number file and is not a machine-readable crosswalk."
+    },
+    {
+      "source": "NAIC LOC-JUN-2026",
+      "class": "NO_RELEVANT_IDENTIFIER",
+      "note": "National CoCode spine. No Florida DFS appointing numbers."
+    },
+    {
+      "source": "eAppoint / MyProfile",
+      "class": "BLOCKED",
+      "note": "Authenticated appointing workflow. Not a public bulk crosswalk."
+    }
+  ],
+  "public_records_request_required": true
+}
