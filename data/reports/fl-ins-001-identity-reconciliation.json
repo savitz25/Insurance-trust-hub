@@ -1,0 +1,16 @@
+{
+  "task": "FL-INS-001",
+  "personIdentity": "exact NPN",
+  "agencyIdentity": "exact NPN",
+  "nameMerge": false,
+  "newPersonEntities": 0,
+  "newAgencyEntities": 0,
+  "flAppointerResolvesTo": 0,
+  "txAppointerResolvesTo": 1510,
+  "promotion": {
+    "AGENCY_LICENSE_source_rows": 58642,
+    "graph_fl_agency_credentials": 59189,
+    "newCanonicalCreated": 0,
+    "held": "warranty, limited-lines, title, bail, adjuster firms — not core agencies"
+  }
+}

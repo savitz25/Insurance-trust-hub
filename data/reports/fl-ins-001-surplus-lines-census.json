@@ -1,0 +1,32 @@
+{
+  "at": "2026-08-28T15:49:26.789Z",
+  "notEligibleInsurer": true,
+  "classes": [
+    {
+      "raw": "SURPLUS LINES",
+      "rows": 1749,
+      "npn": 1749,
+      "resident": 1749,
+      "nonresident": 0,
+      "unknownRes": 0,
+      "namespace": "surplus_lines",
+      "subtype": "SURPLUS_LINES_AGENT",
+      "grain": "person",
+      "promote": false,
+      "confidence": "CONFIRMED"
+    },
+    {
+      "raw": "NONRES SURPLUS LINES",
+      "rows": 2834,
+      "npn": 2834,
+      "resident": 0,
+      "nonresident": 2834,
+      "unknownRes": 0,
+      "namespace": "surplus_lines",
+      "subtype": "SURPLUS_LINES_AGENT",
+      "grain": "person",
+      "promote": false,
+      "confidence": "CONFIRMED"
+    }
+  ]
+}

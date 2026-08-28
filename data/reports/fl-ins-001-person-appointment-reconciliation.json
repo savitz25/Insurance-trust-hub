@@ -1,0 +1,14 @@
+{
+  "task": "FL-INS-001",
+  "source": {
+    "files": "AllActiveAppointmentsIndividual(A-Z)",
+    "portal": "https://licenseesearch.fldfs.com/BulkDownload",
+    "lastModified": "2026-08-27T06:27:45Z",
+    "rows": 3142628,
+    "missingNpn": 170,
+    "malformedNpn": 22
+  },
+  "insNat013Writes": 2962397,
+  "thisTaskWrites": 0,
+  "note": "Person APPOINTED_TO not rewritten. Source clock unchanged from INS-NAT-013. Appointment rows are not people. Distinct persons with appointments 495293 (013)."
+}

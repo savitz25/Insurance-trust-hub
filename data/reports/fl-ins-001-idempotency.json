@@ -1,0 +1,19 @@
+{
+  "task": "FL-INS-001",
+  "firstExecute": {
+    "at": "2026-08-28T15:47:43.646Z",
+    "appointedByInserted": 2563,
+    "appointedBySkipped": 0,
+    "graphAppointedBy": 3552
+  },
+  "secondExecute": {
+    "at": "2026-08-28T15:49:43.115Z",
+    "inserted": 0,
+    "skipped": 6242,
+    "graphAppointedBy": 5243
+  },
+  "zeroDeltaInserts": true,
+  "contactsInserted": 0,
+  "loaInserted": 0,
+  "personAppointmentInserted": 0
+}

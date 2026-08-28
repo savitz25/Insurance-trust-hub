@@ -1,0 +1,8 @@
+{
+  "sourceRows": 59405,
+  "expectedConfirmed": 6242,
+  "skipNoNpn": 25,
+  "skipNoAgency": 53138,
+  "skipNoAppointer": 0,
+  "graphBefore": 3552
+}
