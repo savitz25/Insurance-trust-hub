@@ -1,0 +1,105 @@
+{
+  "task": "INS-INSURER-003",
+  "generatedAt": "2026-08-29T20:20:00.000Z",
+  "db_writes": { "schema": 0, "publication": 0, "data_mutation": 0, "ingest_inserts": 0, "second_run_inserts": 0 },
+  "pagination": "listing HTML parse + prior FL-INS-004 exam inventories; no unordered range census",
+  "denominators": {
+    "E1": 2204,
+    "E2": 0,
+    "E3": 2194,
+    "E4": 10,
+    "E5": 0,
+    "E6": 0,
+    "E7": 0,
+    "E8": 0,
+    "E9": 0,
+    "E10": 0,
+    "E11": 0
+  },
+  "equationNote": "E2+E3+E4=E1. E5+E6=0=E2 (nothing ingested). E4=10 CA listing rows that share a PDF with another title (consolidated/multi-entity or duplicate listing).",
+  "inventory": [
+    {
+      "regulator": "California Department of Insurance",
+      "sourceFamily": "FINANCIAL_EXAMINATION",
+      "dataset": "california_cdi_financial_exams",
+      "portal": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/",
+      "reportCount": 137,
+      "uniquePdfs": 129,
+      "dateRange": "listing 'as of' dates on titles (e.g. 12-31-11 through 12-31-24)",
+      "documentUrlAvailability": true,
+      "examinedLegalEntity": "listing title company name only",
+      "identifierType": "none on listing; sampled PDFs lack five-digit NAIC company CoCode",
+      "exactNaicAttachability": false,
+      "uniqueInsurersAttached": 0,
+      "unattachedReports": 127,
+      "ambiguousReports": 10,
+      "publicationCandidateCount": 0,
+      "retrievalClock": "2026-08-29T20:19:13Z",
+      "listingSha256": "27d8ba883d1dc676b7230ea647d4b526ea7cb8074e55aeda95a27046a25d41fd"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "sourceFamily": "MARKET_CONDUCT_EXAMINATION",
+      "dataset": "california_cdi_market_conduct_exams",
+      "portal": "https://www.insurance.ca.gov/01-consumers/120-company/09-mcexam/",
+      "reportCount": 0,
+      "note": "Official catalog is an interactive Oracle APEX search (f?p=151) that returned HTTP 404 on 2026-08-29. No bulk CoCode listing. Not enumerated; not ingested.",
+      "exactNaicAttachability": false,
+      "uniqueInsurersAttached": 0,
+      "unattachedReports": 0,
+      "ambiguousReports": 0,
+      "publicationCandidateCount": 0,
+      "retrievalClock": "2026-08-29T20:19:13Z"
+    },
+    {
+      "regulator": "Florida Office of Insurance Regulation",
+      "sourceFamily": "MARKET_CONDUCT_EXAMINATION",
+      "dataset": "florida_oir_market_conduct_exams",
+      "reportCount": 1007,
+      "exactNaicAttachability": false,
+      "uniqueInsurersAttached": 0,
+      "unattachedReports": 1007,
+      "reason": "FL-INS-004: listing title/URL only; no NAIC or Florida Company Code; name-only forbidden. Conditional ingest not met.",
+      "publicationCandidateCount": 0,
+      "retrievalClock": "2026-08-28T18:01:52Z"
+    },
+    {
+      "regulator": "Florida Office of Insurance Regulation",
+      "sourceFamily": "FINANCIAL_EXAMINATION",
+      "dataset": "florida_oir_financial_exams",
+      "reportCount": 1060,
+      "exactNaicAttachability": false,
+      "uniqueInsurersAttached": 0,
+      "unattachedReports": 1060,
+      "reason": "FL-INS-004: listing title/URL only; name-only forbidden.",
+      "publicationCandidateCount": 0,
+      "retrievalClock": "2026-08-28T18:01:52Z"
+    }
+  ],
+  "identityAudit": {
+    "listingIdentifier": "company name + as-of date",
+    "pdfsSampled": 7,
+    "exactCompanyCoCodeInSample": 0,
+    "groupOnlyInSample": 0,
+    "nameOnlyInSample": 6,
+    "ambiguousMultiEntityInSample": 1,
+    "naicTokenInPdf": "NAIC appears as the Commissioners association / Annual Statement Instructions, not a five-digit company CoCode field"
+  },
+  "ingest": {
+    "sourceRows": 2204,
+    "inserted": 0,
+    "secondRunInserts": 0,
+    "fingerprint": "27d8ba883d1dc676b7230ea647d4b526ea7cb8074e55aeda95a27046a25d41fd",
+    "reasonNotIngested": "No deterministic legal-insurer identifier. Name-only attach prohibited. Florida OIR listings previously inventoried unattached."
+  },
+  "tdiComplaintRemainsInternal": true,
+  "publication": {
+    "decision": "ZERO_PUBLICATION",
+    "wave1": 0,
+    "allowlist": [],
+    "PUBLIC_READY": 0,
+    "publicPeople": 0,
+    "publicGraphAgencies": 0,
+    "publishedUrls": 0
+  }
+}
