@@ -1,6 +1,6 @@
 {
   "task": "INS-HOME-003",
-  "generatedAt": "2026-08-29T05:21:39.295Z",
+  "generatedAt": "2026-08-29T13:29:50.813Z",
   "db_writes": 0,
   "pass": true,
   "gates": {
@@ -11,20 +11,20 @@
     "d2_positive": true
   },
   "d1": 82071,
-  "d2": 77887,
-  "d3": 100801,
+  "d2": 82071,
+  "d3": 109927,
   "d4": 117354,
   "buckets": {
-    "one": 61559,
-    "two": 10551,
-    "threeToFour": 5760,
-    "fiveToNine": 17,
+    "one": 62202,
+    "two": 13289,
+    "threeToFour": 6546,
+    "fiveToNine": 34,
     "tenPlus": 0
   },
   "pctD2": {
-    "one": 79,
-    "two": 13.5,
-    "threeToFour": 7.4,
+    "one": 75.8,
+    "two": 16.2,
+    "threeToFour": 8,
     "fiveToNine": 0,
     "tenPlus": 0
   },

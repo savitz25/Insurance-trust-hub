@@ -28,26 +28,31 @@ async function fetchPages(
   eqVal: string,
 ): Promise<Record<string, unknown>[]> {
   const rows: Record<string, unknown>[] = [];
-  for (let from = 0; ; from += PAGE) {
+  let cursor = '00000000-0000-0000-0000-000000000000';
+  for (;;) {
     let batch: Record<string, unknown>[] | null = null;
     let last = '';
-    for (let attempt = 0; attempt < 5; attempt += 1) {
+    for (let attempt = 0; attempt < 6; attempt += 1) {
       const { data, error } = await sb
         .from(table)
         .select(columns)
         .eq(eqCol, eqVal)
-        .range(from, from + PAGE - 1);
+        .gt('id', cursor)
+        .order('id', { ascending: true })
+        .limit(PAGE);
       if (!error) {
         batch = (data || []) as Record<string, unknown>[];
         break;
       }
       last = error.message;
-      await sleep(1200 * (attempt + 1));
+      await sleep(1500 * (attempt + 1));
     }
-    if (!batch) throw new Error(`${table} page ${from} failed: ${last}`);
+    if (!batch) throw new Error(`${table} after ${cursor} failed: ${last}`);
     rows.push(...batch);
     process.stderr.write(`\r${table} ${rows.length}`);
     if (batch.length < PAGE) break;
+    cursor = String(batch[batch.length - 1]?.id || '');
+    if (!cursor) throw new Error(`${table} missing id cursor`);
   }
   process.stderr.write('\n');
   return rows;

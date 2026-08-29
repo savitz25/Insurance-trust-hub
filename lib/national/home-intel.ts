@@ -15,15 +15,15 @@ export const INS_HOME_CENSUS_AT = '2026-08-28T14:43:51.753Z';
 /** INS-HOME-003 read-only agency × distinct credentialed-state rollup. */
 export const AGENCY_MULTISTATE = {
   d1: 82071,
-  d2: 77887,
-  d3: 100801,
+  d2: 82071,
+  d3: 109927,
   d4: 117354,
-  one: 61559,
-  two: 10551,
-  threeToFour: 5760,
-  fiveToNine: 17,
+  one: 62202,
+  two: 13289,
+  threeToFour: 6546,
+  fiveToNine: 34,
   tenPlus: 0,
-  retrievedAt: '2026-08-29T05:21:39.295Z',
+  retrievedAt: '2026-08-29T05:48:24.729Z',
   includedStates: ['FL', 'MA', 'OH', 'TX', 'VT'] as const,
   sourceDatasets: [
     'florida_dfs',

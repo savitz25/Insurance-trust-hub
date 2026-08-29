@@ -87,7 +87,7 @@ assert(Math.abs(pct - 100) < 0.15, `percentage total ~100 got ${pct.toFixed(2)}`
 assert(/LICENSED_IN is not SERVES/i.test(f2?.summary || ''), 'LICENSED_IN ≠ SERVES');
 assert(!/best|top agent|trust score|safest/i.test(JSON.stringify(f2)), 'no quality/rank language');
 
-assert(a.agencyMultistate.d2 === 77887, 'payload D2');
+assert(a.agencyMultistate.d2 === 82071, 'payload D2');
 assert(credentialIsAppointment() === false, 'credential ≠ appointment');
 assert(appointmentIsInsurerIdentity() === false, 'appointment ≠ insurer');
 assert(licenseIsEndorsement() === false, 'license ≠ endorsement');
