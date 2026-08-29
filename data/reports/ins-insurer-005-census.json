@@ -1,0 +1,33 @@
+{
+  "task": "INS-INSURER-005",
+  "at": "2026-08-29T22:39:34.226Z",
+  "db_writes": {
+    "identity": 0
+  },
+  "tdi": {
+    "attachedInsurers": 1259,
+    "family": "INTERNAL_ONLY"
+  },
+  "denominators": {
+    "PS1": 20,
+    "PS2": 20,
+    "PS3": 26,
+    "PS4": 26,
+    "PS5": 26,
+    "PS6": 0,
+    "PS7": 0,
+    "PS8": 7,
+    "PS9": 19,
+    "PS10": 26
+  },
+  "publicationReadinessV4": {
+    "PUBLIC_READY": 26,
+    "REVIEW_REQUIRED": 0,
+    "INSUFFICIENT_EVIDENCE": 4910,
+    "IDENTITY_COLLISION": 0,
+    "INTERNAL_ONLY": 1249
+  },
+  "examRows": 26,
+  "legalInsurers": 6185,
+  "identityWrites": 0
+}

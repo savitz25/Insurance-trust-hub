@@ -1,0 +1,38 @@
+{
+  "task": "INS-INSURER-005",
+  "execute": true,
+  "at": "2026-08-29T22:39:26.463Z",
+  "baseline": {
+    "legalInsurer": 6185,
+    "agencies": 82071,
+    "persons": 1029860,
+    "regulatoryEvidence": 6004,
+    "tdi": 5966,
+    "caExams": 7,
+    "flExams": 19
+  },
+  "predicted": {
+    "documents": 20,
+    "examinations": 20,
+    "relationships": 26,
+    "observations": 26,
+    "farmers": 7,
+    "florida": 19,
+    "identityWrites": 0
+  },
+  "writes": {
+    "inserted": 0,
+    "skipped": 26
+  },
+  "secondRunWouldInsert": 0,
+  "fingerprint": "28aadabacd740a71529b0cebd93c2317fdb16aae4ce0b3d8391b1c0b39011469",
+  "after": {
+    "legalInsurer": 6185,
+    "agencies": 82071,
+    "persons": 1029860,
+    "regulatoryEvidence": 6004,
+    "tdi": 5966,
+    "caExams": 7,
+    "flExams": 19
+  }
+}

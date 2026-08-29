@@ -29,6 +29,19 @@ export type LegalInsurerRegulatoryObservationV1 = {
   publicSafe: boolean;
 };
 
+/** Prepared for a later /insurers mount. Not rendered in INS-INSURER-005. */
+export type LegalInsurerExaminationReportV1 = {
+  regulator: string;
+  examType: 'FINANCIAL_EXAMINATION' | 'MARKET_CONDUCT_EXAMINATION';
+  reportDate: string | null;
+  officialSource: string;
+  documentUrl: string | null;
+  documentHash: string | null;
+  attachmentMethod: string;
+  publicSafe: boolean;
+  limitations: string[];
+};
+
 export type LegalInsurerProfileV1 = {
   version: typeof LEGAL_INSURER_PROFILE_VERSION;
   entityId: string;
@@ -39,6 +52,7 @@ export type LegalInsurerProfileV1 = {
   identifiers: Array<{ scheme: string; value: string; confidence: string }>;
   credentialEvidence: never[];
   regulatoryEvidence: LegalInsurerRegulatoryObservationV1[];
+  examinationReports: LegalInsurerExaminationReportV1[];
   marketplaceEvidence: never[];
   federalEvidence: never[];
   sourceClocks: LegalInsurerSourceClock[];
@@ -70,6 +84,7 @@ export function emptyLegalInsurerProfile(partial: {
       : [],
     credentialEvidence: [],
     regulatoryEvidence: [],
+    examinationReports: [],
     marketplaceEvidence: [],
     federalEvidence: [],
     sourceClocks: [
