@@ -4,7 +4,7 @@ Refinement, honesty, accessibility, responsive quality, and closure. `db_writes 
 
 ## A. STATUS
 
-**COMPLETE WITH BLOCKERS** until Preview visual QA and Production promotion land. Local production-build visual QA at 1440 / 768 / 390 / 360 is PASS.
+**COMPLETE WITH BLOCKERS** pending Production promotion after Preview HTML/header verification. Local production-build visual QA at 1440 / 768 / 390 / 360 is PASS. Preview `/` returns 200 with `X-Robots-Tag: noindex`. Preview Deployment Protection (SSO) blocked unauthenticated Chrome; visual proof is the same SHA's local production build.
 
 ## B. RELEASE
 
@@ -12,12 +12,13 @@ Refinement, honesty, accessibility, responsive quality, and closure. `db_writes 
 |---|---|
 | Starting SHA / `origin/main` | `281c52d112ea5187ef31b9d3397c820a55a3f2da` |
 | Branch / worktree | `ins-home-002-national-home-refinement` / `C:\Users\makei\insurance-trust-hub-intel-006` |
-| Implementation SHA | *(commit after this doc is staged)* |
-| Final `origin/main` | *(after merge)* |
-| Preview | *(Vercel Preview URL)* |
+| Implementation SHA | `390db018123c0216e0c3f0ff5300c868119a2cdc` |
+| Pull request | https://github.com/savitz25/Insurance-trust-hub/pull/5 |
+| Final `origin/main` | *(merge commit after PR merge)* |
+| Preview | https://insurance-trust-hub-git-ins-home-002-ab642d-savitz25-s-projects.vercel.app (`dpl_ExdVjTMFwb2Y2YEPvxuqLu1ZX4aB`) |
 | Production | https://www.insurancetrusthub.com |
 | Rollback SHA | `281c52d112ea5187ef31b9d3397c820a55a3f2da` |
-| Previous Production deployment | git-main alias at `281c52d` (INS-HOME-001 audit) |
+| Previous Production deployment | `dpl_7hVXf82wrAgMybeBRse7HpNqbTNa` / https://insurance-trust-i8n6uu1wh-savitz25-s-projects.vercel.app (git-main `281c52d`) |
 
 ## C. BASELINE LOCK
 
