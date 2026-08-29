@@ -12,6 +12,28 @@ export const INS_HOME_INTEL_TASK = 'INTEL-006';
 export const INS_HOME_CENSUS_TASK = 'INS-NAT-FINAL-006';
 export const INS_HOME_CENSUS_AT = '2026-08-28T14:43:51.753Z';
 
+/** INS-HOME-003 read-only agency × distinct credentialed-state rollup. */
+export const AGENCY_MULTISTATE = {
+  d1: 82071,
+  d2: 77887,
+  d3: 100801,
+  d4: 117354,
+  one: 61559,
+  two: 10551,
+  threeToFour: 5760,
+  fiveToNine: 17,
+  tenPlus: 0,
+  retrievedAt: '2026-08-29T05:21:39.295Z',
+  includedStates: ['FL', 'MA', 'OH', 'TX', 'VT'] as const,
+  sourceDatasets: [
+    'florida_dfs',
+    'massachusetts_doi_regulatory',
+    'ohio_odi',
+    'texas_tdi',
+    'vermont_dfr',
+  ] as const,
+} as const;
+
 export const FORBIDDEN_HOME_COPY = [
   'trust score',
   'carrier risk score',
@@ -60,7 +82,7 @@ export type Finding = {
   title: string;
   summary: string;
   chartCaption: string;
-  series: Array<{ key: string; label: string; value: number; note?: string }>;
+  series: Array<{ key: string; label: string; value: number; note?: string; shareOf?: number }>;
   whyItMatters: string;
   doesNotMean: string[];
   source: string;
@@ -97,7 +119,15 @@ export type InsuranceHomeIntelV1 = {
   };
   featuredFindings: Finding[];
   licenseAuthorityComposition: Array<{ key: string; label: string; value: number; source: string }>;
-  multiStateDistribution: Array<{ key: string; label: string; value: number }>;
+  agencyMultistate: {
+    d1: number;
+    d2: number;
+    d3: number;
+    d4: number;
+    includedStates: string[];
+    sourceDatasets: string[];
+  };
+  multiStateDistribution: Array<{ key: string; label: string; value: number; shareOf: number }>;
   evidenceCoverage: EvidenceFamily[];
   geography: Array<{
     state: string;
@@ -304,28 +334,35 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
       },
       {
         id: 'multi-state-licensing',
-        type: 'GAP',
-        title: 'Licensing evidence in this graph is source-dependent, not a 50-state service map',
+        type: 'BENCHMARK',
+        title: 'Some agencies hold credentials across multiple states',
         summary:
-          'Credential rows currently exist for Florida, Texas, Vermont, Massachusetts, and Ohio source families. Other listed states have 0 credential rows in this extract. A credential in a state is not proof the agency serves every consumer there.',
-        chartCaption: 'Credential observations by ingested source state (row grain, not unique agencies)',
-        series: credentialByState.map((row) => ({
-          key: row.state,
-          label: row.state,
-          value: row.credentialRows,
-        })),
+          'Insurance businesses may hold credentials in more than one state. That can matter when researching a business operating across jurisdictions, but a state credential does not mean every office, individual producer, product or policy is available everywhere in that state. LICENSED_IN is not SERVES.',
+        chartCaption: `Canonical agencies grouped by distinct credentialed states among ${fmt(AGENCY_MULTISTATE.d2)} agencies with at least one attached state credential in FL, TX, VT, MA, or OH`,
+        series: [
+          { key: '1', label: '1 credentialed state', value: AGENCY_MULTISTATE.one, shareOf: AGENCY_MULTISTATE.d2 },
+          { key: '2', label: '2 credentialed states', value: AGENCY_MULTISTATE.two, shareOf: AGENCY_MULTISTATE.d2 },
+          { key: '3-4', label: '3–4 credentialed states', value: AGENCY_MULTISTATE.threeToFour, shareOf: AGENCY_MULTISTATE.d2 },
+          { key: '5-9', label: '5–9 credentialed states', value: AGENCY_MULTISTATE.fiveToNine, shareOf: AGENCY_MULTISTATE.d2 },
+          { key: '10+', label: '10+ credentialed states', value: AGENCY_MULTISTATE.tenPlus, shareOf: AGENCY_MULTISTATE.d2 },
+        ],
         whyItMatters:
-          'Insurance licensing is jurisdictional. This extract is richer where a state source has been ingested — not because those states are “better markets.”',
+          'Consumers may encounter agencies operating across multiple jurisdictions and should verify the exact credential relevant to their state.',
         doesNotMean: [
           'LICENSED_IN means SERVES.',
-          'Zero rows means no insurance exists in that state.',
-          'Florida numbers are the national dataset.',
-          'Every person or office of an agency is available statewide.',
+          'Nationwide service.',
+          'Every producer at the agency is licensed in those states.',
+          'Every insurance product is authorized there.',
+          'A physical office exists there.',
+          'Domicile or business address is a licensed state.',
+          'Appointment evidence increases the state count.',
+          'Quality or TrustHub endorsement.',
+          'This is a complete 50-state licensing census.',
         ],
-        source: `${INS_HOME_CENSUS_TASK} credentials-by-state census`,
-        asOf: INS_HOME_CENSUS_AT,
+        source: `Agency license_credentials only (${AGENCY_MULTISTATE.sourceDatasets.join(', ')}). Retrieved ${AGENCY_MULTISTATE.retrievedAt}.`,
+        asOf: AGENCY_MULTISTATE.retrievedAt,
         limitation:
-          'National per-agency licensed-state buckets (1 / 2 / 3–4 / 5–9 / 10+) are not published here because this snapshot does not include that unique-agency rollup. Color/value is credential-row volume.',
+          `Denominator D2=${fmt(AGENCY_MULTISTATE.d2)} agencies with ≥1 included 2-letter jurisdiction credential. D1 canonical agencies=${fmt(AGENCY_MULTISTATE.d1)}. D3 agency×state pairs=${fmt(AGENCY_MULTISTATE.d3)}. D4 contributing credential rows=${fmt(AGENCY_MULTISTATE.d4)}. Person credentials, appointments, domicile, and addresses are excluded. Included states: ${AGENCY_MULTISTATE.includedStates.join(', ')}.`,
       },
       {
         id: 'lines-of-authority',
@@ -353,11 +390,21 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
       },
     ],
     licenseAuthorityComposition: loa,
-    multiStateDistribution: credentialByState.map((row) => ({
-      key: row.state,
-      label: row.state,
-      value: row.credentialRows,
-    })),
+    agencyMultistate: {
+      d1: AGENCY_MULTISTATE.d1,
+      d2: AGENCY_MULTISTATE.d2,
+      d3: AGENCY_MULTISTATE.d3,
+      d4: AGENCY_MULTISTATE.d4,
+      includedStates: [...AGENCY_MULTISTATE.includedStates],
+      sourceDatasets: [...AGENCY_MULTISTATE.sourceDatasets],
+    },
+    multiStateDistribution: [
+      { key: '1', label: '1 credentialed state', value: AGENCY_MULTISTATE.one, shareOf: AGENCY_MULTISTATE.d2 },
+      { key: '2', label: '2 credentialed states', value: AGENCY_MULTISTATE.two, shareOf: AGENCY_MULTISTATE.d2 },
+      { key: '3-4', label: '3–4 credentialed states', value: AGENCY_MULTISTATE.threeToFour, shareOf: AGENCY_MULTISTATE.d2 },
+      { key: '5-9', label: '5–9 credentialed states', value: AGENCY_MULTISTATE.fiveToNine, shareOf: AGENCY_MULTISTATE.d2 },
+      { key: '10+', label: '10+ credentialed states', value: AGENCY_MULTISTATE.tenPlus, shareOf: AGENCY_MULTISTATE.d2 },
+    ],
     evidenceCoverage: [
       { family: 'Identity', status: 'Partial', note: 'Agency/person/legal-insurer identities exist in the graph; public profiles are gated.' },
       { family: 'State licensing', status: 'State-dependent', note: 'Credential rows for FL, TX, VT, MA, OH source families in this extract.' },

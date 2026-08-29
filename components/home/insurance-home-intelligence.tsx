@@ -64,7 +64,12 @@ function Bars({ finding }: { finding: Finding }) {
             <li key={row.key}>
               <div className="flex justify-between gap-3 text-sm">
                 <span>{row.label}</span>
-                <span className="font-semibold tabular-nums">{row.value.toLocaleString('en-US')}</span>
+                <span className="font-semibold tabular-nums">
+                  {row.value.toLocaleString('en-US')}
+                  {row.shareOf
+                    ? ` · ${((100 * row.value) / row.shareOf).toFixed(1)}% of ${row.shareOf.toLocaleString('en-US')}`
+                    : ''}
+                </span>
               </div>
               <div className="mt-1 h-2 rounded-full bg-[#E0F2FE]" aria-hidden>
                 <div
@@ -81,7 +86,8 @@ function Bars({ finding }: { finding: Finding }) {
             <thead>
               <tr>
                 <th scope="col">Measure</th>
-                <th scope="col">Count</th>
+                <th scope="col">Agencies</th>
+                <th scope="col">Share</th>
               </tr>
             </thead>
             <tbody>
@@ -91,6 +97,9 @@ function Bars({ finding }: { finding: Finding }) {
                     {row.label}
                   </th>
                   <td className="tabular-nums">{row.value.toLocaleString('en-US')}</td>
+                  <td className="tabular-nums">
+                    {row.shareOf ? `${((100 * row.value) / row.shareOf).toFixed(1)}% of D2` : '—'}
+                  </td>
                 </tr>
               ))}
             </tbody>

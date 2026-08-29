@@ -1,0 +1,72 @@
+{
+  "task": "INS-HOME-003",
+  "generatedAt": "2026-08-29T05:21:39.295Z",
+  "db_writes": 0,
+  "pass": true,
+  "gates": {
+    "d2_le_d1": true,
+    "bucket_sum_eq_d2": true,
+    "d3_ge_d2": true,
+    "d1_positive": true,
+    "d2_positive": true
+  },
+  "d1": 82071,
+  "d2": 77887,
+  "d3": 100801,
+  "d4": 117354,
+  "buckets": {
+    "one": 61559,
+    "two": 10551,
+    "threeToFour": 5760,
+    "fiveToNine": 17,
+    "tenPlus": 0
+  },
+  "pctD2": {
+    "one": 79,
+    "two": 13.5,
+    "threeToFour": 7.4,
+    "fiveToNine": 0,
+    "tenPlus": 0
+  },
+  "includedStates": [
+    "FL",
+    "MA",
+    "OH",
+    "TX",
+    "VT"
+  ],
+  "sourceDatasets": [
+    "florida_dfs",
+    "massachusetts_doi_regulatory",
+    "ohio_odi",
+    "texas_tdi",
+    "vermont_dfr"
+  ],
+  "sourcesByState": {
+    "FL": [
+      "florida_dfs"
+    ],
+    "MA": [
+      "massachusetts_doi_regulatory"
+    ],
+    "OH": [
+      "ohio_odi"
+    ],
+    "TX": [
+      "texas_tdi"
+    ],
+    "VT": [
+      "vermont_dfr"
+    ]
+  },
+  "exclusions": {
+    "agencyCredentialRowsScanned": 117354,
+    "excludedUnattached": 0,
+    "excludedIdentity": 0,
+    "excludedUnknownState": 0,
+    "excludedAttribution": 0
+  },
+  "identityRule": "agency entity_kind + attached entity_id + CONFIRMED/HIGH_CONFIDENCE on entity and credential attribution",
+  "jurisdictionRule": "upper(trim(jurisdiction)) matches /^[A-Z]{2}$/",
+  "grain": "canonical agency × distinct credential jurisdiction"
+}
