@@ -23,7 +23,7 @@ type Props = { searchParams: Promise<{ q?: string }> };
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { q } = await searchParams;
   return buildMetadata({
-    title: 'Research legal insurance companies | InsuranceTrustHub',
+    title: 'Research legal insurance companies',
     description:
       'Search exact legal insurers by company name or NAIC company code and review official regulatory examination evidence where InsuranceTrustHub has deterministically matched it.',
     path: INS_INSURER_006_ROUTE,

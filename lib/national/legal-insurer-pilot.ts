@@ -320,7 +320,7 @@ export function attachmentConsumerCopy(method: string): string {
 }
 
 export function seoTitle(legalName: string, naic: string): string {
-  return `${legalName} — NAIC ${naic} Regulatory Research | InsuranceTrustHub`;
+  return `${legalName} — NAIC ${naic} Regulatory Research`;
 }
 
 export function seoDescription(legalName: string): string {
