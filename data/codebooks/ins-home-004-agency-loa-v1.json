@@ -1,0 +1,527 @@
+{
+  "version": "ins-home-004-agency-loa-v1",
+  "db_writes": 0,
+  "nationalStory": "INTENTIONALLY_UNCHANGED",
+  "entries": [
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Casualty",
+      "raw_rows": 4589,
+      "unique_agencies": 4589,
+      "statuses": {
+        "active": 4589
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Casualty",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "MA DOI atomic Casualty",
+      "included_in_national_story": false,
+      "consumer_label": "Casualty"
+    },
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Property",
+      "raw_rows": 4571,
+      "unique_agencies": 4571,
+      "statuses": {
+        "active": 4571
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Property",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "MA DOI atomic Property",
+      "included_in_national_story": false,
+      "consumer_label": "Property"
+    },
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Life",
+      "raw_rows": 4311,
+      "unique_agencies": 4311,
+      "statuses": {
+        "active": 4311
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Life",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "MA DOI atomic Life",
+      "included_in_national_story": false,
+      "consumer_label": "Life"
+    },
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Accident & Health or Sickness",
+      "raw_rows": 4195,
+      "unique_agencies": 4195,
+      "statuses": {
+        "active": 4195
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Accident & Health / Health",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "MA DOI atomic Accident & Health or Sickness",
+      "included_in_national_story": false,
+      "consumer_label": "Accident & Health"
+    },
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Personal Lines",
+      "raw_rows": 903,
+      "unique_agencies": 903,
+      "statuses": {
+        "active": 903
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Personal Lines",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "MA Personal Lines is not the same string or proven equivalent of TX Personal Lines Prop and Cas",
+      "included_in_national_story": false,
+      "consumer_label": "Personal Lines"
+    },
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Variable Life & Variable Annuity",
+      "raw_rows": 421,
+      "unique_agencies": 421,
+      "statuses": {
+        "active": 421
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Variable Life / Variable Annuity",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "MA DOI Variable Life & Variable Annuity; no matching agency label in TX/VT in this extract",
+      "included_in_national_story": false,
+      "consumer_label": "Variable Life / Annuity"
+    },
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Travel",
+      "raw_rows": 165,
+      "unique_agencies": 165,
+      "statuses": {
+        "active": 165
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Travel",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "MA DOI Travel",
+      "included_in_national_story": false,
+      "consumer_label": "Travel"
+    },
+    {
+      "state": "MA",
+      "source_dataset": "massachusetts_doi_regulatory",
+      "regulator": "Massachusetts Division of Insurance",
+      "raw_code": null,
+      "raw_label": "Credit",
+      "raw_rows": 22,
+      "unique_agencies": 22,
+      "statuses": {
+        "active": 22
+      },
+      "source_observed_min": "2026-08-27T00:00:00+00:00",
+      "source_observed_max": "2026-08-27T00:00:00+00:00",
+      "normalized_family": "Credit",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "MA DOI Credit",
+      "included_in_national_story": false,
+      "consumer_label": "Credit"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Life, Accident, Health & HMO",
+      "raw_rows": 22707,
+      "unique_agencies": 22706,
+      "statuses": {
+        "UNKNOWN": 22127,
+        "expired": 580
+      },
+      "source_observed_min": "2026-08-15T15:15:21.148+00:00",
+      "source_observed_max": "2026-08-15T15:16:10.795+00:00",
+      "normalized_family": "Life / Accident / Health / HMO (source composite)",
+      "mapping_confidence": "DEFENSIBLE_COMPOSITE",
+      "mapping_basis": "Texas TDI bundled Life, Accident, Health & HMO; not decomposed into MA Life vs MA Health",
+      "included_in_national_story": false,
+      "consumer_label": "Life, Accident, Health & HMO"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Property and Casualty",
+      "raw_rows": 21925,
+      "unique_agencies": 21923,
+      "statuses": {
+        "UNKNOWN": 21497,
+        "expired": 428
+      },
+      "source_observed_min": "2026-08-15T15:15:21.148+00:00",
+      "source_observed_max": "2026-08-15T15:16:10.795+00:00",
+      "normalized_family": "Property & Casualty (source composite)",
+      "mapping_confidence": "DEFENSIBLE_COMPOSITE",
+      "mapping_basis": "Texas TDI single Property and Casualty qualification; not split into MA Property vs Casualty",
+      "included_in_national_story": false,
+      "consumer_label": "Property & Casualty"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Life Agent/Agency",
+      "raw_rows": 3892,
+      "unique_agencies": 3892,
+      "statuses": {
+        "UNKNOWN": 3710,
+        "expired": 182
+      },
+      "source_observed_min": "2026-08-15T15:15:21.147+00:00",
+      "source_observed_max": "2026-08-15T15:16:10.795+00:00",
+      "normalized_family": "Life Agent/Agency",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Texas label mixes life authority with agent/agency class; not treated as MA Life",
+      "included_in_national_story": false,
+      "consumer_label": "Life Agent/Agency"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Personal Lines Prop and Cas",
+      "raw_rows": 974,
+      "unique_agencies": 974,
+      "statuses": {
+        "UNKNOWN": 939,
+        "expired": 35
+      },
+      "source_observed_min": "2026-08-15T15:15:21.148+00:00",
+      "source_observed_max": "2026-08-15T15:16:10.494+00:00",
+      "normalized_family": "Personal Lines",
+      "mapping_confidence": "DEFENSIBLE_COMPOSITE",
+      "mapping_basis": "Texas TDI Personal Lines Prop and Cas is not identical to MA Property or MA Casualty",
+      "included_in_national_story": false,
+      "consumer_label": "Personal Lines (P&C)"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "MGA - P&C",
+      "raw_rows": 516,
+      "unique_agencies": 516,
+      "statuses": {
+        "UNKNOWN": 513,
+        "expired": 3
+      },
+      "source_observed_min": "2026-08-15T15:15:21.351+00:00",
+      "source_observed_max": "2026-08-15T15:16:10.795+00:00",
+      "normalized_family": "MGA - P&C",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Managing General Agent P&C is a Texas role/qualification, not MA Property or Casualty",
+      "included_in_national_story": false,
+      "consumer_label": "MGA - P&C"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Adjuster - P&C",
+      "raw_rows": 96,
+      "unique_agencies": 96,
+      "statuses": {
+        "UNKNOWN": 95,
+        "expired": 1
+      },
+      "source_observed_min": "2026-08-15T15:15:23.098+00:00",
+      "source_observed_max": "2026-08-15T15:16:10.594+00:00",
+      "normalized_family": "Adjuster",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Adjuster authority is claims handling, not a selling LOA comparable to MA Property/Casualty",
+      "included_in_national_story": false,
+      "consumer_label": "Adjuster - P&C"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Limited Lines",
+      "raw_rows": 73,
+      "unique_agencies": 73,
+      "statuses": {
+        "UNKNOWN": 73
+      },
+      "source_observed_min": "2026-08-15T15:15:21.594+00:00",
+      "source_observed_max": "2026-08-15T15:16:09.893+00:00",
+      "normalized_family": "Limited Lines",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Texas Limited Lines without a product split in this extract",
+      "included_in_national_story": false,
+      "consumer_label": "Limited Lines"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Travel",
+      "raw_rows": 47,
+      "unique_agencies": 47,
+      "statuses": {
+        "UNKNOWN": 47
+      },
+      "source_observed_min": "2026-08-15T15:15:21.148+00:00",
+      "source_observed_max": "2026-08-15T15:16:10.299+00:00",
+      "normalized_family": "Travel",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "Texas TDI Travel qualification",
+      "included_in_national_story": false,
+      "consumer_label": "Travel"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Credit",
+      "raw_rows": 46,
+      "unique_agencies": 46,
+      "statuses": {
+        "UNKNOWN": 46
+      },
+      "source_observed_min": "2026-08-15T15:15:21.351+00:00",
+      "source_observed_max": "2026-08-15T15:16:09.489+00:00",
+      "normalized_family": "Credit",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "Texas TDI Credit qualification",
+      "included_in_national_story": false,
+      "consumer_label": "Credit"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Adjuster - All Lines",
+      "raw_rows": 43,
+      "unique_agencies": 43,
+      "statuses": {
+        "UNKNOWN": 43
+      },
+      "source_observed_min": "2026-08-15T15:15:21.478+00:00",
+      "source_observed_max": "2026-08-15T15:16:09.994+00:00",
+      "normalized_family": "Adjuster",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Adjuster \u2014 All Lines is claims authority, not a national selling family",
+      "included_in_national_story": false,
+      "consumer_label": "Adjuster - All Lines"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "County Mutual",
+      "raw_rows": 12,
+      "unique_agencies": 12,
+      "statuses": {
+        "UNKNOWN": 11,
+        "expired": 1
+      },
+      "source_observed_min": "2026-08-15T15:15:28.269+00:00",
+      "source_observed_max": "2026-08-15T15:16:09.488+00:00",
+      "normalized_family": "County Mutual",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Texas County Mutual is a source-specific company/authority class",
+      "included_in_national_story": false,
+      "consumer_label": "County Mutual"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Adjuster -  Worker's Comp.",
+      "raw_rows": 6,
+      "unique_agencies": 6,
+      "statuses": {
+        "UNKNOWN": 6
+      },
+      "source_observed_min": "2026-08-15T15:15:33.151+00:00",
+      "source_observed_max": "2026-08-15T15:16:08.077+00:00",
+      "normalized_family": "Adjuster",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Workers' compensation adjuster is source-specific claims authority",
+      "included_in_national_story": false,
+      "consumer_label": "Adjuster - Worker's Comp."
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Portable Electronic Devices",
+      "raw_rows": 5,
+      "unique_agencies": 5,
+      "statuses": {
+        "UNKNOWN": 5
+      },
+      "source_observed_min": "2026-08-15T15:15:22.996+00:00",
+      "source_observed_max": "2026-08-15T15:16:04.523+00:00",
+      "normalized_family": "Limited Lines",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Portable Electronic Devices is a limited line; not a national Property family",
+      "included_in_national_story": false,
+      "consumer_label": "Portable Electronic Devices"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Life Ins Not Exceeding $25,000",
+      "raw_rows": 3,
+      "unique_agencies": 3,
+      "statuses": {
+        "UNKNOWN": 3
+      },
+      "source_observed_min": "2026-08-15T15:15:51.844+00:00",
+      "source_observed_max": "2026-08-15T15:15:56.48+00:00",
+      "normalized_family": "Life (limited)",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Capped life amount is not equivalent to MA Life",
+      "included_in_national_story": false,
+      "consumer_label": "Life ins. not exceeding $25,000"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Pre-Need",
+      "raw_rows": 2,
+      "unique_agencies": 2,
+      "statuses": {
+        "UNKNOWN": 2
+      },
+      "source_observed_min": "2026-08-15T15:15:36.082+00:00",
+      "source_observed_max": "2026-08-15T15:15:38.294+00:00",
+      "normalized_family": "Pre-Need",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Texas Pre-Need is a limited/source-specific qualification",
+      "included_in_national_story": false,
+      "consumer_label": "Pre-Need"
+    },
+    {
+      "state": "TX",
+      "source_dataset": "texas_tdi",
+      "regulator": "Texas Department of Insurance",
+      "raw_code": null,
+      "raw_label": "Underwriter",
+      "raw_rows": 1,
+      "unique_agencies": 1,
+      "statuses": {
+        "UNKNOWN": 1
+      },
+      "source_observed_min": "2026-08-15T15:15:27.146+00:00",
+      "source_observed_max": "2026-08-15T15:15:27.146+00:00",
+      "normalized_family": "Underwriter",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Underwriter is a role/qualification, not a product LOA family",
+      "included_in_national_story": false,
+      "consumer_label": "Underwriter"
+    },
+    {
+      "state": "VT",
+      "source_dataset": "vermont_dfr",
+      "regulator": "Vermont Department of Financial Regulation",
+      "raw_code": null,
+      "raw_label": "Travel",
+      "raw_rows": 9,
+      "unique_agencies": 9,
+      "statuses": {
+        "UNKNOWN": 9
+      },
+      "source_observed_min": "2026-08-13T20:02:44.416+00:00",
+      "source_observed_max": "2026-08-13T20:02:46.094+00:00",
+      "normalized_family": "Travel",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "Vermont DFR Travel limited line",
+      "included_in_national_story": false,
+      "consumer_label": "Travel"
+    },
+    {
+      "state": "VT",
+      "source_dataset": "vermont_dfr",
+      "regulator": "Vermont Department of Financial Regulation",
+      "raw_code": null,
+      "raw_label": "Limited Line",
+      "raw_rows": 7,
+      "unique_agencies": 7,
+      "statuses": {
+        "UNKNOWN": 7
+      },
+      "source_observed_min": "2026-08-13T20:02:44.418+00:00",
+      "source_observed_max": "2026-08-13T20:02:46.461+00:00",
+      "normalized_family": "Limited Lines",
+      "mapping_confidence": "SOURCE_SPECIFIC",
+      "mapping_basis": "Vermont Limited Line without a product category in this extract",
+      "included_in_national_story": false,
+      "consumer_label": "Limited Line"
+    },
+    {
+      "state": "VT",
+      "source_dataset": "vermont_dfr",
+      "regulator": "Vermont Department of Financial Regulation",
+      "raw_code": null,
+      "raw_label": "Credit",
+      "raw_rows": 4,
+      "unique_agencies": 4,
+      "statuses": {
+        "UNKNOWN": 4
+      },
+      "source_observed_min": "2026-08-13T20:02:44.418+00:00",
+      "source_observed_max": "2026-08-13T20:02:45.675+00:00",
+      "normalized_family": "Credit",
+      "mapping_confidence": "EXACT",
+      "mapping_basis": "Vermont DFR Credit limited line",
+      "included_in_national_story": false,
+      "consumer_label": "Credit"
+    }
+  ]
+}
