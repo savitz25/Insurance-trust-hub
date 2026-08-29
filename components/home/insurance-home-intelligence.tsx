@@ -50,10 +50,16 @@ function Trace({ metric }: { metric: Metric }) {
   );
 }
 
+function countHeaderForFinding(id: string): string {
+  if (id === 'network') return 'Entities';
+  if (id === 'lines-of-authority') return 'LOA observation rows';
+  return 'Agencies';
+}
+
 function Bars({ finding }: { finding: Finding }) {
   const max = Math.max(...finding.series.map((row) => row.value), 1);
   return (
-    <article className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-[0_1px_2px_rgb(10_37_64_/_0.04)]">
+    <article className="min-w-0 rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-[0_1px_2px_rgb(10_37_64_/_0.04)]">
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">{finding.type}</p>
       <h3 className="mt-2 text-xl font-semibold text-[#0A2540]">{finding.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-[#1E293B]">{finding.summary}</p>
@@ -80,13 +86,13 @@ function Bars({ finding }: { finding: Finding }) {
             </li>
           ))}
         </ul>
-        <div className="mt-3 overflow-x-auto">
-          <table className="w-full text-left text-sm">
+        <div className="mt-3 min-w-0 overflow-x-auto">
+          <table className="w-full min-w-0 max-w-full text-left text-sm">
             <caption className="sr-only">{finding.chartCaption}</caption>
             <thead>
               <tr>
                 <th scope="col">Measure</th>
-                <th scope="col">Agencies</th>
+                <th scope="col">{countHeaderForFinding(finding.id)}</th>
                 <th scope="col">Share</th>
               </tr>
             </thead>
@@ -180,17 +186,17 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
             </a>
             <Link href="/directory" data-intel-event="insurance_intel_research_agency">
               <Button size="lg" variant="outline" className="h-12 w-full sm:w-auto">
-                Research licensed agencies
+                Browse public directory listings
               </Button>
             </Link>
           </div>
-          <div className="mt-8 max-w-2xl rounded-xl border border-[#E2E8F0] bg-white p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">Agency directory lookup</p>
-            <p className="mt-1 text-sm text-[#1E293B]">
-              Live public search is agency/provider listings by ZIP. It is not a public producer-profile search and not a
-              6,185-insurer directory.
+          <div className="mt-8 min-w-0 max-w-2xl rounded-xl border border-[#E2E8F0] bg-white p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">Public directory listings</p>
+            <p className="mt-1 text-sm leading-relaxed text-[#1E293B]">
+              Search public insurance directory listings by ZIP. This is a ZIP lookup of directory records, not a search
+              of all graph agencies, producers, or legal insurers. It is not a ranking.
             </p>
-            <div className="mt-4">
+            <div className="mt-4 min-w-0">
               <ZipSearch />
             </div>
           </div>
@@ -209,10 +215,28 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {metrics.map((item) => (
-              <article key={item.id} className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4">
+              <article key={item.id} className="min-w-0 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4">
                 <p className="font-serif text-2xl font-semibold tabular-nums text-[#0A2540]">{item.display}</p>
                 <h3 className="mt-1 text-sm font-semibold text-[#0A2540]">{item.label}</h3>
                 <p className="mt-1 text-xs text-[#1E293B]">{item.grain}</p>
+                {item.id === 'graph-persons' ? (
+                  <p className="mt-2 text-xs leading-5 text-[#64748B]">
+                    Graph persons, not a public people directory. Public people pages remain 0.
+                  </p>
+                ) : null}
+                {item.id === 'graph-agencies' ? (
+                  <p className="mt-2 text-xs leading-5 text-[#64748B]">
+                    Graph agencies with attached-credential evidence. Not the 170,499 public directory listings, and not
+                    a public agency-profile directory (0 published).
+                  </p>
+                ) : null}
+                {item.id === 'graph-legal-insurers' ? (
+                  <p className="mt-2 text-xs leading-5 text-[#64748B]">
+                    Legal insurer identities. Distinct from 13,547{' '}
+                    <code className="text-[10px]">entity_kind=carrier</code> rows and from marketplace / appointed-by
+                    grains.
+                  </p>
+                ) : null}
                 <Trace metric={item} />
               </article>
             ))}
@@ -428,8 +452,8 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
         </div>
       </section>
 
-      <section id="sources" className="scroll-mt-24 bg-white" aria-labelledby="sources-title">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <section id="sources" className="min-w-0 scroll-mt-24 bg-white" aria-labelledby="sources-title">
+        <div className="mx-auto min-w-0 max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">Evidence / sources / limitations</p>
           <h2 id="sources-title" className="mt-2 text-3xl font-semibold text-[#0A2540]">
             Where the numbers come from
@@ -465,7 +489,7 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <p className="mt-6 text-xs text-[#1E293B]">
+          <p className="mt-6 max-w-full break-all text-xs text-[#1E293B]">
             Snapshot {intel.version}. Fingerprint {intel.fingerprint.slice(0, 12)}… db_writes={intel.db_writes}. Florida
             locked fingerprint remains {intel.sourceClocks[1]?.asOf}.
           </p>

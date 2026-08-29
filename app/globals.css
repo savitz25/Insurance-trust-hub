@@ -83,6 +83,8 @@ body {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   color-scheme: light;
   font-feature-settings: "rlig" 1, "kern" 1;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .container {
@@ -257,6 +259,9 @@ body {
   flex-wrap: nowrap;
   align-items: center;
   height: 100%;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   gap: var(--th-nav-gap);
   overflow: visible;
 }
