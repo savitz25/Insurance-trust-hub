@@ -2,7 +2,7 @@
  * INS-INSURER-004 — PDF-native CoCode extraction. Mention ≠ subject. Wave 1 = 0.
  *   npm run check:ins-insurer-004
  */
-import { existsSync, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import { join } from 'path';
 import { CANONICAL_SNAPSHOT_FINGERPRINT } from '../lib/national/fl-state-intel';
 import { buildFloridaStateView } from '../lib/national/fl-state-display';
@@ -68,8 +68,7 @@ assert(mayAttachExamClass('NAME_ONLY') === false, 'name-only not attachable');
 assert(INS_INSURER_004_WAVE1_SIZE === 0 && INS_INSURER_004_PUBLISHED_URLS === 0, 'sitemap expansion equals approved pilot (0)');
 assert(INS_INSURER_004_IDENTITY_WRITES === 0, 'identity writes = 0');
 assert(INS_INSURER_004_DECISION === 'ZERO_PUBLICATION', 'no ranking/recommendation product');
-assert(!existsSync(join(root, 'app/insurers')), 'no /insurers routes');
-assert(!src('app/sitemap.ts').includes('/insurers'), 'sitemap equals pilot 0');
+assert(INS_INSURER_004_WAVE1_SIZE === 0, '004 did not launch /insurers; 006 owns the pilot');
 assert(src('app/sitemap.ts').includes('/carriers'), '/carriers unchanged');
 assert(!src('lib/national/home-intel.ts').includes('INS-INSURER-004'), 'homepage untouched');
 assert(!src('lib/national/fl-state-intel.ts').includes('INS-INSURER-004'), 'florida untouched');

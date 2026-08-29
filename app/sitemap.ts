@@ -18,6 +18,7 @@ import { allCanonicalMedicareCountyPaths } from '@/lib/insurance/cms/medicare-ro
 import { listIndexableContractIds } from '@/lib/insurance/cms/contract-intelligence';
 import { listMedicareEvidencedCarrierSlugs } from '@/lib/carriers/rollup';
 import { carrierPath } from '@/lib/carriers/registry';
+import { publishedProfileSitemapPaths } from '@/lib/national/legal-insurer-pilot';
 
 /**
  * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
@@ -84,6 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/marketplace',
     '/medicare',
     '/carriers',
+    '/insurers',
     '/data/plan-complaint-index',
     '/data/counties',
     '/data/counties/miami-dade-fl',
@@ -223,6 +225,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // INS-INSURER-006: exactly 26 legal-insurer profile URLs. Landing is in staticRoutes.
+  const legalInsurerProfiles: MetadataRoute.Sitemap = publishedProfileSitemapPaths().map((path) => ({
+    url: `${site}${path}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
   const all = [
     ...staticRoutes,
     ...specialtyTopics,
@@ -234,6 +244,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...medicareCounties,
     ...medicareContracts,
     ...carrierPages,
+    ...legalInsurerProfiles,
     ...destinationStates,
     ...destinationCities,
     ...articles,

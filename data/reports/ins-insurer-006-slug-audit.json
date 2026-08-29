@@ -1,0 +1,192 @@
+{
+  "audit": {
+    "n": 26,
+    "baseSlugCollisions": [],
+    "resolvedSlugCollisions": [],
+    "duplicateUrlCount": 0
+  },
+  "insurers": [
+    {
+      "slug": "citizens-property-insurance-corporation",
+      "baseSlug": "citizens-property-insurance-corporation",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "10064",
+      "canonical_legal_name": "CITIZENS PROP INS CORP"
+    },
+    {
+      "slug": "florida-peninsula-insurance-company",
+      "baseSlug": "florida-peninsula-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "10132",
+      "canonical_legal_name": "FLORIDA PENINSULA INS CO"
+    },
+    {
+      "slug": "civic-property-and-casualty-company",
+      "baseSlug": "civic-property-and-casualty-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "10315",
+      "canonical_legal_name": "CIVIC PROP & CAS CO"
+    },
+    {
+      "slug": "neighborhood-spirit-property-and-casualty-company",
+      "baseSlug": "neighborhood-spirit-property-and-casualty-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "10317",
+      "canonical_legal_name": "NEIGHBORHOOD SPIRIT PROP & CAS CO"
+    },
+    {
+      "slug": "exact-property-and-casualty-company-inc",
+      "baseSlug": "exact-property-and-casualty-company-inc",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "10318",
+      "canonical_legal_name": "EXACT PROP & CAS CO INC"
+    },
+    {
+      "slug": "american-strategic-insurance-corporation",
+      "baseSlug": "american-strategic-insurance-corporation",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "10872",
+      "canonical_legal_name": "AMERICAN STRATEGIC INS CORP"
+    },
+    {
+      "slug": "american-traditions-insurance-company",
+      "baseSlug": "american-traditions-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "12359",
+      "canonical_legal_name": "AMERICAN TRADITIONS INS CO"
+    },
+    {
+      "slug": "ocean-harbor-casualty-insurance-company",
+      "baseSlug": "ocean-harbor-casualty-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "12360",
+      "canonical_legal_name": "OCEAN HARBOR CAS INS CO"
+    },
+    {
+      "slug": "centauri-specialty-insurance-company",
+      "baseSlug": "centauri-specialty-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "12573",
+      "canonical_legal_name": "CENTAURI SPECIALTY INS CO"
+    },
+    {
+      "slug": "american-integrity-insurance-company",
+      "baseSlug": "american-integrity-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "12841",
+      "canonical_legal_name": "AMERICAN INTEGRITY INS CO"
+    },
+    {
+      "slug": "olympus-insurance-company",
+      "baseSlug": "olympus-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "12954",
+      "canonical_legal_name": "OLYMPUS INS CO"
+    },
+    {
+      "slug": "american-coastal-insurance-company",
+      "baseSlug": "american-coastal-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "12968",
+      "canonical_legal_name": "AMERICAN COASTAL INS CO"
+    },
+    {
+      "slug": "heritage-property-and-casualty-insurance-company",
+      "baseSlug": "heritage-property-and-casualty-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "14407",
+      "canonical_legal_name": "HERITAGE PROP & CAS INS CO"
+    },
+    {
+      "slug": "safepoint-insurance-company",
+      "baseSlug": "safepoint-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "15341",
+      "canonical_legal_name": "SAFEPOINT INS CO"
+    },
+    {
+      "slug": "monarch-national-insurance-company",
+      "baseSlug": "monarch-national-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "15715",
+      "canonical_legal_name": "MONARCH NATL INS CO"
+    },
+    {
+      "slug": "oscar-insurance-company-of-fl",
+      "baseSlug": "oscar-insurance-company-of-fl",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "16374",
+      "canonical_legal_name": "OSCAR INS CO OF FL"
+    },
+    {
+      "slug": "kin-interinsurance-network",
+      "baseSlug": "kin-interinsurance-network",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "16603",
+      "canonical_legal_name": "KIN INTERINSURANCE NETWORK"
+    },
+    {
+      "slug": "american-mobile-insurance-exchange",
+      "baseSlug": "american-mobile-insurance-exchange",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "16883",
+      "canonical_legal_name": "AMERICAN MOBILE INS EXCHANGE"
+    },
+    {
+      "slug": "slide-insurance-company",
+      "baseSlug": "slide-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "17227",
+      "canonical_legal_name": "SLIDE INS CO"
+    },
+    {
+      "slug": "farmers-insurance-exchange",
+      "baseSlug": "farmers-insurance-exchange",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "21652",
+      "canonical_legal_name": "FARMERS INS EXCH"
+    },
+    {
+      "slug": "fire-insurance-exchange",
+      "baseSlug": "fire-insurance-exchange",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "21660",
+      "canonical_legal_name": "FIRE INS EXCH"
+    },
+    {
+      "slug": "mid-century-insurance-company",
+      "baseSlug": "mid-century-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "21687",
+      "canonical_legal_name": "MID CENTURY INS CO"
+    },
+    {
+      "slug": "truck-insurance-exchange",
+      "baseSlug": "truck-insurance-exchange",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "21709",
+      "canonical_legal_name": "TRUCK INS EXCH"
+    },
+    {
+      "slug": "clear-blue-insurance-company",
+      "baseSlug": "clear-blue-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "28860",
+      "canonical_legal_name": "CLEAR BLUE INS CO"
+    },
+    {
+      "slug": "hartford-insurance-company-of-the-midwest",
+      "baseSlug": "hartford-insurance-company-of-the-midwest",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "37478",
+      "canonical_legal_name": "HARTFORD INS CO OF THE MIDWEST"
+    },
+    {
+      "slug": "celtic-insurance-company",
+      "baseSlug": "celtic-insurance-company",
+      "usedNaicDisambiguation": false,
+      "naic_cocode": "80799",
+      "canonical_legal_name": "CELTIC INS CO"
+    }
+  ]
+}

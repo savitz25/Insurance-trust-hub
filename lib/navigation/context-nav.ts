@@ -35,6 +35,11 @@ const FROM_ALLOWLIST: Array<{ test: (p: string) => boolean; label: string; short
     shortLabel: 'Carriers',
   },
   {
+    test: (p) => p === '/insurers' || p.startsWith('/insurers/'),
+    label: 'Back to legal insurers',
+    shortLabel: 'Insurers',
+  },
+  {
     test: (p) => p === '/data/counties' || p.startsWith('/data/counties/'),
     label: 'Back to County dashboards',
     shortLabel: 'Counties',
@@ -217,6 +222,24 @@ const ROUTE_RULES: RouteRule[] = [
     resolve: () => ({
       back: { href: '/', label: 'Back to Home', shortLabel: 'Home' },
       crumbs: [{ href: '/', label: 'Home' }, { label: 'Health hubs' }],
+    }),
+  },
+  {
+    match: (p) => p === '/insurers',
+    resolve: () => ({
+      back: { href: '/', label: 'Back to Home', shortLabel: 'Home' },
+      crumbs: [{ href: '/', label: 'Home' }, { label: 'Legal insurers' }],
+    }),
+  },
+  {
+    match: (p) => p.startsWith('/insurers/'),
+    resolve: (_path, currentLabel) => ({
+      back: { href: '/insurers', label: 'Back to legal insurers', shortLabel: 'Insurers' },
+      crumbs: [
+        { href: '/', label: 'Home' },
+        { href: '/insurers', label: 'Legal insurers' },
+        { label: currentLabel || 'Legal insurer' },
+      ],
     }),
   },
   {
