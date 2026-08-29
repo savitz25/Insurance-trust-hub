@@ -145,6 +145,8 @@
     "check:ins-home-002": "tsx scripts/check-ins-home-002.ts",
     "check:ins-insurer-001": "tsx scripts/check-ins-insurer-001.ts",
     "national:run-ins-insurer-001": "tsx scripts/national/run-ins-insurer-001-audit.ts",
+    "check:ins-insurer-002": "tsx scripts/check-ins-insurer-002.ts",
+    "national:run-ins-insurer-002": "tsx scripts/national/run-ins-insurer-002-audit.ts",
     "check:ins-nat-012": "tsx scripts/check-ins-nat-012.ts",
     "national:run-ins-nat-012": "python -u scripts/national/run-ins-nat-012-person-loa.py",
     "national:run-ins-home-004-loa": "python -u scripts/national/run-ins-home-004-loa-keyset.py",

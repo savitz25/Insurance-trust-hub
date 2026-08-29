@@ -16,6 +16,19 @@ export type LegalInsurerSourceClock = {
   limitation: string;
 };
 
+export type LegalInsurerRegulatoryObservationV1 = {
+  sourceNativeLabel: string;
+  regulator: string;
+  jurisdiction: string | null;
+  eventDate: string | null;
+  sourceIdentifier: string;
+  description: string | null;
+  sourceUrl: string | null;
+  family: string;
+  attachmentMethod: string;
+  publicSafe: boolean;
+};
+
 export type LegalInsurerProfileV1 = {
   version: typeof LEGAL_INSURER_PROFILE_VERSION;
   entityId: string;
@@ -25,15 +38,18 @@ export type LegalInsurerProfileV1 = {
   domicile: string | null;
   identifiers: Array<{ scheme: string; value: string; confidence: string }>;
   credentialEvidence: never[];
-  regulatoryEvidence: never[];
+  regulatoryEvidence: LegalInsurerRegulatoryObservationV1[];
   marketplaceEvidence: never[];
   federalEvidence: never[];
   sourceClocks: LegalInsurerSourceClock[];
   limitations: string[];
+  whatThisDoesNotMean: string[];
   traceability: 'Trace This Record';
   score: null;
   recommendation: null;
   trustRating: null;
+  enforcementScore: null;
+  complaintScore: null;
 };
 
 export function emptyLegalInsurerProfile(partial: {
@@ -74,9 +90,16 @@ export function emptyLegalInsurerProfile(partial: {
       'Missing evidence is not a zero or a clean record.',
       'Brand names are not legal insurers unless a CONFIRMED bridge exists.',
     ],
+    whatThisDoesNotMean: [
+      'Presence of a regulatory observation is not a quality score.',
+      'Absence of an attached observation is not a clean record.',
+      'A source event is not current license status unless that source proves it.',
+    ],
     traceability: 'Trace This Record',
     score: null,
     recommendation: null,
     trustRating: null,
+    enforcementScore: null,
+    complaintScore: null,
   };
 }
