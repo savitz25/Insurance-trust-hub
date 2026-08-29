@@ -1,0 +1,100 @@
+{
+  "task": "INS-INSURER-001",
+  "generatedAt": "2026-08-29T19:44:03.526Z",
+  "db_writes": {
+    "schema": 0,
+    "publication": 0,
+    "data_mutation": 0
+  },
+  "pagination": "keyset order=id gt=id; no unordered range",
+  "grains": {
+    "person": 1029860,
+    "agency": 82071,
+    "legal_insurer": 6185,
+    "carrier": 13547,
+    "insurance_group": 720,
+    "consumer_brand": 14,
+    "providers": 170499,
+    "credentials": 1531158,
+    "loa": 1791158,
+    "marketplace": 1300108,
+    "regulatory_evidence": 5978
+  },
+  "carrierPrefixes": {
+    "fl_dfs": 12030,
+    "tx_tdi": 1517
+  },
+  "carrierKindExplanation": "entity_kind=carrier is appointing-entity grain (FL DFS + TX TDI keys), not the NAIC legal-insurer spine.",
+  "legalInsurerExplanation": "entity_kind=legal_insurer is one NAIC CoCode from Listing of Companies. One CoCode = one legal insurer.",
+  "naic": {
+    "identifierRows": 6185,
+    "withCode": 6185,
+    "missing": 0,
+    "duplicateCodes": 0,
+    "oneEntityMultipleNaic": 0,
+    "source": "national_entity_identifiers.scheme=naic_cocode + provisional_key legal-insurer:naic:{CoCode}",
+    "confidence": "CONFIRMED official CoCode; name never invents NAIC",
+    "sourceClock": "2026-08-27T00:00:00.000Z"
+  },
+  "names": {
+    "exactDuplicateLegalNames": 29,
+    "normalizedDuplicateLegalNames": 29,
+    "note": "Same legal name + different CoCode is two insurers. Search similarity is not a merge."
+  },
+  "brands": {
+    "consumer_brand": 14,
+    "USES_BRAND": 0,
+    "curatedCarrierPages": 14,
+    "note": "/carriers is a curated brand/Medicare hub, not the 6,185 legal-insurer graph."
+  },
+  "evidence": {
+    "credentialsOnLegalInsurer": 0,
+    "regulatory": {
+      "total": 5978,
+      "insurerAttached": 5713,
+      "agencyAttached": 0,
+      "personAttached": 0,
+      "carrierAttached": 0,
+      "unattached": 265,
+      "attached": 5713,
+      "attachmentMethod": "exact NAIC / source-native identifier; name-only prohibited"
+    },
+    "marketplace": {
+      "total": 1300108,
+      "attached": 731990,
+        "unattached": 568118,
+      "sampleAttachedKinds": {
+        "person": 200
+      },
+      "note": "Marketplace observations are not a legal-insurer census. Brand-name similarity is not attachment."
+    }
+  },
+  "appointments": {
+    "APPOINTER_RESOLVES_TO": 1510,
+    "USES_BRAND": 0,
+    "MEMBER_OF_GROUP": 3844,
+    "appointed_by": 2680,
+    "WORKS_FOR": 0,
+    "unresolvedFlPolicy": "FL DFS appointing number is never treated as NAIC CoCode",
+    "txConfirmedBridges": 1510
+  },
+  "eligibility": {
+    "PUBLIC_READY": 0,
+    "REVIEW_REQUIRED": 0,
+    "INSUFFICIENT_EVIDENCE": 6185,
+    "IDENTITY_COLLISION": 0,
+    "INTERNAL_ONLY": 0
+  },
+  "publication": {
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "mayPublishLegalInsurer": false,
+    "mayPublishAgency": true,
+    "publicPeople": 0,
+    "publicGraphAgencies": 0,
+    "publicLegalInsurers": 0,
+    "publishedUrls": 0,
+    "decision": "ZERO_PUBLICATION",
+    "sitemapBefore": 0,
+    "sitemapAfter": 0
+  }
+}
