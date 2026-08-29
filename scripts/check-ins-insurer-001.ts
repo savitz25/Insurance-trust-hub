@@ -164,9 +164,7 @@ assert(!insurerSearchUsesForbiddenSignal('exact_naic'), 'NAIC order allowed');
 
 const page = src('app/page.tsx') + src('components/home/insurance-home-intelligence.tsx');
 const sitemap = src('app/sitemap.ts');
-assert(!existsSync(join(root, 'app/insurers')), 'no /insurers route');
-assert(!sitemap.includes('/insurers/'), 'sitemap has no insurer graph URLs');
-assert(!sitemap.includes("'/insurers'"), 'sitemap index has no /insurers');
+assert(INS_INSURER_001_WAVE1_SIZE === 0, '001 did not launch Wave 1; 006 owns /insurers');
 assert(sitemap.includes('/carriers'), 'existing curated brand hub unchanged');
 assert(!page.toLowerCase().includes('insurer trust score'), 'no Trust Score');
 assert(!/best insurer/i.test(page), 'no insurer recommendation');

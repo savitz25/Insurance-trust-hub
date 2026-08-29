@@ -149,6 +149,7 @@
     "check:ins-insurer-003": "tsx scripts/check-ins-insurer-003.ts",
     "check:ins-insurer-004": "tsx scripts/check-ins-insurer-004.ts",
     "check:ins-insurer-005": "tsx scripts/check-ins-insurer-005.ts",
+    "check:ins-insurer-006": "tsx scripts/check-ins-insurer-006.ts",
     "national:run-ins-insurer-005-sample": "python -u scripts/national/ins-insurer-005-fl-sample.py",
     "national:run-ins-insurer-005-fl-mc": "python -u scripts/national/ins-insurer-005-fl-mc.py",
     "national:ingest-ins-insurer-005": "tsx scripts/national/ingest-ins-insurer-005.ts",

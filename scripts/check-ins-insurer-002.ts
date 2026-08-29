@@ -170,8 +170,7 @@ assert(profile.score === null && profile.enforcementScore === null && profile.co
 assert(profile.whatThisDoesNotMean.some((s) => /clean record/.test(s)), 'absence semantics on contract');
 
 assert(INSURER_SEARCH_RANK[0] === 'exact_naic', 'search ranking preserved');
-assert(!existsSync(join(root, 'app/insurers')), 'no orphan insurer routes');
-assert(!src('app/sitemap.ts').includes('/insurers'), 'sitemap has no /insurers');
+assert(INS_INSURER_002_WAVE1_SIZE === 0, '002 did not launch /insurers; 006 owns the pilot');
 assert(src('app/sitemap.ts').includes('/carriers'), '/carriers semantics unchanged in sitemap');
 assert(src('lib/carriers/registry.ts').includes('Curated carrier identity'), '/carriers brand hub unchanged');
 assert(!src('lib/national/home-intel.ts').includes('INS-INSURER-002'), 'no homepage insurer search');
