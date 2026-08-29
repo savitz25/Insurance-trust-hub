@@ -1,0 +1,2944 @@
+{
+  "task": "INS-INSURER-004",
+  "retrieved_at": "2026-08-29T20:40:00Z",
+  "denominators": {
+    "X1": 129,
+    "X2": 129,
+    "X3": 10,
+    "X4": 7,
+    "X5": 0,
+    "X6": 1,
+    "X7": 6,
+    "X8": 118,
+    "X9": 4,
+    "X10": 0,
+    "X11": 7,
+    "X12": 7,
+    "X13": 0,
+    "mention_only_cocode_instances": 58,
+    "class_counts": {
+      "NAME_ONLY": 118,
+      "COCODE_MENTION_ONLY": 6,
+      "AMBIGUOUS": 4,
+      "CONSOLIDATED_EXAM_EXPLICIT": 1
+    },
+    "class_sum": 129
+  },
+  "documents": [
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/2-10-HBW-Warranty-of-California-Inc-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "2-10 HBW Warranty of California, Inc - as of 12-31-21"
+      ],
+      "listing_name": "2-10 HBW Warranty of California, Inc - as of 12-31-21",
+      "document_hash": "d12b8cea171cb340295052c1f76c7ce55a0c53f0b60a69df9543297104b6f9eb",
+      "file_size": 255855,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/21st-Century-Casualty-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "21st Century Casualty Company - as of 12-31-21",
+        "21st Century Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "21st Century Casualty Company - as of 12-31-21",
+      "document_hash": "c78e6453ebfcfc3fe69725c87ff6ef6ef36b045e90a5765f9493973db4c9b7d8",
+      "file_size": 662984,
+      "page_count": 34,
+      "text_ok": true,
+      "classification": "COCODE_MENTION_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [
+        "10245",
+        "40169"
+      ],
+      "cover_subjects": [
+        "21st CENTURY INSURANCE COMPANY",
+        "21st CENTURY CASUALTY COMPANY"
+      ],
+      "review_reason": "cocodes_found_but_not_proven_as_examination_subjects",
+      "all_cocodes_found": [
+        "10245",
+        "40169"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/AetnaLifeInsuranceCoMLR11.pdf",
+      "listing_names": [
+        "Aetna Life Insurance Company - as of 12-31-11 - MLR Report"
+      ],
+      "listing_name": "Aetna Life Insurance Company - as of 12-31-11 - MLR Report",
+      "document_hash": "223bba35b01925f1465a7764837941d1e8cab5fab13159037e568267c9c2b322",
+      "file_size": 267074,
+      "page_count": 10,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/All-Savers-Life-Insurance-Company-of-California-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "All Savers Life Insurance Company of California - as of 12-31-22"
+      ],
+      "listing_name": "All Savers Life Insurance Company of California - as of 12-31-22",
+      "document_hash": "00d61189b7b911143125bfcc355459120c5f7c8cbf0096d90956310a3301f511",
+      "file_size": 203575,
+      "page_count": 13,
+      "text_ok": true,
+      "classification": "AMBIGUOUS",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "ALL SAVERS LIFE INSURANCE COMPANY",
+        "OF CALIFORNIA"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Allianz-Reinsurance-America-Inc-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Allianz Reinsurance America, Inc. - as of 12-31-23"
+      ],
+      "listing_name": "Allianz Reinsurance America, Inc. - as of 12-31-23",
+      "document_hash": "3a1f0ee86e7734803cac30b20d2eb9de95ce64954d0a1ccc2b1b7ba328b0db67",
+      "file_size": 355956,
+      "page_count": 24,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/American-Contractors-Indemnity-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "American Contractors Indemnity Company - as of 12-31-23"
+      ],
+      "listing_name": "American Contractors Indemnity Company - as of 12-31-23",
+      "document_hash": "5654db3d6fec53bfcd9e573500bede5f7cf63c69dd8cc51d9d5194d5d5b119a2",
+      "file_size": 357155,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "COCODE_MENTION_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [
+        "10367"
+      ],
+      "cover_subjects": [],
+      "review_reason": "cocodes_found_but_not_proven_as_examination_subjects",
+      "all_cocodes_found": [
+        "10367"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/American-Home-Shield-of-California-Inc-2020-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "American Home Shield of California, Inc. - as of 12-31-20"
+      ],
+      "listing_name": "American Home Shield of California, Inc. - as of 12-31-20",
+      "document_hash": "3084a89ea2a1ad610af325d28274c7aa2c2fb1040c1c93245b211b4d2376a42e",
+      "file_size": 167371,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/AMT-Home-Protection-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "AMT Home Protection Company - as of 12-31-24"
+      ],
+      "listing_name": "AMT Home Protection Company - as of 12-31-24",
+      "document_hash": "a0242392cabce3dc867993a8a4c843fe8f5a4f96b48681df9e26293e95dba55a",
+      "file_size": 326814,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Anchor-General-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Anchor General Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Anchor General Insurance Company - as of 12-31-22",
+      "document_hash": "e99b974d8d8942d0b47cb757477ed05985a756298616af2bb4f0cc5e94c0749a",
+      "file_size": 367577,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "ANCHOR GENERAL INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Anthem-Blue-Cross-Life-and-Health-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Anthem Blue Cross Life &amp; Health Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Anthem Blue Cross Life &amp; Health Insurance Company - as of 12-31-22",
+      "document_hash": "3ac2f751ccd20d1e853befc1961c9bd107ad4ac6483e32c77d2be2d6f1367f9e",
+      "file_size": 711829,
+      "page_count": 18,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "ANTHEM BLUE CROSS LIFE AND HEALTH"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Anthem-Blue-Cross-Life-and-Health-Insurance-Company-MLR-Examination-2022-Final-Report.pdf",
+      "listing_names": [
+        "Anthem Blue Cross Life &amp; Health Insurance Company - as of 12-31-22 - MLR Report"
+      ],
+      "listing_name": "Anthem Blue Cross Life &amp; Health Insurance Company - as of 12-31-22 - MLR Report",
+      "document_hash": "c9f548682bce0d45349f6c72caffbccd922e74ecb96fc2c6228d5b108b8d4e83",
+      "file_size": 333683,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_validated_exam_subject_cocode",
+      "all_cocodes_found": [
+        "21215"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Aspire-General-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Aspire General Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Aspire General Insurance Company - as of 12-31-23",
+      "document_hash": "672a51dfee5267235eead56a2f5209afbc74f4853afaf850e5d81aa05cbb99e1",
+      "file_size": 347978,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Atlas-National-Title-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Atlas National Title Insurance Company - as of 12-31-2022"
+      ],
+      "listing_name": "Atlas National Title Insurance Company - as of 12-31-2022",
+      "document_hash": "347d8eb906c6cc91a66b7af774335feb927c17a288ff4bdbd65f079517bd555d",
+      "file_size": 266188,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Automobile-Club-of-Southern-California-Life-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Automobile Club of Southern California Life Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "Automobile Club of Southern California Life Insurance Company - as of 12-31-21",
+      "document_hash": "49a80e34f958f490ee1712cf76ffa8da018c6230008ff1d7e0990844af03b684",
+      "file_size": 350599,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Blue-Shield-of-California-Life-Health-Insurance-Company-2024-Exam-Report.pdf",
+      "listing_names": [
+        "Blue Shield of California Life &amp; Health Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Blue Shield of California Life &amp; Health Insurance Company - as of 12-31-24",
+      "document_hash": "1f831e72a9313917e925a1b2336cf4aa397e83c4662ad8cb80ae061689b3aac1",
+      "file_size": 275114,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "BLUE SHIELD OF CALIFORNIA LIFE & HEALTH"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Blue-Shield-of-California-Life-Health-Insurance-Company-MLR-Examination-2023-Final-Report.pdf",
+      "listing_names": [
+        "Blue Shield of California Life and Health Insurance Company - as of 12-31-23 - MLR Report"
+      ],
+      "listing_name": "Blue Shield of California Life and Health Insurance Company - as of 12-31-23 - MLR Report",
+      "document_hash": "85a0bed99b53a5c47065d7d440d84b68b688dc7e7f6a2047fd3eecc52898f628",
+      "file_size": 236234,
+      "page_count": 10,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Business-Alliance-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Business Alliance Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Business Alliance Insurance Company - as of 12-31-24",
+      "document_hash": "d03be264dc59bf518c209771282dce83ca63f550aaab7fde3e614ac1034e53ad",
+      "file_size": 304220,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Automobile-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "California Automobile Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "California Automobile Insurance Company - as of 12-31-21",
+      "document_hash": "6fad66c59483762f1f48925e7149d74fbf9381df59ff32e5f4e9c37d88836f1b",
+      "file_size": 287624,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Capital-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "California Capital Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "California Capital Insurance Company - as of 12-31-24",
+      "document_hash": "3e589bc27416e6c866deb3f6cab2cac587ab55173c330335038feb6b50e55dc7",
+      "file_size": 293442,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CALIFORNIA CAPITAL INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Casualty-Fire-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "California Casualty &amp; Fire Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "California Casualty &amp; Fire Insurance Company - as of 12-31-21",
+      "document_hash": "e62794607518a6a47f6d925b93202588b97a9da3f00fb977d70686f8b80c3018",
+      "file_size": 347739,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CALIFORNIA CASUALTY & FIRE INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Casualty-Compensation-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "California Casualty Compensation Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "California Casualty Compensation Insurance Company - as of 12-31-21",
+      "document_hash": "b5fa4628c1a70c5c5f36f676000c877b43d7723ddf2cf3958b16cf252d6f86c0",
+      "file_size": 306919,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Casualty-Indemnity-Exchange-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "California Casualty Indemnity Exchange - as of 12-31-21"
+      ],
+      "listing_name": "California Casualty Indemnity Exchange - as of 12-31-21",
+      "document_hash": "68e97680a742d323c3b1a55e4dbce8f1266b5190bfb2386bc1d00d471a72bb40",
+      "file_size": 323826,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Earthquake-Authority-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "California Earthquake Authority - as of 12-31-22"
+      ],
+      "listing_name": "California Earthquake Authority - as of 12-31-22",
+      "document_hash": "604283c656bf87e8dae86e32acc3253b366a732c2c891801e16e9b786deebc4c",
+      "file_size": 218154,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CALIFORNIA EARTHQUAKE AUTHORITY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Fair-Plan-Association-Exam-Report-Final-as-of-9-30-2023.pdf",
+      "listing_names": [
+        "California Fair Plan Association - as of 09-30-23"
+      ],
+      "listing_name": "California Fair Plan Association - as of 09-30-23",
+      "document_hash": "41403aa31c5c487cdffa2a6a83b7a44807cc1affca6fb6e8e29ebcc5df9d6a42",
+      "file_size": 467145,
+      "page_count": 48,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Fair-Plan-Assoication-Operational-Assessment-Final-Report-as-of-6-15-2022-ADA.pdf",
+      "listing_names": [
+        "California Fair Plan Association Operational Assessment Report as of 06-15-22"
+      ],
+      "listing_name": "California Fair Plan Association Operational Assessment Report as of 06-15-22",
+      "document_hash": "7da1cff2fa9e9de5d2bd2ea721bfd851a3faf845923fd3cc81fc3c3c9ef0e655",
+      "file_size": 339346,
+      "page_count": 31,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-General-Underwriters-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "California General Underwriters Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "California General Underwriters Insurance Company - as of 12-31-21",
+      "document_hash": "8a99d21fb93f41bcaadf8b3c122c7e152923396659fa9651f58f6c55da83511d",
+      "file_size": 269883,
+      "page_count": 18,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Insurance-Company-2021-Exam-Report-ADA-EQ.pdf",
+      "listing_names": [
+        "California Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "California Insurance Company - as of 12-31-21",
+      "document_hash": "f57d75bf40b5271e310628dadfa9a3d5c4a1767bc3be68168d34af5f2638e4d2",
+      "file_size": 312050,
+      "page_count": 36,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CALIFORNIA INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Life-and-Health-Insurance-Guarantee-Association-2023-Exam-Report.pdf",
+      "listing_names": [
+        "California Life and Health Insurance Guarantee Association - as of 06-30-23"
+      ],
+      "listing_name": "California Life and Health Insurance Guarantee Association - as of 06-30-23",
+      "document_hash": "a5ae6eaa4746955bb36b9765e361bb1b0d9e67537a348893e4122504049edd7e",
+      "file_size": 241406,
+      "page_count": 22,
+      "text_ok": true,
+      "classification": "AMBIGUOUS",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CALIFORNIA LIFE AND HEALTH",
+        "INSURANCE GUARANTEE ASSOCIATION"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Insurance-Guarantee-Association-2024-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "California Insurance Guarantee Association - as of 06-30-24"
+      ],
+      "listing_name": "California Insurance Guarantee Association - as of 06-30-24",
+      "document_hash": "02f631ef12cae88853fabcd792f58ff50f2cb80d2e677a5940f19d710f96c6bb",
+      "file_size": 292957,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Members-Title-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "California Members Title Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "California Members Title Insurance Company - as of 12-31-24",
+      "document_hash": "c73ff7fddc5cf05e2f07eb8186e9e390430565fc31e05bf0754ae429f1687fd4",
+      "file_size": 344293,
+      "page_count": 18,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Mutual-Insurance-Company-2023-Exam-Report.pdf",
+      "listing_names": [
+        "California Mutual Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "California Mutual Insurance Company - as of 12-31-23",
+      "document_hash": "bd25e2861e14a47a106f0c7360b8d915547bd562707110537f8a478925da092d",
+      "file_size": 245577,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CALIFORNIA MUTUAL INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/CAMICO-Mutual-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Camico Mutual Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Camico Mutual Insurance Company - as of 12-31-22",
+      "document_hash": "9bef0796d7cd4926a6611ed4a88b58bd28d23eac7558629dd1eefa9e8b1c6572",
+      "file_size": 231243,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CAMICO MUTUAL INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/CareAmerica-Life-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "CareAmerica Life Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "CareAmerica Life Insurance Company - as of 12-31-24",
+      "document_hash": "5804ad94057017550356f159c9202ec0031670abd89fc0e21b33d70cf67ae925",
+      "file_size": 252894,
+      "page_count": 13,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CAREAMERICA LIFE INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Care-West-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Care West Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "Care West Insurance Company - as of 12-31-21",
+      "document_hash": "3be1cda09e1713324597b92c748f9fb142791890651518e865d05bcf5c5c3022",
+      "file_size": 216566,
+      "page_count": 13,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CARE WEST INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Century-National-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Century National Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Century National Insurance Company - as of 12-31-22",
+      "document_hash": "28d0a05f7dea09127cb8fe780ab806f5a05ffafc71ac4ab8fcc41ac8f7ea53a3",
+      "file_size": 312479,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf",
+      "listing_names": [
+        "Civic Property and Casualty Company - as of 12-31-21",
+        "Exact Property and Casualty Company - as of 12-31-21",
+        "Farmers Insurance Exchange - as of 12-31-21",
+        "Farmers Reinsurance Company - as of 12-31-21",
+        "Fire Insurance Exchange - as of 12-31-21",
+        "Mid-Century Insurance Company - as of 12-31-21",
+        "Neighborhood Spirit Property and Casualty Company - as of 12-31-21",
+        "Truck Insurance Exchange - as of 12-31-21"
+      ],
+      "listing_name": "Civic Property and Casualty Company - as of 12-31-21",
+      "document_hash": "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0",
+      "file_size": 2111102,
+      "page_count": 111,
+      "text_ok": true,
+      "classification": "CONSOLIDATED_EXAM_EXPLICIT",
+      "examined_entities": [
+        {
+          "source_name": "FARMERS INSURANCE EXCHANGE",
+          "naic_cocode": "21652",
+          "canonical_entity_id": "dcd810e1-3f6e-495b-8992-e797206676bb",
+          "canonical_name": "FARMERS INS EXCH",
+          "evidence_location": "group/company table",
+          "attachment_class": "CONSOLIDATED_EXAM_EXPLICIT"
+        },
+        {
+          "source_name": "FIRE INSURANCE EXCHANGE",
+          "naic_cocode": "21660",
+          "canonical_entity_id": "eaf003dc-4715-4716-b0b1-a40bd8d3e1a9",
+          "canonical_name": "FIRE INS EXCH",
+          "evidence_location": "group/company table",
+          "attachment_class": "CONSOLIDATED_EXAM_EXPLICIT"
+        },
+        {
+          "source_name": "TRUCK INSURANCE EXCHANGE",
+          "naic_cocode": "21709",
+          "canonical_entity_id": "f91b9a9a-d163-4099-a81d-8d79c2cec92d",
+          "canonical_name": "TRUCK INS EXCH",
+          "evidence_location": "group/company table",
+          "attachment_class": "CONSOLIDATED_EXAM_EXPLICIT"
+        },
+        {
+          "source_name": "CIVIC PROPERTY AND CASUALTY COMPANY",
+          "naic_cocode": "10315",
+          "canonical_entity_id": "174798e8-6887-4ab4-9c8f-54d72c5e758d",
+          "canonical_name": "CIVIC PROP & CAS CO",
+          "evidence_location": "group/company table",
+          "attachment_class": "CONSOLIDATED_EXAM_EXPLICIT"
+        },
+        {
+          "source_name": "EXACT PROPERTY AND CASUALTY COMPANY",
+          "naic_cocode": "10318",
+          "canonical_entity_id": "411a90b1-61de-4bec-8897-9f178ffb6a33",
+          "canonical_name": "EXACT PROP & CAS CO INC",
+          "evidence_location": "group/company table",
+          "attachment_class": "CONSOLIDATED_EXAM_EXPLICIT"
+        },
+        {
+          "source_name": "MID-CENTURY INSURANCE COMPANY",
+          "naic_cocode": "21687",
+          "canonical_entity_id": "488c66f8-8f2b-44c8-955a-71aaefcc9ca5",
+          "canonical_name": "MID CENTURY INS CO",
+          "evidence_location": "group/company table",
+          "attachment_class": "CONSOLIDATED_EXAM_EXPLICIT"
+        },
+        {
+          "source_name": "NEIGHBORHOOD SPIRIT PROPERTY AND CASUALTY COMPANY",
+          "naic_cocode": "10317",
+          "canonical_entity_id": "e8270a89-1d8d-4031-85e2-7231dacfd3f8",
+          "canonical_name": "NEIGHBORHOOD SPIRIT PROP & CAS CO",
+          "evidence_location": "group/company table",
+          "attachment_class": "CONSOLIDATED_EXAM_EXPLICIT"
+        }
+      ],
+      "mentioned_only": [
+        "21598",
+        "21601",
+        "10806",
+        "21679",
+        "21628",
+        "36889",
+        "21636",
+        "21695",
+        "24392",
+        "28673",
+        "21644",
+        "25089",
+        "33120",
+        "12774",
+        "11034",
+        "19658",
+        "11185",
+        "11800",
+        "41513",
+        "43699",
+        "29254",
+        "41688",
+        "36404",
+        "12963",
+        "23795",
+        "10805",
+        "28487",
+        "25232",
+        "10184",
+        "10710",
+        "32220",
+        "34789",
+        "43974",
+        "20796",
+        "10245",
+        "22926",
+        "38067",
+        "40649",
+        "40169",
+        "26298",
+        "13938"
+      ],
+      "cover_subjects": [
+        "FARMERS INSURANCE EXCHANGE",
+        "FIRE INSURANCE EXCHANGE",
+        "TRUCK INSURANCE EXCHANGE",
+        "CIVIC PROPERTY AND CASUALTY COMPANY",
+        "EXACT PROPERTY AND CASUALTY COMPANY",
+        "MID-CENTURY INSURANCE COMPANY",
+        "NEIGHBORHOOD SPIRIT PROPERTY AND CASUALTY COMPANY",
+        "FARMERS REINSURANCE COMPANY"
+      ],
+      "review_reason": null,
+      "all_cocodes_found": [
+        "21598",
+        "21652",
+        "21709",
+        "21660",
+        "10315",
+        "10317",
+        "10318",
+        "21687",
+        "21601",
+        "10806",
+        "21679",
+        "21628",
+        "36889",
+        "21636",
+        "21695",
+        "24392",
+        "28673",
+        "21644",
+        "25089",
+        "33120",
+        "12774",
+        "11034",
+        "19658",
+        "11185",
+        "11800",
+        "41513",
+        "43699",
+        "29254",
+        "41688",
+        "36404",
+        "12963",
+        "23795",
+        "10805",
+        "28487",
+        "25232",
+        "10184",
+        "10710",
+        "32220",
+        "34789",
+        "43974",
+        "20796",
+        "10245",
+        "22926",
+        "38067",
+        "40649",
+        "40169",
+        "26298",
+        "13938"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Civil-Service-Employees-Insurance-Company-2023-Exam-Report-2.pdf",
+      "listing_names": [
+        "Civil Service Employees Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Civil Service Employees Insurance Company - as of 12-31-23",
+      "document_hash": "1185be9018534659e6db7617e073fbe69834c67ca1f08ab2ab18654075a04172",
+      "file_size": 258493,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CIVIL SERVICE EMPLOYEES"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Coast-National-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Coast National Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "Coast National Insurance Company - as of 12-31-21",
+      "document_hash": "32f1261eb29d1b7af687a12a1449fd5e4fffe3739df7f861eab3b99d3e704f7c",
+      "file_size": 465849,
+      "page_count": 27,
+      "text_ok": true,
+      "classification": "COCODE_MENTION_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [
+        "10245",
+        "40169"
+      ],
+      "cover_subjects": [
+        "COAST NATIONAL INSURANCE COMPANY"
+      ],
+      "review_reason": "cocodes_found_but_not_proven_as_examination_subjects",
+      "all_cocodes_found": [
+        "10245",
+        "40169"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Coastal-Select-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Coastal Select Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Coastal Select Insurance Company - as of 12-31-22",
+      "document_hash": "22a320917c90a4132361f50dff3621ff076ed2e1adb92a1ced2caaf4f6eba77d",
+      "file_size": 294356,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "COASTAL SELECT INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Commerce-West-Insurance-Company-2023-Exam-Report.pdf",
+      "listing_names": [
+        "Commerce West Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Commerce West Insurance Company - as of 12-31-23",
+      "document_hash": "88335dc61d3507324722ee62b07ad291e54363493eb9d77d36fd63ccb186c81d",
+      "file_size": 259484,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "COMMERCE WEST INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Companion-Life-Insurance-Company-of-CA-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Companion Life Insurance Company of California - as of 12-31-21"
+      ],
+      "listing_name": "Companion Life Insurance Company of California - as of 12-31-21",
+      "document_hash": "1d85637567e9d3e2e0952b831faf314573ce87c77eb77376ff9543603effb889",
+      "file_size": 232836,
+      "page_count": 23,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Complete-Appliance-Protection-Inc-2021-Exam-Final-Report-ADA.pdf",
+      "listing_names": [
+        "Complete Appliance Protection, Inc. - as of 12-31-2021"
+      ],
+      "listing_name": "Complete Appliance Protection, Inc. - as of 12-31-2021",
+      "document_hash": "69b657d17bf270b0984cfbbc17d2cd34dcfa219386e0d3470ecef4591b4faf08",
+      "file_size": 280658,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "COMPLETE APPLIANCE PROTECTION, INC."
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/CompWest-Insurance-Company-2023-Report-of-Examination.pdf",
+      "listing_names": [
+        "CompWest Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "CompWest Insurance Company - as of 12-31-23",
+      "document_hash": "55cc9fa8f9585ad00abe4b679462118a6fad5a423fc85ac2cbd3a3d9e7d16965",
+      "file_size": 232161,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/ConnecticutGeneralLifeInsCoMLR2011.pdf",
+      "listing_names": [
+        "Connecticut General Life Insurance Company - as of 12-31-11 - MLR Report"
+      ],
+      "listing_name": "Connecticut General Life Insurance Company - as of 12-31-11 - MLR Report",
+      "document_hash": "0f277b5963eb876cd1f757165248bd876484d889bc24f6b5181a9d46d3cead7a",
+      "file_size": 92431,
+      "page_count": 11,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Crusader-Insurance-Company-2020-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Crusader Insurance Company - as of 12-31-20"
+      ],
+      "listing_name": "Crusader Insurance Company - as of 12-31-20",
+      "document_hash": "0f4bde35ea1f3231545c12f819106abb640c651e4460273bb73b2ba25bab880c",
+      "file_size": 227477,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CRUSADER INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/CSAA-Insurance-Exchange-2023-Report-of-Examination.pdf",
+      "listing_names": [
+        "CSAA Insurance Exchange - as of 12-31-23"
+      ],
+      "listing_name": "CSAA Insurance Exchange - as of 12-31-23",
+      "document_hash": "ff8fecad445e7562ffd1cf0d5bdceec04ac81828ecc79f11f79d1fcd8304a803",
+      "file_size": 306381,
+      "page_count": 20,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CSAA INSURANCE EXCHANGE"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/CSE-Safeguard-Insurance-Company-2023-Exam-Report-2.pdf",
+      "listing_names": [
+        "CSE Safeguard Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "CSE Safeguard Insurance Company - as of 12-31-23",
+      "document_hash": "6538246d09c49eb00059753da0572e6e33330986ba198d5a7a18443b677f883c",
+      "file_size": 258621,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CSE SAFEGUARD INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Cypress-Dental-Insurance-Company-of-California-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Cypress Dental Insurance Company of California - as of 12-31-22"
+      ],
+      "listing_name": "Cypress Dental Insurance Company of California - as of 12-31-22",
+      "document_hash": "b7d1db3e730a6f659688a240258843c1f2ee746fdf592f6131b2c178bfcf4e41",
+      "file_size": 229769,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "CYPRESS DENTAL INSURANCE COMPANY OF CALIFORNIA"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Cypress-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Cypress Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Cypress Insurance Company - as of 12-31-24",
+      "document_hash": "08bc3dc33097168d91e8b98d2cc764e88906aafacf6db785c27db3740757427f",
+      "file_size": 314451,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Developers-Surety-and-Indemnity-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Developers Surety and Indemnity Company - as of 12-31-21"
+      ],
+      "listing_name": "Developers Surety and Indemnity Company - as of 12-31-21",
+      "document_hash": "3abc2540c0c464b3c44bc42e651a7e6962df4830bbf0651cfcb8e65f9584d8f0",
+      "file_size": 333449,
+      "page_count": 20,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Doctor-s-Company-An-Interinsurance-Exchange-The-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Doctors' Company, An Interinsurance Exchange (The) - as of 12-31-23"
+      ],
+      "listing_name": "Doctors' Company, An Interinsurance Exchange (The) - as of 12-31-23",
+      "document_hash": "1f28272030d42a4835a67187ff3670c6274f18bd3ba4a529492f27a495ca7abd",
+      "file_size": 262736,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "THE DOCTORS COMPANY, AN INTERINSURANCE EXCHANGE"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Eagle-West-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Eagle West Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Eagle West Insurance Company - as of 12-31-24",
+      "document_hash": "9da12b215779844f0571eb820ab3e1b02f18f7920dff3af4c9bdb03158b9e75f",
+      "file_size": 303522,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "EAGLE WEST INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Employers-Compensation-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Employers Compensation Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Employers Compensation Insurance Company - as of 12-31-22",
+      "document_hash": "b65346a27dc559ce9f6f647062b3b2cb8541ad374fbffdf51a03ad9471b8d5dd",
+      "file_size": 331708,
+      "page_count": 20,
+      "text_ok": true,
+      "classification": "COCODE_MENTION_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [
+        "10375"
+      ],
+      "cover_subjects": [],
+      "review_reason": "cocodes_found_but_not_proven_as_examination_subjects",
+      "all_cocodes_found": [
+        "10375"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/ICW-Group-Consolidated-2024-Exam-Report-Final-3.pdf",
+      "listing_names": [
+        "Explorer Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Explorer Insurance Company - as of 12-31-24",
+      "document_hash": "e6742160ad26e1e1e5f5a223e7c6bb3aa20c2291b761dbf804186d3a99525aed",
+      "file_size": 418750,
+      "page_count": 41,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Falls-Lake-Fire-and-Casualty-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Falls Lake Fire and Casualty Company - as of 12-31-24"
+      ],
+      "listing_name": "Falls Lake Fire and Casualty Company - as of 12-31-24",
+      "document_hash": "4dad83289521b8da43f08c0a07977e2438a70839f803b7a784267c6e1dd2bc5f",
+      "file_size": 337137,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Fidelity-National-Home-Warranty-Comp-Exam-Report-as-of-12-31-2021.pdf",
+      "listing_names": [
+        "Fidelity National Home Warranty Company - as of 12-31-21"
+      ],
+      "listing_name": "Fidelity National Home Warranty Company - as of 12-31-21",
+      "document_hash": "394a76924e518e09ab36c950f93c91860ffe6991cabaa91ec3f9b77c67d92ec9",
+      "file_size": 293942,
+      "page_count": 22,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Financial-Pacific-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Financial Pacific Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Financial Pacific Insurance Company - as of 12-31-23",
+      "document_hash": "c2571dd60136cc2299a37585bbc3ae2ba9604808b59e60663ec2c8caa0b67e79",
+      "file_size": 328538,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "FINANCIAL PACIFIC INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/FIRST-AMERICAN-HOME-WARRANTY-CORP-12-31-20-EXAMINATION-REPORT-ADA.pdf",
+      "listing_names": [
+        "First American Home Warranty\u00a0Corporation - as of 12-31-20"
+      ],
+      "listing_name": "First American Home Warranty\u00a0Corporation - as of 12-31-20",
+      "document_hash": "ddabaf97f9a57cc8c66aef8dbd096f4b224b0cbd13fce3efcb2cd109e897f3fb",
+      "file_size": 700329,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "FIRST AMERICAN HOME WARRANTY CORPORATION"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/First-American-Property-Casualty-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "First American Property &amp; Casualty Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "First American Property &amp; Casualty Insurance Company - as of 12-31-23",
+      "document_hash": "2cb4a07912e898e24bdac313cc16d57ff7640898bf1b223eff14e47758021652",
+      "file_size": 279318,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/First-American-Specialty-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "First American Specialty Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "First American Specialty Insurance Company - as of 12-31-23",
+      "document_hash": "e6b7877f5fe3561191fa2ed8216b0e036c64b51ef7d7953a51725306f8ea1af1",
+      "file_size": 298094,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/GeoVera-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "GeoVera Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "GeoVera Insurance Company - as of 12-31-22",
+      "document_hash": "9b33e07a7d268f829eafb97e65d05da714448ca247a709045b4ead6354e81959",
+      "file_size": 322502,
+      "page_count": 22,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "GEOVERA INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Golden-Bear-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Golden Bear Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Golden Bear Insurance Company - as of 12-31-22",
+      "document_hash": "97728291a08f7454041b29ee03f8bbe3d8fdefa22fe61a3673f522ac7f85b842",
+      "file_size": 277112,
+      "page_count": 22,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "GOLDEN BEAR INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Health-Net-Life-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Health Net Life Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Health Net Life Insurance Company - as of 12-31-22",
+      "document_hash": "b16ac0394ec5098c7a31c4366a634d1b0f452f74da1a718f8fb1b7ac708ab835",
+      "file_size": 333157,
+      "page_count": 26,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Health-Net-Life-Insurance-Company-MLR-Examination-2017-Final-Report.pdf",
+      "listing_names": [
+        "Health Net Life Insurance Company - as of 12-31-17\u00a0- MLR Report"
+      ],
+      "listing_name": "Health Net Life Insurance Company - as of 12-31-17\u00a0- MLR Report",
+      "document_hash": "1ceff18fb32d1d50c4a7030201f62f4b69a6fe65e8758c619cd930fdf0ad66d2",
+      "file_size": 141995,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Heritage-Indemnity-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Heritage Indemnity Company - as of 12-31-21"
+      ],
+      "listing_name": "Heritage Indemnity Company - as of 12-31-21",
+      "document_hash": "528dcdb016e1feb24180fbdd526fd33c21c66cbaf0c7ff002dbeec77de547d9f",
+      "file_size": 303804,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Exam-Report-HomeGuard-HomeWarranty-Inc.pdf",
+      "listing_names": [
+        "Homeguard Homewarranty, Inc. - as of 12-31-19"
+      ],
+      "listing_name": "Homeguard Homewarranty, Inc. - as of 12-31-19",
+      "document_hash": "ea914e32ddcafe68bf3496575fafe6a41f8e371862eb61a5374c4614b4f97b2d",
+      "file_size": 297584,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "HOMEGUARD HOMEWARRANTY, INC."
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Homesite-Insurance-Company-of-California-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Homesite Insurance Company of California - as of 12-31-21"
+      ],
+      "listing_name": "Homesite Insurance Company of California - as of 12-31-21",
+      "document_hash": "a6e1d5136733b55a135435e89da5e462a962ded7e6f9b7c9d01b04aed16c5aff",
+      "file_size": 268200,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "HOMESITE INSURANCE COMPANY OF CALIFORNIA"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Homesure-Protection-of-California-Inc-Final-Report-as-of-12-31-2021-ADA.pdf",
+      "listing_names": [
+        "HomeSure Protection of California, Inc. - as of 12-31-21"
+      ],
+      "listing_name": "HomeSure Protection of California, Inc. - as of 12-31-21",
+      "document_hash": "2a44b441f9e50eb8704dfa578258a7fddafd0ece38c2b65420c7cb72e7d15d46",
+      "file_size": 358698,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Home-Service-Club-of-California-Inc-as-of-12-31-2020-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Home Service Club of California Inc. - as of 12-31-2020"
+      ],
+      "listing_name": "Home Service Club of California Inc. - as of 12-31-2020",
+      "document_hash": "bb3b6af0151628fa52747b38ea7e051640cbf57e51aacb2579d69453f5f9c626",
+      "file_size": 211856,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "HOME SERVICE CLUB OF CALIFORNIA, INC."
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Hyundai-Marine-Fire-Insurance-Company-Ltd-US-Branch-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Hyundai Marine &amp; Fire Insurance Company, LTD - as of 12-31-24"
+      ],
+      "listing_name": "Hyundai Marine &amp; Fire Insurance Company, LTD - as of 12-31-24",
+      "document_hash": "2509ec98d618c22d438fa2b5a212883e1561c6e4a88e1418b277c68cd4a06aea",
+      "file_size": 382066,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "AMBIGUOUS",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "UNITED STATES BRANCH OF",
+        "HYUNDAI MARINE & FIRE INSURANCE COMPANY, LTD"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/ICW-Group-Consolidated-2024-Exam-Report-Final-2.pdf",
+      "listing_names": [
+        "ICW National Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "ICW National Insurance Company - as of 12-31-24",
+      "document_hash": "e6742160ad26e1e1e5f5a223e7c6bb3aa20c2291b761dbf804186d3a99525aed",
+      "file_size": 418750,
+      "page_count": 41,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Incline-National-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Incline National Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Incline National Insurance Company - as of 12-31-24",
+      "document_hash": "9e3be75322520a25ae3aa28a7a325b906596907718420cbb6bdee05fe5b28015",
+      "file_size": 331312,
+      "page_count": 18,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "INCLINE NATIONAL INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/ICW-Group-Consolidated-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Insurance Company of the West - as of 12-31-24"
+      ],
+      "listing_name": "Insurance Company of the West - as of 12-31-24",
+      "document_hash": "e6742160ad26e1e1e5f5a223e7c6bb3aa20c2291b761dbf804186d3a99525aed",
+      "file_size": 418750,
+      "page_count": 41,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Interinsurance-Exchange-of-the-Automobile-Club-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Interinsurance Exchange of the Automobile Club - as of 12-31-23"
+      ],
+      "listing_name": "Interinsurance Exchange of the Automobile Club - as of 12-31-23",
+      "document_hash": "63e785813e7ab108fa8631fa7d47014e39688bdfacefcac2dfb303cb3b3f9357",
+      "file_size": 390743,
+      "page_count": 25,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Kaiser-Permanente-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Kaiser Permanente Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Kaiser Permanente Insurance Company - as of 12-31-24",
+      "document_hash": "14f04741153b5cb45a6af45b2f4dc29b84d994c73651dc9f354dcb45b9b7ca30",
+      "file_size": 347374,
+      "page_count": 24,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Kaiser-Permanente-Insurance-Company-MLR-Examination-2023-Final-Report.pdf",
+      "listing_names": [
+        "Kaiser Permanente Insurance Company - as of 12-31-23\u00a0- MLR Report"
+      ],
+      "listing_name": "Kaiser Permanente Insurance Company - as of 12-31-23\u00a0- MLR Report",
+      "document_hash": "d421918252db67ef513627245f7db36ad23f20b5a19a60a042d27c6ba6180a1f",
+      "file_size": 283754,
+      "page_count": 12,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Lawyers-Mutual-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Lawyers' Mutual Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Lawyers' Mutual Insurance Company - as of 12-31-22",
+      "document_hash": "d1bf2955f9a1cc440c630a375dffe75bbc4138e736b1cd887d404c050c4e95e9",
+      "file_size": 292320,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Loya-Casualty-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Loya Casualty Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Loya Casualty Insurance Company - as of 12-31-22",
+      "document_hash": "9b9cf5d5c53af58d7381e051804456fc365f763f6002011244481be799d71ecc",
+      "file_size": 303122,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Luso-American-Financial-A-Fraternal-Benefit-Society-2023-Report-of-Examination.pdf",
+      "listing_names": [
+        "Luso-American Financial - A Fraternal Benefit Society - as of 12-31-23"
+      ],
+      "listing_name": "Luso-American Financial - A Fraternal Benefit Society - as of 12-31-23",
+      "document_hash": "54bb3626266972cfd7b7f8ce3224f99bb4e8937a83193f7b2b72d289ffc280d3",
+      "file_size": 260768,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Medical-Insurance-Exchange-of-California-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Medical Insurance Exchange of California - as of 12-31-24"
+      ],
+      "listing_name": "Medical Insurance Exchange of California - as of 12-31-24",
+      "document_hash": "ead6735603d981420a9917640b07f9bb63a3f8147fedebb4b2a9d32c81bd0002",
+      "file_size": 331049,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Mennonite-Aid-Plan-of-the-Pacific-Coast-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Mennonite Aid Plan of the Pacific Coast - as of 12-31-21"
+      ],
+      "listing_name": "Mennonite Aid Plan of the Pacific Coast - as of 12-31-21",
+      "document_hash": "acda904584c180330c7154fd1f9bb525599c3b43c8297fb2f5105db1944a4f32",
+      "file_size": 236410,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "MENNONITE AID PLAN OF THE PACIFIC COAST"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Mercury-Casualty-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Mercury Casualty Company - as of 12-31-21"
+      ],
+      "listing_name": "Mercury Casualty Company - as of 12-31-21",
+      "document_hash": "87f69740cac234c6ebc77040c3b69af9e2428d6fb8edb3137a33dd630607e5fa",
+      "file_size": 315801,
+      "page_count": 24,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Mercury-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Mercury Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "Mercury Insurance Company - as of 12-31-21",
+      "document_hash": "bf2d1636ea1077052d0cb5094f5cb9795142a51e79fcc7f1f670d30a2e34c544",
+      "file_size": 280664,
+      "page_count": 20,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Monterey-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Monterey Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Monterey Insurance Company - as of 12-31-24",
+      "document_hash": "80ba0cb0cd4d6cd0e87cce085e83990d38fac19f4c885b9f0c8e2176c21a69c2",
+      "file_size": 285687,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "MONTEREY INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/National-American-Insurance-Company-of-California-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "National American Insurance Company of California - as of 12-31-24"
+      ],
+      "listing_name": "National American Insurance Company of California - as of 12-31-24",
+      "document_hash": "bdd9271a26b75dd9b0d8bd9ef22c6869a2832f740c2b9c75e1f16f2fca5b7f8e",
+      "file_size": 322968,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/National-General-Premier-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "National General Premier Insurance Company - as of 12-31-2022"
+      ],
+      "listing_name": "National General Premier Insurance Company - as of 12-31-2022",
+      "document_hash": "e1ea18fd9c679e237eb015db21f4530bc06f1507e28b3d7eb3353d3ceee751bf",
+      "file_size": 306205,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Nations-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Nations Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Nations Insurance Company - as of 12-31-22",
+      "document_hash": "ab67d5d7236743048f56cac72b4307f62b4fcabae1f8846d7eca9af9caaff46c",
+      "file_size": 245659,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/NORCAL-Mutual-Insurance-Company-2020-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Norcal Mutual Insurance Company - as of 12-31-20"
+      ],
+      "listing_name": "Norcal Mutual Insurance Company - as of 12-31-20",
+      "document_hash": "4a7527f73327be2edbaaece1e21b946c85e4aa6d8693ed28b3a4d24726b2a063",
+      "file_size": 336301,
+      "page_count": 20,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/NRG-Protects-Inc-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "NRG Protects Inc. - as of 12-31-22"
+      ],
+      "listing_name": "NRG Protects Inc. - as of 12-31-22",
+      "document_hash": "12a1376a906655e4ac4bc2f6f06344320a8edf33555a70c25d16923cceb9b7de",
+      "file_size": 280704,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Old-Republic-Home-Protection-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Old Republic Home Protection Company, Inc. - as of 12-31-21"
+      ],
+      "listing_name": "Old Republic Home Protection Company, Inc. - as of 12-31-21",
+      "document_hash": "e4ca9e9e60d51fdbdf5e264a7d9b3d4bd07d3dd22bcc7c3ce1f99db532bd3d07",
+      "file_size": 249850,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "OLD REPUBLIC HOME PROTECTION COMPANY, INC."
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Orion-Indemnity-Company-2021-Exam-Final-Report-ADA.pdf",
+      "listing_names": [
+        "Orion Indemnity Company - as of 12-31-21"
+      ],
+      "listing_name": "Orion Indemnity Company - as of 12-31-21",
+      "document_hash": "6dd81b6e8d1f52f502bca2af334828cdd3470dd6559af6a75c6b1d394df6ecce",
+      "file_size": 292790,
+      "page_count": 18,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Omaha-National-Casualty-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Omaha National Casualty Company - as of 12-31-24"
+      ],
+      "listing_name": "Omaha National Casualty Company - as of 12-31-24",
+      "document_hash": "b746a89e70fc557eb7606ede554a2a9d26ced1e4f74eba7a573c97dd29f762e2",
+      "file_size": 311649,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Pacific-Compensation-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Pacific Compensation Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Pacific Compensation Insurance Company - as of 12-31-22",
+      "document_hash": "42c0ef2634d8b764e00949d2a239cf4ce0ea2fc217b71cf0d1606e23ba39bc2a",
+      "file_size": 317989,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Pacific-Pioneer-Insurance-Company-2019-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Pacific Pioneer Insurance Company - as of 12-31-19"
+      ],
+      "listing_name": "Pacific Pioneer Insurance Company - as of 12-31-19",
+      "document_hash": "e7443aee54d5b03bc92eeb08d35239d39aa6241a76a7a2169c4bc025abf24529",
+      "file_size": 290972,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "PACIFIC PIONEER INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Pacific-Property-and-Casualty-Company-2020-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Pacific Property &amp; Casualty Company - as of 12-31-20"
+      ],
+      "listing_name": "Pacific Property &amp; Casualty Company - as of 12-31-20",
+      "document_hash": "70661ca954cca12575b47d496d83547a993308bbd7b8fbd6dfe7aa497fde9843",
+      "file_size": 203852,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "PACIFIC PROPERTY AND CASUALTY COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Pacific-Specialty-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Pacific Specialty Insurance Company as of 12-31-24"
+      ],
+      "listing_name": "Pacific Specialty Insurance Company as of 12-31-24",
+      "document_hash": "fc11f2d24c35ef6d7addefe8bb44775376bc78d76d6a7f869ff1b08cfa23b9c1",
+      "file_size": 449875,
+      "page_count": 30,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Portuguese-Fraternal-Society-of-America-2023-Exam-Report-ADA.pdf",
+      "listing_names": [
+        "Portuguese Fraternal Society of America - as of 12-31-23"
+      ],
+      "listing_name": "Portuguese Fraternal Society of America - as of 12-31-23",
+      "document_hash": "1c7a402ea3bdd859dbc6f76ca3ed374abc73eb0b8f9e582c5a130adb30365ff4",
+      "file_size": 249796,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "PORTUGUESE FRATERNAL SOCIETY OF AMERICA"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Preferred-Employers-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Preferred Employers Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Preferred Employers Insurance Company - as of 12-31-22",
+      "document_hash": "635f36c59f6c71b4389def899f0c1bd7e35b1db309b0dd1e6a393dddde237c24",
+      "file_size": 322169,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "PREFERRED EMPLOYERS INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Premier-Access-Insurance-Company-2023-Exam-Report-ADA.pdf",
+      "listing_names": [
+        "Premier Access Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Premier Access Insurance Company - as of 12-31-23",
+      "document_hash": "b44c239c29f632b846d4c13ada3a17f8ceac186aee09f7d3ecdff53ea7fc189e",
+      "file_size": 216818,
+      "page_count": 18,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "PREMIER ACCESS INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Property-ID-Home-Warranty-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Property ID Home Warranty - as of 12-31-23"
+      ],
+      "listing_name": "Property ID Home Warranty - as of 12-31-23",
+      "document_hash": "afdad782228d8d722ca70dea3d3292a37b403a64bb85b9d1724a6e5a8916788c",
+      "file_size": 261618,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_validated_exam_subject_cocode",
+      "all_cocodes_found": [
+        "12752"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Qualitas-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Qualitas Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Qualitas Insurance Company - as of 12-31-24",
+      "document_hash": "10663871503bd8d5d44ae48a1b73eca3ee5249a0e43d6381a95ee268b7787d48",
+      "file_size": 316095,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Real-Advantage-Title-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Real Advantage Title Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Real Advantage Title Insurance Company - as of 12-31-23",
+      "document_hash": "8e2b2d396546272b86f0e9772f1ae49a5de878cb4f8a341932d90ab4763a11e6",
+      "file_size": 296046,
+      "page_count": 20,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Republic-Indemnity-Company-of-America-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Republic Indemnity Company of America - as of 12-31-21"
+      ],
+      "listing_name": "Republic Indemnity Company of America - as of 12-31-21",
+      "document_hash": "7fcc6176b2f844c24aca24229d5e882b5f120a02067818a387cd1114082b8fab",
+      "file_size": 321124,
+      "page_count": 18,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Republic-Indemnity-Company-of-California-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Republic Indemnity Company of California - as of 12-31-21"
+      ],
+      "listing_name": "Republic Indemnity Company of California - as of 12-31-21",
+      "document_hash": "d9bbef41d5ce0feae1f0fc4f02fff937d37151cc7f51ab2380eb4dc8005d0b02",
+      "file_size": 318493,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Residence-Mutual-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Residence Mutual Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Residence Mutual Insurance Company - as of 12-31-22",
+      "document_hash": "d679d8de15548b1ff03c4841d6390fb115e0b4897bb09c43a62da5a1def40dc4",
+      "file_size": 287465,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Residential-Warranty-Home-Protection-of-California-Inc-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Residential Warranty Home\u00a0Protection of California - as of 12-31-21"
+      ],
+      "listing_name": "Residential Warranty Home\u00a0Protection of California - as of 12-31-21",
+      "document_hash": "08e79edbc02f5431e47dac6c7f472be398ef252e6a60f5059009a32db0de75be",
+      "file_size": 228014,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "AMBIGUOUS",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "RESIDENTIAL WARRANTY HOME PROTECTION",
+        "OF CALIFORNIA, INC"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Response-Indemnity-Company-of-California-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Response Indemnity Company of California - as of 12-31-21"
+      ],
+      "listing_name": "Response Indemnity Company of California - as of 12-31-21",
+      "document_hash": "791842b072b25ba0c37a86eb9d9d54e3ad4ba57dd0c8d0e9dd9d2243bd83a79e",
+      "file_size": 366214,
+      "page_count": 24,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/SafeHealth-Life-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Safehealth Life Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Safehealth Life Insurance Company - as of 12-31-23",
+      "document_hash": "98235c85d5e7c851b21edc5cd7bc71c59f8ba216c035e20f2075648365a8f1b8",
+      "file_size": 262414,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "COCODE_MENTION_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [
+        "65978",
+        "60188",
+        "60690",
+        "62634",
+        "97136",
+        "14170",
+        "14189",
+        "13092",
+        "95051",
+        "95387"
+      ],
+      "cover_subjects": [
+        "SAFEHEALTH LIFE INSURANCE COMPANY"
+      ],
+      "review_reason": "cocodes_found_but_not_proven_as_examination_subjects",
+      "all_cocodes_found": [
+        "65978",
+        "60188",
+        "60690",
+        "62634",
+        "97136",
+        "14170",
+        "14189",
+        "13092",
+        "95051",
+        "95387"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/San-Diego-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "San Diego Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "San Diego Insurance Company - as of 12-31-23",
+      "document_hash": "137ec3f1469e881df357db9348b6848f560fb5e565dae565daa8a8bbbe204ea0",
+      "file_size": 295526,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "SAN DIEGO INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/2020-Seaview-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Seaview Insurance Company - as of 12-31-20"
+      ],
+      "listing_name": "Seaview Insurance Company - as of 12-31-20",
+      "document_hash": "3a53b089849757aa27fa509dbf7d00fe8709871e158b07268c22eadf4a4091ed",
+      "file_size": 418379,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "SEAVIEW INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Sequoia-Insurance-Company-2021-Exam-Report.pdf",
+      "listing_names": [
+        "Sequoia Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "Sequoia Insurance Company - as of 12-31-21",
+      "document_hash": "b3e05bf82cf314481a80939c61fa9bdd21cba074376c5a1acc2b066a4d74a3c6",
+      "file_size": 324077,
+      "page_count": 20,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "SEQUOIA INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Service-Line-Warranties-of-America-Inc-2020-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Service Line Warranties of America, Inc. - as of 12-31-20"
+      ],
+      "listing_name": "Service Line Warranties of America, Inc. - as of 12-31-20",
+      "document_hash": "84e9e3db7a6f271698715d2d85999ec41b7bd470a67f8c38118705c3a144f7ed",
+      "file_size": 178306,
+      "page_count": 14,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "SERVICE LINE WARRANTIES OF AMERICA, INC."
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/State-Compensation-Insurance-Fund-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "State Compensation Insurance Fund - as of 12-31-24"
+      ],
+      "listing_name": "State Compensation Insurance Fund - as of 12-31-24",
+      "document_hash": "6726d99f58d07a4aaa714603fb0d6c156a9a05ac235175002143562434921115",
+      "file_size": 282945,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Sterling-Casualty-Insurance-Company-2024-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Sterling Casualty Insurance Company - as of 12-31-24"
+      ],
+      "listing_name": "Sterling Casualty Insurance Company - as of 12-31-24",
+      "document_hash": "0b246c5f1b25ada4b87a654ac487f3c2c4a6144e6ea16216b355a27d6cdc4a33",
+      "file_size": 374317,
+      "page_count": 19,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Stillwater-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Stillwater Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Stillwater Insurance Company - as of 12-31-22",
+      "document_hash": "3740235b71a0be7682e49cf8a3d5e79b072321d93818f97fa9d29e23b41f0c35",
+      "file_size": 352563,
+      "page_count": 26,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Tesla-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Tesla Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Tesla Insurance Company - as of 12-31-22",
+      "document_hash": "829850839a352c4581de76940410bcf4314ea931d8cdc8e938a3c7ec876c45fc",
+      "file_size": 290236,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "TESLA INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Tesla-Property-Casualty-Inc-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Tesla Property &amp; Casualty, Inc - as of 12-31-22"
+      ],
+      "listing_name": "Tesla Property &amp; Casualty, Inc - as of 12-31-22",
+      "document_hash": "6607323eb008d474f249bf7e90cb518d44ee96010f949de5292243c1319b081d",
+      "file_size": 391975,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/The-Dentists-Insurance-Company-2021-Exam-Report-ADA.pdf",
+      "listing_names": [
+        "The Dentists Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "The Dentists Insurance Company - as of 12-31-21",
+      "document_hash": "85c25dc547b6f30e1d8b17564835650cf1d20eb7249e9218b96af19394910753",
+      "file_size": 260089,
+      "page_count": 21,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "THE DENTISTS INSURANCE COMPANY"
+      ],
+      "review_reason": "no_validated_exam_subject_cocode",
+      "all_cocodes_found": [
+        "94108",
+        "96814"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/TIG-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "TIG Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "TIG Insurance Company - as of 12-31-23",
+      "document_hash": "8d859e1bc2b704c6ac3ab103416884194c33832755e554c34b2dafa39efb2b4c",
+      "file_size": 316102,
+      "page_count": 25,
+      "text_ok": true,
+      "classification": "COCODE_MENTION_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [
+        "21113"
+      ],
+      "cover_subjects": [
+        "TIG INSURANCE COMPANY"
+      ],
+      "review_reason": "cocodes_found_but_not_proven_as_examination_subjects",
+      "all_cocodes_found": [
+        "21113"
+      ],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Topa-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Topa Insurance Company - as of 12-31-21"
+      ],
+      "listing_name": "Topa Insurance Company - as of 12-31-21",
+      "document_hash": "8ba5ffd78b085569a8a27a615f25c22348cb5fdcc6ec168a0a070474eafd927e",
+      "file_size": 342467,
+      "page_count": 29,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Topa-Insurance-Company-2023-Exam-Report-Final-Limited-Scope-ADA.pdf",
+      "listing_names": [
+        "Topa Insurance Company - as of 12-31-23 - Limited Report"
+      ],
+      "listing_name": "Topa Insurance Company - as of 12-31-23 - Limited Report",
+      "document_hash": "12ceee5692823dd32e8bacd8076e1eae88ae968bcc9a01c509c457b93e36cb5f",
+      "file_size": 397461,
+      "page_count": 31,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Trans-World-Assurance-Company-2019-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Trans World Assurance Company - as of 12-31-19"
+      ],
+      "listing_name": "Trans World Assurance Company - as of 12-31-19",
+      "document_hash": "01ba6c54d30b46ad620471fe98045e15f371f7325c5b18ecfb967536e5c3593e",
+      "file_size": 387271,
+      "page_count": 25,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "TRANS WORLD ASSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/UBS-Exam-Report-as-of-12-31-20-Final-for-filing.pdf",
+      "listing_names": [
+        "UBS Life Insurance Company USA - as of 12-31-20"
+      ],
+      "listing_name": "UBS Life Insurance Company USA - as of 12-31-20",
+      "document_hash": "8b7c5f6613155660f5217ae48a5bece1b95a8d04e4897fefac0ebebf4ea7d4b2",
+      "file_size": 714995,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "UBS LIFE INSURANCE COMPANY USA"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/UnitedHealthCareMLR11.pdf",
+      "listing_names": [
+        "UnitedHealthcare Insurance Company - as of 12-31-11 - MLR Report"
+      ],
+      "listing_name": "UnitedHealthcare Insurance Company - as of 12-31-11 - MLR Report",
+      "document_hash": "cd50a42a2b1b77d786ec02cc60052af8f85441fcdfc12408bfdfac16621de626",
+      "file_size": 76544,
+      "page_count": 10,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/WCF-Select-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "WCF Select Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "WCF Select Insurance Company - as of 12-31-22",
+      "document_hash": "04e5d0b5a7d257360d5e9c3fa738541feef698e99fc2182980db6aca8e63accb",
+      "file_size": 223512,
+      "page_count": 15,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "WCF SELECT INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Wawanesa-General-Insurance-Company-2020-Exam-Report-Final.pdf",
+      "listing_names": [
+        "Wawanesa General Insurance Company - as of 12-31-20"
+      ],
+      "listing_name": "Wawanesa General Insurance Company - as of 12-31-20",
+      "document_hash": "ac7fc31b230eff2af8902d7d12a34e2ba829dbfea807f47d151a30991c6f9e24",
+      "file_size": 360223,
+      "page_count": 17,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Western-Mutual-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Western Mutual Insurance Company - as of 12-31-22"
+      ],
+      "listing_name": "Western Mutual Insurance Company - as of 12-31-22",
+      "document_hash": "aaea45a96ab924ed1c17c18e929a6f9b9a280cba54d47ba2a41f2494a95473dd",
+      "file_size": 292748,
+      "page_count": 16,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "WESTERN MUTUAL INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Zenith-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "Zenith Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "Zenith Insurance Company - as of 12-31-23",
+      "document_hash": "929c0179131d9ec3aa39563e7ea27777199cdd183df557dc313316d16daa61c7",
+      "file_size": 385935,
+      "page_count": 33,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    },
+    {
+      "regulator": "California Department of Insurance",
+      "source_dataset": "california_cdi_financial_exams",
+      "document_url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/ZNAT-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "listing_names": [
+        "ZNAT Insurance Company - as of 12-31-23"
+      ],
+      "listing_name": "ZNAT Insurance Company - as of 12-31-23",
+      "document_hash": "6194e03c26277901b579af30f5a22733641f19b02c22666898076d9542a72a49",
+      "file_size": 339262,
+      "page_count": 22,
+      "text_ok": true,
+      "classification": "NAME_ONLY",
+      "examined_entities": [],
+      "mentioned_only": [],
+      "cover_subjects": [
+        "ZNAT INSURANCE COMPANY"
+      ],
+      "review_reason": "no_five_digit_cocode_next_to_label_or_company_name_line",
+      "all_cocodes_found": [],
+      "retrieved_at": "2026-08-29T20:40:00Z"
+    }
+  ]
+}
