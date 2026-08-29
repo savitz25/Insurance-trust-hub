@@ -88,14 +88,14 @@ export function InsurancePwaProvider() {
   return (
     <div
       className={cn(
-        'fixed inset-x-0 bottom-0 z-[90] p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]',
+        'fixed inset-x-0 bottom-0 z-[90] box-border max-w-full p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]',
         'pointer-events-none sm:bottom-4 sm:left-auto sm:right-4 sm:max-w-sm sm:p-0'
       )}
       role="region"
       aria-label="Install app"
     >
-      <div className="pointer-events-auto rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-lg backdrop-blur">
-        <div className="flex items-start gap-3">
+      <div className="pointer-events-auto box-border w-full min-w-0 max-w-full rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-lg backdrop-blur">
+        <div className="flex min-w-0 items-start gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E0F2FE] text-[#0284C7]">
             <Download className="h-5 w-5" aria-hidden />
           </div>
@@ -120,7 +120,7 @@ export function InsurancePwaProvider() {
           <button
             type="button"
             onClick={dismiss}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+            className="shrink-0 rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
             aria-label="Dismiss"
           >
             <X className="h-4 w-4" />
