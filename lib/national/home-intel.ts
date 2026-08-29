@@ -12,7 +12,12 @@ export const INS_HOME_INTEL_TASK = 'INTEL-006';
 export const INS_HOME_CENSUS_TASK = 'INS-NAT-FINAL-006';
 export const INS_HOME_CENSUS_AT = '2026-08-28T14:43:51.753Z';
 
-/** INS-HOME-003 read-only agency × distinct credentialed-state rollup. */
+/**
+ * INS-HOME-003 / 003B SQL-locked agency × distinct credentialed-state rollup.
+ * Grain: canonical agency × distinct attached credential state.
+ * Wording: attached state credential evidence. LICENSED_IN ≠ SERVES.
+ * Not active licenses. Not a 50-state service-territory census.
+ */
 export const AGENCY_MULTISTATE = {
   d1: 82071,
   d2: 82071,

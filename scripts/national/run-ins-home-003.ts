@@ -2,6 +2,10 @@
  * INTEL-HOME-003 — read-only agency × distinct credentialed-state rollup.
  * db_writes = 0. No graph mutation.
  *
+ * INS-HOME-003B: unordered PostgREST offset pagination without ORDER BY is
+ * disqualified for this census. Pages must be keyset-ordered by `id`. Prefer
+ * the SQL lock in scripts/sql/ins-home-003b-lock.sql / run-ins-home-003b-sql.ts.
+ *
  *   npx tsx scripts/national/run-ins-home-003.ts
  */
 import { mkdirSync, writeFileSync } from 'fs';

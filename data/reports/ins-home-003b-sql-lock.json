@@ -1,0 +1,46 @@
+{
+  "task": "INS-HOME-003B",
+  "generatedAt": "2026-08-29T15:10:00.000Z",
+  "db_writes": 0,
+  "sqlLock": "LOCKED",
+  "pass": true,
+  "homepageDecision": "KEEP_PRODUCTION_STORY_2",
+  "canonicalSha": "99b7ce6ca4a7c2d6fea99290ea4c96bc57580848",
+  "homepageFingerprint": "934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9",
+  "contractVersion": "insurance-home-intel-v1",
+  "grain": "canonical agency × distinct attached credential state",
+  "d1": 82071,
+  "d2": 82071,
+  "d3": 109927,
+  "d4": 117354,
+  "buckets": {
+    "one": 62202,
+    "two": 13289,
+    "threeToFour": 6546,
+    "fiveToNine": 34,
+    "tenPlus": 0
+  },
+  "pctD2": {
+    "one": 75.8,
+    "two": 16.2,
+    "threeToFour": 8.0,
+    "fiveToNine": 0.0,
+    "tenPlus": 0.0
+  },
+  "includedStates": ["FL", "MA", "OH", "TX", "VT"],
+  "sourceDatasets": [
+    "florida_dfs",
+    "massachusetts_doi_regulatory",
+    "ohio_odi",
+    "texas_tdi",
+    "vermont_dfr"
+  ],
+  "wording": {
+    "headline": "Some agencies hold credentials across multiple states",
+    "evidence": "attached state credential evidence",
+    "not": ["active licenses", "50-state service-territory census", "LICENSED_IN means SERVES"]
+  },
+  "paginationRule": "unordered PostgREST .range() without ORDER BY is disqualified for entity-level census",
+  "sqlArtifact": "scripts/sql/ins-home-003b-lock.sql",
+  "sqlRunner": "scripts/national/run-ins-home-003b-sql.ts"
+}
