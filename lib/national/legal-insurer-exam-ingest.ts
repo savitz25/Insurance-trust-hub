@@ -29,6 +29,10 @@ export const FARMERS_EXACT_COCODES = [
 export const FARMERS_DOCUMENT_HASH =
   'ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0' as const;
 
+/** Deterministic lock of the first 26 PUBLIC_READY legal insurers (NAIC|entity_id). */
+export const INS_INSURER_005B_COHORT_FINGERPRINT =
+  '9fae2c8fba13789a0445b50eae7af15a48c9cda3662d4ce8c31c0d6b4d488681' as const;
+
 export const NON_CANONICAL_FIVE_DIGIT = '32399' as const;
 
 export const ATTACHMENT_METHOD = {

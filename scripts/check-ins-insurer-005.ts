@@ -25,6 +25,7 @@ import {
   EXAM_DATASETS,
   FARMERS_DOCUMENT_HASH,
   FARMERS_EXACT_COCODES,
+  INS_INSURER_005B_COHORT_FINGERPRINT,
   INS_INSURER_005_DECISION,
   INS_INSURER_005_IDENTITY_WRITES,
   INS_INSURER_005_PUBLISHED_URLS,
@@ -190,6 +191,28 @@ const snap = JSON.parse(src('data/reports/fl-ins-006-state-snapshot.json'));
 const ready = JSON.parse(src('data/reports/fl-ins-006-profile-readiness.json'));
 const view = buildFloridaStateView(snap, ready);
 assert(view.fingerprint === CANONICAL_SNAPSHOT_FINGERPRINT && view.fingerprint === FL_FP, '28 Florida fingerprint unchanged');
+
+const cohort = JSON.parse(src('data/reports/ins-insurer-005b-public-ready-cohort.json'));
+assert(cohort.locked === true && cohort.cohort_size === 26 && cohort.insurers.length === 26, '005B cohort locked at 26');
+assert(cohort.fingerprint === INS_INSURER_005B_COHORT_FINGERPRINT, '005B cohort fingerprint');
+assert(cohort.non_canonical_five_digit.attached === 0, '32399 never attaches');
+assert(cohort.tdi_complaint_indexes.family === 'INTERNAL_ONLY' && cohort.tdi_complaint_indexes.excluded_from_cohort === true, 'TDI excluded from cohort');
+assert(cohort.publicationReadinessV4.PUBLIC_READY === 26, 'V4 PUBLIC_READY 26');
+assert(cohort.production.legal_insurers === 6185 && cohort.production.regulatory_evidence === 6004, 'Production totals locked');
+const codes = cohort.insurers.map((r: { naic_cocode: string }) => r.naic_cocode);
+assert(new Set(codes).size === 26, '26 unique CoCodes');
+assert(!codes.includes(NON_CANONICAL_FIVE_DIGIT), '32399 not in cohort CoCodes');
+assert(
+  FARMERS_EXACT_COCODES.every((c) => codes.includes(c)),
+  'Farmers 7 inside locked cohort'
+);
+assert(
+  cohort.insurers.every((r: { public_safe_status: string }) => r.public_safe_status === 'PUBLIC_SAFE'),
+  'cohort rows PUBLIC_SAFE only'
+);
+assert(!JSON.stringify(cohort.insurers).toLowerCase().includes('complaint'), 'no TDI complaint values in cohort payload');
+assert(!JSON.stringify(cohort.insurers).toLowerCase().includes('score'), 'no scores in cohort');
+assert(Array.isArray(profile.examinationReports), 'profile can consume examinationReports[]');
 
 if (errors.length) {
   console.error(`INS-INSURER-005 FAIL (${errors.length})`);
