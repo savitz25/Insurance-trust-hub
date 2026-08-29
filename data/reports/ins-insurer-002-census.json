@@ -1,0 +1,94 @@
+{
+  "task": "INS-INSURER-002",
+  "generatedAt": "2026-08-29T20:02:58.649Z",
+  "db_writes": {
+    "schema": 0,
+    "publication": 0,
+    "data_mutation": 0
+  },
+  "pagination": "keyset order=id gt=id",
+  "grains": {
+    "legal_insurer": 6185,
+    "regulatory_evidence_total": 5978,
+    "attached_legal_insurer_count_head": 5713,
+    "unattached": 265
+  },
+  "denominators": {
+    "R1": 6185,
+    "R2": 1259,
+    "R3": 4926,
+    "R4": 5713,
+    "R5": 0,
+    "R6": 5713,
+    "R7": 0,
+    "R8": 0
+  },
+  "equationErrors": [],
+  "inventory": [
+    {
+      "regulator": "Texas Department of Insurance",
+      "dataset": "tdi_complaint_indexes",
+      "observationType": "CONFIRMED_COMPLAINT_INDEX",
+      "grain": "legal_insurer × calendar year × line of coverage (complaint-index statistic)",
+      "identifierUsed": "TDI NAIC ID exact-matched to official NAIC CoCode",
+      "naicAttachmentMethod": "exact_tdi_naic_id_equals_official_loc_cocode",
+      "totalRows": 5966,
+      "attachedRows": 5713,
+      "uniqueLegalInsurers": 1259,
+      "earliestObservedDate": "2019-12-31",
+      "latestObservedDate": "2025-12-31",
+      "retrievedDate": "2026-08-27T00:00:00.000Z",
+      "publicSourceUrlAvailable": true,
+      "consumerSafeDescription": true,
+      "publicationEligible": false,
+      "reason": "Source-native object is a Texas complaint-index statistic (confirmed complaints, policy counts, and an index by year and line), not a consent order, examination, or enforcement action. Existing mayPublishRegulatoryEvidenceRecord rejects COMPLAINT for the generic enforcement renderer. Publishing the index as Regulatory & Enforcement History would read as a complaint score and as violations."
+    },
+    {
+      "regulator": "unknown",
+      "dataset": "florida_dfs_receiver_companies",
+      "observationType": "unknown",
+      "grain": "unknown",
+      "identifierUsed": "unknown",
+      "naicAttachmentMethod": "unknown",
+      "totalRows": 12,
+      "attachedRows": 0,
+      "uniqueLegalInsurers": 0,
+      "earliestObservedDate": "2026-08-28T00:00:00+00:00",
+      "latestObservedDate": "2026-08-28T00:00:00+00:00",
+      "retrievedDate": null,
+      "publicSourceUrlAvailable": false,
+      "consumerSafeDescription": false,
+      "publicationEligible": false,
+      "reason": "unlisted source family held"
+    }
+  ],
+  "duplicateEvents": {
+    "method": "source_dataset + record_identifier (TDI org|year|line|naic). No fuzzy name/text merge.",
+    "distinctEventKeys": 5713,
+    "attachedRows": 5713,
+    "extrasVsKeys": 0
+  },
+  "eligibility": {
+    "PUBLIC_READY": 0,
+    "REVIEW_REQUIRED": 0,
+    "INSUFFICIENT_EVIDENCE": 4926,
+    "IDENTITY_COLLISION": 0,
+    "INTERNAL_ONLY": 1259
+  },
+  "publication": {
+    "PUBLIC_REGULATORY_EVIDENCE_ENABLED": false,
+    "mayPublishLegalInsurer": false,
+    "PUBLIC_PERSON_PROFILES_ENABLED": false,
+    "allowlist": [],
+    "identityOnlyPages": false,
+    "decision": "ZERO_PUBLICATION",
+    "wave1": 0,
+    "publicPeople": 0,
+    "publicGraphAgencies": 0,
+    "publicLegalInsurers": 0,
+    "publishedUrls": 0
+  },
+  "nameOnlyJoins": 0,
+  "marketplaceOnProfiles": false,
+  "medicareOnProfiles": false
+}
