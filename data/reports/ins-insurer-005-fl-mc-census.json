@@ -1,0 +1,430 @@
+{
+  "task": "INS-INSURER-005",
+  "source": "florida_oir_market_conduct_exams",
+  "retrieved_at": "2026-08-29T21:30:00Z",
+  "listing_count": 1547,
+  "unique_pdfs": 1547,
+  "class_counts": {
+    "UNREADABLE": 799,
+    "NAME_ONLY": 521,
+    "HISTORICAL_NAME_REVIEW": 41,
+    "AMBIGUOUS": 91,
+    "COCODE_MENTION_ONLY": 76,
+    "EXAMINED_ENTITY_EXACT": 19
+  },
+  "X_fl": {
+    "n": 1547,
+    "text_ok": 748,
+    "EXAMINED_ENTITY_EXACT": 19,
+    "CONSOLIDATED_EXAM_EXPLICIT": 0,
+    "COCODE_MENTION_ONLY": 76,
+    "NAME_ONLY": 521,
+    "AMBIGUOUS": 91,
+    "UNREADABLE": 799,
+    "HISTORICAL_NAME_REVIEW": 41,
+    "exact_relationships": 19,
+    "unique_examined_cocodes": 19,
+    "non_canonical_32399_docs": 229
+  },
+  "exact_ingest_candidates": [
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-coastal-insurance-company-(07-18-2025).pdf",
+      "document_hash": "eacae2afb1ebf591e2be98d9cc21b6e4c6cc8a2c507252e5c9cf8e6cec218382",
+      "listing_title": "American Coastal Insurance Company (07/18/2025)",
+      "report_date": "2025-07-18",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "American Coastal Insurance Company",
+          "naic_cocode": "12968",
+          "canonical_entity_id": "c3defa8d-9a38-43f2-8217-e0d73496c08d",
+          "canonical_name": "AMERICAN COASTAL INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "July 18, 2025"
+        }
+      ],
+      "issued": "July 18, 2025",
+      "subject": "American Coastal Insurance Company"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/american-integrity-insurance-company-of-florida-3-1-2024.pdf",
+      "document_hash": "c3860eb00176306cc6217e8120adfb50d04a2abba70c50e5d04f55b10ff96601",
+      "listing_title": "American Integrity Insurance Company of Florida (3/1/2024)",
+      "report_date": "2024-03-01",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "AMERICAN INTEGRITY INSURANCE COMPANY OF FLORIDA",
+          "naic_cocode": "12841",
+          "canonical_entity_id": "7e74e026-5b30-420c-88d3-1f364157ddf6",
+          "canonical_name": "AMERICAN INTEGRITY INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "March 1, 2024"
+        }
+      ],
+      "issued": "March 1, 2024",
+      "subject": "AMERICAN INTEGRITY INSURANCE COMPANY OF FLORIDA"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-mobile-insurance-exchange-(07-11-2025).pdf",
+      "document_hash": "93775048f201610ecfa8ebeb5614ae373f5fed5addf7d01d05d792719649c9aa",
+      "listing_title": "American Mobile Insurance Exchange (07/11/2025)",
+      "report_date": "2025-07-11",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "AMERICAN MOBILE INSURANCE EXCHANGE",
+          "naic_cocode": "16883",
+          "canonical_entity_id": "0e69fee6-2c9c-4378-b36f-c1f8a146e686",
+          "canonical_name": "AMERICAN MOBILE INS EXCHANGE",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "July 11, 2025"
+        }
+      ],
+      "issued": "July 11, 2025",
+      "subject": "AMERICAN MOBILE INSURANCE EXCHANGE"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/2a-final-report_am-strategic-sent-111224.pdf",
+      "document_hash": "eb68db593afd94008869f74f499f33ca7390925cb3eacf0d3e7f370a842f9980",
+      "listing_title": "American Strategic Insurance Corp. (11/12/24)",
+      "report_date": "2024-11-12",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "AMERICAN STRATEGIC INSURANCE CORP.",
+          "naic_cocode": "10872",
+          "canonical_entity_id": "2ff30c82-0f55-4a32-a068-e06c6e320e68",
+          "canonical_name": "AMERICAN STRATEGIC INS CORP",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "November 12, 2024"
+        }
+      ],
+      "issued": "November 12, 2024",
+      "subject": "AMERICAN STRATEGIC INSURANCE CORP."
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/american-traditions-insurance-company-4-1-2024.pdf",
+      "document_hash": "47c227e2d22d42c0db3fb769c7b2707651034c75cdb66e6cb1e7a5c2caae5480",
+      "listing_title": "American Traditions Insurance Company (4/1/2024)",
+      "report_date": "2024-04-01",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "AMERICAN TRADITIONS INSURANCE COMPANY",
+          "naic_cocode": "12359",
+          "canonical_entity_id": "873375d3-e212-4c9d-bde1-efe2f3364cb8",
+          "canonical_name": "AMERICAN TRADITIONS INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "April 1, 2024"
+        }
+      ],
+      "issued": "April 1, 2024",
+      "subject": "AMERICAN TRADITIONS INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/life-health-libraries/market-regulation/2024/241213-final-report.pdf",
+      "document_hash": "813738cd040a36704f9c08d3b94134eb2dd4d310c6aca12c73e314a495b366dc",
+      "listing_title": "Celtic Insurance Company (12/13/2024)",
+      "report_date": "2024-12-13",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "CELTIC INSURANCE COMPANY",
+          "naic_cocode": "80799",
+          "canonical_entity_id": "63081046-bb8f-40e9-8f5b-98caecdb81d3",
+          "canonical_name": "CELTIC INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "December 13, 2024"
+        }
+      ],
+      "issued": "December 13, 2024",
+      "subject": "CELTIC INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/centauri-specialty-insurance-company-(04-22-2025).pdf",
+      "document_hash": "2ca3b0544afe6137006df83652e35a37d6b0224134925ae5a3054e7cfc2c897b",
+      "listing_title": "Centauri Specialty Insurance Company (04/22/2025)",
+      "report_date": "2025-04-22",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "CENTAURI SPECIALTY INSURANCE COMPANY",
+          "naic_cocode": "12573",
+          "canonical_entity_id": "ffe7afec-f1dd-4a7c-bcfc-4cb2d1845593",
+          "canonical_name": "CENTAURI SPECIALTY INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "April 22, 2025"
+        }
+      ],
+      "issued": "April 22, 2025",
+      "subject": "CENTAURI SPECIALTY INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/citizens-property-insurance-corporation_final-exam-report.pdf",
+      "document_hash": "5b602323d9d61c5ff6bf1836762b21783225f7940dcb6dc4cece317cd1d717a6",
+      "listing_title": "Citizens Property Insurance Corporation (1-24-2025)",
+      "report_date": "2025-01-24",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "CITIZENS PROPERTY INSURANCE CORPORATION",
+          "naic_cocode": "10064",
+          "canonical_entity_id": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+          "canonical_name": "CITIZENS PROP INS CORP",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "January 24, 2025"
+        }
+      ],
+      "issued": "January 24, 2025",
+      "subject": "CITIZENS PROPERTY INSURANCE CORPORATION"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/clear-blue-insurance-company-(05-22-2025)5d52a6fe-eeed-4601-919f-7dca46215af2.pdf",
+      "document_hash": "bcd1acb42112e207cf21b546e65c7927444163ad8eaefbcaaf23fe95016dc5ef",
+      "listing_title": "Clear Blue Insurance Company (05/22/2025)",
+      "report_date": "2025-05-22",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "CLEAR BLUE INSURANCE COMPANY",
+          "naic_cocode": "28860",
+          "canonical_entity_id": "9dfa983e-d0fe-43f8-928b-72f6aac80940",
+          "canonical_name": "CLEAR BLUE INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "May 22, 2025"
+        }
+      ],
+      "issued": "May 22, 2025",
+      "subject": "CLEAR BLUE INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/florida-peninsula-insurance-company-4-1-2024.pdf",
+      "document_hash": "2f369aedaabf60e22298cedb5522bfecf1c9c6336ffeb99a71f94af0173c179c",
+      "listing_title": "Florida Peninsula Insurance Company (4/1/2024)",
+      "report_date": "2024-04-01",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "FLORIDA PENINSULA INSURANCE COMPANY",
+          "naic_cocode": "10132",
+          "canonical_entity_id": "48283d8b-3092-4b0f-aa05-b8c4855f1c70",
+          "canonical_name": "FLORIDA PENINSULA INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "April 1, 2024"
+        }
+      ],
+      "issued": "April 1, 2024",
+      "subject": "FLORIDA PENINSULA INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/2-hartford-midwest_final-report.pdf",
+      "document_hash": "883a5e63bc7767b4704d695e60b4c1dd1316b697e54bb9ac865003085a56c522",
+      "listing_title": "Hartford Insurance Company of the Midwest (01-24-2025)",
+      "report_date": "2025-01-24",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "HARTFORD INSURANCE COMPANY OF THE MIDWEST",
+          "naic_cocode": "37478",
+          "canonical_entity_id": "2cdbb20b-7e95-4e4b-88a0-3dd1f71a27cb",
+          "canonical_name": "HARTFORD INS CO OF THE MIDWEST",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "January 24, 2025"
+        }
+      ],
+      "issued": "January 24, 2025",
+      "subject": "HARTFORD INSURANCE COMPANY OF THE MIDWEST"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/heritage-insurance-company-3-11-2024.pdf",
+      "document_hash": "d4038ad6f9f7671ea0d5c41fa651b659c6983c8989f4b845a3462f520ec67af6",
+      "listing_title": "Heritage P&amp;C Insurance Company (3/11/2024)",
+      "report_date": "2024-03-11",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "HERITAGE PROPERTY & CASUALTY INSURANCE COMPANY",
+          "naic_cocode": "14407",
+          "canonical_entity_id": "d9e85c15-5990-4838-a6b7-62a0f7279291",
+          "canonical_name": "HERITAGE PROP & CAS INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "March 11, 2024"
+        }
+      ],
+      "issued": "March 11, 2024",
+      "subject": "HERITAGE PROPERTY & CASUALTY INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/kin-interinsurance-network-(08-11-2025).pdf",
+      "document_hash": "4e6d65a681ff833b049289ebc38588d56d5c5681fe2595aaf167d45101096bc2",
+      "listing_title": "Kin Interinsurance Network (08/11/2025)",
+      "report_date": "2025-08-11",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "Kin Interinsurance Network",
+          "naic_cocode": "16603",
+          "canonical_entity_id": "d71b1eba-6629-44ab-97b6-4f0061041e57",
+          "canonical_name": "KIN INTERINSURANCE NETWORK",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "August 11, 2025"
+        }
+      ],
+      "issued": "August 11, 2025",
+      "subject": "Kin Interinsurance Network"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/monarch-national-insurance-company-(04-21-2025).pdf",
+      "document_hash": "6c07b9fa4b9b5af2c946e09d213cfa8d36b1d6af5c6e8fa055a7d67334deb27a",
+      "listing_title": "Monarch National Insurance Company (04/21/2025)",
+      "report_date": "2025-04-21",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "MONARCH NATIONAL INSURANCE COMPANY",
+          "naic_cocode": "15715",
+          "canonical_entity_id": "699aa912-cba1-425d-867b-26e7e82320fd",
+          "canonical_name": "MONARCH NATL INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "April 21, 2025"
+        }
+      ],
+      "issued": "April 21, 2025",
+      "subject": "MONARCH NATIONAL INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/ocean-harbor-final-report-5-14-2024.pdf",
+      "document_hash": "cc2847922a9c476766cacb4c709cdfffbf1f4b43a90331c28a58a21f14e06f7c",
+      "listing_title": "Ocean Harbor Casualty Insurance Company (05/14/2024)",
+      "report_date": "2024-05-14",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "OCEAN HARBOR CASUALTY INSURANCE COMPANY",
+          "naic_cocode": "12360",
+          "canonical_entity_id": "311b9c1e-e164-49e3-9e81-d9bc6d95d68c",
+          "canonical_name": "OCEAN HARBOR CAS INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "May 14, 2024"
+        }
+      ],
+      "issued": "May 14, 2024",
+      "subject": "OCEAN HARBOR CASUALTY INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/olympus-insurance-company-3-1-2024.pdf",
+      "document_hash": "a69009a900a4a38599566cd88db4b16a2b61b1c0de0baabbe55f6d7829c52280",
+      "listing_title": "Olympus Insurance Company (3/1/2024)",
+      "report_date": "2024-03-01",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "OLYMPUS INSURANCE COMPANY",
+          "naic_cocode": "12954",
+          "canonical_entity_id": "9461c1b7-b592-4307-9cbd-d877fd9775a2",
+          "canonical_name": "OLYMPUS INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "March 1, 2024"
+        }
+      ],
+      "issued": "March 1, 2024",
+      "subject": "OLYMPUS INSURANCE COMPANY"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/life-health-libraries/market-regulation/2024/oscar-final-examination-report---12-13-24.pdf",
+      "document_hash": "f912301cf46b8aa5129b195614182c324c66bf296950ec6d31ab0bd9d742ec21",
+      "listing_title": "Oscar Insurance Company of Florida (12/13/2024)",
+      "report_date": "2024-12-13",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "OSCAR INSURANCE COMPANY OF FLORIDA",
+          "naic_cocode": "16374",
+          "canonical_entity_id": "ba4b55b0-2503-44b6-817a-473374d0c889",
+          "canonical_name": "OSCAR INS CO OF FL",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "December 13, 2024"
+        }
+      ],
+      "issued": "December 13, 2024",
+      "subject": "OSCAR INSURANCE COMPANY OF FLORIDA"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/1-safepoint-final-report.pdf",
+      "document_hash": "624ca5c1d4ce45ee0f7a4904b1acfe9232dc81b7a5fe69d813d23f05d88aa3d0",
+      "listing_title": "Safepoint Insurance Company (8/28/2024)",
+      "report_date": "2024-08-29",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "Safepoint Insurance Company",
+          "naic_cocode": "15341",
+          "canonical_entity_id": "847b6b82-0260-4002-b226-371fc2e7541a",
+          "canonical_name": "SAFEPOINT INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "August 29, 2024"
+        }
+      ],
+      "issued": "August 29, 2024",
+      "subject": "Safepoint Insurance Company"
+    },
+    {
+      "document_url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/slide-ins-final-rpt-ian_idalia_08-28-2025.pdf",
+      "document_hash": "bfc250b8f17e2722059ed541a3f3999081c5ec1074061696e5e4a5c46cefeb85",
+      "listing_title": "Slide Insurance Company (08/28/2025)",
+      "report_date": "2025-08-28",
+      "retrieved_at": "2026-08-29T21:30:00Z",
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "examined_entities": [
+        {
+          "source_name": "SLIDE INSURANCE COMPANY",
+          "naic_cocode": "17227",
+          "canonical_entity_id": "2b6db78c-950f-47ad-95b0-64284caa4f25",
+          "canonical_name": "SLIDE INS CO",
+          "evidence_location": "cover/title",
+          "attachment_class": "EXAMINED_ENTITY_EXACT",
+          "issued": "August 28, 2025"
+        }
+      ],
+      "issued": "August 28, 2025",
+      "subject": "SLIDE INSURANCE COMPANY"
+    }
+  ]
+}

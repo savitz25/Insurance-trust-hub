@@ -1,0 +1,445 @@
+{
+  "n": 10,
+  "rows": [
+    {
+      "label": "American Coastal",
+      "listing": "American Coastal Insurance Company (07/18/2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-coastal-insurance-company-(07-18-2025).pdf",
+      "pages": 7,
+      "bytes": 241992,
+      "sha256": "eacae2afb1ebf591e2be98d9cc21b6e4c6cc8a2c507252e5c9cf8e6cec218382",
+      "text_ok": true,
+      "subject_legal_name": "American Coastal Insurance Company",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "July 18, 2025",
+      "all_candidate_cocodes": [
+        "12968",
+        "32399"
+      ],
+      "subject_cocode": "12968",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "American Coastal Insurance Company",
+        "naic_cocode": "12968",
+        "canonical_entity_id": "c3defa8d-9a38-43f2-8217-e0d73496c08d",
+        "canonical_name": "AMERICAN COASTAL INS CO",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "July 18, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "American Coastal Insurance Company",
+        "cover_company_codes": [
+          "12968"
+        ],
+        "cover_group_codes": [
+          "4830"
+        ],
+        "issued": "July 18, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "American Mobile",
+      "listing": "American Mobile Insurance Exchange (07/11/2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-mobile-insurance-exchange-(07-11-2025).pdf",
+      "pages": 10,
+      "bytes": 358323,
+      "sha256": "93775048f201610ecfa8ebeb5614ae373f5fed5addf7d01d05d792719649c9aa",
+      "text_ok": true,
+      "subject_legal_name": "AMERICAN MOBILE INSURANCE EXCHANGE",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "July 11, 2025",
+      "all_candidate_cocodes": [
+        "16883",
+        "32399"
+      ],
+      "subject_cocode": "16883",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "AMERICAN MOBILE INSURANCE EXCHANGE",
+        "naic_cocode": "16883",
+        "canonical_entity_id": "0e69fee6-2c9c-4378-b36f-c1f8a146e686",
+        "canonical_name": "AMERICAN MOBILE INS EXCHANGE",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "July 11, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "AMERICAN MOBILE INSURANCE EXCHANGE",
+        "cover_company_codes": [
+          "16883"
+        ],
+        "cover_group_codes": [],
+        "issued": "July 11, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "Centauri",
+      "listing": "Centauri Specialty Insurance Company (04/22/2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/centauri-specialty-insurance-company-(04-22-2025).pdf",
+      "pages": 8,
+      "bytes": 300724,
+      "sha256": "2ca3b0544afe6137006df83652e35a37d6b0224134925ae5a3054e7cfc2c897b",
+      "text_ok": true,
+      "subject_legal_name": "CENTAURI SPECIALTY INSURANCE COMPANY",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "April 22, 2025",
+      "all_candidate_cocodes": [
+        "12573",
+        "32399"
+      ],
+      "subject_cocode": "12573",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "CENTAURI SPECIALTY INSURANCE COMPANY",
+        "naic_cocode": "12573",
+        "canonical_entity_id": "ffe7afec-f1dd-4a7c-bcfc-4cb2d1845593",
+        "canonical_name": "CENTAURI SPECIALTY INS CO",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "April 22, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "CENTAURI SPECIALTY INSURANCE COMPANY",
+        "cover_company_codes": [
+          "12573"
+        ],
+        "cover_group_codes": [
+          "4962"
+        ],
+        "issued": "April 22, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "Citizens",
+      "listing": "Citizens Property Insurance Corporation (1-24-2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/citizens-property-insurance-corporation_final-exam-report.pdf",
+      "pages": 15,
+      "bytes": 342241,
+      "sha256": "5b602323d9d61c5ff6bf1836762b21783225f7940dcb6dc4cece317cd1d717a6",
+      "text_ok": true,
+      "subject_legal_name": "CITIZENS PROPERTY INSURANCE CORPORATION",
+      "explicit_cover_language": "Market Conduct Examination Report",
+      "issued": "January 24, 2025",
+      "all_candidate_cocodes": [
+        "10064",
+        "32399"
+      ],
+      "subject_cocode": "10064",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "CITIZENS PROPERTY INSURANCE CORPORATION",
+        "naic_cocode": "10064",
+        "canonical_entity_id": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+        "canonical_name": "CITIZENS PROP INS CORP",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "January 24, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Market Conduct Examination Report",
+        "subject": "CITIZENS PROPERTY INSURANCE CORPORATION",
+        "cover_company_codes": [
+          "10064"
+        ],
+        "cover_group_codes": [],
+        "issued": "January 24, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "Clear Blue",
+      "listing": "Clear Blue Insurance Company (05/22/2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/clear-blue-insurance-company-(05-22-2025)5d52a6fe-eeed-4601-919f-7dca46215af2.pdf",
+      "pages": 7,
+      "bytes": 259624,
+      "sha256": "bcd1acb42112e207cf21b546e65c7927444163ad8eaefbcaaf23fe95016dc5ef",
+      "text_ok": true,
+      "subject_legal_name": "CLEAR BLUE INSURANCE COMPANY",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "May 22, 2025",
+      "all_candidate_cocodes": [
+        "28860",
+        "32399"
+      ],
+      "subject_cocode": "28860",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "CLEAR BLUE INSURANCE COMPANY",
+        "naic_cocode": "28860",
+        "canonical_entity_id": "9dfa983e-d0fe-43f8-928b-72f6aac80940",
+        "canonical_name": "CLEAR BLUE INS CO",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "May 22, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "CLEAR BLUE INSURANCE COMPANY",
+        "cover_company_codes": [
+          "28860"
+        ],
+        "cover_group_codes": [
+          "4850"
+        ],
+        "issued": "May 22, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "Hartford Midwest",
+      "listing": "Hartford Insurance Company of the Midwest (01-24-2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/2-hartford-midwest_final-report.pdf",
+      "pages": 7,
+      "bytes": 298917,
+      "sha256": "883a5e63bc7767b4704d695e60b4c1dd1316b697e54bb9ac865003085a56c522",
+      "text_ok": true,
+      "subject_legal_name": "HARTFORD INSURANCE COMPANY OF THE MIDWEST",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "January 24, 2025",
+      "all_candidate_cocodes": [
+        "37478",
+        "32399"
+      ],
+      "subject_cocode": "37478",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "HARTFORD INSURANCE COMPANY OF THE MIDWEST",
+        "naic_cocode": "37478",
+        "canonical_entity_id": "2cdbb20b-7e95-4e4b-88a0-3dd1f71a27cb",
+        "canonical_name": "HARTFORD INS CO OF THE MIDWEST",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "January 24, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "HARTFORD INSURANCE COMPANY OF THE MIDWEST",
+        "cover_company_codes": [
+          "37478"
+        ],
+        "cover_group_codes": [
+          "0091"
+        ],
+        "issued": "January 24, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "Monarch National",
+      "listing": "Monarch National Insurance Company (04/21/2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/monarch-national-insurance-company-(04-21-2025).pdf",
+      "pages": 9,
+      "bytes": 329041,
+      "sha256": "6c07b9fa4b9b5af2c946e09d213cfa8d36b1d6af5c6e8fa055a7d67334deb27a",
+      "text_ok": true,
+      "subject_legal_name": "MONARCH NATIONAL INSURANCE COMPANY",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "April 21, 2025",
+      "all_candidate_cocodes": [
+        "15715",
+        "32399"
+      ],
+      "subject_cocode": "15715",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "MONARCH NATIONAL INSURANCE COMPANY",
+        "naic_cocode": "15715",
+        "canonical_entity_id": "699aa912-cba1-425d-867b-26e7e82320fd",
+        "canonical_name": "MONARCH NATL INS CO",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "April 21, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "MONARCH NATIONAL INSURANCE COMPANY",
+        "cover_company_codes": [
+          "15715"
+        ],
+        "cover_group_codes": [
+          "5074"
+        ],
+        "issued": "April 21, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "Slide",
+      "listing": "Slide Insurance Company (08/28/2025)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/slide-ins-final-rpt-ian_idalia_08-28-2025.pdf",
+      "pages": 10,
+      "bytes": 370324,
+      "sha256": "bfc250b8f17e2722059ed541a3f3999081c5ec1074061696e5e4a5c46cefeb85",
+      "text_ok": true,
+      "subject_legal_name": "SLIDE INSURANCE COMPANY",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "August 28, 2025",
+      "all_candidate_cocodes": [
+        "17227",
+        "32399"
+      ],
+      "subject_cocode": "17227",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "SLIDE INSURANCE COMPANY",
+        "naic_cocode": "17227",
+        "canonical_entity_id": "2b6db78c-950f-47ad-95b0-64284caa4f25",
+        "canonical_name": "SLIDE INS CO",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "August 28, 2025"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "SLIDE INSURANCE COMPANY",
+        "cover_company_codes": [
+          "17227"
+        ],
+        "cover_group_codes": [],
+        "issued": "August 28, 2025",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "American Integrity",
+      "listing": "American Integrity Insurance Company of Florida (3/1/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/american-integrity-insurance-company-of-florida-3-1-2024.pdf",
+      "pages": 6,
+      "bytes": 282773,
+      "sha256": "c3860eb00176306cc6217e8120adfb50d04a2abba70c50e5d04f55b10ff96601",
+      "text_ok": true,
+      "subject_legal_name": "AMERICAN INTEGRITY INSURANCE COMPANY OF FLORIDA",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "March 1, 2024",
+      "all_candidate_cocodes": [
+        "12841",
+        "32399"
+      ],
+      "subject_cocode": "12841",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "AMERICAN INTEGRITY INSURANCE COMPANY OF FLORIDA",
+        "naic_cocode": "12841",
+        "canonical_entity_id": "7e74e026-5b30-420c-88d3-1f364157ddf6",
+        "canonical_name": "AMERICAN INTEGRITY INS CO",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "March 1, 2024"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "AMERICAN INTEGRITY INSURANCE COMPANY OF FLORIDA",
+        "cover_company_codes": [
+          "12841"
+        ],
+        "cover_group_codes": [],
+        "issued": "March 1, 2024",
+        "evidence_section": "cover/title"
+      }
+    },
+    {
+      "label": "American Traditions",
+      "listing": "American Traditions Insurance Company (4/1/2024)",
+      "url": "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/american-traditions-insurance-company-4-1-2024.pdf",
+      "pages": 6,
+      "bytes": 281969,
+      "sha256": "47c227e2d22d42c0db3fb769c7b2707651034c75cdb66e6cb1e7a5c2caae5480",
+      "text_ok": true,
+      "subject_legal_name": "AMERICAN TRADITIONS INSURANCE COMPANY",
+      "explicit_cover_language": "Targeted Market Conduct Examination Report",
+      "issued": "April 1, 2024",
+      "all_candidate_cocodes": [
+        "12359",
+        "32399"
+      ],
+      "subject_cocode": "12359",
+      "excluded_cocodes": [],
+      "non_canonical_five_digit": [
+        "32399"
+      ],
+      "canonical_match": {
+        "source_name": "AMERICAN TRADITIONS INSURANCE COMPANY",
+        "naic_cocode": "12359",
+        "canonical_entity_id": "873375d3-e212-4c9d-bde1-efe2f3364cb8",
+        "canonical_name": "AMERICAN TRADITIONS INS CO",
+        "evidence_location": "cover/title",
+        "attachment_class": "EXAMINED_ENTITY_EXACT",
+        "issued": "April 1, 2024"
+      },
+      "classification": "EXAMINED_ENTITY_EXACT",
+      "evidence_page_section": "cover/title",
+      "review_reason": null,
+      "florida_cover": {
+        "heading": "Targeted Market Conduct Examination Report",
+        "subject": "AMERICAN TRADITIONS INSURANCE COMPANY",
+        "cover_company_codes": [
+          "12359"
+        ],
+        "cover_group_codes": [],
+        "issued": "April 1, 2024",
+        "evidence_section": "cover/title"
+      }
+    }
+  ]
+}

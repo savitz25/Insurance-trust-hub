@@ -1,0 +1,693 @@
+{
+  "task": "INS-INSURER-005B",
+  "locked": true,
+  "at": "2026-08-29T23:21:41.880Z",
+  "identity_writes": 0,
+  "tdi_complaint_indexes": {
+    "family": "INTERNAL_ONLY",
+    "excluded_from_cohort": true,
+    "attached_insurers": 1259
+  },
+  "non_canonical_five_digit": {
+    "value": "32399",
+    "attached": 0
+  },
+  "production": {
+    "legal_insurers": 6185,
+    "regulatory_evidence": 6004,
+    "tdi_rows": 5966
+  },
+  "denominators": {
+    "PS1": 20,
+    "PS2": 20,
+    "PS3": 26,
+    "PS4": 26,
+    "PS5": 26,
+    "PS6": 0,
+    "PS7": 0,
+    "PS8": 7,
+    "PS9": 19,
+    "PS10": 26
+  },
+  "publicationReadinessV4": {
+    "PUBLIC_READY": 26,
+    "REVIEW_REQUIRED": 0,
+    "INSUFFICIENT_EVIDENCE": 4910,
+    "IDENTITY_COLLISION": 0,
+    "INTERNAL_ONLY": 1249
+  },
+  "cohort_size": 26,
+  "fingerprint": "9fae2c8fba13789a0445b50eae7af15a48c9cda3662d4ce8c31c0d6b4d488681",
+  "insurers": [
+    {
+      "entity_id": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+      "canonical_legal_name": "CITIZENS PROP INS CORP",
+      "naic_cocode": "10064",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-01-24"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/citizens-property-insurance-corporation_final-exam-report.pdf"
+      ],
+      "document_hashes": [
+        "5b602323d9d61c5ff6bf1836762b21783225f7940dcb6dc4cece317cd1d717a6"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "48283d8b-3092-4b0f-aa05-b8c4855f1c70",
+      "canonical_legal_name": "FLORIDA PENINSULA INS CO",
+      "naic_cocode": "10132",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-04-01"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/florida-peninsula-insurance-company-4-1-2024.pdf"
+      ],
+      "document_hashes": [
+        "2f369aedaabf60e22298cedb5522bfecf1c9c6336ffeb99a71f94af0173c179c"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "174798e8-6887-4ab4-9c8f-54d72c5e758d",
+      "canonical_legal_name": "CIVIC PROP & CAS CO",
+      "naic_cocode": "10315",
+      "examination_count": 1,
+      "examination_families": [
+        "FINANCIAL_EXAMINATION"
+      ],
+      "regulator": [
+        "California Department of Insurance"
+      ],
+      "jurisdiction": [
+        "CA"
+      ],
+      "report_dates": [
+        "2021-12-31"
+      ],
+      "official_source_urls": [
+        "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf"
+      ],
+      "document_hashes": [
+        "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "e8270a89-1d8d-4031-85e2-7231dacfd3f8",
+      "canonical_legal_name": "NEIGHBORHOOD SPIRIT PROP & CAS CO",
+      "naic_cocode": "10317",
+      "examination_count": 1,
+      "examination_families": [
+        "FINANCIAL_EXAMINATION"
+      ],
+      "regulator": [
+        "California Department of Insurance"
+      ],
+      "jurisdiction": [
+        "CA"
+      ],
+      "report_dates": [
+        "2021-12-31"
+      ],
+      "official_source_urls": [
+        "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf"
+      ],
+      "document_hashes": [
+        "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "411a90b1-61de-4bec-8897-9f178ffb6a33",
+      "canonical_legal_name": "EXACT PROP & CAS CO INC",
+      "naic_cocode": "10318",
+      "examination_count": 1,
+      "examination_families": [
+        "FINANCIAL_EXAMINATION"
+      ],
+      "regulator": [
+        "California Department of Insurance"
+      ],
+      "jurisdiction": [
+        "CA"
+      ],
+      "report_dates": [
+        "2021-12-31"
+      ],
+      "official_source_urls": [
+        "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf"
+      ],
+      "document_hashes": [
+        "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "2ff30c82-0f55-4a32-a068-e06c6e320e68",
+      "canonical_legal_name": "AMERICAN STRATEGIC INS CORP",
+      "naic_cocode": "10872",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-11-12"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/2a-final-report_am-strategic-sent-111224.pdf"
+      ],
+      "document_hashes": [
+        "eb68db593afd94008869f74f499f33ca7390925cb3eacf0d3e7f370a842f9980"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "873375d3-e212-4c9d-bde1-efe2f3364cb8",
+      "canonical_legal_name": "AMERICAN TRADITIONS INS CO",
+      "naic_cocode": "12359",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-04-01"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/american-traditions-insurance-company-4-1-2024.pdf"
+      ],
+      "document_hashes": [
+        "47c227e2d22d42c0db3fb769c7b2707651034c75cdb66e6cb1e7a5c2caae5480"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "311b9c1e-e164-49e3-9e81-d9bc6d95d68c",
+      "canonical_legal_name": "OCEAN HARBOR CAS INS CO",
+      "naic_cocode": "12360",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-05-14"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/ocean-harbor-final-report-5-14-2024.pdf"
+      ],
+      "document_hashes": [
+        "cc2847922a9c476766cacb4c709cdfffbf1f4b43a90331c28a58a21f14e06f7c"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "ffe7afec-f1dd-4a7c-bcfc-4cb2d1845593",
+      "canonical_legal_name": "CENTAURI SPECIALTY INS CO",
+      "naic_cocode": "12573",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-04-22"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/centauri-specialty-insurance-company-(04-22-2025).pdf"
+      ],
+      "document_hashes": [
+        "2ca3b0544afe6137006df83652e35a37d6b0224134925ae5a3054e7cfc2c897b"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "7e74e026-5b30-420c-88d3-1f364157ddf6",
+      "canonical_legal_name": "AMERICAN INTEGRITY INS CO",
+      "naic_cocode": "12841",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-03-01"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/american-integrity-insurance-company-of-florida-3-1-2024.pdf"
+      ],
+      "document_hashes": [
+        "c3860eb00176306cc6217e8120adfb50d04a2abba70c50e5d04f55b10ff96601"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "9461c1b7-b592-4307-9cbd-d877fd9775a2",
+      "canonical_legal_name": "OLYMPUS INS CO",
+      "naic_cocode": "12954",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-03-01"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/olympus-insurance-company-3-1-2024.pdf"
+      ],
+      "document_hashes": [
+        "a69009a900a4a38599566cd88db4b16a2b61b1c0de0baabbe55f6d7829c52280"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "c3defa8d-9a38-43f2-8217-e0d73496c08d",
+      "canonical_legal_name": "AMERICAN COASTAL INS CO",
+      "naic_cocode": "12968",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-07-18"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-coastal-insurance-company-(07-18-2025).pdf"
+      ],
+      "document_hashes": [
+        "eacae2afb1ebf591e2be98d9cc21b6e4c6cc8a2c507252e5c9cf8e6cec218382"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "d9e85c15-5990-4838-a6b7-62a0f7279291",
+      "canonical_legal_name": "HERITAGE PROP & CAS INS CO",
+      "naic_cocode": "14407",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-03-11"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/heritage-insurance-company-3-11-2024.pdf"
+      ],
+      "document_hashes": [
+        "d4038ad6f9f7671ea0d5c41fa651b659c6983c8989f4b845a3462f520ec67af6"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "847b6b82-0260-4002-b226-371fc2e7541a",
+      "canonical_legal_name": "SAFEPOINT INS CO",
+      "naic_cocode": "15341",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-08-29"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/1-safepoint-final-report.pdf"
+      ],
+      "document_hashes": [
+        "624ca5c1d4ce45ee0f7a4904b1acfe9232dc81b7a5fe69d813d23f05d88aa3d0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "699aa912-cba1-425d-867b-26e7e82320fd",
+      "canonical_legal_name": "MONARCH NATL INS CO",
+      "naic_cocode": "15715",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-04-21"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/monarch-national-insurance-company-(04-21-2025).pdf"
+      ],
+      "document_hashes": [
+        "6c07b9fa4b9b5af2c946e09d213cfa8d36b1d6af5c6e8fa055a7d67334deb27a"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "ba4b55b0-2503-44b6-817a-473374d0c889",
+      "canonical_legal_name": "OSCAR INS CO OF FL",
+      "naic_cocode": "16374",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-12-13"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/life-health-libraries/market-regulation/2024/oscar-final-examination-report---12-13-24.pdf"
+      ],
+      "document_hashes": [
+        "f912301cf46b8aa5129b195614182c324c66bf296950ec6d31ab0bd9d742ec21"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "d71b1eba-6629-44ab-97b6-4f0061041e57",
+      "canonical_legal_name": "KIN INTERINSURANCE NETWORK",
+      "naic_cocode": "16603",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-08-11"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/kin-interinsurance-network-(08-11-2025).pdf"
+      ],
+      "document_hashes": [
+        "4e6d65a681ff833b049289ebc38588d56d5c5681fe2595aaf167d45101096bc2"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "0e69fee6-2c9c-4378-b36f-c1f8a146e686",
+      "canonical_legal_name": "AMERICAN MOBILE INS EXCHANGE",
+      "naic_cocode": "16883",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-07-11"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-mobile-insurance-exchange-(07-11-2025).pdf"
+      ],
+      "document_hashes": [
+        "93775048f201610ecfa8ebeb5614ae373f5fed5addf7d01d05d792719649c9aa"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "2b6db78c-950f-47ad-95b0-64284caa4f25",
+      "canonical_legal_name": "SLIDE INS CO",
+      "naic_cocode": "17227",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-08-28"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/slide-ins-final-rpt-ian_idalia_08-28-2025.pdf"
+      ],
+      "document_hashes": [
+        "bfc250b8f17e2722059ed541a3f3999081c5ec1074061696e5e4a5c46cefeb85"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "dcd810e1-3f6e-495b-8992-e797206676bb",
+      "canonical_legal_name": "FARMERS INS EXCH",
+      "naic_cocode": "21652",
+      "examination_count": 1,
+      "examination_families": [
+        "FINANCIAL_EXAMINATION"
+      ],
+      "regulator": [
+        "California Department of Insurance"
+      ],
+      "jurisdiction": [
+        "CA"
+      ],
+      "report_dates": [
+        "2021-12-31"
+      ],
+      "official_source_urls": [
+        "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf"
+      ],
+      "document_hashes": [
+        "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "eaf003dc-4715-4716-b0b1-a40bd8d3e1a9",
+      "canonical_legal_name": "FIRE INS EXCH",
+      "naic_cocode": "21660",
+      "examination_count": 1,
+      "examination_families": [
+        "FINANCIAL_EXAMINATION"
+      ],
+      "regulator": [
+        "California Department of Insurance"
+      ],
+      "jurisdiction": [
+        "CA"
+      ],
+      "report_dates": [
+        "2021-12-31"
+      ],
+      "official_source_urls": [
+        "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf"
+      ],
+      "document_hashes": [
+        "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "488c66f8-8f2b-44c8-955a-71aaefcc9ca5",
+      "canonical_legal_name": "MID CENTURY INS CO",
+      "naic_cocode": "21687",
+      "examination_count": 1,
+      "examination_families": [
+        "FINANCIAL_EXAMINATION"
+      ],
+      "regulator": [
+        "California Department of Insurance"
+      ],
+      "jurisdiction": [
+        "CA"
+      ],
+      "report_dates": [
+        "2021-12-31"
+      ],
+      "official_source_urls": [
+        "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf"
+      ],
+      "document_hashes": [
+        "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "f91b9a9a-d163-4099-a81d-8d79c2cec92d",
+      "canonical_legal_name": "TRUCK INS EXCH",
+      "naic_cocode": "21709",
+      "examination_count": 1,
+      "examination_families": [
+        "FINANCIAL_EXAMINATION"
+      ],
+      "regulator": [
+        "California Department of Insurance"
+      ],
+      "jurisdiction": [
+        "CA"
+      ],
+      "report_dates": [
+        "2021-12-31"
+      ],
+      "official_source_urls": [
+        "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf"
+      ],
+      "document_hashes": [
+        "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "9dfa983e-d0fe-43f8-928b-72f6aac80940",
+      "canonical_legal_name": "CLEAR BLUE INS CO",
+      "naic_cocode": "28860",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-05-22"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/clear-blue-insurance-company-(05-22-2025)5d52a6fe-eeed-4601-919f-7dca46215af2.pdf"
+      ],
+      "document_hashes": [
+        "bcd1acb42112e207cf21b546e65c7927444163ad8eaefbcaaf23fe95016dc5ef"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "2cdbb20b-7e95-4e4b-88a0-3dd1f71a27cb",
+      "canonical_legal_name": "HARTFORD INS CO OF THE MIDWEST",
+      "naic_cocode": "37478",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2025-01-24"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/2-hartford-midwest_final-report.pdf"
+      ],
+      "document_hashes": [
+        "883a5e63bc7767b4704d695e60b4c1dd1316b697e54bb9ac865003085a56c522"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    },
+    {
+      "entity_id": "63081046-bb8f-40e9-8f5b-98caecdb81d3",
+      "canonical_legal_name": "CELTIC INS CO",
+      "naic_cocode": "80799",
+      "examination_count": 1,
+      "examination_families": [
+        "MARKET_CONDUCT_EXAMINATION"
+      ],
+      "regulator": [
+        "Florida Office of Insurance Regulation"
+      ],
+      "jurisdiction": [
+        "FL"
+      ],
+      "report_dates": [
+        "2024-12-13"
+      ],
+      "official_source_urls": [
+        "https://floir.gov/docs-sf/life-health-libraries/market-regulation/2024/241213-final-report.pdf"
+      ],
+      "document_hashes": [
+        "813738cd040a36704f9c08d3b94134eb2dd4d310c6aca12c73e314a495b366dc"
+      ],
+      "public_safe_status": "PUBLIC_SAFE"
+    }
+  ]
+}
