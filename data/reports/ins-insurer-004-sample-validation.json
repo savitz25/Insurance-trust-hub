@@ -1,0 +1,236 @@
+{
+  "n": 20,
+  "rows": [
+    {
+      "regulator": "CA",
+      "listing": "California Automobile Insurance Company - as of 12-31-21",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/California-Automobile-Insurance-Company-2021-Exam-Report-Final-ADA.pdf",
+      "pages": 21,
+      "bytes": 287624,
+      "sha256": "6fad66c59483762f1f48925e7149d74fbf9381df59ff32e5f4e9c37d88836f1b",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "Allianz Reinsurance America, Inc. - as of 12-31-23",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Allianz-Reinsurance-America-Inc-2023-Exam-Report-Final-ADA.pdf",
+      "pages": 24,
+      "bytes": 355956,
+      "sha256": "3a1f0ee86e7734803cac30b20d2eb9de95ce64954d0a1ccc2b1b7ba328b0db67",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "CSAA Insurance Exchange - as of 12-31-23",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/CSAA-Insurance-Exchange-2023-Report-of-Examination.pdf",
+      "pages": 20,
+      "bytes": 306381,
+      "sha256": "ff8fecad445e7562ffd1cf0d5bdceec04ac81828ecc79f11f79d1fcd8304a803",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [
+        "CSAA INSURANCE EXCHANGE"
+      ],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "Anchor General Insurance Company - as of 12-31-22",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Anchor-General-Insurance-Company-2022-Exam-Report-Final-ADA.pdf",
+      "pages": 16,
+      "bytes": 367577,
+      "sha256": "e99b974d8d8942d0b47cb757477ed05985a756298616af2bb4f0cc5e94c0749a",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [
+        "ANCHOR GENERAL INSURANCE COMPANY"
+      ],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "Blue Shield of California Life & Health Insurance Company - as of 12-31-24",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Blue-Shield-of-California-Life-Health-Insurance-Company-2024-Exam-Report.pdf",
+      "pages": 15,
+      "bytes": 275114,
+      "sha256": "1f831e72a9313917e925a1b2336cf4aa397e83c4662ad8cb80ae061689b3aac1",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [
+        "BLUE SHIELD OF CALIFORNIA LIFE & HEALTH",
+        "INSURANCE COMPANY"
+      ],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "AMT Home Protection Company - as of 12-31-24",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/AMT-Home-Protection-Company-2024-Exam-Report-Final.pdf",
+      "pages": 16,
+      "bytes": 326814,
+      "sha256": "a0242392cabce3dc867993a8a4c843fe8f5a4f96b48681df9e26293e95dba55a",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "Aspire General Insurance Company - as of 12-31-23",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Aspire-General-Insurance-Company-2023-Exam-Report-Final-ADA.pdf",
+      "pages": 17,
+      "bytes": 347978,
+      "sha256": "672a51dfee5267235eead56a2f5209afbc74f4853afaf850e5d81aa05cbb99e1",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "CompWest Insurance Company - as of 12-31-23",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/CompWest-Insurance-Company-2023-Report-of-Examination.pdf",
+      "error": "The read operation timed out",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "CA",
+      "listing": "21st Century Casualty Company / 21st Century Insurance Company SHARED PDF",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/21st-Century-Casualty-Company-2021-Exam-Report-Final-ADA.pdf",
+      "pages": 34,
+      "bytes": 662984,
+      "sha256": "c78e6453ebfcfc3fe69725c87ff6ef6ef36b045e90a5765f9493973db4c9b7d8",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [
+        "21st CENTURY INSURANCE COMPANY",
+        "21st CENTURY CASUALTY COMPANY"
+      ],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "CA",
+      "listing": "Farmers Insurance Group Consolidated (8 listing titles)",
+      "url": "https://www.insurance.ca.gov/0250-insurers/0300-insurers/0400-reports-examination/upload/Farmers-Insurance-Group-Consolidated-Exam-Report-Final-as-of-12-2021-ADA.pdf",
+      "pages": 111,
+      "bytes": 2111102,
+      "sha256": "ba88e28116e08e27ecab2dfaeea39a7649ee646012f9e299f003f9e31fb28ca0",
+      "text_ok": true,
+      "all_labeled_cocodes": [],
+      "classification": "NAME_ONLY",
+      "examined": [],
+      "mentioned": [],
+      "cover": [
+        "FARMERS INSURANCE EXCHANGE",
+        "FIRE INSURANCE EXCHANGE",
+        "TRUCK INSURANCE EXCHANGE",
+        "CIVIC PROPERTY AND CASUALTY COMPANY",
+        "EXACT PROPERTY AND CASUALTY COMPANY",
+        "MID-CENTURY INSURANCE COMPANY",
+        "NEIGHBORHOOD SPIRIT PROPERTY AND CASUALTY COMPANY",
+        "FARMERS REINSURANCE COMPANY"
+      ],
+      "reason": "no_labeled_cocode"
+    },
+    {
+      "regulator": "FL",
+      "listing": "American Coastal Insurance Company (07/18/2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-coastal-insurance-company-(07-18-2025).pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "American Mobile Insurance Exchange (07/11/2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/american-mobile-insurance-exchange-(07-11-2025).pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "Centauri Specialty Insurance Company (04/22/2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/centauri-specialty-insurance-company-(04-22-2025).pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "Citizens Property Insurance Corporation (1-24-2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/citizens-property-insurance-corporation_final-exam-report.pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "Clear Blue Insurance Company (05/22/2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/clear-blue-insurance-company-(05-22-2025)5d52a6fe-eeed-4601-919f-7dca46215af2.pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "Hartford Insurance Company of the Midwest (01-24-2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/2-hartford-midwest_final-report.pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "Insurance Premium Services, LLC. (02/05/2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/insurance-premium-services-llc-(02-05-2025).pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "Monarch National Insurance Company (04/21/2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/monarch-national-insurance-company-(04-21-2025).pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "Slide Insurance Company (08/28/2025)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/slide-ins-final-rpt-ian_idalia_08-28-2025.pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    },
+    {
+      "regulator": "FL",
+      "listing": "American Integrity Insurance Company of Florida (3/1/2024)",
+      "url": "http://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2024/american-integrity-insurance-company-of-florida-3-1-2024.pdf",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>",
+      "classification": "UNREADABLE"
+    }
+  ]
+}
