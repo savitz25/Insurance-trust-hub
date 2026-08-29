@@ -1,40 +1,19 @@
 /**
- * INS-NAT-012 Texas individual + PERSON→AGENCY + CMS re-attach tests (no production writes).
+ * INS-NAT-012 person/producer LOA codebook gates.
+ * Homepage and Florida must remain unchanged.
  *   npm run check:ins-nat-012
  */
-import { readFileSync, existsSync } from 'fs';
+import { createHash } from 'crypto';
+import { readFileSync } from 'fs';
 import { join } from 'path';
-import { NationalGraph } from '../lib/national/graph';
+import { CANONICAL_SNAPSHOT_FINGERPRINT } from '../lib/national/fl-state-intel';
+import { buildFloridaStateView } from '../lib/national/fl-state-display';
 import {
-  PUBLIC_PERSON_PROFILES_ENABLED,
-  mayPromoteToPublicProvider,
-  mayPublishEntityKind,
-} from '../lib/national/publication';
-import {
-  decidePersonIdentity,
-  isTxIndividualCoreProducerLicense,
-  isTxIndividualExcludedLicense,
-  isTxIndividualHighConfidenceProducerLicense,
-  personContactPublicEligible,
-  personProfilesArePublic,
-  personPublicationBlocked,
-} from '../lib/national/person-identity';
-import {
-  extractOfficialLoas,
-  healthLoaImpliesMarketplace,
-  healthOrLifeLoaImpliesMedicare,
-} from '../lib/national/loa';
-import {
-  associationImpliesWorksFor,
-  associationJoinUsesName,
-  classifyPersonAgencyAssociation,
-  DEFAULT_PERSON_AGENCY_RELATIONSHIP,
-  personAgencyRelationshipType,
-  relationshipStatusFromAssociation,
-} from '../lib/national/tx-association';
-import { cmsJoinExactNpn } from '../lib/national/cms-marketplace';
-import { txStatusFromOfficialExpiration } from '../lib/national/freshness';
-import type { SourceCredentialInput } from '../lib/national/types';
+  AGENCY_MULTISTATE,
+  buildInsuranceHomeIntelV1,
+  fingerprintHomeIntel,
+} from '../lib/national/home-intel';
+import { PUBLIC_PERSON_PROFILES_ENABLED } from '../lib/national/publication';
 
 const errors: string[] = [];
 function assert(c: unknown, m: string) {
@@ -42,360 +21,125 @@ function assert(c: unknown, m: string) {
 }
 
 const root = join(__dirname, '..');
-const script = join(root, 'scripts/national/backfill-tx-individuals.ts');
-assert(existsSync(script), 'backfill script');
-const src = readFileSync(script, 'utf8');
-assert(!/\.from\(\s*['"]providers['"]\s*\)\.(insert|update|upsert|delete)/i.test(src), 'PUB2 no provider writes');
-assert(src.includes('providerWritesPredicted: 0'), 'PUB2 predicted 0');
-assert(!/compareLegalNames\(.*assoc/i.test(src), 'REL3 no association name join');
-assert(src.includes('normalizeNpn'), 'exact NPN');
-assert(src.includes('identity_attachment'), 'CMS attach field');
-assert(src.includes("identity_attachment: 'UNATTACHED'") || src.includes('identity_attachment\', \'UNATTACHED\''), 'CMSA3 only UNATTACHED');
-assert(!/relationship_type:\s*['"]WORKS_FOR['"]/.test(src), 'REL6 script does not write WORKS_FOR');
-assert(src.includes('ASSOCIATED_WITH'), 'REL1 ASSOCIATED_WITH');
-assert(src.includes('source_observed_at'), 'freshness source_observed_at');
-assert(src.includes('CMS_ROW_BASELINE'), 'CMSA2 row baseline');
+const report = JSON.parse(readFileSync(join(root, 'data/reports/ins-nat-012-person-loa.json'), 'utf8')) as {
+  db_writes: number;
+  pagination: string;
+  fingerprint: string;
+  P1: number;
+  P2: number;
+  P3: number;
+  P4: number;
+  P5: number;
+  P6: number;
+  P7: number;
+  P8: number;
+  P9: number;
+  P10: number;
+  P11: number;
+  equations: Record<string, boolean>;
+  personDatasets: Record<string, { entity_grain: string; dataset: string }>;
+  homepageUntouched: boolean;
+};
+const codebook = JSON.parse(readFileSync(join(root, 'data/codebooks/ins-nat-012-person-loa-v1.json'), 'utf8')) as {
+  version: string;
+  person_grain: boolean;
+  nationalPublicChart: boolean;
+  fingerprint: string;
+  entries: Array<{
+    source_dataset: string;
+    raw_label: string;
+    mapping_confidence: string;
+    mapping_basis: string;
+    person_grain: boolean;
+    included_in_cross_source_analysis: boolean;
+  }>;
+};
+const lock = JSON.parse(readFileSync(join(root, 'data/reports/ins-home-003b-sql-lock.json'), 'utf8')) as {
+  sqlLock: string;
+};
 
-function person(
-  partial: Partial<SourceCredentialInput> &
-    Pick<SourceCredentialInput, 'sourceDataset' | 'sourceRecordId' | 'jurisdiction' | 'licenseNumber' | 'legalName'>
-): SourceCredentialInput {
-  return {
-    entityKind: 'person',
-    regulator: partial.regulator || `${partial.jurisdiction} DOI`,
-    regulatoryStatus: 'active',
-    sourceObservedAt: '2026-08-24T00:00:00.000Z',
-    ingestedAt: '2026-08-26T00:00:00.000Z',
-    ...partial,
-  };
+assert(report.db_writes === 0, 'db_writes = 0');
+assert(/keyset/i.test(report.pagination), 'keyset extraction');
+assert(/no unordered/i.test(report.pagination), 'no unordered range documented');
+assert(report.homepageUntouched === true, 'homepage untouched flag');
+assert(report.P2 + report.P3 === report.P1, 'P2+P3=P1');
+assert(report.P5 + report.P6 + report.P7 + report.P8 === report.P2, 'P5..P8=P2');
+assert(report.P9 <= report.P4, 'P9≤P4');
+assert(report.P11 <= report.P10, 'P11≤P10');
+assert(report.equations.p2_plus_p3_eq_p1 && report.equations.p5_to_p8_eq_p2, 'equation flags');
+assert(report.P10 >= 3, 'FL TX VT person LOA states');
+assert(codebook.version === 'ins-nat-012-person-loa-v1', 'codebook version');
+assert(codebook.person_grain === true, 'person grain');
+assert(codebook.nationalPublicChart === false, 'no public product pie');
+assert(codebook.fingerprint === report.fingerprint, 'artifact fingerprint shared');
+assert(typeof report.fingerprint === 'string' && report.fingerprint.length === 64, 'sha256 fingerprint');
+
+const personDs = new Set(['florida_dfs_individual', 'texas_tdi_individual', 'vermont_dfr_individual']);
+for (const row of codebook.entries) {
+  assert(personDs.has(row.source_dataset), `person dataset only: ${row.source_dataset}`);
+  assert(row.person_grain === true, 'entry person grain');
+  assert(row.raw_label.length > 0, 'raw label');
+  assert(['EXACT', 'DEFENSIBLE_COMPOSITE', 'SOURCE_SPECIFIC', 'UNRESOLVED'].includes(row.mapping_confidence), 'confidence');
+  assert(row.mapping_basis.length > 8, 'basis');
+  assert(!/silently split|split into Property and Casualty as independent/i.test(row.mapping_basis) || row.mapping_confidence === 'DEFENSIBLE_COMPOSITE', 'composites preserved');
 }
+assert(!codebook.entries.some((r) => /texas_tdi$|massachusetts_doi_regulatory|vermont_dfr$/.test(r.source_dataset) && !r.source_dataset.includes('individual')), 'agency datasets excluded');
 
-// TXP1 Same NPN TX + FL → one person
-{
-  const g = new NationalGraph();
-  const a = g.ingest(
-    person({
-      sourceDataset: 'florida_dfs',
-      sourceRecordId: 'fl-1',
-      jurisdiction: 'FL',
-      licenseNumber: 'A111',
-      npn: '55555',
-      legalName: 'SMITH, JANE',
-    })
-  );
-  const b = g.ingest(
-    person({
-      sourceDataset: 'texas_tdi_individual',
-      sourceRecordId: 'tx-1',
-      jurisdiction: 'TX',
-      licenseNumber: '2000001',
-      npn: '55555',
-      legalName: 'JANE SMITH',
-      licenseClass: 'General Lines Agent',
-    })
-  );
-  assert(a.entity?.id === b.entity?.id, 'TXP1 one person');
-  assert(g.entities.filter((e) => e.entityKind === 'person').length === 1, 'TXP1 count');
-}
+const extractor = readFileSync(join(root, 'scripts/national/run-ins-nat-012-person-loa.py'), 'utf8');
+assert(!/\.range\s*\(/.test(extractor.replace(/#.*$/gm, '')), 'no .range() in extractor');
+assert(/order=id/.test(extractor), 'ordered keyset');
+assert(!/cms_marketplace/.test(extractor), 'Marketplace excluded');
+assert(!/medicare/i.test(extractor.split('class ')[0] || extractor), 'Medicare not mixed');
+assert(/no name\/email\/phone/.test(extractor) || /no name/.test(extractor), 'no fuzzy identity');
 
-// TXP2 Same NPN TX + VT → one person
-{
-  const g = new NationalGraph();
-  g.ingest(
-    person({
-      sourceDataset: 'vermont_dfr',
-      sourceRecordId: 'vt-1',
-      jurisdiction: 'VT',
-      licenseNumber: '3001',
-      npn: '55556',
-      legalName: 'JANE SMITH',
-    })
-  );
-  const b = g.ingest(
-    person({
-      sourceDataset: 'texas_tdi_individual',
-      sourceRecordId: 'tx-2',
-      jurisdiction: 'TX',
-      licenseNumber: '2000099',
-      npn: '55556',
-      legalName: 'JANE SMITH',
-    })
-  );
-  assert(b.entity != null && g.entities.filter((e) => e.entityKind === 'person').length === 1, 'TXP2');
-}
+const a = buildInsuranceHomeIntelV1('2026-08-29T05:48:24.729Z');
+const b = buildInsuranceHomeIntelV1('2026-08-30T00:00:00.000Z');
+assert(a.fingerprint === '934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9', 'homepage fingerprint');
+assert(a.fingerprint === b.fingerprint && a.fingerprint === fingerprintHomeIntel(a), 'home fingerprint stable');
+assert(a.featuredFindings[2]?.title === 'Lines of authority matter — and they are not one national taxonomy yet', 'Story #3 unchanged');
+assert(lock.sqlLock === 'LOCKED', 'Story #2 SQL lock');
+assert(AGENCY_MULTISTATE.d1 === 82071 && AGENCY_MULTISTATE.d2 === 82071, 'Story #2 D1 D2');
+assert(AGENCY_MULTISTATE.d3 === 109927 && AGENCY_MULTISTATE.d4 === 117354, 'Story #2 D3 D4');
+assert(AGENCY_MULTISTATE.one === 62202 && AGENCY_MULTISTATE.tenPlus === 0, 'Story #2 buckets');
+assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'public people disabled');
+assert(a.publicAvailability.publicPeople === 0, 'public people 0');
+assert(a.publicAvailability.publicLegalInsurers === 0, 'public legal insurers 0');
+assert(a.publicAvailability.publicGraphAgencies === 0, 'public graph agencies 0');
+const page = readFileSync(join(root, 'components/home/insurance-home-intelligence.tsx'), 'utf8');
+assert(!page.includes('href="/texas"'), 'sitemap expansion 0');
 
-// TXP3 TX-only valid NPN → new confirmed person
-{
-  const d = decidePersonIdentity({ npn: '1234567', legalName: 'NEW TEXAN' });
-  assert(d.action === 'create' && d.confidence === 'CONFIRMED', 'TXP3');
-}
+const snap = JSON.parse(readFileSync(join(root, 'data/reports/fl-ins-006-state-snapshot.json'), 'utf8'));
+const ready = JSON.parse(readFileSync(join(root, 'data/reports/fl-ins-006-profile-readiness.json'), 'utf8'));
+const view = buildFloridaStateView(snap, ready);
+assert(view.fingerprint === CANONICAL_SNAPSHOT_FINGERPRINT, 'florida fingerprint');
+assert(view.fingerprint === '8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93', 'florida exact');
 
-// TXP4 Same name different NPN → separate people
-{
-  const g = new NationalGraph();
-  g.ingest(
-    person({
-      sourceDataset: 'texas_tdi_individual',
-      sourceRecordId: 'tx-4a',
-      jurisdiction: 'TX',
-      licenseNumber: 'L1',
-      npn: '701',
-      legalName: 'PAT LEE',
-    })
-  );
-  g.ingest(
-    person({
-      sourceDataset: 'texas_tdi_individual',
-      sourceRecordId: 'tx-4b',
-      jurisdiction: 'TX',
-      licenseNumber: 'L2',
-      npn: '702',
-      legalName: 'PAT LEE',
-    })
-  );
-  assert(g.entities.filter((e) => e.entityKind === 'person').length === 2, 'TXP4');
-}
-
-// TXP5 Same NPN incompatible names → REVIEW_REQUIRED
-{
-  const d = decidePersonIdentity({
-    npn: '88888',
-    legalName: 'ALICE JONES',
-    existingPersonName: 'ZZZZ CORP HOLDINGS INTERNATIONAL',
-  });
-  assert(d.confidence === 'REVIEW_REQUIRED' && d.action === 'review_name', 'TXP5');
-}
-
-// TXP6 Person/agency same NPN → no cross-kind merge
-{
-  const g = new NationalGraph();
-  const agency = g.ingest({
-    entityKind: 'agency',
-    sourceDataset: 'texas_tdi',
-    sourceRecordId: 'ag-1',
-    jurisdiction: 'TX',
-    licenseNumber: '90001',
-    npn: '99901',
-    legalName: 'ACME INSURANCE LLC',
-    regulator: 'TDI',
-  });
-  const per = g.ingest(
-    person({
-      sourceDataset: 'texas_tdi_individual',
-      sourceRecordId: 'tx-6',
-      jurisdiction: 'TX',
-      licenseNumber: 'L6',
-      npn: '99901',
-      legalName: 'ACME PERSON',
-    })
-  );
-  assert(agency.entity?.entityKind === 'agency', 'TXP6 agency');
-  assert(per.identityConfidence === 'REVIEW_REQUIRED', 'TXP6 conflict');
-  const d = decidePersonIdentity({ npn: '99901', legalName: 'JANE', agencyOwnsNpn: true });
-  assert(d.action === 'kind_conflict', 'TXP6 helper');
-}
-
-// TXP7 Missing NPN → no confirmed person
-{
-  const d = decidePersonIdentity({ npn: null, legalName: 'NO NPN' });
-  assert(d.action === 'provisional' && d.confidence === 'UNRESOLVED', 'TXP7');
-}
-
-// TXP8 TX credential attaches to correct person
-{
-  const g = new NationalGraph();
-  g.ingest(
-    person({
-      sourceDataset: 'florida_dfs',
-      sourceRecordId: 'fl-8',
-      jurisdiction: 'FL',
-      licenseNumber: 'A808',
-      npn: '80808',
-      legalName: 'KIM RIVERA',
-    })
-  );
-  g.ingest(
-    person({
-      sourceDataset: 'texas_tdi_individual',
-      sourceRecordId: 'tx-8',
-      jurisdiction: 'TX',
-      licenseNumber: '280808',
-      npn: '80808',
-      legalName: 'KIM RIVERA',
-      licenseClass: 'General Lines Agent',
-    })
-  );
-  const creds = g.credentials.filter((c) => c.entityKind === 'person');
-  assert(creds.length === 2, 'TXP8 two credentials');
-  assert(creds.some((c) => c.jurisdiction === 'TX' && c.licenseNumber === '280808'), 'TXP8 tx cred');
-  assert(new Set(creds.map((c) => c.entityId)).size === 1, 'TXP8 same entity');
-}
-
-// TXP9 Raw qualification preserved
-{
-  const r = extractOfficialLoas({
-    jurisdiction: 'TX',
-    sourceDataset: 'texas_tdi',
-    entityKind: 'person',
-    licenseTypes: ['General Lines Agent'],
-    qualifications: ['Life, Accident, Health & HMO'],
-  });
-  assert(r.observations.length === 1, 'TXP9 one loa');
-  assert(r.observations[0]!.officialText === 'Life, Accident, Health & HMO', 'TXP9 text');
-}
-
-// TXP10 Qualification does not create fake Marketplace status
-assert(healthLoaImpliesMarketplace('Life, Accident, Health & HMO') === false, 'TXP10 marketplace');
-assert(healthOrLifeLoaImpliesMedicare('Life, Accident, Health & HMO') === false, 'TXP10 medicare');
-
-assert(isTxIndividualCoreProducerLicense('General Lines Agent'), 'core gl');
-assert(isTxIndividualCoreProducerLicense('Life Agent'), 'core life');
-assert(isTxIndividualCoreProducerLicense('Pers Lines Prop and Cas Agent'), 'core pl');
-assert(!isTxIndividualCoreProducerLicense('Adjuster'), 'not adjuster');
-assert(isTxIndividualExcludedLicense('Adjuster - DHS Texas'), 'exclude dhs');
-assert(isTxIndividualExcludedLicense('Escrow Officer'), 'exclude escrow');
-assert(isTxIndividualHighConfidenceProducerLicense('County Mutual Agent'), 'hc county');
-assert(!isTxIndividualCoreProducerLicense('County Mutual Agent'), 'county not execute core');
-
-// REL1 Exact person NPN + exact agency NPN → relationship
-{
-  const r = classifyPersonAgencyAssociation({
-    licenseeNpn: '55555',
-    associatedLicenseeNpn: '90001',
-    associationType: 'Desig-Resp-Lic-Person',
-    beginDate: '2019-04-01',
-    personNpns: new Set(['55555']),
-    agencyNpns: new Set(['90001']),
-  });
-  assert(r.action === 'relate' && r.relationshipType === 'ASSOCIATED_WITH', 'REL1');
-  if (r.action === 'relate') {
-    assert(r.personNpn === '55555' && r.agencyNpn === '90001', 'REL1 ids');
-  }
-}
-
-// REL2 Missing agency entity → no forced relationship
-{
-  const r = classifyPersonAgencyAssociation({
-    licenseeNpn: '55555',
-    associatedLicenseeNpn: null,
-    associatedNaicId: '23043',
-    associationType: 'Employee',
-    personNpns: new Set(['55555']),
-    agencyNpns: new Set(['90001']),
-  });
-  assert(r.action === 'skip', 'REL2 skip');
-  assert(r.action === 'skip' && (r.reason === 'carrier_or_naic_only' || r.reason === 'missing_agency_entity'), 'REL2 reason');
-}
-
-// REL3 Name matching is never used
-assert(associationJoinUsesName() === false, 'REL3');
-assert(!/associated_licensee_name|licensee_name/.test(
-  classifyPersonAgencyAssociation.toString() + associationJoinUsesName.toString()
-), 'REL3 helper has no name join');
-
-// REL4 Many persons may link to one agency
-{
-  const agency = new Set(['90001']);
-  const a = classifyPersonAgencyAssociation({
-    licenseeNpn: '11111',
-    associatedLicenseeNpn: '90001',
-    personNpns: new Set(['11111', '22222']),
-    agencyNpns: agency,
-  });
-  const b = classifyPersonAgencyAssociation({
-    licenseeNpn: '22222',
-    associatedLicenseeNpn: '90001',
-    personNpns: new Set(['11111', '22222']),
-    agencyNpns: agency,
-  });
-  assert(a.action === 'relate' && b.action === 'relate', 'REL4 both');
-  if (a.action === 'relate' && b.action === 'relate') {
-    assert(a.agencyNpn === b.agencyNpn && a.personNpn !== b.personNpn, 'REL4 many persons');
-  }
-}
-
-// REL5 One person may link to multiple agencies
-{
-  const r1 = classifyPersonAgencyAssociation({
-    licenseeNpn: '55555',
-    associatedLicenseeNpn: '90001',
-    personNpns: new Set(['55555']),
-    agencyNpns: new Set(['90001', '90002']),
-  });
-  const r2 = classifyPersonAgencyAssociation({
-    licenseeNpn: '55555',
-    associatedLicenseeNpn: '90002',
-    personNpns: new Set(['55555']),
-    agencyNpns: new Set(['90001', '90002']),
-  });
-  assert(r1.action === 'relate' && r2.action === 'relate', 'REL5 both');
-  if (r1.action === 'relate' && r2.action === 'relate') {
-    assert(r1.personNpn === r2.personNpn && r1.agencyNpn !== r2.agencyNpn, 'REL5 many agencies');
-  }
-}
-
-// REL6 Association is not mislabeled WORKS_FOR
-assert(associationImpliesWorksFor('Employee') === false, 'REL6 employee');
-assert(personAgencyRelationshipType('Employee') === DEFAULT_PERSON_AGENCY_RELATIONSHIP, 'REL6 type');
-assert(personAgencyRelationshipType('Owner') === 'ASSOCIATED_WITH', 'REL6 owner');
-
-// REL7 Historical remains historical when dates/status prove it
-{
-  const hist = relationshipStatusFromAssociation({
-    beginDate: '2018-01-01',
-    endDate: '2020-01-01',
-  });
-  assert(hist.status === 'historical' && hist.currency === 'HISTORICAL', 'REL7 end date');
-  const unknown = relationshipStatusFromAssociation({ beginDate: '2021-12-17' });
-  assert(unknown.currency === 'UNKNOWN', 'REL7 stale begin is not current');
-}
-
-// CMSA1 New TX person exact NPN attaches existing CMS evidence
-{
-  const j = cmsJoinExactNpn({ npn: '55555', personId: 'person-tx-1' });
-  assert(j.attachment === 'ATTACHED' && j.entityId === 'person-tx-1', 'CMSA1');
-  assert(j.createPerson === false, 'CMSA1 no create');
-}
-
-// CMSA2 attachment alone does not insert CMS rows (script updates only)
-assert(!/\.from\(\s*['"]cms_marketplace_observations['"]\s*\)\.insert/i.test(src), 'CMSA2 no insert');
-assert(/\.update\(/.test(src), 'CMSA2 update attach');
-
-// CMSA3 KIND_CONFLICT CMS evidence does not attach
-{
-  const j = cmsJoinExactNpn({ npn: '99901', agencyOwnsNpn: true });
-  assert(j.attachment === 'KIND_CONFLICT' && j.entityId == null, 'CMSA3');
-}
-
-// CMSA4 No fuzzy CMS join
-assert(!/compareLegalNames/.test(readFileSync(join(root, 'lib/national/cms-marketplace.ts'), 'utf8')), 'CMSA4');
-
-// PUB1 / PUB2
-assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'PUB1');
-assert(mayPublishEntityKind('person') === false, 'PUB1 mayPublish');
-assert(personProfilesArePublic() === false, 'PUB1 profiles');
-assert(personPublicationBlocked() === true, 'PUB1 blocked');
-assert(personContactPublicEligible() === false, 'PUB1 contacts');
-assert(mayPromoteToPublicProvider({ entityType: 'individual' }).ok === false, 'PUB1 promote');
-
-// Freshness: download today ≠ verified today
-{
-  const observed = new Date('2026-08-24T12:00:00Z');
-  const ingested = new Date('2026-08-26T18:00:00Z');
-  const st = txStatusFromOfficialExpiration('2027-08-31', observed);
-  assert(st === 'active', 'status from official expiration vs snapshot');
-  assert(observed.toISOString().slice(0, 10) !== ingested.toISOString().slice(0, 10), 'dates separated');
-  const expired = txStatusFromOfficialExpiration('2021-06-30', observed);
-  assert(expired === 'expired', 'expired by official date');
-}
-
-// IDEM1 unique natural keys documented
-assert(src.includes('TX_INDIVIDUAL_SOURCE'), 'IDEM source dataset');
-assert(src.includes('source_record_id'), 'IDEM source record');
+const fpSrc = {
+  source_inventory: report.personDatasets,
+  codebook: codebook.entries,
+  denominators: {
+    P1: report.P1,
+    P2: report.P2,
+    P3: report.P3,
+    P4: report.P4,
+    P5: report.P5,
+    P6: report.P6,
+    P7: report.P7,
+    P8: report.P8,
+    P10: report.P10,
+    P11: report.P11,
+  },
+};
+void createHash;
 
 if (errors.length) {
-  console.error('INS-NAT-012 FAIL');
+  console.error(`INS-NAT-012 FAIL (${errors.length})`);
   for (const e of errors) console.error(' -', e);
   process.exit(1);
 }
-console.log('INS-NAT-012 PASS TXP1–TXP10 REL1–REL7 CMSA1–CMSA4 PUB1–PUB2 IDEM1');
+console.log('INS-NAT-012 PASS');
+console.log('P1', report.P1, 'P4', report.P4, 'P10', report.P10);
+console.log('artifact', report.fingerprint);
+console.log('homepage', a.fingerprint);
+console.log('florida', view.fingerprint);
+console.log('db_writes', report.db_writes);

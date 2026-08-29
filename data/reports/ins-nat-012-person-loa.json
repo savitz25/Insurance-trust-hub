@@ -1,0 +1,339 @@
+{
+  "version": "ins-nat-012-person-loa-v1",
+  "task": "INS-NAT-012",
+  "db_writes": 0,
+  "homepageUntouched": true,
+  "P1": 1721613,
+  "P2": 1721613,
+  "P3": 0,
+  "P4": 1029860,
+  "P5": 115055,
+  "P6": 1130688,
+  "P7": 475870,
+  "P8": 0,
+  "P9": 926115,
+  "P10": 3,
+  "P11": 3,
+  "equations": {
+    "p2_plus_p3_eq_p1": true,
+    "p5_to_p8_eq_p2": true,
+    "p9_le_p4": true,
+    "p11_le_p10": true
+  },
+  "total_loa_observations": 1791158,
+  "source_row_counts": {
+    "florida_dfs_individual": 927692,
+    "texas_tdi_individual": 733324,
+    "vermont_dfr_individual": 60597,
+    "texas_tdi": 50348,
+    "massachusetts_doi_regulatory": 19177,
+    "vermont_dfr": 20,
+    "florida_dfs": 0,
+    "ohio_odi": 0,
+    "ohio_odi_individual": 0,
+    "massachusetts_doi": 0
+  },
+  "personDatasets": {
+    "florida_dfs_individual": {
+      "state": "FL",
+      "regulator": "Florida DFS",
+      "dataset": "florida_dfs_individual",
+      "entity_grain": "person",
+      "raw_loa_rows": 927692,
+      "unique_persons": 691126,
+      "unattached": 0,
+      "statuses": {
+        "UNKNOWN": 927692
+      },
+      "source_observed_min": null,
+      "source_observed_max": null,
+      "ingested_min": "2026-08-26T20:42:29.663449+00:00",
+      "ingested_max": "2026-08-26T20:51:37.137191+00:00",
+      "overlap": {
+        "1": 492418,
+        "2": 170695,
+        "3-4": 25325,
+        "5+": 2688
+      },
+      "eligible_for_semantic_mapping": true,
+      "limitation": "Person grain only. Not mixed with agency LOAs. Identity uses existing entity_id attachment.",
+      "raw_categories": 17,
+      "top_categories": [
+        [
+          "NONRES LIFE & VARIABLE ANNUITY",
+          195288
+        ],
+        [
+          "NONRESIDENT HEALTH",
+          163335
+        ],
+        [
+          "LIFE INCL VAR ANNUITY & HEALTH",
+          139733
+        ],
+        [
+          "LIFE INCL VARIABLE ANNUITY",
+          99868
+        ],
+        [
+          "NONRES GEN LINES (PROP & CAS)",
+          81935
+        ],
+        [
+          "HEALTH",
+          60778
+        ],
+        [
+          "GENERAL LINES (PROP & CAS)",
+          53573
+        ],
+        [
+          "NONRES LIFE, HEALTH, & VAR ANN",
+          51431
+        ],
+        [
+          "NONRES PERSONAL LINES AGENT",
+          40281
+        ],
+        [
+          "PERSONAL LINES AGENT",
+          20491
+        ],
+        [
+          "LIFE & HEALTH",
+          10197
+        ],
+        [
+          "LIFE",
+          6219
+        ],
+        [
+          "NONRESIDENT LIFE & HEALTH",
+          2991
+        ],
+        [
+          "NONRESIDENT LIFE",
+          1330
+        ],
+        [
+          "VARIABLE ANNUITY",
+          237
+        ]
+      ]
+    },
+    "texas_tdi_individual": {
+      "state": "TX",
+      "regulator": "Texas Department of Insurance",
+      "dataset": "texas_tdi_individual",
+      "entity_grain": "person",
+      "raw_loa_rows": 733324,
+      "unique_persons": 644411,
+      "unattached": 0,
+      "statuses": {
+        "UNKNOWN": 705272,
+        "expired": 28052
+      },
+      "source_observed_min": "2026-08-26T07:01:41+00:00",
+      "source_observed_max": "2026-08-26T07:01:41+00:00",
+      "ingested_min": "2026-08-27T00:08:09.240503+00:00",
+      "ingested_max": "2026-08-27T00:26:30.599479+00:00",
+      "overlap": {
+        "1": 557670,
+        "2": 84638,
+        "3-4": 2103,
+        "5+": 0
+      },
+      "eligible_for_semantic_mapping": true,
+      "limitation": "Person grain only. Not mixed with agency LOAs. Identity uses existing entity_id attachment.",
+      "raw_categories": 5,
+      "top_categories": [
+        [
+          "Life, Accident, Health & HMO",
+          378894
+        ],
+        [
+          "Property and Casualty",
+          169997
+        ],
+        [
+          "Life Agent/Agency",
+          133668
+        ],
+        [
+          "Personal Lines Prop and Cas",
+          50764
+        ],
+        [
+          "Accident and Health",
+          1
+        ]
+      ]
+    },
+    "vermont_dfr_individual": {
+      "state": "VT",
+      "regulator": "Vermont Department of Financial Regulation",
+      "dataset": "vermont_dfr_individual",
+      "entity_grain": "person",
+      "raw_loa_rows": 60597,
+      "unique_persons": 48601,
+      "unattached": 0,
+      "statuses": {
+        "UNKNOWN": 60597
+      },
+      "source_observed_min": null,
+      "source_observed_max": null,
+      "ingested_min": "2026-08-26T20:51:37.137191+00:00",
+      "ingested_max": "2026-08-26T20:52:30.346487+00:00",
+      "overlap": {
+        "1": 37896,
+        "2": 9510,
+        "3-4": 1192,
+        "5+": 3
+      },
+      "eligible_for_semantic_mapping": true,
+      "limitation": "Person grain only. Not mixed with agency LOAs. Identity uses existing entity_id attachment.",
+      "raw_categories": 12,
+      "top_categories": [
+        [
+          "Property",
+          12701
+        ],
+        [
+          "Casualty",
+          12572
+        ],
+        [
+          "Accident and Health or Sickness",
+          11953
+        ],
+        [
+          "Life",
+          10793
+        ],
+        [
+          "Personal Lines",
+          8759
+        ],
+        [
+          "VARIABLE LIFE AND VARIABLE ANNUITY",
+          3775
+        ],
+        [
+          "Travel",
+          36
+        ],
+        [
+          "Limited Line",
+          3
+        ],
+        [
+          "Credit",
+          2
+        ],
+        [
+          "Worker's Compensation",
+          1
+        ],
+        [
+          "SELF STORAGE",
+          1
+        ],
+        [
+          "Title",
+          1
+        ]
+      ]
+    }
+  },
+  "agencyDatasetsExcluded": {
+    "texas_tdi": 50348,
+    "massachusetts_doi_regulatory": 19177,
+    "vermont_dfr": 20,
+    "florida_dfs": 0,
+    "ohio_odi": 0
+  },
+  "overlap_internal": {
+    "1": 562001,
+    "2": 307696,
+    "3-4": 145845,
+    "5+": 14318
+  },
+  "comparability": [
+    {
+      "concept": "Life",
+      "FL": "SOURCE_SPECIFIC / composite TYCL (LIFE, LIFE INCL VARIABLE, LIFE & HEALTH, \u2026)",
+      "TX": "atomic Life if present; else Life/AH/HMO composite",
+      "VT": "not assumed; inventory-driven",
+      "comparable_nationally": false,
+      "why_not": "Florida TYCL composites and Texas Life, Accident, Health & HMO are not atomic Life"
+    },
+    {
+      "concept": "Health / A&H",
+      "FL": "HEALTH atomic plus many health composites",
+      "TX": "often bundled with Life/HMO",
+      "VT": "inventory-driven",
+      "comparable_nationally": false,
+      "why_not": "Texas health is typically a composite qualification; Florida mixes HEALTH with LIFE & HEALTH TYCL"
+    },
+    {
+      "concept": "Property",
+      "FL": "not atomic; GENERAL LINES / NONRES GEN LINES (PROP & CAS)",
+      "TX": "Property and Casualty composite or Personal Lines Prop and Cas",
+      "VT": "inventory-driven",
+      "comparable_nationally": false,
+      "why_not": "No source publishes standalone Property as the only person qualification comparable to MA agency Property"
+    },
+    {
+      "concept": "Casualty",
+      "FL": "bundled in general lines P&C TYCL",
+      "TX": "bundled in P&C / personal lines P&C",
+      "VT": "inventory-driven",
+      "comparable_nationally": false,
+      "why_not": "Casualty is not an independent person LOA across these sources"
+    },
+    {
+      "concept": "Personal Lines",
+      "FL": "PERSONAL LINES AGENT / NONRES PERSONAL LINES AGENT (TYCL)",
+      "TX": "Personal Lines Prop and Cas (composite)",
+      "VT": "inventory-driven",
+      "comparable_nationally": false,
+      "why_not": "Florida TYCL agent class is not proven equivalent to Texas Personal Lines Prop and Cas"
+    },
+    {
+      "concept": "Travel",
+      "FL": "if Travel TYCL appears, EXACT",
+      "TX": "Travel EXACT if present",
+      "VT": "Travel EXACT if present",
+      "comparable_nationally": true,
+      "why_not": null
+    },
+    {
+      "concept": "Credit",
+      "FL": "if Credit TYCL appears, EXACT",
+      "TX": "Credit EXACT if present",
+      "VT": "Credit EXACT if present",
+      "comparable_nationally": true,
+      "why_not": null
+    },
+    {
+      "concept": "Variable",
+      "FL": "many LIFE INCL VARIABLE ANNUITY TYCL composites",
+      "TX": "inventory-driven",
+      "VT": "inventory-driven",
+      "comparable_nationally": false,
+      "why_not": "Florida variable language is bundled with life/health TYCL, not a standalone variable LOA"
+    },
+    {
+      "concept": "Limited Lines",
+      "FL": "source-specific TYCL if present",
+      "TX": "source-specific if present",
+      "VT": "Limited Line SOURCE_SPECIFIC",
+      "comparable_nationally": false,
+      "why_not": "Limited Line is not a product category without regulator product split"
+    }
+  ],
+  "identityRule": "existing entity_id attachment only; no name/email/phone/address/NPN fuzzy match",
+  "pagination": "keyset id.asc page=1000; no unordered range",
+  "fingerprint": "58f08afe5911ab36762e5829190540c2964099c8754884b9fd0389e76e50e3c3",
+  "generatedAt": "2026-08-29T16:24:52.620401+00:00"
+}
