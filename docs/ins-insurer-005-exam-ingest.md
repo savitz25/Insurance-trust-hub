@@ -12,10 +12,10 @@ Exact examination relationships are now canonical Production evidence. PUBLIC_RE
 
 | | SHA |
 |---|---|
-| starting SHA | `72ecbf0` (origin/main / PR #9) |
-| implementation SHA | *(this branch)* |
-| final main | pending PR |
-| rollback | `72ecbf0` |
+| starting SHA | `72ecbf02d49d99f621057847318dddc6048d0717` (origin/main / PR #9) |
+| implementation SHA | `3ece3b9776438fefb0f9a7fa071eabc73788ad65` |
+| final main | pending [PR #10](https://github.com/savitz25/Insurance-trust-hub/pull/10) |
+| rollback | `72ecbf02d49d99f621057847318dddc6048d0717` |
 
 ## CA FARMERS VALIDATION
 
