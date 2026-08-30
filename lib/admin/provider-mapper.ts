@@ -4,6 +4,12 @@ import type { AdminProviderFormValues } from '@/lib/validations/admin';
 import { getLicenseDepartment } from '@/lib/tools/license-verification';
 import { isPlaceholderPhone } from '@/lib/provenance/phone';
 import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
+import {
+  classifyBailBondDirectoryPublication,
+  mayAssignPublicInsuranceCategory,
+  mayAssignPublicInsuranceSpecialty,
+  maySetDirectoryVerified,
+} from '@/lib/directory/bail-bond-publication';
 
 export interface AdminProviderFormData {
   slug: string;
@@ -124,13 +130,19 @@ export function formToDbInsert(data: AdminProviderFormData): ProviderInsert {
     data.licenseSourceUrl.trim() || dept?.lookupUrl || 'https://content.naic.org/consumer.htm';
   const checkedAt = data.licenseCheckedAt.trim() || undefined;
 
+  const bail = classifyBailBondDirectoryPublication({
+    businessNames: [data.name],
+    licenseEvidence: [data.licenseNotes, ...(data.insuranceTypes ?? [])],
+  });
+
   // Never write verified without full provenance (Phase 6B1)
   const canVerify =
     data.verified &&
     Boolean(cleaned) &&
     Boolean(source) &&
     Boolean(checkedAt) &&
-    data.identityMatchAccepted;
+    data.identityMatchAccepted &&
+    maySetDirectoryVerified(bail);
 
   const prevAudit: LicenseInfo['audit'] = [];
   if (cleaned) {
@@ -147,7 +159,7 @@ export function formToDbInsert(data: AdminProviderFormData): ProviderInsert {
     slug: data.slug,
     name: data.name,
     provider_type: data.providerType,
-    categories: data.insuranceTypes,
+    categories: data.insuranceTypes.filter((c) => mayAssignPublicInsuranceCategory(c, bail)),
     states_licensed: state ? [state] : [],
     cities: data.city ? [data.city] : [],
     license_info: {
@@ -169,7 +181,7 @@ export function formToDbInsert(data: AdminProviderFormData): ProviderInsert {
         : [],
       audit: prevAudit,
     },
-    specialties: data.specialties,
+    specialties: data.specialties.filter((s) => mayAssignPublicInsuranceSpecialty(s, bail)),
     years_in_business: data.yearsInBusiness,
     relocation_experience: data.relocationExperience,
     verified: canVerify,

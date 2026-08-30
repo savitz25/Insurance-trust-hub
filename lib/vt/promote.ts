@@ -10,6 +10,7 @@ import {
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { isSeedProviderId } from '@/lib/provenance/promotion';
+import { rejectBailBondDirectoryPromotion } from '@/lib/directory/bail-bond-publication';
 import {
   VT_DFR_LOOKUP_URL,
   VT_DFR_REGULATOR,
@@ -132,6 +133,12 @@ export function evaluateVtPromotionEligibility(
   if (!producer.display_name?.trim() && !producer.legal_name?.trim()) {
     return { ok: false, reason: 'missing_name' };
   }
+  const bailBlock = rejectBailBondDirectoryPromotion({
+    legalName: producer.legal_name,
+    displayName: producer.display_name,
+    licenseEvidence: producer.license_types,
+  });
+  if (bailBlock) return bailBlock;
 
   const market =
     (producer.launch_market_id && marketById(producer.launch_market_id)) ||

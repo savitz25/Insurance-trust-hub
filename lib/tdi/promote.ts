@@ -12,6 +12,7 @@ import {
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { isSeedProviderId } from '@/lib/provenance/promotion';
+import { rejectBailBondDirectoryPromotion } from '@/lib/directory/bail-bond-publication';
 import {
   TX_TDI_LOOKUP_URL,
   TX_TDI_REGULATOR,
@@ -128,6 +129,12 @@ export function evaluateTdiPromotionEligibility(
   if (!producer.display_name?.trim() && !producer.legal_name?.trim()) {
     return { ok: false, reason: 'missing_name' };
   }
+  const bailBlock = rejectBailBondDirectoryPromotion({
+    legalName: producer.legal_name,
+    displayName: producer.display_name,
+    licenseEvidence: [...(producer.license_types ?? []), ...(producer.qualifications ?? [])],
+  });
+  if (bailBlock) return bailBlock;
 
   const hqState = (producer.state || '').trim().toUpperCase().slice(0, 2);
   const txHq = hqState === 'TX';
