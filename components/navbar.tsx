@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
 const PRIMARY_NAV = INSURANCE_HEADER_NAV.filter((item) =>
-  ['Research', 'Marketplace', 'Medicare', 'Directory'].includes(item.label),
+  ['Ask', 'Research', 'Marketplace', 'Medicare', 'Directory'].includes(item.label),
 );
 const MORE_NAV = INSURANCE_HEADER_NAV.filter((item) =>
   ['Guides', 'Data', 'Methodology'].includes(item.label),

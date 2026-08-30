@@ -263,6 +263,7 @@ export const INSURANCE_NETWORK_SECTION = {
  * Switch Hub is a separate control.
  */
 export const INSURANCE_HEADER_NAV = [
+  { href: '/ask', label: 'Ask' },
   { href: '/tools', label: 'Research' },
   { href: '/tools/marketplace-plan-research', label: 'Marketplace' },
   { href: '/medicare', label: 'Medicare' },
@@ -354,6 +355,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
   {
     title: 'Verify & trust',
     links: [
+      { href: '/ask', label: 'Ask InsuranceTrustHub' },
       { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
       { href: '/florida', label: 'Florida insurance research' },
       { href: '/tools/license-verification', label: 'License verification' },
