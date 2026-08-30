@@ -189,6 +189,11 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
                 Browse public directory listings
               </Button>
             </Link>
+            <Link href="/ask">
+              <Button size="lg" variant="outline" className="h-12 w-full sm:w-auto">
+                Ask InsuranceTrustHub
+              </Button>
+            </Link>
           </div>
           <div className="mt-8 min-w-0 max-w-2xl rounded-xl border border-[#E2E8F0] bg-white p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">Public directory listings</p>
@@ -405,6 +410,28 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
           <h2 id="ask-title" className="mt-2 text-3xl font-semibold text-[#0A2540]">
             Structured questions, not a chatbot
           </h2>
+          <form action="/ask" method="get" className="mt-4 max-w-2xl" role="search" aria-label="Ask InsuranceTrustHub">
+            <label htmlFor="home-ask-q" className="sr-only">
+              Ask InsuranceTrustHub
+            </label>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <input
+                id="home-ask-q"
+                name="q"
+                placeholder="Show insurance agencies credentialed in Florida."
+                className="min-h-12 flex-1 rounded-xl border border-[#E2E8F0] px-4"
+              />
+              <button type="submit" className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#0A2540] px-5 font-semibold text-white">
+                Ask
+              </button>
+            </div>
+            <p className="mt-2 text-xs text-[#1E293B]">
+              Structured regulatory research. Not a ranking or quote engine.{' '}
+              <Link href="/ask" className="font-semibold text-[#0284C7]">
+                Open Ask InsuranceTrustHub
+              </Link>
+            </p>
+          </form>
           <div className="mt-4 space-y-2">
             {intel.ask.map((item) => (
               <details key={item.id} className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-4">

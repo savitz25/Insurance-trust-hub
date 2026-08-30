@@ -11,6 +11,7 @@ export type PrimaryNavLink = {
 
 /** Always-visible product links on desktop (lg+). */
 export const PRIMARY_NAV: PrimaryNavLink[] = [
+  { href: '/ask', label: 'Ask', description: 'Structured regulatory research' },
   { href: '/tools', label: 'Research', description: 'ACA, Medicare & cost tools' },
   { href: '/directory', label: 'Directory', description: 'Licensed agencies & agents' },
   { href: '/medicare', label: 'Medicare', description: 'Market intelligence' },
