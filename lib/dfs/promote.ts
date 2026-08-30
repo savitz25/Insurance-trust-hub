@@ -9,6 +9,7 @@ import {
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { isSeedProviderId } from '@/lib/provenance/promotion';
+import { rejectBailBondDirectoryPromotion } from '@/lib/directory/bail-bond-publication';
 import {
   FL_DFS_LOOKUP_URL,
   FL_DFS_REGULATOR,
@@ -107,6 +108,9 @@ export function candidateToTrustProbe(
     license_checked_at: opts.checkedAt,
     license_method: 'automated',
     license_identity_match_accepted: opts.identityMatchAccepted,
+    license_notes: isNorm
+      ? undefined
+      : (p as DfsProducerRow).lines_of_authority?.join('; ') || undefined,
   };
 }
 
@@ -135,6 +139,12 @@ export function evaluatePromotionEligibility(
   if (!producer.display_name?.trim() && !producer.legal_name?.trim()) {
     return { ok: false, reason: 'missing_name' };
   }
+  const bailBlock = rejectBailBondDirectoryPromotion({
+    legalName: producer.legal_name,
+    displayName: producer.display_name,
+    licenseEvidence: producer.lines_of_authority,
+  });
+  if (bailBlock) return bailBlock;
 
   const checkedAt =
     producer.source_checked_at || (opts?.now ?? new Date()).toISOString();

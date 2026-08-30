@@ -7,6 +7,7 @@ import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
 import { isPlaceholderPhone } from '@/lib/provenance/phone';
 import type { PublicListingClass } from '@/lib/provenance/types';
 import type { Provider } from '@/types/provider';
+import { classifyBailBondDirectoryPublication } from '@/lib/directory/bail-bond-publication';
 
 export function isSeedProviderId(id: string | null | undefined): boolean {
   if (!id) return true;
@@ -64,6 +65,8 @@ export function evaluatePromotionGates(input: {
   isVerified?: boolean | null;
   identityMatchAccepted?: boolean | null;
   phone?: string | null;
+  businessName?: string | null;
+  licenseEvidence?: readonly (string | null | undefined)[] | null;
 }): PromotionGateResult {
   const reasons: string[] = [];
   const missing: string[] = [];
@@ -75,6 +78,23 @@ export function evaluatePromotionGates(input: {
       canShowHardVerifiedBadge: false,
       reasons: ['Known seed / generated / fallback entity — never promote'],
       missing: [],
+    };
+  }
+
+  const bail = classifyBailBondDirectoryPublication({
+    businessNames: [input.businessName],
+    licenseEvidence: input.licenseEvidence,
+  });
+  if (bail.excludeFromConsumerDirectory) {
+    return {
+      ok: false,
+      listingClass: 'pending_verification',
+      canShowHardVerifiedBadge: false,
+      reasons: [
+        'Bail-bond activity is retained as regulatory evidence but is not eligible for the consumer insurance-agency directory',
+        bail.reason,
+      ],
+      missing: ['consumer_insurance_agency_eligibility'],
     };
   }
 
@@ -156,6 +176,11 @@ export function evaluatePromotionGates(input: {
 }
 
 export function evaluateProviderPromotion(provider: Provider): PromotionGateResult {
+  const licenseEvidence = [
+    provider.license_notes,
+    ...(provider.licenses ?? []).map((l) => l.type),
+    ...(provider.licenses ?? []).map((l) => l.notes),
+  ];
   return evaluatePromotionGates({
     id: provider.id,
     licenseNumber: provider.license_number,
@@ -166,6 +191,8 @@ export function evaluateProviderPromotion(provider: Provider): PromotionGateResu
     isVerified: provider.is_verified,
     identityMatchAccepted: provider.license_identity_match_accepted ?? false,
     phone: provider.phone,
+    businessName: provider.name,
+    licenseEvidence,
   });
 }
 

@@ -1,0 +1,15 @@
+{
+  "task": "INS-DIR-BAIL-001",
+  "at": "2026-08-30T00:40:03.996Z",
+  "public_verified_providers": 169870,
+  "license_credentials_bail_bond_namespace": 2,
+  "provider_rows_authoritative_bail_license": 566,
+  "provider_rows_defensive_bail_name": 63,
+  "mixed_bail_and_non_bail_insurance_entities": 0,
+  "currently_public_bail_only_after_firewall": 0,
+  "public_hits": [],
+  "sitemap_provider_urls_before": 0,
+  "sitemap_provider_urls_after": 0,
+  "sitemap_delta": 0,
+  "db_mutation": 0
+}
