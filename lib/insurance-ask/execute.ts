@@ -145,9 +145,14 @@ function whyAgency(row: EntityRow, cred: CredEmbed | undefined, loas: string[]):
   return `This agency matches because ${bits.join(', ')}.`;
 }
 
-export async function executeInsuranceAsk(raw: string, page = 1): Promise<InsuranceAskResult> {
+export async function executeInsuranceAsk(
+  raw: string,
+  page = 1,
+  pageSize = INSURANCE_ASK_PAGE_SIZE,
+): Promise<InsuranceAskResult> {
   const started = Date.now();
   const parsed = interpretInsuranceAskQuery(raw, page);
+  parsed.query.pageSize = Math.max(1, Math.min(50, Math.floor(pageSize)));
   const q = parsed.query;
   const empty = emptyBase(parsed, started);
 
@@ -253,7 +258,7 @@ async function lookupMarketplace(parsed: ParsedInsuranceAsk, started: number): P
     .select('id, npn, evidence_type, plan_year, status, source_dataset, source_observed_at, identity_attachment')
     .eq('npn', npn)
     .order('plan_year', { ascending: false })
-    .limit(INSURANCE_ASK_PAGE_SIZE);
+    .limit(parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
   if (year) query = query.eq('plan_year', year);
   const { data } = await query;
   const rows = (data ?? []) as Array<{
@@ -325,7 +330,7 @@ async function lookupAppointment(parsed: ParsedInsuranceAsk, started: number): P
       .select('id, relationship_type, status, source_dataset, source_observed_at, to_entity_id, from_entity_id')
       .eq('from_entity_id', row.id)
       .in('relationship_type', ['appointed_by', 'APPOINTED_TO', 'appointed_to', 'APPOINTED_BY'])
-      .limit(INSURANCE_ASK_PAGE_SIZE);
+      .limit(parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
     const relRows = (rels ?? []) as Array<{
       id: string;
       relationship_type: string;
@@ -341,7 +346,7 @@ async function lookupAppointment(parsed: ParsedInsuranceAsk, started: number): P
         .from('national_entities')
         .select('id, entity_kind, npn, display_name, legal_name')
         .in('id', toIds)
-        .limit(INSURANCE_ASK_PAGE_SIZE);
+        .limit(parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
       for (const t of (tos ?? []) as EntityRow[]) names.set(t.id, t);
     }
     for (const rel of relRows) {
@@ -575,8 +580,9 @@ async function listAgencies(parsed: ParsedInsuranceAsk, started: number): Promis
   if (official) return listAgenciesOfficialLoa(parsed, started);
 
   const page = q.page;
-  const from = (page - 1) * INSURANCE_ASK_PAGE_SIZE;
-  const to = from + INSURANCE_ASK_PAGE_SIZE - 1;
+  const pageSize = q.pageSize ?? INSURANCE_ASK_PAGE_SIZE;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
   let query = db()
     .from('national_entities')
     .select(
@@ -620,8 +626,9 @@ async function listAgenciesOfficialLoa(parsed: ParsedInsuranceAsk, started: numb
   const loas = q.linesOfAuthority ?? [];
   const primary = loas[0]!;
   const page = q.page;
-  const from = (page - 1) * INSURANCE_ASK_PAGE_SIZE;
-  const fetchTo = q.loaMatch === 'all' && loas.length > 1 ? from + INSURANCE_ASK_PAGE_SIZE * 3 - 1 : from + INSURANCE_ASK_PAGE_SIZE - 1;
+  const pageSize = q.pageSize ?? INSURANCE_ASK_PAGE_SIZE;
+  const from = (page - 1) * pageSize;
+  const fetchTo = q.loaMatch === 'all' && loas.length > 1 ? from + pageSize * 3 - 1 : from + pageSize - 1;
   const { data, count } = await db()
     .from('national_entities')
     .select(
@@ -640,7 +647,7 @@ async function listAgenciesOfficialLoa(parsed: ParsedInsuranceAsk, started: numb
       const texts = asArray(row.loa_observations).map((l) => l.official_text.toLowerCase());
       return loas.every((loa) => texts.some((t) => t.includes(loa.toLowerCase())));
     });
-    rows = rows.slice(0, INSURANCE_ASK_PAGE_SIZE);
+    rows = rows.slice(0, pageSize);
   }
   const results = rows.map((row) => cardFromEntity(row, loas, true));
   return finish(
@@ -696,7 +703,7 @@ function emptyBase(parsed: ParsedInsuranceAsk, started: number): InsuranceAskRes
     entityClass: parsed.query.entityClass ?? null,
     results: [],
     counts: [],
-    pagination: { page: parsed.query.page, pageSize: INSURANCE_ASK_PAGE_SIZE, total: 0, hasMore: false },
+    pagination: { page: parsed.query.page, pageSize: parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE, total: 0, hasMore: false },
     provenance: {
       sourceFamily: 'InsuranceTrustHub national identity graph',
       geographyMeaning: parsed.query.jurisdiction
@@ -720,6 +727,7 @@ function finish(
   counts: AskCountRow[] = [],
 ): InsuranceAskResult {
   const page = parsed.query.page;
+  const pageSize = parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE;
   return {
     contract: INSURANCE_ASK_CONTRACT,
     queryText: parsed.raw,
@@ -730,9 +738,9 @@ function finish(
     counts: counts.length ? counts : total ? [{ label: 'Matching research identities', value: total, grain }] : [],
     pagination: {
       page,
-      pageSize: INSURANCE_ASK_PAGE_SIZE,
+      pageSize,
       total,
-      hasMore: page * INSURANCE_ASK_PAGE_SIZE < total,
+      hasMore: page * pageSize < total,
     },
     provenance: {
       sourceFamily: 'national_entities ⋈ license_credentials (service-role; not public RLS; not a client-side table dump)',
