@@ -99,6 +99,8 @@ export type InsuranceResearchQuery = {
   appointerName?: string;
   sort?: 'name' | 'npn' | 'jurisdiction';
   page: number;
+  /** Internal execution page size. Public insurance-ask-v1 keeps the default of 20. */
+  pageSize?: number;
   definitionId?: string;
   failReason?: string;
   alternatives?: string[];
