@@ -101,6 +101,11 @@ def test_repo() -> None:
     check("exam_ne_enforcement", "is_enforcement" in runner)
     check("complaint_ne_violation", "valid_complaints" in runner)
     check("no_vercel_project", not (ROOT / ".vercel/project.json").exists())
+    spaced = mod.safe_urljoin(
+        "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2021.html",
+        "orders/2103/2051125 .pdf",
+    )
+    check("spaced_pdf_url_quoted", " " not in spaced and "%20" in spaced, spaced)
 
 
 def main() -> None:

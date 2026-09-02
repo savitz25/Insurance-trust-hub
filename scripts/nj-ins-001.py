@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin, urlparse
+from urllib.parse import quote, urljoin, urlparse
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,9 +75,18 @@ def normalize_space(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def safe_urljoin(base_url: str, href: str) -> str:
+    href = html_lib.unescape(href or "").strip().replace("\\", "/")
+    href = re.sub(r"\s+", "%20", href)
+    joined = urljoin(base_url, href)
+    parsed = urlparse(joined)
+    path = quote(parsed.path, safe="/%._-")
+    return parsed._replace(path=path).geturl()
+
+
 def html_to_text(html: str, base_url: str) -> str:
     def _pdf(match: re.Match[str]) -> str:
-        href = urljoin(base_url, html_lib.unescape(match.group(1)))
+        href = safe_urljoin(base_url, match.group(1))
         label = normalize_space(re.sub(r"<[^>]+>", " ", match.group(2)))
         return f" [[PDF {href}|{label}]] "
 
@@ -310,7 +319,7 @@ def parse_financial_exams(html: str, source_url: str) -> list[dict[str, Any]]:
             name = normalize_space(name[: tail.start()])
         elif "AA-" in name:
             naic = None
-        pdf = urljoin(source_url, html_lib.unescape(href))
+        pdf = safe_urljoin(source_url, href)
         year = int(year_m.group(1)) if year_m else None
         party = {"legal_name": name, "party_type": "INSURER", "role_in_order": "examination_subject", "naic_cocode": naic, "npn": None, "state_reference": None}
         if naic:
@@ -349,7 +358,7 @@ def parse_mc_exams(html: str, source_url: str) -> list[dict[str, Any]]:
         name = normalize_space(re.sub(r"<[^>]+>", " ", label))
         if not name or "instruction" in name.lower() or len(name) < 4:
             continue
-        pdf = urljoin(source_url, html_lib.unescape(href))
+        pdf = safe_urljoin(source_url, href)
         multi = bool(re.search(r"\band\b|Group \(| / ", name, re.I))
         names = [n.strip() for n in re.split(r"\band\b|/", name) if n.strip()] if multi else [name]
         parties = []
