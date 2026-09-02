@@ -1,6 +1,6 @@
 {
   "ticket": "NJ-INS-002",
-  "generated_at": "2026-09-02T19:12:53Z",
+  "generated_at": "2026-09-02T19:20:43Z",
   "publication": {
     "new_jersey_route_created": false,
     "county_pages": false,
@@ -23,13 +23,12 @@
       2025,
       2026
     ],
-    "rate_change_observations": 44,
+    "rate_change_observations": 42,
     "carriers": [
       "Aetna",
       "Ambetter from WellCare of New Jersey",
       "AmeriHealth",
       "AmeriHealth HMO",
-      "Average",
       "Horizon",
       "Oscar",
       "Oxford",
@@ -48,7 +47,7 @@
     "off_marketplace_enrollment_rows": 24,
     "plan_counts": 117,
     "exact_naic": 0,
-    "review_required": 41,
+    "review_required": 39,
     "unresolved": 3
   },
   "seh": {
@@ -64,7 +63,6 @@
     "carriers": [
       "AmeriHealth",
       "AmeriHealth HMO",
-      "Average",
       "Horizon",
       "Oscar",
       "Oxford",
@@ -98,7 +96,6 @@
     "not_asterisked_ihc_writers": [
       "AmeriHealth",
       "AmeriHealth HMO",
-      "Average",
       "Horizon",
       "Oscar",
       "Oxford"

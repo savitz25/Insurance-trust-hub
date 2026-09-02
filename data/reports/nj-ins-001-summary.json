@@ -1,6 +1,6 @@
 {
   "ticket": "NJ-INS-001",
-  "generated_at": "2026-09-02T19:07:14Z",
+  "generated_at": "2026-09-02T19:20:16Z",
   "publication": {
     "new_jersey_route_created": false,
     "sitemap_change": false,
@@ -14,40 +14,40 @@
     "events": 3821,
     "unique_orders": 3748,
     "class_counts": {
-      "FINAL_ORDER": 192,
-      "CONSENT_ORDER": 1051,
-      "ORDER_TO_SHOW_CAUSE": 333,
+      "FINAL_ORDER": 187,
+      "CONSENT_ORDER": 3306,
+      "ORDER_TO_SHOW_CAUSE": 324,
       "CEASE_AND_DESIST": 2,
-      "OTHER": 2243
+      "OTHER": 2
     },
     "status_counts": {
-      "FINAL": 1241,
-      "PENDING": 343,
-      "UNKNOWN": 2237
+      "FINAL": 3482,
+      "PENDING": 335,
+      "UNKNOWN": 4
     },
     "penalties": 3293,
     "restitution": 100,
     "fraud_surcharge": 61,
-    "multi_party": 2833
+    "multi_party": 2827
   },
   "respondents": {
     "counts": {
-      "INDIVIDUAL_PRODUCER": 6235,
+      "INDIVIDUAL_PRODUCER": 6177,
       "AGENCY": 559,
-      "PUBLIC_ADJUSTER": 220,
+      "PUBLIC_ADJUSTER": 219,
       "BAIL_BOND_PRODUCER": 76,
       "INSURER": 61,
       "THIRD_PARTY_BILLING": 93
     },
-    "individuals": 6235,
-    "internal_only_individuals": 6376
+    "individuals": 6177,
+    "internal_only_individuals": 6317
   },
   "identity": {
     "exact_naic": 117,
     "exact_npn": 0,
     "exact_state_ref": 0,
     "match_status_counts": {
-      "INTERNAL_ONLY_INDIVIDUAL": 6376,
+      "INTERNAL_ONLY_INDIVIDUAL": 6317,
       "UNRESOLVED": 938,
       "UNSAFE_REJECTED": 29,
       "EXACT": 117,
@@ -98,7 +98,11 @@
     "index_only": 663,
     "unique_hashes": 3356,
     "duplicate_content_groups": 22,
-    "document_links": 3392
+    "document_links": 3392,
+    "text_extracted": 353,
+    "image_only": 3003,
+    "other_extraction_failures": 0,
+    "occurrence_vs_canonical": "occurrence_fingerprint identifies index rows; canonical_document_id is content hash"
   },
   "coverage": [
     {
@@ -293,5 +297,5 @@
     "group_ne_legal_entity": true,
     "producer_ne_insurer": true
   },
-  "mode": "download"
+  "mode": "inspect"
 }
