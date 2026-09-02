@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/directory',
     '/florida',
+    '/new-jersey',
     '/methodology',
     '/about',
     '/destinations',

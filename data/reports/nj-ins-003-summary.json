@@ -1,0 +1,13 @@
+{
+  "admitted": 1370,
+  "as_of": "2026-09-02",
+  "county_routes": false,
+  "crib_publication_allowed": false,
+  "enforcement_events": 3821,
+  "fingerprint": "bcab35631a0494038667647244863a9510f5c76a36495fd14217bb0afd2a59e5",
+  "generated_at": "2026-09-02T19:32:45Z",
+  "indexable": true,
+  "route": "/new-jersey",
+  "serff_filings_displayed": null,
+  "ticket": "NJ-INS-003"
+}

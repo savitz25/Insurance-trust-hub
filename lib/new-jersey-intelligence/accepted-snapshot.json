@@ -1,0 +1,935 @@
+{
+  "as_of": "2026-09-02",
+  "authorization": {
+    "admitted": 1370,
+    "admitted_is_not_surplus": true,
+    "caveat": "Admitted-insurer rows are legal entities with NAIC company codes. They are not appointments, not producer licenses, and not surplus-lines eligible companies. A missing surplus-lines census is not zero eligible companies.",
+    "classes": {
+      "ADMITTED_INSURER": 1370
+    },
+    "exact_naic": 1370,
+    "grain": "legal_entity",
+    "group_is_not_company": true,
+    "license_is_not_appointment": true,
+    "producer_is_not_insurer": true,
+    "source_url": "https://www.nj.gov/dobi/data/inscomp.htm",
+    "surplus_lines_coverage_state": "SOURCE_NOT_ACQUIRED",
+    "surplus_lines_eligible": null,
+    "surplus_lines_url": "https://www.nj.gov/dobi/data/sl_whitelist260720.pdf"
+  },
+  "auto_complaints": {
+    "caveat": "A valid complaint is not a violation. A group row stays at group grain and is not copied onto a legal subsidiary. Incomplete historical years are not a finding of zero complaints.",
+    "company_grain_rows": 19,
+    "complaint_is_not_violation": true,
+    "copied_to_legal_entities": false,
+    "eligibility_threshold_vehicles": 10000,
+    "group_grain_rows": 31,
+    "group_is_not_copied_to_subsidiary": true,
+    "leaderboard_created": false,
+    "methodology": "Official auto consumer information report: valid complaints per 1,000 insured autos; index 1.00 = average. Ratios are for companies or groups with at least 10,000 insured autos.",
+    "no_complaint_ranking": true,
+    "rows": 50,
+    "source_url": "https://www.nj.gov/dobi/division_consumers/insurance/auto.htm",
+    "valid_complaint_is_not_all_complaints": true,
+    "years": [
+      2023,
+      2024
+    ]
+  },
+  "coverage": [
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines06.htm",
+      "year": 2006
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines07.htm",
+      "year": 2007
+    },
+    {
+      "coverage_state": "SOURCE_NOT_ACQUIRED",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines08.htm",
+      "year": 2008
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines09.htm",
+      "year": 2009
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines10.htm",
+      "year": 2010
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines11.htm",
+      "year": 2011
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines12.htm",
+      "year": 2012
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines13.htm",
+      "year": 2013
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines14.htm",
+      "year": 2014
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines15.htm",
+      "year": 2015
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines16.htm",
+      "year": 2016
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines17.htm",
+      "year": 2017
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines18.htm",
+      "year": 2018
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2018.html",
+      "year": 2018
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines19.htm",
+      "year": 2019
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2019.html",
+      "year": 2019
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines20.htm",
+      "year": 2020
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2020.html",
+      "year": 2020
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines21.htm",
+      "year": 2021
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2021.html",
+      "year": 2021
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines22.htm",
+      "year": 2022
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2022.html",
+      "year": 2022
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines23.htm",
+      "year": 2023
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2023.html",
+      "year": 2023
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines24.htm",
+      "year": 2024
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2024.html",
+      "year": 2024
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines25.htm",
+      "year": 2025
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2025.html",
+      "year": 2025
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines26.htm",
+      "year": 2026
+    },
+    {
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2026.html",
+      "year": 2026
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_IHC_ENROLLMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+      "year": null,
+      "years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_SEH_ENROLLMENT",
+      "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+      "year": null,
+      "years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "family": "NJ_RESIDUAL_MARKETS",
+      "url": "https://www.nj.gov/dobi/division_insurance/propcas.htm",
+      "year": null,
+      "years": null
+    },
+    {
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "family": "NJ_CRIB_PLAN_RISK",
+      "url": "https://www.njcrib.com/FileDownload/PlanRiskDAT",
+      "year": null,
+      "years": null
+    },
+    {
+      "coverage_state": "SOURCE_ACCESS_BLOCKED",
+      "family": "NJ_SERFF_FILING",
+      "url": "https://filingaccess.serff.com/sfa/home/NJ",
+      "year": null,
+      "years": null
+    },
+    {
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "family": "NJ_DOBI_CARRIER_AUTHORIZATION",
+      "url": "https://www.nj.gov/dobi/data/inscomp.htm",
+      "year": null
+    },
+    {
+      "coverage_state": "SOURCE_NOT_ACQUIRED",
+      "family": "NJ_DOBI_SURPLUS_LINES_ELIGIBLE",
+      "notes": "Official surplus-lines eligible list exists. It was not ingested as a public census. Missing is not zero eligible companies.",
+      "url": "https://www.nj.gov/dobi/data/sl_whitelist260720.pdf",
+      "year": null
+    },
+    {
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "family": "NJ_DOBI_MARKET_CONDUCT_EXAMINATION",
+      "url": "https://www.nj.gov/dobi/division_consumers/insurance/marketconductexams.htm",
+      "year": null
+    },
+    {
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "family": "NJ_DOBI_FINANCIAL_EXAMINATION",
+      "url": "https://www.nj.gov/dobi/division_insurance/finexam_reports.htm",
+      "year": null
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_DOBI_AUTO_COMPLAINT",
+      "url": "https://www.nj.gov/dobi/division_consumers/insurance/auto.htm",
+      "year": null,
+      "years": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "family": "NJ_DOBI_REHABILITATION_LIQUIDATION",
+      "url": "https://www.nj.gov/dobi/division_insurance/finesolv.htm",
+      "year": null
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_IHC_RATE_CHANGE",
+      "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/index.html",
+      "year": null,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_SEH_RATE_CHANGE",
+      "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/index.html",
+      "year": null,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "family": "NJ_GET_COVERED_PARTICIPATION",
+      "notes": "Participation is taken from official IHC asterisk markers, not the Get Covered NJ marketing homepage.",
+      "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/index.html",
+      "year": null,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    }
+  ],
+  "coverage_gaps": [
+    {
+      "id": "doi-2008",
+      "label": "DOI enforcement 2008",
+      "meaning": "Missing year is not zero enforcement actions.",
+      "state": "SOURCE_NOT_ACQUIRED"
+    },
+    {
+      "id": "surplus-lines",
+      "label": "Surplus-lines eligible census",
+      "meaning": "Admitted census is not a surplus-lines count. Missing is not zero eligible companies.",
+      "state": "SOURCE_NOT_ACQUIRED"
+    },
+    {
+      "id": "serff",
+      "label": "SERFF Filing Access",
+      "meaning": "Blocked access is not zero filings.",
+      "state": "SOURCE_ACCESS_BLOCKED"
+    },
+    {
+      "id": "crib",
+      "label": "NJCRIB Plan Risk republication",
+      "meaning": "Acquired internally; withheld from public metrics under source terms.",
+      "state": "PUBLIC_WITH_TERMS"
+    },
+    {
+      "id": "ihc-enrollment-total",
+      "label": "IHC covered-lives statewide total",
+      "meaning": "Missing total is not zero enrollment.",
+      "state": "NOT_IN_COMMITTED_PUBLIC_SNAPSHOT"
+    },
+    {
+      "id": "seh-enrollment-total",
+      "label": "SEH enrollment statewide total",
+      "meaning": "Missing total is not zero enrollment.",
+      "state": "NOT_IN_COMMITTED_PUBLIC_SNAPSHOT"
+    },
+    {
+      "id": "auto-history",
+      "label": "Auto complaint years before 2023",
+      "meaning": "Partial history is not a clean complaint record.",
+      "state": "SOURCE_NOT_ACQUIRED"
+    },
+    {
+      "id": "market-conduct-identity",
+      "label": "Market-conduct exact NAIC",
+      "meaning": "Ambiguous reports are withheld from profiles.",
+      "state": "UNRESOLVED_OR_REVIEW_REQUIRED"
+    },
+    {
+      "id": "authorization-subtypes",
+      "label": "HMO / title / captive / RRG completeness",
+      "meaning": "The admitted census is not a complete subtype universe.",
+      "state": "NOT_CLAIMED"
+    }
+  ],
+  "crib": {
+    "access_classification": "PUBLIC_WITH_TERMS",
+    "caveat": "Plan Risk is downloadable without login, but NJCRIB terms forbid copying/redistribution and using content to supplement a database. Those terms are absolute. Restricted rows are not rendered.",
+    "commit_raw_file": false,
+    "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+    "database_supplementation_restricted": true,
+    "downloadable_dataset": false,
+    "employer_profiles_created": false,
+    "login_bypass": false,
+    "publication_allowed": false,
+    "published": "coverage statement and terms determination only",
+    "redistribution_forbidden": true,
+    "rows_rendered": 0,
+    "source_url": "https://www.njcrib.com/FileDownload/PlanRiskDAT",
+    "terms_url": "https://www.njcrib.com/",
+    "withheld": [
+      "employer names",
+      "producer names",
+      "carrier relationships",
+      "modification factors",
+      "Plan Risk rows",
+      "county distributions",
+      "downloadable transformed dataset",
+      "raw DAT file"
+    ]
+  },
+  "database": {
+    "available": false,
+    "used_for_page": false
+  },
+  "document_depth": {
+    "available_hash_verified": 3385,
+    "caveat": "Index-only rows are not missing-as-zero documents. Image-only PDFs were not bulk-OCR\u2019d.",
+    "document_links": 3392,
+    "duplicate_content_groups": 22,
+    "image_only": 3026,
+    "index_only": 663,
+    "occurrence_vs_canonical": "occurrence_fingerprint identifies index rows; canonical_document_id is content hash",
+    "other_extraction_failures": 0,
+    "status_counts": {
+      "EXISTING_HASH_VERIFIED": 3385,
+      "HTTP_404_SOURCE_UNAVAILABLE": 7,
+      "INDEX_ONLY_NO_DOCUMENT": 663
+    },
+    "text_extracted": 353,
+    "unavailable": 7,
+    "unique_hashes": 3356
+  },
+  "enforcement": {
+    "absence_is_not_clean_history": true,
+    "action_class_counts": {
+      "CIVIL_PENALTY": 3336,
+      "DENIAL": 29,
+      "FRAUD_SURCHARGE": 64,
+      "RESTITUTION": 109,
+      "REVOCATION": 427,
+      "SETTLEMENT": 47,
+      "SURRENDER": 35,
+      "SUSPENSION": 22
+    },
+    "bfd": {
+      "action_class_counts": {
+        "CIVIL_PENALTY": 2237,
+        "DENIAL": 10,
+        "SETTLEMENT": 3,
+        "SUSPENSION": 6
+      },
+      "class_counts": {
+        "CONSENT_ORDER": 2241
+      },
+      "events": 2241,
+      "remaining_other": 0,
+      "remaining_unknown": 0,
+      "status_counts": {
+        "FINAL": 2233,
+        "PENDING": 8
+      }
+    },
+    "caveat": "An enforcement event is not a document. A consent order is an instrument, not a quality score. Bureau of Fraud Deterrence consent records are classified from official page headings. Unresolved and individual respondents are not attached to public profiles. Missing 2008 DOI pages are SOURCE_NOT_ACQUIRED, not zero actions.",
+    "class_counts": {
+      "CEASE_AND_DESIST": 2,
+      "CONSENT_ORDER": 3288,
+      "FINAL_ORDER": 192,
+      "ORDER_TO_SHOW_CAUSE": 336,
+      "OTHER": 2,
+      "REVOCATION": 1
+    },
+    "classification_method_counts": {
+      "PAGE_HEADING": 3819,
+      "UNCLASSIFIED": 2
+    },
+    "document_is_not_hash": true,
+    "doi_2008_coverage_state": "SOURCE_NOT_ACQUIRED",
+    "doi_2008_url": "https://www.nj.gov/dobi/division_insurance/insfines08.htm",
+    "event_is_not_document": true,
+    "events": 3821,
+    "evidence_rows_note": "Ticket expected ~4,055 evidence rows. Public counts use the audited 001/001C grains below rather than an invented combined total.",
+    "fraud_surcharge": 61,
+    "identity": {
+      "exact_naic": 117,
+      "exact_npn": 0,
+      "exact_state_ref": 0,
+      "match_status_counts": {
+        "EXACT": 117,
+        "INTERNAL_ONLY_INDIVIDUAL": 6316,
+        "REVIEW_REQUIRED": 39,
+        "UNRESOLVED": 938,
+        "UNSAFE_REJECTED": 29
+      },
+      "no_public_person_profile": true
+    },
+    "index_occurrence_is_not_event": true,
+    "individual_not_copied_to_agency": true,
+    "instrument_is_not_sanction": true,
+    "multi_party": 2827,
+    "no_enforcement_ranking": true,
+    "penalties": 3293,
+    "respondents": {
+      "counts": {
+        "AGENCY": 559,
+        "BAIL_BOND_PRODUCER": 76,
+        "INDIVIDUAL_PRODUCER": 6176,
+        "INSURER": 61,
+        "PUBLIC_ADJUSTER": 219,
+        "THIRD_PARTY_BILLING": 93
+      },
+      "individuals": 6176,
+      "internal_only_individuals": 6316
+    },
+    "restitution": 100,
+    "source_url_bfd": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement.htm",
+    "source_url_doi": "https://www.nj.gov/dobi/division_insurance/insfines26.htm",
+    "status_counts": {
+      "FINAL": 3473,
+      "PENDING": 346,
+      "UNKNOWN": 2
+    },
+    "unique_orders": 3748,
+    "unresolved_not_profile_attached": true
+  },
+  "evidence_depth": [
+    {
+      "count": 3821,
+      "grain": "enforcement events"
+    },
+    {
+      "count": 3748,
+      "grain": "unique orders"
+    },
+    {
+      "count": 3392,
+      "grain": "document links"
+    },
+    {
+      "count": 3356,
+      "grain": "unique hashes"
+    },
+    {
+      "count": 3385,
+      "grain": "hash-verified documents"
+    },
+    {
+      "count": 663,
+      "grain": "index-only rows"
+    },
+    {
+      "count": 7,
+      "grain": "source-unavailable documents"
+    },
+    {
+      "count": 353,
+      "grain": "text-extracted PDFs"
+    },
+    {
+      "count": 3026,
+      "grain": "image-only PDFs"
+    }
+  ],
+  "existing_nj_agency_hubs": [
+    "/hubs/new-jersey",
+    "/hubs/new-jersey/north-new-jersey",
+    "/hubs/new-jersey/central-new-jersey",
+    "/hubs/new-jersey/south-new-jersey"
+  ],
+  "financial_exams": {
+    "caveat": "A financial examination may attach only on an exact NAIC match to an already-published legal-insurer profile. It is not a solvency rating, not enforcement, and not a market-conduct report. Unresolved identities are withheld.",
+    "converted_to_enforcement": 0,
+    "exact_naic": 117,
+    "exam_score": null,
+    "reports": 129,
+    "source_url": "https://www.nj.gov/dobi/division_insurance/finexam_reports.htm",
+    "unresolved": 12
+  },
+  "findings": [
+    {
+      "id": "admitted-census",
+      "text": "NJDOBI's licensed-carrier census in the acquired snapshot lists 1,370 admitted legal insurers, each with an exact NAIC company code. That census is not a surplus-lines eligible list and is not a count of companies serving every New Jersey consumer."
+    },
+    {
+      "id": "enforcement-grains",
+      "text": "The acquired NJDOBI enforcement corpus contains 3,821 events and 3,748 unique orders. Those grains are not interchangeable with 3,392 document links or 3,356 unique hashes."
+    },
+    {
+      "id": "health-residual-coverage",
+      "text": "Individual Health Coverage and Small Employer Health are separate programs. Get Covered NJ participation is an official asterisk observation, not an endorsement. Residual-market programs (NJIUA/FAIR, PAIP, SAIP, CAIP) are not voluntary insurers."
+    },
+    {
+      "id": "blocked-restricted",
+      "text": "SERFF Filing Access returned HTTP 403, so this page does not report a filing count. NJCRIB Plan Risk was acquired under terms that forbid redistribution and database supplementation, so employer/producer/carrier rows are withheld."
+    }
+  ],
+  "fingerprint": "bcab35631a0494038667647244863a9510f5c76a36495fd14217bb0afd2a59e5",
+  "generated_at": "2026-09-02T19:32:45Z",
+  "get_covered": {
+    "caveat": "Marketplace participation is not an endorsement, ranking, or proof of current enrollment.",
+    "marketplace_is_not_endorsement": true,
+    "not_asterisked_ihc_writers": [
+      "AmeriHealth",
+      "AmeriHealth HMO",
+      "Horizon",
+      "Oscar",
+      "Oxford"
+    ],
+    "participating": [
+      "Aetna",
+      "Ambetter from WellCare of New Jersey",
+      "AmeriHealth",
+      "Horizon",
+      "Oscar",
+      "UnitedHealthcare",
+      "WellCare"
+    ],
+    "plan_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "source": "Official IHC average-rate-change asterisk, not the Get Covered NJ marketing homepage",
+    "source_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/index.html"
+  },
+  "hero": {
+    "as_of_hint": "As-of is the audited artifact date, not a live database clock.",
+    "as_of_label": "snapshot date",
+    "as_of_value": "2026-09-02",
+    "current_hint": "Index events in the acquired DOI + BFD corpus. Not every action ever issued. Missing years are not zero.",
+    "current_label": "enforcement events",
+    "current_value": 3821,
+    "geography_hint": "Statewide official sources. This page does not create county routes or infer service area from domicile.",
+    "geography_label": "New Jersey",
+    "geography_value": "statewide",
+    "observations_hint": "Document-link grain. Not unique hashes and not unique orders.",
+    "observations_label": "document links",
+    "observations_value": 3392,
+    "universe_hint": "NJDOBI Licensed Insurance Carriers census. Admitted is not surplus-lines eligible. This is not a count of companies serving every New Jersey consumer.",
+    "universe_label": "admitted legal insurers with exact NAIC",
+    "universe_value": 1370
+  },
+  "ihc": {
+    "average_rate_change_is_not_consumer_premium": true,
+    "carriers": [
+      "Aetna",
+      "Ambetter from WellCare of New Jersey",
+      "AmeriHealth",
+      "AmeriHealth HMO",
+      "Horizon",
+      "Oscar",
+      "Oxford",
+      "UnitedHealthcare",
+      "WellCare"
+    ],
+    "caveat": "IHC is not SEH. An official average rate change is not every consumer\u2019s premium. Brand-grain carrier names are not NAIC legal entities. Missing quarters are not zero enrollment.",
+    "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+    "enrollment_total": null,
+    "exact_naic": 0,
+    "ihc_is_not_seh": true,
+    "latest_period": "2026 Q1",
+    "latest_period_grain": "official enrollment-index quarter; covered-lives totals are not in the committed public snapshot",
+    "marketplace_asterisk_carriers": [
+      "Aetna",
+      "Ambetter from WellCare of New Jersey",
+      "AmeriHealth",
+      "Horizon",
+      "Oscar",
+      "UnitedHealthcare",
+      "WellCare"
+    ],
+    "missing_quarter_is_not_zero": true,
+    "off_marketplace_enrollment_rows": 24,
+    "plan_counts": 117,
+    "program": "Individual Health Coverage",
+    "rate_change_observations": 42,
+    "rate_change_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "rate_source_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/index.html",
+    "review_required": 39,
+    "source_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+    "unresolved": 3
+  },
+  "invariants": {
+    "absence_ne_clean": true,
+    "base_rate_ne_personalized_premium": true,
+    "blocked_source_ne_zero": true,
+    "complaint_ne_violation": true,
+    "exam_ne_enforcement": true,
+    "filed_ne_approved": true,
+    "group_ne_legal_entity": true,
+    "ihc_ne_seh": true,
+    "license_ne_appointment": true,
+    "loss_ratio_ne_score": true,
+    "market_conduct_ne_financial": true,
+    "marketplace_ne_endorsement": true,
+    "mod_ne_score": true,
+    "njiua_ne_legal_carrier": true,
+    "no_county_routes": true,
+    "no_crib_login_bypass": true,
+    "no_ranking": true,
+    "no_serff_bypass": true,
+    "no_trust_score": true,
+    "paip_ne_caip": true,
+    "producer_ne_insurer": true,
+    "rate_change_ne_quality": true,
+    "residual_ne_voluntary_insurer": true,
+    "saip_ne_paip": true
+  },
+  "market_conduct": {
+    "caveat": "A market-conduct examination is not an enforcement action and is not a financial examination. Name-only and multi-entity reports stay unresolved or review-required. They are not attached to public insurer profiles. No exam score is published.",
+    "converted_to_enforcement": 0,
+    "exact_naic": 0,
+    "exam_score": null,
+    "multi_entity_review": 18,
+    "name_only_unresolved": 75,
+    "reports": 93,
+    "source_url": "https://www.nj.gov/dobi/division_consumers/insurance/marketconductexams.htm",
+    "withheld_from_profiles": true
+  },
+  "profile_modules": {
+    "bail_firewall_preserved": true,
+    "exact_naic_admitted": 1370,
+    "exact_naic_enforcement": 117,
+    "exact_naic_financial_exam": 117,
+    "ihc_seh_exact_naic": 0,
+    "internal_only_individuals": 6316,
+    "market_conduct_review": 18,
+    "market_conduct_unresolved": 75,
+    "no_public_person_profile": true,
+    "public_profile_links_reason": "NJ exact-NAIC ledgers are not committed as a public attach index. Existing 26 legal-insurer profiles are unchanged. Exact NAIC financial exams may attach later when the identifier is on an already-published profile. Review-required, unresolved, name-only, synthetic, and individual evidence is withheld.",
+    "public_profile_links_rendered": 0,
+    "withheld_review_unresolved": 1006
+  },
+  "publication": {
+    "canonical": "https://www.insurancetrusthub.com/new-jersey",
+    "complaint_leaderboard": false,
+    "county_routes": false,
+    "crib_republication": false,
+    "existing_nj_agency_hubs_preserved": true,
+    "florida_canonical_unchanged": true,
+    "indexable": true,
+    "public_person_expansion": false,
+    "rankings": false,
+    "robots": "index,follow",
+    "route": "/new-jersey",
+    "sitemap": true,
+    "trust_scores": false
+  },
+  "rehab": {
+    "caveat": "Status is only what NJDOBI publishes on the official rehabilitation/liquidation page. Names in that listing were not committed as an exact-NAIC attach index, so they are not copied onto public insurer profiles. Insolvency is not inferred from other families.",
+    "entities": 12,
+    "identity_status": "UNRESOLVED",
+    "inferred_insolvency": false,
+    "liquidation": 11,
+    "names_published": false,
+    "rehabilitation": 1,
+    "source_url": "https://www.nj.gov/dobi/division_insurance/finesolv.htm"
+  },
+  "residuals": {
+    "caveat": "Residual placement is not a quality or wrongdoing flag. NJIUA is not a voluntary insurer. PAIP is not CAIP. SAIP is not an insurer.",
+    "programs": [
+      {
+        "code": "NJIUA_FAIR",
+        "name": "New Jersey Insurance Underwriting Association (FAIR Plan)",
+        "not_a_legal_carrier": true,
+        "not_a_quality_flag": true,
+        "not_a_voluntary_insurer": true
+      },
+      {
+        "code": "PAIP",
+        "name": "New Jersey Personal Auto Insurance Plan (PAIP)",
+        "not_a_quality_flag": true,
+        "not_a_voluntary_insurer": true,
+        "not_caip": true,
+        "oversees": "SAIP"
+      },
+      {
+        "code": "SAIP",
+        "name": "Special Automobile Insurance Plan (SAIP)",
+        "not_a_carrier": true,
+        "not_a_quality_flag": true,
+        "separate_from": "PAIP",
+        "source_note": "Official PAIP narrative states PAIP oversees SAIP. No dedicated SAIP program page was published on the residual-market index."
+      },
+      {
+        "code": "CAIP",
+        "name": "New Jersey Commercial Automobile Insurance Plan (CAIP)",
+        "not_a_quality_flag": true,
+        "not_a_voluntary_insurer": true,
+        "separate_from": "PAIP"
+      }
+    ],
+    "ranking": false,
+    "source_url": "https://www.nj.gov/dobi/division_insurance/propcas.htm"
+  },
+  "seh": {
+    "carriers": [
+      "AmeriHealth",
+      "AmeriHealth HMO",
+      "Horizon",
+      "Oscar",
+      "Oxford",
+      "Oxford HMO"
+    ],
+    "caveat": "SEH is not IHC. Statutory loss ratio is not a quality score and is not federal MLR. Brand-grain names are not NAIC legal entities.",
+    "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+    "enrollment_total": null,
+    "exact_naic": 0,
+    "ihc_is_not_seh": true,
+    "latest_period": "2026 Q1",
+    "loss_ratio_is_not_score": true,
+    "loss_ratio_rows": 18,
+    "loss_ratio_years": [
+      2024
+    ],
+    "program": "Small Employer Health",
+    "rate_change_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "source_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html"
+  },
+  "serff": {
+    "access_classification": "SOURCE_ACCESS_BLOCKED",
+    "bypass": false,
+    "caveat": "A blocked source is not zero filings. This page does not display a SERFF filing count. Filed is not approved.",
+    "coverage_state": "SOURCE_ACCESS_BLOCKED",
+    "filed_is_not_approved": true,
+    "filings_displayed": null,
+    "http_status": 403,
+    "source_url": "https://filingaccess.serff.com/sfa/home/NJ"
+  },
+  "source_as_of": {
+    "nj_ins_001": "2026-09-02T19:32:45Z",
+    "nj_ins_002": "2026-09-02T19:20:43Z"
+  },
+  "source_families": [
+    "NJ_DOBI_DOI_ENFORCEMENT",
+    "NJ_DOBI_BFD_ENFORCEMENT",
+    "NJ_DOBI_CARRIER_AUTHORIZATION",
+    "NJ_DOBI_MARKET_CONDUCT_EXAMINATION",
+    "NJ_DOBI_FINANCIAL_EXAMINATION",
+    "NJ_DOBI_AUTO_COMPLAINT",
+    "NJ_DOBI_REHABILITATION_LIQUIDATION",
+    "NJ_IHC_ENROLLMENT",
+    "NJ_SEH_ENROLLMENT",
+    "NJ_IHC_RATE_CHANGE",
+    "NJ_SEH_RATE_CHANGE",
+    "NJ_GET_COVERED_PARTICIPATION",
+    "NJ_RESIDUAL_NJIUA_FAIR",
+    "NJ_RESIDUAL_PAIP",
+    "NJ_RESIDUAL_SAIP",
+    "NJ_RESIDUAL_CAIP",
+    "NJ_CRIB_PLAN_RISK",
+    "NJ_SERFF_FILING"
+  ],
+  "ticket": "NJ-INS-003",
+  "version": "insurance-nj-state-intel-v1",
+  "what_changed": [
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "observation": "DOI 2008 enforcement index remains SOURCE_NOT_ACQUIRED (HTTP 404 on the official year page)."
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "observation": "BFD 2018\u20132026 consent records in the acquired corpus classify as CONSENT_ORDER from official page headings (remaining OTHER = 0)."
+    },
+    {
+      "family": "NJ_IHC_RATE_CHANGE",
+      "observation": "IHC/SEH average-rate-change tables cover plan years 2020\u20132026; the 2026.html year page 404s while 2026 lives on the index."
+    },
+    {
+      "family": "NJ_SERFF_FILING",
+      "observation": "SERFF Filing Access home returned HTTP 403. No filing corpus was acquired."
+    },
+    {
+      "family": "NJ_CRIB_PLAN_RISK",
+      "observation": "NJCRIB Plan Risk DAT is downloadable without login but terms forbid redistribution and database supplementation."
+    }
+  ]
+}

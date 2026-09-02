@@ -358,6 +358,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
       { href: '/ask', label: 'Ask InsuranceTrustHub' },
       { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
       { href: '/florida', label: 'Florida insurance research' },
+      { href: '/new-jersey', label: 'New Jersey insurance research' },
       { href: '/tools/license-verification', label: 'License verification' },
       { href: '/claim-listing', label: 'Request a listing' },
       { href: '/methodology', label: 'Methodology' },
