@@ -101,9 +101,36 @@ def test_001c_bfd_and_documents() -> None:
         check("bfd_consent_final", consent["event_status"] == "FINAL")
         check("bfd_penalty_not_copied_to_parties", consent["amounts"]["civil_penalty_amount"] == 1500 and all("civil_penalty_amount" not in p for p in consent["parties"]))
         check("occurrence_not_canonical_hash", consent["occurrence_fingerprint"] != (consent.get("document_url") or ""))
-    leftover_cls, leftover_status = mod.event_class("UNKNOWN", "Routine licensing correspondence dated May 1, 2024.")
-    check("remaining_other_class_preserved", leftover_cls == "OTHER")
+    leftover_cls, leftover_status, leftover_method = mod.event_class("UNKNOWN", "Routine licensing correspondence dated May 1, 2024.")
+    check("remaining_other_class_preserved", leftover_cls == "OTHER" and leftover_method == "UNCLASSIFIED")
     check("remaining_unknown_status_preserved", leftover_status == "UNKNOWN")
+
+    def class_only(heading: str, body: str) -> tuple[str, str, str, list[str]]:
+        cls, status, method = mod.event_class(heading, body)
+        return cls, status, method, mod.action_classes(heading, body)
+
+    cls, status, method, actions = class_only("REVOCATIONS", "License revoked effective May 1, 2024.")
+    check("class_revocation_heading", cls == "REVOCATION" and method == "PAGE_HEADING" and "REVOCATION" in actions)
+    cls, status, method, actions = class_only("SUSPENSIONS", "Producer license suspended for 90 days.")
+    check("class_suspension_heading", cls == "SUSPENSION" and "SUSPENSION" in actions)
+    cls, status, method, actions = class_only("SURRENDERS", "Respondent surrendered the license.")
+    check("class_surrender_heading", cls == "SURRENDER" and "SURRENDER" in actions)
+    cls, status, method, actions = class_only("DENIALS", "Application denied.")
+    check("class_denial_heading", cls == "DENIAL" and "DENIAL" in actions)
+    cls, status, method, actions = class_only("SETTLEMENTS", "Matter resolved by settlement.")
+    check("class_settlement_heading", cls == "SETTLEMENT" and "SETTLEMENT" in actions)
+    cls, status, method, actions = class_only("CORRECTIVE ACTION", "Corrective action required.")
+    check("class_corrective_heading", cls == "CORRECTIVE_ACTION" and "CORRECTIVE_ACTION" in actions)
+    cls, status, method, actions = class_only("CONSENT ORDERS", "Consent Order #E25-01. Civil Penalty: $1,500.00. Restitution $200. Fraud Act Surcharge $100.")
+    check("class_consent_heading_not_replaced_by_sanction", cls == "CONSENT_ORDER" and status == "FINAL")
+    check("class_civil_penalty_action", "CIVIL_PENALTY" in actions)
+    check("class_restitution_action", "RESTITUTION" in actions)
+    check("class_fraud_surcharge_action", "FRAUD_SURCHARGE" in actions)
+    cls, status, method, actions = class_only("UNKNOWN", "Notice of investigation dated May 1, 2024. Fine - $500")
+    check("notice_is_not_final_order", cls == "OTHER" and status == "UNKNOWN")
+    check("amount_does_not_imply_final_status", status != "FINAL")
+    cls, status, method, actions = class_only("UNKNOWN", "Respondent committed fraud in an application.")
+    check("bfd_not_every_matter_fraud", "FRAUD_SURCHARGE" not in actions and cls == "OTHER")
 
     tmp = ROOT / "data" / "fixtures" / "nj-ins-001" / "_tmp_pdf"
     if tmp.exists():
@@ -139,11 +166,23 @@ def test_001c_bfd_and_documents() -> None:
         {"document_url": existing_url, "occurrence_fingerprint": "occ-exist-2"},
     ]
     stats = mod.download_docs(rows, fetcher=fake_fetch, pdf_dir=tmp, sleep_s=0)
-    check("existing_pdf_hash_skip", rows[0]["acquisition_state"] == "SKIPPED_EXISTING_HASH" and rows[0]["content_hash"] == digest)
-    check("download_retry_status", rows[1].get("retry_status") in {"SUCCESS_AFTER_RETRY", "SUCCESS"} and rows[1]["acquisition_state"] == "DOCUMENT_DOWNLOADED")
-    check("unavailable_404_preserved", rows[2]["acquisition_state"] == "HTTP_404" and rows[2]["occurrence_fingerprint"] == "occ-404")
-    check("unavailable_nonpdf_preserved", rows[3]["acquisition_state"] == "DOCUMENT_UNAVAILABLE")
-    check("index_only_preserved", rows[4]["acquisition_state"] == "INDEX_ONLY")
+    check("existing_pdf_hash_skip", rows[0]["acquisition_state"] == "EXISTING_HASH_VERIFIED" and rows[0]["content_hash"] == digest)
+    check("download_retry_status", rows[1].get("retry_status") in {"SUCCESS_AFTER_RETRY", "SUCCESS"} and rows[1]["acquisition_state"] == "DOWNLOADED_HASH_VERIFIED")
+    check("unavailable_404_preserved", rows[2]["acquisition_state"] == "HTTP_404_SOURCE_UNAVAILABLE" and rows[2]["occurrence_fingerprint"] == "occ-404")
+    check("unavailable_nonpdf_preserved", rows[3]["acquisition_state"] == "NON_PDF_RESPONSE")
+    check("index_only_preserved", rows[4]["acquisition_state"] == "INDEX_ONLY_NO_DOCUMENT")
+    check("mime_and_size_recorded", rows[0].get("mime") == "application/pdf" and rows[0].get("byte_length") == len(payload))
+    no_refetch = {"n": 0}
+
+    def forbid_fetch(url: str) -> dict:
+        no_refetch["n"] += 1
+        raise AssertionError("must not refetch hash-verified file")
+
+    again = [
+        {"document_url": existing_url, "occurrence_fingerprint": "occ-exist-3"},
+    ]
+    mod.download_docs(again, fetcher=forbid_fetch, pdf_dir=tmp, sleep_s=0, refetch=False)
+    check("no_refetch_verified_hash", again[0]["acquisition_state"] == "EXISTING_HASH_VERIFIED" and no_refetch["n"] == 0)
     check(
         "occurrence_vs_canonical_document",
         rows[0]["occurrence_fingerprint"] != rows[0]["canonical_document_id"]

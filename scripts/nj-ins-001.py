@@ -39,6 +39,9 @@ ACTION_HEADINGS = [
     "CONSENT ORDERS", "CONSENT ORDER", "FINAL ORDERS", "FINAL ORDER",
     "ORDER TO SHOW CAUSE", "ORDERS TO SHOW CAUSE", "CEASE AND DESIST ORDER",
     "ORDER TO CEASE AND DESIST",
+    "REVOCATIONS", "REVOCATION", "SUSPENSIONS", "SUSPENSION",
+    "SURRENDERS", "SURRENDER", "DENIALS", "DENIAL",
+    "SETTLEMENTS", "SETTLEMENT", "CORRECTIVE ACTION",
 ]
 ORDER_RE = re.compile(r"Order\s*#?\s*(E\d{2}-\d+|E\d{2}-\d+\w*|\d{2}-\d{5}-\d+)", re.I)
 NAIC_RE = re.compile(r"\b(?:NAIC(?:\s*(?:No\.?|Company\s*Code|Code))?|Company Code)\s*[:\-]?\s*(\d{5})\b", re.I)
@@ -136,8 +139,12 @@ def heading_at(line: str) -> str | None:
     compact = re.sub(r"\s+", " ", re.sub(r"[^A-Z ]", "", normalize_space(line).upper())).strip()
     if not compact or len(compact) > 80 or compact in MONTH_HEADINGS:
         return None
+    short = {"REVOCATION", "REVOCATIONS", "SUSPENSION", "SUSPENSIONS", "SURRENDER", "SURRENDERS", "DENIAL", "DENIALS", "SETTLEMENT", "SETTLEMENTS"}
     for heading in ACTION_HEADINGS:
-        if compact == heading or compact.startswith(heading + " ") or heading in compact:
+        if heading in short:
+            if compact == heading or compact.startswith(heading + " "):
+                return heading
+        elif compact == heading or compact.startswith(heading + " ") or heading in compact:
             return heading
     return None
 
@@ -165,26 +172,76 @@ def split_names(caption: str) -> list[str]:
     return [p.strip(" ,") for p in parts if p.strip(" ,")]
 
 
-def event_class(heading: str, body: str) -> tuple[str, str]:
+def event_class(heading: str, body: str) -> tuple[str, str, str]:
+    """Instrument class from official heading first, then instrument phrases.
+
+    A dollar amount never implies FINAL. A 'notice' is not a final order.
+    """
     h = (heading or "").upper()
+    body_l = (body or "").lower()
     text = f"{heading} {body}".lower()
-    if "CONSENT" in h or "consent order" in text:
-        cls = "CONSENT_ORDER"
-    elif ("FINAL" in h and "ORDER" in h) or re.search(r"\bfinal order\b", text):
-        cls = "FINAL_ORDER"
-    elif "SHOW CAUSE" in h or "show cause" in text:
-        cls = "ORDER_TO_SHOW_CAUSE"
-    elif "CEASE" in h or "cease and desist" in text:
-        cls = "CEASE_AND_DESIST"
+    method = "UNCLASSIFIED"
+    if "CONSENT" in h:
+        cls, method = "CONSENT_ORDER", "PAGE_HEADING"
+    elif "FINAL" in h and "ORDER" in h:
+        cls, method = "FINAL_ORDER", "PAGE_HEADING"
+    elif "SHOW CAUSE" in h:
+        cls, method = "ORDER_TO_SHOW_CAUSE", "PAGE_HEADING"
+    elif "CEASE" in h:
+        cls, method = "CEASE_AND_DESIST", "PAGE_HEADING"
+    elif "REVOC" in h:
+        cls, method = "REVOCATION", "PAGE_HEADING"
+    elif "SUSPEN" in h:
+        cls, method = "SUSPENSION", "PAGE_HEADING"
+    elif "SURRENDER" in h:
+        cls, method = "SURRENDER", "PAGE_HEADING"
+    elif "DENIAL" in h or h.endswith("DENIED"):
+        cls, method = "DENIAL", "PAGE_HEADING"
+    elif "SETTLEMENT" in h:
+        cls, method = "SETTLEMENT", "PAGE_HEADING"
+    elif "CORRECTIVE" in h:
+        cls, method = "CORRECTIVE_ACTION", "PAGE_HEADING"
+    elif re.search(r"\bconsent order\b", body_l):
+        cls, method = "CONSENT_ORDER", "BODY_INSTRUMENT_PHRASE"
+    elif re.search(r"\bfinal order\b", body_l):
+        cls, method = "FINAL_ORDER", "BODY_INSTRUMENT_PHRASE"
+    elif "show cause" in body_l:
+        cls, method = "ORDER_TO_SHOW_CAUSE", "BODY_INSTRUMENT_PHRASE"
+    elif "cease and desist" in body_l:
+        cls, method = "CEASE_AND_DESIST", "BODY_INSTRUMENT_PHRASE"
     else:
-        cls = "OTHER"
+        cls, method = "OTHER", "UNCLASSIFIED"
     if cls == "ORDER_TO_SHOW_CAUSE" or "alleged" in text:
         status = "PENDING"
-    elif cls in {"CONSENT_ORDER", "FINAL_ORDER"}:
+    elif cls in {
+        "CONSENT_ORDER", "FINAL_ORDER", "CEASE_AND_DESIST", "REVOCATION",
+        "SUSPENSION", "SURRENDER", "DENIAL", "SETTLEMENT", "CORRECTIVE_ACTION",
+    }:
         status = "FINAL"
     else:
         status = "UNKNOWN"
-    return cls, status
+    return cls, status, method
+
+
+def action_classes(heading: str, body: str) -> list[str]:
+    """Sanction/action labels from official phrases only. Amounts alone never classify."""
+    text = f"{heading} {body}"
+    found: list[str] = []
+    rules = [
+        ("REVOCATION", r"revok|revoc"),
+        ("SUSPENSION", r"\bsuspend"),
+        ("SURRENDER", r"\bsurrender"),
+        ("DENIAL", r"\bdenial\b|\bdenied\b|\blicense denied\b"),
+        ("CIVIL_PENALTY", r"civil penalty|\bfine\b|\bpenalty\b"),
+        ("RESTITUTION", r"\brestitution\b"),
+        ("FRAUD_SURCHARGE", r"fraud(?:\s+act)?\s+surcharge"),
+        ("CORRECTIVE_ACTION", r"corrective action"),
+        ("SETTLEMENT", r"\bsettlement\b"),
+    ]
+    for label, pattern in rules:
+        if re.search(pattern, text, re.I):
+            found.append(label)
+    return found
 
 
 def match_party(party: dict[str, Any]) -> dict[str, Any]:
@@ -253,7 +310,8 @@ def parse_enforcement_html(html: str, source_url: str, year: int | None, family:
             order_number = m.group(1) if m else None
         names = [ln for ln in chunk_lines if not heading_at(ln) and "[[PDF" not in ln and not ORDER_RE.search(ln) and not ln.lower().startswith(("sanction", "respondents", "respondent")) and len(ln) < 120]
         caption = " and ".join(names[:8]) if names else "UNKNOWN RESPONDENT"
-        cls, status = event_class(heading, chunk)
+        cls, status, method = event_class(heading, chunk)
+        actions = action_classes(heading, chunk)
         amounts = parse_money(chunk)
         parties = []
         for name in split_names(caption) or [caption]:
@@ -263,9 +321,9 @@ def parse_enforcement_html(html: str, source_url: str, year: int | None, family:
             party.update(match_party(party))
             parties.append(party)
         flags = {
-            "revocation": bool(re.search(r"revok|revoc", chunk, re.I)),
-            "suspension": bool(re.search(r"suspend", chunk, re.I)),
-            "surrender": bool(re.search(r"surrender", chunk, re.I)),
+            "revocation": "REVOCATION" in actions,
+            "suspension": "SUSPENSION" in actions,
+            "surrender": "SURRENDER" in actions,
         }
         occ_fp = fingerprint({"url": source_url, "order": order_number, "caption": caption, "pdf": pdfs[0][0] if pdfs else None})
         events.append({
@@ -278,6 +336,9 @@ def parse_enforcement_html(html: str, source_url: str, year: int | None, family:
             "event_id": order_number or occ_fp,
             "event_class": cls,
             "event_status": status,
+            "action_classes": actions,
+            "classification_method": method,
+            "classification_confidence": "HIGH" if method == "PAGE_HEADING" else ("MEDIUM" if method == "BODY_INSTRUMENT_PHRASE" else "LOW"),
             "flags": flags,
             "respondent_caption": caption,
             "action_date": parse_date(chunk),
@@ -467,28 +528,55 @@ def parse_rehab(html: str, source_url: str) -> list[dict[str, Any]]:
 
 
 def extract_pdf_text(data: bytes) -> tuple[str, str]:
-    if not data.startswith(b"%PDF"):
-        return "", "FAILED"
+    profile = profile_pdf(data)
+    return profile["text"], profile["text_extraction_state"]
+
+
+def profile_pdf(data: bytes) -> dict[str, Any]:
+    """Hash/profile a PDF. No OCR."""
+    out = {
+        "text": "",
+        "text_extraction_state": "FAILED",
+        "text_layer_state": "ABSENT",
+        "mime": "application/octet-stream",
+        "page_count": None,
+        "byte_length": len(data or b""),
+        "valid_pdf": False,
+    }
+    if not data or not data.startswith(b"%PDF"):
+        return out
+    out["mime"] = "application/pdf"
+    out["valid_pdf"] = True
     try:
         from io import BytesIO
         from pypdf import PdfReader
         reader = PdfReader(BytesIO(data))
-        pages = []
-        for page in reader.pages[:20]:
-            pages.append(page.extract_text() or "")
+        out["page_count"] = len(reader.pages)
+        pages = [(page.extract_text() or "") for page in reader.pages[:20]]
         text = normalize_space("\n".join(pages))
+        out["text"] = text[:40000]
         if len(text) >= 80:
-            return text[:40000], "EXTRACTED"
-        if data.count(b"/Image") > 3:
-            return "", "IMAGE_ONLY"
-        return text, "EXTRACTED" if text else "IMAGE_ONLY"
+            out["text_extraction_state"] = "EXTRACTED"
+            out["text_layer_state"] = "PRESENT"
+        elif data.count(b"/Image") > 3:
+            out["text_extraction_state"] = "IMAGE_ONLY"
+            out["text_layer_state"] = "IMAGE_ONLY"
+        else:
+            out["text_extraction_state"] = "EXTRACTED" if text else "IMAGE_ONLY"
+            out["text_layer_state"] = "SPARSE" if text else "IMAGE_ONLY"
+        return out
     except Exception:
         literals = re.findall(rb"\(((?:\\.|[^\\)]){3,})\)", data)
         decoded = [raw.decode("latin-1", errors="ignore") for raw in literals[:8000]]
         text = normalize_space(" ".join(decoded))
+        out["text"] = text[:40000]
         if len(text) >= 80:
-            return text[:40000], "EXTRACTED"
-        return "", "FAILED"
+            out["text_extraction_state"] = "EXTRACTED"
+            out["text_layer_state"] = "PRESENT"
+        else:
+            out["text_extraction_state"] = "FAILED"
+            out["text_layer_state"] = "FAILED"
+        return out
 
 
 def parse_auto_complaint(text: str, year: int, source_url: str) -> list[dict[str, Any]]:
@@ -571,44 +659,79 @@ def pdf_name(url: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]", "_", Path(urlparse(url).path).name or "doc.pdf")
 
 
+def classify_fetch_failure(got: dict[str, Any], data: bytes) -> str:
+    status = got.get("status")
+    err = str(got.get("error") or "").lower()
+    if status == 404:
+        return "HTTP_404_SOURCE_UNAVAILABLE"
+    if status == 410:
+        return "HTTP_410_SOURCE_REMOVED"
+    if status in {401, 403, 451}:
+        return "SOURCE_ACCESS_BLOCKED"
+    if got.get("retry_status") == "RETRY_EXHAUSTED" or status is None:
+        if "redirect" in err:
+            return "REDIRECT_FAILURE"
+        return "TIMEOUT"
+    if status == 200 and data and not data.startswith(b"%PDF"):
+        return "NON_PDF_RESPONSE"
+    return "VALIDATION_FAILURE"
+
+
 def download_docs(
     events: list[dict[str, Any]],
     fetcher: Any = None,
     pdf_dir: Path | None = None,
     sleep_s: float = 0.05,
+    refetch: bool = False,
+    allow_fetch: bool = True,
 ) -> dict[str, Any]:
     dest_dir = pdf_dir or PDF_DIR
     dest_dir.mkdir(parents=True, exist_ok=True)
     seen: dict[str, dict[str, Any]] = {}
     hashes: dict[str, list[str]] = {}
-    downloaded = skipped = unavailable = index_only = 0
+    counts: Counter[str] = Counter()
     extraction = Counter()
+    retrieved = iso()
     for ev in events:
         url = ev.get("document_url")
+        ev["original_document_url"] = url
+        ev["normalized_document_url"] = url
+        ev["retrieved_at"] = retrieved
         if not url:
-            ev["acquisition_state"] = "INDEX_ONLY"
+            ev["acquisition_state"] = "INDEX_ONLY_NO_DOCUMENT"
             ev["canonical_document_id"] = None
-            index_only += 1
+            counts["INDEX_ONLY_NO_DOCUMENT"] += 1
             continue
         if url in seen:
             ev.update(seen[url])
-            skipped += 1
+            counts[ev.get("acquisition_state") or "EXISTING_HASH_VERIFIED"] += 1
             continue
         dest = dest_dir / pdf_name(url)
-        if dest.exists():
+        if dest.exists() and not refetch:
             data = dest.read_bytes()
             digest = sha256_bytes(data)
-            _text, st = extract_pdf_text(data)
+            prof = profile_pdf(data)
             rec = {
-                "acquisition_state": "SKIPPED_EXISTING_HASH",
+                "acquisition_state": "EXISTING_HASH_VERIFIED",
                 "content_hash": digest,
                 "canonical_document_id": digest,
-                "text_extraction_state": st,
-                "retry_status": "SKIPPED_EXISTING_HASH",
-                "byte_length": len(data),
+                "text_extraction_state": prof["text_extraction_state"],
+                "text_layer_state": prof["text_layer_state"],
+                "mime": prof["mime"],
+                "page_count": prof["page_count"],
+                "byte_length": prof["byte_length"],
+                "retry_status": "EXISTING_HASH_VERIFIED",
+                "error_state": None,
             }
-            skipped += 1
-            extraction[st] += 1
+            counts["EXISTING_HASH_VERIFIED"] += 1
+            extraction[prof["text_extraction_state"]] += 1
+        elif not allow_fetch:
+            rec = {
+                "acquisition_state": "INDEX_ONLY_NO_DOCUMENT",
+                "error_state": "NO_LOCAL_FILE_FETCH_SKIPPED",
+                "canonical_document_id": None,
+            }
+            counts["NO_LOCAL_FILE_FETCH_SKIPPED"] += 1
         else:
             got = fetch_with_retry(url, fetcher=fetcher, sleep_s=sleep_s)
             data = got.get("body") or b""
@@ -617,40 +740,52 @@ def download_docs(
                 "http_status": got.get("status"),
                 "download_attempts": got.get("attempts"),
                 "canonical_document_id": None,
+                "normalized_document_url": got.get("final_url") or url,
             }
-            if got.get("status") == 404:
-                rec["acquisition_state"] = "HTTP_404"
-                rec["text_extraction_state"] = "UNAVAILABLE"
-                unavailable += 1
-            elif got.get("status") != 200 or not data.startswith(b"%PDF"):
-                rec["acquisition_state"] = "DOCUMENT_UNAVAILABLE"
-                rec["text_extraction_state"] = "UNAVAILABLE"
-                unavailable += 1
-            else:
+            if got.get("status") == 200 and data.startswith(b"%PDF"):
                 dest.write_bytes(data)
                 digest = sha256_bytes(data)
-                _text, st = extract_pdf_text(data)
+                prof = profile_pdf(data)
                 rec.update({
-                    "acquisition_state": "DOCUMENT_DOWNLOADED",
+                    "acquisition_state": "DOWNLOADED_HASH_VERIFIED",
                     "content_hash": digest,
                     "canonical_document_id": digest,
-                    "text_extraction_state": st,
+                    "text_extraction_state": prof["text_extraction_state"],
+                    "text_layer_state": prof["text_layer_state"],
+                    "mime": prof["mime"],
+                    "page_count": prof["page_count"],
+                    "byte_length": prof["byte_length"],
+                    "error_state": None,
+                })
+                counts["DOWNLOADED_HASH_VERIFIED"] += 1
+                extraction[prof["text_extraction_state"]] += 1
+            else:
+                state = classify_fetch_failure(got, data)
+                rec.update({
+                    "acquisition_state": state,
+                    "text_extraction_state": "UNAVAILABLE",
+                    "text_layer_state": "UNAVAILABLE",
+                    "error_state": got.get("error") or state,
                     "byte_length": len(data),
                 })
-                downloaded += 1
-                extraction[st] += 1
+                counts[state] += 1
         ev.update(rec)
         seen[url] = rec
         digest = rec.get("content_hash")
         if digest:
             hashes.setdefault(digest, []).append(url)
-        if sleep_s and rec.get("acquisition_state") not in {"SKIPPED_EXISTING_HASH"}:
+        if sleep_s and rec.get("acquisition_state") not in {"EXISTING_HASH_VERIFIED"}:
             time.sleep(sleep_s)
+    unavailable = sum(counts[k] for k in counts if k not in {
+        "DOWNLOADED_HASH_VERIFIED", "EXISTING_HASH_VERIFIED", "INDEX_ONLY_NO_DOCUMENT",
+        "NO_LOCAL_FILE_FETCH_SKIPPED",
+    })
     return {
-        "downloaded": downloaded,
-        "skipped_existing_hash": skipped,
+        "downloaded": counts["DOWNLOADED_HASH_VERIFIED"],
+        "skipped_existing_hash": counts["EXISTING_HASH_VERIFIED"],
         "unavailable": unavailable,
-        "index_only": index_only,
+        "index_only": counts["INDEX_ONLY_NO_DOCUMENT"],
+        "status_counts": dict(counts),
         "unique_hashes": len(hashes),
         "duplicate_content_groups": sum(1 for u in hashes.values() if len(set(u)) > 1),
         "document_links": sum(1 for e in events if e.get("document_url")),
@@ -727,6 +862,9 @@ def summarize(parsed: dict[str, Any], docs: dict[str, Any]) -> dict[str, Any]:
     enf_parties = [p for e in enf for p in e.get("parties") or []]
     class_counts = Counter(e.get("event_class") for e in enf)
     status_counts = Counter(e.get("event_status") for e in enf)
+    action_counts = Counter(a for e in enf for a in (e.get("action_classes") or []))
+    method_class_counts = Counter(e.get("classification_method") for e in enf)
+    bfd = [e for e in enf if e.get("source_family") == "NJ_DOBI_BFD_ENFORCEMENT"]
     party_counts = Counter(p.get("party_type") for p in enf_parties)
     match_counts = Counter(p.get("match_status") for p in parties)
     method_counts = Counter(p.get("match_method") for p in parties)
@@ -756,6 +894,16 @@ def summarize(parsed: dict[str, Any], docs: dict[str, Any]) -> dict[str, Any]:
             "restitution": sum(1 for e in enf if (e.get("amounts") or {}).get("restitution_amount")),
             "fraud_surcharge": sum(1 for e in enf if (e.get("amounts") or {}).get("fraud_surcharge_amount")),
             "multi_party": sum(1 for e in enf if len(e.get("parties") or []) > 1),
+            "action_class_counts": dict(action_counts),
+            "classification_method_counts": dict(method_class_counts),
+            "bfd": {
+                "events": len(bfd),
+                "class_counts": dict(Counter(e.get("event_class") for e in bfd)),
+                "status_counts": dict(Counter(e.get("event_status") for e in bfd)),
+                "action_class_counts": dict(Counter(a for e in bfd for a in (e.get("action_classes") or []))),
+                "remaining_other": sum(1 for e in bfd if e.get("event_class") == "OTHER"),
+                "remaining_unknown": sum(1 for e in bfd if e.get("event_status") == "UNKNOWN"),
+            },
         },
         "respondents": {
             "counts": dict(party_counts),
@@ -832,21 +980,10 @@ def run(mode: str, download_pdfs: bool) -> dict[str, Any]:
         "duplicate_content_groups": 0,
         "document_links": sum(1 for e in parsed["events"] if e.get("document_url")),
     }
-    if mode in {"download", "execute"} and download_pdfs:
-        docs = download_docs(parsed["events"])
+    if mode in {"download", "execute", "reconcile"} and download_pdfs:
+        docs = download_docs(parsed["events"], refetch=False, allow_fetch=True)
     elif mode in {"local-input", "inspect", "dry-run", "verify"}:
-        for ev in parsed["events"]:
-            url = ev.get("document_url")
-            if not url:
-                ev["acquisition_state"] = "INDEX_ONLY"
-                continue
-            dest = PDF_DIR / pdf_name(url)
-            if dest.exists():
-                data = dest.read_bytes()
-                ev["acquisition_state"] = "SKIPPED_EXISTING_HASH"
-                ev["content_hash"] = sha256_bytes(data)
-        docs["unique_hashes"] = len({e.get("content_hash") for e in parsed["events"] if e.get("content_hash")})
-        docs["index_only"] = sum(1 for e in parsed["events"] if not e.get("document_url"))
+        docs = download_docs(parsed["events"], sleep_s=0, refetch=False, allow_fetch=False)
     summary = summarize(parsed, docs)
     summary["mode"] = mode
     write_json("nj-ins-001-summary.json", summary)
@@ -859,7 +996,7 @@ def run(mode: str, download_pdfs: bool) -> dict[str, Any]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=["discover", "download", "local-input", "inspect", "dry-run", "execute", "verify"])
+    parser.add_argument("mode", choices=["discover", "download", "local-input", "inspect", "dry-run", "execute", "verify", "reconcile"])
     parser.add_argument("--skip-pdfs", action="store_true")
     args = parser.parse_args()
     if args.mode == "discover":
