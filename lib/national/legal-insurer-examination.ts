@@ -22,6 +22,8 @@ export const CDI_FINANCIAL_DATASET = 'california_cdi_financial_exams' as const;
 export const CDI_MARKET_CONDUCT_DATASET = 'california_cdi_market_conduct_exams' as const;
 export const FL_OIR_MARKET_CONDUCT_DATASET = 'florida_oir_market_conduct_exams' as const;
 export const FL_OIR_FINANCIAL_DATASET = 'florida_oir_financial_exams' as const;
+export const NJ_DOBI_MARKET_CONDUCT_DATASET = 'nj_dobi_market_conduct_exams' as const;
+export const NJ_DOBI_FINANCIAL_DATASET = 'nj_dobi_financial_exams' as const;
 
 export const EXAMINATION_HEADING = 'Examination Reports' as const;
 export const EXAMINATION_ABSENCE =

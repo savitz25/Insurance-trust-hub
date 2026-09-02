@@ -1,0 +1,297 @@
+{
+  "ticket": "NJ-INS-001",
+  "generated_at": "2026-09-02T18:39:37Z",
+  "publication": {
+    "new_jersey_route_created": false,
+    "sitemap_change": false,
+    "rankings": false,
+    "trust_scores": false,
+    "complaint_leaderboard": false,
+    "manual_vercel": false,
+    "bail_bond_firewall_preserved": true
+  },
+  "enforcement": {
+    "events": 3821,
+    "unique_orders": 3748,
+    "class_counts": {
+      "FINAL_ORDER": 192,
+      "CONSENT_ORDER": 1051,
+      "ORDER_TO_SHOW_CAUSE": 333,
+      "CEASE_AND_DESIST": 2,
+      "OTHER": 2243
+    },
+    "status_counts": {
+      "FINAL": 1241,
+      "PENDING": 343,
+      "UNKNOWN": 2237
+    },
+    "penalties": 3293,
+    "restitution": 100,
+    "fraud_surcharge": 61,
+    "multi_party": 2833
+  },
+  "respondents": {
+    "counts": {
+      "INDIVIDUAL_PRODUCER": 6235,
+      "AGENCY": 559,
+      "PUBLIC_ADJUSTER": 220,
+      "BAIL_BOND_PRODUCER": 76,
+      "INSURER": 61,
+      "THIRD_PARTY_BILLING": 93
+    },
+    "individuals": 6235,
+    "internal_only_individuals": 6376
+  },
+  "identity": {
+    "exact_naic": 117,
+    "exact_npn": 0,
+    "exact_state_ref": 0,
+    "match_status_counts": {
+      "INTERNAL_ONLY_INDIVIDUAL": 6376,
+      "UNRESOLVED": 938,
+      "UNSAFE_REJECTED": 29,
+      "EXACT": 117,
+      "REVIEW_REQUIRED": 39
+    },
+    "no_public_person_profile": true
+  },
+  "carriers": {
+    "source_rows": 1370,
+    "exact_naic": 1370,
+    "classes": {
+      "ADMITTED_INSURER": 1370
+    }
+  },
+  "market_conduct": {
+    "reports": 93,
+    "name_only_unresolved": 75,
+    "multi_entity_review": 18,
+    "converted_to_enforcement": 0
+  },
+  "financial_exams": {
+    "reports": 129,
+    "exact_naic": 117,
+    "unresolved": 12,
+    "converted_to_enforcement": 0
+  },
+  "auto_complaints": {
+    "rows": 50,
+    "years": [
+      2023,
+      2024
+    ],
+    "group_grain_rows": 31,
+    "company_grain_rows": 19,
+    "leaderboard_created": false,
+    "copied_to_legal_entities": false
+  },
+  "rehab": {
+    "entities": 12,
+    "liquidation": 11,
+    "rehabilitation": 1,
+    "inferred_insolvency": false
+  },
+  "acquisition": {
+    "downloaded": 0,
+    "skipped_existing_hash": 0,
+    "unavailable": 0,
+    "index_only": 663,
+    "unique_hashes": 0,
+    "duplicate_content_groups": 0,
+    "document_links": 3392
+  },
+  "coverage": [
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2006,
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines06.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2007,
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines07.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2008,
+      "coverage_state": "SOURCE_NOT_ACQUIRED",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines08.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2009,
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines09.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2010,
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines10.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2011,
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines11.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2012,
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines12.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2013,
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines13.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2014,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines14.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2015,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines15.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2016,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines16.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2017,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines17.htm"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2018,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines18.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2018,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2018.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2019,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines19.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2019,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2019.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2020,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines20.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2020,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2020.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2021,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines21.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2021,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2021.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2022,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines22.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2022,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2022.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2023,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines23.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2023,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2023.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2024,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines24.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2024,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2024.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2025,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines25.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2025,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2025.html"
+    },
+    {
+      "family": "NJ_DOBI_DOI_ENFORCEMENT",
+      "year": 2026,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/insfines26.htm"
+    },
+    {
+      "family": "NJ_DOBI_BFD_ENFORCEMENT",
+      "year": 2026,
+      "coverage_state": "ACQUIRED_COMPLETE",
+      "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2026.html"
+    }
+  ],
+  "database": {
+    "available": false,
+    "production_blocker": "No authorized InsuranceTrustHub database session in this worktree. Safe dormant code may merge."
+  },
+  "invariants": {
+    "license_ne_appointment": true,
+    "complaint_ne_violation": true,
+    "exam_ne_enforcement": true,
+    "group_ne_legal_entity": true,
+    "producer_ne_insurer": true
+  },
+  "mode": "inspect"
+}

@@ -56,6 +56,9 @@ yarn-error.log*
 !/data/tx-raw/README.md
 /data/nj-raw/**
 !/data/nj-raw/README.md
+/data/reports/nj-ins-001-events.json
+/data/reports/nj-ins-001-carriers.json
+/data/reports/nj-ins-001-complaints.json
 /data/ohio-raw/**
 !/data/ohio-raw/README.md
 /data/nc-raw/**

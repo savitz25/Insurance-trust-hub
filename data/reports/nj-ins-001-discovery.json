@@ -1,0 +1,672 @@
+[
+  {
+    "key": "doi_enforcement_hub",
+    "url": "https://www.nj.gov/dobi/division_insurance/enforcement.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enforcement_hub2",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines.htm",
+    "content_type": "text/html",
+    "bytes": 29480,
+    "sha256": "7488229b226a14de6e6ea9692f5cdabbe3f6567984050c753cfded8e3726d1a2",
+    "path": "data/nj-raw/dobi-ins/html/doi_enforcement_hub2.html"
+  },
+  {
+    "key": "doi_index",
+    "url": "https://www.nj.gov/dobi/division_insurance/index.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/index.htm",
+    "content_type": "text/html",
+    "bytes": 37555,
+    "sha256": "a7b46f19d9d7b61a706bc4e6c8a6768525285717ec572893ecc9107b6c877ec1",
+    "path": "data/nj-raw/dobi-ins/html/doi_index.html"
+  },
+  {
+    "key": "bfd_enforcement",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement.htm",
+    "content_type": "text/html",
+    "bytes": 24006,
+    "sha256": "8f94bcde32820a086b89b576a8a1d05518106658dd28aef5aa9a958a5af12c59",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enforcement.html"
+  },
+  {
+    "key": "financial_exams",
+    "url": "https://www.nj.gov/dobi/division_insurance/finexam_reports.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/finexam_reports.htm",
+    "content_type": "text/html",
+    "bytes": 89705,
+    "sha256": "e2207add78e1e8fd904c785c0d446f9554f8317c3f8b22bb9a4862d6a24354de",
+    "path": "data/nj-raw/dobi-ins/html/financial_exams.html"
+  },
+  {
+    "key": "mc_exams",
+    "url": "https://www.nj.gov/dobi/division_consumers/insurance/mcexams.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "mc_exams_html",
+    "url": "https://www.nj.gov/dobi/division_consumers/insurance/mcexams/index.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "inscomp",
+    "url": "https://www.nj.gov/dobi/data/inscomp.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/data/inscomp.htm",
+    "content_type": "text/html",
+    "bytes": 772039,
+    "sha256": "542813e02eda33c735fdef0f62fc392c755d6426122b6c4ce620914e84f9ffd1",
+    "path": "data/nj-raw/dobi-ins/html/inscomp.html"
+  },
+  {
+    "key": "inscomp_root",
+    "url": "https://www.nj.gov/dobi/inscomp.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "inscomp_state",
+    "url": "https://www.state.nj.us/dobi/data/inscomp.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/data/inscomp.htm",
+    "content_type": "text/html",
+    "bytes": 772040,
+    "sha256": "be18a583ec307a7c90e0f9d28a66850671314cae9998d744ee6fd5262446a916",
+    "path": "data/nj-raw/dobi-ins/html/inscomp_state.html"
+  },
+  {
+    "key": "auto_consumer",
+    "url": "https://www.nj.gov/dobi/division_consumers/insurance/auto.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_consumers/insurance/auto.htm",
+    "content_type": "text/html",
+    "bytes": 29583,
+    "sha256": "1e0e2a84af208c66b12d23acf4a962ada9a5d36deae3d220f312d6204a39fc35",
+    "path": "data/nj-raw/dobi-ins/html/auto_consumer.html"
+  },
+  {
+    "key": "auto_2024",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2024autoconsumerrpt.pdf",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_consumers/pdf/2024autoconsumerrpt.pdf",
+    "content_type": "application/pdf",
+    "bytes": 118762,
+    "sha256": "5232ebd7df84f719d6616b675a82489814598e0e8e9e3c76854ff67f9eb10b56",
+    "path": "data/nj-raw/dobi-ins/html/auto_2024.pdf"
+  },
+  {
+    "key": "auto_2023",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2023autoconsumerrpt.pdf",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_consumers/pdf/2023autoconsumerrpt.pdf",
+    "content_type": "application/pdf",
+    "bytes": 227292,
+    "sha256": "c4c323618d4399bdffb2e3af296e3c4f33cfdaec35d628dcae6c40eba98fca42",
+    "path": "data/nj-raw/dobi-ins/html/auto_2023.pdf"
+  },
+  {
+    "key": "rehab",
+    "url": "https://www.nj.gov/dobi/finreceivership/index.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "rehab2",
+    "url": "https://www.nj.gov/dobi/division_insurance/solvency/receivership.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "captive_rehab",
+    "url": "https://www.nj.gov/dobi/division_insurance/captive/rehab.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "surplus",
+    "url": "https://www.nj.gov/dobi/division_insurance/surpluslines.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "licensee_search",
+    "url": "https://www-dobi.nj.gov/DOBI_LicSearch/",
+    "status": 200,
+    "final_url": "https://www-dobi.nj.gov/DOBI_LicSearch/",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 6058,
+    "sha256": "03d9a3df9e17f8aa01e7611d104485b70357dcfd2efa8e28235e1df91715d016",
+    "path": "data/nj-raw/dobi-ins/html/licensee_search.html"
+  },
+  {
+    "key": "doi_enf_2006",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines06.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines06.htm",
+    "content_type": "text/html",
+    "bytes": 123570,
+    "sha256": "c6ebd56611297b04a561a2608593ebe8ae3beb284ddd6253b8345d01b39d429f",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2006.html"
+  },
+  {
+    "key": "bfd_enf_2006",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2006.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2006",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2006autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2007",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines07.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines07.htm",
+    "content_type": "text/html",
+    "bytes": 92976,
+    "sha256": "3626ca5983ea5d504e691c3266890256cc8a62074cb463cc6a6c97841248d03a",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2007.html"
+  },
+  {
+    "key": "bfd_enf_2007",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2007.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2007",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2007autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2008",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines08.htm",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "bfd_enf_2008",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2008.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2008",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2008autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2009",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines09.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines09.htm",
+    "content_type": "text/html",
+    "bytes": 66371,
+    "sha256": "9a9c9572089a7d4fa18c3070d80b89504ce5d92db53aed9976f38094c73371d8",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2009.html"
+  },
+  {
+    "key": "bfd_enf_2009",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2009.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2009",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2009autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2010",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines10.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines10.htm",
+    "content_type": "text/html",
+    "bytes": 53651,
+    "sha256": "53b5ba02e2a309dc0b8380f9e6de0c62f7197f8c9265b1ffc4be45fb86607076",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2010.html"
+  },
+  {
+    "key": "bfd_enf_2010",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2010.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2010",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2010autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2011",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines11.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines11.htm",
+    "content_type": "text/html",
+    "bytes": 61799,
+    "sha256": "e4485e89067ba100888cae5cbaabe31acb53f212071a70ac040d3f5a5396cfb4",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2011.html"
+  },
+  {
+    "key": "bfd_enf_2011",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2011.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2011",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2011autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2012",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines12.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines12.htm",
+    "content_type": "text/html",
+    "bytes": 76680,
+    "sha256": "2656b47e8fdd88c56affcb5079e2bf26530fca7e0e85442278b9afb727276eef",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2012.html"
+  },
+  {
+    "key": "bfd_enf_2012",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2012.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2012",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2012autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2013",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines13.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines13.htm",
+    "content_type": "text/html",
+    "bytes": 80110,
+    "sha256": "ac231e9d895916f2ff2a9fd6703bd5dbda12703a837af3c6537b4d20c6f20a0e",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2013.html"
+  },
+  {
+    "key": "bfd_enf_2013",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2013.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2013",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2013autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2014",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines14.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines14.htm",
+    "content_type": "text/html",
+    "bytes": 96155,
+    "sha256": "954c2bd9eef7ffcdf2369e4261dfbbf6f438cd3bd7abc54ced560de0dfe28000",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2014.html"
+  },
+  {
+    "key": "bfd_enf_2014",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2014.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2014",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2014autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2015",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines15.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines15.htm",
+    "content_type": "text/html",
+    "bytes": 88188,
+    "sha256": "fc211bb10ccfbb631f13b761b892ed753bf0129938afb4a5d7d5d01a27c568ab",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2015.html"
+  },
+  {
+    "key": "bfd_enf_2015",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2015.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2015",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2015autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2016",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines16.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines16.htm",
+    "content_type": "text/html",
+    "bytes": 88993,
+    "sha256": "c129b49d311e8d481fa9338348325b9eb50d5523f97a31446bc8ec9f1d1315a0",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2016.html"
+  },
+  {
+    "key": "bfd_enf_2016",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2016.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2016",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2016autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2017",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines17.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines17.htm",
+    "content_type": "text/html",
+    "bytes": 82714,
+    "sha256": "e31e51e4cc096c8b31c7ef5b8a2ed335670a4d612c74e72444e0c5dc666f0f13",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2017.html"
+  },
+  {
+    "key": "bfd_enf_2017",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2017.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "auto_2017",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2017autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2018",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines18.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines18.htm",
+    "content_type": "text/html",
+    "bytes": 73557,
+    "sha256": "c3ccba0bee4c44fe296e4f7d4548455e71377e605dd7beaa23c68d2923a8e68e",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2018.html"
+  },
+  {
+    "key": "bfd_enf_2018",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2018.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2018.html",
+    "content_type": "text/html",
+    "bytes": 125345,
+    "sha256": "a86b293dd8b99a5bda4ab05a211500ced9227f7fc4fbda4fe1b4540ea65d6fcd",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2018.html"
+  },
+  {
+    "key": "auto_2018",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2018autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2019",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines19.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines19.htm",
+    "content_type": "text/html",
+    "bytes": 75556,
+    "sha256": "2044c79a8da10ad8f4b553fdf03a90a4cc3c5edf494b62e9ed8e5a170a128cc5",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2019.html"
+  },
+  {
+    "key": "bfd_enf_2019",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2019.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2019.html",
+    "content_type": "text/html",
+    "bytes": 163978,
+    "sha256": "1da2d14e30a687e922af90732ade95bc637611de7ec0858df6792ba6ea501da9",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2019.html"
+  },
+  {
+    "key": "auto_2019",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2019autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2020",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines20.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines20.htm",
+    "content_type": "text/html",
+    "bytes": 38139,
+    "sha256": "3934fbf43514ebe1091cbc6c352188edca1805690b2b934527025f5100feb9ad",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2020.html"
+  },
+  {
+    "key": "bfd_enf_2020",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2020.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2020.html",
+    "content_type": "text/html",
+    "bytes": 109120,
+    "sha256": "84d807f7dae12fd9b813045f2c4aece4c3d7490a8a81375aff3a85f48526d2b9",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2020.html"
+  },
+  {
+    "key": "auto_2020",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2020autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2021",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines21.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines21.htm",
+    "content_type": "text/html",
+    "bytes": 46394,
+    "sha256": "6d9742573528743909b5bd0026d3f7d9009a0136f651e6e354b3208c1377e338",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2021.html"
+  },
+  {
+    "key": "bfd_enf_2021",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2021.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2021.html",
+    "content_type": "text/html",
+    "bytes": 157995,
+    "sha256": "f161c434edbef09b41ea7eae0bc84f768390343f80cc90822a91ec58d9deb018",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2021.html"
+  },
+  {
+    "key": "auto_2021",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2021autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2022",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines22.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines22.htm",
+    "content_type": "text/html",
+    "bytes": 62826,
+    "sha256": "81bca1b91d3698719312be215e58d4c519f813fd5821e6162caca9d9eed59f32",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2022.html"
+  },
+  {
+    "key": "bfd_enf_2022",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2022.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2022.html",
+    "content_type": "text/html",
+    "bytes": 176947,
+    "sha256": "45a1e1cb1993ee98c8bebba05157144e87d72d89069d2f34798427cd7e27d52b",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2022.html"
+  },
+  {
+    "key": "auto_2022",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2022autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2023",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines23.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines23.htm",
+    "content_type": "text/html",
+    "bytes": 46964,
+    "sha256": "9f133c1da45f084fc3684653bc5a9f3d0f41e0be825c02bf177c24154af955dd",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2023.html"
+  },
+  {
+    "key": "bfd_enf_2023",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2023.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2023.html",
+    "content_type": "text/html",
+    "bytes": 231592,
+    "sha256": "aea441c5b1b3d33037773e6002564965358722ee1c08e338f6c2ec7f7fe76d9a",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2023.html"
+  },
+  {
+    "key": "doi_enf_2024",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines24.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines24.htm",
+    "content_type": "text/html",
+    "bytes": 51491,
+    "sha256": "070c96e003818b1f59278716fc500a3d8f4c4190eb20b4952ba5ed1b5a8ce5ff",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2024.html"
+  },
+  {
+    "key": "bfd_enf_2024",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2024.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2024.html",
+    "content_type": "text/html",
+    "bytes": 218559,
+    "sha256": "368fd8b477097e87aa65a72a46ffa24c2ea3733d705764e1ea7bf8d5b5c982ea",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2024.html"
+  },
+  {
+    "key": "doi_enf_2025",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines25.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines25.htm",
+    "content_type": "text/html",
+    "bytes": 33424,
+    "sha256": "651066300f78ff12874a7d69b6b38fae9d672cee644029ad9fbe192f4c0bb68d",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2025.html"
+  },
+  {
+    "key": "bfd_enf_2025",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2025.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2025.html",
+    "content_type": "text/html",
+    "bytes": 234068,
+    "sha256": "c55eb9399079e855aebea01bd6a3e26cde24f8c4c6a04997595c6191464a3268",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2025.html"
+  },
+  {
+    "key": "auto_2025",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2025autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "doi_enf_2026",
+    "url": "https://www.nj.gov/dobi/division_insurance/insfines26.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/insfines26.htm",
+    "content_type": "text/html",
+    "bytes": 72403,
+    "sha256": "ccec2128e83998deabdc295dbb4fedf376c1ba9179784b2bb3a4e7f9a065cdb0",
+    "path": "data/nj-raw/dobi-ins/html/doi_enf_2026.html"
+  },
+  {
+    "key": "bfd_enf_2026",
+    "url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2026.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2026.html",
+    "content_type": "text/html",
+    "bytes": 145904,
+    "sha256": "f5b294dd3cb897ebf789c3ca7df6d6665945bd601451adb0f213c3383d43206e",
+    "path": "data/nj-raw/dobi-ins/html/bfd_enf_2026.html"
+  },
+  {
+    "key": "auto_2026",
+    "url": "https://www.nj.gov/dobi/division_consumers/pdf/2026autoconsumerrpt.pdf",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  }
+]
