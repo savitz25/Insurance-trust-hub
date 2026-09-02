@@ -124,14 +124,20 @@ def parse_date(text: str) -> str | None:
         return None
 
 
+MONTH_HEADINGS = {
+    "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
+    "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER",
+}
+
+
 def heading_at(line: str) -> str | None:
     if ORDER_RE.search(line):
         return None
-    compact = re.sub(r"[^A-Z ]", "", normalize_space(line).upper())
-    if len(compact) > 40:
+    compact = re.sub(r"\s+", " ", re.sub(r"[^A-Z ]", "", normalize_space(line).upper())).strip()
+    if not compact or len(compact) > 80 or compact in MONTH_HEADINGS:
         return None
     for heading in ACTION_HEADINGS:
-        if compact == heading or compact.startswith(heading + " "):
+        if compact == heading or compact.startswith(heading + " ") or heading in compact:
             return heading
     return None
 
@@ -162,13 +168,13 @@ def split_names(caption: str) -> list[str]:
 def event_class(heading: str, body: str) -> tuple[str, str]:
     h = (heading or "").upper()
     text = f"{heading} {body}".lower()
-    if "CONSENT" in h:
+    if "CONSENT" in h or "consent order" in text:
         cls = "CONSENT_ORDER"
-    elif "FINAL" in h:
+    elif ("FINAL" in h and "ORDER" in h) or re.search(r"\bfinal order\b", text):
         cls = "FINAL_ORDER"
-    elif "SHOW CAUSE" in h:
+    elif "SHOW CAUSE" in h or "show cause" in text:
         cls = "ORDER_TO_SHOW_CAUSE"
-    elif "CEASE" in h:
+    elif "CEASE" in h or "cease and desist" in text:
         cls = "CEASE_AND_DESIST"
     else:
         cls = "OTHER"
@@ -214,7 +220,8 @@ def match_party(party: dict[str, Any]) -> dict[str, Any]:
 def parse_enforcement_html(html: str, source_url: str, year: int | None, family: str, page: str) -> list[dict[str, Any]]:
     text = html_to_text(html, source_url)
     lines = text.splitlines()
-    heading = "UNKNOWN"
+    title_m = re.search(r"<title>([^<]+)</title>", html, flags=re.I)
+    heading = heading_at(title_m.group(1) if title_m else "") or "UNKNOWN"
     buf: list[str] = []
     events: list[dict[str, Any]] = []
     pending = False
@@ -534,56 +541,111 @@ def fetch(url: str) -> dict[str, Any]:
         return {"status": None, "body": b"", "final_url": url, "error": str(exc)}
 
 
+def fetch_with_retry(
+    url: str,
+    attempts: int = 3,
+    fetcher: Any = None,
+    sleep_s: float = 0.25,
+) -> dict[str, Any]:
+    fetcher = fetcher or fetch
+    last: dict[str, Any] = {"status": None, "body": b"", "final_url": url, "error": "no_attempt"}
+    for i in range(max(1, attempts)):
+        last = fetcher(url)
+        last["attempts"] = i + 1
+        status = last.get("status")
+        body = last.get("body") or b""
+        if status == 200 and body:
+            last["retry_status"] = "SUCCESS" if i == 0 else "SUCCESS_AFTER_RETRY"
+            return last
+        if status in {404, 403, 410, 451}:
+            last["retry_status"] = "TERMINAL_HTTP"
+            return last
+        last["retry_status"] = "RETRYING"
+        if sleep_s:
+            time.sleep(sleep_s * (i + 1))
+    last["retry_status"] = "RETRY_EXHAUSTED"
+    return last
+
+
 def pdf_name(url: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]", "_", Path(urlparse(url).path).name or "doc.pdf")
 
 
-def download_docs(events: list[dict[str, Any]]) -> dict[str, Any]:
-    PDF_DIR.mkdir(parents=True, exist_ok=True)
+def download_docs(
+    events: list[dict[str, Any]],
+    fetcher: Any = None,
+    pdf_dir: Path | None = None,
+    sleep_s: float = 0.05,
+) -> dict[str, Any]:
+    dest_dir = pdf_dir or PDF_DIR
+    dest_dir.mkdir(parents=True, exist_ok=True)
     seen: dict[str, dict[str, Any]] = {}
     hashes: dict[str, list[str]] = {}
     downloaded = skipped = unavailable = index_only = 0
+    extraction = Counter()
     for ev in events:
         url = ev.get("document_url")
         if not url:
             ev["acquisition_state"] = "INDEX_ONLY"
+            ev["canonical_document_id"] = None
             index_only += 1
             continue
         if url in seen:
             ev.update(seen[url])
             skipped += 1
             continue
-        dest = PDF_DIR / pdf_name(url)
+        dest = dest_dir / pdf_name(url)
         if dest.exists():
             data = dest.read_bytes()
             digest = sha256_bytes(data)
-            text, st = extract_pdf_text(data)
-            rec = {"acquisition_state": "SKIPPED_EXISTING_HASH", "content_hash": digest, "text_extraction_state": st}
+            _text, st = extract_pdf_text(data)
+            rec = {
+                "acquisition_state": "SKIPPED_EXISTING_HASH",
+                "content_hash": digest,
+                "canonical_document_id": digest,
+                "text_extraction_state": st,
+                "retry_status": "SKIPPED_EXISTING_HASH",
+                "byte_length": len(data),
+            }
             skipped += 1
+            extraction[st] += 1
         else:
-            got = fetch(url)
-            data = got["body"]
-            if got["status"] == 404:
-                ev["acquisition_state"] = "HTTP_404"
-                seen[url] = {"acquisition_state": "HTTP_404"}
+            got = fetch_with_retry(url, fetcher=fetcher, sleep_s=sleep_s)
+            data = got.get("body") or b""
+            rec = {
+                "retry_status": got.get("retry_status"),
+                "http_status": got.get("status"),
+                "download_attempts": got.get("attempts"),
+                "canonical_document_id": None,
+            }
+            if got.get("status") == 404:
+                rec["acquisition_state"] = "HTTP_404"
+                rec["text_extraction_state"] = "UNAVAILABLE"
                 unavailable += 1
-                time.sleep(0.05)
-                continue
-            if got["status"] != 200 or not data.startswith(b"%PDF"):
-                ev["acquisition_state"] = "DOCUMENT_UNAVAILABLE"
-                seen[url] = {"acquisition_state": "DOCUMENT_UNAVAILABLE"}
+            elif got.get("status") != 200 or not data.startswith(b"%PDF"):
+                rec["acquisition_state"] = "DOCUMENT_UNAVAILABLE"
+                rec["text_extraction_state"] = "UNAVAILABLE"
                 unavailable += 1
-                time.sleep(0.05)
-                continue
-            dest.write_bytes(data)
-            digest = sha256_bytes(data)
-            text, st = extract_pdf_text(data)
-            rec = {"acquisition_state": "DOCUMENT_DOWNLOADED", "content_hash": digest, "text_extraction_state": st}
-            downloaded += 1
+            else:
+                dest.write_bytes(data)
+                digest = sha256_bytes(data)
+                _text, st = extract_pdf_text(data)
+                rec.update({
+                    "acquisition_state": "DOCUMENT_DOWNLOADED",
+                    "content_hash": digest,
+                    "canonical_document_id": digest,
+                    "text_extraction_state": st,
+                    "byte_length": len(data),
+                })
+                downloaded += 1
+                extraction[st] += 1
         ev.update(rec)
         seen[url] = rec
-        hashes.setdefault(digest, []).append(url)
-        time.sleep(0.05)
+        digest = rec.get("content_hash")
+        if digest:
+            hashes.setdefault(digest, []).append(url)
+        if sleep_s and rec.get("acquisition_state") not in {"SKIPPED_EXISTING_HASH"}:
+            time.sleep(sleep_s)
     return {
         "downloaded": downloaded,
         "skipped_existing_hash": skipped,
@@ -592,6 +654,10 @@ def download_docs(events: list[dict[str, Any]]) -> dict[str, Any]:
         "unique_hashes": len(hashes),
         "duplicate_content_groups": sum(1 for u in hashes.values() if len(set(u)) > 1),
         "document_links": sum(1 for e in events if e.get("document_url")),
+        "text_extracted": extraction.get("EXTRACTED", 0),
+        "image_only": extraction.get("IMAGE_ONLY", 0),
+        "other_extraction_failures": extraction.get("FAILED", 0),
+        "occurrence_vs_canonical": "occurrence_fingerprint identifies index rows; canonical_document_id is content hash",
     }
 
 

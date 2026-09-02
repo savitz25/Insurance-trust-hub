@@ -85,6 +85,78 @@ def test_complaints_and_identity() -> None:
     check("exact_naic", exact["match_method"] == "EXACT_NAIC_COCODE")
 
 
+def test_001c_bfd_and_documents() -> None:
+    html = (FIX / "bfd-2025-sample.html").read_text(encoding="utf-8")
+    events = mod.parse_enforcement_html(
+        html,
+        "https://www.nj.gov/dobi/division_insurance/bfd/enforcement2025.html",
+        2025,
+        "NJ_DOBI_BFD_ENFORCEMENT",
+        "bfd_enf_2025",
+    )
+    by = {e.get("order_number"): e for e in events}
+    consent = by.get("E25-01")
+    check("bfd_reclassified_consent", bool(consent) and consent["event_class"] == "CONSENT_ORDER", str([e.get("event_class") for e in events]))
+    if consent:
+        check("bfd_consent_final", consent["event_status"] == "FINAL")
+        check("bfd_penalty_not_copied_to_parties", consent["amounts"]["civil_penalty_amount"] == 1500 and all("civil_penalty_amount" not in p for p in consent["parties"]))
+        check("occurrence_not_canonical_hash", consent["occurrence_fingerprint"] != (consent.get("document_url") or ""))
+    leftover_cls, leftover_status = mod.event_class("UNKNOWN", "Routine licensing correspondence dated May 1, 2024.")
+    check("remaining_other_class_preserved", leftover_cls == "OTHER")
+    check("remaining_unknown_status_preserved", leftover_status == "UNKNOWN")
+
+    tmp = ROOT / "data" / "fixtures" / "nj-ins-001" / "_tmp_pdf"
+    if tmp.exists():
+        for p in tmp.glob("*"):
+            p.unlink()
+    tmp.mkdir(parents=True, exist_ok=True)
+    existing_url = "https://www.nj.gov/dobi/division_insurance/bfd/orders/exist.pdf"
+    existing_path = tmp / mod.pdf_name(existing_url)
+    payload = b"%PDF-1.4 existing-hash-skip"
+    existing_path.write_bytes(payload)
+    digest = mod.sha256_bytes(payload)
+
+    attempts = {"n": 0}
+
+    def fake_fetch(url: str) -> dict:
+        attempts["n"] += 1
+        if "retry.pdf" in url:
+            if attempts["n"] < 3:
+                return {"status": None, "body": b"", "final_url": url, "error": "timeout"}
+            return {"status": 200, "body": b"%PDF-1.4 retried", "final_url": url, "error": None}
+        if "missing.pdf" in url:
+            return {"status": 404, "body": b"", "final_url": url, "error": "Not Found"}
+        if "gone.pdf" in url:
+            return {"status": 200, "body": b"<html>not a pdf</html>", "final_url": url, "error": None}
+        return {"status": 200, "body": b"%PDF-1.4 other", "final_url": url, "error": None}
+
+    rows = [
+        {"document_url": existing_url, "occurrence_fingerprint": "occ-exist"},
+        {"document_url": "https://www.nj.gov/dobi/division_insurance/bfd/orders/retry.pdf", "occurrence_fingerprint": "occ-retry"},
+        {"document_url": "https://www.nj.gov/dobi/division_insurance/bfd/orders/missing.pdf", "occurrence_fingerprint": "occ-404"},
+        {"document_url": "https://www.nj.gov/dobi/division_insurance/bfd/orders/gone.pdf", "occurrence_fingerprint": "occ-unavail"},
+        {"document_url": None, "occurrence_fingerprint": "occ-index"},
+        {"document_url": existing_url, "occurrence_fingerprint": "occ-exist-2"},
+    ]
+    stats = mod.download_docs(rows, fetcher=fake_fetch, pdf_dir=tmp, sleep_s=0)
+    check("existing_pdf_hash_skip", rows[0]["acquisition_state"] == "SKIPPED_EXISTING_HASH" and rows[0]["content_hash"] == digest)
+    check("download_retry_status", rows[1].get("retry_status") in {"SUCCESS_AFTER_RETRY", "SUCCESS"} and rows[1]["acquisition_state"] == "DOCUMENT_DOWNLOADED")
+    check("unavailable_404_preserved", rows[2]["acquisition_state"] == "HTTP_404" and rows[2]["occurrence_fingerprint"] == "occ-404")
+    check("unavailable_nonpdf_preserved", rows[3]["acquisition_state"] == "DOCUMENT_UNAVAILABLE")
+    check("index_only_preserved", rows[4]["acquisition_state"] == "INDEX_ONLY")
+    check(
+        "occurrence_vs_canonical_document",
+        rows[0]["occurrence_fingerprint"] != rows[0]["canonical_document_id"]
+        and rows[0]["canonical_document_id"] == digest
+        and rows[5]["canonical_document_id"] == digest
+        and rows[5]["occurrence_fingerprint"] == "occ-exist-2",
+    )
+    check("no_amount_duplication", consent is None or all("amounts" not in p for p in consent["parties"]))
+    for p in tmp.glob("*"):
+        p.unlink()
+    tmp.rmdir()
+
+
 def test_repo() -> None:
     sql = MIGRATION = (ROOT / "supabase/migrations/20260902140000_nj_ins_001_regulatory_ledger.sql").read_text(encoding="utf-8")
     check("no_nj_silo_orders", "nj_dobi_orders" not in sql and "nj_insurers" not in sql)
@@ -112,6 +184,7 @@ def main() -> None:
     test_enforcement()
     test_exams()
     test_complaints_and_identity()
+    test_001c_bfd_and_documents()
     test_repo()
     if failed:
         print("FAILED", failed)

@@ -1,0 +1,12 @@
+2024 SEH Loss Ratio and Refund Report
+In 2024, the SEH market had $1,788,090,204 in claims and $2,042,101,504 in premium for a loss ratio of 87.6%.
+Entities Claims Premium Loss Ratio State Refund State Refund Due
+AmeriHealth HMO $456,926 $794,406 57.5% $178,599 $178,599
+AmeriHealth $96,223,561 $124,502,416 77.3% $3,378,371 $3,378,371
+Horizon $1,284,627,347 $1,433,403,066 89.6% $0 $0
+Oscar $3,021,109 $2,918,899 103.5% $0 $0
+Oxford $402,645,629 $479,219,877 84.0% $0 $0
+Oxford HMO $1,115,632 $1,262,840 88.3% $0 $0
+SEH Totals $1,788,090,204 $2,042,101,504 87.6% $3,556,970 $3,556,970
+The Federal MLR calculation resulted in $0 in refunds.
+NJ loss ratio is not a quality score and is not the federal MLR.

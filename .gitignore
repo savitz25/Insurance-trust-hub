@@ -59,6 +59,8 @@ yarn-error.log*
 /data/reports/nj-ins-001-events.json
 /data/reports/nj-ins-001-carriers.json
 /data/reports/nj-ins-001-complaints.json
+/data/reports/nj-ins-002-observations.json
+/data/reports/nj-ins-002-plan-risk.json
 /data/ohio-raw/**
 !/data/ohio-raw/README.md
 /data/nc-raw/**

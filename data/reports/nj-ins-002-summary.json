@@ -1,0 +1,280 @@
+{
+  "ticket": "NJ-INS-002",
+  "generated_at": "2026-09-02T19:12:53Z",
+  "publication": {
+    "new_jersey_route_created": false,
+    "county_pages": false,
+    "sitemap_change": false,
+    "indexing_change": false,
+    "public_insurer_expansion": false,
+    "producer_person_publication": false,
+    "crib_employer_publication": false,
+    "ranking": false,
+    "trust_score": false,
+    "manual_vercel": false
+  },
+  "ihc": {
+    "rate_change_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "rate_change_observations": 44,
+    "carriers": [
+      "Aetna",
+      "Ambetter from WellCare of New Jersey",
+      "AmeriHealth",
+      "AmeriHealth HMO",
+      "Average",
+      "Horizon",
+      "Oscar",
+      "Oxford",
+      "UnitedHealthcare",
+      "WellCare"
+    ],
+    "marketplace_asterisk_carriers": [
+      "Aetna",
+      "Ambetter from WellCare of New Jersey",
+      "AmeriHealth",
+      "Horizon",
+      "Oscar",
+      "UnitedHealthcare",
+      "WellCare"
+    ],
+    "off_marketplace_enrollment_rows": 24,
+    "plan_counts": 117,
+    "exact_naic": 0,
+    "review_required": 41,
+    "unresolved": 3
+  },
+  "seh": {
+    "rate_change_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "carriers": [
+      "AmeriHealth",
+      "AmeriHealth HMO",
+      "Average",
+      "Horizon",
+      "Oscar",
+      "Oxford",
+      "Oxford HMO"
+    ],
+    "loss_ratio_years": [
+      2024
+    ],
+    "loss_ratio_rows": 18,
+    "exact_naic": 0
+  },
+  "get_covered": {
+    "plan_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "participating": [
+      "Aetna",
+      "Ambetter from WellCare of New Jersey",
+      "AmeriHealth",
+      "Horizon",
+      "Oscar",
+      "UnitedHealthcare",
+      "WellCare"
+    ],
+    "not_asterisked_ihc_writers": [
+      "AmeriHealth",
+      "AmeriHealth HMO",
+      "Average",
+      "Horizon",
+      "Oscar",
+      "Oxford"
+    ]
+  },
+  "residuals": {
+    "programs": [
+      "NJIUA_FAIR",
+      "PAIP",
+      "SAIP",
+      "CAIP"
+    ],
+    "ranking": false
+  },
+  "crib": {
+    "access": {
+      "access_classification": "PUBLIC_WITH_TERMS",
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "terms_reviewed": true,
+      "login_bypass": false,
+      "member_only_assignment_letters_skipped": true,
+      "redistribution_forbidden": true,
+      "database_supplementation_restricted": true,
+      "publication_allowed": false,
+      "commit_raw_file": false,
+      "notes": "PlanRisk DAT is downloadable without login. NJCRIB Terms of Use restrict copying/redistribution and using content to supplement a database. Internal profiling only; do not publish or commit the raw file."
+    },
+    "file_acquired": true,
+    "hash": "02f671d94102eafce18f8aa76441418304b8ee0fe283215adadd4ec2d6386902",
+    "bytes": 6431197,
+    "profile": {
+      "file_date": null,
+      "rows": 17775,
+      "columns": 26,
+      "schema_ok": true,
+      "schema_drift": null,
+      "delimiter": "?",
+      "county_coverage": [
+        "ATLANTIC",
+        "BERGEN",
+        "BURLINGTON",
+        "CAMDEN",
+        "CAPE MAY",
+        "CUMBERLAND",
+        "ESSEX",
+        "GLOUCESTER",
+        "HUDSON",
+        "HUNTERDON",
+        "MERCER",
+        "MIDDLESEX",
+        "MONMOUTH",
+        "MORRIS",
+        "OCEAN",
+        "PASSAIC",
+        "SALEM",
+        "SOMERSET",
+        "SUSSEX",
+        "UNION",
+        "WARREN"
+      ],
+      "carrier_count": 8,
+      "producer_count": 3703,
+      "employer_count": 17394,
+      "mod_populated_rows": 17775,
+      "ccpap_rows": 55,
+      "exact_carrier_joins": 0,
+      "review_required_producers": 3703,
+      "employer_attachment_status": "internal_only_no_public_profiles",
+      "baseline_only": true,
+      "recommended_stable_key": "coverage_id+bureau_company_number+policy_effective_date+employer_name"
+    }
+  },
+  "serff": {
+    "access_classification": "SOURCE_ACCESS_BLOCKED",
+    "coverage_state": "SOURCE_ACCESS_BLOCKED",
+    "http_status": 403,
+    "filings_acquired": 0,
+    "tracking_numbers": 0,
+    "exact_naic": 0,
+    "rate_filings": 0,
+    "rule_filings": 0,
+    "form_filings": 0,
+    "bypass": false,
+    "captcha_bypass": false,
+    "private_api": false,
+    "unlimited_harvest": false,
+    "notes": "SERFF Filing Access home returned HTTP 403. No CAPTCHA bypass, private API, or access-control bypass attempted. Manual runbook only."
+  },
+  "monitoring": {
+    "baseline_only": true,
+    "historical_alerts": 0,
+    "families": [
+      "NJ_IHC_ENROLLMENT",
+      "NJ_SEH_ENROLLMENT",
+      "NJ_IHC_RATE_CHANGE",
+      "NJ_SEH_RATE_CHANGE",
+      "NJ_GET_COVERED_PARTICIPATION",
+      "NJ_RESIDUAL_NJIUA_FAIR",
+      "NJ_RESIDUAL_PAIP",
+      "NJ_RESIDUAL_SAIP",
+      "NJ_RESIDUAL_CAIP",
+      "NJ_CRIB_PLAN_RISK",
+      "NJ_SERFF_FILING"
+    ]
+  },
+  "coverage": [
+    {
+      "family": "NJ_IHC_ENROLLMENT",
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+      "years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "family": "NJ_SEH_ENROLLMENT",
+      "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+      "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+      "years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "family": "NJ_RESIDUAL_MARKETS",
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "url": "https://www.nj.gov/dobi/division_insurance/propcas.htm"
+    },
+    {
+      "family": "NJ_CRIB_PLAN_RISK",
+      "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+      "url": "https://www.njcrib.com/FileDownload/PlanRiskDAT"
+    },
+    {
+      "family": "NJ_SERFF_FILING",
+      "coverage_state": "SOURCE_ACCESS_BLOCKED",
+      "url": "https://filingaccess.serff.com/sfa/home/NJ"
+    }
+  ],
+  "database": {
+    "available": false,
+    "production_blocker": "No authorized InsuranceTrustHub database session in this worktree. Safe dormant code may merge."
+  },
+  "invariants": {
+    "ihc_ne_seh": true,
+    "base_rate_ne_personalized_premium": true,
+    "rate_change_ne_quality": true,
+    "marketplace_ne_endorsement": true,
+    "residual_ne_voluntary_insurer": true,
+    "paip_ne_caip": true,
+    "saip_ne_paip": true,
+    "njiua_ne_legal_carrier": true,
+    "mod_ne_score": true,
+    "loss_ratio_ne_score": true,
+    "filed_ne_approved": true,
+    "no_serff_bypass": true,
+    "no_crib_login_bypass": true
+  },
+  "mode": "inspect"
+}

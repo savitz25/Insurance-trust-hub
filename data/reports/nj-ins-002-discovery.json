@@ -1,0 +1,142 @@
+[
+  {
+    "key": "ihcseh_index",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/index.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/index.html",
+    "bytes": 31795,
+    "sha256": "6591a572e3be92b25e159a29287416960b8e35b88349a6ed07df8ed011106eca",
+    "content_type": "text/html"
+  },
+  {
+    "key": "ihc_enroll",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+    "bytes": 120625,
+    "sha256": "5e151f6f799b1a2311af7b266c009a1a82f6c1f70e4f4392bd081f3f9ac34f0c",
+    "content_type": "text/html"
+  },
+  {
+    "key": "ihc_data",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/data_ihc.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/data_ihc.htm",
+    "bytes": 16148,
+    "sha256": "54613f7c0757ebb9c7af6bd22eb885a684b072316e1e8e722028544fcd0d8c92",
+    "content_type": "text/html"
+  },
+  {
+    "key": "ihc_program",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/program_ihc.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/program_ihc.htm",
+    "bytes": 26580,
+    "sha256": "ecd381f150b7fd14d09607606dd2ab768e2e4dfc687879203e74e13280c20718",
+    "content_type": "text/html"
+  },
+  {
+    "key": "ihc_rates_hist",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihchistrate.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihchistrate.html",
+    "bytes": 23416,
+    "sha256": "187f39271ad221a43c051f9c7c9ee69580b9e5f72b4fe3542b7807627b85ca10",
+    "content_type": "text/html"
+  },
+  {
+    "key": "rate_changes_index",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/index.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/index.html",
+    "bytes": 14869,
+    "sha256": "2df9583a89293d07db3882e0c2de238af7ba845226b4bf9226ae6b553c32830a",
+    "content_type": "text/html"
+  },
+  {
+    "key": "rate_changes_2025",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/2025.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/2025.html",
+    "bytes": 14797,
+    "sha256": "87a35aac706608c5647e742ccf65936c1dd1151b64af171e110fcf65b9c17986",
+    "content_type": "text/html"
+  },
+  {
+    "key": "rate_changes_2026",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/averageratechanges/2026.html",
+    "status": 404,
+    "error": "Not found",
+    "bytes": 0
+  },
+  {
+    "key": "seh_reports",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/sehreports.html",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/sehreports.html",
+    "bytes": 27800,
+    "sha256": "630bf6e5b7d9017b2779a700637643fb74e5a587d20545be5d27955f44445ed9",
+    "content_type": "text/html"
+  },
+  {
+    "key": "seh_program",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/program_seh.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/ihcseh/program_seh.htm",
+    "bytes": 26268,
+    "sha256": "9adaebf76883dc3efd33b5071c0b6271703ffb15ed36b571788f284811a20405",
+    "content_type": "text/html"
+  },
+  {
+    "key": "getcovered",
+    "url": "https://nj.gov/getcoverednj/",
+    "status": 200,
+    "final_url": "https://nj.gov/getcoverednj/",
+    "bytes": 35470,
+    "sha256": "020a0919a9d71ba431bb6d18c383b42cd6df56ed56c3ac7dab9cec8262441f19",
+    "content_type": "text/html"
+  },
+  {
+    "key": "propcas",
+    "url": "https://www.nj.gov/dobi/division_insurance/propcas.htm",
+    "status": 200,
+    "final_url": "https://www.nj.gov/dobi/division_insurance/propcas.htm",
+    "bytes": 74962,
+    "sha256": "7df2bf3a818169c00a7239e81cfc79f6357b00a2a22779847caef6a62cbfeacf",
+    "content_type": "text/html"
+  },
+  {
+    "key": "serff_nj",
+    "url": "https://filingaccess.serff.com/sfa/home/NJ",
+    "status": 403,
+    "error": "Forbidden",
+    "bytes": 0
+  },
+  {
+    "key": "crib_info",
+    "url": "https://www.njcrib.com/InformationServices/InformationServices",
+    "status": 200,
+    "final_url": "https://www.njcrib.com/InformationServices/InformationServices",
+    "bytes": 139234,
+    "sha256": "83944d2cb2f3084fd01277e9b81bde2e00284688ffea976fabcc405fb171f7b4",
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "key": "crib_planrisk",
+    "url": "https://www.njcrib.com/FileDownload/PlanRiskDownloadProcedure",
+    "status": 200,
+    "final_url": "https://www.njcrib.com/FileDownload/PlanRiskDownloadProcedure",
+    "bytes": 669747,
+    "sha256": "32c007bb78f529a4624a69bd68080e06bdf2bce182285f9667a0fca8208663ea",
+    "content_type": "application/pdf"
+  },
+  {
+    "key": "crib_home",
+    "url": "https://www.njcrib.com/",
+    "status": 200,
+    "final_url": "https://www.njcrib.com/",
+    "bytes": 161808,
+    "sha256": "191958519281b89206158cea68b8e4e47b30ed5fbc2fe966452fd8d2547847da",
+    "content_type": "text/html; charset=utf-8"
+  }
+]

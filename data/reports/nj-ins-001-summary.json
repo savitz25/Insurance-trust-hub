@@ -1,6 +1,6 @@
 {
   "ticket": "NJ-INS-001",
-  "generated_at": "2026-09-02T18:39:37Z",
+  "generated_at": "2026-09-02T19:07:14Z",
   "publication": {
     "new_jersey_route_created": false,
     "sitemap_change": false,
@@ -92,12 +92,12 @@
     "inferred_insolvency": false
   },
   "acquisition": {
-    "downloaded": 0,
-    "skipped_existing_hash": 0,
-    "unavailable": 0,
+    "downloaded": 1937,
+    "skipped_existing_hash": 1448,
+    "unavailable": 7,
     "index_only": 663,
-    "unique_hashes": 0,
-    "duplicate_content_groups": 0,
+    "unique_hashes": 3356,
+    "duplicate_content_groups": 22,
     "document_links": 3392
   },
   "coverage": [
@@ -293,5 +293,5 @@
     "group_ne_legal_entity": true,
     "producer_ne_insurer": true
   },
-  "mode": "inspect"
+  "mode": "download"
 }

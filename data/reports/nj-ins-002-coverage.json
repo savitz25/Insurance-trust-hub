@@ -1,0 +1,53 @@
+[
+  {
+    "family": "NJ_IHC_ENROLLMENT",
+    "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+    "years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  {
+    "family": "NJ_SEH_ENROLLMENT",
+    "coverage_state": "ACQUIRED_PARTIAL_HISTORY",
+    "url": "https://www.nj.gov/dobi/division_insurance/ihcseh/ihcsehenroll.html",
+    "years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  {
+    "family": "NJ_RESIDUAL_MARKETS",
+    "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+    "url": "https://www.nj.gov/dobi/division_insurance/propcas.htm"
+  },
+  {
+    "family": "NJ_CRIB_PLAN_RISK",
+    "coverage_state": "ACQUIRED_CURRENT_SNAPSHOT",
+    "url": "https://www.njcrib.com/FileDownload/PlanRiskDAT"
+  },
+  {
+    "family": "NJ_SERFF_FILING",
+    "coverage_state": "SOURCE_ACCESS_BLOCKED",
+    "url": "https://filingaccess.serff.com/sfa/home/NJ"
+  }
+]
