@@ -27,7 +27,6 @@ for (const rel of routes) {
 const helper = read('lib/og/insurance-share-og.ts');
 const model = read('lib/seo/share-card-model.ts');
 const card = read('lib/og/insurance-share-card.tsx');
-const networkCard = read('lib/og/network-share-card.tsx');
 const carrierPage = read('app/carriers/[slug]/page.tsx');
 const providerPage = read('app/providers/[slug]/page.tsx');
 const providerRoute = read('app/providers/[slug]/share-og/route.tsx');
@@ -47,7 +46,7 @@ assert(providerPage.includes('canShowAsVerified'), 'unverified providers stay fa
 assert(providerRoute.includes('resolveInsuranceProviderCard'), 'provider share-og uses public gate');
 assert(card.includes('insurancetrusthub.com'), 'card domain');
 assert(!card.includes('lendertrusthub.com'), 'no foreign hub domain');
-assert(networkCard.includes('1200') && networkCard.includes('630'), '1200×630');
+assert(card.includes('1200') && card.includes('630'), '1200×630');
 assert(!existsSync(join(root, 'app/medicare/contracts/[contractId]/share-og/route.tsx')), 'no medicare contract OG');
 assert(!existsSync(join(root, 'app/my-insurance/share-og/route.tsx')), 'no private account OG');
 
