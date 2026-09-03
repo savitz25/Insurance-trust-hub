@@ -357,6 +357,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
     links: [
       { href: '/ask', label: 'Ask InsuranceTrustHub' },
       { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
+      { href: '/california', label: 'California insurance research' },
       { href: '/florida', label: 'Florida insurance research' },
       { href: '/new-jersey', label: 'New Jersey insurance research' },
       { href: '/tools/license-verification', label: 'License verification' },

@@ -217,6 +217,7 @@ export const LOCAL_RESEARCH_ENTRY = {
     { href: '/guides', label: 'Local ACA guides' },
     { href: '/data/counties', label: 'County Medicare data' },
     { href: '/directory?verified=true', label: 'Verified directory' },
+    { href: '/california', label: 'California insurance research' },
     { href: '/florida', label: 'Florida insurance research' },
   ],
 } as const;

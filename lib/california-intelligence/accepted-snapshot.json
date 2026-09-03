@@ -1,0 +1,716 @@
+{
+  "as_of": "2026-06-01",
+  "cdi_admitted": {
+    "access": "OPEN_SEARCH_ONLY",
+    "complete_count": null,
+    "coverage": "SOURCE_NOT_ACQUIRED",
+    "lookup_url": "https://www.insurance.ca.gov/01-consumers/120-company/lookup/index.cfm",
+    "missing_is_not_zero": true
+  },
+  "cdi_health_list": {
+    "agency": "California Department of Insurance",
+    "companies": [
+      {
+        "cdi_profile_id": null,
+        "company_name": "4 Ever Life Insurance Company",
+        "phone": "800-621-9125",
+        "website": "https://4everlife.com/new/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Aetna Life Insurance Company",
+        "phone": "800-872-3862",
+        "website": "https://www.aetna.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "American National Insurance Company",
+        "phone": "800-899-6503",
+        "website": "http://www.anico.com"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "American States Insurance Company",
+        "phone": "888-398-8924",
+        "website": "https://www.libertymutual.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Anthem Blue Cross Life and Health Insurance Company",
+        "phone": "877-875-1223",
+        "website": "https://www.anthem.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Blue Shield of California Life and Health Insurance Company",
+        "phone": "800-393-6130",
+        "website": "http://www.blueshieldca.com"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "CIGNA Health and Life Insurance Company",
+        "phone": "800-244-6224",
+        "website": "http://www.cigna.com"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Connecticut General Life Insurance Company",
+        "phone": "800-244-6224",
+        "website": "http://www.cigna.com"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Equitable Financial Life Insurance Company",
+        "phone": "866-444-6001",
+        "website": "https://equitable.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Guardian Life Insurance Company of America",
+        "phone": "888-482-7342",
+        "website": "https://www.guardianlife.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "John Hancock Life Insurance Company (U.S.A.)",
+        "phone": "800-377-7311",
+        "website": "https://www.johnhancock.com/index.html"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Kaiser Permanente Insurance Company",
+        "phone": "800-788-0710",
+        "website": "http://www.kp.org/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Massachusetts Casualty Insurance Company",
+        "phone": "800-462-9897",
+        "website": "https://www.massmutual.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Metropolitan Life Insurance Company",
+        "phone": "800-638-5433",
+        "website": "https://www.metlife.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Mony Life Insurance Company",
+        "phone": "800-268-1000",
+        "website": "https://www.protective.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Mutual of Omaha Insurance Company",
+        "phone": "800-775-1000",
+        "website": "https://www.mutualofomaha.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "National Benefit Life Insurance Company",
+        "phone": "800-222-2062",
+        "website": "https://www.nationalbenefitlife.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "National Foundation Life Insurance Company of America",
+        "phone": "800-221-9039",
+        "website": "https://myushg.ushealthgroup.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "New York Life Insurance Company",
+        "phone": "800-225-5695",
+        "website": "https://www.newyorklife.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Nippon Life Insurance Company of America",
+        "phone": "800-374-1835",
+        "website": "http://www.nipponlifebenefits.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Prudential Insurance Company of America",
+        "phone": "800-828-0153",
+        "website": ""
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Sierra Health And Life Insurance Company, Inc.",
+        "phone": "800-888-2264",
+        "website": "https://www.uhc.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "State Farm Mutual Automobile Insurance Company",
+        "phone": "800-782-8332",
+        "website": "https://www.statefarm.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Teacher's Insurance and Annuity Association of America",
+        "phone": "800-842-2733",
+        "website": "https://www.tiaa.org/public/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Transamerica Life Insurance Company",
+        "phone": "800-625-4212",
+        "website": "https://www.transamerica.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "Trustmark Insurance Company",
+        "phone": "800-666-6977",
+        "website": "https://www.trustmarkbenefits.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "United HealthCare Insurance Company",
+        "phone": "877-294-1429",
+        "website": "https://www.uhc.com/"
+      },
+      {
+        "cdi_profile_id": null,
+        "company_name": "United States Life Insurance Company in the City of New York",
+        "phone": "800-763-8851",
+        "website": "https://www.corebridgefinancial.com/"
+      }
+    ],
+    "email_count": 0,
+    "email_policy": "NOT_IN_SOURCE",
+    "label": "Companies on CDI's dated health-insurer list",
+    "licensed_is_not_currently_selling": true,
+    "not_all_property_casualty": true,
+    "not_complete_admitted_universe": true,
+    "not_dmhc_knox_keene": true,
+    "phone_count": 28,
+    "phone_eligibility": "PUBLIC_ELIGIBLE",
+    "row_count": 28,
+    "source": "https://www.insurance.ca.gov/01-consumers/110-health/20-look/hcpcarriers.cfm",
+    "source_as_of": "2025-12-31",
+    "website_count": 27,
+    "website_eligibility": "PUBLIC_ELIGIBLE"
+  },
+  "complaints": {
+    "access": "OPEN_OFFICIAL_STUDY",
+    "agency": "California Department of Insurance",
+    "commissioner_report_2024": {
+      "complaint_cases_closed": 62002,
+      "complaint_cases_opened": 62559,
+      "source": "https://www.insurance.ca.gov/0400-news/0200-studies-reports/0700-commissioner-report/upload/2024-Annual-Report-of-the-Commissioner.pdf",
+      "telephone_and_in_person": 206965
+    },
+    "complaint_is_not_violation": true,
+    "coverage": "REGULATOR_PUBLISHED_JUSTIFIED_COMPLAINT_STUDY",
+    "http_status": 200,
+    "imr_is_not_complaint": true,
+    "note": "CDI Consumer Complaint Study publishes justified complaint ratios with exposure denominators for 50 large auto/home/life companies. InsuranceTrustHub does not republish that ranking. State-level 2024 commissioner-report aggregates: 62,559 complaint cases opened and 62,002 closed.",
+    "source": "https://www.insurance.ca.gov/01-consumers/120-company/03-concmplt/",
+    "trusthub_ranking_created": false
+  },
+  "contacts": {
+    "business_phone_public_eligible": 28,
+    "cdi_health_list_rows": 28,
+    "officer_personal_contacts_published": false,
+    "public_email": 0,
+    "website_public_eligible": 27
+  },
+  "coverage_gaps": [
+    {
+      "id": "admitted-universe",
+      "label": "Complete CDI admitted/company denominator",
+      "state": "SOURCE_NOT_ACQUIRED"
+    },
+    {
+      "id": "producer",
+      "label": "Complete producer denominator",
+      "state": "SOURCE_AVAILABLE_BY_PAID_LIST / SEARCH_ONLY"
+    },
+    {
+      "id": "agency-broker",
+      "label": "Full agency/broker universe",
+      "state": "SOURCE_NOT_ACQUIRED"
+    },
+    {
+      "id": "appointments",
+      "label": "Full California appointments",
+      "state": "SOURCE_NOT_ACQUIRED"
+    },
+    {
+      "id": "authorization-subtypes",
+      "label": "Complete California authorization subtype coverage",
+      "state": "SOURCE_NOT_ACQUIRED"
+    },
+    {
+      "id": "fair-plan-inforce",
+      "label": "FAIR Plan in-force/TIV/premium by ZIP",
+      "state": "NOT_INGESTED"
+    },
+    {
+      "id": "rate-bulk",
+      "label": "Rate/filing bulk",
+      "state": "OPEN_SEARCH_ONLY"
+    },
+    {
+      "id": "imr-enrollment",
+      "label": "Plan enrollment denominators for IMR/enforcement rates",
+      "state": "NOT_IN_SOURCE"
+    },
+    {
+      "id": "dmhc-plan-id",
+      "label": "Unresolved DMHC entity identity (no exact plan key)",
+      "state": "NAME_ONLY_UNSAFE_FOR_ADVERSE_ATTACH"
+    }
+  ],
+  "enforcement": {
+    "accusation_is_not_final_finding": true,
+    "action_counts": {
+      "Accusation": 53,
+      "Amended Accusation": 9,
+      "Amended Cease and Desist Order": 16,
+      "Cease and Desist Order": 240,
+      "Civil Complaint": 3,
+      "Judicial Order/Ruling": 36,
+      "Letter of Admonishment": 6,
+      "Letter of Agreement": 4212,
+      "Lift Cease and Desist Order": 116,
+      "Miscellaneous Agreement": 3,
+      "Order": 105,
+      "Order Appointing Conservator": 11,
+      "Order Taking Possession": 1,
+      "Other": 18,
+      "Settlement Agreement": 606
+    },
+    "agency": "Department of Managed Health Care",
+    "cease_and_desist_is_not_revocation": true,
+    "date_max": "2026-05-22",
+    "date_min": "2000-07-03",
+    "distinct_organization_names": 238,
+    "document_availability": "INDEX_ONLY",
+    "grain": "enforcement action row",
+    "identity_bar": "UNSAFE_FOR_ADVERSE_PROFILE_ATTACH",
+    "identity_key": null,
+    "inventory_path": "/california-dmhc-enforcement.json",
+    "letter_of_agreement_is_not_settlement": true,
+    "no_enforcement_ranking": true,
+    "occurrence_is_not_unique_company": true,
+    "organization_type_counts": {
+      "Agent": 43,
+      "Health Plan": 5104,
+      "Medical Group": 163,
+      "Other": 82,
+      "Provider": 43
+    },
+    "penalty_rows": 3953,
+    "profile_links": 0,
+    "rows": 5435,
+    "rows_with_link": 5435,
+    "source": "https://data.chhs.ca.gov/dataset/enforcement-actions-trend",
+    "source_as_of": "2026-06-01",
+    "year_counts": {
+      "2000": 9,
+      "2001": 58,
+      "2002": 55,
+      "2003": 90,
+      "2004": 145,
+      "2005": 168,
+      "2006": 117,
+      "2007": 97,
+      "2008": 148,
+      "2009": 400,
+      "2010": 139,
+      "2011": 545,
+      "2012": 137,
+      "2013": 127,
+      "2014": 173,
+      "2015": 289,
+      "2016": 337,
+      "2017": 245,
+      "2018": 245,
+      "2019": 357,
+      "2020": 273,
+      "2021": 214,
+      "2022": 227,
+      "2023": 103,
+      "2024": 284,
+      "2025": 330,
+      "2026": 123
+    }
+  },
+  "evidence_depth": [
+    {
+      "access_class": "OPEN_API_DATASTORE",
+      "agency": "DMHC",
+      "as_of": "2026-06-01",
+      "contact_coverage": "none",
+      "family": "DMHC enforcement",
+      "grain": "enforcement action row",
+      "identity_key": "none (OrganizationName only)",
+      "limitations": "No plan ID/NAIC. Name-only is UNSAFE for adverse profile attach.",
+      "publication_status": "PUBLISHED_STATE_EVENT",
+      "rows": 5435,
+      "source": "https://data.chhs.ca.gov/dataset/enforcement-actions-trend"
+    },
+    {
+      "access_class": "OPEN_API_DATASTORE",
+      "agency": "DMHC",
+      "as_of": "2026-06-01",
+      "contact_coverage": "none",
+      "family": "DMHC IMR",
+      "grain": "IMR determination",
+      "identity_key": "none",
+      "limitations": "No plan identifier. Findings text not republished. No enrollment denominator.",
+      "publication_status": "PUBLISHED_AGGREGATES",
+      "rows": 42749,
+      "source": "https://data.chhs.ca.gov/dataset/independent-medical-review-imr-determinations-trend"
+    },
+    {
+      "access_class": "OPEN_HTML_TABLE",
+      "agency": "CDI",
+      "as_of": "2025-12-31",
+      "contact_coverage": "28 phones / 27 websites",
+      "family": "CDI health-insurer list",
+      "grain": "dated health-insurer list row",
+      "identity_key": "company name on CDI list",
+      "limitations": "Not complete admitted universe. Licensed \u2260 currently selling.",
+      "publication_status": "PUBLISHED_LIST",
+      "rows": 28,
+      "source": "https://www.insurance.ca.gov/01-consumers/110-health/20-look/hcpcarriers.cfm"
+    },
+    {
+      "access_class": "OPEN_SEARCH_ONLY",
+      "agency": "CDI",
+      "as_of": "2026-09-03",
+      "contact_coverage": "SEARCH_ONLY",
+      "family": "CDI company lookup",
+      "grain": "admitted company profile",
+      "identity_key": "CDI company profile (search)",
+      "limitations": "No free bulk roster. Absence is not zero companies.",
+      "publication_status": "COVERAGE_GAP",
+      "rows": null,
+      "source": "https://www.insurance.ca.gov/01-consumers/120-company/lookup/index.cfm"
+    },
+    {
+      "access_class": "SOURCE_AVAILABLE_BY_PAID_LIST / SEARCH_ONLY",
+      "agency": "CDI",
+      "as_of": "2026-09-03",
+      "contact_coverage": "PAID",
+      "family": "CDI producer source",
+      "grain": "licensed producer / mailing list",
+      "identity_key": "CDI license / NPN if purchased",
+      "limitations": "Not purchased. Not scraped. National NPN \u2260 California license.",
+      "publication_status": "COVERAGE_GAP",
+      "rows": null,
+      "source": "https://www.insurance.ca.gov/0200-industry/0130-mailing-lists/"
+    },
+    {
+      "access_class": "OPEN_PDF",
+      "agency": "CDI",
+      "as_of": "2025-01-13",
+      "contact_coverage": "n/a",
+      "family": "FAIR Plan",
+      "grain": "statewide residential new-and-renewed policy counts",
+      "identity_key": "n/a (market aggregate)",
+      "limitations": "Residual market. Not typical market. ZIP files not ingested as county pages.",
+      "publication_status": "PUBLISHED_STATE_AGGREGATE",
+      "rows": null,
+      "source": "https://www.insurance.ca.gov/01-consumers/200-wrr/upload/CDI-Fact-Sheet-Summary-on-Residential-Insurance-Policies-and-the-FAIR-Plan-v-011325.pdf"
+    },
+    {
+      "access_class": "OPEN_STATE_PUBLICATION",
+      "agency": "CDI",
+      "as_of": "2025-01",
+      "contact_coverage": "n/a",
+      "family": "property/wildfire market source",
+      "grain": "statewide residential market publications",
+      "identity_key": "n/a",
+      "limitations": "No property-level wildfire score. No premium prediction.",
+      "publication_status": "PUBLISHED_CONTEXT",
+      "rows": null,
+      "source": "https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm"
+    },
+    {
+      "access_class": "OPEN_OFFICIAL_STUDY",
+      "agency": "CDI",
+      "as_of": "2024 calendar / 2025 study",
+      "contact_coverage": "n/a",
+      "family": "complaint evidence",
+      "grain": "regulator complaint study + commissioner-report totals",
+      "identity_key": "not attached",
+      "limitations": "CDI ranks 50 large companies; TrustHub does not republish that ranking. Complaint \u2260 violation. IMR \u2260 complaint.",
+      "publication_status": "PUBLISHED_STATE_TOTALS_ONLY",
+      "rows": null,
+      "source": "https://www.insurance.ca.gov/01-consumers/120-company/03-concmplt/"
+    },
+    {
+      "access_class": "OPEN_SEARCH_ONLY",
+      "agency": "CDI",
+      "as_of": "2026-09-03",
+      "contact_coverage": "n/a",
+      "family": "rate filing evidence",
+      "grain": "rate filing search",
+      "identity_key": "filing number (search)",
+      "limitations": "No bulk dump. Rate filing \u2260 consumer premium. No SERFF scrape.",
+      "publication_status": "COVERAGE_GAP",
+      "rows": null,
+      "source": "https://www.insurance.ca.gov/0250-insurers/0800-rate-filings/"
+    },
+    {
+      "access_class": "EXISTING_GRAPH",
+      "agency": "NAIC / CMS (existing)",
+      "as_of": "existing graph",
+      "contact_coverage": "existing",
+      "family": "federal/national overlay",
+      "grain": "national legal-insurer / NAIC identity",
+      "identity_key": "NAIC CoCode where already stored nationally",
+      "limitations": "NAIC identity \u2260 California authorization.",
+      "publication_status": "NOT_USED_AS_CA_AUTHORIZATION",
+      "rows": null,
+      "source": "InsuranceTrustHub national/legal-insurer graph"
+    }
+  ],
+  "fair_plan": {
+    "acquired": true,
+    "agency": "California Department of Insurance",
+    "bytes": 718531,
+    "experience_year": 2023,
+    "fair_plan_share_of_residential_new_renewed_2023": 0.037,
+    "grain": "statewide residential new-and-renewed policy counts",
+    "http_status": 200,
+    "label": "residual-market infrastructure",
+    "new_and_renewed_policies_2023": {
+      "fair_plan": 324954,
+      "surplus_lines": 41514,
+      "voluntary_market": 8300730
+    },
+    "not_a_safety_score": true,
+    "not_insurer_of_choice": true,
+    "not_typical_market": true,
+    "note": "Counts are official CDI statewide new-and-renewed residential policy counts. FAIR Plan is the residual market, not the typical California insurance market. ZIP/county files exist on the CDI wildfire page and are not ingested as county pages.",
+    "sha256": "71bf6598846bb2e607df08b791ad21028d3ab8c788532078b5499fa306394591",
+    "source": "https://www.insurance.ca.gov/01-consumers/200-wrr/upload/CDI-Fact-Sheet-Summary-on-Residential-Insurance-Policies-and-the-FAIR-Plan-v-011325.pdf",
+    "source_as_of": "2025-01-13",
+    "table_1_new_and_renewed_fair_plan": {
+      "2015": 141391,
+      "2016": 141192,
+      "2017": 140312,
+      "2018": 140447,
+      "2019": 189790,
+      "2020": 222091,
+      "2021": 246807,
+      "2022": 275131,
+      "2023": 324954
+    }
+  },
+  "federal_national": {
+    "cms_marketplace_is_not_cdi_or_dmhc_license": true,
+    "exact_naic_from_california_source": 0,
+    "naic_identity_available_in_graph": true,
+    "naic_is_not_california_authorization": true,
+    "note": "Existing national/legal-insurer identities are not labeled California-authorized without a California source NAIC or official crosswalk."
+  },
+  "findings": [
+    {
+      "id": "dmhc-action-mix",
+      "text": "DMHC Office of Enforcement published 5,435 enforcement-action rows from 2000-07-03 through 2026-05-22. Source-native classes include Letter of Agreement 4,212, Settlement Agreement 606, Cease and Desist Order 240, and Accusation 53, plus every other official class in the file. Those 5,435 rows name 238 distinct organization-name strings. A letter of agreement is not a settlement. An accusation is not a final finding. A cease-and-desist order is not a revocation. An enforcement occurrence is not a unique company. This is not an insurer ranking."
+    },
+    {
+      "id": "imr-volume",
+      "text": "DMHC Independent Medical Review determinations total 42,749 rows (datastore as of 2026-06-01). Overturned decision of health plan: 22,445. Upheld decision of health plan: 20,304. An IMR case is not a complaint. An IMR decision is not enforcement. An IMR outcome is not a plan quality score. IMR volume is not market share. This extract has no plan identifier and no enrollment denominator, so plan-level IMR rates are not published."
+    },
+    {
+      "id": "cdi-health-list",
+      "text": "CDI's dated health-insurer list names 28 companies licensed to provide health insurance coverage as of 2025-12-31. 28 have a published business phone and 27 have a website. Licensed is not currently selling. This list is not the complete admitted-carrier universe and is not the DMHC Knox-Keene plan roster."
+    },
+    {
+      "id": "fair-plan-residual",
+      "text": "CDI's January 2025 fact sheet on residential policies reports 324,954 FAIR Plan new-and-renewed policies in 2023 versus 8,300,730 in the voluntary market (3.7% of that residential new-and-renewed mix). FAIR Plan is residual-market infrastructure, not the typical California insurance market, not an insurer of choice, and not a safety score."
+    }
+  ],
+  "fingerprint": "dc1eb54c514def4663c33551ee6835a41f38349f8fcfae2647e514cd7711f468",
+  "generated_at": "2026-09-03T18:39:26+00:00",
+  "hero": {
+    "as_of_hint": "CDI health list as of 2025-12-31. FAIR Plan fact sheet January 2025 (2023 experience).",
+    "as_of_label": "DMHC CHHS datasets",
+    "as_of_value": "2026-06-01",
+    "current_hint": "IMR is not a complaint and not enforcement. No plan-level rates.",
+    "current_label": "DMHC IMR determinations",
+    "current_value": 42749,
+    "geography_hint": "No California county insurance pages. Mailing geography is not a service area.",
+    "geography_label": "statewide sources",
+    "geography_value": "California",
+    "observations_hint": "Companies on CDI's dated health-insurer list. Not the complete admitted universe.",
+    "observations_label": "CDI dated health-insurer list",
+    "observations_value": 28,
+    "universe_hint": "Knox-Keene / DMHC actions, not all California insurers and not a unique-company census.",
+    "universe_label": "DMHC enforcement rows",
+    "universe_value": 5435
+  },
+  "imr": {
+    "agency": "Department of Managed Health Care",
+    "determination_counts": {
+      "Overturned Decision of Health Plan": 22445,
+      "Upheld Decision of Health Plan": 20304
+    },
+    "diagnosis_category_counts": {
+      "Autism Spectrum": 1390,
+      "CNS/ Neuromusc Dis": 3304,
+      "Cancer": 3709,
+      "Cardiac/Circ Problem": 2158,
+      "Digestive System/ GI": 1857,
+      "Ears/Nose/Throat": 702,
+      "Endocrine/Metabolic": 3342,
+      "Foot Disorder": 397,
+      "GU/ Kidney Disorder": 992,
+      "Immuno Disorders": 960,
+      "Infectious Disease": 1795,
+      "Mental Disorder": 6120,
+      "Morbid Obesity": 948,
+      "OB-GYN/ Pregnancy": 1080,
+      "Orth/Musculoskeletal": 7337,
+      "Pediatrics": 1062,
+      "Prevention/Good Hlth": 819,
+      "Respiratory System": 896,
+      "Skin Disorders": 1311,
+      "Vision": 417
+    },
+    "grain": "IMR determination",
+    "has_plan_identifier": false,
+    "imr_is_not_complaint": true,
+    "imr_is_not_enforcement": true,
+    "imr_is_not_quality_score": true,
+    "imr_type_counts": {
+      "Expedited": 12541,
+      "Standard": 30208
+    },
+    "imr_volume_is_not_market_share": true,
+    "no_plan_rates": true,
+    "rows": 42749,
+    "source": "https://data.chhs.ca.gov/dataset/independent-medical-review-imr-determinations-trend",
+    "source_as_of": "2026-06-01",
+    "type_counts": {
+      "Experimental/Investigational": 10476,
+      "Medical Necessity": 31504,
+      "Urgent Care": 769
+    },
+    "year_counts": {
+      "2001": 28,
+      "2002": 695,
+      "2003": 738,
+      "2004": 788,
+      "2005": 959,
+      "2006": 1080,
+      "2007": 1342,
+      "2008": 1521,
+      "2009": 1432,
+      "2010": 1453,
+      "2011": 1435,
+      "2012": 1203,
+      "2013": 1197,
+      "2014": 1433,
+      "2015": 2079,
+      "2016": 3055,
+      "2017": 2954,
+      "2018": 2683,
+      "2019": 2331,
+      "2020": 2197,
+      "2021": 2133,
+      "2022": 1776,
+      "2023": 2246,
+      "2024": 2715,
+      "2025": 2730,
+      "2026": 546
+    }
+  },
+  "no_aggregate_rating": true,
+  "no_california_county_pages": true,
+  "no_paid_ranking": true,
+  "no_review_schema": true,
+  "no_trust_score": true,
+  "producer": {
+    "complete_count": null,
+    "coverage": "SOURCE_AVAILABLE_BY_PAID_LIST / SEARCH_ONLY",
+    "national_npn_is_not_california_license": true,
+    "page_blocker": false,
+    "purchased": false,
+    "scraped": false,
+    "source": "https://www.insurance.ca.gov/0200-industry/0130-mailing-lists/"
+  },
+  "publication": {
+    "canonical": "https://www.insurancetrusthub.com/california",
+    "indexable": true,
+    "path": "/california",
+    "robots": "index,follow",
+    "sitemap": true
+  },
+  "rate_filings": {
+    "access": "OPEN_SEARCH_ONLY",
+    "agency": "California Department of Insurance",
+    "bulk_acquired": false,
+    "http_status": 200,
+    "note": "No simple official bulk rate-filing dump used. Do not scrape SERFF/CDI filing search.",
+    "rate_filing_is_not_consumer_premium": true,
+    "source": "https://www.insurance.ca.gov/0250-insurers/0800-rate-filings/"
+  },
+  "regulators": {
+    "cdi": {
+      "covers": "Admitted insurers, producers, property/casualty residual-market oversight context, complaint study, rate filings.",
+      "name": "California Department of Insurance",
+      "short": "CDI",
+      "url": "https://www.insurance.ca.gov/"
+    },
+    "cdi_license_is_not_knox_keene": true,
+    "cdi_lookup_is_not_bulk_universe": true,
+    "dmhc": {
+      "covers": "Knox-Keene health care service plans, DMHC enforcement, Independent Medical Review.",
+      "name": "Department of Managed Health Care",
+      "short": "DMHC",
+      "url": "https://www.dmhc.ca.gov/"
+    },
+    "dmhc_is_not_cdi": true,
+    "dmhc_plan_is_not_all_california_insurers": true
+  },
+  "semantics": [
+    "DMHC != CDI",
+    "DMHC PLAN != ALL CALIFORNIA INSURERS",
+    "CDI HEALTH LIST != COMPLETE ADMITTED UNIVERSE",
+    "LICENSED != CURRENTLY SELLING",
+    "IMR != COMPLAINT",
+    "IMR != ENFORCEMENT",
+    "COMPLAINT != VIOLATION",
+    "ACCUSATION != FINAL FINDING",
+    "LETTER OF AGREEMENT != SETTLEMENT",
+    "CEASE & DESIST != REVOCATION",
+    "RAW ENFORCEMENT COUNT != QUALITY",
+    "FAIR PLAN != ENTIRE PROPERTY MARKET",
+    "RATE FILING != CONSUMER PREMIUM",
+    "NAIC IDENTITY != CALIFORNIA AUTHORIZATION",
+    "SEARCH-ONLY SOURCE ABSENCE != ZERO",
+    "MISSING != ZERO",
+    "NO TRUST SCORE",
+    "NO PAID RANKING"
+  ],
+  "verify": {
+    "cdi_company_lookup": "https://www.insurance.ca.gov/01-consumers/120-company/lookup/index.cfm",
+    "cdi_complaint_study": "https://www.insurance.ca.gov/01-consumers/120-company/03-concmplt/",
+    "cdi_health_list": "https://www.insurance.ca.gov/01-consumers/110-health/20-look/hcpcarriers.cfm",
+    "dmhc_enforcement": "https://www.dmhc.ca.gov/LawsRegulations/EnforcementActions.aspx",
+    "dmhc_imr": "https://www.dmhc.ca.gov/FileaComplaint/IndependentMedicalReviewIMR.aspx"
+  },
+  "version": "insurance-ca-state-intel-v1",
+  "wildfire_market": {
+    "access": "OPEN_STATE_PUBLICATION",
+    "acquired_state_aggregates": true,
+    "agency": "California Department of Insurance",
+    "http_status": 200,
+    "no_county_pages": true,
+    "no_premium_prediction": true,
+    "no_property_score": true,
+    "note": "Statewide FAIR Plan/voluntary/surplus new-and-renewed counts used. ZIP non-renewal files not ingested.",
+    "source": "https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm",
+    "zip_files_ingested": false
+  }
+}

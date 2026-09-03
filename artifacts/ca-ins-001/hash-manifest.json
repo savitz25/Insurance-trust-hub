@@ -1,0 +1,8 @@
+{
+  "ticket": "CA-INS-001",
+  "snapshot_fingerprint": "dc1eb54c514def4663c33551ee6835a41f38349f8fcfae2647e514cd7711f468",
+  "enforcement_rows": 5435,
+  "imr_rows": 42749,
+  "cdi_health_rows": 28,
+  "inventory_bytes": 950109
+}
