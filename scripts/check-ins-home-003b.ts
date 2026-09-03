@@ -132,7 +132,7 @@ assert(geographyIsServiceTerritory() === false, 'geo ≠ service territory');
 assert(brandIsLegalInsurer() === false, 'brand ≠ legal insurer');
 assert(page.includes('data-intel-event="insurance_intel_explain_chart"'), 'Explain this chart');
 assert(page.includes('data-intel-event="insurance_intel_trace_number"'), 'Trace this number');
-assert(!page.includes("href: '/texas'") && !page.includes('href="/texas"'), 'sitemap expansion = 0');
+assert(page.includes('href="/texas"'), 'texas intelligence route live');
 for (const phrase of FORBIDDEN_HOME_COPY) {
   if (phrase === 'trust score' || phrase === 'paid ranking') continue;
   assert(!page.toLowerCase().includes(phrase), `no ${phrase}`);

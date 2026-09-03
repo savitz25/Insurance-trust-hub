@@ -377,15 +377,23 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
             <Link href="/florida" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
               Florida Insurance Intelligence
             </Link>
-            {' '}and{' '}
+            {', '}
             <Link href="/new-jersey" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
               New Jersey Insurance Intelligence
+            </Link>
+            {', '}
+            <Link href="/california" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
+              California Insurance Intelligence
+            </Link>
+            {', and '}
+            <Link href="/texas" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
+              Texas Insurance Intelligence
             </Link>
             . Other jurisdictions:{' '}
             <Link href="/hubs/browse" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
               browse existing state/MSA hubs
             </Link>
-            . No additional /texas or /california intelligence routes were created.
+            .
           </p>
         </div>
       </section>

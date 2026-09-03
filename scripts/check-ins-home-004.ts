@@ -118,7 +118,7 @@ assert(!page.includes('74983') && !page.includes('74,983'), 'obsolete 74983 abse
 assert(a.publicAvailability.publicPeople === 0, 'public people 0');
 assert(a.publicAvailability.publicLegalInsurers === 0, 'public legal insurers 0');
 assert(a.publicAvailability.publicGraphAgencies === 0, 'public graph agencies 0');
-assert(!page.includes("href: '/texas'") && !page.includes('href="/texas"'), 'sitemap expansion 0');
+assert(page.includes('href="/texas"'), 'texas intelligence route live');
 assert(credentialIsAppointment() === false, 'LOA/credential ≠ appointment');
 assert(appointmentIsInsurerIdentity() === false, 'appointment ≠ insurer');
 assert(licenseIsEndorsement() === false, 'license ≠ endorsement');

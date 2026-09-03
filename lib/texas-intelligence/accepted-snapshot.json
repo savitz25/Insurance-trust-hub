@@ -1,0 +1,781 @@
+{
+  "version": "insurance-tx-state-intel-v1",
+  "ticket": "TX-INS-001",
+  "as_of": "2026-09-03",
+  "retrieved_at": "2026-09-03T21:25:29.469734+00:00",
+  "source_clock": "TDI Open Data rowsUpdatedAt 2026-09-03",
+  "no_trust_score": true,
+  "no_paid_ranking": true,
+  "no_texas_county_pages": true,
+  "missing_is_not_zero": true,
+  "person_directory_public": false,
+  "person_appointments_public": false,
+  "publication": {
+    "path": "/texas",
+    "indexable": true,
+    "robots": "index,follow",
+    "canonical": "https://www.insurancetrusthub.com/texas",
+    "h1": "Texas Insurance Market & Regulatory Intelligence"
+  },
+  "hero": {
+    "universe_value": 56625,
+    "universe_label": "TDI agency license rows",
+    "universe_hint": "One row per agency license, not a person directory.",
+    "current_value": 43597,
+    "current_label": "distinct agency NPN",
+    "current_hint": "Exact business identity. License jurisdiction is Texas.",
+    "observations_value": 622019,
+    "observations_label": "active agency appointments",
+    "observations_hint": "Agency NPN to company NAIC. Appointment count is not quality.",
+    "geography_value": "Texas",
+    "geography_label": "state snapshot",
+    "geography_hint": "No Texas county routes.",
+    "as_of_value": "2026-09-03",
+    "as_of_label": "TDI open data",
+    "as_of_hint": "Official SODA clocks, not a TrustHub score."
+  },
+  "regulators": {
+    "tdi": {
+      "name": "Texas Department of Insurance",
+      "url": "https://www.tdi.texas.gov/",
+      "covers": "Companies, agencies/businesses, individual agents/adjusters, appointments, surplus lines, title, complaints, and rate filings."
+    },
+    "entity_classes": [
+      {
+        "class": "Insurance company / insurer",
+        "id": "NAIC + TDI company/EID when acquired",
+        "establishes": "Texas authorization only when a Texas company source says so",
+        "does_not": "National NAIC identity alone is not Texas authorization"
+      },
+      {
+        "class": "Agency / business entity",
+        "id": "NPN + TDI agency license number",
+        "establishes": "TDI business license to sell/service/manage insurance",
+        "does_not": "Not an individual agent; not an insurer"
+      },
+      {
+        "class": "Individual agent / adjuster",
+        "id": "Person NPN",
+        "establishes": "Person credential",
+        "does_not": "Not a public business profile in this snapshot"
+      },
+      {
+        "class": "Appointment",
+        "id": "Agency NPN + NAIC",
+        "establishes": "Active designation to represent a company",
+        "does_not": "Not a quality signal; not proof the agency can sell every product"
+      },
+      {
+        "class": "Surplus lines",
+        "id": "TDI surplus license number",
+        "establishes": "Surplus lines person or firm license status",
+        "does_not": "Not insurer authorization; firm row is not automatically the standard agency universe"
+      },
+      {
+        "class": "Title",
+        "id": "TDI title agency license + underwriter + county",
+        "establishes": "County-level title underwriter appointment",
+        "does_not": "Not a general P&C appointment; not a county page"
+      },
+      {
+        "class": "HMO / health entity",
+        "id": "appears in complaint respondent role and some appointment types",
+        "establishes": "Source-native role where present",
+        "does_not": "Not collapsed into P&C denominators"
+      }
+    ],
+    "tdi_is_not_national_naic_authorization": true
+  },
+  "agencies": {
+    "dataset_id": "3yqc-fcdt",
+    "source_url": "https://data.texas.gov/dataset/Insurance-agencies-and-businesses-approved-to-mana/3yqc-fcdt",
+    "csv_sha256": "75e4f78dd2e1581cab950e5de371d24e7a97b0ec8d64a5ab6a94b8e21837616b",
+    "bytes": 8762207,
+    "grain": "one row per TDI license held by an agency or business",
+    "rows": 56625,
+    "distinct_npn": 43597,
+    "distinct_tdi_license": 48920,
+    "tx_listed_state_rows": 23004,
+    "tx_listed_state_npn": 16924,
+    "state_field_meaning": "Listed state on the agency row (often mailing/home office). License jurisdiction is Texas TDI. state=TX is not the licensed-in-Texas universe.",
+    "license_type_counts": {
+      "General Lines Agency": 45267,
+      "Life Agency": 3936,
+      "Surplus Lines Agency": 1945,
+      "Specialty Insurance Agency": 1581,
+      "Pers Lines Prop and Cas Agency": 976,
+      "Title Agency": 837,
+      "Managing General Agency": 692,
+      "Adjuster": 513,
+      "Public Insurance Adjuster": 395,
+      "Limited Lines Agency": 154,
+      "Reinsurance Broker": 73,
+      "Risk Manager Agency": 48,
+      "Life Stlmnt Broker": 43,
+      "Discount Hthcare Prgm Oper Reg": 43,
+      "Reinsurance Manager": 30,
+      "Pre-Need Agency": 29,
+      "Life Stlmnt Provider": 24,
+      "Title Direct Operations": 15,
+      "County Mutual Agency": 13,
+      "Life Stlmnt LE Estimator": 8,
+      "LI Agy Not Exceeding $25,000": 3
+    },
+    "org_type_counts": {
+      "Limited Liability Company": 31720,
+      "Corporation": 23513,
+      "Partnership": 667,
+      "Limited Liability Partnership": 362,
+      "Depository Institution": 233,
+      "Limited Partnership": 92,
+      "Sole Proprietorship": 15,
+      "Registered Ltd Liability Co.": 14,
+      "Association": 7,
+      "Other": 2
+    },
+    "expiration_on_or_after_2026_09_03": 55334,
+    "expiration_before_2026_09_03": 1291,
+    "contacts": {
+      "BUSINESS_PHONE": {
+        "present": false,
+        "count": 0,
+        "note": "column not in official schema"
+      },
+      "BUSINESS_EMAIL": {
+        "present": false,
+        "count": 0,
+        "note": "column not in official schema"
+      },
+      "WEBSITE": {
+        "present": false,
+        "count": 0,
+        "note": "column not in official schema"
+      },
+      "PHYSICAL_BUSINESS_ADDRESS": {
+        "present": false,
+        "count": 0,
+        "note": "street address not in official schema"
+      },
+      "CITY": {
+        "present": true,
+        "count": 56625
+      },
+      "POSTAL_CODE": {
+        "present": true,
+        "count": 56625
+      },
+      "NAME": {
+        "present": true,
+        "count": 56625
+      }
+    },
+    "identity": [
+      "NPN",
+      "TDI agency license number"
+    ],
+    "namespaces": [
+      "NPN:{npn}",
+      "TX-TDI-AGENCY:{license_number}"
+    ],
+    "verify_url": "https://www.tdi.texas.gov/agent/index.html"
+  },
+  "appointments": {
+    "dataset_id": "avjc-7u2m",
+    "source_url": "https://data.texas.gov/dataset/Active-insurance-company-appointments-for-agencies/avjc-7u2m",
+    "csv_sha256": "7c412e6ad8572a1bc09f34fdc3e9606fd9b9dd1e0ca2cafbe8693f934242a7d8",
+    "bytes": 92584025,
+    "grain": "one active appointment between an agency/business and an insurance company",
+    "rows": 622019,
+    "distinct_agency_npn": 35167,
+    "distinct_naic": 1414,
+    "both_exact_npn_and_naic": 619830,
+    "unresolved_agency": 2158,
+    "unresolved_company": 32,
+    "malformed_identifiers": 2189,
+    "appointment_npn_in_agency_file": 35158,
+    "appointment_npn_not_in_agency_file": 9,
+    "type_counts": {
+      "Property and Casualty": 373320,
+      "Life, Accident, Health and HMO": 228183,
+      "Life": 8287,
+      "Pers Lines Prop and Cas": 3699,
+      "Underwriter": 2668,
+      "Managing General Agent - P & C": 1336,
+      "County Mutual": 1005,
+      "Credit": 1003,
+      "Life Ins Not Exceeding $25,000": 855,
+      "Travel": 638,
+      "Self-Service Storage Facility": 448,
+      "Limited Lines": 435,
+      "Pre-Need": 76,
+      "Rental Car Company": 39,
+      "Portable Electronic Devices": 27
+    },
+    "per_agency": {
+      "n": 35167,
+      "min": 1,
+      "p50": 8,
+      "p90": 41,
+      "p99": 151,
+      "max": 687,
+      "mean": 17.63
+    },
+    "per_company": {
+      "n": 1414,
+      "min": 1,
+      "p50": 100,
+      "p90": 1364,
+      "p99": 3926,
+      "max": 6563,
+      "mean": 439.88
+    },
+    "more_appointments_is_not_better": true,
+    "status_semantics": "Dataset is active appointments only. No termination column. Active date is when the appointment became active."
+  },
+  "authorized_companies": {
+    "status": "SOURCE_NOT_ACQUIRED",
+    "count": null,
+    "tool_url": "https://appscenter.tdi.texas.gov/tdireports/p/externalReports",
+    "note": "Interactive TDI company-licensing report. No deterministic bulk export landed. Appointment NAIC is a Texas source relationship, not the complete authorized-company universe."
+  },
+  "person_licenses": {
+    "dataset_id": "kxv3-diwf",
+    "rows": 962001,
+    "public_directory": false,
+    "types_top": {
+      "General Lines Agent": 546310,
+      "Adjuster": 167956,
+      "Life Agent": 132472,
+      "Pers Lines Prop and Cas Agent": 50258,
+      "Adjuster - DHS Texas": 26857,
+      "Surplus Lines Agent": 8302,
+      "Escrow Officer": 7988,
+      "Limited Lines Agent": 7807,
+      "Pre-Need Agent": 3811,
+      "County Mutual Agent": 2260,
+      "Public Insurance Adjuster": 1846,
+      "Life Agt Not Exceeding $25,000": 1763,
+      "Managing General Agent": 1071,
+      "Temp General Lines - LAH Agent": 985,
+      "Risk Manager": 847,
+      "Specialty Insurance Agent": 800,
+      "Life Stlmt Bkr Regr - Life Agt": 382,
+      "Life Stlmnt Broker": 114,
+      "Temporary Life Agent": 79,
+      "Reinsurance Broker": 33,
+      "Temp General Lines - P&C Agent": 27,
+      "Reinsurance Manager": 15,
+      "Temporary Pre-Need Agent": 7,
+      "Temporary Limited Lines Agent": 6,
+      "Temp. Pers Lines Prop and Cas": 2,
+      "Temp. Gen. Lines - ER Adjuster": 1,
+      "Temp Gen Lines- Emer P&C Agent": 1,
+      "Life Stlmnt LE Estimator": 1
+    },
+    "person_license_is_not_agency": true
+  },
+  "person_appointments": {
+    "dataset_id": "bupb-23s9",
+    "rows": 4400210,
+    "public_directory": false
+  },
+  "relationships": {
+    "dataset_id": "kvqi-vsrr",
+    "rows": 132253,
+    "both_npn_rows": 119652,
+    "association_type_counts": {
+      "Adjuster": 50737,
+      "Desig-Resp-Lic-Person": 41605,
+      "Employee": 9842,
+      "Owner": 7343,
+      "Member": 3780,
+      "Officer/Director": 3546,
+      "Sub-Agent": 3495,
+      "Adjusting Firm": 3367,
+      "Corporation": 2451,
+      "Qualifying Active Officer": 1733,
+      "Limited Liability Company": 861,
+      "Sponsor": 786,
+      "Public Ins Adjuster": 729,
+      "Resp. Person": 438,
+      "Partner": 323,
+      "Licensed Individual": 186,
+      "Member/Owner": 175,
+      "Desig-Resp-Person": 172,
+      "Desig-Resp-Adjuster": 144,
+      "PG-PG Agent": 117,
+      "SL- Designated Resp Party": 64,
+      "LS-Officer/Director": 58,
+      "Pre-Need": 49,
+      "Agent": 45,
+      "Company": 44,
+      "Bank": 32,
+      "General Partner": 16,
+      "IR-Officer/Director": 16,
+      "Branch Office": 11,
+      "Limited Partnership": 11
+    },
+    "public_directory": false,
+    "note": "Non-appointment associations. Designated responsible licensed person is not employment proof. Aggregates only on the public page."
+  },
+  "surplus": {
+    "dataset_id": "7isd-ex6t",
+    "rows": 18816,
+    "entity_type_counts": {
+      "INDIVIDUAL": 15047,
+      "FIRM": 3769
+    },
+    "license_status_counts": {
+      "Active": 10247,
+      "Inactive": 8569
+    },
+    "surplus_license_is_not_insurer_authorization": true,
+    "person_rows_not_published_as_directory": true,
+    "firm_rows": 3769
+  },
+  "title": {
+    "dataset_id": "y9ze-ft94",
+    "rows": 23115,
+    "distinct_title_agency_license": 850,
+    "distinct_underwriter_name": 31,
+    "distinct_counties": 254,
+    "grain": "active title underwriter appointment by county",
+    "title_is_not_general_appointment": true,
+    "no_county_pages": true
+  },
+  "complaints": {
+    "dataset_id": "ubdr-4uff",
+    "rows": 305156,
+    "received_date_min": "2011-04-28",
+    "received_date_max": "2026-08-31",
+    "year_counts": {
+      "2011": 15,
+      "2012": 11982,
+      "2013": 19853,
+      "2014": 23019,
+      "2015": 22802,
+      "2016": 27057,
+      "2017": 25395,
+      "2018": 28192,
+      "2019": 20393,
+      "2020": 13434,
+      "2021": 17049,
+      "2022": 16267,
+      "2023": 20450,
+      "2024": 22342,
+      "2025": 21788,
+      "2026": 15118
+    },
+    "confirmed_yes": 56726,
+    "confirmed_no": 248430,
+    "respondent_type": {
+      "Organization": 292138,
+      "Individual": 13018
+    },
+    "respondent_role_top": {
+      "Ins Co - Licensed/Active": 229381,
+      "Self-Funded / Erisa": 22792,
+      "Health Maintenance Org": 21724,
+      "Agent": 12835,
+      "Insurance Agency": 6567
+    },
+    "reason_counts_top": {
+      "Denial Of Claim": 28169,
+      "Delays (Claims Handling)": 27406,
+      "Cust Service Claim Handling; Delays (Claims Handling)": 25720,
+      "Unsatisfactory Settle/Offer": 22799,
+      "Balance Billing; Unsatisfactory Settle/Offer": 17612,
+      "Cust Service Claim Handling; Delays (Claims Handling); Unsatisfactory Settle/Offer": 12098,
+      "Delays (Claims Handling); Unsatisfactory Settle/Offer": 11568,
+      "Cust Service Claim Handling; Unsatisfactory Settle/Offer": 7505,
+      "Delays (Policyholder Service)": 7154,
+      "Denial Of Claim; Unsatisfactory Settle/Offer": 6701,
+      "Premium and Rating": 5620,
+      "Unsatisfactory Settle/Offer; Usual And Customary": 5053,
+      "Refund Of Premium": 4650,
+      "Cust Service Claim Handling; Denial Of Claim": 4163,
+      "Other": 3857
+    },
+    "line_counts_top": {
+      "Accident and Health": 118861,
+      "Automobile": 104686,
+      "Individual Private Pass": 95697,
+      "Homeowners": 87305,
+      "Group A&H": 77750,
+      "Individual A & H": 40888,
+      "Life & Annuity": 17872,
+      "Individual Life": 13521,
+      "Miscellaneous": 10587,
+      "Business Automobile": 6575,
+      "Liability": 4532,
+      "General Liability": 3917,
+      "Title Insurance": 3027,
+      "P & C Misc": 2775,
+      "Fire, Allied Lines & CMP": 2771
+    },
+    "complaint_is_not_violation": true,
+    "raw_count_is_not_quality": true,
+    "name_only_attach": "UNSAFE",
+    "identity_for_adverse": "Respondent ID / NAIC when source-native and exact",
+    "grain": "one row per person or organization named in a complaint; complaint numbers can repeat"
+  },
+  "complaint_index": {
+    "dataset_id": "pa9u-9s9w",
+    "rows": 5966,
+    "distinct_naic": 1282,
+    "native_label": "TDI complaint index",
+    "not_trusthub_score": true,
+    "years": {
+      "2019": 450,
+      "2020": 442,
+      "2021": 450,
+      "2022": 451,
+      "2023": 438,
+      "2024": 1898,
+      "2025": 1837
+    },
+    "line_counts": {
+      "Accident and Health": 3067,
+      "Automobile": 987,
+      "Life and Annuity": 840,
+      "Workers' Compensation": 603,
+      "Homeowners": 469
+    },
+    "zero_index_rows": 3712,
+    "greater_than_one_rows": 786,
+    "fields": [
+      "Organization ID",
+      "Company name",
+      "NAIC ID",
+      "Total number of confirmed complaints",
+      "Total policies",
+      "Complaint Index",
+      "Year of policy count",
+      "Line of coverage"
+    ],
+    "methodology": "TDI publishes confirmed-complaint counts, in-force policy counts, and a native Complaint Index by NAIC, year, and line. Insurance Code \u00a7521.052 requires justified (confirmed) complaints expressed relative to policies in force on December 31 of the preceding year. Observed index values scale with confirmed-complaint rate versus line-year policy exposure. 0 means no confirmed complaints in that slice. This snapshot preserves TDI's field and does not rescale it into a TrustHub score.",
+    "one_point_zero": "Not treated as an independently certified 'average' badge. Near-1 values sit near the implied line-year baseline; exact 1.0 is rare because the ratio is continuous.",
+    "attachment": "Exact NAIC only. Name-only is UNSAFE."
+  },
+  "rate_filings": {
+    "dataset_id": "iubg-btfs",
+    "rows": 18001,
+    "distinct_company_name": 474,
+    "distinct_serff": 15035,
+    "status_counts": {
+      "Closed": 17757,
+      "Pending": 244
+    },
+    "closed_type_counts": {
+      "Reviewed": 17009,
+      "Withdrawn": 524,
+      "blank_pending": 244,
+      "Rejected": 224
+    },
+    "line_counts": {
+      "Personal Automobile": 12580,
+      "Personal Auto": 11758,
+      "Homeowners": 9904,
+      "Dwelling": 705,
+      "Motorcycle": 415,
+      "Recreational Vehicle (RV)": 325,
+      "Mobile Homeowners 04.0002": 173,
+      "Mobileowners": 75,
+      "Residential Flood": 32,
+      "Personal Flood 02.3002": 15,
+      "HOMEOWNERS/UMB": 13,
+      "Non-Resident": 7
+    },
+    "received_date_min": "2009-01-01",
+    "received_date_max": "2026-09-01",
+    "rate_filing_is_not_consumer_premium": true,
+    "requested_is_not_approved_unless_status_proves": true,
+    "name_only_attach": "UNSAFE",
+    "identity": "Company name is source-native; attach to NAIC only when an exact company source supplies NAIC. SERFF ID identifies a filing."
+  },
+  "enforcement": {
+    "status": "NO_STRUCTURED_BULK",
+    "access": "OPEN_SEARCH_OR_PDF",
+    "rows": null,
+    "note": "Bounded catalog pass found no machine-readable TDI disciplinary-order roster on data.texas.gov. Did not scrape search portals or harvest PDFs."
+  },
+  "residual_property": {
+    "twia": {
+      "name": "Texas Windstorm Insurance Association",
+      "url": "https://www.twia.org/",
+      "status": "OFFICIAL_PROGRAM_NOT_BULK_ROSTER"
+    },
+    "fair_plan": {
+      "status": "NOT_A_CALIFORNIA_FAIR_PLAN_EQUIVALENT_IN_TDI_SODA"
+    },
+    "no_property_risk_score": true,
+    "no_county_insurance_pages": true
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "text": "TDI's official agency file has 56,625 license rows and 43,597 distinct agency NPN identities. That is a business-license universe, not a person directory and not a combined 'Texas insurance providers' count."
+    },
+    {
+      "id": "F2",
+      "text": "The official active agency-appointment file has 622,019 rows linking 35,167 agency NPN values to 1,414 NAIC company codes. 619,830 rows have both an exact numeric NPN and an exact NAIC. Appointment count is not quality."
+    },
+    {
+      "id": "F3",
+      "text": "TDI publishes 305,156 complaint-name rows (2011-04-28 through 2026-08-31) and a 5,966-row complaint-index file with NAIC, confirmed complaints, policy counts, year, and line. A complaint is not a violation. The TDI complaint index is not a TrustHub score."
+    },
+    {
+      "id": "F4",
+      "text": "TDI home-and-auto rate filings number 18,001 (15,035 distinct SERFF IDs). A rate filing is not a consumer premium. Closed/Reviewed is not an individual's quoted rate."
+    },
+    {
+      "id": "F5",
+      "text": "Title appointments are a separate 23,115-row county\u00d7underwriter graph (850 title-agency licenses, 31 underwriter names, 254 counties). Surplus-lines status detail has 18,816 rows (3,769 firm / 15,047 individual). Neither is the standard agency\u2194company appointment universe."
+    }
+  ],
+  "evidence_depth": [
+    {
+      "source": "TDI agencies",
+      "dataset_id": "3yqc-fcdt",
+      "as_of": "2026-09-03",
+      "grain": "agency license row",
+      "rows": 56625,
+      "identity_key": "NPN + TDI license",
+      "class": "business",
+      "public": true,
+      "limitations": "No phone/email/street. state=TX is listed state, not the licensed universe."
+    },
+    {
+      "source": "Agency appointments",
+      "dataset_id": "avjc-7u2m",
+      "as_of": "2026-09-03",
+      "grain": "active agency-company appointment",
+      "rows": 622019,
+      "identity_key": "NPN + NAIC",
+      "class": "business relationship",
+      "public": true,
+      "limitations": "Active-only. Appointment count is not quality."
+    },
+    {
+      "source": "Authorized companies",
+      "dataset_id": null,
+      "as_of": null,
+      "grain": "company authorization",
+      "rows": null,
+      "identity_key": "NAIC + TDI EID",
+      "class": "company",
+      "public": false,
+      "limitations": "SOURCE_NOT_ACQUIRED. Interactive report tool."
+    },
+    {
+      "source": "Person licenses",
+      "dataset_id": "kxv3-diwf",
+      "as_of": "2026-09-03",
+      "grain": "person license row",
+      "rows": 962001,
+      "identity_key": "person NPN",
+      "class": "person",
+      "public": false,
+      "limitations": "Intentionally unpublished directory."
+    },
+    {
+      "source": "Person appointments",
+      "dataset_id": "bupb-23s9",
+      "as_of": "2026-09-03",
+      "grain": "person-company appointment",
+      "rows": 4400210,
+      "identity_key": "person NPN + NAIC",
+      "class": "person",
+      "public": false,
+      "limitations": "Intentionally unpublished graph."
+    },
+    {
+      "source": "Relationships",
+      "dataset_id": "kvqi-vsrr",
+      "as_of": "2026-09-03",
+      "grain": "non-appointment association",
+      "rows": 132253,
+      "identity_key": "NPN/EIN/NAIC",
+      "class": "mixed",
+      "public": false,
+      "limitations": "Aggregates only. Not employment proof."
+    },
+    {
+      "source": "Surplus lines",
+      "dataset_id": "7isd-ex6t",
+      "as_of": "2026-09-03",
+      "grain": "surplus license status",
+      "rows": 18816,
+      "identity_key": "TDI surplus license",
+      "class": "mixed person/firm",
+      "public": true,
+      "limitations": "Firm vs individual kept separate. Not insurer authorization."
+    },
+    {
+      "source": "Title appointments",
+      "dataset_id": "y9ze-ft94",
+      "as_of": "2026-09-03",
+      "grain": "title agency \u00d7 underwriter \u00d7 county",
+      "rows": 23115,
+      "identity_key": "TDI title license",
+      "class": "business",
+      "public": true,
+      "limitations": "Not a county page. Not general P&C appointments."
+    },
+    {
+      "source": "Complaints",
+      "dataset_id": "ubdr-4uff",
+      "as_of": "2026-09-03",
+      "grain": "named party on a complaint",
+      "rows": 305156,
+      "identity_key": "Respondent ID when exact",
+      "class": "mixed",
+      "public": true,
+      "limitations": "Complaint \u2260 violation. Name-only attach UNSAFE."
+    },
+    {
+      "source": "Complaint index",
+      "dataset_id": "pa9u-9s9w",
+      "as_of": "2026-09-03",
+      "grain": "company \u00d7 year \u00d7 line statistic",
+      "rows": 5966,
+      "identity_key": "NAIC ID",
+      "class": "company",
+      "public": true,
+      "limitations": "TDI index, not a TrustHub score."
+    },
+    {
+      "source": "Rate filings",
+      "dataset_id": "iubg-btfs",
+      "as_of": "2026-09-03",
+      "grain": "home/auto rate filing",
+      "rows": 18001,
+      "identity_key": "SERFF ID; NAIC only if exact",
+      "class": "company filing",
+      "public": true,
+      "limitations": "Not a consumer premium."
+    },
+    {
+      "source": "Enforcement",
+      "dataset_id": null,
+      "as_of": null,
+      "grain": "order/action",
+      "rows": null,
+      "identity_key": "NPN/NAIC/TDI license",
+      "class": "mixed",
+      "public": false,
+      "limitations": "No structured bulk found."
+    },
+    {
+      "source": "Property/residual",
+      "dataset_id": null,
+      "as_of": null,
+      "grain": "program",
+      "rows": null,
+      "identity_key": null,
+      "class": "market",
+      "public": false,
+      "limitations": "TWIA is an official program without a bulk roster in this snapshot."
+    }
+  ],
+  "trace": {
+    "agency_rows": {
+      "source": "3yqc-fcdt",
+      "value": 56625,
+      "grain": "license row",
+      "clock": "2026-09-03",
+      "filters": "none",
+      "limitations": "Multiple licenses per NPN."
+    },
+    "distinct_npn": {
+      "source": "3yqc-fcdt",
+      "value": 43597,
+      "grain": "NPN",
+      "clock": "2026-09-03",
+      "filters": "nonempty NPN",
+      "limitations": "Exact business identity."
+    },
+    "agency_appointments": {
+      "source": "avjc-7u2m",
+      "value": 622019,
+      "grain": "active appointment",
+      "clock": "2026-09-03",
+      "filters": "active dataset",
+      "limitations": "Not quality."
+    },
+    "distinct_companies": {
+      "source": "avjc-7u2m",
+      "value": 1414,
+      "grain": "NAIC",
+      "clock": "2026-09-03",
+      "filters": "numeric NAIC",
+      "limitations": "Not complete authorized-company universe."
+    },
+    "complaints": {
+      "source": "ubdr-4uff",
+      "value": 305156,
+      "grain": "named-party row",
+      "clock": "2026-09-03",
+      "filters": "none",
+      "limitations": "Complaint numbers repeat; complaint \u2260 violation."
+    },
+    "complaint_index": {
+      "source": "pa9u-9s9w",
+      "value": 5966,
+      "grain": "NAIC \u00d7 year \u00d7 line",
+      "clock": "2026-09-03",
+      "filters": "none",
+      "limitations": "TDI index, not TrustHub score."
+    },
+    "rate_filings": {
+      "source": "iubg-btfs",
+      "value": 18001,
+      "grain": "filing",
+      "clock": "2026-09-03",
+      "filters": "home and auto",
+      "limitations": "Not consumer premium."
+    }
+  },
+  "gaps": [
+    "Complete TDI authorized-company export was not acquired.",
+    "Agency business phone, email, website, and street address are not in the official agency SODA file.",
+    "No structured TDI disciplinary-order bulk file was found.",
+    "Appointment type is not a full product-level authority matrix.",
+    "Company exposure denominators exist in the TDI complaint index; they are not a TrustHub denominator.",
+    "Person-level market counts are intentionally unpublished as a directory."
+  ],
+  "identity_rules": {
+    "EXACT": [
+      "NPN",
+      "NAIC",
+      "TDI source license number"
+    ],
+    "HIGH_CONFIDENCE": "exact legal business name + exact government business address for non-adverse descriptive linkage only",
+    "REVIEW_REQUIRED": [
+      "name + city",
+      "DBA mismatch"
+    ],
+    "UNSAFE": [
+      "name only",
+      "phone only"
+    ],
+    "adverse_requires_exact": true
+  },
+  "guardrails": [
+    "AGENCY != INDIVIDUAL AGENT",
+    "APPOINTMENT != LICENSE",
+    "APPOINTMENT COUNT != QUALITY",
+    "MORE COMPANIES != BETTER AGENCY",
+    "NAIC IDENTITY != TEXAS AUTHORIZATION WITHOUT TEXAS EVIDENCE",
+    "COMPLAINT != VIOLATION",
+    "TDI COMPLAINT INDEX != TRUSTHUB SCORE",
+    "RATE FILING != CONSUMER PREMIUM",
+    "SURPLUS-LINES LICENSE != INSURER AUTHORIZATION",
+    "TITLE APPOINTMENT != GENERAL INSURANCE APPOINTMENT",
+    "PERSON LICENSE != BUSINESS AGENCY",
+    "MISSING != ZERO",
+    "NO TRUST SCORE",
+    "NO PAID RANKING"
+  ],
+  "fingerprint": "3be93a9cd2b1ab7edada6c783ccfbfd7a5723589920fee1524601e9218c76319"
+}

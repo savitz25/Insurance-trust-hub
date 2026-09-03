@@ -141,7 +141,7 @@ for (const phrase of FORBIDDEN_HOME_COPY) {
 }
 assert(/no paid rankings/i.test(src('app/page.tsx')), 'SEO no-paid-rankings');
 assert(src('app/page.tsx').includes("path: '/'"), 'homepage metadata path');
-assert(!page.includes('href="/texas"'), 'no new texas intel URL');
+assert(page.includes('href="/texas"'), 'texas intelligence route live');
 assert(pwa.includes('box-border') && pwa.includes('max-w-full') && pwa.includes('min-w-0'), 'PWA banner cannot overflow 390');
 assert(pwa.includes('shrink-0'), 'PWA close control shrink-0');
 assert(/overflow-x:\s*clip/.test(src('app/globals.css')), 'root overflow clip safety');

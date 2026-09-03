@@ -92,7 +92,7 @@ assert(
 );
 assert(page.includes('insurance_intel_explore'), 'intel explore event');
 assert(page.includes('Retrieved / generated'), 'trace retrieval clock');
-assert(!page.includes("href: '/texas'"), 'no fake texas route');
+assert(page.includes('href="/texas"'), 'texas intelligence route live');
 for (const phrase of FORBIDDEN_HOME_COPY) {
   const hit = page.toLowerCase().includes(phrase);
   if (!hit) continue;

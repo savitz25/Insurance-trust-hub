@@ -1,0 +1,10 @@
+{
+  "snapshot_fingerprint": "3be93a9cd2b1ab7edada6c783ccfbfd7a5723589920fee1524601e9218c76319",
+  "agencies_csv_sha256": "75e4f78dd2e1581cab950e5de371d24e7a97b0ec8d64a5ab6a94b8e21837616b",
+  "appointments_csv_sha256": "7c412e6ad8572a1bc09f34fdc3e9606fd9b9dd1e0ca2cafbe8693f934242a7d8",
+  "complaints_csv_sha256": "db0b8552c84a2b3662af0f6706df2ebb179a4681f3655fbd46a0e1e10cdcc7d8",
+  "complaint_index_csv_sha256": "f2d2105827ac0e1c0f998be6b37026a03125ee434fce2e9c293e0f69a4006846",
+  "rate_filings_csv_sha256": "3bd0584d59856f6ef98d9ec039802d7fbceeed3b63480789686fce80a4242ddb",
+  "public_agencies_bytes": 4797891,
+  "public_companies_bytes": 123356
+}

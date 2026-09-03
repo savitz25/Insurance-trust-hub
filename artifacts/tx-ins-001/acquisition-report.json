@@ -1,0 +1,1298 @@
+{
+  "retrieved_at": "2026-09-03T21:25:29.469734+00:00",
+  "today": "2026-09-03",
+  "meta": {
+    "agencies": {
+      "id": "3yqc-fcdt",
+      "name": "Insurance agencies and businesses approved to manage insurance-related products",
+      "attribution": "Texas Department of Insurance",
+      "description": "The Texas Department of Insurance (TDI) is responsible for licensing, registering, certifying, and regulating agencies and businesses that want to sell insurance or adjust property and casualty claims in Texas. This data set includes a row for each license held by an agency or business. An agency or business with more than one license will be listed in multiple rows. To view a list of people licensed by TDI, go to the <a href=\"https://data.texas.gov/dataset/Insurance-agents-adjusters-and-people-approved-to-/kxv3-diwf\" target=\"_blank\"><u>Insurance agent and adjusters data set</u></a>. To learn more about the type of licenses in this data set, go to <a href=\"https://tdi.texas.gov/agent/index.html\" target=\"_blank\"><u>TDI\u2019s agent and adjuster licensing</u></a> webpage. For detailed search resu",
+      "rowsUpdatedAt": 1788419789,
+      "viewLastModified": 1733939776,
+      "downloadCount": 57406,
+      "columns": [
+        {
+          "name": "NPN",
+          "field": "npn",
+          "type": "number",
+          "desc": "National Producer Number assigned by the National Association of Insurance Commissioners (NAIC) "
+        },
+        {
+          "name": "License number",
+          "field": "agency_license_number",
+          "type": "number",
+          "desc": "Unique number assigned by TDI to the licensee"
+        },
+        {
+          "name": "Name",
+          "field": "org_name",
+          "type": "text",
+          "desc": "Name of the licensed business"
+        },
+        {
+          "name": "Org type",
+          "field": "agency_type",
+          "type": "text",
+          "desc": "Type of organization / business structure"
+        },
+        {
+          "name": "License type",
+          "field": "license_type",
+          "type": "text",
+          "desc": "Type of license "
+        },
+        {
+          "name": "Qualification",
+          "field": "qualification",
+          "type": "text",
+          "desc": "Shows which type of insurance the licensed business is qualified to sell / service / manage"
+        },
+        {
+          "name": "Issue date",
+          "field": "license_issue_date",
+          "type": "calendar_date",
+          "desc": "Date the license was issued by TDI"
+        },
+        {
+          "name": "Expiration date",
+          "field": "expiration_date",
+          "type": "calendar_date",
+          "desc": "Date the license will expire if not renewed"
+        },
+        {
+          "name": "City",
+          "field": "city",
+          "type": "text",
+          "desc": "City of the licensed business"
+        },
+        {
+          "name": "State",
+          "field": "state",
+          "type": "text",
+          "desc": "State of the licensed business"
+        },
+        {
+          "name": "Postal code",
+          "field": "pstl_cd",
+          "type": "text",
+          "desc": "Postal code of the licensed business"
+        },
+        {
+          "name": "County (if title agency)",
+          "field": "county",
+          "type": "text",
+          "desc": "The county or counties in which the title agency can conduct business"
+        }
+      ]
+    },
+    "agency_appointments": {
+      "id": "avjc-7u2m",
+      "name": "Active insurance company appointments for agencies and businesses",
+      "attribution": "Texas Department of Insurance",
+      "description": "Appointments are formal designations to represent regulated insurance companies. This data set includes a row for each active appointment between an insurance agency and an insurance company. To view a list of appointments for agents and adjusters, go to the <a href=\"https://data.texas.gov/dataset/Active-insurance-company-appointments-for-agents-a/bupb-23s9/about_data\" target=\"_blank\"><u>Active insurance company appointments for agents and adjusters data set</u></a>. To view a list of non-appointment relationships between agents, agencies, adjusters, and insurance companies, go to the <a href=\"https://data.texas.gov/dataset/Business-relationships-between-agents-agencies-adj/kvqi-vsrr\"  target=\"_blank\"><u>Business relationships between agents, agencies, adjusters, and insurance companies da",
+      "rowsUpdatedAt": 1788411851,
+      "viewLastModified": 1782916315,
+      "downloadCount": 10158,
+      "columns": [
+        {
+          "name": "NAIC ID",
+          "field": "naic_id",
+          "type": "text",
+          "desc": "Number assigned by the National Association of Insurance Commissioners (NAIC) to an insurance company or group of companies"
+        },
+        {
+          "name": "Insurance company name",
+          "field": "company",
+          "type": "text",
+          "desc": "Name of the regulated insurance company approved to underwrite insurance"
+        },
+        {
+          "name": "Appointment active date",
+          "field": "active_date",
+          "type": "calendar_date",
+          "desc": "The date an appointment became active"
+        },
+        {
+          "name": "Appointment type",
+          "field": "appointment_type",
+          "type": "text",
+          "desc": "The type of formal designation between an agency or business and insurance company"
+        },
+        {
+          "name": "Agency NPN",
+          "field": "npn",
+          "type": "text",
+          "desc": "National Producer Number assigned by the NAIC to a licensed agency"
+        },
+        {
+          "name": "Agency EIN",
+          "field": "ein",
+          "type": "text",
+          "desc": "Employee identification number issued by the Internal Revenue Service to a licensed agency"
+        },
+        {
+          "name": "Agency name",
+          "field": "agency_name",
+          "type": "text",
+          "desc": "Name of the agency"
+        },
+        {
+          "name": "City",
+          "field": "city",
+          "type": "text",
+          "desc": "City of the agency"
+        },
+        {
+          "name": "State",
+          "field": "state",
+          "type": "text",
+          "desc": "State of the agency"
+        },
+        {
+          "name": "Postal code",
+          "field": "zip",
+          "type": "text",
+          "desc": "Postal code of the agency"
+        }
+      ]
+    },
+    "surplus": {
+      "id": "7isd-ex6t",
+      "name": "Surplus lines agent and agency status detail",
+      "attribution": "Texas Department of Insurance",
+      "description": "This data set includes a row for each person or organization with an active or inactive Surplus Lines license issued by TDI. For detailed search results on individual agencies, agents, and adjusters please click here: <a href=\"https://appscenter.tdi.texas.gov/reports/p/sirconReport\" target=\"_blank\"><u>Detailed reports</u></a>.",
+      "rowsUpdatedAt": 1788419802,
+      "viewLastModified": 1733344163,
+      "downloadCount": 16379,
+      "columns": [
+        {
+          "name": "License number",
+          "field": "license_number",
+          "type": "number",
+          "desc": "Unique number assigned by TDI based on the type of license"
+        },
+        {
+          "name": "License status",
+          "field": "license_status",
+          "type": "text",
+          "desc": "Status surplus lines licenses for agents and agencies"
+        },
+        {
+          "name": "Licensee name",
+          "field": "licensee_name",
+          "type": "text",
+          "desc": "Name of licensed agent or agency"
+        },
+        {
+          "name": "Entity type",
+          "field": "entity_type",
+          "type": "text",
+          "desc": "Shows if a licensee is a person (individual) or organization"
+        },
+        {
+          "name": "Resident state",
+          "field": "resident_state",
+          "type": "text",
+          "desc": "Location of licensed entity"
+        },
+        {
+          "name": "License original issue date",
+          "field": "license_original_issue_date",
+          "type": "calendar_date",
+          "desc": "Shows the date the licensee was first approved to handle surplus lines "
+        },
+        {
+          "name": "License effective date",
+          "field": "status_date",
+          "type": "calendar_date",
+          "desc": "Shows the most recent status date of a license"
+        },
+        {
+          "name": "License expiration date",
+          "field": "license_expiration_date",
+          "type": "calendar_date",
+          "desc": "Shows the date that a license is no longer valid"
+        },
+        {
+          "name": "License inactivation reason",
+          "field": "license_inactivation_reason",
+          "type": "text",
+          "desc": "Shows the basis for the inactivation of a license"
+        }
+      ]
+    },
+    "title": {
+      "id": "y9ze-ft94",
+      "name": "Title agency & title direct operations \u2013 appointments by county and underwriter",
+      "attribution": "Texas Department of Insurance",
+      "description": "This data set includes a row for each active underwriter appointment by county for Title Agencies and Title Direct Operations.",
+      "rowsUpdatedAt": 1788419795,
+      "viewLastModified": 1733343931,
+      "downloadCount": 8025,
+      "columns": [
+        {
+          "name": "License number",
+          "field": "agy_lic_nbr",
+          "type": "number",
+          "desc": "Unique number assigned by TDI to the licensee"
+        },
+        {
+          "name": "Name",
+          "field": "title_agent_name",
+          "type": "text",
+          "desc": "Name of the licensed business"
+        },
+        {
+          "name": "Underwriter name",
+          "field": "underwriter_name",
+          "type": "text",
+          "desc": "A regulated insurance company approved to underwrite title insurance for property"
+        },
+        {
+          "name": "County",
+          "field": "county",
+          "type": "text",
+          "desc": "The county in which the title agency can conduct business"
+        },
+        {
+          "name": "Active date",
+          "field": "actv_dte",
+          "type": "calendar_date",
+          "desc": "The date an appointment became active between an insurer and an agency for a specific county"
+        }
+      ]
+    },
+    "relationships": {
+      "id": "kvqi-vsrr",
+      "name": "Business relationships between agents, agencies, adjusters, and insurance companies",
+      "attribution": "Texas Department of Insurance",
+      "description": "This data set includes a row for each type of non-appointment relationship between an insurance agent, agency, adjuster, and businesses and an insurance company or another person or business approved to manage insurance-related products or claims. To view a list of formal designations, or appointments, for agents to represent a regulated company, go to <a href=\" https://data.texas.gov/dataset/Active-insurance-company-appointments-for-agents-a/bupb-23s9/about_data\" target=\"_blank\"><u>Active insurance company appointments for agents and adjusters</u></a>. To view a list of formal designations, or appointments, for agencies to represent a regulated company, go to <a href=\"https://data.texas.gov/dataset/Active-insurance-company-appointments-for-agencies/avjc-7u2m\"  target=\"_blank\"><u>Active in",
+      "rowsUpdatedAt": 1788412492,
+      "viewLastModified": 1782916256,
+      "downloadCount": 92360,
+      "columns": [
+        {
+          "name": "Associated licensee name",
+          "field": "associated_licensee_name",
+          "type": "text",
+          "desc": "The name of a licensed person, business, insurance company, or group of companies that established a relationship with an agent or agency."
+        },
+        {
+          "name": "Associated licensee NPN",
+          "field": "associated_licensee_npn",
+          "type": "text",
+          "desc": "The name of a licensed person, business, insurance company, or group of companies that established a relationship with an agent or agency."
+        },
+        {
+          "name": "Associated licensee EIN",
+          "field": "associated_licensee_ein",
+          "type": "text",
+          "desc": "Employee identification number issued by the Internal Revenue Service to a licensed business."
+        },
+        {
+          "name": "Associated licensee NAIC ID",
+          "field": "associated_licensee_naic_id",
+          "type": "text",
+          "desc": "Number assigned by the National Association of Insurance Commissioners (NAIC) to an insurance company or group of companies."
+        },
+        {
+          "name": "Association type",
+          "field": "association_type",
+          "type": "text",
+          "desc": "The type of relationship between two licensees, as it pertains to the associated licensee."
+        },
+        {
+          "name": "Licensee name",
+          "field": "licensee_name",
+          "type": "text",
+          "desc": "The name of a licensed agent or agency that is associated with a licensed person, business, insurance company, or group of companies."
+        },
+        {
+          "name": "Licensee NPN",
+          "field": "licensee_npn",
+          "type": "text",
+          "desc": "National Producer Number assigned by the National Association of Insurance Commissioners (NAIC) to a licensed agent and agency."
+        },
+        {
+          "name": "Licensee EIN",
+          "field": "licensee_ein",
+          "type": "text",
+          "desc": "Employee identification number issued by the Internal Revenue Service to a licensed business. Association begin date - The date an association became active."
+        },
+        {
+          "name": "Association begin date",
+          "field": "association_begin_date",
+          "type": "calendar_date",
+          "desc": "The date an association became active."
+        }
+      ]
+    },
+    "complaints": {
+      "id": "ubdr-4uff",
+      "name": "Insurance complaints: All data",
+      "attribution": "Texas Department of Insurance",
+      "description": "\u25ba The Texas Department of Insurance (TDI) handles complaints against people and organizations licensed by TDI, such as companies, agents, and adjusters. To learn more, go to the TDI webpage,  <a href=\"https://www.tdi.texas.gov/tips/ways-we-can-help.html\"  target=\"_blank\"><u>How to get help with an insurance issue or file a complaint</u></a>.&nbsp \u25ba This dataset includes a row for each person and organization named in a complaint. This means some complaint numbers are listed multiple times. To view a dataset that lists each complaint number once due to removing the \u201cComplaint filed against\u201d column, use  <a href=\"https://data.texas.gov/dataset/Insurance-complaints-One-record-complaint/jjc8-mxkg\" target=\"_blank\"><u>TDI Complaints: One Record / Complaint</u></a>.",
+      "rowsUpdatedAt": 1788419250,
+      "viewLastModified": 1692103082,
+      "downloadCount": 22417,
+      "columns": [
+        {
+          "name": "Complaint number",
+          "field": "complaint_number",
+          "type": "number",
+          "desc": "The number assigned to a specific complaint."
+        },
+        {
+          "name": "Complaint filed against",
+          "field": "respondent_name",
+          "type": "text",
+          "desc": "The name of the person or organization the complaint was filed against."
+        },
+        {
+          "name": "Complaint filed by",
+          "field": "complainant_role",
+          "type": "text",
+          "desc": "Shows who filed the complaint. For example, the insured person (insured), the insured person\u2019s attorney (attorney), or a relative of the insured person (relative)."
+        },
+        {
+          "name": "Reason complaint filed",
+          "field": "reason",
+          "type": "text",
+          "desc": "Shows the reason the complaint was filed."
+        },
+        {
+          "name": "Confirmed complaint",
+          "field": "complaint_confirmed_code",
+          "type": "text",
+          "desc": "A \u201cYes\u201d answer means TDI confirmed the licensed person or organization was in error."
+        },
+        {
+          "name": "How resolved",
+          "field": "disposition",
+          "type": "text",
+          "desc": "Gives brief description of how the complaint was resolved."
+        },
+        {
+          "name": "Received date",
+          "field": "received_date",
+          "type": "calendar_date",
+          "desc": "The date TDI received the complaint."
+        },
+        {
+          "name": "Closed date",
+          "field": "closed_date",
+          "type": "calendar_date",
+          "desc": "The date TDI closed the complaint."
+        },
+        {
+          "name": "Complaint type",
+          "field": "complaint_type",
+          "type": "text",
+          "desc": "Shows if the complaint was about \u201cProperty and Casualty\u201d or \u201cLife, Accident and Health\u201d insurance."
+        },
+        {
+          "name": "Coverage type",
+          "field": "coverage_type",
+          "type": "text",
+          "desc": "Shows if the coverage was \u201cAutomobile,\u201d \u201cHomeowners,\u201d \u201cAccident and Health,\u201d \u201cLife & Annuity,\u201d or \u201cMiscellaneous.\u201d "
+        },
+        {
+          "name": "Coverage level",
+          "field": "coverage_level",
+          "type": "text",
+          "desc": "Shows if the coverage was \u201cProperty or Casualty\u201d or \u201cLife, Accident and Health.\u201d"
+        },
+        {
+          "name": "Others involved",
+          "field": "involved_party_type",
+          "type": "text",
+          "desc": "Shows the other types of people and organizations involved in the complaint. For example: provider, attorney, spouse, hospital."
+        },
+        {
+          "name": "Respondent ID",
+          "field": "respondent_id",
+          "type": "number",
+          "desc": "The number assigned to the person or organization the complaint was filed against."
+        },
+        {
+          "name": "Respondent Role",
+          "field": "respondent_role",
+          "type": "text",
+          "desc": "Shows the role of the person or organization that a complaint was filed against."
+        },
+        {
+          "name": "Respondent type",
+          "field": "respondent_type",
+          "type": "text",
+          "desc": "Shows if the complaint was filed against a person (individual) or organization."
+        },
+        {
+          "name": "Complainant type",
+          "field": "complainant_type",
+          "type": "text",
+          "desc": "Shows if the complaint came from a person (INDV) or organization (ORG)."
+        },
+        {
+          "name": "Keywords",
+          "field": "keyword",
+          "type": "text",
+          "desc": "Shows more information about the complaint or category to help sort common issues."
+        }
+      ]
+    },
+    "complaint_index": {
+      "id": "pa9u-9s9w",
+      "name": "Complaint indexes and policy counts for insurance companies",
+      "attribution": "Texas Department of Insurance",
+      "description": "The Texas Department of Insurance (TDI) regulates the state\u2019s insurance industry and oversees the administration of the Texas workers\u2019 compensation system. This data set includes counts for confirmed complaints and policies in force by company name and line of coverage. The complaint index is calculated by dividing the company's percentage of complaints for a specific line of insurance by the company's percentage of policies in force for the same line of insurance. The average index is 1.00. A number less than 1 indicates fewer complaints than average. A number greater than 1 indicates more complaints than average. Please visit <a href=\"https://data.texas.gov/dataset/Insurance-complaints-All-data/ubdr-4uff\"  target=\"_blank\"><u>TDI Complaints: All Data </u></a>for details about processed co",
+      "rowsUpdatedAt": 1788419821,
+      "viewLastModified": 1733939511,
+      "downloadCount": 15367,
+      "columns": [
+        {
+          "name": "Organization ID",
+          "field": "org_id",
+          "type": "number",
+          "desc": "The number assigned by TDI to an insurance carrier"
+        },
+        {
+          "name": "Company name",
+          "field": "company_name",
+          "type": "text",
+          "desc": "Name of insurance carrier approved by TDI to offer insurance products"
+        },
+        {
+          "name": "NAIC ID",
+          "field": "naic_id",
+          "type": "text",
+          "desc": "The number assigned by the National Association of Insurance Commissioners to an insurance carrier"
+        },
+        {
+          "name": "Total number of confirmed complaints",
+          "field": "col1",
+          "type": "number",
+          "desc": "The number of complaints that TDI confirmed against a licensed carrier"
+        },
+        {
+          "name": "Total policies",
+          "field": "col2",
+          "type": "number",
+          "desc": "The number of policies in force for a specific line of coverage as of December 31 on the specified year"
+        },
+        {
+          "name": "Complaint Index",
+          "field": "col3",
+          "type": "number",
+          "desc": "This number indicates how a company's ratio of the number of complaints to the number of policyholders compares to the average for all insurers"
+        },
+        {
+          "name": "Year of policy count",
+          "field": "year",
+          "type": "text",
+          "desc": "The year for the number of policies that a carrier reported"
+        },
+        {
+          "name": "Line of coverage",
+          "field": "type_cd",
+          "type": "text",
+          "desc": "Shows if the coverage was \u201cAutomobile,\u201d \u201cHomeowners,\u201d \u201cAccident and Health,\u201d \u201cLife and Annuity,\u201d or \u201cWorkers\u2019 Compensation"
+        }
+      ]
+    },
+    "rate_filings": {
+      "id": "iubg-btfs",
+      "name": "Home and auto rate filings",
+      "attribution": "Texas Department of Insurance",
+      "description": "This data set includes home and auto rate filings submitted by insurance companies to the Texas Department of Insurance. <a href=\"https://www.tdi.texas.gov/consumer/how-to-find-home-and-auto-insurance-rate-filings.html\"   target=\"_blank\">Click here</a> to learn more about this data and the rate filing process.",
+      "rowsUpdatedAt": 1788433262,
+      "viewLastModified": 1781792586,
+      "downloadCount": 63,
+      "columns": [
+        {
+          "name": "Company Name",
+          "field": "company_name",
+          "type": "text",
+          "desc": "Look at your insurance policy or billing statement or call your agent to ask the exact name of your company. You want to know the name of your company and <a href=\"https://www.tdi.texas.gov/blog/do-you-know-the-difference-between-insurance-company-and-insurance-group.html\"   target=\"_blank\">not just the company group</a>."
+        },
+        {
+          "name": "Received Date",
+          "field": "received_date",
+          "type": "calendar_date",
+          "desc": "This is the date the filing was submitted to TDI."
+        },
+        {
+          "name": "Type of Insurance",
+          "field": "state_type_of_insurance",
+          "type": "text",
+          "desc": "Personal auto or homeowners"
+        },
+        {
+          "name": "SubType of Insurance",
+          "field": "state_subtype_of_insurance",
+          "type": "text",
+          "desc": "This could further narrow the type of policies covered by the filing, such as for mobile owners, renters, or motorcycles. "
+        },
+        {
+          "name": "Product Name",
+          "field": "product_name",
+          "type": "text",
+          "desc": "Insurance companies sell products through agents and agencies. When filing rates, companies give product names to their filings. The product name can help you find the rate filing for your policy.   Your policy or billing statement should show the name of the policy sold to you. It may also include the name of the agent or agency that sold you the policy."
+        },
+        {
+          "name": "Percent Change",
+          "field": "percent_change",
+          "type": "text",
+          "desc": "This is the estimated overall impact that the rate change has on existing policyholders. Impacts could be higher or lower for any policyholder depending on changes to specific factors and the changing characteristics of the policyholder. If the Percent Change is blank or 0%, it could mean that only rules or other non-premium bearing items were changed in the filing or that the overall impact is 0%"
+        },
+        {
+          "name": "SERFF ID #",
+          "field": "serff_id",
+          "type": "text",
+          "desc": "This is the filing number for the rate filing."
+        },
+        {
+          "name": "Effective Date (new business)",
+          "field": "effective_date_new_business",
+          "type": "calendar_date",
+          "desc": "This is the date when the rate starts getting charged for any new business written by the insurance company."
+        },
+        {
+          "name": "Effective Date (renewal business)",
+          "field": "effective_date_renewal",
+          "type": "calendar_date",
+          "desc": "This is the date when the rate starts getting charged for any existing business written by the insurance company."
+        },
+        {
+          "name": "Status",
+          "field": "status",
+          "type": "text",
+          "desc": "A filing can be pending (still under review) or closed (review completed)."
+        },
+        {
+          "name": "Closed Type",
+          "field": "closed_type",
+          "type": "text",
+          "desc": "This indicates the disposition of the filing. "
+        }
+      ]
+    }
+  },
+  "person_licenses": {
+    "id": "kxv3-diwf",
+    "count": 962001,
+    "types": [
+      {
+        "license_type": "General Lines Agent",
+        "n": "546310"
+      },
+      {
+        "license_type": "Adjuster",
+        "n": "167956"
+      },
+      {
+        "license_type": "Life Agent",
+        "n": "132472"
+      },
+      {
+        "license_type": "Pers Lines Prop and Cas Agent",
+        "n": "50258"
+      },
+      {
+        "license_type": "Adjuster - DHS Texas",
+        "n": "26857"
+      },
+      {
+        "license_type": "Surplus Lines Agent",
+        "n": "8302"
+      },
+      {
+        "license_type": "Escrow Officer",
+        "n": "7988"
+      },
+      {
+        "license_type": "Limited Lines Agent",
+        "n": "7807"
+      },
+      {
+        "license_type": "Pre-Need Agent",
+        "n": "3811"
+      },
+      {
+        "license_type": "County Mutual Agent",
+        "n": "2260"
+      },
+      {
+        "license_type": "Public Insurance Adjuster",
+        "n": "1846"
+      },
+      {
+        "license_type": "Life Agt Not Exceeding $25,000",
+        "n": "1763"
+      },
+      {
+        "license_type": "Managing General Agent",
+        "n": "1071"
+      },
+      {
+        "license_type": "Temp General Lines - LAH Agent",
+        "n": "985"
+      },
+      {
+        "license_type": "Risk Manager",
+        "n": "847"
+      },
+      {
+        "license_type": "Specialty Insurance Agent",
+        "n": "800"
+      },
+      {
+        "license_type": "Life Stlmt Bkr Regr - Life Agt",
+        "n": "382"
+      },
+      {
+        "license_type": "Life Stlmnt Broker",
+        "n": "114"
+      },
+      {
+        "license_type": "Temporary Life Agent",
+        "n": "79"
+      },
+      {
+        "license_type": "Reinsurance Broker",
+        "n": "33"
+      },
+      {
+        "license_type": "Temp General Lines - P&C Agent",
+        "n": "27"
+      },
+      {
+        "license_type": "Reinsurance Manager",
+        "n": "15"
+      },
+      {
+        "license_type": "Temporary Pre-Need Agent",
+        "n": "7"
+      },
+      {
+        "license_type": "Temporary Limited Lines Agent",
+        "n": "6"
+      },
+      {
+        "license_type": "Temp. Pers Lines Prop and Cas",
+        "n": "2"
+      },
+      {
+        "license_type": "Temp. Gen. Lines - ER Adjuster",
+        "n": "1"
+      },
+      {
+        "license_type": "Temp Gen Lines- Emer P&C Agent",
+        "n": "1"
+      },
+      {
+        "license_type": "Life Stlmnt LE Estimator",
+        "n": "1"
+      }
+    ],
+    "public_directory": false
+  },
+  "person_appointments": {
+    "id": "bupb-23s9",
+    "count": 4400210,
+    "public_directory": false
+  },
+  "downloads": {
+    "agencies": {
+      "url": "https://data.texas.gov/api/views/3yqc-fcdt/rows.csv?accessType=DOWNLOAD",
+      "bytes": 8762207,
+      "sha256": "75e4f78dd2e1581cab950e5de371d24e7a97b0ec8d64a5ab6a94b8e21837616b",
+      "path": "data\\tdi-raw\\agencies.csv"
+    },
+    "agency_appointments": {
+      "url": "https://data.texas.gov/api/views/avjc-7u2m/rows.csv?accessType=DOWNLOAD",
+      "bytes": 92584025,
+      "sha256": "7c412e6ad8572a1bc09f34fdc3e9606fd9b9dd1e0ca2cafbe8693f934242a7d8",
+      "path": "data\\tdi-raw\\agency_appointments.csv"
+    },
+    "surplus": {
+      "url": "https://data.texas.gov/api/views/7isd-ex6t/rows.csv?accessType=DOWNLOAD",
+      "bytes": 1754024,
+      "sha256": "60cfbb4a76a94ff126fb05731705185199299f71bbb016b66ef0d40639eb33ab",
+      "path": "data\\tdi-raw\\surplus.csv"
+    },
+    "title": {
+      "url": "https://data.texas.gov/api/views/y9ze-ft94/rows.csv?accessType=DOWNLOAD",
+      "bytes": 2133766,
+      "sha256": "2b67ac0ae2fe9debbd17a0bb6dc5c723a5aa1824050dad3e5388a35a06a04fe1",
+      "path": "data\\tdi-raw\\title.csv"
+    },
+    "relationships": {
+      "url": "https://data.texas.gov/api/views/kvqi-vsrr/rows.csv?accessType=DOWNLOAD",
+      "bytes": 11686812,
+      "sha256": "db2330a9571e41239d4972a654b6d982dcfea338fd11082ce95cc32432bfaec7",
+      "path": "data\\tdi-raw\\relationships.csv"
+    },
+    "complaints": {
+      "url": "https://data.texas.gov/api/views/ubdr-4uff/rows.csv?accessType=DOWNLOAD",
+      "bytes": 106221567,
+      "sha256": "db0b8552c84a2b3662af0f6706df2ebb179a4681f3655fbd46a0e1e10cdcc7d8",
+      "path": "data\\tdi-raw\\complaints.csv"
+    },
+    "complaint_index": {
+      "url": "https://data.texas.gov/api/views/pa9u-9s9w/rows.csv?accessType=DOWNLOAD",
+      "bytes": 471195,
+      "sha256": "f2d2105827ac0e1c0f998be6b37026a03125ee434fce2e9c293e0f69a4006846",
+      "path": "data\\tdi-raw\\complaint_index.csv"
+    },
+    "rate_filings": {
+      "url": "https://data.texas.gov/api/views/iubg-btfs/rows.csv?accessType=DOWNLOAD",
+      "bytes": 2728736,
+      "sha256": "3bd0584d59856f6ef98d9ec039802d7fbceeed3b63480789686fce80a4242ddb",
+      "path": "data\\tdi-raw\\rate_filings.csv"
+    }
+  },
+  "agencies": {
+    "rows": 56625,
+    "header": [
+      "NPN",
+      "License number",
+      "Name",
+      "Org type",
+      "License type",
+      "Qualification",
+      "Issue date",
+      "Expiration date",
+      "City",
+      "State",
+      "Postal code",
+      "County (if title agency)"
+    ],
+    "distinct_npn": 43597,
+    "distinct_tdi_license": 48920,
+    "license_type_counts": {
+      "General Lines Agency": 45267,
+      "Life Agency": 3936,
+      "Surplus Lines Agency": 1945,
+      "Specialty Insurance Agency": 1581,
+      "Pers Lines Prop and Cas Agency": 976,
+      "Title Agency": 837,
+      "Managing General Agency": 692,
+      "Adjuster": 513,
+      "Public Insurance Adjuster": 395,
+      "Limited Lines Agency": 154,
+      "Reinsurance Broker": 73,
+      "Risk Manager Agency": 48,
+      "Life Stlmnt Broker": 43,
+      "Discount Hthcare Prgm Oper Reg": 43,
+      "Reinsurance Manager": 30,
+      "Pre-Need Agency": 29,
+      "Life Stlmnt Provider": 24,
+      "Title Direct Operations": 15,
+      "County Mutual Agency": 13,
+      "Life Stlmnt LE Estimator": 8,
+      "LI Agy Not Exceeding $25,000": 3
+    },
+    "org_type_counts": {
+      "Limited Liability Company": 31720,
+      "Corporation": 23513,
+      "Partnership": 667,
+      "Limited Liability Partnership": 362,
+      "Depository Institution": 233,
+      "Limited Partnership": 92,
+      "Sole Proprietorship": 15,
+      "Registered Ltd Liability Co.": 14,
+      "Association": 7,
+      "Other": 2
+    },
+    "state_counts_top": {
+      "TX": 23004,
+      "FL": 5176,
+      "CA": 4087,
+      "NY": 1881,
+      "IL": 1661,
+      "GA": 1358,
+      "AZ": 1068,
+      "PA": 1038,
+      "NJ": 961,
+      "OH": 935,
+      "CO": 922,
+      "MI": 920,
+      "OK": 906,
+      "LA": 889,
+      "MO": 861
+    },
+    "tx_state_field_rows": 23004,
+    "tx_state_field_npn": 16924,
+    "state_field_meaning": "Mailing/listed state on the agency row. License jurisdiction is Texas TDI. state=TX is not the licensed-in-Texas universe.",
+    "expiration": {
+      "on_or_after_today": 0,
+      "before_today": 56625,
+      "blank": 0,
+      "today": "2026-09-03"
+    },
+    "contacts": {
+      "BUSINESS_PHONE": {
+        "present": false,
+        "count": 0,
+        "note": "column not in official schema"
+      },
+      "BUSINESS_EMAIL": {
+        "present": false,
+        "count": 0,
+        "note": "column not in official schema"
+      },
+      "WEBSITE": {
+        "present": false,
+        "count": 0,
+        "note": "column not in official schema"
+      },
+      "PHYSICAL_BUSINESS_ADDRESS": {
+        "present": false,
+        "count": 0,
+        "note": "street address not in official schema"
+      },
+      "CITY": {
+        "present": true,
+        "count": 56625
+      },
+      "POSTAL_CODE": {
+        "present": true,
+        "count": 56625
+      },
+      "NAME": {
+        "present": true,
+        "count": 56625
+      }
+    }
+  },
+  "agency_appointments": {
+    "rows": 622019,
+    "header": [
+      "NAIC ID",
+      "Insurance company name",
+      "Appointment active date",
+      "Appointment type",
+      "Agency NPN",
+      "Agency EIN",
+      "Agency name",
+      "City",
+      "State",
+      "Postal code"
+    ],
+    "distinct_agency_npn": 35167,
+    "distinct_naic": 1414,
+    "both_exact": 619830,
+    "unresolved_agency": 2158,
+    "unresolved_company": 32,
+    "malformed_identifiers": 2189,
+    "appointment_npn_also_in_agency_file": 35158,
+    "appointment_npn_not_in_agency_file": 9,
+    "appointment_type_counts": {
+      "Property and Casualty": 373320,
+      "Life, Accident, Health and HMO": 228183,
+      "Life": 8287,
+      "Pers Lines Prop and Cas": 3699,
+      "Underwriter": 2668,
+      "Managing General Agent - P & C": 1336,
+      "County Mutual": 1005,
+      "Credit": 1003,
+      "Life Ins Not Exceeding $25,000": 855,
+      "Travel": 638,
+      "Self-Service Storage Facility": 448,
+      "Limited Lines": 435,
+      "Pre-Need": 76,
+      "Rental Car Company": 39,
+      "Portable Electronic Devices": 27
+    },
+    "per_agency": {
+      "n": 35167,
+      "min": 1,
+      "p50": 8,
+      "p90": 41,
+      "p99": 151,
+      "max": 687,
+      "mean": 17.63
+    },
+    "per_company": {
+      "n": 1414,
+      "min": 1,
+      "p50": 100,
+      "p90": 1364,
+      "p99": 3926,
+      "max": 6563,
+      "mean": 439.88
+    },
+    "grain": "one active appointment between an insurance agency/business and an insurance company",
+    "status_semantics": "Dataset is active appointments only. No termination column. Active date is when the appointment became active."
+  },
+  "surplus": {
+    "entity_type_counts": {
+      "INDIVIDUAL": 15047,
+      "FIRM": 3769
+    },
+    "license_status_counts": {
+      "Active": 10247,
+      "Inactive": 8569
+    },
+    "nonempty": {
+      "License number": 18816,
+      "License status": 18816,
+      "Licensee name": 18816,
+      "Entity type": 18816,
+      "Resident state": 18815,
+      "License original issue date": 18816,
+      "License effective date": 18816,
+      "License expiration date": 18777,
+      "License inactivation reason": 8569
+    },
+    "rows": 18816,
+    "header": [
+      "License number",
+      "License status",
+      "Licensee name",
+      "Entity type",
+      "Resident state",
+      "License original issue date",
+      "License effective date",
+      "License expiration date",
+      "License inactivation reason"
+    ]
+  },
+  "title": {
+    "rows": 23115,
+    "header": [
+      "License number",
+      "Name",
+      "Underwriter name",
+      "County",
+      "Active date"
+    ],
+    "distinct_title_agency_license": 850,
+    "distinct_underwriter_name": 31,
+    "distinct_counties": 254,
+    "grain": "active title underwriter appointment by county for a title agency or title direct operation",
+    "no_county_pages": true
+  },
+  "relationships": {
+    "rows": 132253,
+    "header": [
+      "Associated licensee name",
+      "Associated licensee NPN",
+      "Associated licensee EIN",
+      "Associated licensee NAIC ID",
+      "Association type",
+      "Licensee name",
+      "Licensee NPN",
+      "Licensee EIN",
+      "Association begin date"
+    ],
+    "association_type_counts": {
+      "Adjuster": 50737,
+      "Desig-Resp-Lic-Person": 41605,
+      "Employee": 9842,
+      "Owner": 7343,
+      "Member": 3780,
+      "Officer/Director": 3546,
+      "Sub-Agent": 3495,
+      "Adjusting Firm": 3367,
+      "Corporation": 2451,
+      "Qualifying Active Officer": 1733,
+      "Limited Liability Company": 861,
+      "Sponsor": 786,
+      "Public Ins Adjuster": 729,
+      "Resp. Person": 438,
+      "Partner": 323,
+      "Licensed Individual": 186,
+      "Member/Owner": 175,
+      "Desig-Resp-Person": 172,
+      "Desig-Resp-Adjuster": 144,
+      "PG-PG Agent": 117,
+      "SL- Designated Resp Party": 64,
+      "LS-Officer/Director": 58,
+      "Pre-Need": 49,
+      "Agent": 45,
+      "Company": 44,
+      "Bank": 32,
+      "General Partner": 16,
+      "IR-Officer/Director": 16,
+      "Branch Office": 11,
+      "Limited Partnership": 11
+    },
+    "both_npn_rows": 119652,
+    "grain": "non-appointment relationship between a licensee (person or business) and another licensee or company",
+    "public_directory": false,
+    "note": "Existing national layer treats NPN\u2194NPN as ASSOCIATED_WITH, not employment. Internal only on the Texas state page except aggregates."
+  },
+  "complaints": {
+    "rows": 305156,
+    "header": [
+      "Complaint number",
+      "Complaint filed against",
+      "Complaint filed by",
+      "Reason complaint filed",
+      "Confirmed complaint",
+      "How resolved",
+      "Received date",
+      "Closed date",
+      "Complaint type",
+      "Coverage type",
+      "Coverage level",
+      "Others involved",
+      "Respondent ID",
+      "Respondent Role",
+      "Respondent type",
+      "Complainant type",
+      "Keywords"
+    ],
+    "year_counts": {},
+    "reason_counts_top": {
+      "Denial Of Claim": 28169,
+      "Delays (Claims Handling)": 27406,
+      "Cust Service Claim Handling; Delays (Claims Handling)": 25720,
+      "Unsatisfactory Settle/Offer": 22799,
+      "Balance Billing; Unsatisfactory Settle/Offer": 17612,
+      "Cust Service Claim Handling; Delays (Claims Handling); Unsatisfactory Settle/Offer": 12098,
+      "Delays (Claims Handling); Unsatisfactory Settle/Offer": 11568,
+      "Cust Service Claim Handling; Unsatisfactory Settle/Offer": 7505,
+      "Delays (Policyholder Service)": 7154,
+      "Denial Of Claim; Unsatisfactory Settle/Offer": 6701,
+      "Premium and Rating": 5620,
+      "Unsatisfactory Settle/Offer; Usual And Customary": 5053,
+      "Refund Of Premium": 4650,
+      "Cust Service Claim Handling; Denial Of Claim": 4163,
+      "Other": 3857
+    },
+    "line_counts_top": {
+      "Accident and Health": 118861,
+      "Automobile": 104686,
+      "Individual Private Pass": 95697,
+      "Homeowners": 87305,
+      "Group A&H": 77750,
+      "Individual A & H": 40888,
+      "Life & Annuity": 17872,
+      "Individual Life": 13521,
+      "Miscellaneous": 10587,
+      "Business Automobile": 6575,
+      "Liability": 4532,
+      "General Liability": 3917,
+      "Title Insurance": 3027,
+      "P & C Misc": 2775,
+      "Fire, Allied Lines & CMP": 2771
+    },
+    "disposition_counts_top": {},
+    "distinct_company_name": 0,
+    "distinct_naic": 0,
+    "date_min": "01/01/2015",
+    "date_max": "12/31/2025",
+    "complaint_is_not_violation": true,
+    "raw_count_is_not_quality": true,
+    "name_only_attach": "UNSAFE",
+    "first_row_keys": [
+      "Complaint number",
+      "Complaint filed against",
+      "Complaint filed by",
+      "Reason complaint filed",
+      "Confirmed complaint",
+      "How resolved",
+      "Received date",
+      "Closed date",
+      "Complaint type",
+      "Coverage type",
+      "Coverage level",
+      "Others involved",
+      "Respondent ID",
+      "Respondent Role",
+      "Respondent type",
+      "Complainant type",
+      "Keywords"
+    ]
+  },
+  "complaint_index": {
+    "rows": 5966,
+    "header": [
+      "Organization ID",
+      "Company name",
+      "NAIC ID",
+      "Total number of confirmed complaints",
+      "Total policies",
+      "Complaint Index",
+      "Year of policy count",
+      "Line of coverage"
+    ],
+    "year_counts": {
+      "2019": 450,
+      "2020": 442,
+      "2021": 450,
+      "2022": 451,
+      "2023": 438,
+      "2024": 1898,
+      "2025": 1837
+    },
+    "line_counts_top": {
+      "Accident and Health": 3067,
+      "Automobile": 987,
+      "Life and Annuity": 840,
+      "Workers' Compensation": 603,
+      "Homeowners": 469
+    },
+    "distinct_naic": 1282,
+    "sample_row": {
+      "Organization ID": "75",
+      "Company name": "GHS INSURANCE COMPANY",
+      "NAIC ID": "29718",
+      "Total number of confirmed complaints": "0",
+      "Total policies": "4274",
+      "Complaint Index": "0",
+      "Year of policy count": "2019",
+      "Line of coverage": "Accident and Health"
+    },
+    "native_label": "TDI complaint index",
+    "not_trusthub_score": true
+  },
+  "rate_filings": {
+    "rows": 18001,
+    "header": [
+      "Company Name",
+      "Received Date",
+      "Type of Insurance",
+      "SubType of Insurance",
+      "Product Name",
+      "Percent Change",
+      "SERFF ID #",
+      "Effective Date (new business)",
+      "Effective Date (renewal business)",
+      "Status",
+      "Closed Type"
+    ],
+    "line_counts": {
+      "Personal Automobile": 12580,
+      "Personal Auto": 11758,
+      "Homeowners": 9904,
+      "Dwelling": 705,
+      "Motorcycle": 415,
+      "Recreational Vehicle (RV)": 325,
+      "Mobile Homeowners 04.0002": 173,
+      "Mobileowners": 75,
+      "Residential Flood": 32,
+      "Personal Flood 02.3002": 15,
+      "HOMEOWNERS/UMB": 13,
+      "Non-Resident": 7
+    },
+    "distinct_company_name": 474,
+    "distinct_serff": 15035,
+    "date_min": "01/01/2009",
+    "date_max": "12/31/2025",
+    "sample_row": {
+      "Company Name": "OLD AMERICAN COUNTY MUTUAL FIRE INSURANCE COMPANY",
+      "Received Date": "09/01/2026",
+      "Type of Insurance": "Personal Automobile",
+      "SubType of Insurance": "Personal Auto",
+      "Product Name": "TFCBA-326 R",
+      "Percent Change": "   2.3%",
+      "SERFF ID #": "OAMF-135074487",
+      "Effective Date (new business)": "09/01/2026",
+      "Effective Date (renewal business)": "10/01/2026",
+      "Status": "Pending",
+      "Closed Type": ""
+    },
+    "rate_filing_is_not_consumer_premium": true,
+    "requested_is_not_approved_unless_status_proves": true,
+    "name_only_attach": "UNSAFE"
+  },
+  "catalog": {
+    "enforcement order insurance TDI": [
+      {
+        "id": "kxv3-diwf",
+        "name": "Insurance agents, adjusters, and people approved to manage insurance-related products or claims",
+        "updated": "2026-09-03T07:15:59.000Z"
+      },
+      {
+        "id": "ubdr-4uff",
+        "name": "Insurance complaints: All data",
+        "updated": "2026-09-03T07:07:30.000Z"
+      },
+      {
+        "id": "3yqc-fcdt",
+        "name": "Insurance agencies and businesses approved to manage insurance-related products",
+        "updated": "2026-09-03T07:16:29.000Z"
+      },
+      {
+        "id": "pa9u-9s9w",
+        "name": "Complaint indexes and policy counts for insurance companies",
+        "updated": "2026-09-03T07:17:01.000Z"
+      },
+      {
+        "id": "jjc8-mxkg",
+        "name": "Insurance complaints: One record / complaint",
+        "updated": "2026-09-03T07:09:30.000Z"
+      },
+      {
+        "id": "y9ze-ft94",
+        "name": "Title agency & title direct operations \u2013 appointments by county and underwriter",
+        "updated": "2026-09-03T07:16:35.000Z"
+      },
+      {
+        "id": "uahw-xts9",
+        "name": "Aliases for licensed title agencies and direct operations",
+        "updated": "2026-09-03T07:16:46.000Z"
+      },
+      {
+        "id": "ghh2-6wm5",
+        "name": "Active officers and directors for active surplus lines agencies",
+        "updated": "2026-09-03T07:16:50.000Z"
+      }
+    ],
+    "disciplinary insurance": [],
+    "TWIA": [],
+    "FAIR plan Texas": [],
+    "workers compensation insurance company": [
+      {
+        "id": "c4xz-httr",
+        "name": "Workers' compensation insurance coverage subscriber information",
+        "updated": "2026-08-12T07:39:35.000Z"
+      },
+      {
+        "id": "azae-8krr",
+        "name": "Workers' compensation non-subscriber employer information",
+        "updated": "2026-08-03T13:14:30.000Z"
+      },
+      {
+        "id": "pa9u-9s9w",
+        "name": "Complaint indexes and policy counts for insurance companies",
+        "updated": "2026-09-03T07:17:01.000Z"
+      },
+      {
+        "id": "xven-is8v",
+        "name": "Workers\u2019 Compensation Maximum Medical Improvement Doctors and Designated Doctors List",
+        "updated": "2026-08-30T15:48:50.000Z"
+      },
+      {
+        "id": "732j-wdur",
+        "name": "Workers\u2019 Compensation Maximum Medical Improvement Doctors and Designated Doctors\u2019 Address Information",
+        "updated": "2026-08-30T15:51:51.000Z"
+      },
+      {
+        "id": "avjc-7u2m",
+        "name": "Active insurance company appointments for agencies and businesses",
+        "updated": "2026-09-03T05:04:11.000Z"
+      },
+      {
+        "id": "kvqi-vsrr",
+        "name": "Business relationships between agents, agencies, adjusters, and insurance companies",
+        "updated": "2026-09-03T05:14:52.000Z"
+      },
+      {
+        "id": "ubdr-4uff",
+        "name": "Insurance complaints: All data",
+        "updated": "2026-09-03T07:07:30.000Z"
+      }
+    ]
+  },
+  "authorized_companies": {
+    "status": "SOURCE_NOT_ACQUIRED",
+    "tool_url": "https://appscenter.tdi.texas.gov/tdireports/p/externalReports",
+    "index_url": "https://www.tdi.texas.gov/webinfo/colists.html",
+    "note": "Official authorized-company list is an interactive TDI reports tool, not a SODA dataset. No deterministic bulk export landed this ticket. Appointment NAIC is not the complete authorized-company universe.",
+    "count": null
+  }
+}
