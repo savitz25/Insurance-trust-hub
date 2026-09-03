@@ -27,7 +27,7 @@ function assert(c: unknown, m: string) {
 const root = join(__dirname, '..');
 const mig = join(root, 'supabase/migrations/20260826120000_national_identity_graph.sql');
 assert(existsSync(mig), 'graph migration must still exist');
-const sql = readFileSync(mig, 'utf8');
+const sql = readFileSync(mig, 'utf8').replace(/\r\n/g, '\n');
 const hash = createHash('sha256').update(sql).digest('hex');
 assert(
   hash === 'd918e1161fe77a9f582453285dc2372d463f41a4ca5caa15d1b07e411ec1f4c8',
