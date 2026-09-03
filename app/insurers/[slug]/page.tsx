@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { LegalInsurerProfileView } from '@/components/insurers/legal-insurer-profile-view';
-import { JsonLd } from '@/lib/seo/json-ld';
-import { buildMetadata } from '@/lib/seo/metadata';
-import { buildResearchPageGraph } from '@/lib/seo/research-seo';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { LegalInsurerProfileView } from "@/components/insurers/legal-insurer-profile-view";
+import { JsonLd } from "@/lib/seo/json-ld";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { buildResearchPageGraph } from "@/lib/seo/research-seo";
 import {
   buildPilotProfile,
   getPublishedBySlug,
@@ -12,9 +12,11 @@ import {
   mayPublishLegalInsurerPilot,
   seoDescription,
   seoTitle,
-} from '@/lib/national/legal-insurer-pilot';
+} from "@/lib/national/legal-insurer-pilot";
+import { insurerCustomerEligible } from "@/lib/customer-integration/eligibility";
+import { fetchCustomerLayer } from "@/lib/customer-integration/public";
 
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };
@@ -26,8 +28,18 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const row = getPublishedBySlug(slug);
-  if (!row || !mayPublishLegalInsurerPilot({ entityKind: 'legal_insurer', entityId: row.entity_id })) {
-    return buildMetadata({ title: 'Legal insurer research', description: 'Legal insurer research', noIndex: true });
+  if (
+    !row ||
+    !mayPublishLegalInsurerPilot({
+      entityKind: "legal_insurer",
+      entityId: row.entity_id,
+    })
+  ) {
+    return buildMetadata({
+      title: "Legal insurer research",
+      description: "Legal insurer research",
+      noIndex: true,
+    });
   }
   const path = insurerProfilePath(row.slug);
   return buildMetadata({
@@ -41,18 +53,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LegalInsurerProfilePage({ params }: Props) {
   const { slug } = await params;
   const row = getPublishedBySlug(slug);
-  if (!row || !mayPublishLegalInsurerPilot({ entityKind: 'legal_insurer', entityId: row.entity_id })) {
+  if (
+    !row ||
+    !mayPublishLegalInsurerPilot({
+      entityKind: "legal_insurer",
+      entityId: row.entity_id,
+    })
+  ) {
     notFound();
   }
   const profile = buildPilotProfile(row);
+  const customerEnabled = insurerCustomerEligible(row);
+  const customer = customerEnabled
+    ? await fetchCustomerLayer(row.entity_id)
+    : { profile: null, replies: null };
   const path = insurerProfilePath(row.slug);
   const jsonLd = buildResearchPageGraph({
     path,
     name: row.canonical_legal_name,
     description: seoDescription(row.canonical_legal_name),
     breadcrumbs: [
-      { name: 'Home', path: '/' },
-      { name: 'Legal insurers', path: '/insurers' },
+      { name: "Home", path: "/" },
+      { name: "Legal insurers", path: "/insurers" },
       { name: row.canonical_legal_name, path },
     ],
   });
@@ -60,7 +82,12 @@ export default async function LegalInsurerProfilePage({ params }: Props) {
   return (
     <>
       <JsonLd data={jsonLd} />
-      <LegalInsurerProfileView row={row} profile={profile} />
+      <LegalInsurerProfileView
+        row={row}
+        profile={profile}
+        customerEnabled={customerEnabled}
+        customer={customer}
+      />
     </>
   );
 }
