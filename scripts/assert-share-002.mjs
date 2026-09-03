@@ -37,8 +37,8 @@ assert(
   'SHARE_HUB.origin',
 );
 assert(
-  shareHub.includes("ogImagePath: '/brand/insurance-trust-hub-og.png'"),
-  'OG path is PNG not a logo strip',
+  shareHub.includes("ogImagePath: '/opengraph-image'"),
+  'OG path is the dynamic canonical route',
 );
 assert(shareHub.includes('ogWidth: 1200'), '1200 width');
 assert(shareHub.includes('ogHeight: 630'), '630 height');

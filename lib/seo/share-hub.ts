@@ -10,7 +10,7 @@ export const SHARE_HUB = {
   host: 'www.insurancetrusthub.com',
   apexHost: 'insurancetrusthub.com',
   origin: 'https://www.insurancetrusthub.com',
-  ogImagePath: '/brand/insurance-trust-hub-og.png',
+  ogImagePath: '/opengraph-image',
   ogWidth: 1200,
   ogHeight: 630,
   ogAlt:
