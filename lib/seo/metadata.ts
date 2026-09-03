@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { BRAND_ASSET_VERSION, BRAND_ICONS } from '@/lib/brand';
+import { BRAND_ICONS } from '@/lib/brand';
 import {
   SHARE_HUB,
   resolveShareOrigin,
@@ -18,7 +18,7 @@ export const DEFAULT_SITE_DESCRIPTION =
   'Insurance Trust Hub is independent insurance research — Marketplace tools, Medicare intelligence, verification pathways, and verified agency listings only when real inventory exists. Not a policy marketplace.';
 
 export const OG_IMAGE = {
-  url: shareOgImageAbsoluteUrl(resolveShareOrigin(), `v=${BRAND_ASSET_VERSION}`),
+  url: shareOgImageAbsoluteUrl(resolveShareOrigin(), 'v=20260903share004b-final'),
   width: SHARE_HUB.ogWidth,
   height: SHARE_HUB.ogHeight,
   alt: SHARE_HUB.ogAlt,
