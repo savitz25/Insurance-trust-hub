@@ -150,6 +150,7 @@
     "check:insurance-ask-live": "tsx scripts/check-insurance-ask-live.ts",
     "check:ins-cap-001": "tsx scripts/check-ins-cap-001.ts",
     "check:ins-cust-cap-001": "tsx scripts/check-ins-cust-cap-001.ts",
+    "check:ath-cust-net-002c": "tsx scripts/check-ath-cust-net-002c.ts",
     "check:ins-insurer-001": "tsx scripts/check-ins-insurer-001.ts",
     "national:run-ins-insurer-001": "tsx scripts/national/run-ins-insurer-001-audit.ts",
     "check:ins-insurer-002": "tsx scripts/check-ins-insurer-002.ts",
