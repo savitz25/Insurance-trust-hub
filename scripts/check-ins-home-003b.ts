@@ -1,6 +1,6 @@
 /**
  * INS-HOME-003B — SQL lock of Story #2 + ban on unordered PostgREST pagination.
- * Canonical homepage payload remains 99b7ce6 / fingerprint 934a4872… .
+ * Story #2 SQL lock remains 99b7ce6 / D1–D4. Homepage fingerprint is insurance-network-metrics-v1.
  *   npm run check:ins-home-003b
  */
 import { readFileSync } from 'fs';
@@ -82,10 +82,13 @@ assert(a.db_writes === 0, 'payload db_writes');
 assert(a.fingerprint === b.fingerprint, 'deterministic fingerprint');
 assert(a.fingerprint === fingerprintHomeIntel(a), 'fingerprint recomputes');
 assert(
-  a.fingerprint === '934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9',
-  'homepage fingerprint unchanged from 99b7ce6',
+  a.fingerprint === '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb',
+  'homepage fingerprint after insurance-network-metrics-v1',
 );
-assert(a.fingerprint === report.homepageFingerprint, 'report fingerprint matches payload');
+assert(
+  report.homepageFingerprint === '934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9',
+  '003B SQL-lock report remains historical',
+);
 assert(a.featuredFindings.length === 3, 'exactly 3 findings');
 assert(a.publicAvailability.publicPeople === 0, 'public people 0');
 assert(a.publicAvailability.publicLegalInsurers === 0, 'public legal insurers 0');

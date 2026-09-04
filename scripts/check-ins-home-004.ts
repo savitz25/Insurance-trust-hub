@@ -91,7 +91,7 @@ assert(!/appointment/i.test(extractor), 'no appointments in extractor');
 const a = buildInsuranceHomeIntelV1('2026-08-29T05:48:24.729Z');
 const b = buildInsuranceHomeIntelV1('2026-08-30T00:00:00.000Z');
 assert(a.version === INS_HOME_INTEL_VERSION, 'contract version');
-assert(a.fingerprint === '934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9', 'homepage fingerprint unchanged');
+assert(a.fingerprint === '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb', 'homepage fingerprint unchanged');
 assert(a.fingerprint === b.fingerprint, 'deterministic fingerprint');
 assert(a.fingerprint === fingerprintHomeIntel(a), 'fingerprint recomputes');
 assert(a.featuredFindings[0]?.id === 'network', 'Story #1 unchanged');
