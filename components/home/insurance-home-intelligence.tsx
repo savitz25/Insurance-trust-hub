@@ -3,56 +3,9 @@ import { Button } from '@/components/ui/button';
 import { ZipSearch } from '@/components/zip-search';
 import { HomeIntelChecklist } from '@/components/home/home-intel-checklist';
 import { HomeIntelEvents } from '@/components/home/home-intel-events';
-import type { Finding, InsuranceHomeIntelV1, Metric } from '@/lib/national/home-intel';
+import type { Finding, InsuranceHomeIntelV1 } from '@/lib/national/home-intel';
 import { INSURANCE_BRAND, INSURANCE_INDEPENDENCE_LINE } from '@/lib/design/insurance-design-system';
 import { metricByKey, type InsuranceNetworkMetric, type InsuranceNetworkMetricsV1 } from '@/lib/metrics/insurance-network-metrics-v1';
-
-function Trace({ metric }: { metric: Metric }) {
-  return (
-    <details className="mt-2">
-      <summary
-        className="inline-flex min-h-11 cursor-pointer items-center py-2 text-sm font-semibold text-[#0284C7]"
-        data-intel-event="insurance_intel_trace_number"
-      >
-        Trace this number
-      </summary>
-      <div className="space-y-1 text-sm text-[#1E293B]">
-        <p>
-          <strong>Metric.</strong> {metric.id} — {metric.label}
-        </p>
-        <p>
-          <strong>Entity class.</strong> {metric.entityClass}
-        </p>
-        <p>
-          <strong>Cohort.</strong> {metric.cohort}
-        </p>
-        <p>
-          <strong>Grain.</strong> {metric.grain}
-        </p>
-        {metric.denominator != null ? (
-          <p>
-            <strong>Denominator context.</strong> {metric.denominator.toLocaleString('en-US')}
-          </p>
-        ) : null}
-        <p>
-          <strong>Source.</strong> {metric.source}
-        </p>
-        <p>
-          <strong>As-of (sourceAsOf).</strong> {metric.asOf}
-        </p>
-        <p>
-          <strong>Retrieved / generated (generatedAt).</strong> {metric.generatedAt}
-        </p>
-        <p>
-          <strong>Limitation.</strong> {metric.limitation}
-        </p>
-        <p>
-          <strong>Canonical identity.</strong> Used only in this trace. Public labels stay consumer-facing.
-        </p>
-      </div>
-    </details>
-  );
-}
 
 function NetworkTrace({ metric }: { metric: InsuranceNetworkMetric }) {
   return (
@@ -204,12 +157,12 @@ export function InsuranceHomeIntelligence({
   intel: InsuranceHomeIntelV1;
   metrics: InsuranceNetworkMetricsV1;
 }) {
-  const metrics = [
-    intel.population.agencies,
-    intel.population.persons,
-    intel.population.legalInsurers,
-    intel.population.marketplaceObservations,
-    intel.population.credentials,
+  const identityMetrics = [
+    metricByKey(network, 'insurance_agencies'),
+    metricByKey(network, 'insurance_producer_records'),
+    metricByKey(network, 'licensed_insurance_companies'),
+    metricByKey(network, 'cms_marketplace_evidence_observations'),
+    metricByKey(network, 'credential_observations'),
   ];
   const maxGeo = Math.max(...intel.geography.map((row) => row.credentialRows), 1);
   const appointingCarriers = metricByKey(network, 'appointing_carrier_entities');
@@ -285,31 +238,32 @@ export function InsuranceHomeIntelligence({
             profiles — public people and public legal-insurer pages are currently zero.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {metrics.map((item) => (
-              <article key={item.id} className="min-w-0 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4">
-                <p className="font-serif text-2xl font-semibold tabular-nums text-[#0A2540]">{item.display}</p>
+            {identityMetrics.map((item) => (
+              <article key={item.key} className="min-w-0 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4">
+                <p className="font-serif text-2xl font-semibold tabular-nums text-[#0A2540]">
+                  {item.value == null ? 'Not acquired' : item.value.toLocaleString('en-US')}
+                </p>
                 <h3 className="mt-1 text-sm font-semibold text-[#0A2540]">{item.label}</h3>
-                <p className="mt-1 text-xs text-[#1E293B]">{item.grain}</p>
-                {item.id === 'graph-persons' ? (
+                {item.key === 'insurance_producer_records' ? (
                   <p className="mt-2 text-xs leading-5 text-[#64748B]">
-                    Graph persons, not a public people directory. Public people pages remain 0.
+                    Producer records in the research graph, not a public people directory. Public people pages remain 0.
                   </p>
                 ) : null}
-                {item.id === 'graph-agencies' ? (
+                {item.key === 'insurance_agencies' ? (
                   <p className="mt-2 text-xs leading-5 text-[#64748B]">
-                    Graph agencies with attached-credential evidence. Not the{' '}
+                    Research-graph agencies with attached-credential evidence. Not the{' '}
                     {directoryListings.value?.toLocaleString('en-US')} public directory listings, and not a public
                     agency-profile directory (0 published).
                   </p>
                 ) : null}
-                {item.id === 'graph-legal-insurers' ? (
+                {item.key === 'licensed_insurance_companies' ? (
                   <p className="mt-2 text-xs leading-5 text-[#64748B]">
-                    Legal insurer identities. Distinct from {appointingCarriers.value?.toLocaleString('en-US')}{' '}
-                    <code className="text-[10px]">entity_kind=carrier</code> rows and from marketplace / appointed-by
-                    grains.
+                    Licensed insurance companies / legal insurers. Distinct from{' '}
+                    {appointingCarriers.value?.toLocaleString('en-US')} appointing-entity records and from marketplace
+                    observations.
                   </p>
                 ) : null}
-                <Trace metric={item} />
+                <NetworkTrace metric={item} />
               </article>
             ))}
           </div>
@@ -616,7 +570,6 @@ export function InsuranceHomeIntelligence({
                     {item.value == null ? 'Not acquired' : item.value.toLocaleString('en-US')}
                   </p>
                   <h4 className="mt-1 text-sm font-semibold text-[#0A2540]">{item.label}</h4>
-                  <p className="mt-1 text-xs text-[#1E293B]">{item.grain}</p>
                   <NetworkTrace metric={item} />
                 </article>
               ))}
