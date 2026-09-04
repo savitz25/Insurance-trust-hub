@@ -100,6 +100,7 @@ assert(brandIsLegalInsurer() === false, 'brand ≠ legal insurer');
 const page = readFileSync(join(root, 'components/home/insurance-home-intelligence.tsx'), 'utf8');
 assert(page.includes('data-intel-event="insurance_intel_explain_chart"'), 'reuse explain event');
 assert(page.includes('href="/texas"'), 'texas intelligence route live');
+assert(page.includes('href="/washington"'), 'washington intelligence route live');
 
 const snap = JSON.parse(readFileSync(join(root, 'data/reports/fl-ins-006-state-snapshot.json'), 'utf8'));
 const ready = JSON.parse(readFileSync(join(root, 'data/reports/fl-ins-006-profile-readiness.json'), 'utf8'));

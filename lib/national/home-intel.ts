@@ -626,6 +626,7 @@ export function buildInsuranceHomeIntelV1(
       { href: '/methodology', label: 'Methodology', note: 'How verification and research work here.' },
       { href: '/carriers', label: 'Carrier research (public-data rollups)', note: `Existing Medicare-evidenced carrier research. Not ${fmt(legalInsurers)} public legal-insurer pages.` },
       { href: '/texas', label: 'Texas Insurance Intelligence', note: 'Live TDI agency, appointment, complaint, and rate-filing snapshot. Not a person directory.' },
+      { href: '/washington', label: 'Washington Insurance Intelligence', note: 'Live OIC verification paths and 2025 annual-report aggregates. Not a producer roster and not a live company census.' },
       { href: '/my-insurance', label: 'My Insurance', note: 'Save research. Not a quote funnel.' },
       { href: '/my-insurance/compare', label: 'Compare saved options', note: 'Existing My Insurance compare session. Not a ranking board.' },
     ],
@@ -647,7 +648,7 @@ export function buildInsuranceHomeIntelV1(
       { id: 'appointment', label: 'Appointment evidence', status: 'partial', note: 'Not employment; not NAIC identity.' },
       { id: 'federal', label: 'Federal program evidence', status: 'partial', note: 'CMS Marketplace and Medicare tools, separate lane.' },
       { id: 'regulatory', label: 'Regulatory observations', status: 'partial', note: 'Internal complaint observations; not a clean-record proof.' },
-      { id: 'view', label: 'InsuranceTrustHub research view', status: 'connected', note: 'This national homepage plus /directory, /florida, /texas, /new-jersey, and /california.' },
+      { id: 'view', label: 'InsuranceTrustHub research view', status: 'connected', note: 'This national homepage plus /directory, /florida, /texas, /new-jersey, /california, and /washington.' },
     ],
   };
 

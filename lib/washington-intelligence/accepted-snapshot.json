@@ -1,0 +1,445 @@
+{
+  "version": "insurance-wa-state-intel-v1",
+  "ticket": "WA-INS-001",
+  "as_of": "2026-09-04",
+  "retrieved_at": "2026-09-04T17:58:55Z",
+  "source_clock": "OIC 2025 annual report PDF (published 2026-07 on insurance.wa.gov) plus official page retrieval this snapshot",
+  "no_trust_score": true,
+  "no_paid_ranking": true,
+  "no_washington_county_pages": true,
+  "missing_is_not_zero": true,
+  "restricted_is_not_zero": true,
+  "search_only_is_not_zero": true,
+  "person_directory_public": false,
+  "publication": {
+    "path": "/washington",
+    "indexable": true,
+    "robots": "index,follow",
+    "canonical": "https://www.insurancetrusthub.com/washington",
+    "h1": "Washington Insurance Market & Regulatory Intelligence",
+    "sitemap": true
+  },
+  "hero": {
+    "universe_value": 2924,
+    "universe_label": "OIC 2025 regulated entities (annual-report aggregate)",
+    "universe_hint": "Official 2025 annual-report wording: insurance and risk/non-risk bearing entities. Not a live company roster.",
+    "current_value": "Search only",
+    "current_label": "Producer / agency bulk roster",
+    "current_hint": "Producer lists are SOURCE_USE_RESTRICTED. Agency bulk was not acquired.",
+    "observations_value": "Search only",
+    "observations_label": "Rate filings and orders",
+    "observations_hint": "SERFF and OIC orders remain lookup tools. Not scraped.",
+    "geography_value": "Washington",
+    "geography_label": "state snapshot",
+    "geography_hint": "No Washington county or city routes.",
+    "as_of_value": "2025 annual report",
+    "as_of_label": "OIC market aggregate",
+    "as_of_hint": "Dated annual-report grain, not current legal-company status."
+  },
+  "regulators": {
+    "oic": {
+      "name": "Washington Office of the Insurance Commissioner",
+      "short": "OIC",
+      "url": "https://www.insurance.wa.gov/",
+      "covers": "Insurance companies, agencies, individual producers, appointments, rate/form filings, orders, complaints, and market-conduct/financial examinations as described by OIC."
+    },
+    "entity_classes": [
+      {
+        "class": "Insurance company / legal insurer",
+        "id": "NAIC company code + Washington authorization when an OIC company record says so",
+        "establishes": "Legal insurer identity; Washington authority only when OIC says so",
+        "does_not": "NAIC identity alone is not Washington authorization. A brand is not the legal insurer."
+      },
+      {
+        "class": "Insurance agency / business entity",
+        "id": "WAOIC / NPN when the lookup returns a business entity",
+        "establishes": "Business-entity credential when a live lookup record says so",
+        "does_not": "Not an insurer. Not an individual producer."
+      },
+      {
+        "class": "Individual producer",
+        "id": "NPN / WAOIC person credential",
+        "establishes": "Person license when a live lookup record says so",
+        "does_not": "Not an agency. Not published as a person directory here."
+      },
+      {
+        "class": "Appointment",
+        "id": "Producer/agency to insurer relationship when source-native",
+        "establishes": "Authority to represent a company when the source says so",
+        "does_not": "Not quality. Not acquired as a bulk graph this ticket."
+      },
+      {
+        "class": "Plan",
+        "id": "CMS Marketplace or Medicare contract/plan ID when already in the national overlay",
+        "establishes": "Federal plan identity where already stored",
+        "does_not": "A plan is not an insurer. Marketplace participation is not OIC authority."
+      }
+    ]
+  },
+  "source_access": {
+    "agent_company_lookup": {
+      "classification": "SEARCH_ONLY",
+      "url": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+      "http_status": 200,
+      "scraped": false,
+      "limitation": "Consumer lookup for agents, agencies, and companies. Do not scrape."
+    },
+    "lists_of_individuals": {
+      "classification": "SOURCE_USE_RESTRICTED",
+      "url": "https://www.insurance.wa.gov/about-us/request-public-records/request-list-individuals",
+      "http_status": 200,
+      "governing_restriction": "RCW 42.56 prohibits providing lists of individuals requested for commercial purposes. OIC requires a commercial-use declaration.",
+      "acquired": false,
+      "commercial_declaration_submitted": false,
+      "page_mentions_commercial_use": false
+    },
+    "orders_search": {
+      "classification": "SEARCH_ONLY",
+      "url": "https://fortress.wa.gov/oic/consumertoolkit/HomePage.aspx",
+      "http_status": 200,
+      "scraped": false,
+      "identity_bar": "EXACT_NPN_OR_NAIC_OR_WAOIC_ONLY",
+      "name_only": "UNSAFE"
+    },
+    "serff_rate_form": {
+      "classification": "SEARCH_ONLY",
+      "url": "https://www.insurance.wa.gov/insurers-regulated-entities/rate-and-form-filing/search-company-filings-serff-filing-access",
+      "http_status": 200,
+      "scraped": false,
+      "rate_filing_is_not_quote": true
+    },
+    "annual_report_aggregates": {
+      "classification": "PUBLIC_BULK_OK",
+      "grain": "dated annual-report aggregate, not a roster",
+      "url": "https://www.insurance.wa.gov/sites/default/files/2026-07/oic-annual-report-2025.pdf"
+    }
+  },
+  "producer_roster": {
+    "WA_PRODUCER_BULK_ROSTER": "SOURCE_USE_RESTRICTED / SEARCH_ONLY",
+    "count": null,
+    "acquired": false,
+    "ckan": {
+      "http_status": 404,
+      "query": "insurance producer license roster Washington",
+      "titles": []
+    },
+    "caveat": "Restricted is not zero. Search-only is not zero. Do not invent a Washington producer count."
+  },
+  "agency_roster": {
+    "WA_AGENCY_BULK_ROSTER": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+    "count": null,
+    "acquired": false,
+    "ckan": {
+      "http_status": 404,
+      "query": "insurance agency license roster Washington",
+      "titles": []
+    },
+    "caveat": "No unrestricted official agency CSV/API was acquired. Missing is not zero."
+  },
+  "insurer_company": {
+    "current_authorized_company_roster": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+    "count": null,
+    "ckan": {
+      "http_status": 404,
+      "query": "OIC authorized insurer company roster",
+      "titles": []
+    },
+    "lookup_url": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+    "caveat": "Annual-report entity totals are not a current legal-company roster. NAIC != Washington authorization."
+  },
+  "annual_aggregates": {
+    "source": "OIC 2025 annual report",
+    "url": "https://www.insurance.wa.gov/sites/default/files/2026-07/oic-annual-report-2025.pdf",
+    "http_status": 200,
+    "bytes": 543090,
+    "sha256": "fccafc2d2e0467839231cf95956dd0f24d80f1daf9b16291abf80ece4cddc691",
+    "label": "insurance and risk/non-risk bearing entities",
+    "not_a_live_roster": true,
+    "not_washington_insurance_companies_label": true,
+    "regulated_entities": 2924,
+    "domestic": 263,
+    "foreign": 2590,
+    "alien": 71,
+    "definition": "OIC 2025 annual report aggregate of insurance and risk/non-risk bearing entities supervised/regulated in that report year, split domestic / foreign / alien. This is not a downloadable company roster and is not a current authorized-insurer census.",
+    "sum_check": true
+  },
+  "verify": {
+    "agent_producer": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+    "agency": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+    "company": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+    "explains": "The OIC Agent and Company Lookup is the live official verification path. A lookup hit is not a TrustHub profile and is not a bulk roster. Existing InsuranceTrustHub insurer/agency research tools remain national graph tools, not a substitute for OIC verification."
+  },
+  "rate_filings": {
+    "RATE_FILINGS": "OPEN_SEARCH_ONLY",
+    "url": "https://www.insurance.wa.gov/insurers-regulated-entities/rate-and-form-filing/search-company-filings-serff-filing-access",
+    "http_status": 200,
+    "bulk_acquired": false,
+    "existing_canonical_wa_rate_extract": false,
+    "classes_researchable_in_serff": [
+      "health",
+      "property/casualty",
+      "life",
+      "other as filed"
+    ],
+    "rate_filing_is_not_consumer_quote": true,
+    "rate_filing_is_not_quality": true,
+    "rate_filing_is_not_approved_price_for_every_policyholder": true,
+    "page_mentions_serff": true
+  },
+  "orders": {
+    "access": "OPEN_SEARCH_ONLY",
+    "url": "https://fortress.wa.gov/oic/consumertoolkit/HomePage.aspx",
+    "http_status": 200,
+    "bulk_acquired": false,
+    "rows": null,
+    "identity_bar": "EXACT_NPN_OR_NAIC_OR_WAOIC_ONLY",
+    "name_only": "UNSAFE_FOR_ADVERSE_PROFILE_ATTACH",
+    "notice_is_not_final_order": true,
+    "order_is_not_complaint": true,
+    "order_count_is_not_quality": true,
+    "ckan": {
+      "http_status": 404,
+      "query": "OIC disciplinary orders",
+      "titles": []
+    }
+  },
+  "complaints_market_conduct": {
+    "access": "ANNUAL_OR_SEARCH_CONTEXT",
+    "complaint_url": "https://www.insurance.wa.gov/file-complaint",
+    "http_status": 200,
+    "structured_complaint_index": "SOURCE_NOT_ACQUIRED",
+    "company_complaint_rates_published": false,
+    "complaint_is_not_violation": true,
+    "no_complaint_is_not_clean_record": true,
+    "fine_is_not_consumer_loss": true,
+    "ckan": {
+      "http_status": 404,
+      "query": "insurance commissioner complaints",
+      "titles": []
+    },
+    "note": "File-a-complaint and annual-report context only. No company complaint ranking."
+  },
+  "federal_overlay": {
+    "cms_marketplace_washington_projection": "SOURCE_NOT_SPLIT / NOT_USED",
+    "cms_county_summaries_wa_counties": 0,
+    "medicare_routes_mention_washington": false,
+    "marketplace_coverage_module_is_runtime_api": true,
+    "note": "Committed CMS county summaries and Medicare routes do not contain a Washington-safe Marketplace plan census. Existing national CMS/NAIC identities are not Washington OIC authorization. No new federal ingest was performed.",
+    "cms_marketplace_participation_is_not_oic_authority": true
+  },
+  "identity_rules": {
+    "EXACT": [
+      "NAIC when source-native",
+      "NPN when source-native",
+      "WAOIC when source-native"
+    ],
+    "UNSAFE": "name-only order/complaint attach; producer mailing lists",
+    "not_minted_from_aggregates": true
+  },
+  "contacts": {
+    "policy": "Reuse accepted canonical business/company contacts only. No individual producer harvest. No internet enrichment.",
+    "producer_contacts_harvested": false
+  },
+  "expansion_ledger": {
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_STATE_IDENTITIES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "NEW_EVIDENCE_ROWS": 0,
+    "note": "This closeout documents OIC access, restrictions, and dated annual-report aggregates. It does not mint canonical organizations, does not acquire restricted producer identities, and does not treat 2,924 as entity growth."
+  },
+  "findings": [
+    {
+      "id": "annual-composition",
+      "title": "OIC's 2025 annual report is a dated entity composition, not a live roster",
+      "summary": "The official 2025 annual report counts insurance and risk/non-risk bearing entities as an aggregate split domestic / foreign / alien. That is not a current authorized-company download.",
+      "doesNotMean": [
+        "2,924 Washington insurance companies",
+        "live licensed-insurer census"
+      ]
+    },
+    {
+      "id": "producer-restriction",
+      "title": "Producer lists are commercially restricted; company lookup remains search-only",
+      "summary": "RCW 42.56 and OIC's list-of-individuals process block commercial producer mailing lists. Agent, agency, and company verification stays on the official lookup.",
+      "doesNotMean": [
+        "zero Washington producers",
+        "zero Washington agencies"
+      ]
+    },
+    {
+      "id": "rate-order-transparency",
+      "title": "Rate filings and orders are official research paths, not scraped bulk files",
+      "summary": "SERFF Filing Access and the OIC orders search are live official tools. A rate filing is not a consumer quote. An order is not a quality score. Name-only attach is unsafe.",
+      "doesNotMean": [
+        "TrustHub has a complete Washington order extract",
+        "SERFF search equals current premium"
+      ]
+    },
+    {
+      "id": "federal-vs-state",
+      "title": "Federal Marketplace/Medicare evidence is not Washington OIC authority",
+      "summary": "No Washington-safe Marketplace plan census is in the committed CMS overlays used here. Existing NAIC/CMS identities stay national. Marketplace participation is not state authority.",
+      "doesNotMean": [
+        "Washington has no health-insurance market",
+        "CMS listing authorizes a company in Washington"
+      ]
+    }
+  ],
+  "evidence_depth": [
+    {
+      "family": "OIC company lookup",
+      "agency": "Washington OIC",
+      "source": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+      "as_of": "2026-09-04",
+      "grain": "live search record",
+      "count": null,
+      "identity": "NAIC / WAOIC when returned",
+      "access": "SEARCH_ONLY",
+      "publication": "verification link",
+      "limitations": "Not scraped. Not a roster."
+    },
+    {
+      "family": "OIC agency/producer lookup",
+      "agency": "Washington OIC",
+      "source": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+      "as_of": "2026-09-04",
+      "grain": "live search record (mixed person and business)",
+      "count": null,
+      "identity": "NPN / WAOIC when returned",
+      "access": "SEARCH_ONLY",
+      "publication": "verification link",
+      "limitations": "Producer != agency. Person lists SOURCE_USE_RESTRICTED."
+    },
+    {
+      "family": "OIC annual report",
+      "agency": "Washington OIC",
+      "source": "https://www.insurance.wa.gov/sites/default/files/2026-07/oic-annual-report-2025.pdf",
+      "as_of": "2025 report / posted 2026-07",
+      "grain": "agency_aggregate",
+      "count": 2924,
+      "identity": "none (aggregate)",
+      "access": "PUBLIC_BULK_OK as aggregate",
+      "publication": "dated tiles, not a roster",
+      "limitations": "Not a live company census."
+    },
+    {
+      "family": "OIC rate filings / SERFF",
+      "agency": "Washington OIC / NAIC SERFF",
+      "source": "https://www.insurance.wa.gov/insurers-regulated-entities/rate-and-form-filing/search-company-filings-serff-filing-access",
+      "as_of": "2026-09-04",
+      "grain": "rate/rule/form filing search",
+      "count": null,
+      "identity": "NAIC on a filing when the search returns one",
+      "access": "SEARCH_ONLY",
+      "publication": "research path",
+      "limitations": "Not scraped. Filing != quote."
+    },
+    {
+      "family": "OIC orders",
+      "agency": "Washington OIC",
+      "source": "https://fortress.wa.gov/oic/consumertoolkit/HomePage.aspx",
+      "as_of": "2026-09-04",
+      "grain": "enforcement_order search",
+      "count": null,
+      "identity": "exact NPN/NAIC/WAOIC only",
+      "access": "SEARCH_ONLY",
+      "publication": "research path",
+      "limitations": "Not scraped. Name-only UNSAFE."
+    },
+    {
+      "family": "complaint / market conduct",
+      "agency": "Washington OIC",
+      "source": "https://www.insurance.wa.gov/file-complaint",
+      "as_of": "2026-09-04",
+      "grain": "consumer complaint intake / annual context",
+      "count": null,
+      "identity": "not attached",
+      "access": "ANNUAL_OR_SEARCH_CONTEXT",
+      "publication": "semantics + coverage gap",
+      "limitations": "No company complaint rate. Complaint != violation."
+    },
+    {
+      "family": "federal Marketplace overlay",
+      "agency": "CMS (existing InsuranceTrustHub)",
+      "source": "Committed CMS overlays in this repo",
+      "as_of": "existing graph",
+      "grain": "not a Washington Marketplace census",
+      "count": null,
+      "identity": "CMS contract/plan where already stored nationally",
+      "access": "SOURCE_NOT_SPLIT / NOT_USED for WA projection",
+      "publication": "limitation, not a WA plan count",
+      "limitations": "Marketplace participation != OIC authority."
+    },
+    {
+      "family": "canonical insurer graph",
+      "agency": "InsuranceTrustHub national graph",
+      "source": "Existing legal-insurer / NAIC identities",
+      "as_of": "existing graph",
+      "grain": "national legal insurer",
+      "count": null,
+      "identity": "NAIC CoCode where already stored",
+      "access": "EXISTING_GRAPH",
+      "publication": "reuse; not Washington authorization",
+      "limitations": "No new organizations minted this ticket."
+    }
+  ],
+  "gaps": [
+    "Complete unrestricted Washington agency roster",
+    "Complete producer roster (restricted / not acquired)",
+    "Current authorized-company roster",
+    "Appointment graph",
+    "Structured regulatory-order bulk",
+    "Company-level complaint denominator",
+    "Complete rate-file extract",
+    "Washington-safe CMS Marketplace plan census in committed overlays"
+  ],
+  "semantics": [
+    "OIC PRODUCER != AGENCY",
+    "AGENCY != INSURER",
+    "PLAN != INSURER",
+    "NAIC != NPN",
+    "ANNUAL AGGREGATE != LIVE ROSTER",
+    "MARKETPLACE PARTICIPATION != STATE AUTHORITY",
+    "RATE FILING != QUOTE",
+    "COMPLAINT != VIOLATION",
+    "ORDER COUNT != QUALITY",
+    "SEARCH_ONLY != ZERO",
+    "RESTRICTED != ZERO",
+    "NO TRUST SCORE",
+    "NO PAID RANKING"
+  ],
+  "probes": {
+    "lookup": {
+      "url": "https://www.insurance.wa.gov/agent-and-company-lookup-tool",
+      "http_status": 200,
+      "bytes": 273684
+    },
+    "lists": {
+      "url": "https://www.insurance.wa.gov/about-us/request-public-records/request-list-individuals",
+      "http_status": 200,
+      "bytes": 275020
+    },
+    "serff": {
+      "url": "https://www.insurance.wa.gov/insurers-regulated-entities/rate-and-form-filing/search-company-filings-serff-filing-access",
+      "http_status": 200,
+      "bytes": 272225
+    },
+    "orders": {
+      "url": "https://fortress.wa.gov/oic/consumertoolkit/HomePage.aspx",
+      "http_status": 200,
+      "bytes": 24135
+    },
+    "complaints": {
+      "url": "https://www.insurance.wa.gov/file-complaint",
+      "http_status": 200,
+      "bytes": 279642
+    },
+    "report": {
+      "url": "https://www.insurance.wa.gov/sites/default/files/2026-07/oic-annual-report-2025.pdf",
+      "http_status": 200,
+      "bytes": 543090,
+      "sha256": "fccafc2d2e0467839231cf95956dd0f24d80f1daf9b16291abf80ece4cddc691"
+    }
+  },
+  "fingerprint": "17128d3a8dac4ea1457b5a02269fe25de2b1312e6dfa9bb553a8af9c06ea66ac"
+}

@@ -1,0 +1,14 @@
+{
+  "ticket": "WA-INS-001",
+  "snapshot_fingerprint": "17128d3a8dac4ea1457b5a02269fe25de2b1312e6dfa9bb553a8af9c06ea66ac",
+  "annual_report_pdf_sha256": "fccafc2d2e0467839231cf95956dd0f24d80f1daf9b16291abf80ece4cddc691",
+  "annual_report_bytes": 543090,
+  "regulated_entities": 2924,
+  "domestic": 263,
+  "foreign": 2590,
+  "alien": 71,
+  "producer_roster": "SOURCE_USE_RESTRICTED / SEARCH_ONLY",
+  "agency_roster": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+  "authorized_company_roster": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+  "cms_marketplace_washington_projection": "SOURCE_NOT_SPLIT / NOT_USED"
+}

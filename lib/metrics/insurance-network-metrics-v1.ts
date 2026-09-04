@@ -45,6 +45,7 @@ export type MetricGrain =
   | 'tdi_agency_npn'
   | 'florida_credentialed_agency'
   | 'published_state_intelligence_page'
+  | 'annual_report_entity_aggregate'
   | 'public_legal_insurer_profile'
   | 'contact_observation'
   | 'combined_incompatible_grains';
@@ -163,6 +164,16 @@ export type InsuranceNetworkMetricsV1 = {
     cdiHealthInsurerListRows: number;
     dmhcEnforcementRows: number;
     imrRows: number;
+  };
+  washington: {
+    snapshotFingerprint: string;
+    asOf: string;
+    regulatedEntitiesAnnualReport: number;
+    regulatedEntitiesCoverage: 'ANNUAL_REPORT_AGGREGATE_NOT_LIVE_ROSTER';
+    producerRosterCoverage: 'SOURCE_USE_RESTRICTED / SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    authorizedCompanies: null;
+    authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED';
   };
   publication: {
     publicPeople: 0;

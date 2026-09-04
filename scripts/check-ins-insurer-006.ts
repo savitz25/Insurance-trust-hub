@@ -43,7 +43,7 @@ function src(rel: string): string {
   return readFileSync(join(root, rel), 'utf8');
 }
 
-const HOME_FP = '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb';
+const HOME_FP = '7474172a3996c574e26058be24b6af5149765f801660ddedba9d5508ef332fc1';
 const FL_FP = '8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93';
 const home = buildInsuranceHomeIntelV1();
 assert(home.fingerprint === HOME_FP && home.fingerprint === fingerprintHomeIntel(home), '35 homepage fingerprint unchanged');

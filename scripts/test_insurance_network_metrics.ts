@@ -69,9 +69,12 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     californiaCdiHealthInsurerListRows: 28,
     californiaDmhcEnforcementRows: 5435,
     californiaImrRows: 42749,
+    washingtonSnapshotFingerprint: '17128d3a8dac4ea1457b5a02269fe25de2b1312e6dfa9bb553a8af9c06ea66ac',
+    washingtonAsOf: '2026-09-04',
+    washingtonRegulatedEntitiesAnnualReport: 2924,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
-    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california'],
+    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington'],
     ...over,
   };
 }
@@ -173,8 +176,12 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     const m = computeInsuranceNetworkMetrics(baseInput());
     assert.equal(metricByKey(m, 'texas_authorized_companies').value, null);
     assert.equal(metricByKey(m, 'ca_admitted_insurer_universe').value, null);
+    assert.equal(metricByKey(m, 'wa_authorized_companies').value, null);
+    assert.equal(metricByKey(m, 'wa_oic_regulated_entities_annual_report').value, 2924);
     assert.match(metricByKey(m, 'texas_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
     assert.match(metricByKey(m, 'ca_admitted_insurer_universe').trace.whyUnknown ?? '', /never render as zero/i);
+    assert.match(metricByKey(m, 'wa_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
+    assert.match(metricByKey(m, 'wa_oic_regulated_entities_annual_report').description, /not a live/i);
   });
 
   it('does not replace sourceAsOf with generatedAt', () => {
@@ -182,7 +189,7 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     assert.equal(metricByKey(m, 'appointments').sourceAsOf, '2026-09-03');
     assert.equal(metricByKey(m, 'cms_marketplace_evidence_observations').sourceAsOf, '2026-08-21');
     assert.notEqual(metricByKey(m, 'cms_marketplace_evidence_observations').sourceAsOf, m.generatedAt.slice(0, 10));
-    assert.equal(m.newestDocumentedSourceAsOf, '2026-09-03');
+    assert.equal(m.newestDocumentedSourceAsOf, '2026-09-04');
   });
 
   it('keeps public labels on the required consumer-facing keys', () => {

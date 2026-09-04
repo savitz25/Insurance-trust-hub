@@ -51,6 +51,7 @@ yarn-error.log*
 !/data/cdi-raw/README.md
 /data/ca-raw/**
 !/data/ca-raw/README.md
+/data/raw/washington/**
 /data/reports/ins-insurer-004-spine.json
 /data/tdi-raw/**
 !/data/tdi-raw/README.md

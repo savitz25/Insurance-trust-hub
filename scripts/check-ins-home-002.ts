@@ -34,7 +34,7 @@ function src(rel: string): string {
   return readFileSync(join(root, rel), 'utf8');
 }
 
-const HOME_FP = '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb';
+const HOME_FP = '7474172a3996c574e26058be24b6af5149765f801660ddedba9d5508ef332fc1';
 const FL_FP = '8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93';
 
 const a = buildInsuranceHomeIntelV1('2026-08-29T05:48:24.729Z');
@@ -112,7 +112,7 @@ assert(/aria-label="Search public insurance directory listings by ZIP code"/.tes
 assert(/aria-label="ZIP code for public directory listings"/.test(zip), 'ZIP input labeled');
 assert(/role="alert"/.test(zip), 'ZIP validation alert');
 assert(/directoryListings\.value|publicDirectoryProviders/.test(page), 'directory listing count distinguished from graph agencies');
-assert(/entity_kind=carrier/.test(page), 'legal insurer ≠ entity_kind=carrier');
+assert(/appointing-entity records/.test(page) && /licensed_insurance_companies/.test(page), 'legal insurer ≠ entity_kind=carrier');
 assert(/appointing_carrier_entities|appointingCarriers/.test(page), 'carrier-kind count shown as distinct grain');
 assert(/Public people pages remain 0|public people pages remain 0/i.test(page), 'people not a public directory');
 assert(/The legal insurer that underwrites/.test(page), 'Carrier glossary');
@@ -120,7 +120,7 @@ assert(/licensed business that may sell/.test(page), 'Agency glossary');
 assert(/licensed individual/i.test(page), 'Producer glossary');
 assert(page.includes('insurance_intel_trace_number'), 'Trace this number');
 assert(page.includes('insurance_intel_explain_chart'), 'Explain this chart');
-assert(page.includes('Retrieved / generated'), 'trace retrieval clock');
+assert(page.includes('sourceAsOf') && page.includes('generatedAt'), 'trace retrieval clock');
 assert(!/national Life\/Health\/Property/i.test(ui), 'no person LOA national product chart');
 assert(!/person LOA (pie|product-line chart)/i.test(ui), 'person LOA product chart absent');
 assert(!/NATIONAL PERSON PRODUCT-LINE CHART/.test(ui), 'person product-line chart not present');
@@ -142,6 +142,7 @@ for (const phrase of FORBIDDEN_HOME_COPY) {
 assert(/no paid rankings/i.test(src('app/page.tsx')), 'SEO no-paid-rankings');
 assert(src('app/page.tsx').includes("path: '/'"), 'homepage metadata path');
 assert(page.includes('href="/texas"'), 'texas intelligence route live');
+assert(page.includes('href="/washington"'), 'washington intelligence route live');
 assert(pwa.includes('box-border') && pwa.includes('max-w-full') && pwa.includes('min-w-0'), 'PWA banner cannot overflow 390');
 assert(pwa.includes('shrink-0'), 'PWA close control shrink-0');
 assert(/overflow-x:\s*clip/.test(src('app/globals.css')), 'root overflow clip safety');
