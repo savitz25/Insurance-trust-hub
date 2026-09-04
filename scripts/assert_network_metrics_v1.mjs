@@ -31,6 +31,13 @@ assert(v1.texas.snapshotFingerprint === pub.texasSnapshotFingerprint, "TX snapsh
 assert(v1.florida.snapshotFingerprint === pub.floridaSnapshotFingerprint, "FL snapshot fingerprint");
 assert(v1.newJersey.snapshotFingerprint === pub.newJerseySnapshotFingerprint, "NJ snapshot fingerprint");
 assert(v1.california.snapshotFingerprint === pub.californiaSnapshotFingerprint, "CA snapshot fingerprint");
+assert(v1.washington.snapshotFingerprint === pub.washingtonSnapshotFingerprint, "WA snapshot fingerprint");
+assert(v1.washington.regulatedEntitiesAnnualReport === pub.washingtonRegulatedEntities, "WA annual-report entities");
+assert(v1.washington.authorizedCompanies === null, "WA authorized companies not a number");
+assert(byKey.wa_authorized_companies.value === null, "WA authorized metric not a number");
+assert(byKey.wa_authorized_companies.valueState === "NOT_ACQUIRED", "WA authorized not acquired");
+assert(byKey.wa_oic_regulated_entities_annual_report.value === 2924, "WA 2924 annual aggregate");
+assert(byKey.wa_oic_regulated_entities_annual_report.value !== byKey.licensed_insurance_companies.value, "WA aggregate != national companies");
 assert(byKey.insurance_agencies.value === v1.nationalGraph.agencies, "agency metric matches graph");
 assert(byKey.licensed_insurance_companies.value === v1.nationalGraph.legalInsurers, "legal insurer metric");
 assert(byKey.insurance_producer_records.value === v1.nationalGraph.persons, "producer metric");

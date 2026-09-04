@@ -62,6 +62,9 @@ export type InsuranceNetworkMetricsInput = {
   californiaCdiHealthInsurerListRows: number;
   californiaDmhcEnforcementRows: number;
   californiaImrRows: number;
+  washingtonSnapshotFingerprint: string;
+  washingtonAsOf: string;
+  washingtonRegulatedEntitiesAnnualReport: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -167,6 +170,12 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   if (!input.publishedStateIntelligencePaths.includes('/california')) {
     throw new Error('California state intelligence path missing');
   }
+  if (!input.publishedStateIntelligencePaths.includes('/washington')) {
+    throw new Error('Washington state intelligence path missing');
+  }
+  if (input.washingtonRegulatedEntitiesAnnualReport === input.legalInsurers) {
+    throw new Error('Washington annual-report entities must not equal national legal insurers');
+  }
   if (input.publishedStateIntelligencePaths.length === input.agencies) {
     throw new Error('state pages must not equal agencies');
   }
@@ -183,6 +192,7 @@ export function computeInsuranceNetworkMetrics(
     input.texasAsOf,
     input.newJerseyAsOf,
     input.californiaAsOf,
+    input.washingtonAsOf,
   ]
     .filter(Boolean)
     .map((d) => d.slice(0, 10))
@@ -622,6 +632,51 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'wa_oic_regulated_entities_annual_report',
+      label: 'Washington OIC 2025 regulated entities (annual-report aggregate)',
+      value: input.washingtonRegulatedEntitiesAnnualReport,
+      valueState: 'KNOWN',
+      grain: 'annual_report_entity_aggregate',
+      denominator: 'OIC 2025 annual-report insurance and risk/non-risk bearing entities',
+      description:
+        'Dated OIC annual-report aggregate. Not a live authorized-company roster and not a count of Washington insurance companies.',
+      coverage: 'Washington',
+      contributingSourceSystems: ['washington_oic_annual_report'],
+      sourceAsOf: input.washingtonAsOf.slice(0, 10),
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One official 2025 annual-report regulated-entity total (domestic + foreign + alien).',
+        'Not a live insurer roster, not national legal insurers, not agencies, not producers, not a numeric zero for missing rosters.',
+        ['washington_oic'],
+        'Washington; dated report year 2025',
+        `OIC 2025 annual report as of ${input.washingtonAsOf.slice(0, 10)}`
+      ),
+    }),
+    metric({
+      key: 'wa_authorized_companies',
+      label: 'Washington authorized companies',
+      value: null,
+      valueState: 'NOT_ACQUIRED',
+      grain: 'authorized_company_row',
+      denominator: 'OIC Agent and Company Lookup — OPEN_SEARCH_ONLY / SOURCE_NOT_ACQUIRED',
+      description:
+        'Current authorized-company roster is not acquired. The 2,924 annual-report aggregate is a different grain. Missing is not zero companies.',
+      coverage: 'Washington',
+      contributingSourceSystems: ['washington_oic'],
+      sourceAsOf: null,
+      generatedAt,
+      publicationStatus: 'PUBLIC_UNKNOWN',
+      trace: commonTrace(
+        'No bulk authorized-company universe is stored.',
+        'Not the 2,924 annual-report aggregate, not national legal insurers, not a numeric zero.',
+        ['washington_oic'],
+        'Washington',
+        'SOURCE_NOT_ACQUIRED',
+        { whyUnknown: 'OIC company lookup is search-only. Annual-report 2,924 is not a live roster. Never render as zero.' }
+      ),
+    }),
+    metric({
       key: 'texas_surplus_lines_observations',
       label: 'Texas surplus-lines observations',
       value: input.texasSurplusLinesRows,
@@ -711,9 +766,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA',
+      coverage: 'FL, TX, NJ, CA, WA',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -721,7 +776,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -798,6 +853,8 @@ export function computeInsuranceNetworkMetrics(
     njFin: input.newJerseyFinancialExamReports,
     caFp: input.californiaSnapshotFingerprint,
     caHealthList: input.californiaCdiHealthInsurerListRows,
+    waFp: input.washingtonSnapshotFingerprint,
+    waEntities: input.washingtonRegulatedEntitiesAnnualReport,
     paths: input.publishedStateIntelligencePaths,
     wave1: input.publicLegalInsurerWave1,
   };
@@ -882,6 +939,16 @@ export function computeInsuranceNetworkMetrics(
       cdiHealthInsurerListRows: input.californiaCdiHealthInsurerListRows,
       dmhcEnforcementRows: input.californiaDmhcEnforcementRows,
       imrRows: input.californiaImrRows,
+    },
+    washington: {
+      snapshotFingerprint: input.washingtonSnapshotFingerprint,
+      asOf: input.washingtonAsOf,
+      regulatedEntitiesAnnualReport: input.washingtonRegulatedEntitiesAnnualReport,
+      regulatedEntitiesCoverage: 'ANNUAL_REPORT_AGGREGATE_NOT_LIVE_ROSTER',
+      producerRosterCoverage: 'SOURCE_USE_RESTRICTED / SEARCH_ONLY',
+      agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      authorizedCompanies: null,
+      authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED',
     },
     publication: {
       publicPeople: 0,

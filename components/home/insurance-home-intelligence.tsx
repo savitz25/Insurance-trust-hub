@@ -411,9 +411,13 @@ export function InsuranceHomeIntelligence({
             <Link href="/california" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
               California Insurance Intelligence
             </Link>
-            {', and '}
+            {', '}
             <Link href="/texas" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
               Texas Insurance Intelligence
+            </Link>
+            {', and '}
+            <Link href="/washington" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">
+              Washington Insurance Intelligence
             </Link>
             . Other jurisdictions:{' '}
             <Link href="/hubs/browse" className="font-medium text-[#0284C7] underline-offset-2 hover:underline">

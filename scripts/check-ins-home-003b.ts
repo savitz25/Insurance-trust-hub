@@ -82,7 +82,7 @@ assert(a.db_writes === 0, 'payload db_writes');
 assert(a.fingerprint === b.fingerprint, 'deterministic fingerprint');
 assert(a.fingerprint === fingerprintHomeIntel(a), 'fingerprint recomputes');
 assert(
-  a.fingerprint === '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb',
+  a.fingerprint === '7474172a3996c574e26058be24b6af5149765f801660ddedba9d5508ef332fc1',
   'homepage fingerprint after insurance-network-metrics-v1',
 );
 assert(
@@ -136,6 +136,7 @@ assert(brandIsLegalInsurer() === false, 'brand ≠ legal insurer');
 assert(page.includes('data-intel-event="insurance_intel_explain_chart"'), 'Explain this chart');
 assert(page.includes('data-intel-event="insurance_intel_trace_number"'), 'Trace this number');
 assert(page.includes('href="/texas"'), 'texas intelligence route live');
+assert(page.includes('href="/washington"'), 'washington intelligence route live');
 for (const phrase of FORBIDDEN_HOME_COPY) {
   if (phrase === 'trust score' || phrase === 'paid ranking') continue;
   assert(!page.toLowerCase().includes(phrase), `no ${phrase}`);

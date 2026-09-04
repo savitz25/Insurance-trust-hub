@@ -1,0 +1,17 @@
+{
+  "ticket": "WA-INS-001",
+  "fingerprint": "17128d3a8dac4ea1457b5a02269fe25de2b1312e6dfa9bb553a8af9c06ea66ac",
+  "regulated_entities": 2924,
+  "domestic": 263,
+  "foreign": 2590,
+  "alien": 71,
+  "producer_roster": "SOURCE_USE_RESTRICTED / SEARCH_ONLY",
+  "agency_roster": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+  "expansion_ledger": {
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_STATE_IDENTITIES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "NEW_EVIDENCE_ROWS": 0,
+    "note": "This closeout documents OIC access, restrictions, and dated annual-report aggregates. It does not mint canonical organizations, does not acquire restricted producer identities, and does not treat 2,924 as entity growth."
+  }
+}

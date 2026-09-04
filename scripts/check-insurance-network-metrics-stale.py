@@ -20,6 +20,7 @@ TX_PATH = ROOT / "lib" / "texas-intelligence" / "accepted-snapshot.json"
 FL_PATH = ROOT / "data" / "reports" / "fl-ins-006-state-snapshot.json"
 NJ_PATH = ROOT / "lib" / "new-jersey-intelligence" / "accepted-snapshot.json"
 CA_PATH = ROOT / "lib" / "california-intelligence" / "accepted-snapshot.json"
+WA_PATH = ROOT / "lib" / "washington-intelligence" / "accepted-snapshot.json"
 FL_MC = ROOT / "data" / "reports" / "fl-ins-004-market-exam-census.json"
 FL_FIN = ROOT / "data" / "reports" / "fl-ins-004-financial-exam-census.json"
 CENSUS = ROOT / "data" / "reports" / "ins-nat-final-006-census.json"
@@ -56,6 +57,7 @@ def check_files() -> dict[str, Any]:
     fl = json.loads(FL_PATH.read_text(encoding="utf-8"))
     nj = json.loads(NJ_PATH.read_text(encoding="utf-8"))
     ca = json.loads(CA_PATH.read_text(encoding="utf-8"))
+    wa = json.loads(WA_PATH.read_text(encoding="utf-8"))
     fl_mc = json.loads(FL_MC.read_text(encoding="utf-8"))
     fl_fin = json.loads(FL_FIN.read_text(encoding="utf-8"))
     census = json.loads(CENSUS.read_text(encoding="utf-8"))
@@ -68,6 +70,14 @@ def check_files() -> dict[str, Any]:
         errors.append("New Jersey snapshot fingerprint drifted; regenerate insurance-network-metrics-v1")
     if metrics.get("california", {}).get("snapshotFingerprint") != ca.get("fingerprint"):
         errors.append("California snapshot fingerprint drifted; regenerate insurance-network-metrics-v1")
+    if metrics.get("washington", {}).get("snapshotFingerprint") != wa.get("fingerprint"):
+        errors.append("Washington snapshot fingerprint drifted; regenerate insurance-network-metrics-v1")
+    if metrics.get("washington", {}).get("regulatedEntitiesAnnualReport") != wa.get("annual_aggregates", {}).get("regulated_entities"):
+        errors.append("Washington annual-report entity aggregate drifted")
+    if metric_value(metrics, "wa_authorized_companies") is not None:
+        errors.append("Washington authorized companies must remain NOT_ACQUIRED / null")
+    if metric_value(metrics, "wa_oic_regulated_entities_annual_report") != 2924:
+        errors.append("Washington OIC 2025 regulated-entity aggregate drifted")
     if metric_value(metrics, "appointments") != tx["appointments"]["rows"]:
         errors.append("Texas appointments drifted")
     if metric_value(metrics, "consumer_complaint_observations") != tx["complaints"]["rows"]:
@@ -91,6 +101,7 @@ def check_files() -> dict[str, Any]:
         "/texas",
         "/new-jersey",
         "/california",
+        "/washington",
     }:
         errors.append("published state intelligence paths drifted")
     if census["entities"]["agency"] != metrics["nationalGraph"]["agencies"] and os.environ.get("REQUIRE_LIVE_CENSUS_MATCH") == "1":

@@ -91,8 +91,9 @@ assert(
   'compare session linked'
 );
 assert(page.includes('insurance_intel_explore'), 'intel explore event');
-assert(page.includes('Retrieved / generated'), 'trace retrieval clock');
+assert(page.includes('sourceAsOf') && page.includes('generatedAt'), 'trace retrieval clock');
 assert(page.includes('href="/texas"'), 'texas intelligence route live');
+assert(page.includes('href="/washington"'), 'washington intelligence route live');
 for (const phrase of FORBIDDEN_HOME_COPY) {
   const hit = page.toLowerCase().includes(phrase);
   if (!hit) continue;

@@ -14,10 +14,12 @@ const readJson = (rel) => JSON.parse(read(rel));
 export function publicationMetricInputs() {
   const txPub = read("lib/texas-intelligence/publication.ts");
   const caPub = read("lib/california-intelligence/publication.ts");
+  const waPub = read("lib/washington-intelligence/publication.ts");
   const njPub = read("lib/new-jersey-intelligence/publication.ts");
   const flPub = read("lib/national/fl-state-intel.ts");
   const tx = readJson("lib/texas-intelligence/accepted-snapshot.json");
   const ca = readJson("lib/california-intelligence/accepted-snapshot.json");
+  const wa = readJson("lib/washington-intelligence/accepted-snapshot.json");
   const nj = readJson("lib/new-jersey-intelligence/accepted-snapshot.json");
   const fl = readJson("data/reports/fl-ins-006-state-snapshot.json");
   const flMc = readJson("data/reports/fl-ins-004-market-exam-census.json");
@@ -33,9 +35,11 @@ export function publicationMetricInputs() {
   const txPath = txPub.match(/path: '(\/[^']+)'/)?.[1];
   const njPath = njPub.match(/path: '(\/[^']+)'/)?.[1];
   const caPath = caPub.match(/path: '(\/[^']+)'/)?.[1];
+  const waPath = waPub.match(/path: '(\/[^']+)'/)?.[1];
   if (txPath && existsSync(join(root, "app/texas/page.tsx"))) paths.push(txPath);
   if (njPath && existsSync(join(root, "app/new-jersey/page.tsx"))) paths.push(njPath);
   if (caPath && existsSync(join(root, "app/california/page.tsx"))) paths.push(caPath);
+  if (waPath && existsSync(join(root, "app/washington/page.tsx"))) paths.push(waPath);
 
   const cmsSourceAsOf = cms.match(/modified: '([^']+)'/)?.[1]?.slice(0, 10) || "2026-08-21";
   const flFp = flPub.match(/CANONICAL_SNAPSHOT_FINGERPRINT =\s*'([a-f0-9]{64})'/)?.[1];
@@ -82,6 +86,9 @@ export function publicationMetricInputs() {
     californiaCdiHealthInsurerListRows: ca.cdi_health_list.companies.length,
     californiaDmhcEnforcementRows: ca.enforcement.rows,
     californiaImrRows: ca.imr.rows,
+    washingtonSnapshotFingerprint: wa.fingerprint,
+    washingtonAsOf: wa.as_of,
+    washingtonRegulatedEntities: wa.annual_aggregates.regulated_entities,
     censusTask: census.task,
     censusAsOf: census.at,
     censusAgencies: census.entities.agency,
