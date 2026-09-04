@@ -5,6 +5,7 @@ import { HomeIntelChecklist } from '@/components/home/home-intel-checklist';
 import { HomeIntelEvents } from '@/components/home/home-intel-events';
 import type { Finding, InsuranceHomeIntelV1, Metric } from '@/lib/national/home-intel';
 import { INSURANCE_BRAND, INSURANCE_INDEPENDENCE_LINE } from '@/lib/design/insurance-design-system';
+import { metricByKey, type InsuranceNetworkMetric, type InsuranceNetworkMetricsV1 } from '@/lib/metrics/insurance-network-metrics-v1';
 
 function Trace({ metric }: { metric: Metric }) {
   return (
@@ -37,14 +38,64 @@ function Trace({ metric }: { metric: Metric }) {
           <strong>Source.</strong> {metric.source}
         </p>
         <p>
-          <strong>As-of.</strong> {metric.asOf}
+          <strong>As-of (sourceAsOf).</strong> {metric.asOf}
         </p>
         <p>
-          <strong>Retrieved / generated.</strong> {metric.generatedAt}
+          <strong>Retrieved / generated (generatedAt).</strong> {metric.generatedAt}
         </p>
         <p>
           <strong>Limitation.</strong> {metric.limitation}
         </p>
+        <p>
+          <strong>Canonical identity.</strong> Used only in this trace. Public labels stay consumer-facing.
+        </p>
+      </div>
+    </details>
+  );
+}
+
+function NetworkTrace({ metric }: { metric: InsuranceNetworkMetric }) {
+  return (
+    <details className="mt-2">
+      <summary
+        className="inline-flex min-h-11 cursor-pointer items-center py-2 text-sm font-semibold text-[#0284C7]"
+        data-intel-event="insurance_intel_trace_number"
+      >
+        Trace this number
+      </summary>
+      <div className="space-y-1 text-sm text-[#1E293B]">
+        <p>
+          <strong>Metric.</strong> {metric.key} — {metric.label}
+        </p>
+        <p>
+          <strong>Value state.</strong> {metric.valueState}
+        </p>
+        <p>
+          <strong>Grain.</strong> {metric.grain}
+        </p>
+        <p>
+          <strong>Denominator.</strong> {metric.denominator}
+        </p>
+        <p>
+          <strong>Counts.</strong> {metric.trace.counts}
+        </p>
+        <p>
+          <strong>Does not count.</strong> {metric.trace.doesNotCount}
+        </p>
+        <p>
+          <strong>Coverage.</strong> {metric.coverage}
+        </p>
+        <p>
+          <strong>sourceAsOf.</strong> {metric.sourceAsOf ?? 'not a single official clock'}
+        </p>
+        <p>
+          <strong>generatedAt.</strong> {metric.generatedAt}
+        </p>
+        {metric.trace.whyUnknown ? (
+          <p>
+            <strong>Why unknown.</strong> {metric.trace.whyUnknown}
+          </p>
+        ) : null}
       </div>
     </details>
   );
@@ -146,7 +197,13 @@ function Bars({ finding }: { finding: Finding }) {
   );
 }
 
-export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntelV1 }) {
+export function InsuranceHomeIntelligence({
+  intel,
+  metrics: network,
+}: {
+  intel: InsuranceHomeIntelV1;
+  metrics: InsuranceNetworkMetricsV1;
+}) {
   const metrics = [
     intel.population.agencies,
     intel.population.persons,
@@ -155,6 +212,15 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
     intel.population.credentials,
   ];
   const maxGeo = Math.max(...intel.geography.map((row) => row.credentialRows), 1);
+  const appointingCarriers = metricByKey(network, 'appointing_carrier_entities');
+  const directoryListings = metricByKey(network, 'public_directory_listings');
+  const depthKeys = [
+    'appointments',
+    'consumer_complaint_observations',
+    'rate_filing_observations',
+    'cms_marketplace_evidence_observations',
+  ] as const;
+  const depthMetrics = depthKeys.map((key) => metricByKey(network, key));
 
   return (
     <div data-hub="insurance">
@@ -231,13 +297,14 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
                 ) : null}
                 {item.id === 'graph-agencies' ? (
                   <p className="mt-2 text-xs leading-5 text-[#64748B]">
-                    Graph agencies with attached-credential evidence. Not the 170,499 public directory listings, and not
-                    a public agency-profile directory (0 published).
+                    Graph agencies with attached-credential evidence. Not the{' '}
+                    {directoryListings.value?.toLocaleString('en-US')} public directory listings, and not a public
+                    agency-profile directory (0 published).
                   </p>
                 ) : null}
                 {item.id === 'graph-legal-insurers' ? (
                   <p className="mt-2 text-xs leading-5 text-[#64748B]">
-                    Legal insurer identities. Distinct from 13,547{' '}
+                    Legal insurer identities. Distinct from {appointingCarriers.value?.toLocaleString('en-US')}{' '}
                     <code className="text-[10px]">entity_kind=carrier</code> rows and from marketplace / appointed-by
                     grains.
                   </p>
@@ -351,7 +418,8 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
           </h2>
           <p className="mt-2 max-w-3xl text-sm text-[#1E293B]">
             Color intensity is credential-row volume in the research graph — not safest state, not best market, not
-            service territory. Florida is the only live state intelligence page.
+            service territory. Florida and Texas open live state intelligence pages. New Jersey and California
+            intelligence are live on their own routes.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
             {intel.geography.map((row) => (
@@ -367,7 +435,11 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
                 <strong>{row.state}</strong>
                 <span className="mt-1 block tabular-nums">{row.credentialRows.toLocaleString('en-US')} credential rows</span>
                 <span className="mt-1 block text-xs">
-                  {row.liveIntelligence ? 'Opens Florida intelligence' : 'Opens agency directory'}
+                  {row.liveIntelligence
+                    ? row.state === 'TX'
+                      ? 'Opens Texas intelligence'
+                      : 'Opens Florida intelligence'
+                    : 'Opens agency directory'}
                 </span>
               </Link>
             ))}
@@ -528,9 +600,32 @@ export function InsuranceHomeIntelligence({ intel }: { intel: InsuranceHomeIntel
               <li key={item}>{item}</li>
             ))}
           </ul>
+          <section className="mt-10 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-5" aria-labelledby="tx-federal-depth">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">Texas and federal evidence depth</p>
+            <h3 id="tx-federal-depth" className="mt-2 text-xl font-semibold text-[#0A2540]">
+              Separate grains — not one insurance-company total
+            </h3>
+            <p className="mt-2 text-sm text-[#1E293B]">
+              Texas TDI appointments, complaints, and rate filings stay next to CMS Marketplace observations. They are
+              not added into agencies or licensed insurance companies.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {depthMetrics.map((item) => (
+                <article key={item.key} className="min-w-0 rounded-xl border border-[#E2E8F0] bg-white p-4">
+                  <p className="font-serif text-2xl font-semibold tabular-nums text-[#0A2540]">
+                    {item.value == null ? 'Not acquired' : item.value.toLocaleString('en-US')}
+                  </p>
+                  <h4 className="mt-1 text-sm font-semibold text-[#0A2540]">{item.label}</h4>
+                  <p className="mt-1 text-xs text-[#1E293B]">{item.grain}</p>
+                  <NetworkTrace metric={item} />
+                </article>
+              ))}
+            </div>
+          </section>
           <p className="mt-6 max-w-full break-all text-xs text-[#1E293B]">
             Snapshot {intel.version}. Fingerprint {intel.fingerprint.slice(0, 12)}… db_writes={intel.db_writes}. Florida
-            locked fingerprint remains {intel.sourceClocks[1]?.asOf}.
+            locked fingerprint remains {intel.sourceClocks[1]?.asOf}. Network rollup generated {network.generatedAt}.
+            Newest documented sourceAsOf {network.newestDocumentedSourceAsOf ?? 'none'} (not Git/deploy time).
           </p>
         </div>
       </section>

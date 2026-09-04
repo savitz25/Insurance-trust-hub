@@ -32,7 +32,7 @@ function src(rel: string): string {
   return readFileSync(join(root, rel), 'utf8');
 }
 
-const HOME_FP = '934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9';
+const HOME_FP = '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb';
 const FL_FP = '8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93';
 const home = buildInsuranceHomeIntelV1();
 assert(home.fingerprint === HOME_FP && home.fingerprint === fingerprintHomeIntel(home), 'homepage fingerprint unchanged');

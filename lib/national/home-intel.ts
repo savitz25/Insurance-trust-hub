@@ -154,6 +154,42 @@ export type InsuranceHomeIntelV1 = {
   evidenceJourney: Array<{ id: string; label: string; status: 'connected' | 'unavailable' | 'partial'; note: string }>;
 };
 
+export type HomeIntelCountInput = {
+  agencies: number;
+  persons: number;
+  legalInsurers: number;
+  credentials: number;
+  agencyCredentials: number;
+  marketplace: number;
+  publicDirectoryProviders: number;
+  appointingCarrierEntities: number;
+  flCredentialRows: number;
+  txCredentialRows: number;
+  vtCredentialRows: number;
+  maCredentialRows: number;
+  ohCredentialRows: number;
+  texasLive: boolean;
+  newestDocumentedSourceAsOf?: string | null;
+};
+
+const DEFAULT_HOME_COUNTS: HomeIntelCountInput = {
+  agencies: 82071,
+  persons: 1029860,
+  legalInsurers: 6185,
+  credentials: 1531158,
+  agencyCredentials: 117354,
+  marketplace: 1300108,
+  publicDirectoryProviders: 170499,
+  appointingCarrierEntities: 13547,
+  flCredentialRows: 750316,
+  txCredentialRows: 718894,
+  vtCredentialRows: 50514,
+  maCredentialRows: 7187,
+  ohCredentialRows: 4247,
+  texasLive: true,
+  newestDocumentedSourceAsOf: '2026-09-03',
+};
+
 function fmt(n: number): string {
   return n.toLocaleString('en-US');
 }
@@ -193,22 +229,30 @@ function metric(
   };
 }
 
-export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): InsuranceHomeIntelV1 {
-  const agencies = 82071;
-  const persons = 1029860;
-  const legalInsurers = 6185;
-  const credentials = 1531158;
-  const agencyCredentials = 117354;
-  const personCredentials = 1413804;
-  const marketplace = 1300108;
-  const publicProviders = 170499;
+export function buildInsuranceHomeIntelV1(
+  generatedAt = INS_HOME_CENSUS_AT,
+  counts: HomeIntelCountInput = DEFAULT_HOME_COUNTS,
+): InsuranceHomeIntelV1 {
+  const agencies = counts.agencies;
+  const persons = counts.persons;
+  const legalInsurers = counts.legalInsurers;
+  const credentials = counts.credentials;
+  const agencyCredentials = counts.agencyCredentials;
+  const personCredentials = credentials - agencyCredentials;
+  const marketplace = counts.marketplace;
+  const publicProviders = counts.publicDirectoryProviders;
 
   const credentialByState = [
-    { state: 'FL', credentialRows: 750316, href: '/florida', liveIntelligence: true },
-    { state: 'TX', credentialRows: 718894, href: '/directory', liveIntelligence: false },
-    { state: 'VT', credentialRows: 50514, href: '/directory', liveIntelligence: false },
-    { state: 'MA', credentialRows: 7187, href: '/directory', liveIntelligence: false },
-    { state: 'OH', credentialRows: 4247, href: '/directory', liveIntelligence: false },
+    { state: 'FL', credentialRows: counts.flCredentialRows, href: '/florida', liveIntelligence: true },
+    {
+      state: 'TX',
+      credentialRows: counts.txCredentialRows,
+      href: counts.texasLive ? '/texas' : '/directory',
+      liveIntelligence: counts.texasLive,
+    },
+    { state: 'VT', credentialRows: counts.vtCredentialRows, href: '/directory', liveIntelligence: false },
+    { state: 'MA', credentialRows: counts.maCredentialRows, href: '/directory', liveIntelligence: false },
+    { state: 'OH', credentialRows: counts.ohCredentialRows, href: '/directory', liveIntelligence: false },
   ] as const;
 
   const loa = [
@@ -445,6 +489,12 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
     sourceClocks: [
       { id: 'census', label: 'INS-NAT-FINAL-006 entity/credential census', asOf: INS_HOME_CENSUS_AT },
       { id: 'florida-snapshot', label: 'Locked Florida state snapshot (untouched)', asOf: CANONICAL_SNAPSHOT_FINGERPRINT },
+      { id: 'texas-snapshot', label: 'Locked Texas state snapshot', asOf: 'insurance-tx-state-intel-v1' },
+      {
+        id: 'network-metrics',
+        label: 'insurance-network-metrics-v1 newest documented sourceAsOf',
+        asOf: counts.newestDocumentedSourceAsOf ?? INS_HOME_CENSUS_AT,
+      },
     ],
     sources: [
       {
@@ -574,7 +624,8 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
       { href: '/medicare', label: 'Medicare research', note: 'Existing Medicare intelligence surfaces.' },
       { href: '/tools/marketplace-plan-research', label: 'Marketplace plan research', note: 'ACA Marketplace landscape by ZIP. Federal overlay, not a DOI license.' },
       { href: '/methodology', label: 'Methodology', note: 'How verification and research work here.' },
-      { href: '/carriers', label: 'Carrier research (public-data rollups)', note: 'Existing Medicare-evidenced carrier research. Not 6,185 public legal-insurer pages.' },
+      { href: '/carriers', label: 'Carrier research (public-data rollups)', note: `Existing Medicare-evidenced carrier research. Not ${fmt(legalInsurers)} public legal-insurer pages.` },
+      { href: '/texas', label: 'Texas Insurance Intelligence', note: 'Live TDI agency, appointment, complaint, and rate-filing snapshot. Not a person directory.' },
       { href: '/my-insurance', label: 'My Insurance', note: 'Save research. Not a quote funnel.' },
       { href: '/my-insurance/compare', label: 'Compare saved options', note: 'Existing My Insurance compare session. Not a ranking board.' },
     ],
@@ -596,7 +647,7 @@ export function buildInsuranceHomeIntelV1(generatedAt = INS_HOME_CENSUS_AT): Ins
       { id: 'appointment', label: 'Appointment evidence', status: 'partial', note: 'Not employment; not NAIC identity.' },
       { id: 'federal', label: 'Federal program evidence', status: 'partial', note: 'CMS Marketplace and Medicare tools, separate lane.' },
       { id: 'regulatory', label: 'Regulatory observations', status: 'partial', note: 'Internal complaint observations; not a clean-record proof.' },
-      { id: 'view', label: 'InsuranceTrustHub research view', status: 'connected', note: 'This national homepage plus /directory and /florida.' },
+      { id: 'view', label: 'InsuranceTrustHub research view', status: 'connected', note: 'This national homepage plus /directory, /florida, /texas, /new-jersey, and /california.' },
     ],
   };
 

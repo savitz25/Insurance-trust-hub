@@ -34,7 +34,7 @@ function src(rel: string): string {
   return readFileSync(join(root, rel), 'utf8');
 }
 
-const HOME_FP = '934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9';
+const HOME_FP = '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb';
 const FL_FP = '8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93';
 
 const a = buildInsuranceHomeIntelV1('2026-08-29T05:48:24.729Z');
@@ -111,9 +111,9 @@ assert(/Search listings/.test(zip), 'submit label Search listings');
 assert(/aria-label="Search public insurance directory listings by ZIP code"/.test(zip), 'ZIP form labeled');
 assert(/aria-label="ZIP code for public directory listings"/.test(zip), 'ZIP input labeled');
 assert(/role="alert"/.test(zip), 'ZIP validation alert');
-assert(/170,499|170499/.test(page), 'directory listing count distinguished from graph agencies');
+assert(/directoryListings\.value|publicDirectoryProviders/.test(page), 'directory listing count distinguished from graph agencies');
 assert(/entity_kind=carrier/.test(page), 'legal insurer ≠ entity_kind=carrier');
-assert(/13,547|13547/.test(page), 'carrier-kind count shown as distinct grain');
+assert(/appointing_carrier_entities|appointingCarriers/.test(page), 'carrier-kind count shown as distinct grain');
 assert(/Public people pages remain 0|public people pages remain 0/i.test(page), 'people not a public directory');
 assert(/The legal insurer that underwrites/.test(page), 'Carrier glossary');
 assert(/licensed business that may sell/.test(page), 'Agency glossary');

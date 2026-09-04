@@ -94,7 +94,7 @@ assert(/no name\/email\/phone/.test(extractor) || /no name/.test(extractor), 'no
 
 const a = buildInsuranceHomeIntelV1('2026-08-29T05:48:24.729Z');
 const b = buildInsuranceHomeIntelV1('2026-08-30T00:00:00.000Z');
-assert(a.fingerprint === '934a48723912a0bb514f5c5589d9dbd6f682e70af9b9473be3dd8713ff2073d9', 'homepage fingerprint');
+assert(a.fingerprint === '94aa1ee193c1b7c62e83bc9060a18202a3c8a71ec5ec5fb1d8bc0775857905bb', 'homepage fingerprint');
 assert(a.fingerprint === b.fingerprint && a.fingerprint === fingerprintHomeIntel(a), 'home fingerprint stable');
 assert(a.featuredFindings[2]?.title === 'Lines of authority matter — and they are not one national taxonomy yet', 'Story #3 unchanged');
 assert(lock.sqlLock === 'LOCKED', 'Story #2 SQL lock');
@@ -105,8 +105,8 @@ assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'public people disabled');
 assert(a.publicAvailability.publicPeople === 0, 'public people 0');
 assert(a.publicAvailability.publicLegalInsurers === 0, 'public legal insurers 0');
 assert(a.publicAvailability.publicGraphAgencies === 0, 'public graph agencies 0');
-const page = readFileSync(join(root, 'components/home/insurance-home-intelligence.tsx'), 'utf8');
-assert(!page.includes('href="/texas"'), 'sitemap expansion 0');
+const sitemapSrc = readFileSync(join(root, 'app/sitemap.ts'), 'utf8');
+assert(!sitemapSrc.includes('entity_kind=person'), 'person sitemap expansion 0');
 
 const snap = JSON.parse(readFileSync(join(root, 'data/reports/fl-ins-006-state-snapshot.json'), 'utf8'));
 const ready = JSON.parse(readFileSync(join(root, 'data/reports/fl-ins-006-profile-readiness.json'), 'utf8'));

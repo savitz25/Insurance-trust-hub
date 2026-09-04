@@ -1,5 +1,6 @@
 import { InsuranceHomeIntelligence } from '@/components/home/insurance-home-intelligence';
-import { loadInsuranceHomeIntel } from '@/lib/national/load-home-intel';
+import { loadInsuranceNetworkMetrics } from '@/lib/metrics/load-network-metrics';
+import { projectHomeIntelFromNetworkMetrics } from '@/lib/metrics/project-home-intel';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildHomepageGraph } from '@/lib/seo/schemas';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -12,11 +13,12 @@ export const metadata = buildMetadata({
 });
 
 export default function HomePage() {
-  const intel = loadInsuranceHomeIntel();
+  const metrics = loadInsuranceNetworkMetrics();
+  const intel = projectHomeIntelFromNetworkMetrics(metrics);
   return (
     <>
       <JsonLd data={buildHomepageGraph()} />
-      <InsuranceHomeIntelligence intel={intel} />
+      <InsuranceHomeIntelligence intel={intel} metrics={metrics} />
     </>
   );
 }
