@@ -6,9 +6,9 @@ import { buildHomepageGraph } from '@/lib/seo/schemas';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export const metadata = buildMetadata({
-  title: 'Insurance Licensing & Regulatory Intelligence',
+  title: 'Insurance Agency, License, Carrier & Regulatory Research',
   description:
-    'Independent national insurance research: agencies, producers, insurers, licenses, lines of authority, appointments, and public regulatory records. No paid rankings. No lead fees. We organize the evidence. You decide.',
+    'Research insurance agencies, licensing, lines of authority, appointments, insurers, complaints, examinations, rate filings, and state regulatory evidence. No paid rankings or Trust Score.',
   path: '/',
 });
 
