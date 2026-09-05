@@ -1,15 +1,15 @@
-import { InsuranceHomeIntelligence } from '@/components/home/insurance-home-intelligence';
-import { loadInsuranceNetworkMetrics } from '@/lib/metrics/load-network-metrics';
-import { projectHomeIntelFromNetworkMetrics } from '@/lib/metrics/project-home-intel';
-import { JsonLd } from '@/lib/seo/json-ld';
-import { buildHomepageGraph } from '@/lib/seo/schemas';
-import { buildMetadata } from '@/lib/seo/metadata';
+import { InsuranceHomeIntelligence } from "@/components/home/insurance-home-intelligence";
+import { loadInsuranceNetworkMetrics } from "@/lib/metrics/load-network-metrics";
+import { projectHomeIntelFromNetworkMetrics } from "@/lib/metrics/project-home-intel";
+import { JsonLd } from "@/lib/seo/json-ld";
+import { buildHomepageGraph } from "@/lib/seo/schemas";
+import { buildMetadata } from "@/lib/seo/metadata";
 
 export const metadata = buildMetadata({
-  title: 'Insurance Licensing & Regulatory Intelligence',
+  title: "Insurance Agency, License, Carrier & Regulatory Research",
   description:
-    'Independent national insurance research: agencies, producers, insurers, licenses, lines of authority, appointments, and public regulatory records. No paid rankings. No lead fees. We organize the evidence. You decide.',
-  path: '/',
+    "Research insurance agencies, licensing, lines of authority, appointments, insurers, complaints, examinations, rate filings, and state regulatory evidence. No paid rankings or Trust Score.",
+  path: "/",
 });
 
 export default function HomePage() {

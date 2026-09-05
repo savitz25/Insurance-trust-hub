@@ -16,7 +16,7 @@ const page = readFileSync('app/new-jersey/page.tsx', 'utf8');
 const ui = readFileSync('components/new-jersey/nj-state-page.tsx', 'utf8');
 const pkg = readFileSync('package.json', 'utf8');
 const footer = readFileSync('lib/design/insurance-design-system.ts', 'utf8');
-const home = readFileSync('components/home/insurance-home-intelligence.tsx', 'utf8');
+const home = readFileSync('components/home/insurance-home-intelligence.tsx', 'utf8') + readFileSync('lib/metrics/insurance-home-evidence-inventory.ts', 'utf8');
 const bail = readFileSync('lib/directory/bail-bond-publication.ts', 'utf8');
 const s = NEW_JERSEY_SNAPSHOT;
 

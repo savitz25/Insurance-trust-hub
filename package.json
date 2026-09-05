@@ -24,6 +24,7 @@
     "home:metrics": "node --import tsx scripts/build_network_metrics_v1.mjs",
     "assert:network-metrics": "node scripts/assert_network_metrics_v1.mjs && npx --yes tsx --test scripts/test_insurance_network_metrics.ts && python -X utf8 scripts/check-insurance-network-metrics-stale.py",
     "assert:visual": "node scripts/assert-visual-005.mjs",
+    "assert:ins-home-003": "tsx scripts/assert-ins-home-003.mts",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "brand:favicons": "node scripts/install-ith-favicon.mjs",
