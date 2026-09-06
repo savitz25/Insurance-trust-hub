@@ -70,13 +70,15 @@ export async function GET(
     const askOrigin = (
       process.env.ATH_CUSTOMER_ORIGIN || "https://www.asktrusthub.com"
     ).replace(/\/+$/, "");
+    console.info(JSON.stringify({ event: "claim_cta_clicked", hub: "insurance", profile_class: "legal_insurer", state: "unknown", acquisition_source: "organic" }));
     return redirect(
       `${askOrigin}/claim/continue?handoff=${encodeURIComponent(minted.token)}`,
     );
   } catch (error) {
     console.error("Insurance customer handoff unavailable", {
       category: error instanceof Error ? error.message : "unknown",
-      profileId: row.entity_id,
+      hub: "insurance",
+      profileClass: "legal_insurer",
     });
     return redirect(recoveryUrl(requestOrigin, row.slug));
   }
