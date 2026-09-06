@@ -8,6 +8,7 @@ import {
 } from "../lib/metrics/insurance-home-evidence-inventory";
 import metricsJson from "../data/home/insurance-network-metrics-v1.json";
 import type { InsuranceNetworkMetricsV1 } from "../lib/metrics/insurance-network-metrics-v1";
+import { buildHomepageGraph } from "../lib/seo/schemas";
 
 const errors: string[] = [];
 const ok = (condition: unknown, message: string) => {
@@ -176,6 +177,10 @@ ok(
   "real analytics hooks render",
 );
 ok(!/AggregateRating/.test(renderedStructure), "no AggregateRating");
+ok(
+  JSON.stringify(buildHomepageGraph()).includes('"@type":"WebPage"'),
+  "homepage WebPage JSON-LD",
+);
 ok(
   !/best insurer|top insurer|recommended insurer/i.test(renderedStructure),
   "no ranking language",
