@@ -748,7 +748,7 @@ function emptyBase(parsed: ParsedInsuranceAsk, started: number): InsuranceAskRes
     },
     limitations: LIMITATIONS,
     elapsedMs: Date.now() - started,
-    coverageState: parsed.query.coverageState ?? 'KNOWN',
+    coverageState: parsed.query.coverageState ?? (parsed.query.mode === 'fail_closed' ? 'UNSUPPORTED' : 'KNOWN'),
   };
 }
 

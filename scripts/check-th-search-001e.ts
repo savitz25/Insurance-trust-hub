@@ -35,6 +35,7 @@ for (const question of INSURANCE_SEARCH_GOLDEN_QUESTIONS) {
 const root = process.cwd();
 for (const file of ['docs/trusthub-specialist-search-v1.md','components/specialist-search/insurance-specialist-search-shell.tsx','components/ask-insurance-result.tsx','app/ask/page.tsx']) assert.ok(fs.existsSync(path.join(root, file)), `missing ${file}`);
 const rendered = ['app/ask/page.tsx','components/ask-insurance-result.tsx','components/specialist-search/insurance-specialist-search-shell.tsx'].map((f) => fs.readFileSync(path.join(root, f), 'utf8')).join('\n');
+assert.ok(fs.readFileSync(path.join(root, 'lib/insurance-ask/execute.ts'), 'utf8').includes("parsed.query.mode === 'fail_closed' ? 'UNSUPPORTED' : 'KNOWN'"), 'fail-closed results must not display KNOWN coverage');
 for (const phrase of ['Research insurance','What do you want to find out?','Advanced filters','Why this matched','Trace this result']) assert.ok(rendered.includes(phrase), `missing shared anatomy: ${phrase}`);
 assert.ok(!/track\([^\n]*queryText|rawQuery/.test(rendered), 'raw query must not enter analytics');
 
