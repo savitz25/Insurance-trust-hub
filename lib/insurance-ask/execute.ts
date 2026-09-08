@@ -14,7 +14,7 @@ import {
   isSupabaseAdminConfigured,
 } from '@/lib/supabase/config';
 import { PUBLIC_PERSON_PROFILES_ENABLED } from '@/lib/national/publication';
-import { getPublishedByNaic, insurerProfilePath } from '@/lib/national/legal-insurer-pilot';
+import { getPublishedByNaic, insurerProfilePath, searchPublishedInsurers } from '@/lib/national/legal-insurer-pilot';
 import { AGENCY_MULTISTATE } from '@/lib/national/home-intel';
 
 export type AskCard = {
@@ -57,6 +57,7 @@ export type InsuranceAskResult = {
   };
   limitations: string[];
   elapsedMs: number;
+  coverageState: 'KNOWN' | 'UNKNOWN' | 'PARTIAL' | 'NOT_ACQUIRED' | 'REQUEST_ONLY' | 'UNSUPPORTED';
 };
 
 const LIMITATIONS = [
@@ -157,6 +158,11 @@ export async function executeInsuranceAsk(
   const empty = emptyBase(parsed, started);
 
   if (q.mode === 'fail_closed' || q.mode === 'definition') {
+    empty.elapsedMs = Date.now() - started;
+    return empty;
+  }
+
+  if (q.mode === 'directory') {
     empty.elapsedMs = Date.now() - started;
     return empty;
   }
@@ -434,6 +440,31 @@ const UNPUBLISHED_NAIC =
   'InsuranceTrustHub has not published a legal-insurer research profile for this NAIC company code. Graph identity may still exist. Absence of a public page is not a finding about the company.';
 
 async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
+  if (parsed.query.nameQuery) {
+    const matches = searchPublishedInsurers(parsed.query.nameQuery).slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
+    const results: AskCard[] = matches.flatMap((match) => {
+      const published = getPublishedByNaic(match.naicCode ?? '');
+      if (!published) return [];
+      return [{
+      entityId: published.entity_id,
+      entityClass: 'insurer',
+      displayName: published.canonical_legal_name,
+      npn: null,
+      naicCode: published.naic_cocode,
+      credentialJurisdiction: published.jurisdiction[0] ?? null,
+      credentialStatus: published.public_safe_status,
+      licenseNumber: null,
+      licenseClass: null,
+      loas: [],
+      sourceDataset: 'ins-insurer-006-wave1',
+      sourceObservedAt: published.report_dates[0] ?? null,
+      href: insurerProfilePath(published.slug),
+      publicationNote: null,
+      whyMatched: 'This published legal-insurer identity is a bounded normalized-name candidate. The legal name and NAIC code on the profile establish identity; the consumer brand is not assumed.',
+    }];
+    });
+    return finish(parsed, results, results.length, started, 'Wave-1 published legal-insurer normalized-name candidates');
+  }
   const base = emptyBase(parsed, started);
   const reason =
     parsed.query.jurisdiction?.meaning === 'regulatory_domicile' || parsed.query.domicile
@@ -452,6 +483,7 @@ async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promis
       },
     },
     elapsedMs: Date.now() - started,
+    coverageState: parsed.query.coverageState ?? (parsed.query.mode === 'fail_closed' ? 'UNSUPPORTED' : 'KNOWN'),
   };
 }
 
@@ -601,6 +633,7 @@ async function listAgencies(parsed: ParsedInsuranceAsk, started: number): Promis
       query = query.ilike('license_credentials.license_class', `%${loa}%`);
     }
   }
+  if (q.nameQuery) query = query.ilike('display_name', `%${q.nameQuery.slice(0, 80)}%`);
   const { data, count } = await query;
   const rows = (data ?? []) as EntityRow[];
   const results = rows.map((row) => cardFromEntity(row, q.linesOfAuthority ?? []));
@@ -715,6 +748,7 @@ function emptyBase(parsed: ParsedInsuranceAsk, started: number): InsuranceAskRes
     },
     limitations: LIMITATIONS,
     elapsedMs: Date.now() - started,
+    coverageState: parsed.query.coverageState ?? 'KNOWN',
   };
 }
 
@@ -753,6 +787,7 @@ function finish(
     },
     limitations: LIMITATIONS,
     elapsedMs: Date.now() - started,
+    coverageState: parsed.query.coverageState ?? 'KNOWN',
   };
 }
 
@@ -799,6 +834,7 @@ export function publicAskPayload(result: InsuranceAskResult) {
     provenance: result.provenance,
     limitations: result.limitations,
     elapsedMs: result.elapsedMs,
+    coverageState: result.coverageState,
     definition: result.parsed.query.definitionId ? ASK_DEFINITIONS[result.parsed.query.definitionId] : undefined,
   };
 }
