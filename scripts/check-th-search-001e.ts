@@ -23,6 +23,7 @@ assert.equal(interpretInsuranceAskQuery('best insurance company').query.mode, 'f
 assert.equal(interpretInsuranceAskQuery('agency with no complaints').query.mode, 'fail_closed');
 assert.equal(interpretInsuranceAskQuery('licensed insurance companies in Texas').query.coverageState, 'NOT_ACQUIRED');
 assert.ok(interpretInsuranceAskQuery('Florida agencies with Property and Casualty authority').query.linesOfAuthority?.length === 2);
+assert.equal(interpretInsuranceAskQuery('Florida agencies with Property and Casualty authority').query.coverageState, 'PARTIAL');
 assert.equal(interpretInsuranceAskQuery('What is an insurance appointment?').query.definitionId, 'appointment');
 
 for (const question of INSURANCE_SEARCH_GOLDEN_QUESTIONS) {

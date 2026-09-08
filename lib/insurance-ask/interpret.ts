@@ -480,6 +480,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     linesOfAuthority: loas.length ? loas : undefined,
     loaMatch: /\band\b/.test(q) && loas.length > 1 ? 'all' : 'any',
     loaAsOfficialObservation: states[0] !== 'FL',
+    coverageState: states[0] === 'FL' && loas.length ? 'PARTIAL' : 'KNOWN',
     sort: 'name',
     page: safePage,
   };
