@@ -72,6 +72,7 @@ export type InsuranceAskMode =
   | 'comparison'
   | 'evidence'
   | 'definition'
+  | 'directory'
   | 'fail_closed';
 
 export type InsuranceEntityClass = 'person' | 'agency' | 'insurer';
@@ -105,6 +106,8 @@ export type InsuranceResearchQuery = {
   failReason?: string;
   alternatives?: string[];
   aggregateMetric?: 'credentials_by_state' | 'entity_count' | 'multi_state_agencies';
+  directoryZip?: string;
+  coverageState?: 'KNOWN' | 'UNKNOWN' | 'PARTIAL' | 'NOT_ACQUIRED' | 'REQUEST_ONLY' | 'UNSUPPORTED';
 };
 
 export type InterpretationLine = { label: string; value: string };

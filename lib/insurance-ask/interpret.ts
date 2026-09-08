@@ -13,11 +13,17 @@ const STATE_NAMES: Record<string, string> = {
   massachusetts: 'MA',
   ohio: 'OH',
   vermont: 'VT',
+  'new jersey': 'NJ',
+  california: 'CA',
+  washington: 'WA',
   fl: 'FL',
   tx: 'TX',
   ma: 'MA',
   oh: 'OH',
   vt: 'VT',
+  nj: 'NJ',
+  ca: 'CA',
+  wa: 'WA',
 };
 
 function detectStates(q: string): string[] {
@@ -102,6 +108,23 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     };
   }
 
+  const zip = q.match(/\b(\d{5})\b/)?.[1];
+  if (zip && /\b(near|zip|local|directory|homeowners|auto|life|health)\b/i.test(q) && !/\b(npn|naic|license)\b/i.test(q)) {
+    const query: InsuranceResearchQuery = { mode: 'directory', directoryZip: zip, page: 1, coverageState: 'KNOWN' };
+    push('Research type', 'Local public directory');
+    push('ZIP', zip);
+    push('Boundary', 'Directory listing, not canonical regulatory identity or service territory');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(near me|in boca raton|local (insurance|agenc)|homeowners insurance near)\b/i.test(q)) {
+    const query = fail('Local listing discovery needs a ZIP code. The public directory is separate from the regulatory identity graph and does not prove service territory.', ['Insurance agencies in ZIP 33441.', 'Show insurance agencies credentialed in Florida.']);
+    query.coverageState = 'PARTIAL';
+    push('Research type', 'Local directory handoff');
+    push('Coverage', 'PARTIAL — ZIP required');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (/\bhow many insurance providers\b/i.test(q)) {
     const query = fail(
       'Counts require an entity class. Agencies, individual producers, and legal insurers are not added into one “insurance providers” total.',
@@ -150,6 +173,28 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
       ['Show insurance agencies credentialed in Florida.'],
     );
     push('Mode', 'fail_closed');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(no enforcement|no exams?)\b/i.test(q)) {
+    const query = fail('Missing regulatory-event evidence is not a clean history. Coverage varies by source, period, and identity linkage.', ['Show insurers with indexed regulatory evidence.']);
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — absence cannot be established');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(serv(e|es|ing)|service territory|writes? policies in)\b/i.test(q)) {
+    const query = fail('Credential jurisdiction, office location, insurer domicile, appointment county, and ZIP listings do not establish service territory or policy availability.', ['Show insurance agencies credentialed in Florida.', 'Browse public directory listings by ZIP.']);
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — service territory');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(complaints?|market conduct exams?|financial exams?|enforcement|rate filings?)\b/i.test(q) && !/\bwhat (is|are)\b/i.test(q)) {
+    const query = fail('This evidence family is source-specific and is not yet executable as a complete cross-state identity list in Specialist Search. An observation is not wrongdoing, and missing evidence is not zero.', ['Research a labeled NPN or NAIC company code.', 'Explore state intelligence.']);
+    query.coverageState = 'PARTIAL';
+    push('Research type', 'Regulatory evidence');
+    push('Coverage', 'PARTIAL — source and identity linkage vary');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -270,6 +315,23 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
+  if (/\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?)\b/i.test(q) && /\b(texas|new jersey|california|washington)\b/i.test(q)) {
+    const state = detectStates(q)[0];
+    const query = fail(`${state ?? 'The requested'} complete authorized/legal-insurer roster is not acquired as a current bulk universe. Missing coverage is not zero.`, ['Find insurer NAIC code 10064.', 'What is a legal insurer?']);
+    query.entityClass = 'insurer';
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Entity class', 'Legal insurer');
+    push('Coverage', 'NOT_ACQUIRED');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(nfip certified|certified agenc)/i.test(q)) {
+    const query = fail('An NFIP registry observation is not Trust Hub or NFIP certification. Search can explain the registry evidence without creating a certification claim.', ['NFIP insurance agents.', 'What is an insurance appointment?']);
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — certification conclusion');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (
     /\bwho is\b/i.test(q) ||
     /\bnamed\b/i.test(q) ||
@@ -291,6 +353,26 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   const states = detectStates(q);
   const loas = detectLoas(q);
   const geo = geographyMeaning(q);
+
+  const looksLikeNamedIdentity = Boolean(entityClass) && !states.length && !loas.length && !/\b(how many|with |credentialed|licensed|compare|what is|difference|complaint|exam|enforcement|rate filing|appointment|marketplace)\b/i.test(q);
+  if (looksLikeNamedIdentity) {
+    const name = q.replace(/^(find|research|check)\s+/i, '').trim();
+    const query: InsuranceResearchQuery = { mode: 'entity', entityClass, nameQuery: name, credentialStatus: 'current_source', sort: 'name', page: safePage, coverageState: 'PARTIAL' };
+    push('Research type', 'Identity name candidate');
+    push('Entity class', entityLabel(entityClass!));
+    push('Name', name);
+    push('Identity rule', 'Name match is a candidate; exact regulatory identity is not inferred from similarity');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (!entityClass && /\b(state farm|insurance agency|insurance company)\b/i.test(q) && !/\b(what|difference|underwrite|appoint|represent)\b/i.test(q)) {
+    const name = q.replace(/^(find|research|check)\s+/i, '').trim();
+    const query: InsuranceResearchQuery = { mode: 'entity', entityClass: 'agency', nameQuery: name, credentialStatus: 'current_source', sort: 'name', page: safePage, coverageState: 'PARTIAL' };
+    push('Research type', 'Identity name candidate');
+    push('Name', name);
+    push('Identity rule', 'Name match is a candidate, not canonical identity proof');
+    return { raw: q, query, interpretation: lines };
+  }
 
   if (/\bhow many\b|\bcount of\b/i.test(q)) {
     if (!entityClass) {

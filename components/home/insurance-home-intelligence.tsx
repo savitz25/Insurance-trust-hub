@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ZipSearch } from "@/components/zip-search";
+import { InsuranceSpecialistSearchShell } from "@/components/specialist-search/insurance-specialist-search-shell";
 import { HomeIntelEvents } from "./home-intel-events";
 import type { InsuranceHomeIntelV1 } from "@/lib/national/home-intel";
 import type { InsuranceNetworkMetricsV1 } from "@/lib/metrics/insurance-network-metrics-v1";
@@ -142,36 +143,24 @@ export function InsuranceHomeIntelligence({
             decide.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/directory"
-              data-intel-event="insurance_intel_research_agency"
-            >
-              <Button size="lg" variant="trust">
-                Search public directory
-              </Button>
-            </Link>
             <a href="#states" data-intel-event="insurance_intel_explore">
               <Button size="lg" variant="outline">
                 Explore state intelligence
               </Button>
             </a>
-            <Link href="/ask" data-intel-event="insurance_intel_ask">
-              <Button size="lg" variant="outline">
-                Ask InsuranceTrustHub
-              </Button>
-            </Link>
           </div>
+          <div className="mt-8 max-w-5xl"><InsuranceSpecialistSearchShell compact /></div>
           <div className="mt-8 max-w-2xl rounded-2xl border border-sky-200 bg-white/90 p-5">
             <p className="text-sm font-semibold text-[#0A2540]">
-              Search public directory listings by ZIP
+              Looking for local directory listings?
             </p>
             <p className="mt-1 text-sm text-slate-600">
-              Directory listings are not the same universe as research-graph
-              agencies, people, or insurers.
+              Browse public insurance listings by ZIP. Listings are a separate publication grain, not canonical regulatory identities or proof of service territory.
             </p>
             <div className="mt-3">
               <ZipSearch />
             </div>
+            <Link href="/directory" data-intel-event="insurance_intel_research_agency" className="mt-3 inline-flex min-h-11 items-center font-semibold text-sky-700">Search public directory listings →</Link>
           </div>
         </div>
       </section>
@@ -414,27 +403,10 @@ export function InsuranceHomeIntelligence({
             Continue your research
           </p>
           <h2 className="mt-2 text-3xl font-semibold">
-            Ask a structured insurance research question
+            Continue in Specialist Search
           </h2>
-          <form
-            action="/ask"
-            data-intel-event="insurance_intel_ask"
-            className="mt-5 flex max-w-2xl flex-col gap-2 sm:flex-row"
-            role="search"
-          >
-            <label className="sr-only" htmlFor="insurance-question">
-              Ask InsuranceTrustHub
-            </label>
-            <input
-              id="insurance-question"
-              name="q"
-              className="min-h-12 flex-1 rounded-xl bg-white px-4 text-slate-900"
-              placeholder="What evidence should I check about an insurer or agency?"
-            />
-            <button className="min-h-12 rounded-xl bg-sky-600 px-6 font-semibold">
-              Ask InsuranceTrustHub
-            </button>
-          </form>
+          <p className="mt-3 max-w-2xl text-slate-300">Use the same question-first research experience for an agency, producer, legal insurer, credential, or supported evidence family.</p>
+          <Link href="/ask" data-intel-event="insurance_intel_ask" className="mt-5 inline-flex min-h-12 items-center rounded-xl bg-sky-600 px-6 font-semibold text-white">Open Insurance Specialist Search →</Link>
           <p className="mt-8 text-xs text-slate-300">
             Inventory generated from {metrics.schemaVersion} at{" "}
             {metrics.generatedAt}. Source clocks vary by agency and evidence

@@ -26,6 +26,13 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
             </div>
           ))}
         </dl>
+        <div className="mt-4 flex flex-wrap gap-2" aria-label="Interpreted research criteria">
+          {result.parsed.interpretation.filter((row) => !['Mode', 'Sort'].includes(row.label)).map((row) => (
+            <Link key={`criterion-${row.label}`} href={removeCriterionHref(result.queryText, row.label)} data-specialist-event="refine" className="inline-flex min-h-11 items-center rounded-full border border-sky-200 px-3 text-sm text-sky-800" aria-label={`Remove ${row.label} criterion`}>
+              {row.label}: {row.value} <span aria-hidden="true" className="ml-2">×</span>
+            </Link>
+          ))}
+        </div>
         <p className="mt-3 text-sm text-[#1E293B]">
           Parsing and regulatory execution stay separate. Credential jurisdiction is not service territory.
         </p>
@@ -44,6 +51,19 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
           </button>
         </form>
       </section>
+
+      <section className="rounded-2xl border border-sky-200 bg-sky-50 p-4" aria-label="Research coverage">
+        <p className="font-semibold text-[#0A2540]">Coverage: {result.coverageState}</p>
+        <p className="mt-1 text-sm text-slate-700">Unavailable or incomplete data is never converted into a zero or a clean-history claim.</p>
+      </section>
+
+      {q.mode === 'directory' && q.directoryZip ? (
+        <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
+          <h2 className="text-2xl font-semibold text-[#0A2540]">Local directory research</h2>
+          <p className="mt-3 text-sm text-slate-700">ZIP listings are a separate publication grain. They are not canonical agency identities and do not prove service territory.</p>
+          <Link href={`/directory?zip=${encodeURIComponent(q.directoryZip)}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-700">Browse listings for {q.directoryZip} →</Link>
+        </section>
+      ) : null}
 
       {q.mode === 'fail_closed' ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-[#F0F9FF] p-5">
@@ -85,7 +105,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         </section>
       ) : null}
 
-      {q.mode !== 'fail_closed' && !def && !result.results.length && !result.counts.length ? (
+      {q.mode !== 'fail_closed' && q.mode !== 'directory' && !def && !result.results.length && !result.counts.length ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
           <h2 className="text-2xl font-semibold text-[#0A2540]">No matching research identities in this extract</h2>
           <p className="mt-3 text-sm leading-relaxed text-[#1E293B]">
@@ -159,12 +179,25 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
                 <span className="font-semibold">Why this matched. </span>
                 {row.whyMatched}
               </p>
+              <div className="mt-4 flex flex-wrap gap-4">
               {row.publicationNote ? <p className="mt-2 text-xs text-[#1E293B]">{row.publicationNote}</p> : null}
               {row.href ? (
-                <Link href={row.href} className="mt-4 inline-flex min-h-11 items-center font-semibold text-[#0284C7]">
-                  View research report
+                <Link href={row.href} data-specialist-event="profile_open" className="inline-flex min-h-11 items-center font-semibold text-[#0284C7]">
+                  Research this {row.entityClass === 'insurer' ? 'insurer' : row.entityClass === 'person' ? 'producer' : 'agency'}
                 </Link>
               ) : null}
+              </div>
+              <details data-specialist-event="trace_open" className="mt-3 rounded-xl bg-slate-50 p-3 text-sm">
+                <summary className="min-h-11 cursor-pointer py-2 font-semibold text-sky-800">Trace this result</summary>
+                <dl className="grid gap-2 sm:grid-cols-2">
+                  <div><dt className="text-xs uppercase">Identity class</dt><dd>{row.entityClass}</dd></div>
+                  <div><dt className="text-xs uppercase">Identity method</dt><dd>{row.npn ? 'Exact NPN or canonical graph identity' : row.naicCode ? 'Exact NAIC company code' : 'Structured source match'}</dd></div>
+                  <div><dt className="text-xs uppercase">Credential source</dt><dd>{row.sourceDataset ?? 'See accepted source family'}</dd></div>
+                  <div><dt className="text-xs uppercase">Official/source date</dt><dd>{row.sourceObservedAt ?? 'Source clock unavailable'}</dd></div>
+                  <div className="sm:col-span-2"><dt className="text-xs uppercase">Geography meaning</dt><dd>{row.credentialJurisdiction ? `${row.credentialJurisdiction} credential jurisdiction — not office or service territory` : 'No service territory inferred'}</dd></div>
+                </dl>
+                <p className="mt-3 text-xs text-slate-600">LOA is not appointment. Appointment is not employment or endorsement. Marketplace evidence is not a state license.</p>
+              </details>
             </li>
           ))}
         </ol>
@@ -224,4 +257,15 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
       </details>
     </div>
   );
+}
+
+function removeCriterionHref(query: string, label: string) {
+  let revised = query;
+  if (/identifier/i.test(label)) revised = revised.replace(/\b(npn|naic(?: company)?(?: code)?)\s*#?\s*\d{3,12}\b/gi, '');
+  else if (/jurisdiction|domicile/i.test(label)) revised = revised.replace(/\b(florida|texas|massachusetts|ohio|vermont|new jersey|california|washington|FL|TX|MA|OH|VT|NJ|CA|WA)\b/gi, '');
+  else if (/loa|authority/i.test(label)) revised = revised.replace(/\b(property|casualty|life|health|personal lines)\b/gi, '');
+  else if (/evidence/i.test(label)) revised = revised.replace(/\b(appointment|marketplace|credential|complaints?|exams?|enforcement|rate filings?)\b/gi, '');
+  else return '/ask';
+  revised = revised.replace(/\s+/g, ' ').trim();
+  return revised ? `/ask?q=${encodeURIComponent(revised)}` : '/ask';
 }
