@@ -1,9 +1,9 @@
 {
   "schemaVersion": "insurance-network-metrics-v1",
-  "generatedAt": "2026-09-04T18:09:27.287Z",
-  "newestDocumentedSourceAsOf": "2026-09-04",
+  "generatedAt": "2026-09-09T12:00:00.000Z",
+  "newestDocumentedSourceAsOf": "2026-09-09",
   "newestDocumentedSourceAsOfNote": "Newest documented official source-effective date among metrics that carry a sourceAsOf. Not Git/deploy time and not a single network clock.",
-  "sourceFingerprint": "21a2895e9e7f55170b9056fa3b8054faedcb160e8b0ed4d5dab2cbf16494a4f2",
+  "sourceFingerprint": "6726a3b8c554aad67142a71d3d5536334e981fcd5a828f4c88d3fe53869cdeee",
   "liveProductionHost": "gojyhmbojbwbpiamoktq.supabase.co",
   "nationalGraph": {
     "agencies": 82071,
@@ -95,6 +95,17 @@
     "authorizedCompanies": null,
     "authorizedCompaniesCoverage": "SOURCE_NOT_ACQUIRED"
   },
+  "colorado": {
+    "snapshotFingerprint": "1d94a9a07a60f94e2a32e7a7666d4568fd79f0dcfe3963f348841ea7db11f668",
+    "asOf": "2026-09-09",
+    "statisticalDirectoryRows": 1839,
+    "statisticalDirectoryCoverage": "ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER",
+    "surplusLinesEligibleIdentities": 247,
+    "producerRosterCoverage": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+    "agencyRosterCoverage": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+    "authorizedCompanies": null,
+    "authorizedCompaniesCoverage": "SOURCE_NOT_ACQUIRED"
+  },
   "publication": {
     "publicPeople": 0,
     "publicGraphAgencies": 0,
@@ -106,7 +117,8 @@
       "/texas",
       "/new-jersey",
       "/california",
-      "/washington"
+      "/washington",
+      "/colorado"
     ]
   },
   "rejectedTotals": {
@@ -142,7 +154,7 @@
         "ohio_odi"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One national_entities row with entity_kind=agency.",
@@ -152,7 +164,7 @@
         ],
         "geographicCoverage": "Research-graph identities; public graph-agency profiles = 0",
         "sourceDates": "Graph census 2026-08-28; not Git/deploy time.",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -170,7 +182,7 @@
         "naic_listing_of_companies"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One legal_insurer entity per NAIC company code.",
@@ -180,7 +192,7 @@
         ],
         "geographicCoverage": "National identity spine. Public legal-insurer kind remains unpublished; a 26-firm evidence cohort is a different grain.",
         "sourceDates": "Graph census 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -197,7 +209,7 @@
         "national_entities"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC_RESEARCH_GRAPH",
       "trace": {
         "counts": "One person entity in the national graph.",
@@ -207,7 +219,7 @@
         ],
         "geographicCoverage": "Research graph only. Public people = 0.",
         "sourceDates": "Graph census 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -224,7 +236,7 @@
         "texas_tdi_agency_appointments"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One active TDI appointment between an agency NPN and a company NAIC.",
@@ -234,7 +246,7 @@
         ],
         "geographicCoverage": "Texas. County appointment is not statewide authority.",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "currentActiveRule": "Source file is active appointments only."
       }
     },
@@ -252,7 +264,7 @@
         "texas_tdi_complaints"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI complaint-name row (person or organization named in a complaint).",
@@ -262,7 +274,7 @@
         ],
         "geographicCoverage": "Texas complaints 2011-04-28 through 2026-08-31",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -279,7 +291,7 @@
         "florida_oir_market_conduct_exams"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One OIR market-conduct listing/PDF inventory row.",
@@ -289,7 +301,7 @@
         ],
         "geographicCoverage": "Florida listing catalog. Name-only attach forbidden; listings are unattached.",
         "sourceDates": "FL-INS-004 listing census 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -306,7 +318,7 @@
         "texas_tdi_rate_filings"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI home/auto rate-filing row (SERFF-identified when present).",
@@ -316,7 +328,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -334,7 +346,7 @@
         "cms_ffm"
       ],
       "sourceAsOf": "2026-08-21",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One CMS Marketplace observation row in the research graph.",
@@ -344,7 +356,7 @@
         ],
         "geographicCoverage": "Federal overlay, not a DOI license",
         "sourceDates": "CMS source-modified 2026-08-21",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -363,7 +375,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One entity_kind=carrier appointing-entity row.",
@@ -373,7 +385,7 @@
         ],
         "geographicCoverage": "FL DFS and TX TDI appointing keys",
         "sourceDates": "Graph census 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -390,7 +402,7 @@
         "license_credentials"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One license_credentials row.",
@@ -400,7 +412,7 @@
         ],
         "geographicCoverage": "Source-state dependent",
         "sourceDates": "Graph census 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -417,7 +429,7 @@
         "providers"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One providers listing row currently stored.",
@@ -427,7 +439,7 @@
         ],
         "geographicCoverage": "Public ZIP directory, not the research graph",
         "sourceDates": "Production providers count 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -444,7 +456,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI agency/business license row.",
@@ -454,7 +466,7 @@
         ],
         "geographicCoverage": "Texas TDI",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -472,7 +484,7 @@
         "license_credentials"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Distinct agencies with a Florida credential.",
@@ -482,7 +494,7 @@
         ],
         "geographicCoverage": "Florida credential jurisdiction, not service territory",
         "sourceDates": "FL-INS-006 snapshot 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -500,7 +512,7 @@
         "national_relationships"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One appointed_by relationship row.",
@@ -510,7 +522,7 @@
         ],
         "geographicCoverage": "Florida DFS appointing-entity identifier, not NAIC CoCode",
         "sourceDates": "FL-INS-006 appointment census",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -527,7 +539,7 @@
         "florida_oir_financial_exams"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One OIR financial-exam listing/PDF inventory row.",
@@ -537,7 +549,7 @@
         ],
         "geographicCoverage": "Florida listing catalog",
         "sourceDates": "FL-INS-004 listing census 2026-08-28",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -554,7 +566,7 @@
         "nj_dobi"
       ],
       "sourceAsOf": "2026-09-02",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One NJDOBI admitted-insurer row with exact NAIC.",
@@ -564,7 +576,7 @@
         ],
         "geographicCoverage": "New Jersey admitted census",
         "sourceDates": "NJ snapshot as of 2026-09-02",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -581,7 +593,7 @@
         "nj_dobi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No bulk surplus-lines eligible census is stored.",
@@ -591,7 +603,7 @@
         ],
         "geographicCoverage": "New Jersey",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "Official surplus-lines whitelist was not acquired as a deterministic bulk file. Never render as zero."
       }
     },
@@ -609,7 +621,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No bulk authorized-company universe is stored.",
@@ -619,7 +631,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "TDI authorized-company report is interactive-only. Appointment NAIC is a relationship, not the complete authorized universe. Never render as zero."
       }
     },
@@ -637,7 +649,7 @@
         "california_cdi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No complete CDI admitted census is stored.",
@@ -647,7 +659,7 @@
         ],
         "geographicCoverage": "California",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "CDI admitted/company lookup is open-search only. Never render as zero."
       }
     },
@@ -665,7 +677,7 @@
         "washington_oic_annual_report"
       ],
       "sourceAsOf": "2026-09-04",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One official 2025 annual-report regulated-entity total (domestic + foreign + alien).",
@@ -675,7 +687,7 @@
         ],
         "geographicCoverage": "Washington; dated report year 2025",
         "sourceDates": "OIC 2025 annual report as of 2026-09-04",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -692,7 +704,7 @@
         "washington_oic"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No bulk authorized-company universe is stored.",
@@ -702,8 +714,90 @@
         ],
         "geographicCoverage": "Washington",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "OIC company lookup is search-only. Annual-report 2,924 is not a live roster. Never render as zero."
+      }
+    },
+    {
+      "unit": "count",
+      "key": "co_statistical_report_naic_directory_rows",
+      "label": "Colorado 2025 NAIC Companies directory rows (statistical report)",
+      "value": 1839,
+      "valueState": "KNOWN",
+      "grain": "statistical_report_directory_row",
+      "denominator": "Colorado DOI 2025 statistical-report NAIC Companies tab, excluding the legend row",
+      "description": "Dated 2025 statistical-report directory rows as of 2025-12-31. Not a live authorized-company roster and not a count of Colorado insurance companies.",
+      "coverage": "Colorado",
+      "contributingSourceSystems": [
+        "colorado_doi_statistical_report"
+      ],
+      "sourceAsOf": "2025-12-31",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
+      "publicationStatus": "PUBLIC",
+      "trace": {
+        "counts": "One 2025 NAIC Companies directory row after excluding the statement-type legend.",
+        "doesNotCount": "Not a live insurer roster, not national legal insurers, not agencies, not producers, not surplus-lines eligibility, not domestic certificates.",
+        "contributingSourceSystems": [
+          "colorado_doi"
+        ],
+        "geographicCoverage": "Colorado; dated report year 2025",
+        "sourceDates": "Colorado DOI 2025 statistical report as of 2025-12-31",
+        "generationDate": "2026-09-09"
+      }
+    },
+    {
+      "unit": "count",
+      "key": "co_authorized_companies",
+      "label": "Colorado authorized companies",
+      "value": null,
+      "valueState": "NOT_ACQUIRED",
+      "grain": "authorized_company_row",
+      "denominator": "Colorado DOI / Sircon lookup — OPEN_SEARCH_ONLY / SOURCE_NOT_ACQUIRED",
+      "description": "Current authorized-company roster is not acquired. The 1,839 statistical-report directory rows are a different grain. Missing is not zero companies.",
+      "coverage": "Colorado",
+      "contributingSourceSystems": [
+        "colorado_doi"
+      ],
+      "sourceAsOf": null,
+      "generatedAt": "2026-09-09T12:00:00.000Z",
+      "publicationStatus": "PUBLIC_UNKNOWN",
+      "trace": {
+        "counts": "No bulk current authorized-company universe is stored.",
+        "doesNotCount": "Not the 1,839 statistical-report directory rows, not national legal insurers, not a numeric zero.",
+        "contributingSourceSystems": [
+          "colorado_doi"
+        ],
+        "geographicCoverage": "Colorado",
+        "sourceDates": "SOURCE_NOT_ACQUIRED",
+        "generationDate": "2026-09-09",
+        "whyUnknown": "Colorado company lookup is search-only. The 2025 statistical-report directory is not a live roster. Never render as zero."
+      }
+    },
+    {
+      "unit": "count",
+      "key": "co_surplus_lines_eligible_identities",
+      "label": "Colorado eligible non-admitted surplus-lines identities",
+      "value": 247,
+      "valueState": "KNOWN",
+      "grain": "surplus_lines_eligibility_identity",
+      "denominator": "Official 2025–2026 eligible non-admitted insurer list",
+      "description": "Eligible non-admitted surplus-lines identities (NAIC CoCode or alien AA-). Not admitted authority and not a producer list.",
+      "coverage": "Colorado",
+      "contributingSourceSystems": [
+        "colorado_doi_surplus_lines"
+      ],
+      "sourceAsOf": "2026-01-26",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
+      "publicationStatus": "PUBLIC",
+      "trace": {
+        "counts": "One official eligible non-admitted identity on the 2025–2026 list.",
+        "doesNotCount": "Not admitted insurers, not agencies, not producers, not the 2025 statistical-report directory.",
+        "contributingSourceSystems": [
+          "colorado_doi"
+        ],
+        "geographicCoverage": "Colorado; list effective 2025-07-01 through 2026-06-30",
+        "sourceDates": "Colorado eligible non-admitted list updated 2026-01-26",
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -720,7 +814,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI surplus-lines status row (firm or individual).",
@@ -730,7 +824,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -747,7 +841,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One active title underwriter appointment by county.",
@@ -757,7 +851,7 @@
         ],
         "geographicCoverage": "Texas counties in the title file; no county pages are published",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -774,7 +868,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI complaint-index row (NAIC × year × line).",
@@ -784,7 +878,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -801,7 +895,7 @@
         "nfip_agency_registry"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One NFIP Agency Registry card in the Florida inventory.",
@@ -811,24 +905,24 @@
         ],
         "geographicCoverage": "Florida snapshot; NPN absent on cards",
         "sourceDates": "FL-INS-006 NFIP census",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state intelligence pages",
-      "value": 5,
+      "value": 6,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
-      "denominator": "Indexable /florida /texas /new-jersey /california /washington publication gates",
+      "denominator": "Indexable /florida /texas /new-jersey /california /washington /colorado publication gates",
       "description": "State intelligence routes currently published. Not an agency or company count.",
-      "coverage": "FL, TX, NJ, CA, WA",
+      "coverage": "FL, TX, NJ, CA, WA, CO",
       "contributingSourceSystems": [
         "state-intelligence-publication"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Published state intelligence routes.",
@@ -838,11 +932,12 @@
           "texas-intel",
           "nj-intel",
           "ca-intel",
-          "wa-intel"
+          "wa-intel",
+          "co-intel"
         ],
-        "geographicCoverage": "/florida, /texas, /new-jersey, /california, /washington",
+        "geographicCoverage": "/florida, /texas, /new-jersey, /california, /washington, /colorado",
         "sourceDates": "Publication gates; Texas source clock is the newest documented official date among these pages",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -859,7 +954,7 @@
         "legal-insurer-pilot"
       ],
       "sourceAsOf": "2026-08-29",
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One published /insurers profile in the locked 26-firm wave.",
@@ -869,7 +964,7 @@
         ],
         "geographicCoverage": "Selected PUBLIC_READY legal insurers",
         "sourceDates": "INS-INSURER-006 cohort lock",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -884,7 +979,7 @@
       "coverage": "Unsupported",
       "contributingSourceSystems": [],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-04T18:09:27.287Z",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "REJECTED",
       "trace": {
         "counts": "Not computed.",
@@ -892,7 +987,7 @@
         "contributingSourceSystems": [],
         "geographicCoverage": "None",
         "sourceDates": "Rejected by grain contract",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     }
   ]

@@ -146,6 +146,23 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-04" },
     ],
   },
+  {
+    state: "Colorado",
+    abbreviation: "CO",
+    href: "/colorado",
+    regulators: "Colorado Division of Insurance",
+    evidence: [
+      "Dated 2025 statistical-report directory",
+      "Eligible non-admitted surplus-lines list",
+      "Domestic certificates of compliance",
+      "Producer and agency verification paths",
+    ],
+    limitation:
+      "The 1,839-row 2025 NAIC Companies directory is not a current authorized-company roster; producer and agency lists remain search-only.",
+    sourceClocks: [
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-09" },
+    ],
+  },
 ] as const;
 
 const ALLOWED = new Set<PublicationStatus>([
@@ -187,6 +204,9 @@ const FAMILY_BY_KEY: Record<string, InsuranceHomeEvidenceFamily> = {
   ca_admitted_insurer_universe: "ENTITY_IDENTITY",
   wa_oic_regulated_entities_annual_report: "ENTITY_IDENTITY",
   wa_authorized_companies: "ENTITY_IDENTITY",
+  co_statistical_report_naic_directory_rows: "ENTITY_IDENTITY",
+  co_authorized_companies: "ENTITY_IDENTITY",
+  co_surplus_lines_eligible_identities: "RATE_MARKET",
   public_directory_listings: "PUBLIC_SURFACES",
   published_state_intelligence_pages: "PUBLIC_SURFACES",
   public_legal_insurer_wave1_profiles: "PUBLIC_SURFACES",
@@ -220,6 +240,9 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   ca_admitted_insurer_universe: "/california",
   wa_oic_regulated_entities_annual_report: "/washington",
   wa_authorized_companies: "/washington",
+  co_statistical_report_naic_directory_rows: "/colorado",
+  co_authorized_companies: "/colorado",
+  co_surplus_lines_eligible_identities: "/colorado",
 };
 
 function fromMetric(

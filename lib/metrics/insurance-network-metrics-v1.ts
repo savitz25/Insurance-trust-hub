@@ -48,6 +48,8 @@ export type MetricGrain =
   | 'annual_report_entity_aggregate'
   | 'public_legal_insurer_profile'
   | 'contact_observation'
+  | 'statistical_report_directory_row'
+  | 'surplus_lines_eligibility_identity'
   | 'combined_incompatible_grains';
 
 export type PublicationStatus =
@@ -171,6 +173,17 @@ export type InsuranceNetworkMetricsV1 = {
     regulatedEntitiesAnnualReport: number;
     regulatedEntitiesCoverage: 'ANNUAL_REPORT_AGGREGATE_NOT_LIVE_ROSTER';
     producerRosterCoverage: 'SOURCE_USE_RESTRICTED / SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    authorizedCompanies: null;
+    authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED';
+  };
+  colorado: {
+    snapshotFingerprint: string;
+    asOf: string;
+    statisticalDirectoryRows: number;
+    statisticalDirectoryCoverage: 'ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER';
+    surplusLinesEligibleIdentities: number;
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
     agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
     authorizedCompanies: null;
     authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED';

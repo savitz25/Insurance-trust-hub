@@ -72,9 +72,13 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     washingtonSnapshotFingerprint: '17128d3a8dac4ea1457b5a02269fe25de2b1312e6dfa9bb553a8af9c06ea66ac',
     washingtonAsOf: '2026-09-04',
     washingtonRegulatedEntitiesAnnualReport: 2924,
+    coloradoSnapshotFingerprint: '1d94a9a07a60f94e2a32e7a7666d4568fd79f0dcfe3963f348841ea7db11f668',
+    coloradoAsOf: '2026-09-09',
+    coloradoStatisticalDirectoryRows: 1839,
+    coloradoSurplusLinesEligibleIdentities: 247,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
-    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington'],
+    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado'],
     ...over,
   };
 }
@@ -178,10 +182,23 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     assert.equal(metricByKey(m, 'ca_admitted_insurer_universe').value, null);
     assert.equal(metricByKey(m, 'wa_authorized_companies').value, null);
     assert.equal(metricByKey(m, 'wa_oic_regulated_entities_annual_report').value, 2924);
+    assert.equal(metricByKey(m, 'co_authorized_companies').value, null);
+    assert.equal(metricByKey(m, 'co_statistical_report_naic_directory_rows').value, 1839);
+    assert.equal(metricByKey(m, 'co_surplus_lines_eligible_identities').value, 247);
     assert.match(metricByKey(m, 'texas_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
     assert.match(metricByKey(m, 'ca_admitted_insurer_universe').trace.whyUnknown ?? '', /never render as zero/i);
     assert.match(metricByKey(m, 'wa_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
+    assert.match(metricByKey(m, 'co_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
+    assert.match(metricByKey(m, 'co_statistical_report_naic_directory_rows').description, /not a live/i);
     assert.match(metricByKey(m, 'wa_oic_regulated_entities_annual_report').description, /not a live/i);
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington'] })),
+      /Colorado state intelligence path missing/
+    );
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ coloradoStatisticalDirectoryRows: 6185 })),
+      /Colorado statistical-report directory rows must not equal national legal insurers/
+    );
   });
 
   it('does not replace sourceAsOf with generatedAt', () => {
@@ -189,7 +206,7 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     assert.equal(metricByKey(m, 'appointments').sourceAsOf, '2026-09-03');
     assert.equal(metricByKey(m, 'cms_marketplace_evidence_observations').sourceAsOf, '2026-08-21');
     assert.notEqual(metricByKey(m, 'cms_marketplace_evidence_observations').sourceAsOf, m.generatedAt.slice(0, 10));
-    assert.equal(m.newestDocumentedSourceAsOf, '2026-09-04');
+    assert.equal(m.newestDocumentedSourceAsOf, '2026-09-09');
   });
 
   it('keeps public labels on the required consumer-facing keys', () => {
