@@ -46,7 +46,7 @@ assert(byKey.co_authorized_companies.value === null, "CO authorized metric not a
 assert(byKey.co_authorized_companies.valueState === "NOT_ACQUIRED", "CO authorized not acquired");
 assert(byKey.co_statistical_report_naic_directory_rows.value === 1839, "CO 1839 directory rows");
 assert(byKey.co_statistical_report_naic_directory_rows.value !== byKey.licensed_insurance_companies.value, "CO directory != national companies");
-assert(byKey.co_surplus_lines_eligible_identities.value === 247, "CO 247 surplus identities");
+assert(byKey.co_surplus_lines_eligible_identities.value === 259, "CO 259 surplus identities");
 assert(byKey.co_surplus_lines_eligible_identities.value !== byKey.co_statistical_report_naic_directory_rows.value, "CO surplus != directory");
 assert(byKey.insurance_agencies.value === v1.nationalGraph.agencies, "agency metric matches graph");
 assert(byKey.licensed_insurance_companies.value === v1.nationalGraph.legalInsurers, "legal insurer metric");

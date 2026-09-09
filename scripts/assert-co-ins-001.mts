@@ -35,7 +35,18 @@ if (ui.match(/best insurer|worst insurer|safest/i)) throw new Error('ranking lan
 if (snap.producer_roster.count != null) throw new Error('fake producer count');
 if (snap.agency_roster.count != null) throw new Error('fake agency count');
 if (snap.statistical_report.naic_companies_tab.company_directory_rows !== 1839) throw new Error('1839');
-if (snap.surplus_lines.eligible_identities !== 247) throw new Error('247');
+if (snap.surplus_lines.eligible_identities !== 259) throw new Error('259');
+if (snap.surplus_lines.effective_through !== '2027-06-30') throw new Error('current surplus through');
+if (snap.surplus_lines.prior_2025_2026_list.effective_through !== '2026-06-30') throw new Error('historical surplus through');
+if (snap.complaints.complaint_index_is_not_trusthub_score !== true) throw new Error('index != score');
+if (snap.complaints.standard_ratio_index.company_line_rows !== 415) throw new Error('415');
+if (snap.naic_crosswalk.CROSSWALK_STATUS !== 'EXECUTED') throw new Error('crosswalk');
+if (snap.expansion_ledger.EXISTING_ORGANIZATIONS_ENRICHED !== 0) throw new Error('no enrichment write');
+if (snap.domestic_certificates.named_company_entries !== 49) throw new Error('49 entries');
+if (snap.domestic_certificates.total_list_item_hrefs !== 50) throw new Error('50 hrefs');
+if (snap.domestic_certificates.named_company_entries === snap.domestic_certificates.total_list_item_hrefs) {
+  throw new Error('entry count collapsed into href total');
+}
 if (snap.findings.length < 3) throw new Error('findings');
 if (snap.expansion_ledger.NET_NEW_CANONICAL_LEGAL_INSURERS !== 0) throw new Error('org growth');
 if (snap.federal_overlays.cms_marketplace_colorado_projection !== 'SOURCE_NOT_SPLIT / NOT_USED') {

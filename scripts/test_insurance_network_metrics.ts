@@ -75,7 +75,7 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     coloradoSnapshotFingerprint: '1d94a9a07a60f94e2a32e7a7666d4568fd79f0dcfe3963f348841ea7db11f668',
     coloradoAsOf: '2026-09-09',
     coloradoStatisticalDirectoryRows: 1839,
-    coloradoSurplusLinesEligibleIdentities: 247,
+    coloradoSurplusLinesEligibleIdentities: 259,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
     publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado'],
@@ -184,7 +184,7 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     assert.equal(metricByKey(m, 'wa_oic_regulated_entities_annual_report').value, 2924);
     assert.equal(metricByKey(m, 'co_authorized_companies').value, null);
     assert.equal(metricByKey(m, 'co_statistical_report_naic_directory_rows').value, 1839);
-    assert.equal(metricByKey(m, 'co_surplus_lines_eligible_identities').value, 247);
+    assert.equal(metricByKey(m, 'co_surplus_lines_eligible_identities').value, 259);
     assert.match(metricByKey(m, 'texas_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
     assert.match(metricByKey(m, 'ca_admitted_insurer_universe').trace.whyUnknown ?? '', /never render as zero/i);
     assert.match(metricByKey(m, 'wa_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);

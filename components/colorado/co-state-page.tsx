@@ -256,11 +256,19 @@ export function ColoradoInsurancePage({ snapshot }: { snapshot: ColoradoInsuranc
       <section className="mt-10">
         <h2 className="text-lg font-semibold text-[#0A2540]">Domestic certificates of compliance</h2>
         <p className="mt-2 text-sm text-slate-600">{s.domestic_certificates.caveat}</p>
-        <Metric
-          value={fmtInt(s.domestic_certificates.named_company_entries)}
-          label="Named certificate-of-compliance entries"
-          hint="Domestic-certificate subset. Not all authorized insurers."
-        />
+        <p className="mt-2 text-sm text-slate-600">{s.domestic_certificates.reconciliation}</p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <Metric
+            value={fmtInt(s.domestic_certificates.named_company_entries)}
+            label="Named certificate-of-compliance company entries"
+            hint="Not a document-link count. Not all authorized insurers."
+          />
+          <Metric
+            value={fmtInt(s.domestic_certificates.company_document_links)}
+            label="Company document links"
+            hint="45 DOI PDFs + 4 Google Drive. The 50th list-item href is the Title Agencies heading."
+          />
+        </div>
         <p className="mt-2 text-sm">
           <Official href={s.domestic_certificates.url} label="Certificates of compliance" />
         </p>
@@ -270,7 +278,11 @@ export function ColoradoInsurancePage({ snapshot }: { snapshot: ColoradoInsuranc
         <h2 className="text-lg font-semibold text-[#0A2540]">Eligible non-admitted surplus-lines list</h2>
         <p className="mt-2 text-sm text-slate-600">{sl.caveat}</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <Metric value={fmtInt(sl.eligible_identities)} label="Eligible identities" hint="Not admitted. Not producers." />
+          <Metric
+            value={fmtInt(sl.eligible_identities)}
+            label="2026–2027 eligible identities"
+            hint="Effective 2026-07-01 through 2027-06-30. Not admitted. Not producers."
+          />
           <Metric value={fmtInt(sl.naic_cocode_identities)} label="NAIC CoCode identities" />
           <Metric
             value={fmtInt(sl.alien_aa_identities)}
@@ -278,11 +290,17 @@ export function ColoradoInsurancePage({ snapshot }: { snapshot: ColoradoInsuranc
             hint="Alien AA- is not a NAIC CoCode."
           />
         </div>
+        <p className="mt-3 text-sm text-slate-600">
+          The prior 2025–2026 list ({fmtInt(sl.prior_2025_2026_list.eligible_identities)} identities, effective{' '}
+          {sl.prior_2025_2026_list.effective_from} through {sl.prior_2025_2026_list.effective_through}) is a historical
+          eligibility snapshot. An expired period is not current eligibility, and a missing later list would not be
+          zero insurers.
+        </p>
         <Trace
           source={sl.url}
           sourceDate={`effective ${sl.effective_from} through ${sl.effective_through}; updated ${sl.updated_at}`}
-          denominator="Official eligible non-admitted insurer list rows"
-          calculation="215 NAIC CoCodes + 32 alien AA- identities = 247 distinct eligible identities. No duplicate IDs."
+          denominator="Official 2026–2027 eligible non-admitted insurer list rows"
+          calculation="225 NAIC CoCodes + 34 alien AA- identities = 259 distinct eligible identities. No duplicate IDs."
           grain="surplus-lines eligibility identity"
           coverage="ACQUIRED for the list's effective window"
           caveat={sl.caveat}
@@ -338,14 +356,56 @@ export function ColoradoInsurancePage({ snapshot }: { snapshot: ColoradoInsuranc
 
       <section className="mt-10">
         <h2 className="text-lg font-semibold text-[#0A2540]">Complaints</h2>
-        <p className="mt-2 text-sm text-slate-600">{s.complaints.caveat}</p>
         <p className="mt-2 text-sm text-slate-600">
-          Complaint is not a violation. Received is not substantiated. No complaint found is not a
-          clean history. InsuranceTrustHub does not invent complaint-to-premium rankings.
+          Colorado DOI publishes annual complaint-and-recoveries reports and a source-native Complaint
+          Ratio / Complaint Index. Complaint Ratio and Complaint Index are regulator-published
+          comparative measures. They are not a TrustHub score, ranking, best/worst label, or quality
+          grade. DOI calculates both from all received complaints, not confirmed-only. Total
+          complaints are not confirmed complaints. A complaint is not a violation. A confirmed
+          complaint is not a conviction. Zero complaints in one year and line is not a universal
+          clean history.
         </p>
-        <p className="mt-2 text-sm">
-          <Official href={s.complaints.url} label="Consumer protection" />
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <Metric
+            value={`$${fmtInt(s.complaints.annual.recoveries_total_usd)}`}
+            label="FY 2024-25 recoveries"
+            hint="Money restored to consumers. Recoveries are not fines and not a consumer-loss total."
+          />
+          <Metric
+            value={fmtInt(s.complaints.standard_ratio_index.company_line_rows)}
+            label="2025 standard ratio/index company-line rows"
+            hint="Bounded official tables (5+ complaints or 0.1% premium share). Not a TrustHub ranking."
+          />
+        </div>
+        <Trace
+          source={s.complaints.annual.url}
+          sourceDate="FY 2024-25 (July 2024 - June 2025); news release 2025-11-19"
+          denominator="DOI annual recoveries, not a complaint-only count"
+          calculation="$10,430,250 property/casualty + $7,176,838 life/health = $17,607,341. The 7,792 closed figure mixes complaints and inquiries (including 222 inquiries) and is not a complaint-only total."
+          grain="dated annual recoveries aggregate"
+          coverage="ACQUIRED as report-level aggregates"
+          caveat={s.complaints.annual.note}
+        />
+        <p className="mt-3 text-sm text-slate-600">
+          Standard 2025 tables have NAIC CoCodes on official company-detail links. Read-only exact
+          NAIC matches are not graph enrichment and are not public profile attachments. Name-only
+          attach remains unsafe. A parenthetical alias/DBA on a company label is not an identity key.
         </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm">
+          <li>
+            <Official href={s.complaints.landing_url} label="Insurance Complaint Reports" />
+          </li>
+          <li>
+            <Official href={s.complaints.standard_ratio_index.url} label="Standard Complaint Ratio / Index reports" />
+          </li>
+          <li>
+            <Official href={s.complaints.interactive_ratio_index.url} label="Interactive Complaint Ratio / Index" />{' '}
+            (search only; not scraped)
+          </li>
+          <li>
+            <Official href={s.complaints.file_a_complaint.url} label="File a complaint" />
+          </li>
+        </ul>
       </section>
 
       <section className="mt-10">
@@ -366,6 +426,16 @@ export function ColoradoInsurancePage({ snapshot }: { snapshot: ColoradoInsuranc
           <Metric value={fmtInt(s.expansion_ledger.NET_NEW_PUBLIC_PROFILES)} label="Net-new public profiles" />
           <Metric value={fmtInt(s.expansion_ledger.NEW_MARKET_OBSERVATION_ROWS)} label="New market observation rows (snapshot)" />
           <Metric value={fmtInt(s.expansion_ledger.NEW_SURPLUS_LINES_ROWS)} label="New surplus-lines rows (snapshot)" />
+          <Metric
+            value={fmtInt(s.expansion_ledger.EXACT_STATISTICAL_NAIC_MATCHES)}
+            label="Exact statistical NAIC matches (read-only)"
+            hint="Exact identity match is not graph enrichment."
+          />
+          <Metric
+            value={fmtInt(s.expansion_ledger.NEW_COMPLAINT_ROWS)}
+            label="New 2025 standard complaint-report rows (snapshot)"
+            hint="Company × line observations. Not legal-insurer identities."
+          />
         </div>
       </section>
 

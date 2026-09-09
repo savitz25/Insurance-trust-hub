@@ -21,7 +21,7 @@ export function assertColoradoInsurance(
   if (value.version !== CO_STATE_INTEL_VERSION_CHECK) {
     throw new Error(`Unexpected Colorado contract ${value.version}`);
   }
-  if (value.fingerprint !== '1d94a9a07a60f94e2a32e7a7666d4568fd79f0dcfe3963f348841ea7db11f668') {
+  if (value.fingerprint !== '79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1') {
     throw new Error('Colorado insurance snapshot fingerprint drifted');
   }
   if (value.statistical_report.naic_companies_tab.company_directory_rows !== 1839) {
@@ -33,11 +33,29 @@ export function assertColoradoInsurance(
   if (value.statistical_report.not_a_live_roster !== true) {
     throw new Error('Statistical report must remain not a live roster');
   }
-  if (value.surplus_lines.eligible_identities !== 247) {
+  if (value.surplus_lines.eligible_identities !== 259) {
     throw new Error('Surplus-lines eligible identities drifted');
   }
-  if (value.surplus_lines.naic_cocode_identities !== 215 || value.surplus_lines.alien_aa_identities !== 32) {
+  if (value.surplus_lines.naic_cocode_identities !== 225 || value.surplus_lines.alien_aa_identities !== 34) {
     throw new Error('Surplus-lines NAIC/alien split drifted');
+  }
+  if (value.surplus_lines.effective_through !== '2027-06-30') {
+    throw new Error('Current surplus effective-through drifted');
+  }
+  if (value.surplus_lines.prior_2025_2026_list.effective_through !== '2026-06-30') {
+    throw new Error('Historical surplus period must remain visible');
+  }
+  if (value.complaints.complaint_index_is_not_trusthub_score !== true) {
+    throw new Error('Complaint Index must not be a TrustHub score');
+  }
+  if (value.complaints.standard_ratio_index.company_line_rows !== 415) {
+    throw new Error('2025 standard complaint rows drifted');
+  }
+  if (value.expansion_ledger.EXISTING_ORGANIZATIONS_ENRICHED !== 0) {
+    throw new Error('read-only NAIC match is not enrichment');
+  }
+  if (value.naic_crosswalk.CROSSWALK_STATUS !== 'EXECUTED') {
+    throw new Error('NAIC crosswalk must be executed');
   }
   if (value.producer_roster.CO_PRODUCER_BULK_ROSTER !== 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY') {
     throw new Error('Producer roster restriction drifted');

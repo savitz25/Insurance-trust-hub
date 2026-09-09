@@ -746,18 +746,18 @@ export function computeInsuranceNetworkMetrics(
       grain: 'surplus_lines_eligibility_identity',
       denominator: 'Official 2025–2026 eligible non-admitted insurer list',
       description:
-        'Eligible non-admitted surplus-lines identities (NAIC CoCode or alien AA-). Not admitted authority and not a producer list.',
+        'Eligible non-admitted surplus-lines identities on the official 2026–2027 list (NAIC CoCode or alien AA-). Not admitted authority and not a producer list.',
       coverage: 'Colorado',
       contributingSourceSystems: ['colorado_doi_surplus_lines'],
-      sourceAsOf: '2026-01-26',
+      sourceAsOf: '2026-07-24',
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
         'One official eligible non-admitted identity on the 2025–2026 list.',
         'Not admitted insurers, not agencies, not producers, not the 2025 statistical-report directory.',
         ['colorado_doi'],
-        'Colorado; list effective 2025-07-01 through 2026-06-30',
-        'Colorado eligible non-admitted list updated 2026-01-26'
+        'Colorado; list effective 2026-07-01 through 2027-06-30',
+        'Colorado eligible non-admitted list updated 2026-07-24'
       ),
     }),
     metric({

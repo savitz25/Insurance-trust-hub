@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-09T12:00:00.000Z",
   "newestDocumentedSourceAsOf": "2026-09-09",
   "newestDocumentedSourceAsOfNote": "Newest documented official source-effective date among metrics that carry a sourceAsOf. Not Git/deploy time and not a single network clock.",
-  "sourceFingerprint": "6726a3b8c554aad67142a71d3d5536334e981fcd5a828f4c88d3fe53869cdeee",
+  "sourceFingerprint": "0bd703d9e9bb63dda4cfe038e90c3e35212417f2521c7f0c6820696ce88031eb",
   "liveProductionHost": "gojyhmbojbwbpiamoktq.supabase.co",
   "nationalGraph": {
     "agencies": 82071,
@@ -96,11 +96,11 @@
     "authorizedCompaniesCoverage": "SOURCE_NOT_ACQUIRED"
   },
   "colorado": {
-    "snapshotFingerprint": "1d94a9a07a60f94e2a32e7a7666d4568fd79f0dcfe3963f348841ea7db11f668",
+    "snapshotFingerprint": "79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1",
     "asOf": "2026-09-09",
     "statisticalDirectoryRows": 1839,
     "statisticalDirectoryCoverage": "ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER",
-    "surplusLinesEligibleIdentities": 247,
+    "surplusLinesEligibleIdentities": 259,
     "producerRosterCoverage": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
     "agencyRosterCoverage": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
     "authorizedCompanies": null,
@@ -777,16 +777,16 @@
       "unit": "count",
       "key": "co_surplus_lines_eligible_identities",
       "label": "Colorado eligible non-admitted surplus-lines identities",
-      "value": 247,
+      "value": 259,
       "valueState": "KNOWN",
       "grain": "surplus_lines_eligibility_identity",
       "denominator": "Official 2025–2026 eligible non-admitted insurer list",
-      "description": "Eligible non-admitted surplus-lines identities (NAIC CoCode or alien AA-). Not admitted authority and not a producer list.",
+      "description": "Eligible non-admitted surplus-lines identities on the official 2026–2027 list (NAIC CoCode or alien AA-). Not admitted authority and not a producer list.",
       "coverage": "Colorado",
       "contributingSourceSystems": [
         "colorado_doi_surplus_lines"
       ],
-      "sourceAsOf": "2026-01-26",
+      "sourceAsOf": "2026-07-24",
       "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
@@ -795,8 +795,8 @@
         "contributingSourceSystems": [
           "colorado_doi"
         ],
-        "geographicCoverage": "Colorado; list effective 2025-07-01 through 2026-06-30",
-        "sourceDates": "Colorado eligible non-admitted list updated 2026-01-26",
+        "geographicCoverage": "Colorado; list effective 2026-07-01 through 2027-06-30",
+        "sourceDates": "Colorado eligible non-admitted list updated 2026-07-24",
         "generationDate": "2026-09-09"
       }
     },
