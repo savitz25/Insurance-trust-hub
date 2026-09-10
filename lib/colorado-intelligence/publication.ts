@@ -9,4 +9,4 @@ export const COLORADO_INTELLIGENCE_GATE = {
 
 export const CO_STATE_INTEL_VERSION = 'insurance-co-state-intel-v1' as const;
 export const CANONICAL_CO_SNAPSHOT_FINGERPRINT =
-  '79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1';
+  '1430467e59b9b5555643853c077369e9132b26f2a445eb34285d16124742ef89';

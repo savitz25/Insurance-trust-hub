@@ -516,6 +516,9 @@ def build() -> dict:
                 "recoveries_total_usd": 17607341,
                 "recoveries_property_casualty_usd": 10430250,
                 "recoveries_life_health_usd": 7176838,
+                "recoveries_displayed_pc_lh_subtotal_usd": 17607088,
+                "recoveries_unattributed_difference_usd": 253,
+                "recoveries_displayed_lines_do_not_equal_official_total": True,
                 "recoveries_homeowners_usd": 5764272,
                 "recoveries_auto_usd": 3880700,
                 "recoveries_health_usd": 3011033,
@@ -528,8 +531,12 @@ def build() -> dict:
                 "recoveries_are_not_fines": True,
                 "recoveries_are_not_consumer_losses": True,
                 "note": (
-                    "Recoveries are money restored to consumers. The closed figure of 7,792 is complaints and inquiries "
-                    "together and includes 222 inquiries. That mixed grain is not published as a complaint-only total. "
+                    "Colorado DOI reports $17,607,341 in total recoveries. The two published line amounts shown here "
+                    "are $10,430,250 for property/casualty and $7,176,838 for life/health, which sum to $17,607,088; "
+                    "the $253 difference is not attributed to either displayed line in this extraction. "
+                    "Do not treat the component lines as reconciling to the official aggregate. Recoveries are not fines "
+                    "and not a consumer-loss total. The closed figure of 7,792 is complaints and inquiries together "
+                    "and includes 222 inquiries. That mixed grain is not published as a complaint-only total. "
                     "The annual report does not state a single statewide confirmed-complaint count."
                 ),
             },
@@ -962,7 +969,7 @@ def main() -> None:
         "ticket": "CO-INS-001A2",
         "contract": snap["version"],
         "snapshot_fingerprint": snap["fingerprint"],
-        "prior_fingerprint": "1d94a9a07a60f94e2a32e7a7666d4568fd79f0dcfe3963f348841ea7db11f668",
+        "prior_fingerprint": "79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1",
         "method": "sha256(json.dumps(snapshot_without_fingerprint, sort_keys=True, separators=(',', ':')))",
         "recursive": True,
         "check_twice": check,

@@ -21,7 +21,7 @@ export function assertColoradoInsurance(
   if (value.version !== CO_STATE_INTEL_VERSION_CHECK) {
     throw new Error(`Unexpected Colorado contract ${value.version}`);
   }
-  if (value.fingerprint !== '79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1') {
+  if (value.fingerprint !== '1430467e59b9b5555643853c077369e9132b26f2a445eb34285d16124742ef89') {
     throw new Error('Colorado insurance snapshot fingerprint drifted');
   }
   if (value.statistical_report.naic_companies_tab.company_directory_rows !== 1839) {
@@ -50,6 +50,18 @@ export function assertColoradoInsurance(
   }
   if (value.complaints.standard_ratio_index.company_line_rows !== 415) {
     throw new Error('2025 standard complaint rows drifted');
+  }
+  if (value.complaints.annual.recoveries_total_usd !== 17607341) {
+    throw new Error('official recoveries aggregate drifted');
+  }
+  if (value.complaints.annual.recoveries_displayed_pc_lh_subtotal_usd !== 17607088) {
+    throw new Error('displayed P&C+L&H recoveries subtotal drifted');
+  }
+  if (value.complaints.annual.recoveries_unattributed_difference_usd !== 253) {
+    throw new Error('unattributed recoveries difference drifted');
+  }
+  if (value.complaints.annual.recoveries_displayed_lines_do_not_equal_official_total !== true) {
+    throw new Error('component recoveries must not be treated as reconciling to the official total');
   }
   if (value.expansion_ledger.EXISTING_ORGANIZATIONS_ENRICHED !== 0) {
     throw new Error('read-only NAIC match is not enrichment');

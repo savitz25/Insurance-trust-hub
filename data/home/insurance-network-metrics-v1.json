@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-09T12:00:00.000Z",
   "newestDocumentedSourceAsOf": "2026-09-09",
   "newestDocumentedSourceAsOfNote": "Newest documented official source-effective date among metrics that carry a sourceAsOf. Not Git/deploy time and not a single network clock.",
-  "sourceFingerprint": "0bd703d9e9bb63dda4cfe038e90c3e35212417f2521c7f0c6820696ce88031eb",
+  "sourceFingerprint": "1bd24775782fda5fcfc5df25e59e417dbf5e82b51ad96722548fd730803c0aad",
   "liveProductionHost": "gojyhmbojbwbpiamoktq.supabase.co",
   "nationalGraph": {
     "agencies": 82071,
@@ -96,7 +96,7 @@
     "authorizedCompaniesCoverage": "SOURCE_NOT_ACQUIRED"
   },
   "colorado": {
-    "snapshotFingerprint": "79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1",
+    "snapshotFingerprint": "1430467e59b9b5555643853c077369e9132b26f2a445eb34285d16124742ef89",
     "asOf": "2026-09-09",
     "statisticalDirectoryRows": 1839,
     "statisticalDirectoryCoverage": "ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER",
@@ -780,7 +780,7 @@
       "value": 259,
       "valueState": "KNOWN",
       "grain": "surplus_lines_eligibility_identity",
-      "denominator": "Official 2025–2026 eligible non-admitted insurer list",
+      "denominator": "Official 2026–2027 eligible non-admitted insurer list",
       "description": "Eligible non-admitted surplus-lines identities on the official 2026–2027 list (NAIC CoCode or alien AA-). Not admitted authority and not a producer list.",
       "coverage": "Colorado",
       "contributingSourceSystems": [
@@ -790,7 +790,7 @@
       "generatedAt": "2026-09-09T12:00:00.000Z",
       "publicationStatus": "PUBLIC",
       "trace": {
-        "counts": "One official eligible non-admitted identity on the 2025–2026 list.",
+        "counts": "One official eligible non-admitted identity on the 2026–2027 list.",
         "doesNotCount": "Not admitted insurers, not agencies, not producers, not the 2025 statistical-report directory.",
         "contributingSourceSystems": [
           "colorado_doi"

@@ -1,8 +1,8 @@
 {
   "ticket": "CO-INS-001A2",
   "contract": "insurance-co-state-intel-v1",
-  "snapshot_fingerprint": "79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1",
-  "prior_fingerprint": "1d94a9a07a60f94e2a32e7a7666d4568fd79f0dcfe3963f348841ea7db11f668",
+  "snapshot_fingerprint": "1430467e59b9b5555643853c077369e9132b26f2a445eb34285d16124742ef89",
+  "prior_fingerprint": "79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1",
   "method": "sha256(json.dumps(snapshot_without_fingerprint, sort_keys=True, separators=(',', ':')))",
   "recursive": true,
   "check_twice": true,

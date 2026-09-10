@@ -47,6 +47,21 @@ if (snap.domestic_certificates.total_list_item_hrefs !== 50) throw new Error('50
 if (snap.domestic_certificates.named_company_entries === snap.domestic_certificates.total_list_item_hrefs) {
   throw new Error('entry count collapsed into href total');
 }
+const annual = snap.complaints.annual;
+if (annual.recoveries_total_usd !== 17607341) throw new Error('official recoveries');
+if (annual.recoveries_displayed_pc_lh_subtotal_usd !== 17607088) throw new Error('pc+lh subtotal');
+if (annual.recoveries_unattributed_difference_usd !== 253) throw new Error('253 residual');
+if (
+  annual.recoveries_property_casualty_usd + annual.recoveries_life_health_usd ===
+  annual.recoveries_total_usd
+) {
+  throw new Error('do not assert P&C+L&H equal official recoveries total');
+}
+if (ui.includes('life/health = $17,607,341')) throw new Error('false recoveries equation in UI');
+if (!ui.includes('$17,607,088') || !ui.includes('$253')) throw new Error('recoveries residual copy');
+if (snap.surplus_lines.eligible_identities === snap.surplus_lines.prior_2025_2026_list.eligible_identities) {
+  throw new Error('current and historical surplus lists swapped');
+}
 if (snap.findings.length < 3) throw new Error('findings');
 if (snap.expansion_ledger.NET_NEW_CANONICAL_LEGAL_INSURERS !== 0) throw new Error('org growth');
 if (snap.federal_overlays.cms_marketplace_colorado_projection !== 'SOURCE_NOT_SPLIT / NOT_USED') {

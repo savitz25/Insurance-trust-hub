@@ -381,7 +381,7 @@ export function ColoradoInsurancePage({ snapshot }: { snapshot: ColoradoInsuranc
           source={s.complaints.annual.url}
           sourceDate="FY 2024-25 (July 2024 - June 2025); news release 2025-11-19"
           denominator="DOI annual recoveries, not a complaint-only count"
-          calculation="$10,430,250 property/casualty + $7,176,838 life/health = $17,607,341. The 7,792 closed figure mixes complaints and inquiries (including 222 inquiries) and is not a complaint-only total."
+          calculation="Colorado DOI reports $17,607,341 in total recoveries. The two published line amounts shown here are $10,430,250 for property/casualty and $7,176,838 for life/health, which sum to $17,607,088; the $253 difference is not attributed to either displayed line in this extraction. The 7,792 closed figure mixes complaints and inquiries (including 222 inquiries) and is not a complaint-only total."
           grain="dated annual recoveries aggregate"
           coverage="ACQUIRED as report-level aggregates"
           caveat={s.complaints.annual.note}
