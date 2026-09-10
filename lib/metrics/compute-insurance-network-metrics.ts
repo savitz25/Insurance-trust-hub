@@ -65,6 +65,10 @@ export type InsuranceNetworkMetricsInput = {
   washingtonSnapshotFingerprint: string;
   washingtonAsOf: string;
   washingtonRegulatedEntitiesAnnualReport: number;
+  coloradoSnapshotFingerprint: string;
+  coloradoAsOf: string;
+  coloradoStatisticalDirectoryRows: number;
+  coloradoSurplusLinesEligibleIdentities: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -173,8 +177,20 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   if (!input.publishedStateIntelligencePaths.includes('/washington')) {
     throw new Error('Washington state intelligence path missing');
   }
+  if (!input.publishedStateIntelligencePaths.includes('/colorado')) {
+    throw new Error('Colorado state intelligence path missing');
+  }
   if (input.washingtonRegulatedEntitiesAnnualReport === input.legalInsurers) {
     throw new Error('Washington annual-report entities must not equal national legal insurers');
+  }
+  if (input.coloradoStatisticalDirectoryRows === input.legalInsurers) {
+    throw new Error('Colorado statistical-report directory rows must not equal national legal insurers');
+  }
+  if (input.coloradoSurplusLinesEligibleIdentities === input.legalInsurers) {
+    throw new Error('Colorado surplus-lines identities must not equal national legal insurers');
+  }
+  if (input.coloradoSurplusLinesEligibleIdentities === input.coloradoStatisticalDirectoryRows) {
+    throw new Error('Colorado surplus-lines identities must not equal statistical-report directory rows');
   }
   if (input.publishedStateIntelligencePaths.length === input.agencies) {
     throw new Error('state pages must not equal agencies');
@@ -193,6 +209,7 @@ export function computeInsuranceNetworkMetrics(
     input.newJerseyAsOf,
     input.californiaAsOf,
     input.washingtonAsOf,
+    input.coloradoAsOf,
   ]
     .filter(Boolean)
     .map((d) => d.slice(0, 10))
@@ -677,6 +694,73 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'co_statistical_report_naic_directory_rows',
+      label: 'Colorado 2025 NAIC Companies directory rows (statistical report)',
+      value: input.coloradoStatisticalDirectoryRows,
+      valueState: 'KNOWN',
+      grain: 'statistical_report_directory_row',
+      denominator: 'Colorado DOI 2025 statistical-report NAIC Companies tab, excluding the legend row',
+      description:
+        'Dated 2025 statistical-report directory rows as of 2025-12-31. Not a live authorized-company roster and not a count of Colorado insurance companies.',
+      coverage: 'Colorado',
+      contributingSourceSystems: ['colorado_doi_statistical_report'],
+      sourceAsOf: '2025-12-31',
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One 2025 NAIC Companies directory row after excluding the statement-type legend.',
+        'Not a live insurer roster, not national legal insurers, not agencies, not producers, not surplus-lines eligibility, not domestic certificates.',
+        ['colorado_doi'],
+        'Colorado; dated report year 2025',
+        'Colorado DOI 2025 statistical report as of 2025-12-31'
+      ),
+    }),
+    metric({
+      key: 'co_authorized_companies',
+      label: 'Colorado authorized companies',
+      value: null,
+      valueState: 'NOT_ACQUIRED',
+      grain: 'authorized_company_row',
+      denominator: 'Colorado DOI / Sircon lookup — OPEN_SEARCH_ONLY / SOURCE_NOT_ACQUIRED',
+      description:
+        'Current authorized-company roster is not acquired. The 1,839 statistical-report directory rows are a different grain. Missing is not zero companies.',
+      coverage: 'Colorado',
+      contributingSourceSystems: ['colorado_doi'],
+      sourceAsOf: null,
+      generatedAt,
+      publicationStatus: 'PUBLIC_UNKNOWN',
+      trace: commonTrace(
+        'No bulk current authorized-company universe is stored.',
+        'Not the 1,839 statistical-report directory rows, not national legal insurers, not a numeric zero.',
+        ['colorado_doi'],
+        'Colorado',
+        'SOURCE_NOT_ACQUIRED',
+        { whyUnknown: 'Colorado company lookup is search-only. The 2025 statistical-report directory is not a live roster. Never render as zero.' }
+      ),
+    }),
+    metric({
+      key: 'co_surplus_lines_eligible_identities',
+      label: 'Colorado eligible non-admitted surplus-lines identities',
+      value: input.coloradoSurplusLinesEligibleIdentities,
+      valueState: 'KNOWN',
+      grain: 'surplus_lines_eligibility_identity',
+      denominator: 'Official 2026–2027 eligible non-admitted insurer list',
+      description:
+        'Eligible non-admitted surplus-lines identities on the official 2026–2027 list (NAIC CoCode or alien AA-). Not admitted authority and not a producer list.',
+      coverage: 'Colorado',
+      contributingSourceSystems: ['colorado_doi_surplus_lines'],
+      sourceAsOf: '2026-07-24',
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One official eligible non-admitted identity on the 2026–2027 list.',
+        'Not admitted insurers, not agencies, not producers, not the 2025 statistical-report directory.',
+        ['colorado_doi'],
+        'Colorado; list effective 2026-07-01 through 2027-06-30',
+        'Colorado eligible non-admitted list updated 2026-07-24'
+      ),
+    }),
+    metric({
       key: 'texas_surplus_lines_observations',
       label: 'Texas surplus-lines observations',
       value: input.texasSurplusLinesRows,
@@ -766,9 +850,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA',
+      coverage: 'FL, TX, NJ, CA, WA, CO',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -776,7 +860,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -855,6 +939,9 @@ export function computeInsuranceNetworkMetrics(
     caHealthList: input.californiaCdiHealthInsurerListRows,
     waFp: input.washingtonSnapshotFingerprint,
     waEntities: input.washingtonRegulatedEntitiesAnnualReport,
+    coFp: input.coloradoSnapshotFingerprint,
+    coDirectory: input.coloradoStatisticalDirectoryRows,
+    coSurplus: input.coloradoSurplusLinesEligibleIdentities,
     paths: input.publishedStateIntelligencePaths,
     wave1: input.publicLegalInsurerWave1,
   };
@@ -946,6 +1033,17 @@ export function computeInsuranceNetworkMetrics(
       regulatedEntitiesAnnualReport: input.washingtonRegulatedEntitiesAnnualReport,
       regulatedEntitiesCoverage: 'ANNUAL_REPORT_AGGREGATE_NOT_LIVE_ROSTER',
       producerRosterCoverage: 'SOURCE_USE_RESTRICTED / SEARCH_ONLY',
+      agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      authorizedCompanies: null,
+      authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED',
+    },
+    colorado: {
+      snapshotFingerprint: input.coloradoSnapshotFingerprint,
+      asOf: input.coloradoAsOf,
+      statisticalDirectoryRows: input.coloradoStatisticalDirectoryRows,
+      statisticalDirectoryCoverage: 'ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER',
+      surplusLinesEligibleIdentities: input.coloradoSurplusLinesEligibleIdentities,
+      producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       authorizedCompanies: null,
       authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED',

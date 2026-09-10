@@ -94,7 +94,7 @@ assert(/no name\/email\/phone/.test(extractor) || /no name/.test(extractor), 'no
 
 const a = buildInsuranceHomeIntelV1('2026-08-29T05:48:24.729Z');
 const b = buildInsuranceHomeIntelV1('2026-08-30T00:00:00.000Z');
-assert(a.fingerprint === '7474172a3996c574e26058be24b6af5149765f801660ddedba9d5508ef332fc1', 'homepage fingerprint');
+assert(a.fingerprint === '8d1e3890d67ce9bab618f9ad58c4978f6a9d6c64c955094858c7e3c93b9e3a83', 'homepage fingerprint');
 assert(a.fingerprint === b.fingerprint && a.fingerprint === fingerprintHomeIntel(a), 'home fingerprint stable');
 assert(a.featuredFindings[2]?.title === 'Lines of authority matter — and they are not one national taxonomy yet', 'Story #3 unchanged');
 assert(lock.sqlLock === 'LOCKED', 'Story #2 SQL lock');

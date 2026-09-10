@@ -7,7 +7,7 @@ import { INSURANCE_SEARCH_CAPABILITIES } from '../lib/specialist-search/capabili
 import { SPECIALIST_SEARCH_ANALYTICS_EVENTS, SPECIALIST_SEARCH_VERSION } from '../lib/specialist-search/contract';
 
 assert.equal(SPECIALIST_SEARCH_VERSION, 'trusthub-specialist-search-v1');
-assert.equal(INSURANCE_SEARCH_GOLDEN_QUESTIONS.length, 86);
+assert.equal(INSURANCE_SEARCH_GOLDEN_QUESTIONS.length, 89);
 assert.equal(INSURANCE_SEARCH_GOLDEN_QUESTIONS.filter((q) => q.expected === 'FAIL').length, 0);
 assert.deepEqual(SPECIALIST_SEARCH_ANALYTICS_EVENTS, ['specialist_search_submit','specialist_search_interpreted','specialist_search_results','specialist_search_zero_results','specialist_search_refine','specialist_search_trace_open','specialist_search_profile_open']);
 assert.equal(INSURANCE_SEARCH_CAPABILITIES.find((c) => c.key === 'service_territory')?.supportState, 'UNSUPPORTED');

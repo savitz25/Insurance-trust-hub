@@ -8,6 +8,8 @@ export const INSURANCE_SEARCH_CAPABILITIES: SpecialistSearchCapability[] = [
   { key: 'tx_insurers', label: 'Texas authorized-company universe', supportState: 'NOT_ACQUIRED', coverage: 'No complete acquired roster', sourceSystems: ['Texas TDI'], limitations: ['Missing roster is not zero.'] },
   { key: 'nj_insurers', label: 'New Jersey surplus-lines eligible universe', supportState: 'NOT_ACQUIRED', coverage: 'No complete acquired roster', sourceSystems: ['New Jersey DOBI'], limitations: ['Missing roster is not zero.'] },
   { key: 'ca_insurers', label: 'California admitted-insurer universe', supportState: 'NOT_ACQUIRED', coverage: 'No complete acquired roster', sourceSystems: ['California DOI'], limitations: ['Missing roster is not zero.'] },
+  { key: 'co_insurers', label: 'Colorado current authorized-insurer universe', supportState: 'NOT_ACQUIRED', coverage: '2025 statistical-report directory is not a live roster', sourceSystems: ['Colorado DOI'], limitations: ['Missing roster is not zero.', 'Annual market participants are not currently authorized unless the source says so.'] },
+  { key: 'co_agencies', label: 'Colorado licensed-agency roster', supportState: 'NOT_ACQUIRED', coverage: 'No complete acquired roster', sourceSystems: ['Colorado DOI', 'Sircon'], limitations: ['Search-only is not zero.'] },
   { key: 'service_territory', label: 'Agency or insurer service territory', supportState: 'UNSUPPORTED', coverage: 'Credential, domicile and directory geography do not establish service', sourceSystems: [], limitations: ['Do not infer service from credential jurisdiction, office, domicile, appointment county, or ZIP listing.'] },
 ];
 

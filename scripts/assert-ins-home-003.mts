@@ -22,7 +22,7 @@ const renderedStructure = readFileSync(
   "utf8",
 );
 
-ok(inventory.length === 39, "39 deterministic inventory measures");
+ok(inventory.length === 42, "42 deterministic inventory measures");
 ok(
   Object.keys(INSURANCE_HOME_EVIDENCE_FAMILIES).length === 10,
   "ten evidence families",
@@ -131,6 +131,11 @@ ok(
   "WA destination explicit",
 );
 ok(
+  byKey("co_statistical_report_naic_directory_rows")?.destination ===
+    "/colorado",
+  "CO destination explicit",
+);
+ok(
   byKey("public_directory_listings")?.destination === "/directory",
   "directory destination explicit",
 );
@@ -138,10 +143,10 @@ ok(
   byKey("licensed_insurance_companies")?.destination === "/insurers",
   "insurer destination explicit",
 );
-ok(INSURANCE_HOMEPAGE_STATE_CARDS.length === 5, "exactly five state cards");
+ok(INSURANCE_HOMEPAGE_STATE_CARDS.length === 6, "exactly six state cards");
 ok(
   INSURANCE_HOMEPAGE_STATE_CARDS.map((s) => s.href).join(",") ===
-    "/florida,/texas,/new-jersey,/california,/washington",
+    "/florida,/texas,/new-jersey,/california,/washington,/colorado",
   "canonical state hrefs",
 );
 ok(

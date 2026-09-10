@@ -1,0 +1,995 @@
+"""CO-INS-001 — Colorado insurance state-intelligence snapshot.
+
+Allowed: official Colorado DOI public files (2025 statistical report, surplus-lines
+eligibility list, certificates-of-compliance index, verification/research paths).
+Forbidden: Sircon/NIPR/SBS scrape, SERFF query-by-query scrape, CORA filing,
+county/city routes, minting organizations from names or annual-report rows,
+combining agency+producer+insurer denominators, paid symmetry with FL/TX.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+LIB = ROOT / "lib" / "colorado-intelligence"
+ART = ROOT / "artifacts" / "co-ins-001"
+
+STAT_URL = "https://doi.colorado.gov/colorado-insurance-industry-statistical-report"
+STAT_XLSX = "https://doi.colorado.gov/sites/doi/files/documents/Colorado%202025%20Statistical%20Report%20Final.xlsx"
+SURPLUS_PDF = (
+    "https://doi.colorado.gov/sites/doi/files/documents/"
+    "2026%20Colorado%20Eligible%20Nonadmitted%20Insurers%20Writing%20Surplus%20Lines%2007242026.pdf"
+)
+SURPLUS_PDF_2025 = (
+    "https://doi.colorado.gov/sites/doi/files/documents/"
+    "2025%20Colorado%20Eligible%20Nonadmitted%20Insurers%20Writing%20Surplus%20Lines%2001262026.pdf"
+)
+SURPLUS_BROKERS = (
+    "https://doi.colorado.gov/insurance-industry/producers/agents/"
+    "surplus-lines-information-for-agents/agencies/producers/brokers"
+)
+COMPLAINT_REPORTS = "https://doi.colorado.gov/for-consumers/consumer-resources/insurance-complaint-reports"
+COMPLAINT_FY2024_25 = (
+    "https://doi.colorado.gov/sites/doi/files/documents/"
+    "2025%20Colorado%20Division%20of%20Insurance%20Annual%20Complaint%20and%20Recoveries%20Report.pdf"
+)
+COMPLAINT_STD = "https://www.dora.state.co.us/pls/real/ins_comp_ratio_report.std_report_page"
+COMPLAINT_INTERACTIVE = (
+    "http://www.dora.state.co.us/pls/real/ins_comp_ratio_report.interactive_report_page"
+    "?p_report_id=Complaint%20Ratio%20and%20Complaint%20Index%20Search%20Results&p_label="
+)
+FILE_COMPLAINT = "https://doi.colorado.gov/for-consumers/file-a-complaint"
+CERTS_URL = "https://doi.colorado.gov/for-consumers/consumer-protection/insurer-financials/certificates-of-compliance"
+PRODUCER_URL = "https://doi.colorado.gov/insurance-industry/for-producers/agents"
+SIRCON_CONSUMER = "https://www.sircon.com/ComplianceExpress/Inquiry/consumerInquiry.do?nonSscrb=Y"
+SIRCON_LANDING = "https://www.sircon.com/landingPages/states/colorado/content.jsp"
+DISCIPLINARY_URL = (
+    "https://doi.colorado.gov/for-consumers/consumer-protection/disciplinary-actions/"
+    "agent-producer-and-agency-disciplinary"
+)
+DATA_STUDIO = "https://datastudio.google.com/s/jBVetgkyGFY"
+MCE_URL = "https://doi.colorado.gov/for-consumers/consumer-protection/disciplinary-actions/market-conduct-examinations"
+FIN_URL = "https://doi.colorado.gov/for-consumers/consumer-protection/insurer-financials/financial-examinations"
+SERFF_PAGE = "https://doi.colorado.gov/for-consumers/consumer-resources/insurance-plan-filings-approved-plans"
+SERFF_URL = "https://serff-sfa.naic.org/serff/sfa/home/CO"
+CONSUMER_URL = "https://doi.colorado.gov/for-consumers/consumer-protection"
+DOI_HOME = "https://doi.colorado.gov/"
+
+
+def fingerprint(payload: dict) -> str:
+    body = {k: v for k, v in payload.items() if k != "fingerprint"}
+    canonical = json.dumps(body, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def build() -> dict:
+    snapshot = {
+        "version": "insurance-co-state-intel-v1",
+        "ticket": "CO-INS-001",
+        "as_of": "2026-09-09",
+        "retrieved_at": "2026-09-09",
+        "snapshot_as_of": "2026-09-09",
+        "source_clock": (
+            "Colorado DOI 2025 statistical report as of 2025-12-31 (published August 2026); "
+            "eligible non-admitted surplus-lines list effective 2026-07-01 through 2027-06-30 "
+            "(updated 2026-07-24); FY 2024-25 complaint and recoveries report; 2025 standard "
+            "complaint ratio/index tables; certificates-of-compliance index retrieved 2026-09-09. "
+            "Retrieval date is not current authorization."
+        ),
+        "no_trust_score": True,
+        "no_paid_ranking": True,
+        "no_colorado_county_pages": True,
+        "no_denver_route": True,
+        "missing_is_not_zero": True,
+        "restricted_is_not_zero": True,
+        "search_only_is_not_zero": True,
+        "request_only_is_not_zero": True,
+        "person_directory_public": False,
+        "publication": {
+            "path": "/colorado",
+            "indexable": True,
+            "robots": "index,follow",
+            "canonical": "https://www.insurancetrusthub.com/colorado",
+            "h1": "Colorado Insurance Market & Regulatory Intelligence",
+            "sitemap": True,
+        },
+        "hero": {
+            "universe_value": 1839,
+            "universe_label": "2025 NAIC Companies directory rows (statistical report)",
+            "universe_hint": (
+                "Colorado DOI 2025 statistical-report NAIC Companies tab after excluding one "
+                "statement-type legend row. As of 2025-12-31. Not a 2026 live authorized-insurer roster."
+            ),
+            "current_value": "Search only",
+            "current_label": "Producer / agency bulk roster",
+            "current_hint": "Sircon/Vertafore consumer inquiry is OPEN_SEARCH_ONLY. Missing is not zero.",
+            "observations_value": 259,
+            "observations_label": "2026–2027 eligible non-admitted surplus-lines identities",
+            "observations_hint": (
+                "Official 2026–2027 eligible non-admitted list effective 2026-07-01 through 2027-06-30 "
+                "(updated 2026-07-24): 225 NAIC CoCodes + 34 alien AA- identities. "
+                "Eligible non-admitted is not admitted. Not a producer list."
+            ),
+            "geography_value": "Colorado",
+            "geography_label": "statewide snapshot",
+            "geography_hint": "No Denver, county, or city insurance routes.",
+            "as_of_value": "2025-12-31",
+            "as_of_label": "statistical-report source date",
+            "as_of_hint": "Dated annual market report, not current legal-company status.",
+        },
+        "regulators": {
+            "doi": {
+                "name": "Colorado Division of Insurance",
+                "short": "DOI",
+                "parent": "Colorado Department of Regulatory Agencies (DORA)",
+                "url": DOI_HOME,
+                "covers": (
+                    "Legal insurers, agencies, individual producers, appointments, surplus-lines eligibility, "
+                    "rate/form filings, examinations, disciplinary actions, and consumer complaints as described "
+                    "on official Colorado DOI pages."
+                ),
+            },
+            "entity_classes": [
+                {
+                    "class": "Legal insurer",
+                    "id": "NAIC CoCode when source-native",
+                    "establishes": "Legal-insurer identity; Colorado authority only when a current official record says so",
+                    "does_not": "A 2025 statistical-report row is not current authorization. A brand is not the legal insurer. NAIC is not NPN.",
+                },
+                {
+                    "class": "Insurance agency / business entity",
+                    "id": "NPN / Colorado agency license when a live lookup record says so",
+                    "establishes": "Business-entity credential when the official lookup returns one",
+                    "does_not": "Not an insurer. Not an individual producer. No bulk agency roster was acquired.",
+                },
+                {
+                    "class": "Individual producer",
+                    "id": "NPN / Colorado producer license when a live lookup record says so",
+                    "establishes": "Person license when the official lookup returns one",
+                    "does_not": "Not an agency. Not published as a person directory here.",
+                },
+                {
+                    "class": "Appointment",
+                    "id": "Exact producer/agency-to-insurer relationship when source-native",
+                    "establishes": "Authority to represent a company when the source says so",
+                    "does_not": "Not quality. Not acquired as a bulk graph this ticket. License is not appointment.",
+                },
+                {
+                    "class": "Eligible non-admitted / surplus-lines insurer",
+                    "id": "NAIC CoCode or alien AA- identity on the official eligibility list",
+                    "establishes": "Surplus-lines eligibility for the list's effective window",
+                    "does_not": "Not admitted authority. Alien AA- is not a NAIC CoCode. Not a producer.",
+                },
+                {
+                    "class": "Plan",
+                    "id": "CMS Marketplace or Medicare contract/plan ID when already in the national overlay",
+                    "establishes": "Federal plan identity where already stored",
+                    "does_not": "A plan is not an insurer. Marketplace participation is not Colorado DOI authority.",
+                },
+            ],
+        },
+        "source_access": {
+            "producer_agency_lookup": {
+                "classification": "OPEN_SEARCH_ONLY",
+                "url": SIRCON_CONSUMER,
+                "landing": SIRCON_LANDING,
+                "doi_page": PRODUCER_URL,
+                "http_status": 200,
+                "scraped": False,
+                "limitation": "Consumer verify via Sircon. Do not scrape. Search-only is not zero.",
+            },
+            "statistical_report": {
+                "classification": "ACQUIRED",
+                "url": STAT_URL,
+                "xlsx_url": STAT_XLSX,
+                "grain": "dated annual market-report rows, not a live roster",
+                "source_as_of": "2025-12-31",
+                "published_at": "2026-08",
+            },
+            "surplus_lines_list": {
+                "classification": "ACQUIRED",
+                "url": SURPLUS_PDF,
+                "brokers_page": SURPLUS_BROKERS,
+                "effective_from": "2026-07-01",
+                "effective_through": "2027-06-30",
+                "updated_at": "2026-07-24",
+                "prior_list": SURPLUS_PDF_2025,
+            },
+            "certificates_of_compliance": {
+                "classification": "ACQUIRED",
+                "url": CERTS_URL,
+                "grain": "domestic certificate-of-compliance document index, not all authorized insurers",
+            },
+            "disciplinary_index": {
+                "classification": "OPEN_SEARCH_ONLY",
+                "url": DISCIPLINARY_URL,
+                "index_url": DATA_STUDIO,
+                "http_status": 200,
+                "scraped": False,
+                "identity_bar": "EXACT_NPN_OR_LICENSE_OR_ORDER_ONLY",
+                "name_only": "UNSAFE",
+            },
+            "serff": {
+                "classification": "OPEN_SEARCH_ONLY",
+                "url": SERFF_URL,
+                "doi_page": SERFF_PAGE,
+                "scraped": False,
+                "rate_filing_is_not_quote": True,
+            },
+            "complaints": {
+                "annual_recoveries_report": {
+                    "classification": "ACQUIRED",
+                    "url": COMPLAINT_FY2024_25,
+                    "landing": COMPLAINT_REPORTS,
+                    "period": "FY 2024-25 (July 2024 - June 2025)",
+                },
+                "standard_ratio_index": {
+                    "classification": "ACQUIRED",
+                    "url": COMPLAINT_STD,
+                    "year": "2025",
+                    "bounded_pregenerated_tables": True,
+                },
+                "interactive_ratio_index": {
+                    "classification": "OPEN_SEARCH_ONLY",
+                    "url": COMPLAINT_INTERACTIVE,
+                    "scraped": False,
+                },
+                "file_a_complaint": {
+                    "classification": "PUBLIC_RESEARCH_PATH",
+                    "url": FILE_COMPLAINT,
+                },
+            },
+            "cora": {
+                "classification": "SOURCE_AVAILABLE_BY_REQUEST",
+                "filed_this_ticket": False,
+                "limitation": "No CORA request was filed to enlarge this ticket.",
+            },
+        },
+        "producer_roster": {
+            "CO_PRODUCER_BULK_ROSTER": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+            "count": None,
+            "acquired": False,
+            "scraped": False,
+            "verify_url": SIRCON_CONSUMER,
+            "caveat": "No free bulk producer roster was acquired. Search-only is not zero. Do not invent a Colorado producer count.",
+        },
+        "agency_roster": {
+            "CO_AGENCY_BULK_ROSTER": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+            "count": None,
+            "acquired": False,
+            "scraped": False,
+            "verify_url": SIRCON_CONSUMER,
+            "caveat": "No unrestricted official agency CSV/API was acquired. Missing is not zero.",
+        },
+        "authorized_insurers": {
+            "current_authorized_company_roster": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+            "count": None,
+            "lookup_url": SIRCON_CONSUMER,
+            "caveat": (
+                "The 2025 statistical-report NAIC Companies directory is not a current authorized-insurer roster. "
+                "Domicile is not Colorado authority. Domestic certificates are a subset. NAIC identity is not Colorado authorization."
+            ),
+        },
+        "statistical_report": {
+            "source": "Colorado DOI 2025 Insurance Industry Statistical Report",
+            "landing_url": STAT_URL,
+            "xlsx_url": STAT_XLSX,
+            "http_status": 200,
+            "bytes": 1260692,
+            "sha256": "3eac2ed56410b85144b5dc328e950a98146a5ddc284e07bc47e2f2d68095e958",
+            "source_as_of": "2025-12-31",
+            "published_at": "2026-08",
+            "retrieved_at": "2026-09-09",
+            "not_a_live_roster": True,
+            "not_colorado_insurance_companies_label": True,
+            "naic_companies_tab": {
+                "tab": "NAIC Companies",
+                "nonempty_rows_including_legend": 1840,
+                "excluded_legend_rows": 1,
+                "company_directory_rows": 1839,
+                "distinct_naic": 1839,
+                "duplicate_naic_codes": [],
+                "colorado_domicile_rows": 45,
+                "colorado_domicile_distinct_naic": 45,
+                "one_to_one": True,
+                "note": (
+                    "One nonempty row is a statement-type legend, not a company. "
+                    "Company directory rows equal distinct NAIC CoCodes. "
+                    "DOM=CO is domicile on this dated directory, not current Colorado authority and not the certificates-of-compliance subset."
+                ),
+            },
+            "naic_companies_data_tab": {
+                "tab": "NAIC Companies Data",
+                "data_rows_including_legend": 1840,
+                "distinct_naic": 1839,
+                "note": "Financial overlay of the same directory. Do not double-count as a second insurer universe.",
+            },
+            "companies_by_group_tab": {
+                "tab": "Companies by Group",
+                "data_rows": 1843,
+                "distinct_naic": 1843,
+                "note": "Grouping overlay, not a second insurer count.",
+            },
+            "non_naic_companies_tab": {
+                "tab": "Non-NAIC Companies",
+                "data_rows": 19,
+                "distinct_naic": 0,
+                "note": "Non-NAIC filed directory. Different grain from NAIC Companies.",
+            },
+            "preneed_companies_tab": {
+                "tab": "Pre-need Companies",
+                "data_rows": 59,
+                "note": "Pre-need companies. Source typo on companion tab: 'Pre-need Comanies Data'.",
+            },
+            "title_line_tab": {
+                "tab": "37",
+                "line": "Title",
+                "data_rows_including_total": 23,
+                "distinct_naic": 22,
+                "note": "Title-insurance line market observations. Not title agencies and not title producers.",
+            },
+            "official_pdf_narrative_companies": {
+                "value": 1844,
+                "label": "Official 2025 PDF narrative: premium written to 1844 companies",
+                "publish_as_headline": False,
+                "note": (
+                    "The PDF narrative says Colorado citizens spent more than $61 billion in premium to 1844 companies. "
+                    "That is not reconstructed 1:1 from the Excel NAIC Companies directory (1,839). "
+                    "It is not a live authorized roster and is not used as the hero universe."
+                ),
+            },
+            "line_tabs_are_market_observations": True,
+            "sum_of_all_tab_rows_is_not_an_insurer_count": True,
+        },
+        "domestic_certificates": {
+            "url": CERTS_URL,
+            "http_status": 200,
+            "list_items_including_heading": 50,
+            "excluded_heading": "Title Agencies",
+            "named_company_entries": 49,
+            "company_document_links": 49,
+            "heading_document_links": 1,
+            "total_list_item_hrefs": 50,
+            "doi_pdf_links_including_heading": 46,
+            "company_doi_pdf_links": 45,
+            "google_drive_links": 4,
+            "companies_with_multiple_links": 0,
+            "companies_with_no_link": 0,
+            "updated_annually": True,
+            "not_all_authorized_insurers": True,
+            "not_statistical_directory": True,
+            "not_colorado_domicile_count": True,
+            "company_entry_is_not_document_link": True,
+            "reconciliation": (
+                "50 list items include one Title Agencies heading that has its own document link. "
+                "49 named company entries map 1:1 to 49 company document links (45 DOI PDF + 4 Google Drive). "
+                "The prior 46 PDF + 4 Drive = 50 count included the heading link. "
+                "Company-entry count and document-link count remain separate grains."
+            ),
+            "caveat": (
+                "Named domestic certificate-of-compliance entries on the official page after excluding the "
+                "'Title Agencies' heading. This is a domestic-certificate subset, not all authorized insurers, "
+                "and not the 45 DOM=CO statistical-report rows."
+            ),
+        },
+        "surplus_lines": {
+            "source": "2026 Colorado Eligible Nonadmitted Insurers Writing Surplus Lines",
+            "url": SURPLUS_PDF,
+            "http_status": 200,
+            "bytes": 217260,
+            "sha256": "dee36dd21c3c746683f7d0c3e0ca7ba5c3002d2871cf6e5f5380700231578d1a",
+            "pages": 4,
+            "effective_from": "2026-07-01",
+            "effective_through": "2027-06-30",
+            "updated_at": "2026-07-24",
+            "retrieved_at": "2026-09-09",
+            "classification": "CURRENT_DATED_ELIGIBILITY_LIST",
+            "eligible_identities": 259,
+            "naic_cocode_identities": 225,
+            "alien_aa_identities": 34,
+            "duplicate_ids": [],
+            "eligible_is_not_admitted": True,
+            "alien_aa_is_not_naic_cocode": True,
+            "not_a_producer_list": True,
+            "expired_prior_period_is_not_current": True,
+            "prior_2025_2026_list": {
+                "classification": "HISTORICAL_ELIGIBILITY_SNAPSHOT",
+                "url": SURPLUS_PDF_2025,
+                "effective_from": "2025-07-01",
+                "effective_through": "2026-06-30",
+                "updated_at": "2026-01-26",
+                "eligible_identities": 247,
+                "naic_cocode_identities": 215,
+                "alien_aa_identities": 32,
+                "period_ended": True,
+            },
+            "delta_versus_2025_2026": {
+                "added_naic": 10,
+                "removed_naic": 0,
+                "stable_naic": 215,
+                "added_alien": 2,
+                "removed_alien": 0,
+            },
+            "caveat": (
+                "Official 2026–2027 list: 259 distinct eligible identities (225 NAIC CoCodes + 34 alien AA- IDs), "
+                "effective 2026-07-01 through 2027-06-30, updated 2026-07-24. "
+                "Eligible non-admitted is not admitted. Alien AA- is not NAIC CoCode. "
+                "The 2025–2026 list (247 identities, through 2026-06-30) is a historical snapshot, not current eligibility."
+            ),
+        },
+        "title": {
+            "title_insurer_line_observations": 22,
+            "title_agency_roster": "SOURCE_NOT_ACQUIRED",
+            "title_producer_roster": "SOURCE_NOT_ACQUIRED",
+            "count": None,
+            "caveat": (
+                "Title insurer ≠ title producer ≠ title agency ≠ P&C. "
+                "The 2025 statistical-report Title line has 22 distinct NAIC observations. "
+                "No bulk title-agency or title-producer roster was acquired."
+            ),
+        },
+        "disciplinary_actions": {
+            "access": "OPEN_SEARCH_ONLY",
+            "url": DISCIPLINARY_URL,
+            "index_url": DATA_STUDIO,
+            "bulk_acquired": False,
+            "rows": None,
+            "identity_bar": "EXACT_NPN_OR_LICENSE_OR_ORDER_ONLY",
+            "name_only": "UNSAFE_FOR_ADVERSE_PROFILE_ATTACH",
+            "name_plus_city": "REVIEW_REQUIRED",
+            "disciplinary_is_not_conviction": True,
+            "caveat": "Google Data Studio / DOI disciplinary index. Not scraped. Name-only attach is unsafe.",
+        },
+        "insurer_enforcement": {
+            "access": "OPEN_SEARCH_ONLY",
+            "bulk_acquired": False,
+            "rows": None,
+            "grain": "insurer enforcement / order when a source-native case identity exists",
+            "not_producer_disciplinary": True,
+            "not_exam": True,
+        },
+        "market_conduct_exams": {
+            "access": "OPEN_SEARCH_ONLY",
+            "url": MCE_URL,
+            "http_status": 200,
+            "bulk_acquired": False,
+            "pdf_hrefs_on_page": 0,
+            "rows": None,
+            "market_conduct_is_not_enforcement": True,
+            "caveat": (
+                "The market-conduct page is an index/research path. Zero scrapeable PDF hrefs on the landing page "
+                "is not zero examinations. Missing is not zero."
+            ),
+        },
+        "financial_exams": {
+            "access": "OPEN_SEARCH_ONLY",
+            "url": FIN_URL,
+            "http_status": 200,
+            "bulk_acquired": False,
+            "pdf_hrefs_on_page": 0,
+            "rows": None,
+            "financial_exam_is_not_insolvency": True,
+            "financial_exam_is_not_market_conduct": True,
+            "caveat": (
+                "The financial-examinations page is an index/research path. Zero scrapeable PDF hrefs on the landing page "
+                "is not zero examinations."
+            ),
+        },
+        "rate_filings": {
+            "RATE_FILINGS": "OPEN_SEARCH_ONLY",
+            "url": SERFF_URL,
+            "doi_page": SERFF_PAGE,
+            "bulk_acquired": False,
+            "rows": None,
+            "rate_filing_is_not_consumer_quote": True,
+            "rate_filing_is_not_quality": True,
+            "rate_filing_is_not_approval_unless_status_says_so": True,
+            "do_not_scrape_query_by_query": True,
+        },
+        "complaints": {
+            "landing_url": COMPLAINT_REPORTS,
+            "complaint_is_not_violation": True,
+            "received_is_not_substantiated": True,
+            "confirmed_is_not_conviction": True,
+            "no_complaint_is_not_clean_history": True,
+            "complaint_index_is_not_trusthub_score": True,
+            "complaint_ratio_is_source_native_doi": True,
+            "ratio_and_index_use_received_complaints": True,
+            "total_complaints_are_not_confirmed_complaints": True,
+            "do_not_rank_by_complaint_to_premium": True,
+            "name_only_adverse_attach": "UNSAFE",
+            "alias_parenthetical_is_not_identity_key": True,
+            "annual": {
+                "classification": "ACQUIRED",
+                "title": "FY 2024-25 Colorado DOI Annual Complaint & Recoveries Report",
+                "url": COMPLAINT_FY2024_25,
+                "bytes": 18761117,
+                "sha256": "68e2ddd7efb674ec2c6ad6d9ee87df480065a3a08698894b231ab276a8a9ec82",
+                "pages": 11,
+                "period": "FY 2024-25 (July 2024 - June 2025)",
+                "source_as_of": "2025-06-30",
+                "published_at": "2025-11",
+                "retrieved_at": "2026-09-09",
+                "recoveries_total_usd": 17607341,
+                "recoveries_property_casualty_usd": 10430250,
+                "recoveries_life_health_usd": 7176838,
+                "recoveries_displayed_pc_lh_subtotal_usd": 17607088,
+                "recoveries_unattributed_difference_usd": 253,
+                "recoveries_displayed_lines_do_not_equal_official_total": True,
+                "recoveries_homeowners_usd": 5764272,
+                "recoveries_auto_usd": 3880700,
+                "recoveries_health_usd": 3011033,
+                "recoveries_life_annuity_usd": 4165805,
+                "recoveries_other_pc_usd": 785278,
+                "complaints_and_inquiries_closed": 7792,
+                "inquiries_included_in_closed_figure": 222,
+                "closed_figure_is_not_complaint_only": True,
+                "statewide_confirmed_total": None,
+                "recoveries_are_not_fines": True,
+                "recoveries_are_not_consumer_losses": True,
+                "note": (
+                    "Colorado DOI reports $17,607,341 in total recoveries. The two published line amounts shown here "
+                    "are $10,430,250 for property/casualty and $7,176,838 for life/health, which sum to $17,607,088; "
+                    "the $253 difference is not attributed to either displayed line in this extraction. "
+                    "Do not treat the component lines as reconciling to the official aggregate. Recoveries are not fines "
+                    "and not a consumer-loss total. The closed figure of 7,792 is complaints and inquiries together "
+                    "and includes 222 inquiries. That mixed grain is not published as a complaint-only total. "
+                    "The annual report does not state a single statewide confirmed-complaint count."
+                ),
+            },
+            "standard_ratio_index": {
+                "classification": "ACQUIRED",
+                "url": COMPLAINT_STD,
+                "year": "2025",
+                "available_years_on_index": ["2025", "2024", "2023", "2022", "2021", "2020"],
+                "lines": ["AUTO", "HOME", "ACHL", "ANNT", "LIFE", "HMO"],
+                "inclusion_rule": "five or more complaints OR at least 0.1% of premium volume in a line",
+                "company_line_rows": 415,
+                "distinct_naic": 292,
+                "distinct_company_labels": 293,
+                "exact_naic_on_detail_link": True,
+                "rows_auto": 89,
+                "rows_home": 69,
+                "rows_health": 69,
+                "rows_annuity": 74,
+                "rows_life": 104,
+                "rows_hmo": 10,
+                "ratio_definition": "total received complaints per $1 million premium in that line",
+                "index_definition": "(company share of complaints) / (company share of premium) in that line; 1.0 is average",
+                "unverified_reconciliation_caveat": True,
+                "not_a_trusthub_ranking": True,
+                "complaint_report_row_is_not_legal_insurer_identity": True,
+            },
+            "interactive_ratio_index": {
+                "classification": "OPEN_SEARCH_ONLY",
+                "url": COMPLAINT_INTERACTIVE,
+                "inclusion_rule": "any Colorado insurance premium written OR at least one complaint",
+                "shows_confirmed_complaints": True,
+                "scraped": False,
+                "bulk_acquired": False,
+            },
+            "file_a_complaint": {
+                "classification": "PUBLIC_RESEARCH_PATH",
+                "url": FILE_COMPLAINT,
+            },
+        },
+        "federal_overlays": {
+            "cms_marketplace_colorado_projection": "SOURCE_NOT_SPLIT / NOT_USED",
+            "cms_marketplace_participation_is_not_doi_authority": True,
+            "national_naic_identity_is_not_colorado_authorization": True,
+            "note": (
+                "Existing national CMS/NAIC identities are not Colorado authorization. "
+                "No new federal ingest was performed."
+            ),
+        },
+        "identity_rules": {
+            "EXACT": [
+                "NAIC CoCode when source-native",
+                "NPN when source-native",
+                "Colorado producer/agency license when source-native",
+                "SERFF tracking number when source-native",
+                "DOI order/case when source-native",
+                "Alien AA- identity when source-native on the surplus-lines list",
+            ],
+            "UNSAFE": "name-only adverse attach; name-only filing attach; collapsing CoCode with NPN; DBA/alias as identity",
+            "REVIEW_REQUIRED": "name + city adverse attach",
+            "not_minted_from_aggregates": True,
+            "not_minted_from_names": True,
+            "cocode_is_not_npn": True,
+            "person_npn_is_not_agency_npn": True,
+            "brand_is_not_legal_insurer": True,
+            "complaint_alias_is_not_identity": True,
+            "read_only_naic_match_is_not_enrichment": True,
+        },
+        "profile_attachments": {
+            "EXACT_PROFILE_ATTACHMENTS": 0,
+            "REVIEW_REQUIRED_JOINS": 0,
+            "REJECTED_UNSAFE_JOINS": 0,
+            "graph_cocode_join_executed": True,
+            "graph_write": False,
+            "note": (
+                "Read-only exact NAIC CoCode comparison against data/reports/ins-insurer-006-identity-index.json "
+                "(6,185 legal-insurer CoCodes). Exact identity match is not a graph enrichment write and is not a "
+                "public profile attachment. Alien AA- identities were not crosswalked to NAIC companies."
+            ),
+        },
+        "naic_crosswalk": {
+            "CROSSWALK_STATUS": "EXECUTED",
+            "spine_source": "data/reports/ins-insurer-006-identity-index.json",
+            "spine_legal_insurers": 6185,
+            "read_only": True,
+            "graph_write": False,
+            "statistical_report": {
+                "SOURCE_DISTINCT_NAIC": 1839,
+                "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 1834,
+                "UNMATCHED_NAIC": 5,
+                "INVALID_OR_UNRESOLVED_IDS": 0,
+                "unmatched_naic": ["11805", "17677", "35912", "73504", "85561"],
+            },
+            "surplus_lines": {
+                "SOURCE_DISTINCT_NAIC": 225,
+                "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 223,
+                "UNMATCHED_NAIC": 2,
+                "INVALID_OR_UNRESOLVED_IDS": 0,
+                "unmatched_naic": ["34118", "35912"],
+                "alien_aa_not_crosswalked": 34,
+            },
+            "complaint_standard_2025": {
+                "SOURCE_DISTINCT_NAIC": 292,
+                "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 291,
+                "UNMATCHED_NAIC": 1,
+                "unmatched_naic": ["11805"],
+                "EXACT_PROFILE_ATTACHMENTS": 0,
+            },
+        },
+        "expansion_ledger": {
+            "PRE_INGEST_CANONICAL_AGENCIES": 82071,
+            "PRE_INGEST_CANONICAL_PERSONS": 1029860,
+            "PRE_INGEST_CANONICAL_LEGAL_INSURERS": 6185,
+            "NET_NEW_CANONICAL_AGENCIES": 0,
+            "NET_NEW_CANONICAL_PERSONS": 0,
+            "NET_NEW_CANONICAL_LEGAL_INSURERS": 0,
+            "NET_NEW_PUBLIC_PROFILES": 0,
+            "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+            "EXACT_STATISTICAL_NAIC_MATCHES": 1834,
+            "EXACT_SURPLUS_NAIC_MATCHES": 223,
+            "EXACT_COMPLAINT_STANDARD_NAIC_MATCHES": 291,
+            "EXACT_IDENTITY_MATCH_IS_NOT_ENRICHMENT": True,
+            "NEW_COLORADO_STATE_IDENTITIES": 0,
+            "NEW_COLORADO_CREDENTIAL_ROWS": 0,
+            "NEW_MARKET_OBSERVATION_ROWS": 1839,
+            "NEW_SURPLUS_LINES_ROWS": 259,
+            "NEW_EXAM_EVIDENCE_ROWS": 0,
+            "NEW_ENFORCEMENT_EVIDENCE_ROWS": 0,
+            "NEW_RATE_FILING_ROWS": 0,
+            "NEW_COMPLAINT_ROWS": 415,
+            "EXACT_PROFILE_ATTACHMENTS": 0,
+            "REVIEW_REQUIRED_JOINS": 0,
+            "REJECTED_UNSAFE_JOINS": 0,
+            "note": (
+                "NEW_*_ROWS are snapshot-documented observation/eligibility/report rows, not graph ingest. "
+                "EXACT_*_NAIC_MATCHES are read-only identity comparisons. EXISTING_ORGANIZATIONS_ENRICHED remains 0 "
+                "because no canonical row was written."
+            ),
+        },
+        "source_inventory": [
+            {
+                "family": "2025 statistical report",
+                "access": "ACQUIRED",
+                "url": STAT_XLSX,
+                "sha256": "3eac2ed56410b85144b5dc328e950a98146a5ddc284e07bc47e2f2d68095e958",
+            },
+            {
+                "family": "Eligible non-admitted surplus-lines list 2026-2027",
+                "access": "ACQUIRED",
+                "url": SURPLUS_PDF,
+                "sha256": "dee36dd21c3c746683f7d0c3e0ca7ba5c3002d2871cf6e5f5380700231578d1a",
+            },
+            {
+                "family": "FY 2024-25 annual complaint and recoveries report",
+                "access": "ACQUIRED",
+                "url": COMPLAINT_FY2024_25,
+            },
+            {
+                "family": "2025 standard complaint ratio/index tables",
+                "access": "ACQUIRED",
+                "url": COMPLAINT_STD,
+            },
+            {
+                "family": "Interactive complaint ratio/index",
+                "access": "OPEN_SEARCH_ONLY",
+                "url": COMPLAINT_INTERACTIVE,
+            },
+            {
+                "family": "Certificates of compliance index",
+                "access": "ACQUIRED",
+                "url": CERTS_URL,
+            },
+            {
+                "family": "Producer/agency verification",
+                "access": "OPEN_SEARCH_ONLY",
+                "url": SIRCON_CONSUMER,
+            },
+            {
+                "family": "Disciplinary index",
+                "access": "OPEN_SEARCH_ONLY",
+                "url": DISCIPLINARY_URL,
+            },
+            {
+                "family": "Market-conduct examinations page",
+                "access": "OPEN_SEARCH_ONLY",
+                "url": MCE_URL,
+            },
+            {
+                "family": "Financial examinations page",
+                "access": "OPEN_SEARCH_ONLY",
+                "url": FIN_URL,
+            },
+            {
+                "family": "SERFF Filing Access",
+                "access": "OPEN_SEARCH_ONLY",
+                "url": SERFF_URL,
+            },
+            {
+                "family": "File a complaint process",
+                "access": "PUBLIC_RESEARCH_PATH",
+                "url": FILE_COMPLAINT,
+            },
+            {
+                "family": "CORA bulk records",
+                "access": "SOURCE_AVAILABLE_BY_REQUEST",
+                "url": DOI_HOME,
+            },
+        ],
+        "gaps": {
+            "ACQUIRED": [
+                "2025 statistical-report Excel (dated market rows)",
+                "2026–2027 eligible non-admitted surplus-lines PDF",
+                "FY 2024-25 annual complaint and recoveries report",
+                "2025 standard complaint ratio/index tables (six lines)",
+                "Domestic certificates-of-compliance index",
+            ],
+            "OPEN_SEARCH_ONLY": [
+                "Producer license verification (Sircon)",
+                "Agency license verification (Sircon)",
+                "Current authorized-insurer lookup",
+                "Disciplinary actions index",
+                "Market-conduct examinations",
+                "Financial examinations",
+                "SERFF rate/form filings",
+                "Insurer enforcement orders",
+                "Interactive complaint ratio/index database",
+            ],
+            "SOURCE_NOT_ACQUIRED": [
+                "Complete current authorized-insurer roster",
+                "Complete agency roster",
+                "Complete producer roster",
+                "Appointment graph",
+                "Interactive complaint-database bulk extract",
+                "Title agency roster",
+                "Title producer roster",
+                "Structured exam report extract",
+            ],
+            "SOURCE_AVAILABLE_BY_REQUEST": [
+                "Possible CORA bulk licensing/exam extracts — not requested this ticket",
+            ],
+            "SOURCE_USE_RESTRICTED": [],
+            "UNKNOWN": [
+                "Live 2026 authorized-company census",
+                "Live producer and agency counts",
+            ],
+            "NOT_APPLICABLE": [
+                "Colorado county insurance pages",
+                "Denver nested insurance route",
+                "Paid SBS/Vertafore/NIPR bulk purchase",
+                "Arizona insurance page",
+            ],
+        },
+        "rejected_joins": [
+            "Name-only disciplinary/enforcement attach",
+            "Statistical-report company name attach to a national profile without NAIC CoCode",
+            "Surplus-lines eligibility attach without source-native NAIC or AA- identity",
+            "Certificate page label attach without source-native CoCode",
+            "Name-only complaint-report attach to a canonical legal-insurer profile",
+            "DBA/parenthetical alias as a complaint identity key",
+        ],
+        "rejected_totals": {
+            "agency_plus_producer_plus_legal_insurer_as_colorado_insurance_companies": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "statistical_report_rows_as_colorado_insurers": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "domestic_certificates_as_all_authorized_insurers": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "surplus_lines_plus_admitted_as_one_denominator": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "complaints_plus_exams_plus_filings_as_regulatory_actions": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "market_share_or_premium_as_quality": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "producer_licenses_as_agency_count": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "appointments_as_additional_agencies_or_insurers": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+            "official_pdf_1844_as_hero_universe": {
+                "status": "REJECTED",
+                "publishAsHeadline": False,
+            },
+        },
+        "semantic_guardrails": [
+            "LEGAL INSURER != AGENCY != PERSON != APPOINTING CARRIER != GROUP != BRAND != PLAN",
+            "NPN != NAIC COCODE",
+            "LICENSE != APPOINTMENT != LOA",
+            "DOMICILE != COLORADO AUTHORITY",
+            "DOMESTIC CERTIFICATE != ALL AUTHORIZED INSURERS",
+            "STATISTICAL ROW != CURRENT AUTHORIZATION",
+            "MARKET SHARE != QUALITY",
+            "SURPLUS-LINES ELIGIBILITY != ADMITTED",
+            "ALIEN AA- != NAIC COCODE",
+            "SERFF FILING != QUOTE != APPROVAL UNLESS STATUS SAYS SO",
+            "COMPLAINT != VIOLATION",
+            "TOTAL COMPLAINTS != CONFIRMED COMPLAINTS",
+            "COMPLAINT INDEX != TRUSTHUB SCORE",
+            "DOI COMPLAINT RATIO/INDEX USES RECEIVED COMPLAINTS",
+            "EXPIRED SURPLUS PERIOD != CURRENT ELIGIBILITY",
+            "READ-ONLY NAIC MATCH != GRAPH ENRICHMENT",
+            "CERTIFICATE COMPANY ENTRY != DOCUMENT LINK",
+            "DBA/ALIAS != IDENTITY KEY",
+            "EXAM != ENFORCEMENT",
+            "FINANCIAL EXAM != INSOLVENCY",
+            "DISCIPLINARY != CONVICTION",
+            "NAME-ONLY ADVERSE = UNSAFE",
+            "MISSING / SEARCH-ONLY / REQUEST-ONLY != ZERO",
+            "NO TRUST SCORE",
+            "NO PAID RANKING",
+            "NO DENVER ROUTE",
+        ],
+        "verify": {
+            "agent_producer": SIRCON_CONSUMER,
+            "agency": SIRCON_CONSUMER,
+            "company": SIRCON_CONSUMER,
+            "explains": (
+                "Colorado DOI points consumers to Sircon for live license inquiry. A lookup hit is not a TrustHub profile "
+                "and is not a bulk roster. Existing InsuranceTrustHub insurer/agency research tools remain national graph "
+                "tools, not a substitute for Colorado DOI verification."
+            ),
+        },
+        "findings": [
+            {
+                "id": "statistical-not-roster",
+                "title": "The 2025 statistical report is a dated market report, not a live authorized roster",
+                "summary": (
+                    "The NAIC Companies tab has 1,839 company directory rows and 1,839 distinct NAIC CoCodes after "
+                    "excluding a legend row. That grain is as-of 2025-12-31."
+                ),
+                "doesNotMean": [
+                    "1,839 currently authorized Colorado insurance companies",
+                    "the official PDF narrative of 1,844 premium-writing companies is the same denominator",
+                ],
+            },
+            {
+                "id": "surplus-not-admitted",
+                "title": "Eligible non-admitted surplus-lines identities are a separate grain",
+                "summary": (
+                    "The official 2026–2027 list has 259 eligible identities (225 NAIC + 34 alien AA-), "
+                    "effective 2026-07-01 through 2027-06-30, updated 2026-07-24. "
+                    "The 2025–2026 list (247 identities through 2026-06-30) is historical."
+                ),
+                "doesNotMean": [
+                    "259 admitted insurers",
+                    "259 producers",
+                    "alien AA- identities are NAIC CoCodes",
+                    "the expired 2025–2026 list is current eligibility",
+                ],
+            },
+            {
+                "id": "complaint-ratio-not-score",
+                "title": "Colorado DOI publishes a source-native Complaint Ratio and Complaint Index",
+                "summary": (
+                    "The 2025 standard reports are bounded company-by-line tables with NAIC CoCodes on official detail links. "
+                    "DOI calculates ratio and index from all received complaints, not confirmed-only. "
+                    "That regulator metric is not a TrustHub score, ranking, or quality grade."
+                ),
+                "doesNotMean": [
+                    "TrustHub ranked insurers",
+                    "confirmed complaints equal received complaints",
+                    "a low index is a TrustHub declaration of a good insurer",
+                    "zero complaints in one year/line is a universal clean history",
+                ],
+            },
+            {
+                "id": "rosters-search-only",
+                "title": "Producer and agency bulk rosters were not acquired",
+                "summary": "Verification remains on Sircon/DOI search. Search-only is not zero.",
+                "doesNotMean": [
+                    "zero Colorado producers",
+                    "zero Colorado agencies",
+                ],
+            },
+            {
+                "id": "certificates-subset",
+                "title": "Domestic certificates of compliance are a subset, not all authorized insurers",
+                "summary": (
+                    "The official certificates page lists 49 named company entries after excluding a Title Agencies heading. "
+                    "That is not the 1,839 statistical-directory rows and not the 45 DOM=CO rows."
+                ),
+                "doesNotMean": [
+                    "49 is the complete authorized-insurer universe",
+                    "DOM=CO equals certificates of compliance",
+                ],
+            },
+        ],
+        "local_county_decision": {
+            "break_statewide_first": False,
+            "denver_route": False,
+            "reason": (
+                "No exceptional local/county insurance bulk roster was discovered. "
+                "The existing denver-agents hub is a national curated hub and was not modified."
+            ),
+        },
+    }
+    snapshot["fingerprint"] = fingerprint(snapshot)
+    return snapshot
+
+
+def main() -> None:
+    check = "--check" in sys.argv
+    first = build()
+    second = build()
+    if first["fingerprint"] != second["fingerprint"]:
+        raise SystemExit(f"in-memory fingerprint drift: {first['fingerprint']} vs {second['fingerprint']}")
+    snap = first
+    LIB.mkdir(parents=True, exist_ok=True)
+    ART.mkdir(parents=True, exist_ok=True)
+    out = LIB / "accepted-snapshot.json"
+    out.write_text(json.dumps(snap, indent=2) + "\n", encoding="utf-8")
+    loaded = json.loads(out.read_text(encoding="utf-8"))
+    recomputed = fingerprint(loaded)
+    if recomputed != snap["fingerprint"]:
+        raise SystemExit(f"fingerprint not reproducible: {snap['fingerprint']} vs {recomputed}")
+    man = {
+        "ticket": "CO-INS-001A2",
+        "contract": snap["version"],
+        "snapshot_fingerprint": snap["fingerprint"],
+        "prior_fingerprint": "79de75cfdd57357d73ef81f5cca83dc4aaf16dc32b9e9a4ee6ef89322edbd4a1",
+        "method": "sha256(json.dumps(snapshot_without_fingerprint, sort_keys=True, separators=(',', ':')))",
+        "recursive": True,
+        "check_twice": check,
+        "statistical_xlsx_sha256": snap["statistical_report"]["sha256"],
+        "surplus_pdf_sha256": snap["surplus_lines"]["sha256"],
+    }
+    (ART / "hash-manifest.json").write_text(json.dumps(man, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({
+        "fingerprint": snap["fingerprint"],
+        "in_memory_repeat_ok": True,
+        "written_recompute_ok": True,
+        "directory_rows": snap["statistical_report"]["naic_companies_tab"]["company_directory_rows"],
+        "surplus": snap["surplus_lines"]["eligible_identities"],
+        "certs_entries": snap["domestic_certificates"]["named_company_entries"],
+        "certs_links": snap["domestic_certificates"]["company_document_links"],
+        "complaint_rows": snap["complaints"]["standard_ratio_index"]["company_line_rows"],
+        "ledger_orgs": snap["expansion_ledger"]["NET_NEW_CANONICAL_LEGAL_INSURERS"],
+        "exact_stat_matches": snap["expansion_ledger"]["EXACT_STATISTICAL_NAIC_MATCHES"],
+    }, indent=2))
+
+
+if __name__ == "__main__":
+    main()
