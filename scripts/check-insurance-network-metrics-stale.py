@@ -86,6 +86,10 @@ def check_files() -> dict[str, Any]:
         errors.append("Colorado authorized companies must remain NOT_ACQUIRED / null")
     if metric_value(metrics, "co_statistical_report_naic_directory_rows") != 1839:
         errors.append("Colorado 2025 NAIC Companies directory rows drifted")
+    if metrics.get("virginia", {}).get("statisticalDirectoryRows") != 1546:
+        errors.append("Virginia statistical-report companies drifted")
+    if metric_value(metrics, "va_statistical_report_naic_directory_rows") != 1546:
+        errors.append("Virginia 2025 statistical-report NAIC rows drifted")
     if metric_value(metrics, "wa_authorized_companies") is not None:
         errors.append("Washington authorized companies must remain NOT_ACQUIRED / null")
     if metric_value(metrics, "wa_oic_regulated_entities_annual_report") != 2924:
@@ -115,6 +119,7 @@ def check_files() -> dict[str, Any]:
         "/california",
         "/washington",
         "/colorado",
+        "/virginia",
     }:
         errors.append("published state intelligence paths drifted")
     if census["entities"]["agency"] != metrics["nationalGraph"]["agencies"] and os.environ.get("REQUIRE_LIVE_CENSUS_MATCH") == "1":

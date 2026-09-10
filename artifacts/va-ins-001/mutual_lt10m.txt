@@ -1,0 +1,22 @@
+State Corporation Commission - Bureau of Insurance - Financial Regulation
+2025 Financial Data for Domestic Mutual Assessment Companies (Assets < $10 million)
+COCODE Company Name ADMITTED ASSETS LIABILITIES SURPLUS
+NET ASSESSMENTS 
+REC'D NET INCOME TOTAL INCOME
+TOTAL 
+DISBURSEMENTS INS. IN FORCE NET LOSSES
+13106 Commonwealth Mutual Fire Ins Co* 1,842,749$                     86,792$                           1,755,956$                  * 23,428$                               * * * *
+13112 Farmers Mutl Fire Ins Co of Scott Lee and Russell County, VA 571,151                            7,663                                563,488                         13,639                           20,391                                 34,673                          14,282                              3,592,673                       700                              
+13113 Farmers Mutual Fire Ins Co of WA County, VA 7,672,678                       607,216                           7,065,462                     775,054                        449,130                               1,205,362                   756,231                           514,138,514                  234,539                     
+13118 Floyd County Mutual Fire Ins Co of Inc 3,944,178                       92,902                              3,851,276                     111,924                        184,382                               265,127                       80,745                              27,352,910                    9,952                          
+13108 Highland Mutual Fire Ins Co 611,331                            71,769                              539,562                         92,830                           66,148                                 115,415                       49,267                              28,594,695                    22,301                       
+13114 Patrick County Farmers Mutual Ins Co of VA Incorp. 275,200                            2,589                                274,102                         14,899                           (3,271)                                   27,715                          30,986                              2,019,325                       -                               
+13111 Pulaski and Giles Mutual Ins Co 3,650,362                       357,288                           2,293,074                     325,177                        4,516                                    389,343                       384,826                           167,080,882                  190,660                     
+13116 Rockbridge Mutual Fire Ins Co 510,566                            8,750                                501,816                         72,278                           19,548                                 103,174                       83,626                              36,441,450                    429                              
+Totals 19,078,215$                  1,234,969$                    16,844,736$               1,405,801$                 764,272$                            2,140,809$                 1,399,963$                    779,220,449$               458,581$                  
+Number of Companies                      8
+* Indicates that the entity files a different blank; therefore, some values are not available.
+____________
+June 1, 2026
+__________
+Page 1 of 1

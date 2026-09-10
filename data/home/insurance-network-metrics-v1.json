@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-09T12:00:00.000Z",
   "newestDocumentedSourceAsOf": "2026-09-09",
   "newestDocumentedSourceAsOfNote": "Newest documented official source-effective date among metrics that carry a sourceAsOf. Not Git/deploy time and not a single network clock.",
-  "sourceFingerprint": "1bd24775782fda5fcfc5df25e59e417dbf5e82b51ad96722548fd730803c0aad",
+  "sourceFingerprint": "b3a7dbc6703b270e75c128af130bed5b23449e64e9df50d4ce3e772729dec361",
   "liveProductionHost": "gojyhmbojbwbpiamoktq.supabase.co",
   "nationalGraph": {
     "agencies": 82071,
@@ -106,6 +106,16 @@
     "authorizedCompanies": null,
     "authorizedCompaniesCoverage": "SOURCE_NOT_ACQUIRED"
   },
+  "virginia": {
+    "snapshotFingerprint": "fd4e95d83bf1d909e51ee8dc8aaab3d399861d389d81d31c8cdfa70094c613fb",
+    "asOf": "2025-12-31",
+    "statisticalDirectoryRows": 1546,
+    "statisticalDirectoryCoverage": "ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER",
+    "producerRosterCoverage": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+    "agencyRosterCoverage": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+    "authorizedCompanies": null,
+    "authorizedCompaniesCoverage": "SOURCE_NOT_ACQUIRED"
+  },
   "publication": {
     "publicPeople": 0,
     "publicGraphAgencies": 0,
@@ -118,7 +128,8 @@
       "/new-jersey",
       "/california",
       "/washington",
-      "/colorado"
+      "/colorado",
+      "/virginia"
     ]
   },
   "rejectedTotals": {
@@ -747,6 +758,33 @@
     },
     {
       "unit": "count",
+      "key": "va_statistical_report_naic_directory_rows",
+      "label": "Virginia 2025 statistical-report companies (distinct NAIC)",
+      "value": 1546,
+      "valueState": "KNOWN",
+      "grain": "statistical_report_directory_row",
+      "denominator": "Virginia SCC 2025 Insurance Company Statistical Report financial-data PDFs",
+      "description": "Dated 2025 company-level NAIC observations, year ended 2025-12-31, reported as of 2026-06-01. Not a live authorized-company roster.",
+      "coverage": "Virginia",
+      "contributingSourceSystems": [
+        "virginia_scc_statistical_report"
+      ],
+      "sourceAsOf": "2025-12-31",
+      "generatedAt": "2026-09-09T12:00:00.000Z",
+      "publicationStatus": "PUBLIC",
+      "trace": {
+        "counts": "One distinct NAIC company identity from the 2025 financial-data PDFs.",
+        "doesNotCount": "Not a live insurer roster, not national legal insurers, not agencies, not producers, not Regulatory Action rows.",
+        "contributingSourceSystems": [
+          "virginia_scc"
+        ],
+        "geographicCoverage": "Virginia; period ended 2025-12-31; reported as of 2026-06-01",
+        "sourceDates": "Virginia SCC 2025 Insurance Company Statistical Report",
+        "generationDate": "2026-09-09"
+      }
+    },
+    {
+      "unit": "count",
       "key": "co_authorized_companies",
       "label": "Colorado authorized companies",
       "value": null,
@@ -912,12 +950,12 @@
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state intelligence pages",
-      "value": 6,
+      "value": 7,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
-      "denominator": "Indexable /florida /texas /new-jersey /california /washington /colorado publication gates",
+      "denominator": "Indexable /florida /texas /new-jersey /california /washington /colorado /virginia publication gates",
       "description": "State intelligence routes currently published. Not an agency or company count.",
-      "coverage": "FL, TX, NJ, CA, WA, CO",
+      "coverage": "FL, TX, NJ, CA, WA, CO, VA",
       "contributingSourceSystems": [
         "state-intelligence-publication"
       ],
@@ -926,16 +964,17 @@
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Published state intelligence routes.",
-        "doesNotCount": "Not live researched-agency totals, not counties, not a 50-state census.",
+        "doesNotCount": "Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.",
         "contributingSourceSystems": [
           "florida-intel",
           "texas-intel",
           "nj-intel",
           "ca-intel",
           "wa-intel",
-          "co-intel"
+          "co-intel",
+          "va-intel"
         ],
-        "geographicCoverage": "/florida, /texas, /new-jersey, /california, /washington, /colorado",
+        "geographicCoverage": "/florida, /texas, /new-jersey, /california, /washington, /colorado, /virginia",
         "sourceDates": "Publication gates; Texas source clock is the newest documented official date among these pages",
         "generationDate": "2026-09-09"
       }

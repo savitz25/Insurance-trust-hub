@@ -163,6 +163,23 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-09" },
     ],
   },
+  {
+    state: "Virginia",
+    abbreviation: "VA",
+    href: "/virginia",
+    regulators: "Virginia SCC Bureau of Insurance",
+    evidence: [
+      "Dated 2025 statistical-report company observations",
+      "Regulatory Actions table",
+      "Market Conduct Examination table",
+      "Current company verification path",
+    ],
+    limitation:
+      "The 1,546 distinct 2025 NAIC observations are not a current authorized-company roster; producer and agency lists remain search-only.",
+    sourceClocks: [
+      { label: "Statistical-report period end", snapshotAsOf: "2025-12-31" },
+    ],
+  },
 ] as const;
 
 const ALLOWED = new Set<PublicationStatus>([
@@ -207,6 +224,7 @@ const FAMILY_BY_KEY: Record<string, InsuranceHomeEvidenceFamily> = {
   co_statistical_report_naic_directory_rows: "ENTITY_IDENTITY",
   co_authorized_companies: "ENTITY_IDENTITY",
   co_surplus_lines_eligible_identities: "RATE_MARKET",
+  va_statistical_report_naic_directory_rows: "ENTITY_IDENTITY",
   public_directory_listings: "PUBLIC_SURFACES",
   published_state_intelligence_pages: "PUBLIC_SURFACES",
   public_legal_insurer_wave1_profiles: "PUBLIC_SURFACES",
@@ -243,6 +261,7 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   co_statistical_report_naic_directory_rows: "/colorado",
   co_authorized_companies: "/colorado",
   co_surplus_lines_eligible_identities: "/colorado",
+  va_statistical_report_naic_directory_rows: "/virginia",
 };
 
 function fromMetric(

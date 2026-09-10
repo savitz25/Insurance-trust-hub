@@ -38,6 +38,9 @@ assert(v1.colorado.snapshotFingerprint === pub.coloradoSnapshotFingerprint, "CO 
 assert(v1.colorado.statisticalDirectoryRows === pub.coloradoStatisticalDirectoryRows, "CO statistical directory rows");
 assert(v1.colorado.surplusLinesEligibleIdentities === pub.coloradoSurplusLinesEligibleIdentities, "CO surplus-lines identities");
 assert(v1.colorado.authorizedCompanies === null, "CO authorized companies not a number");
+assert(v1.virginia.snapshotFingerprint === pub.virginiaSnapshotFingerprint, "VA snapshot fingerprint");
+assert(v1.virginia.statisticalDirectoryRows === pub.virginiaStatisticalDirectoryRows, "VA statistical directory rows");
+assert(v1.virginia.authorizedCompanies === null, "VA authorized companies not a number");
 assert(byKey.wa_authorized_companies.value === null, "WA authorized metric not a number");
 assert(byKey.wa_authorized_companies.valueState === "NOT_ACQUIRED", "WA authorized not acquired");
 assert(byKey.wa_oic_regulated_entities_annual_report.value === 2924, "WA 2924 annual aggregate");
@@ -47,6 +50,8 @@ assert(byKey.co_authorized_companies.valueState === "NOT_ACQUIRED", "CO authoriz
 assert(byKey.co_statistical_report_naic_directory_rows.value === 1839, "CO 1839 directory rows");
 assert(byKey.co_statistical_report_naic_directory_rows.value !== byKey.licensed_insurance_companies.value, "CO directory != national companies");
 assert(byKey.co_surplus_lines_eligible_identities.value === 259, "CO 259 surplus identities");
+assert(byKey.va_statistical_report_naic_directory_rows.value === 1546, "VA 1546 directory rows");
+assert(byKey.va_statistical_report_naic_directory_rows.value !== byKey.licensed_insurance_companies.value, "VA directory != national companies");
 assert(byKey.co_surplus_lines_eligible_identities.value !== byKey.co_statistical_report_naic_directory_rows.value, "CO surplus != directory");
 assert(byKey.insurance_agencies.value === v1.nationalGraph.agencies, "agency metric matches graph");
 assert(byKey.licensed_insurance_companies.value === v1.nationalGraph.legalInsurers, "legal insurer metric");
