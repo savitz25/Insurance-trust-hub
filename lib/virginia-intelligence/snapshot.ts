@@ -66,6 +66,49 @@ export function assertVirginiaInsurance(
   if (value.expansion_ledger.EXISTING_ORGANIZATIONS_ENRICHED !== 0) {
     throw new Error('Do not write graph enrichment');
   }
+  if (value.expansion_ledger.NET_NEW_CANONICAL_AGENCIES !== 0) {
+    throw new Error('Do not mint agencies');
+  }
+  if (value.expansion_ledger.NET_NEW_CANONICAL_PERSONS !== 0) {
+    throw new Error('Do not mint persons');
+  }
+  if (value.expansion_ledger.EXACT_PROFILE_ATTACHMENTS !== 0) {
+    throw new Error('Do not attach profiles');
+  }
+  const statUnmatched = value.naic_crosswalk.statistical_report.unmatched_naic;
+  const actUnmatched = value.naic_crosswalk.regulatory_actions.unmatched_naic;
+  const mcUnmatched = value.naic_crosswalk.market_conduct.unmatched_naic;
+  if (!statUnmatched.includes('15791') || !actUnmatched.includes('15791')) {
+    throw new Error('15791 must appear in both statistical and regulatory unmatched sets');
+  }
+  const union = [...new Set([...statUnmatched, ...actUnmatched, ...mcUnmatched])].sort();
+  if (union.length !== 5) {
+    throw new Error('High-yield unmatched NAIC union must be 5 unique IDs');
+  }
+  if (statUnmatched.length + actUnmatched.length + mcUnmatched.length !== 6) {
+    throw new Error('Layer unmatched count sum must remain 6');
+  }
+  if (value.expansion_ledger.UNIQUE_UNMATCHED_NAIC_IDS_ACROSS_HIGH_YIELD_LAYERS !== 5) {
+    throw new Error('Unique unmatched union drifted');
+  }
+  if (value.expansion_ledger.LAYER_UNMATCHED_COUNT_SUM === value.expansion_ledger.UNIQUE_UNMATCHED_NAIC_IDS_ACROSS_HIGH_YIELD_LAYERS) {
+    throw new Error('Layer unmatched sum must not equal unique union');
+  }
+  if (value.expansion_ledger.EXACT_NAIC_MATCH_OBSERVATIONS !== 1727) {
+    throw new Error('Exact-match observation aggregate drifted');
+  }
+  if (value.expansion_ledger.EXACT_NAIC_CROSSWALKS !== 1727) {
+    throw new Error('EXACT_NAIC_CROSSWALKS aggregate drifted');
+  }
+  if (value.expansion_ledger.EXACT_NAIC_CROSSWALKS_GRAIN !== 'sum_of_layer_specific_exact_match_counts') {
+    throw new Error('EXACT_NAIC_CROSSWALKS grain must remain a layer-observation sum');
+  }
+  if (value.expansion_ledger.EXACT_NAIC_CROSSWALKS_NOT_UNIQUE_NAIC_IDS !== true) {
+    throw new Error('EXACT_NAIC_CROSSWALKS must not be unique NAIC IDs');
+  }
+  if (value.expansion_ledger.UNMATCHED_UNION_EXCLUDES_FINANCIAL_EXAMS !== true) {
+    throw new Error('Financial-exam unmatched IDs must stay out of the high-yield union');
+  }
   if (value.claim_eligibility.broadened !== false) {
     throw new Error('Claim eligibility must stay unchanged');
   }

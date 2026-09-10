@@ -228,8 +228,21 @@
     "NEW_VA_MARKET_CONDUCT_ROWS": 117,
     "NEW_VA_MARKET_CONDUCT_DISTINCT_NAIC_IDS": 100,
     "NEW_VA_SURPLUS_ROWS": 0,
+    "EXACT_NAIC_MATCH_OBSERVATIONS": 1727,
     "EXACT_NAIC_CROSSWALKS": 1727,
-    "UNMATCHED_NAIC_IDS": 6,
+    "EXACT_NAIC_CROSSWALKS_GRAIN": "sum_of_layer_specific_exact_match_counts",
+    "EXACT_NAIC_CROSSWALKS_NOT_UNIQUE_NAIC_IDS": true,
+    "LAYER_UNMATCHED_COUNT_SUM": 6,
+    "UNIQUE_UNMATCHED_NAIC_IDS_ACROSS_HIGH_YIELD_LAYERS": 5,
+    "UNMATCHED_NAIC_IDS": 5,
+    "UNMATCHED_NAIC_UNION": [
+      "15791",
+      "16575",
+      "73504",
+      "85561",
+      "95811"
+    ],
+    "UNMATCHED_UNION_EXCLUDES_FINANCIAL_EXAMS": true,
     "NET_NEW_CANONICAL_LEGAL_INSURERS": 0,
     "NET_NEW_CANONICAL_AGENCIES": 0,
     "NET_NEW_CANONICAL_PERSONS": 0,
@@ -302,5 +315,5 @@
   ],
   "no_combined_denominator": true,
   "unknown_is_not_zero": true,
-  "fingerprint": "d4314962fa54b866ffb1111ad4d60aba5dd9a25269734af04ff4b874cf08de58"
+  "fingerprint": "fd4e95d83bf1d909e51ee8dc8aaab3d399861d389d81d31c8cdfa70094c613fb"
 }

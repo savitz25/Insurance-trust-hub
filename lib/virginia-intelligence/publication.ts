@@ -9,4 +9,4 @@ export const VIRGINIA_INTELLIGENCE_GATE = {
 
 export const VA_STATE_INTEL_VERSION = 'insurance-va-state-intel-v1' as const;
 export const CANONICAL_VA_SNAPSHOT_FINGERPRINT =
-  'd4314962fa54b866ffb1111ad4d60aba5dd9a25269734af04ff4b874cf08de58';
+  'fd4e95d83bf1d909e51ee8dc8aaab3d399861d389d81d31c8cdfa70094c613fb';

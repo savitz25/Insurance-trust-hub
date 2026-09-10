@@ -76,7 +76,7 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     coloradoAsOf: '2026-09-09',
     coloradoStatisticalDirectoryRows: 1839,
     coloradoSurplusLinesEligibleIdentities: 259,
-    virginiaSnapshotFingerprint: 'd4314962fa54b866ffb1111ad4d60aba5dd9a25269734af04ff4b874cf08de58',
+    virginiaSnapshotFingerprint: 'fd4e95d83bf1d909e51ee8dc8aaab3d399861d389d81d31c8cdfa70094c613fb',
     virginiaAsOf: '2025-12-31',
     virginiaStatisticalDirectoryRows: 1546,
     publicLegalInsurerWave1: 26,

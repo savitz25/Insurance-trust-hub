@@ -269,10 +269,41 @@ def main() -> int:
             "NEW_VA_MARKET_CONDUCT_ROWS": len(market),
             "NEW_VA_MARKET_CONDUCT_DISTINCT_NAIC_IDS": mc_x["SOURCE_DISTINCT_NAIC"],
             "NEW_VA_SURPLUS_ROWS": 0,
-            "EXACT_NAIC_CROSSWALKS": stat_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
-            + act_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
-            + mc_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"],
-            "UNMATCHED_NAIC_IDS": stat_x["UNMATCHED_NAIC"] + act_x["UNMATCHED_NAIC"] + mc_x["UNMATCHED_NAIC"],
+            "EXACT_NAIC_MATCH_OBSERVATIONS": (
+                stat_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
+                + act_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
+                + mc_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
+            ),
+            "EXACT_NAIC_CROSSWALKS": (
+                stat_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
+                + act_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
+                + mc_x["EXACT_EXISTING_LEGAL_INSURER_MATCHES"]
+            ),
+            "EXACT_NAIC_CROSSWALKS_GRAIN": "sum_of_layer_specific_exact_match_counts",
+            "EXACT_NAIC_CROSSWALKS_NOT_UNIQUE_NAIC_IDS": True,
+            "LAYER_UNMATCHED_COUNT_SUM": stat_x["UNMATCHED_NAIC"]
+            + act_x["UNMATCHED_NAIC"]
+            + mc_x["UNMATCHED_NAIC"],
+            "UNIQUE_UNMATCHED_NAIC_IDS_ACROSS_HIGH_YIELD_LAYERS": len(
+                sorted(
+                    set(stat_x["unmatched_naic"])
+                    | set(act_x["unmatched_naic"])
+                    | set(mc_x["unmatched_naic"])
+                )
+            ),
+            "UNMATCHED_NAIC_IDS": len(
+                sorted(
+                    set(stat_x["unmatched_naic"])
+                    | set(act_x["unmatched_naic"])
+                    | set(mc_x["unmatched_naic"])
+                )
+            ),
+            "UNMATCHED_NAIC_UNION": sorted(
+                set(stat_x["unmatched_naic"])
+                | set(act_x["unmatched_naic"])
+                | set(mc_x["unmatched_naic"])
+            ),
+            "UNMATCHED_UNION_EXCLUDES_FINANCIAL_EXAMS": True,
             "NET_NEW_CANONICAL_LEGAL_INSURERS": 0,
             "NET_NEW_CANONICAL_AGENCIES": 0,
             "NET_NEW_CANONICAL_PERSONS": 0,

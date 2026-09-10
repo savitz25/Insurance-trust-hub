@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-09T12:00:00.000Z",
   "newestDocumentedSourceAsOf": "2026-09-09",
   "newestDocumentedSourceAsOfNote": "Newest documented official source-effective date among metrics that carry a sourceAsOf. Not Git/deploy time and not a single network clock.",
-  "sourceFingerprint": "e28d7656ed9821d8e8764f8ba87118c85b124da86a1499ed64f2094298e7f4a3",
+  "sourceFingerprint": "b3a7dbc6703b270e75c128af130bed5b23449e64e9df50d4ce3e772729dec361",
   "liveProductionHost": "gojyhmbojbwbpiamoktq.supabase.co",
   "nationalGraph": {
     "agencies": 82071,
@@ -107,7 +107,7 @@
     "authorizedCompaniesCoverage": "SOURCE_NOT_ACQUIRED"
   },
   "virginia": {
-    "snapshotFingerprint": "d4314962fa54b866ffb1111ad4d60aba5dd9a25269734af04ff4b874cf08de58",
+    "snapshotFingerprint": "fd4e95d83bf1d909e51ee8dc8aaab3d399861d389d81d31c8cdfa70094c613fb",
     "asOf": "2025-12-31",
     "statisticalDirectoryRows": 1546,
     "statisticalDirectoryCoverage": "ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER",
