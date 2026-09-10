@@ -69,6 +69,9 @@ export type InsuranceNetworkMetricsInput = {
   coloradoAsOf: string;
   coloradoStatisticalDirectoryRows: number;
   coloradoSurplusLinesEligibleIdentities: number;
+  virginiaSnapshotFingerprint: string;
+  virginiaAsOf: string | null;
+  virginiaStatisticalDirectoryRows: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -179,6 +182,12 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   }
   if (!input.publishedStateIntelligencePaths.includes('/colorado')) {
     throw new Error('Colorado state intelligence path missing');
+  }
+  if (!input.publishedStateIntelligencePaths.includes('/virginia')) {
+    throw new Error('Virginia state intelligence path missing');
+  }
+  if (input.virginiaStatisticalDirectoryRows === input.legalInsurers) {
+    throw new Error('Virginia statistical-report companies must not equal national legal insurers');
   }
   if (input.washingtonRegulatedEntitiesAnnualReport === input.legalInsurers) {
     throw new Error('Washington annual-report entities must not equal national legal insurers');
@@ -716,6 +725,28 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'va_statistical_report_naic_directory_rows',
+      label: 'Virginia 2025 statistical-report companies (distinct NAIC)',
+      value: input.virginiaStatisticalDirectoryRows,
+      valueState: 'KNOWN',
+      grain: 'statistical_report_directory_row',
+      denominator: 'Virginia SCC 2025 Insurance Company Statistical Report financial-data PDFs',
+      description:
+        'Dated 2025 company-level NAIC observations, year ended 2025-12-31, reported as of 2026-06-01. Not a live authorized-company roster.',
+      coverage: 'Virginia',
+      contributingSourceSystems: ['virginia_scc_statistical_report'],
+      sourceAsOf: '2025-12-31',
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One distinct NAIC company identity from the 2025 financial-data PDFs.',
+        'Not a live insurer roster, not national legal insurers, not agencies, not producers, not Regulatory Action rows.',
+        ['virginia_scc'],
+        'Virginia; period ended 2025-12-31; reported as of 2026-06-01',
+        'Virginia SCC 2025 Insurance Company Statistical Report'
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -850,17 +881,17 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
         'Published state intelligence routes.',
-        'Not live researched-agency totals, not counties, not a 50-state census.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel'],
+        'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -942,6 +973,8 @@ export function computeInsuranceNetworkMetrics(
     coFp: input.coloradoSnapshotFingerprint,
     coDirectory: input.coloradoStatisticalDirectoryRows,
     coSurplus: input.coloradoSurplusLinesEligibleIdentities,
+    vaFp: input.virginiaSnapshotFingerprint,
+    vaDirectory: input.virginiaStatisticalDirectoryRows,
     paths: input.publishedStateIntelligencePaths,
     wave1: input.publicLegalInsurerWave1,
   };
@@ -1043,6 +1076,16 @@ export function computeInsuranceNetworkMetrics(
       statisticalDirectoryRows: input.coloradoStatisticalDirectoryRows,
       statisticalDirectoryCoverage: 'ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER',
       surplusLinesEligibleIdentities: input.coloradoSurplusLinesEligibleIdentities,
+      producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      authorizedCompanies: null,
+      authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED',
+    },
+    virginia: {
+      snapshotFingerprint: input.virginiaSnapshotFingerprint,
+      asOf: input.virginiaAsOf,
+      statisticalDirectoryRows: input.virginiaStatisticalDirectoryRows,
+      statisticalDirectoryCoverage: 'ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER',
       producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       authorizedCompanies: null,

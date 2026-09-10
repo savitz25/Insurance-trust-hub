@@ -188,6 +188,16 @@ export type InsuranceNetworkMetricsV1 = {
     authorizedCompanies: null;
     authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED';
   };
+  virginia: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    statisticalDirectoryRows: number;
+    statisticalDirectoryCoverage: 'ANNUAL_STATISTICAL_REPORT_NOT_LIVE_ROSTER';
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    authorizedCompanies: null;
+    authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED';
+  };
   publication: {
     publicPeople: 0;
     publicGraphAgencies: 0;

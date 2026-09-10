@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/directory',
     '/california',
     '/colorado',
+    '/virginia',
     '/florida',
     '/new-jersey',
     '/texas',

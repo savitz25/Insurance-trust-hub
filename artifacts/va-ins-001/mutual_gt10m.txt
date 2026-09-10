@@ -1,0 +1,29 @@
+State Corporation Commission - Bureau of Insurance - Financial Regulation
+2025 Financial Data for Domestic Mutual Assessment Companies (Assets > $10 million)
+COCODE Company Name
+ADMITTED 
+ASSETS LIABILITIES SURPLUS NET U/W GAIN
+DIVIDENDS 
+TO POLICY-
+HOLDERS
+NET PREM 
+WRITTEN
+PREMIUMS 
+EARNED
+LOSS EXP 
+INCURRED
+OTHER U/W 
+EXP 
+INCURRED INCOME TAX NET INCOME
+28851 Augusta Mutual Ins Co 43,083,656$        19,883,593$          23,200,063$          (1,088,114)$          -$                  21,470,895$      18,430,249$     1,643,266$           7,524,352$      -$                         220,375$          
+13029 Grayson-Caroll-Wythe Mutual Ins Co 45,761,645          10,144,016            35,617,629            (367,225)                 -                     10,085,476         9,064,627          345,566                  4,115,908         89,969                    1,432,063         
+10329 Loudoun Mutual Ins Co 143,701,899        73,207,359            70,494,540            3,337,725              -                     86,655,003         81,289,524        5,913,377              28,442,358      1,428,910             7,649,795         
+33740 Mutual Assurance Society of VA 501,099,377        89,580,791            411,518,586          (19,297,488)          -                     15,448,083         13,013,434        3,044,425              12,823,203      (5,063,035)            13,999,236      
+10196 Northern Neck Ins Co 175,062,792        80,300,464            94,762,328            2,044,080              -                     79,588,200         76,675,140        4,187,122              28,022,861      1,286,329             9,988,893         
+13117 Shenandoah Mutual Fire Ins Co 10,779,772          8,207,144               2,377,575               1,306,407              -                     8,281,858            7,430,100          329,215                  3,112,176         -                            1,502,509         
+Totals 919,489,141$     281,323,367$       637,970,721$       (14,064,615)$       -$                  221,529,515$    205,903,074$  15,462,971$         84,040,858$   (2,257,827)$         34,792,871$    
+Number of Companies                      6
+____________
+June 1, 2026 # Confidential
+__________
+Page 1 of 1

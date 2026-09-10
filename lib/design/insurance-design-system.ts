@@ -359,6 +359,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
       { href: '/data/plan-complaint-index', label: 'Plan Complaint Index' },
       { href: '/california', label: 'California insurance research' },
       { href: '/colorado', label: 'Colorado insurance research' },
+      { href: '/virginia', label: 'Virginia insurance research' },
       { href: '/florida', label: 'Florida insurance research' },
       { href: '/new-jersey', label: 'New Jersey insurance research' },
       { href: '/texas', label: 'Texas insurance research' },

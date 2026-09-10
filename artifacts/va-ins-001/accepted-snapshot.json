@@ -1,0 +1,306 @@
+{
+  "version": "insurance-va-state-intel-v1",
+  "ticket": "VA-INS-001",
+  "as_of": null,
+  "source_as_of": null,
+  "source_as_of_state": "UNKNOWN",
+  "period_end": "2025-12-31",
+  "reported_as_of": "2026-06-01",
+  "retrieved_at": "2026-09-10T17:15:26Z",
+  "generated_at": "2026-09-10T17:15:26Z",
+  "snapshot_as_of": "2026-09-10",
+  "source_clock": "Virginia SCC 2025 Insurance Company Statistical Report: year ended 2025-12-31, data reported as of 2026-06-01. Regulatory Actions and Market Conduct tables retrieved 2026-09-10. Retrieval is not current authorization.",
+  "no_trust_score": true,
+  "no_paid_ranking": true,
+  "no_virginia_county_pages": true,
+  "no_richmond_route": true,
+  "missing_is_not_zero": true,
+  "search_only_is_not_zero": true,
+  "publication": {
+    "path": "/virginia",
+    "indexable": true,
+    "robots": "index,follow",
+    "canonical": "https://www.insurancetrusthub.com/virginia",
+    "h1": "Virginia Insurance Market & Regulatory Intelligence",
+    "sitemap": true
+  },
+  "regulators": {
+    "name": "Virginia State Corporation Commission Bureau of Insurance",
+    "short": "SCC BOI",
+    "url": "https://www.scc.virginia.gov/regulated-industries/companies/",
+    "financial_reporting": "https://www.scc.virginia.gov/regulated-industries/companies/for-insurance-companies/company-financial-reporting/",
+    "regulatory_actions": "https://www.scc.virginia.gov/regulated-industries/companies/for-insurance-companies/regulatory-actions/",
+    "market_conduct": "https://www.scc.virginia.gov/regulated-industries/companies/for-insurance-companies/market-conduct-examination-reports/",
+    "company_search": "https://www.scc.virginia.gov/pages/Look-Up-a-Company"
+  },
+  "hero": {
+    "universe_value": 1546,
+    "universe_label": "2025 statistical-report company observations (distinct NAIC)",
+    "universe_hint": "Company-level rows from 2025 financial-data PDFs. Year ended 2025-12-31, reported as of 2026-06-01. Not a September 2026 live authorized-insurer roster.",
+    "actions_value": 124,
+    "actions_label": "Regulatory Action company observations",
+    "actions_hint": "Bounded official table. Observation rows are not unique cases and not unique insurers.",
+    "exams_value": 117,
+    "exams_label": "Market Conduct Examination observations",
+    "exams_hint": "Bounded official table. An examination is not a finding of wrongdoing.",
+    "geography_value": "Virginia",
+    "as_of_value": "2025-12-31",
+    "as_of_label": "statistical-report period end"
+  },
+  "statistical_report": {
+    "period_end": "2025-12-31",
+    "reported_as_of": "2026-06-01",
+    "landing": "https://www.scc.virginia.gov/regulated-industries/companies/for-insurance-companies/company-financial-reporting/",
+    "not_current_authorization": true,
+    "premium_is_not_quality": true,
+    "row_is_not_claimable_profile": true,
+    "observation_rows": 1546,
+    "distinct_naic": 1546,
+    "by_category": {
+      "health": 103,
+      "life": 406,
+      "pc": 988,
+      "title": 26,
+      "burial": 1,
+      "legal_service": 5,
+      "lgsip": 3,
+      "mutual_lt10m": 8,
+      "mutual_gt10m": 6
+    },
+    "categories_acquired": [
+      "health",
+      "life",
+      "property_casualty",
+      "title",
+      "burial",
+      "legal_service",
+      "local_government_self_insurance",
+      "mutual_assessment"
+    ],
+    "workers_comp_group_self_insurance": "NON_NAIC_LICENSE_NUMBERS / NOT_IN_NAIC_UNIVERSE",
+    "caveat": "Dated 2025 financial-data company observations. Not current authorization. Categories are not added into one quality ranking."
+  },
+  "current_company_verification": {
+    "coverage": "OPEN_SEARCH_ONLY",
+    "url": "https://www.scc.virginia.gov/pages/Look-Up-a-Company",
+    "bulk_acquired": false,
+    "count": null,
+    "caveat": "Current SCC company search is a live verification path. The 2025 statistical report is not current authorization. Search-only is not zero."
+  },
+  "regulatory_actions": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "url": "https://www.scc.virginia.gov/regulated-industries/companies/for-insurance-companies/regulatory-actions/",
+    "observation_rows": 124,
+    "distinct_cases": 79,
+    "distinct_naic": 87,
+    "action_is_not_conviction": true,
+    "case_is_not_violation_count": true,
+    "row_is_not_unique_insurer": true,
+    "row_is_not_claimable_profile": true,
+    "did_not_crawl_case_pdfs": true
+  },
+  "market_conduct": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "url": "https://www.scc.virginia.gov/regulated-industries/companies/for-insurance-companies/market-conduct-examination-reports/",
+    "observation_rows": 117,
+    "distinct_naic": 100,
+    "examination_is_not_violation": true,
+    "examination_is_not_enforcement_order": true,
+    "row_is_not_claimable_profile": true,
+    "did_not_crawl_exam_pdfs": true
+  },
+  "financial_exams": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "decision": "GRABBED \u2014 EASY SECONDARY",
+    "listing_rows": 85,
+    "distinct_naic": 70,
+    "non_naic_source_codes": 15,
+    "examination_is_not_market_conduct": true,
+    "did_not_crawl_exam_pdfs": true
+  },
+  "producer_roster": {
+    "count": null,
+    "coverage": "OPEN_SEARCH_ONLY"
+  },
+  "agency_roster": {
+    "count": null,
+    "coverage": "OPEN_SEARCH_ONLY"
+  },
+  "complaints": {
+    "coverage": "PUBLIC_RESEARCH_PATH / SOURCE_NOT_ACQUIRED",
+    "count": null,
+    "complaint_is_not_violation": true,
+    "complaint_ratio_is_not_trusthub_score": true
+  },
+  "surplus_lines": {
+    "coverage": "SOURCE_NOT_ACQUIRED",
+    "count": null,
+    "surplus_is_not_admitted": true
+  },
+  "identity": {
+    "bar": "EXACT_NAIC_ONLY",
+    "name_only": "UNSAFE",
+    "read_only_naic_match_is_not_enrichment": true,
+    "company_is_not_agency": true,
+    "company_is_not_producer": true,
+    "naic_is_not_npn": true
+  },
+  "naic_crosswalk": {
+    "CROSSWALK_STATUS": "EXECUTED",
+    "spine_source": "data/reports/ins-insurer-006-identity-index.json",
+    "spine_legal_insurers": 6185,
+    "read_only": true,
+    "graph_write": false,
+    "statistical_report": {
+      "SOURCE_DISTINCT_NAIC": 1546,
+      "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 1541,
+      "UNMATCHED_NAIC": 5,
+      "unmatched_naic": [
+        "15791",
+        "16575",
+        "73504",
+        "85561",
+        "95811"
+      ],
+      "read_only": true,
+      "graph_write": false,
+      "exact_match_is_not_enrichment": true,
+      "exact_match_is_not_profile_attachment": true
+    },
+    "regulatory_actions": {
+      "SOURCE_DISTINCT_NAIC": 87,
+      "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 86,
+      "UNMATCHED_NAIC": 1,
+      "unmatched_naic": [
+        "15791"
+      ],
+      "read_only": true,
+      "graph_write": false,
+      "exact_match_is_not_enrichment": true,
+      "exact_match_is_not_profile_attachment": true
+    },
+    "market_conduct": {
+      "SOURCE_DISTINCT_NAIC": 100,
+      "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 100,
+      "UNMATCHED_NAIC": 0,
+      "unmatched_naic": [],
+      "read_only": true,
+      "graph_write": false,
+      "exact_match_is_not_enrichment": true,
+      "exact_match_is_not_profile_attachment": true
+    },
+    "financial_exams": {
+      "SOURCE_DISTINCT_NAIC": 70,
+      "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 59,
+      "UNMATCHED_NAIC": 11,
+      "unmatched_naic": [
+        "15791",
+        "16149",
+        "16534",
+        "16575",
+        "16763",
+        "18791",
+        "34118",
+        "95481",
+        "95612",
+        "95811",
+        "97144"
+      ],
+      "read_only": true,
+      "graph_write": false,
+      "exact_match_is_not_enrichment": true,
+      "exact_match_is_not_profile_attachment": true
+    }
+  },
+  "profile_attachments": {
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "graph_write": false,
+    "note": "Read-only exact NAIC comparison. Exact identity match is not a graph enrichment write and is not a public profile attachment."
+  },
+  "claim_eligibility": {
+    "broadened": false
+  },
+  "expansion_ledger": {
+    "NEW_VA_MARKET_OBSERVATION_ROWS": 1546,
+    "NEW_VA_DISTINCT_STAT_REPORT_NAIC_IDS": 1546,
+    "NEW_VA_REGULATORY_ACTION_ROWS": 124,
+    "NEW_VA_REGULATORY_ACTION_CASES": 79,
+    "NEW_VA_MARKET_CONDUCT_ROWS": 117,
+    "NEW_VA_MARKET_CONDUCT_DISTINCT_NAIC_IDS": 100,
+    "NEW_VA_SURPLUS_ROWS": 0,
+    "EXACT_NAIC_CROSSWALKS": 1727,
+    "UNMATCHED_NAIC_IDS": 6,
+    "NET_NEW_CANONICAL_LEGAL_INSURERS": 0,
+    "NET_NEW_CANONICAL_AGENCIES": 0,
+    "NET_NEW_CANONICAL_PERSONS": 0,
+    "NET_NEW_PUBLIC_PROFILES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "PRE_INGEST_CANONICAL_LEGAL_INSURERS": 6185
+  },
+  "juice_squeeze": [
+    {
+      "source": "2025 Insurance Company Statistical Report financial-data PDFs",
+      "decision": "GRABBED \u2014 HIGH YIELD",
+      "note": "Company-level COCODE observations from Health/Life/P&C/Title/Burial/Legal/Mutual/LGSIP gen PDFs."
+    },
+    {
+      "source": "SCC Regulatory Actions table",
+      "decision": "GRABBED \u2014 HIGH YIELD",
+      "note": "Bounded HTML table with NAIC, type, order date, case file. Case PDFs not crawled."
+    },
+    {
+      "source": "SCC Market Conduct Examination Reports table",
+      "decision": "GRABBED \u2014 HIGH YIELD",
+      "note": "Bounded HTML table with NAIC, type, order date. Exam PDFs not crawled."
+    },
+    {
+      "source": "SCC domestic financial examination listing",
+      "decision": "GRABBED \u2014 EASY SECONDARY",
+      "note": "Same financial-reporting page table. PDF reports not crawled."
+    },
+    {
+      "source": "Line-of-business premium-profile PDFs (PC_prem etc.)",
+      "decision": "LEFT \u2014 TOO MUCH WORK FOR CURRENT YIELD",
+      "note": "Company-level financial-data PDFs already give the NAIC universe. Premium-line archaeology not required."
+    },
+    {
+      "source": "Current SCC company search",
+      "decision": "LEFT \u2014 SEARCH ONLY",
+      "note": "No bounded bulk export. Statistical report is not current authorization."
+    },
+    {
+      "source": "Agent / Agency / Navigator search",
+      "decision": "LEFT \u2014 SEARCH ONLY",
+      "note": "No bulk roster. Producer != agency != legal insurer."
+    },
+    {
+      "source": "Complaint ratio / case documents",
+      "decision": "LEFT \u2014 SEARCH ONLY",
+      "note": "No clean statewide complaint-ratio table in this ticket."
+    },
+    {
+      "source": "Surplus-lines eligible list",
+      "decision": "LEFT \u2014 SEARCH ONLY",
+      "note": "No straightforward current dated list found on the financial-reporting page."
+    },
+    {
+      "source": "Regulatory/market-conduct case PDFs",
+      "decision": "LEFT \u2014 TOO MUCH WORK FOR CURRENT YIELD",
+      "note": "Table metadata is enough."
+    },
+    {
+      "source": "FOIA / paid SBS-Sircon",
+      "decision": "LEFT \u2014 REQUEST ONLY",
+      "note": "Not requested."
+    },
+    {
+      "source": "Virginia city/county pages",
+      "decision": "LEFT \u2014 LOCAL / FUTURE",
+      "note": "Statewide only."
+    }
+  ],
+  "no_combined_denominator": true,
+  "unknown_is_not_zero": true,
+  "fingerprint": "d4314962fa54b866ffb1111ad4d60aba5dd9a25269734af04ff4b874cf08de58"
+}

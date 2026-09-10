@@ -17,6 +17,7 @@ const STATE_NAMES: Record<string, string> = {
   california: 'CA',
   washington: 'WA',
   colorado: 'CO',
+  virginia: 'VA',
   fl: 'FL',
   tx: 'TX',
   ma: 'MA',
@@ -26,6 +27,7 @@ const STATE_NAMES: Record<string, string> = {
   ca: 'CA',
   wa: 'WA',
   co: 'CO',
+  va: 'VA',
 };
 
 function detectStates(q: string): string[] {
@@ -319,10 +321,10 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
 
   if (
     /\b(licensed insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
-    /\bcolorado\b/i.test(q)
+    /\b(colorado|virginia)\b/i.test(q)
   ) {
     const query = fail(
-      'Colorado producer and agency bulk rosters were not acquired. Sircon/DOI verification remains search-only. Search-only is not zero, and this extract will not silently resolve Colorado agents to the national person graph.',
+      'Colorado/Virginia producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.',
       ['Find NPN 10391484.', 'What is an NPN?'],
     );
     query.coverageState = 'NOT_ACQUIRED';
@@ -330,7 +332,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  if (/\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?)\b/i.test(q) && /\b(texas|new jersey|california|washington|colorado)\b/i.test(q)) {
+  if (/\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?)\b/i.test(q) && /\b(texas|new jersey|california|washington|colorado|virginia)\b/i.test(q)) {
     const state = detectStates(q)[0];
     const query = fail(`${state ?? 'The requested'} complete authorized/legal-insurer roster is not acquired as a current bulk universe. Missing coverage is not zero.`, ['Find insurer NAIC code 10064.', 'What is a legal insurer?']);
     query.entityClass = 'insurer';

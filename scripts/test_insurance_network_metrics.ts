@@ -76,9 +76,12 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     coloradoAsOf: '2026-09-09',
     coloradoStatisticalDirectoryRows: 1839,
     coloradoSurplusLinesEligibleIdentities: 259,
+    virginiaSnapshotFingerprint: 'd4314962fa54b866ffb1111ad4d60aba5dd9a25269734af04ff4b874cf08de58',
+    virginiaAsOf: '2025-12-31',
+    virginiaStatisticalDirectoryRows: 1546,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
-    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado'],
+    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia'],
     ...over,
   };
 }
@@ -195,6 +198,11 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
       () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington'] })),
       /Colorado state intelligence path missing/
     );
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado'] })),
+      /Virginia state intelligence path missing/
+    );
+    assert.equal(metricByKey(m, 'va_statistical_report_naic_directory_rows').value, 1546);
     assert.throws(
       () => computeInsuranceNetworkMetrics(baseInput({ coloradoStatisticalDirectoryRows: 6185 })),
       /Colorado statistical-report directory rows must not equal national legal insurers/
