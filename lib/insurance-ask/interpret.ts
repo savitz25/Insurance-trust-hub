@@ -325,12 +325,13 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     /\b(licensed insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
     /\b(colorado|virginia|new york)\b/i.test(q)
   ) {
+    const state = detectStates(q)[0] ?? 'The requested state';
     const query = fail(
-      'Colorado/Virginia producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.',
+      `${state} producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.`,
       ['Find NPN 10391484.', 'What is an NPN?'],
     );
     query.coverageState = 'NOT_ACQUIRED';
-    push('Coverage', 'NOT_ACQUIRED — Colorado agency/producer roster');
+    push('Coverage', `NOT_ACQUIRED — ${state} agency/producer roster`);
     return { raw: q, query, interpretation: lines };
   }
 
