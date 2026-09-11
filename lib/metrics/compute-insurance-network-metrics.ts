@@ -72,6 +72,9 @@ export type InsuranceNetworkMetricsInput = {
   virginiaSnapshotFingerprint: string;
   virginiaAsOf: string | null;
   virginiaStatisticalDirectoryRows: number;
+  newYorkSnapshotFingerprint: string;
+  newYorkAsOf: string | null;
+  newYorkDirectoryRows: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -185,6 +188,12 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   }
   if (!input.publishedStateIntelligencePaths.includes('/virginia')) {
     throw new Error('Virginia state intelligence path missing');
+  }
+  if (!input.publishedStateIntelligencePaths.includes('/new-york')) {
+    throw new Error('New York state intelligence path missing');
+  }
+  if (input.newYorkDirectoryRows === input.legalInsurers) {
+    throw new Error('New York DFS directory rows must not equal national legal insurers');
   }
   if (input.virginiaStatisticalDirectoryRows === input.legalInsurers) {
     throw new Error('Virginia statistical-report companies must not equal national legal insurers');
@@ -747,6 +756,28 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'ny_dfs_company_directory_rows',
+      label: 'New York DFS Insurance Company Directory rows',
+      value: input.newYorkDirectoryRows,
+      valueState: 'KNOWN',
+      grain: 'statistical_report_directory_row',
+      denominator: 'NY DFS Insurance Company Search list-all table',
+      description:
+        'DFS company directory rows from the official list-all retrieval. Not a current authorized-writing roster and not a unique-company census if NAIC is reused.',
+      coverage: 'New York',
+      contributingSourceSystems: ['ny_dfs_company_directory'],
+      sourceAsOf: input.newYorkAsOf ?? '2026-09-11',
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One DFS Insurance Company Directory row.',
+        'Not current writing authority, not national legal insurers, not agencies, not producers, not enforcement actions.',
+        ['ny_dfs'],
+        'New York; directory retrieval',
+        'NY DFS Insurance Company Search list-all'
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -881,9 +912,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -891,7 +922,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -975,6 +1006,8 @@ export function computeInsuranceNetworkMetrics(
     coSurplus: input.coloradoSurplusLinesEligibleIdentities,
     vaFp: input.virginiaSnapshotFingerprint,
     vaDirectory: input.virginiaStatisticalDirectoryRows,
+    nyFp: input.newYorkSnapshotFingerprint,
+    nyDirectory: input.newYorkDirectoryRows,
     paths: input.publishedStateIntelligencePaths,
     wave1: input.publicLegalInsurerWave1,
   };
@@ -1090,6 +1123,16 @@ export function computeInsuranceNetworkMetrics(
       agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       authorizedCompanies: null,
       authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED',
+    },
+    newYork: {
+      snapshotFingerprint: input.newYorkSnapshotFingerprint,
+      asOf: input.newYorkAsOf,
+      directoryRows: input.newYorkDirectoryRows,
+      directoryCoverage: 'DFS_COMPANY_DIRECTORY_NOT_CURRENT_AUTHORIZATION',
+      producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      authorizedCompanies: null,
+      authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY / PARTIAL',
     },
     publication: {
       publicPeople: 0,

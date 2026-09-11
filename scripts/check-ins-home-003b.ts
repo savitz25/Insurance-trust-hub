@@ -101,7 +101,7 @@ assert(a.fingerprint === b.fingerprint, "deterministic fingerprint");
 assert(a.fingerprint === fingerprintHomeIntel(a), "fingerprint recomputes");
 assert(
   a.fingerprint ===
-    "8d1e3890d67ce9bab618f9ad58c4978f6a9d6c64c955094858c7e3c93b9e3a83",
+    "16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b",
   "homepage fingerprint after insurance-network-metrics-v1",
 );
 assert(

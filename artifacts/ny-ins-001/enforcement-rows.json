@@ -1,0 +1,960 @@
+[
+  {
+    "date": "2026-04-30",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20260430 Consent Order to Delta Dental Insurance Company and Delta Dental of New York, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2026-02-17",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20260217-co-jericho-health-share Consent Order to House of Prayer and Life, Inc. d/b/a Jericho Health Share or Jericho Share and https://www.dfs.ny.gov/industry-guidance/enforcement-discipline/ea20260217-co-jericho-health-share-settlement-consumer-remediation-fact-sheet Jericho Share Settlement Consumer Remediation",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-farmers-ins-exchange Consent Order to Farmers Insurance Exchange",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-hagerty-ins-agency Consent Order to Hagerty Insurance Agency, LLC",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-hartford-fire-ins-company Consent Order to Hartford Fire Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-infinity-ins-company Consent Order to Infinity Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-liberty-mutual-ins-company Consent Order to Liberty Mutual Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-metromile-ins-company Consent Order to Metromile Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-midvale-indem-company Consent Order to Midvale Indemnity Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-10-14",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20251014-co-state-auto-mutual-ins-company Consent Order to State Automobile Mutual Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-09-04",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20250904-co-excellus-health Consent Order to Excellus Health Plan, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-01-09",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20250109-co-kemper-corp-group Consent Order to Kemper Corp Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2025-01-09",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20250109-co-starr-indemnity-and-liability-company Consent Order to Starr Indemnity and Liability Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-12-22",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241224-co-w-r-berkley-insurance-group Consent Order to W.R. Berkley Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-12-22",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241222-co-preferred-mutual-insurance-company Consent Order to Preferred Mutual Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-12-22",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241222-co-munich-reins-group Consent Order to Munich Reinsurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-12-22",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241222-co-cna-ins-group Consent Order to CNA Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-12-10",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241210-co-hanover-ins-group Consent Order to Hanover Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-11-26",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241126-co-nycm-ins-group Consent Order to New York Central Mutual Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-11-26",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241126-ny-marine-and-gen-ins-company Consent Order to New York Marine and General Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-11-25",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241125-the-travelers-indemnity-company Consent Order to The Travelers Indemnity Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-11-25",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20241125-government-employees-insurance-group Consent Order to Government Employees Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-09-23",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240923-great-american-insurance-group Consent Order to Great American Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-09-05",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240905-main-street-america-insurance-group Consent Order to Main Street America Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-08-27",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240827-co-farmers-metro-general-companies Consent Order to Farmers/Metropolitan General Companies",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-08-01",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240801-farm-fam-casualty Consent Order to Farm Family Casualty Insurance Company and United Farm Family Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-08-01",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240801-co-markel-group Consent Order to Markel Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-08-01",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240801-co-utica-national Consent Order to Utica National",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-08-01",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240801-co-usaa Consent Order to USAA Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-08-01",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240801-co-selective Consent Order to Selective Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-06-13",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240613-co-hartford Consent Order to Hartford Fire & Casualty Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-06-13",
+    "action": "Department of Financial Services Issues /industry-guidance/enforcement-discipline/ea20240613-co-erie Consent Order to Erie Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-03-18",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20240318-co-nufic Consent Order to National Union Fire Insurance Company of Pittsburgh, PA",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-02-27",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20240227_nationwide Consent Order to Nationwide Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-02-27",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20240227_old_republic Consent Order to Old Republic General Insurance Group, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-02-05",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20240205_fairfax Consent Order to Fairfax Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-02-02",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20240202_amtrust Consent Order to AmTrust",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-01-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea2024012_wellfleet Consent Order to Wellfleet New York Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-01-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea2024012_cigna Consent Order to Cigna Health and Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-01-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea2024012_empire_health_choice Consent Order to Empire HealthChoice Assurance, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-01-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea2024012_cglic Consent Order to Connecticut General Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-01-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea2024012_nippon_life_insurance Consent Order to Nippon Life Insurance Company of America",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2024-01-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea2024012_aetna Consent Order to Aetna Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-12-15",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea2023_co_axa_xl Consent Order to AXA XL",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-11-27",
+    "action": "Department of Financial Services Issues https://www.dfs.ny.gov/industry_guidance/enforcement_discipline/ea20231127_first_american Consent Order to First American Title Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-11-27",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20231127_aig_companies Consent Order to AIG Companies",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-11-03",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20231103_co_agia_inc Consent Order to A.G.I.A., Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-08-10",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230810_co_allstate_ins_group Consent Order to the Allstate Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-08-10",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230810_co_natl_gen_ins_group Consent Order to the National General Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-07-28",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230728_farmers Consent Order to the Farmers Insurance Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-07-28",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_actions_Insurance/ea20230728_co_tokio_marine_group Consent Order to the Tokio Marine Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-07-13",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230713_co_travelers_group Consent Order to the Travelers Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-07-07",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230707_sa_stone_wealth_mgmt Consent Order to SA Stone Wealth Management Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-06-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_actions_Insurance/ea20230612_co_geico Consent Order to GEICO",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-05-10",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230510_co_4_ever_life Consent Order to 4 Ever Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-05-10",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230510_co_aetna_life Consent Order to Aetna Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-05-10",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230510_co_uhc Consent Order to UnitedHealthcare Insurance Company of New York",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-05-10",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230510_co_wellfleet_ny Consent Order to Wellfleet New York Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2023-01-27",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20230127_phil_indemnity Consent Order to Philadelphia Indemnity",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-12-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20221219_chubb Consent Order to Chubb",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-12-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20221219_liberty_mutual Consent Order to Liberty Mutual",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-12-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20221220_state_farm Consent Order to State Farm",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-12-02",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20221202_ttec_hs Consent Order to TTEC Healthcare Solutions, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-10-18",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20221018_eyemed Consent Order to EyeMed Vision Care LLC",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-08-17",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea202208_john_hancock Consent Order to John Hancock Life and Health Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-07-22",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220727_co_banner_life Consent Order to Banner Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-06-28",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220628_guarantors Consent Order to Guarantr, Inc. D/B/A The Guarantors",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-06-23",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220623_carnival_co Consent Order to Carnival Corporation d/b/a Carnival Cruise Line; Princess Cruise Lines, Ltd; Holland America Line NV; Seabourn Cruise Line, Ltd; and Costa Cruise Lines, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-05-19",
+    "action": "Department of Financial Services Issues /industry_guidance/industry_letters/il20220519_co_nationwide_life Consent Order to Nationwide Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-03-15",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220315_moneygram Consent Order to Moneygram International Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-03-15",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220308_co_progressive_group Consent Order to Progressive Group",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-03-15",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220308_co_zurich_na Consent Order to Zurich North America",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-01-22",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220122_ca_cipla_usa Closeout Agreement with Cipla USA, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2022-01-10",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20220110_co_columbian_mutual Consent Order to Columbian Mutual Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-12-16",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20211221_pacific_life Consent Order to Pacific Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-12-07",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20211207_wellfleet_ny_ins_comp Consent Order to Wellfleet New York Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-12-07",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20211207_oscar_ins_corp Consent Order to Oscar Insurance Corporation",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-12-07",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20211207_aetna_life_ins_comp Consent Order to Aetna Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-10-15",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20211015_utica Consent Order to Utica National Insurance Company of Texas and Utica Mutual Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-09-20",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20210920_co_lifemark Consent Order to LifeMark Securities Corporation",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-06-28",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20210628_tri-state Consent Order to Tri-State Consumer Insurance Company and Tri-State Consumer Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-05-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20210512_first_unum Consent Order to First Unum Life Insurance Company and The Paul Revere Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-04-12",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20210412_national_securities_corp Consent Order to National Securities Corporation",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-02-26",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20210226_nyliac Consent Order to New York Life Insurance & Annuity Corporation",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2021-02-01",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20210201_aig Consent Order to American General Life Insurance Company, American International Group, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-11-18",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20201118_nra Consent Order to the National Rifle Association of America (NRA)",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-10-30",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_actions_Insurance/ea20201030_combined_consent_orders Consent Order to Allstate, State Farm, AIG, and Tri-State",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-10-29",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20201029_principal_life Consent Order to Principal Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-10-20",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20201020_aliera_trinity Statement of Charges and Notice of Hearing regarding Aliera Companies and Trinity Healthshare",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-10-09",
+    "action": "Department of Financial Issues /industry_guidance/enforcement_discipline/ea_20200909_johnson_and_johnson Statement of Charges and Notice of Hearing regarding Johnson & Johnson and related companies",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-08-19",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200819_co_signal_place Consent to the Signal Agency, LP, an Assurant Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-08-18",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200818_teva_allergen Statement of Charges and Notice of Hearing regarding Teva Pharmaceutical Industries, Ltd., and Allergan PLC.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-07-29",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200729_co_cdphp Consent Order for CDPHP Universal Benefits Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-07-29",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200729_co_mvp Consent Order for MVP Health Services Corp.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-07-21",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200721_first_american_statement_notice Statement of Charges and Notice of Hearing to First American Title Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-06-08",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200608_endo_par_first_amend Statement of Charges and Notice of Hearing regarding Endo International, PLC., Endo Health Solutions, Inc., Endo Pharmaceuticals Inc., and PAR Pharmaceutical Companies, Inc. (Updated July 28, 2021)",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-04-17",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea20200417_statement_charges_notice_hearing_mallinckrodt_specgx.pdf Statement of Charges and Notice of Hearing regarding Mallinckrodt PLC, Mallinckrodt LLC, And Specgx LLC",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea20200417_statement_charges_notice_hearing_mallinckrodt_specgx.pdf"
+    ]
+  },
+  {
+    "date": "2020-04-13",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea20200413_consent_order_athene.pdf Consent Order to Athene Annuity and Life Company, Athene Holding Ltd.",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea20200413_consent_order_athene.pdf"
+    ]
+  },
+  {
+    "date": "2020-04-09",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea20200409_consent_orders_annuities.pdf Consent Orders to Lincoln Life & Annuity Company of New York, Massachusetts Mutual Life Insurance Company, and Pacific Life & Annuity Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea20200409_consent_orders_annuities.pdf"
+    ]
+  },
+  {
+    "date": "2020-02-26",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200226_asurion Consent Order to Asurion Insurance Services, Inc. and Asurion Protection Services LLC",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2020-02-05",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20200205_nra_notice Statement of Charges and Notice of Hearing to the National Rifle Association of America",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2019-09-17",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/09/ea190917_american_progressive.pdf Consent Order to American Progressive Life and Health Insurance Company of New York",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/09/ea190917_american_progressive.pdf"
+    ]
+  },
+  {
+    "date": "2019-07-18",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/07/ea190718_applied_underwriters.pdf Consent Order to Continental Indemnity Company, Applied Underwriters, Inc., Applied Risk Services, Inc., Applied Risk Services of NY, Inc., and Applied Underwriters Captive Risk Assurance Company, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/07/ea190718_applied_underwriters.pdf"
+    ]
+  },
+  {
+    "date": "2019-05-03",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/05/ea190503_multi.pdf Consent Orders to Crystal Run Health Plan, LLC and Crystal Run Health Insurance Company, Inc., Aetna Life Insurance Company, HealthNow New York, Inc., CDPHP Universal Benefits, Inc., Oxford Health Insurance, Inc., Oxford Health Plans (NY), Inc., and UnitedHealthcare Insurance Company of New York, and Indepen",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/05/ea190503_multi.pdf"
+    ]
+  },
+  {
+    "date": "2019-01-31",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/02/ea190131_lockton.pdf Consent Order to Lockton Affinity, LLC and Lockton Companies, LLC",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/02/ea190131_lockton.pdf"
+    ]
+  },
+  {
+    "date": "2019-01-28",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea190128_metlife.pdf Consent Order to Metropolitan Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea190128_metlife.pdf"
+    ]
+  },
+  {
+    "date": "2019-01-28",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea190128_globelic.pdf Consent Order to Globe Life Insurance Company of New York",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea190128_globelic.pdf"
+    ]
+  },
+  {
+    "date": "2019-01-25",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/02/ea190125_gottdiener_suspension.pdf Order of Summary Suspension to Superior Service Group LTD and Elisha Gottdiener",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/02/ea190125_gottdiener_suspension.pdf"
+    ]
+  },
+  {
+    "date": "2019-01-10",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea190110_nat_union.pdf Consent Order to National Union Fire Insurance Company of Pittsburgh, PA",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea190110_nat_union.pdf"
+    ]
+  },
+  {
+    "date": "2019-01-10",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea190110_arch.pdf Consent Order to Arch Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea190110_arch.pdf"
+    ]
+  },
+  {
+    "date": "2018-12-20",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea181220_lloyds.pdf Consent Order to Lloyd's of London",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea181220_lloyds.pdf"
+    ]
+  },
+  {
+    "date": "2018-12-12",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea181212_oscar_0.pdf Consent Order to Oscar Insurance Corporation",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea181212_oscar_0.pdf"
+    ]
+  },
+  {
+    "date": "2018-12-12",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea181212_aetna.pdf Consent Order to Aetna Health Inc., Aetna Health Insurance Company of New York and Aetna Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea181212_aetna.pdf"
+    ]
+  },
+  {
+    "date": "2018-12-05",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/01/ea181205_national_integrity.pdf Consent Order to National Integrity Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/01/ea181205_national_integrity.pdf"
+    ]
+  },
+  {
+    "date": "2018-09-11",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20180911_selective Consent Order to Selective Insurance Company of America, Selective Way Insurance Company and Selective Insurance Company of New York",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2018-09-11",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/03/ea180911_sentinel.pdf Consent Order to Sentinel Insurance Company, Ltd.",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/03/ea180911_sentinel.pdf"
+    ]
+  },
+  {
+    "date": "2018-07-02",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20180702_transam Consent Order to Transamerica Financial Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2018-07-02",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20180702_aflac Consent Order to AFLAC",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2018-06-28",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20180628_co_athene_life Consent Order to Athene Life Insurance Company of New York",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2018-05-07",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20180507_co_chubb_illinois Consent Order to Chubb Group Holdings Inc. and Illinois Union Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2018-05-03",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20180503_co_william_penn_life Consent Order to William Penn Life Insurance Company of New York",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2018-05-02",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/03/ea180502_lockton.pdf Consent Order to Lockton Affinity, LLC and Lockton Companies, LLC",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/03/ea180502_lockton.pdf"
+    ]
+  },
+  {
+    "date": "2018-03-15",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/03/ea180315_qbe.pdf Consent Order to QBE Insurance Corporation",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/03/ea180315_qbe.pdf"
+    ]
+  },
+  {
+    "date": "2017-11-14",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20171114_co_cigna_health_life Consent Order to Cigna Health and Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2017-08-22",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20170822_stip_co_mvp Stipulation and Consent Order to MVP Health Plan, Inc. and MVP Health Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2017-07-06",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/03/ea170706_pri.pdf Consent Order to Physicians' Reciprocal Insurers",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/03/ea170706_pri.pdf"
+    ]
+  },
+  {
+    "date": "2017-05-08",
+    "action": "Department of Financial Services Issues /system/files/documents/2019/12/ea170508_axa_equitable_life_insurance.pdf Stipulation and Consent Order to AXA Equitable Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2019/12/ea170508_axa_equitable_life_insurance.pdf"
+    ]
+  },
+  {
+    "date": "2017-04-17",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20170417_excellus Stipulation and Consent Order to Excellus Health Plan, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2017-04-07",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/03/ea170407_yp_dba_zenefits.pdf Consent Order to YourPeople, Inc., d/b/a Zenefits FTW Insurance Services",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/03/ea170407_yp_dba_zenefits.pdf"
+    ]
+  },
+  {
+    "date": "2017-03-07",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/03/ea170307_lincoln.pdf Consent Order to Lincoln National Corporation and Lincoln Life & Annuity Company of New York.",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/03/ea170307_lincoln.pdf"
+    ]
+  },
+  {
+    "date": "2017-03-01",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/03/ea170301_oxford.pdf Consent Order to Oxford Health Plans (NY), Inc. and Oxford Health Insurance, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/03/ea170301_oxford.pdf"
+    ]
+  },
+  {
+    "date": "2016-12-21",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea161221_columbian_mutual_life.pdf Consent Order to Columbian Mutual Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea161221_columbian_mutual_life.pdf"
+    ]
+  },
+  {
+    "date": "2015-12-24",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20151224_co_healthnow Consent Order to Healthnow New York Inc.",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2014-05-27",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea140527_narragansett_bay.pdf Consent Order to Narragansett Bay Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea140527_narragansett_bay.pdf"
+    ]
+  },
+  {
+    "date": "2014-04-16",
+    "action": "Department of Financial Services Issues /industry_guidance/enforcement_discipline/ea20140416_stip_aetna_life Stipulation to Aetna Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": []
+  },
+  {
+    "date": "2014-03-31",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea140331_american_life_et_al.pdf Consent Order to American Life Insurance Company, Delaware American Life Insurance Company and MetLife Inc.",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea140331_american_life_et_al.pdf"
+    ]
+  },
+  {
+    "date": "2014-03-17",
+    "action": "The Department of Financial Services Issues /system/files/documents/2020/04/ea140317_axa_equitable.pdf Consent Order to AXA Equitable Life Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea140317_axa_equitable.pdf"
+    ]
+  },
+  {
+    "date": "2013-05-30",
+    "action": "Department of Financial Services Reaches /system/files/documents/2020/04/ea130530_finsecure.pdf Agreement on Code of Conduct with Starnet Insurance Company and Finsecure, LLC",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea130530_finsecure.pdf"
+    ]
+  },
+  {
+    "date": "2013-05-30",
+    "action": "Department of Financial Services Reaches /system/files/documents/2020/04/ea130530_amer.pdf Consent Order to American Modern Home Insurance Company and American Modern Insurance Group, Inc.",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea130530_amer.pdf"
+    ]
+  },
+  {
+    "date": "2013-04-18",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea130418_qbe.pdf Consent Order to QBE FIRST, QBE Insurance, and QBE Holdings",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea130418_qbe.pdf"
+    ]
+  },
+  {
+    "date": "2013-04-18",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea130418_balboa.pdf Consent Order to Balboa, MeritPlan, BA Insurance Group, QBE FIRST and QBE",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea130418_balboa.pdf"
+    ]
+  },
+  {
+    "date": "2013-04-17",
+    "action": "The Department of Financial Services Issues a /system/files/documents/2020/04/ea130417_balboa_et_al.pdf Consent Order to Balboa Insurance Company, Meritplan Insurance Company, BA Insurance Group, Inc., QBE Financial Institution Risk Services, Inc., And QBE Insurance Corporation",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea130417_balboa_et_al.pdf"
+    ]
+  },
+  {
+    "date": "2013-04-09",
+    "action": "Department of Financial Services Issues /system/files/documents/2020/04/ea130409_zurich_american_stip.pdf Stipulation to Zurich American Insurance Company",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea130409_zurich_american_stip.pdf"
+    ]
+  },
+  {
+    "date": "2013-03-21",
+    "action": "Department Of Financial Services Issues /system/files/documents/2020/04/ea130321_american_security_et_al.pdf Consent Order to Assurant, Inc. and its subsidiaries, American Security Insurance Company and American Bankers Insurance Company of Florida",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea130321_american_security_et_al.pdf"
+    ]
+  },
+  {
+    "date": "2012-06-08",
+    "action": "/system/files/documents/2020/04/ea120608_qbe_ins_corp.pdf QBE Insurance Corporation Ordered to Propose and Justify Amended Rates for Force-Placed Insurance",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea120608_qbe_ins_corp.pdf"
+    ]
+  },
+  {
+    "date": "2012-06-08",
+    "action": "/system/files/documents/2020/04/ea120608_american_security.pdf American Security Insurance Company Ordered to Propose and Justify Amended Rates for Force-Placed Insurance",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea120608_american_security.pdf"
+    ]
+  },
+  {
+    "date": "2012-06-08",
+    "action": "/system/files/documents/2020/04/ea120608_american_modern_home.pdf American Modern Home Ordered to Propose and Justify Amended Rates for Force-Placed Insurance",
+    "subject": "Insurance",
+    "pdf_paths": [
+      "/system/files/documents/2020/04/ea120608_american_modern_home.pdf"
+    ]
+  }
+]

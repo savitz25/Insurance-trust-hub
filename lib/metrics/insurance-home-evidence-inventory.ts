@@ -180,6 +180,23 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       { label: "Statistical-report period end", snapshotAsOf: "2025-12-31" },
     ],
   },
+  {
+    state: "New York",
+    abbreviation: "NY",
+    href: "/new-york",
+    regulators: "New York State Department of Financial Services",
+    evidence: [
+      "DFS Insurance Company Directory",
+      "Insurance Enforcement Actions table",
+      "Automobile complaint rankings",
+      "Current authorization verification path",
+    ],
+    limitation:
+      "The 1,054 DFS directory rows are not a current authorized-writing roster; producer and agency lists remain search-only.",
+    sourceClocks: [
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-11" },
+    ],
+  },
 ] as const;
 
 const ALLOWED = new Set<PublicationStatus>([
@@ -225,6 +242,7 @@ const FAMILY_BY_KEY: Record<string, InsuranceHomeEvidenceFamily> = {
   co_authorized_companies: "ENTITY_IDENTITY",
   co_surplus_lines_eligible_identities: "RATE_MARKET",
   va_statistical_report_naic_directory_rows: "ENTITY_IDENTITY",
+  ny_dfs_company_directory_rows: "ENTITY_IDENTITY",
   public_directory_listings: "PUBLIC_SURFACES",
   published_state_intelligence_pages: "PUBLIC_SURFACES",
   public_legal_insurer_wave1_profiles: "PUBLIC_SURFACES",
@@ -262,6 +280,7 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   co_authorized_companies: "/colorado",
   co_surplus_lines_eligible_identities: "/colorado",
   va_statistical_report_naic_directory_rows: "/virginia",
+  ny_dfs_company_directory_rows: "/new-york",
 };
 
 function fromMetric(
