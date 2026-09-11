@@ -41,6 +41,9 @@ assert(v1.colorado.authorizedCompanies === null, "CO authorized companies not a 
 assert(v1.virginia.snapshotFingerprint === pub.virginiaSnapshotFingerprint, "VA snapshot fingerprint");
 assert(v1.virginia.statisticalDirectoryRows === pub.virginiaStatisticalDirectoryRows, "VA statistical directory rows");
 assert(v1.virginia.authorizedCompanies === null, "VA authorized companies not a number");
+assert(v1.newYork.snapshotFingerprint === pub.newYorkSnapshotFingerprint, "NY snapshot fingerprint");
+assert(v1.newYork.directoryRows === pub.newYorkDirectoryRows, "NY directory rows");
+assert(v1.newYork.authorizedCompanies === null, "NY authorized companies not a number");
 assert(byKey.wa_authorized_companies.value === null, "WA authorized metric not a number");
 assert(byKey.wa_authorized_companies.valueState === "NOT_ACQUIRED", "WA authorized not acquired");
 assert(byKey.wa_oic_regulated_entities_annual_report.value === 2924, "WA 2924 annual aggregate");

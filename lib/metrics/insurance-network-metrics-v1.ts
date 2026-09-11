@@ -198,6 +198,16 @@ export type InsuranceNetworkMetricsV1 = {
     authorizedCompanies: null;
     authorizedCompaniesCoverage: 'SOURCE_NOT_ACQUIRED';
   };
+  newYork: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    directoryRows: number;
+    directoryCoverage: 'DFS_COMPANY_DIRECTORY_NOT_CURRENT_AUTHORIZATION';
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    authorizedCompanies: null;
+    authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY / PARTIAL';
+  };
   publication: {
     publicPeople: 0;
     publicGraphAgencies: 0;

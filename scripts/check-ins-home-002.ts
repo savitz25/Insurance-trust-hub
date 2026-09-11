@@ -35,7 +35,7 @@ function src(rel: string): string {
 }
 
 const HOME_FP =
-  "8d1e3890d67ce9bab618f9ad58c4978f6a9d6c64c955094858c7e3c93b9e3a83";
+  "16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b";
 const FL_FP =
   "8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93";
 

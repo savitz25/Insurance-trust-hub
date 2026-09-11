@@ -139,7 +139,7 @@ const b = buildInsuranceHomeIntelV1("2026-08-30T00:00:00.000Z");
 assert(a.version === INS_HOME_INTEL_VERSION, "contract version");
 assert(
   a.fingerprint ===
-    "8d1e3890d67ce9bab618f9ad58c4978f6a9d6c64c955094858c7e3c93b9e3a83",
+    "16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b",
   "homepage fingerprint unchanged",
 );
 assert(a.fingerprint === b.fingerprint, "deterministic fingerprint");

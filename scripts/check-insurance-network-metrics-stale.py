@@ -22,6 +22,7 @@ NJ_PATH = ROOT / "lib" / "new-jersey-intelligence" / "accepted-snapshot.json"
 CA_PATH = ROOT / "lib" / "california-intelligence" / "accepted-snapshot.json"
 WA_PATH = ROOT / "lib" / "washington-intelligence" / "accepted-snapshot.json"
 CO_PATH = ROOT / "lib" / "colorado-intelligence" / "accepted-snapshot.json"
+NY_PATH = ROOT / "lib" / "new-york-intelligence" / "accepted-snapshot.json"
 FL_MC = ROOT / "data" / "reports" / "fl-ins-004-market-exam-census.json"
 FL_FIN = ROOT / "data" / "reports" / "fl-ins-004-financial-exam-census.json"
 CENSUS = ROOT / "data" / "reports" / "ins-nat-final-006-census.json"
@@ -60,6 +61,7 @@ def check_files() -> dict[str, Any]:
     ca = json.loads(CA_PATH.read_text(encoding="utf-8"))
     wa = json.loads(WA_PATH.read_text(encoding="utf-8"))
     co = json.loads(CO_PATH.read_text(encoding="utf-8"))
+    ny = json.loads(NY_PATH.read_text(encoding="utf-8"))
     fl_mc = json.loads(FL_MC.read_text(encoding="utf-8"))
     fl_fin = json.loads(FL_FIN.read_text(encoding="utf-8"))
     census = json.loads(CENSUS.read_text(encoding="utf-8"))
@@ -90,6 +92,14 @@ def check_files() -> dict[str, Any]:
         errors.append("Virginia statistical-report companies drifted")
     if metric_value(metrics, "va_statistical_report_naic_directory_rows") != 1546:
         errors.append("Virginia 2025 statistical-report NAIC rows drifted")
+    if metrics.get("newYork", {}).get("snapshotFingerprint") != ny.get("fingerprint"):
+        errors.append("New York snapshot fingerprint drifted; regenerate insurance-network-metrics-v1")
+    if metrics.get("newYork", {}).get("directoryRows") != 1054:
+        errors.append("New York DFS directory rows drifted")
+    if metric_value(metrics, "ny_dfs_company_directory_rows") != 1054:
+        errors.append("New York DFS directory metric drifted")
+    if metrics.get("newYork", {}).get("authorizedCompanies") is not None:
+        errors.append("New York authorized companies must remain search-only / null")
     if metric_value(metrics, "wa_authorized_companies") is not None:
         errors.append("Washington authorized companies must remain NOT_ACQUIRED / null")
     if metric_value(metrics, "wa_oic_regulated_entities_annual_report") != 2924:
@@ -120,6 +130,7 @@ def check_files() -> dict[str, Any]:
         "/washington",
         "/colorado",
         "/virginia",
+        "/new-york",
     }:
         errors.append("published state intelligence paths drifted")
     if census["entities"]["agency"] != metrics["nationalGraph"]["agencies"] and os.environ.get("REQUIRE_LIVE_CENSUS_MATCH") == "1":
