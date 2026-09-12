@@ -67,7 +67,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
           <h2 className="text-2xl font-semibold text-[#0A2540]">Local directory research</h2>
           <p className="mt-3 text-sm text-slate-700">ZIP listings are a separate publication grain. They are not canonical agency identities and do not prove service territory.</p>
-          <Link href={`/directory?${new URLSearchParams({zip:q.directoryZip,insuranceContext:q.directoryContext?.requestedInsuranceContext.join(',')??'',requestedPlace:q.directoryContext?.requestedLocation??''})}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-700">Browse listings for {q.directoryZip} →</Link>
+          <a href={`/directory?${new URLSearchParams({zip:q.directoryZip,insuranceContext:q.directoryContext?.requestedInsuranceContext.join(',')??'',requestedPlace:q.directoryContext?.requestedLocation??''})}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-700">Browse listings for {q.directoryZip} →</a>
         </section>
       ) : null}
 
