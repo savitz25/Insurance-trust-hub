@@ -22,3 +22,5 @@ Baseline and canonical Production: `8051be7d5169929e42155cab81effa94178e8aad`; o
 | insurer domiciled in Florida | BAD | Correctly refuses unsupported domicile cohort but reports KNOWN coverage. |
 | is NPN 10391484 appointed with State Farm? | UGLY | Appointed with wording is missed; exact identity returned without appointment requirement. |
 | licensed insurance agencies in Colorado | BAD | NOT_ACQUIRED correct; class/jurisdiction not retained and fixed unrelated NPN recovery. |
+
+The classifications above are the initial customer-surface observations. Deeper source/browser verification then found two connected defects under initially GOOD controls: the directory destination did not apply ZIP equality, and the Texas Life cohort could use a Life observation from a different issuer jurisdiction. The source matrix records that later evidence and the repaired predicates; the initial observation is not silently rewritten.

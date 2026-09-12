@@ -1,0 +1,44 @@
+{
+  "utc": "2026-09-12T21:18:39.574Z",
+  "origin": "http://localhost:3213",
+  "cases": [
+    {
+      "id": "fl-official",
+      "q": "agencies located in Florida",
+      "label": "Official Florida Department of Financial Services research",
+      "destination": "https://licenseesearch.fldfs.com/",
+      "title": "Licensee Search",
+      "ms": 4358,
+      "access": "OPENED",
+      "excerpt": " Licensee Search\nBulk Downloads\nFAQs\nRelated Services \nIndividual First Name:\nIndividual Last Name:\nIndividual Middle Name:\nEmail Address:\n Begins With    Contains\nAgency/Firm Name:\n Begins With    Contains\nResident Status:\n-- Select --\nNon-Resident\nResident\nFL License #:\nNPN #:\nLicense Status:\nVali",
+      "screenshot": "docs/qa/th-search-r1-013/actions-local-833d3ac/fl-official.png"
+    },
+    {
+      "id": "co-recovery",
+      "q": "licensed insurance agencies in Colorado",
+      "label": "Open CO agency research",
+      "destination": "http://localhost:3213/colorado",
+      "title": "Colorado Insurance Market & Regulatory Intelligence | InsuranceTrustHub | InsuranceTrustHub",
+      "ms": 2732,
+      "access": "OPENED",
+      "excerpt": "Skip to content\nINSURANCE\nTRUST HUB\nAsk\nResearch\nMarketplace\nMedicare\nDirectory\nMore\nMy Insurance\nSwitch Hub\nHome\n/\nColorado research\n\nINDEPENDENT RESEARCH · COLORADO\n\nColorado Insurance Market & Regulatory Intelligence\n\nA source-backed view of Colorado Division of Insurance verification paths, the ",
+      "screenshot": "docs/qa/th-search-r1-013/actions-local-833d3ac/co-recovery.png"
+    },
+    {
+      "id": "directory-responsive-320",
+      "width": 320,
+      "scrollWidth": 320,
+      "ms": 7930,
+      "status": "PASS",
+      "screenshot": "docs/qa/th-search-r1-013/actions-local-833d3ac/directory-320.png"
+    },
+    {
+      "id": "directory-responsive-768",
+      "width": 768,
+      "scrollWidth": 768,
+      "ms": 4898,
+      "status": "PASS",
+      "screenshot": "docs/qa/th-search-r1-013/actions-local-833d3ac/directory-768.png"
+    }
+  ]
+}

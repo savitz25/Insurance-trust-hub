@@ -6,7 +6,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const base=process.env.QA_ORIGIN||'http://localhost:3213';
 const tag=process.env.QA_TAG||'local';
 const out=`docs/qa/th-search-r1-013/browser-${tag}`;mkdirSync(out,{recursive:true});
-const report={ticket:'TH-SEARCH-R1-013',utc:new Date().toISOString(),origin:base,testedHead:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),dirty:execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trim().length>0,cases:[],failures:[]};
+const report={ticket:'TH-SEARCH-R1-013',utc:new Date().toISOString(),origin:base,scope:process.env.QA_FLOWS_ONLY?'navigation-and-responsive':'complete',testedHead:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),dirty:execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trim().length>0,cases:[],failures:[]};
 const browser=process.env.QA_CDP ? await chromium.connectOverCDP(process.env.QA_CDP) : await chromium.launch({headless:true});
 const context=await browser.newContext({viewport:{width:390,height:844}});const page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',e=>{report.failures.push({name:'browser-runtime',error:e.message});save()});
 const save=()=>writeFileSync(`${out}/result.json`,JSON.stringify(report,null,2));
@@ -14,7 +14,7 @@ function assert(value,message){if(!value)throw Error(message)}
 async function capture(name){await page.screenshot({path:`${out}/${name}.png`,fullPage:true});return `${out}/${name}.png`}
 async function flow(name,fn){const start=Date.now();try{const detail=await fn();report.cases.push({name,utc:new Date().toISOString(),ms:Date.now()-start,status:'PASS',...detail});console.log('PASS',name)}catch(e){report.failures.push({name,error:String(e),url:page.url()});console.error('FAIL',name,String(e));await capture('failure-'+report.failures.length).catch(()=>{});}save()}
 const cases=[['npn','Find NPN 10391484'],['naic','Find insurer NAIC code 10064'],['agency','Research Gulfstream Insurance Agency LLC'],['insurer','Research CITIZENS PROP INS CORP'],['brand','Research State Farm'],['near','insurance agency near me'],['boca','insurance agency in Boca Raton Florida'],['zip','insurance agencies in ZIP 33441'],['homeowners','homeowners insurance agency in ZIP 33441'],['credential','insurance agencies credentialed in Florida'],['address','agencies located in Florida'],['domicile','insurer domiciled in Florida'],['appointment','is NPN 10391484 appointed with State Farm?'],['colorado','licensed insurance agencies in Colorado'],['miss','NPN 999999999999'],['tx-loa','life insurance agencies credentialed in Texas']];
-for(const [id,q] of cases)await flow(id,async()=>{
+for(const [id,q] of (process.env.QA_FLOWS_ONLY?[]:cases))await flow(id,async()=>{
  const began=Date.now();await page.goto(base+'/ask?'+new URLSearchParams({q}),{waitUntil:'domcontentloaded',timeout:30000});await page.locator('[data-specialist-results]').waitFor();const settledMs=Date.now()-began;
  const apiStart=Date.now(),response=await context.request.get(base+'/api/ask?'+new URLSearchParams({q}),{timeout:30000});const api=await response.json(),apiMs=Date.now()-apiStart;
  assert(response.status()===200,'API status '+response.status());const body=await page.locator('[data-specialist-results]').innerText();

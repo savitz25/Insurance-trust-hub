@@ -1,0 +1,444 @@
+{
+  "utc": "2026-09-12T21:11:22.739Z",
+  "head": "077e054eb205b63b76f0076947d3d40d82f4fc75",
+  "surface": "/api/specialist-execution/v2",
+  "cases": [
+    {
+      "q": "Research Gulfstream Insurance Agency LLC",
+      "status": 200,
+      "ms": 1362,
+      "body": {
+        "contract": "trusthub-specialist-execution-v2",
+        "contractVersion": "2.0.0",
+        "schemaFingerprint": "4aa93bb372aebb45c7028b750000e77be4a847d9a210f3c40d3db1df1f7f637f",
+        "contractFingerprint": "1292fd1ee4ce13a4d934dcb8c3deb21208d4e1e59049cbb8eb22793b310c1071",
+        "queryInterpretation": {
+          "sourceContract": "insurance-ask-v1",
+          "mode": "entity",
+          "entityClass": "agency",
+          "terminalState": "NEEDS_CLARIFICATION",
+          "conditions": [
+            {
+              "meaning": "requested entity filter on identity",
+              "outcome": "NEEDS_CLARIFICATION"
+            },
+            {
+              "meaning": "requested state filter on identity",
+              "outcome": "NEEDS_CLARIFICATION"
+            },
+            {
+              "meaning": "requested loa filter on identity",
+              "outcome": "NEEDS_CLARIFICATION"
+            }
+          ],
+          "interpretation": [
+            {
+              "label": "Research task",
+              "value": "NAME_IDENTITY"
+            },
+            {
+              "label": "Entity class",
+              "value": "agency"
+            },
+            {
+              "label": "Requested name",
+              "value": "Gulfstream Insurance Agency LLC"
+            }
+          ]
+        },
+        "appliedFilters": {
+          "publication": "public-safe response allowlist"
+        },
+        "resultState": "AMBIGUOUS_IDENTITIES",
+        "rows": [
+          {
+            "entityClass": "agency",
+            "name": "GULFSTREAM INSURANCE AGENCY LLC",
+            "npn": "20168263",
+            "naicCode": null,
+            "credentialJurisdiction": null,
+            "credentialStatus": null,
+            "licenseNumber": null,
+            "licenseClass": null,
+            "linesOfAuthority": [],
+            "sourceDataset": null,
+            "sourceObservedAt": null,
+            "publicationState": "RESEARCH_ROW_ONLY",
+            "destination": null,
+            "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source legal_name ?GULFSTREAM INSURANCE AGENCY LLC? (normalized_exact_name). NPN 20168263 identifies the source agency; similarity is not a license or appointment finding.",
+            "matchEvidence": {
+              "method": "normalized_exact_name",
+              "field": "legal_name",
+              "value": "GULFSTREAM INSURANCE AGENCY LLC",
+              "requested": "Gulfstream Insurance Agency LLC",
+              "entityId": "5da0697d-58f2-4c48-b4d3-04403b70fc07",
+              "entityClass": "agency",
+              "source": "national_entities source legal/display name",
+              "normalization": [
+                "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+              ]
+            },
+            "selectionUrl": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=5da0697d-58f2-4c48-b4d3-04403b70fc07"
+          },
+          {
+            "entityClass": "agency",
+            "name": "GULFSTREAM AUTO INSURANCE INC.",
+            "npn": "8862411",
+            "naicCode": null,
+            "credentialJurisdiction": null,
+            "credentialStatus": null,
+            "licenseNumber": null,
+            "licenseClass": null,
+            "linesOfAuthority": [],
+            "sourceDataset": null,
+            "sourceObservedAt": null,
+            "publicationState": "RESEARCH_ROW_ONLY",
+            "destination": null,
+            "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM AUTO INSURANCE INC.? (distinctive_token_candidate). NPN 8862411 identifies the source agency; similarity is not a license or appointment finding.",
+            "matchEvidence": {
+              "method": "distinctive_token_candidate",
+              "field": "display_name",
+              "value": "GULFSTREAM AUTO INSURANCE INC.",
+              "requested": "Gulfstream Insurance Agency LLC",
+              "entityId": "d79021de-a48d-4799-892f-d151a53780b6",
+              "entityClass": "agency",
+              "source": "national_entities source legal/display name",
+              "normalization": [
+                "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+              ]
+            },
+            "selectionUrl": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=d79021de-a48d-4799-892f-d151a53780b6"
+          },
+          {
+            "entityClass": "agency",
+            "name": "GULFSTREAM INSURANCE GROUP, INC.",
+            "npn": "4394687",
+            "naicCode": null,
+            "credentialJurisdiction": null,
+            "credentialStatus": null,
+            "licenseNumber": null,
+            "licenseClass": null,
+            "linesOfAuthority": [],
+            "sourceDataset": null,
+            "sourceObservedAt": null,
+            "publicationState": "RESEARCH_ROW_ONLY",
+            "destination": null,
+            "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM INSURANCE GROUP, INC.? (distinctive_token_candidate). NPN 4394687 identifies the source agency; similarity is not a license or appointment finding.",
+            "matchEvidence": {
+              "method": "distinctive_token_candidate",
+              "field": "display_name",
+              "value": "GULFSTREAM INSURANCE GROUP, INC.",
+              "requested": "Gulfstream Insurance Agency LLC",
+              "entityId": "729e0233-c35f-4a16-895f-81335d8a43c2",
+              "entityClass": "agency",
+              "source": "national_entities source legal/display name",
+              "normalization": [
+                "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+              ]
+            },
+            "selectionUrl": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=729e0233-c35f-4a16-895f-81335d8a43c2"
+          },
+          {
+            "entityClass": "agency",
+            "name": "GULFSTREAM INSURANCE INC",
+            "npn": "17328505",
+            "naicCode": null,
+            "credentialJurisdiction": null,
+            "credentialStatus": null,
+            "licenseNumber": null,
+            "licenseClass": null,
+            "linesOfAuthority": [],
+            "sourceDataset": null,
+            "sourceObservedAt": null,
+            "publicationState": "RESEARCH_ROW_ONLY",
+            "destination": null,
+            "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM INSURANCE INC? (distinctive_token_candidate). NPN 17328505 identifies the source agency; similarity is not a license or appointment finding.",
+            "matchEvidence": {
+              "method": "distinctive_token_candidate",
+              "field": "display_name",
+              "value": "GULFSTREAM INSURANCE INC",
+              "requested": "Gulfstream Insurance Agency LLC",
+              "entityId": "e290320b-bc73-46ea-85f5-dbd160c902c3",
+              "entityClass": "agency",
+              "source": "national_entities source legal/display name",
+              "normalization": [
+                "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+              ]
+            },
+            "selectionUrl": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=e290320b-bc73-46ea-85f5-dbd160c902c3"
+          },
+          {
+            "entityClass": "agency",
+            "name": "GULFSTREAM RISK PARTNERS, LLC",
+            "npn": "19422124",
+            "naicCode": null,
+            "credentialJurisdiction": null,
+            "credentialStatus": null,
+            "licenseNumber": null,
+            "licenseClass": null,
+            "linesOfAuthority": [],
+            "sourceDataset": null,
+            "sourceObservedAt": null,
+            "publicationState": "RESEARCH_ROW_ONLY",
+            "destination": null,
+            "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM RISK PARTNERS, LLC? (distinctive_token_candidate). NPN 19422124 identifies the source agency; similarity is not a license or appointment finding.",
+            "matchEvidence": {
+              "method": "distinctive_token_candidate",
+              "field": "display_name",
+              "value": "GULFSTREAM RISK PARTNERS, LLC",
+              "requested": "Gulfstream Insurance Agency LLC",
+              "entityId": "d76f2f72-ec16-4f11-9430-98c37b5fc69c",
+              "entityClass": "agency",
+              "source": "national_entities source legal/display name",
+              "normalization": [
+                "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+              ]
+            },
+            "selectionUrl": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=d76f2f72-ec16-4f11-9430-98c37b5fc69c"
+          }
+        ],
+        "total": 5,
+        "pagination": {
+          "page": 1,
+          "limit": 20,
+          "total": 5,
+          "hasMore": false
+        },
+        "availableRefinements": [
+          {
+            "key": "credentialJurisdiction",
+            "values": [
+              "FL",
+              "TX",
+              "MA",
+              "OH",
+              "VT"
+            ],
+            "limitation": "Credential jurisdiction is not service territory."
+          },
+          {
+            "key": "lineOfAuthority",
+            "values": [
+              "source-native labels only"
+            ],
+            "limitation": "LOA is not appointment."
+          }
+        ],
+        "provenance": {
+          "sourceFamily": "national_entities with source-native credential or evidence observations",
+          "geographyMeaning": "Not geography-filtered",
+          "officialAsOf": "See credential source_observed_at",
+          "grain": "Displayed source-name candidates; not an exhaustive market count",
+          "exclusions": [
+            "Person, agency, and legal insurer stay separate classes.",
+            "Credential jurisdiction is not office location or service territory.",
+            "Line of authority is not carrier appointment.",
+            "Marketplace evidence is not a state license and not certification.",
+            "Missing evidence is not a clean record.",
+            "Public people pages = 0. Public graph-agency profiles = 0."
+          ],
+          "sourceDataset": "accepted InsuranceTrustHub source datasets",
+          "publicationSemantics": "Research rows do not create public profiles."
+        },
+        "limitations": [
+          "Agency graph names and published Wave-1 legal-insurer names are searched separately. Display names are not assumed to be official DBAs.",
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0.",
+          "Agency, individual producer, and legal insurer are separate entity classes.",
+          "Credential jurisdiction is not office location, domicile, service territory, or product availability.",
+          "License and line of authority are not appointments. County appointment is not service territory.",
+          "Complaint is not violation. Complaint index is not enforcement. Examination is not enforcement.",
+          "InsuranceTrustHub does not rank, recommend, score, or use paid ordering."
+        ],
+        "destinations": [
+          {
+            "type": "OFFICIAL_SOURCE",
+            "url": "https://content.naic.org/consumer"
+          },
+          {
+            "type": "IDENTITY_SELECTION",
+            "url": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=5da0697d-58f2-4c48-b4d3-04403b70fc07"
+          },
+          {
+            "type": "IDENTITY_SELECTION",
+            "url": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=d79021de-a48d-4799-892f-d151a53780b6"
+          },
+          {
+            "type": "IDENTITY_SELECTION",
+            "url": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=729e0233-c35f-4a16-895f-81335d8a43c2"
+          },
+          {
+            "type": "IDENTITY_SELECTION",
+            "url": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=e290320b-bc73-46ea-85f5-dbd160c902c3"
+          },
+          {
+            "type": "IDENTITY_SELECTION",
+            "url": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&entity=undefined&state=undefined&loa=undefined&selected=d76f2f72-ec16-4f11-9430-98c37b5fc69c"
+          }
+        ],
+        "diagnostics": {
+          "sourceContract": "insurance-ask-v1",
+          "sourceResultType": "entity",
+          "elapsedMs": 1194,
+          "publicPayloadContract": "insurance-ask-v1",
+          "bailRowsSuppressedOnPage": 0
+        }
+      }
+    },
+    {
+      "q": "Find insurer NAIC code 10064",
+      "status": 200,
+      "ms": 74,
+      "body": {
+        "contract": "trusthub-specialist-execution-v2",
+        "contractVersion": "2.0.0",
+        "schemaFingerprint": "4aa93bb372aebb45c7028b750000e77be4a847d9a210f3c40d3db1df1f7f637f",
+        "contractFingerprint": "1292fd1ee4ce13a4d934dcb8c3deb21208d4e1e59049cbb8eb22793b310c1071",
+        "queryInterpretation": {
+          "sourceContract": "insurance-ask-v1",
+          "mode": "identifier",
+          "entityClass": "legal_insurer",
+          "terminalState": "RESULTS",
+          "conditions": [
+            {
+              "meaning": "requested entity filter on identity",
+              "outcome": "NEEDS_CLARIFICATION"
+            },
+            {
+              "meaning": "requested state filter on identity",
+              "outcome": "NEEDS_CLARIFICATION"
+            },
+            {
+              "meaning": "requested loa filter on identity",
+              "outcome": "NEEDS_CLARIFICATION"
+            }
+          ],
+          "identifier": {
+            "type": "naic_company_code",
+            "value": "10064"
+          },
+          "interpretation": [
+            {
+              "label": "Research task",
+              "value": "IDENTIFIER_LOOKUP"
+            },
+            {
+              "label": "Entity class",
+              "value": "insurer"
+            },
+            {
+              "label": "Identifier",
+              "value": "naic_company_code 10064"
+            }
+          ]
+        },
+        "appliedFilters": {
+          "publication": "public-safe response allowlist"
+        },
+        "resultState": "EXACT_IDENTITY",
+        "rows": [
+          {
+            "entityClass": "legal_insurer",
+            "name": "CITIZENS PROP INS CORP",
+            "npn": null,
+            "naicCode": "10064",
+            "credentialJurisdiction": null,
+            "credentialStatus": null,
+            "licenseNumber": null,
+            "licenseClass": null,
+            "linesOfAuthority": [],
+            "sourceDataset": "ins-insurer-006-wave1",
+            "sourceObservedAt": "2025-01-24",
+            "publicationState": "PUBLIC_PROFILE",
+            "destination": "/insurers/citizens-property-insurance-corporation",
+            "whyMatched": "This legal insurer matches because the official record lists NAIC company code 10064. A consumer brand is not assumed."
+          }
+        ],
+        "total": 1,
+        "pagination": {
+          "page": 1,
+          "limit": 20,
+          "total": 1,
+          "hasMore": false
+        },
+        "availableRefinements": [
+          {
+            "key": "identifier",
+            "values": [
+              "NPN",
+              "NAIC"
+            ]
+          }
+        ],
+        "provenance": {
+          "sourceFamily": "national_entities with source-native credential or evidence observations",
+          "geographyMeaning": "Not geography-filtered",
+          "officialAsOf": "2025-01-24",
+          "grain": "NAIC company code (Wave-1 public cohort unless unpublished)",
+          "exclusions": [
+            "Person, agency, and legal insurer stay separate classes.",
+            "Credential jurisdiction is not office location or service territory.",
+            "Line of authority is not carrier appointment.",
+            "Marketplace evidence is not a state license and not certification.",
+            "Missing evidence is not a clean record.",
+            "Public people pages = 0. Public graph-agency profiles = 0."
+          ],
+          "sourceDataset": "ins-insurer-006-wave1",
+          "publicationSemantics": "Research rows do not create public profiles."
+        },
+        "limitations": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0.",
+          "Agency, individual producer, and legal insurer are separate entity classes.",
+          "Credential jurisdiction is not office location, domicile, service territory, or product availability.",
+          "License and line of authority are not appointments. County appointment is not service territory.",
+          "Complaint is not violation. Complaint index is not enforcement. Examination is not enforcement.",
+          "InsuranceTrustHub does not rank, recommend, score, or use paid ordering."
+        ],
+        "destinations": [
+          {
+            "type": "LEGAL_INSURER_PROFILE",
+            "url": "/insurers/citizens-property-insurance-corporation"
+          },
+          {
+            "type": "OFFICIAL_SOURCE",
+            "url": "https://content.naic.org/consumer"
+          }
+        ],
+        "diagnostics": {
+          "sourceContract": "insurance-ask-v1",
+          "sourceResultType": "identifier",
+          "elapsedMs": 0,
+          "publicPayloadContract": "insurance-ask-v1",
+          "bailRowsSuppressedOnPage": 0
+        }
+      }
+    },
+    {
+      "q": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "status": 400,
+      "ms": 28,
+      "body": {
+        "contract": "trusthub-specialist-execution-v2",
+        "resultState": "INVALID_QUERY",
+        "error": {
+          "code": "invalid_query",
+          "message": "Use at most 180 characters; no input was truncated."
+        }
+      }
+    }
+  ],
+  "assertions": {
+    "nameMatchEvidenceAndSelection": true,
+    "wave1PublicationNotCredentialStatus": true,
+    "fullOverlongInputRejected": true
+  }
+}

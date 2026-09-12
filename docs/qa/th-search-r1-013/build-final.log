@@ -1,0 +1,296 @@
+
+> insurance-trust-hub@1.0.0 build
+> next build --turbopack
+
+node.exe :  ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( ⚠ Warning: Nex...not be correct.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ We detected multiple lockfiles and selected the directory of C:\Users\makei\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if 
+it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\makei\th-search-r1-013-work\package-lock.json
+
+   ▲ Next.js 15.5.19 (Turbopack)
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+ ✓ Finished writing to disk in 5.8s
+ ✓ Compiled successfully in 39.1s
+   Linting and checking validity of types ...
+
+./app/directory/page.tsx
+132:9  Warning: 'verifiedOnly' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/hub-page-view.tsx
+299:29  Warning: '_c' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/my-insurance/guest-insurance-hq.tsx
+609:3  Warning: 'planId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/my-insurance/research-wallet-panel.tsx
+110:6  Warning: React Hook useEffect has a missing dependency: 'user'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./lib/dfs/appointments.ts
+331:20  Warning: '_r' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/hubs/data/charlotte-agents.ts
+3:7  Warning: 'HUB_SLUG' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/hubs/data/research-triangle-agents.ts
+3:7  Warning: 'HUB_SLUG' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/hubs/data/triad-agents.ts
+3:7  Warning: 'HUB_SLUG' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/my-insurance/request-magic-link.ts
+28:3  Warning: '_request' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/my-insurance/storage.ts
+28:3  Warning: 'SHORTLIST_CAP' is defined but never used.  @typescript-eslint/no-unused-vars
+644:11  Warning: 'alreadySame' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/national/cms-marketplace.ts
+130:53  Warning: '_row' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/national/fl-individual-appointments.ts
+9:10  Warning: 'normalizeAppointingEntityNumber' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/national/loa.ts
+197:45  Warning: '_officialText' is defined but never used.  @typescript-eslint/no-unused-vars
+202:48  Warning: '_officialText' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/national/ma-doi-regulatory.ts
+18:15  Warning: 'IdentityConfidence' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/national/tx-association.ts
+59:44  Warning: '_associationType' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/national/tx-individual-appointments.ts
+8:10  Warning: 'normalizeNpn' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/nc/normalize.ts
+192:9  Warning: 'city' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/nj/normalize.ts
+9:3  Warning: 'normalizeCityName' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/odi/normalize.ts
+208:9  Warning: 'city' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/providers/reviews.ts
+16:10  Warning: 'buildFallbackReviews' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./lib/seo/research-seo.ts
+353:29  Warning: '_c' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/tdi/normalize.ts
+165:9  Warning: 'city' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./lib/tools/aca-subsidy-planner.ts
+363:9  Warning: 'silverNet' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+ ⚠ Using edge runtime on a page currently disables static generation for that page
+   Generating static pages (0/374) ...
+   Generating static pages (93/374) 
+   Generating static pages (186/374) 
+   Generating static pages (280/374) 
+ ✓ Generating static pages (374/374)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                 Size  First Load JS
+┌ ○ /                                                    2.67 kB         228 kB
+├ ○ /_not-found                                              0 B         225 kB
+├ ○ /about                                                   0 B         225 kB
+├ ○ /admin                                                   0 B         227 kB
+├ ƒ /admin/api/listing-requests                              0 B            0 B
+├ ƒ /admin/api/login                                         0 B            0 B
+├ ƒ /admin/api/logout                                        0 B            0 B
+├ ƒ /admin/enrichment                                    5.43 kB         232 kB
+├ ○ /admin/leads                                             0 B         227 kB
+├ ƒ /admin/license-backfill                              5.65 kB         233 kB
+├ ƒ /admin/listing-requests                                  0 B         227 kB
+├ ƒ /admin/listing-requests/[id]                         1.94 kB         229 kB
+├ ○ /admin/login                                         2.54 kB         254 kB
+├ ○ /admin/providers                                       850 B         228 kB
+├ ƒ /admin/providers/[id]/edit                               0 B         259 kB
+├ ○ /admin/providers/new                                     0 B         259 kB
+├ ○ /admin/reviews                                         774 B         228 kB
+├ ƒ /api/admin/providers                                     0 B            0 B
+├ ƒ /api/admin/reviews                                       0 B            0 B
+├ ƒ /api/ask                                                 0 B            0 B
+├ ƒ /api/auth/facebook                                       0 B            0 B
+├ ƒ /api/auth/google                                         0 B            0 B
+├ ƒ /api/auth/magic-link                                     0 B            0 B
+├ ƒ /api/auth/network-handoff/health                         0 B            0 B
+├ ƒ /api/auth/network-handoff/start                          0 B            0 B
+├ ƒ /api/claim/handoff/[slug]                                0 B            0 B
+├ ƒ /api/customer-claim-validation/v1                        0 B            0 B
+├ ƒ /api/inventory/health                                    0 B            0 B
+├ ƒ /api/marketplace/coverage                                0 B            0 B
+├ ƒ /api/marketplace/drugs/search                            0 B            0 B
+├ ƒ /api/marketplace/landscape                               0 B            0 B
+├ ƒ /api/marketplace/plans                                   0 B            0 B
+├ ƒ /api/marketplace/providers/search                        0 B            0 B
+├ ƒ /api/specialist-execution/v2                             0 B            0 B
+├ ○ /apple-icon.png                                          0 B            0 B
+├ ƒ /ask                                                 1.14 kB         226 kB
+├ ƒ /auth/callback                                           0 B            0 B
+├ ƒ /auth/confirm                                            0 B            0 B
+├ ƒ /auth/network-handoff                                    0 B            0 B
+├ ○ /calculators                                             0 B         225 kB
+├ ƒ /calculators/aca-subsidy                                 0 B         249 kB
+├ ○ /calculators/medicare-gap                            1.86 kB         227 kB
+├ ○ /calculators/premium-estimator                           0 B         247 kB
+├ ○ /california                                           1.7 kB         227 kB
+├ ○ /carriers                                                0 B         225 kB
+├ ● /carriers/[slug]                                     5.34 kB         231 kB
+├   ├ /carriers/humana
+├   ├ /carriers/unitedhealthcare
+├   ├ /carriers/aetna
+├   └ [+11 more paths]
+├ ƒ /carriers/[slug]/share-og                                0 B            0 B
+├ ƒ /claim-insurer/unavailable                               0 B         225 kB
+├ ○ /claim-listing                                       4.29 kB         254 kB
+├ ○ /colorado                                                0 B         225 kB
+├ ○ /contact                                             3.49 kB         253 kB
+├ ƒ /data/counties                                           0 B         225 kB
+├ ● /data/counties/[slug]                                    0 B         226 kB
+├   ├ /data/counties/miami-dade-fl
+├   ├ /data/counties/broward-fl
+├   └ /data/counties/palm-beach-fl
+├ ƒ /data/plan-complaint-index                           14.4 kB         240 kB
+├ ƒ /destinations                                        9.47 kB         235 kB
+├ ● /destinations/[state]                                    0 B         235 kB
+├   ├ /destinations/florida
+├   ├ /destinations/texas
+├   ├ /destinations/california
+├   └ [+3 more paths]
+├ ● /destinations/[state]/[city]                             0 B         235 kB
+├   ├ /destinations/florida/miami
+├   ├ /destinations/florida/tampa
+├   ├ /destinations/florida/orlando
+├   └ [+24 more paths]
+├ ƒ /destinations/[state]/[city]/share-og                    0 B            0 B
+├ ƒ /destinations/[state]/share-og                           0 B            0 B
+├ ƒ /directory                                            8.2 kB         233 kB
+├ ○ /florida                                                 0 B         225 kB
+├ ○ /guides                                                  0 B         225 kB
+├ ● /guides/[slug]                                           0 B         225 kB
+├   ├ /guides/florida-aca-marketplace
+├   ├ /guides/miami-dade-aca-marketplace
+├   ├ /guides/broward-aca-marketplace
+├   └ [+23 more paths]
+├ ƒ /guides/[slug]/share-og                                  0 B            0 B
+├ ○ /hubs                                                    0 B         227 kB
+├ ● /hubs/[state]                                            0 B         225 kB
+├   ├ /hubs/new-jersey
+├   ├ /hubs/new-york
+├   ├ /hubs/california
+├   └ [+34 more paths]
+├ ● /hubs/[state]/[slug]                                     0 B         229 kB
+├   ├ /hubs/new-jersey/north-new-jersey
+├   ├ /hubs/new-jersey/central-new-jersey
+├   ├ /hubs/new-jersey/south-new-jersey
+├   └ [+78 more paths]
+├ ○ /hubs/aca                                                0 B         227 kB
+├ ○ /hubs/browse                                             0 B         225 kB
+├ ● /hubs/browse/[state]                                     0 B         225 kB
+├   ├ /hubs/browse/new-jersey
+├   ├ /hubs/browse/new-york
+├   ├ /hubs/browse/california
+├   └ [+34 more paths]
+├ ○ /hubs/health-insurance                                   0 B         227 kB
+├ ○ /hubs/medicare                                           0 B         227 kB
+├ ƒ /hubs/south-florida                                      0 B         229 kB
+├ ○ /icon.png                                                0 B            0 B
+├ ○ /icon.svg                                                0 B            0 B
+├ ○ /illinois                                                0 B         225 kB
+├ ƒ /insurers                                                0 B         225 kB
+├ ● /insurers/[slug]                                         0 B         225 kB
+├   ├ /insurers/citizens-property-insurance-corporation
+├   ├ /insurers/florida-peninsula-insurance-company
+├   ├ /insurers/civic-property-and-casualty-company
+├   └ [+23 more paths]
+├ ○ /marketplace                                             0 B         225 kB
+├ ● /marketplace/[state]/[county]                         3.2 kB         228 kB
+├   ├ /marketplace/fl/miami-dade
+├   ├ /marketplace/fl/broward
+├   ├ /marketplace/fl/palm-beach
+├   └ [+5 more paths]
+├ ƒ /marketplace/plans/[year]/[planId]                   8.58 kB         234 kB
+├ ○ /medicare                                                0 B         225 kB
+├ ● /medicare/[state]/[county]                               0 B         226 kB
+├   ├ /medicare/fl/miami-dade
+├   ├ /medicare/fl/broward
+├   └ /medicare/fl/palm-beach
+├ ● /medicare/contracts/[contractId]                     5.59 kB         231 kB
+├   ├ /medicare/contracts/H1036
+├   ├ /medicare/contracts/H5420
+├   ├ /medicare/contracts/H1045
+├   └ [+11 more paths]
+├ ○ /methodology                                             0 B         225 kB
+├ ƒ /my-insurance                                        19.7 kB         245 kB
+├ ƒ /my-insurance/compare                                2.84 kB         228 kB
+├ ○ /my-insurance/plans                                  3.11 kB         228 kB
+├ ○ /my-insurance/report                                 3.86 kB         229 kB
+├ ○ /my-insurance/setup                                  3.91 kB         229 kB
+├ ○ /new-jersey                                              0 B         225 kB
+├ ○ /new-york                                                0 B         225 kB
+├ ○ /offline                                                 0 B         225 kB
+├ ƒ /opengraph-image                                         0 B            0 B
+├ ○ /privacy                                                 0 B         225 kB
+├ ƒ /providers                                           1.45 kB         227 kB
+├ ● /providers/[slug]                                    13.7 kB         263 kB
+├ ƒ /providers/[slug]/share-og                               0 B            0 B
+├ ○ /resources                                               0 B         225 kB
+├ ● /resources/[slug]                                        0 B         225 kB
+├   ├ /resources/how-to-choose-insurance-agent
+├   ├ /resources/auto-insurance-costs-by-state
+├   ├ /resources/homeowners-insurance-basics
+├   └ [+11 more paths]
+├ ○ /robots.txt                                              0 B            0 B
+├ ○ /sitemap.xml                                             0 B            0 B
+├ ○ /terms                                                   0 B         225 kB
+├ ○ /texas                                               2.35 kB         228 kB
+├ ○ /tools                                                   0 B         225 kB
+├ ○ /tools/aca-eligibility-checker                           0 B         249 kB
+├ ○ /tools/aca-plan-explorer                             22.4 kB         248 kB
+├ ƒ /tools/cost-estimator                                    0 B         247 kB
+├ ƒ /tools/coverage-compass                              8.75 kB         234 kB
+├ ƒ /tools/license-verification                          6.05 kB         231 kB
+├ ○ /tools/marketplace-plan-research                     6.03 kB         231 kB
+├ ƒ /tools/medicare-plan-finder                          4.56 kB         230 kB
+├ ƒ /tools/medicare-provider-lookup                      5.09 kB         230 kB
+├ ƒ /tools/needs-assessment                                  0 B         225 kB
+├ ○ /tools/prescription-drug-list                        7.23 kB         232 kB
+├ ○ /tools/quote-comparison                                  0 B         247 kB
+├ ○ /twitter-image                                           0 B            0 B
+├ ○ /virginia                                                0 B         225 kB
+└ ○ /washington                                              0 B         225 kB
++ First Load JS shared by all                             244 kB
+  ├ chunks/641e082e492ae6fb.js                           59.2 kB
+  ├ chunks/67299e330e06fe9e.js                           17.2 kB
+  ├ chunks/6873b1b71ac023db.js                           14.3 kB
+  ├ chunks/75742de3a6378026.js                           13.1 kB
+  ├ chunks/9be822fa80c7d788.js                           68.4 kB
+  ├ chunks/fa9e81c1bb9ef372.js                           18.2 kB
+  ├ chunks/66dfb03d7d93311b.css                          17.8 kB
+  └ other shared chunks (total)                          35.5 kB
+
+
+ƒ Middleware                                             94.1 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand

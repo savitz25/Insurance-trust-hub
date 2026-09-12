@@ -1,0 +1,1290 @@
+{
+  "ticket": "TH-SEARCH-R1-013",
+  "utc": "2026-09-12T21:01:30.652Z",
+  "origin": "http://localhost:3213",
+  "testedHead": "3954cf823421661687fc92930205e612bb406cc0",
+  "dirty": true,
+  "cases": [
+    {
+      "name": "npn",
+      "utc": "2026-09-12T21:01:37.275Z",
+      "ms": 4297,
+      "status": "PASS",
+      "q": "Find NPN 10391484",
+      "settledMs": 2863,
+      "apiMs": 652,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "identifier",
+        "intent": "IDENTIFIER_LOOKUP",
+        "identifier": {
+          "type": "npn",
+          "value": "10391484"
+        },
+        "page": 1,
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION",
+          "npn": "10391484",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published. Directory listings are a separate ZIP surface.",
+          "whyMatched": "This agency matches because its indexed NPN is 10391484. NPN is an identifier, not an endorsement. Class was not assumed from the digits."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 1,
+          "grain": "Labeled NPN lookup"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Labeled NPN lookup",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/npn.png"
+    },
+    {
+      "name": "naic",
+      "utc": "2026-09-12T21:01:38.380Z",
+      "ms": 1102,
+      "status": "PASS",
+      "q": "Find insurer NAIC code 10064",
+      "settledMs": 347,
+      "apiMs": 112,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "identifier",
+        "intent": "IDENTIFIER_LOOKUP",
+        "identifier": {
+          "type": "naic_company_code",
+          "value": "10064"
+        },
+        "entityClass": "insurer",
+        "page": 1,
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "insurer",
+          "name": "CITIZENS PROP INS CORP",
+          "npn": null,
+          "naicCode": "10064",
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": "2025-01-24",
+          "href": "/insurers/citizens-property-insurance-corporation",
+          "publicationNote": null,
+          "whyMatched": "This legal insurer matches because the official record lists NAIC company code 10064. A consumer brand is not assumed."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 1,
+          "grain": "NAIC company code (Wave-1 public cohort unless unpublished)"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "2025-01-24",
+        "grain": "NAIC company code (Wave-1 public cohort unless unpublished)",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/naic.png"
+    },
+    {
+      "name": "agency",
+      "utc": "2026-09-12T21:01:43.283Z",
+      "ms": 4900,
+      "status": "PASS",
+      "q": "Research Gulfstream Insurance Agency LLC",
+      "settledMs": 2666,
+      "apiMs": 1453,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "entity",
+        "intent": "NAME_IDENTITY",
+        "entityClass": "agency",
+        "nameQuery": "Gulfstream Insurance Agency LLC",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM INSURANCE AGENCY LLC",
+          "npn": "20168263",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source legal_name ?GULFSTREAM INSURANCE AGENCY LLC? (normalized_exact_name). NPN 20168263 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "GULFSTREAM INSURANCE AGENCY LLC",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "5da0697d-58f2-4c48-b4d3-04403b70fc07",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=5da0697d-58f2-4c48-b4d3-04403b70fc07"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM AUTO INSURANCE INC.",
+          "npn": "8862411",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM AUTO INSURANCE INC.? (distinctive_token_candidate). NPN 8862411 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM AUTO INSURANCE INC.",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "d79021de-a48d-4799-892f-d151a53780b6",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=d79021de-a48d-4799-892f-d151a53780b6"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM INSURANCE GROUP, INC.",
+          "npn": "4394687",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM INSURANCE GROUP, INC.? (distinctive_token_candidate). NPN 4394687 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM INSURANCE GROUP, INC.",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "729e0233-c35f-4a16-895f-81335d8a43c2",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=729e0233-c35f-4a16-895f-81335d8a43c2"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM INSURANCE INC",
+          "npn": "17328505",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM INSURANCE INC? (distinctive_token_candidate). NPN 17328505 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM INSURANCE INC",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "e290320b-bc73-46ea-85f5-dbd160c902c3",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=e290320b-bc73-46ea-85f5-dbd160c902c3"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM RISK PARTNERS, LLC",
+          "npn": "19422124",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM RISK PARTNERS, LLC? (distinctive_token_candidate). NPN 19422124 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM RISK PARTNERS, LLC",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "d76f2f72-ec16-4f11-9430-98c37b5fc69c",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=d76f2f72-ec16-4f11-9430-98c37b5fc69c"
+        }
+      ],
+      "counts": [
+        {
+          "label": "Displayed source-name candidates",
+          "value": 5,
+          "grain": "Bounded candidate identities; not an exhaustive market count"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Displayed source-name candidates; not an exhaustive market count",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/agency.png"
+    },
+    {
+      "name": "insurer",
+      "utc": "2026-09-12T21:01:47.107Z",
+      "ms": 3822,
+      "status": "PASS",
+      "q": "Research CITIZENS PROP INS CORP",
+      "settledMs": 1621,
+      "apiMs": 1629,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "entity",
+        "intent": "NAME_IDENTITY",
+        "nameQuery": "CITIZENS PROP INS CORP",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "insurer",
+          "name": "CITIZENS PROP INS CORP",
+          "npn": null,
+          "naicCode": "10064",
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": "2025-01-24",
+          "href": "/insurers/citizens-property-insurance-corporation",
+          "publicationNote": null,
+          "whyMatched": "Name candidate: requested ?CITIZENS PROP INS CORP? matches source canonical_legal_name ?CITIZENS PROP INS CORP? (normalized_exact_name); NAIC company code 10064. This is not a consumer-brand or agency association.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "canonical_legal_name",
+            "value": "CITIZENS PROP INS CORP",
+            "requested": "CITIZENS PROP INS CORP",
+            "entityId": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+            "entityClass": "insurer",
+            "source": "ins-insurer-006-wave1",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+CITIZENS+PROP+INS+CORP&selected=27d7418a-d2bf-4339-8c3b-4774e7f403bc"
+        }
+      ],
+      "counts": [
+        {
+          "label": "Displayed source-name candidates",
+          "value": 1,
+          "grain": "Bounded candidate identities; not an exhaustive market count"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "2025-01-24",
+        "grain": "Displayed source-name candidates; not an exhaustive market count",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/insurer.png"
+    },
+    {
+      "name": "brand",
+      "utc": "2026-09-12T21:01:51.990Z",
+      "ms": 4881,
+      "status": "PASS",
+      "q": "Research State Farm",
+      "settledMs": 1886,
+      "apiMs": 1936,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "entity",
+        "intent": "NAME_IDENTITY",
+        "nameQuery": "State Farm",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "19836872",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 19836872 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "1750df52-c28e-4501-b3bd-84367f92af32",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=1750df52-c28e-4501-b3bd-84367f92af32"
+        },
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "17081764",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 17081764 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "3eb3b023-8a7d-45db-9696-5ac25b6849b2",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=3eb3b023-8a7d-45db-9696-5ac25b6849b2"
+        },
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "14492909",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 14492909 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "645f9a37-0eb0-4d9e-92ff-613c4251c3a6",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=645f9a37-0eb0-4d9e-92ff-613c4251c3a6"
+        },
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "17734559",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 17734559 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "e7854420-c4c5-4629-8e0b-fe4348d10b4e",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=e7854420-c4c5-4629-8e0b-fe4348d10b4e"
+        },
+        {
+          "entityClass": "agency",
+          "name": "AARON REEVES STATE FARM",
+          "npn": "15749382",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source display_name ?AARON REEVES STATE FARM? (distinctive_token_candidate). NPN 15749382 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "AARON REEVES STATE FARM",
+            "requested": "State Farm",
+            "entityId": "eea1f819-0d87-405f-977e-79e71809214a",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=eea1f819-0d87-405f-977e-79e71809214a"
+        }
+      ],
+      "counts": [
+        {
+          "label": "Displayed source-name candidates",
+          "value": 10,
+          "grain": "Bounded candidate identities; not an exhaustive market count"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Displayed source-name candidates; not an exhaustive market count",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/brand.png"
+    },
+    {
+      "name": "near",
+      "utc": "2026-09-12T21:01:52.898Z",
+      "ms": 906,
+      "status": "PASS",
+      "q": "insurance agency near me",
+      "settledMs": 237,
+      "apiMs": 39,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "fail_closed",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "refinement": "zip",
+        "terminalState": "NEEDS_CLARIFICATION",
+        "failReason": "Enter a ZIP for public directory listings. Your requested place is retained; no ZIP or service area is guessed.",
+        "directoryContext": {
+          "requestedLocation": "me",
+          "requestedInsuranceContext": [],
+          "unresolvedConditions": [
+            "ZIP required"
+          ]
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "Source credential clocks",
+        "grain": "fail_closed",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/near.png"
+    },
+    {
+      "name": "boca",
+      "utc": "2026-09-12T21:01:53.734Z",
+      "ms": 833,
+      "status": "PASS",
+      "q": "insurance agency in Boca Raton Florida",
+      "settledMs": 233,
+      "apiMs": 28,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "fail_closed",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "refinement": "zip",
+        "terminalState": "NEEDS_CLARIFICATION",
+        "failReason": "Enter a ZIP for public directory listings. Your requested place is retained; no ZIP or service area is guessed.",
+        "directoryContext": {
+          "requestedLocation": "Boca Raton Florida",
+          "requestedInsuranceContext": [],
+          "unresolvedConditions": [
+            "ZIP required"
+          ]
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "Source credential clocks",
+        "grain": "fail_closed",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/boca.png"
+    },
+    {
+      "name": "zip",
+      "utc": "2026-09-12T21:01:54.558Z",
+      "ms": 822,
+      "status": "PASS",
+      "q": "insurance agencies in ZIP 33441",
+      "settledMs": 229,
+      "apiMs": 22,
+      "terminal": "DIRECTORY_HANDOFF",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "directory",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "directoryZip": "33441",
+        "coverageState": "PARTIAL",
+        "directoryContext": {
+          "requestedLocation": "ZIP 33441",
+          "requestedInsuranceContext": [],
+          "effectiveZip": "33441",
+          "unresolvedConditions": []
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "Separate public directory",
+        "geographyMeaning": "Selected ZIP 33441; recorded directory address, not service territory",
+        "officialAsOf": "Source credential clocks",
+        "grain": "Directory handoff; no regulatory identities retrieved",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/zip.png"
+    },
+    {
+      "name": "homeowners",
+      "utc": "2026-09-12T21:01:55.375Z",
+      "ms": 808,
+      "status": "PASS",
+      "q": "homeowners insurance agency in ZIP 33441",
+      "settledMs": 218,
+      "apiMs": 26,
+      "terminal": "DIRECTORY_HANDOFF",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "directory",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "directoryZip": "33441",
+        "coverageState": "PARTIAL",
+        "directoryContext": {
+          "requestedLocation": "ZIP 33441",
+          "requestedInsuranceContext": [
+            "homeowners"
+          ],
+          "effectiveZip": "33441",
+          "unresolvedConditions": [
+            "Insurance product context is retained, not an applied LOA, appointment or directory product filter."
+          ]
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "Separate public directory",
+        "geographyMeaning": "Selected ZIP 33441; recorded directory address, not service territory",
+        "officialAsOf": "Source credential clocks",
+        "grain": "Directory handoff; no regulatory identities retrieved",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/homeowners.png"
+    },
+    {
+      "name": "credential",
+      "utc": "2026-09-12T21:02:03.211Z",
+      "ms": 7824,
+      "status": "PASS",
+      "q": "insurance agencies credentialed in Florida",
+      "settledMs": 4904,
+      "apiMs": 1451,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "entity",
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "FL",
+          "meaning": "credential_jurisdiction"
+        },
+        "credentialStatus": "current_source",
+        "loaMatch": "any",
+        "loaAsOfficialObservation": false,
+        "coverageState": "KNOWN",
+        "sort": "name",
+        "page": 1,
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION",
+          "npn": "10391484",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 10391484, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "# INSURANCE COMPANY PLACE INC DBA BRIGHTWAY INSURANCE THE DOR AGENCY",
+          "npn": "21617358",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21617358, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "#1 HEALTH & RETIREMENT SOLUTIONS DBA #1 HEALTH INSURANCE & RETIREMENT SOLUTIONS",
+          "npn": "21400906",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21400906, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "07CARRERA, LLC DBA FIGUEROA INSURANCE AGENCY",
+          "npn": "21119412",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21119412, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "1 CARE INSURANCE GROUP",
+          "npn": "18748057",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 18748057, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 56939,
+          "grain": "credential_jurisdiction = FL"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "credential_jurisdiction = FL",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "credential_jurisdiction = FL",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/credential.png"
+    },
+    {
+      "name": "address",
+      "utc": "2026-09-12T21:02:04.052Z",
+      "ms": 836,
+      "status": "PASS",
+      "q": "agencies located in Florida",
+      "settledMs": 216,
+      "apiMs": 22,
+      "terminal": "CAPABILITY_LIMITATION",
+      "coverage": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "page": 1,
+        "failReason": "Recorded office/address geography is not a national Ask filter in this extract. Ask currently executes credential jurisdiction and (where sourced) domicile — not physical location or service territory.",
+        "alternatives": [
+          "Show insurance agencies credentialed in Florida."
+        ],
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "FL",
+          "meaning": "recorded_address_state"
+        },
+        "coverageState": "UNSUPPORTED",
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "recorded_address_state = FL",
+        "officialAsOf": "Source credential clocks",
+        "grain": "agency",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/address.png"
+    },
+    {
+      "name": "domicile",
+      "utc": "2026-09-12T21:02:04.873Z",
+      "ms": 816,
+      "status": "PASS",
+      "q": "insurer domiciled in Florida",
+      "settledMs": 218,
+      "apiMs": 20,
+      "terminal": "CAPABILITY_LIMITATION",
+      "coverage": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "entityClass": "insurer",
+        "jurisdiction": {
+          "state": "FL",
+          "meaning": "regulatory_domicile"
+        },
+        "domicile": "FL",
+        "credentialStatus": "current_source",
+        "loaMatch": "any",
+        "loaAsOfficialObservation": false,
+        "coverageState": "KNOWN",
+        "sort": "name",
+        "page": 1,
+        "requestOptions": {},
+        "pageSize": 20,
+        "failReason": "Legal-insurer domicile is not a complete national Ask field in this extract. Wave-1 public profiles (26) store domicile as null; 6,185 graph identities are not a domicile census. Use a labeled NAIC company code.",
+        "alternatives": [
+          "What is a legal insurer?",
+          "Find insurer NAIC code 10064."
+        ]
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "regulatory_domicile = FL",
+        "officialAsOf": "Source credential clocks",
+        "grain": "insurer",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/domicile.png"
+    },
+    {
+      "name": "appointment",
+      "utc": "2026-09-12T21:02:08.232Z",
+      "ms": 3357,
+      "status": "PASS",
+      "q": "is NPN 10391484 appointed with State Farm?",
+      "settledMs": 1870,
+      "apiMs": 997,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "evidence",
+        "intent": "EVIDENCE",
+        "identifier": {
+          "type": "npn",
+          "value": "10391484"
+        },
+        "page": 1,
+        "requestedTask": "appointment",
+        "evidenceFamily": "appointment",
+        "appointerName": "State Farm",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION",
+          "npn": "10391484",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published. Directory listings are a separate ZIP surface.",
+          "whyMatched": "This agency matches because its indexed NPN is 10391484. NPN is an identifier, not an endorsement. Class was not assumed from the digits."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 1,
+          "grain": "Labeled NPN lookup"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Labeled NPN lookup",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/appointment.png"
+    },
+    {
+      "name": "colorado",
+      "utc": "2026-09-12T21:02:08.969Z",
+      "ms": 735,
+      "status": "PASS",
+      "q": "licensed insurance agencies in Colorado",
+      "settledMs": 203,
+      "apiMs": 20,
+      "terminal": "CAPABILITY_LIMITATION",
+      "coverage": "NOT_ACQUIRED",
+      "query": {
+        "mode": "fail_closed",
+        "page": 1,
+        "failReason": "CO producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.",
+        "alternatives": [
+          "Find NPN 10391484.",
+          "What is an NPN?"
+        ],
+        "coverageState": "NOT_ACQUIRED",
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "CO",
+          "meaning": "credential_jurisdiction"
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "credential_jurisdiction = CO",
+        "officialAsOf": "Source credential clocks",
+        "grain": "agency",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/colorado.png"
+    },
+    {
+      "name": "miss",
+      "utc": "2026-09-12T21:02:10.423Z",
+      "ms": 1451,
+      "status": "PASS",
+      "q": "NPN 999999999999",
+      "settledMs": 580,
+      "apiMs": 256,
+      "terminal": "NO_MATCH",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "identifier",
+        "intent": "IDENTIFIER_LOOKUP",
+        "identifier": {
+          "type": "npn",
+          "value": "999999999999"
+        },
+        "page": 1,
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Labeled NPN lookup",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/miss.png"
+    },
+    {
+      "name": "tx-loa",
+      "utc": "2026-09-12T21:02:22.445Z",
+      "ms": 12020,
+      "status": "PASS",
+      "q": "life insurance agencies credentialed in Texas",
+      "settledMs": 8258,
+      "apiMs": 2622,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "entity",
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "TX",
+          "meaning": "credential_jurisdiction"
+        },
+        "credentialStatus": "current_source",
+        "linesOfAuthority": [
+          "Life"
+        ],
+        "loaMatch": "any",
+        "loaAsOfficialObservation": true,
+        "coverageState": "KNOWN",
+        "sort": "name",
+        "page": 1,
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "1 HEALTH USA, LC",
+          "npn": "21054630",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO",
+            "Life Agent/Agency"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:51.041+00:00",
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21054630, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "1 KEY INSURANCE SOLUTIONS",
+          "npn": "16516458",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:26.2+00:00",
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 16516458, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "1 WORLD INSURANCE DBA INSURANCE 'N YOU",
+          "npn": "20116201",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:44.347+00:00",
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 20116201, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "10:10 LIFE AND LEGACY LLC",
+          "npn": "22200524",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:16:00.058+00:00",
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 22200524, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "108 CAPITAL MANAGEMENT, LLC",
+          "npn": "20761765",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:49.113+00:00",
+          "href": null,
+          "publicationNote": "Research identity — public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 20761765, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 25565,
+          "grain": "official LOA observation text in TX (not appointment; not a national codebook)"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "credential_jurisdiction = TX",
+        "officialAsOf": "2026-08-15T15:15:51.041+00:00",
+        "grain": "official LOA observation text in TX (not appointment; not a national codebook)",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/tx-loa.png"
+    },
+    {
+      "name": "candidate-select-edit-history-390",
+      "utc": "2026-09-12T21:02:35.107Z",
+      "ms": 5311,
+      "status": "PASS",
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/selected-agency-390.png"
+    },
+    {
+      "name": "candidate-select-edit-history-1280",
+      "utc": "2026-09-12T21:03:09.590Z",
+      "ms": 6460,
+      "status": "PASS",
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/selected-agency-1280.png"
+    },
+    {
+      "name": "responsive-320",
+      "utc": "2026-09-12T21:03:10.524Z",
+      "ms": 931,
+      "status": "PASS",
+      "width": 320,
+      "scrollWidth": 320,
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/width-320.png"
+    },
+    {
+      "name": "responsive-390",
+      "utc": "2026-09-12T21:03:11.465Z",
+      "ms": 938,
+      "status": "PASS",
+      "width": 390,
+      "scrollWidth": 390,
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/width-390.png"
+    },
+    {
+      "name": "responsive-768",
+      "utc": "2026-09-12T21:03:12.579Z",
+      "ms": 1110,
+      "status": "PASS",
+      "width": 768,
+      "scrollWidth": 768,
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/width-768.png"
+    },
+    {
+      "name": "responsive-1280",
+      "utc": "2026-09-12T21:03:13.704Z",
+      "ms": 1122,
+      "status": "PASS",
+      "width": 1280,
+      "scrollWidth": 1280,
+      "screenshot": "docs/qa/th-search-r1-013/browser-local-final/width-1280.png"
+    }
+  ],
+  "failures": [
+    {
+      "name": "homepage-first-enter-zip-handoff-390",
+      "error": "Error: History lost ZIP selection",
+      "url": "http://localhost:3213/ask?q=homeowners+insurance+agency+in+Boca+Raton+Florida&entity=&state=&loa=&evidence="
+    },
+    {
+      "name": "homepage-first-enter-zip-handoff-1280",
+      "error": "TimeoutError: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-specialist-results]') to be visible\u001b[22m\n",
+      "url": "http://localhost:3213/directory?zip=33441&insuranceContext=homeowners&requestedPlace=Boca+Raton+Florida"
+    }
+  ]
+}
