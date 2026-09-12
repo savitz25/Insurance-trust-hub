@@ -6,7 +6,7 @@ const store = new Map<string, Entry>();
 const TTL_MS = 10 * 60 * 1000;
 
 export function askCacheKey(parts: Array<string | number | undefined | null>): string {
-  return [INSURANCE_ASK_SNAPSHOT_FINGERPRINT, ...parts.map((p) => (p == null ? '' : String(p)))].join('|');
+  return JSON.stringify([INSURANCE_ASK_SNAPSHOT_FINGERPRINT, ...parts.map((p) => p == null ? null : String(p))]);
 }
 
 export function cacheGetCount(key: string): number | undefined {

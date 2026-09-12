@@ -4,6 +4,11 @@ export const INSURANCE_ASK_CONTRACT = 'insurance-ask-v1' as const;
 export const INSURANCE_ASK_ROUTE = 'https://www.insurancetrusthub.com/ask';
 export const INSURANCE_ASK_API = 'https://www.insurancetrusthub.com/api/ask';
 export const INSURANCE_ASK_PAGE_SIZE = 20;
+export const INSURANCE_ASK_INPUT_LIMIT = 180;
+export type ResearchIntent = 'IDENTIFIER_LOOKUP' | 'NAME_IDENTITY' | 'COHORT_DISCOVERY' | 'DIRECTORY_DISCOVERY' | 'EVIDENCE' | 'DEFINITION' | 'RECOVERY' | 'FAIL_CLOSED';
+export type ResearchCondition = { value: string; meaning: string; outcome: 'APPLIED' | 'NEEDS_CLARIFICATION' | 'UNSUPPORTED' };
+export type RecoveryAction = { type: 'INTERNAL_RESEARCH' | 'OFFICIAL_SOURCE'; label: string; destination: string; reason: string; establishes: string; doesNotEstablish: string };
+export type InsuranceRequestOptions = { entity?: InsuranceEntityClass; state?: string; loa?: string; evidence?: 'credential' | 'appointment' | 'marketplace'; zip?: string; selected?: string };
 
 /** Homepage intel fingerprint — cache keys include this so aggregates do not reuse across payload changes. */
 export const INSURANCE_ASK_SNAPSHOT_FINGERPRINT =
@@ -84,6 +89,15 @@ export type GeographyDimension =
   | 'insurer_market_geography';
 
 export type InsuranceResearchQuery = {
+  intent?: ResearchIntent;
+  requestedTask?: 'identity' | 'credential' | 'appointment' | 'marketplace' | 'regulatory_evidence';
+  conditions?: ResearchCondition[];
+  refinement?: 'zip' | 'identity' | 'class' | 'appointer';
+  terminalState?: 'INVALID_INPUT' | 'NEEDS_CLARIFICATION';
+  directoryContext?: { requestedLocation: string; requestedInsuranceContext: string[]; effectiveZip?: string; unresolvedConditions: string[] };
+  selectedEntity?: string;
+  recoveryActions?: RecoveryAction[];
+  requestOptions?: InsuranceRequestOptions;
   mode: InsuranceAskMode;
   entityClass?: InsuranceEntityClass;
   identifier?: { type: 'npn' | 'naic_company_code' | 'state_license'; value: string };

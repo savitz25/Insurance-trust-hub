@@ -1,3 +1,4 @@
+import { interpretIdentityAndLocal } from './research-intent';
 import {
   ASK_DEFINITIONS,
   CREDENTIAL_STATES,
@@ -100,7 +101,9 @@ function isAdvice(q: string): boolean {
 export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
-  const q = raw.trim().slice(0, 400);
+  const typed = interpretIdentityAndLocal(raw, page);
+  if (typed) return typed;
+  const q = raw.trim();
   const lines: ParsedInsuranceAsk['interpretation'] = [];
   const push = (label: string, value: string) => lines.push({ label, value });
   const safePage = Math.max(1, Math.min(200, page));
@@ -194,6 +197,9 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   if (/\b(serv(e|es|ing)|service territory|writes? policies in)\b/i.test(q)) {
     const query = fail('Credential jurisdiction, office location, insurer domicile, appointment county, and ZIP listings do not establish service territory or policy availability.', ['Show insurance agencies credentialed in Florida.', 'Browse public directory listings by ZIP.']);
     query.coverageState = 'UNSUPPORTED';
+    query.entityClass = detectClass(q);
+    query.intent = 'RECOVERY';
+    query.conditions = detectStates(q).map(value=>({value,meaning:'requested service territory',outcome:'UNSUPPORTED'}));
     push('Coverage', 'UNSUPPORTED — service territory');
     return { raw: q, query, interpretation: lines };
   }
@@ -276,7 +282,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
 
   const npn = q.match(/\bnpn\s*#?\s*(\d{4,12})\b/i);
   if (npn?.[1]) {
-    const appointment = /\b(appoint|sell policies for|allowed to sell|authorized to sell)\b/i.test(q);
+    const appointment = /\b(appoint(?:ed|ment)?|sell policies for|allowed to sell|authorized to sell)\b/i.test(q);
     const marketplace = /\bmarketplace\b/i.test(q);
     const appointer = q.match(/\bfor\s+(.+?)(?:\?|$)/i)?.[1]?.trim();
     const query: InsuranceResearchQuery = {
@@ -300,7 +306,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  if (/\b(appoint|sell policies for|allowed to sell|authorized to sell)\b/i.test(q) && !/\bevery insurer/i.test(q)) {
+  if (/\b(appoint(?:ed|ment)?|sell policies for|allowed to sell|authorized to sell)\b/i.test(q) && !/\bevery insurer/i.test(q)) {
     const query = fail(
       'Appointment answers require a labeled NPN and indexed appointment evidence naming the producer/agency and the appointing entity. A license or line of authority does not prove an appointment. Missing appointment evidence is not a finding of “unauthorized.”',
       ['What is an insurance appointment?', 'Find NPN 1234567.'],
@@ -333,6 +339,8 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
       ['Find NPN 10391484.', 'What is an NPN?'],
     );
     query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = detectClass(q);
+    query.jurisdiction = { state, meaning: geographyMeaning(q) };
     push('Coverage', `NOT_ACQUIRED — ${state} agency/producer roster`);
     return { raw: q, query, interpretation: lines };
   }
@@ -368,6 +376,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     const state = detectStates(q)[0];
     const query = fail(`${state ?? 'The requested'} complete authorized/legal-insurer roster is not acquired as a current bulk universe. Missing coverage is not zero.`, ['Find insurer NAIC code 10064.', 'What is a legal insurer?']);
     query.entityClass = 'insurer';
+    query.jurisdiction = state ? {state,meaning: geographyMeaning(q)} : undefined;
     query.coverageState = 'NOT_ACQUIRED';
     push('Entity class', 'Legal insurer');
     push('Coverage', 'NOT_ACQUIRED');
@@ -402,26 +411,6 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   const states = detectStates(q);
   const loas = detectLoas(q);
   const geo = geographyMeaning(q);
-
-  const looksLikeNamedIdentity = Boolean(entityClass) && !states.length && !loas.length && !/\b(how many|with |credentialed|licensed|compare|what is|difference|complaint|exam|enforcement|rate filing|appointment|marketplace)\b/i.test(q);
-  if (looksLikeNamedIdentity) {
-    const name = q.replace(/^(find|research|check)\s+/i, '').trim();
-    const query: InsuranceResearchQuery = { mode: 'entity', entityClass, nameQuery: name, credentialStatus: 'current_source', sort: 'name', page: safePage, coverageState: 'PARTIAL' };
-    push('Research type', 'Identity name candidate');
-    push('Entity class', entityLabel(entityClass!));
-    push('Name', name);
-    push('Identity rule', 'Name match is a candidate; exact regulatory identity is not inferred from similarity');
-    return { raw: q, query, interpretation: lines };
-  }
-
-  if (!entityClass && /\b(state farm|insurance agency|insurance company)\b/i.test(q) && !/\b(what|difference|underwrite|appoint|represent)\b/i.test(q)) {
-    const name = q.replace(/^(find|research|check)\s+/i, '').trim();
-    const query: InsuranceResearchQuery = { mode: 'entity', entityClass: 'agency', nameQuery: name, credentialStatus: 'current_source', sort: 'name', page: safePage, coverageState: 'PARTIAL' };
-    push('Research type', 'Identity name candidate');
-    push('Name', name);
-    push('Identity rule', 'Name match is a candidate, not canonical identity proof');
-    return { raw: q, query, interpretation: lines };
-  }
 
   if (/\bhow many\b|\bcount of\b/i.test(q)) {
     if (!entityClass) {
@@ -498,6 +487,10 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
       'Recorded office/address geography is not a national Ask filter in this extract. Ask currently executes credential jurisdiction and (where sourced) domicile — not physical location or service territory.',
       ['Show insurance agencies credentialed in Florida.'],
     );
+    query.entityClass = entityClass;
+    query.jurisdiction = states[0] ? { state: states[0], meaning: 'recorded_address_state' } : undefined;
+    query.coverageState = 'UNSUPPORTED';
+    push('Requested office state', states[0] ?? 'Not specified');
     push('Mode', 'fail_closed');
     return { raw: q, query, interpretation: lines };
   }
@@ -507,6 +500,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
       'Public producer profile pages are not published. Ask can count Florida-credentialed persons or look up a labeled NPN. It will not mass-publish people.',
       ['How many individual producers are credentialed in Florida?', 'Find NPN 1234567.'],
     );
+    query.entityClass = 'person';
     push('Mode', 'fail_closed');
     return { raw: q, query, interpretation: lines };
   }
@@ -519,6 +513,8 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     push('Mode', 'fail_closed');
     return { raw: q, query, interpretation: lines };
   }
+
+  if (!entityClass) return { raw: q, query: { ...fail('Specify an agency, individual producer, legal insurer, labeled identifier, or local directory question.', []), refinement: 'class', terminalState: 'NEEDS_CLARIFICATION' }, interpretation: [{ label: 'Research task', value: 'Clarification required' }] };
 
   const query: InsuranceResearchQuery = {
     mode: 'entity',

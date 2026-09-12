@@ -1,0 +1,5 @@
+
+> insurance-trust-hub@1.0.0 check:phase12-my-insurance
+> tsx scripts/check-phase12-my-insurance.ts
+
+Phase 12 My Insurance checks passed

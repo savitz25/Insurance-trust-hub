@@ -1,0 +1,3 @@
+
+> insurance-trust-hub@1.0.0 typecheck
+> tsc --noEmit

@@ -1,0 +1,6 @@
+
+> insurance-trust-hub@1.0.0 check:ins-insurer-006
+> tsx scripts/check-ins-insurer-006.ts
+
+INS-INSURER-006 FAIL (1)
+ - 35 homepage fingerprint unchanged

@@ -1,0 +1,5 @@
+
+> insurance-trust-hub@1.0.0 check:phase6a-appointments
+> tsx scripts/check-phase6a-appointments.ts
+
+Phase 6A appointment checks passed

@@ -55,7 +55,7 @@ const nameOnly = q('Who is John Smith');
 assert(nameOnly.query.mode === 'fail_closed', 'name-only identity does not overclaim');
 
 const findName = q('Find Acme Insurance Brokers');
-assert(findName.query.mode === 'fail_closed', 'find-name without class does not overclaim');
+assert(findName.query.mode === 'entity' && findName.query.intent === 'NAME_IDENTITY' && findName.query.coverageState === 'PARTIAL', 'explicit firm name produces candidates, not exact identity');
 
 // AGENCY + LOA
 const loa = q('Show Florida-credentialed agencies with Property and Casualty authority.');
@@ -213,7 +213,7 @@ assert(sitemap.includes("'/providers'"), 'sitemap providers');
 assert(!sitemap.includes("'/ask'"), 'ask stays noindex (not in sitemap)');
 assert(robots.includes("allow: '/'"), 'robots allow root');
 assert(askPage.includes('noIndex: true') || askPage.includes("index: false"), 'ask noindex');
-assert(home.includes('Ask InsuranceTrustHub'), 'homepage Ask CTA');
+assert(home.includes('InsuranceSpecialistSearchShell') && readFileSync('components/specialist-search/insurance-specialist-search-shell.tsx','utf8').includes('action="/ask"'), 'homepage mounts the actual Ask search form');
 assert(nav.includes("href: '/ask'"), 'header Ask link');
 assert(nav.includes("href: '/directory'"), 'header directory retained');
 assert(nav.includes("href: '/methodology'"), 'header methodology retained');

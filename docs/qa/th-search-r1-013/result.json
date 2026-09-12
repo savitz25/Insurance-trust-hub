@@ -1,0 +1,82 @@
+{
+  "ticket": "TH-SEARCH-R1-013",
+  "status": "READY_FOR_REVIEW",
+  "model": "GPT-6 Astra / High ? USER-CONFIRMED",
+  "modelMetadataIndependentlyVerified": false,
+  "baseline": "8051be7d5169929e42155cab81effa94178e8aad",
+  "testedImplementation": "833d3acce9d469c707014c71999fd02aaacf9f19",
+  "runtimeMerge": null,
+  "deployedSha": null,
+  "pr": "https://github.com/savitz25/Insurance-trust-hub/pull/34",
+  "updatedAt": "2026-09-12T21:20:10.971487+00:00",
+  "baselineMatrix": "baseline.json",
+  "independentOracle": "source-oracle.json",
+  "sourceMatrix": "source-capability-matrix.md",
+  "officialSources": "official-sources.json",
+  "focusedGate": {
+    "pass": 63,
+    "fail": 0,
+    "redBefore": {
+      "pass": 2,
+      "fail": 10,
+      "note": "Initial target subset on unchanged baseline; already-good cases not manufactured red."
+    }
+  },
+  "mutations": "mutations.json",
+  "reviewMethod": "Self-review plus automated behavioral, source-contract, browser and CI checks; no independent human review",
+  "previewBrowser": "Authentication required; no protection bypass or share-token creation. Preview builds pass. Local optimized and canonical Production browser proof are recorded separately.",
+  "remaining": [
+    "Directory source contains inconsistent address fields and legacy listing-quality issues; only recorded ZIP equality is certified.",
+    "No public person-name roster, graph-agency profile expansion, new alias source or bulk state acquisition.",
+    "Parent Ask rendering/selection completion is not certified; existing insurance-ask-v1 compatibility was inspected read-only.",
+    "All other Search Reliability R1 tickets and Move canonical correction remain outside this closure."
+  ],
+  "rollback": "Reviewed Insurance-only revert/deployment of this ticket; no database rollback. Preserve prior state/publication releases.",
+  "localBrowser": {
+    "queryMatrix": {
+      "path": "browser-local-077e054/result.json",
+      "implementation": "077e054eb205b63b76f0076947d3d40d82f4fc75",
+      "queryCasesPassed": 16,
+      "knownHistoryFailures": 2,
+      "nativeSettledMsRange": [
+        210,
+        8334
+      ],
+      "apiMsRange": [
+        23,
+        4125
+      ]
+    },
+    "afterHistoryRepair": {
+      "path": "browser-local-833d3ac/result.json",
+      "implementation": "833d3acce9d469c707014c71999fd02aaacf9f19",
+      "pass": 8,
+      "fail": 0
+    },
+    "actionsAndDirectoryWidths": "actions-local-833d3ac/result.json"
+  },
+  "structuredLive": "structured-live.json",
+  "regressionGates": "regression-gates.json",
+  "build": "build-final.log",
+  "typecheck": "typecheck-final.log",
+  "finalFocusedLog": "green-final.log",
+  "reviewFinding": {
+    "method": "Vercel automated review",
+    "head": "19ccca8688034ae2946323f0f108a0a6f4306f64",
+    "reviewId": "a273f8200303caaa54142ba3b2ff2530",
+    "finding": "Unmapped source kinds could cause NPN lookup exception",
+    "sourceCheck": {
+      "utc": "2026-09-12T21:33:35.432007+00:00",
+      "method": "Bounded read-only non-null NPN query for insurance_group/carrier/consumer_brand",
+      "observedRows": 0
+    },
+    "fixtureRed": {
+      "pass": 60,
+      "fail": 3
+    },
+    "fixtureGreen": {
+      "pass": 63,
+      "fail": 0
+    }
+  }
+}

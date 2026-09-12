@@ -1,0 +1,40 @@
+[
+  {
+    "mutation": "agency-to-insurer",
+    "exitCode": 1,
+    "detected": true,
+    "failures": [
+      "FAIL explicit agency class and source legal name evidence AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "FAIL selected candidate revalidated original task and conditions AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    ],
+    "utc": "2026-09-12T20:46:08.743414+00:00"
+  },
+  {
+    "mutation": "directory-to-graph",
+    "exitCode": 1,
+    "detected": true,
+    "failures": [
+      "FAIL directory is never canonical graph rows AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "FAIL structured directory retains handoff and context AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    ],
+    "utc": "2026-09-12T20:46:11.731949+00:00"
+  },
+  {
+    "mutation": "address-to-credential",
+    "exitCode": 1,
+    "detected": true,
+    "failures": [
+      "FAIL address request cannot become FL credential cohort AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    ],
+    "utc": "2026-09-12T20:46:14.921229+00:00"
+  },
+  {
+    "mutation": "loa-to-appointment",
+    "exitCode": 1,
+    "detected": true,
+    "failures": [
+      "FAIL appointment requires actual source relationship, not LOA AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+    ],
+    "utc": "2026-09-12T20:46:18.103697+00:00"
+  }
+]

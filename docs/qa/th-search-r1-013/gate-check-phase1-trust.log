@@ -1,0 +1,8 @@
+
+> insurance-trust-hub@1.0.0 check:phase1-trust
+> tsx scripts/check-phase1-trust-state.ts
+
+Phase 1 trust-state checks passed
+  verified requirements: 7
+  seed/illustrative cannot resolve to verified
+  countVerified ignores non-verified records

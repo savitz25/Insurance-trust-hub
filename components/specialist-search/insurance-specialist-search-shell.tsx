@@ -1,3 +1,4 @@
+import { INSURANCE_ASK_INPUT_LIMIT, type InsuranceRequestOptions } from '@/lib/insurance-ask/contract';
 import Link from 'next/link';
 import { SearchShellAnalytics } from './search-shell-analytics';
 
@@ -8,7 +9,7 @@ const EXAMPLES = [
   'What is an insurance appointment?',
 ];
 
-export function InsuranceSpecialistSearchShell({ query = '', compact = false }: { query?: string; compact?: boolean }) {
+export function InsuranceSpecialistSearchShell({ query = '', compact = false, options = {} }: { query?: string; compact?: boolean; options?: InsuranceRequestOptions }) {
   const suffix = compact ? 'home' : 'ask';
   return (
     <section className={`rounded-3xl border border-sky-200 bg-white/95 p-5 shadow-sm sm:p-7 ${compact ? '' : 'mx-auto max-w-5xl'}`} aria-labelledby={`${suffix}-insurance-search-title`}>
@@ -17,16 +18,16 @@ export function InsuranceSpecialistSearchShell({ query = '', compact = false }: 
       <form action="/ask" method="get" role="search" aria-label="Research insurance identities and evidence" className="mt-5">
         <div className="flex flex-col gap-3 md:flex-row">
           <label className="sr-only" htmlFor={`${suffix}-insurance-search-q`}>Question, agency, insurer, NPN, or NAIC code</label>
-          <input id={`${suffix}-insurance-search-q`} name="q" type="search" maxLength={180} defaultValue={query} required placeholder="Ask a question, enter an agency, insurer, NPN, NAIC code, state or credential..." className="min-h-12 min-w-0 flex-1 rounded-xl border border-slate-300 px-4 text-base text-[#0A2540] outline-none focus-visible:ring-2 focus-visible:ring-sky-600" />
+          <input id={`${suffix}-insurance-search-q`} name="q" type="search" maxLength={INSURANCE_ASK_INPUT_LIMIT} defaultValue={query} required placeholder="Ask a question, enter an agency, insurer, NPN, NAIC code, state or credential..." className="min-h-12 min-w-0 flex-1 rounded-xl border border-slate-300 px-4 text-base text-[#0A2540] outline-none focus-visible:ring-2 focus-visible:ring-sky-600" />
           <button type="submit" className="min-h-12 rounded-xl bg-[#0A2540] px-7 font-semibold text-white outline-none hover:bg-sky-900 focus-visible:ring-2 focus-visible:ring-sky-600">Research</button>
         </div>
         <details className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3">
           <summary className="min-h-11 cursor-pointer py-2 font-semibold text-[#0A2540]">Advanced filters</summary>
           <div className="grid gap-4 pt-3 sm:grid-cols-2 lg:grid-cols-4">
-            <Filter label="Entity class" name="entity" options={[['', 'Interpret from question'], ['agency', 'Agency'], ['insurer', 'Legal insurer'], ['person', 'Producer / individual']]} />
-            <Filter label="Credential jurisdiction" name="state" options={[['', 'Any supported state'], ['FL', 'Florida'], ['TX', 'Texas'], ['MA', 'Massachusetts'], ['OH', 'Ohio'], ['VT', 'Vermont']]} />
-            <Filter label="Authority / class" name="loa" options={[['', 'Any supported authority'], ['property', 'Property'], ['casualty', 'Casualty'], ['life', 'Life'], ['health', 'Health']]} />
-            <Filter label="Evidence" name="evidence" options={[['', 'Any supported evidence'], ['credential', 'Credential'], ['appointment', 'Appointment'], ['marketplace', 'Marketplace']]} />
+            <Filter label="Entity class" name="entity" value={options.entity} options={[['', 'Interpret from question'], ['agency', 'Agency'], ['insurer', 'Legal insurer'], ['person', 'Producer / individual']]} />
+            <Filter label="Credential jurisdiction" name="state" value={options.state} options={[['', 'Any supported state'], ['FL', 'Florida'], ['TX', 'Texas'], ['MA', 'Massachusetts'], ['OH', 'Ohio'], ['VT', 'Vermont']]} />
+            <Filter label="Authority / class" name="loa" value={options.loa} options={[['', 'Any supported authority'], ['property', 'Property'], ['casualty', 'Casualty'], ['life', 'Life'], ['health', 'Health']]} />
+            <Filter label="Evidence" name="evidence" value={options.evidence} options={[['', 'Any supported evidence'], ['credential', 'Credential'], ['appointment', 'Appointment'], ['marketplace', 'Marketplace']]} />
           </div>
         </details>
       </form>
@@ -39,6 +40,6 @@ export function InsuranceSpecialistSearchShell({ query = '', compact = false }: 
   );
 }
 
-function Filter({ label, name, options }: { label: string; name: string; options: Array<[string, string]> }) {
-  return <label className="grid gap-1 text-sm font-semibold text-[#0A2540]">{label}<select name={name} defaultValue="" className="min-h-11 min-w-0 rounded-lg border border-slate-300 bg-white px-3 font-normal">{options.map(([value, text]) => <option key={value} value={value}>{text}</option>)}</select></label>;
+function Filter({ label, name, options, value }: { label: string; name: string; value?: string; options: Array<[string, string]> }) {
+  return <label className="grid gap-1 text-sm font-semibold text-[#0A2540]">{label}<select name={name} defaultValue={value ?? ''} className="min-h-11 min-w-0 rounded-lg border border-slate-300 bg-white px-3 font-normal">{options.map(([value, text]) => <option key={value} value={value}>{text}</option>)}</select></label>;
 }

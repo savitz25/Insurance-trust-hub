@@ -1,0 +1,614 @@
+
+> insurance-trust-hub@1.0.0 test
+> node scripts/assert-share-002.mjs && node scripts/assert-share-003.mjs && node scripts/assert-visual-005.mjs && tsx scripts/check-ins-nat-002.ts && tsx scripts/check-ins-nat-003.ts && tsx scripts/check-ins-nat-005.ts && tsx scripts/check-ins-nat-006.ts && tsx scripts/check-ins-nat-007.ts && tsx scripts/check-ins-nat-008.ts && tsx scripts/check-ins-nat-009.ts && tsx scripts/check-ins-nat-010.ts && tsx scripts/check-ins-nat-011.ts && tsx scripts/check-ins-nat-012.ts && tsx scripts/check-ins-nat-013.ts && tsx scripts/check-ins-nat-014.ts && tsx scripts/check-ma-ins-000.ts && tsx scripts/check-ma-ins-001.ts && tsx scripts/check-ma-ins-002.ts && tsx scripts/check-ins-nat-final-002.ts && tsx scripts/check-ins-nat-final-002b.ts && tsx scripts/check-ins-nat-final-003.ts && tsx scripts/check-ins-nat-final-004.ts && tsx scripts/check-ins-nat-final-005.ts && tsx scripts/check-ins-nat-final-005b.ts && tsx scripts/check-ins-nat-final-006.ts && tsx scripts/check-fl-ins-000.ts && tsx scripts/check-fl-ins-001.ts && tsx scripts/check-fl-ins-001b.ts && tsx scripts/check-fl-ins-001c.ts && tsx scripts/check-fl-ins-002.ts && tsx scripts/check-fl-ins-003.ts && tsx scripts/check-fl-ins-004.ts && tsx scripts/check-fl-ins-005.ts && tsx scripts/check-fl-ins-006.ts && tsx scripts/check-fl-ins-007.ts && tsx scripts/check-ins-home-006.ts && tsx scripts/check-ins-home-003.ts && tsx scripts/check-ins-home-003b.ts && tsx scripts/check-ins-home-004.ts && tsx scripts/check-ins-nat-012.ts && tsx scripts/check-ins-home-002.ts && npm run assert:network-metrics && npm run assert:nj-ins-001 && npm run assert:nj-ins-002 && npm run assert:nj-ins-003 && npm run assert:ca-ins-001 && npm run assert:tx-ins-001 && npm run assert:wa-ins-001 && npm run assert:co-ins-001 && npm run assert:va-ins-001 && npm run assert:ny-ins-001 && npm run assert:il-ins-001
+
+SHARE-002 Insurance assertions passed (host, 1200×630 PNG, twitter large, no localhost, no cross-Hub).
+SHARE-003 Insurance assertions passed.
+VISUAL-005 Insurance network-shell assertions passed.
+{
+  "ok": true,
+  "tests": [
+    "T1 same NPN FL+TX",
+    "T2 same NPN multiple FL credentials",
+    "T3 different NPN same name",
+    "T4 same name+address no NPN",
+    "T5 missing NPN provisional",
+    "T6 person vs agency",
+    "T7 slug collision",
+    "T8 multi-license graph + licenses[0] documented",
+    "T9 individual publication gate",
+    "T10 freshness vs regulator status",
+    "proof cohort FL/TX/OH/VT",
+    "K1 idempotent reimport",
+    "K2 namespace does not collapse",
+    "K3 natural key uniqueness",
+    "P1 provisional for clear missing NPN",
+    "P2 unattached for ambiguous identity",
+    "P3 provisional NPN upgrade",
+    "P4 provisional conflicting NPN"
+  ],
+  "legacyLicenseFirstOnlyPaths": [
+    "lib/providers/map-db-provider.ts — license_number/state/source from licenses[0]",
+    "lib/admin/provider-mapper.ts — dbProviderToForm uses licenses[0]",
+    "actions/my-insurance.ts — checkedAt / states_licensed[0]",
+    "scripts/dfs/audit-nonresident-fl.ts — license_number from licenses[0]",
+    "scripts/tdi/audit-nonresident-tx.ts — license_number from licenses[0]"
+  ]
+}
+INS-NAT-003 PASS C1–C13 registryVersion=1.1.0
+INS-NAT-005 PASS OH1–OH9 registryVersion=1.1.0
+INS-NAT-006 PASS safety + canonical-name
+INS-NAT-007 PASS CAR1–CAR5 APT3–APT5 APT9–APT10
+INS-NAT-008 PASS CON1–CON14 unit checks
+INS-NAT-009 PASS LOA1–LOA14
+INS-NAT-010 PASS PER1–PER16
+INS-NAT-011 PASS CMS1–CMS15
+INS-NAT-012 PASS
+P1 1721613 P4 1029860 P10 3
+artifact 58f08afe5911ab36762e5829190540c2964099c8754884b9fd0389e76e50e3c3
+homepage 16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b
+florida 8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93
+db_writes 0
+INS-NAT-013 PASS FIA1–FIA16
+INS-NAT-014 PASS TIA1–TIA25
+MA-INS-000 PASS T1–T17
+MA-INS-001 PASS writer tests
+MA-INS-002 PASS T1–T20
+INS-NAT-FINAL-002 PASS T1–T20 parser=0a8a037c1dce legal=11 groups=8
+INS-NAT-FINAL-002B PASS ingest-gates T-migration T-identity T-publication
+INS-NAT-FINAL-003 PASS T1–T17 contract
+INS-NAT-FINAL-004 PASS taxonomy identity publication traversal
+INS-NAT-FINAL-005 PASS T1-T24 publication bridge trust-report
+INS-NAT-FINAL-005B PASS T1-T16 backfill reconcile readiness
+INS-NAT-FINAL-006 PASS publication semantics bridge taxonomy
+FL-INS-000 PASS inventory semantics publication-safe
+FL-INS-001 PASS taxonomy appointments publication-safe
+FL-INS-001B PASS appointed_by reconciled publication-safe
+FL-INS-001C PASS source-control production-lock tests=31
+FL-INS-002 PASS oir-naic identity publication-safe tests=20
+FL-INS-003 PASS fail-closed appointer bridge tests=20
+FL-INS-004 PASS regulatory evidence tests=20
+FL-INS-005 PASS market intelligence tests=21
+FL-INS-006 PASS state intelligence tests=21
+FL-INS-007 PASS state page tests=25
+INTEL-006 PASS
+fingerprint 16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b
+florida_fingerprint 8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93
+db_writes 0
+INS-HOME-003 PASS
+fingerprint 16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b
+d2 82071
+florida 8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93
+INS-HOME-003B PASS
+sqlLock LOCKED
+fingerprint 16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b
+florida 8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93
+db_writes 0
+INS-HOME-004 PASS
+story3 INTENTIONALLY_UNCHANGED
+L1 69545 L5 40358
+fingerprint 16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b
+florida 8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93
+db_writes 0
+INS-NAT-012 PASS
+P1 1721613 P4 1029860 P10 3
+artifact 58f08afe5911ab36762e5829190540c2964099c8754884b9fd0389e76e50e3c3
+homepage 16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b
+florida 8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93
+db_writes 0
+INS-HOME-002 PASS
+contract insurance-home-intel-v1
+fingerprint 16246123633f9146fc44b140c67282bc11c483ea8309924949c984a11ce6678b
+agencies 82071
+legal_insurers 6185
+public_people 0
+buckets 62202/13289/6546/34/0
+florida_fingerprint 8021301d48bd509b30fa4639e74c777bfbbd82a6f0cd12a2f80a11e05b415d93
+db_writes 0
+NATIONAL PERSON PRODUCT-LINE CHART: NOT PRESENT
+
+> insurance-trust-hub@1.0.0 assert:network-metrics
+> node scripts/assert_network_metrics_v1.mjs && npx --yes tsx --test scripts/test_insurance_network_metrics.ts && python -X utf8 scripts/check-insurance-network-metrics-stale.py
+
+ATH-METRICS-003B PASS network metric grain and staleness gates
+▶ insurance-network-metrics-v1 grain safety — 13 forbidden mixes
+  ✔ 1 agency != producer (9.3252ms)
+  ✔ 2 agency != legal insurer/carrier (1.0297ms)
+  ✔ 3 producer != legal insurer (1.0305ms)
+  ✔ 4 appointment != agency (5.5587ms)
+  ✔ 5 appointment != producer (0.4416ms)
+  ✔ 6 appointment != legal insurer (0.3783ms)
+  ✔ 7 license/credential != agency (1.0814ms)
+  ✔ 8 title entity/branch appointment != agency and != P&C appointment (0.8834ms)
+  ✔ 9 CMS marketplace observation != plans/companies/agencies/people (3.9628ms)
+  ✔ 10 rate filing != company (1.2879ms)
+  ✔ 11 market conduct exam != financial exam (1.2761ms)
+  ✔ 12 complaint != company and complaint != wrongdoing (1.4666ms)
+  ✔ 13 surplus-lines observation != agency and != legal insurer (2.3711ms)
+✔ insurance-network-metrics-v1 grain safety — 13 forbidden mixes (35.1265ms)
+▶ missing is not zero; generatedAt is not sourceAsOf
+  ✔ does not convert unacquired Texas authorized companies or CA admitted universe to zero (2.244ms)
+  ✔ does not replace sourceAsOf with generatedAt (0.4529ms)
+  ✔ keeps public labels on the required consumer-facing keys (0.4119ms)
+  ✔ rejects mixing NFIP registry listings into agencies and county title rows into statewide appointments (0.4996ms)
+✔ missing is not zero; generatedAt is not sourceAsOf (4.0418ms)
+▶ checked-in manifest vs homepage wiring
+  ✔ keeps homepage consumers on the v1 artifact path (2.4807ms)
+✔ checked-in manifest vs homepage wiring (2.6875ms)
+ℹ tests 18
+ℹ suites 3
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 960.4321
+file coupling ok
+live production comparison ok
+
+> insurance-trust-hub@1.0.0 assert:nj-ins-001
+> python scripts/nj-ins-001-tests.py && tsx scripts/assert-nj-ins-001.mts
+
+node.exe : EOF marker not found
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (EOF marker not found:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+EOF marker not found
+EOF marker not found
+PASS enf_count ['E26-83', 'E26-80', 'E25-21']
+PASS multi_party
+PASS penalty_not_copied
+PASS consent_final
+PASS individual_internal
+PASS fraud_surcharge_separate
+PASS revocation_flag
+PASS order_not_entity_id
+PASS bail_class_preserved
+PASS bail_internal
+PASS fin_naic_exact
+PASS fin_not_enforcement
+PASS fin_unresolved_no_naic
+PASS mc_name_only
+PASS mc_multi_review
+PASS mc_not_enforcement
+PASS complaint_rows 2
+PASS group_grain
+PASS no_leaderboard
+PASS valid_complaints_field
+PASS name_only_unresolved
+PASS person_internal
+PASS exact_naic
+PASS bfd_reclassified_consent ['CONSENT_ORDER', 'CONSENT_ORDER']
+PASS bfd_consent_final
+PASS bfd_penalty_not_copied_to_parties
+PASS occurrence_not_canonical_hash
+PASS remaining_other_class_preserved
+PASS remaining_unknown_status_preserved
+PASS class_revocation_heading
+PASS class_suspension_heading
+PASS class_surrender_heading
+PASS class_denial_heading
+PASS class_settlement_heading
+PASS class_corrective_heading
+PASS class_consent_heading_not_replaced_by_sanction
+PASS class_civil_penalty_action
+PASS class_restitution_action
+PASS class_fraud_surcharge_action
+PASS notice_is_not_final_order
+PASS amount_does_not_imply_final_status
+PASS bfd_not_every_matter_fraud
+PASS existing_pdf_hash_skip
+PASS download_retry_status
+PASS unavailable_404_preserved
+PASS unavailable_nonpdf_preserved
+PASS index_only_preserved
+PASS mime_and_size_recorded
+PASS no_refetch_verified_hash
+PASS occurrence_vs_canonical_document
+PASS no_amount_duplication
+PASS no_nj_silo_orders
+PASS rls_forced
+PASS internal_only
+PASS no_anon_grant
+PASS new_jersey_route_no_counties
+PASS sitemap_has_new_jersey_not_counties
+PASS bail_firewall
+PASS no_fuzzy
+PASS exam_ne_enforcement
+PASS complaint_ne_violation
+PASS no_vercel_project
+PASS spaced_pdf_url_quoted https://www.nj.gov/dobi/division_insurance/bfd/orders/2103/2051125%20.pdf
+PASS nj-ins-001-tests
+NJ-INS-001 assertions: PASS
+
+> insurance-trust-hub@1.0.0 assert:nj-ins-002
+> python scripts/nj-ins-002-tests.py && tsx scripts/assert-nj-ins-002.mts
+
+PASS 08_ihc_seh_separation
+PASS 09_quarter_parsing [(2025, 4), (2026, 1)]
+PASS 10_marketplace_off_separation
+PASS 11_legal_carrier_identity_review
+PASS 12_group_metric_stays_group
+PASS 13_rate_change_pct_parsing
+PASS 14_base_plan_rate_parsing [547.44, 610.36, 403.08, 321.1]
+PASS 15_base_rate_ne_personalized_premium
+PASS 16_missing_enrollment_ne_zero
+PASS 17_idempotent_quarter_reingest
+PASS 18_marketplace_participation_by_plan_year
+PASS 19_ihc_carrier_ne_auto_marketplace
+PASS 20_marketplace_ne_endorsement
+PASS 21_njiua_separate_from_legal_carrier
+PASS 22_paip_separate_from_caip
+PASS 23_saip_separate_from_paip
+PASS 24_residual_ne_quality_flag
+PASS 25_source_unavailable_ne_zero
+PASS 26_plan_risk_access_classification
+PASS 27_question_mark_delimiter
+PASS 28_field_count_schema
+PASS 29_employer_producer_carrier_separation
+PASS 30_mod_is_not_score
+PASS 31_loss_ratio_is_not_score
+PASS 32_exact_carrier_crosswalk_only_when_supported
+PASS 33_name_only_producer_not_auto_attached
+PASS 34_first_file_baseline_only
+PASS 35_safe_second_run_idempotency
+PASS crib_missing_premium_not_zero
+PASS 36_tracking_number_identity
+PASS 37_exact_naic_serff
+PASS 38_filed_ne_approved
+PASS 39_filing_vs_effective_date
+PASS 40_amendment_no_duplicate
+PASS 41_status_change_monitoring
+PASS 42_bounded_public_search
+PASS 43_no_access_control_bypass
+PASS 44_nj_ins_001_script
+PASS 45_existing_insurer_identity
+PASS 46_existing_examination_spine
+PASS 47_public_insurer_profiles
+PASS 48_florida_insurance
+PASS 49_cms_marketplace_evidence
+PASS 50_bail_bond_firewall
+PASS 51_ask_specialist_integration
+PASS 52_new_jersey_route_no_counties
+PASS 53_sitemap_has_state_not_county_routes
+PASS 54_no_person_publication
+PASS 55_no_trust_score_ranking
+PASS 56_no_vercel_configuration_change
+PASS no_nj_silo
+PASS rls_forced
+PASS no_anon_grant
+PASS seh_loss_ratio_not_score
+PASS hios_is_not_naic
+PASS nj-ins-002-tests
+NJ-INS-002 assertions: PASS
+
+> insurance-trust-hub@1.0.0 assert:nj-ins-003
+> python scripts/nj-ins-003-tests.py && tsx scripts/assert-nj-ins-003.mts
+
+PASS 01_route_exists
+PASS 02_indexable
+PASS 03_canonical
+PASS 04_sitemap
+PASS 05_fingerprint
+PASS 06_admitted_reconciles
+PASS 07_admitted_ne_surplus
+PASS 08_legal_entity_grain
+PASS 09_group_ne_company
+PASS 10_license_ne_appointment
+PASS 11_grain_separation
+PASS 12_bfd_consent
+PASS 13_sanction_ne_instrument
+PASS 14_unresolved_not_attached
+PASS 15_individual_not_copied
+PASS 16_absence_ne_clean
+PASS 17_no_enforcement_ranking
+PASS 18_mc_ne_financial
+PASS 19_exam_ne_enforcement
+PASS 20_financial_exact_naic
+PASS 21_mc_withheld
+PASS 22_no_exam_score
+PASS 23_complaint_ne_violation
+PASS 24_valid_ne_all
+PASS 25_group_grain
+PASS 26_not_copied_subsidiary
+PASS 27_no_complaint_ranking
+PASS 28_ihc_ne_seh
+PASS 29_marketplace_ne_endorsement
+PASS 30_rate_ne_premium
+PASS 31_missing_quarter_ne_zero
+PASS 32_njiua_ne_voluntary
+PASS 33_paip_ne_caip
+PASS 34_saip_ne_insurer
+PASS 35_residual_ne_quality
+PASS 36_crib_terms
+PASS 37_crib_not_rendered
+PASS 38_no_employer_profiles
+PASS 39_serff_blocked_ne_zero
+PASS 40_filed_ne_approved
+PASS 41_rehab_official_only
+PASS 42_florida_route
+PASS 43_national_insurer_identity
+PASS 44_examination_spine
+PASS 45_cms_marketplace
+PASS 46_public_insurer_profiles
+PASS 47_bail_firewall
+PASS 48_ask_customer
+PASS 49_existing_nj_hubs
+PASS 50_no_public_person
+PASS 51_no_ranking
+PASS 52_no_trust_score_product
+PASS no_county_routes
+PASS florida_canonical_untouched
+PASS footer_discovery
+PASS five_noun_hero
+PASS trace_this_number
+PASS no_every_consumer
+PASS no_zero_serff_metric
+PASS ui_interpolates
+PASS gate_path
+PASS hubs_preserved
+PASS no_vercel_project
+PASS reconcile_events
+PASS reconcile_ihc_obs
+PASS nj-ins-003-tests
+NJ-INS-003 assertions: PASS
+  admitted 1370 · events 3821
+  fingerprint bcab35631a0494038667647244863a9510f5c76a36495fd14217bb0afd2a59e5
+
+> insurance-trust-hub@1.0.0 assert:ca-ins-001
+> python scripts/ca-ins-001-tests.py && tsx scripts/assert-ca-ins-001.mts
+
+PASS 01_route
+PASS 02_indexable
+PASS 03_canonical
+PASS 04_sitemap
+PASS 05_fingerprint
+PASS 06_footer
+PASS 07_enf_rows
+PASS 08_loa
+PASS 09_settlement
+PASS 10_cd
+PASS 11_accusation
+PASS 12_all_classes
+PASS 13_dates
+PASS 14_no_name_attach
+PASS 15_loa_ne_settlement
+PASS 16_no_rank
+PASS 17_inventory
+PASS 18_imr_rows
+PASS 19_imr_ne_complaint
+PASS 20_imr_sum
+PASS 21_no_plan_rates
+PASS 22_cdi_count
+PASS 23_phones
+PASS 24_sites
+PASS 25_not_universe
+PASS 26_cdi_ne_dmhc
+PASS 27_no_combined
+PASS 28_fair_residual
+PASS 29_complaint_ne_violation
+PASS 30_naic
+PASS 31_findings
+PASS 32_no_trust
+PASS 33_jsonld
+PASS 34_no_rating_schema
+PASS 35_no_counties
+PASS 36_nj_untouched
+PASS 37_fl_untouched
+PASS 38_missing_ne_zero
+ca-ins-001-tests PASS dc1eb54c514def4663c33551ee6835a41f38349f8fcfae2647e514cd7711f468
+assert-ca-ins-001 PASS dc1eb54c514def4663c33551ee6835a41f38349f8fcfae2647e514cd7711f468
+
+> insurance-trust-hub@1.0.0 assert:tx-ins-001
+> python scripts/tx-ins-001-tests.py && tsx scripts/assert-tx-ins-001.mts
+
+PASS 01_route
+PASS 02_indexable
+PASS 03_canonical
+PASS 04_sitemap
+PASS 05_fingerprint
+PASS 06_footer
+PASS 07_agency_rows
+PASS 08_npn
+PASS 09_appts
+PASS 10_naic
+PASS 11_both_exact
+PASS 12_no_phone
+PASS 13_people_off
+PASS 14_people_appts_off
+PASS 15_complaints
+PASS 16_index
+PASS 17_rates
+PASS 18_surplus
+PASS 19_title
+PASS 20_auth_co
+PASS 21_findings
+PASS 22_no_trust
+PASS 23_jsonld
+PASS 24_no_rating_schema
+PASS 25_no_counties
+PASS 26_tx_listed_not_universe
+PASS 27_more_appts
+PASS 28_tdi_index_label
+PASS 29_inventories
+PASS 30_ca
+PASS 31_nj
+PASS 32_fl
+PASS 33_claim
+PASS 34_missing_ne_zero
+PASS 35_no_person_hero
+PASS 36_h1
+tx-ins-001-tests PASS 3be93a9cd2b1ab7edada6c783ccfbfd7a5723589920fee1524601e9218c76319
+assert-tx-ins-001 PASS 3be93a9cd2b1ab7edada6c783ccfbfd7a5723589920fee1524601e9218c76319
+
+> insurance-trust-hub@1.0.0 assert:wa-ins-001
+> python scripts/wa-ins-001-tests.py && tsx scripts/assert-wa-ins-001.mts
+
+PASS 01_route
+PASS 02_indexable
+PASS 03_canonical
+PASS 04_sitemap
+PASS 05_no_nested
+PASS 06_fingerprint
+PASS 07_footer
+PASS 08_entities
+PASS 09_split
+PASS 10_foreign
+PASS 11_alien
+PASS 12_sum
+PASS 13_not_roster
+PASS 14_producer
+PASS 15_agency
+PASS 16_no_counts
+PASS 17_no_scrape
+PASS 18_no_declaration
+PASS 19_orders_unsafe
+PASS 20_rate_search
+PASS 21_cms
+PASS 22_findings
+PASS 23_no_trust
+PASS 24_jsonld
+PASS 25_no_rating
+PASS 26_no_counties
+PASS 27_ledger_orgs
+PASS 28_ledger_ids
+PASS 29_tx
+PASS 30_ca
+PASS 31_missing
+PASS 32_nj
+PASS 33_fl
+PASS 34_hash_manifest
+PASS 35_no_seattle
+PASS 36_manifest_fp
+wa-ins-001-tests PASS 17128d3a8dac4ea1457b5a02269fe25de2b1312e6dfa9bb553a8af9c06ea66ac
+assert-wa-ins-001 PASS 17128d3a8dac4ea1457b5a02269fe25de2b1312e6dfa9bb553a8af9c06ea66ac
+
+> insurance-trust-hub@1.0.0 assert:co-ins-001
+> python scripts/co-ins-001-tests.py && tsx scripts/assert-co-ins-001.mts
+
+PASS 01_route
+PASS 02_indexable
+PASS 03_canonical
+PASS 04_sitemap
+PASS 05_no_nested
+PASS 06_fingerprint
+PASS 07_footer
+PASS 08_directory
+PASS 09_distinct
+PASS 10_one_to_one
+PASS 11_not_roster
+PASS 12_producer
+PASS 13_agency
+PASS 14_no_counts
+PASS 15_no_scrape
+PASS 16_surplus
+PASS 17_surplus_split
+PASS 18_surplus_not_admitted
+PASS 19_alien_not_naic
+PASS 20_certs_not_all
+PASS 20b_certs_entries_vs_heading_hrefs
+PASS 20c_certs_company_links
+PASS 20d_certs_total_hrefs
+PASS 20e_certs_entry_ne_total_href
+PASS 20f_surplus_current_window
+PASS 20g_prior_expired
+PASS 20h_expired_ne_current
+PASS 20i_complaint_index_not_score
+PASS 20j_ratio_received
+PASS 20k_total_ne_confirmed
+PASS 20l_complaint_ne_violation
+PASS 20m_std_rows
+PASS 20n_std_naic
+PASS 20o_name_only_unsafe
+PASS 20p_alias_not_id
+PASS 20q_row_ne_insurer
+PASS 20r_crosswalk
+PASS 20s_stat_match
+PASS 20t_stat_unmatched
+PASS 20u_surplus_match
+PASS 20v_alien_not_xw
+PASS 20w_match_ne_enrich
+PASS 20x_enriched_zero
+PASS 20y_no_profile_attach
+PASS 20z_closed_mixed
+PASS 20ad_official_recoveries
+PASS 20ae_pc_lh_subtotal
+PASS 20af_pc_plus_lh
+PASS 20ag_residual_253
+PASS 20ah_lines_ne_official
+PASS 20ai_no_false_equation
+PASS 20aj_do_not_reconcile_flag
+PASS 20ak_ui_no_false_sum
+PASS 20al_ui_states_residual
+PASS 20am_current_surplus_metric_2026
+PASS 20an_current_surplus_trace_2026
+PASS 20aq_json_denom_2026
+PASS 20ar_json_trace_2026
+PASS 20as_json_value_259
+PASS 20at_json_not_2025_current
+PASS 20ao_historical_247_stays_2025
+PASS 20ap_lists_not_swapped
+PASS 20aa_ui_period
+PASS 20ab_ui_complaint_index
+PASS 20ac_ui_no_current_bare
+PASS 21_domicile_not_auth
+PASS 22_orders_unsafe
+PASS 23_rate_search
+PASS 24_cms
+PASS 25_findings
+PASS 26_no_trust
+PASS 27_jsonld
+PASS 28_no_rating
+PASS 29_no_counties
+PASS 30_ledger_orgs
+PASS 31_ledger_agencies
+PASS 32_tx
+PASS 33_ca
+PASS 34_wa
+PASS 35_nj
+PASS 36_fl
+PASS 37_missing
+PASS 38_no_denver
+PASS 39_recursive_fp
+PASS 40_no_1844_hero
+PASS 41_1844_rejected
+PASS 42_national_agencies
+PASS 43_national_persons
+PASS 44_national_legal
+PASS 45_state_pages
+PASS 46_six_pages
+PASS 47_no_az
+PASS 48_surplus_ne_directory
+PASS 49_directory_ne_national
+PASS 50_certs_ne_domicile
+PASS 51_manifest_fp
+PASS 52_local_no
+PASS 53_no_clock
+PASS 54_search_only_copy
+co-ins-001-tests PASS 1430467e59b9b5555643853c077369e9132b26f2a445eb34285d16124742ef89
+assert-co-ins-001 PASS 1430467e59b9b5555643853c077369e9132b26f2a445eb34285d16124742ef89
+
+> insurance-trust-hub@1.0.0 assert:va-ins-001
+> python scripts/va-ins-001-tests.py && tsx scripts/assert-va-ins-001.mts
+
+va-ins-001-tests.py pass
+assert:va-ins-001 pass fd4e95d83bf1
+
+> insurance-trust-hub@1.0.0 assert:ny-ins-001
+> python scripts/ny-ins-001-tests.py && tsx scripts/assert-ny-ins-001.mts
+
+ny-ins-001-tests.py pass
+assert:ny-ins-001 pass d4832c3c41c0
+
+> insurance-trust-hub@1.0.0 assert:il-ins-001
+> python -X utf8 scripts/build-il-public-snapshot.py --check && python scripts/il-ins-001-tests.py && tsx scripts/assert-il-ins-001.mts
+
+{
+  "check": "ok",
+  "fingerprint": "3085ccfe7ec30c038fafcfb3e70a11609eeba91a9918c9efe14ceb7f0ef634aa"
+}
+il-ins-001-tests.py pass 3085ccfe7ec3
+assert:il-ins-001 pass 3085ccfe7ec3

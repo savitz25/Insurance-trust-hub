@@ -1,0 +1,72 @@
+node.exe : FAIL known insurer source abbreviation stays a name AssertionError [ERR_ASSERTION]: Expected values to be
+strictly equal:
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (FAIL known insu...strictly equal::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
++ actual - expected
+
++ undefined
+- 'CITIZENS PROP INS CORP'
+
+FAIL agency name plus state retains name AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'Gulfstream Insurance Agency LLC'
+
+FAIL brand does not assume agency AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'agency'
+- undefined
+
+FAIL near me has executable ZIP refinement AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+undefined !== 'zip'
+
+FAIL Boca requested location remains visible AssertionError [ERR_ASSERTION]: The input did not match the regular
+expression /Boca Raton/i. Input:
+
+'{"mode":"fail_closed","page":1,"failReason":"Local listing discovery needs a ZIP code. The public directory is
+separate from the regulatory identity graph and does not prove service territory.","alternatives":["Insurance agencies
+in ZIP 33441.","Show insurance agencies credentialed in Florida."],"coverageState":"PARTIAL"}'
+
+FAIL homeowners context retained as unresolved directory criterion AssertionError [ERR_ASSERTION]: The input did not
+match the regular expression /homeowners/i. Input:
+
+'{"mode":"directory","directoryZip":"33441","page":1,"coverageState":"KNOWN"}'
+
+FAIL appointed with invokes evidence AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'appointment'
+
+FAIL address preserves its semantic jurisdiction AssertionError [ERR_ASSERTION]: Expected values to be strictly
+deep-equal:
++ actual - expected
+
++ undefined
+- {
+-   meaning: 'recorded_address_state',
+-   state: 'FL'
+- }
+
+FAIL NOT_ACQUIRED preserves class and state AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'agency'
+
+FAIL overlong cannot truncate to valid identity AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'identifier'
+- 'fail_closed'
+
+PASS NPN exact preserved without class assumption
+PASS NAIC exact stays insurer
+{ pass: 2, fail: 10 }

@@ -27,9 +27,9 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
           <div className="sm:col-span-2 lg:col-span-4">
             <div className="mb-4">
-              <Link prefetch={false} href="/" className="inline-block">
+              <div className="inline-block">
                 <BrandLogoStacked />
-              </Link>
+              </div>
             </div>
             <p
               className="text-xs font-semibold uppercase tracking-[0.14em]"

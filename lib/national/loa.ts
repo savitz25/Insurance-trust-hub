@@ -98,6 +98,11 @@ const DATASET_JURISDICTION: Record<string, string> = {
   massachusetts_doi_regulatory: 'MA',
 };
 
+/** Existing source contract: jurisdiction belongs to the issuer dataset, not an office address. */
+export function loaSourceDatasetsForJurisdiction(state: string): string[] {
+  return Object.entries(DATASET_JURISDICTION).filter(([dataset, jurisdiction]) => jurisdiction === state && !dataset.endsWith('_appointments')).map(([dataset]) => dataset);
+}
+
 /** Fields that are appointment type, never LOA. */
 const APPOINTMENT_FIELDS = new Set([
   'appointment_type',
