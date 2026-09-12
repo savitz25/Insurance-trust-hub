@@ -1,3 +1,4 @@
+import { insuranceRequestHref } from '@/lib/insurance-ask/request';
 import Link from 'next/link';
 import { ASK_DEFINITIONS, INSURANCE_ASK_PAGE_SIZE } from '@/lib/insurance-ask/contract';
 import type { InsuranceAskResult } from '@/lib/insurance-ask/execute';
@@ -13,7 +14,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
   const def = q.definitionId ? ASK_DEFINITIONS[q.definitionId] : undefined;
 
   return (
-    <div className="space-y-8">
+    <div className="min-w-0 space-y-8 [overflow-wrap:anywhere]">
       <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5 sm:p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0284C7]">
           We interpreted your question as
@@ -28,9 +29,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         </dl>
         <div className="mt-4 flex flex-wrap gap-2" aria-label="Interpreted research criteria">
           {result.parsed.interpretation.filter((row) => !['Mode', 'Sort'].includes(row.label)).map((row) => (
-            <Link key={`criterion-${row.label}`} href={removeCriterionHref(result.queryText, row.label)} data-specialist-event="refine" className="inline-flex min-h-11 items-center rounded-full border border-sky-200 px-3 text-sm text-sky-800" aria-label={`Remove ${row.label} criterion`}>
-              {row.label}: {row.value} <span aria-hidden="true" className="ml-2">×</span>
-            </Link>
+            <span key={`criterion-${row.label}-${row.value}`} className="inline-flex min-h-11 max-w-full items-center rounded-full border border-sky-200 px-3 text-sm text-sky-800 [overflow-wrap:anywhere]">{row.label}: {row.value}</span>
           ))}
         </div>
         <p className="mt-3 text-sm text-[#1E293B]">
@@ -40,11 +39,13 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
           <label htmlFor="ask-edit" className="sr-only">
             Change interpretation
           </label>
+          {Object.entries(q.requestOptions ?? {}).filter(([k])=>!['selected','zip'].includes(k)).map(([k,v])=><input key={k} type="hidden" name={k} value={v} />)}
           <input
+            maxLength={180}
             id="ask-edit"
             name="q"
             defaultValue={result.queryText}
-            className="min-h-11 flex-1 rounded-xl border border-[#E2E8F0] px-3 text-sm text-[#0A2540]"
+            className="min-h-11 min-w-0 flex-1 rounded-xl border border-[#E2E8F0] px-3 text-sm text-[#0A2540]"
           />
           <button type="submit" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#0A2540] px-4 text-sm font-semibold text-white">
             Change interpretation
@@ -57,19 +58,24 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         <p className="mt-1 text-sm text-slate-700">Unavailable or incomplete data is never converted into a zero or a clean-history claim.</p>
       </section>
 
+      {q.refinement === 'zip' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">Enter a ZIP for directory research</h2><p className="mt-2">Requested location: {q.directoryContext?.requestedLocation}. We do not use device location or guess a ZIP.</p><form action="/ask" method="get" className="mt-4 flex flex-wrap gap-3"><input type="hidden" name="q" value={result.queryText}/>{Object.entries(q.requestOptions??{}).filter(([k])=>!['zip','selected'].includes(k)).map(([k,v])=><input key={k} type="hidden" name={k} value={v}/>)}<label htmlFor="directory-zip" className="grid gap-1">Five-digit ZIP<input id="directory-zip" name="zip" inputMode="numeric" pattern="[0-9]{5}" maxLength={5} required className="min-h-11 min-w-0 rounded border px-3"/></label><button className="min-h-11 rounded bg-sky-900 px-4 text-white">Apply ZIP</button></form></section> : null}
+      {q.conditions?.length ? <section className="rounded-2xl border bg-white p-5"><h2 className="font-semibold">Additional requested conditions</h2><ul>{q.conditions.map((c,i)=><li key={i}>{c.meaning}: {c.value} ? {c.outcome}. Identity resolution does not establish this condition.</li>)}</ul></section>:null}
+      {q.directoryContext?.unresolvedConditions.map(x=><p key={x} className="rounded-xl bg-amber-50 p-4">{x}</p>)}
+      {result.terminalState === 'NO_MATCH' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">No matching indexed research identity</h2><p>The complete {q.identifier ? `${q.identifier.type} ${q.identifier.value}` : q.nameQuery} was searched in the permitted corpus. No other identity or cohort was substituted. Absence here does not establish an invalid identifier or lack of authorization.</p></section>:null}
+      {result.candidateSelection ? <section className="rounded-xl bg-sky-50 p-4"><h2 className="text-xl font-semibold">Select the source identity you mean</h2><p>Names indicate candidates. Compare class and identifiers before continuing the original question.</p>{result.candidateTruncated?<p>Only 10 candidates are displayed; refine the name. This is not an exhaustive total.</p>:null}</section>:null}
       {q.mode === 'directory' && q.directoryZip ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
           <h2 className="text-2xl font-semibold text-[#0A2540]">Local directory research</h2>
           <p className="mt-3 text-sm text-slate-700">ZIP listings are a separate publication grain. They are not canonical agency identities and do not prove service territory.</p>
-          <Link href={`/directory?zip=${encodeURIComponent(q.directoryZip)}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-700">Browse listings for {q.directoryZip} →</Link>
+          <Link href={`/directory?${new URLSearchParams({zip:q.directoryZip,insuranceContext:q.directoryContext?.requestedInsuranceContext.join(',')??'',requestedPlace:q.directoryContext?.requestedLocation??''})}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-700">Browse listings for {q.directoryZip} →</Link>
         </section>
       ) : null}
 
       {q.mode === 'fail_closed' ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-[#F0F9FF] p-5">
-          <h2 className="text-2xl font-semibold text-[#0A2540]">This question is not supported as asked</h2>
+          <h2 className="text-2xl font-semibold text-[#0A2540]">{q.terminalState === 'INVALID_INPUT' ? 'Check the request' : q.refinement ? 'A little more information is needed' : 'Current research limitation'}</h2>
           <p className="mt-3 text-sm leading-relaxed text-[#1E293B]">{q.failReason}</p>
-          {q.alternatives?.length ? (
+          {!q.refinement && !result.recoveryActions?.length && q.alternatives?.length ? (
             <ul className="mt-4 space-y-2">
               {q.alternatives.map((alt) => (
                 <li key={alt}>
@@ -118,7 +124,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
       {result.results.length ? (
         <ol className="grid gap-4">
           {result.results.map((row) => (
-            <li key={row.entityId} className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
+            <li key={`${row.entityId}:${row.evidenceFamily ?? ''}:${row.planYear ?? ''}:${row.sourceObservedAt ?? ''}`} className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <h3 className="text-xl font-semibold text-[#0A2540]">{row.displayName}</h3>
                 <span className="rounded-full border border-[#E2E8F0] px-2 py-0.5 text-[11px] font-semibold">
@@ -181,6 +187,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
               </p>
               <div className="mt-4 flex flex-wrap gap-4">
               {row.publicationNote ? <p className="mt-2 text-xs text-[#1E293B]">{row.publicationNote}</p> : null}
+              {row.selectionHref ? <Link href={row.selectionHref} className="inline-flex min-h-11 items-center font-semibold text-sky-800">Select this identity and continue</Link>:null}
               {row.href ? (
                 <Link href={row.href} data-specialist-event="profile_open" className="inline-flex min-h-11 items-center font-semibold text-[#0284C7]">
                   Research this {row.entityClass === 'insurer' ? 'insurer' : row.entityClass === 'person' ? 'producer' : 'agency'}
@@ -191,7 +198,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
                 <summary className="min-h-11 cursor-pointer py-2 font-semibold text-sky-800">Trace this result</summary>
                 <dl className="grid gap-2 sm:grid-cols-2">
                   <div><dt className="text-xs uppercase">Identity class</dt><dd>{row.entityClass}</dd></div>
-                  <div><dt className="text-xs uppercase">Identity method</dt><dd>{row.npn ? 'Exact NPN or canonical graph identity' : row.naicCode ? 'Exact NAIC company code' : 'Structured source match'}</dd></div>
+                  <div><dt className="text-xs uppercase">Identity method</dt><dd>{row.matchEvidence ? `${row.matchEvidence.method}: ${row.matchEvidence.field} = ${row.matchEvidence.value}` : row.npn ? 'Exact NPN or canonical graph identity' : row.naicCode ? 'Exact NAIC company code' : 'Structured source match'}</dd></div>
                   <div><dt className="text-xs uppercase">Credential source</dt><dd>{row.sourceDataset ?? 'See accepted source family'}</dd></div>
                   <div><dt className="text-xs uppercase">Official/source date</dt><dd>{row.sourceObservedAt ?? 'Source clock unavailable'}</dd></div>
                   <div className="sm:col-span-2"><dt className="text-xs uppercase">Geography meaning</dt><dd>{row.credentialJurisdiction ? `${row.credentialJurisdiction} credential jurisdiction — not office or service territory` : 'No service territory inferred'}</dd></div>
@@ -206,12 +213,12 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
       {result.results.length > 0 && result.pagination.total > INSURANCE_ASK_PAGE_SIZE ? (
         <nav className="flex gap-3" aria-label="Pagination">
           {result.pagination.page > 1 ? (
-            <Link href={href(result.queryText, result.pagination.page - 1)} className="inline-flex min-h-11 items-center rounded-xl border px-4">
+            <Link href={insuranceRequestHref(result.queryText,q.requestOptions,result.pagination.page-1)} className="inline-flex min-h-11 items-center rounded-xl border px-4">
               Previous
             </Link>
           ) : null}
           {result.pagination.hasMore ? (
-            <Link href={href(result.queryText, result.pagination.page + 1)} className="inline-flex min-h-11 items-center rounded-xl bg-[#0A2540] px-4 text-white">
+            <Link href={insuranceRequestHref(result.queryText,q.requestOptions,result.pagination.page+1)} className="inline-flex min-h-11 items-center rounded-xl bg-[#0A2540] px-4 text-white">
               Next
             </Link>
           ) : null}
@@ -221,6 +228,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         </nav>
       ) : null}
 
+      {result.recoveryActions?.length ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">What you can do next</h2><ul className="mt-3 space-y-4">{result.recoveryActions.map(action=><li key={action.destination}><a href={action.destination} className="inline-flex min-h-11 items-center font-semibold text-sky-800">{action.label}</a><p>{action.reason}</p><p className="text-sm">{action.establishes} {action.doesNotEstablish}</p></li>)}</ul></section>:null}
       <details className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-5">
         <summary className="min-h-11 cursor-pointer font-semibold text-[#0A2540]">Trace this query</summary>
         <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
@@ -257,15 +265,4 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
       </details>
     </div>
   );
-}
-
-function removeCriterionHref(query: string, label: string) {
-  let revised = query;
-  if (/identifier/i.test(label)) revised = revised.replace(/\b(npn|naic(?: company)?(?: code)?)\s*#?\s*\d{3,12}\b/gi, '');
-  else if (/jurisdiction|domicile/i.test(label)) revised = revised.replace(/\b(florida|texas|massachusetts|ohio|vermont|new jersey|california|washington|FL|TX|MA|OH|VT|NJ|CA|WA)\b/gi, '');
-  else if (/loa|authority/i.test(label)) revised = revised.replace(/\b(property|casualty|life|health|personal lines)\b/gi, '');
-  else if (/evidence/i.test(label)) revised = revised.replace(/\b(appointment|marketplace|credential|complaints?|exams?|enforcement|rate filings?)\b/gi, '');
-  else return '/ask';
-  revised = revised.replace(/\s+/g, ' ').trim();
-  return revised ? `/ask?q=${encodeURIComponent(revised)}` : '/ask';
 }

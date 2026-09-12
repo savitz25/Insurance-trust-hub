@@ -1,0 +1,124 @@
+{
+  "ticket": "TH-SEARCH-R1-013",
+  "collectedAt": "2026-09-12",
+  "method": "Bounded read-only SQL independently of parser/executor; publication-safe agency/directory excerpts. No person roster or data writes.",
+  "sources": {
+    "r13AgencyOracle": {
+      "rows": [
+        {
+          "id": "e28cf148-881c-4045-9b8d-1a2f2331ce99",
+          "entity_kind": "agency",
+          "npn": "10391484",
+          "display_name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION",
+          "legal_name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION"
+        },
+        {
+          "id": "5da0697d-58f2-4c48-b4d3-04403b70fc07",
+          "entity_kind": "agency",
+          "npn": "20168263",
+          "display_name": "GULFSTREAM INSURANCE AGENCY LLC",
+          "legal_name": "GULFSTREAM INSURANCE AGENCY LLC"
+        },
+        {
+          "id": "729e0233-c35f-4a16-895f-81335d8a43c2",
+          "entity_kind": "agency",
+          "npn": "4394687",
+          "display_name": "GULFSTREAM INSURANCE GROUP, INC.",
+          "legal_name": "GULFSTREAM INSURANCE GROUP, INC."
+        },
+        {
+          "id": "e290320b-bc73-46ea-85f5-dbd160c902c3",
+          "entity_kind": "agency",
+          "npn": "17328505",
+          "display_name": "GULFSTREAM INSURANCE INC",
+          "legal_name": "GULFSTREAM INSURANCE INC"
+        }
+      ],
+      "excerptSha256": "e0e286810fd4115fc30cebc20cdec47760ce1d5d5e83ff3af40de7b8d15220ed"
+    },
+    "r13DirectoryOracle": {
+      "rows": [
+        {
+          "id": "ba6d3ac9-1bb5-4578-a89f-71afe2d0cd56",
+          "name": "ABOVE AIR, INC.",
+          "recorded_zip": "33441",
+          "recorded_city": "DEERFIELD BEACH",
+          "recorded_state": "FL"
+        },
+        {
+          "id": "ac6c9f2a-1678-4091-a3ed-480c98407590",
+          "name": "Aca Health Insurance Agency Llc",
+          "recorded_zip": "33441",
+          "recorded_city": "Deerfield Beach",
+          "recorded_state": "FL"
+        },
+        {
+          "id": "0efebca0-e0e7-4992-994f-723d59db6e38",
+          "name": "ACA HEALTH INSURANCE AGENCY LLC",
+          "recorded_zip": "33441",
+          "recorded_city": "DEERFIELD BEACH",
+          "recorded_state": "FL"
+        }
+      ],
+      "excerptSha256": "41632fa7a35c10b60c7e5255893e4bb5a67b6c0d28fcb932f2778373e0a6ee1f"
+    },
+    "wave1": {
+      "record": {
+        "entity_id": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+        "canonical_legal_name": "CITIZENS PROP INS CORP",
+        "naic_cocode": "10064",
+        "examination_count": 1,
+        "examination_families": [
+          "MARKET_CONDUCT_EXAMINATION"
+        ],
+        "regulator": [
+          "Florida Office of Insurance Regulation"
+        ],
+        "jurisdiction": [
+          "FL"
+        ],
+        "report_dates": [
+          "2025-01-24"
+        ],
+        "official_source_urls": [
+          "https://floir.gov/docs-sf/property-casualty-libraries/market-regulation/2025/citizens-property-insurance-corporation_final-exam-report.pdf"
+        ],
+        "document_hashes": [
+          "5b602323d9d61c5ff6bf1836762b21783225f7940dcb6dc4cece317cd1d717a6"
+        ],
+        "public_safe_status": "PUBLIC_SAFE",
+        "baseSlug": "citizens-property-insurance-corporation",
+        "slug": "citizens-property-insurance-corporation",
+        "usedNaicDisambiguation": false
+      },
+      "artifacts": {
+        "data/reports/ins-insurer-005b-public-ready-cohort.json": "9f2ccaecfae1b1a44721224f905b51be66fb2395c43ce8b10b12a88c82bff353",
+        "data/reports/ins-insurer-006-identity-index.json": "5a31d9a7f87b6904a93ae66016a9f363decf49720b8217a0244eb39846e394f9"
+      }
+    },
+    "loa": {
+      "source": "loa_observations joined to license_credentials by credential_id; existing lib/national/loa.ts issuer mapping",
+      "observed": [
+        {
+          "officialText": "Life, Accident, Health & HMO",
+          "dataset": "texas_tdi",
+          "jurisdiction": "TX",
+          "observedAt": "2026-08-15T15:16:09.691Z"
+        },
+        {
+          "officialText": "Life",
+          "dataset": "massachusetts_doi_regulatory",
+          "jurisdiction": "MA"
+        }
+      ],
+      "timingBoundary": "These are source observation clocks, not retrieval/deployment or license effective dates. Live projection is mutable; no claim of immutable database snapshot."
+    },
+    "directory-count": {
+      "checkedAt": "2026-09-12T20:46:46.399831+00:00",
+      "predicate": "providers.verified = true AND contact.address.zip = '33441'",
+      "observedRows": 279,
+      "meaning": "Recorded ZIP equality; not unique regulatory identities, product-filtered agencies or service area.",
+      "sourceQualityLimitation": "Other recorded address-state values are inconsistent (observed minimum CA, maximum PA). ZIP equality does not certify city/state correctness. No source rows were corrected or excluded to fit a geographic claim."
+    }
+  }
+}

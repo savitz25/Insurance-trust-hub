@@ -16,6 +16,7 @@ import {
 import { countyMatchOrParts, FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
 import { providerMatchesLaunchCounties } from '@/lib/dfs/providers-by-county';
 import { looksLikeZip } from '@/lib/tools/zip-resolve';
+import { applyDirectoryZipScope } from './directory-scope';
 /**
  * Phase 1 — public directory returns verified TrustState only.
  * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
@@ -28,13 +29,14 @@ export async function getProviders(
   filters: ProviderFilters = {}
 ): Promise<{ providers: Provider[]; total: number }> {
   if (!isSupabaseConfigured()) {
+    if (filters.zip) throw new Error('Directory source unavailable');
     // Prefer honest empty state over unpublished catalog rows on public surfaces
     return { providers: [], total: 0 };
   }
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return { providers: [], total: 0 };
+    if (!supabase) { if (filters.zip) throw new Error('Directory source unavailable'); return { providers: [], total: 0 }; }
 
     // Public directory: verified research rows only
     let query = supabase
@@ -43,14 +45,17 @@ export async function getProviders(
       .eq('verified', true);
 
     const stateCode = filters.state?.trim().toUpperCase();
-    const launchCounty = filters.launchCountyId
+    const launchCounty = !filters.zip && filters.launchCountyId
       ? FL_LAUNCH_COUNTIES.find((c) => c.id === filters.launchCountyId)
       : undefined;
     // Never treat a ZIP as a name/description ILIKE.
     const nameQuery =
       filters.query && !looksLikeZip(filters.query) ? filters.query.trim() : '';
 
-    if (stateCode) {
+    if (filters.zip) {
+      query = applyDirectoryZipScope(query, filters.zip);
+    }
+    if (stateCode && !filters.zip) {
       query = query.contains('states_licensed', [stateCode]);
     }
     if (launchCounty) {
@@ -95,6 +100,7 @@ export async function getProviders(
     const { data, error, count } = await query;
 
     if (error || !data) {
+      if (filters.zip) throw new Error('Directory source unavailable');
       return { providers: [], total: 0 };
     }
 
@@ -102,7 +108,7 @@ export async function getProviders(
       data.map((row) => mapRowToProvider(row as DbProvider))
     );
 
-    if (stateCode) {
+    if (stateCode && !filters.zip) {
       providers = providers.filter((p) => {
         const licensed = (p.license_state || p.state || '').toUpperCase();
         return licensed === stateCode;
@@ -116,6 +122,7 @@ export async function getProviders(
 
     return { providers, total: count ?? providers.length };
   } catch {
+    if (filters.zip) throw new Error('Directory source unavailable');
     return { providers: [], total: 0 };
   }
 }

@@ -28,7 +28,8 @@ assert.equal(interpretInsuranceAskQuery('What is an insurance appointment?').que
 
 for (const question of INSURANCE_SEARCH_GOLDEN_QUESTIONS) {
   const parsed = interpretInsuranceAskQuery(question.query);
-  assert.ok(parsed.raw.length <= 400);
+  assert.equal(parsed.raw, question.query, 'Preserve submitted text; do not truncate away conditions');
+  if (question.query.length > 180) assert.equal(parsed.query.terminalState, 'INVALID_INPUT', 'Reject the full overlong request before execution');
   assert.ok(parsed.query.page >= 1 && parsed.query.page <= 200);
   assert.ok(parsed.interpretation.length > 0);
 }

@@ -1,0 +1,5 @@
+
+> insurance-trust-hub@1.0.0 check:phase19-seo
+> tsx scripts/check-phase19-seo.ts
+
+Phase 19 SEO compounding checks passed

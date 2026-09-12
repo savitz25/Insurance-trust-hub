@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-09-12T20:41:40.658667+00:00",
+  "method": "Bounded official HTTPS landing-page retrieval; no lookup submissions or regulatory transactions",
+  "sources": [
+    {
+      "agency": "Florida Department of Financial Services",
+      "jurisdiction": "FL",
+      "title": "Licensee Search",
+      "url": "https://licenseesearch.fldfs.com/",
+      "observed": "Agency/producer name, NPN, license and appointment search controls observed.",
+      "whatItEstablishes": "A relevant official research destination; customers must perform and assess the actual source lookup.",
+      "whatItDoesNotEstablish": "No current identity, license, appointment, service territory, authorization or endorsement was established by constructing/opening this link.",
+      "deepLinkParameters": false,
+      "access": "Page content available"
+    },
+    {
+      "agency": "Texas Department of Insurance",
+      "jurisdiction": "TX",
+      "title": "Agent and adjuster licensing",
+      "url": "https://www.tdi.texas.gov/agent/index.html",
+      "observed": "Licensing guidance and official agent name/license lookup path observed.",
+      "whatItEstablishes": "A relevant official research destination; customers must perform and assess the actual source lookup.",
+      "whatItDoesNotEstablish": "No current identity, license, appointment, service territory, authorization or endorsement was established by constructing/opening this link.",
+      "deepLinkParameters": false,
+      "access": "Page content available"
+    },
+    {
+      "agency": "Illinois Department of Insurance",
+      "jurisdiction": "IL",
+      "title": "Agent Lookup",
+      "url": "https://idoi.illinois.gov/companies/agent-lookup.html",
+      "observed": "Official producer/agent lookup path observed.",
+      "whatItEstablishes": "A relevant official research destination; customers must perform and assess the actual source lookup.",
+      "whatItDoesNotEstablish": "No current identity, license, appointment, service territory, authorization or endorsement was established by constructing/opening this link.",
+      "deepLinkParameters": false,
+      "access": "Page content available"
+    },
+    {
+      "agency": "National Association of Insurance Commissioners",
+      "jurisdiction": "US",
+      "title": "Consumer",
+      "url": "https://content.naic.org/consumer",
+      "observed": "Consumer and state insurance-department research pathways observed.",
+      "whatItEstablishes": "A relevant official research destination; customers must perform and assess the actual source lookup.",
+      "whatItDoesNotEstablish": "No current identity, license, appointment, service territory, authorization or endorsement was established by constructing/opening this link.",
+      "deepLinkParameters": false,
+      "access": "Page content available"
+    }
+  ]
+}

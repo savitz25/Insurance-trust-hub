@@ -1,0 +1,12 @@
+
+> insurance-trust-hub@1.0.0 check:th-search-001e
+> tsx scripts/check-th-search-001e.ts
+
+{
+  "ticket": "TH-SEARCH-001E",
+  "total": 100,
+  "PASS": 29,
+  "PARTIAL": 21,
+  "UNSUPPORTED_SAFE": 50,
+  "FAIL": 0
+}

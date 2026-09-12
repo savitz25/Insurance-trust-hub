@@ -1,0 +1,87 @@
+[
+  {
+    "gate": "check:th-search-001e",
+    "exitCode": 0,
+    "note": "Updated truncation expectation to full 180-character validation. Golden classification ledger remains 29/21/50/0; real runtime assertions also execute."
+  },
+  {
+    "gate": "check:ins-dir-bail-001",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:phase1-trust",
+    "exitCode": 0
+  },
+  {
+    "gate": "check:phase11-directory",
+    "exitCode": 0
+  },
+  {
+    "gate": "check:phase12-my-insurance",
+    "exitCode": 0
+  },
+  {
+    "gate": "check:phase19-seo",
+    "exitCode": 0
+  },
+  {
+    "gate": "check:phase20-profiles",
+    "exitCode": 0
+  },
+  {
+    "gate": "check:phase6a-appointments",
+    "exitCode": 0
+  },
+  {
+    "gate": "check:phase6b-appointments",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:ins-insurer-001",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:ins-insurer-002",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:ins-insurer-003",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:ins-insurer-004",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:ins-insurer-005",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:ins-insurer-006",
+    "exitCode": 1,
+    "baselineExitCode": 1,
+    "classification": "PRE_EXISTING_BASELINE_FAILURE"
+  },
+  {
+    "gate": "check:ins-cust-cap-001",
+    "exitCode": 0
+  },
+  {
+    "gate": "check:ath-cust-net-002c",
+    "exitCode": 0
+  }
+]

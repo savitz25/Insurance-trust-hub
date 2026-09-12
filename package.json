@@ -178,7 +178,6 @@
     "national:run-ins-insurer-004": "python -u scripts/national/ins-insurer-004-run-ca.py",
     "national:run-ins-insurer-003": "tsx scripts/check-ins-insurer-003.ts",
     "national:run-ins-insurer-002": "tsx scripts/national/run-ins-insurer-002-audit.ts",
-    "check:ins-nat-012": "tsx scripts/check-ins-nat-012.ts",
     "national:run-ins-nat-012": "python -u scripts/national/run-ins-nat-012-person-loa.py",
     "national:run-ins-home-004-loa": "python -u scripts/national/run-ins-home-004-loa-keyset.py",
     "national:run-ins-home-003": "tsx scripts/national/run-ins-home-003.ts",
@@ -192,7 +191,8 @@
     "ma:resolve-held-npns": "tsx scripts/national/resolve-ma-held-npns.ts",
     "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
-    "db:schema": "tsx scripts/seed.ts --schema"
+    "db:schema": "tsx scripts/seed.ts --schema",
+    "check:th-search-r1-013": "tsx --tsconfig scripts/tsconfig.r13.json scripts/check-th-search-r1-013.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

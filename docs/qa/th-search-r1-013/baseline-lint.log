@@ -1,0 +1,183 @@
+
+> insurance-trust-hub@1.0.0 lint
+> eslint
+
+
+<ticket-worktree>\actions\my-insurance.ts
+   53:36  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  613:11  warning  'user' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  736:11  warning  'user' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\app\directory\page.tsx
+  130:9  warning  'verifiedOnly' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\components\hub-page-view.tsx
+  299:29  warning  '_c' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\components\my-insurance\guest-insurance-hq.tsx
+  609:3  warning  'planId' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\components\my-insurance\research-wallet-panel.tsx
+  110:6  warning  React Hook useEffect has a missing dependency: 'user'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+<ticket-worktree>\lib\dfs\appointments.ts
+  331:20  warning  '_r' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\hubs\data\charlotte-agents.ts
+  3:7  warning  'HUB_SLUG' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\hubs\data\research-triangle-agents.ts
+  3:7  warning  'HUB_SLUG' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\hubs\data\triad-agents.ts
+  3:7  warning  'HUB_SLUG' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\my-insurance\request-magic-link.ts
+  28:3  warning  '_request' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\my-insurance\storage.ts
+   28:3   warning  'SHORTLIST_CAP' is defined but never used         @typescript-eslint/no-unused-vars
+  644:11  warning  'alreadySame' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\national\cms-marketplace.ts
+  130:53  warning  '_row' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\national\fl-individual-appointments.ts
+  9:10  warning  'normalizeAppointingEntityNumber' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\national\loa.ts
+  192:45  warning  '_officialText' is defined but never used  @typescript-eslint/no-unused-vars
+  197:48  warning  '_officialText' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\national\ma-doi-regulatory.ts
+  18:15  warning  'IdentityConfidence' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\national\tx-association.ts
+  59:44  warning  '_associationType' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\national\tx-individual-appointments.ts
+  8:10  warning  'normalizeNpn' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\nc\normalize.ts
+  192:9  warning  'city' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\nj\normalize.ts
+  9:3  warning  'normalizeCityName' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\odi\normalize.ts
+  208:9  warning  'city' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\providers\reviews.ts
+  16:10  warning  'buildFallbackReviews' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\seo\research-seo.ts
+  353:29  warning  '_c' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\tdi\normalize.ts
+  165:9  warning  'city' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\lib\tools\aca-subsidy-planner.ts
+  363:9  warning  'silverNet' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\assert-ny-ins-001.mts
+  20:7  warning  'page' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\check-fl-ins-007.ts
+  34:3  warning  'nameMatchingAllowed' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\check-ins-insurer-002.ts
+  5:10  warning  'existsSync' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\check-ins-insurer-003.ts
+  5:10  warning  'existsSync' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\check-ins-nat-012.ts
+  117:7  warning  'fpSrc' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\check-ins-nat-final-002.ts
+  15:3  warning  'decideInsuranceGroupIdentity' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\check-ins-nat-final-005.ts
+  53:7  warning  'display' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\check-th-search-r1-013.ts
+  7:108  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+<ticket-worktree>\scripts\dfs\attach-appointments.ts
+  252:37  warning  '_drop' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\dfs\audit-nonresident-fl.ts
+  41:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  41:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+<ticket-worktree>\scripts\import-cms-complaint-rankings.mjs
+   13:7   warning  'ROOT' is assigned a value but never used                     @typescript-eslint/no-unused-vars
+   32:7   warning  'SUMMARY_XLSX_CANDIDATES' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  190:10  warning  'parseContractStates' is defined but never used               @typescript-eslint/no-unused-vars
+  450:9   warning  'outIdx' is assigned a value but never used                   @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\audit-carrier-identity.ts
+   23:3   warning  'IDENTIFIER_SCHEME' is defined but never used          @typescript-eslint/no-unused-vars
+   24:3   warning  'CARRIER_RELATIONSHIP_TYPE' is defined but never used  @typescript-eslint/no-unused-vars
+  159:28  error    A `require()` style import is forbidden                @typescript-eslint/no-require-imports
+
+<ticket-worktree>\scripts\national\audit-ma-doi-regulatory.ts
+   18:3  warning  'MA_DOI_REGULATORY_SOURCE' is defined but never used     @typescript-eslint/no-unused-vars
+  379:7  warning  'newMaRelationships' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\audit-national-completion.ts
+  30:16  warning  'countIn' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\backfill-individual-producers.ts
+  700:7  error  'credBatchesN' is never reassigned. Use 'const' instead  prefer-const
+
+<ticket-worktree>\scripts\national\backfill-loa-observations.ts
+  181:7  error  'malformed' is never reassigned. Use 'const' instead     prefer-const
+  403:7  error  'existingKeys' is never reassigned. Use 'const' instead  prefer-const
+
+<ticket-worktree>\scripts\national\census-ins-dir-bail-001.ts
+  26:7  error  'mixed' is never reassigned. Use 'const' instead  prefer-const
+
+<ticket-worktree>\scripts\national\classify-dry-run.ts
+  58:7  warning  'ohioOverlay' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\ingest-carrier-identity.ts
+   13:10  warning  'existsSync' is defined but never used                   @typescript-eslint/no-unused-vars
+  118:16  warning  'countKind' is defined but never used                    @typescript-eslint/no-unused-vars
+  445:7   error    'txUnresolved' is never reassigned. Use 'const' instead  prefer-const
+  455:50  warning  'txReview' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\resolve-ma-held-npns.ts
+  54:10  warning  'bump' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\run-fl-ins-001.ts
+   24:10  warning  'carrierProvisionalKey' is defined but never used     @typescript-eslint/no-unused-vars
+   36:3   warning  'normalizeFlLicenseStatus' is defined but never used  @typescript-eslint/no-unused-vars
+  334:7   error    'skipKind' is never reassigned. Use 'const' instead   prefer-const
+
+<ticket-worktree>\scripts\national\run-fl-ins-001b.ts
+  437:77  warning  'flDfs' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\run-ins-home-004-loa.ts
+  269:9  warning  'agenciesNormalized' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\national\run-ins-nat-final-006.ts
+  79:16  warning  'countIs' is defined but never used       @typescript-eslint/no-unused-vars
+  94:16  warning  'countNotNull' is defined but never used  @typescript-eslint/no-unused-vars
+
+<ticket-worktree>\scripts\qa-r13-baseline.ts
+  7:33   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  7:251  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+<ticket-worktree>\scripts\run-logo-install.cjs
+  1:16  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  3:27  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+<ticket-worktree>\scripts\tdi\audit-nonresident-tx.ts
+  18:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:63  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 73 problems (18 errors, 55 warnings)
+  6 errors and 0 warnings potentially fixable with the `--fix` option.
+

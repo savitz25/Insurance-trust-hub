@@ -1,0 +1,6 @@
+
+> insurance-trust-hub@1.0.0 check:ins-dir-bail-001
+> tsx scripts/check-ins-dir-bail-001.ts
+
+INS-DIR-BAIL-001 FAIL (1)
+ - homepage fingerprint unchanged

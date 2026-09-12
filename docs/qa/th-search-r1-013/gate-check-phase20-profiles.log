@@ -1,0 +1,5 @@
+
+> insurance-trust-hub@1.0.0 check:phase20-profiles
+> tsx scripts/check-phase20-profiles.ts
+
+Phase 20 research profile checks passed

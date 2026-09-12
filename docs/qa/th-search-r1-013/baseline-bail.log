@@ -1,0 +1,12 @@
+
+> insurance-trust-hub@1.0.0 check:ins-dir-bail-001
+> tsx scripts/check-ins-dir-bail-001.ts
+
+node.exe : INS-DIR-BAIL-001 FAIL (1)
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (INS-DIR-BAIL-001 FAIL (1):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ - homepage fingerprint unchanged

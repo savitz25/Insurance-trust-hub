@@ -1,0 +1,32 @@
+
+> insurance-trust-hub@1.0.0 check:ins-cust-cap-001
+> tsx scripts/check-ins-cust-cap-001.ts
+
+{
+  "check": "INS-CUST-CAP-001",
+  "outcome": "LEGAL_INSURER_READY_AGENCY_BLOCKED",
+  "contract": "insurance-customer-claim-validation-v1",
+  "version": "1.0.0",
+  "schemaFingerprint": "cc8d6cc82c4e118e266607196cad17ecf99033f4ee1bb6c46ffceceddf62741b",
+  "contractFingerprint": "b6396688c36251e59e906db2b98cde40fd88d46c271e31598d7bd0a22c06c9eb",
+  "legalInsurerClaimable": 26,
+  "agencyClaimable": 0,
+  "metrics": {
+    "NAME_ONLY_VALIDATIONS": 0,
+    "FUZZY_VALIDATIONS": 0,
+    "PRODUCER_CLAIMABLE_IDENTITIES": 0,
+    "BRAND_CLAIMABLE_IDENTITIES": 0,
+    "GROUP_CLAIMABLE_IDENTITIES": 0,
+    "DIRECTORY_ONLY_CLAIMABLE_IDENTITIES": 0,
+    "UNPUBLISHED_ENTITY_VALIDATIONS": 0,
+    "RESEARCH_ONLY_ENTITY_VALIDATIONS": 0,
+    "NPN_NATIVE_ID_MISMATCHES_ACCEPTED": 0,
+    "NAIC_NATIVE_ID_MISMATCHES_ACCEPTED": 0,
+    "CANONICAL_DESTINATION_MISMATCHES_ACCEPTED": 0,
+    "CROSS_ENTITY_CLASS_VALIDATIONS": 0,
+    "PROFILE_MINTING": 0,
+    "DB_WRITES": 0,
+    "PUBLICATION_DELTA": 0,
+    "RANKING_EFFECTS": 0
+  }
+}

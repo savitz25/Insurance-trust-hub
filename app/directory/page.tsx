@@ -94,6 +94,8 @@ function sortProviders(providers: Provider[], sort: string, query: string): Prov
 
 export default async function DirectoryPage({ searchParams }: DirectoryPageProps) {
   const params = await searchParams;
+  const insuranceContext = getParam(params,'insuranceContext').split(',').filter(x=>['homeowner','homeowners','auto','life','health','medicare'].includes(x)).slice(0,6);
+  const requestedPlace = getParam(params,'requestedPlace').slice(0,120);
   const rawQuery = getParam(params, 'q');
   const zipParam = getParam(params, 'zip') || (looksLikeZip(rawQuery) ? rawQuery : '');
   const zipGeo = resolveDirectoryZip(zipParam);
@@ -153,11 +155,13 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   });
 
   let loaFallback = false;
-  let { providers: rawProviders, total } = zipParam && !zipGeo
-    ? { providers: [], total: 0 }
-    : await searchProviders(searchArgs());
+  if(zipParam && !zipGeo)return <section className="mx-auto max-w-3xl p-6"><h1 className="text-2xl font-semibold">ZIP location needs clarification</h1><p>This ZIP is not resolved by the maintained directory location reference. No nationwide or state results were substituted.</p><form action="/directory" className="mt-4 flex flex-wrap gap-3"><input type="hidden" name="insuranceContext" value={insuranceContext.join(',')}/><input type="hidden" name="requestedPlace" value={requestedPlace}/><label>ZIP<input name="zip" defaultValue={zipParam} maxLength={5} pattern="[0-9]{5}" required className="min-h-11 rounded border px-3"/></label><button className="min-h-11 rounded border px-4">Update ZIP</button></form></section>;
+  let initial: {providers:Provider[];total:number};
+  try { initial=await searchProviders(searchArgs()); }
+  catch { return <section className="mx-auto max-w-3xl p-6"><h1 className="text-2xl font-semibold">Directory source temporarily unavailable</h1><p>The recorded-address lookup could not complete. This is not a finding of zero listings.</p><Link href={`/directory?${new URLSearchParams({zip:zipParam,insuranceContext:insuranceContext.join(','),requestedPlace})}`} className="mt-4 inline-flex min-h-11 items-center underline">Retry this directory request</Link></section>; }
+  let {providers:rawProviders,total}=initial;
 
-  if (zipGeo && specialty && total === 0) {
+  if (!zipParam && zipGeo && specialty && total === 0) {
     const retryLocal = await searchProviders(searchArgs(''));
     if (retryLocal.total > 0) {
       rawProviders = retryLocal.providers;
@@ -221,6 +225,8 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const filterParams: Record<string, string> = {};
   if (query) filterParams.q = query;
   if (zipGeo?.zip) filterParams.zip = zipGeo.zip;
+  if(insuranceContext.length)filterParams.insuranceContext=insuranceContext.join(',');
+  if(requestedPlace)filterParams.requestedPlace=requestedPlace;
   if (state) filterParams.state = state;
   if (type) filterParams.type = type;
   if (specialty) filterParams.specialty = specialty;
@@ -251,9 +257,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         <NetworkBelongingLine align="left" className="mt-2" />
         <p className="mt-3 text-muted-foreground leading-relaxed">
           {zipGeo
-            ? `ZIP ${zipGeo.zip} maps to ${zipGeo.displayLabel}. Showing verified agencies in that geography only — not a nationwide name search.`
+            ? `Listings with recorded address ZIP ${zipGeo.zip}. This is a public directory, not a canonical regulatory-identity or service-area search.`
             : getDirectoryStateIntro(state)}
         </p>
+        {requestedPlace ? <p className="mt-3 text-sm">Original requested place: {requestedPlace}. The selected ZIP is the executed directory scope; this does not establish coverage of the original city or a service area.</p>:null}
+        {insuranceContext.length ? <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm">Requested insurance context: {insuranceContext.join(', ')}. These listings are not filtered by that product, official LOA or appointment. Contact/verify the source identity separately.</p>:null}
         {zipGeo?.hubHref ? (
           <p className="mt-2 text-sm text-muted-foreground">
             Prefer the county hub:{' '}

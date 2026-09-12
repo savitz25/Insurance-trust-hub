@@ -1,0 +1,5 @@
+
+> insurance-trust-hub@1.0.0 check:phase11-directory
+> tsx scripts/check-phase11-directory.ts
+
+Phase 11A/11B directory checks passed
