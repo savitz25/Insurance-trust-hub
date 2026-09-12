@@ -205,9 +205,8 @@ export function interpretIdentityAndLocal(
   let explicitName: string[] | null = /^(?:research|find|check|who is|is)\s+(.+?)\??$/i.exec(q);
   if (
     !explicitName &&
-    /^[A-Z]/.test(q) &&
     /\b(?:agency|insurance company|llc|inc|corp)\b/i.test(q) &&
-    !/\b(?:in|near|which|what|how|show|does|has|have|can|should|this|licensed|credentialed|located|domiciled|complaints|best|serves)\b/i.test(
+    !/\b(?:in|near|with|which|what|how|show|does|has|have|can|should|this|licensed|credentialed|located|domiciled|complaints|best|serves)\b/i.test(
       q,
     ) &&
     distinctiveNameTokens(q).length

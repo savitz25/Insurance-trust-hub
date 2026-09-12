@@ -112,6 +112,10 @@ async function test(name: string, fn: () => Promise<void>) {
   }
 }
 async function main() {
+  check('bare agency-name case normalization retains identity intent',()=>assert.equal(parse('gulfstream insurance agency llc').query.nameQuery,'gulfstream insurance agency llc'));
+
+  check('long name retains every meaningful token and digit',()=>assert.equal(matchSourceName('Alpha Beta Gamma Delta Epsilon Zeta Theta Iota Kappa 42 Insurance Agency','Alpha Beta Gamma Delta Epsilon Zeta Theta Iota Kappa 99 Insurance Agency'),null));
+
   await test('structured HTTP validates full input and duplicate parameters',async()=>{for(const url of ['https://example.com/api?q='+encodeURIComponent('NPN 10391484 '+'x'.repeat(180)),'https://example.com/api?q=NPN+10391484&q=NAIC+10064'])assert.equal((await specialistGet(new Request(url))).status,400);assert.equal((await specialistPost(new Request('https://example.com/api',{method:'POST',body:'null',headers:{'Content-Type':'application/json'}}))).status,400)});
   await test('direct Wave-1 publication status is not a credential status',async()=>{const r=await executeSpecialistV2({queryType:'cohort',entityClass:'legal_insurer'});assert.ok(r.body.rows.length);assert.ok(r.body.rows.every(x=>x.credentialStatus===null&&x.credentialJurisdiction===null))});
 

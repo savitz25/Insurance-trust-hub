@@ -34,7 +34,7 @@ export function distinctiveNameTokens(value: string): string[] {
         .split(" ")
         .filter((t) => t.length > 1 && !GENERIC.has(t)),
     ),
-  ].slice(0, 8);
+  ];
 }
 export function escapeNamePattern(value: string): string {
   return value.replace(/[\\%_]/g, "\\$&");
