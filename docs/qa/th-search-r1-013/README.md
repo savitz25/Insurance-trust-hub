@@ -1,6 +1,6 @@
 # TH-SEARCH-R1-013 release evidence
 
-Status: READY FOR REVIEW. Production verification is pending; no future merge/deployment identity is asserted. The machine-readable [receipt](result.json) is authoritative for exact identities and final status.
+Status: RELEASED AND VERIFIED for the certified R1-013 cases. Runtime PR #34 merged as `3e1d0dc41f23b35714561d232bd6887d84019f18`; deployment `dpl_AVbNVorH6zZRXLhpihHSBs5wTNjh` was READY on canonical `www.insurancetrusthub.com` before the final suite. This receipt is a documentation follow-up; no future evidence merge identity is asserted. The machine-readable [receipt](result.json) is authoritative for exact identities and final status.
 
 ## Scope and observed repair
 
@@ -20,7 +20,7 @@ The [18-question baseline](baseline-matrix.md) records actual unchanged-main/Pro
 
 [Source matrix](source-capability-matrix.md) and [independent oracle](source-oracle.json) document approved fields, publication scope, independent positives and file SHA256 fingerprints. Mutable database observations retain per-row source clocks and are not represented as a pinned full-corpus release.
 
-60 focused behavioral checks pass. The initial target subset was 10 red / 2 already-green on unchanged main. All four deliberate mutations were detected and restored: agency?insurer, directory?graph, address?credential and LOA?appointment. [Mutation output](mutations.json), [clean gate](green-final.log), [regressions](regression-gates.json), [build](build-final.log) and [typecheck](typecheck-final.log) retain actual observations.
+63 focused behavioral checks pass. The initial target subset was 10 red / 2 already-green on unchanged main. All four deliberate mutations were detected and restored: agency?insurer, directory?graph, address?credential and LOA?appointment. [Mutation output](mutations.json), [clean gate](green-final.log), [regressions](regression-gates.json), [build](build-final.log) and [typecheck](typecheck-final.log) retain actual observations.
 
 The 16 local native/API queries passed on `077e054`; first-interaction/history testing then found a real directory client-navigation bounce. After the minimal document-link repair, all eight navigation/Ask responsive checks passed on `833d3ac`, plus working official/state actions and directory overflow checks. Native query completion was 210?8,334 ms and API completion 23?4,125 ms in that local window. Whole multi-step flows take longer and are timed separately. [Final affected-flow proof](browser-local-833d3ac/result.json), [actions/320/768 directory proof](actions-local-833d3ac/result.json), [structured endpoint proof](structured-live.json). Earlier failed runs are retained; they are not certificates. Preview browser access requires Vercel authentication and was not bypassed. Preview build success is not browser proof.
 
@@ -30,4 +30,13 @@ Separate review was self-review plus automated behavioral/source/browser/CI chec
 
 Runtime changes are in `lib/insurance-ask/*`, the existing national LOA source mapping, public-directory predicate adapter, structured v2 adapter, Ask/API/directory rendering and the shared search shell. The redundant nested footer anchor was removed because baseline hydration erased first input. CI, fixtures, QA scripts and evidence are scoped to this ticket. All runtime files are listed in PR #34.
 
-Rollback is a reviewed Insurance-only revert/deployment of the ticket, preserving earlier state/publication releases; no database rollback is needed. Directory records contain inconsistent address fields and some legacy listing-quality issues; this ticket certifies ZIP equality, not every listing's geocoding/company relevance or product capability. Wider source acquisition, person/graph profile publication, parent Ask completion, other hubs and Move's pending canonical correction remain outside scope. Close only R1-013 after the Production receipt is complete.
+Rollback is a reviewed Insurance-only revert/deployment of the ticket, preserving earlier state/publication releases; no database rollback is needed. Directory records contain inconsistent address fields and some legacy listing-quality issues; this ticket certifies ZIP equality, not every listing's geocoding/company relevance or product capability. Wider source acquisition, person/graph profile publication, parent Ask completion, other hubs and Move's pending canonical correction remain outside scope. Only R1-013 is closed by these certified outcomes.
+
+
+## Canonical Production certificate
+
+[Production browser/API proof](browser-production-3e1d0dc/result.json): all 24 checks pass, including the 16 query matrix, homepage Enter ? Boca/product retention ? ZIP ? real directory rows, selection/edit/stale-card clearing, refresh and one-step history at 390/1280, and 320/390/768/1280 Ask overflow/focus checks. [Actual official/internal action clicks and directory 320/768 proof](actions-production-3e1d0dc/result.json) pass. [Five API compatibility supplements](compat-production-3e1d0dc/result.json) pass: lowercase name, spaced exact NPN, structured source-name selection metadata, NAIC publication/status separation and overlong rejection. The first supplement invocation had a test-harness Fetch status-property error; that harness was corrected before the successful observations, with no product failure inferred.
+
+Exact Production source matches include organization NPN 10391484, Gulfstream agency NPN 20168263 and Citizens legal insurer NAIC 10064. Brand candidates remain separate and capped; exact misses remain misses. The Source/Trace/API records capture actual per-row clocks and observed counts rather than freezing historical totals. The initial automated review's unmapped-source-kind finding was fixed in `732da60`; three fixture cases were red before and green after. The incremental Vercel review passed with zero additional suggestions. The final local build passed after automatic retries for slow static pages; no timeout/configuration gate was relaxed.
+
+This documentation follow-up does not alter runtime code. Its eventual main/deployment identity must be verified after it exists; the committed runtime certificate remains explicitly tied to `3e1d0dc`. The final release report distinguishes that documentation-only follow-up from the runtime implementation and full Production suite.

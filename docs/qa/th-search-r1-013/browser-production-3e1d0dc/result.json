@@ -1,0 +1,1300 @@
+{
+  "ticket": "TH-SEARCH-R1-013",
+  "utc": "2026-09-12T21:41:09.594Z",
+  "origin": "https://www.insurancetrusthub.com",
+  "scope": "complete",
+  "testedHead": "3e1d0dc41f23b35714561d232bd6887d84019f18",
+  "dirty": true,
+  "cases": [
+    {
+      "name": "npn",
+      "utc": "2026-09-12T21:41:18.142Z",
+      "ms": 6536,
+      "status": "PASS",
+      "q": "Find NPN 10391484",
+      "settledMs": 4960,
+      "apiMs": 766,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "identifier",
+        "intent": "IDENTIFIER_LOOKUP",
+        "identifier": {
+          "type": "npn",
+          "value": "10391484"
+        },
+        "page": 1,
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION",
+          "npn": "10391484",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published. Directory listings are a separate ZIP surface.",
+          "whyMatched": "This agency matches because its indexed NPN is 10391484. NPN is an identifier, not an endorsement. Class was not assumed from the digits."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 1,
+          "grain": "Labeled NPN lookup"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Labeled NPN lookup",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/npn.png"
+    },
+    {
+      "name": "naic",
+      "utc": "2026-09-12T21:41:19.323Z",
+      "ms": 1178,
+      "status": "PASS",
+      "q": "Find insurer NAIC code 10064",
+      "settledMs": 346,
+      "apiMs": 144,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "identifier",
+        "intent": "IDENTIFIER_LOOKUP",
+        "identifier": {
+          "type": "naic_company_code",
+          "value": "10064"
+        },
+        "entityClass": "insurer",
+        "page": 1,
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "insurer",
+          "name": "CITIZENS PROP INS CORP",
+          "npn": null,
+          "naicCode": "10064",
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": "2025-01-24",
+          "href": "/insurers/citizens-property-insurance-corporation",
+          "publicationNote": null,
+          "whyMatched": "This legal insurer matches because the official record lists NAIC company code 10064. A consumer brand is not assumed."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 1,
+          "grain": "NAIC company code (Wave-1 public cohort unless unpublished)"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "2025-01-24",
+        "grain": "NAIC company code (Wave-1 public cohort unless unpublished)",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/naic.png"
+    },
+    {
+      "name": "agency",
+      "utc": "2026-09-12T21:41:30.199Z",
+      "ms": 10874,
+      "status": "PASS",
+      "q": "Research Gulfstream Insurance Agency LLC",
+      "settledMs": 4804,
+      "apiMs": 5092,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "entity",
+        "intent": "NAME_IDENTITY",
+        "entityClass": "agency",
+        "nameQuery": "Gulfstream Insurance Agency LLC",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM INSURANCE AGENCY LLC",
+          "npn": "20168263",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source legal_name ?GULFSTREAM INSURANCE AGENCY LLC? (normalized_exact_name). NPN 20168263 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "GULFSTREAM INSURANCE AGENCY LLC",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "5da0697d-58f2-4c48-b4d3-04403b70fc07",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=5da0697d-58f2-4c48-b4d3-04403b70fc07"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM AUTO INSURANCE INC.",
+          "npn": "8862411",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM AUTO INSURANCE INC.? (distinctive_token_candidate). NPN 8862411 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM AUTO INSURANCE INC.",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "d79021de-a48d-4799-892f-d151a53780b6",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=d79021de-a48d-4799-892f-d151a53780b6"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM INSURANCE GROUP, INC.",
+          "npn": "4394687",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM INSURANCE GROUP, INC.? (distinctive_token_candidate). NPN 4394687 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM INSURANCE GROUP, INC.",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "729e0233-c35f-4a16-895f-81335d8a43c2",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=729e0233-c35f-4a16-895f-81335d8a43c2"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM INSURANCE INC",
+          "npn": "17328505",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM INSURANCE INC? (distinctive_token_candidate). NPN 17328505 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM INSURANCE INC",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "e290320b-bc73-46ea-85f5-dbd160c902c3",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=e290320b-bc73-46ea-85f5-dbd160c902c3"
+        },
+        {
+          "entityClass": "agency",
+          "name": "GULFSTREAM RISK PARTNERS, LLC",
+          "npn": "19422124",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?Gulfstream Insurance Agency LLC? matches source display_name ?GULFSTREAM RISK PARTNERS, LLC? (distinctive_token_candidate). NPN 19422124 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "GULFSTREAM RISK PARTNERS, LLC",
+            "requested": "Gulfstream Insurance Agency LLC",
+            "entityId": "d76f2f72-ec16-4f11-9430-98c37b5fc69c",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+Gulfstream+Insurance+Agency+LLC&selected=d76f2f72-ec16-4f11-9430-98c37b5fc69c"
+        }
+      ],
+      "counts": [
+        {
+          "label": "Displayed source-name candidates",
+          "value": 5,
+          "grain": "Bounded candidate identities; not an exhaustive market count"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Displayed source-name candidates; not an exhaustive market count",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/agency.png"
+    },
+    {
+      "name": "insurer",
+      "utc": "2026-09-12T21:41:35.827Z",
+      "ms": 5626,
+      "status": "PASS",
+      "q": "Research CITIZENS PROP INS CORP",
+      "settledMs": 2687,
+      "apiMs": 2278,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "entity",
+        "intent": "NAME_IDENTITY",
+        "nameQuery": "CITIZENS PROP INS CORP",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "insurer",
+          "name": "CITIZENS PROP INS CORP",
+          "npn": null,
+          "naicCode": "10064",
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": "2025-01-24",
+          "href": "/insurers/citizens-property-insurance-corporation",
+          "publicationNote": null,
+          "whyMatched": "Name candidate: requested ?CITIZENS PROP INS CORP? matches source canonical_legal_name ?CITIZENS PROP INS CORP? (normalized_exact_name); NAIC company code 10064. This is not a consumer-brand or agency association.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "canonical_legal_name",
+            "value": "CITIZENS PROP INS CORP",
+            "requested": "CITIZENS PROP INS CORP",
+            "entityId": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+            "entityClass": "insurer",
+            "source": "ins-insurer-006-wave1",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+CITIZENS+PROP+INS+CORP&selected=27d7418a-d2bf-4339-8c3b-4774e7f403bc"
+        }
+      ],
+      "counts": [
+        {
+          "label": "Displayed source-name candidates",
+          "value": 1,
+          "grain": "Bounded candidate identities; not an exhaustive market count"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "2025-01-24",
+        "grain": "Displayed source-name candidates; not an exhaustive market count",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/insurer.png"
+    },
+    {
+      "name": "brand",
+      "utc": "2026-09-12T21:41:47.220Z",
+      "ms": 11391,
+      "status": "PASS",
+      "q": "Research State Farm",
+      "settledMs": 5611,
+      "apiMs": 4722,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "entity",
+        "intent": "NAME_IDENTITY",
+        "nameQuery": "State Farm",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "19836872",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 19836872 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "1750df52-c28e-4501-b3bd-84367f92af32",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=1750df52-c28e-4501-b3bd-84367f92af32"
+        },
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "17081764",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 17081764 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "3eb3b023-8a7d-45db-9696-5ac25b6849b2",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=3eb3b023-8a7d-45db-9696-5ac25b6849b2"
+        },
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "14492909",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 14492909 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "645f9a37-0eb0-4d9e-92ff-613c4251c3a6",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=645f9a37-0eb0-4d9e-92ff-613c4251c3a6"
+        },
+        {
+          "entityClass": "agency",
+          "name": "STATE FARM",
+          "npn": "17734559",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source legal_name ?STATE FARM? (normalized_exact_name). NPN 17734559 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "normalized_exact_name",
+            "field": "legal_name",
+            "value": "STATE FARM",
+            "requested": "State Farm",
+            "entityId": "e7854420-c4c5-4629-8e0b-fe4348d10b4e",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "case, whitespace, punctuation and ampersand presentation only; legal suffixes retained"
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=e7854420-c4c5-4629-8e0b-fe4348d10b4e"
+        },
+        {
+          "entityClass": "agency",
+          "name": "AARON REEVES STATE FARM",
+          "npn": "15749382",
+          "naicCode": null,
+          "credentialJurisdiction": null,
+          "credentialStatus": null,
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "Name candidate: requested ?State Farm? matches source display_name ?AARON REEVES STATE FARM? (distinctive_token_candidate). NPN 15749382 identifies the source agency; similarity is not a license or appointment finding.",
+          "matchEvidence": {
+            "method": "distinctive_token_candidate",
+            "field": "display_name",
+            "value": "AARON REEVES STATE FARM",
+            "requested": "State Farm",
+            "entityId": "eea1f819-0d87-405f-977e-79e71809214a",
+            "entityClass": "agency",
+            "source": "national_entities source legal/display name",
+            "normalization": [
+              "All distinctive requested tokens present; shorter/source name is a candidate, not exact identity."
+            ]
+          },
+          "selectionHref": "/ask?q=Research+State+Farm&selected=eea1f819-0d87-405f-977e-79e71809214a"
+        }
+      ],
+      "counts": [
+        {
+          "label": "Displayed source-name candidates",
+          "value": 10,
+          "grain": "Bounded candidate identities; not an exhaustive market count"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Displayed source-name candidates; not an exhaustive market count",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/brand.png"
+    },
+    {
+      "name": "near",
+      "utc": "2026-09-12T21:41:48.277Z",
+      "ms": 1055,
+      "status": "PASS",
+      "q": "insurance agency near me",
+      "settledMs": 386,
+      "apiMs": 105,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "fail_closed",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "refinement": "zip",
+        "terminalState": "NEEDS_CLARIFICATION",
+        "failReason": "Enter a ZIP for public directory listings. Your requested place is retained; no ZIP or service area is guessed.",
+        "directoryContext": {
+          "requestedLocation": "me",
+          "requestedInsuranceContext": [],
+          "unresolvedConditions": [
+            "ZIP required"
+          ]
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "Source credential clocks",
+        "grain": "fail_closed",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/near.png"
+    },
+    {
+      "name": "boca",
+      "utc": "2026-09-12T21:41:49.329Z",
+      "ms": 1051,
+      "status": "PASS",
+      "q": "insurance agency in Boca Raton Florida",
+      "settledMs": 286,
+      "apiMs": 97,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "fail_closed",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "coverageState": "PARTIAL",
+        "refinement": "zip",
+        "terminalState": "NEEDS_CLARIFICATION",
+        "failReason": "Enter a ZIP for public directory listings. Your requested place is retained; no ZIP or service area is guessed.",
+        "directoryContext": {
+          "requestedLocation": "Boca Raton Florida",
+          "requestedInsuranceContext": [],
+          "unresolvedConditions": [
+            "ZIP required"
+          ]
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "Source credential clocks",
+        "grain": "fail_closed",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/boca.png"
+    },
+    {
+      "name": "zip",
+      "utc": "2026-09-12T21:41:50.396Z",
+      "ms": 1063,
+      "status": "PASS",
+      "q": "insurance agencies in ZIP 33441",
+      "settledMs": 305,
+      "apiMs": 102,
+      "terminal": "DIRECTORY_HANDOFF",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "directory",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "directoryZip": "33441",
+        "coverageState": "PARTIAL",
+        "directoryContext": {
+          "requestedLocation": "ZIP 33441",
+          "requestedInsuranceContext": [],
+          "effectiveZip": "33441",
+          "unresolvedConditions": []
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "Separate public directory",
+        "geographyMeaning": "Selected ZIP 33441; recorded directory address, not service territory",
+        "officialAsOf": "Source credential clocks",
+        "grain": "Directory handoff; no regulatory identities retrieved",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/zip.png"
+    },
+    {
+      "name": "homeowners",
+      "utc": "2026-09-12T21:41:51.411Z",
+      "ms": 1011,
+      "status": "PASS",
+      "q": "homeowners insurance agency in ZIP 33441",
+      "settledMs": 297,
+      "apiMs": 108,
+      "terminal": "DIRECTORY_HANDOFF",
+      "coverage": "PARTIAL",
+      "query": {
+        "mode": "directory",
+        "intent": "DIRECTORY_DISCOVERY",
+        "page": 1,
+        "directoryZip": "33441",
+        "coverageState": "PARTIAL",
+        "directoryContext": {
+          "requestedLocation": "ZIP 33441",
+          "requestedInsuranceContext": [
+            "homeowners"
+          ],
+          "effectiveZip": "33441",
+          "unresolvedConditions": [
+            "Insurance product context is retained, not an applied LOA, appointment or directory product filter."
+          ]
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "Separate public directory",
+        "geographyMeaning": "Selected ZIP 33441; recorded directory address, not service territory",
+        "officialAsOf": "Source credential clocks",
+        "grain": "Directory handoff; no regulatory identities retrieved",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/homeowners.png"
+    },
+    {
+      "name": "credential",
+      "utc": "2026-09-12T21:41:56.444Z",
+      "ms": 5031,
+      "status": "PASS",
+      "q": "insurance agencies credentialed in Florida",
+      "settledMs": 2902,
+      "apiMs": 530,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "entity",
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "FL",
+          "meaning": "credential_jurisdiction"
+        },
+        "credentialStatus": "current_source",
+        "loaMatch": "any",
+        "loaAsOfficialObservation": false,
+        "coverageState": "KNOWN",
+        "sort": "name",
+        "page": 1,
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION",
+          "npn": "10391484",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 10391484, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "# INSURANCE COMPANY PLACE INC DBA BRIGHTWAY INSURANCE THE DOR AGENCY",
+          "npn": "21617358",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21617358, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "#1 HEALTH & RETIREMENT SOLUTIONS DBA #1 HEALTH INSURANCE & RETIREMENT SOLUTIONS",
+          "npn": "21400906",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21400906, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "07CARRERA, LLC DBA FIGUEROA INSURANCE AGENCY",
+          "npn": "21119412",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21119412, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "1 CARE INSURANCE GROUP",
+          "npn": "18748057",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 18748057, it is linked to a FL credential (credential jurisdiction, not service territory)."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 56939,
+          "grain": "credential_jurisdiction = FL"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "credential_jurisdiction = FL",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "credential_jurisdiction = FL",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/credential.png"
+    },
+    {
+      "name": "address",
+      "utc": "2026-09-12T21:41:57.315Z",
+      "ms": 868,
+      "status": "PASS",
+      "q": "agencies located in Florida",
+      "settledMs": 248,
+      "apiMs": 133,
+      "terminal": "CAPABILITY_LIMITATION",
+      "coverage": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "page": 1,
+        "failReason": "Recorded office/address geography is not a national Ask filter in this extract. Ask currently executes credential jurisdiction and (where sourced) domicile \u2014 not physical location or service territory.",
+        "alternatives": [
+          "Show insurance agencies credentialed in Florida."
+        ],
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "FL",
+          "meaning": "recorded_address_state"
+        },
+        "coverageState": "UNSUPPORTED",
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "recorded_address_state = FL",
+        "officialAsOf": "Source credential clocks",
+        "grain": "agency",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/address.png"
+    },
+    {
+      "name": "domicile",
+      "utc": "2026-09-12T21:41:58.202Z",
+      "ms": 886,
+      "status": "PASS",
+      "q": "insurer domiciled in Florida",
+      "settledMs": 233,
+      "apiMs": 112,
+      "terminal": "CAPABILITY_LIMITATION",
+      "coverage": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "entityClass": "insurer",
+        "jurisdiction": {
+          "state": "FL",
+          "meaning": "regulatory_domicile"
+        },
+        "domicile": "FL",
+        "credentialStatus": "current_source",
+        "loaMatch": "any",
+        "loaAsOfficialObservation": false,
+        "coverageState": "KNOWN",
+        "sort": "name",
+        "page": 1,
+        "requestOptions": {},
+        "pageSize": 20,
+        "failReason": "Legal-insurer domicile is not a complete national Ask field in this extract. Wave-1 public profiles (26) store domicile as null; 6,185 graph identities are not a domicile census. Use a labeled NAIC company code.",
+        "alternatives": [
+          "What is a legal insurer?",
+          "Find insurer NAIC code 10064."
+        ]
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "regulatory_domicile = FL",
+        "officialAsOf": "Source credential clocks",
+        "grain": "insurer",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/domicile.png"
+    },
+    {
+      "name": "appointment",
+      "utc": "2026-09-12T21:42:00.566Z",
+      "ms": 2361,
+      "status": "PASS",
+      "q": "is NPN 10391484 appointed with State Farm?",
+      "settledMs": 1092,
+      "apiMs": 605,
+      "terminal": "NEEDS_CLARIFICATION",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "evidence",
+        "intent": "EVIDENCE",
+        "identifier": {
+          "type": "npn",
+          "value": "10391484"
+        },
+        "page": 1,
+        "requestedTask": "appointment",
+        "evidenceFamily": "appointment",
+        "appointerName": "State Farm",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "(MIA) MULTIPLE INSURANCE ASSOCIATE CORPORATION",
+          "npn": "10391484",
+          "naicCode": null,
+          "credentialJurisdiction": "FL",
+          "credentialStatus": "unknown",
+          "loas": [],
+          "sourceObservedAt": null,
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published. Directory listings are a separate ZIP surface.",
+          "whyMatched": "This agency matches because its indexed NPN is 10391484. NPN is an identifier, not an endorsement. Class was not assumed from the digits."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 1,
+          "grain": "Labeled NPN lookup"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Labeled NPN lookup",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/appointment.png"
+    },
+    {
+      "name": "colorado",
+      "utc": "2026-09-12T21:42:01.625Z",
+      "ms": 1057,
+      "status": "PASS",
+      "q": "licensed insurance agencies in Colorado",
+      "settledMs": 292,
+      "apiMs": 104,
+      "terminal": "CAPABILITY_LIMITATION",
+      "coverage": "NOT_ACQUIRED",
+      "query": {
+        "mode": "fail_closed",
+        "page": 1,
+        "failReason": "CO producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.",
+        "alternatives": [
+          "Find NPN 10391484.",
+          "What is an NPN?"
+        ],
+        "coverageState": "NOT_ACQUIRED",
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "CO",
+          "meaning": "credential_jurisdiction"
+        },
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "InsuranceTrustHub national identity graph",
+        "geographyMeaning": "credential_jurisdiction = CO",
+        "officialAsOf": "Source credential clocks",
+        "grain": "agency",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/colorado.png"
+    },
+    {
+      "name": "miss",
+      "utc": "2026-09-12T21:42:02.856Z",
+      "ms": 1229,
+      "status": "PASS",
+      "q": "NPN 999999999999",
+      "settledMs": 429,
+      "apiMs": 211,
+      "terminal": "NO_MATCH",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "identifier",
+        "intent": "IDENTIFIER_LOOKUP",
+        "identifier": {
+          "type": "npn",
+          "value": "999999999999"
+        },
+        "page": 1,
+        "requestedTask": "identity",
+        "conditions": [],
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [],
+      "counts": [],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "Not geography-filtered",
+        "officialAsOf": "See credential source_observed_at",
+        "grain": "Labeled NPN lookup",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/miss.png"
+    },
+    {
+      "name": "tx-loa",
+      "utc": "2026-09-12T21:42:15.086Z",
+      "ms": 12226,
+      "status": "PASS",
+      "q": "life insurance agencies credentialed in Texas",
+      "settledMs": 7481,
+      "apiMs": 2660,
+      "terminal": "RESULTS",
+      "coverage": "KNOWN",
+      "query": {
+        "mode": "entity",
+        "entityClass": "agency",
+        "jurisdiction": {
+          "state": "TX",
+          "meaning": "credential_jurisdiction"
+        },
+        "credentialStatus": "current_source",
+        "linesOfAuthority": [
+          "Life"
+        ],
+        "loaMatch": "any",
+        "loaAsOfficialObservation": true,
+        "coverageState": "KNOWN",
+        "sort": "name",
+        "page": 1,
+        "requestOptions": {},
+        "pageSize": 20
+      },
+      "results": [
+        {
+          "entityClass": "agency",
+          "name": "1 HEALTH USA, LC",
+          "npn": "21054630",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO",
+            "Life Agent/Agency"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:51.041+00:00",
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 21054630, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "1 KEY INSURANCE SOLUTIONS",
+          "npn": "16516458",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:26.2+00:00",
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 16516458, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "1 WORLD INSURANCE DBA INSURANCE 'N YOU",
+          "npn": "20116201",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:44.347+00:00",
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 20116201, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "10:10 LIFE AND LEGACY LLC",
+          "npn": "22200524",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:16:00.058+00:00",
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 22200524, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        },
+        {
+          "entityClass": "agency",
+          "name": "108 CAPITAL MANAGEMENT, LLC",
+          "npn": "20761765",
+          "naicCode": null,
+          "credentialJurisdiction": "TX",
+          "credentialStatus": "unknown",
+          "loas": [
+            "Life, Accident, Health & HMO"
+          ],
+          "sourceObservedAt": "2026-08-15T15:15:49.113+00:00",
+          "href": null,
+          "publicationNote": "Research identity \u2014 public graph-agency profile is not currently published.",
+          "whyMatched": "This agency matches because it is classified as an agency, its organization NPN is 20761765, it is linked to a TX credential (credential jurisdiction, not service territory), indexed official LOA text includes Life (not an appointment)."
+        }
+      ],
+      "counts": [
+        {
+          "label": "Matching research identities",
+          "value": 25565,
+          "grain": "official LOA observation text in TX (not appointment; not a national codebook)"
+        }
+      ],
+      "provenance": {
+        "sourceFamily": "national_entities with source-native credential or evidence observations",
+        "geographyMeaning": "credential_jurisdiction = TX",
+        "officialAsOf": "2026-08-15T15:15:51.041+00:00",
+        "grain": "official LOA observation text in TX (not appointment; not a national codebook)",
+        "exclusions": [
+          "Person, agency, and legal insurer stay separate classes.",
+          "Credential jurisdiction is not office location or service territory.",
+          "Line of authority is not carrier appointment.",
+          "Marketplace evidence is not a state license and not certification.",
+          "Missing evidence is not a clean record.",
+          "Public people pages = 0. Public graph-agency profiles = 0."
+        ]
+      },
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/tx-loa.png"
+    },
+    {
+      "name": "homepage-first-enter-zip-handoff-390",
+      "utc": "2026-09-12T21:42:28.444Z",
+      "ms": 13345,
+      "status": "PASS",
+      "href": "/directory?zip=33441&insuranceContext=homeowners&requestedPlace=Boca+Raton+Florida",
+      "directoryText": "Insurance agency directory\n\nPart of Ask Trust Hub \u2014 independent research for moving, insurance, and home financing.\n\nListings with recorded address ZIP 33441. This is a public directory, not a canonical regulatory-identity or service-area search.\n\nOriginal requested place: Boca Raton Florida. The selected ZIP is the executed directory scope; this does not establish coverage of the original city or a service area.\n\nRequested insurance context: homeowners. These listings are not filtered by that product, official LOA or appointment. Contact/verify the source identity separately.\n\nSave agencies to My Insurance to build a research shortlist (guest-saved on this device).\n\nLicensed agency not shown? Request a listing. We publish only after an official state license check. Not paid placement.\n\nAll verified\nFilter agencies\nState\nAll verified\nFlorida\nTexas\nOhio\nAlabama\nAlaska\nArizona\nArkansas\nCalifornia\nColorado\nConnecticut\nDelaware\nGeorgia\nHawaii\nIdaho\nIllinois\nIndiana\nIowa\nKansas\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nMontana\nNebraska\nNevada\nNew Hampshire\nNew Jersey\nNew Mexico\nNew York\nNorth Carolina\nNorth Dakota\nOklahoma\nOregon\nPennsylvania\nRhode Island\nSouth Carolina\nSouth Dakota\nTennessee\nUtah\nVermont\nVirginia\nWashington\nWest Virginia\nWisconsin\nWyoming\nInsurance type\nAll types\nHomeowners\nAuto\nHealth\nMedicare\nRenters\nLife\nUmbrella\nFlood\nSpecialty\nAll specialties\nHealth\nLife\nProperty & Casualty\nPersonal Lines\nAgency\nTitle\nPublic Adjuster\nRelocation Experienced\nHigh-Value Property\nMedicare Specialists\nBundle Experts\nIndependent Agency\nCaptive Agent\nCommercial Lines\nHigh-Risk Auto\nFlood & Wind\nACA Marketplace\nLife & Annuities\nSmall Business\nBilingual Services\nMinimum rating\nAny rating\n3.0+\n3.5+\n4.0+\n4.5+\nVerified research listings only (default)\nApply filters\nClear\n\nSPECIALTY\n\nAll specialties\nHealth\nLife\nProperty & Casualty\nPersonal Lines\nAgency\nTitle\nPublic Adjuster\n\nLicense capability tags when the source maps lines of authority (FL DFS, TX TDI, OH ODI, and others). Hidden for states without LOA columns (e.g. Mississippi MID). Shareable via ?specialty= or ?loa=.\n\nShowing 1\u201348 of 279 verified research listings\n\nName A\u2013Z\nRelevance\nThird-party rating (not an ITH rank)\nReview count\nABOVE AIR, INC.\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense E040012 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\nDFS appointment snapshot on profile\n(regulatory, not a rank)\n\n(954) 341-0816\n\nWebsite on file\n\u00b7 secondary signal\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAca Health Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4010385 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n888-688-2998\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3176335 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L125960 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(888) 688-2998\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA INSURANCE AGENCY MADE SIMPLE INC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L124981 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(989) 588-1960\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA INSURANCE AGENCY QUOTES NOW INC\n\nDEERFIELD BCH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L129593 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(561) 719-1044\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACCESS HEALTH GROUP LLC,\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L104945 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(888) 640-8037\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nADVANCED PROFESSIONAL INSURANCE SERVICES, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L065556 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 725-6112\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nADVANCED PROFESSIONAL SERVICES, LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 2375142 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nADVANCED PROFESSIONAL SERVICES, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L043957 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 725-6112\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAFFORDABLE HEALTH INSURANCE NETWORK LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L125334 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 778-4610\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAFFORDABLE HEALTH NETWORK LLC DBA AFFORDABLE HEALTH CARE INSURANCE AGENCY\n\nAlso known as / DBA: AFFORDABLE HEALTH CARE INSURANCE AGENCY\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L124037 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 778-4600\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALL AG INSURANCE GROUP, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L104133 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(631) 236-8474\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALL POWER SOLUTIONS, INC.\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense W834824 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 773-6900\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALL-STAR FINANCIAL & RETIREMENT SERVICES, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L060501 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 425-0665\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALLEGIANCE INTEGRITY GROUP INSURANCE AGENCY\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3281078 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALLEGIANCE INTEGRITY GROUP INSURANCE AGENCY\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L129248 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 710-8350\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALPHA HEALTH OPTIONS LLC DBA ALPHA HEALTH INSURANCE AGENCY\n\nAlso known as / DBA: ALPHA HEALTH INSURANCE AGENCY\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L126283 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(888) 462-2179\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAlpha Health Solutions Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3997820 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n954-242-9529\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALPHA HEALTH SOLUTIONS LLC DBA ALPHA HEALTH SOLUTIONS INSURANCE AGENCY LLC\n\nAlso known as / DBA: ALPHA HEALTH SOLUTIONS INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L124569 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 242-9529\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERICAN INSULATION AND RODENT SOLUTIONS\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense W884317 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 681-8626\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAmericas Marketing Team Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4074618 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n678-979-0670\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERICAS MARKETING TEAM INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L129083 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(678) 979-0670\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERICAS MARKETING TEAM INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3276159 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAmerisheild Health Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4187405 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n954-588-5128\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERISHEILD HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3447217 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERISHIELD HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L134539 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 588-5128\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMI GROUP, INC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L067139 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 854-7640\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nANCORA INSURANCE AGENCY, INC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense R045154 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 420-5998\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAP LIFE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3411097 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAp Life Agency Llc Dba Ap Life Insurance Agency Llc\n\nAlso known as / DBA: Ap Life Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4162270 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n866-861-1120\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAP LIFE AGENCY LLC DBA AP LIFE INSURANCE AGENCY LLC\n\nAlso known as / DBA: AP LIFE INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L126737 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 980-7623\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nASTRAL HEALTHCARE LLC DBA LEGACY HEALTH OPTIONS\n\nAlso known as / DBA: LEGACY HEALTH OPTIONS\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L134845 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 394-7838\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAT&T CORPORATION\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense W423233 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(816) 237-3103\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nATLANTIC FINANCIAL INSURANCE INVESTMENTS (AFI),\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L119904 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(561) 706-0093\n\nResearch listing \u2014 re-check license status on official tools be",
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/directory-33441-390.png"
+    },
+    {
+      "name": "candidate-select-edit-history-390",
+      "utc": "2026-09-12T21:42:33.938Z",
+      "ms": 5489,
+      "status": "PASS",
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/selected-agency-390.png"
+    },
+    {
+      "name": "homepage-first-enter-zip-handoff-1280",
+      "utc": "2026-09-12T21:42:47.897Z",
+      "ms": 13895,
+      "status": "PASS",
+      "href": "/directory?zip=33441&insuranceContext=homeowners&requestedPlace=Boca+Raton+Florida",
+      "directoryText": "Insurance agency directory\n\nPart of Ask Trust Hub \u2014 independent research for moving, insurance, and home financing.\n\nListings with recorded address ZIP 33441. This is a public directory, not a canonical regulatory-identity or service-area search.\n\nOriginal requested place: Boca Raton Florida. The selected ZIP is the executed directory scope; this does not establish coverage of the original city or a service area.\n\nRequested insurance context: homeowners. These listings are not filtered by that product, official LOA or appointment. Contact/verify the source identity separately.\n\nSave agencies to My Insurance to build a research shortlist (guest-saved on this device).\n\nLicensed agency not shown? Request a listing. We publish only after an official state license check. Not paid placement.\n\nAll verified\n\nSPECIALTY\n\nAll specialties\nHealth\nLife\nProperty & Casualty\nPersonal Lines\nAgency\nTitle\nPublic Adjuster\n\nLicense capability tags when the source maps lines of authority (FL DFS, TX TDI, OH ODI, and others). Hidden for states without LOA columns (e.g. Mississippi MID). Shareable via ?specialty= or ?loa=.\n\nABOVE AIR, INC.\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense E040012 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\nDFS appointment snapshot on profile\n(regulatory, not a rank)\n\n(954) 341-0816\n\nWebsite on file\n\u00b7 secondary signal\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAca Health Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4010385 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n888-688-2998\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3176335 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L125960 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(888) 688-2998\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA INSURANCE AGENCY MADE SIMPLE INC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L124981 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(989) 588-1960\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACA INSURANCE AGENCY QUOTES NOW INC\n\nDEERFIELD BCH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L129593 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(561) 719-1044\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nACCESS HEALTH GROUP LLC,\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L104945 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(888) 640-8037\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nADVANCED PROFESSIONAL INSURANCE SERVICES, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L065556 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 725-6112\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nADVANCED PROFESSIONAL SERVICES, LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 2375142 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nADVANCED PROFESSIONAL SERVICES, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L043957 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 725-6112\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAFFORDABLE HEALTH INSURANCE NETWORK LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L125334 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 778-4610\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAFFORDABLE HEALTH NETWORK LLC DBA AFFORDABLE HEALTH CARE INSURANCE AGENCY\n\nAlso known as / DBA: AFFORDABLE HEALTH CARE INSURANCE AGENCY\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L124037 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 778-4600\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALL AG INSURANCE GROUP, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L104133 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(631) 236-8474\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALL POWER SOLUTIONS, INC.\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense W834824 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 773-6900\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALL-STAR FINANCIAL & RETIREMENT SERVICES, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L060501 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 425-0665\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALLEGIANCE INTEGRITY GROUP INSURANCE AGENCY\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L129248 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 710-8350\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALLEGIANCE INTEGRITY GROUP INSURANCE AGENCY\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3281078 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALPHA HEALTH OPTIONS LLC DBA ALPHA HEALTH INSURANCE AGENCY\n\nAlso known as / DBA: ALPHA HEALTH INSURANCE AGENCY\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L126283 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(888) 462-2179\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAlpha Health Solutions Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3997820 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n954-242-9529\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nALPHA HEALTH SOLUTIONS LLC DBA ALPHA HEALTH SOLUTIONS INSURANCE AGENCY LLC\n\nAlso known as / DBA: ALPHA HEALTH SOLUTIONS INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L124569 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 242-9529\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERICAN INSULATION AND RODENT SOLUTIONS\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense W884317 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 681-8626\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAmericas Marketing Team Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4074618 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n678-979-0670\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERICAS MARKETING TEAM INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L129083 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(678) 979-0670\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERICAS MARKETING TEAM INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3276159 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAmerisheild Health Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4187405 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n954-588-5128\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERISHEILD HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3447217 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMERISHIELD HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L134539 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 588-5128\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAMI GROUP, INC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L067139 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 854-7640\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nANCORA INSURANCE AGENCY, INC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense R045154 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 420-5998\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAP LIFE AGENCY LLC\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 3411097 \u00b7 TX\n\nTexas Department of Insurance \u00b7 checked Aug 15, 2026\n\nAgency\nIndependent Agency\nHealth\nProperty & Casualty\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAp Life Agency Llc Dba Ap Life Insurance Agency Llc\n\nAlso known as / DBA: Ap Life Insurance Agency Llc\n\nDeerfield Beach, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense 4162270 \u00b7 NV\n\nNevada Division of Insurance \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n866-861-1120\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAP LIFE AGENCY LLC DBA AP LIFE INSURANCE AGENCY LLC\n\nAlso known as / DBA: AP LIFE INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L126737 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 980-7623\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nASTRAL HEALTHCARE LLC DBA LEGACY HEALTH OPTIONS\n\nAlso known as / DBA: LEGACY HEALTH OPTIONS\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L134845 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 394-7838\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAT&T CORPORATION\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense W423233 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(816) 237-3103\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nATLANTIC FINANCIAL INSURANCE INVESTMENTS (AFI),\n\nDEERFIELD BEACH, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L119904 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(561) 706-0093\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nATLAS HEALTH INSURANCE AGENCY LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L135570 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\n(954) 913-7113\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nAUTO-MATIC INSURANCE, INC.\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense R000932 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 14, 2026\n\nAgency\nIndependent Agency\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nBELLWETHER INSURANCE GROUP, LLC\n\nDEERFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L088616 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndependent Agency\n\n(954) 800-6400\n\nResearch listing \u2014 re-check license status on official tools before you enroll.\n\nSave\nResearch profile \u2192\nBENCOR RETIREMENT GROUP LLC\n\nDEEFIELD BEACH, Broward County, FL\n\nState license verified\n\nRESEARCH LISTING\n\nLicense L062209 \u00b7 FL\n\nFlorida DFS \u00b7 checked Aug 11, 2026\n\nIndepend",
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/directory-33441-1280.png"
+    },
+    {
+      "name": "candidate-select-edit-history-1280",
+      "utc": "2026-09-12T21:42:53.568Z",
+      "ms": 5668,
+      "status": "PASS",
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/selected-agency-1280.png"
+    },
+    {
+      "name": "responsive-320",
+      "utc": "2026-09-12T21:42:54.518Z",
+      "ms": 945,
+      "status": "PASS",
+      "width": 320,
+      "scrollWidth": 320,
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/width-320.png"
+    },
+    {
+      "name": "responsive-390",
+      "utc": "2026-09-12T21:42:55.469Z",
+      "ms": 946,
+      "status": "PASS",
+      "width": 390,
+      "scrollWidth": 390,
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/width-390.png"
+    },
+    {
+      "name": "responsive-768",
+      "utc": "2026-09-12T21:42:56.714Z",
+      "ms": 1239,
+      "status": "PASS",
+      "width": 768,
+      "scrollWidth": 768,
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/width-768.png"
+    },
+    {
+      "name": "responsive-1280",
+      "utc": "2026-09-12T21:42:58.162Z",
+      "ms": 1444,
+      "status": "PASS",
+      "width": 1280,
+      "scrollWidth": 1280,
+      "screenshot": "docs/qa/th-search-r1-013/browser-production-3e1d0dc/width-1280.png"
+    }
+  ],
+  "failures": [],
+  "deployedSha": "3e1d0dc41f23b35714561d232bd6887d84019f18",
+  "deploymentId": "dpl_AVbNVorH6zZRXLhpihHSBs5wTNjh"
+}
