@@ -44,6 +44,14 @@ assert(v1.virginia.authorizedCompanies === null, "VA authorized companies not a 
 assert(v1.newYork.snapshotFingerprint === pub.newYorkSnapshotFingerprint, "NY snapshot fingerprint");
 assert(v1.newYork.directoryRows === pub.newYorkDirectoryRows, "NY directory rows");
 assert(v1.newYork.authorizedCompanies === null, "NY authorized companies not a number");
+assert(v1.illinois.snapshotFingerprint === pub.illinoisSnapshotFingerprint, "IL snapshot fingerprint");
+assert(v1.illinois.directorsOrderObservations === pub.illinoisDirectorsOrderObservations, "IL Director's Orders observations");
+assert(v1.illinois.directorsOrderObservations === 2896, "IL 2896 order observations");
+assert(v1.illinois.authorizedCompanies === null, "IL authorized companies not a number");
+assert(byKey.il_authorized_companies.value === null, "IL authorized metric not a number");
+assert(byKey.il_authorized_companies.valueState === "NOT_ACQUIRED", "IL authorized not acquired");
+assert(byKey.il_directors_order_observations.value === 2896, "IL 2896 order metric");
+assert(byKey.il_directors_order_observations.value !== byKey.licensed_insurance_companies.value, "IL orders != national companies");
 assert(byKey.wa_authorized_companies.value === null, "WA authorized metric not a number");
 assert(byKey.wa_authorized_companies.valueState === "NOT_ACQUIRED", "WA authorized not acquired");
 assert(byKey.wa_oic_regulated_entities_annual_report.value === 2924, "WA 2924 annual aggregate");

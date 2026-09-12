@@ -18,6 +18,7 @@ export function publicationMetricInputs() {
   const coPub = read("lib/colorado-intelligence/publication.ts");
   const vaPub = read("lib/virginia-intelligence/publication.ts");
   const nyPub = read("lib/new-york-intelligence/publication.ts");
+  const ilPub = read("lib/illinois-intelligence/publication.ts");
   const njPub = read("lib/new-jersey-intelligence/publication.ts");
   const flPub = read("lib/national/fl-state-intel.ts");
   const tx = readJson("lib/texas-intelligence/accepted-snapshot.json");
@@ -26,6 +27,7 @@ export function publicationMetricInputs() {
   const co = readJson("lib/colorado-intelligence/accepted-snapshot.json");
   const va = readJson("lib/virginia-intelligence/accepted-snapshot.json");
   const ny = readJson("lib/new-york-intelligence/accepted-snapshot.json");
+  const il = readJson("lib/illinois-intelligence/accepted-snapshot.json");
   const nj = readJson("lib/new-jersey-intelligence/accepted-snapshot.json");
   const fl = readJson("data/reports/fl-ins-006-state-snapshot.json");
   const flMc = readJson("data/reports/fl-ins-004-market-exam-census.json");
@@ -45,6 +47,7 @@ export function publicationMetricInputs() {
   const coPath = coPub.match(/path: '(\/[^']+)'/)?.[1];
   const vaPath = vaPub.match(/path: '(\/[^']+)'/)?.[1];
   const nyPath = nyPub.match(/path: '(\/[^']+)'/)?.[1];
+  const ilPath = ilPub.match(/path: '(\/[^']+)'/)?.[1];
   if (txPath && existsSync(join(root, "app/texas/page.tsx"))) paths.push(txPath);
   if (njPath && existsSync(join(root, "app/new-jersey/page.tsx"))) paths.push(njPath);
   if (caPath && existsSync(join(root, "app/california/page.tsx"))) paths.push(caPath);
@@ -52,6 +55,7 @@ export function publicationMetricInputs() {
   if (coPath && existsSync(join(root, "app/colorado/page.tsx"))) paths.push(coPath);
   if (vaPath && existsSync(join(root, "app/virginia/page.tsx"))) paths.push(vaPath);
   if (nyPath && existsSync(join(root, "app/new-york/page.tsx"))) paths.push(nyPath);
+  if (ilPath && existsSync(join(root, "app/illinois/page.tsx"))) paths.push(ilPath);
 
   const cmsSourceAsOf = cms.match(/modified: '([^']+)'/)?.[1]?.slice(0, 10) || "2026-08-21";
   const flFp = flPub.match(/CANONICAL_SNAPSHOT_FINGERPRINT =\s*'([a-f0-9]{64})'/)?.[1];
@@ -111,6 +115,9 @@ export function publicationMetricInputs() {
     newYorkSnapshotFingerprint: ny.fingerprint,
     newYorkAsOf: ny.snapshot_as_of,
     newYorkDirectoryRows: ny.company_directory.directory_rows,
+    illinoisSnapshotFingerprint: il.fingerprint,
+    illinoisAsOf: il.snapshot_as_of,
+    illinoisDirectorsOrderObservations: il.directors_orders.observation_rows,
     censusTask: census.task,
     censusAsOf: census.at,
     censusAgencies: census.entities.agency,

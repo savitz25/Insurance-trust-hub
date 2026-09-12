@@ -82,9 +82,12 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     newYorkSnapshotFingerprint: 'd4832c3c41c0390d6ffa15755142c6d669e49e6fb0db858f55f761ea894b212e',
     newYorkAsOf: '2026-09-11',
     newYorkDirectoryRows: 1054,
+    illinoisSnapshotFingerprint: '3085ccfe7ec30c038fafcfb3e70a11609eeba91a9918c9efe14ceb7f0ef634aa',
+    illinoisAsOf: '2026-09-12',
+    illinoisDirectorsOrderObservations: 2896,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
-    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york'],
+    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois'],
     ...over,
   };
 }
@@ -207,9 +210,22 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     );
     assert.equal(metricByKey(m, 'va_statistical_report_naic_directory_rows').value, 1546);
     assert.equal(metricByKey(m, 'ny_dfs_company_directory_rows').value, 1054);
+    assert.equal(metricByKey(m, 'il_directors_order_observations').value, 2896);
+    assert.equal(metricByKey(m, 'il_authorized_companies').value, null);
+    assert.equal(metricByKey(m, 'il_authorized_companies').valueState, 'NOT_ACQUIRED');
+    assert.match(metricByKey(m, 'il_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
+    assert.equal(metricByKey(m, 'published_state_intelligence_pages').value, 9);
     assert.throws(
       () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia'] })),
       /New York state intelligence path missing/
+    );
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york'] })),
+      /Illinois state intelligence path missing/
+    );
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ illinoisDirectorsOrderObservations: 6185 })),
+      /Illinois Director/
     );
     assert.throws(
       () => computeInsuranceNetworkMetrics(baseInput({ coloradoStatisticalDirectoryRows: 6185 })),

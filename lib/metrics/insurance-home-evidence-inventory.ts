@@ -197,6 +197,24 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-11" },
     ],
   },
+  {
+    state: "Illinois",
+    abbreviation: "IL",
+    href: "/illinois",
+    regulators: "Illinois Department of Insurance",
+    evidence: [
+      "IDOI Company Lookup (search-only)",
+      "SBS individual and business-entity lookup (search-only)",
+      "Director's Orders search-index observations",
+      "Consumer complaint and help-center paths",
+    ],
+    limitation:
+      "No current bulk authorized-company roster was acquired; 2,896 Director's Orders observations are not a company census. Producer and agency lists remain search-only.",
+    sourceClocks: [
+      { label: "Director's Orders retrieval", retrievedAt: "2026-09-12T16:41:31Z" },
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-12" },
+    ],
+  },
 ] as const;
 
 const ALLOWED = new Set<PublicationStatus>([
@@ -243,6 +261,8 @@ const FAMILY_BY_KEY: Record<string, InsuranceHomeEvidenceFamily> = {
   co_surplus_lines_eligible_identities: "RATE_MARKET",
   va_statistical_report_naic_directory_rows: "ENTITY_IDENTITY",
   ny_dfs_company_directory_rows: "ENTITY_IDENTITY",
+  il_directors_order_observations: "REGULATORY_ENFORCEMENT",
+  il_authorized_companies: "ENTITY_IDENTITY",
   public_directory_listings: "PUBLIC_SURFACES",
   published_state_intelligence_pages: "PUBLIC_SURFACES",
   public_legal_insurer_wave1_profiles: "PUBLIC_SURFACES",
@@ -281,6 +301,8 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   co_surplus_lines_eligible_identities: "/colorado",
   va_statistical_report_naic_directory_rows: "/virginia",
   ny_dfs_company_directory_rows: "/new-york",
+  il_directors_order_observations: "/illinois",
+  il_authorized_companies: "/illinois",
 };
 
 function fromMetric(

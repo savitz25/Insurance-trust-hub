@@ -361,6 +361,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
       { href: '/colorado', label: 'Colorado insurance research' },
       { href: '/virginia', label: 'Virginia insurance research' },
       { href: '/new-york', label: 'New York insurance research' },
+      { href: '/illinois', label: 'Illinois insurance research' },
       { href: '/florida', label: 'Florida insurance research' },
       { href: '/new-jersey', label: 'New Jersey insurance research' },
       { href: '/texas', label: 'Texas insurance research' },

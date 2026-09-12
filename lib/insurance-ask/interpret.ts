@@ -19,6 +19,7 @@ const STATE_NAMES: Record<string, string> = {
   colorado: 'CO',
   virginia: 'VA',
   'new york': 'NY',
+  illinois: 'IL',
   fl: 'FL',
   tx: 'TX',
   ma: 'MA',
@@ -30,6 +31,7 @@ const STATE_NAMES: Record<string, string> = {
   co: 'CO',
   va: 'VA',
   ny: 'NY',
+  il: 'IL',
 };
 
 function detectStates(q: string): string[] {
@@ -322,8 +324,8 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   }
 
   if (
-    /\b(licensed insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
-    /\b(colorado|virginia|new york)\b/i.test(q)
+    /\b((?:licensed )?insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
+    /\b(colorado|virginia|new york|illinois)\b/i.test(q)
   ) {
     const state = detectStates(q)[0] ?? 'The requested state';
     const query = fail(
@@ -335,7 +337,34 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  if (/\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?)\b/i.test(q) && /\b(texas|new jersey|california|washington|colorado|virginia|new york)\b/i.test(q)) {
+  if (
+    (/\billinois\b/i.test(q) || detectStates(q)[0] === 'IL') &&
+    /complaint/i.test(q) &&
+    /\b(insurer|company|agent|producer|agency)\b/i.test(q)
+  ) {
+    const query = fail(
+      'Illinois consumer complaints are IDOI Help Center / file-a-complaint search-only. Missing bulk complaints is not zero. A complaint is not a Director’s Order and not a violation.',
+      ['Open Illinois insurance research.', 'Find insurer NAIC code 10064.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Coverage', 'NOT_ACQUIRED — Illinois complaint bulk');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (
+    (/\billinois\b/i.test(q) || detectStates(q)[0] === 'IL') &&
+    /disciplin|director.?s orders|enforcement order|revocation|suspension/i.test(q)
+  ) {
+    const query = fail(
+      'Illinois Director’s Orders are official enforcement observations, not a company census and not consumer complaints. Name-only matching is unsafe. Use the official IDOI Directors Orders search.',
+      ['Open Illinois insurance research.', 'Find NPN 10391484.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Illinois Director’s Orders');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(q) && /\b(texas|new jersey|california|washington|colorado|virginia|new york|illinois)\b/i.test(q)) {
     const state = detectStates(q)[0];
     const query = fail(`${state ?? 'The requested'} complete authorized/legal-insurer roster is not acquired as a current bulk universe. Missing coverage is not zero.`, ['Find insurer NAIC code 10064.', 'What is a legal insurer?']);
     query.entityClass = 'insurer';

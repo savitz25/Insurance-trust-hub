@@ -50,6 +50,7 @@ export type MetricGrain =
   | 'contact_observation'
   | 'statistical_report_directory_row'
   | 'surplus_lines_eligibility_identity'
+  | 'directors_order_observation'
   | 'combined_incompatible_grains';
 
 export type PublicationStatus =
@@ -207,6 +208,16 @@ export type InsuranceNetworkMetricsV1 = {
     agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
     authorizedCompanies: null;
     authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY / PARTIAL';
+  };
+  illinois: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    directorsOrderObservations: number;
+    directorsOrderCoverage: 'DIRECTORS_ORDERS_SEARCH_INDEX_NOT_COMPANY_CENSUS';
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    authorizedCompanies: null;
+    authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY';
   };
   publication: {
     publicPeople: 0;

@@ -75,6 +75,9 @@ export type InsuranceNetworkMetricsInput = {
   newYorkSnapshotFingerprint: string;
   newYorkAsOf: string | null;
   newYorkDirectoryRows: number;
+  illinoisSnapshotFingerprint: string;
+  illinoisAsOf: string | null;
+  illinoisDirectorsOrderObservations: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -192,8 +195,14 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   if (!input.publishedStateIntelligencePaths.includes('/new-york')) {
     throw new Error('New York state intelligence path missing');
   }
+  if (!input.publishedStateIntelligencePaths.includes('/illinois')) {
+    throw new Error('Illinois state intelligence path missing');
+  }
   if (input.newYorkDirectoryRows === input.legalInsurers) {
     throw new Error('New York DFS directory rows must not equal national legal insurers');
+  }
+  if (input.illinoisDirectorsOrderObservations === input.legalInsurers) {
+    throw new Error('Illinois Director’s Orders must not equal national legal insurers');
   }
   if (input.virginiaStatisticalDirectoryRows === input.legalInsurers) {
     throw new Error('Virginia statistical-report companies must not equal national legal insurers');
@@ -778,6 +787,54 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'il_directors_order_observations',
+      label: "Illinois IDOI Director's Orders observations",
+      value: input.illinoisDirectorsOrderObservations,
+      valueState: 'KNOWN',
+      grain: 'directors_order_observation',
+      denominator: 'IDOI Directors Orders application search-index rows',
+      description:
+        "Official Director's Orders search-index observations. An order is not a conviction, not a unique company, and not a current insurer roster.",
+      coverage: 'Illinois',
+      contributingSourceSystems: ['il_idoi_directors_orders'],
+      sourceAsOf: input.illinoisAsOf,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        "One IDOI Director's Orders search-index row.",
+        'Not current company authorization, not agencies, not producers, not complaints, not national legal insurers.',
+        ['il_idoi'],
+        'Illinois; Directors Orders retrieval',
+        'IDOI Directors Orders application'
+      ),
+    }),
+    metric({
+      key: 'il_authorized_companies',
+      label: 'Illinois authorized companies',
+      value: null,
+      valueState: 'NOT_ACQUIRED',
+      grain: 'authorized_company_row',
+      denominator: 'IDOI Company Lookup — OPEN_SEARCH_ONLY',
+      description:
+        'Current authorized-company roster is not acquired. Director’s Orders observations are a different grain. Missing is not zero companies.',
+      coverage: 'Illinois',
+      contributingSourceSystems: ['il_idoi'],
+      sourceAsOf: null,
+      generatedAt,
+      publicationStatus: 'PUBLIC_UNKNOWN',
+      trace: commonTrace(
+        'Current IDOI-authorized company identities when a bulk roster exists.',
+        'Not Director’s Orders, not producers, not national legal insurers. Never render as zero.',
+        ['il_idoi'],
+        'Illinois; live Company Lookup',
+        'IDOI Company Lookup Application',
+        {
+          whyUnknown:
+            'IDOI Company Lookup is live/search-only. Do not fabricate sourceAsOf from retrieval. Director’s Orders are not a current authorized-company roster. Never render as zero.',
+        }
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -912,9 +969,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -922,7 +979,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -1008,6 +1065,8 @@ export function computeInsuranceNetworkMetrics(
     vaDirectory: input.virginiaStatisticalDirectoryRows,
     nyFp: input.newYorkSnapshotFingerprint,
     nyDirectory: input.newYorkDirectoryRows,
+    ilFp: input.illinoisSnapshotFingerprint,
+    ilOrders: input.illinoisDirectorsOrderObservations,
     paths: input.publishedStateIntelligencePaths,
     wave1: input.publicLegalInsurerWave1,
   };
@@ -1133,6 +1192,16 @@ export function computeInsuranceNetworkMetrics(
       agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       authorizedCompanies: null,
       authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY / PARTIAL',
+    },
+    illinois: {
+      snapshotFingerprint: input.illinoisSnapshotFingerprint,
+      asOf: input.illinoisAsOf,
+      directorsOrderObservations: input.illinoisDirectorsOrderObservations,
+      directorsOrderCoverage: 'DIRECTORS_ORDERS_SEARCH_INDEX_NOT_COMPANY_CENSUS',
+      producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      authorizedCompanies: null,
+      authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY',
     },
     publication: {
       publicPeople: 0,
