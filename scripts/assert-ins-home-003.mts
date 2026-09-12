@@ -143,10 +143,10 @@ ok(
   byKey("licensed_insurance_companies")?.destination === "/insurers",
   "insurer destination explicit",
 );
-ok(INSURANCE_HOMEPAGE_STATE_CARDS.length === 6, "exactly six state cards");
+ok(INSURANCE_HOMEPAGE_STATE_CARDS.length === 9, "exactly nine state cards");
 ok(
   INSURANCE_HOMEPAGE_STATE_CARDS.map((s) => s.href).join(",") ===
-    "/florida,/texas,/new-jersey,/california,/washington,/colorado",
+    "/florida,/texas,/new-jersey,/california,/washington,/colorado,/virginia,/new-york,/illinois",
   "canonical state hrefs",
 );
 ok(

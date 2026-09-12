@@ -128,7 +128,7 @@ def main() -> None:
     check("43_national_persons", metrics["nationalGraph"]["persons"] == 1029860)
     check("44_national_legal", metrics["nationalGraph"]["legalInsurers"] == 6185)
     check("45_state_pages", "/colorado" in metrics["publication"]["publishedStateIntelligencePaths"])
-    check("46_six_pages", len(metrics["publication"]["publishedStateIntelligencePaths"]) == 8 and "/virginia" in metrics["publication"]["publishedStateIntelligencePaths"] and "/new-york" in metrics["publication"]["publishedStateIntelligencePaths"])
+    check("46_six_pages", len(metrics["publication"]["publishedStateIntelligencePaths"]) == 9 and "/virginia" in metrics["publication"]["publishedStateIntelligencePaths"] and "/new-york" in metrics["publication"]["publishedStateIntelligencePaths"] and "/illinois" in metrics["publication"]["publishedStateIntelligencePaths"])
     check("47_no_az", "/arizona" not in metrics["publication"]["publishedStateIntelligencePaths"])
     check("48_surplus_ne_directory", snap["surplus_lines"]["eligible_identities"] != snap["statistical_report"]["naic_companies_tab"]["company_directory_rows"])
     check("49_directory_ne_national", snap["statistical_report"]["naic_companies_tab"]["company_directory_rows"] != 6185)
