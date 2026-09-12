@@ -32,6 +32,8 @@ type SafeRow = {
   publicationState: 'RESEARCH_ROW_ONLY' | 'PUBLIC_PROFILE';
   destination: string | null;
   whyMatched: string;
+  matchEvidence?: InsuranceAskResult['results'][number]['matchEvidence'];
+  selectionUrl?: string;
 };
 
 export type SpecialistEnvelope = {
@@ -93,6 +95,9 @@ function unsupported(code: string, message: string, alternatives: string[], inte
 }
 
 function validate(req: SpecialistRequest): void {
+  if (!req || typeof req !== 'object' || Array.isArray(req)) throw new RequestError('invalid_query', 'Request must be a structured object.');
+  if (req.query != null && typeof req.query !== 'string') throw new RequestError('invalid_query', 'Query must be text.');
+  if (req.identityName != null && typeof req.identityName !== 'string') throw new RequestError('invalid_name', 'Identity name must be text.');
   if (req.query && req.query.length > INSURANCE_ASK_INPUT_LIMIT) throw new RequestError('input_too_long', 'Use at most 180 characters; the full request was rejected.');
   if (req.contract && req.contract !== SPECIALIST_EXECUTION_CONTRACT) throw new RequestError('contract_mismatch', 'Unsupported specialist contract.');
   if (req.entityClass && !['agency', 'producer', 'legal_insurer'].includes(req.entityClass)) throw new RequestError('invalid_entity_class', 'Invalid insurance entity class.');
@@ -124,6 +129,7 @@ function safeRows(result: InsuranceAskResult): SafeRow[] {
       sourceDataset: row.sourceDataset, sourceObservedAt: row.sourceObservedAt,
       publicationState: row.href ? 'PUBLIC_PROFILE' as const : 'RESEARCH_ROW_ONLY' as const,
       destination: row.href, whyMatched: row.whyMatched,
+      matchEvidence: row.matchEvidence, selectionUrl: row.selectionHref,
     }];
   });
 }
@@ -155,7 +161,7 @@ function wave1(req: SpecialistRequest): SpecialistEnvelope {
   out.appliedFilters = { publicationClass: ['WAVE_1_PUBLIC_PROFILE'] };
   out.rows = chosen.map((row) => ({
     entityClass: 'legal_insurer', name: row.canonical_legal_name, npn: null, naicCode: row.naic_cocode,
-    credentialJurisdiction: null, credentialStatus: row.public_safe_status, linesOfAuthority: [],
+    credentialJurisdiction: null, credentialStatus: null, linesOfAuthority: [],
     sourceDataset: 'ins-insurer-006-wave1', sourceObservedAt: row.report_dates[0] ?? null,
     publicationState: 'PUBLIC_PROFILE', destination: insurerProfilePath(row.slug),
     whyMatched: 'This legal insurer is in the accepted Wave-1 public cohort because exact NAIC identity and public examination-evidence gates passed.',
@@ -207,6 +213,7 @@ export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ sta
     out.limitations = [...v1.limitations, ...BASE_LIMITATIONS.filter((x) => !v1.limitations.includes(x))];
     out.destinations = Array.from(new Set(rows.map((r) => r.destination).filter((x): x is string => Boolean(x)))).map((url) => ({ type: url.startsWith('/insurers/') ? 'LEGAL_INSURER_PROFILE' : 'DIRECTORY_RESEARCH', url }));
     out.destinations.push(...(v1.recoveryActions??[]).map(a=>({type:a.type,url:a.destination})));
+    out.destinations.push(...rows.filter(r=>r.selectionUrl).map(r=>({type:'IDENTITY_SELECTION',url:r.selectionUrl!})));
     if(v1.parsed.query.directoryZip)out.destinations.push({type:'DIRECTORY_RESEARCH',url:'/directory?'+new URLSearchParams({zip:v1.parsed.query.directoryZip,insuranceContext:v1.parsed.query.directoryContext?.requestedInsuranceContext.join(',')??'',requestedPlace:v1.parsed.query.directoryContext?.requestedLocation??''})});
     out.availableRefinements = entityClassFromV1(v1.entityClass) === 'agency' ? [{ key: 'credentialJurisdiction', values: ['FL', 'TX', 'MA', 'OH', 'VT'], limitation: 'Credential jurisdiction is not service territory.' }, { key: 'lineOfAuthority', values: v1.parsed.query.jurisdiction?.state === 'FL' ? [] : ['source-native labels only'], limitation: 'LOA is not appointment.' }] : [{ key: 'identifier', values: ['NPN', 'NAIC'] }];
     out.diagnostics = { sourceContract: v1.contract, sourceResultType: v1.resultType, elapsedMs: v1.elapsedMs, publicPayloadContract: publicV1.contract, bailRowsSuppressedOnPage: v1.results.length - rows.length };

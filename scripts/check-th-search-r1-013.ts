@@ -1,3 +1,4 @@
+import {GET as specialistGet,POST as specialistPost} from '../app/api/specialist-execution/v2/route';
 import {Footer} from '../components/footer';
 import { applyDirectoryZipScope } from "../lib/providers/directory-scope";
 import { GET as askGet } from "../app/api/ask/route";
@@ -111,6 +112,9 @@ async function test(name: string, fn: () => Promise<void>) {
   }
 }
 async function main() {
+  await test('structured HTTP validates full input and duplicate parameters',async()=>{for(const url of ['https://example.com/api?q='+encodeURIComponent('NPN 10391484 '+'x'.repeat(180)),'https://example.com/api?q=NPN+10391484&q=NAIC+10064'])assert.equal((await specialistGet(new Request(url))).status,400);assert.equal((await specialistPost(new Request('https://example.com/api',{method:'POST',body:'null',headers:{'Content-Type':'application/json'}}))).status,400)});
+  await test('direct Wave-1 publication status is not a credential status',async()=>{const r=await executeSpecialistV2({queryType:'cohort',entityClass:'legal_insurer'});assert.ok(r.body.rows.length);assert.ok(r.body.rows.every(x=>x.credentialStatus===null&&x.credentialJurisdiction===null))});
+
   check('actual footer markup cannot nest links and remount first search',()=>{const html=renderToStaticMarkup(createElement(Footer));let open=0;for(const token of html.matchAll(/<a\b[^>]*>|<\/a>/g)){if(token[0].startsWith('</'))open--;else {assert.equal(open,0,'Nested anchor breaks hydration');open++;}}assert.equal(open,0);assert.match(html,/Insurance Trust Hub home/)});
 
   const source = fixtureSource();
@@ -383,7 +387,8 @@ async function main() {
         assert.match(html, /selected=/);
         assert.match(html, /Research\+Acme\+Insurance/);
       });
-      await test("structured natural identity equals native", async () => {
+      await test('structured candidates expose safe revalidated continuation',async()=>{const r=await executeSpecialistV2({query:'Research Acme Insurance'});assert.equal(r.body.resultState,'AMBIGUOUS_IDENTITIES');assert.ok(r.body.rows.every(x=>x.selectionUrl?.startsWith('/ask?')&&x.matchEvidence));assert.ok(r.body.destinations.some(x=>x.type==='IDENTITY_SELECTION'))});
+    await test("structured natural identity equals native", async () => {
         const a = await executeInsuranceAsk("NPN 10391484"),
           b = await executeSpecialistV2({ query: "NPN 10391484" });
         assert.equal(b.body.rows[0]?.npn, a.results[0]?.npn);

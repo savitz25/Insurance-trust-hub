@@ -717,21 +717,30 @@ async function listAgenciesOfficialLoa(parsed: ParsedInsuranceAsk, started: numb
   const pageSize = q.pageSize ?? INSURANCE_ASK_PAGE_SIZE;
   const from = (page - 1) * pageSize;
   // The maintained issuer-dataset contract establishes LOA jurisdiction. Both predicates run before pagination.
+  if (loas.length > 1 && q.loaMatch !== 'all') {
+    q.mode = 'fail_closed'; q.terminalState = 'NEEDS_CLARIFICATION'; q.coverageState = 'UNSUPPORTED';
+    q.failReason = 'Select one official line of authority, or explicitly request all listed lines. An alternative-line cohort is not executed by this source query; no requested line was discarded.';
+    return emptyBase(parsed, started);
+  }
   const requestedLoas = q.loaMatch === 'all' ? loas : [primary];
   const embeds = requestedLoas.map((_, i) => `loa${i}:loa_observations!inner(official_text, source_dataset, source_observed_at)`).join(',');
-  let sourceQuery = db()
-    .from('national_entities')
-    .select(
+  function selectLoa(head: boolean) {
+    let query = db().from('national_entities').select(
       `id, entity_kind, npn, display_name, legal_name, identity_kind, identity_confidence, license_credentials!inner(id, jurisdiction, regulatory_status, license_number, license_class, source_dataset, source_observed_at, entity_kind), ${embeds}`,
-      { count: 'exact' },
-    )
-    .eq('entity_kind', 'agency')
-    .eq('license_credentials.jurisdiction', state)
-    .order('display_name', { ascending: true })
-    .order('id', { ascending: true })
-    .range(from, from + pageSize - 1);
-  requestedLoas.forEach((loa, i) => { sourceQuery = sourceQuery.ilike(`loa${i}.official_text`, `%${escapeNamePattern(loa)}%`).in(`loa${i}.source_dataset`, loaSourceDatasetsForJurisdiction(state)); });
-  const { data, count } = await sourceQuery;
+      head ? { count: 'exact', head: true } : undefined,
+    ).eq('entity_kind', 'agency').eq('license_credentials.jurisdiction', state);
+    requestedLoas.forEach((loa, i) => { query = query.ilike(`loa${i}.official_text`, `%${escapeNamePattern(loa)}%`).in(`loa${i}.source_dataset`, loaSourceDatasetsForJurisdiction(state)); });
+    return head ? query : query.order('display_name', {ascending:true}).order('id', {ascending:true}).range(from, from + pageSize - 1);
+  }
+  const { data } = await selectLoa(false);
+  const countKey = askCacheKey(['agency', 'official-loa', state, ...requestedLoas, q.loaMatch]);
+  let count = sourceContext.getStore() ? undefined : cacheGetCount(countKey);
+  if (count === undefined) {
+    const counted = await selectLoa(true);
+    if (counted.count === null) throw new Error('Insurance research count source unavailable');
+    count = counted.count;
+    if (!sourceContext.getStore()) cacheSetCount(countKey, count);
+  }
   const rows = ((data ?? []) as EntityRow[]).map(row => ({ ...row, loa_observations: requestedLoas.flatMap((_, i) => (row as unknown as Record<string, NonNullable<EntityRow['loa_observations']>>)[`loa${i}`] ?? []) }));
   const results = rows.map((row) => cardFromEntity(row, loas, true));
   return finish(
