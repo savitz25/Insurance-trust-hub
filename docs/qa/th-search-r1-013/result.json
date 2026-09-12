@@ -1,14 +1,14 @@
 {
   "ticket": "TH-SEARCH-R1-013",
-  "status": "READY_FOR_REVIEW",
+  "status": "RELEASED_AND_VERIFIED",
   "model": "GPT-6 Astra / High ? USER-CONFIRMED",
   "modelMetadataIndependentlyVerified": false,
   "baseline": "8051be7d5169929e42155cab81effa94178e8aad",
-  "testedImplementation": "833d3acce9d469c707014c71999fd02aaacf9f19",
-  "runtimeMerge": null,
-  "deployedSha": null,
+  "testedImplementation": "732da60b0ecfb03565dd9ddaca98af6515646205",
+  "runtimeMerge": "3e1d0dc41f23b35714561d232bd6887d84019f18",
+  "deployedSha": "3e1d0dc41f23b35714561d232bd6887d84019f18",
   "pr": "https://github.com/savitz25/Insurance-trust-hub/pull/34",
-  "updatedAt": "2026-09-12T21:20:10.971487+00:00",
+  "updatedAt": "2026-09-12T21:45:10.864043+00:00",
   "baselineMatrix": "baseline.json",
   "independentOracle": "source-oracle.json",
   "sourceMatrix": "source-capability-matrix.md",
@@ -23,7 +23,7 @@
     }
   },
   "mutations": "mutations.json",
-  "reviewMethod": "Self-review plus automated behavioral, source-contract, browser and CI checks; no independent human review",
+  "reviewMethod": "Self-review, automated behavioral/browser/CI checks and Vercel Agent Review; one suggestion repaired, incremental review zero suggestions. No independent human review.",
   "previewBrowser": "Authentication required; no protection bypass or share-token creation. Preview builds pass. Local optimized and canonical Production browser proof are recorded separately.",
   "remaining": [
     "Directory source contains inconsistent address fields and legacy listing-quality issues; only recorded ZIP equality is certified.",
@@ -57,9 +57,9 @@
   },
   "structuredLive": "structured-live.json",
   "regressionGates": "regression-gates.json",
-  "build": "build-final.log",
-  "typecheck": "typecheck-final.log",
-  "finalFocusedLog": "green-final.log",
+  "build": "build-reviewed-source-class.log",
+  "typecheck": "typecheck-reviewed-source-class.log",
+  "finalFocusedLog": "review-finding-green.log",
   "reviewFinding": {
     "method": "Vercel automated review",
     "head": "19ccca8688034ae2946323f0f108a0a6f4306f64",
@@ -78,5 +78,30 @@
       "pass": 63,
       "fail": 0
     }
-  }
+  },
+  "deployment": "deployment-runtime.json",
+  "productionBrowser": {
+    "path": "browser-production-3e1d0dc/result.json",
+    "pass": 24,
+    "fail": 0,
+    "nativeSettledMsRange": [
+      233,
+      7481
+    ],
+    "apiMsRange": [
+      97,
+      5092
+    ],
+    "actions": "actions-production-3e1d0dc/result.json",
+    "compatibilitySupplement": "compat-production-3e1d0dc/result.json"
+  },
+  "reviewCi": "review-ci-final.jsonl",
+  "closure": "Only TH-SEARCH-R1-013 certified identity/class/local-directory/recovery cases",
+  "documentationFollowup": {
+    "branch": "th-search-r1-013-receipt",
+    "runtimeChange": false,
+    "commit": null,
+    "note": "This receipt follows the observed runtime release; no future evidence merge SHA is fabricated."
+  },
+  "cleanupLimitation": "Automatic approval review blocked deletion of generated untracked scripts/__pycache__; no policy bypass attempted."
 }
