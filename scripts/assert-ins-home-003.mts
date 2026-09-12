@@ -22,7 +22,7 @@ const renderedStructure = readFileSync(
   "utf8",
 );
 
-ok(inventory.length === 42, "42 deterministic inventory measures");
+ok(inventory.length === 46, "46 deterministic inventory measures");
 ok(
   Object.keys(INSURANCE_HOME_EVIDENCE_FAMILIES).length === 10,
   "ten evidence families",
