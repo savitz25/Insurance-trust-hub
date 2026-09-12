@@ -8,12 +8,12 @@ At line:1 char:1
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : NotSpecified: ( ⚠ Warning: Nex...not be correct.:String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
- 
+
  We detected multiple lockfiles and selected the directory of C:\Users\makei\package-lock.json as the root directory.
- To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if 
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if
 it's not needed.
    See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
- Detected additional lockfiles: 
+ Detected additional lockfiles:
    * C:\Users\makei\th-search-r1-013-work\package-lock.json
 
    ▲ Next.js 15.5.19 (Turbopack)
@@ -101,9 +101,9 @@ info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/d
    Collecting page data ...
  ⚠ Using edge runtime on a page currently disables static generation for that page
    Generating static pages (0/374) ...
-   Generating static pages (93/374) 
-   Generating static pages (186/374) 
-   Generating static pages (280/374) 
+   Generating static pages (93/374)
+   Generating static pages (186/374)
+   Generating static pages (280/374)
  ✓ Generating static pages (374/374)
    Finalizing page optimization ...
    Collecting build traces ...
