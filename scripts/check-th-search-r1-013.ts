@@ -628,6 +628,15 @@ async function main() {
       "INVALID_INPUT",
     );
   });
+  for (const kind of ['insurance_group','carrier','consumer_brand']) await test(`unmapped NPN class ${kind} is a limitation, not outage or agency`,async()=>{
+    for(const q of ['NPN 10391484','is NPN 10391484 appointed with Acme?','NPN 10391484 marketplace']) {
+      const f=fixtureSource();f.tables.national_entities[0]!.entity_kind=kind;
+      const r=await withInsuranceSource(f.db,()=>executeInsuranceAsk(q),insurerFixture);
+      assert.equal(r.terminalState,'CAPABILITY_LIMITATION');assert.equal(r.coverageState,'PARTIAL');assert.equal(r.results.length,0);assert.equal(r.parsed.query.identifier?.value,'10391484');
+      assert.ok(f.calls.every(c=>c.table==='national_entities'));
+      const html=renderToStaticMarkup(createElement(AskInsuranceResultView,{result:r}));assert.ok(html.includes('source class'));assert.ok(!html.includes('No matching research identities'));
+    }
+  });
   console.log({ pass, fail });
   if (fail) process.exitCode = 1;
 }

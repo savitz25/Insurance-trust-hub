@@ -233,6 +233,14 @@ async function executeInsurancePlan(parsed: ParsedInsuranceAsk, pageSize: number
   return listAgencies(parsed, started);
 }
 
+function unmappedNpnClass(parsed: ParsedInsuranceAsk, rows: EntityRow[], started: number): InsuranceAskResult | undefined {
+  const kinds = [...new Set(rows.map(r=>r.entity_kind))];
+  if(kinds.every(k=>['person','agency','legal_insurer'].includes(k)))return undefined;
+  const reason='The exact NPN matched an indexed source class that this person/agency/legal-insurer contract cannot safely classify. This is a completed lookup limitation, not an invalid NPN or a source outage. Use the official research action to establish the intended class.';
+  const effective:ParsedInsuranceAsk={...parsed,query:{...parsed.query,mode:'fail_closed',coverageState:'PARTIAL',failReason:reason},interpretation:[...parsed.interpretation,{label:'Source class requiring clarification',value:kinds.join(', ')}]};
+  const result=emptyBase(effective,started);result.terminalState='CAPABILITY_LIMITATION';result.limitations=[reason,...LIMITATIONS];result.provenance.grain='Exact NPN source observation; entity class not projected or joined to evidence';return result;
+}
+
 async function lookupNpn(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
   const npn = parsed.query.identifier!.value;
   const { data } = await db()
@@ -242,6 +250,7 @@ async function lookupNpn(parsed: ParsedInsuranceAsk, started: number): Promise<I
     .limit(20);
   let rows = (data ?? []) as EntityRow[];
   if (parsed.query.selectedEntity) { const selected = rows.find(r => r.id === parsed.query.selectedEntity); if (!selected) throw new Error('Candidate no longer matches the exact identifier'); rows = [selected]; }
+  const classLimitation=unmappedNpnClass(parsed,rows,started);if(classLimitation)return classLimitation;
   const results: AskCard[] = [];
   for (const row of rows) {
     const cls = classOf(row.entity_kind);
@@ -293,6 +302,7 @@ async function lookupMarketplace(parsed: ParsedInsuranceAsk, started: number): P
   const npn = parsed.query.identifier!.value;
   const year = parsed.query.marketplacePlanYear;
   const identity = await lookupNpn(parsed, started);
+  if(identity.terminalState==='CAPABILITY_LIMITATION')return identity;
   if (identity.results.length !== 1) {
     identity.terminalState = identity.results.length ? 'NEEDS_CLARIFICATION' : 'NO_MATCH';
     identity.limitations = ['Marketplace evidence requires a resolved source identity. NPN digits do not establish producer class.', ...identity.limitations];
@@ -370,6 +380,7 @@ async function lookupAppointment(parsed: ParsedInsuranceAsk, started: number): P
     .limit(20);
   let rows = (entities ?? []) as EntityRow[];
   if (parsed.query.selectedEntity) rows = rows.filter(r=>r.id === parsed.query.selectedEntity);
+  const classLimitation=unmappedNpnClass(parsed,rows,started);if(classLimitation)return classLimitation;
   if(rows.length>1)return {...await lookupNpn(parsed,started),terminalState:'NEEDS_CLARIFICATION',limitations:['Select the source class/identity before attaching appointment evidence.',...LIMITATIONS]};
   if (!rows.length) {
     return finish(parsed, [], 0, started, 'Labeled NPN had no indexed entity for appointment lookup');
