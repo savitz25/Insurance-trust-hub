@@ -1,5 +1,5 @@
-
-> insurance-trust-hub@1.0.0 check:ins-cap-001
-> tsx scripts/check-ins-cap-001.ts
-
-INS-CAP-001 PASS (51 contract and firewall assertions covered)
+
+> insurance-trust-hub@1.0.0 check:ins-cap-001
+> tsx scripts/check-ins-cap-001.ts
+
+INS-CAP-001 PASS (51 contract and firewall assertions covered)

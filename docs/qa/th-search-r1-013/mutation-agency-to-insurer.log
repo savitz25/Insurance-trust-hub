@@ -67,4 +67,3 @@ FAIL selected candidate revalidated original task and conditions AssertionError 
 
 + undefined
 - '00000000-0000-4000-8000-000000000001'
-

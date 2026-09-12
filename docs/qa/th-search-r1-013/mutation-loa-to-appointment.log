@@ -62,4 +62,3 @@ FAIL appointment requires actual source relationship, not LOA AssertionError [ER
 
 + 'RESULTS'
 - 'EVIDENCE_UNAVAILABLE'
-

@@ -1,5 +1,5 @@
-
-> insurance-trust-hub@1.0.0 check:insurance-ask
-> tsx scripts/check-insurance-ask.ts
-
-check-insurance-ask PASS 0
+
+> insurance-trust-hub@1.0.0 check:insurance-ask
+> tsx scripts/check-insurance-ask.ts
+
+check-insurance-ask PASS 0
