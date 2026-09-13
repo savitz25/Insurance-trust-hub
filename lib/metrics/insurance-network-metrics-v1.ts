@@ -14,6 +14,11 @@ export type MetricValueState =
   | 'REQUEST_ONLY';
 
 export type MetricGrain =
+  | 'ny_dfs_company_directory_row'
+  | 'state_evidence_observation'
+  | 'exact_naic_identity_match'
+  | 'source_identifier'
+  | 'unknown_state_universe'
   | 'canonical_agency_entity'
   | 'canonical_person_entity'
   | 'canonical_legal_insurer_entity'
@@ -73,6 +78,12 @@ export type MetricTrace = {
 };
 
 export type InsuranceNetworkMetric = {
+  family?: import('./insurance-home-evidence-inventory').InsuranceHomeEvidenceFamily;
+  sourceArtifact?: string;
+  sourceField?: string;
+  destination?: string;
+  retrievedAt?: string | null;
+  snapshotAsOf?: string | null;
   key: string;
   label: string;
   value: number | null;
@@ -90,6 +101,8 @@ export type InsuranceNetworkMetric = {
 };
 
 export type InsuranceNetworkMetricsV1 = {
+  contractRevision?: 'ATH-METRICS-R2-04';
+  reconciliation?: import('./network-reconciliation').NetworkReconciliation;
   schemaVersion: typeof INSURANCE_NETWORK_METRICS_VERSION;
   generatedAt: string;
   newestDocumentedSourceAsOf: string | null;

@@ -22,5 +22,6 @@ jobs:
       - run: npm run check:th-search-r1-013
       - run: npm run check:insurance-ask
       - run: npm run check:ins-cap-001
+      - run: npm run check:metrics
       - run: npm run typecheck
       - run: npm test

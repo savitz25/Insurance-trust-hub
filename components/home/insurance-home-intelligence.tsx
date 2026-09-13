@@ -180,7 +180,7 @@ export function InsuranceHomeIntelligence({
           </p>
           <div className="mt-7 grid gap-px overflow-hidden rounded-2xl bg-slate-700 sm:grid-cols-2 lg:grid-cols-4">
             {highlights.map((row) => (
-              <article key={row.key} className="min-w-0 bg-[#0A2540] p-5">
+              <article key={row.key} data-metric-key={row.key} className="min-w-0 bg-[#0A2540] p-5">
                 <p className="break-words text-3xl font-semibold tabular-nums">
                   {row.display}
                 </p>
@@ -246,7 +246,7 @@ export function InsuranceHomeIntelligence({
                     <div className="mt-3 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
                       {rows.map((row) => (
                         <article
-                          key={row.key}
+                          key={row.key} data-metric-key={row.key}
                           className="min-w-0 rounded-xl border border-slate-200 bg-white p-4"
                         >
                           <p className="text-2xl font-semibold tabular-nums text-[#0A2540]">

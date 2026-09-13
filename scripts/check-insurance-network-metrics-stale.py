@@ -62,6 +62,7 @@ def check_files() -> dict[str, Any]:
     ca = json.loads(CA_PATH.read_text(encoding="utf-8"))
     wa = json.loads(WA_PATH.read_text(encoding="utf-8"))
     co = json.loads(CO_PATH.read_text(encoding="utf-8"))
+    va = json.loads((ROOT / "lib/virginia-intelligence/accepted-snapshot.json").read_text(encoding="utf-8"))
     ny = json.loads(NY_PATH.read_text(encoding="utf-8"))
     il = json.loads(IL_PATH.read_text(encoding="utf-8"))
     fl_mc = json.loads(FL_MC.read_text(encoding="utf-8"))
@@ -88,25 +89,25 @@ def check_files() -> dict[str, Any]:
         errors.append("Colorado surplus-lines identities drifted")
     if metric_value(metrics, "co_authorized_companies") is not None:
         errors.append("Colorado authorized companies must remain NOT_ACQUIRED / null")
-    if metric_value(metrics, "co_statistical_report_naic_directory_rows") != 1839:
+    if metric_value(metrics, "co_statistical_report_naic_directory_rows") != co["statistical_report"]["naic_companies_tab"]["company_directory_rows"]:
         errors.append("Colorado 2025 NAIC Companies directory rows drifted")
-    if metrics.get("virginia", {}).get("statisticalDirectoryRows") != 1546:
+    if metrics.get("virginia", {}).get("statisticalDirectoryRows") != va["statistical_report"]["observation_rows"]:
         errors.append("Virginia statistical-report companies drifted")
-    if metric_value(metrics, "va_statistical_report_naic_directory_rows") != 1546:
+    if metric_value(metrics, "va_statistical_report_naic_directory_rows") != va["statistical_report"]["observation_rows"]:
         errors.append("Virginia 2025 statistical-report NAIC rows drifted")
     if metrics.get("newYork", {}).get("snapshotFingerprint") != ny.get("fingerprint"):
         errors.append("New York snapshot fingerprint drifted; regenerate insurance-network-metrics-v1")
-    if metrics.get("newYork", {}).get("directoryRows") != 1054:
+    if metrics.get("newYork", {}).get("directoryRows") != ny["company_directory"]["directory_rows"]:
         errors.append("New York DFS directory rows drifted")
-    if metric_value(metrics, "ny_dfs_company_directory_rows") != 1054:
+    if metric_value(metrics, "ny_dfs_company_directory_rows") != ny["company_directory"]["directory_rows"]:
         errors.append("New York DFS directory metric drifted")
     if metrics.get("newYork", {}).get("authorizedCompanies") is not None:
         errors.append("New York authorized companies must remain search-only / null")
     if metrics.get("illinois", {}).get("snapshotFingerprint") != il.get("fingerprint"):
         errors.append("Illinois snapshot fingerprint drifted; regenerate insurance-network-metrics-v1")
-    if metrics.get("illinois", {}).get("directorsOrderObservations") != 2896:
+    if metrics.get("illinois", {}).get("directorsOrderObservations") != il["directors_orders"]["observation_rows"]:
         errors.append("Illinois Director's Orders observations drifted")
-    if metric_value(metrics, "il_directors_order_observations") != 2896:
+    if metric_value(metrics, "il_directors_order_observations") != il["directors_orders"]["observation_rows"]:
         errors.append("Illinois Director's Orders metric drifted")
     if metrics.get("illinois", {}).get("authorizedCompanies") is not None:
         errors.append("Illinois authorized companies must remain search-only / null")
@@ -114,7 +115,7 @@ def check_files() -> dict[str, Any]:
         errors.append("Illinois authorized companies must remain NOT_ACQUIRED / null")
     if metric_value(metrics, "wa_authorized_companies") is not None:
         errors.append("Washington authorized companies must remain NOT_ACQUIRED / null")
-    if metric_value(metrics, "wa_oic_regulated_entities_annual_report") != 2924:
+    if metric_value(metrics, "wa_oic_regulated_entities_annual_report") != wa["annual_aggregates"]["regulated_entities"]:
         errors.append("Washington OIC 2025 regulated-entity aggregate drifted")
     if metric_value(metrics, "appointments") != tx["appointments"]["rows"]:
         errors.append("Texas appointments drifted")

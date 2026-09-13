@@ -1,3 +1,4 @@
+import networkMetrics from '@/data/home/insurance-network-metrics-v1.json';
 /**
  * INTEL-006 — insurance-home-intel-v1
  * National homepage snapshot. Read-only. No graph writes.
@@ -10,7 +11,7 @@ import { PUBLIC_PERSON_PROFILES_ENABLED, mayPublishEntityKind } from '@/lib/nati
 export const INS_HOME_INTEL_VERSION = 'insurance-home-intel-v1' as const;
 export const INS_HOME_INTEL_TASK = 'INTEL-006';
 export const INS_HOME_CENSUS_TASK = 'INS-NAT-FINAL-006';
-export const INS_HOME_CENSUS_AT = '2026-08-28T14:43:51.753Z';
+export const INS_HOME_CENSUS_AT = networkMetrics.nationalGraph.censusAsOf;
 
 /**
  * INS-HOME-003 / 003B SQL-locked agency × distinct credentialed-state rollup.
@@ -18,26 +19,7 @@ export const INS_HOME_CENSUS_AT = '2026-08-28T14:43:51.753Z';
  * Wording: attached state credential evidence. LICENSED_IN ≠ SERVES.
  * Not active licenses. Not a 50-state service-territory census.
  */
-export const AGENCY_MULTISTATE = {
-  d1: 82071,
-  d2: 82071,
-  d3: 109927,
-  d4: 117354,
-  one: 62202,
-  two: 13289,
-  threeToFour: 6546,
-  fiveToNine: 34,
-  tenPlus: 0,
-  retrievedAt: '2026-08-29T05:48:24.729Z',
-  includedStates: ['FL', 'MA', 'OH', 'TX', 'VT'] as const,
-  sourceDatasets: [
-    'florida_dfs',
-    'massachusetts_doi_regulatory',
-    'ohio_odi',
-    'texas_tdi',
-    'vermont_dfr',
-  ] as const,
-} as const;
+export const AGENCY_MULTISTATE = networkMetrics.homepageInputs.agencyMultistate;
 
 export const FORBIDDEN_HOME_COPY = [
   'trust score',
@@ -173,21 +155,21 @@ export type HomeIntelCountInput = {
 };
 
 const DEFAULT_HOME_COUNTS: HomeIntelCountInput = {
-  agencies: 82071,
-  persons: 1029860,
-  legalInsurers: 6185,
-  credentials: 1531158,
-  agencyCredentials: 117354,
-  marketplace: 1300108,
-  publicDirectoryProviders: 170499,
-  appointingCarrierEntities: 13547,
-  flCredentialRows: 750316,
-  txCredentialRows: 718894,
-  vtCredentialRows: 50514,
-  maCredentialRows: 7187,
-  ohCredentialRows: 4247,
+  agencies: networkMetrics.nationalGraph.agencies,
+  persons: networkMetrics.nationalGraph.persons,
+  legalInsurers: networkMetrics.nationalGraph.legalInsurers,
+  credentials: networkMetrics.nationalGraph.credentials,
+  agencyCredentials: networkMetrics.nationalGraph.agencyCredentials,
+  marketplace: networkMetrics.nationalGraph.cmsMarketplaceObservations,
+  publicDirectoryProviders: networkMetrics.nationalGraph.publicDirectoryListings,
+  appointingCarrierEntities: networkMetrics.nationalGraph.appointingCarriers,
+  flCredentialRows: networkMetrics.nationalGraph.credentialsByJurisdiction.FL,
+  txCredentialRows: networkMetrics.nationalGraph.credentialsByJurisdiction.TX,
+  vtCredentialRows: networkMetrics.nationalGraph.credentialsByJurisdiction.VT,
+  maCredentialRows: networkMetrics.nationalGraph.credentialsByJurisdiction.MA,
+  ohCredentialRows: networkMetrics.nationalGraph.credentialsByJurisdiction.OH,
   texasLive: true,
-  newestDocumentedSourceAsOf: '2026-09-03',
+  newestDocumentedSourceAsOf: networkMetrics.newestDocumentedSourceAsOf,
 };
 
 function fmt(n: number): string {
@@ -256,10 +238,10 @@ export function buildInsuranceHomeIntelV1(
   ] as const;
 
   const loa = [
-    { key: 'texas_tdi_individual', label: 'Texas TDI individual LOA rows', value: 733324, source: 'Texas TDI' },
-    { key: 'texas_tdi', label: 'Texas TDI agency LOA rows', value: 50348, source: 'Texas TDI' },
-    { key: 'massachusetts', label: 'Massachusetts DOI regulatory LOA rows', value: 19177, source: 'Massachusetts DOI' },
-    { key: 'vermont', label: 'Vermont DFR LOA rows', value: 20, source: 'Vermont DFR' },
+    { key: 'texas_tdi_individual', label: 'Texas TDI individual LOA rows', value: networkMetrics.homepageInputs.loaByDataset.texas_tdi_individual, source: 'Texas TDI' },
+    { key: 'texas_tdi', label: 'Texas TDI agency LOA rows', value: networkMetrics.homepageInputs.loaByDataset.texas_tdi, source: 'Texas TDI' },
+    { key: 'massachusetts', label: 'Massachusetts DOI regulatory LOA rows', value: networkMetrics.homepageInputs.loaByDataset.massachusetts_doi_regulatory, source: 'Massachusetts DOI' },
+    { key: 'vermont', label: 'Vermont DFR LOA rows', value: networkMetrics.homepageInputs.loaByDataset.vermont_dfr, source: 'Vermont DFR' },
   ];
 
   const draft: InsuranceHomeIntelV1 = {

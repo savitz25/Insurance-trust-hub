@@ -245,7 +245,7 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     const m = computeInsuranceNetworkMetrics(baseInput());
     const labels = Object.fromEntries(requiredPublicKeys().map((k) => [k, metricByKey(m, k).label]));
     assert.equal(labels.insurance_agencies, 'Insurance agencies');
-    assert.equal(labels.licensed_insurance_companies, 'Licensed insurance companies');
+    assert.equal(labels.licensed_insurance_companies, 'Legal insurer identities');
     assert.equal(labels.insurance_producer_records, 'Insurance producer records');
     assert.equal(labels.appointments, 'Appointments');
     assert.equal(labels.consumer_complaint_observations, 'Consumer complaint observations');

@@ -1,16 +1,21 @@
 import { buildInsuranceHomeIntelV1, type InsuranceHomeIntelV1 } from '@/lib/national/home-intel';
 import { metricByKey, type InsuranceNetworkMetricsV1 } from './insurance-network-metrics-v1';
 
+function required(value: number | null | undefined): number {
+  if (!Number.isSafeInteger(value) || value === null || value === undefined || value < 0) throw new Error('Required homepage count unavailable');
+  return value;
+}
+
 export function projectHomeIntelFromNetworkMetrics(
   m: InsuranceNetworkMetricsV1
 ): InsuranceHomeIntelV1 {
-  const agencies = metricByKey(m, 'insurance_agencies').value ?? 0;
-  const persons = metricByKey(m, 'insurance_producer_records').value ?? 0;
-  const legalInsurers = metricByKey(m, 'licensed_insurance_companies').value ?? 0;
-  const marketplace = metricByKey(m, 'cms_marketplace_evidence_observations').value ?? 0;
-  const credentials = metricByKey(m, 'credential_observations').value ?? 0;
-  const directory = metricByKey(m, 'public_directory_listings').value ?? 0;
-  const appointingCarriers = metricByKey(m, 'appointing_carrier_entities').value ?? 0;
+  const agencies = required(metricByKey(m, 'insurance_agencies').value);
+  const persons = required(metricByKey(m, 'insurance_producer_records').value);
+  const legalInsurers = required(metricByKey(m, 'licensed_insurance_companies').value);
+  const marketplace = required(metricByKey(m, 'cms_marketplace_evidence_observations').value);
+  const credentials = required(metricByKey(m, 'credential_observations').value);
+  const directory = required(metricByKey(m, 'public_directory_listings').value);
+  const appointingCarriers = required(metricByKey(m, 'appointing_carrier_entities').value);
   return buildInsuranceHomeIntelV1(m.generatedAt, {
     agencies,
     persons,
@@ -20,11 +25,11 @@ export function projectHomeIntelFromNetworkMetrics(
     marketplace,
     publicDirectoryProviders: directory,
     appointingCarrierEntities: appointingCarriers,
-    flCredentialRows: m.nationalGraph.credentialsByJurisdiction.FL ?? 0,
-    txCredentialRows: m.nationalGraph.credentialsByJurisdiction.TX ?? 0,
-    vtCredentialRows: m.nationalGraph.credentialsByJurisdiction.VT ?? 0,
-    maCredentialRows: m.nationalGraph.credentialsByJurisdiction.MA ?? 0,
-    ohCredentialRows: m.nationalGraph.credentialsByJurisdiction.OH ?? 0,
+    flCredentialRows: required(m.nationalGraph.credentialsByJurisdiction.FL),
+    txCredentialRows: required(m.nationalGraph.credentialsByJurisdiction.TX),
+    vtCredentialRows: required(m.nationalGraph.credentialsByJurisdiction.VT),
+    maCredentialRows: required(m.nationalGraph.credentialsByJurisdiction.MA),
+    ohCredentialRows: required(m.nationalGraph.credentialsByJurisdiction.OH),
     texasLive: true,
     newestDocumentedSourceAsOf: m.newestDocumentedSourceAsOf,
   });

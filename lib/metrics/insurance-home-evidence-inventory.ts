@@ -1,3 +1,4 @@
+import networkMetrics from '@/data/home/insurance-network-metrics-v1.json';
 import type {
   InsuranceNetworkMetric,
   InsuranceNetworkMetricsV1,
@@ -62,7 +63,7 @@ export type InsuranceStateCard = {
   }>;
 };
 
-export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
+const STATE_CARD_COPY: InsuranceStateCard[] = [
   {
     state: "Florida",
     abbreviation: "FL",
@@ -141,7 +142,7 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       "Company verification context",
     ],
     limitation:
-      "The 2,924-entity annual-report aggregate is not a current authorized-company roster.",
+      "The dated annual-report aggregate is not a current authorized-company roster.",
     sourceClocks: [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-04" },
     ],
@@ -158,7 +159,7 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       "Producer and agency verification paths",
     ],
     limitation:
-      "The 1,839-row 2025 NAIC Companies directory is not a current authorized-company roster; producer and agency lists remain search-only.",
+      "The dated NAIC Companies directory is not a current authorized-company roster; producer and agency lists remain search-only.",
     sourceClocks: [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-09" },
     ],
@@ -175,7 +176,7 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       "Current company verification path",
     ],
     limitation:
-      "The 1,546 distinct 2025 NAIC observations are not a current authorized-company roster; producer and agency lists remain search-only.",
+      "The dated NAIC observations are not a current authorized-company roster; producer and agency lists remain search-only.",
     sourceClocks: [
       { label: "Statistical-report period end", snapshotAsOf: "2025-12-31" },
     ],
@@ -192,7 +193,7 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       "Current authorization verification path",
     ],
     limitation:
-      "The 1,054 DFS directory rows are not a current authorized-writing roster; producer and agency lists remain search-only.",
+      "The DFS directory rows are not a current authorized-writing roster; producer and agency lists remain search-only.",
     sourceClocks: [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-11" },
     ],
@@ -209,13 +210,21 @@ export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = [
       "Consumer complaint and help-center paths",
     ],
     limitation:
-      "No current bulk authorized-company roster was acquired; 2,896 Director's Orders observations are not a company census. Producer and agency lists remain search-only.",
+      "No current bulk authorized-company roster was acquired; Director's Order observations are not a company census. Producer and agency lists remain search-only.",
     sourceClocks: [
       { label: "Director's Orders retrieval", retrievedAt: "2026-09-12T16:41:31Z" },
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-12" },
     ],
   },
 ] as const;
+
+export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = STATE_CARD_COPY
+  .filter(card => networkMetrics.publication.publishedStateIntelligencePaths.includes(card.href))
+  .map(card => {
+    const state = networkMetrics.stateClocks[card.abbreviation as keyof typeof networkMetrics.stateClocks];
+    if (!state) return card;
+    return {...card, sourceClocks:[{label:'Accepted state evidence', sourceAsOf:state.sourceAsOf ?? undefined, snapshotAsOf:state.snapshotAsOf ?? undefined, retrievedAt:state.retrievedAt ?? undefined}]};
+  });
 
 const ALLOWED = new Set<PublicationStatus>([
   "PUBLIC",
@@ -318,20 +327,20 @@ function fromMetric(
     value: metric.value,
     display: format(metric.value, metric.valueState),
     valueState: metric.valueState,
-    family: FAMILY_BY_KEY[metric.key] ?? "REGULATORY_ENFORCEMENT",
+    family: metric.family ?? FAMILY_BY_KEY[metric.key] ?? "REGULATORY_ENFORCEMENT",
     grain: metric.grain,
     entityClass: metric.grain,
     geography: metric.coverage,
     source: metric.contributingSourceSystems.join(" · "),
-    acceptedArtifact: "insurance-network-metrics-v1",
+    acceptedArtifact: metric.sourceArtifact ?? "insurance-network-metrics-v1",
     sourceAsOf: metric.sourceAsOf,
-    retrievedAt: null,
-    snapshotAsOf: null,
+    retrievedAt: metric.retrievedAt ?? null,
+    snapshotAsOf: metric.snapshotAsOf ?? null,
     networkGeneratedAt: metric.generatedAt,
     definition: metric.trace.counts,
     doesNotCount: metric.trace.doesNotCount,
     publicationStatus: metric.publicationStatus as HomePublicationStatus,
-    destination: DESTINATION_BY_KEY[metric.key] ?? "/methodology",
+    destination: metric.destination ?? DESTINATION_BY_KEY[metric.key] ?? "/methodology",
     limitation: metric.trace.whyUnknown,
   };
 }
@@ -393,7 +402,8 @@ export function buildInsuranceHomepageEvidenceInventory(
       entityClass: "credential authority",
       geography: "National research graph",
       source: "state credential sources",
-      sourceAsOf: metrics.nationalGraph.censusAsOf.slice(0, 10),
+      sourceAsOf: null,
+      retrievedAt: metrics.nationalGraph.censusAsOf,
       definition:
         "Source-native authority/class observations attached to credentials.",
       doesNotCount:
@@ -411,7 +421,8 @@ export function buildInsuranceHomepageEvidenceInventory(
       entityClass: "producer relationship",
       geography: "Research graph",
       source: "accepted state appointment sources",
-      sourceAsOf: metrics.nationalGraph.censusAsOf.slice(0, 10),
+      sourceAsOf: null,
+      retrievedAt: metrics.nationalGraph.censusAsOf,
       definition: "APPOINTED_TO relationships retained in the research graph.",
       doesNotCount:
         "Not employment, endorsement, public producer profiles, or unique people.",
@@ -428,7 +439,8 @@ export function buildInsuranceHomepageEvidenceInventory(
       entityClass: "business relationship",
       geography: "Research graph",
       source: "accepted identity graph",
-      sourceAsOf: metrics.nationalGraph.censusAsOf.slice(0, 10),
+      sourceAsOf: null,
+      retrievedAt: metrics.nationalGraph.censusAsOf,
       definition: "Source-supported ASSOCIATED_WITH graph relationships.",
       doesNotCount:
         "Not ownership, employment, appointment, or unique entities.",
@@ -445,7 +457,8 @@ export function buildInsuranceHomepageEvidenceInventory(
       entityClass: "business contact",
       geography: "Research graph",
       source: "publication-eligible public sources",
-      sourceAsOf: metrics.nationalGraph.censusAsOf.slice(0, 10),
+      sourceAsOf: null,
+      retrievedAt: metrics.nationalGraph.censusAsOf,
       definition: "Public or business-safe contact observations.",
       doesNotCount:
         "Not private producer contacts, verified service areas, or unique entities.",
@@ -462,7 +475,8 @@ export function buildInsuranceHomepageEvidenceInventory(
       entityClass: "regulatory evidence",
       geography: "Accepted graph sources",
       source: "state regulatory publications",
-      sourceAsOf: metrics.nationalGraph.censusAsOf.slice(0, 10),
+      sourceAsOf: null,
+      retrievedAt: metrics.nationalGraph.censusAsOf,
       definition: "Source-native regulatory evidence rows in the graph.",
       doesNotCount:
         "Not criminal convictions, unique actions, findings of misconduct, or a clean-record test.",
@@ -479,7 +493,8 @@ export function buildInsuranceHomepageEvidenceInventory(
       entityClass: "insurance group",
       geography: "National identity graph",
       source: "accepted identity graph",
-      sourceAsOf: metrics.nationalGraph.censusAsOf.slice(0, 10),
+      sourceAsOf: null,
+      retrievedAt: metrics.nationalGraph.censusAsOf,
       definition:
         "Insurance-group identities modeled separately from companies.",
       doesNotCount:
@@ -497,7 +512,8 @@ export function buildInsuranceHomepageEvidenceInventory(
       entityClass: "consumer brand",
       geography: "National identity graph",
       source: "accepted identity graph",
-      sourceAsOf: metrics.nationalGraph.censusAsOf.slice(0, 10),
+      sourceAsOf: null,
+      retrievedAt: metrics.nationalGraph.censusAsOf,
       definition: "Consumer-facing brand identities in the research graph.",
       doesNotCount:
         "Not regulated legal entities or proof of the underwriting company.",
@@ -589,17 +605,11 @@ export function buildInsuranceHomepageEvidenceInventory(
       destination: "/california",
     },
   ];
+
   const inventory = [
     ...rows,
     ...extra.map((m) => supplemental(m, metrics.generatedAt)),
   ];
-  const stateMetric = inventory.find(
-    (row) => row.key === "published_state_intelligence_pages",
-  );
-  if (stateMetric) {
-    stateMetric.value = INSURANCE_HOMEPAGE_STATE_CARDS.length;
-    stateMetric.display = String(INSURANCE_HOMEPAGE_STATE_CARDS.length);
-  }
   assertInsuranceHomepageInventory(inventory);
   return inventory;
 }

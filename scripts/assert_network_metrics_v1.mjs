@@ -49,7 +49,7 @@ assert(v1.illinois.directorsOrderObservations === pub.illinoisDirectorsOrderObse
 assert(v1.illinois.directorsOrderObservations === 2896, "IL 2896 order observations");
 assert(v1.illinois.authorizedCompanies === null, "IL authorized companies not a number");
 assert(byKey.il_authorized_companies.value === null, "IL authorized metric not a number");
-assert(byKey.il_authorized_companies.valueState === "NOT_ACQUIRED", "IL authorized not acquired");
+assert(byKey.il_authorized_companies.valueState === "UNKNOWN", "IL authorized not acquired");
 assert(byKey.il_directors_order_observations.value === 2896, "IL 2896 order metric");
 assert(byKey.il_directors_order_observations.value !== byKey.licensed_insurance_companies.value, "IL orders != national companies");
 assert(byKey.wa_authorized_companies.value === null, "WA authorized metric not a number");
@@ -93,7 +93,7 @@ assert(hero.includes("insurance_agencies"), "homepage uses agency metric key");
 assert(hero.includes("licensed_insurance_companies"), "homepage uses licensed-company metric key");
 assert(hero.includes("insurance_producer_records"), "homepage uses producer metric key");
 assert(byKey.insurance_agencies.label === "Insurance agencies", "consumer agency label");
-assert(byKey.licensed_insurance_companies.label === "Licensed insurance companies", "consumer insurer label");
+assert(byKey.licensed_insurance_companies.label === "Legal insurer identities", "consumer insurer label");
 assert(byKey.insurance_producer_records.label === "Insurance producer records", "consumer producer label");
 assert(!hero.includes("Agencies in the research graph"), "no internal agency title on homepage");
 assert(!hero.includes("{item.grain}"), "grain is not a public card subtitle");

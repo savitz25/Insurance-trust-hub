@@ -192,7 +192,8 @@
     "ops:phase6c-preflight": "node scripts/ops-phase6c-preflight.mjs",
     "db:seed": "tsx scripts/seed.ts",
     "db:schema": "tsx scripts/seed.ts --schema",
-    "check:th-search-r1-013": "tsx --tsconfig scripts/tsconfig.r13.json scripts/check-th-search-r1-013.ts"
+    "check:th-search-r1-013": "tsx --tsconfig scripts/tsconfig.r13.json scripts/check-th-search-r1-013.ts",
+    "check:metrics": "node --import tsx scripts/build_network_metrics_v1.mjs --check && node --import tsx --test scripts/test-metrics-r2-04.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -2,15 +2,16 @@
  * Rebuild insurance-network-metrics-v1.json from committed national counts
  * plus current publication inputs. Does not recount the live graph.
  */
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { publicationMetricInputs } from "./publication_metric_inputs.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const existing = JSON.parse(
-  (await import("node:fs")).readFileSync(join(root, "data/home/insurance-network-metrics-v1.json"), "utf8")
-);
+const existing = JSON.parse(readFileSync(join(root, "data/home/insurance-metric-census-r2-04.json"), "utf8"));
+const check = process.argv.includes("--check");
+const out = join(root, "data/home/insurance-network-metrics-v1.json");
+const generatedAt = check ? JSON.parse(readFileSync(out, "utf8")).generatedAt : new Date().toISOString();
 const { computeInsuranceNetworkMetrics } = await import(
   pathToFileURL(join(root, "lib/metrics/compute-insurance-network-metrics.ts")).href
 );
@@ -18,7 +19,7 @@ const pub = publicationMetricInputs();
 const g = existing.nationalGraph;
 
 const manifest = computeInsuranceNetworkMetrics({
-  generatedAt: "2026-09-09T12:00:00.000Z",
+  generatedAt,
   liveProductionHost: existing.liveProductionHost,
   agencies: g.agencies,
   persons: g.persons,
@@ -40,7 +41,7 @@ const manifest = computeInsuranceNetworkMetrics({
   appointerResolvesTo: g.appointerResolvesTo,
   regulatoryEvidence: g.regulatoryEvidence,
   censusTask: pub.censusTask,
-  censusAsOf: pub.censusAsOf,
+  censusAsOf: existing.retrievedAt,
   cmsSourceAsOf: pub.cmsSourceAsOf,
   texasSnapshotFingerprint: pub.texasSnapshotFingerprint,
   texasAsOf: pub.texasAsOf,
@@ -91,18 +92,14 @@ const manifest = computeInsuranceNetworkMetrics({
   illinoisAsOf: pub.illinoisAsOf,
   illinoisDirectorsOrderObservations: pub.illinoisDirectorsOrderObservations,
   publicLegalInsurerWave1: pub.publicLegalInsurerWave1,
-  ingestedExamObservations: 26,
+  ingestedExamObservations: pub.publicLegalInsurerWave1,
   publishedStateIntelligencePaths: pub.publishedStateIntelligencePaths,
 });
 
-writeFileSync(join(root, "data/home/insurance-network-metrics-v1.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
-console.log(JSON.stringify({
-  wrote: "data/home/insurance-network-metrics-v1.json",
-  sourceFingerprint: manifest.sourceFingerprint,
-  generatedAt: manifest.generatedAt,
-  newestDocumentedSourceAsOf: manifest.newestDocumentedSourceAsOf,
-  paths: manifest.publication.publishedStateIntelligencePaths,
-  agencies: manifest.nationalGraph.agencies,
-  legalInsurers: manifest.nationalGraph.legalInsurers,
-  persons: manifest.nationalGraph.persons,
-}, null, 2));
+const { reconcile } = await import("./reconcile-network-metrics-r2-04.mjs");
+reconcile(manifest, root, existing);
+const serialized = `${JSON.stringify(manifest, null, 2)}\n`;
+if (check) {
+  if (readFileSync(out, "utf8").replace(/\r\n/g, "\n") !== serialized) throw new Error("Network metric drift: regenerate with npm run home:metrics");
+} else writeFileSync(out, serialized);
+console.log(JSON.stringify({check, generatedAt, sourceFingerprint:manifest.sourceFingerprint, agencies:manifest.nationalGraph.agencies, legalInsurers:manifest.nationalGraph.legalInsurers}));

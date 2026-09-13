@@ -1,0 +1,39 @@
+{
+  "version": "insurance-metric-census-v1",
+  "retrievedAt": "2026-09-13T15:23:00.840Z",
+  "sourceAsOf": null,
+  "sourceClockNote": "Read-only sequential exact-count queries; count retrieval is not official source freshness.",
+  "liveProductionHost": "gojyhmbojbwbpiamoktq.supabase.co",
+  "nationalGraph": {
+    "agencies": 82071,
+    "persons": 1029860,
+    "legalInsurers": 6185,
+    "appointingCarriers": 13547,
+    "insuranceGroups": 720,
+    "consumerBrands": 14,
+    "credentials": 1531158,
+    "agencyCredentials": 117354,
+    "personCredentials": 1413804,
+    "credentialsByJurisdiction": {
+      "FL": 750316,
+      "TX": 718894,
+      "VT": 50514,
+      "MA": 7187,
+      "OH": 4247,
+      "NJ": 0,
+      "CA": 0
+    },
+    "cmsMarketplaceObservations": 1300108,
+    "loaObservations": 1791158,
+    "contactObservations": 144864,
+    "publicDirectoryListings": 170499,
+    "appointedBy": 2680,
+    "appointedTo": 7334179,
+    "associatedWith": 52827,
+    "appointerResolvesTo": 1510,
+    "regulatoryEvidence": 6004,
+    "censusTask": "INS-NAT-FINAL-006",
+    "censusAsOf": "2026-08-28T14:43:51.753Z",
+    "cohortRule": "national_entities.entity_kind grains stay separate; appointments, credentials, complaints, exams, rate filings, CMS, surplus-lines, and title never join the agency or legal-insurer denominators"
+  }
+}
