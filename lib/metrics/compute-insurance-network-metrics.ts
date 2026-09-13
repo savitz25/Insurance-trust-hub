@@ -285,7 +285,7 @@ export function computeInsuranceNetworkMetrics(
     }),
     metric({
       key: 'licensed_insurance_companies',
-      label: 'Licensed insurance companies',
+      label: 'Legal insurer identities',
       value: input.legalInsurers,
       valueState: 'KNOWN',
       grain: 'canonical_legal_insurer_entity',

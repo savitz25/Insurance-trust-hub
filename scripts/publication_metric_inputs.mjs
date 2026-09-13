@@ -57,7 +57,8 @@ export function publicationMetricInputs() {
   if (nyPath && existsSync(join(root, "app/new-york/page.tsx"))) paths.push(nyPath);
   if (ilPath && existsSync(join(root, "app/illinois/page.tsx"))) paths.push(ilPath);
 
-  const cmsSourceAsOf = cms.match(/modified: '([^']+)'/)?.[1]?.slice(0, 10) || "2026-08-21";
+  const cmsSourceAsOf = cms.match(/modified: '([^']+)'/)?.[1]?.slice(0, 10) ;
+  if (!cmsSourceAsOf) throw new Error("Missing CMS source clock");
   const flFp = flPub.match(/CANONICAL_SNAPSHOT_FINGERPRINT =\s*'([a-f0-9]{64})'/)?.[1];
   const txFp = txPub.match(/CANONICAL_TX_SNAPSHOT_FINGERPRINT =\s*'([a-f0-9]{64})'/)?.[1];
   const njFp = njPub.match(/CANONICAL_NJ_SNAPSHOT_FINGERPRINT =\s*'([a-f0-9]{64})'/)?.[1];
@@ -87,7 +88,7 @@ export function publicationMetricInputs() {
     floridaAgencyAppointedBy: fl.headlineMetrics.appointed_by,
     floridaMarketConductExamListings: flMc.reports,
     floridaFinancialExamListings: flFin.reports,
-    floridaNfipRegistryListings: 1474,
+    floridaNfipRegistryListings: fl.nfip.registry_cards,
     newJerseySnapshotFingerprint: nj.fingerprint,
     newJerseyPublicationFingerprint: njFp,
     newJerseyAsOf: nj.as_of,
@@ -125,6 +126,6 @@ export function publicationMetricInputs() {
     censusLegalInsurers: census.entities.legalInsurer,
     insurerCarrierKind: insurer.grains.carrier,
     cmsSourceAsOf,
-    publicLegalInsurerWave1: 26,
+    publicLegalInsurerWave1: readJson("data/reports/ins-insurer-005b-public-ready-cohort.json").cohort_size,
   };
 }
