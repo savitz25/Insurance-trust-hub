@@ -44,7 +44,7 @@ const specs = {
  CO: [
  ["statistical_report.naic_companies_tab.company_directory_rows", "Statistical / NAIC observations", "statistical_report_directory_row"],
  ["surplus_lines.eligible_identities", "Surplus-lines eligibility rows", "surplus_lines_observation"],
- ["complaints.standard_ratio_index.company_line_rows", "Complaint company by line observations", "consumer_complaint_observation", "COMPLAINTS"],
+ ["complaints.standard_ratio_index.company_line_rows", "Complaint company by line observations", "complaint_company_line_observation", "COMPLAINTS"],
  ["complaints.standard_ratio_index.distinct_naic", "Distinct NAIC IDs in complaint company by line observations", "source_identifier", "COMPLAINTS"],
  ],
  VA: [
@@ -59,7 +59,7 @@ const specs = {
  ["company_directory.ny_domicile_rows", "Directory domicile observations", "state_evidence_observation"],
  ["company_directory.org_type_distribution.AH", "Directory AH observations", "state_evidence_observation"],
  ["company_directory.distinct_group_numbers", "Distinct directory group identifiers", "source_identifier"],
- ["auto_complaints.observation_rows", "2024 auto-market observations", "consumer_complaint_observation", "COMPLAINTS"],
+ ["auto_complaints.observation_rows", "2024 auto-market observations", "auto_market_report_observation", "COMPLAINTS"],
  ["enforcement_actions.observation_rows", "DFS enforcement observations (unattached)", "regulatory_evidence_row"],
  ],
  IL: [

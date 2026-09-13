@@ -14,6 +14,8 @@ export type MetricValueState =
   | 'REQUEST_ONLY';
 
 export type MetricGrain =
+  | 'complaint_company_line_observation'
+  | 'auto_market_report_observation'
   | 'ny_dfs_company_directory_row'
   | 'state_evidence_observation'
   | 'exact_naic_identity_match'

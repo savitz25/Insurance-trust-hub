@@ -40,6 +40,7 @@ test('search-only null survives export and homepage; missing input fails rather 
 });
 test('Colorado evidence and exact distinct NAIC matches remain distinct from identities',()=>{
  assert.equal(sources.CO.complaints.standard_ratio_index.company_line_rows,415);
+ assert.equal(m.reconciliation.measures.find(r=>r.key==='co_complaints_standard_ratio_index_company_line_rows').grain,'complaint_company_line_observation');
  assert.equal(sources.CO.naic_crosswalk.complaint_standard_2025.EXACT_EXISTING_LEGAL_INSURER_MATCHES,291);
  const bad=clone(sources);bad.CO.naic_crosswalk.statistical_report.EXACT_EXISTING_LEGAL_INSURER_MATCHES++;
  assert.throws(()=>validateInsurance(bad,census));
