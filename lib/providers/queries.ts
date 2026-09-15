@@ -28,15 +28,23 @@ function onlyVerifiedResearch(providers: Provider[]): Provider[] {
 export async function getProviders(
   filters: ProviderFilters = {}
 ): Promise<{ providers: Provider[]; total: number }> {
+  // TH-DISCOVERY-002B: a pure county-grain lookup (no zip) is a new call shape -- the live
+  // /directory page always supplies zip and launchCountyId together (both derived from the same
+  // resolved zipGeo), so getProviders({launchCountyId}) alone was previously unreachable and its
+  // error-swallowing behavior was never observed in practice. specialist-execution/v2's
+  // OFFICE_LOCATION branch is the first caller to invoke it standalone, and a swallowed transient
+  // backend error must not be reported as a confident "zero agencies here" for an established FL
+  // launch county -- extend the existing zip fail-loud guarantee to cover it too.
+  const failLoud = Boolean(filters.zip || filters.launchCountyId);
   if (!isSupabaseConfigured()) {
-    if (filters.zip) throw new Error('Directory source unavailable');
+    if (failLoud) throw new Error('Directory source unavailable');
     // Prefer honest empty state over unpublished catalog rows on public surfaces
     return { providers: [], total: 0 };
   }
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) { if (filters.zip) throw new Error('Directory source unavailable'); return { providers: [], total: 0 }; }
+    if (!supabase) { if (failLoud) throw new Error('Directory source unavailable'); return { providers: [], total: 0 }; }
 
     // Public directory: verified research rows only
     let query = supabase
@@ -100,7 +108,7 @@ export async function getProviders(
     const { data, error, count } = await query;
 
     if (error || !data) {
-      if (filters.zip) throw new Error('Directory source unavailable');
+      if (failLoud) throw new Error('Directory source unavailable');
       return { providers: [], total: 0 };
     }
 
@@ -122,7 +130,7 @@ export async function getProviders(
 
     return { providers, total: count ?? providers.length };
   } catch {
-    if (filters.zip) throw new Error('Directory source unavailable');
+    if (failLoud) throw new Error('Directory source unavailable');
     return { providers: [], total: 0 };
   }
 }
