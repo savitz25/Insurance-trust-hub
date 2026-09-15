@@ -4,6 +4,9 @@ import { executeInsuranceAsk, publicAskPayload, type InsuranceAskResult } from '
 import { INSURANCE_ASK_PAGE_SIZE, LOCKED_CENSUS } from '@/lib/insurance-ask/contract';
 import { classifyBailBondDirectoryPublication } from '@/lib/directory/bail-bond-publication';
 import { listPublishedInsurers, insurerProfilePath } from '@/lib/national/legal-insurer-pilot';
+import { getProviders } from '@/lib/providers/queries';
+import { matchLaunchCounty } from '@/lib/dfs/launch-counties';
+import type { Provider } from '@/types/provider';
 import {
   SPECIALIST_EXECUTION_CONTRACT,
   SPECIALIST_EXECUTION_CONTRACT_FINGERPRINT,
@@ -174,6 +177,78 @@ function wave1(req: SpecialistRequest): SpecialistEnvelope {
   return out;
 }
 
+/**
+ * TH-DISCOVERY-002B: recorded public-directory address lookup (agency grain only). This is a
+ * distinct capability from the CREDENTIAL_JURISDICTION legal/regulatory graph below -- it wires
+ * the same real, live `getProviders`/`searchProviders` query that already backs
+ * InsuranceTrustHub's own /directory page (proven live for ZIP; county grain shares the identical
+ * query path and verified-only gate) into the network contract, rather than building a second
+ * city/ZIP matcher. Only ZIP and FL-launch-county grain are recognized -- city name resolution is
+ * Ask's job (florida-municipality-crosswalk.ts already does it) and is deliberately not
+ * duplicated here. A recorded directory address is never a service-territory claim.
+ */
+async function localDirectory(req: SpecialistRequest, page: number, limit: number): Promise<SpecialistEnvelope> {
+  const zip = req.geography?.zip;
+  const county = !zip ? matchLaunchCounty(req.geography?.county) : undefined;
+  if (!zip && !county) {
+    const out = unsupported('local_directory_geography_not_recognized', 'This ZIP or county is not in the accepted public-directory geography set.', ['Research the state cohort instead.'], { geography: req.geography });
+    out.resultState = 'UNSUPPORTED_CAPABILITY';
+    return out;
+  }
+  const offset = (page - 1) * limit;
+  let providers: Provider[];
+  let total: number;
+  try {
+    const filters = zip ? { zip, limit, offset } : { launchCountyId: county!.id, limit, offset };
+    const result = await getProviders(filters);
+    providers = result.providers;
+    total = result.total;
+  } catch {
+    const out = base('BACKEND_UNAVAILABLE', page, limit);
+    out.error = { code: 'directory_source_unavailable', message: 'The public-directory research backend is temporarily unavailable.' };
+    return out;
+  }
+  const place = zip ? `ZIP ${zip}` : `${county!.displayName} County, Florida`;
+  const out = base(providers.length ? 'SUPPORTED_RESULTS' : 'ZERO_MATCHING_ROWS', page, limit);
+  out.queryInterpretation = { queryType: 'cohort', entityClass: 'agency', geographyGrain: zip ? 'RECORDED_ZIP' : 'RECORDED_COUNTY', geography: { zip, county: county?.displayName } };
+  out.appliedFilters = zip ? { zip } : { launchCountyId: county!.id };
+  out.rows = providers.map((p) => ({
+    entityClass: 'agency' as const,
+    name: p.name,
+    npn: null,
+    naicCode: null,
+    credentialJurisdiction: p.license_state ?? p.state ?? null,
+    credentialStatus: null,
+    licenseNumber: p.license_number ?? null,
+    licenseClass: null,
+    linesOfAuthority: Array.isArray(p.insurance_types) ? p.insurance_types.map(String) : [],
+    sourceDataset: 'ins-directory-providers',
+    sourceObservedAt: p.license_checked_at ?? null,
+    publicationState: 'PUBLIC_PROFILE' as const,
+    destination: `/providers/${p.slug}`,
+    whyMatched: `Recorded public-directory address in ${place}. A recorded address is not a confirmed service area -- a directory record does not mean this agency serves every customer in the surrounding area.`,
+  }));
+  out.total = total;
+  out.pagination = { page, limit, total, hasMore: page * limit < total };
+  out.provenance = {
+    sourceFamily: 'InsuranceTrustHub verified public agency directory',
+    sourceDataset: 'ins-directory-providers',
+    officialAsOf: 'See row source clocks',
+    retrievalDate: 'Live query at request time',
+    publicationSemantics: 'Recorded public-directory address only. Not a service-territory, appointment, licensing, or ranking claim.',
+    geographyMeaning: 'OFFICE_LOCATION',
+  };
+  out.limitations = [
+    'Recorded public-directory address is not a confirmed service area, appointment territory, or product availability.',
+    'This directory is a separate source from the regulatory credential graph and does not confirm licensing, appointments, or lines of authority.',
+    ...BASE_LIMITATIONS,
+  ];
+  out.destinations = out.rows.map((r) => ({ type: 'DIRECTORY_PROFILE', url: r.destination! }));
+  out.availableRefinements = total > out.rows.length ? [{ key: 'page', values: [], limitation: `First page shown; ${total} total verified directory record(s) match this geography.` }] : [];
+  out.diagnostics = { sourceContract: 'ins-directory-providers', geographyGrain: zip ? 'zip' : 'county' };
+  return out;
+}
+
 export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ status: number; body: SpecialistEnvelope }> {
   try { validate(req); } catch (error) {
     const e = error as RequestError;
@@ -182,6 +257,10 @@ export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ sta
   }
   const page = req.page ?? 1;
   const limit = Math.min(req.limit ?? INSURANCE_ASK_PAGE_SIZE, SPECIALIST_EXECUTION_MAX_LIMIT);
+  if ((!req.entityClass || req.entityClass === 'agency') && req.geography?.intent === 'OFFICE_LOCATION' && (req.geography.zip || req.geography.county)) {
+    const body = await localDirectory(req, page, limit);
+    return { status: body.resultState === 'UNSUPPORTED_CAPABILITY' ? 422 : body.resultState === 'BACKEND_UNAVAILABLE' ? 503 : 200, body };
+  }
   if (req.geography?.intent === 'SERVICE_TERRITORY') return { status: 422, body: unsupported('service_territory_not_supported', 'Service territory and product availability are not supported by credential geography.', ['Use credential-jurisdiction research.']) };
   if (req.entityClass === 'producer' && !req.identifier) return { status: 422, body: unsupported('producer_publication_restricted', 'Public producer profiles and mass-person cohorts are not published.', ['Enter a labeled NPN.']) };
   if (req.entityClass === 'legal_insurer' && req.queryType === 'cohort') {

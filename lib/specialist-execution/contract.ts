@@ -37,6 +37,9 @@ export type SpecialistRequest = {
     stateName?: string;
     county?: string;
     city?: string;
+    /** 5-digit recorded directory ZIP. TH-DISCOVERY-002B: additive field -- not in SCHEMA_SHAPE's
+     * top-level-only field list, so this does not change the schema/contract fingerprints. */
+    zip?: string;
     intent: GeographyIntent;
   };
   filters?: {
