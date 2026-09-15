@@ -45,12 +45,6 @@ export function ProviderCompareView({ providers, comparisonId }: Props) {
         values: providers.map((p) => display(p.years_in_business)),
       },
       {
-        label: 'Trust score',
-        values: providers.map((p) =>
-          p.trust_score != null ? `${p.trust_score}/100` : '—'
-        ),
-      },
-      {
         label: 'Rating',
         values: providers.map((p) =>
           p.rating

@@ -7,11 +7,17 @@ import {
   PPEF_DATASET_META,
 } from '@/lib/insurance/cms/ppef-lookup';
 
+/**
+ * Structured, source-backed Medicare relationship only — a specialty tag or
+ * a listed insurance type. Deliberately does NOT substring-match free-text
+ * description/short_description: a passing mention of "Medicare" in prose is
+ * not a source-backed entity relationship and must not pull CMS/Medicare
+ * modules onto an otherwise unrelated agency profile.
+ */
 function isMedicareFocused(provider: Provider): boolean {
   if (provider.specialties.some((s) => s === 'Medicare Specialists')) return true;
   if (provider.insurance_types.includes('medicare')) return true;
-  const blob = `${provider.short_description ?? ''} ${provider.description ?? ''}`.toLowerCase();
-  return blob.includes('medicare');
+  return false;
 }
 
 function providerNpi(provider: Provider): string | null {
@@ -100,6 +106,17 @@ export function resolveGovernmentVerification(provider: Provider): GovernmentVer
 
 export function providerIsMedicareSpecialist(provider: Provider): boolean {
   return isMedicareFocused(provider);
+}
+
+/**
+ * Gate for whether the Government Verification (CMS/Medicare/NPI) panel
+ * should render at all on an agency-class provider profile. Requires a
+ * structured, source-backed relationship: a Medicare specialty/insurance-type
+ * tag, or an NPI already on file. A plain independent agency with neither
+ * must not show CMS/Medicare modules, even as a "not applicable" state.
+ */
+export function governmentVerificationApplicable(provider: Provider): boolean {
+  return isMedicareFocused(provider) || Boolean(providerNpi(provider));
 }
 
 export function resolveGovernmentStandingInput(provider: Provider) {
