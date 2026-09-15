@@ -25,12 +25,10 @@ import { BeforeYouReachOut } from '@/components/research/before-you-reach-out';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
 import { CompareProviderButton } from '@/components/my-insurance/compare-provider-button';
 import { GovernmentVerificationPanel } from '@/components/insurance/cms/government-verification-panel';
-import { TrustScoreBreakdownPanel } from '@/components/insurance/cms/trust-score-breakdown';
 import {
-  providerIsMedicareSpecialist,
+  governmentVerificationApplicable,
   resolveGovernmentVerification,
 } from '@/lib/insurance/cms/resolve-government-verification';
-import { computeProviderTrustScoreBreakdown } from '@/lib/insurance/enrichment/trust-score';
 import {
   allowContactForm,
   toPublicProviderView,
@@ -233,18 +231,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     agencyTrustReport = null;
   }
 
-  const trustBreakdown = computeProviderTrustScoreBreakdown({
-    bbbRating: provider.bbb_rating,
-    isVerified: publicView.verification.showLicenseVerifiedBadge,
-    yearsInBusiness: publicView.yearsInBusiness,
-    cmsParticipation: governmentVerification.cmsParticipation,
-    hasNpi: Boolean(governmentVerification.npi),
-    isMedicareSpecialist: providerIsMedicareSpecialist(provider),
-    licenseNumber: provider.license_number,
-    isSeed: false,
-    googleRating: publicView.showReviews ? publicView.rating : null,
-    googleReviewCount: publicView.showReviews ? publicView.reviewCount : null,
-  });
+  // Only render CMS/Medicare/NPI evidence when a structured, source-backed
+  // signal (Medicare specialty tag, medicare insurance type, or an NPI on
+  // file) makes it relevant — never inferred from free-text description
+  // matches, and never on a plain agency profile with no such relationship.
+  const showGovernmentVerification = governmentVerificationApplicable(provider);
 
   const suitsRelocating =
     specialties.includes('Relocation Experienced') ||
@@ -567,7 +558,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
 
             <ContinueClusterResearch cluster={continueCluster} />
 
-            <GovernmentVerificationPanel data={governmentVerification} />
+            {showGovernmentVerification ? (
+              <GovernmentVerificationPanel data={governmentVerification} />
+            ) : null}
 
             {publicView.showCarriers && publicView.carriers.length > 0 && (
               <section>
@@ -726,21 +719,22 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Research metrics</CardTitle>
+                <CardTitle className="text-lg">Evidence on file</CardTitle>
               </CardHeader>
-              <CardContent className="text-sm space-y-4">
-                {trustBreakdown.published ? (
-                  <TrustScoreBreakdownPanel breakdown={trustBreakdown} />
-                ) : (
-                  <p className="text-muted-foreground">
-                    Research Score not published — insufficient verified inputs (re-checkable
-                    license required). See{' '}
-                    <Link href="/methodology" className="text-primary underline">
-                      methodology
-                    </Link>
-                    .
+              <CardContent className="text-sm space-y-3">
+                <p>
+                  <span className="font-medium">License verification:</span>{' '}
+                  {publicView.verification.showLicenseVerifiedBadge
+                    ? 'Re-checkable license number on file'
+                    : 'License number on file — confirm status on official lookup'}
+                </p>
+                {publicView.showReviews && publicView.rating != null && publicView.reviewCount ? (
+                  <p>
+                    <span className="font-medium">Consumer reviews:</span>{' '}
+                    {publicView.rating.toFixed(1)} · {publicView.reviewCount} reviews (attributed
+                    snapshot, not a TrustHub rating)
                   </p>
-                )}
+                ) : null}
                 {secondarySignals?.bbb?.rating ? (
                   <p>
                     <span className="font-medium">BBB snapshot:</span>{' '}
@@ -750,14 +744,19 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       : ''}
                   </p>
                 ) : null}
-                {trustBreakdown.published ? (
-                  <p className="text-[11px] text-muted-foreground">
-                    Government Standing sub-score: {trustBreakdown.governmentStanding}/100.{' '}
-                    <Link href="/data/plan-complaint-index" className="text-primary hover:underline">
-                      Plan Complaint Index
-                    </Link>
+                {publicView.yearsInBusiness ? (
+                  <p>
+                    <span className="font-medium">Tenure:</span> {publicView.yearsInBusiness} years
+                    in business
                   </p>
                 ) : null}
+                <p className="text-muted-foreground">
+                  No TrustHub score, grade, or ranking is calculated from this evidence. See{' '}
+                  <Link href="/methodology" className="text-primary underline">
+                    methodology
+                  </Link>
+                  .
+                </p>
               </CardContent>
             </Card>
 
