@@ -4,7 +4,6 @@ import { executeInsuranceAsk, publicAskPayload, type InsuranceAskResult } from '
 import { INSURANCE_ASK_PAGE_SIZE, LOCKED_CENSUS } from '@/lib/insurance-ask/contract';
 import { classifyBailBondDirectoryPublication } from '@/lib/directory/bail-bond-publication';
 import { listPublishedInsurers, insurerProfilePath } from '@/lib/national/legal-insurer-pilot';
-import { getProviders } from '@/lib/providers/queries';
 import { matchLaunchCounty } from '@/lib/dfs/launch-counties';
 import type { Provider } from '@/types/provider';
 import {
@@ -199,6 +198,12 @@ async function localDirectory(req: SpecialistRequest, page: number, limit: numbe
   let providers: Provider[];
   let total: number;
   try {
+    // Dynamic import: lib/providers/queries.ts transitively imports the 'server-only'-guarded
+    // Supabase client wrapper, which throws immediately on a top-level static import outside
+    // Next's own server runtime -- including in plain-tsx CI scripts (e.g. check-th-search-r1-013)
+    // that import executeSpecialistV2 but never reach this OFFICE_LOCATION branch. A dynamic
+    // import defers module evaluation until this branch actually executes.
+    const { getProviders } = await import('@/lib/providers/queries');
     const filters = zip ? { zip, limit, offset } : { launchCountyId: county!.id, limit, offset };
     const result = await getProviders(filters);
     providers = result.providers;

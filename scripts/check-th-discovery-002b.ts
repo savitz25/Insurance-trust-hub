@@ -46,7 +46,7 @@ const contract = readFileSync(join(root, 'lib/specialist-execution/contract.ts')
 
 // --- Reuses the existing, already-live directory query -- no second matcher ---
 assert(
-  /from ['"]@\/lib\/providers\/queries['"]/.test(v2),
+  /from ['"]@\/lib\/providers\/queries['"]|import\(['"]@\/lib\/providers\/queries['"]\)/.test(v2),
   'v2.ts must delegate to the existing lib/providers/queries getProviders/searchProviders implementation, not build a second city/ZIP matcher'
 );
 assert(!/new\s+Map\s*\(\s*\[\s*\['?\d{5}/.test(v2), 'no hardcoded ZIP-to-result table may be invented in v2.ts');
