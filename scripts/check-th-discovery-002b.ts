@@ -80,6 +80,17 @@ assert(
   'a failed directory lookup must surface as BACKEND_UNAVAILABLE, never a substituted SUPPORTED_RESULTS'
 );
 
+// --- "source outage is error, never zero": getProviders must fail loud for a pure county-grain
+// lookup too, not just ZIP -- discovered live (production intermittently returned
+// ZERO_MATCHING_ROWS for Palm Beach County, a launch county with 5,000+ real records, on a
+// transient backend hiccup that the old zip-only guard silently swallowed into an honest-looking
+// empty result) ---
+const queries = readFileSync(join(root, 'lib/providers/queries.ts'), 'utf8');
+assert(
+  /failLoud\s*=\s*Boolean\(filters\.zip\s*\|\|\s*filters\.launchCountyId\)/.test(queries),
+  'getProviders must fail loud (throw) on a backend error for a county-grain lookup too, not just ZIP -- a transient outage must never be reported as a confident zero for an established launch county'
+);
+
 // --- Entity-class integrity: only 'agency' (or unset, which defaults to agency for local intent)
 // may be routed into the local directory -- producer and legal_insurer keep their own, separately
 // scoped and unaffected capability gaps ---
