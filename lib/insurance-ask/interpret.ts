@@ -1,4 +1,4 @@
-import { interpretIdentityAndLocal } from './research-intent';
+import { interpretIdentityAndLocal, resolveFlCityLaunchCounty } from './research-intent';
 import {
   ASK_DEFINITIONS,
   CREDENTIAL_STATES,
@@ -128,11 +128,20 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  if (/\b(near me|in boca raton|local (insurance|agenc)|homeowners insurance near)\b/i.test(q)) {
-    const query = fail('Local listing discovery needs a ZIP code. The public directory is separate from the regulatory identity graph and does not prove service territory.', ['Insurance agencies in ZIP 33441.', 'Show insurance agencies credentialed in Florida.']);
+  // TH-DISCOVERY-RESET-001: this used to only recognize the literal phrase "in boca raton" as a
+  // trigger, and always fail closed asking for a ZIP even then -- hiding the real local-directory
+  // capability behind a handoff. Recognizes any city already resolved to one of this source's
+  // existing FL_LAUNCH_COUNTIES ids (not a new dataset, see resolveFlCityLaunchCounty) and runs
+  // the real county-grain directory query instead of a bare ZIP request.
+  const nearMeLocation = q.match(/\b(?:in|near)\s+(.+?)[?.]?$/i)?.[1]?.replace(/[?.]+$/, '');
+  const nearMeLaunchCountyId = nearMeLocation ? resolveFlCityLaunchCounty(nearMeLocation) : undefined;
+  if (nearMeLaunchCountyId || /\b(near me|in boca raton|local (insurance|agenc)|homeowners insurance near)\b/i.test(q)) {
+    const query: InsuranceResearchQuery = nearMeLaunchCountyId
+      ? { mode: 'directory', directoryLaunchCountyId: nearMeLaunchCountyId, page: 1, coverageState: 'PARTIAL' }
+      : fail('Local listing discovery needs a ZIP code. The public directory is separate from the regulatory identity graph and does not prove service territory.', ['Insurance agencies in ZIP 33441.', 'Show insurance agencies credentialed in Florida.']);
     query.coverageState = 'PARTIAL';
-    push('Research type', 'Local directory handoff');
-    push('Coverage', 'PARTIAL — ZIP required');
+    push('Research type', nearMeLaunchCountyId ? 'Local public directory (recorded county)' : 'Local directory handoff');
+    push('Coverage', nearMeLaunchCountyId ? `Resolved to launch county from "${nearMeLocation}"` : 'PARTIAL — ZIP required');
     return { raw: q, query, interpretation: lines };
   }
 
