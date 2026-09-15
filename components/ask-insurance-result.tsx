@@ -63,11 +63,17 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
       {q.directoryContext?.unresolvedConditions.map(x=><p key={x} className="rounded-xl bg-amber-50 p-4">{x}</p>)}
       {result.terminalState === 'NO_MATCH' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">No matching indexed research identity</h2><p>The complete {q.identifier ? `${q.identifier.type} ${q.identifier.value}` : q.nameQuery} was searched in the permitted corpus. No other identity or cohort was substituted. Absence here does not establish an invalid identifier or lack of authorization.</p></section>:null}
       {result.candidateSelection ? <section className="rounded-xl bg-sky-50 p-4"><h2 className="text-xl font-semibold">Select the source identity you mean</h2><p>Names indicate candidates. Compare class and identifiers before continuing the original question.</p>{result.candidateTruncated?<p>Only 10 candidates are displayed; refine the name. This is not an exhaustive total.</p>:null}</section>:null}
-      {q.mode === 'directory' && q.directoryZip ? (
+      {q.mode === 'directory' && (q.directoryZip || q.directoryLaunchCountyId) ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
           <h2 className="text-2xl font-semibold text-[#0A2540]">Local directory research</h2>
-          <p className="mt-3 text-sm text-slate-700">ZIP listings are a separate publication grain. They are not canonical agency identities and do not prove service territory.</p>
-          <a href={`/directory?${new URLSearchParams({zip:q.directoryZip,insuranceContext:q.directoryContext?.requestedInsuranceContext.join(',')??'',requestedPlace:q.directoryContext?.requestedLocation??''})}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-700">Browse listings for {q.directoryZip} →</a>
+          <p className="mt-3 text-sm text-slate-700">
+            {q.directoryZip
+              ? 'ZIP listings are a separate publication grain. They are not canonical agency identities and do not prove service territory.'
+              : 'These are recorded public-directory addresses in the requested county. A recorded address is not a confirmed service area -- a directory record does not mean an agency serves every customer in the surrounding area.'}
+          </p>
+          {q.directoryZip ? (
+            <a href={`/directory?${new URLSearchParams({zip:q.directoryZip,insuranceContext:q.directoryContext?.requestedInsuranceContext.join(',')??'',requestedPlace:q.directoryContext?.requestedLocation??''})}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-700">Browse listings for {q.directoryZip} →</a>
+          ) : null}
         </section>
       ) : null}
 

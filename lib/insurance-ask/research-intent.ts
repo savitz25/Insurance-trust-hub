@@ -20,6 +20,69 @@ export function requestedClass(text: string): InsuranceEntityClass | undefined {
   if (/\b(?:legal insurer|insurers?|insurance compan(?:y|ies))\b/i.test(text))
     return "insurer";
 }
+/**
+ * TH-DISCOVERY-RESET-001: "Florida insurance company" and "insurance company Monmouth County New
+ * Jersey" were misclassified below as an explicit company NAME (the entire phrase becomes
+ * nameQuery, producing a doomed exact-match lookup and a false "no match" result) -- provider-
+ * class + geography is a DISCOVERY request, not a name, but distinctiveNameTokens only filters
+ * generic insurance words, not state/county geography, so a bare state or county name survived as
+ * a "distinctive token" and satisfied the length check that gates that branch. Recognizes a query
+ * as geography-only once its recognized state name(s), "<Name> County" patterns, and generic
+ * insurance words are removed and nothing distinctive remains.
+ */
+// TH-DISCOVERY-RESET-001: minimal, already-authoritative city -> launch-county crosswalk so a
+// bare city name can reach real local-directory results without requiring a ZIP first. Bounded
+// exactly to the FL_LAUNCH_COUNTIES set this source already accepts (lib/dfs/launch-counties.ts)
+// -- these are not new geographic facts, just naming the principal cities of counties this source
+// already publishes.
+const FL_CITY_LAUNCH_COUNTY: Record<string, string> = {
+  "boca raton": "palm_beach",
+  "west palm beach": "palm_beach",
+  "delray beach": "palm_beach",
+  "boynton beach": "palm_beach",
+  jupiter: "palm_beach",
+  wellington: "palm_beach",
+  "fort lauderdale": "broward",
+  "ft lauderdale": "broward",
+  "ft. lauderdale": "broward",
+  "deerfield beach": "broward",
+  "pompano beach": "broward",
+  hollywood: "broward",
+  "pembroke pines": "broward",
+  "coral springs": "broward",
+  miami: "miami_dade",
+  "miami beach": "miami_dade",
+  hialeah: "miami_dade",
+  tampa: "hillsborough",
+  "st petersburg": "pinellas",
+  "st. petersburg": "pinellas",
+  "saint petersburg": "pinellas",
+  clearwater: "pinellas",
+  orlando: "orange",
+  jacksonville: "duval",
+};
+export function resolveFlCityLaunchCounty(location: string): string | undefined {
+  const key = location
+    .toLowerCase()
+    .replace(/[,]+/g, " ")
+    .replace(/\bflorida\b|\bfl\b/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return FL_CITY_LAUNCH_COUNTY[key];
+}
+function isGeographyOnlyPhrase(q: string, matchedStateCodes: string[]): boolean {
+  let residue = q;
+  for (const code of matchedStateCodes) {
+    const state = US_STATES.find((s) => s.code === code);
+    if (state) residue = residue.replace(new RegExp(`\\b${state.name}\\b`, "gi"), " ");
+  }
+  residue = residue.replace(/\b[A-Za-z][A-Za-z.'-]*\s+county\b/gi, " ");
+  residue = residue.replace(
+    /\b(?:insurance|ins|agency|agencies|company|companies|co|corporation|corp|inc|llc|llp|limited|ltd|services|group|insurer|insurers|the|and|of|an?)\b/gi,
+    " ",
+  );
+  return !/[a-z]/i.test(residue);
+}
 export function invalidResearch(
   raw: string,
   reason: string,
@@ -209,6 +272,7 @@ export function interpretIdentityAndLocal(
     !/\b(?:in|near|with|which|what|how|show|does|has|have|can|should|this|licensed|credentialed|located|domiciled|complaints|best|serves)\b/i.test(
       q,
     ) &&
+    !isGeographyOnlyPhrase(q, states) &&
     distinctiveNameTokens(q).length
   )
     explicitName = [q, q];
@@ -234,23 +298,36 @@ export function interpretIdentityAndLocal(
     const location =
       q.match(/\b(?:in|near)\s+(.+?)[?.]?$/i)?.[1]?.replace(/[?.]+$/, "") ??
       "near me";
+    // TH-DISCOVERY-RESET-001: a bare city name (e.g. "Boca Raton") used to always fall to
+    // fail_closed asking for a ZIP, hiding the real local-directory capability behind a ZIP
+    // requirement even though the launch-county grain is already sufficient to run it. Resolves
+    // against the same already-authoritative FL_LAUNCH_COUNTIES set this source already accepts
+    // (not a new dataset) before requiring a ZIP.
+    const launchCountyId = !zip ? resolveFlCityLaunchCounty(location) : undefined;
     return parsed(q, {
-      mode: zip ? "directory" : "fail_closed",
+      mode: zip || launchCountyId ? "directory" : "fail_closed",
       intent: "DIRECTORY_DISCOVERY",
       page,
       directoryZip: zip,
+      directoryLaunchCountyId: launchCountyId,
       coverageState: "PARTIAL",
-      refinement: zip ? undefined : "zip",
-      terminalState: zip ? undefined : "NEEDS_CLARIFICATION",
-      failReason: zip
-        ? undefined
-        : "Enter a ZIP for public directory listings. Your requested place is retained; no ZIP or service area is guessed.",
+      refinement: zip || launchCountyId ? undefined : "zip",
+      terminalState: zip || launchCountyId ? undefined : "NEEDS_CLARIFICATION",
+      failReason:
+        zip || launchCountyId
+          ? undefined
+          : "Enter a ZIP for public directory listings. Your requested place is retained; no ZIP or service area is guessed.",
       directoryContext: {
         requestedLocation: location,
         requestedInsuranceContext: context,
         effectiveZip: zip,
         unresolvedConditions: [
-          ...(!zip ? ["ZIP required"] : []),
+          ...(!zip && !launchCountyId ? ["ZIP required"] : []),
+          ...(launchCountyId
+            ? [
+                "Recorded public-directory county record, not a confirmed service area -- a county directory record does not mean an agency serves customers throughout the county.",
+              ]
+            : []),
           ...(context.length
             ? [
                 "Insurance product context is retained, not an applied LOA, appointment or directory product filter.",

@@ -369,17 +369,25 @@ async function main() {
         );
         assert.equal(bad.status, 400);
       });
-      await test("real renderer offers ZIP form and honest directory boundary", async () => {
+      await test("real renderer resolves bare city to county directory and states an honest boundary", async () => {
+        // TH-DISCOVERY-RESET-001: "Boca Raton Florida" now resolves directly to the
+        // palm_beach launch county via resolveFlCityLaunchCounty and no longer needs a
+        // ZIP form -- RESULTS FIRST means a bare city + state is enough to search.
         const r = await executeInsuranceAsk(
           "homeowners insurance agency in Boca Raton Florida",
         );
+        assert.equal(r.parsed.query.mode, "directory");
+        assert.equal(r.parsed.query.directoryLaunchCountyId, "palm_beach");
+        assert.equal(r.parsed.query.directoryZip, undefined);
         const html = renderToStaticMarkup(
           createElement(AskInsuranceResultView, { result: r }),
         );
-        assert.match(html, /name="zip"/);
-        assert.match(html, /Apply ZIP/);
+        assert.doesNotMatch(html, /name="zip"/);
+        assert.doesNotMatch(html, /Apply ZIP/);
         assert.match(html, /Boca Raton/);
         assert.match(html, /homeowners/);
+        assert.match(html, /Local directory research/);
+        assert.match(html, /recorded address is not a confirmed service area/);
         assert.doesNotMatch(html, /licensed in ZIP|serves ZIP/);
       });
       await test("real renderer candidate action carries original task", async () => {

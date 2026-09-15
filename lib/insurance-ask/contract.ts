@@ -121,6 +121,8 @@ export type InsuranceResearchQuery = {
   alternatives?: string[];
   aggregateMetric?: 'credentials_by_state' | 'entity_count' | 'multi_state_agencies';
   directoryZip?: string;
+  /** TH-DISCOVERY-RESET-001: a bare city resolved to one of this source's existing FL_LAUNCH_COUNTIES ids. */
+  directoryLaunchCountyId?: string;
   coverageState?: 'KNOWN' | 'UNKNOWN' | 'PARTIAL' | 'NOT_ACQUIRED' | 'REQUEST_ONLY' | 'UNSUPPORTED';
 };
 
