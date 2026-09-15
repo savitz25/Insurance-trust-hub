@@ -5,6 +5,7 @@ import { INSURANCE_ASK_PAGE_SIZE, LOCKED_CENSUS } from '@/lib/insurance-ask/cont
 import { classifyBailBondDirectoryPublication } from '@/lib/directory/bail-bond-publication';
 import { listPublishedInsurers, insurerProfilePath } from '@/lib/national/legal-insurer-pilot';
 import { matchLaunchCounty } from '@/lib/dfs/launch-counties';
+import { resolveZip } from '@/lib/tools/zip-resolve';
 import type { Provider } from '@/types/provider';
 import {
   SPECIALIST_EXECUTION_CONTRACT,
@@ -187,7 +188,14 @@ function wave1(req: SpecialistRequest): SpecialistEnvelope {
  * duplicated here. A recorded directory address is never a service-territory claim.
  */
 async function localDirectory(req: SpecialistRequest, page: number, limit: number): Promise<SpecialistEnvelope> {
-  const zip = req.geography?.zip;
+  // TH-DISCOVERY-002B: reuse the exact same ZIP-validity guard the real /directory page already
+  // relies on (resolveZip, backed by the curated ZIP_COUNTY crosswalk plus a real US ZIP-prefix
+  // range check) before ever querying the directory. Without this, a ZIP that merely looks
+  // syntactically valid (5 digits) but isn't a real US ZIP -- e.g. the reserved/placeholder value
+  // "00000" -- could match a genuine data-quality artifact in the source (some records carry that
+  // literal sentinel) and be misreported as real recorded-address evidence. /directory itself
+  // never queries getProviders for a ZIP that fails this same check.
+  const zip = req.geography?.zip && resolveZip(req.geography.zip) ? req.geography.zip : undefined;
   const county = !zip ? matchLaunchCounty(req.geography?.county) : undefined;
   if (!zip && !county) {
     const out = unsupported('local_directory_geography_not_recognized', 'This ZIP or county is not in the accepted public-directory geography set.', ['Research the state cohort instead.'], { geography: req.geography });

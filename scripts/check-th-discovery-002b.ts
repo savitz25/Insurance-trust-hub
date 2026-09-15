@@ -64,6 +64,15 @@ assert(
   'a ZIP/county the directory does not recognize must fail closed as UNSUPPORTED_CAPABILITY, never silently broadened or fabricated'
 );
 
+// --- A syntactically-5-digit but non-real ZIP (e.g. "00000") must be rejected by the same
+// resolveZip validity check the real /directory page already relies on -- discovered live: some
+// directory records carry that literal sentinel value, so passing an unvalidated ZIP straight
+// through would misreport a data-quality artifact as real recorded-address evidence ---
+assert(
+  /resolveZip\(req\.geography\.zip\)/.test(v2),
+  'a supplied ZIP must be validated with the existing resolveZip check (the same one /directory uses) before querying the directory, not passed through unvalidated'
+);
+
 // --- The directory-source query failure (e.g. no Supabase credential, or a real backend error)
 // must surface as a genuine failure state, never a fabricated success ---
 assert(
