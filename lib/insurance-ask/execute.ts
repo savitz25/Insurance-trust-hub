@@ -593,11 +593,66 @@ async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promis
     });
     return finish(parsed, results, results.length, started, 'Wave-1 published legal-insurer normalized-name candidates');
   }
+  const isDomicileQuery = parsed.query.jurisdiction?.meaning === 'regulatory_domicile' || parsed.query.domicile;
+  const reason = isDomicileQuery
+    ? 'Legal-insurer domicile is not a complete national Ask field in this extract. Wave-1 public profiles (26) store domicile as null; 6,185 graph identities are not a domicile census. Use a labeled NAIC company code.'
+    : 'Ask does not list all 6,185 legal insurers as a directory. Use a labeled NAIC company code, or browse the published Wave-1 /insurers cohort.';
+  // TH-DISCOVERY-RESET-001B: RESULTS FIRST -- when the exact legal-insurer state cohort is not a
+  // supported directory (the common case for a colloquial "Florida insurance company"/"insurance
+  // company Monmouth County New Jersey"), do not stonewall with a bare limitation + recovery link.
+  // Real insurance AGENCIES for the same requested state are one query away (listAgencies, the
+  // same function that already backs the passing "insurance agencies in Florida" case) -- show
+  // them immediately as an explicitly labeled broader alternative. The original interpretation
+  // (parsed.interpretation, "Entity class: insurer") is untouched, so the panel still shows what
+  // was actually asked; only the query passed to listAgencies is cloned with entityClass:'agency'
+  // so the returned rows/entityClass are truthfully agency, never relabeled as insurers.
+  // A genuine "domiciled in X" question is a different, distinct regulatory concept an agency
+  // result cannot answer at all, so it deliberately stays UNSUPPORTED rather than broadening into
+  // an unrelated class of evidence.
+  const state = !isDomicileQuery ? parsed.query.jurisdiction?.state : undefined;
+  if (state) {
+    const broaderParsed: ParsedInsuranceAsk = { ...parsed, query: { ...parsed.query, entityClass: 'agency', nameQuery: undefined, mode: 'entity' } };
+    const broader = await listAgencies(broaderParsed, started);
+    // If even the broadened agency cohort is empty for this jurisdiction, there is nothing to show
+    // on a first screen -- fall through to the honest bare-UNSUPPORTED path below rather than
+    // claiming PARTIAL over zero rows.
+    if (broader.results.length === 0) {
+      const base = emptyBase(parsed, started);
+      return {
+        ...base,
+        resultType: 'fail_closed',
+        parsed: {
+          ...parsed,
+          query: {
+            ...parsed.query,
+            mode: 'fail_closed',
+            failReason: reason,
+            alternatives: ['What is a legal insurer?', 'Find insurer NAIC code 10064.'],
+          },
+        },
+        elapsedMs: Date.now() - started,
+        coverageState: 'UNSUPPORTED',
+      };
+    }
+    const place = parsed.query.jurisdiction?.meaning === 'credential_jurisdiction' ? `a ${state} credential` : state;
+    broader.results = broader.results.map((row) => ({
+      ...row,
+      whyMatched: `Broader ${state} insurance agency result, not a legal insurer -- ${state === 'FL' ? 'agency and legal insurer are separate regulated classes' : `${place} does not establish a local county office or service area`}. ${row.whyMatched}`,
+    }));
+    broader.limitations = [
+      reason,
+      `These are insurance agencies, not legal underwriting insurers -- the requested legal-insurer state cohort is not published as a directory. ${state} credential jurisdiction does not establish office location or service territory.`,
+      ...broader.limitations,
+    ];
+    broader.coverageState = 'PARTIAL';
+    // The original request (parsed) is preserved for interpretation/display; only the executed
+    // query underneath (agency, same jurisdiction) differs, and that difference is what the
+    // limitations above and each row's whyMatched disclose.
+    broader.parsed = parsed;
+    broader.entityClass = 'agency';
+    return broader;
+  }
   const base = emptyBase(parsed, started);
-  const reason =
-    parsed.query.jurisdiction?.meaning === 'regulatory_domicile' || parsed.query.domicile
-      ? 'Legal-insurer domicile is not a complete national Ask field in this extract. Wave-1 public profiles (26) store domicile as null; 6,185 graph identities are not a domicile census. Use a labeled NAIC company code.'
-      : 'Ask does not list all 6,185 legal insurers as a directory. Use a labeled NAIC company code, or browse the published Wave-1 /insurers cohort.';
   return {
     ...base,
     resultType: 'fail_closed',

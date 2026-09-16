@@ -293,6 +293,55 @@ async function main() {
         assert.equal(r.coverageState, "UNSUPPORTED");
         assert.equal(r.results.length, 0);
       });
+      // TH-DISCOVERY-RESET-001B: bare "<state> insurance company" no longer stonewalls with zero
+      // rows -- the unsupported legal-insurer state cohort now broadens immediately to real,
+      // explicitly-labeled agency results for the same jurisdiction (reusing listAgencies, the same
+      // function already backing "insurance agencies in Florida"), while the original request
+      // (entityClass insurer) stays intact in parsed for the interpretation panel.
+      await test("bare state insurer cohort broadens to labeled agency results, not zero rows", async () => {
+        const r = await executeInsuranceAsk("Florida insurance company");
+        assert.equal(r.parsed.query.entityClass, "insurer");
+        assert.equal(r.entityClass, "agency");
+        assert.equal(r.coverageState, "PARTIAL");
+        assert.ok(r.results.length > 0);
+        assert.ok(r.results.every((c) => c.entityClass === "agency"));
+        assert.equal(r.results[0]?.entityId, ids.agency);
+        assert.match(r.limitations.join(" "), /not legal underwriting insurers/i);
+        assert.match(r.results[0]?.whyMatched ?? "", /Broader FL insurance agency/i);
+      });
+      // Texas was one of the 8 states (texas|new jersey|california|washington|colorado|virginia|
+      // new york|illinois) that interpret.ts intercepted into an unconditional fail_closed before
+      // ever reaching listInsurers's broadening -- this is the exact stonewall this ticket
+      // eliminates. A real TX agency fixture exists, so this exercises the full broadened path.
+      await test("bare Texas insurer cohort (previously hard fail_closed) now broadens to labeled agency results", async () => {
+        const r = await executeInsuranceAsk("Texas insurance company");
+        assert.equal(r.parsed.query.entityClass, "insurer");
+        assert.equal(r.parsed.query.coverageState, "NOT_ACQUIRED");
+        assert.equal(r.entityClass, "agency");
+        assert.equal(r.coverageState, "PARTIAL");
+        assert.equal(r.results[0]?.entityId, ids.other);
+        assert.ok(r.results.every((c) => c.entityClass === "agency"));
+      });
+      await test("how many insurance companies in Texas stays a count fail_closed, not a broadened listing", async () => {
+        const r = await executeInsuranceAsk(
+          "How many insurance companies are licensed in Texas?",
+        );
+        assert.equal(r.parsed.query.mode, "fail_closed");
+        assert.equal(r.results.length, 0);
+      });
+      // This fixture source has no NJ agency row, so the broadened agency query legitimately
+      // returns zero rows -- confirms the fallback never claims PARTIAL over an empty cohort and
+      // instead stays honestly UNSUPPORTED (real NJ agency coverage in production is verified
+      // separately against the live source, not this fixture).
+      await test("insurer cohort with no broader rows available stays honestly unsupported, not a false PARTIAL", async () => {
+        const r = await executeInsuranceAsk(
+          "insurance company Monmouth County New Jersey",
+        );
+        assert.equal(r.parsed.query.entityClass, "insurer");
+        assert.equal(r.parsed.query.jurisdiction?.state, "NJ");
+        assert.equal(r.coverageState, "UNSUPPORTED");
+        assert.equal(r.results.length, 0);
+      });
       await test("LOA is not appointment or service area", async () => {
         const r = await executeInsuranceAsk(
           "life insurance agencies credentialed in Texas",
