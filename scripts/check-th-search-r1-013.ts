@@ -329,18 +329,29 @@ async function main() {
         assert.equal(r.parsed.query.mode, "fail_closed");
         assert.equal(r.results.length, 0);
       });
-      // This fixture source has no NJ agency row, so the broadened agency query legitimately
-      // returns zero rows -- confirms the fallback never claims PARTIAL over an empty cohort and
-      // instead stays honestly UNSUPPORTED (real NJ agency coverage in production is verified
-      // separately against the live source, not this fixture).
-      await test("insurer cohort with no broader rows available stays honestly unsupported, not a false PARTIAL", async () => {
+      // TH-DISCOVERY-RESET-001C: this fixture source has no NJ agency row, so the in-state
+      // broadened agency query legitimately returns zero rows -- but that must no longer mean zero
+      // providers on the first screen. The published Wave-1 legal-insurer cohort (real, national,
+      // always available -- the same data "exact NAIC uses legal insurer fixture only" above reads
+      // directly, since this wrapper passes no insurer fixture) is the strongest real broader
+      // inventory available, so it must appear immediately, explicitly labeled as broader/national
+      // and NOT specific to NJ or Monmouth County -- never implying it satisfies the unavailable
+      // local condition.
+      await test("insurer cohort with no broader in-state rows falls back to the real national Wave-1 cohort, not zero providers", async () => {
         const r = await executeInsuranceAsk(
           "insurance company Monmouth County New Jersey",
         );
         assert.equal(r.parsed.query.entityClass, "insurer");
         assert.equal(r.parsed.query.jurisdiction?.state, "NJ");
-        assert.equal(r.coverageState, "UNSUPPORTED");
-        assert.equal(r.results.length, 0);
+        assert.equal(r.coverageState, "PARTIAL");
+        assert.ok(r.results.length > 0, "provider cards must be visible on the first screen, not behind a second click");
+        assert.ok(r.results.every((c) => c.entityClass === "insurer"));
+        assert.match(r.results[0]?.whyMatched ?? "", /BROADER NATIONAL RESULT -- not specific to NJ/);
+        assert.match(
+          r.limitations.join(" "),
+          /NJ insurance-agency bulk credentials have not been acquired/,
+        );
+        assert.match(r.limitations.join(" "), /NOT specific to NJ or the requested county/);
       });
       // TH-DISCOVERY-RESET-001B: a structured legal_insurer cohort request with a resolved (non-
       // domicile) state used to hard-stonewall with a bare 422 before ever reaching listInsurers's
