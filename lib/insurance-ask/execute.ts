@@ -13,7 +13,7 @@ import {
   LOCKED_CENSUS,
 } from './contract';
 import { askCacheKey, cacheGetCount, cacheSetCount } from './cache';
-import type { ParsedInsuranceAsk } from './contract';
+import type { ParsedInsuranceAsk, InsuranceResearchQuery } from './contract';
 import {
   getSupabaseServiceRoleKey,
   getSupabaseUrl,
@@ -196,8 +196,7 @@ async function executeInsurancePlan(parsed: ParsedInsuranceAsk, pageSize: number
   }
 
   if (q.mode === 'directory') {
-    empty.elapsedMs = Date.now() - started;
-    return empty;
+    return executeDirectoryMode(parsed, q, started);
   }
 
   if (!sourceContext.getStore() && !isSupabaseAdminConfigured()) {
@@ -231,6 +230,69 @@ async function executeInsurancePlan(parsed: ParsedInsuranceAsk, pageSize: number
   }
 
   return listAgencies(parsed, started);
+}
+
+/**
+ * TH-DISCOVERY-RESET-001: directory mode used to always return an empty handoff shell, hiding the
+ * real local-directory capability (getProviders/searchProviders, the same source that backs this
+ * hub's own /directory page) behind a bare "no regulatory identities retrieved" placeholder.
+ * Delegates directly to that existing query -- not a second matcher -- for a supplied ZIP or a
+ * city already resolved to one of this source's existing FL_LAUNCH_COUNTIES ids.
+ */
+async function executeDirectoryMode(parsed: ParsedInsuranceAsk, q: InsuranceResearchQuery, started: number): Promise<InsuranceAskResult> {
+  const empty = emptyBase(parsed, started);
+  if (!q.directoryZip && !q.directoryLaunchCountyId) {
+    empty.elapsedMs = Date.now() - started;
+    return empty;
+  }
+  try {
+    // Dynamic import: lib/providers/queries.ts transitively imports the 'server-only'-guarded
+    // Supabase client wrapper, which throws immediately on a top-level static import outside
+    // Next's own server runtime -- including plain-tsx CI scripts that import this module (e.g.
+    // check-th-search-r1-013.ts) but never reach directory mode. A dynamic import defers module
+    // evaluation until this branch actually executes.
+    const { getProviders } = await import('@/lib/providers/queries');
+    const pageSize = q.pageSize ?? INSURANCE_ASK_PAGE_SIZE;
+    const offset = (q.page - 1) * pageSize;
+    const { providers, total } = await getProviders(
+      q.directoryZip
+        ? { zip: q.directoryZip, limit: pageSize, offset }
+        : { launchCountyId: q.directoryLaunchCountyId, limit: pageSize, offset },
+    );
+    const place = q.directoryZip ? `ZIP ${q.directoryZip}` : q.directoryContext?.requestedLocation ?? 'the requested area';
+    const results: AskCard[] = providers.map((p) => ({
+      entityId: p.id,
+      entityClass: 'agency',
+      displayName: p.name,
+      npn: null,
+      naicCode: null,
+      credentialJurisdiction: p.license_state ?? p.state ?? null,
+      credentialStatus: null,
+      licenseNumber: p.license_number ?? null,
+      licenseClass: null,
+      loas: Array.isArray(p.insurance_types) ? p.insurance_types.map(String) : [],
+      sourceDataset: 'ins-directory-providers',
+      sourceObservedAt: p.license_checked_at ?? null,
+      href: `/providers/${p.slug}`,
+      publicationNote: 'PUBLIC_PROFILE',
+      whyMatched: `Recorded public-directory address in ${place}. A recorded address is not a confirmed service area -- a directory record does not mean this agency serves every customer in the surrounding area.`,
+    }));
+    const result = finish(parsed, results, total, started, 'ins-directory-providers');
+    result.terminalState = results.length ? 'RESULTS' : 'NO_MATCH';
+    result.provenance.sourceFamily = 'InsuranceTrustHub verified public agency directory';
+    result.provenance.geographyMeaning = `Recorded public-directory address in ${place}; not service territory`;
+    result.limitations = [
+      'Recorded public-directory address is not a confirmed service area, appointment territory, or product availability.',
+      'This directory is a separate source from the regulatory credential graph and does not confirm licensing, appointments, or lines of authority.',
+      ...result.limitations,
+    ];
+    return result;
+  } catch {
+    empty.elapsedMs = Date.now() - started;
+    empty.coverageState = 'UNSUPPORTED';
+    empty.limitations = ['The public-directory research backend is temporarily unavailable.', ...empty.limitations];
+    return empty;
+  }
 }
 
 function unmappedNpnClass(parsed: ParsedInsuranceAsk, rows: EntityRow[], started: number): InsuranceAskResult | undefined {
