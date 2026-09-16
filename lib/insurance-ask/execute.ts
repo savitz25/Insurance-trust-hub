@@ -20,7 +20,7 @@ import {
   isSupabaseAdminConfigured,
 } from '@/lib/supabase/config';
 import { PUBLIC_PERSON_PROFILES_ENABLED } from '@/lib/national/publication';
-import { getPublishedByNaic, insurerProfilePath, searchPublishedInsurers, type PublishedInsurer } from '@/lib/national/legal-insurer-pilot';
+import { getPublishedByNaic, insurerProfilePath, listPublishedInsurers, searchPublishedInsurers, type PublishedInsurer } from '@/lib/national/legal-insurer-pilot';
 import { AGENCY_MULTISTATE } from '@/lib/national/home-intel';
 import { loaSourceDatasetsForJurisdiction } from '@/lib/national/loa';
 
@@ -613,10 +613,44 @@ async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promis
   if (state) {
     const broaderParsed: ParsedInsuranceAsk = { ...parsed, query: { ...parsed.query, entityClass: 'agency', nameQuery: undefined, mode: 'entity' } };
     const broader = await listAgencies(broaderParsed, started);
-    // If even the broadened agency cohort is empty for this jurisdiction, there is nothing to show
-    // on a first screen -- fall through to the honest bare-UNSUPPORTED path below rather than
-    // claiming PARTIAL over zero rows.
+    // TH-DISCOVERY-RESET-001C: some jurisdictions (e.g. NJ) have not had ANY insurance-agency bulk
+    // credentials acquired at all, so even the in-state broadening above returns zero rows. That is
+    // a genuine research-source gap, not zero agencies, and it must stay disclosed honestly -- but
+    // it is not a reason to show zero providers. The Wave-1 published legal-insurer cohort (the
+    // same 26 real, verified national identities already backing a bare "Legal insurers" browse)
+    // is real, always-available inventory, so fall back to it, clearly labeled as broader/national
+    // and explicitly NOT specific to the requested state or county -- never implying it satisfies
+    // the unavailable local condition.
     if (broader.results.length === 0) {
+      const nationalRows: AskCard[] = publishedInsurers()
+        .map((published): AskCard => ({
+          entityId: published.entity_id,
+          entityClass: 'insurer',
+          displayName: published.canonical_legal_name,
+          npn: null,
+          naicCode: published.naic_cocode,
+          credentialJurisdiction: null,
+          credentialStatus: null,
+          licenseNumber: null,
+          licenseClass: null,
+          loas: [],
+          sourceDataset: 'ins-insurer-006-wave1',
+          sourceObservedAt: published.report_dates[0] ?? null,
+          href: insurerProfilePath(published.slug),
+          publicationNote: null,
+          whyMatched: `BROADER NATIONAL RESULT -- not specific to ${state}. This is a published Wave-1 legal-insurer identity, not a local ${state} match. The legal name and NAIC code on the profile establish identity; no ${state} presence or office is implied.`,
+        }))
+        .slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
+      if (nationalRows.length > 0) {
+        const national = finish(parsed, nationalRows, nationalRows.length, started, 'Wave-1 published legal-insurer national cohort (broader fallback; no acquired state agency data)');
+        national.limitations = [
+          reason,
+          `${state} insurance-agency bulk credentials have not been acquired for this jurisdiction -- this is not zero agencies, it is a research-source gap. These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort, NOT specific to ${state} or the requested county -- broader, not local.`,
+          ...national.limitations,
+        ];
+        national.coverageState = 'PARTIAL';
+        return national;
+      }
       const base = emptyBase(parsed, started);
       return {
         ...base,
@@ -1102,4 +1136,5 @@ export async function executeInsuranceRequest(input: URLSearchParams | Record<st
 }
 
 function publishedByNaic(code:string):PublishedInsurer|undefined { const fixtures=sourceContext.getStore()?.insurers; return fixtures ? fixtures.find(x=>x.naic_cocode===code) : getPublishedByNaic(code)??undefined; }
+function publishedInsurers(): readonly PublishedInsurer[] { return sourceContext.getStore()?.insurers ?? listPublishedInsurers(); }
 function publishedSearch(name:string) { const fixtures=sourceContext.getStore()?.insurers; return fixtures ? searchLegalInsurers(name,fixtures.map(x=>({entityId:x.entity_id,legalName:x.canonical_legal_name,naicCode:x.naic_cocode,domicile:null}))) : searchPublishedInsurers(name); }
