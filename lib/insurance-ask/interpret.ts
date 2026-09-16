@@ -387,6 +387,14 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.entityClass = 'insurer';
     query.jurisdiction = state ? {state,meaning: geographyMeaning(q)} : undefined;
     query.coverageState = 'NOT_ACQUIRED';
+    // TH-DISCOVERY-RESET-001B: a resolved state still has real, labeled insurance agencies one
+    // query away (execute.ts's listInsurers now broadens to them instead of stonewalling) -- only
+    // route to a bare fail_closed dead end when no state was actually resolved to broaden from, or
+    // when the request is a count/aggregate ("how many...") rather than a browse/entity listing --
+    // a count has no listing to broaden into and must stay fail_closed exactly as before.
+    // coverageState stays NOT_ACQUIRED here as the parse-time record of what was asked for; the
+    // executed result's own coverageState (PARTIAL/UNSUPPORTED) is computed independently below.
+    if (state && !/\bhow many\b|\bcount of\b/i.test(q)) query.mode = 'entity';
     push('Entity class', 'Legal insurer');
     push('Coverage', 'NOT_ACQUIRED');
     return { raw: q, query, interpretation: lines };

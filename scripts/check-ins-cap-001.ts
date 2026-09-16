@@ -32,9 +32,21 @@ async function main() {
   assert.equal(producer.body.resultState, 'PUBLICATION_RESTRICTED');
   assert.equal(INS_CAP_LOCKS.publicPeople, 0);
 
-  const texas = await executeSpecialistV2({ query: 'insurance company in Texas' });
-  assert.equal(texas.status, 422);
-  assert.equal(texas.body.error?.code, 'legal_insurer_state_cohort_unavailable');
+  // TH-DISCOVERY-RESET-001B: "insurance company in Texas" (a bare, non-domicile state cohort
+  // request) no longer stonewalls with a bare 422 -- it broadens to real, explicitly labeled
+  // insurance agencies for the same state (see listInsurers, lib/insurance-ask/execute.ts). That
+  // broadened path is DB-backed and this script has no Supabase credentials in CI (this repo's
+  // fixture-backed check-th-search-r1-013.ts, run earlier in the same CI job, already exercises
+  // it end-to-end -- see "structured legal_insurer cohort with a credential-jurisdiction state
+  // broadens instead of a bare 422"). A genuine domicile-cohort request has nothing to broaden
+  // into and stays a bare, DB-free unsupported response, so it's still safe to assert here.
+  const domicile = await executeSpecialistV2({
+    entityClass: 'legal_insurer',
+    queryType: 'cohort',
+    geography: { intent: 'DOMICILE', stateCode: 'TX' },
+  });
+  assert.equal(domicile.status, 422);
+  assert.equal(domicile.body.error?.code, 'legal_insurer_state_cohort_unavailable');
 
   const territory = await executeSpecialistV2({ query: 'insurance agencies serving Florida' });
   assert.equal(territory.status, 422);

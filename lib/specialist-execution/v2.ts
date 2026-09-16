@@ -277,8 +277,13 @@ export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ sta
   if (req.geography?.intent === 'SERVICE_TERRITORY') return { status: 422, body: unsupported('service_territory_not_supported', 'Service territory and product availability are not supported by credential geography.', ['Use credential-jurisdiction research.']) };
   if (req.entityClass === 'producer' && !req.identifier) return { status: 422, body: unsupported('producer_publication_restricted', 'Public producer profiles and mass-person cohorts are not published.', ['Enter a labeled NPN.']) };
   if (req.entityClass === 'legal_insurer' && req.queryType === 'cohort') {
-    if (req.geography) return { status: 422, body: unsupported('legal_insurer_state_cohort_unavailable', 'Complete legal-insurer domicile and market-availability cohorts are unavailable.', ['Browse Wave 1.', 'Enter a NAIC Company Code.']) };
-    return { status: 200, body: wave1(req) };
+    // TH-DISCOVERY-RESET-001B: a resolved state (credential jurisdiction) is not a genuine domicile
+    // question -- listInsurers (lib/insurance-ask/execute.ts, reached via the fallthrough below)
+    // already broadens that case to real, explicitly-labeled insurance agencies instead of a bare
+    // stonewall. Only a true domicile cohort request has nothing an agency result can answer, so
+    // that alone still returns the unsupported response immediately.
+    if (req.geography && req.geography.intent === 'DOMICILE') return { status: 422, body: unsupported('legal_insurer_state_cohort_unavailable', 'Complete legal-insurer domicile and market-availability cohorts are unavailable.', ['Browse Wave 1.', 'Enter a NAIC Company Code.']) };
+    if (!req.geography) return { status: 200, body: wave1(req) };
   }
   const query = toCanonicalQuery(req);
   if (!query) { const out = base('INVALID_QUERY'); out.error = { code: 'missing_query', message: 'Provide a query or structured research request.' }; return { status: 400, body: out }; }
