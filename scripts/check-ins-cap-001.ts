@@ -27,9 +27,14 @@ async function main() {
   assert.equal(bare.status, 422);
   assert.equal(bare.body.resultState, 'UNSUPPORTED_CAPABILITY');
 
-  const producer = await executeSpecialistV2({ query: 'insurance agents in Florida' });
-  assert.equal(producer.status, 422);
-  assert.equal(producer.body.resultState, 'PUBLICATION_RESTRICTED');
+  // TH-DISCOVERY-GEN-001: individual producer profiles are still never mass-published
+  // (INS_CAP_LOCKS.publicPeople stays 0), but a bare producer/agent request is a provider-category
+  // phrase, not a reason to dead-end -- it now broadens to real agencies (or the national Wave-1
+  // cohort with no requested geography) instead of a bare 422. Any entity-mode query (even one
+  // whose broadened path needs no DB row lookups) hits executeInsurancePlan's blanket "no DB
+  // configured" guard before reaching that class-specific logic, so this script -- which has no
+  // fixture DB -- cannot exercise it; check-th-search-r1-013.ts's fixture-backed tests cover the
+  // full broadening behavior end-to-end instead.
   assert.equal(INS_CAP_LOCKS.publicPeople, 0);
 
   // TH-DISCOVERY-RESET-001B: "insurance company in Texas" (a bare, non-domicile state cohort

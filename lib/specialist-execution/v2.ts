@@ -275,7 +275,11 @@ export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ sta
     return { status: body.resultState === 'UNSUPPORTED_CAPABILITY' ? 422 : body.resultState === 'BACKEND_UNAVAILABLE' ? 503 : 200, body };
   }
   if (req.geography?.intent === 'SERVICE_TERRITORY') return { status: 422, body: unsupported('service_territory_not_supported', 'Service territory and product availability are not supported by credential geography.', ['Use credential-jurisdiction research.']) };
-  if (req.entityClass === 'producer' && !req.identifier) return { status: 422, body: unsupported('producer_publication_restricted', 'Public producer profiles and mass-person cohorts are not published.', ['Enter a labeled NPN.']) };
+  // TH-DISCOVERY-GEN-001: "insurance agents"/producer requests used to always 422 here before
+  // ever reaching listPersons (execute.ts), which now broadens an unsupported mass-producer
+  // cohort to real agencies (or the national Wave-1 cohort) for the same jurisdiction, exactly
+  // like the legal_insurer fallthrough below. Falls through to the normal executeInsuranceAsk
+  // path so that broadening is reachable through this structured contract too.
   if (req.entityClass === 'legal_insurer' && req.queryType === 'cohort') {
     // TH-DISCOVERY-RESET-001B: a resolved state (credential jurisdiction) is not a genuine domicile
     // question -- listInsurers (lib/insurance-ask/execute.ts, reached via the fallthrough below)

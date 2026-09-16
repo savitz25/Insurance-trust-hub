@@ -243,7 +243,13 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  if (/\b(broward|palm beach|miami[-\s]?dade).*(appoint|authorized to write|service (area|territory))\b/i.test(q) ||
+  // TH-DISCOVERY-GEN-001: this used to require the county name to appear BEFORE the
+  // appointment/authorization phrase (".*" between two capture groups), so "Is this producer
+  // authorized to write insurance in Broward County?" (phrase before county) fell through this
+  // check entirely once the separate blanket person-class fail_closed (removed above) stopped
+  // catching it as a side effect. The two signals are independent of word order.
+  if ((/\b(broward|palm beach|miami[-\s]?dade)\b/i.test(q) &&
+    /\b(appoint|authorized to write|service (area|territory))\b/i.test(q)) ||
     /\bcounty appointment\b/i.test(q)) {
     const query = fail(
       'Florida county appointment records have specialized regulatory meaning and are not treated as “authorized to write insurance in this county” or as a service-territory map.',
@@ -512,15 +518,12 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  if (entityClass === 'person' && !npn) {
-    const query = fail(
-      'Public producer profile pages are not published. Ask can count Florida-credentialed persons or look up a labeled NPN. It will not mass-publish people.',
-      ['How many individual producers are credentialed in Florida?', 'Find NPN 1234567.'],
-    );
-    query.entityClass = 'person';
-    push('Mode', 'fail_closed');
-    return { raw: q, query, interpretation: lines };
-  }
+  // TH-DISCOVERY-GEN-001: "insurance agent"/"insurance producer" is a provider-category phrase,
+  // not a company name or a reason to dead-end -- individual producer profiles genuinely cannot
+  // be mass-published, but that constraint belongs at execution time (listPersons broadens to
+  // real agencies / the national cohort, exactly like listInsurers already does for an unsupported
+  // legal-insurer cohort), not as an early parse-time fail_closed with zero providers. Falls
+  // through to the generic entity-mode construction below, same as agency/insurer.
 
   if (/\bmarketplace\b/i.test(q) && !npn) {
     const query = fail(

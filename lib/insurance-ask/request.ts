@@ -181,12 +181,11 @@ export function planInsuranceRequest(
     q.failReason =
       "This evidence filter requires an exact identity and the requested appointment or Marketplace context.";
   }
-  if (q.entityClass === "person" && q.mode === "entity") {
-    q.mode = "fail_closed";
-    q.refinement = "identity";
-    q.failReason =
-      "Public person directories are not published. Enter a labeled NPN.";
-  }
+  // TH-DISCOVERY-GEN-001: this used to unconditionally force a bare fail_closed for any
+  // person-class entity-mode query, duplicating (and overriding) interpret.ts's own handling --
+  // execute.ts's listPersons now broadens an unsupported mass-producer cohort to real agencies (or
+  // the national Wave-1 cohort) for the resolved jurisdiction instead of a zero-provider dead end,
+  // so this query must reach it unmodified rather than being re-converted to fail_closed here.
   if (
     q.entityClass === "agency" &&
     q.jurisdiction &&
