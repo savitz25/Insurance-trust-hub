@@ -342,6 +342,23 @@ async function main() {
         assert.equal(r.coverageState, "UNSUPPORTED");
         assert.equal(r.results.length, 0);
       });
+      // TH-DISCOVERY-RESET-001B: a structured legal_insurer cohort request with a resolved (non-
+      // domicile) state used to hard-stonewall with a bare 422 before ever reaching listInsurers's
+      // broadening -- AskTrustHub calls this exact structured shape, not free text. A genuine
+      // domicile cohort request has nothing to broaden into and must still return the unsupported
+      // error.
+      await test('structured legal_insurer cohort with a credential-jurisdiction state broadens instead of a bare 422', async () => {
+        const r = await executeSpecialistV2({ queryType: 'cohort', entityClass: 'legal_insurer', geography: { intent: 'CREDENTIAL_JURISDICTION', stateCode: 'FL' } });
+        assert.equal(r.status, 200);
+        assert.equal(r.body.error, undefined);
+        assert.equal(r.body.resultState, 'SUPPORTED_RESULTS');
+        assert.ok(r.body.rows.every((x) => x.entityClass === 'agency'));
+      });
+      await test('structured legal_insurer cohort with a genuine domicile state stays unsupported', async () => {
+        const r = await executeSpecialistV2({ queryType: 'cohort', entityClass: 'legal_insurer', geography: { intent: 'DOMICILE', stateCode: 'FL' } });
+        assert.equal(r.status, 422);
+        assert.equal(r.body.error?.code, 'legal_insurer_state_cohort_unavailable');
+      });
       await test("LOA is not appointment or service area", async () => {
         const r = await executeInsuranceAsk(
           "life insurance agencies credentialed in Texas",

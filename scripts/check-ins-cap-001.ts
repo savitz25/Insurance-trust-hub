@@ -32,9 +32,22 @@ async function main() {
   assert.equal(producer.body.resultState, 'PUBLICATION_RESTRICTED');
   assert.equal(INS_CAP_LOCKS.publicPeople, 0);
 
+  // TH-DISCOVERY-RESET-001B: a bare "<state> insurance company" cohort request no longer
+  // stonewalls with a bare 422 -- it broadens to real, explicitly labeled insurance agencies for
+  // the same state (see listInsurers, lib/insurance-ask/execute.ts). A genuine domicile-cohort
+  // request (no credential-jurisdiction state to broaden from) still returns the unsupported error.
   const texas = await executeSpecialistV2({ query: 'insurance company in Texas' });
-  assert.equal(texas.status, 422);
-  assert.equal(texas.body.error?.code, 'legal_insurer_state_cohort_unavailable');
+  assert.equal(texas.status, 200);
+  assert.equal(texas.body.error, undefined);
+  assert.equal(texas.body.resultState, 'SUPPORTED_RESULTS');
+  assert.ok(texas.body.rows.every((r) => r.entityClass === 'agency'));
+  const domicile = await executeSpecialistV2({
+    entityClass: 'legal_insurer',
+    queryType: 'cohort',
+    geography: { intent: 'DOMICILE', stateCode: 'TX' },
+  });
+  assert.equal(domicile.status, 422);
+  assert.equal(domicile.body.error?.code, 'legal_insurer_state_cohort_unavailable');
 
   const territory = await executeSpecialistV2({ query: 'insurance agencies serving Florida' });
   assert.equal(territory.status, 422);
