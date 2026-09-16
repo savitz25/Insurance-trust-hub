@@ -306,7 +306,7 @@ async function main() {
         assert.ok(r.results.length > 0);
         assert.ok(r.results.every((c) => c.entityClass === "agency"));
         assert.equal(r.results[0]?.entityId, ids.agency);
-        assert.match(r.limitations.join(" "), /not legal underwriting insurers/i);
+        assert.match(r.limitations.join(" "), /insurance agencies, not a legal insurer/i);
         assert.match(r.results[0]?.whyMatched ?? "", /Broader FL insurance agency/i);
       });
       // Texas was one of the 8 states (texas|new jersey|california|washington|colorado|virginia|
@@ -369,6 +369,34 @@ async function main() {
         const r = await executeSpecialistV2({ queryType: 'cohort', entityClass: 'legal_insurer', geography: { intent: 'DOMICILE', stateCode: 'FL' } });
         assert.equal(r.status, 422);
         assert.equal(r.body.error?.code, 'legal_insurer_state_cohort_unavailable');
+      });
+      // TH-DISCOVERY-GEN-001: "insurance agent"/"insurance producer" is a provider-category phrase
+      // that used to dead-end at parse time (fail_closed, zero providers) purely because individual
+      // producers cannot be mass-published. Now broadens to real agencies for the resolved state,
+      // exactly like the legal-insurer cohort already does -- never presenting agencies as
+      // individual producers.
+      await test('bare "insurance agent in <state>" broadens to labeled agency results, not a publication-restricted dead end', async () => {
+        const r = await executeInsuranceAsk('insurance agent in Florida');
+        assert.equal(r.parsed.query.entityClass, 'person');
+        assert.equal(r.entityClass, 'agency');
+        assert.equal(r.coverageState, 'PARTIAL');
+        assert.ok(r.results.length > 0, 'provider cards must be visible on the first screen');
+        assert.ok(r.results.every((c) => c.entityClass === 'agency'));
+        assert.match(r.results[0]?.whyMatched ?? '', /not individual producers/i);
+        assert.match(r.limitations.join(' '), /individual producer cohorts are not publicly published/i);
+      });
+      await test('bare "insurance agent" with no geography still shows the real national cohort, not zero providers', async () => {
+        const r = await executeInsuranceAsk('insurance agent');
+        assert.equal(r.parsed.query.entityClass, 'person');
+        assert.ok(r.results.length > 0, 'provider cards must be visible on the first screen even with no geography');
+        assert.match(r.results[0]?.whyMatched ?? '', /not individual producers/i);
+      });
+      await test('structured producer cohort request broadens instead of a bare 422', async () => {
+        const r = await executeSpecialistV2({ queryType: 'cohort', entityClass: 'producer', geography: { intent: 'CREDENTIAL_JURISDICTION', stateCode: 'FL' } });
+        assert.equal(r.status, 200);
+        assert.equal(r.body.error, undefined);
+        assert.equal(r.body.resultState, 'SUPPORTED_RESULTS');
+        assert.ok(r.body.rows.every((x) => x.entityClass === 'agency'));
       });
       await test("LOA is not appointment or service area", async () => {
         const r = await executeInsuranceAsk(

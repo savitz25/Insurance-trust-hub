@@ -225,6 +225,10 @@ async function executeInsurancePlan(parsed: ParsedInsuranceAsk, pageSize: number
     return listInsurers(parsed, started);
   }
 
+  if (q.entityClass === 'person' && q.mode === 'entity' && !q.identifier) {
+    return listPersons(parsed, started);
+  }
+
   if (q.mode === 'count' || q.mode === 'aggregate' || q.mode === 'comparison') {
     return counts(parsed, started);
   }
@@ -567,6 +571,120 @@ async function lookupNaic(parsed: ParsedInsuranceAsk, started: number): Promise<
 const UNPUBLISHED_NAIC =
   'InsuranceTrustHub has not published a legal-insurer research profile for this NAIC company code. Graph identity may still exist. Absence of a public page is not a finding about the company.';
 
+// TH-DISCOVERY-GEN-001: shared RESULTS-FIRST broadening -- an unsupported mass-cohort request for
+// a NON-agency class (legal insurer, individual producer/person) never dead-ends with zero
+// providers when a state is resolved. It broadens to real agencies for that state (listAgencies,
+// the same function already backing the passing "insurance agencies in Florida" case); if that
+// state's agency data is itself unacquired, it falls back once more to the real, always-available
+// national Wave-1 legal-insurer cohort. Every row and the top-level limitations explicitly say
+// what class the results actually are and that they are broader, not the originally-requested
+// class -- never a silent relabel. No state at all (nothing to broaden into) stays fail_closed.
+async function broadenUnsupportedClassToAgencies(
+  parsed: ParsedInsuranceAsk,
+  started: number,
+  state: string | undefined,
+  reason: string,
+  originalClassNoun: string,
+  fallbackAlternatives: string[],
+): Promise<InsuranceAskResult> {
+  if (state) {
+    const broaderParsed: ParsedInsuranceAsk = { ...parsed, query: { ...parsed.query, entityClass: 'agency', nameQuery: undefined, mode: 'entity' } };
+    const broader = await listAgencies(broaderParsed, started);
+    if (broader.results.length === 0) {
+      const nationalRows: AskCard[] = publishedInsurers()
+        .map((published): AskCard => ({
+          entityId: published.entity_id,
+          entityClass: 'insurer',
+          displayName: published.canonical_legal_name,
+          npn: null,
+          naicCode: published.naic_cocode,
+          credentialJurisdiction: null,
+          credentialStatus: null,
+          licenseNumber: null,
+          licenseClass: null,
+          loas: [],
+          sourceDataset: 'ins-insurer-006-wave1',
+          sourceObservedAt: published.report_dates[0] ?? null,
+          href: insurerProfilePath(published.slug),
+          publicationNote: null,
+          whyMatched: `BROADER NATIONAL RESULT -- not specific to ${state}. This is a published Wave-1 legal-insurer identity, not a local ${state} match and not ${originalClassNoun}. The legal name and NAIC code on the profile establish identity; no ${state} presence or office is implied.`,
+        }))
+        .slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
+      if (nationalRows.length > 0) {
+        const national = finish(parsed, nationalRows, nationalRows.length, started, 'Wave-1 published legal-insurer national cohort (broader fallback; no acquired state agency data)');
+        national.limitations = [
+          reason,
+          `${state} insurance-agency bulk credentials have not been acquired for this jurisdiction -- this is not zero agencies, it is a research-source gap. These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort, NOT specific to ${state} or the requested county and NOT ${originalClassNoun} -- broader, not local.`,
+          ...national.limitations,
+        ];
+        national.coverageState = 'PARTIAL';
+        return national;
+      }
+      const base = emptyBase(parsed, started);
+      return {
+        ...base,
+        resultType: 'fail_closed',
+        parsed: { ...parsed, query: { ...parsed.query, mode: 'fail_closed', failReason: reason, alternatives: fallbackAlternatives } },
+        elapsedMs: Date.now() - started,
+        coverageState: 'UNSUPPORTED',
+      };
+    }
+    const place = parsed.query.jurisdiction?.meaning === 'credential_jurisdiction' ? `a ${state} credential` : state;
+    broader.results = broader.results.map((row) => ({
+      ...row,
+      whyMatched: `Broader ${state} insurance agency result, not ${originalClassNoun} -- ${state === 'FL' ? 'these are separate regulated classes' : `${place} does not establish a local county office or service area`}. ${row.whyMatched}`,
+    }));
+    broader.limitations = [
+      reason,
+      `These are insurance agencies, not ${originalClassNoun} -- the requested cohort is not published as a directory. ${state} credential jurisdiction does not establish office location or service territory.`,
+      ...broader.limitations,
+    ];
+    broader.coverageState = 'PARTIAL';
+    // The original request (parsed) is preserved for interpretation/display; only the executed
+    // query underneath (agency, same jurisdiction) differs, and that difference is what the
+    // limitations above and each row's whyMatched disclose.
+    broader.parsed = parsed;
+    broader.entityClass = 'agency';
+    return broader;
+  }
+  // TH-DISCOVERY-GEN-001: no geography at all to broaden into locally -- still show the real
+  // national Wave-1 legal-insurer cohort rather than a zero-provider dead end (a bare provider
+  // category with no geography is still DISCOVERY, not a reason for an empty screen).
+  const nationalRows: AskCard[] = publishedInsurers()
+    .map((published): AskCard => ({
+      entityId: published.entity_id,
+      entityClass: 'insurer',
+      displayName: published.canonical_legal_name,
+      npn: null,
+      naicCode: published.naic_cocode,
+      credentialJurisdiction: null,
+      credentialStatus: null,
+      licenseNumber: null,
+      licenseClass: null,
+      loas: [],
+      sourceDataset: 'ins-insurer-006-wave1',
+      sourceObservedAt: published.report_dates[0] ?? null,
+      href: insurerProfilePath(published.slug),
+      publicationNote: null,
+      whyMatched: `BROADER NATIONAL RESULT -- not ${originalClassNoun}. This is a published Wave-1 legal-insurer identity. The legal name and NAIC code on the profile establish identity.`,
+    }))
+    .slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
+  if (nationalRows.length > 0) {
+    const national = finish(parsed, nationalRows, nationalRows.length, started, 'Wave-1 published legal-insurer national cohort (broader fallback; no requested geography)');
+    national.limitations = [reason, `These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort, NOT ${originalClassNoun} -- broader, not the requested class.`, ...national.limitations];
+    national.coverageState = 'PARTIAL';
+    return national;
+  }
+  const base = emptyBase(parsed, started);
+  return {
+    ...base,
+    resultType: 'fail_closed',
+    parsed: { ...parsed, query: { ...parsed.query, mode: 'fail_closed', failReason: reason, alternatives: fallbackAlternatives } },
+    elapsedMs: Date.now() - started,
+    coverageState: 'UNSUPPORTED',
+  };
+}
+
 async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
   if (parsed.query.nameQuery) {
     const matches = publishedSearch(parsed.query.nameQuery).slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
@@ -597,111 +715,32 @@ async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promis
   const reason = isDomicileQuery
     ? 'Legal-insurer domicile is not a complete national Ask field in this extract. Wave-1 public profiles (26) store domicile as null; 6,185 graph identities are not a domicile census. Use a labeled NAIC company code.'
     : 'Ask does not list all 6,185 legal insurers as a directory. Use a labeled NAIC company code, or browse the published Wave-1 /insurers cohort.';
-  // TH-DISCOVERY-RESET-001B: RESULTS FIRST -- when the exact legal-insurer state cohort is not a
-  // supported directory (the common case for a colloquial "Florida insurance company"/"insurance
-  // company Monmouth County New Jersey"), do not stonewall with a bare limitation + recovery link.
-  // Real insurance AGENCIES for the same requested state are one query away (listAgencies, the
-  // same function that already backs the passing "insurance agencies in Florida" case) -- show
-  // them immediately as an explicitly labeled broader alternative. The original interpretation
-  // (parsed.interpretation, "Entity class: insurer") is untouched, so the panel still shows what
-  // was actually asked; only the query passed to listAgencies is cloned with entityClass:'agency'
-  // so the returned rows/entityClass are truthfully agency, never relabeled as insurers.
   // A genuine "domiciled in X" question is a different, distinct regulatory concept an agency
   // result cannot answer at all, so it deliberately stays UNSUPPORTED rather than broadening into
   // an unrelated class of evidence.
   const state = !isDomicileQuery ? parsed.query.jurisdiction?.state : undefined;
-  if (state) {
-    const broaderParsed: ParsedInsuranceAsk = { ...parsed, query: { ...parsed.query, entityClass: 'agency', nameQuery: undefined, mode: 'entity' } };
-    const broader = await listAgencies(broaderParsed, started);
-    // TH-DISCOVERY-RESET-001C: some jurisdictions (e.g. NJ) have not had ANY insurance-agency bulk
-    // credentials acquired at all, so even the in-state broadening above returns zero rows. That is
-    // a genuine research-source gap, not zero agencies, and it must stay disclosed honestly -- but
-    // it is not a reason to show zero providers. The Wave-1 published legal-insurer cohort (the
-    // same 26 real, verified national identities already backing a bare "Legal insurers" browse)
-    // is real, always-available inventory, so fall back to it, clearly labeled as broader/national
-    // and explicitly NOT specific to the requested state or county -- never implying it satisfies
-    // the unavailable local condition.
-    if (broader.results.length === 0) {
-      const nationalRows: AskCard[] = publishedInsurers()
-        .map((published): AskCard => ({
-          entityId: published.entity_id,
-          entityClass: 'insurer',
-          displayName: published.canonical_legal_name,
-          npn: null,
-          naicCode: published.naic_cocode,
-          credentialJurisdiction: null,
-          credentialStatus: null,
-          licenseNumber: null,
-          licenseClass: null,
-          loas: [],
-          sourceDataset: 'ins-insurer-006-wave1',
-          sourceObservedAt: published.report_dates[0] ?? null,
-          href: insurerProfilePath(published.slug),
-          publicationNote: null,
-          whyMatched: `BROADER NATIONAL RESULT -- not specific to ${state}. This is a published Wave-1 legal-insurer identity, not a local ${state} match. The legal name and NAIC code on the profile establish identity; no ${state} presence or office is implied.`,
-        }))
-        .slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
-      if (nationalRows.length > 0) {
-        const national = finish(parsed, nationalRows, nationalRows.length, started, 'Wave-1 published legal-insurer national cohort (broader fallback; no acquired state agency data)');
-        national.limitations = [
-          reason,
-          `${state} insurance-agency bulk credentials have not been acquired for this jurisdiction -- this is not zero agencies, it is a research-source gap. These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort, NOT specific to ${state} or the requested county -- broader, not local.`,
-          ...national.limitations,
-        ];
-        national.coverageState = 'PARTIAL';
-        return national;
-      }
-      const base = emptyBase(parsed, started);
-      return {
-        ...base,
-        resultType: 'fail_closed',
-        parsed: {
-          ...parsed,
-          query: {
-            ...parsed.query,
-            mode: 'fail_closed',
-            failReason: reason,
-            alternatives: ['What is a legal insurer?', 'Find insurer NAIC code 10064.'],
-          },
-        },
-        elapsedMs: Date.now() - started,
-        coverageState: 'UNSUPPORTED',
-      };
-    }
-    const place = parsed.query.jurisdiction?.meaning === 'credential_jurisdiction' ? `a ${state} credential` : state;
-    broader.results = broader.results.map((row) => ({
-      ...row,
-      whyMatched: `Broader ${state} insurance agency result, not a legal insurer -- ${state === 'FL' ? 'agency and legal insurer are separate regulated classes' : `${place} does not establish a local county office or service area`}. ${row.whyMatched}`,
-    }));
-    broader.limitations = [
-      reason,
-      `These are insurance agencies, not legal underwriting insurers -- the requested legal-insurer state cohort is not published as a directory. ${state} credential jurisdiction does not establish office location or service territory.`,
-      ...broader.limitations,
-    ];
-    broader.coverageState = 'PARTIAL';
-    // The original request (parsed) is preserved for interpretation/display; only the executed
-    // query underneath (agency, same jurisdiction) differs, and that difference is what the
-    // limitations above and each row's whyMatched disclose.
-    broader.parsed = parsed;
-    broader.entityClass = 'agency';
-    return broader;
+  if (isDomicileQuery) {
+    const base = emptyBase(parsed, started);
+    return {
+      ...base,
+      resultType: 'fail_closed',
+      parsed: { ...parsed, query: { ...parsed.query, mode: 'fail_closed', failReason: reason, alternatives: ['What is a legal insurer?', 'Find insurer NAIC code 10064.'] } },
+      elapsedMs: Date.now() - started,
+      coverageState: 'UNSUPPORTED',
+    };
   }
-  const base = emptyBase(parsed, started);
-  return {
-    ...base,
-    resultType: 'fail_closed',
-    parsed: {
-      ...parsed,
-      query: {
-        ...parsed.query,
-        mode: 'fail_closed',
-        failReason: reason,
-        alternatives: ['What is a legal insurer?', 'Find insurer NAIC code 10064.'],
-      },
-    },
-    elapsedMs: Date.now() - started,
-    coverageState: 'UNSUPPORTED',
-  };
+  return broadenUnsupportedClassToAgencies(parsed, started, state, reason, 'a legal insurer', ['What is a legal insurer?', 'Find insurer NAIC code 10064.']);
+}
+
+// TH-DISCOVERY-GEN-001: "insurance agent"/"insurance producer" is a provider-category phrase, not
+// a company name -- individual producer profiles cannot be mass-published (a real, confirmed
+// publication-safety constraint), but that must never mean zero providers. Broadens to real
+// agencies (or the national Wave-1 cohort) the exact same way listInsurers already does for an
+// unsupported legal-insurer cohort.
+async function listPersons(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
+  const reason = 'Public individual-producer profile pages are not published. Individual producer cohorts are not publicly published as a directory; use a labeled NPN.';
+  const state = parsed.query.jurisdiction?.state;
+  return broadenUnsupportedClassToAgencies(parsed, started, state, reason, 'individual producers', ['Find NPN 1234567.']);
 }
 
 async function counts(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {

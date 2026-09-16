@@ -97,8 +97,12 @@ assert(domicileQ.query.entityClass === 'insurer', 'domicile entity insurer');
 assert(domicileQ.query.jurisdiction?.meaning === 'regulatory_domicile', 'domicile dimension');
 
 // PERSON
+// TH-DISCOVERY-GEN-001: a bare producer/agent request is a provider-category phrase, not a
+// parse-time dead end -- it now parses as a normal entity-mode query (mode: 'entity'), and
+// execute.ts's listPersons broadens the unsupported mass-producer cohort to real agencies at
+// execution time instead of interpret.ts stonewalling it here with zero providers.
 const personList = q('Show insurance producers credentialed in Florida.');
-assert(personList.query.mode === 'fail_closed', 'person list not mass-published');
+assert(personList.query.mode === 'entity' && personList.query.entityClass === 'person', 'person list parses as entity mode, broadened at execution time');
 
 const personCount = q('How many individual producers are credentialed in Florida?');
 assert(personCount.query.mode === 'count' && personCount.query.entityClass === 'person', 'person count');
