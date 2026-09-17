@@ -68,10 +68,17 @@ const specs = {
  ["directors_orders.with_company_name", "Director's Orders with a company name", "directors_order_observation"],
  ["directors_orders.with_person_name", "Director's Orders with a person name", "directors_order_observation"],
  ["directors_orders.with_both_names", "Director's Orders with both name fields", "directors_order_observation"],
+ ],
+ OR: [
+ ["dfr_orders.document_rows", "Oregon DFR insurance-related administrative-order documents", "dfr_insurance_order_document"],
+ ["dfr_orders.distinct_cases", "Distinct DFR insurance case numbers", "source_identifier"],
+ ["complaints.row_total", "Oregon DFR 2025 insurer-line complaint table rows", "dfr_complaint_table_row", "COMPLAINTS"],
+ ["market_conduct.report_rows", "Oregon market-conduct examination report listings", "market_conduct_examination_listing", "EXAMINATIONS"],
+ ["financial_exams.report_rows", "Oregon financial examination report listings", "financial_examination_listing", "EXAMINATIONS"],
  ]
 };
-const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois" };
-const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois" };
+const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon" };
+const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon" };
 export function reconcile(manifest, root, census) {
   const paths = Object.fromEntries(Object.entries(slugs).map(([k,v]) => [k, `lib/${v}-intelligence/accepted-snapshot.json`]));
   const sources = Object.fromEntries(Object.entries(paths).map(([k,v])=>[k,read(root,v)]));

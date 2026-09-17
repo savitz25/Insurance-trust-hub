@@ -113,6 +113,15 @@ def check_files() -> dict[str, Any]:
         errors.append("Illinois authorized companies must remain search-only / null")
     if metric_value(metrics, "il_authorized_companies") is not None:
         errors.append("Illinois authorized companies must remain NOT_ACQUIRED / null")
+    or_snap = json.loads((ROOT / "lib" / "oregon-intelligence" / "accepted-snapshot.json").read_text(encoding="utf-8"))
+    if metrics.get("oregon", {}).get("snapshotFingerprint") != or_snap.get("fingerprint"):
+        errors.append("Oregon snapshot fingerprint drifted; regenerate insurance-network-metrics-v1")
+    if metrics.get("oregon", {}).get("dfrInsuranceOrderDocuments") != or_snap["dfr_orders"]["document_rows"]:
+        errors.append("Oregon DFR insurance order documents drifted")
+    if metrics.get("oregon", {}).get("complaintTableRows") != or_snap["complaints"]["row_total"]:
+        errors.append("Oregon complaint table rows drifted")
+    if metrics.get("oregon", {}).get("authorizedCompanies") is not None:
+        errors.append("Oregon authorized companies must remain search-only / null")
     if metric_value(metrics, "wa_authorized_companies") is not None:
         errors.append("Washington authorized companies must remain NOT_ACQUIRED / null")
     if metric_value(metrics, "wa_oic_regulated_entities_annual_report") != wa["annual_aggregates"]["regulated_entities"]:
@@ -145,6 +154,7 @@ def check_files() -> dict[str, Any]:
         "/virginia",
         "/new-york",
         "/illinois",
+        "/oregon",
     }:
         errors.append("published state intelligence paths drifted")
     if census["entities"]["agency"] != metrics["nationalGraph"]["agencies"] and os.environ.get("REQUIRE_LIVE_CENSUS_MATCH") == "1":
