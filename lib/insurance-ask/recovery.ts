@@ -83,6 +83,29 @@ export function recoveryFor(q: InsuranceResearchQuery): RecoveryAction[] {
     });
   }
 
+  if (q.conditions?.some((c) => c.meaning === "requested insurance product" && c.outcome === "UNSUPPORTED")) {
+    const products = (
+      q.requestedProduct ??
+      q.conditions
+        .filter((c) => c.meaning === "requested insurance product")
+        .map((c) => c.value)
+    ).join(", ");
+    if (state && ["FL", "TX", "MA", "OH", "VT"].includes(state) && (q.entityClass === "agency" || !q.entityClass)) {
+      out.push({
+        type: "INTERNAL_RESEARCH",
+        label: `Research agencies credentialed in ${state} without a product filter`,
+        destination:
+          "/ask?" +
+          new URLSearchParams({
+            q: `Show insurance agencies credentialed in ${state === "FL" ? "Florida" : state}.`,
+          }),
+        reason: `The statewide ${state} agency census is not a ${products || "product"}-qualified result. This alternative drops the requested product instead of pretending it was applied.`,
+        establishes: "Indexed state credential observations for agencies.",
+        doesNotEstablish: `${products || "Requested product"} authority, appointment, or service territory.`,
+      });
+    }
+  }
+
   if (state && STATE_RESEARCH[state])
     out.push({
       type: "INTERNAL_RESEARCH",

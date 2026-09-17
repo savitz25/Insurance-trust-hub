@@ -3,6 +3,11 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import { planInsuranceRequest, readInsuranceRequest } from './request';
 import { invalidResearch } from './research-intent';
 import { recoveryFor } from './recovery';
+import {
+  applyUnresolvedProduct,
+  rememberProductOnInterpretation,
+  unresolvedProductsBlockingCensus,
+} from './product-intent';
 import { matchSourceName, distinctiveNameTokens, escapeNamePattern } from './name-match';
 import type { InsuranceRequestOptions, RecoveryAction } from './contract';
 import { createClient } from '@supabase/supabase-js';
@@ -188,6 +193,11 @@ async function executeInsurancePlan(parsed: ParsedInsuranceAsk, pageSize: number
   const started = Date.now();
   parsed.query.pageSize = Math.max(1, Math.min(50, Math.floor(pageSize)));
   const q = parsed.query;
+  const blockedProducts = unresolvedProductsBlockingCensus(parsed.raw, q);
+  if (blockedProducts.length) {
+    applyUnresolvedProduct(q, blockedProducts);
+    rememberProductOnInterpretation(parsed, blockedProducts);
+  }
   const empty = emptyBase(parsed, started);
 
   if (q.mode === 'fail_closed' || q.mode === 'definition') {

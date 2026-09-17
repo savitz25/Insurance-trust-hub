@@ -1,5 +1,10 @@
 import { interpretIdentityAndLocal, resolveFlCityLaunchCounty } from './research-intent';
 import {
+  applyUnresolvedProduct,
+  detectRequestedConsumerProducts,
+  productInterpretationLines,
+} from './product-intent';
+import {
   ASK_DEFINITIONS,
   CREDENTIAL_STATES,
   type GeographyDimension,
@@ -553,6 +558,23 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   const states = detectStates(q);
   const loas = detectLoas(q);
   const geo = geographyMeaning(q);
+  const unresolvedProducts = detectRequestedConsumerProducts(q);
+  // SQA-009: a product-qualified agency/producer cohort cannot execute as the unfiltered
+  // statewide census. Official LOA terms (Property/Casualty/Life/Health/Personal Lines) stay
+  // on the existing executable path; homeowners/auto/flood are not those terms.
+  if (
+    unresolvedProducts.length &&
+    (entityClass === 'agency' || entityClass === 'person' || /\bhow many\b|\bcount of\b/i.test(q))
+  ) {
+    const query = fail('', []);
+    query.entityClass = entityClass;
+    query.jurisdiction = states[0] ? { state: states[0], meaning: geo } : undefined;
+    applyUnresolvedProduct(query, unresolvedProducts);
+    for (const row of productInterpretationLines(unresolvedProducts)) push(row.label, row.value);
+    if (query.entityClass) push('Entity', entityLabel(query.entityClass));
+    if (query.jurisdiction) push(dimensionLabel(query.jurisdiction.meaning), query.jurisdiction.state);
+    return { raw: q, query, interpretation: lines };
+  }
 
   if (/\bhow many\b|\bcount of\b/i.test(q)) {
     if (!entityClass) {

@@ -102,7 +102,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         </section>
       ) : null}
 
-      {result.counts.length ? (
+      {result.counts.length && q.mode !== 'fail_closed' ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
           <h2 className="text-2xl font-semibold text-[#0A2540]">Count</h2>
           <ul className="mt-4 divide-y divide-[#E2E8F0]">

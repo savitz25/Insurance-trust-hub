@@ -25,6 +25,9 @@ assert.equal(interpretInsuranceAskQuery('licensed insurance companies in Texas')
 assert.ok(interpretInsuranceAskQuery('Florida agencies with Property and Casualty authority').query.linesOfAuthority?.length === 2);
 assert.equal(interpretInsuranceAskQuery('Florida agencies with Property and Casualty authority').query.coverageState, 'PARTIAL');
 assert.equal(interpretInsuranceAskQuery('What is an insurance appointment?').query.definitionId, 'appointment');
+assert.equal(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.mode, 'fail_closed');
+assert.deepEqual(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.requestedProduct, ['homeowners']);
+assert.equal(interpretInsuranceAskQuery('Show insurance agencies credentialed in Florida.').query.mode, 'entity');
 
 for (const question of INSURANCE_SEARCH_GOLDEN_QUESTIONS) {
   const parsed = interpretInsuranceAskQuery(question.query);

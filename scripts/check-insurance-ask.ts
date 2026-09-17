@@ -25,6 +25,7 @@ assert(LOCKED_CENSUS.agencies === 82071, 'locked agency census');
 assert(LOCKED_CENSUS.persons === 1029860, 'locked person census');
 assert(LOCKED_CENSUS.legalInsurers === 6185, 'locked insurer census');
 assert(LOCKED_CENSUS.flDistinctAgencies === 56939, 'locked FL agency distinct');
+assert(LOCKED_CENSUS.flAgencyCredentialRows === 59189, 'locked FL agency credential rows remain a separate grain from 56939 distinct agencies');
 assert(LOCKED_CENSUS.publicPeople === 0, 'public people 0');
 assert(LOCKED_CENSUS.publicGraphAgencies === 0, 'public graph agencies 0');
 
@@ -84,6 +85,46 @@ assert(health.query.linesOfAuthority?.[0] === 'Health', 'Health LOA');
 
 const ah = q('Show Florida-credentialed agencies with Accident & Health.');
 assert(ah.query.linesOfAuthority?.includes('Health'), 'A&H → Health');
+
+// SQA-009: product intent is retained and does not execute the FL agency census.
+const homeownersFl = q('homeowners insurance agencies in Florida');
+assert(homeownersFl.query.mode === 'fail_closed', 'homeowners does not execute FL census');
+assert(homeownersFl.query.coverageState === 'UNSUPPORTED', 'homeowners coverage is unresolved product');
+assert(homeownersFl.query.entityClass === 'agency', 'homeowners still names agency class');
+assert(homeownersFl.query.jurisdiction?.state === 'FL', 'homeowners retains FL');
+assert(JSON.stringify(homeownersFl.query.requestedProduct) === JSON.stringify(['homeowners']), 'homeowners product retained');
+assert(homeownersFl.query.conditions?.some((c) => c.value === 'homeowners' && c.outcome === 'UNSUPPORTED'), 'homeowners condition unsupported');
+assert(!homeownersFl.query.linesOfAuthority?.length, 'do not invent a homeowners LOA');
+assert(/statewide agency census/i.test(homeownersFl.query.failReason ?? ''), 'fail reason refuses census-as-product');
+assert(JSON.stringify(homeownersFl.interpretation).toLowerCase().includes('homeowners'), 'homeowners visible in interpretation');
+
+const homeownersAlt = q('Florida homeowners insurance agencies');
+assert(homeownersAlt.query.mode === 'fail_closed', 'word-order homeowners still unresolved');
+assert(homeownersAlt.query.requestedProduct?.includes('homeowners'), 'word-order homeowners retained');
+
+const autoFl = q('auto insurance agencies in Florida');
+assert(autoFl.query.mode === 'fail_closed', 'auto does not execute FL census');
+assert(autoFl.query.requestedProduct?.includes('auto'), 'auto product retained');
+assert(!autoFl.query.linesOfAuthority?.length, 'do not invent an auto LOA');
+
+const homeownersCount = q('how many homeowners insurance agencies in Florida');
+assert(homeownersCount.query.mode === 'fail_closed', 'homeowners count is not the 56939 census');
+assert(homeownersCount.query.requestedProduct?.includes('homeowners'), 'count retains homeowners');
+
+const unspecifiedFl = q('Show insurance agencies credentialed in Florida.');
+assert(unspecifiedFl.query.mode === 'entity' && unspecifiedFl.query.entityClass === 'agency', 'unspecified product remains FL agency cohort');
+assert(!unspecifiedFl.query.requestedProduct?.length, 'unspecified product has no unresolved product');
+assert(!unspecifiedFl.query.linesOfAuthority?.length, 'unspecified product is not an LOA filter');
+
+const lifeTx = q('life insurance agencies in Texas');
+assert(lifeTx.query.mode === 'entity' && lifeTx.query.entityClass === 'agency', 'TX life stays executable LOA');
+assert(lifeTx.query.linesOfAuthority?.[0] === 'Life', 'TX life is official Life LOA');
+assert(lifeTx.query.jurisdiction?.state === 'TX', 'TX life jurisdiction');
+assert(!lifeTx.query.requestedProduct?.length, 'life is LOA-supported, not unresolved product');
+
+const zipHomeowners = q('homeowners insurance agency in ZIP 33441');
+assert(zipHomeowners.query.mode === 'directory', 'ZIP homeowners remains directory');
+assert(JSON.stringify(zipHomeowners.query).toLowerCase().includes('homeowners'), 'ZIP homeowners retains product');
 
 // GEOGRAPHY
 const serving = q('Show agencies serving Florida.');

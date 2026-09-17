@@ -92,7 +92,9 @@ export type InsuranceResearchQuery = {
   intent?: ResearchIntent;
   requestedTask?: 'identity' | 'credential' | 'appointment' | 'marketplace' | 'regulatory_evidence';
   conditions?: ResearchCondition[];
-  refinement?: 'zip' | 'identity' | 'class' | 'appointer';
+  refinement?: 'zip' | 'identity' | 'class' | 'appointer' | 'product';
+  /** Consumer product words retained from the request. Not an official LOA. */
+  requestedProduct?: string[];
   terminalState?: 'INVALID_INPUT' | 'NEEDS_CLARIFICATION';
   directoryContext?: { requestedLocation: string; requestedInsuranceContext: string[]; effectiveZip?: string; unresolvedConditions: string[] };
   selectedEntity?: string;
