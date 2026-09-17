@@ -1,0 +1,405 @@
+{
+  "source": "https://www.pid.pa.gov/scrpts/cmpln_tool",
+  "officialUrl": "https://www.pid.pa.gov/scrpts/cmpln_tool",
+  "retrievedAt": "2026-09-17T16:55:00Z",
+  "reportingYear": 2025,
+  "denominator": "Premium as published in the PID Complaint Comparison Tool (also publishes market share)",
+  "index_label": "Pennsylvania Insurance Department Complaint Index (source-created)",
+  "index_is_not_trust_score": true,
+  "complaint_is_not_violation": true,
+  "complaint_is_not_enforcement": true,
+  "name_only": true,
+  "row_total_2025": 595,
+  "distinct_names_2025": 500,
+  "sum_complaints_2025": 9209.0,
+  "line_rows_2025": {
+    "Accident and Health": 44,
+    "Annuity": 42,
+    "Auto": 223,
+    "Homeowners": 138,
+    "Life": 141,
+    "Title": 7
+  },
+  "line_total_complaints_2025": {
+    "Accident and Health": 2008.0,
+    "Annuity": 87.0,
+    "Auto": 4326.0,
+    "Homeowners": 2124.0,
+    "Life": 653.0,
+    "Title": 11.0
+  },
+  "tables": [
+    {
+      "year": "2025",
+      "lineCode": "HL",
+      "lineLabel": "Accident and Health",
+      "rowCount": 44,
+      "distinctNames": 44,
+      "sumComplaints": 2008.0,
+      "sample": [
+        {
+          "name": "WELLCARE PRESCRIPTION INSURANCE, INC.",
+          "complaints": 1.0,
+          "complaintIndex": 0.00869,
+          "marketSharePct": 4.04,
+          "premium": 711527533.0
+        },
+        {
+          "name": "FIRST PRIORITY LIFE INSURANCE COMPANY, INC.",
+          "complaints": 1.0,
+          "complaintIndex": 0.03024,
+          "marketSharePct": 1.16,
+          "premium": 204615603.0
+        },
+        {
+          "name": "UPMC HEALTH COVERAGE, INC",
+          "complaints": 1.0,
+          "complaintIndex": 0.07418,
+          "marketSharePct": 0.47,
+          "premium": 83410599.0
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "lineCode": "AN",
+      "lineLabel": "Annuity",
+      "rowCount": 42,
+      "distinctNames": 42,
+      "sumComplaints": 87.0,
+      "sample": [
+        {
+          "name": "GENWORTH LIFE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 4853.0
+        },
+        {
+          "name": "ATHENE ANNUITY AND LIFE COMPANY",
+          "complaints": 3.0,
+          "complaintIndex": 0.36576,
+          "marketSharePct": 7.81,
+          "premium": 2156312775.0
+        },
+        {
+          "name": "MASSACHUSETTS MUTUAL LIFE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.39854,
+          "marketSharePct": 2.39,
+          "premium": 659644053.0
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "lineCode": "PP",
+      "lineLabel": "Auto",
+      "rowCount": 223,
+      "distinctNames": 223,
+      "sumComplaints": 4326.0,
+      "sample": [
+        {
+          "name": "FREDERICK MUTUAL INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 768.0
+        },
+        {
+          "name": "CRUM & FORSTER SPECIALTY INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.04058,
+          "marketSharePct": 0.56,
+          "premium": 83806705.0
+        },
+        {
+          "name": "GREAT WEST CASUALTY COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.06913,
+          "marketSharePct": 0.33,
+          "premium": 49201373.0
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "lineCode": "HO",
+      "lineLabel": "Homeowners",
+      "rowCount": 138,
+      "distinctNames": 138,
+      "sumComplaints": 2124.0,
+      "sample": [
+        {
+          "name": "FIRST NATIONAL INSURANCE COMPANY OF AMERICA",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 2432.0
+        },
+        {
+          "name": "FARMERS CASUALTY INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 1796.0
+        },
+        {
+          "name": "CINCINNATI CASUALTY COMPANY (THE)",
+          "complaints": 1.0,
+          "complaintIndex": 0.13701,
+          "marketSharePct": 0.32,
+          "premium": 18316134.0
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "lineCode": "LF",
+      "lineLabel": "Life",
+      "rowCount": 141,
+      "distinctNames": 141,
+      "sumComplaints": 653.0,
+      "sample": [
+        {
+          "name": "AXCELUS FINANCIAL LIFE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 1755.0
+        },
+        {
+          "name": "JOHN HANCOCK LIFE & HEALTH INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 2230.0
+        },
+        {
+          "name": "MASSACHUSETTS MUTUAL LIFE INSURANCE COMPANY",
+          "complaints": 2.0,
+          "complaintIndex": 0.05525,
+          "marketSharePct": 5.27,
+          "premium": 399658713.0
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "lineCode": "TT",
+      "lineLabel": "Title",
+      "rowCount": 7,
+      "distinctNames": 7,
+      "sumComplaints": 11.0,
+      "sample": [
+        {
+          "name": "FIDELITY NATIONAL TITLE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.32003,
+          "marketSharePct": 28.41,
+          "premium": 204066251.0
+        },
+        {
+          "name": "OLD REPUBLIC NATIONAL TITLE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.74415,
+          "marketSharePct": 12.22,
+          "premium": 87759720.0
+        },
+        {
+          "name": "STEWART TITLE GUARANTY COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 1.09893,
+          "marketSharePct": 8.27,
+          "premium": 59427547.0
+        }
+      ]
+    },
+    {
+      "year": "2024",
+      "lineCode": "HL",
+      "lineLabel": "Accident and Health",
+      "rowCount": 38,
+      "distinctNames": 38,
+      "sumComplaints": 1463.0,
+      "sample": [
+        {
+          "name": "UPMC HEALTH PLAN, INC.",
+          "complaints": 47.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 665.0
+        },
+        {
+          "name": "HIGHMARK COVERAGE ADVANTAGE INC.",
+          "complaints": 1.0,
+          "complaintIndex": 0.02348,
+          "marketSharePct": 1.82,
+          "premium": 264864237.0
+        },
+        {
+          "name": "FIRST PRIORITY LIFE INSURANCE COMPANY, INC.",
+          "complaints": 2.0,
+          "complaintIndex": 0.06188,
+          "marketSharePct": 1.38,
+          "premium": 200996360.0
+        }
+      ]
+    },
+    {
+      "year": "2024",
+      "lineCode": "AN",
+      "lineLabel": "Annuity",
+      "rowCount": 54,
+      "distinctNames": 54,
+      "sumComplaints": 125.0,
+      "sample": [
+        {
+          "name": "TEACHERS INSURANCE AND ANNUITY ASSOCIATION OF AMERICA",
+          "complaints": 1.0,
+          "complaintIndex": 0.15531,
+          "marketSharePct": 4.67,
+          "premium": 1275633792.0
+        },
+        {
+          "name": "JACKSON NATIONAL LIFE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.18467,
+          "marketSharePct": 3.92,
+          "premium": 1072774807.0
+        },
+        {
+          "name": "FIDELITY & GUARANTY LIFE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.18483,
+          "marketSharePct": 3.92,
+          "premium": 1071891535.0
+        }
+      ]
+    },
+    {
+      "year": "2024",
+      "lineCode": "PP",
+      "lineLabel": "Auto",
+      "rowCount": 214,
+      "distinctNames": 214,
+      "sumComplaints": 4065.0,
+      "sample": [
+        {
+          "name": "SAFE AUTO INSURANCE COMPANY",
+          "complaints": 10.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 851.0
+        },
+        {
+          "name": "GREAT WEST CASUALTY COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.07853,
+          "marketSharePct": 0.31,
+          "premium": 44915091.0
+        },
+        {
+          "name": "STATE NATIONAL INSURANCE COMPANY, INC.",
+          "complaints": 1.0,
+          "complaintIndex": 0.08352,
+          "marketSharePct": 0.29,
+          "premium": 42235629.0
+        }
+      ]
+    },
+    {
+      "year": "2024",
+      "lineCode": "HO",
+      "lineLabel": "Homeowners",
+      "rowCount": 138,
+      "distinctNames": 138,
+      "sumComplaints": 2518.0,
+      "sample": [
+        {
+          "name": "ECONOMY PREFERRED INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 74.0
+        },
+        {
+          "name": "FARMERS CASUALTY INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.0,
+          "marketSharePct": 0.0,
+          "premium": 1347.0
+        },
+        {
+          "name": "GREAT NORTHERN INSURANCE COMPANY",
+          "complaints": 2.0,
+          "complaintIndex": 0.09189,
+          "marketSharePct": 0.82,
+          "premium": 43225932.0
+        }
+      ]
+    },
+    {
+      "year": "2024",
+      "lineCode": "LF",
+      "lineLabel": "Life",
+      "rowCount": 147,
+      "distinctNames": 147,
+      "sumComplaints": 670.0,
+      "sample": [
+        {
+          "name": "NORTHWESTERN MUTUAL LIFE INSURANCE COMPANY (THE)",
+          "complaints": 1.0,
+          "complaintIndex": 0.0265,
+          "marketSharePct": 5.4,
+          "premium": 408192835.0
+        },
+        {
+          "name": "GUARDIAN LIFE INSURANCE COMPANY OF AMERICA",
+          "complaints": 1.0,
+          "complaintIndex": 0.05113,
+          "marketSharePct": 2.8,
+          "premium": 211543575.0
+        },
+        {
+          "name": "MASSACHUSETTS MUTUAL LIFE INSURANCE COMPANY",
+          "complaints": 2.0,
+          "complaintIndex": 0.05391,
+          "marketSharePct": 5.31,
+          "premium": 401299953.0
+        }
+      ]
+    },
+    {
+      "year": "2024",
+      "lineCode": "TT",
+      "lineLabel": "Title",
+      "rowCount": 6,
+      "distinctNames": 6,
+      "sumComplaints": 9.0,
+      "sample": [
+        {
+          "name": "FIRST AMERICAN TITLE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.42662,
+          "marketSharePct": 23.44,
+          "premium": 151724560.0
+        },
+        {
+          "name": "OLD REPUBLIC NATIONAL TITLE INSURANCE COMPANY",
+          "complaints": 1.0,
+          "complaintIndex": 0.85593,
+          "marketSharePct": 11.68,
+          "premium": 75624707.0
+        },
+        {
+          "name": "FIDELITY NATIONAL TITLE INSURANCE COMPANY",
+          "complaints": 3.0,
+          "complaintIndex": 1.06776,
+          "marketSharePct": 28.1,
+          "premium": 181864513.0
+        }
+      ]
+    }
+  ]
+}

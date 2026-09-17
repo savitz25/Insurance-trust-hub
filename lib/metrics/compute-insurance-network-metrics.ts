@@ -82,6 +82,11 @@ export type InsuranceNetworkMetricsInput = {
   oregonAsOf: string | null;
   oregonDfrInsuranceOrderDocuments: number;
   oregonComplaintTableRows: number;
+  pennsylvaniaSnapshotFingerprint: string;
+  pennsylvaniaAsOf: string | null;
+  pennsylvaniaLicensedCompaniesDistinctNaic: number;
+  pennsylvaniaEnforcementActions: number;
+  pennsylvaniaComplaintTableRows: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -205,6 +210,9 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   if (!input.publishedStateIntelligencePaths.includes('/oregon')) {
     throw new Error('Oregon state intelligence path missing');
   }
+  if (!input.publishedStateIntelligencePaths.includes('/pennsylvania')) {
+    throw new Error('Pennsylvania state intelligence path missing');
+  }
   if (input.oregonDfrInsuranceOrderDocuments === input.legalInsurers) {
     throw new Error('Oregon DFR insurance orders must not equal national legal insurers');
   }
@@ -216,6 +224,18 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   }
   if (input.illinoisDirectorsOrderObservations === input.legalInsurers) {
     throw new Error('Illinois Director’s Orders must not equal national legal insurers');
+  }
+  if (input.pennsylvaniaLicensedCompaniesDistinctNaic === input.legalInsurers) {
+    throw new Error('Pennsylvania licensed companies must not equal national legal insurers');
+  }
+  if (input.pennsylvaniaLicensedCompaniesDistinctNaic === input.pennsylvaniaEnforcementActions) {
+    throw new Error('Pennsylvania licensed companies must not equal enforcement documents');
+  }
+  if (input.pennsylvaniaComplaintTableRows === input.pennsylvaniaLicensedCompaniesDistinctNaic) {
+    throw new Error('Pennsylvania complaints must not equal licensed companies');
+  }
+  if (input.pennsylvaniaEnforcementActions === input.legalInsurers) {
+    throw new Error('Pennsylvania enforcement documents must not equal national legal insurers');
   }
   if (input.virginiaStatisticalDirectoryRows === input.legalInsurers) {
     throw new Error('Virginia statistical-report companies must not equal national legal insurers');
@@ -918,6 +938,72 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'pa_licensed_companies_distinct_naic',
+      label: 'Pennsylvania PID licensed companies (distinct NAIC)',
+      value: input.pennsylvaniaLicensedCompaniesDistinctNaic,
+      valueState: 'KNOWN',
+      grain: 'authorized_company_row',
+      denominator: 'PID Licensed Company Search A–Z distinct NAIC codes',
+      description:
+        'Distinct NAIC identities on the PID licensed-company A–Z list. Not agencies, not producers, not surplus lines, not the liquidation catalog, and not national legal insurers.',
+      coverage: 'Pennsylvania',
+      contributingSourceSystems: ['pa_pid_gfsearch'],
+      sourceAsOf: '2026-09-14',
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One distinct NAIC on the PID Licensed Company Search A–Z list.',
+        'Not agencies, not producers, not surplus lines, not liquidation, not enforcement, not complaints, not national legal insurers.',
+        ['pa_pid'],
+        'Pennsylvania; Licensed Company Search',
+        'PID company information current as of 2026-09-14'
+      ),
+    }),
+    metric({
+      key: 'pa_enforcement_action_documents',
+      label: 'Pennsylvania PID Enforcement Actions documents',
+      value: input.pennsylvaniaEnforcementActions,
+      valueState: 'KNOWN',
+      grain: 'regulatory_evidence_row',
+      denominator: 'Insurance-Regulatory Actions hub facet Enforcement Actions',
+      description:
+        'Source-facet Enforcement Actions documents. Market Conduct Actions and CCRC Reports are separate grains. A document is not a unique matter.',
+      coverage: 'Pennsylvania',
+      contributingSourceSystems: ['pa_pid_enforcement'],
+      sourceAsOf: input.pennsylvaniaAsOf,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One PID Enforcement Actions document.',
+        'Not market-conduct exams, not CCRC reports, not complaints, not licensed companies, not national legal insurers.',
+        ['pa_pid'],
+        'Pennsylvania; Enforcement Actions Search',
+        'PID Insurance-Regulatory Actions hub'
+      ),
+    }),
+    metric({
+      key: 'pa_complaint_table_rows',
+      label: 'Pennsylvania PID 2025 complaint comparison insurer-line rows',
+      value: input.pennsylvaniaComplaintTableRows,
+      valueState: 'KNOWN',
+      grain: 'consumer_complaint_observation',
+      denominator: '2025 PID Complaint Comparison Tool tables by line',
+      description:
+        'Name-only insurer-line rows. Premium is the published denominator. PID Complaint Index is not a Trust Score. A complaint is not a violation.',
+      coverage: 'Pennsylvania',
+      contributingSourceSystems: ['pa_pid_complaints'],
+      sourceAsOf: '2025',
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One 2025 PID complaint comparison insurer-line row.',
+        'Not a license census, not a ranking, not a Trust Score, not NAIC identity, not enforcement.',
+        ['pa_pid'],
+        'Pennsylvania; 2025 Complaint Comparison Tool',
+        'PID cmpln_tool 2025'
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -1052,9 +1138,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -1062,7 +1148,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -1153,6 +1239,10 @@ export function computeInsuranceNetworkMetrics(
     orFp: input.oregonSnapshotFingerprint,
     orOrders: input.oregonDfrInsuranceOrderDocuments,
     orComplaints: input.oregonComplaintTableRows,
+    paFp: input.pennsylvaniaSnapshotFingerprint,
+    paCompanies: input.pennsylvaniaLicensedCompaniesDistinctNaic,
+    paEnforcement: input.pennsylvaniaEnforcementActions,
+    paComplaints: input.pennsylvaniaComplaintTableRows,
     paths: input.publishedStateIntelligencePaths,
     wave1: input.publicLegalInsurerWave1,
   };
@@ -1299,6 +1389,16 @@ export function computeInsuranceNetworkMetrics(
       agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       authorizedCompanies: null,
       authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY',
+    },
+    pennsylvania: {
+      snapshotFingerprint: input.pennsylvaniaSnapshotFingerprint,
+      asOf: input.pennsylvaniaAsOf,
+      licensedCompaniesDistinctNaic: input.pennsylvaniaLicensedCompaniesDistinctNaic,
+      enforcementActions: input.pennsylvaniaEnforcementActions,
+      complaintTableRows: input.pennsylvaniaComplaintTableRows,
+      producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT',
     },
     publication: {
       publicPeople: 0,

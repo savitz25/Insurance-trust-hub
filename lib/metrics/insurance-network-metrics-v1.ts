@@ -247,6 +247,16 @@ export type InsuranceNetworkMetricsV1 = {
     authorizedCompanies: null;
     authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY';
   };
+  pennsylvania: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    licensedCompaniesDistinctNaic: number;
+    enforcementActions: number;
+    complaintTableRows: number;
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT';
+  };
   publication: {
     publicPeople: 0;
     publicGraphAgencies: 0;

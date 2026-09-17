@@ -27,6 +27,7 @@ const STATE_NAMES: Record<string, string> = {
   'new york': 'NY',
   illinois: 'IL',
   oregon: 'OR',
+  pennsylvania: 'PA',
   fl: 'FL',
   tx: 'TX',
   ma: 'MA',
@@ -40,6 +41,7 @@ const STATE_NAMES: Record<string, string> = {
   ny: 'NY',
   il: 'IL',
   or: 'OR',
+  pa: 'PA',
 };
 
 function detectStates(q: string): string[] {
@@ -148,6 +150,30 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     );
     query.coverageState = 'PARTIAL';
     return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Oregon financial exams' }] };
+  }
+  if (/\b(philadelphia|pittsburgh)\b/i.test(early) && /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(early)) {
+    const query = fail(
+      'This statewide Pennsylvania insurance page does not publish Philadelphia, Pittsburgh, or other local insurance intelligence routes. License geography is statewide.',
+      ['Open Pennsylvania insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'UNSUPPORTED — no Pennsylvania local intelligence' }] };
+  }
+  if (/\bpennsylvania\b/i.test(early) && /complaint/i.test(early)) {
+    const query = fail(
+      'Pennsylvania Insurance Department 2025 Complaint Comparison Tool tables are name-only insurer-line observations (Accident and Health, Auto, Homeowners, Life, Annuity, Title): 595 rows / 500 distinct names. Premium is the published denominator. A complaint is not a violation or enforcement action. The source Complaint Index is PID’s metric, not a Trust Score, and is not a ranking. Names are not NAIC attachments. Confirm /pennsylvania and the official comparison tool.',
+      ['Open Pennsylvania insurance research.', 'Find insurer NAIC code 13735.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Pennsylvania 2025 complaint tables' }] };
+  }
+  if (/\bpennsylvania\b/i.test(early) && /liquidat|rehabilitat|discharged estate/i.test(early)) {
+    const query = fail(
+      'Pennsylvania liquidation/rehab/discharge is a 95-document catalog (62 liquidation, 32 discharged, 1 rehabilitation). It is not the current licensed-company census. Rehabilitation is not liquidation. Discharge is not current license status. Names are not NAIC attachments. See /pennsylvania.',
+      ['Open Pennsylvania insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Pennsylvania liquidation catalog' }] };
   }
   const typed = interpretIdentityAndLocal(raw, page);
   if (typed) return typed;
@@ -468,9 +494,95 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
+  const pennsylvaniaAsked = /\bpennsylvania\b/i.test(q) || detectStates(q)[0] === 'PA';
+  if (/\b(philadelphia|pittsburgh)\b/i.test(q) && /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(q)) {
+    const query = fail(
+      'This statewide Pennsylvania insurance page does not publish Philadelphia, Pittsburgh, or other local insurance intelligence routes. License geography is statewide.',
+      ['Open Pennsylvania insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — no Pennsylvania local intelligence');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (pennsylvaniaAsked && /complaint/i.test(q)) {
+    const query = fail(
+      'Pennsylvania Insurance Department 2025 Complaint Comparison Tool tables are name-only insurer-line observations (Accident and Health, Auto, Homeowners, Life, Annuity, Title): 595 rows / 500 distinct names. Premium is the published denominator. A complaint is not a violation or enforcement action. The source Complaint Index is PID’s metric, not a Trust Score, and is not a ranking. Names are not NAIC attachments. Confirm /pennsylvania and the official comparison tool.',
+      ['Open Pennsylvania insurance research.', 'Find insurer NAIC code 13735.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Pennsylvania 2025 complaint tables');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (pennsylvaniaAsked && /market conduct/i.test(q)) {
+    const query = fail(
+      'Pennsylvania Market Conduct Actions are 450 documents in the PID regulatory-actions hub. An examination is not discipline and not an Enforcement Actions document. Exam existence is not a negative finding. Name-only attachment is unsafe. See /pennsylvania.',
+      ['Open Pennsylvania insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Pennsylvania market-conduct catalog');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (pennsylvaniaAsked && /financial exam/i.test(q)) {
+    const query = fail(
+      'Pennsylvania financial examination reports are 494 documents / 367 unique titles. A financial exam is solvency review, not market conduct and not enforcement. NAIC was not populated, so company↔exam exact bridges remain 0. See /pennsylvania.',
+      ['Open Pennsylvania insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Pennsylvania financial exams');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (pennsylvaniaAsked && /enforcement/i.test(q)) {
+    const query = fail(
+      'Pennsylvania Enforcement Actions are 3,232 documents in the PID regulatory-actions hub. Market Conduct Actions (450) and CCRC Reports (24) are separate grains. A document is not a unique matter. No NAIC or docket was populated. Name-only attachment is unsafe. Confirm /pennsylvania and the official Enforcement Actions Search.',
+      ['Open Pennsylvania insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Pennsylvania Enforcement Actions');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (pennsylvaniaAsked && /liquidat|rehabilitat|discharged estate/i.test(q)) {
+    const query = fail(
+      'Pennsylvania liquidation/rehab/discharge is a 95-document catalog (62 liquidation, 32 discharged, 1 rehabilitation). It is not the current licensed-company census. Rehabilitation is not liquidation. Discharge is not current license status. Names are not NAIC attachments. See /pennsylvania.',
+      ['Open Pennsylvania insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Pennsylvania liquidation catalog');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (pennsylvaniaAsked && /surplus lines/i.test(q)) {
+    const query = fail(
+      'Pennsylvania eligible surplus-lines companies are 233 distinct NAIC identities, not the 1,722 licensed-company census and not agencies. Confirm /pennsylvania and PID Eligible Surplus Lines Company Search.',
+      ['Open Pennsylvania insurance research.', 'Find insurer NAIC code 13735.'],
+    );
+    query.coverageState = 'PARTIAL';
+    query.entityClass = 'insurer';
+    push('Coverage', 'PARTIAL — Pennsylvania surplus lines');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (
+    pennsylvaniaAsked &&
+    /\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(q) &&
+    !/\bagenc/i.test(q)
+  ) {
+    const workers = /workers?\s*comp/i.test(q);
+    const lifePower = /\blife\b/i.test(q) && !/\bvariable life\b/i.test(q);
+    const reason = workers
+      ? 'Pennsylvania PID Licensed Company Search lists 674 companies with the source-native Workers Compensation power. That power is not an agency cohort and not a consumer product mapping. Distinct licensed-company NAIC identities overall: 1,722 as of 2026-09-14. Confirm /pennsylvania.'
+      : lifePower
+        ? 'Pennsylvania PID Licensed Company Search lists 495 companies with the source-native Life and Annuities power. That power is not a consumer life-agency product and not an executable LOA cohort. Distinct licensed-company NAIC identities overall: 1,722 as of 2026-09-14. Confirm /pennsylvania.'
+        : 'Pennsylvania PID Licensed Company Search A–Z: 1,722 distinct NAIC identities (1,724 letter rows; 211 Pennsylvania-domicile) current as of 2026-09-14. This is not an agency or producer census, not surplus lines, and not the liquidation catalog. This extract does not auto-publish insurer profiles from that census. Confirm /pennsylvania and PID Licensed Company Search.';
+    const query = fail(reason, ['Open Pennsylvania insurance research.', 'Find insurer NAIC code 13735.']);
+    query.coverageState = 'PARTIAL';
+    query.entityClass = 'insurer';
+    query.jurisdiction = { state: 'PA', meaning: geographyMeaning(q) };
+    push('Coverage', 'PARTIAL — Pennsylvania licensed companies');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (
     /\b((?:licensed )?insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
-    /\b(colorado|virginia|new york|illinois)\b/i.test(q)
+    /\b(colorado|virginia|new york|illinois|pennsylvania)\b/i.test(q) &&
+    !detectRequestedConsumerProducts(q).length
   ) {
     const state = detectStates(q)[0] ?? 'The requested state';
     const query = fail(
