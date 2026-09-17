@@ -54,6 +54,17 @@ yarn-error.log*
 /data/raw/washington/**
 /data/colorado/co-ins-001/**
 !/data/colorado/co-ins-001/README.md
+/data/pennsylvania/pa-ins-001/raw/**
+/data/pennsylvania/pa-ins-001/enforcement-catalog.json
+/data/pennsylvania/pa-ins-001/liquidation-catalog.json
+/data/pennsylvania/pa-ins-001/financial-exams.json
+/data/pennsylvania/pa-ins-001/complaint-probe.json
+/data/pennsylvania/pa-ins-001/complaints.json
+/data/pennsylvania/pa-ins-001/company-detail-probe.json
+/data/pennsylvania/pa-ins-001/exam-hub-discovery.json
+/data/pennsylvania/pa-ins-001/remaining-fetch-summary.json
+/data/pennsylvania/pa-ins-001/producer-agency-probe.json
+scripts/**/__pycache__/
 /data/reports/ins-insurer-004-spine.json
 /data/tdi-raw/**
 !/data/tdi-raw/README.md
@@ -93,3 +104,6 @@ next-env.d.ts
 tmp/
 *.png
 
+
+scripts/**/__pycache__/
+scripts/pennsylvania/__pycache__/

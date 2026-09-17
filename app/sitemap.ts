@@ -37,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/new-york',
     '/illinois',
     '/oregon',
+    '/pennsylvania',
     '/florida',
     '/new-jersey',
     '/texas',

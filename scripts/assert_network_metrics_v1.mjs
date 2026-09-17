@@ -53,6 +53,14 @@ assert(v1.oregon.dfrInsuranceOrderDocuments === pub.oregonDfrInsuranceOrderDocum
 assert(v1.oregon.dfrInsuranceOrderDocuments === 738, "OR 738 order documents");
 assert(v1.oregon.complaintTableRows === 1309, "OR 1309 complaint rows");
 assert(v1.oregon.authorizedCompanies === null, "OR authorized companies not a number");
+assert(v1.pennsylvania.snapshotFingerprint === pub.pennsylvaniaSnapshotFingerprint, "PA snapshot fingerprint");
+assert(v1.pennsylvania.licensedCompaniesDistinctNaic === 1722, "PA 1722 licensed companies");
+assert(v1.pennsylvania.enforcementActions === 3232, "PA 3232 enforcement actions");
+assert(v1.pennsylvania.complaintTableRows === 595, "PA 595 complaint rows");
+assert(byKey.pa_licensed_companies_distinct_naic.value === 1722, "PA licensed metric");
+assert(byKey.pa_licensed_companies_distinct_naic.value !== byKey.licensed_insurance_companies.value, "PA companies != national companies");
+assert(byKey.pa_enforcement_action_documents.value === 3232, "PA enforcement metric");
+assert(byKey.pa_complaint_table_rows.value === 595, "PA complaint metric");
 assert(byKey.il_authorized_companies.value === null, "IL authorized metric not a number");
 assert(byKey.il_authorized_companies.valueState === "UNKNOWN", "IL authorized not acquired");
 assert(byKey.il_directors_order_observations.value === 2896, "IL 2896 order metric");
