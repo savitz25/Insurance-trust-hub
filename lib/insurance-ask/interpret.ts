@@ -21,6 +21,7 @@ const STATE_NAMES: Record<string, string> = {
   virginia: 'VA',
   'new york': 'NY',
   illinois: 'IL',
+  oregon: 'OR',
   fl: 'FL',
   tx: 'TX',
   ma: 'MA',
@@ -33,6 +34,7 @@ const STATE_NAMES: Record<string, string> = {
   va: 'VA',
   ny: 'NY',
   il: 'IL',
+  or: 'OR',
 };
 
 function detectStates(q: string): string[] {
@@ -101,6 +103,47 @@ function isAdvice(q: string): boolean {
 export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
+  const early = raw.trim();
+  if (/\boregon\b/i.test(early) && /receivership|in supervision/i.test(early)) {
+    const query = fail(
+      'Oregon receivership is official NAIC GRID search-only. DFR supervision orders are a separate grain and are not a receivership census. Historical receivership is not current license status.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Oregon receivership bulk' }] };
+  }
+  if (/\boregon\b/i.test(early) && /complaint/i.test(early)) {
+    const query = fail(
+      'Oregon DFR 2025 insurer complaint tables are name-only line-of-insurance observations (auto, homeowners, health, life, annuities, long-term care). Premium is the published denominator. A complaint is not a violation. The source Complaint Index is Oregon DFR’s metric, not a Trust Score, and is not a ranking. Names are not NAIC attachments. Confirm /oregon and DFR complaint information.',
+      ['Open Oregon insurance research.', 'Find insurer NAIC code 10064.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Oregon 2025 complaint tables' }] };
+  }
+  if (/\boregon\b/i.test(early) && /enforcement|admin(?:istrative)? orders?|dfr case|notices and orders/i.test(early)) {
+    const query = fail(
+      'Oregon DFR insurance-related administrative orders are document rows in source-native DFRAction classes. Mixed Enforcement/Filing/Mortgage/Securities buckets are not that census. A document is not a unique case. Name-only attachment is unsafe. Confirm the official Notices and orders system and /oregon.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Oregon DFR insurance orders' }] };
+  }
+  if (/\boregon\b/i.test(early) && /market conduct/i.test(early)) {
+    const query = fail(
+      'Oregon DFR market-conduct examination reports are a public index of exam reports, not discipline and not administrative orders. Exam existence is not a negative finding. See /oregon.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Oregon market-conduct exams' }] };
+  }
+  if (/\boregon\b/i.test(early) && /financial exam/i.test(early)) {
+    const query = fail(
+      'Oregon DFR financial examination reports are solvency/financial-compliance reviews, not market-conduct exams and not enforcement. See /oregon.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Oregon financial exams' }] };
+  }
   const typed = interpretIdentityAndLocal(raw, page);
   if (typed) return typed;
   const q = raw.trim();
@@ -344,6 +387,82 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
+  const oregonAsked = /\boregon\b/i.test(q) || detectStates(q)[0] === 'OR';
+  if (oregonAsked && /\b(how many|count of)\b/i.test(q) && /\b(agenc|producer|agent|compan|insurer|provider)/i.test(q)) {
+    const query = fail(
+      'Oregon DFR/SBS current agency, producer, and authorized-insurer bulk rosters were not acquired. Search-only is not zero. Do not answer with InsuranceTrustHub directory rows, complaint tables, examination listings, or DFR order documents as that census. Verify on NAIC SBS and DFR Check a license.',
+      ['Open Oregon insurance research.', 'Find NPN 1234567.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.jurisdiction = { state: 'OR', meaning: geographyMeaning(q) };
+    push('Coverage', 'NOT_ACQUIRED — Oregon license census');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (oregonAsked && /\blicensed\b/i.test(q) && /\bagenc/i.test(q)) {
+    const query = fail(
+      'Oregon insurance-agency licensing is DFR/SBS search-only. No bulk agency roster was acquired. An agency is not an individual producer and not an insurer. Sole proprietors are not the agency business-entity license. Search-only is not zero.',
+      ['Open Oregon insurance research.', 'Find NPN 1234567.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'agency';
+    push('Coverage', 'NOT_ACQUIRED — Oregon agency roster');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (oregonAsked && /complaint/i.test(q)) {
+    const query = fail(
+      'Oregon DFR 2025 insurer complaint tables are name-only line-of-insurance observations (auto, homeowners, health, life, annuities, long-term care). Premium is the published denominator. A complaint is not a violation. The source Complaint Index is Oregon DFR’s metric, not a Trust Score, and is not a ranking. Names are not NAIC attachments. Confirm /oregon and DFR complaint information.',
+      ['Open Oregon insurance research.', 'Find insurer NAIC code 10064.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Oregon 2025 complaint tables');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (oregonAsked && /enforcement|admin(?:istrative)? orders?|dfr case|notices and orders/i.test(q)) {
+    const query = fail(
+      'Oregon DFR insurance-related administrative orders are document rows in source-native DFRAction classes (Producer, Marketplace violations, Financial-*, Workers’ Comp Billing, supervision, acquisition/merger). Mixed Enforcement/Filing/Mortgage/Securities buckets are not that census. A document is not a unique case. Name-only attachment is unsafe. Confirm the official Notices and orders system and /oregon.',
+      ['Open Oregon insurance research.', 'Find NPN 1234567.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Oregon DFR insurance orders');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (oregonAsked && /market conduct/i.test(q)) {
+    const query = fail(
+      'Oregon DFR market-conduct examination reports are a public index of exam reports, not discipline and not administrative orders. Exam existence is not a negative finding. Names were not attached to profiles. See /oregon and DFR examination reports.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Oregon market-conduct exams');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (oregonAsked && /financial exam/i.test(q)) {
+    const query = fail(
+      'Oregon DFR financial examination reports are solvency/financial-compliance reviews, not market-conduct exams and not enforcement. They are not added to order counts. See /oregon.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Oregon financial exams');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (oregonAsked && /receivership|in supervision/i.test(q)) {
+    const query = fail(
+      'Oregon receivership is official NAIC GRID search-only. DFR supervision orders are a separate grain and are not a receivership census. Historical receivership is not current license status.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Coverage', 'NOT_ACQUIRED — Oregon receivership bulk');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (oregonAsked && /\b(portland|multnomah)\b/i.test(q)) {
+    const query = fail(
+      'This statewide Oregon insurance page does not publish Portland, Multnomah County, or other local insurance intelligence routes. License geography is not a city census.',
+      ['Open Oregon insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — no Oregon local intelligence');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (
     /\b((?:licensed )?insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
     /\b(colorado|virginia|new york|illinois)\b/i.test(q)
@@ -387,7 +506,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  if (/\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(q) && /\b(texas|new jersey|california|washington|colorado|virginia|new york|illinois)\b/i.test(q)) {
+  if (/\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(q) && /\b(texas|new jersey|california|washington|colorado|virginia|new york|illinois|oregon)\b/i.test(q)) {
     const state = detectStates(q)[0];
     const query = fail(`${state ?? 'The requested'} complete authorized/legal-insurer roster is not acquired as a current bulk universe. Missing coverage is not zero.`, ['Find insurer NAIC code 10064.', 'What is a legal insurer?']);
     query.entityClass = 'insurer';

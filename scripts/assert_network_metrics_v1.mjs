@@ -48,6 +48,11 @@ assert(v1.illinois.snapshotFingerprint === pub.illinoisSnapshotFingerprint, "IL 
 assert(v1.illinois.directorsOrderObservations === pub.illinoisDirectorsOrderObservations, "IL Director's Orders observations");
 assert(v1.illinois.directorsOrderObservations === 2896, "IL 2896 order observations");
 assert(v1.illinois.authorizedCompanies === null, "IL authorized companies not a number");
+assert(v1.oregon.snapshotFingerprint === pub.oregonSnapshotFingerprint, "OR snapshot fingerprint");
+assert(v1.oregon.dfrInsuranceOrderDocuments === pub.oregonDfrInsuranceOrderDocuments, "OR DFR insurance order documents");
+assert(v1.oregon.dfrInsuranceOrderDocuments === 738, "OR 738 order documents");
+assert(v1.oregon.complaintTableRows === 1309, "OR 1309 complaint rows");
+assert(v1.oregon.authorizedCompanies === null, "OR authorized companies not a number");
 assert(byKey.il_authorized_companies.value === null, "IL authorized metric not a number");
 assert(byKey.il_authorized_companies.valueState === "UNKNOWN", "IL authorized not acquired");
 assert(byKey.il_directors_order_observations.value === 2896, "IL 2896 order metric");

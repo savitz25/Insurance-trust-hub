@@ -1,0 +1,516 @@
+{
+  "source": "https://dfr.oregon.gov/business/reg/reports-data/pages/examination-reports-of-insurers.aspx",
+  "financial": {
+    "report_rows": 44,
+    "distinct_names": 44,
+    "rows": [
+      {
+        "name": "AllCare Health Plan, \u200bInc.",
+        "anchor": "12/31/22",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/allcare22f.pdf",
+        "date": "12/31/22",
+        "kind": "financial"
+      },
+      {
+        "name": "Atrio Health Plans, Inc.",
+        "anchor": "12/31/22\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/atrio_healthplans22f.pdf",
+        "date": "12/31/22\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "California Casualty General Insurance Company",
+        "anchor": "12/31/21\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/california_casualty-general21f.pdf",
+        "date": "12/31/21\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "California Casualty Insurance Company",
+        "anchor": "12/31/21",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/california_casualty21f.pdf",
+        "date": "12/31/21",
+        "kind": "financial"
+      },
+      {
+        "name": "Enumclaw Property &amp; Casualty Insurance Company",
+        "anchor": "12/31/23\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/enumclaw-pc23f.pdf",
+        "date": "12/31/23\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Farmers Insurance Company of Oregon",
+        "anchor": "12/31/21",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/farmers21f.pdf",
+        "date": "12/31/21",
+        "kind": "financial"
+      },
+      {
+        "name": "Health Net Health Plan of Oregon",
+        "anchor": "12/31/22",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/healthnet22f.pdf",
+        "date": "12/31/22",
+        "kind": "financial"
+      },
+      {
+        "name": "Health Plan of CareOregon, Inc.",
+        "anchor": "12/31/19",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/healthplan-careoregon19f.pdf",
+        "date": "12/31/19",
+        "kind": "financial"
+      },
+      {
+        "name": "Kaiser Foundation Health Plan of the Northwest",
+        "anchor": "12/31/24\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/kaiser24f.pdf",
+        "date": "12/31/24\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Liberty Northwest Insurance Corporation",
+        "anchor": "12/31/23",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/libertynw23f.pdf",
+        "date": "12/31/23",
+        "kind": "financial"
+      },
+      {
+        "name": "LifeMap Assurance Company",
+        "anchor": "12/31/20",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/lifemap-assurance20f.pdf",
+        "date": "12/31/20",
+        "kind": "financial"
+      },
+      {
+        "name": "LifeWise Health Plan of Oregon",
+        "anchor": "12/31/18",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/lifewise18f.pdf",
+        "date": "12/31/18",
+        "kind": "financial"
+      },
+      {
+        "name": "Marquis Advantage Health Plan",
+        "anchor": "12/31/23\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/marquisadvantage23f.pdf",
+        "date": "12/31/23\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "MODA Health Plan, Inc.",
+        "anchor": "12/31/22\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/modahp22f.pdf",
+        "date": "12/31/22\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Mutual of Enumclaw Insurance Company",
+        "anchor": "12/31/23\u200b\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/mutual-enumclaw23f.pdf",
+        "date": "12/31/23\u200b\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "North Pacific Insurance Company",
+        "anchor": "12/31/23",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/npacific23f.pdf",
+        "date": "12/31/23",
+        "kind": "financial"
+      },
+      {
+        "name": "Oregon Automobile Insurance Company",
+        "anchor": "12/31/23",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/orautoinsco23f.pdf",
+        "date": "12/31/23",
+        "kind": "financial"
+      },
+      {
+        "name": "Oregon Dental Service",
+        "anchor": "12/31/22",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/ordentalserv22f.pdf",
+        "date": "12/31/22",
+        "kind": "financial"
+      },
+      {
+        "name": "Oregon Fair Plan Association",
+        "anchor": "12/31/10",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/ofairplan10f.pdf",
+        "date": "12/31/10",
+        "kind": "financial"
+      },
+      {
+        "name": "Oregon Insurance Guaranty Association",
+        "anchor": "12/31/10",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/oiga10f.pdf",
+        "date": "12/31/10",
+        "kind": "financial"
+      },
+      {
+        "name": "Oregon Life &amp; Health Guaranty Association",
+        "anchor": "12/31/025\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/orlh-guaranty25f.pdf",
+        "date": "12/31/025\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Oregon Mutual Insurance Company",
+        "anchor": "12/31/19\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/ormutual2019f.pdf",
+        "date": "12/31/19\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "PacificSource Health Plans",
+        "anchor": "12/31/22",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/pacificsource22f.pdf",
+        "date": "12/31/22",
+        "kind": "financial"
+      },
+      {
+        "name": "PacificSource Community Health Plans, Inc.",
+        "anchor": "12/31/22\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/pacificsource-community22f.pdf",
+        "date": "12/31/22\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Palomar Specialty Insurance Company",
+        "anchor": "12/31/20\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/palomar-specialty20f.pdf",
+        "date": "12/31/20\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Providence Health Plan",
+        "anchor": "12/31/21",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/providence21f.pdf",
+        "date": "12/31/21",
+        "kind": "financial"
+      },
+      {
+        "name": "Providence Health Assurance",
+        "anchor": "12\u200b/31/21",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/providence-health-assurance21f.pdf",
+        "date": "12\u200b/31/21",
+        "kind": "financial"
+      },
+      {
+        "name": "Regence BlueCross Blue Shield of Oregon",
+        "anchor": "12/31/23",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/bcbs2023f.pdf",
+        "date": "12/31/23",
+        "kind": "financial"
+      },
+      {
+        "name": "Regence Health Maintenance of Oregon, Inc.",
+        "anchor": "12/31/23",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/rhmo2023f.pdf",
+        "date": "12/31/23",
+        "kind": "financial"
+      },
+      {
+        "name": "Regence HMO Oregon",
+        "anchor": "12/31/23\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/hmoor2023f.pdf",
+        "date": "12/31/23\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Safeco Insurance Company of Oregon",
+        "anchor": "12/31/23\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/safeco23f.pdf",
+        "date": "12/31/23\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Samaritan Health Plans, Inc.",
+        "anchor": "12/31/21\u200b\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/samaritan2021f.pdf",
+        "date": "12/31/21\u200b\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Standard Insurance Company",
+        "anchor": "12/31/20",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/standard20f.pdf",
+        "date": "12/31/20",
+        "kind": "financial"
+      },
+      {
+        "name": "State Accident Insurance Fund Corporation",
+        "anchor": "12/31/22",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/saif22f.pdf",
+        "date": "12/31/22",
+        "kind": "financial"
+      },
+      {
+        "name": "Sublimity Insurance Company",
+        "anchor": "12/31/22\u200b\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/sublimity22f.pdf",
+        "date": "12/31/22\u200b\u200b",
+        "kind": "financial"
+      },
+      {
+        "name": "Summit Health Plan, Inc.",
+        "anchor": "03/17/2020",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/summit-health20qf.pdf",
+        "date": "03/17/2020",
+        "kind": "financial"
+      },
+      {
+        "name": "TDC National Assurance Company",
+        "anchor": "12/31/23",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/tdc-nationalassurance23f.pdf",
+        "date": "12/31/23",
+        "kind": "financial"
+      },
+      {
+        "name": "The Surplus Line Association of Oregon",
+        "anchor": "12/31/10",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/surpluslineassoc10f.pdf",
+        "date": "12/31/10",
+        "kind": "financial"
+      },
+      {
+        "name": "Trillium Community Health Plan, Inc.",
+        "anchor": "12/31/22",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/trillium-community22f.pdf",
+        "date": "12/31/22",
+        "kind": "financial"
+      },
+      {
+        "name": "UnitedHealthCare of Oregon, Inc.",
+        "anchor": "12/31/24",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/unitedhealthcareOR24f.pdf",
+        "date": "12/31/24",
+        "kind": "financial"
+      },
+      {
+        "name": "Valley Property and Casualty Insurance Company",
+        "anchor": "12/31/23",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/valley23f.pdf",
+        "date": "12/31/23",
+        "kind": "financial"
+      },
+      {
+        "name": "Verboort Benevolent Society of Oregon, Inc.",
+        "anchor": "12/31/18",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/verboort18f.pdf",
+        "date": "12/31/18",
+        "kind": "financial"
+      },
+      {
+        "name": "Western Protectors Insurance Company",
+        "anchor": "12/31/19",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/wprotect2019f.pdf",
+        "date": "12/31/19",
+        "kind": "financial"
+      },
+      {
+        "name": "Willamette Dental Insurance Inc.",
+        "anchor": "12/31/24",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-financial/willametteden24f.pdf",
+        "date": "12/31/24",
+        "kind": "financial"
+      }
+    ]
+  },
+  "market_conduct": {
+    "report_rows": 27,
+    "distinct_names": 26,
+    "rows": [
+      {
+        "name": "Property & Casualty Insurance Company of Hartford",
+        "anchor": "Property & Casualty Insurance Company of Hartford",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/hartford-mc-2024.pdf",
+        "date": "02/07/2024",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Aetna Life Insurance Company",
+        "anchor": "Aetna Life Insurance Company",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/aetna-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Allstate Vehicle and Property Insurance Company",
+        "anchor": "Allstate Vehicle and Property Insurance Company",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/allstate-vehicle-property-23mc.pdf",
+        "date": null,
+        "kind": "market_conduct"
+      },
+      {
+        "name": "BridgeSpan Health Company",
+        "anchor": "BridgeSpan Health Company",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/bridgespan-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "California Casualty General Insurance Company of Oregon",
+        "anchor": "California Casualty General Insurance Company of Oregon",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/california-casualty-general-22mc.pdf",
+        "date": null,
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Cigna Health and Life Insurance Company",
+        "anchor": "Cigna Health and Life Insurance Company",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/cigna-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "CSAA General Insurance Company",
+        "anchor": "CSAA General Insurance Company",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/CSAA-general-23mc.pdf",
+        "date": "11/14/2023",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "\u200bHealth Net Health Plan Of Oregon, Inc.",
+        "anchor": "\u200bHealth Net Health Plan Of Oregon, Inc.",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/healthnet-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Homesite Insurance Company of the Midwest",
+        "anchor": "Homesite Insurance Company of the Midwest",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/homesite-midwest-23mc.pdf",
+        "date": "08/23/2023",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Kaiser Foundation Health Plan Of The Northwest",
+        "anchor": "Kaiser Foundation Health Plan Of The Northwest",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/kaiser-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Moda Health Plan Inc.",
+        "anchor": "Moda Health Plan Inc.",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/moda-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Oregon Mutual Insurance Company",
+        "anchor": "Oregon Mutual Insurance Company",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/oregon-mutual-23mc.pdf",
+        "date": "07/15/2023",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "PacificSource Health Plans\u200b",
+        "anchor": "PacificSource Health Plans\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/pacificsource-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Providence Health Plan",
+        "anchor": "Providence Health Plan",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/providence-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Regence Bluecross Blueshield Of Oregon",
+        "anchor": "Regence Bluecross Blueshield Of Oregon",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/regence-bcbs-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Safeco Insurance Company of Oregon",
+        "anchor": "Safeco Insurance Company of Oregon",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/safeco-oregon-23mc.pdf",
+        "date": "03/21/2023",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Samaritan Health Plans, Inc.",
+        "anchor": "Samaritan Health Plans, Inc.",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/samaritan-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Travelers Personal Insurance Company",
+        "anchor": "Travelers Personal Insurance Company",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/travelers-personal-insurance-23mc.pdf#page=3",
+        "date": "10/31/2023",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "UnitedHealthcare Insurance Company",
+        "anchor": "UnitedHealthcare Insurance Company",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/unitedhealthcare-ins-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "UnitedHealthcare of Oregon, Inc.",
+        "anchor": "UnitedHealthcare of Oregon, Inc.",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/unitedhealthcare-oregon-mc-rhea-2020.pdf",
+        "date": "12/31/2020",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Enumclaw Property and Casualty Insurance Co.\u200b",
+        "anchor": "Enumclaw Property and Casualty Insurance Co.\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/enunclaw-pc-22mc.pdf",
+        "date": "10/10/2022",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Farmers Insurance Company of Oregon",
+        "anchor": "Farmers Insurance Company of Oregon",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/farmers-oregon-22mc.pdf",
+        "date": "12/07/2022",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Mutual of Enumclaw Insurance Co.\u200b",
+        "anchor": "Mutual of Enumclaw Insurance Co.\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/mutual-enunclaw-22mc.pdf",
+        "date": "10/10/2022",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Sublimity Insurance Co.",
+        "anchor": "Sublimity Insurance Co.",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/sublimity-insurance-co-22mc.pdf",
+        "date": null,
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Valley Property & Casualty Insurance Co.\u200b",
+        "anchor": "Valley Property & Casualty Insurance Co.\u200b",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/valley-pc-22mc.pdf",
+        "date": "7/29/2022",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Kaiser Foundation Health Plan",
+        "anchor": "Kaiser Foundation Health Plan",
+        "href": "https://dfr.oregon.gov/business/reg/insurer/Documents/Exams-MC/kaiserFHPNW-18mc.pdf",
+        "date": "4/24/2018",
+        "kind": "market_conduct"
+      },
+      {
+        "name": "Providence Health Plan",
+        "anchor": "Providence Health Plan",
+        "href": "https://dfr.oregon.gov/business/reg/DFR-market-regulation/Documents/providence-mc-target-2018.pdf",
+        "date": "12/31/2018",
+        "kind": "market_conduct"
+      }
+    ]
+  },
+  "supporting_pdfs_skipped": 28,
+  "exam_is_not_discipline": true,
+  "financial_exam_is_not_market_conduct": true,
+  "name_only": true
+}

@@ -1,0 +1,1038 @@
+{
+  "fileRows": 4446,
+  "actions": {
+    "": {
+      "n": 2500,
+      "prefixes": [
+        [
+          "NUMERIC",
+          893
+        ],
+        [
+          "M",
+          451
+        ],
+        [
+          "S",
+          311
+        ],
+        [
+          "O",
+          229
+        ],
+        [
+          "INS",
+          173
+        ],
+        [
+          "DM",
+          137
+        ],
+        [
+          "A",
+          65
+        ],
+        [
+          "BLANK",
+          32
+        ],
+        [
+          "CA",
+          27
+        ],
+        [
+          "MSD",
+          27
+        ],
+        [
+          "B",
+          21
+        ],
+        [
+          "PD",
+          16
+        ],
+        [
+          "I",
+          14
+        ],
+        [
+          "FDIC",
+          12
+        ],
+        [
+          "CF",
+          9
+        ],
+        [
+          "C",
+          8
+        ],
+        [
+          "DOCKET",
+          8
+        ],
+        [
+          "P",
+          7
+        ],
+        [
+          "ID",
+          7
+        ],
+        [
+          "PN",
+          6
+        ],
+        [
+          "PT",
+          6
+        ],
+        [
+          "PB",
+          6
+        ],
+        [
+          "DC",
+          4
+        ],
+        [
+          "CR",
+          4
+        ],
+        [
+          "CC",
+          4
+        ],
+        [
+          "X",
+          4
+        ],
+        [
+          "MT",
+          3
+        ],
+        [
+          "SS",
+          2
+        ],
+        [
+          "CS",
+          2
+        ],
+        [
+          "IT",
+          2
+        ],
+        [
+          "N",
+          2
+        ],
+        [
+          "T",
+          2
+        ],
+        [
+          "ENF",
+          1
+        ],
+        [
+          "ORDER",
+          1
+        ],
+        [
+          "CL",
+          1
+        ],
+        [
+          "F",
+          1
+        ],
+        [
+          "ML",
+          1
+        ],
+        [
+          "MS",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Joiner, Paul B.",
+          "case": "97-11-003",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "97-11-003.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Tierney, Donald R.",
+          "case": "98-03-014f",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "98-03-014f.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Tierney, Donald R.",
+          "case": "98-03-014p",
+          "type": "Proposed",
+          "violator": "Producer",
+          "file": "98-03-014p.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        }
+      ]
+    },
+    "Enforcement": {
+      "n": 742,
+      "prefixes": [
+        [
+          "INS",
+          364
+        ],
+        [
+          "S",
+          112
+        ],
+        [
+          "M",
+          109
+        ],
+        [
+          "DM",
+          81
+        ],
+        [
+          "CA",
+          19
+        ],
+        [
+          "MT",
+          19
+        ],
+        [
+          "MSD",
+          12
+        ],
+        [
+          "CF",
+          11
+        ],
+        [
+          "PB",
+          2
+        ],
+        [
+          "PN",
+          2
+        ],
+        [
+          "CC",
+          2
+        ],
+        [
+          "NUMERIC",
+          2
+        ],
+        [
+          "DB",
+          1
+        ],
+        [
+          "PD",
+          1
+        ],
+        [
+          "DPT",
+          1
+        ],
+        [
+          "TL",
+          1
+        ],
+        [
+          "DTB",
+          1
+        ],
+        [
+          "PBM",
+          1
+        ],
+        [
+          "PR",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "FIRSTSOURCE TRANSACTION SOLUTION, LLC",
+          "case": "INS-20-0017",
+          "type": null,
+          "violator": "Other",
+          "file": "Consent Order firstsource SIGG.pdf",
+          "date": "2020-11-30T08:00:00Z"
+        },
+        {
+          "name": "ATLANTA-ONE, INC.",
+          "case": "S-87-0042",
+          "type": null,
+          "violator": "Other",
+          "file": "Atlanta-One Consent Order.pdf",
+          "date": "1988-03-22T08:00:00Z"
+        },
+        {
+          "name": "Accurate Precious Metals Refineries",
+          "case": "PB-17-0158",
+          "type": null,
+          "violator": null,
+          "file": "Accurate PMR Consent Order SSIG.pdf",
+          "date": "2019-02-06T08:00:00Z"
+        }
+      ]
+    },
+    "Filing": {
+      "n": 425,
+      "prefixes": [
+        [
+          "NUMERIC",
+          425
+        ]
+      ],
+      "samples": [
+        {
+          "name": "ACA Financial Guaranty Corporation",
+          "case": "98-11-004",
+          "type": "Final",
+          "violator": "Company",
+          "file": "98-11-004.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Alexander Hamilton Life Insurance Company of America",
+          "case": "98-11-005",
+          "type": "Final",
+          "violator": "Company",
+          "file": "98-11-005.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Anthem Life Insurance Company",
+          "case": "98-11-006",
+          "type": "Final",
+          "violator": "Company",
+          "file": "98-11-006.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        }
+      ]
+    },
+    "Marketplace violations": {
+      "n": 332,
+      "prefixes": [
+        [
+          "NUMERIC",
+          327
+        ],
+        [
+          "INS",
+          4
+        ],
+        [
+          "MIA",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "PFL Life Insurance Company",
+          "case": "97-11-010",
+          "type": "Final",
+          "violator": "Company",
+          "file": "97-11-010.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Polaris Insurance Company Ltd.",
+          "case": "98-06-011",
+          "type": "Final",
+          "violator": "Company",
+          "file": "98-06-011.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "American Bankers Insurance Group, Inc.",
+          "case": "98-11-022",
+          "type": "Final",
+          "violator": "Company",
+          "file": "98-11-022.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        }
+      ]
+    },
+    "Producer": {
+      "n": 148,
+      "prefixes": [
+        [
+          "INS",
+          142
+        ],
+        [
+          "NUMERIC",
+          3
+        ],
+        [
+          "M",
+          1
+        ],
+        [
+          "S",
+          1
+        ],
+        [
+          "SS",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Bonzer, Jacob R",
+          "case": "15-07-006",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "15-07-006.pdf",
+          "date": "2016-03-10T08:00:00Z"
+        },
+        {
+          "name": "Perry, Lisa M",
+          "case": "15-07-023",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "15-07-023.pdf",
+          "date": "2016-03-10T08:00:00Z"
+        },
+        {
+          "name": "Parks, Steve",
+          "case": "15-08-008",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "15-08-008.pdf",
+          "date": "2016-03-10T08:00:00Z"
+        }
+      ]
+    },
+    "Financial-suspension": {
+      "n": 98,
+      "prefixes": [
+        [
+          "NUMERIC",
+          79
+        ],
+        [
+          "INS",
+          19
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Fremont Pacific Insurance Company",
+          "case": "02-04-018",
+          "type": "Final",
+          "violator": "Company",
+          "file": "02-04-018.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Highlands Insurance Company",
+          "case": "02-05-003",
+          "type": "Final",
+          "violator": "Company",
+          "file": "02-05-003.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Northwestern National Casualty Company",
+          "case": "02-05-004",
+          "type": "Final",
+          "violator": "Company",
+          "file": "02-05-004.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        }
+      ]
+    },
+    "Financial-other": {
+      "n": 70,
+      "prefixes": [
+        [
+          "NUMERIC",
+          60
+        ],
+        [
+          "INS",
+          9
+        ],
+        [
+          "M",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Farmers Insurance Company of Oregon",
+          "case": "06-06-015",
+          "type": "Final",
+          "violator": "Company",
+          "file": "06-06-015.pdf",
+          "date": "2006-08-17T07:00:00Z"
+        },
+        {
+          "name": "Farmers Insurance Exchange",
+          "case": "06-06-016",
+          "type": "Final",
+          "violator": "Company",
+          "file": "06-06-016.pdf",
+          "date": "2006-08-17T07:00:00Z"
+        },
+        {
+          "name": "Argonaut Insurance Company",
+          "case": "07-05-003",
+          "type": "Final",
+          "violator": "Company",
+          "file": "07-05-003.pdf",
+          "date": "2007-05-30T07:00:00Z"
+        }
+      ]
+    },
+    "Workers' Comp Billing": {
+      "n": 36,
+      "prefixes": [
+        [
+          "INS",
+          31
+        ],
+        [
+          "NUMERIC",
+          4
+        ],
+        [
+          "OAH",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Tritac Shooting Solutions, LLC",
+          "case": "15-10-001",
+          "type": "Amended",
+          "violator": "Workers' comp billing",
+          "file": "15-10-001-tritac-20160722.pdf",
+          "date": "2016-07-22T07:00:00Z"
+        },
+        {
+          "name": "DeVry Builders, LLC",
+          "case": "16-03-009",
+          "type": "Final",
+          "violator": "Workers' comp billing",
+          "file": "16-03-009-devry-20160913.pdf",
+          "date": "2016-09-13T07:00:00Z"
+        },
+        {
+          "name": "ASAP Business Solutions, LLC",
+          "case": "INS-14-12-004",
+          "type": "Final",
+          "violator": "Workers' comp billing",
+          "file": "14-12-004-asap-20170329.pdf",
+          "date": "2017-03-29T07:00:00Z"
+        }
+      ]
+    },
+    "<blank>": {
+      "n": 17,
+      "prefixes": [
+        [
+          "NUMERIC",
+          14
+        ],
+        [
+          "INS",
+          2
+        ],
+        [
+          "CR",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "The Ultimate Warranty Corporation",
+          "case": "08-05-001-p",
+          "type": "Notice of Proposed Action",
+          "violator": "Company",
+          "file": "08-05-001-p.pdf",
+          "date": "2008-07-07T07:00:00Z"
+        },
+        {
+          "name": "Safeco Insurance Company of Oregon by Liberty Mutual Insurance Company",
+          "case": "08-07-001-formA",
+          "type": "Other",
+          "violator": "Company",
+          "file": "08-07-001-formA.pdf",
+          "date": "2008-07-10T07:00:00Z"
+        },
+        {
+          "name": "Regence Life and Health Insurance Company by Regence BlueCross BlueShield of Oregon",
+          "case": "08-10-001",
+          "type": "Other",
+          "violator": "Company",
+          "file": "08-10-001.pdf",
+          "date": "2008-10-20T07:00:00Z"
+        }
+      ]
+    },
+    "Order extending supervision": {
+      "n": 16,
+      "prefixes": [
+        [
+          "INS",
+          16
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Health Republic Insurance Company",
+          "case": "INS FR 17-02-001",
+          "type": "Financial-Supervision",
+          "violator": "Company",
+          "file": "20170213-healthrepublic-ins-fr-17-02-001.pdf",
+          "date": "2017-02-13T08:00:00Z"
+        },
+        {
+          "name": "Health Republic Insurance Company ",
+          "case": "INS FR 17-08-002",
+          "type": "Financial-Supervision",
+          "violator": "Company",
+          "file": "20170814-healthrepublic-ins-fr-17-08-002.pdf",
+          "date": "2017-08-03T07:00:00Z"
+        },
+        {
+          "name": "Health Republic Insurance Company",
+          "case": "INS FR 17-10-001",
+          "type": "Financial-Supervision",
+          "violator": "Company",
+          "file": "20171002-healthrepublic-ins-fr-17-10-001.pdf",
+          "date": "2017-10-02T07:00:00Z"
+        }
+      ]
+    },
+    "Acquisition Merger": {
+      "n": 12,
+      "prefixes": [
+        [
+          "INS",
+          11
+        ],
+        [
+          "BLANK",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Approved acquisition of Providence Health Plan and Providence Health Assurance by Providence St. Joseph Health",
+          "case": "INS-FR 18-03-003",
+          "type": "Approval of Acquisition Merger",
+          "violator": "Company",
+          "file": "20190108-providence-stjoseph-ins-fr-18-03-003.pdf",
+          "date": "2019-01-08T08:00:00Z"
+        },
+        {
+          "name": "Approved Aquisition of Control of Moda Health Plan, Inc. by Delta Dental of California",
+          "case": "INS-FR 19-2-008",
+          "type": "Approval of Acquisition Merger",
+          "violator": "Company",
+          "file": "20190227-moda-deltadental-ins-fr-19-2-008.pdf",
+          "date": "2019-02-27T08:00:00Z"
+        },
+        {
+          "name": "Approved acquisition of NexDent Dental Plans, Inc. by Advantage Dental Plan, Inc.",
+          "case": "INS-FR 19-3-005",
+          "type": "Approval of Acquisition Merger",
+          "violator": "Company",
+          "file": "20190506-nexdent-advantage-ins-fr-19-3-005.pdf",
+          "date": "2019-05-06T07:00:00Z"
+        }
+      ]
+    },
+    "Mortgage": {
+      "n": 10,
+      "prefixes": [
+        [
+          "M",
+          10
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Network For Oregon Affordable Housing",
+          "case": "M-24-0053",
+          "type": "Consent Order",
+          "violator": "Mortgage",
+          "file": "20240821-network-oregon-affordable-housing-m-24-0053.pdf",
+          "date": "2024-08-21T07:00:00Z"
+        },
+        {
+          "name": "Henry, Russell Roger",
+          "case": "M-15-0121",
+          "type": "Consent Order",
+          "violator": "Mortgage",
+          "file": "20151102-henryr-m-15-0121.pdf",
+          "date": "2015-11-02T08:00:00Z"
+        },
+        {
+          "name": "Plum Tree Mortgage",
+          "case": "M-15-0119",
+          "type": "Consent Order",
+          "violator": "Mortgage",
+          "file": "20151124-plumtree-m-15-0119.pdf",
+          "date": "2015-11-24T08:00:00Z"
+        }
+      ]
+    },
+    "Financial-supervision": {
+      "n": 7,
+      "prefixes": [
+        [
+          "INS",
+          7
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Health Republic Insurance Company",
+          "case": "INS-FR 16-12-001",
+          "type": "Financial-Supervision",
+          "violator": "Company",
+          "file": "20161206-healthrepublic-ins-fr-16-12-001.pdf",
+          "date": "2016-12-06T08:00:00Z"
+        },
+        {
+          "name": "ATRIO",
+          "case": "INS-04-1326",
+          "type": "Default Order",
+          "violator": null,
+          "file": "atrio-order-of-supervision.pdf",
+          "date": "2026-07-14T07:00:00Z"
+        },
+        {
+          "name": "ATRIO",
+          "case": "INS-06-0826",
+          "type": null,
+          "violator": null,
+          "file": "atrio-order-supplementing-order-of-supervision.pdf",
+          "date": "2026-07-14T07:00:00Z"
+        }
+      ]
+    },
+    "Securities sales": {
+      "n": 7,
+      "prefixes": [
+        [
+          "S",
+          7
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Gill, Robert D.",
+          "case": "S-15-0081",
+          "type": "Consent Order",
+          "violator": "Sales",
+          "file": "20150819-gillr-s-15-0081.pdf",
+          "date": "2015-08-19T07:00:00Z"
+        },
+        {
+          "name": "Roque, Julio E.",
+          "case": "S-15-0101",
+          "type": "Consent Order",
+          "violator": "Sales",
+          "file": "20150915-roquej-s-15-0101.pdf",
+          "date": "2015-09-15T07:00:00Z"
+        },
+        {
+          "name": "Sheets, Ryan L.",
+          "case": "S-15-0104",
+          "type": "Consent Order",
+          "violator": "Sales",
+          "file": "20150923-sheetsr-s-15-0104.pdf",
+          "date": "2015-09-23T07:00:00Z"
+        }
+      ]
+    },
+    "Withdrawal": {
+      "n": 6,
+      "prefixes": [
+        [
+          "NUMERIC",
+          6
+        ]
+      ],
+      "samples": [
+        {
+          "name": "NORCAL Mutual Insurance Company",
+          "case": "04-02-004",
+          "type": "Other",
+          "violator": "Company",
+          "file": "04-02-004.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Atlantic Mutual Insurance Company",
+          "case": "04-04-021",
+          "type": "Other",
+          "violator": "Company",
+          "file": "04-04-021.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        },
+        {
+          "name": "Centennial Insurance Company",
+          "case": "04-04-022",
+          "type": "Other",
+          "violator": "Company",
+          "file": "04-04-022.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        }
+      ]
+    },
+    "Debt Management": {
+      "n": 5,
+      "prefixes": [
+        [
+          "DM",
+          5
+        ]
+      ],
+      "samples": [
+        {
+          "name": "REI One LLC dba Advanced Processing Solutions and John Mogar",
+          "case": "DM-15-0012",
+          "type": "Order to Cease and Desist and Consent to Entry of Order",
+          "violator": "Debt mgmt",
+          "file": "20150511-rei-one-dm-15-0012.pdf",
+          "date": "2015-05-11T07:00:00Z"
+        },
+        {
+          "name": "Serj Badrik Geutssoyan and Green Tree Financial Group",
+          "case": "DM-15-0065",
+          "type": "Final",
+          "violator": "Debt mgmt",
+          "file": "20150605-greentree-dm-15-0065.pdf",
+          "date": "2015-06-05T07:00:00Z"
+        },
+        {
+          "name": "Porter, Bruce R.",
+          "case": "DM-15-0072",
+          "type": "Final",
+          "violator": "Debt mgmt",
+          "file": "20150714-porterb-dm-15-0072.pdf",
+          "date": "2015-07-14T07:00:00Z"
+        }
+      ]
+    },
+    "Producer-probationary": {
+      "n": 4,
+      "prefixes": [
+        [
+          "NUMERIC",
+          4
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Jordan, Jeffery",
+          "case": "15-01-014",
+          "type": "Consent Order",
+          "violator": "Producer",
+          "file": "15-01-014.pdf",
+          "date": "2015-03-26T07:00:00Z"
+        },
+        {
+          "name": "Koch, Robert B Jr",
+          "case": "15-01-023",
+          "type": "Consent Order",
+          "violator": "Producer",
+          "file": "15-01-023.pdf",
+          "date": "2015-03-26T07:00:00Z"
+        },
+        {
+          "name": "Nordin, Amanda M",
+          "case": "15-03-016",
+          "type": "Consent Order",
+          "violator": "Producer",
+          "file": "15-03-016.pdf",
+          "date": "2015-12-11T08:00:00Z"
+        }
+      ]
+    },
+    "Producer-suspension": {
+      "n": 3,
+      "prefixes": [
+        [
+          "SS",
+          2
+        ],
+        [
+          "INS",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Roqueta, Edward C.",
+          "case": "SS-16-0326",
+          "type": "Final-Suspension",
+          "violator": "Producer",
+          "file": "20160819-roquetae-ss-16-0326.pdf",
+          "date": "2016-08-19T07:00:00Z"
+        },
+        {
+          "name": "Cook, Frank D.",
+          "case": "SS-16-0345",
+          "type": "Final-Suspension",
+          "violator": "Producer",
+          "file": "20161013-cookf-ss-16-0345.pdf",
+          "date": "2016-10-13T07:00:00Z"
+        },
+        {
+          "name": "Terra Administrators, Inc.",
+          "case": "INS-16-0338",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "20161107-terraadministrators-ins-16-0338.pdf",
+          "date": "2016-11-07T08:00:00Z"
+        }
+      ]
+    },
+    "Producer-vacate suspension": {
+      "n": 3,
+      "prefixes": [
+        [
+          "SS",
+          3
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Johnson, Ronald A.",
+          "case": "SS-16-0325",
+          "type": "Other",
+          "violator": "Producer",
+          "file": "20160914-johnsonr-ss-16-0325.pdf",
+          "date": "2016-09-14T07:00:00Z"
+        },
+        {
+          "name": "Roqueta, Edward C.",
+          "case": "SS-16-0326",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "20161005-roquetae-ss-16-0326.pdf",
+          "date": "2016-10-27T07:00:00Z"
+        },
+        {
+          "name": "Cook, Frank D.",
+          "case": "SS-16-0345",
+          "type": "Final",
+          "violator": "Producer",
+          "file": "20161031-cookf-ss-16-0345.pdf",
+          "date": "2016-10-31T07:00:00Z"
+        }
+      ]
+    },
+    "Consent Order": {
+      "n": 2,
+      "prefixes": [
+        [
+          "M",
+          1
+        ],
+        [
+          "INS",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Kameron Kay Lavinder (NMLS ID# 202999)",
+          "case": "M-13-0191",
+          "type": "Consent Order",
+          "violator": "Mortgage",
+          "file": "m-13-0191-lavinder-k-20131002.pdf",
+          "date": "2013-10-02T07:00:00Z"
+        },
+        {
+          "name": "National Union Fire Insurance Company of Pittsburgh, PA",
+          "case": "INS-22-0102",
+          "type": "Consent Order",
+          "violator": null,
+          "file": "NUFICConsentOrderSIGG.pdf",
+          "date": "2022-10-27T07:00:00Z"
+        }
+      ]
+    },
+    "Financial-revocation": {
+      "n": 1,
+      "prefixes": [
+        [
+          "NUMERIC",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Primeguard Insurance Company, Inc., A Risk Retention Group",
+          "case": "06-01-015",
+          "type": "Final",
+          "violator": "Company",
+          "file": "06-01-015.pdf",
+          "date": "2006-03-28T08:00:00Z"
+        }
+      ]
+    },
+    "Order Terminating Supervision": {
+      "n": 1,
+      "prefixes": [
+        [
+          "INS",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "Health Republic Insurance Company",
+          "case": "INS-FR 19-11-001",
+          "type": "Financial-Supervision",
+          "violator": "Company",
+          "file": "20191113-health-republic-ins-fr-19-11-001.pdf",
+          "date": "2019-11-13T08:00:00Z"
+        }
+      ]
+    },
+    "Workers\u2019 Comp. Billing": {
+      "n": 1,
+      "prefixes": [
+        [
+          "INS",
+          1
+        ]
+      ],
+      "samples": [
+        {
+          "name": "IN THE MATTER OF SCOTTI MCLAIN",
+          "case": "INS-WC 24-05-16",
+          "type": null,
+          "violator": null,
+          "file": "final-order-mclain.pdf",
+          "date": "2026-07-16T07:00:00Z"
+        }
+      ]
+    }
+  }
+}

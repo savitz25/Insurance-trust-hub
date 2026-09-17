@@ -216,6 +216,23 @@ const STATE_CARD_COPY: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-12" },
     ],
   },
+  {
+    state: "Oregon",
+    abbreviation: "OR",
+    href: "/oregon",
+    regulators: "Oregon Division of Financial Regulation",
+    evidence: [
+      "DFR/SBS/NIPR license verification (search-only)",
+      "2025 insurer complaint tables by line",
+      "Market-conduct and financial examination indexes",
+      "DFR insurance-native administrative orders",
+    ],
+    limitation:
+      "No current bulk agency, producer, or authorized-insurer roster was acquired. Complaint tables and orders are not a license census. Search-only is not zero.",
+    sourceClocks: [
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-17" },
+    ],
+  },
 ] as const;
 
 export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = STATE_CARD_COPY
@@ -312,6 +329,9 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   ny_dfs_company_directory_rows: "/new-york",
   il_directors_order_observations: "/illinois",
   il_authorized_companies: "/illinois",
+  or_dfr_insurance_order_documents: "/oregon",
+  or_complaint_table_rows: "/oregon",
+  or_authorized_companies: "/oregon",
 };
 
 function fromMetric(

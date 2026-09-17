@@ -58,6 +58,8 @@ export type MetricGrain =
   | 'statistical_report_directory_row'
   | 'surplus_lines_eligibility_identity'
   | 'directors_order_observation'
+  | 'dfr_insurance_order_document'
+  | 'dfr_complaint_table_row'
   | 'combined_incompatible_grains';
 
 export type PublicationStatus =
@@ -229,6 +231,17 @@ export type InsuranceNetworkMetricsV1 = {
     asOf: string | null;
     directorsOrderObservations: number;
     directorsOrderCoverage: 'DIRECTORS_ORDERS_SEARCH_INDEX_NOT_COMPANY_CENSUS';
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    authorizedCompanies: null;
+    authorizedCompaniesCoverage: 'OPEN_SEARCH_ONLY';
+  };
+  oregon: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    dfrInsuranceOrderDocuments: number;
+    complaintTableRows: number;
+    orderCoverage: 'INSURANCE_NATIVE_DFRACTION_NOT_LICENSE_CENSUS';
     producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
     agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
     authorizedCompanies: null;
