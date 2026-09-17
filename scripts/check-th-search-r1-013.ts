@@ -67,6 +67,32 @@ check("homeowners context retained as unresolved directory criterion", () =>
     /homeowners/i,
   ),
 );
+check("statewide homeowners is unresolved product, not the FL census", () => {
+  const q = parse("homeowners insurance agencies in Florida").query;
+  assert.equal(q.mode, "fail_closed");
+  assert.equal(q.coverageState, "UNSUPPORTED");
+  assert.deepEqual(q.requestedProduct, ["homeowners"]);
+  assert.equal(q.linesOfAuthority, undefined);
+  assert.match(q.failReason ?? "", /statewide agency census/i);
+});
+check("auto product-intent variant is also unresolved", () => {
+  const q = parse("auto insurance agencies in Florida").query;
+  assert.equal(q.mode, "fail_closed");
+  assert.deepEqual(q.requestedProduct, ["auto"]);
+});
+check("unspecified-product FL agencies remain a credential cohort", () => {
+  const q = parse("Show insurance agencies credentialed in Florida.").query;
+  assert.equal(q.mode, "entity");
+  assert.equal(q.entityClass, "agency");
+  assert.equal(q.jurisdiction?.state, "FL");
+  assert.equal(q.requestedProduct, undefined);
+});
+check("TX life remains official LOA, not unresolved product", () => {
+  const q = parse("life insurance agencies in Texas").query;
+  assert.equal(q.mode, "entity");
+  assert.deepEqual(q.linesOfAuthority, ["Life"]);
+  assert.equal(q.requestedProduct, undefined);
+});
 check("appointed with invokes evidence", () => {
   const q = parse("is NPN 10391484 appointed with State Farm?").query;
   assert.equal(q.evidenceFamily, "appointment");
@@ -275,6 +301,45 @@ async function main() {
           [ids.agency],
         );
         assert.equal(r.results[0]?.credentialJurisdiction, "FL");
+      });
+      await test("homeowners FL agencies fail closed without executing the census", async () => {
+        const n = source.calls.length;
+        const r = await executeInsuranceAsk(
+          "homeowners insurance agencies in Florida",
+        );
+        assert.equal(r.parsed.query.mode, "fail_closed");
+        assert.equal(r.terminalState, "CAPABILITY_LIMITATION");
+        assert.equal(r.coverageState, "UNSUPPORTED");
+        assert.equal(r.results.length, 0);
+        assert.equal(r.counts.length, 0);
+        assert.equal(r.pagination.total, 0);
+        assert.notEqual(r.pagination.total, 56939);
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.equal(source.calls.length, n);
+        const html = renderToStaticMarkup(
+          createElement(AskInsuranceResultView, { result: r }),
+        );
+        assert.match(html, /homeowners/i);
+        assert.equal(html.includes("56,939") || html.includes("56939"), false);
+        assert.match(html, /Current research limitation/);
+        assert.match(html, /without a product filter/);
+      });
+      await test("auto product-intent variant also refuses the FL census", async () => {
+        const n = source.calls.length;
+        const r = await executeInsuranceAsk("auto insurance agencies in Florida");
+        assert.equal(r.parsed.query.mode, "fail_closed");
+        assert.deepEqual(r.parsed.query.requestedProduct, ["auto"]);
+        assert.equal(r.results.length, 0);
+        assert.equal(r.counts.length, 0);
+        assert.equal(source.calls.length, n);
+      });
+      await test("unspecified-product control still returns the FL agency cohort", async () => {
+        const r = await executeInsuranceAsk(
+          "Show insurance agencies credentialed in Florida.",
+        );
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.equal(r.results[0]?.entityId, ids.agency);
+        assert.equal(r.parsed.query.requestedProduct, undefined);
       });
       await test("address request cannot become FL credential cohort", async () => {
         const n = source.calls.length,

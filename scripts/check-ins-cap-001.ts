@@ -65,6 +65,16 @@ async function main() {
   assert.equal(ranking.status, 422);
   assert.equal(ranking.body.error?.code, 'ranking_not_supported');
 
+  const homeowners = await executeSpecialistV2({ query: 'homeowners insurance agencies in Florida' });
+  assert.equal(homeowners.status, 422);
+  assert.equal(homeowners.body.resultState, 'UNSUPPORTED_CAPABILITY');
+  assert.equal(homeowners.body.error?.code, 'unresolved_product');
+  assert.equal(homeowners.body.total, 0);
+  assert.equal(homeowners.body.rows.length, 0);
+  assert.equal(homeowners.body.pagination.total, 0);
+  assert.match(JSON.stringify(homeowners.body.queryInterpretation), /homeowners/i);
+  assert.match(homeowners.body.error?.message ?? '', /statewide agency census/i);
+
   const wave = await executeSpecialistV2({ query: 'legal insurer Wave 1', page: 1, limit: 10 });
   assert.equal(wave.status, 200);
   assert.equal(wave.body.resultState, 'SUPPORTED_RESULTS');
