@@ -265,6 +265,14 @@ export type InsuranceNetworkMetricsV1 = {
     agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
     licensedCompanyCoverage: 'OPEN_SEARCH_ONLY';
   };
+  ohio: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    authorizedCompaniesDistinctNaic: number;
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    agencyRosterCoverage: 'ACQUIRED_MAJOR_LINES_BUSINESS_ENTITY_MAILING_LIST';
+    licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT';
+  };
   publication: {
     publicPeople: 0;
     publicGraphAgencies: 0;

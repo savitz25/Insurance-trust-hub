@@ -1,0 +1,306 @@
+{
+  "retrievedAt": "2026-09-18T16:08:16Z",
+  "pages": {
+    "company_search": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 15534,
+      "disposition": null,
+      "error": null,
+      "title": "Ohio Department of Insurance - Company Search"
+    },
+    "auth_org_list": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/Reports/ViewReport?reportName=AuthOrgList",
+      "status": 200,
+      "content_type": "application/pdf",
+      "bytes": 901987,
+      "disposition": "attachment; filename=AuthOrgList091820261208.pdf",
+      "error": null,
+      "title": null
+    },
+    "agent_locator": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/AgentSearch.mvc/DisplaySearch",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 27027,
+      "disposition": null,
+      "error": null,
+      "title": "\r\n\tOhio Department of Insurance - Agent / Agency Locator\r\n"
+    },
+    "mailing_list": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/MailingList.mvc",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 21469,
+      "disposition": null,
+      "error": null,
+      "title": "\r\n\tOhio Department of Insurance - Agent/Agency Mailing Lists\r\n"
+    },
+    "journal": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.AdministrativeAction.Public.UI/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 28517,
+      "disposition": null,
+      "error": null,
+      "title": "Home - Administrative Action Search"
+    },
+    "journal_legacy": {
+      "url": "https://legacy.insurance.ohio.gov/JournalSearch/JournalSearchYearly.aspx",
+      "status": 503,
+      "content_type": "text/html; charset=us-ascii",
+      "bytes": 326,
+      "disposition": null,
+      "error": null,
+      "title": "Service Unavailable"
+    },
+    "companies": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/companies",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "agents": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/agent-and-agencies",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "consumers": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/consumers",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "surplus": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/companies/surplus-lines",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "receivership": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/companies/receiverships",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "market_conduct": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/companies/market-conduct",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "financial_exam": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/companies/financial-examinations",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "complaints": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/consumers/file-a-complaint",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    },
+    "reports": {
+      "url": "https://insurance.ohio.gov/about-us/reports",
+      "status": 404,
+      "content_type": "text/html",
+      "bytes": 5271,
+      "disposition": null,
+      "error": null,
+      "title": "404 Error Page"
+    }
+  },
+  "journal_signals": {
+    "incompleteness_warning": true,
+    "ce_excluded": true,
+    "view_cutoff": true,
+    "api_like": [
+      "/UI/ODI.AdministrativeAction.Public.UI/Captcha/StoreCaptcha",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/Captcha.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/ODIcss?v=-UW6k69TnpPuL7iLxOsZy6mkIs1t3cPIeOgUQUVMWlE1",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/StyleApp.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/bootstrap.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/bootstrap.min.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/css?v=lDDDqlM-zvDac4ZVVNX7G7tS0Z4OfHGSaQSARj3nj8A1",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/jquery-themes-blitzer-1.8.9-ui.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/Content/jquery.dataTables-1.10.23.min.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/EnterpriseMedia/scripts/purify.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Home/Dashboard",
+      "/UI/ODI.AdministrativeAction.Public.UI/Home/EmailDocument",
+      "/UI/ODI.AdministrativeAction.Public.UI/PageJS/Dashboard.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/PageJS/common.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/bootstrap.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery-3.7.1.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.2.70.blockUI.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.ajax.1.7.2.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.ajax.1.8.9.ui.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.dataTables-1.10.23.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/css/all.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/css/dialog.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/css/print.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/ohio-bundle.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/ohio-style.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/bundles/ODIScripts?v=fJnRPN_DAKtnHe1xdtuTJB03C3vmf7IIlN-PShp6Dt41",
+      "/UI/ODI.AdministrativeAction.Public.UI/bundles/jquery?v=N2YlHnRI7it2_JoqUZTYWxPtx-s61zIGkk78Q0eabPM1",
+      "/UI/ODI.AdministrativeAction.Public.UI/bundles/modernizr?v=inCVuEFe6J4Q07A0AcRsbJic_UE5MwpRMNGcOtk94TE1"
+    ],
+    "scripts": [
+      "/UI/ODI.AdministrativeAction.Public.UI/EnterpriseMedia/scripts/purify.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/PageJS/Dashboard.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/PageJS/common.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/bootstrap.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery-3.7.1.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.2.70.blockUI.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.ajax.1.7.2.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.ajax.1.8.9.ui.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/Scripts/jquery.dataTables-1.10.23.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/ohio-bundle.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+      "/UI/ODI.AdministrativeAction.Public.UI/bundles/ODIScripts?v=fJnRPN_DAKtnHe1xdtuTJB03C3vmf7IIlN-PShp6Dt41",
+      "/UI/ODI.AdministrativeAction.Public.UI/bundles/jquery?v=N2YlHnRI7it2_JoqUZTYWxPtx-s61zIGkk78Q0eabPM1",
+      "/UI/ODI.AdministrativeAction.Public.UI/bundles/modernizr?v=inCVuEFe6J4Q07A0AcRsbJic_UE5MwpRMNGcOtk94TE1"
+    ],
+    "doc_types": [
+      "All",
+      "Bulletin",
+      "Notice",
+      "Order",
+      "Other",
+      "Rule"
+    ]
+  },
+  "locator_signals": {
+    "requires_last_name_or_npn": true,
+    "has_search_form": true,
+    "fields": [
+      "BusinessEntity",
+      "captcha"
+    ],
+    "title": "\r\n\tOhio Department of Insurance - Agent / Agency Locator\r\n"
+  },
+  "company_search_signals": {
+    "auth_list": true,
+    "auth_org": true,
+    "financial": true,
+    "report_uris": [
+      " />\r\n        <input type=",
+      "/UI/ODI.Risk.Public.UI/Reports/ViewReport",
+      "/UI/ODI.Risk.Public.UI/StatutoryAgent/Details",
+      "/UI/ODI.Risk.Public.UI/StatutoryAgent/UpdateSearch",
+      "/UI/ODI.Risk.Public.UI/api/Company/Search",
+      "/UI/ODI.Risk.Public.UI/api/FrStatement/Search",
+      "/UI/ODI.Risk.Public.UI/api/Reinsurer/Search",
+      "/UI/ODI.Risk.Public.UI/api/StatutoryAgent/Search",
+      "/UI/ODI.Risk.Public.UI/api/StatutoryAgent/UpdateAgent",
+      "/UI/ODI.Risk.Public.UI/api/StatutoryAgent/UpdateSearch"
+    ],
+    "scripts": [
+      "/UI/ODI.Risk.Public.UI/EnterpriseMaster/includes/menu.debug.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/jquery-3.7.1.min.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/jquery-ui-1.13.2.min.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/jquery.maskedinput.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/jquery.blockUI.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/knockout-3.5.1.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/knockout-viewmodels.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/knockout-tablesorting.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/knockout-formatting.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/DOMPurify/dist/purify.js",
+      "/UI/ODI.Risk.Public.UI/Scripts/Company/CompanySearch.js",
+      "/UI/ODI.Risk.Public.UI/css/images/tablesorter/first.png",
+      "/UI/ODI.Risk.Public.UI/css/images/tablesorter/prev.png",
+      "/UI/ODI.Risk.Public.UI/css/images/tablesorter/next.png",
+      "/UI/ODI.Risk.Public.UI/css/images/tablesorter/last.png"
+    ]
+  },
+  "mailing_posts": [
+    {
+      "residence": "Resident",
+      "residence_id": "1",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 10099,
+      "disposition": null,
+      "error": null,
+      "json_keys": [
+        "IsModelStateValid",
+        "IsRedirection",
+        "RedirectionUrl",
+        "Form",
+        "Content"
+      ],
+      "redirection": null,
+      "preview": "{\"IsModelStateValid\":false,\"IsRedirection\":false,\"RedirectionUrl\":null,\"Form\":null,\"Content\":\"\\r\\n\\r\\n\\u003cdiv id=\\\"companyFilterWrapper\\\"\\u003e\\r\\n    \\u003cul\\u003e\\r\\n        \\u003cli\\u003eYou can select multiple items by pressing CTRL + mouse click (this selects or adds\\r\\n            to your selection one item at a time), or SHIFT + mouse click (this selects a range\\r\\n            of items).",
+      "is_valid": false,
+      "is_redirection": false
+    },
+    {
+      "residence": "Non-Resident",
+      "residence_id": "2",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 10099,
+      "disposition": null,
+      "error": null,
+      "json_keys": [
+        "IsModelStateValid",
+        "IsRedirection",
+        "RedirectionUrl",
+        "Form",
+        "Content"
+      ],
+      "redirection": null,
+      "preview": "{\"IsModelStateValid\":false,\"IsRedirection\":false,\"RedirectionUrl\":null,\"Form\":null,\"Content\":\"\\r\\n\\r\\n\\u003cdiv id=\\\"companyFilterWrapper\\\"\\u003e\\r\\n    \\u003cul\\u003e\\r\\n        \\u003cli\\u003eYou can select multiple items by pressing CTRL + mouse click (this selects or adds\\r\\n            to your selection one item at a time), or SHIFT + mouse click (this selects a range\\r\\n            of items).",
+      "is_valid": false,
+      "is_redirection": false
+    },
+    {
+      "residence": "Certified",
+      "residence_id": "3",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 10099,
+      "disposition": null,
+      "error": null,
+      "json_keys": [
+        "IsModelStateValid",
+        "IsRedirection",
+        "RedirectionUrl",
+        "Form",
+        "Content"
+      ],
+      "redirection": null,
+      "preview": "{\"IsModelStateValid\":false,\"IsRedirection\":false,\"RedirectionUrl\":null,\"Form\":null,\"Content\":\"\\r\\n\\r\\n\\u003cdiv id=\\\"companyFilterWrapper\\\"\\u003e\\r\\n    \\u003cul\\u003e\\r\\n        \\u003cli\\u003eYou can select multiple items by pressing CTRL + mouse click (this selects or adds\\r\\n            to your selection one item at a time), or SHIFT + mouse click (this selects a range\\r\\n            of items).",
+      "is_valid": false,
+      "is_redirection": false
+    }
+  ]
+}

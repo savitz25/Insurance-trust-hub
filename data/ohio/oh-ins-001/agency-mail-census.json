@@ -1,0 +1,399 @@
+{
+  "retrievedAt": "2026-09-18T16:12:02Z",
+  "auth": {
+    "types": {
+      "PC": 1069,
+      "LIFE": 498,
+      "FR": 45,
+      "HIC": 45,
+      "TI": 33,
+      "RE": 26,
+      "MPP": 11,
+      "MEWA": 10,
+      "CUSG": 1
+    },
+    "domestic_types": {
+      "PC": 148,
+      "LIFE": 41,
+      "HIC": 27,
+      "MPP": 11,
+      "MEWA": 10,
+      "FR": 8,
+      "RE": 4,
+      "TI": 2,
+      "CUSG": 1
+    },
+    "rows": 1738,
+    "distinct_naic": 1738,
+    "sourceAsOf_filename": "AuthList09182026.xls"
+  },
+  "mail": {
+    "mail-Bu-r1-loa1-2-27-3.bin": {
+      "file": "mail-Bu-r1-loa1-2-27-3.bin",
+      "bytes": 564820,
+      "sha256": "8bb63d818866d328fccca1fecea2f73f898a75f656575fff26fe827752768165",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 5656,
+      "OH_AGENCY_DISTINCT_NPN": 5648,
+      "OH_AGENCY_ROWS_MISSING_NPN": 3,
+      "sample": [
+        {
+          "org_name": "(HORN) HOUSE OF INSURANCE & BONDS LLC",
+          "address_line1": "42906 WOODHILL DR",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "ELYRIA",
+          "state_province_name": "OH",
+          "postal_code": "44035",
+          "originalIssueDate": "9/9/2021",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "20061156"
+        },
+        {
+          "org_name": "1111GRASSHOPPER LLC",
+          "address_line1": "32170 DAKOTA RUN",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "AVON LAKE",
+          "state_province_name": "OH",
+          "postal_code": "44012",
+          "originalIssueDate": "11/10/2025",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "21785098"
+        }
+      ]
+    },
+    "mail-Bu-r1-loa1.bin": {
+      "file": "mail-Bu-r1-loa1.bin",
+      "bytes": 492022,
+      "sha256": "067aaf5303d211ce86ce2980ada5520e736fd982bcb7cb47e8bfada054d374ef",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 4918,
+      "OH_AGENCY_DISTINCT_NPN": 4910,
+      "OH_AGENCY_ROWS_MISSING_NPN": 3,
+      "sample": [
+        {
+          "org_name": "1111GRASSHOPPER LLC",
+          "address_line1": "32170 DAKOTA RUN",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "AVON LAKE",
+          "state_province_name": "OH",
+          "postal_code": "44012",
+          "originalIssueDate": "11/10/2025",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "21785098"
+        },
+        {
+          "org_name": "1322 LEGACY GROUP",
+          "address_line1": "38 EAST MAIN STREET",
+          "address_line2": "STE C",
+          "address_line3": "",
+          "city": "AMELIA",
+          "state_province_name": "OH",
+          "postal_code": "45102",
+          "originalIssueDate": "8/18/2026",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "22326307"
+        }
+      ]
+    },
+    "mail-Bu-r1-loa16.bin": {
+      "file": "mail-Bu-r1-loa16.bin",
+      "bytes": 359639,
+      "sha256": "6b3f7bb605aa24eea9bfe8becf7e2164fb322c64dddb6aed862427cab1f741a9",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 3601,
+      "OH_AGENCY_DISTINCT_NPN": 3599,
+      "OH_AGENCY_ROWS_MISSING_NPN": 1,
+      "sample": [
+        {
+          "org_name": "(HORN) HOUSE OF INSURANCE & BONDS LLC",
+          "address_line1": "42906 WOODHILL DR",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "ELYRIA",
+          "state_province_name": "OH",
+          "postal_code": "44035",
+          "originalIssueDate": "9/9/2021",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "20061156"
+        },
+        {
+          "org_name": "1111GRASSHOPPER LLC",
+          "address_line1": "32170 DAKOTA RUN",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "AVON LAKE",
+          "state_province_name": "OH",
+          "postal_code": "44012",
+          "originalIssueDate": "11/10/2025",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "21785098"
+        }
+      ]
+    },
+    "mail-Bu-r1-loa27.bin": {
+      "file": "mail-Bu-r1-loa27.bin",
+      "bytes": 361825,
+      "sha256": "4ff9136814e1ac5bf89720d66f1ef6d8e297e653b1a962bedf23088a5e5ff129",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 3623,
+      "OH_AGENCY_DISTINCT_NPN": 3621,
+      "OH_AGENCY_ROWS_MISSING_NPN": 1,
+      "sample": [
+        {
+          "org_name": "(HORN) HOUSE OF INSURANCE & BONDS LLC",
+          "address_line1": "42906 WOODHILL DR",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "ELYRIA",
+          "state_province_name": "OH",
+          "postal_code": "44035",
+          "originalIssueDate": "9/9/2021",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "20061156"
+        },
+        {
+          "org_name": "1111GRASSHOPPER LLC",
+          "address_line1": "32170 DAKOTA RUN",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "AVON LAKE",
+          "state_province_name": "OH",
+          "postal_code": "44012",
+          "originalIssueDate": "11/10/2025",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "21785098"
+        }
+      ]
+    },
+    "mail-Bu-r1-loa28.bin": {
+      "file": "mail-Bu-r1-loa28.bin",
+      "bytes": 122847,
+      "sha256": "e672f02089b147bbe128beb6abd0a9086d01f63d938cf8fea1e8d910dcac9c56",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 1220,
+      "OH_AGENCY_DISTINCT_NPN": 1219,
+      "OH_AGENCY_ROWS_MISSING_NPN": 0,
+      "sample": [
+        {
+          "org_name": "1111GRASSHOPPER LLC",
+          "address_line1": "32170 DAKOTA RUN",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "AVON LAKE",
+          "state_province_name": "OH",
+          "postal_code": "44012",
+          "originalIssueDate": "11/10/2025",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "21785098"
+        },
+        {
+          "org_name": "1LIFE COVERAGE SOLUTIONS INC",
+          "address_line1": "4853 GALAXY PKWY STE M",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "CLEVELAND",
+          "state_province_name": "OH",
+          "postal_code": "441285939",
+          "originalIssueDate": "10/2/2025",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "21746238"
+        }
+      ]
+    },
+    "mail-Bu-r1-loa7.bin": {
+      "file": "mail-Bu-r1-loa7.bin",
+      "bytes": 510824,
+      "sha256": "58120d815fbf02e05de60079fc70d296731db1eac0aa5a1b86741344949df3c4",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 5108,
+      "OH_AGENCY_DISTINCT_NPN": 5102,
+      "OH_AGENCY_ROWS_MISSING_NPN": 2,
+      "sample": [
+        {
+          "org_name": "(HORN) HOUSE OF INSURANCE & BONDS LLC",
+          "address_line1": "42906 WOODHILL DR",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "ELYRIA",
+          "state_province_name": "OH",
+          "postal_code": "44035",
+          "originalIssueDate": "9/9/2021",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "20061156"
+        },
+        {
+          "org_name": "1111GRASSHOPPER LLC",
+          "address_line1": "32170 DAKOTA RUN",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "AVON LAKE",
+          "state_province_name": "OH",
+          "postal_code": "44012",
+          "originalIssueDate": "11/10/2025",
+          "EXPIRATIONDATE": "9/30/2028",
+          "NATIONALPROVIDERNUMBER": "21785098"
+        }
+      ]
+    },
+    "mail-be-major-all-nonresident.csv": {
+      "file": "mail-be-major-all-nonresident.csv",
+      "bytes": 1914321,
+      "sha256": "32f6926a8fc46fd1a099c4ac923cc3a0250373d5ce18cd38fdb5e1d64a4290b1",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 18278,
+      "OH_AGENCY_DISTINCT_NPN": 18274,
+      "OH_AGENCY_ROWS_MISSING_NPN": 3,
+      "sample": [
+        {
+          "org_name": "\" AMERICAN LEGACY LIFE COMPANY LLC\"",
+          "address_line1": "14224 CERVANTES AVE",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "GERMANTOWN",
+          "state_province_name": "MD",
+          "postal_code": "20874",
+          "originalIssueDate": "9/15/2026",
+          "EXPIRATIONDATE": "9/30/2027",
+          "NATIONALPROVIDERNUMBER": "21777430"
+        },
+        {
+          "org_name": "&PARTNERS, LLC",
+          "address_line1": "40 BURTON HILLS BLVD, STE 350",
+          "address_line2": "",
+          "address_line3": "",
+          "city": "NASHVILLE",
+          "state_province_name": "TN",
+          "postal_code": "37215",
+          "originalIssueDate": "3/19/2021",
+          "EXPIRATIONDATE": "9/30/2027",
+          "NATIONALPROVIDERNUMBER": "7077117"
+        }
+      ]
+    },
+    "mail-be-major-all-certified.csv": {
+      "file": "mail-be-major-all-certified.csv",
+      "bytes": 150,
+      "sha256": "fd46e86a27d7dd2532d26fa1b37ba6dc73fd17c71d89eb89d09de072449c8307",
+      "fields": [
+        "org_name",
+        "address_line1",
+        "address_line2",
+        "address_line3",
+        "city",
+        "state_province_name",
+        "postal_code",
+        "originalIssueDate",
+        "EXPIRATIONDATE",
+        "NATIONALPROVIDERNUMBER"
+      ],
+      "OH_AGENCY_MAILING_ROWS": 0,
+      "OH_AGENCY_DISTINCT_NPN": 0,
+      "OH_AGENCY_ROWS_MISSING_NPN": 0,
+      "sample": []
+    }
+  },
+  "extra_fetches": [
+    {
+      "residence": "2",
+      "status": 200,
+      "bytes": 370,
+      "is_valid": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=1,2,27,3,4,9,7,39,25,38,37,36,28,16,21,22,29,31,24,15,23,20,32,13,12,11,14,26&residenceTypeId=2",
+      "file_status": 200,
+      "file_bytes": 1914321,
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-be-major-all-nonresident.csv"
+    },
+    {
+      "residence": "3",
+      "status": 200,
+      "bytes": 370,
+      "is_valid": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=1,2,27,3,4,9,7,39,25,38,37,36,28,16,21,22,29,31,24,15,23,20,32,13,12,11,14,26&residenceTypeId=3",
+      "file_status": 200,
+      "file_bytes": 150,
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-be-major-all-certified.csv"
+    }
+  ]
+}

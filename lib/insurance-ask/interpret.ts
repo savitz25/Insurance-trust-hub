@@ -228,6 +228,127 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.entityClass = 'insurer';
     return { raw: early, query, interpretation: [{ label: 'Coverage', value: `${query.coverageState} — North Carolina companies` }] };
   }
+  if (/\bohio\b/i.test(early) && isRanking(early)) {
+    const query = fail(
+      'InsuranceTrustHub does not rank Ohio insurers, agencies, or agents and does not publish a Trust Score.',
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'UNSUPPORTED — no ranking' }] };
+  }
+  if (
+    /\b(columbus|cleveland|cincinnati|toledo|dayton|akron)\b/i.test(early) &&
+    /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(early)
+  ) {
+    const query = fail(
+      'This statewide Ohio insurance page does not publish Columbus, Cleveland, Cincinnati, Toledo, Dayton, Akron, or other local insurance intelligence routes. License geography is statewide. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'UNSUPPORTED — no Ohio local intelligence' }] };
+  }
+  if (/\bohio\b/i.test(early) && /complaint/i.test(early)) {
+    const query = fail(
+      'ODI accepts consumer complaints, but a complete public insurer-level complaint census was not acquired. Complaint intake is not a bulk census. A complaint is not a finding. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Ohio complaint bulk' }] };
+  }
+  if (
+    /\bohio\b/i.test(early) &&
+    /administrative action|disciplinary|journal|revocation|fine/i.test(early)
+  ) {
+    const query = fail(
+      'ODI Administrative Actions Journal bounded past-12-months catalog: 496 documents (383 Order / 113 Notice). ODI warns search results may not be comprehensive and exclude most agent CE noncompliance. A document is not a unique matter. The Journal is not a complete adverse census. Name-only attachment is unsafe. Confirm /ohio.',
+      ['Open Ohio insurance research.', 'Find NPN 40000001.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Ohio Administrative Actions Journal' }] };
+  }
+  if (/\bohio\b/i.test(early) && /financial data|annual financial/i.test(early)) {
+    const query = fail(
+      'A complete ODI Annual Financial Data export was not acquired. Per-company statement PDFs are supporting evidence, not the authorized-company census. Financial data is not authorization or quality. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Ohio annual financial bulk' }] };
+  }
+  if (/\bohio\b/i.test(early) && /surplus lines/i.test(early)) {
+    const query = fail(
+      'Ohio surplus-lines eligible insurers are a separate universe from ODI admitted authorized companies. No complete free eligible-list dump was acquired. Certified reinsurers (19 name-bearing rows, no NAIC) are not that list. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'insurer';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Ohio surplus-lines bulk list' }] };
+  }
+  if (/\bohio\b/i.test(early) && /receivership|liquidat|rehabilitat/i.test(early)) {
+    const query = fail(
+      'Ohio receivership/liquidation/rehabilitation estates were not acquired as a complete current catalog. Liquidation is not rehabilitation. Historic insolvent estate is not current authorization. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Ohio receivership catalog' }] };
+  }
+  if (/\bohio\b/i.test(early) && /market conduct|financial exam|examination report/i.test(early)) {
+    const query = fail(
+      'Ohio examination-report catalogs were not acquired as a complete public index in this extract. A market exam is not a financial exam and not a Journal administrative action. Exam existence is not a finding. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Ohio examination catalogs' }] };
+  }
+  if (
+    /\bohio\b/i.test(early) &&
+    /\b(insurance agents?|producers?)\b/i.test(early) &&
+    !/\bagenc/i.test(early) &&
+    !/credentialed/i.test(early)
+  ) {
+    const query = fail(
+      'ODI individual-producer bulk roster is not mass-published here. Agent / Agency Locator is live search (last name or NPN, captcha). A person is not an agency. NPN is not NAIC. Search-only is not zero. Confirm /ohio and the official locator.',
+      ['Open Ohio insurance research.', 'Find NPN 40000001.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'person';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Ohio producer bulk census' }] };
+  }
+  if (/\bohio\b/i.test(early) && /insurance agenc/i.test(early) && !/credentialed/i.test(early)) {
+    const products = detectRequestedConsumerProducts(early);
+    const life = /\blife\b/i.test(early) && !/\bvariable life\b/i.test(early);
+    const health = /\bhealth\b/i.test(early);
+    const reason = products.includes('homeowners')
+      ? 'ODI mailing-list Line of Authority options have no Homeowners LOA. Property, Casualty, and Personal authority do not prove an agency currently sells homeowners insurance. Licensing authority is not product inventory. Confirm /ohio.'
+      : products.includes('auto')
+        ? 'ODI mailing-list Line of Authority options have no Auto LOA. Auto Rental is a different limited line. This extract will not treat auto insurance agencies Ohio as generic insurance agencies Ohio. Confirm /ohio.'
+        : products.includes('flood')
+          ? 'ODI mailing-list Line of Authority options have no Flood LOA. Flood insurance agencies Ohio remain unsupported as a product-qualified cohort. Confirm /ohio.'
+          : life
+            ? 'ODI Business Entity + Major Lines mailing list filtered to Line of Authority = Life: 16,306 distinct NPNs (resident 5,102 / non-resident 11,204). That is licensing authority, not current life-product inventory. Confirm /ohio.'
+            : health
+              ? 'ODI Business Entity + Major Lines mailing list filtered to Line of Authority = Accident & Health: 16,132 distinct NPNs (resident 4,910 / non-resident 11,222). That is licensing authority, not current health-product inventory. Confirm /ohio.'
+              : 'ODI Agent/Agency Mailing Lists, Business Entity + Major Lines, all source LOA filters: 23,922 distinct NPNs (resident 5,648 / non-resident 18,274; overlap 0). This is not agents, not legal insurers, and not every ODI license type. LOA is the report filter, not an export column. Confirm /ohio.';
+    const query = fail(reason, ['Open Ohio insurance research.', 'Find NPN 40000001.']);
+    query.coverageState = products.includes('homeowners') || products.includes('auto') || products.includes('flood')
+      ? 'UNSUPPORTED'
+      : 'PARTIAL';
+    query.entityClass = 'agency';
+    if (products.length) query.requestedProduct = products;
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: `${query.coverageState} — Ohio agencies` }] };
+  }
+  if (
+    /\bohio\b/i.test(early) &&
+    /\b(authorized insurance compan(?:y|ies)|licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(early) &&
+    !/\bagenc/i.test(early)
+  ) {
+    const query = fail(
+      "ODI complete current authorized-company Excel (AuthList091820261205.xls) lists 1,738 distinct NAIC codes / 1,738 rows (0 missing NAIC). Authorized is not domestic (Ohio-domicile 237). NAIC is not NPN. A legal insurer is not an agency. Financial data is not authorization. Confirm /ohio and ODI Company Search.",
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'PARTIAL';
+    query.entityClass = 'insurer';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Ohio authorized companies' }] };
+  }
   const typed = interpretIdentityAndLocal(raw, page);
   if (typed) return typed;
   const q = raw.trim();
@@ -720,6 +841,139 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.entityClass = 'insurer';
     query.jurisdiction = { state: 'NC', meaning: geographyMeaning(q) };
     push('Coverage', `${query.coverageState} — North Carolina companies`);
+    return { raw: q, query, interpretation: lines };
+  }
+
+  const ohioAsked = /\bohio\b/i.test(q) || detectStates(q)[0] === 'OH';
+  if (ohioAsked && isRanking(q)) {
+    const query = fail(
+      'InsuranceTrustHub does not rank Ohio insurers, agencies, or agents and does not publish a Trust Score.',
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — no ranking');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (
+    /\b(columbus|cleveland|cincinnati|toledo|dayton|akron)\b/i.test(q) &&
+    /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(q)
+  ) {
+    const query = fail(
+      'This statewide Ohio insurance page does not publish Columbus, Cleveland, Cincinnati, Toledo, Dayton, Akron, or other local insurance intelligence routes. License geography is statewide. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — no Ohio local intelligence');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (ohioAsked && /complaint/i.test(q)) {
+    const query = fail(
+      'ODI accepts consumer complaints, but a complete public insurer-level complaint census was not acquired. Complaint intake is not a bulk census. A complaint is not a finding. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Coverage', 'NOT_ACQUIRED — Ohio complaint bulk');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (ohioAsked && /administrative action|disciplinary|journal|revocation|fine/i.test(q)) {
+    const query = fail(
+      'ODI Administrative Actions Journal bounded past-12-months catalog: 496 documents (383 Order / 113 Notice). ODI warns search results may not be comprehensive and exclude most agent CE noncompliance. A document is not a unique matter. The Journal is not a complete adverse census. Name-only attachment is unsafe. Confirm /ohio.',
+      ['Open Ohio insurance research.', 'Find NPN 40000001.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — Ohio Administrative Actions Journal');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (ohioAsked && /financial data|annual financial/i.test(q)) {
+    const query = fail(
+      'A complete ODI Annual Financial Data export was not acquired. Per-company statement PDFs are supporting evidence, not the authorized-company census. Financial data is not authorization or quality. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Coverage', 'NOT_ACQUIRED — Ohio annual financial bulk');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (ohioAsked && /surplus lines/i.test(q)) {
+    const query = fail(
+      'Ohio surplus-lines eligible insurers are a separate universe from ODI admitted authorized companies. No complete free eligible-list dump was acquired. Certified reinsurers (19 name-bearing rows, no NAIC) are not that list. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'insurer';
+    push('Coverage', 'NOT_ACQUIRED — Ohio surplus-lines bulk list');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (ohioAsked && /receivership|liquidat|rehabilitat/i.test(q)) {
+    const query = fail(
+      'Ohio receivership/liquidation/rehabilitation estates were not acquired as a complete current catalog. Liquidation is not rehabilitation. Historic insolvent estate is not current authorization. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Coverage', 'NOT_ACQUIRED — Ohio receivership catalog');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (ohioAsked && /market conduct|financial exam|examination report/i.test(q)) {
+    const query = fail(
+      'Ohio examination-report catalogs were not acquired as a complete public index in this extract. A market exam is not a financial exam and not a Journal administrative action. Exam existence is not a finding. Search-only is not zero. Confirm /ohio.',
+      ['Open Ohio insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Coverage', 'NOT_ACQUIRED — Ohio examination catalogs');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (
+    ohioAsked &&
+    /\b(insurance agents?|producers?)\b/i.test(q) &&
+    !/\bagenc/i.test(q) &&
+    !/credentialed/i.test(q)
+  ) {
+    const query = fail(
+      'ODI individual-producer bulk roster is not mass-published here. Agent / Agency Locator is live search (last name or NPN, captcha). A person is not an agency. NPN is not NAIC. Search-only is not zero. Confirm /ohio and the official locator.',
+      ['Open Ohio insurance research.', 'Find NPN 40000001.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'person';
+    push('Coverage', 'NOT_ACQUIRED — Ohio producer bulk census');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (ohioAsked && /insurance agenc/i.test(q) && !/credentialed/i.test(q)) {
+    const products = detectRequestedConsumerProducts(q);
+    const life = /\blife\b/i.test(q) && !/\bvariable life\b/i.test(q);
+    const health = /\bhealth\b/i.test(q);
+    const reason = products.includes('homeowners')
+      ? 'ODI mailing-list Line of Authority options have no Homeowners LOA. Property, Casualty, and Personal authority do not prove an agency currently sells homeowners insurance. Licensing authority is not product inventory. Confirm /ohio.'
+      : products.includes('auto')
+        ? 'ODI mailing-list Line of Authority options have no Auto LOA. Auto Rental is a different limited line. This extract will not treat auto insurance agencies Ohio as generic insurance agencies Ohio. Confirm /ohio.'
+        : products.includes('flood')
+          ? 'ODI mailing-list Line of Authority options have no Flood LOA. Flood insurance agencies Ohio remain unsupported as a product-qualified cohort. Confirm /ohio.'
+          : life
+            ? 'ODI Business Entity + Major Lines mailing list filtered to Line of Authority = Life: 16,306 distinct NPNs (resident 5,102 / non-resident 11,204). That is licensing authority, not current life-product inventory. Confirm /ohio.'
+            : health
+              ? 'ODI Business Entity + Major Lines mailing list filtered to Line of Authority = Accident & Health: 16,132 distinct NPNs (resident 4,910 / non-resident 11,222). That is licensing authority, not current health-product inventory. Confirm /ohio.'
+              : 'ODI Agent/Agency Mailing Lists, Business Entity + Major Lines, all source LOA filters: 23,922 distinct NPNs (resident 5,648 / non-resident 18,274; overlap 0). This is not agents, not legal insurers, and not every ODI license type. LOA is the report filter, not an export column. Confirm /ohio.';
+    const query = fail(reason, ['Open Ohio insurance research.', 'Find NPN 40000001.']);
+    query.coverageState = products.includes('homeowners') || products.includes('auto') || products.includes('flood')
+      ? 'UNSUPPORTED'
+      : 'PARTIAL';
+    query.entityClass = 'agency';
+    query.jurisdiction = { state: 'OH', meaning: geographyMeaning(q) };
+    if (products.length) query.requestedProduct = products;
+    push('Coverage', `${query.coverageState} — Ohio agencies`);
+    return { raw: q, query, interpretation: lines };
+  }
+  if (
+    ohioAsked &&
+    /\b(authorized insurance compan(?:y|ies)|licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(q) &&
+    !/\bagenc/i.test(q)
+  ) {
+    const query = fail(
+      "ODI complete current authorized-company Excel (AuthList091820261205.xls) lists 1,738 distinct NAIC codes / 1,738 rows (0 missing NAIC). Authorized is not domestic (Ohio-domicile 237). NAIC is not NPN. A legal insurer is not an agency. Financial data is not authorization. Confirm /ohio and ODI Company Search.",
+      ['Open Ohio insurance research.', 'Find insurer NAIC code 10399.'],
+    );
+    query.coverageState = 'PARTIAL';
+    query.entityClass = 'insurer';
+    query.jurisdiction = { state: 'OH', meaning: geographyMeaning(q) };
+    push('Coverage', 'PARTIAL — Ohio authorized companies');
     return { raw: q, query, interpretation: lines };
   }
 

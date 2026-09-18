@@ -85,6 +85,9 @@ const specs = {
  ["financial_exams.document_rows", "Financial examination report documents", "financial_examination_listing", "EXAMINATIONS"],
  ["liquidation.document_rows", "Liquidation/rehab/discharge catalog documents", "regulatory_evidence_row"],
  ],
+ OH: [
+ ["authorized_companies.distinct_naic", "ODI authorized companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
+ ],
  NC: [
  ["licensing_actions.document_rows", "NCDOI Licensing Action catalog rows", "regulatory_evidence_row"],
  ["licensing_actions.producer_rows", "Insurance Producer licensing-action rows", "regulatory_evidence_row"],
@@ -94,8 +97,8 @@ const specs = {
  ["receiverships.named_current_estates", "Named current receivership/liquidation/rehab estates", "regulatory_evidence_row"],
  ]
 };
-const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina" };
-const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina" };
+const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina", OH:"Ohio" };
+const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina", OH:"ohio" };
 export function reconcile(manifest, root, census) {
   const paths = Object.fromEntries(Object.entries(slugs).map(([k,v]) => [k, `lib/${v}-intelligence/accepted-snapshot.json`]));
   const sources = Object.fromEntries(Object.entries(paths).map(([k,v])=>[k,read(root,v)]));

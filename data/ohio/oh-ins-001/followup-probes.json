@@ -1,0 +1,263 @@
+{
+  "retrievedAt": "2026-09-18T16:09:39Z",
+  "downloads": {
+    "company_search_js": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/Scripts/Company/CompanySearch.js",
+      "status": 200,
+      "bytes": 6973,
+      "type": "application/javascript",
+      "disp": null
+    },
+    "dashboard_js": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.AdministrativeAction.Public.UI/PageJS/Dashboard.js",
+      "status": 200,
+      "bytes": 22593,
+      "type": "application/javascript",
+      "disp": null
+    },
+    "common_js": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.AdministrativeAction.Public.UI/PageJS/common.js",
+      "status": 200,
+      "bytes": 2811,
+      "type": "application/javascript",
+      "disp": null
+    },
+    "certified_xls": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/Reports/ViewReport?reportName=CertifiedReinsurersXLS",
+      "status": 200,
+      "bytes": 16320,
+      "type": "application/vnd.ms-excel",
+      "disp": "attachment; filename=CertifiedReinsurersXLS091820261209.xls"
+    },
+    "certified_pdf": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/Reports/ViewReport?reportName=CertifiedReinsurersPDF",
+      "status": 200,
+      "bytes": 191002,
+      "type": "application/pdf",
+      "disp": "attachment; filename=CertifiedReinsurersPDF091820261209.pdf"
+    }
+  },
+  "company_js_reports": [],
+  "company_js_api": [],
+  "dashboard_api": [
+    "/UI/ODI.AdministrativeAction.Public.UI/Captcha/StoreCaptchaNoValidation",
+    "/UI/ODI.AdministrativeAction.Public.UI/Home/SearchJournalEntry",
+    "/UI/ODI.AdministrativeAction.Public.UI/Home/ViewDocument?documentNumber="
+  ],
+  "dashboard_has_captcha": true,
+  "fr_empty": {
+    "status": 404,
+    "bytes": 152,
+    "preview": "{\"Message\":\"No HTTP resource was found that matches the request URI 'https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/api/FrStatement/Search'.\"}",
+    "type": "application/json; charset=utf-8",
+    "json_type": "dict",
+    "keys": [
+      "Message"
+    ]
+  },
+  "company_empty": {
+    "status": 200,
+    "bytes": 246,
+    "preview": "<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 6623389481224189733<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+    "type": "text/html; charset=utf-8"
+  },
+  "reinsurer_empty": {
+    "status": 200,
+    "bytes": 246,
+    "preview": "<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 6623389481207800564<br><br><a href='javascript:history.back();'>[Go Back]</a></body></html>",
+    "type": "text/html; charset=utf-8"
+  },
+  "journal_gets": [
+    {
+      "path": "/UI/ODI.AdministrativeAction.Public.UI/Home/Dashboard",
+      "status": 200,
+      "bytes": 28517,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/UI/ODI.AdministrativeAction.Public.UI/Home/Search",
+      "status": 404,
+      "bytes": 3758,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/UI/ODI.AdministrativeAction.Public.UI/api/Search",
+      "status": 404,
+      "bytes": 3265,
+      "type": "text/html; charset=utf-8"
+    }
+  ],
+  "mails": [
+    {
+      "entity": "Business Entity",
+      "residence": "1",
+      "license_ids": [
+        "2"
+      ],
+      "loa_ids": [
+        "1"
+      ],
+      "status": 200,
+      "bytes": 294,
+      "content_type": "application/json; charset=utf-8",
+      "error": null,
+      "is_valid": true,
+      "is_redirection": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=1&residenceTypeId=1",
+      "validation": null,
+      "file_status": 200,
+      "file_bytes": 492022,
+      "file_type": "text/csv",
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-Bu-r1-loa1.bin",
+      "loa_name": "AccidentAndHealth"
+    },
+    {
+      "entity": "Business Entity",
+      "residence": "1",
+      "license_ids": [
+        "2"
+      ],
+      "loa_ids": [
+        "7"
+      ],
+      "status": 200,
+      "bytes": 294,
+      "content_type": "application/json; charset=utf-8",
+      "error": null,
+      "is_valid": true,
+      "is_redirection": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=7&residenceTypeId=1",
+      "validation": null,
+      "file_status": 200,
+      "file_bytes": 510824,
+      "file_type": "text/csv",
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-Bu-r1-loa7.bin",
+      "loa_name": "Life"
+    },
+    {
+      "entity": "Business Entity",
+      "residence": "1",
+      "license_ids": [
+        "2"
+      ],
+      "loa_ids": [
+        "16"
+      ],
+      "status": 200,
+      "bytes": 295,
+      "content_type": "application/json; charset=utf-8",
+      "error": null,
+      "is_valid": true,
+      "is_redirection": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=16&residenceTypeId=1",
+      "validation": null,
+      "file_status": 200,
+      "file_bytes": 359639,
+      "file_type": "text/csv",
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-Bu-r1-loa16.bin",
+      "loa_name": "Property"
+    },
+    {
+      "entity": "Business Entity",
+      "residence": "1",
+      "license_ids": [
+        "2"
+      ],
+      "loa_ids": [
+        "27"
+      ],
+      "status": 200,
+      "bytes": 295,
+      "content_type": "application/json; charset=utf-8",
+      "error": null,
+      "is_valid": true,
+      "is_redirection": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=27&residenceTypeId=1",
+      "validation": null,
+      "file_status": 200,
+      "file_bytes": 361825,
+      "file_type": "text/csv",
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-Bu-r1-loa27.bin",
+      "loa_name": "Casualty"
+    },
+    {
+      "entity": "Business Entity",
+      "residence": "1",
+      "license_ids": [
+        "2"
+      ],
+      "loa_ids": [
+        "28"
+      ],
+      "status": 200,
+      "bytes": 295,
+      "content_type": "application/json; charset=utf-8",
+      "error": null,
+      "is_valid": true,
+      "is_redirection": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=28&residenceTypeId=1",
+      "validation": null,
+      "file_status": 200,
+      "file_bytes": 122847,
+      "file_type": "text/csv",
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-Bu-r1-loa28.bin",
+      "loa_name": "Personal"
+    },
+    {
+      "entity": "Business Entity",
+      "residence": "1",
+      "license_ids": [
+        "2"
+      ],
+      "loa_ids": [
+        "1",
+        "2",
+        "27",
+        "3",
+        "4",
+        "9",
+        "7",
+        "39",
+        "25",
+        "38",
+        "37",
+        "36",
+        "28",
+        "16",
+        "21",
+        "22",
+        "29",
+        "31",
+        "24",
+        "15",
+        "23",
+        "20",
+        "32",
+        "13",
+        "12",
+        "11",
+        "14",
+        "26"
+      ],
+      "status": 200,
+      "bytes": 370,
+      "content_type": "application/json; charset=utf-8",
+      "error": null,
+      "is_valid": true,
+      "is_redirection": true,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=1,2,27,3,4,9,7,39,25,38,37,36,28,16,21,22,29,31,24,15,23,20,32,13,12,11,14,26&residenceTypeId=1",
+      "validation": null,
+      "file_status": 200,
+      "file_bytes": 564820,
+      "file_type": "text/csv",
+      "file_disp": "attachment;filename=BusinessEntityMailingList.csv",
+      "saved": "mail-Bu-r1-loa1-2-27-3.bin",
+      "loa_name": "ALL"
+    }
+  ]
+}

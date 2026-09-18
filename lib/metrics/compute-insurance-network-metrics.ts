@@ -90,6 +90,9 @@ export type InsuranceNetworkMetricsInput = {
   northCarolinaSnapshotFingerprint: string;
   northCarolinaAsOf: string | null;
   northCarolinaLicensingActionRows: number;
+  ohioSnapshotFingerprint: string;
+  ohioAsOf: string | null;
+  ohioAuthorizedCompaniesDistinctNaic: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -218,6 +221,15 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   }
   if (!input.publishedStateIntelligencePaths.includes('/north-carolina')) {
     throw new Error('North Carolina state intelligence path missing');
+  }
+  if (!input.publishedStateIntelligencePaths.includes('/ohio')) {
+    throw new Error('Ohio state intelligence path missing');
+  }
+  if (input.ohioAuthorizedCompaniesDistinctNaic === input.legalInsurers) {
+    throw new Error('Ohio authorized companies must not equal national legal insurers');
+  }
+  if (input.ohioAuthorizedCompaniesDistinctNaic === input.northCarolinaLicensingActionRows) {
+    throw new Error('Ohio authorized companies must not equal North Carolina licensing actions');
   }
   if (input.northCarolinaLicensingActionRows === input.legalInsurers) {
     throw new Error('North Carolina licensing actions must not equal national legal insurers');
@@ -1038,6 +1050,28 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'oh_authorized_companies_distinct_naic',
+      label: 'Ohio ODI authorized companies (distinct NAIC)',
+      value: input.ohioAuthorizedCompaniesDistinctNaic,
+      valueState: 'KNOWN',
+      grain: 'authorized_company_row',
+      denominator: "ODI complete current authorized-company Excel (AuthList)",
+      description:
+        'Distinct NAIC codes on ODI’s complete current authorized-company list. Authorized is not domestic. NAIC is not NPN. Not agencies and not agents.',
+      coverage: 'Ohio',
+      contributingSourceSystems: ['odi_authlist'],
+      sourceAsOf: input.ohioAsOf,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One distinct NAIC code on the ODI authorized-company Excel.',
+        'Not agencies, not agents, not domestic-only, not financial rank, not a quality ranking.',
+        ['odi'],
+        'Ohio; AuthList',
+        'ODI AuthList Excel'
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -1172,9 +1206,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC, OH',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -1182,7 +1216,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel', 'oh-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -1277,6 +1311,8 @@ export function computeInsuranceNetworkMetrics(
     paCompanies: input.pennsylvaniaLicensedCompaniesDistinctNaic,
     ncFp: input.northCarolinaSnapshotFingerprint,
     ncActions: input.northCarolinaLicensingActionRows,
+    ohFp: input.ohioSnapshotFingerprint,
+    ohAuthorized: input.ohioAuthorizedCompaniesDistinctNaic,
     paEnforcement: input.pennsylvaniaEnforcementActions,
     paComplaints: input.pennsylvaniaComplaintTableRows,
     paths: input.publishedStateIntelligencePaths,
@@ -1443,6 +1479,14 @@ export function computeInsuranceNetworkMetrics(
       producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       licensedCompanyCoverage: 'OPEN_SEARCH_ONLY',
+    },
+    ohio: {
+      snapshotFingerprint: input.ohioSnapshotFingerprint,
+      asOf: input.ohioAsOf,
+      authorizedCompaniesDistinctNaic: input.ohioAuthorizedCompaniesDistinctNaic,
+      producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      agencyRosterCoverage: 'ACQUIRED_MAJOR_LINES_BUSINESS_ENTITY_MAILING_LIST',
+      licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT',
     },
     publication: {
       publicPeople: 0,
