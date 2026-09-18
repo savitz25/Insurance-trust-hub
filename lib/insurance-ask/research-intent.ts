@@ -1,5 +1,11 @@
 import { distinctiveNameTokens } from "./name-match";
 import { US_STATES } from "@/lib/constants";
+import { detectRequestedEntityClass } from "./entity-class";
+import { stripConsumerProductWords } from "./product-intent";
+import {
+  resolveAllPlaceCodes,
+  stripKnownPlaceText,
+} from "./us-cities";
 import {
   INSURANCE_ASK_INPUT_LIMIT,
   type ParsedInsuranceAsk,
@@ -7,18 +13,17 @@ import {
   type InsuranceEntityClass,
 } from "./contract";
 
+// TH-DISCOVERY-PARITY-001B: delegates to the shared, general place resolver (us-cities.ts) instead
+// of this module's own narrower rule (a state code only counted when written "in NJ" / ", NJ",
+// and no city was ever recognized at all). See us-cities.ts's resolveAllPlaceCodes doc comment.
 export function requestStates(text: string): string[] {
-  return US_STATES.filter(
-    (s) =>
-      new RegExp(`\\b${s.name}\\b`, "i").test(text) ||
-      new RegExp(`(?:\\bin\\s+|,\\s*)${s.code}\\b`, "i").test(text),
-  ).map((s) => s.code);
+  return resolveAllPlaceCodes(text);
 }
+// TH-DISCOVERY-PARITY-001B: delegates to the shared classifier (entity-class.ts) so this module and
+// interpret.ts recognize the exact same provider-category vocabulary (this copy was previously
+// missing "producer(s)" entirely, and neither copy recognized "broker"/"provider").
 export function requestedClass(text: string): InsuranceEntityClass | undefined {
-  if (/\bagenc(?:y|ies)\b/i.test(text)) return "agency";
-  if (/\b(?:person|individual|producer|agent)\b/i.test(text)) return "person";
-  if (/\b(?:legal insurer|insurers?|insurance compan(?:y|ies))\b/i.test(text))
-    return "insurer";
+  return detectRequestedEntityClass(text);
 }
 /**
  * TH-DISCOVERY-RESET-001: "Florida insurance company" and "insurance company Monmouth County New
@@ -70,15 +75,19 @@ export function resolveFlCityLaunchCounty(location: string): string | undefined 
     .trim();
   return FL_CITY_LAUNCH_COUNTY[key];
 }
-function isGeographyOnlyPhrase(q: string, matchedStateCodes: string[]): boolean {
-  let residue = q;
-  for (const code of matchedStateCodes) {
-    const state = US_STATES.find((s) => s.code === code);
-    if (state) residue = residue.replace(new RegExp(`\\b${state.name}\\b`, "gi"), " ");
-  }
-  residue = residue.replace(/\b[A-Za-z][A-Za-z.'-]*\s+county\b/gi, " ");
+// TH-DISCOVERY-PARITY-001B: previously only stripped the SPELLED-OUT state name for whatever
+// states this module's own (narrower) matcher had already found -- never a state CODE's literal
+// text, and never a known city name or a consumer-product word. "home insurance company Trenton
+// NJ" left "home Trenton NJ" behind after stripping only "insurance"/"company", so it read as a
+// distinctive company name and the whole phrase became a doomed exact-name lookup instead of a
+// category + geography discovery request. Now strips every recognized place (state name, state
+// code, known city, "<Name> County") via the shared resolver, plus consumer-product words, so a
+// pure "<category> <product> <geography>" phrase reduces to nothing and is recognized as such.
+function isGeographyOnlyPhrase(q: string): boolean {
+  let residue = stripKnownPlaceText(q);
+  residue = stripConsumerProductWords(residue);
   residue = residue.replace(
-    /\b(?:insurance|ins|agency|agencies|company|companies|co|corporation|corp|inc|llc|llp|limited|ltd|services|group|insurer|insurers|the|and|of|an?)\b/gi,
+    /\b(?:insurance|ins|agency|agencies|agent|agents|broker|brokers|provider|providers|producer|producers|company|companies|co|corporation|corp|inc|llc|llp|limited|ltd|services|group|insurer|insurers|the|and|of|an?)\b/gi,
     " ",
   );
   return !/[a-z]/i.test(residue);
@@ -269,10 +278,17 @@ export function interpretIdentityAndLocal(
   if (
     !explicitName &&
     /\b(?:agency|insurance company|llc|inc|corp)\b/i.test(q) &&
-    !/\b(?:in|near|with|which|what|how|show|does|has|have|can|should|this|licensed|credentialed|located|domiciled|complaints|best|serves)\b/i.test(
+    // TH-DISCOVERY-PARITY-001B: "around" and "nearby" name the same geographic relationship as
+    // "in"/"near" (already excluded below) but were missing from this list, so a real category +
+    // geography discovery request using either word (e.g. "flood insurance agency around Naples
+    // Florida") fell through to this branch and the ENTIRE phrase -- including the city and state --
+    // became a doomed literal company-name lookup instead of a normal entity/geography query. This
+    // is the exact "whole phrase treated as a literal company name" failure this ticket exists to
+    // fix, just triggered by a different preposition than the originally audited strings.
+    !/\b(?:in|near|around|nearby|with|which|what|how|show|does|has|have|can|should|this|licensed|credentialed|located|domiciled|complaints|best|serves)\b/i.test(
       q,
     ) &&
-    !isGeographyOnlyPhrase(q, states) &&
+    !isGeographyOnlyPhrase(q) &&
     distinctiveNameTokens(q).length
   )
     explicitName = [q, q];
@@ -434,5 +450,39 @@ export function interpretIdentityAndLocal(
         outcome: "NEEDS_CLARIFICATION",
       })),
     });
+  // TH-DISCOVERY-PARITY-001B: an unqualified, keyword-free proper-noun phrase (e.g. "State Farm",
+  // "Progressive", "Allstate", "GEICO") previously fell through every rule above -- the explicit-
+  // name rule earlier in this function only fires when the text ALSO contains a marker word like
+  // "agency" / "insurance company" / "llc" / "inc" / "corp", or starts with a lead-in like
+  // "find"/"who is" -- and then dead-ended in interpret.ts's generic "Clarification required" once
+  // no provider-category word or geography was found either. This is general, not keyed to any one
+  // brand: any short, question-free, category-free, geography-free, product-free phrase with at
+  // least one distinctive token is routed to the SAME name-candidate search a qualified name
+  // already uses (lookupNameCandidates in execute.ts), which checks both the agency graph and the
+  // published Wave-1 legal-insurer names. A query that is any kind of question, command, or
+  // recognized category/product/location phrase is excluded and never reaches this branch.
+  if (
+    !cls &&
+    states.length === 0 &&
+    !/[?]/.test(q) &&
+    q.split(/\s+/).filter(Boolean).length <= 6 &&
+    !/\b(?:how|what|where|when|why|which|who|is|are|does|do|can|should|will|would|show|find|open|browse|research|check|named)\b/i.test(
+      q,
+    ) &&
+    !/\b(?:near|nearby|local|zip|directory|county|homeowners?|auto|automobile|car|vehicle|flood|nfip|renters?|umbrella|medicare|life|health|property|casualty|agenc(?:y|ies)|agents?|brokers?|producers?|providers?|insurers?|carriers?|compan(?:y|ies)|npn|naic)\b/i.test(
+      q,
+    ) &&
+    distinctiveNameTokens(q).length >= 1
+  ) {
+    const name = q.trim();
+    return parsed(q, {
+      mode: "entity",
+      intent: "NAME_IDENTITY",
+      nameQuery: name,
+      page,
+      coverageState: "PARTIAL",
+      requestedTask: "identity",
+    });
+  }
   return null;
 }

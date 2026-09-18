@@ -13,6 +13,7 @@ import type { InsuranceRequestOptions, RecoveryAction } from './contract';
 import { createClient } from '@supabase/supabase-js';
 import {
   ASK_DEFINITIONS,
+  CREDENTIAL_STATES,
   INSURANCE_ASK_CONTRACT,
   INSURANCE_ASK_PAGE_SIZE,
   LOCKED_CENSUS,
@@ -187,6 +188,18 @@ export async function executeInsuranceAsk(raw: string, page = 1, pageSize = INSU
   if(q.identifier && new Set(result.results.map(r=>r.entityId)).size>1 && !q.selectedEntity){result.candidateSelection=true;result.terminalState='NEEDS_CLARIFICATION';for(const row of result.results)row.selectionHref='/ask?'+new URLSearchParams({q:raw,...q.requestOptions,selected:row.entityId});}
   result.terminalState ??= q.terminalState ?? (q.mode === 'fail_closed' ? q.refinement ? 'NEEDS_CLARIFICATION' : 'CAPABILITY_LIMITATION' : q.mode === 'directory' ? 'DIRECTORY_HANDOFF' : q.mode === 'definition' ? 'EXPLANATION' : result.results.length || result.counts.length ? 'RESULTS' : 'NO_MATCH');
   if (q.mode === 'directory') { result.provenance.sourceFamily = 'Separate public directory'; result.provenance.grain = 'Directory handoff; no regulatory identities retrieved'; result.provenance.geographyMeaning = `Selected ZIP ${q.directoryZip}; recorded directory address, not service territory`; }
+  // TH-DISCOVERY-PARITY-001B: a requested consumer product (homeowners/auto/flood/...) is never an
+  // official LOA in this extract (see product-intent.ts). Rather than hide the result set (the old
+  // SQA-009 behavior), interpret.ts/product-intent.ts now let real rows execute and this appends one
+  // explicit, un-missable disclosure to WHATEVER result came back so the product is never silently
+  // dropped and never silently satisfied.
+  if (q.requestedProduct?.length && q.mode !== 'fail_closed') {
+    const products = q.requestedProduct.join(', ');
+    result.limitations = [
+      `Requested product (${products}) is a consumer term, not an official agency/insurer line of authority in this extract -- these results are NOT asserted to be ${products}-specific.`,
+      ...result.limitations,
+    ];
+  }
   return result;
 }
 async function executeInsurancePlan(parsed: ParsedInsuranceAsk, pageSize: number): Promise<InsuranceAskResult> {
@@ -596,40 +609,30 @@ async function broadenUnsupportedClassToAgencies(
   reason: string,
   originalClassNoun: string,
   fallbackAlternatives: string[],
+  // TH-DISCOVERY-PARITY-001B: true only when the Wave-1 national cohort IS the originally
+  // requested class (legal insurer) -- see wave1NationalFallback's doc comment for why this must
+  // never be true for the person/agency broadening call sites.
+  sameClassAsWave1 = false,
 ): Promise<InsuranceAskResult> {
   if (state) {
     const broaderParsed: ParsedInsuranceAsk = { ...parsed, query: { ...parsed.query, entityClass: 'agency', nameQuery: undefined, mode: 'entity' } };
-    const broader = await listAgencies(broaderParsed, started);
+    const broader = await listAgencies(broaderParsed, started, false);
     if (broader.results.length === 0) {
-      const nationalRows: AskCard[] = publishedInsurers()
-        .map((published): AskCard => ({
-          entityId: published.entity_id,
-          entityClass: 'insurer',
-          displayName: published.canonical_legal_name,
-          npn: null,
-          naicCode: published.naic_cocode,
-          credentialJurisdiction: null,
-          credentialStatus: null,
-          licenseNumber: null,
-          licenseClass: null,
-          loas: [],
-          sourceDataset: 'ins-insurer-006-wave1',
-          sourceObservedAt: published.report_dates[0] ?? null,
-          href: insurerProfilePath(published.slug),
-          publicationNote: null,
-          whyMatched: `BROADER NATIONAL RESULT -- not specific to ${state}. This is a published Wave-1 legal-insurer identity, not a local ${state} match and not ${originalClassNoun}. The legal name and NAIC code on the profile establish identity; no ${state} presence or office is implied.`,
-        }))
-        .slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
-      if (nationalRows.length > 0) {
-        const national = finish(parsed, nationalRows, nationalRows.length, started, 'Wave-1 published legal-insurer national cohort (broader fallback; no acquired state agency data)');
-        national.limitations = [
-          reason,
-          `${state} insurance-agency bulk credentials have not been acquired for this jurisdiction -- this is not zero agencies, it is a research-source gap. These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort, NOT specific to ${state} or the requested county and NOT ${originalClassNoun} -- broader, not local.`,
-          ...national.limitations,
-        ];
-        national.coverageState = 'PARTIAL';
-        return national;
+      // TH-DISCOVERY-PARITY-001B: before falling all the way to the geography-neutral Wave-1
+      // cohort, try the separate public verified-agency directory (the same source backing
+      // /directory and the ZIP-based directory mode) scoped to the resolved city/state -- a real,
+      // geography-aware query against actual provider data, not a static list. This covers states
+      // this extract has no regulatory-credential bulk data for (e.g. CA/WA/CO/NJ) but that the
+      // public directory does have real listings for.
+      const directory = await broadenAgencyToPublicDirectory(parsed, started, state, parsed.query.requestedCity);
+      if (directory) {
+        directory.limitations = [reason, ...directory.limitations];
+        directory.parsed = withLoaMismatchDisclosure(parsed, parsed.query.linesOfAuthority);
+        directory.coverageState = 'PARTIAL';
+        return directory;
       }
+      const national = wave1NationalFallback(parsed, started, reason, originalClassNoun, state, sameClassAsWave1);
+      if (national) return national;
       const base = emptyBase(parsed, started);
       return {
         ...base,
@@ -660,6 +663,43 @@ async function broadenUnsupportedClassToAgencies(
   // TH-DISCOVERY-GEN-001: no geography at all to broaden into locally -- still show the real
   // national Wave-1 legal-insurer cohort rather than a zero-provider dead end (a bare provider
   // category with no geography is still DISCOVERY, not a reason for an empty screen).
+  const national = wave1NationalFallback(parsed, started, reason, originalClassNoun, undefined, sameClassAsWave1);
+  if (national) return national;
+  const base = emptyBase(parsed, started);
+  return {
+    ...base,
+    resultType: 'fail_closed',
+    parsed: { ...parsed, query: { ...parsed.query, mode: 'fail_closed', failReason: reason, alternatives: fallbackAlternatives } },
+    elapsedMs: Date.now() - started,
+    coverageState: 'UNSUPPORTED',
+  };
+}
+
+/**
+ * TH-DISCOVERY-PARITY-001B: shared "real, broader, honestly-disclosed" last-resort fallback to the
+ * published Wave-1 legal-insurer national cohort. Used by every class's broadening chain --
+ * agency-direct requests in an unsupported jurisdiction (listAgencies), and the person/legal-insurer
+ * broadening above -- once neither this extract's regulatory-credential bulk data nor the separate
+ * public agency directory has anything for the resolved geography. Never silently relabels the
+ * cohort as the originally requested class: every row and the top-level limitations say plainly
+ * what class this actually is (a legal insurer) and that it is broader, not local/class-specific.
+ *
+ * `sameClassAsWave1` must be true only when the ORIGINALLY REQUESTED class already IS legal
+ * insurer (listInsurers's own call): the previous version of this fallback always appended a "NOT
+ * ${originalClassNoun}" class-mismatch disclosure regardless of caller, which produced a literally
+ * false and confusing claim -- "NOT a legal insurer" -- on top of rows that manifestly ARE the
+ * published Wave-1 legal-insurer cohort, whenever an insurer-class request (e.g. "home insurance
+ * company Trenton NJ") reached this fallback. The geography caveat ("not specific to <state>")
+ * still always applies; only the class-mismatch clause is class-conditional.
+ */
+function wave1NationalFallback(
+  parsed: ParsedInsuranceAsk,
+  started: number,
+  reason: string,
+  originalClassNoun: string,
+  state: string | undefined,
+  sameClassAsWave1: boolean,
+): InsuranceAskResult | undefined {
   const nationalRows: AskCard[] = publishedInsurers()
     .map((published): AskCard => ({
       entityId: published.entity_id,
@@ -676,23 +716,31 @@ async function broadenUnsupportedClassToAgencies(
       sourceObservedAt: published.report_dates[0] ?? null,
       href: insurerProfilePath(published.slug),
       publicationNote: null,
-      whyMatched: `BROADER NATIONAL RESULT -- not ${originalClassNoun}. This is a published Wave-1 legal-insurer identity. The legal name and NAIC code on the profile establish identity.`,
+      whyMatched: state
+        ? `BROADER NATIONAL RESULT -- not specific to ${state}. This is a published Wave-1 legal-insurer identity, not a local ${state} match${sameClassAsWave1 ? '' : ` and not ${originalClassNoun}`}. The legal name and NAIC code on the profile establish identity; no ${state} presence or office is implied.`
+        : `BROADER NATIONAL RESULT${sameClassAsWave1 ? '' : ` -- not ${originalClassNoun}`}. This is a published Wave-1 legal-insurer identity. The legal name and NAIC code on the profile establish identity.`,
     }))
     .slice(0, parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE);
-  if (nationalRows.length > 0) {
-    const national = finish(parsed, nationalRows, nationalRows.length, started, 'Wave-1 published legal-insurer national cohort (broader fallback; no requested geography)');
-    national.limitations = [reason, `These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort, NOT ${originalClassNoun} -- broader, not the requested class.`, ...national.limitations];
-    national.coverageState = 'PARTIAL';
-    return national;
-  }
-  const base = emptyBase(parsed, started);
-  return {
-    ...base,
-    resultType: 'fail_closed',
-    parsed: { ...parsed, query: { ...parsed.query, mode: 'fail_closed', failReason: reason, alternatives: fallbackAlternatives } },
-    elapsedMs: Date.now() - started,
-    coverageState: 'UNSUPPORTED',
-  };
+  if (!nationalRows.length) return undefined;
+  const national = finish(
+    parsed,
+    nationalRows,
+    nationalRows.length,
+    started,
+    state
+      ? 'Wave-1 published legal-insurer national cohort (broader fallback; no acquired state agency data)'
+      : 'Wave-1 published legal-insurer national cohort (broader fallback; no requested geography)',
+  );
+  national.limitations = [
+    reason,
+    state
+      ? `${state} insurance-agency bulk credentials have not been acquired for this jurisdiction -- this is not zero agencies, it is a research-source gap. These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort, NOT specific to ${state} or the requested county${sameClassAsWave1 ? '' : ` and NOT ${originalClassNoun}`} -- broader, not local.`
+      : `These ${nationalRows.length} results are the published national Wave-1 legal-insurer cohort${sameClassAsWave1 ? '' : `, NOT ${originalClassNoun}`} -- a bounded published sample, not the full requested census.`,
+    ...national.limitations,
+  ];
+  national.coverageState = 'PARTIAL';
+  national.parsed = withLoaMismatchDisclosure(parsed, parsed.query.linesOfAuthority);
+  return national;
 }
 
 async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
@@ -739,7 +787,7 @@ async function listInsurers(parsed: ParsedInsuranceAsk, started: number): Promis
       coverageState: 'UNSUPPORTED',
     };
   }
-  return broadenUnsupportedClassToAgencies(parsed, started, state, reason, 'a legal insurer', ['What is a legal insurer?', 'Find insurer NAIC code 10064.']);
+  return broadenUnsupportedClassToAgencies(parsed, started, state, reason, 'a legal insurer', ['What is a legal insurer?', 'Find insurer NAIC code 10064.'], true);
 }
 
 // TH-DISCOVERY-GEN-001: "insurance agent"/"insurance producer" is a provider-category phrase, not
@@ -871,7 +919,18 @@ async function countEntities(kind: string, state?: string, loas?: string[]): Pro
   }
 }
 
-async function listAgencies(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
+async function listAgencies(
+  parsed: ParsedInsuranceAsk,
+  started: number,
+  // TH-DISCOVERY-PARITY-001B: false only for the internal "broaderParsed" sub-call from
+  // broadenUnsupportedClassToAgencies below. That caller already applies its OWN directory-then-
+  // Wave1 fallback tier once this call comes back empty (with its own, correct "not <original
+  // class>" disclosure) -- without this flag, this function's tail would fill in Wave1 rows first,
+  // and the outer caller would then wrap that already-final, already-disclosed result a SECOND
+  // time (a nonsensical doubled whyMatched string, and an entityClass/row mismatch), instead of
+  // running its own single, correctly-worded fallback.
+  allowWave1Fallback = true,
+): Promise<InsuranceAskResult> {
   const q = parsed.query;
   const state = q.jurisdiction?.state;
   const official = Boolean(q.loaAsOfficialObservation && state && state !== 'FL' && q.linesOfAuthority?.length);
@@ -915,8 +974,121 @@ async function listAgencies(parsed: ParsedInsuranceAsk, started: number): Promis
       'Florida DFS agency credentials are typically license class “AGENCY LICENSE.” Official Florida LOA observation rows = 0. Property / Casualty / Life / Health in Florida DFS are individual license-class texts, not an agency LOA codebook, and not appointments. Empty is not “no agencies have that authority.”',
       ...LIMITATIONS,
     ];
+    return result;
+  }
+  // TH-DISCOVERY-PARITY-001B: this extract's regulatory-credential bulk data only covers
+  // FL/TX/MA/OH/VT (CREDENTIAL_STATES). A resolved state OUTSIDE that set legitimately has zero
+  // rows here -- that used to just render as an honest-looking but unhelpful empty result, even
+  // though a real, verified public agency directory (the same source backing /directory and the
+  // ZIP-based directory mode) separately covers this geography. Broaden to it, scoped to the
+  // resolved city when we have one (more precise) or the state otherwise, before returning empty.
+  if (!results.length && state && !(CREDENTIAL_STATES as readonly string[]).includes(state)) {
+    const directory = await broadenAgencyToPublicDirectory(parsed, started, state, q.requestedCity);
+    if (directory) return directory;
+    // TH-DISCOVERY-PARITY-001B: the separate public agency directory can also legitimately have
+    // nothing for this resolved city/state (a real data-coverage gap, not a code bug) -- e.g.
+    // "insurance broker Orange County California" or "auto insurance providers in WA" with no
+    // city text to scope by. Without this, a direct agency-class request in an unsupported
+    // jurisdiction dead-ended at a bare zero-provider NO_MATCH here, even though the same
+    // "show real broader inventory, honestly labeled" fallback already exists one layer up (via
+    // broadenUnsupportedClassToAgencies) for person/legal-insurer requests that get broadened INTO
+    // agencies. Apply the identical last-resort tier here so a plain agency request never dead-ends
+    // any harder than the person/insurer paths that route through it.
+    if (allowWave1Fallback) {
+      const reason = `${state} insurance-agency regulatory-credential bulk data has not been acquired for this extract, and the separate public verified agency directory has no recorded listings for the requested geography either -- this is a research-source gap, not zero agencies.`;
+      const national = wave1NationalFallback(parsed, started, reason, 'insurance agencies', state, false);
+      if (national) return national;
+    }
   }
   return result;
+}
+
+/**
+ * TH-DISCOVERY-PARITY-001B: real, geography-aware broadening into InsuranceTrustHub's separate
+ * public verified-agency directory (lib/providers/queries.ts's `providers` table -- the same
+ * source behind /directory and executeDirectoryMode's ZIP lookups above). Tries the resolved city
+ * first (more precise; this table's `cities` coverage is broader than its verified `states_licensed`
+ * coverage) and falls back to the resolved state. Returns undefined (never throws) when neither
+ * yields a row, so callers can fall through to their own next tier.
+ */
+async function broadenAgencyToPublicDirectory(
+  parsed: ParsedInsuranceAsk,
+  started: number,
+  state: string,
+  city: string | undefined,
+): Promise<InsuranceAskResult | undefined> {
+  try {
+    const { getProviders } = await import('@/lib/providers/queries');
+    const pageSize = parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE;
+    const byCity = city ? await getProviders({ city: city.toUpperCase(), limit: pageSize, offset: 0 }) : { providers: [], total: 0 };
+    const usedCity = byCity.providers.length > 0;
+    const chosen = usedCity ? byCity : await getProviders({ state, limit: pageSize, offset: 0 });
+    if (!chosen.providers.length) return undefined;
+    // TH-DISCOVERY-PARITY-001B-REVIEW2: `place` must reflect which query actually produced
+    // `chosen`, not just whether a city was requested -- when the by-city lookup came back empty
+    // and this fell back to the state-wide query, the returned rows are NOT confirmed to be in
+    // `city` at all, so labeling every one of them "near {city}, {state}" would be a false
+    // geography claim on the state-wide fallback rows themselves.
+    const place = usedCity && city ? `${city}, ${state}` : state;
+    const results: AskCard[] = chosen.providers.map((p) => ({
+      entityId: p.id,
+      entityClass: 'agency',
+      displayName: p.name,
+      npn: null,
+      naicCode: null,
+      credentialJurisdiction: p.license_state ?? p.state ?? null,
+      credentialStatus: null,
+      licenseNumber: p.license_number ?? null,
+      licenseClass: null,
+      loas: [],
+      sourceDataset: 'ins-directory-providers',
+      sourceObservedAt: p.license_checked_at ?? null,
+      href: `/providers/${p.slug}`,
+      publicationNote: 'PUBLIC_PROFILE',
+      whyMatched: `Recorded public-directory listing for ${place}. This is a separate public directory source from the regulatory credential graph -- a recorded address is not a confirmed service area, license, or line of authority, and is not asserted to be specific to any requested product.`,
+    }));
+    const result = finish(
+      parsed,
+      results,
+      chosen.total,
+      started,
+      `Public verified agency directory near ${place} (separate from the regulatory credential graph)`,
+    );
+    result.provenance.sourceFamily = 'InsuranceTrustHub verified public agency directory';
+    result.provenance.geographyMeaning = `Recorded public-directory address near ${place}; not service territory`;
+    result.limitations = [
+      `${state} insurance-agency regulatory-credential bulk data has not been acquired for this extract -- this is not zero agencies, it is a research-source gap. These results are from the separate public verified directory near ${place} (recorded address, not credential jurisdiction, and not a confirmed service area).`,
+      ...result.limitations,
+    ];
+    result.coverageState = 'PARTIAL';
+    result.entityClass = 'agency';
+    return result;
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * Corrects the interpretation panel when a requested official line of authority is NOT actually
+ * established by the broader/fallback rows a caller is about to show (e.g. a Wave-1 national
+ * insurer cohort, which never carries any LOA). Without this, a query like "life insurance agents
+ * around Denver" could show its parsed "LOA / credential class: Life" line next to results that
+ * have nothing to do with Life authority -- the exact silent-mismatch danger this ticket exists to
+ * close. Replaces (never just appends to) any existing "LOA / credential class" line so the panel
+ * never shows two contradictory claims at once.
+ */
+function withLoaMismatchDisclosure(parsed: ParsedInsuranceAsk, loas: string[] | undefined): ParsedInsuranceAsk {
+  if (!loas?.length) return parsed;
+  return {
+    ...parsed,
+    interpretation: [
+      ...parsed.interpretation.filter((l) => l.label !== 'LOA / credential class'),
+      {
+        label: 'LOA / credential class',
+        value: `${loas.join(' + ')} -- requested, but NOT established for this broader result. Do not treat these rows as ${loas.join('/')}-qualified.`,
+      },
+    ],
+  };
 }
 
 async function listAgenciesOfficialLoa(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {

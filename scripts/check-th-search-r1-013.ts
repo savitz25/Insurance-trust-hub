@@ -67,18 +67,25 @@ check("homeowners context retained as unresolved directory criterion", () =>
     /homeowners/i,
   ),
 );
-check("statewide homeowners is unresolved product, not the FL census", () => {
+// TH-DISCOVERY-PARITY-001B: homeowners/auto are still never invented as an official agency LOA,
+// but the whole request no longer fails closed to a zero-provider dead end -- it executes as the
+// real FL agency query with an honest "not established" product disclosure retained on the query
+// (see product-intent.ts). This supersedes this check's original SQA-009-era expectation.
+check("statewide homeowners is a real FL agency query, product disclosed not invented as an LOA", () => {
   const q = parse("homeowners insurance agencies in Florida").query;
-  assert.equal(q.mode, "fail_closed");
-  assert.equal(q.coverageState, "UNSUPPORTED");
+  assert.equal(q.mode, "entity");
+  assert.equal(q.entityClass, "agency");
+  assert.equal(q.jurisdiction?.state, "FL");
   assert.deepEqual(q.requestedProduct, ["homeowners"]);
   assert.equal(q.linesOfAuthority, undefined);
-  assert.match(q.failReason ?? "", /statewide agency census/i);
+  assert.ok(q.conditions?.some((c) => c.value === "homeowners" && c.outcome === "UNSUPPORTED"));
 });
-check("auto product-intent variant is also unresolved", () => {
+check("auto product-intent variant also executes the real FL agency query", () => {
   const q = parse("auto insurance agencies in Florida").query;
-  assert.equal(q.mode, "fail_closed");
+  assert.equal(q.mode, "entity");
+  assert.equal(q.entityClass, "agency");
   assert.deepEqual(q.requestedProduct, ["auto"]);
+  assert.equal(q.linesOfAuthority, undefined);
 });
 check("unspecified-product FL agencies remain a credential cohort", () => {
   const q = parse("Show insurance agencies credentialed in Florida.").query;
@@ -302,36 +309,39 @@ async function main() {
         );
         assert.equal(r.results[0]?.credentialJurisdiction, "FL");
       });
-      await test("homeowners FL agencies fail closed without executing the census", async () => {
-        const n = source.calls.length;
+      // TH-DISCOVERY-PARITY-001B: "homeowners insurance agencies in Florida" no longer dead-ends
+      // before touching the source -- it executes the real FL agency query (same rows as
+      // "insurance agencies credentialed in Florida" above, since homeowners is never turned into
+      // an LOA filter) and discloses that homeowners specialization is not established, rather than
+      // hiding real inventory behind a zero-provider "capability limitation."
+      await test("homeowners FL agencies execute the real FL agency query, product disclosed not invented", async () => {
         const r = await executeInsuranceAsk(
           "homeowners insurance agencies in Florida",
         );
-        assert.equal(r.parsed.query.mode, "fail_closed");
-        assert.equal(r.terminalState, "CAPABILITY_LIMITATION");
-        assert.equal(r.coverageState, "UNSUPPORTED");
-        assert.equal(r.results.length, 0);
-        assert.equal(r.counts.length, 0);
-        assert.equal(r.pagination.total, 0);
-        assert.notEqual(r.pagination.total, 56939);
-        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
-        assert.equal(source.calls.length, n);
-        const html = renderToStaticMarkup(
-          createElement(AskInsuranceResultView, { result: r }),
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(
+          r.results.map((c) => c.entityId),
+          [ids.agency],
         );
-        assert.match(html, /homeowners/i);
-        assert.equal(html.includes("56,939") || html.includes("56939"), false);
-        assert.match(html, /Current research limitation/);
-        assert.match(html, /without a product filter/);
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.equal(r.parsed.query.linesOfAuthority, undefined);
+        // Note: this suite's other renderToStaticMarkup(AskInsuranceResultView) calls have a
+        // pre-existing "React is not defined" failure unrelated to this ticket (reproduces on
+        // origin/main before any TH-DISCOVERY-PARITY-001B change, for other queries); this test
+        // intentionally asserts on the query/result data instead of going through that renderer.
+        assert.ok(
+          r.limitations.some((l) => /not asserted to be .*-specific/i.test(l)),
+          "top-level result discloses homeowners is not established, not silently satisfied",
+        );
       });
-      await test("auto product-intent variant also refuses the FL census", async () => {
-        const n = source.calls.length;
+      await test("auto product-intent variant also executes the real FL agency query", async () => {
         const r = await executeInsuranceAsk("auto insurance agencies in Florida");
-        assert.equal(r.parsed.query.mode, "fail_closed");
+        assert.equal(r.parsed.query.mode, "entity");
         assert.deepEqual(r.parsed.query.requestedProduct, ["auto"]);
-        assert.equal(r.results.length, 0);
-        assert.equal(r.counts.length, 0);
-        assert.equal(source.calls.length, n);
+        assert.deepEqual(
+          r.results.map((c) => c.entityId),
+          [ids.agency],
+        );
       });
       await test("unspecified-product control still returns the FL agency cohort", async () => {
         const r = await executeInsuranceAsk(

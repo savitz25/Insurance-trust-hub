@@ -1,9 +1,17 @@
 import { interpretIdentityAndLocal, resolveFlCityLaunchCounty } from './research-intent';
 import {
-  applyUnresolvedProduct,
+  annotateUnestablishedProduct,
   detectRequestedConsumerProducts,
   productInterpretationLines,
 } from './product-intent';
+import { detectRequestedEntityClass } from './entity-class';
+import {
+  matchAmbiguousCity,
+  matchCityForState,
+  matchKnownCity,
+  resolveAllPlaceCodes,
+  titleCasePlace,
+} from './us-cities';
 import {
   ASK_DEFINITIONS,
   CREDENTIAL_STATES,
@@ -13,57 +21,22 @@ import {
   type ParsedInsuranceAsk,
 } from './contract';
 
-const STATE_NAMES: Record<string, string> = {
-  florida: 'FL',
-  texas: 'TX',
-  massachusetts: 'MA',
-  ohio: 'OH',
-  vermont: 'VT',
-  'new jersey': 'NJ',
-  california: 'CA',
-  washington: 'WA',
-  colorado: 'CO',
-  virginia: 'VA',
-  'new york': 'NY',
-  illinois: 'IL',
-  oregon: 'OR',
-  pennsylvania: 'PA',
-  fl: 'FL',
-  tx: 'TX',
-  ma: 'MA',
-  oh: 'OH',
-  vt: 'VT',
-  nj: 'NJ',
-  ca: 'CA',
-  wa: 'WA',
-  co: 'CO',
-  va: 'VA',
-  ny: 'NY',
-  il: 'IL',
-  or: 'OR',
-  pa: 'PA',
-};
-
+// TH-DISCOVERY-PARITY-001B: delegates to the shared, general place resolver (us-cities.ts) so this
+// module recognizes the exact same geography as research-intent.ts. The previous ~14-state
+// hardcoded name list here never matched a bare city ("Spokane", "Fort Worth", "Miami", "Boulder",
+// "Denver", "Trenton", "San Diego") or a trailing state code ("Trenton NJ") at all -- those queries
+// carried NO resolved jurisdiction and so could never be geography-filtered or honestly broadened.
+// PA-INS-001 added a local STATE_NAMES map here (florida/texas/.../pennsylvania -> code); it is
+// superseded by resolveAllPlaceCodes below, which resolves every US_STATES name generically
+// (including Pennsylvania), so it is dropped rather than reconciled.
 function detectStates(q: string): string[] {
-  const found: string[] = [];
-  const add = (code: string) => {
-    if (!found.includes(code)) found.push(code);
-  };
-  for (const [name, code] of Object.entries(STATE_NAMES)) {
-    if (name.length === 2) {
-      if (new RegExp(`\\bin ${name}\\b`, 'i').test(q)) add(code);
-    } else if (new RegExp(`\\b${name}\\b`, 'i').test(q)) add(code);
-  }
-  return found;
+  return resolveAllPlaceCodes(q);
 }
 
+// TH-DISCOVERY-PARITY-001B: delegates to the shared classifier (entity-class.ts); see that file's
+// doc comment. Adds "broker"/"provider" recognition and fixes divergence from research-intent.ts.
 function detectClass(q: string): InsuranceEntityClass | undefined {
-  if (/\b(legal insurers?|insurers?|carriers?|insurance compan(?:y|ies))\b/i.test(q) && !/\bagenc/i.test(q) && !/\bproducer|agent|person/i.test(q)) {
-    return 'insurer';
-  }
-  if (/\b(producers?|individual|persons?|agents?)\b/i.test(q) && !/\bagenc/i.test(q)) return 'person';
-  if (/\bagenc(y|ies)\b/i.test(q)) return 'agency';
-  return undefined;
+  return detectRequestedEntityClass(q);
 }
 
 function detectLoas(q: string): string[] {
@@ -581,17 +554,31 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
 
   if (
     /\b((?:licensed )?insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
-    /\b(colorado|virginia|new york|illinois|pennsylvania)\b/i.test(q) &&
-    !detectRequestedConsumerProducts(q).length
+    /\b(colorado|virginia|new york|illinois|pennsylvania)\b/i.test(q)
   ) {
     const state = detectStates(q)[0] ?? 'The requested state';
+    // TH-DISCOVERY-PARITY-001B / PA-INS-001 reconciliation: these five states have no acquired
+    // agency/producer bulk roster at all (a different grain than TH-DISCOVERY-PARITY-001B's
+    // product-disclosure fix, which only applies where real agency inventory exists to browse, e.g.
+    // FL). An unresolved consumer-product word (homeowners/auto/...) must not route these states
+    // into the generic entity/count builder -- there is no roster to return, so that would produce a
+    // silent, misleading zero instead of the honest NOT_ACQUIRED disclosure. The product is still
+    // named and given its own reason/failReason (distinct from the bare-agency reason) so a request
+    // like "homeowners insurance agencies Pennsylvania" is never indistinguishable from a plain
+    // "insurance agencies Pennsylvania" request.
+    const unresolvedProducts = detectRequestedConsumerProducts(q);
     const query = fail(
-      `${state} producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.`,
-      ['Find NPN 10391484.', 'What is an NPN?'],
+      unresolvedProducts.length
+        ? `${state} producer and agency bulk rosters were not acquired, so this extract cannot show a ${unresolvedProducts.join(' / ')}-qualified ${state} agency cohort. There is also no dedicated ${unresolvedProducts.join(' / ')} line of authority in this extract. Official verification remains search-only; search-only is not zero.`
+        : `${state} producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.`,
+      unresolvedProducts.length
+        ? ['Find NPN 10391484.', 'What is a line of authority?']
+        : ['Find NPN 10391484.', 'What is an NPN?'],
     );
     query.coverageState = 'NOT_ACQUIRED';
     query.entityClass = detectClass(q);
     query.jurisdiction = { state, meaning: geographyMeaning(q) };
+    if (unresolvedProducts.length) query.requestedProduct = unresolvedProducts;
     push('Coverage', `NOT_ACQUIRED — ${state} agency/producer roster`);
     return { raw: q, query, interpretation: lines };
   }
@@ -666,27 +653,36 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
-  const entityClass = detectClass(q);
+  let entityClass = detectClass(q);
   const states = detectStates(q);
   const loas = detectLoas(q);
   const geo = geographyMeaning(q);
   const unresolvedProducts = detectRequestedConsumerProducts(q);
-  // SQA-009: a product-qualified agency/producer cohort cannot execute as the unfiltered
-  // statewide census. Official LOA terms (Property/Casualty/Life/Health/Personal Lines) stay
-  // on the existing executable path; homeowners/auto/flood are not those terms.
-  if (
-    unresolvedProducts.length &&
-    (entityClass === 'agency' || entityClass === 'person' || /\bhow many\b|\bcount of\b/i.test(q))
-  ) {
-    const query = fail('', []);
-    query.entityClass = entityClass;
-    query.jurisdiction = states[0] ? { state: states[0], meaning: geo } : undefined;
-    applyUnresolvedProduct(query, unresolvedProducts);
-    for (const row of productInterpretationLines(unresolvedProducts)) push(row.label, row.value);
-    if (query.entityClass) push('Entity', entityLabel(query.entityClass));
-    if (query.jurisdiction) push(dimensionLabel(query.jurisdiction.meaning), query.jurisdiction.state);
-    return { raw: q, query, interpretation: lines };
-  }
+  // TH-DISCOVERY-PARITY-001B: when no unambiguous city matched but an explicit state was resolved
+  // (e.g. "Newark NJ", "Springfield IL"), that state removes the real-world ambiguity for an
+  // otherwise-ambiguous bare city name -- try it before giving up on a city and falling back to
+  // state-only geography. See us-cities.ts's matchCityForState doc comment.
+  //
+  // A resolved state MUST be checked first: matchKnownCity(q) matches ANY known city substring in
+  // the whole query with no regard for which state was already resolved (e.g. states[0]), so a
+  // query naming an explicit/city-derived state plus an unrelated place name from a DIFFERENT
+  // state's gazetteer entry (e.g. "insurance agent Charlotte County FL" -- Charlotte is only
+  // mapped to NC here) would attach that other state's city as requestedCity next to this query's
+  // actual (different) jurisdiction.state -- a false combined geography claim. Once a state is
+  // resolved, only a city consistent with THAT state (matchCityForState) may be attached;
+  // matchKnownCity is only reached when no state was resolved at all.
+  const cityMatch = states[0] ? matchCityForState(q, states[0]) : matchKnownCity(q);
+  const ambiguousCity = !states.length ? matchAmbiguousCity(q) : undefined;
+  const requestedCity = cityMatch ? titleCasePlace(cityMatch) : undefined;
+  // TH-DISCOVERY-PARITY-001B: SQA-009 used to dead-end the ENTIRE request to fail_closed the
+  // instant an unresolved consumer-product word appeared, even when a real, unambiguous
+  // provider-category (+ optional geography) request could otherwise be answered. That is exactly
+  // the "zero providers despite plausible inventory" bug this ticket exists to fix. A bare product
+  // mention with no other named category (e.g. "cheap car insurance") is still an implicit request
+  // for a provider, so it defaults to agency -- the class this source can honestly browse -- and
+  // falls through to the SAME entity/count builder every other request uses; product-status
+  // disclosure is attached below and again at execution time (execute.ts), never a false LOA claim.
+  if (unresolvedProducts.length && !entityClass) entityClass = 'agency';
 
   if (/\bhow many\b|\bcount of\b/i.test(q)) {
     if (!entityClass) {
@@ -697,13 +693,11 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
       push('Mode', 'fail_closed');
       return { raw: q, query, interpretation: lines };
     }
-    if (entityClass === 'person' && !/\bhow many\b/i.test(q)) {
-      /* keep */
-    }
     const query: InsuranceResearchQuery = {
       mode: 'count',
       entityClass,
       jurisdiction: states[0] ? { state: states[0], meaning: geo } : undefined,
+      requestedCity,
       linesOfAuthority: loas.length ? loas : undefined,
       loaMatch: loas.length > 1 ? 'all' : 'any',
       page: 1,
@@ -712,6 +706,10 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     push('Entity', entityLabel(entityClass));
     if (query.jurisdiction) push(dimensionLabel(query.jurisdiction.meaning), query.jurisdiction.state);
     push('Grain', grainLabel(entityClass));
+    if (unresolvedProducts.length) {
+      annotateUnestablishedProduct(query, unresolvedProducts);
+      for (const row of productInterpretationLines(unresolvedProducts, query.jurisdiction?.state)) push(row.label, row.value);
+    }
     return { raw: q, query, interpretation: lines };
   }
 
@@ -793,6 +791,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     mode: 'entity',
     entityClass: entityClass ?? 'agency',
     jurisdiction: states[0] ? { state: states[0], meaning: geo } : undefined,
+    requestedCity,
     domicile: geo === 'regulatory_domicile' ? states[0] : undefined,
     credentialStatus: 'current_source',
     linesOfAuthority: loas.length ? loas : undefined,
@@ -806,6 +805,17 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   push('Mode', 'entity');
   push('Entity', entityLabel(query.entityClass!));
   if (query.jurisdiction) push(dimensionLabel(query.jurisdiction.meaning), query.jurisdiction.state);
+  if (requestedCity) push('Requested city', requestedCity);
+  if (ambiguousCity) {
+    push(
+      'Geography',
+      `"${ambiguousCity}" matches more than one state in this source and is not attached to a single one -- showing broader results, not narrowed by an unstated state.`,
+    );
+  }
+  if (unresolvedProducts.length) {
+    annotateUnestablishedProduct(query, unresolvedProducts);
+    for (const row of productInterpretationLines(unresolvedProducts, query.jurisdiction?.state)) push(row.label, row.value);
+  }
   if (loas.length) {
     push('LOA / credential class', loas.join(' + '));
     if (states[0] === 'FL') {
