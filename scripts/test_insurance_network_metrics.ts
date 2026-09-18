@@ -97,9 +97,12 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     northCarolinaSnapshotFingerprint: 'a3abc66b4595a426fe6a3969b396f24cd9ecfaf3189411cf1a7ea0db9b2feab0',
     northCarolinaAsOf: '2026-09-18T03:20:41Z',
     northCarolinaLicensingActionRows: 2874,
+    ohioSnapshotFingerprint: '37736ead0d717acbaa8b3cfdcfa43f7b14b5dae985a158dadb6f6d545ebb25bc',
+    ohioAsOf: '2026-09-18',
+    ohioAuthorizedCompaniesDistinctNaic: 1738,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
-    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina'],
+    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio'],
     ...over,
   };
 }
@@ -226,7 +229,7 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     assert.equal(metricByKey(m, 'il_authorized_companies').value, null);
     assert.equal(metricByKey(m, 'il_authorized_companies').valueState, 'NOT_ACQUIRED');
     assert.match(metricByKey(m, 'il_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
-    assert.equal(metricByKey(m, 'published_state_intelligence_pages').value, 12);
+    assert.equal(metricByKey(m, 'published_state_intelligence_pages').value, 13);
     assert.equal(metricByKey(m, 'or_dfr_insurance_order_documents').value, 738);
     assert.equal(metricByKey(m, 'or_complaint_table_rows').value, 1309);
     assert.equal(metricByKey(m, 'or_authorized_companies').value, null);
@@ -250,10 +253,15 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
       () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania'] })),
       /North Carolina state intelligence path missing/
     );
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina'] })),
+      /Ohio state intelligence path missing/
+    );
     assert.equal(metricByKey(m, 'pa_licensed_companies_distinct_naic').value, 1722);
     assert.equal(metricByKey(m, 'pa_enforcement_action_documents').value, 3232);
     assert.equal(metricByKey(m, 'pa_complaint_table_rows').value, 595);
     assert.equal(metricByKey(m, 'nc_licensing_action_rows').value, 2874);
+    assert.equal(metricByKey(m, 'oh_authorized_companies_distinct_naic').value, 1738);
     assert.throws(
       () => computeInsuranceNetworkMetrics(baseInput({ illinoisDirectorsOrderObservations: 6185 })),
       /Illinois Director/

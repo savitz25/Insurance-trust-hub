@@ -269,6 +269,24 @@ const STATE_CARD_COPY: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-17" },
     ],
   },
+  {
+    state: "Ohio",
+    abbreviation: "OH",
+    href: "/ohio",
+    regulators: "Ohio Department of Insurance",
+    evidence: [
+      "ODI complete current authorized-company Excel (distinct NAIC)",
+      "Major Lines business-entity mailing lists by residence filter",
+      "Administrative Actions Journal (bounded; not comprehensive)",
+      "Agent / Agency Locator (search-only)",
+    ],
+    limitation:
+      "Authorized is not domestic. Agency LOA is the mailing-list filter, not product inventory. The Journal warns it is not comprehensive. Individual producer bulk remains search-only. Search-only is not zero.",
+    sourceClocks: [
+      { label: "Authorized-company file / mailing lists", sourceAsOf: "2026-09-18" },
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-18" },
+    ],
+  },
 ] as const;
 
 export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = STATE_CARD_COPY
@@ -329,6 +347,7 @@ const FAMILY_BY_KEY: Record<string, InsuranceHomeEvidenceFamily> = {
   pa_enforcement_action_documents: "REGULATORY_ENFORCEMENT",
   pa_complaint_table_rows: "COMPLAINTS",
   nc_licensing_action_rows: "REGULATORY_ENFORCEMENT",
+  oh_authorized_companies_distinct_naic: "ENTITY_IDENTITY",
   public_directory_listings: "PUBLIC_SURFACES",
   published_state_intelligence_pages: "PUBLIC_SURFACES",
   public_legal_insurer_wave1_profiles: "PUBLIC_SURFACES",
@@ -376,6 +395,7 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   pa_enforcement_action_documents: "/pennsylvania",
   pa_complaint_table_rows: "/pennsylvania",
   nc_licensing_action_rows: "/north-carolina",
+  oh_authorized_companies_distinct_naic: "/ohio",
 };
 
 function fromMetric(

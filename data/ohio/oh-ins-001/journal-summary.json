@@ -1,0 +1,207 @@
+{
+  "retrievedAt": "2026-09-18T16:13:26Z",
+  "source": "https://gateway.insurance.ohio.gov/UI/ODI.AdministrativeAction.Public.UI/Home/SearchJournalEntry",
+  "window": "2025-10-01 through 2026-09-18 (UI past-12-months)",
+  "completeness_warning_required": true,
+  "ce_noncompliance_excluded": true,
+  "OH_ODI_JOURNAL_STATUS": "BOUNDED_METADATA_CATALOG_INCOMPLETE_RETRIEVAL_WARNED",
+  "OH_ODI_ADMIN_ACTION_ROWS": 496,
+  "OH_ODI_ADMIN_ACTION_DISTINCT_DOCUMENT_IDS": 496,
+  "OH_ODI_ADMIN_ACTION_UNIQUE_MATTERS": null,
+  "name_cells": 496,
+  "distinct_name_cells": 0,
+  "months": [
+    {
+      "from": "10/01/2025",
+      "to": "10/31/2025",
+      "status": 200,
+      "html_bytes": 34806,
+      "rows": 34
+    },
+    {
+      "from": "11/01/2025",
+      "to": "11/30/2025",
+      "status": 200,
+      "html_bytes": 22860,
+      "rows": 16
+    },
+    {
+      "from": "12/01/2025",
+      "to": "12/31/2025",
+      "status": 200,
+      "html_bytes": 40840,
+      "rows": 43
+    },
+    {
+      "from": "01/01/2026",
+      "to": "01/31/2026",
+      "status": 200,
+      "html_bytes": 38822,
+      "rows": 40
+    },
+    {
+      "from": "02/01/2026",
+      "to": "02/28/2026",
+      "status": 200,
+      "html_bytes": 27486,
+      "rows": 23
+    },
+    {
+      "from": "03/01/2026",
+      "to": "03/31/2026",
+      "status": 200,
+      "html_bytes": 28209,
+      "rows": 24
+    },
+    {
+      "from": "04/01/2026",
+      "to": "04/30/2026",
+      "status": 200,
+      "html_bytes": 66438,
+      "rows": 72
+    },
+    {
+      "from": "05/01/2026",
+      "to": "05/31/2026",
+      "status": 200,
+      "html_bytes": 84577,
+      "rows": 67
+    },
+    {
+      "from": "06/01/2026",
+      "to": "06/30/2026",
+      "status": 200,
+      "html_bytes": 71884,
+      "rows": 55
+    },
+    {
+      "from": "07/01/2026",
+      "to": "07/31/2026",
+      "status": 200,
+      "html_bytes": 58072,
+      "rows": 42
+    },
+    {
+      "from": "08/01/2026",
+      "to": "08/31/2026",
+      "status": 200,
+      "html_bytes": 71610,
+      "rows": 54
+    },
+    {
+      "from": "09/01/2026",
+      "to": "09/18/2026",
+      "status": 200,
+      "html_bytes": 40974,
+      "rows": 26
+    }
+  ],
+  "type_slices_12mo": [
+    {
+      "type": "Order",
+      "status": 200,
+      "rows": 496,
+      "html_bytes": 452587
+    },
+    {
+      "type": "Notice",
+      "status": 200,
+      "rows": 496,
+      "html_bytes": 452587
+    },
+    {
+      "type": "Bulletin",
+      "status": 200,
+      "rows": 496,
+      "html_bytes": 452587
+    },
+    {
+      "type": "Rule",
+      "status": 200,
+      "rows": 496,
+      "html_bytes": 452587
+    },
+    {
+      "type": "Other",
+      "status": 200,
+      "rows": 496,
+      "html_bytes": 452587
+    }
+  ],
+  "sample": [
+    {
+      "cells": [
+        "",
+        "Brett",
+        "Housley",
+        "",
+        "10/31/2025",
+        "Order",
+        ""
+      ],
+      "document_id": "2720227",
+      "entry_number": null
+    },
+    {
+      "cells": [
+        "",
+        "Thomas",
+        "Parsons",
+        "",
+        "10/31/2025",
+        "Notice",
+        "21711580"
+      ],
+      "document_id": "2720228",
+      "entry_number": null
+    },
+    {
+      "cells": [
+        "",
+        "Miguel",
+        "Quiroz",
+        "",
+        "10/30/2025",
+        "Order",
+        "18318446"
+      ],
+      "document_id": "2720229",
+      "entry_number": null
+    },
+    {
+      "cells": [
+        "",
+        "Nina",
+        "Gillis",
+        "",
+        "10/30/2025",
+        "Order",
+        "17060479"
+      ],
+      "document_id": "2720230",
+      "entry_number": null
+    },
+    {
+      "cells": [
+        "",
+        "Cemal",
+        "Knight",
+        "",
+        "10/30/2025",
+        "Order",
+        "21380041"
+      ],
+      "document_id": "2720231",
+      "entry_number": null
+    }
+  ],
+  "table_headers_hint": [
+    "\n        <tr>\n            <th>Action",
+    "First Name",
+    "Last Name",
+    "Company Name",
+    "Execute Date",
+    "Document Type",
+    "Individual Or Org ID"
+  ]
+}

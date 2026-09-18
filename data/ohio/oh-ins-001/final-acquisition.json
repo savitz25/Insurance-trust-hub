@@ -1,0 +1,108 @@
+{
+  "journal": {
+    "OH_ODI_JOURNAL_STATUS": "BOUNDED_METADATA_CATALOG_INCOMPLETE_RETRIEVAL_WARNED",
+    "window": "2025-10-01 through 2026-09-18",
+    "OH_ODI_ADMIN_ACTION_ROWS": 496,
+    "OH_ODI_ADMIN_ACTION_DISTINCT_DOCUMENT_IDS": 496,
+    "OH_ODI_ADMIN_ACTION_UNIQUE_MATTERS": null,
+    "OH_ODI_AGENT_ACTION_ROWS": 425,
+    "OH_ODI_AGENCY_ACTION_ROWS": null,
+    "OH_ODI_COMPANY_ACTION_ROWS": null,
+    "OH_ODI_PERSON_NAME_ONLY_ROWS": 425,
+    "OH_ODI_COMPANY_NAME_ONLY_ROWS": 68,
+    "OH_ODI_PERSON_AND_COMPANY_NAME_ROWS": 3,
+    "OH_ODI_UNNAMED_ROWS": 0,
+    "OH_ODI_OTHER_ACTION_ROWS": 0,
+    "OH_ODI_EXACT_ID_ROWS": 487,
+    "OH_ODI_EXACT_PROFILE_ATTACHMENTS": 0,
+    "document_type_counts": {
+      "Order": 383,
+      "Notice": 113
+    },
+    "agency_vs_company_unsplit": "Journal Company Name is not a source-native agency vs legal-insurer class. Those grains stay unsplit.",
+    "sample": [
+      {
+        "document_id": "2761351",
+        "first": "Kamille",
+        "last": "Black",
+        "company": "",
+        "execute_date": "01/30/2026",
+        "document_type": "Order",
+        "org_id": "21206613"
+      },
+      {
+        "document_id": "2759402",
+        "first": "Stephanie",
+        "last": "Gabin",
+        "company": "",
+        "execute_date": "01/29/2026",
+        "document_type": "Order",
+        "org_id": "20819047"
+      },
+      {
+        "document_id": "2758602",
+        "first": "Ryan",
+        "last": "Jennison",
+        "company": "",
+        "execute_date": "01/28/2026",
+        "document_type": "Order",
+        "org_id": "19611264"
+      }
+    ]
+  },
+  "unions": {
+    "major_lines_be_resident_npn": 5648,
+    "major_lines_be_nonresident_npn": 18274,
+    "major_lines_be_union_npn": 23922,
+    "major_lines_be_overlap_npn": 0,
+    "life_be_resident_npn": 5102,
+    "life_be_nonresident_npn": 11204,
+    "life_be_union_npn": 16306,
+    "ah_be_resident_npn": 4910,
+    "ah_be_nonresident_npn": 11222,
+    "ah_be_union_npn": 16132,
+    "property_be_resident_npn": 3599,
+    "casualty_be_resident_npn": 3621,
+    "personal_be_resident_npn": 1219,
+    "individual_resident_major_lines_life_npn": 51972,
+    "note": "Residence filters are source-native. Union is reported separately from each filter. Do not add agency+agent."
+  },
+  "financial_report_names": {
+    "AnnualFinancial": {
+      "status": 500,
+      "type": "text/html; charset=utf-8"
+    },
+    "AnnualFinancialData": {
+      "status": 500,
+      "type": "text/html; charset=utf-8"
+    },
+    "FinancialData": {
+      "status": 500,
+      "type": "text/html; charset=utf-8"
+    },
+    "FinData": {
+      "status": 500,
+      "type": "text/html; charset=utf-8"
+    },
+    "AnnualStatement": {
+      "status": 500,
+      "type": "text/html; charset=utf-8"
+    },
+    "Financial": {
+      "status": 500,
+      "type": "text/html; charset=utf-8"
+    },
+    "AuthList": {
+      "status": 200,
+      "type": "application/vnd.ms-excel",
+      "disp": "attachment; filename=AuthList091820261216.xls",
+      "head": "\u00d0\u00cf\u0011\u00e0\u00a1\u00b1\u001a\u00e1\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000>\u0000\u0003\u0000\u00fe\u00ff\t\u0000\u0006\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+    },
+    "CertifiedReinsurersXLS": {
+      "status": 200,
+      "type": "application/vnd.ms-excel",
+      "disp": "attachment; filename=CertifiedReinsurersXLS091820261216.xls",
+      "head": "\u00d0\u00cf\u0011\u00e0\u00a1\u00b1\u001a\u00e1\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000>\u0000\u0003\u0000\u00fe\u00ff\t\u0000\u0006\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+    }
+  }
+}

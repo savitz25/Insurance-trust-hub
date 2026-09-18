@@ -1,0 +1,334 @@
+{
+  "retrievedAt": "2026-09-18T16:14:12Z",
+  "mails": [
+    {
+      "entity": "Business Entity",
+      "residence": "2",
+      "license": [
+        "2"
+      ],
+      "loa": [
+        "7"
+      ],
+      "status": 200,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=7&residenceTypeId=2",
+      "valid": true,
+      "file_status": 200,
+      "file_bytes": 1173309,
+      "census": {
+        "rows": 11207,
+        "distinct_npn": 11204,
+        "missing_npn": 2,
+        "fields": [
+          "org_name",
+          "address_line1",
+          "address_line2",
+          "address_line3",
+          "city",
+          "state_province_name",
+          "postal_code",
+          "originalIssueDate",
+          "EXPIRATIONDATE",
+          "NATIONALPROVIDERNUMBER"
+        ],
+        "bytes": 1173309,
+        "sha256": "940998ff88f7b407d044e8a4112834d820c9b5eca0590ba7a71aeffe8edbed1c",
+        "sample": [
+          {
+            "org_name": "&PARTNERS, LLC",
+            "address_line1": "40 BURTON HILLS BLVD, STE 350",
+            "address_line2": "",
+            "address_line3": "",
+            "city": "NASHVILLE",
+            "state_province_name": "TN",
+            "postal_code": "37215",
+            "originalIssueDate": "3/19/2021",
+            "EXPIRATIONDATE": "9/30/2027",
+            "NATIONALPROVIDERNUMBER": "7077117"
+          }
+        ]
+      },
+      "saved": "mail-be-nr-life.csv"
+    },
+    {
+      "entity": "Business Entity",
+      "residence": "2",
+      "license": [
+        "2"
+      ],
+      "loa": [
+        "1"
+      ],
+      "status": 200,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=BusinessEntityMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=1&residenceTypeId=2",
+      "valid": true,
+      "file_status": 200,
+      "file_bytes": 1178867,
+      "census": {
+        "rows": 11225,
+        "distinct_npn": 11222,
+        "missing_npn": 2,
+        "fields": [
+          "org_name",
+          "address_line1",
+          "address_line2",
+          "address_line3",
+          "city",
+          "state_province_name",
+          "postal_code",
+          "originalIssueDate",
+          "EXPIRATIONDATE",
+          "NATIONALPROVIDERNUMBER"
+        ],
+        "bytes": 1178867,
+        "sha256": "9c843f0c47b3dd3d7aa2751d5f07903d9a5772889cddc9136d0746ff6f99135f",
+        "sample": [
+          {
+            "org_name": "\" AMERICAN LEGACY LIFE COMPANY LLC\"",
+            "address_line1": "14224 CERVANTES AVE",
+            "address_line2": "",
+            "address_line3": "",
+            "city": "GERMANTOWN",
+            "state_province_name": "MD",
+            "postal_code": "20874",
+            "originalIssueDate": "9/15/2026",
+            "EXPIRATIONDATE": "9/30/2027",
+            "NATIONALPROVIDERNUMBER": "21777430"
+          }
+        ]
+      },
+      "saved": "mail-be-nr-ah.csv"
+    },
+    {
+      "entity": "Individual",
+      "residence": "1",
+      "license": [
+        "2"
+      ],
+      "loa": [
+        "7"
+      ],
+      "status": 200,
+      "redirection": "/UI/ODI.Agent.Public.UI/Reports.aspx?reportName=IndividualMailingList&issueStartDate=1/1/0001&issueEndDate=9/18/2026&licenseTypeIds=2&lineOfAuthTypeIds=7&residenceTypeId=1",
+      "valid": true,
+      "file_status": 200,
+      "file_bytes": 4761513,
+      "census": {
+        "rows": 52256,
+        "distinct_npn": 51972,
+        "missing_npn": 0,
+        "fields": [
+          "person_fname",
+          "PERSON_MNAME",
+          "person_lname",
+          "person_suffix_type_name",
+          "address_line1",
+          "address_line2",
+          "address_line3",
+          "city",
+          "state_province_name",
+          "postal_code",
+          "originalIssueDate",
+          "EXPIRATIONDATE",
+          "NATIONALPROVIDERNUMBER"
+        ],
+        "bytes": 4761513,
+        "sha256": "9ade968a9d8001d3fc86b4b122e7527fc31c0dc8c3219a5bf334ee613bc3a45d",
+        "sample": [
+          {
+            "person_fname": "THOMAS",
+            "PERSON_MNAME": "EDWARD",
+            "person_lname": "AAKHUS",
+            "person_suffix_type_name": "",
+            "address_line1": "5722 TYNECASTLE LOOP",
+            "address_line2": "",
+            "address_line3": "",
+            "city": "DUBLIN",
+            "state_province_name": "OH",
+            "postal_code": "430166042",
+            "originalIssueDate": "1/12/2011",
+            "EXPIRATIONDATE": "4/30/2027",
+            "NATIONALPROVIDERNUMBER": "15758730"
+          }
+        ]
+      },
+      "saved": "mail-ind-res-life.csv"
+    }
+  ],
+  "probes": {
+    "company_naic_10399": {
+      "status": 200,
+      "bytes": 330,
+      "type": "application/json; charset=utf-8",
+      "preview": "{\"searchResults\":[{\"Address\":\"Box 157  \",\"City\":\"Woodville\",\"CompanyName\":\"1859 MUTUAL INSURANCE\",\"CompanyType\":\"Mutual Protective - Property\",\"DomicileState\":\"OH\",\"NAICNumber\":10399,\"PhoneNumber\":\"4198492521\",\"State\":\"OH\",\"ZipCode\":\"43469\",\"IdentityTypeList\":null,\"ReinsuranceRating\":null,\"EffectiveDate\":\"0001-01-01T00:00:00\"}]}"
+    },
+    "company_name_state": {
+      "status": 200,
+      "bytes": 1366,
+      "type": "application/json; charset=utf-8",
+      "preview": "{\"searchResults\":[{\"Address\":\"5400 Lyndon B Johnson Freeway, Suite 400  \",\"City\":\"Dallas\",\"CompanyName\":\"HALLMARK NATIONAL INSURANCE COMPANY\",\"CompanyType\":\"Property and Casualty\",\"DomicileState\":\"AZ\",\"NAICNumber\":19530,\"PhoneNumber\":\"817-348-1600\",\"State\":\"TX\",\"ZipCode\":\"75240\",\"IdentityTypeList\":null,\"ReinsuranceRating\":null,\"EffectiveDate\":\"0001-01-01T00:00:00\"},{\"Address\":\"518 E Broad St  \",\"City\":\"Columbus\",\"CompanyName\":\"STATE AUTO INSURANCE COMPANY OF OHIO\",\"CompanyType\":\"Property and Cas"
+    },
+    "fr_get_empty": {
+      "status": 404,
+      "bytes": 152,
+      "type": "application/json; charset=utf-8",
+      "preview": "{\"Message\":\"No HTTP resource was found that matches the request URI 'https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/api/FrStatement/Search'.\"}"
+    },
+    "fr_get_year": {
+      "status": 200,
+      "bytes": 93,
+      "type": "application/json; charset=utf-8",
+      "preview": "{\"validationMessages\":[\"Unable to perform company search - no search parameters specified.\"]}"
+    },
+    "fr_get_naic": {
+      "status": 404,
+      "bytes": 165,
+      "type": "application/json; charset=utf-8",
+      "preview": "{\"Message\":\"No HTTP resource was found that matches the request URI 'https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/api/FrStatement/Search?NaicId=10399'.\"}"
+    },
+    "fr_get_year_naic": {
+      "status": 200,
+      "bytes": 330,
+      "type": "application/json; charset=utf-8",
+      "preview": "{\"searchResults\":[{\"Address\":\"Box 157  \",\"City\":\"Woodville\",\"CompanyName\":\"1859 MUTUAL INSURANCE\",\"CompanyType\":\"Mutual Protective - Property\",\"DomicileState\":\"OH\",\"NAICNumber\":10399,\"PhoneNumber\":\"4198492521\",\"State\":\"OH\",\"ZipCode\":\"43469\",\"IdentityTypeList\":null,\"ReinsuranceRating\":null,\"EffectiveDate\":\"0001-01-01T00:00:00\"}]}"
+    }
+  },
+  "certified_reinsurers": {
+    "headers": [
+      "Company Name",
+      "Reinsurance Rating",
+      "Rating Effective Date",
+      "Address Line 1",
+      "Address Line 2",
+      "City",
+      "State/Province",
+      "Zip Code",
+      "Phone",
+      "Toll Free",
+      "Domicile"
+    ],
+    "rows": 19,
+    "sample": [
+      {
+        "Company Name": "Arch Reinsurance Ltd.",
+        "Reinsurance Rating": "Secure-3 (20% Collateral)",
+        "Rating Effective Date": "42186.0",
+        "Address Line 1": "Eversheds Sutherland (US) LLP",
+        "Address Line 2": "The Grace Building, 40th Floor, 1114 Avenue of the Americas",
+        "City": "New York",
+        "State/Province": "NY",
+        "Zip Code": "10036-7703",
+        "Phone": "212-389-5002",
+        "Toll Free": "",
+        "Domicile": "MO"
+      },
+      {
+        "Company Name": "Athene Life Re Ltd.",
+        "Reinsurance Rating": "Secure-3 (20% Collateral)",
+        "Rating Effective Date": "44109.0",
+        "Address Line 1": "",
+        "Address Line 2": "",
+        "City": "",
+        "State/Province": "",
+        "Zip Code": "",
+        "Phone": "441-279-8400",
+        "Toll Free": "",
+        "Domicile": "DE"
+      }
+    ],
+    "filename": "CertifiedReinsurersXLS091820261209.xls"
+  },
+  "pages": {
+    "home": {
+      "url": "https://insurance.ohio.gov/",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "companies": {
+      "url": "https://insurance.ohio.gov/companies",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "agents": {
+      "url": "https://insurance.ohio.gov/agents-and-agencies",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "consumers": {
+      "url": "https://insurance.ohio.gov/consumers",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "surplus": {
+      "url": "https://insurance.ohio.gov/companies/surplus-lines",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "receivership": {
+      "url": "https://insurance.ohio.gov/companies/receiverships",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "liq": {
+      "url": "https://insurance.ohio.gov/wps/portal/gov/odi/companies/liquidation",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "complaints": {
+      "url": "https://insurance.ohio.gov/consumers/file-a-complaint",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "exams": {
+      "url": "https://insurance.ohio.gov/companies/financial-regulation",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "market": {
+      "url": "https://insurance.ohio.gov/companies/market-conduct",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "financial_data": {
+      "url": "https://insurance.ohio.gov/companies/financial-data",
+      "status": 404,
+      "bytes": 5271,
+      "title": "404 Error Page",
+      "type": "text/html"
+    },
+    "annual_financial": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/FrStatement",
+      "status": 404,
+      "bytes": 1965,
+      "title": "The resource cannot be found.",
+      "type": "text/html; charset=utf-8"
+    },
+    "fr_ui": {
+      "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/Financial",
+      "status": 404,
+      "bytes": 1963,
+      "title": "The resource cannot be found.",
+      "type": "text/html; charset=utf-8"
+    }
+  }
+}

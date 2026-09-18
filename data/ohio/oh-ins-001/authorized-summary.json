@@ -1,0 +1,120 @@
+{
+  "retrievedAt": "2026-09-18T16:05:22Z",
+  "authList": {
+    "url": "https://gateway.insurance.ohio.gov/UI/ODI.Risk.Public.UI/Reports/ViewReport?reportName=AuthList",
+    "filename": "attachment; filename=AuthList091820261205.xls",
+    "bytes": 450496,
+    "sha256": "43734832910c15ea841899fc75b654e4e81184eb8c72097676ad2af296e5eb75",
+    "sheet": "AuthList",
+    "header_row": 0,
+    "headers": [
+      "Type",
+      "NAIC #",
+      "Company Name",
+      "Address Line 1",
+      "Address Line 2",
+      "City",
+      "State/Province",
+      "Zip Code",
+      "Phone",
+      "Toll Free",
+      "Domicile"
+    ],
+    "OH_AUTHORIZED_COMPANY_ROWS": 1738,
+    "OH_AUTHORIZED_DISTINCT_NAIC_CODES": 1738,
+    "OH_AUTHORIZED_ROWS_MISSING_NAIC": 0,
+    "OH_AUTHORIZED_DUPLICATE_NAIC_ROWS": 0,
+    "OH_DOMESTIC_COMPANY_ROWS": 237,
+    "OH_DOMESTIC_DISTINCT_NAIC_CODES": 237,
+    "sample": [
+      {
+        "name": "1859 MUTUAL INSURANCE",
+        "naic": "10399",
+        "domicile": "OH",
+        "type": "MPP"
+      },
+      {
+        "name": "1891 FINANCIAL LIFE",
+        "naic": "57568",
+        "domicile": "IL",
+        "type": "FR"
+      },
+      {
+        "name": "1st CHOICE ADVANTAGE INSURANCE COMPANY INC",
+        "naic": "10750",
+        "domicile": "PA",
+        "type": "PC"
+      },
+      {
+        "name": "21ST CENTURY CASUALTY COMPANY",
+        "naic": "36404",
+        "domicile": "CA",
+        "type": "PC"
+      },
+      {
+        "name": "21ST CENTURY CENTENNIAL INSURANCE COMPANY",
+        "naic": "34789",
+        "domicile": "CA",
+        "type": "PC"
+      }
+    ]
+  },
+  "mailingList": {
+    "url": "https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/MailingList.mvc",
+    "has_all_company": true,
+    "has_loa": true,
+    "options": [
+      "Business Entity",
+      "Individual",
+      "Certified",
+      "Non-Resident",
+      "Resident",
+      "Limited Lines",
+      "Limited Lines Portable Electronics",
+      "Limited Lines Self-Service Storage",
+      "Major Lines",
+      "Managing General Agent",
+      "Navigator",
+      "Public Insurance Adjuster",
+      "Public Insurance Adjuster Agent",
+      "Reinsurance Intermediary Broker",
+      "Reinsurance Intermediary Manager",
+      "Surety Bail Bond",
+      "Surplus Lines",
+      "Temporary",
+      "Third Party Administrator",
+      "Title",
+      "Title Insurance Marketing Rep",
+      "Viatical Settlement Broker",
+      "Accident &amp; Health",
+      "Auto Rental",
+      "Casualty",
+      "Credit",
+      "Crop",
+      "Funeral",
+      "Life",
+      "Limited Lines Self-Service Storage",
+      "Managing General Agent",
+      "Navigator",
+      "PE Major (Eleven or more locations)",
+      "PE Minor (Ten or less locations)",
+      "Personal",
+      "Property",
+      "Public Insurance Adjuster",
+      "Public Insurance Adjuster Agent",
+      "Reciprocal",
+      "Reinsurance Intermediary Broker",
+      "Reinsurance Intermediary Manager",
+      "Surety Bail Bond",
+      "Surplus Lines",
+      "Temporary",
+      "Third Party Administrator",
+      "Title",
+      "Title Insurance Marketing Rep.",
+      "Travel",
+      "Variable",
+      "Viatical Settlement Broker"
+    ],
+    "company_name_required_for_single": true
+  }
+}
