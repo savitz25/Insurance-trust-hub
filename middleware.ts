@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
+import { normalizedPublishedStatePath } from '@/lib/seo/published-state-path';
 
 /**
  * Paths that belong to MoveTrustHub / LenderTrustHub — never serve on this host.
@@ -34,6 +35,12 @@ function isMoveOnlyPath(pathname: string): boolean {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const statePath = normalizedPublishedStatePath(pathname);
+  if (statePath) {
+    const url = request.nextUrl.clone();
+    url.pathname = statePath;
+    return NextResponse.redirect(url, 308);
+  }
 
   if (isMoveOnlyPath(pathname)) {
     const isLender = pathname === '/lender' || pathname.startsWith('/lender/');
