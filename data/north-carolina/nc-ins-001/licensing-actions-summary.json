@@ -1,0 +1,25 @@
+{
+  "source": "https://www.ncdoi.gov/licaction",
+  "retrieved_at": "2026-09-18T03:20:41Z",
+  "document_rows": 2874,
+  "distinct_dockets": 404,
+  "unique_matters": 404,
+  "exact_npn_rows": 2398,
+  "rows_without_exact_id": 444,
+  "by_class": {
+    "insurance_producer": 1717,
+    "public_adjuster": 40,
+    "other": 83,
+    "business_entity": 255,
+    "bail_bond": 559,
+    "collection_agency": 149,
+    "insurance_company_notice": 25,
+    "ra_license": 14,
+    "company_adjuster": 32
+  },
+  "producer_rows": 1717,
+  "business_entity_rows": 255,
+  "adjuster_rows": 72,
+  "other_rows": 830,
+  "pages": 116
+}

@@ -1,0 +1,465 @@
+WORKERS' COMPENSATION BUSINESS 
+FOR THE YEAR ENDED DECEMBER 31, 2025 
+Year Line of Business NAIC 
+Company 
+Code 
+Company Name Business Type Business 
+Sub Type 
+Code 
+Company  
+Type 
+Company 
+Sub Type 
+Code 
+Statement  
+Type  
+Code 
+Group Name Licensed  
+in NC 
+State of 
+Domicile 
+ Direct 
+Premiums 
+Written  
+ Direct 
+Premiums 
+Earned  
+ Direct 
+Losses 
+Paid  
+ Direct 
+Losses 
+Incurred  
+Market 
+Share % 
+ Cumulative 
+Market 
+Share %  
+2025 16. Workers' compensation 16862 1842 Ins Co Property and Casualty N Stock None P Harford Grp Licensed MD 51,654 65,627 35,401 138,477 0.003% 0.003% 
+2025 16. Workers' compensation 20796 21st Century Premier Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed PA 0 0 0 -43 0.000% 0.003% 
+2025 16. Workers' compensation 31325 Acadia Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 362,938 352,417 313,279 -217,623 0.024% 0.028% 
+2025 16. Workers' compensation 12304 Accident Fund Gen Ins Co Property and Casualty N Stock None P Bcbs Of Mi Grp Licensed MI 26,214,913 28,194,133 11,662,495 9,884,655 1.741% 1.769% 
+2025 16. Workers' compensation 10166 Accident Fund Ins Co Of Amer Property and Casualty N Stock None P Bcbs Of Mi Grp Licensed MI 41,520,908 41,675,769 30,414,978 38,449,308 2.758% 4.527% 
+2025 16. Workers' compensation 12305 Accident Fund Natl Ins Co Property and Casualty N Stock None P Bcbs Of Mi Grp Licensed MI 10,101,833 10,365,832 7,347,388 9,477,522 0.671% 5.198% 
+2025 16. Workers' compensation 26379 Accredited Surety & Cas Co Inc Property and Casualty N Stock None P Accredited Ins Holdings Grp Licensed FL 1,662,415 2,481,296 2,388,300 1,720,897 0.110% 5.308% 
+2025 16. Workers' compensation 22667 Ace Amer Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 16,156,092 15,700,237 8,216,038 6,028,268 1.073% 6.382% 
+2025 16. Workers' compensation 20702 Ace Fire Underwriters Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 65,472 64,570 171 6,266 0.004% 6.386% 
+2025 16. Workers' compensation 20699 Ace Prop & Cas Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 90,237 48,859 218,134 -263,204 0.006% 6.392% 
+2025 16. Workers' compensation 19984 Acig Ins Co Property and Casualty N Stock None P American Contractors Ins Grp Licensed IL 1,532,293 1,532,293 704,663 867,781 0.102% 6.494% 
+2025 16. Workers' compensation 10014 Affiliated Fm Ins Co Property and Casualty N Stock None P Fm Grp Licensed RI 0 0 0 -7 0.000% 6.494% 
+2025 16. Workers' compensation 10389 Agent Alliance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed AL 0 0 57,048 -76,133 0.000% 6.494% 
+2025 16. Workers' compensation 40258 Aig Assur Co Property and Casualty N Stock None P American Intl Grp Licensed IL -6,525 -6,525 192,204 -124,866 0.000% 6.493% 
+2025 16. Workers' compensation 19402 Aig Prop Cas Co Property and Casualty N Stock None P American Intl Grp Licensed IL -947 -2,541 38,710 348,297 0.000% 6.493% 
+2025 16. Workers' compensation 19399 Aiu Ins Co Property and Casualty N Stock None P American Intl Grp Licensed NY 10,243,440 10,395,531 959,200 1,274,779 0.680% 7.174% 
+2025 16. Workers' compensation 20222 All Amer Ins Co Property and Casualty N Stock None P Central Mut Ins Co Grp Licensed OH 232,258 220,003 123,767 216,581 0.015% 7.189% 
+2025 16. Workers' compensation 35300 Allianz Global Risks Us Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed IL 0 0 0 -38,231 0.000% 7.189% 
+2025 16. Workers' compensation 11242 Allied Eastern Ind Co Property and Casualty N Stock None P Proassurance Corp Grp Licensed PA 15,600,478 15,062,706 5,746,564 6,486,444 1.036% 8.225% 
+2025 16. Workers' compensation 42579 Allied Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 189,754 189,622 12,799 19,823 0.013% 8.238% 
+2025 16. Workers' compensation 10212 Allmerica Fin Alliance Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 2,961,545 2,879,180 399,441 492,046 0.197% 8.435% 
+2025 16. Workers' compensation 41840 Allmerica Fin Benefit Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed MI 4,547,628 4,308,008 1,677,567 2,108,055 0.302% 8.737% 
+2025 16. Workers' compensation 19232 Allstate Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 38,211 3,009 0.000% 8.737% 
+2025 16. Workers' compensation 19100 Amco Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA -12,922 36,750 213 -117,421 -0.001% 8.736% 
+2025 16. Workers' compensation 19720 American Alt Ins Corp Property and Casualty N Stock None P Munich Re Grp Licensed DE 0 0 4,849 272,759 0.000% 8.736% 
+2025 16. Workers' compensation 21849 American Automobile Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed MO 1,290,901 1,564,654 1,299,045 71,866 0.086% 8.822% 
+2025 16. Workers' compensation 11240 American Builders Ins Co Property and Casualty N Stock None P Builders Ins Grp Licensed DE 2,618,128 1,887,228 179,458 413,727 0.174% 8.996% 
+2025 16. Workers' compensation 20427 American Cas Co Of Reading Pa Property and Casualty N Stock None P Cna Ins Grp Licensed PA 9,558,792 8,631,226 1,617,720 2,190,299 0.635% 9.631% 
+2025 16. Workers' compensation 45934 American Compensation Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed MN 88,584 -15,350 94,918 -13,957 0.006% 9.636% 
+2025 16. Workers' compensation 19690 American Economy Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 0 0 0 -3,995 0.000% 9.636% 
+2025 16. Workers' compensation 23450 American Family Home Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed FL -692 -703 0 -3,434 0.000% 9.636% 
+2025 16. Workers' compensation 24066 American Fire & Cas Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 149,518 194,442 235,660 -163,928 0.010% 9.646% 
+2025 16. Workers' compensation 26247 American Guar & Liab Ins Property and Casualty N Stock None P Zurich Ins Grp Licensed NY 1,693,577 1,568,247 409,441 639,321 0.112% 9.759% 
+2025 16. Workers' compensation 19380 American Home Assur Co Property and Casualty N Stock None P American Intl Grp Licensed NY 46,527 25,887 158,004 36,386 0.003% 9.762% 
+2025 16. Workers' compensation 31895 American Interstate Ins Co Property and Casualty N Stock None P Amerisafe Grp Licensed NE 10,248,122 10,986,112 6,620,546 2,424,406 0.681% 10.443% 
+2025 16. Workers' compensation 12228 American Interstate Ins Co Of Tx Property and Casualty N Stock None P Amerisafe Grp Licensed TX 2,567,580 2,272,527 879,298 1,581,067 0.171% 10.613% 
+2025 16. Workers' compensation 12200 American Liberty Ins Co Property and Casualty N Stock None P Benchmark Holding Grp Licensed UT 64,328 54,781 9,782 75,731 0.004% 10.618% 
+2025 16. Workers' compensation 23469 American Modern Home Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed OH 0 0 0 -880 0.000% 10.618% 
+2025 16. Workers' compensation 19992 American Select Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 52,181 61,410 89,809 47,914 0.003% 10.621% 
+2025 16. Workers' compensation 19704 American States Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 0 0 -4 -85,218 0.000% 10.621% 
+2025 16. Workers' compensation 40142 American Zurich Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed IL 15,942,872 16,777,379 7,785,129 3,576,078 1.059% 11.680% 
+2025 16. Workers' compensation 19488 Amerisure Ins Co Property and Casualty N Stock None P Amerisure Co Grp Licensed MI 3,410,567 3,069,674 2,483,126 774,894 0.227% 11.907% 
+2025 16. Workers' compensation 23396 Amerisure Mut Ins Co Property and Casualty N Mutual None P Amerisure Co Grp Licensed MI 3,832,028 3,942,651 1,424,736 356,398 0.255% 12.161% 
+2025 16. Workers' compensation 11050 Amerisure Partners Ins Co Property and Casualty N Stock None P Amerisure Co Grp Licensed MI 636,266 692,445 163,610 -52,881 0.042% 12.203% 
+2025 16. Workers' compensation 16459 Amfed Advantage Ins Co Property and Casualty N Stock None P Ascot Ins Us Grp Licensed MS 171,211 142,607 140,326 -107,648 0.011% 12.215% 
+2025 16. Workers' compensation 11963 Amfed Cas Ins Co Property and Casualty N Stock None P Ascot Ins Us Grp Licensed MS 8,436,344 8,897,600 1,865,922 2,673,354 0.560% 12.775% 
+2025 16. Workers' compensation 11208 Amfed Natl Ins Co Property and Casualty N Stock None P Ascot Ins Us Grp Licensed MS 1,766,513 1,983,096 501,207 1,311,528 0.117% 12.893% 
+2025 16. Workers' compensation 42390 Amguard Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 17,119,530 17,214,326 6,431,396 5,707,172 1.137% 14.030% 
+2025 16. Workers' compensation 15954 Amtrust Ins Co Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed DE 1,665,251 1,051,201 220,501 348,652 0.111% 14.140% 
+2025 16. Workers' compensation 10984 Ansur Amer Ins Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 65,690 63,916 410,734 -9,720 0.004% 14.145% 
+2025 16. Workers' compensation 30830 Arch Ind Ins Co Property and Casualty N Stock None P Arch Ins Grp Licensed MO 4,859,851 4,670,731 -362,476 700,953 0.323% 14.468% 
+2025 16. Workers' compensation 11150 Arch Ins Co Property and Casualty N Stock None P Arch Ins Grp Licensed MO 14,863,527 14,845,472 6,550,039 6,654,619 0.987% 15.455% 
+2025 16. Workers' compensation 10946 Arch Prop Cas Ins Co Property and Casualty N Stock None P Arch Ins Grp Licensed MO 4,570 16,073 37,500 40,653 0.000% 15.455% 
+2025 16. Workers' compensation 19801 Argonaut Ins Co Property and Casualty N Stock None P Brookfield Wealth Solutions Grp Licensed NE 2,315,925 2,303,618 886,446 1,105,220 0.154% 15.609% 
+2025 16. Workers' compensation 19828 Argonaut Midwest Ins Co Property and Casualty N Stock None P Brookfield Wealth Solutions Grp Licensed NE 48,601 48,026 338,616 -149,437 0.003% 15.612% 
+2025 16. Workers' compensation 23752 Ascot Ins Co Property and Casualty N Stock None P Ascot Ins Us Grp Licensed CO 3,625,205 4,266,182 852,203 1,119,193 0.241% 15.853% 
+2025 16. Workers' compensation 27154 Atlantic Specialty Ins Co Property and Casualty N Stock None P Intact Financial Grp Licensed NY 227,334 236,133 781 62,194 0.015% 15.868% 
+2025 16. Workers' compensation 22586 Atlantic States Ins Co Property and Casualty N Stock None P Donegal Grp Licensed PA 997,371 1,030,645 249,559 -152,878 0.066% 15.934% 
+2025 16. Workers' compensation 18988 Auto Owners Ins Co Property and Casualty N Mutual None P Auto Owners Grp Licensed MI 4,239,894 4,425,499 3,384,712 14,676,988 0.282% 16.216% 
+2025 16. Workers' compensation 19062 Automobile Ins Co Of Hartford Ct Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 32,238 -3,637 0.000% 16.216% 
+2025 16. Workers' compensation 18279 Bankers Standard Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 3,357,523 3,289,176 635,245 1,236,084 0.223% 16.439% 
+2025 16. Workers' compensation 14402 Bearing Midwest Cas Co Property and Casualty N Stock None P Midwest Builders Cas Grp Licensed KS 323,919 266,695 55,875 190,576 0.022% 16.461% 
+2025 16. Workers' compensation 41394 Benchmark Ins Co Property and Casualty N Stock None P Benchmark Holding Grp Licensed KS 7,319,604 7,219,523 3,223,261 2,122,342 0.486% 16.947% 
+2025 16. Workers' compensation 15911 Berkley Cas Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 4,332,710 4,908,967 2,593,863 3,000,021 0.288% 17.235% 
+2025 16. Workers' compensation 32603 Berkley Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed DE 0 0 0 777 0.000% 17.235% 
+2025 16. Workers' compensation 38911 Berkley Natl Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 450,163 432,126 673,536 193,267 0.030% 17.264% 
+2025 16. Workers' compensation 29580 Berkley Regional Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 465,316 529,925 442,642 619,895 0.031% 17.295% 
+2025 16. Workers' compensation 10391 Berkshire Hathaway Direct Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 5,834,058 6,023,107 3,027,495 3,316,295 0.388% 17.683% 
+2025 16. Workers' compensation 20044 Berkshire Hathaway Homestate Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 4,591,824 5,487,269 5,070,877 5,438,392 0.305% 17.988% 
+2025 16. Workers' compensation 20095 Bitco Gen Ins Corp Property and Casualty N Stock None P Old Republic Grp Licensed IA 1,920,749 2,009,837 1,486,678 673,992 0.128% 18.116% 
+2025 16. Workers' compensation 20109 Bitco Natl Ins Co Property and Casualty N Stock None P Old Republic Grp Licensed IA 954,851 951,315 311,447 -509,296 0.063% 18.179% 
+2025 16. Workers' compensation 12311 Bloomington Compensation Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed MN 152,523 219,977 72,780 109,781 0.010% 18.189% 
+2025 16. Workers' compensation 12372 Brickstreet Mut Ins Co Property and Casualty N Mutual None P Encova Mut Ins Grp Licensed WV 5,704,616 5,916,656 3,435,708 1,635,145 0.379% 18.568% 
+2025 16. Workers' compensation 10335 Bridgefield Cas Ins Co Property and Casualty N Stock None P American Financial Grp Licensed FL 39,416,063 39,416,063 19,404,777 23,439,903 2.618% 21.186% 
+2025 16. Workers' compensation 10701 Bridgefield Employers Ins Co Property and Casualty N Stock None P American Financial Grp Licensed FL 1,374,460 1,374,460 1,231,472 753,635 0.091% 21.278% 
+2025 16. Workers' compensation 16618 Bridgefield Ind Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 2,224,710 2,224,710 167,436 1,264,733 0.148% 21.425% 
+2025 16. Workers' compensation 13528 Brotherhood Mut Ins Co Property and Casualty N Mutual None P   Licensed IN 3,781,436 3,788,850 1,024,676 851,166 0.251% 21.677% 
+2025 16. Workers' compensation 11258 Builders Alliance Ins Co Property and Casualty N Stock None P Builders Grp Licensed NC 11,594 -2,430 0 0 0.001% 21.677% 
+2025 16. Workers' compensation 10844 Builders Mut Ins Co Property and Casualty N Mutual None P Builders Grp Licensed NC 76,041,879 77,192,545 28,944,037 27,696,641 5.051% 26.729% 
+2025 16. Workers' compensation 13036 Builders Premier Ins Co Property and Casualty N Stock None P Builders Grp Licensed NC 18,164,867 18,313,791 9,183,542 10,257,960 1.207% 27.935% 
+2025 16. Workers' compensation 11697 Businessfirst Ins Co Property and Casualty N Stock None P Retailfirst Grp Licensed FL 17,956,124 17,449,344 8,169,836 9,101,398 1.193% 29.128% 
+2025 16. Workers' compensation 10510 Carolina Cas Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 17,199,276 16,528,216 8,003,567 6,504,603 1.142% 30.270% 
+2025 16. Workers' compensation 14090 Carolina Mut Ins Inc Property and Casualty N Mutual None P   Licensed NC 25,326,513 25,454,819 10,902,099 7,633,171 1.682% 31.953% 
+2025 16. Workers' compensation 20230 Central Ins Co Property and Casualty N Stock None P Central Mut Ins Co Grp Licensed OH 651,816 695,137 347,392 1,998 0.043% 31.996% 
+2025 16. Workers' compensation 20710 Century Ind Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 0 0 25,756 -1,591,813 0.000% 31.996% 
+2025 16. Workers' compensation 25615 Charter Oak Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 7,891,622 8,371,616 2,837,280 3,727,308 0.524% 32.520% 
+2025 16. Workers' compensation 10642 Cherokee Ins Co Property and Casualty N Stock None P Oakland Financial Corp Grp Licensed MI 729,414 733,529 52,968 -118,332 0.048% 32.569% 
+2025 16. Workers' compensation 16356 Chiron Ins Co Property and Casualty N Stock None P Pharmacists Mut Grp Licensed IA 471,439 417,726 114,051 219,285 0.031% 32.600% 
+2025 16. Workers' compensation 12777 Chubb Ind Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed NY 4,779,922 4,340,136 1,136,922 1,323,641 0.318% 32.918% 
+2025 16. Workers' compensation 10052 Chubb Natl Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 2,345,890 2,091,829 520,078 1,089,012 0.156% 33.073% 
+2025 16. Workers' compensation 18767 Church Mut Ins Co S I Property and Casualty N Stock None P Church Mut Grp Licensed WI 3,309,007 3,374,599 928,385 1,004,852 0.220% 33.293% 
+2025 16. Workers' compensation 20400 Cimarron Ins Co Inc Property and Casualty N Stock None P   Licensed AZ 2,140,487 2,095,212 207,049 401,051 0.142% 33.435% 
+2025 16. Workers' compensation 31534 Citizens Ins Co Of Amer Property and Casualty N Stock None P The Hanover Ins Grp Licensed MI 2,696,432 2,525,253 734,532 895,820 0.179% 33.615% 
+2025 16. Workers' compensation 20532 Clarendon Natl Ins Co Property and Casualty N Stock None P Enstar Grp Licensed TX 0 0 447,823 487,985 0.000% 33.615% 
+2025 16. Workers' compensation 15563 Clear Spring Prop & Cas Co Property and Casualty N Stock None P Group 11 Ins Holdings Grp Licensed IN 1,185,696 1,103,647 1,202,847 5,115,114 0.079% 33.693% 
+2025 16. Workers' compensation 34347 Colonial Amer Cas & Surety Co Property and Casualty N Stock None P Zurich Ins Grp Licensed IL 0 0 0 693 0.000% 33.693% 
+2025 16. Workers' compensation 36927 Colony Specialty Ins Co Property and Casualty N Stock None P Brookfield Wealth Solutions Grp Licensed NE -1,789 -1,199 0 -5,549 0.000% 33.693% 
+2025 16. Workers' compensation 19410 Commerce & Industry Ins Co Property and Casualty N Stock None P American Intl Grp Licensed NY 355,062 614,805 131,902 9,784,947 0.024% 33.717% 
+2025 16. Workers' compensation 20443 Continental Cas Co Property and Casualty N Stock None P Cna Ins Grp Licensed IL 3,716,718 3,121,232 1,539,216 1,424,933 0.247% 33.964% 
+2025 16. Workers' compensation 28258 Continental Ind Co Property and Casualty N Stock None P Au Holding Co Grp Licensed NM 1,018,626 1,018,626 1,545,258 1,030,243 0.068% 34.031% 
+2025 16. Workers' compensation 35289 Continental Ins Co Property and Casualty N Stock None P Cna Ins Grp Licensed PA 4,532,393 4,478,017 1,897,750 1,921,156 0.301% 34.332% 
+2025 16. Workers' compensation 10804 Continental Western Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 994,880 1,178,419 294,188 256,316 0.066% 34.398% 
+2025 16. Workers' compensation 10499 Corepointe Ins Co Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed DE 440,192 666,205 160,684 1,008,737 0.029% 34.428% 
+2025 16. Workers' compensation 18961 Crestbrook Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 234,444 213,486 768 -27,632 0.016% 34.443% 
+2025 16. Workers' compensation 31348 Crum & Forster Ind Co Property and Casualty N Stock None P Fairfax Fin Grp Licensed DE 381,411 388,793 260,034 360,192 0.025% 34.469% 
+2025 16. Workers' compensation 10847 Cumis Ins Society Inc Property and Casualty N Stock None P Trustage Grp Licensed IA 0 0 29,384 -75,501 0.000% 34.469% 
+2025 16. Workers' compensation 42587 Depositors Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 4,071 9,073 1,384,904 2,817,546 0.000% 34.469% 
+2025 16. Workers' compensation 42048 Diamond State Ins Co Property and Casualty N Stock None P Global Ind Grp Licensed IN 0 0 0 -30,881 0.000% 34.469% 
+2025 16. Workers' compensation 22635 Discovery Ins Co Property and Casualty N Stock None P   Licensed NC 0 0 21,788 -434,343 0.000% 34.469% 
+2025 16. Workers' compensation 13692 Donegal Mut Ins Co Property and Casualty N Mutual None P Donegal Grp Licensed PA 454,221 521,785 189,541 518,353 0.030% 34.499% 
+2025 16. Workers' compensation 13019 Eastern Advantage Assur Co Property and Casualty N Stock None P Proassurance Corp Grp Licensed PA 643,903 615,434 497,583 591,766 0.043% 34.542% 
+2025 16. Workers' compensation 10724 Eastern Alliance Ins Co Property and Casualty N Stock None P Proassurance Corp Grp Licensed PA 3,504,604 3,298,533 2,310,044 1,726,194 0.233% 34.775% 
+2025 16. Workers' compensation 14702 Eastguard Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 164,607 129,745 -12,920 -51,899 0.011% 34.786% 
+2025 16. Workers' compensation 25186 Emc Prop & Cas Ins Co Property and Casualty N Stock None P Emc Ins Co Grp Licensed IA 6,114,210 5,895,227 2,674,094 4,055,931 0.406% 35.192% 
+2025 16. Workers' compensation 21407 Emcasco Ins Co Property and Casualty N Stock None P Emc Ins Co Grp Licensed IA 934,410 930,446 495,981 593,571 0.062% 35.254% 
+2025 16. Workers' compensation 25402 Employers Assur Co Property and Casualty N Stock None P Employers Holdings Grp Licensed FL 2,190,481 2,435,388 1,538,949 1,114,378 0.146% 35.399% 
+2025 16. Workers' compensation 11512 Employers Compensation Ins Co Property and Casualty N Stock None P Employers Holdings Grp Licensed CA 3,078,074 2,636,122 1,794,469 2,064,407 0.204% 35.604% 
+2025 16. Workers' compensation 10640 Employers Ins Co Of Nv Property and Casualty N Stock None P Employers Holdings Grp Licensed NV 4,815 4,815 0 -7,934 0.000% 35.604% 
+2025 16. Workers' compensation 21458 Employers Ins Co Of Wausau Property and Casualty N Stock None P Liberty Mut Grp Licensed WI 8,258,463 7,293,624 2,481,888 2,449,603 0.549% 36.153% 
+2025 16. Workers' compensation 21415 Employers Mut Cas Co Property and Casualty N Mutual None P Emc Ins Co Grp Licensed IA 5,574,305 5,871,635 4,171,086 -197,207 0.370% 36.523% 
+2025 16. Workers' compensation 10346 Employers Preferred Ins Co Property and Casualty N Stock None P Employers Holdings Grp Licensed FL 7,477,080 8,113,391 4,301,594 5,179,989 0.497% 37.020% 
+2025 16. Workers' compensation 26263 Erie Ins Co Property and Casualty N Stock None P Erie Ins Grp Licensed PA 1,118,594 991,374 180,244 181,859 0.074% 37.094% 
+2025 16. Workers' compensation 16233 Erie Ins Co Of Ny Property and Casualty N Stock None P Erie Ins Grp Licensed NY 8,443,266 8,038,754 2,507,116 2,886,012 0.561% 37.655% 
+2025 16. Workers' compensation 26271 Erie Ins Exch Property and Casualty N Reciprocal None P Erie Ins Grp Licensed PA 25,532,976 26,053,217 12,983,424 10,460,461 1.696% 39.351% 
+2025 16. Workers' compensation 16044 Everest Denali Ins Co Property and Casualty N Stock None P Everest Reins Holdings Grp Licensed DE 539,212 980,470 849,210 363,460 0.036% 39.387% 
+2025 16. Workers' compensation 10120 Everest Natl Ins Co Property and Casualty N Stock None P Everest Reins Holdings Grp Licensed DE 926,088 1,065,027 396,435 -287,861 0.062% 39.448% 
+2025 16. Workers' compensation 16045 Everest Premier Ins Co Property and Casualty N Stock None P Everest Reins Holdings Grp Licensed DE 1,345,447 1,504,772 959,221 1,766,357 0.089% 39.538% 
+2025 16. Workers' compensation 26921 Everest Reins Co Property and Casualty N Stock None P Everest Reins Holdings Grp Licensed DE 0 0 0 6,419 0.000% 39.538% 
+2025 16. Workers' compensation 11045 Excelsior Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 96,066 -283,701 0.000% 39.538% 
+2025 16. Workers' compensation 35181 Executive Risk Ind Inc Property and Casualty N Stock None P Chubb Ltd Grp Licensed DE 202,752 137,821 226,806 324,196 0.013% 39.551% 
+2025 16. Workers' compensation 44792 Executive Risk Specialty Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Authorized Surplus Lines Writer CT 0 0 0 -6 0.000% 39.551% 
+2025 16. Workers' compensation 31925 Falls Lake Natl Ins Co Property and Casualty N Stock None P James River Grp Licensed OH 4,433 4,433 0 -34,313 0.000% 39.551% 
+2025 16. Workers' compensation 21652 Farmers Ins Exch Property and Casualty N Reciprocal None P Farmers Ins Grp Licensed CA 1,958 771 0 0 0.000% 39.551% 
+2025 16. Workers' compensation 41483 Farmington Cas Co Property and Casualty N Stock None P Travelers Grp Licensed CT 10,167,736 12,865,165 5,095,179 10,355,873 0.675% 40.227% 
+2025 16. Workers' compensation 10178 Fcci Ins Co Property and Casualty N Stock None P Fcci Mut Ins Grp Licensed FL 2,352,439 2,835,388 1,605,100 1,505,725 0.156% 40.383% 
+2025 16. Workers' compensation 20281 Federal Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 7,628,366 7,116,417 3,642,546 2,614,595 0.507% 40.890% 
+2025 16. Workers' compensation 13935 Federated Mut Ins Co Property and Casualty N Mutual None P Federated Mut Grp Licensed MN 15,284,904 14,426,588 6,035,837 6,775,888 1.015% 41.905% 
+2025 16. Workers' compensation 16024 Federated Reserve Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 5,689,228 6,104,433 2,094,877 3,581,458 0.378% 42.283% 
+2025 16. Workers' compensation 11118 Federated Rural Electric Ins Exch Property and Casualty N Reciprocal None P   Licensed KS 4,401,152 4,391,061 2,346,979 3,387,316 0.292% 42.575% 
+2025 16. Workers' compensation 28304 Federated Serv Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 757,869 687,976 716,387 331,687 0.050% 42.626% 
+2025 16. Workers' compensation 10385 Ffva Mut Ins Co Property and Casualty N Mutual None P Ffva Grp Licensed FL 4,463,979 4,675,311 1,306,674 882,511 0.297% 42.922% 
+2025 16. Workers' compensation 16236 Ffva Select Ins Co Property and Casualty N Stock None P Ffva Grp Licensed FL 805,387 945,196 269,400 -173,037 0.053% 42.976% 
+2025 16. Workers' compensation 10699 Fhm Ins Co Property and Casualty N Mutual None P Luba Mut Grp Licensed FL -4,904 -6,081 52,445 23,214 0.000% 42.975% 
+2025 16. Workers' compensation 39306 Fidelity & Deposit Co Of Md Property and Casualty N Stock None P Zurich Ins Grp Licensed IL 0 0 0 466 0.000% 42.975% 
+2025 16. Workers' compensation 35386 Fidelity & Guar Ins Co Property and Casualty N Stock None P Travelers Grp Licensed IA -155 -155 0 -410,609 0.000% 42.975% 
+2025 16. Workers' compensation 25879 Fidelity & Guar Ins Underwriters Inc Property and Casualty N Stock None P Travelers Grp Licensed WI 0 0 60,000 -30,413 0.000% 42.975% 
+2025 16. Workers' compensation 21873 Firemans Fund Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed IL 74,605 94,694 96,168 -731,719 0.005% 42.980% 
+2025 16. Workers' compensation 21784 Firemens Ins Co Of Washington Dc Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 253,954 254,221 481,530 623,575 0.017% 42.997% 
+2025 16. Workers' compensation 13098 First Benefits Ins Mut Inc Property and Casualty N Mutual None P Arowood Grp Licensed NC 12,195,946 13,102,416 13,295,712 14,562,382 0.810% 43.807% 
+2025 16. Workers' compensation 10351 First Dakota Ind Co Property and Casualty N Stock None P Ras Dakota Grp Licensed SD 11,266 9,948 76 476 0.001% 43.808% 
+2025 16. Workers' compensation 33588 First Liberty Ins Corp Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 5,461,066 5,533,044 2,818,223 3,673,108 0.363% 44.171% 
+2025 16. Workers' compensation 24724 First Natl Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 0 -16,250 0.000% 44.171% 
+2025 16. Workers' compensation 40100 Firstline Ins Co Property and Casualty N Stock None P Harford Grp Licensed MD 294,801 289,082 48,762 145,209 0.020% 44.190% 
+2025 16. Workers' compensation 35585 Flagship City Ins Co Property and Casualty N Stock None P Erie Ins Grp Licensed PA 10,079,081 9,555,757 4,198,851 5,935,526 0.670% 44.860% 
+2025 16. Workers' compensation 13978 Florists Mut Ins Co Property and Casualty N Mutual None P Sentry Ins Grp Licensed WI 227,582 213,592 844,458 -293,900 0.015% 44.875% 
+2025 16. Workers' compensation 11185 Foremost Ins Co Grand Rapids Mi Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 0 0 0 -57,750 0.000% 44.875% 
+2025 16. Workers' compensation 11800 Foremost Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 0 0 0 -14,852 0.000% 44.875% 
+2025 16. Workers' compensation 41513 Foremost Signature Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 0 0 0 -23,052 0.000% 44.875% 
+2025 16. Workers' compensation 10941 Forestry Mut Ins Co Property and Casualty N Mutual None P   Licensed NC 6,551,971 6,452,870 2,082,729 1,840,834 0.435% 45.310% 
+2025 16. Workers' compensation 11600 Frank Winston Crum Ins Co Property and Casualty N Stock None P   Licensed FL 3,745,519 3,708,827 701,990 2,187,617 0.249% 45.559% 
+2025 16. Workers' compensation 13986 Frankenmuth Ins Co Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 9,328,582 8,832,993 2,174,084 3,691,052 0.620% 46.179% 
+2025 16. Workers' compensation 22209 Freedom Specialty Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 76,721 9,590 0 319 0.005% 46.184% 
+2025 16. Workers' compensation 24414 General Cas Co Of Wi Property and Casualty N Stock None P Qbe Ins Grp Licensed WI -16,437 145,005 178,220 -279,711 -0.001% 46.183% 
+2025 16. Workers' compensation 24732 General Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 17,459 -2,933 0.000% 46.183% 
+2025 16. Workers' compensation 38962 Genesis Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed DE 0 0 0 -30,000 0.000% 46.183% 
+2025 16. Workers' compensation 22098 Grain Dealers Mut Ins Co Property and Casualty N Mutual None P American Family Ins Grp Licensed IN 44,040 49,028 508,662 -1,318,513 0.003% 46.186% 
+2025 16. Workers' compensation 23809 Granite State Ins Co Property and Casualty N Stock None P American Intl Grp Licensed IL 1,131,186 1,294,349 432,136 -2,401,637 0.075% 46.261% 
+2025 16. Workers' compensation 25984 Graphic Arts Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 943,513 972,354 468,599 102,761 0.063% 46.324% 
+2025 16. Workers' compensation 36307 Gray Ins Co Property and Casualty N Stock None P Gray Ins Grp Licensed LA 205,898 189,723 0 48,584 0.014% 46.337% 
+2025 16. Workers' compensation 26832 Great Amer Alliance Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 11,702,466 11,321,185 1,500,101 1,695,414 0.777% 47.115% 
+2025 16. Workers' compensation 26344 Great Amer Assur Co Property and Casualty N Stock None P American Financial Grp Licensed OH 1,702,558 1,677,582 771,517 -2,024,499 0.113% 47.228% 
+2025 16. Workers' compensation 16691 Great Amer Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 54,434 32,230 29,043 -143,093 0.004% 47.231% 
+2025 16. Workers' compensation 22136 Great Amer Ins Co Of Ny Property and Casualty N Stock None P American Financial Grp Licensed NY 0 0 106,728 -162,031 0.000% 47.231% 
+2025 16. Workers' compensation 33723 Great Amer Spirit Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 702,595 888,519 93,007 227,648 0.047% 47.278% 
+2025 16. Workers' compensation 25224 Great Divide Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed ND 1,955,328 2,031,774 2,272,781 3,459,030 0.130% 47.408% 
+2025 16. Workers' compensation 20303 Great Northern Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 171,929 185,004 127,444 -91,435 0.011% 47.419% 
+2025 16. Workers' compensation 11371 Great West Cas Co Property and Casualty N Stock None P Old Republic Grp Licensed NE 2,481,035 2,542,565 2,503,616 3,248,924 0.165% 47.584% 
+2025 16. Workers' compensation 22322 Greenwich Ins Co Property and Casualty N Stock None P Axa Ins Grp Licensed DE 1,686,799 1,787,901 760,971 1,110,019 0.112% 47.696% 
+2025 16. Workers' compensation 42803 Guideone Elite Ins Co Property and Casualty N Stock None P Guideone Ins Grp Licensed IA 214,769 203,936 131,948 379,858 0.014% 47.710% 
+2025 16. Workers' compensation 15032 Guideone Ins Co Property and Casualty N Stock None P Guideone Ins Grp Licensed IA 247,789 260,052 227,162 320,924 0.016% 47.727% 
+2025 16. Workers' compensation 14559 Guideone Specialty Ins Co Property and Casualty N Stock None P Guideone Ins Grp Licensed IA 45,273 40,890 0 5,814 0.003% 47.730% 
+2025 16. Workers' compensation 36064 Hanover Amer Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 3,442,684 3,425,750 1,171,318 1,547,022 0.229% 47.959% 
+2025 16. Workers' compensation 22292 Hanover Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 2,883,489 2,832,402 849,492 948,358 0.192% 48.150% 
+2025 16. Workers' compensation 14141 Harford Mut Ins Co Property and Casualty N Stock None P Harford Grp Licensed MD 1,770,880 1,748,581 562,783 409,821 0.118% 48.268% 
+2025 16. Workers' compensation 23582 Harleysville Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 8,719 17,464 2,654 61,327 0.001% 48.268% 
+2025 16. Workers' compensation 35696 Harleysville Preferred Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH -5 12,004 12,056 -24,099 0.000% 48.268% 
+2025 16. Workers' compensation 26182 Harleysville Worcester Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH -8,354 -8,196 0 70,448 -0.001% 48.268% 
+2025 16. Workers' compensation 22357 Hartford Accident & Ind Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 7,449,802 7,381,289 2,517,888 3,326,035 0.495% 48.763% 
+2025 16. Workers' compensation 29424 Hartford Cas Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 8,746,367 8,584,253 3,410,344 -15,920,718 0.581% 49.344% 
+2025 16. Workers' compensation 19682 Hartford Fire Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 7,883,688 7,242,734 4,551,056 2,773,454 0.524% 49.867% 
+2025 16. Workers' compensation 38288 Hartford Ins Co Of Il Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IL 2,196,694 2,367,996 649,504 1,091,936 0.146% 50.013% 
+2025 16. Workers' compensation 37478 Hartford Ins Co Of The Midwest Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 8,113,127 8,365,030 3,216,507 1,044,414 0.539% 50.552% 
+2025 16. Workers' compensation 38261 Hartford Ins Co Of The Southeast Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 6,206,115 6,341,624 2,741,277 2,465,846 0.412% 50.964% 
+2025 16. Workers' compensation 30104 Hartford Underwriters Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 40,128,011 40,834,439 8,267,017 13,744,008 2.666% 53.630% 
+2025 16. Workers' compensation 41343 Hdi Global Ins Co Property and Casualty N Stock None P Hannover Grp Licensed IL 127,541 127,116 6,283 145,688 0.008% 53.638% 
+2025 16. Workers' compensation 12936 Houston Specialty Ins Co Property and Casualty N Stock None P Skyward Specialty Ins Grp Inc Grp Authorized Surplus Lines Writer TX 14,861 14,861 0 -348,326 0.001% 53.639% 
+2025 16. Workers' compensation 35408 Imperium Ins Co Property and Casualty N Stock None P Skyward Specialty Ins Grp Inc Grp Licensed TX 194,208 183,043 10,581 -138,974 0.013% 53.652% 
+2025 16. Workers' compensation 11090 Incline Cas Co Property and Casualty N Stock None P Incline Ins Grp Llc Grp Licensed TX 298,320 426,952 12,589 -19,634 0.020% 53.672% 
+2025 16. Workers' compensation 43575 Indemnity Ins Co Of North Amer Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 15,459,474 15,845,207 2,908,523 2,088,935 1.027% 54.699% 
+2025 16. Workers' compensation 22713 Insurance Co Of N Amer Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 57,093 57,093 -62,691 -89,590 0.004% 54.703% 
+2025 16. Workers' compensation 19429 Insurance Co Of The State Of Pa Property and Casualty N Stock None P American Intl Grp Licensed IL -131,585 623,645 2,272,569 -272,237 -0.009% 54.694% 
+2025 16. Workers' compensation 27847 Insurance Co Of The West Property and Casualty N Stock None P Icw Grp Assets Inc Grp Licensed CA 17,340,268 17,203,814 7,012,397 8,354,557 1.152% 55.846% 
+2025 16. Workers' compensation 17182 Intrepid Cas Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 18,356 4,627 0 1,494 0.001% 55.847% 
+2025 16. Workers' compensation 10749 Intrepid Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 1,533,031 1,525,474 950,674 364,658 0.102% 55.949% 
+2025 16. Workers' compensation 10885 Key Risk Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 7,149,855 6,668,585 7,026,191 4,442,806 0.475% 56.424% 
+2025 16. Workers' compensation 42404 Liberty Ins Corp Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 7,530,708 7,704,541 3,126,713 -5,713,797 0.500% 56.924% 
+2025 16. Workers' compensation 23035 Liberty Mut Fire Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed WI 5,599,171 5,762,331 3,547,634 -4,319,489 0.372% 57.296% 
+2025 16. Workers' compensation 23043 Liberty Mut Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed MA 12,455 11,127 630,594 -5,780,375 0.001% 57.297% 
+2025 16. Workers' compensation 11075 Lion Ins Co Property and Casualty N Stock None P   Licensed FL 200,332 200,332 0 0 0.013% 57.310% 
+2025 16. Workers' compensation 33600 Lm Ins Corp Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 36,848,943 37,200,052 7,887,185 13,268,158 2.448% 59.758% 
+2025 16. Workers' compensation 12472 Luba Cas Ins Co Property and Casualty N Stock None P Luba Mut Grp Licensed LA 2,101,284 1,724,795 138,385 831,541 0.140% 59.898% 
+2025 16. Workers' compensation 16001 Luba Ind Ins Co Property and Casualty N Stock None P Luba Mut Grp Licensed LA 230,542 185,061 105,104 285,969 0.015% 59.913% 
+2025 16. Workers' compensation 42617 Mag Mut Ins Co Property and Casualty N Mutual None P Mag Mut Ins Grp Licensed GA 1,203,112 1,315,825 1,026,276 -1,346,562 0.080% 59.993% 
+2025 16. Workers' compensation 29939 Main St Amer Assur Co Property and Casualty N Stock None P American Family Ins Grp Licensed FL -30,636 166,145 28,805 391,315 -0.002% 59.991% 
+2025 16. Workers' compensation 11149 Maine Employers Mut Ins Co Property and Casualty N Mutual None P Maine Employers Mut Ins Grp Licensed ME 214,646 224,308 21,097 145,800 0.014% 60.005% 
+2025 16. Workers' compensation 36897 Manufacturers Alliance Ins Co Property and Casualty N Stock None P Old Republic Grp Licensed PA 3,194,590 3,011,777 1,387,521 1,816,861 0.212% 60.217% 
+2025 16. Workers' compensation 38970 Markel Ins Co Property and Casualty N Stock None P Markel Grp Licensed IL 5,770,515 5,675,267 1,866,780 3,679,590 0.383% 60.601% 
+2025 16. Workers' compensation 22306 Massachusetts Bay Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 2,503,943 2,779,931 805,922 990,110 0.166% 60.767% 
+2025 16. Workers' compensation 14164 Memic Cas Co Property and Casualty N Stock None P Maine Employers Mut Ins Grp Licensed NH 763,644 891,954 477,481 553,009 0.051% 60.818% 
+2025 16. Workers' compensation 11030 Memic Ind Co Property and Casualty N Stock None P Maine Employers Mut Ins Grp Licensed NH 4,449,966 4,046,027 1,111,032 2,527,929 0.296% 61.113% 
+2025 16. Workers' compensation 23353 Meridian Security Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 50,541 72,256 12,645 36,049 0.003% 61.117% 
+2025 16. Workers' compensation 21687 Mid Century Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed CA 4,411 2,761 0 264 0.000% 61.117% 
+2025 16. Workers' compensation 23434 Middlesex Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 1,476,726 1,526,060 1,215,255 -124,341 0.098% 61.215% 
+2025 16. Workers' compensation 12839 Midsouth Ins Co Property and Casualty N Stock None P Fcbi Grp Licensed TN 1,001,320 1,102,694 801,151 941,202 0.067% 61.281% 
+2025 16. Workers' compensation 27138 Midvale Ind Co Property and Casualty N Stock None P American Family Ins Grp Licensed WI 567,610 369,289 14,784 160,123 0.038% 61.319% 
+2025 16. Workers' compensation 23612 Midwest Employers Cas Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 2,228,802 2,153,033 1,663,925 896,364 0.148% 61.467% 
+2025 16. Workers' compensation 26662 Milford Cas Ins Co Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed DE 2,442,956 2,407,844 852,468 789,867 0.162% 61.629% 
+2025 16. Workers' compensation 20362 Mitsui Sumitomo Ins Co Of Amer Property and Casualty N Stock None P Ms & Ad Ins Grp Licensed NY 1,965,121 1,817,897 160,887 307,440 0.131% 61.760% 
+2025 16. Workers' compensation 22551 Mitsui Sumitomo Ins Usa Inc Property and Casualty N Stock None P Ms & Ad Ins Grp Licensed NY 656,987 1,079,672 430,300 404,379 0.044% 61.804% 
+2025 16. Workers' compensation 16392 Mobilitas Ins Co Property and Casualty N Stock None P Csaa Ins Grp Authorized Surplus Lines Writer AZ 0 0 0 683 0.000% 61.804% 
+2025 16. Workers' compensation 32506 Monroe Guar Ins Co Property and Casualty N Stock None P Fcci Mut Ins Grp Licensed IN 1,130,890 1,144,578 549,465 519,004 0.075% 61.879% 
+2025 16. Workers' compensation 14613 Montgomery Mut Ins Co Property and Casualty N Mutual None P Liberty Mut Grp Licensed MA 0 0 226,016 -242,849 0.000% 61.879% 
+2025 16. Workers' compensation 13331 Motorists Commercial Mut Ins Co Property and Casualty N Mutual None P Encova Mut Ins Grp Licensed OH 0 0 369 1,022 0.000% 61.879% 
+2025 16. Workers' compensation 21075 Ms Transverse Ins Co Property and Casualty N Stock None P Ms & Ad Ins Grp Licensed TX 0 0 15,000 -15,011 0.000% 61.879% 
+2025 16. Workers' compensation 23663 National Amer Ins Co Property and Casualty N Stock None P Chandler Ins Grp Licensed OK 15,912 17,416 0 -726 0.001% 61.880% 
+2025 16. Workers' compensation 16632 National Builders Ins Co Property and Casualty N Stock None P Builders Ins Grp Licensed DE 1,653,820 1,113,568 224,948 844,751 0.110% 61.990% 
+2025 16. Workers' compensation 11991 National Cas Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 6,031,579 4,429,029 1,284,766 1,965,917 0.401% 62.390% 
+2025 16. Workers' compensation 16217 National Farmers Union Prop & Cas Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 0 -5,819 0.000% 62.390% 
+2025 16. Workers' compensation 20478 National Fire Ins Co Of Hartford Property and Casualty N Stock None P Cna Ins Grp Licensed IL 3,064,977 2,945,176 677,770 1,134,738 0.204% 62.594% 
+2025 16. Workers' compensation 32620 National Interstate Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 434,109 601,684 494,500 2,324,839 0.029% 62.623% 
+2025 16. Workers' compensation 20052 National Liab & Fire Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed CT 11,610,972 11,137,350 3,573,220 5,780,243 0.771% 63.394% 
+2025 16. Workers' compensation 22608 National Specialty Ins Co Property and Casualty N Stock None P Markel Grp Licensed TX 2,152,723 1,634,723 463,505 2,708,505 0.143% 63.537% 
+2025 16. Workers' compensation 21881 National Surety Corp Property and Casualty N Stock None P Allianz Ins Grp Licensed IL 211,667 290,475 175,902 -2,333,544 0.014% 63.551% 
+2025 16. Workers' compensation 20141 National Trust Ins Co Property and Casualty N Stock None P Fcci Mut Ins Grp Licensed IN 195,768 248,084 189,354 103,404 0.013% 63.564% 
+2025 16. Workers' compensation 19445 National Union Fire Ins Co Of Pittsb Property and Casualty N Stock None P American Intl Grp Licensed PA 13,051,212 11,944,694 4,184,922 2,801,748 0.867% 64.431% 
+2025 16. Workers' compensation 28223 Nationwide Agribusiness Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 357,984 292,077 300,531 28,235 0.024% 64.455% 
+2025 16. Workers' compensation 10723 Nationwide Assur Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 233,438 204,025 2,278,754 808,425 0.016% 64.470% 
+2025 16. Workers' compensation 23760 Nationwide Gen Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 194,007 120,235 3,814 41,697 0.013% 64.483% 
+2025 16. Workers' compensation 25453 Nationwide Ins Co Of Amer Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 638,425 494,101 19,051 206,537 0.042% 64.526% 
+2025 16. Workers' compensation 23787 Nationwide Mut Ins Co Property and Casualty N Mutual None P Nationwide Corp Grp Licensed OH 630,838 683,686 478,435 -1,404,154 0.042% 64.568% 
+2025 16. Workers' compensation 37877 Nationwide Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 492,680 524,689 201,967 391,917 0.033% 64.600% 
+2025 16. Workers' compensation 24171 Netherlands Ins Co The Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 325,388 -771,174 0.000% 64.600% 
+2025 16. Workers' compensation 23841 New Hampshire Ins Co Property and Casualty N Stock None P American Intl Grp Licensed IL 6,081,712 5,957,424 4,595,951 -4,416,993 0.404% 65.004% 
+2025 16. Workers' compensation 16608 New York Marine & Gen Ins Co Property and Casualty N Stock None P Coaction Global Inc Grp Licensed NY 324,682 324,992 12,947 -46,267 0.022% 65.026% 
+2025 16. Workers' compensation 14788 Ngm Ins Co Property and Casualty N Stock None P American Family Ins Grp Licensed FL 291,734 326,030 478,727 -1,474,521 0.019% 65.045% 
+2025 16. Workers' compensation 31470 Norguard Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 5,634,262 6,015,944 2,494,191 1,222,111 0.374% 65.419% 
+2025 16. Workers' compensation 13012 Normandy Ins Co Property and Casualty N Stock None P   Licensed FL 2,588,324 2,492,033 694,001 371,171 0.172% 65.591% 
+2025 16. Workers' compensation 14842 North Carolina Farm Bur Mut Ins Co Property and Casualty N Mutual None P North Carolina Farm Bureau Grp Licensed NC 22,811,630 22,138,290 10,971,710 9,134,367 1.515% 67.107% 
+2025 16. Workers' compensation 27740 North Pointe Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 215,476 291,492 448,687 450,259 0.014% 67.121% 
+2025 16. Workers' compensation 21105 North River Ins Co Property and Casualty N Stock None P Fairfax Fin Grp Licensed NJ 405,200 595,137 98,198 89,701 0.027% 67.148% 
+2025 16. Workers' compensation 13045 Northstone Ins Co Property and Casualty N Stock None P Encova Mut Ins Grp Licensed WV 4,276,182 5,255,985 2,264,956 2,537,429 0.284% 67.432% 
+2025 16. Workers' compensation 42552 Nova Cas Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NY 324,956 320,648 326,125 12,332 0.022% 67.454% 
+2025 16. Workers' compensation 39608 Nutmeg Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 4,696,022 5,083,312 1,688,556 6,409,549 0.312% 67.766% 
+2025 16. Workers' compensation 34630 Oak River Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 294,838 305,158 129,698 469,759 0.020% 67.785% 
+2025 16. Workers' compensation 15645 Obi Amer Ins Co Property and Casualty N Stock None P Intact Financial Grp Licensed PA 8,560 10,351 0 27 0.001% 67.786% 
+2025 16. Workers' compensation 14190 Obi Natl Ins Co Property and Casualty N Stock None P Intact Financial Grp Licensed PA 576,636 611,640 222,523 380,079 0.038% 67.824% 
+2025 16. Workers' compensation 24074 Ohio Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 450,768 432,310 403,934 -287,675 0.030% 67.854% 
+2025 16. Workers' compensation 24082 Ohio Security Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 9,042,049 8,992,074 2,534,655 -2,694,120 0.601% 68.455% 
+2025 16. Workers' compensation 17558 Old Guard Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 445,527 495,783 226,213 270,007 0.030% 68.484% 
+2025 16. Workers' compensation 24139 Old Republic Gen Ins Corp Property and Casualty N Stock None P Old Republic Grp Licensed IL 289 289 0 -174,605 0.000% 68.484% 
+2025 16. Workers' compensation 24147 Old Republic Ins Co Property and Casualty N Stock None P Old Republic Grp Licensed PA 16,903,969 16,434,189 14,077,533 15,118,840 1.123% 69.607% 
+2025 16. Workers' compensation 16219 Omaha Natl Ins Co Property and Casualty N Stock None P Omaha Natl Grp Licensed NE 485,236 549,759 235,691 202,071 0.032% 69.639% 
+2025 16. Workers' compensation 32700 Owners Ins Co Property and Casualty N Stock None P Auto Owners Grp Licensed OH 8,264,524 8,303,183 3,950,462 1,841,704 0.549% 70.188% 
+2025 16. Workers' compensation 22748 Pacific Employers Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 321,213 287,779 211,996 -1,654,497 0.021% 70.210% 
+2025 16. Workers' compensation 20346 Pacific Ind Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed DE 1,201,284 1,212,966 292,700 -374,478 0.080% 70.289% 
+2025 16. Workers' compensation 10859 Park Natl Ins Co Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed DE 0 0 0 -120,868 0.000% 70.289% 
+2025 16. Workers' compensation 18333 Peerless Ind Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 0 0 0 -14,021 0.000% 70.289% 
+2025 16. Workers' compensation 24198 Peerless Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 10,923 -518,787 0.000% 70.289% 
+2025 16. Workers' compensation 14958 Peninsula Ins Co Property and Casualty N Stock None P Donegal Grp Licensed PA 158,365 181,859 137,087 256,653 0.011% 70.300% 
+2025 16. Workers' compensation 14982 Penn Millers Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 4,219 3,264 -137,739 -364,365 0.000% 70.300% 
+2025 16. Workers' compensation 32441 Penn Natl Security Ins Co Property and Casualty N Stock None P Pennsylvania Natl Ins Grp Licensed PA 1,756,656 1,564,248 1,135,512 515,548 0.117% 70.417% 
+2025 16. Workers' compensation 12262 Pennsylvania Manufacturers Assoc Ins Property and Casualty N Stock None P Old Republic Grp Licensed PA 6,506,413 7,703,648 2,743,843 2,343,352 0.432% 70.849% 
+2025 16. Workers' compensation 41424 Pennsylvania Manufacturers Ind Co Property and Casualty N Stock None P Old Republic Grp Licensed PA 203,560 311,907 302,708 790,898 0.014% 70.863% 
+2025 16. Workers' compensation 14990 Pennsylvania Natl Mut Cas Ins Co Property and Casualty N Mutual None P Pennsylvania Natl Ins Grp Licensed PA 3,024,602 3,157,013 1,595,584 132,647 0.201% 71.064% 
+2025 16. Workers' compensation 12297 Petroleum Cas Co Property and Casualty N Stock None P   Licensed TX 78 78 0 0 0.000% 71.064% 
+2025 16. Workers' compensation 13714 Pharmacists Mut Ins Co Property and Casualty N Stock None P Pharmacists Mut Grp Licensed IA 962,018 939,088 349,479 68,482 0.064% 71.127% 
+2025 16. Workers' compensation 25623 Phoenix Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 5,482,605 5,902,350 6,599,253 1,052,279 0.364% 71.492% 
+2025 16. Workers' compensation 10997 Pie Cas Ins Co Property and Casualty N Stock None P Pie Grp Holdings Inc Grp Licensed IL 6,923,317 7,088,049 934,198 1,852,890 0.460% 71.952% 
+2025 16. Workers' compensation 15137 Pinnaclepoint Ins Co Property and Casualty N Stock None P Encova Mut Ins Grp Licensed WV 8,867,071 9,697,408 3,273,973 3,903,265 0.589% 72.541% 
+2025 16. Workers' compensation 30945 Plaza Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA 677,213 804,816 656,670 401,522 0.045% 72.586% 
+2025 16. Workers' compensation 22888 Point Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 0 0 35,088 318,383 0.000% 72.586% 
+2025 16. Workers' compensation 37257 Praetorian Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 2,301,942 2,694,152 1,624,794 1,560,427 0.153% 72.738% 
+2025 16. Workers' compensation 10900 Preferred Employers Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed CA 592 11,852 0 -3,772 0.000% 72.738% 
+2025 16. Workers' compensation 12773 Prescient Natl Ins Co Property and Casualty N Stock None P Louisiana Workers Compensation Grp Licensed NC 8,227,586 9,065,508 3,463,620 1,638,064 0.547% 73.285% 
+2025 16. Workers' compensation 10786 Princeton Excess & Surplus Lines Ins Property and Casualty N Stock None P Munich Re Grp Authorized Surplus Lines Writer DE 0 0 0 -21,882 0.000% 73.285% 
+2025 16. Workers' compensation 34690 Property & Cas Ins Co Of Hartford Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 7,361,205 7,159,630 1,023,855 883,402 0.489% 73.774% 
+2025 16. Workers' compensation 12416 Protective Ins Co Property and Casualty N Stock None P Progressive Grp Licensed IN 2,153,332 2,258,457 672,179 -328,012 0.143% 73.917% 
+2025 16. Workers' compensation 39217 Qbe Ins Corp Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 4,150,622 5,408,770 2,279,962 1,225,704 0.276% 74.193% 
+2025 16. Workers' compensation 11673 Redwood Fire & Cas Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 2,982,121 2,509,231 1,834,197 2,115,229 0.198% 74.391% 
+2025 16. Workers' compensation 24449 Regent Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 1,868 33,763 160,061 -6,809 0.000% 74.391% 
+2025 16. Workers' compensation 12475 Republic Franklin Ins Co Property and Casualty N Stock None P Utica Grp Licensed OH 1,418,904 1,389,893 648,154 25,373 0.094% 74.485% 
+2025 16. Workers' compensation 22179 Republic Ind Co Of Amer Property and Casualty N Stock None P American Financial Grp Licensed CA 0 0 39,205 -668,428 0.000% 74.485% 
+2025 16. Workers' compensation 31089 Repwest Ins Co Property and Casualty N Stock None P Uhaul Holding Grp Licensed AZ 0 0 0 1,517 0.000% 74.485% 
+2025 16. Workers' compensation 36684 Riverport Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 33,051 31,058 133,732 -418,534 0.002% 74.487% 
+2025 16. Workers' compensation 21261 Riverstone Intl Ins Inc Property and Casualty N Stock None P Riverstone Intl Grp Licensed MA 0 0 669,477 -143,101 0.000% 74.487% 
+2025 16. Workers' compensation 13056 Rli Ins Co Property and Casualty N Stock None P Rli Ins Grp Licensed IL 338,127 321,956 1,570 -16,930 0.022% 74.510% 
+2025 16. Workers' compensation 35505 Rockwood Cas Ins Co Property and Casualty N Stock None P Brookfield Wealth Solutions Grp Licensed PA 589,001 595,575 324,744 82,412 0.039% 74.549% 
+2025 16. Workers' compensation 11134 Rural Trust Ins Co Property and Casualty N Stock None P   Licensed TX 457,046 436,395 75,234 158,861 0.030% 74.579% 
+2025 16. Workers' compensation 24740 Safeco Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 0 5,020 0.000% 74.579% 
+2025 16. Workers' compensation 11123 Safety First Ins Co Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed IL 2,290,015 2,288,016 682,752 905,231 0.152% 74.731% 
+2025 16. Workers' compensation 15105 Safety Natl Cas Corp Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed MO 6,174,834 5,942,647 642,678 1,980,146 0.410% 75.142% 
+2025 16. Workers' compensation 40460 Sagamore Ins Co Property and Casualty N Stock None P Progressive Grp Licensed IN 229,367 229,391 662,414 -157,585 0.015% 75.157% 
+2025 16. Workers' compensation 38300 Samsung Fire & Marine Ins Co Ltd Property and Casualty N Us Branch Of Alien Insurer None P   Licensed NY 81,745 80,212 0 18,606 0.005% 75.162% 
+2025 16. Workers' compensation 15580 Scottsdale Ind Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 52,307 23,496 0 5,172 0.003% 75.166% 
+2025 16. Workers' compensation 19879 Security Natl Ins Company Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed DE 12,216,073 11,557,031 4,119,297 5,032,426 0.811% 75.977% 
+2025 16. Workers' compensation 12572 Selective Ins Co Of Amer Property and Casualty N Stock None P Selective Ins Grp Licensed NJ 3,079,755 3,386,825 1,549,566 806,871 0.205% 76.182% 
+2025 16. Workers' compensation 19259 Selective Ins Co Of Sc Property and Casualty N Stock None P Selective Ins Grp Licensed IN 3,091,997 3,339,501 1,127,052 678,716 0.205% 76.387% 
+2025 16. Workers' compensation 39926 Selective Ins Co Of The Southeast Property and Casualty N Stock None P Selective Ins Grp Licensed IN 3,875,796 4,233,615 4,342,790 79,496 0.257% 76.645% 
+2025 16. Workers' compensation 11000 Sentinel Ins Co Ltd Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 2,057,509 2,286,751 861,690 -1,270,737 0.137% 76.781% 
+2025 16. Workers' compensation 28460 Sentry Cas Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 4,722,135 4,515,162 817,519 10,048,584 0.314% 77.095% 
+2025 16. Workers' compensation 24988 Sentry Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 3,893,688 4,305,354 1,155,896 730,819 0.259% 77.354% 
+2025 16. Workers' compensation 21180 Sentry Select Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 566,970 546,882 277,826 422,321 0.038% 77.391% 
+2025 16. Workers' compensation 22985 Sequoia Ins Co Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed CA 5,091,921 4,884,795 1,407,432 1,954,337 0.338% 77.730% 
+2025 16. Workers' compensation 39152 Service Amer Ind Co Property and Casualty N Stock None P Service Ins Holdings Grp Licensed OK 2,029,238 2,016,546 1,186,762 879,137 0.135% 77.864% 
+2025 16. Workers' compensation 43389 Service Lloyds Ins Co Property and Casualty N Syndicate None P Service Ins Holdings Grp Licensed TX 119,235 222,923 248,477 448,356 0.008% 77.872% 
+2025 16. Workers' compensation 11347 Sfm Mut Ins Co Property and Casualty N Mutual None P Sfm Grp Licensed MN 153,427 157,404 13,719 126,321 0.010% 77.882% 
+2025 16. Workers' compensation 26869 Silver Oak Cas Inc Property and Casualty N Stock None P Amerisafe Grp Licensed NE 6,058,836 5,067,150 1,039,479 1,382,311 0.402% 78.285% 
+2025 16. Workers' compensation 38776 Siriuspoint Amer Ins Co Property and Casualty N Stock None P Siriuspoint Grp Licensed NY -222,478 -144,792 433,972 -1,185,287 -0.015% 78.270% 
+2025 16. Workers' compensation 38997 Sompo Amer Fire & Mar Ins Co Amer Property and Casualty N Stock None P Sompo Grp Licensed NY 1,319,869 1,455,918 771,275 1,897,363 0.088% 78.358% 
+2025 16. Workers' compensation 11126 Sompo Amer Ins Co Property and Casualty N Stock None P Sompo Grp Licensed NY 4,719,980 4,763,764 3,301,662 9,289,621 0.314% 78.671% 
+2025 16. Workers' compensation 19216 Southern Ins Co Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed TX 1,865,914 1,518,094 187,054 282,669 0.124% 78.795% 
+2025 16. Workers' compensation 26867 Southern Ins Co Of Va Property and Casualty N Stock None P Donegal Grp Licensed VA 1,018,430 1,081,424 216,015 492,747 0.068% 78.863% 
+2025 16. Workers' compensation 26468 Southern Mut Church Ins Co Property and Casualty N Mutual None P   Licensed SC 507,959 563,750 199,924 257,464 0.034% 78.897% 
+2025 16. Workers' compensation 22861 Southern Pilot Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 781 0.000% 78.897% 
+2025 16. Workers' compensation 15709 Southern States Ins Exch Property and Casualty N Reciprocal None P   Licensed VA 799,125 819,949 188,450 525,549 0.053% 78.950% 
+2025 16. Workers' compensation 20613 Sparta Ins Co Property and Casualty N Stock None P Apollo Global Mgmt Grp Licensed CT 0 0 16,557 -29,220 0.000% 78.950% 
+2025 16. Workers' compensation 24767 St Paul Fire & Marine Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 58,300 58,300 66,840 -386,454 0.004% 78.954% 
+2025 16. Workers' compensation 24775 St Paul Guardian Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 332,529 132,035 0.000% 78.954% 
+2025 16. Workers' compensation 24791 St Paul Mercury Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 34,828 -73,142 0.000% 78.954% 
+2025 16. Workers' compensation 19224 St Paul Protective Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 0 -31,744 0.000% 78.954% 
+2025 16. Workers' compensation 19070 Standard Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 3,968,874 4,419,766 4,476,065 3,388,664 0.264% 79.217% 
+2025 16. Workers' compensation 18023 Star Ins Co Property and Casualty N Stock None P Bcbs Of Mi Grp Licensed MI 621,487 866,366 877,760 1,394,875 0.041% 79.259% 
+2025 16. Workers' compensation 40045 Starnet Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 2,617,340 2,554,769 2,779,122 1,289,344 0.174% 79.432% 
+2025 16. Workers' compensation 38318 Starr Ind & Liab Co Property and Casualty N Stock None P Starr Grp Licensed TX 7,854,127 7,338,849 2,860,746 4,788,419 0.522% 79.954% 
+2025 16. Workers' compensation 16109 Starr Specialty Ins Co Property and Casualty N Stock None P Starr Grp Licensed TX 5,700,320 5,844,751 2,107,557 3,524,216 0.379% 80.333% 
+2025 16. Workers' compensation 25496 Starstone Natl Ins Co Property and Casualty N Stock None P Core Specialty Ins Holdings Grp Licensed DE 2,369,394 3,451,056 1,604,001 4,085,282 0.157% 80.490% 
+2025 16. Workers' compensation 25127 State Auto Prop & Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA 99,078 114,485 398,883 56,930 0.007% 80.497% 
+2025 16. Workers' compensation 25135 State Automobile Mut Ins Co Property and Casualty N Mutual None P Liberty Mut Grp Licensed OH 215,028 312,206 986,391 75,565 0.014% 80.511% 
+2025 16. Workers' compensation 25143 State Farm Fire & Cas Co Property and Casualty N Stock None P State Farm Grp Licensed IL 8,069,073 8,368,975 2,237,676 2,588,752 0.536% 81.047% 
+2025 16. Workers' compensation 25151 State Farm Gen Ins Co Property and Casualty N Stock None P State Farm Grp Licensed IL 0 0 100,488 31,841 0.000% 81.047% 
+2025 16. Workers' compensation 12831 State Natl Ins Co Inc Property and Casualty N Stock None P Markel Grp Licensed TX 2,273,479 2,102,479 753,687 -283,313 0.151% 81.198% 
+2025 16. Workers' compensation 10156 Steadpoint Ins Co Property and Casualty N Stock None P   Licensed TN 34,292 21,444 595 17,552 0.002% 81.200% 
+2025 16. Workers' compensation 11828 Stonewood Ins Co Property and Casualty N Stock None P James River Grp Licensed OH -199,726 -199,400 2,999,441 -4,325,521 -0.013% 81.187% 
+2025 16. Workers' compensation 10340 Stonington Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 126,608 145,127 69,409 -35,327 0.008% 81.195% 
+2025 16. Workers' compensation 15136 Summitpoint Ins Co Property and Casualty N Stock None P Encova Mut Ins Grp Licensed WV 2,023,505 1,850,840 1,476,933 1,585,807 0.134% 81.330% 
+2025 16. Workers' compensation 34762 Sunz Ins Co Property and Casualty N Stock None P Sunz Holdings Llc Grp Licensed FL 2,411,774 2,411,774 381,728 534,965 0.160% 81.490% 
+2025 16. Workers' compensation 25798 Sutton National Ins Co Property and Casualty N Stock None P Sutton Natl Grp Licensed OK -922 -922 65,124 22,069 0.000% 81.490% 
+2025 16. Workers' compensation 29874 Swiss Re Corp Solutions Amer Ins Co Property and Casualty N Stock None P Swiss Re Grp Licensed MO 0 0 29,934 -41,693 0.000% 81.490% 
+2025 16. Workers' compensation 12593 Synergy Comp Ins Co Property and Casualty N Stock None P   Licensed PA 334,197 515,428 76,725 230,558 0.022% 81.512% 
+2025 16. Workers' compensation 12866 T H E Ins Co Property and Casualty N Stock None P Axa Ins Grp Licensed DE 11,896 18,276 310 494,995 0.001% 81.513% 
+2025 16. Workers' compensation 42376 Technology Ins Co Inc Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed DE 16,371,313 16,434,877 8,622,815 9,533,991 1.087% 82.601% 
+2025 16. Workers' compensation 28665 The Cincinnati Cas Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 5,149,287 4,841,730 957,737 1,747,733 0.342% 82.943% 
+2025 16. Workers' compensation 23280 The Cincinnati Ind Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 7,287,488 7,486,329 1,407,725 3,087,530 0.484% 83.427% 
+2025 16. Workers' compensation 10677 The Cincinnati Ins Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 1,144,544 1,188,497 543,188 151,789 0.076% 83.503% 
+2025 16. Workers' compensation 21857 The Pie Ins Co Property and Casualty N Stock None P Pie Grp Holdings Inc Grp Licensed OH 10,500,267 7,392,966 1,844,296 6,815,846 0.697% 84.200% 
+2025 16. Workers' compensation 41769 The Travelers Cas Co Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 0 -1,229 0.000% 84.200% 
+2025 16. Workers' compensation 25534 Tig Ins Co Property and Casualty N Stock None P Fairfax Fin Grp Licensed CA 0 0 38,677 -76,513 0.000% 84.200% 
+2025 16. Workers' compensation 32301 Tnus Ins Co Property and Casualty N Us Branch Of Alien Insurer None P Tokio Marine Holdings Inc Grp Licensed NY 5,728 8,360 0 -1,496 0.000% 84.201% 
+2025 16. Workers' compensation 10945 Tokio Marine Amer Ins Co Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed NY 1,248,773 1,310,924 648,745 315,950 0.083% 84.284% 
+2025 16. Workers' compensation 41238 Trans Pacific Ins Co Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed NY 356,997 274,674 59,383 -884,557 0.024% 84.307% 
+2025 16. Workers' compensation 28886 Transguard Ins Co Of Amer Inc Property and Casualty N Stock None P Iat Reins Co Grp Licensed IL 613,266 679,581 203,140 570,705 0.041% 84.348% 
+2025 16. Workers' compensation 20494 Transportation Ins Co Property and Casualty N Stock None P Cna Ins Grp Licensed IL 4,858,264 4,622,968 1,006,132 1,376,514 0.323% 84.671% 
+2025 16. Workers' compensation 36463 Travco Personal Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 0 -42,023 0.000% 84.671% 
+2025 16. Workers' compensation 19038 Travelers Cas & Surety Co Property and Casualty N Stock None P Travelers Grp Licensed CT 7,845,513 7,569,330 2,982,484 3,899,078 0.521% 85.192% 
+2025 16. Workers' compensation 31194 Travelers Cas & Surety Co Of Amer Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 0 -2,882 0.000% 85.192% 
+2025 16. Workers' compensation 36170 Travelers Cas Co Of Ct Property and Casualty N Stock None P Travelers Grp Licensed CT 14,696,817 8,656,036 702,037 4,194,443 0.976% 86.168% 
+2025 16. Workers' compensation 19046 Travelers Cas Ins Co Of Amer Property and Casualty N Stock None P Travelers Grp Licensed CT 6,410,447 6,064,503 3,249,969 1,842,282 0.426% 86.594% 
+2025 16. Workers' compensation 40282 Travelers Commercial Cas Co Property and Casualty N Stock None P Travelers Grp Licensed CT 1,534,478 991,813 166,368 1,005,979 0.102% 86.696% 
+2025 16. Workers' compensation 25658 Travelers Ind Co Property and Casualty N Stock None P Travelers Grp Licensed CT 5,669,595 6,331,864 3,472,339 1,425,138 0.377% 87.072% 
+2025 16. Workers' compensation 25666 Travelers Ind Co Of Amer Property and Casualty N Stock None P Travelers Grp Licensed CT 8,241,665 13,533,545 4,029,517 3,023,429 0.547% 87.620% 
+2025 16. Workers' compensation 25682 Travelers Ind Co Of Ct Property and Casualty N Stock None P Travelers Grp Licensed CT 5,757,327 5,618,704 1,799,786 2,217,333 0.382% 88.002% 
+2025 16. Workers' compensation 25674 Travelers Prop Cas Co Of Amer Property and Casualty N Stock None P Travelers Grp Licensed CT 33,760,119 32,912,440 8,549,633 -1,200,409 2.243% 90.245% 
+2025 16. Workers' compensation 31003 Tri State Ins Co Of Mn Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 4,627,586 4,537,126 1,954,862 2,695,930 0.307% 90.552% 
+2025 16. Workers' compensation 41106 Triumphe Cas Co Property and Casualty N Stock None P American Financial Grp Licensed OH 1,905,615 1,624,966 665,715 944,610 0.127% 90.679% 
+2025 16. Workers' compensation 21709 Truck Ins Exch Property and Casualty N Reciprocal None P Farmers Ins Grp Licensed CA 7,493 8,226 0 -18,357 0.000% 90.679% 
+2025 16. Workers' compensation 27120 Trumbull Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 9,314,546 8,798,587 4,007,131 2,934,991 0.619% 91.298% 
+2025 16. Workers' compensation 29459 Twin City Fire Ins Co Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 9,172,909 8,628,018 2,992,547 2,009,064 0.609% 91.907% 
+2025 16. Workers' compensation 25844 Union Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 343,610 357,507 645,571 281,613 0.023% 91.930% 
+2025 16. Workers' compensation 21423 Union Ins Co Of Providence Property and Casualty N Stock None P Emc Ins Co Grp Licensed IA 478,105 470,389 651,206 -157,178 0.032% 91.962% 
+2025 16. Workers' compensation 25887 United States Fidelity & Guar Co Property and Casualty N Stock None P Travelers Grp Licensed CT 0 0 273,124 -89,884 0.000% 91.962% 
+2025 16. Workers' compensation 21113 United States Fire Ins Co Property and Casualty N Stock None P Fairfax Fin Grp Licensed DE 1,312,858 1,272,391 91,167 -35,067 0.087% 92.049% 
+2025 16. Workers' compensation 29157 United Wi Ins Co Property and Casualty N Stock None P Bcbs Of Mi Grp Licensed WI 14,509,544 13,943,326 3,945,709 6,198,835 0.964% 93.013% 
+2025 16. Workers' compensation 41181 Universal Underwriters Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed IL 0 0 6,885 50,852 0.000% 93.013% 
+2025 16. Workers' compensation 25976 Utica Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 965,913 1,014,099 304,373 154,899 0.064% 93.077% 
+2025 16. Workers' compensation 10687 Utica Natl Assur Co Property and Casualty N Stock None P Utica Grp Licensed NY 821,905 701,015 484,523 81,773 0.055% 93.132% 
+2025 16. Workers' compensation 20508 Valley Forge Ins Co Property and Casualty N Stock None P Cna Ins Grp Licensed PA 2,500,980 2,874,214 1,105,369 601,350 0.166% 93.298% 
+2025 16. Workers' compensation 21172 Vanliner Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 3,259,661 3,263,623 1,357,149 1,090,644 0.217% 93.514% 
+2025 16. Workers' compensation 20397 Vigilant Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed NY 2,787,793 2,890,630 1,141,227 701,128 0.185% 93.700% 
+2025 16. Workers' compensation 40827 Virginia Surety Co Inc Property and Casualty N Stock None P Assurant Inc Grp Licensed IL 0 0 19,371 -744,231 0.000% 93.700% 
+2025 16. Workers' compensation 26069 Wausau Business Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed WI 0 200 431,291 5,006,243 0.000% 93.700% 
+2025 16. Workers' compensation 26042 Wausau Underwriters Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed WI -5 2,768 10,726 -2,050,449 0.000% 93.700% 
+2025 16. Workers' compensation 13126 Waypoint Mut Property and Casualty N Mutual None P Midwest Builders Cas Grp Licensed KS 77,315 70,711 0 0 0.005% 93.705% 
+2025 16. Workers' compensation 40517 Wcf Natl Ins Co Property and Casualty N Stock None P Wcf Ins Co Grp Licensed UT 42,952 170,909 429,145 -264,801 0.003% 93.708% 
+2025 16. Workers' compensation 21865 Wcf Select Ins Co Property and Casualty N Stock None P Wcf Ins Co Grp Licensed UT 141,358 222,681 31,637 22,929 0.009% 93.717% 
+2025 16. Workers' compensation 32280 Wellfleet Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed IN 1,340,966 1,307,009 155,902 306,352 0.089% 93.806% 
+2025 16. Workers' compensation 20931 Wellfleet Ny Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NY 5,782,654 5,843,970 2,516,955 4,097,785 0.384% 94.190% 
+2025 16. Workers' compensation 25011 Wesco Ins Co Property and Casualty N Stock None P Amtrust Financial Serv Grp Licensed DE 17,915,112 17,645,429 7,303,909 4,944,943 1.190% 95.380% 
+2025 16. Workers' compensation 44393 West Amer Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 306,164 355,747 74,236 -635,751 0.020% 95.401% 
+2025 16. Workers' compensation 15350 West Bend Ins Co Property and Casualty N Stock None P West Bend Ins Grp Licensed WI 8,954,397 8,777,417 4,360,886 3,007,608 0.595% 95.995% 
+2025 16. Workers' compensation 10030 Westchester Fire Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 10,048 14,080 0 -1,392 0.001% 95.996% 
+2025 16. Workers' compensation 16447 Westfield Champion Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 393,244 280,446 127,886 316,998 0.026% 96.022% 
+2025 16. Workers' compensation 24112 Westfield Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 378,900 438,220 483,426 33,131 0.025% 96.047% 
+2025 16. Workers' compensation 24120 Westfield Natl Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 45,391 40,650 147,296 19,551 0.003% 96.050% 
+2025 16. Workers' compensation 16450 Westfield Premier Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 99,191 39,612 0 16,979 0.007% 96.057% 
+2025 16. Workers' compensation 16449 Westfield Superior Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 79,153 75,219 1,234 6,957 0.005% 96.062% 
+2025 16. Workers' compensation 16448 Westfield Touchstone Ins Co Property and Casualty N Stock None P Westfield Grp Licensed OH 215,642 171,598 83,077 258,767 0.014% 96.077% 
+2025 16. Workers' compensation 39845 Westport Ins Corp Property and Casualty N Stock None P Swiss Re Grp Licensed MO 0 0 914 509,600 0.000% 96.077% 
+2025 16. Workers' compensation 31232 Work First Cas Co Property and Casualty N Stock None P   Licensed DE 615,851 630,073 253,035 306,458 0.041% 96.117% 
+2025 16. Workers' compensation 24554 Xl Ins Amer Inc Property and Casualty N Stock None P Axa Ins Grp Licensed DE 4,239,242 3,722,717 633,625 1,942,442 0.282% 96.399% 
+2025 16. Workers' compensation 37885 Xl Specialty Ins Co Property and Casualty N Stock None P Axa Ins Grp Licensed DE 5,948,342 5,687,354 1,753,693 3,640,608 0.395% 96.794% 
+2025 16. Workers' compensation 26220 Yosemite Ins Co Property and Casualty N Stock None P Enstar Grp Licensed OK 0 0 214 -65,588 0.000% 96.794% 
+2025 16. Workers' compensation 13269 Zenith Ins Co Property and Casualty N Stock None P Fairfax Fin Grp Licensed CA 902,170 930,839 389,364 71,830 0.060% 96.854% 
+2025 16. Workers' compensation 30120 Znat Ins Co Property and Casualty N Stock None P Fairfax Fin Grp Licensed CA 4,018,011 4,057,147 1,974,462 2,447,031 0.267% 97.121% 
+2025 16. Workers' compensation 16535 Zurich Amer Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed NY 43,340,349 42,479,906 26,377,424 19,677,233 2.879% 100.000% 
+2025 16. Workers' compensation 27855 Zurich Amer Ins Co Of Il Property and Casualty N Stock None P Zurich Ins Grp Licensed IL 0 0 0 2 0.000% 100.000% 
+                                    
+2025 16. Workers' compensation   TOTAL                 1,505,422,780  1,506,539,227  663,814,159  606,619,757  100.000%   
+ 

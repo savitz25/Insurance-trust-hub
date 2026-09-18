@@ -257,6 +257,14 @@ export type InsuranceNetworkMetricsV1 = {
     agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
     licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT';
   };
+  northCarolina: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    licensingActionRows: number;
+    producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY';
+    licensedCompanyCoverage: 'OPEN_SEARCH_ONLY';
+  };
   publication: {
     publicPeople: 0;
     publicGraphAgencies: 0;

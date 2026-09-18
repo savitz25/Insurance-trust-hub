@@ -57,6 +57,10 @@ assert(v1.pennsylvania.snapshotFingerprint === pub.pennsylvaniaSnapshotFingerpri
 assert(v1.pennsylvania.licensedCompaniesDistinctNaic === 1722, "PA 1722 licensed companies");
 assert(v1.pennsylvania.enforcementActions === 3232, "PA 3232 enforcement actions");
 assert(v1.pennsylvania.complaintTableRows === 595, "PA 595 complaint rows");
+assert(v1.northCarolina.snapshotFingerprint === pub.northCarolinaSnapshotFingerprint, "NC snapshot fingerprint");
+assert(v1.northCarolina.licensingActionRows === 2874, "NC 2874 licensing action rows");
+assert(byKey.nc_licensing_action_rows.value === 2874, "NC licensing metric");
+assert(byKey.nc_licensing_action_rows.value !== byKey.licensed_insurance_companies.value, "NC actions != national companies");
 assert(byKey.pa_licensed_companies_distinct_naic.value === 1722, "PA licensed metric");
 assert(byKey.pa_licensed_companies_distinct_naic.value !== byKey.licensed_insurance_companies.value, "PA companies != national companies");
 assert(byKey.pa_enforcement_action_documents.value === 3232, "PA enforcement metric");

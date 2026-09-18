@@ -1,0 +1,633 @@
+PRIVATE PASSENGER AUTO BUSINESS (LINES 19.1, 19.2 AND 21.1) 
+FOR THE YEAR ENDED DECEMBER 31, 2025 
+Year NAIC 
+Company Code 
+Company Name Business Type Business 
+Sub Type 
+Code 
+Company  
+Type 
+Company 
+Sub Type 
+Code 
+Statement  
+Type  
+Code 
+Group Name Licensed  
+in NC 
+State of 
+Domicile 
+ Direct Premiums 
+Written  
+ Direct Premiums 
+Earned  
+ Direct Losses 
+Paid  
+ Direct Losses 
+Incurred  
+Market 
+Share % 
+2025 10034 Farm Bureau Ins Of Nc Inc Property and Casualty N Stock None P North Carolina Farm Bureau Grp Licensed NC 50 50 2,658 -20,314 0.000% 
+2025 10051 Lyndon Southern Ins Co Property and Casualty N Stock None P Tiptree Fin Grp Licensed DE 2,424,944 2,362,732 378,348 353,659 0.024% 
+2025 10111 American Bankers Ins Co Of Fl Property and Casualty N Stock None P Assurant Inc Grp Licensed FL 548 335 0 -763 0.000% 
+2025 10235 American Southern Ins Co Property and Casualty N Stock None P Atlantic Amer Grp Licensed KS 0 0 -562 -562 0.000% 
+2025 10389 Agent Alliance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed AL 368,803 396,943 423,184 110,385 0.004% 
+2025 10677 The Cincinnati Ins Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 35,946,961 36,380,239 17,948,948 19,029,514 0.361% 
+2025 10749 Intrepid Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 5,433 7,565 0 0 0.000% 
+2025 10804 Continental Western Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 21,208 18,169 1,100 1,999 0.000% 
+2025 10844 Builders Mut Ins Co Property and Casualty N Mutual None P Builders Grp Licensed NC 319,231 294,692 45,557 43,934 0.003% 
+2025 10914 Kemper Independence Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IL 45,045 48,763 443,575 -125,850 0.000% 
+2025 10948 Nationwide Ins Co Of Fl Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -37,701 0.000% 
+2025 10984 Ansur Amer Ins Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 4,427 1,079 0 22 0.000% 
+2025 11000 Sentinel Ins Co Ltd Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 107,235 106,767 66,540 -96,785 0.001% 
+2025 11071 Safeco Ins Co Of Or Property and Casualty N Stock None P Liberty Mut Grp   OR 0 0 346 346 0.000% 
+2025 11128 Greenville Cas Ins Co Inc Property and Casualty N Stock None P Leon Hix Grp Licensed SC 3,374,018 3,486,910 5,876,192 4,599,188 0.034% 
+2025 11162 Insurance Co Of The South Property and Casualty N Stock None P Tiptree Fin Grp Licensed GA 4,106,226 3,755,386 869,828 878,898 0.041% 
+2025 11185 Foremost Ins Co Grand Rapids Mi Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 5,679,493 5,826,312 2,735,349 2,080,306 0.057% 
+2025 11800 Foremost Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 173,516 171,014 10,260 103,930 0.002% 
+2025 12130 New South Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 33,913 33,765 0.000% 
+2025 12475 Republic Franklin Ins Co Property and Casualty N Stock None P Utica Grp Licensed OH 317,327 369,729 460,819 561,754 0.003% 
+2025 12484 Liberty Mut Personal Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 54,740 74,859 0.000% 
+2025 12572 Selective Ins Co Of Amer Property and Casualty N Stock None P Selective Ins Grp Licensed NJ 271,281 267,582 62,396 94,114 0.003% 
+2025 12599 Infinity Standard Ins Co Property and Casualty N Stock None P Kemper Corp Grp Not Licensed IN 0 0 -177 -177 0.000% 
+2025 12617 The Members Ins Co Property and Casualty N Stock None P Automobile Club Mi Grp Licensed NC 53,815,912 54,765,174 34,045,875 35,576,990 0.540% 
+2025 12831 State Natl Ins Co Inc Property and Casualty N Stock None P Markel Grp Licensed TX 909,384 939,395 641,618 -43,030 0.009% 
+2025 12873 Privilege Underwriters Recp Exch Property and Casualty N Reciprocal None P Tokio Marine Holdings Inc Grp Licensed FL 14,208,537 13,210,986 6,128,792 6,120,034 0.143% 
+2025 13036 Builders Premier Ins Co Property and Casualty N Stock None P Builders Grp Licensed NC 335 297 3,087 -10,459 0.000% 
+2025 13234 Wilshire Ins Co Property and Casualty N Stock None P Iat Reins Co Grp Licensed NC 0 0 -200 -200 0.000% 
+2025 13714 Pharmacists Mut Ins Co Property and Casualty N Stock None P Pharmacists Mut Grp Licensed IA 0 0 16,000 -57,870 0.000% 
+2025 13935 Federated Mut Ins Co Property and Casualty N Mutual None P Federated Mut Grp Licensed MN 61,569 61,202 4,709 30,242 0.001% 
+2025 13986 Frankenmuth Ins Co Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 369,469 359,659 271,056 -216,584 0.004% 
+2025 14788 Ngm Ins Co Property and Casualty N Stock None P American Family Ins Grp Licensed FL 1,964,943 4,134,764 2,930,085 2,689,845 0.020% 
+2025 14842 North Carolina Farm Bur Mut Ins Co Property and Casualty N Mutual None P North Carolina Farm Bureau Grp Licensed NC 1,037,627,277 1,021,958,698 631,614,373 628,864,907 10.408% 
+2025 14990 Pennsylvania Natl Mut Cas Ins Co Property and Casualty N Mutual None P Pennsylvania Natl Ins Grp Licensed PA 53,802,561 53,992,014 34,292,253 36,909,185 0.540% 
+2025 15130 Encompass Ind Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 -84 -94 0.000% 
+2025 16024 Federated Reserve Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 6,547 6,388 0 433 0.000% 
+2025 16063 Unitrin Auto & Home Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed NY 8,799 14,619 481,374 354,888 0.000% 
+2025 16186 Vault Recip Exch Property and Casualty N Reciprocal None P Vault Holdings Grp Licensed FL 281,364 174,186 17,631 -64,527 0.003% 
+2025 16217 National Farmers Union Prop & Cas Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 0 -499 0.000% 
+2025 16535 Zurich Amer Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed NY 0 0 22,715 22,715 0.000% 
+2025 17182 Intrepid Cas Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 7,487 5,876 0 0 0.000% 
+2025 17230 Allstate Prop & Cas Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 521,464,250 524,430,949 294,398,820 255,819,275 5.231% 
+2025 18058 Philadelphia Ind Ins Co Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed PA 4,145,045 4,062,601 1,279,114 1,262,900 0.042% 
+2025 18139 Peak Prop & Cas Ins Corp Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 111,820,475 110,092,339 79,079,471 78,852,002 1.122% 
+2025 18279 Bankers Standard Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 13,327,352 12,942,303 5,244,582 5,696,793 0.134% 
+2025 18600 Usaa Gen Ind Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 186,912,429 183,099,341 119,666,129 131,364,394 1.875% 
+2025 18988 Auto Owners Ins Co Property and Casualty N Mutual None P Auto Owners Grp Licensed MI 74,246,451 73,285,949 49,174,744 54,257,212 0.745% 
+2025 19070 Standard Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 889,008 5,192,666 4,654,047 1,997,797 0.009% 
+2025 19100 Amco Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 0 0 0 -56 0.000% 
+2025 19232 Allstate Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 45,163,568 44,925,556 20,603,442 16,408,167 0.453% 
+2025 19240 Allstate Ind Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 34,714,467 35,443,007 21,146,389 14,485,314 0.348% 
+2025 19259 Selective Ins Co Of Sc Property and Casualty N Stock None P Selective Ins Grp Licensed IN 155,372 165,914 36,844 32,644 0.002% 
+2025 19402 Aig Prop Cas Co Property and Casualty N Stock None P American Intl Grp Licensed IL 1,918,605 1,920,186 780,135 1,021,030 0.019% 
+2025 19544 Liberty Cnty Mut Ins Co Property and Casualty N Mutual None P Liberty Mut Grp Not Licensed TX 0 0 417 21,753 0.000% 
+2025 19682 Hartford Fire Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 42,259 41,082 305 2,062 0.000% 
+2025 19704 American States Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 80,436,828 77,015,649 39,214,882 42,401,711 0.807% 
+2025 19720 American Alt Ins Corp Property and Casualty N Stock None P Munich Re Grp Licensed DE 0 0 0 420 0.000% 
+2025 19976 Amica Mut Ins Co Property and Casualty N Mutual None P Amica Mut Grp Licensed RI 60,670,813 60,855,103 32,687,418 34,421,225 0.609% 
+2025 20230 Central Ins Co Property and Casualty N Stock None P Central Mut Ins Co Grp Licensed OH 23,809,195 24,245,069 13,703,426 14,410,458 0.239% 
+2025 20281 Federal Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 25,822 28,345 351,087 427,321 0.000% 
+2025 20303 Great Northern Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 0 0 0 -4 0.000% 
+2025 20346 Pacific Ind Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed DE 0 0 0 -25,401 0.000% 
+2025 20397 Vigilant Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed NY 0 0 0 -71 0.000% 
+2025 21180 Sentry Select Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 1,336,143 1,342,490 812,444 608,745 0.013% 
+2025 21253 Garrison Prop & Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 117,082,937 114,175,685 68,681,065 73,565,367 1.174% 
+2025 21261 Riverstone Intl Ins Inc Property and Casualty N Stock None P Riverstone Intl Grp Licensed MA -6,539 34,503 338,129 -80,851 0.000% 
+2025 21415 Employers Mut Cas Co Property and Casualty N Mutual None P Emc Ins Co Grp Licensed IA 0 0 0 -786 0.000% 
+2025 21709 Truck Ins Exch Property and Casualty N Reciprocal None P Farmers Ins Grp Licensed CA 2,225,240 2,277,718 1,879,541 -2,021,968 0.022% 
+2025 21727 Progressive Universal Ins Co Property and Casualty N Stock None P Progressive Grp Licensed WI 7,823,635 8,118,619 3,400,760 3,045,514 0.078% 
+2025 21735 Progressive Premier Ins Co Of Il Property and Casualty N Stock None P Progressive Grp Licensed OH 909,633,096 857,279,625 468,564,220 524,931,738 9.124% 
+2025 21784 Firemens Ins Co Of Washington Dc Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 8,665 9,912 2,275 1,822 0.000% 
+2025 21849 American Automobile Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed MO 0 0 0 3 0.000% 
+2025 21873 Firemans Fund Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed IL 0 0 0 -21,889 0.000% 
+2025 22055 Geico Ind Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 475,663,382 486,269,973 289,203,898 311,115,567 4.771% 
+2025 22063 Government Employees Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 564,309,985 562,228,373 361,887,482 384,606,016 5.660% 
+2025 22098 Grain Dealers Mut Ins Co Property and Casualty N Mutual None P American Family Ins Grp Licensed IN 757,264 1,552,854 1,948,614 1,311,619 0.008% 
+2025 22268 Infinity Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IN 1,390 1,390 474,525 197,565 0.000% 
+2025 22292 Hanover Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH -10 576 0 178 0.000% 
+2025 22306 Massachusetts Bay Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 0 0 0 -796 0.000% 
+2025 22357 Hartford Accident & Ind Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 2,166,398 2,241,721 794,760 547,431 0.022% 
+2025 22578 Horace Mann Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 18,990,039 18,817,775 9,618,359 9,511,135 0.190% 
+2025 22608 National Specialty Ins Co Property and Casualty N Stock None P Markel Grp Licensed TX 448,495 462,128 556,220 406,404 0.004% 
+2025 22635 Discovery Ins Co Property and Casualty N Stock None P   Licensed NC 27,821,618 31,565,276 29,346,238 27,014,658 0.279% 
+2025 22683 Teachers Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 10,032,918 9,837,514 6,130,316 6,388,376 0.101% 
+2025 22748 Pacific Employers Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 0 0 0 -1 0.000% 
+2025 22756 Horace Mann Prop & Cas Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 10,036,127 10,295,565 5,139,668 4,307,158 0.101% 
+2025 22772 Integon Ind Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 653,633,709 666,577,943 439,562,661 409,203,449 6.556% 
+2025 22780 Integon Gen Ins Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 367,686,506 307,856,756 175,155,118 190,326,895 3.688% 
+2025 22861 Southern Pilot Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 -141 0.000% 
+2025 22888 Point Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 0 0 0 214 0.000% 
+2025 22906 Permanent Gen Assur Corp Of Oh Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 26,009,492 27,189,082 21,707,093 21,345,391 0.261% 
+2025 22926 Economy Fire & Cas Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 16,952,433 17,058,111 11,365,839 11,785,454 0.170% 
+2025 23043 Liberty Mut Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed MA 8,229,702 9,932,899 3,590,694 4,089,528 0.083% 
+2025 23280 The Cincinnati Ind Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 92,647 82,869 18,835 18,835 0.001% 
+2025 23434 Middlesex Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 3,049 316 0 0 0.000% 
+2025 23450 American Family Home Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed FL 617,101 596,430 96,642 98,935 0.006% 
+2025 23469 American Modern Home Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed OH -8 -8 0 0 0.000% 
+2025 23582 Harleysville Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -2,273 0.000% 
+2025 23728 National Gen Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 188,702 193,396 87,294 133,061 0.002% 
+2025 23760 Nationwide Gen Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 151,650,847 158,318,820 63,863,974 56,037,603 1.521% 
+2025 23787 Nationwide Mut Ins Co Property and Casualty N Mutual None P Nationwide Corp Grp Licensed OH 157,000,878 158,697,871 75,846,602 77,824,756 1.575% 
+2025 24066 American Fire & Cas Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 2,951 6,331 0 56 0.000% 
+2025 24074 Ohio Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 64,102 72,730 537,879 1,343,171 0.001% 
+2025 24082 Ohio Security Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 431,901 526,402 182,483 843,476 0.004% 
+2025 24198 Peerless Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 -760 14,912 0.000% 
+2025 24252 Progressive Amer Ins Co Property and Casualty N Stock None P Progressive Grp Licensed OH 0 0 327 327 0.000% 
+2025 24376 Spinnaker Ins Co Property and Casualty N Stock None P Sh1 Holdings Grp Licensed IL 341,992 316,497 53,807 146,073 0.003% 
+2025 24414 General Cas Co Of Wi Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 16 0.000% 
+2025 24449 Regent Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 -127 0.000% 
+2025 24724 First Natl Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 73,379 82,454 26,672 20,161 0.001% 
+2025 24732 General Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 357,892 329,602 116,623 241,946 0.004% 
+2025 24740 Safeco Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 121,720 120,579 21,775 18,765 0.001% 
+2025 24988 Sentry Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 48,108 51,730 0 11,936 0.000% 
+2025 25127 State Auto Prop & Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA 0 18 286,710 9,517,405 0.000% 
+2025 25178 State Farm Mut Auto Ins Co Property and Casualty N Mutual None P State Farm Grp Licensed IL 1,459,397,849 1,471,165,131 933,490,713 901,657,496 14.639% 
+2025 25224 Great Divide Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed ND 933 626 0 1,701 0.000% 
+2025 25321 Farmers Direct Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed RI 5,947,180 6,015,269 3,565,456 3,439,257 0.060% 
+2025 25453 Nationwide Ins Co Of Amer Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 117,894,029 126,005,741 71,884,432 65,934,540 1.183% 
+2025 25615 Charter Oak Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 39,794 110,574 31,344 -15,871 0.000% 
+2025 25623 Phoenix Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 290,065 738,191 528,894 -25,374 0.003% 
+2025 25658 Travelers Ind Co Property and Casualty N Stock None P Travelers Grp Licensed CT 238,979 698,511 825,402 362,549 0.002% 
+2025 25666 Travelers Ind Co Of Amer Property and Casualty N Stock None P Travelers Grp Licensed CT 140,789 422,894 400,399 -12,460 0.001% 
+2025 25682 Travelers Ind Co Of Ct Property and Casualty N Stock None P Travelers Grp Licensed CT 74,942 388,283 496,456 155,441 0.001% 
+2025 25712 Esurance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL -205 -205 1,740,525 -739,044 0.000% 
+2025 25844 Union Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 1,732 9,056 25,820 22,176 0.000% 
+2025 25941 United Serv Automobile Assn Property and Casualty N Reciprocal None P United Serv Automobile Assn Grp Licensed TX 262,697,046 260,406,592 153,839,164 159,597,454 2.635% 
+2025 25968 Usaa Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 234,135,098 231,356,244 140,637,780 146,124,402 2.349% 
+2025 25976 Utica Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 6,697,822 6,791,279 3,539,083 3,965,838 0.067% 
+2025 25984 Graphic Arts Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 52,866 40,083 17,700 -8,841 0.001% 
+2025 26093 Nationwide Affinity Co Of Amer Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 -5,059 27,743 0.000% 
+2025 26182 Harleysville Worcester Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -249 0.000% 
+2025 26263 Erie Ins Co Property and Casualty N Stock None P Erie Ins Grp Licensed PA 131,052,064 131,329,824 84,859,756 85,977,089 1.315% 
+2025 26271 Erie Ins Exch Property and Casualty N Reciprocal None P Erie Ins Grp Licensed PA 314,060,779 297,935,302 184,524,566 188,432,284 3.150% 
+2025 26298 Farmers Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed RI 24,246,053 25,703,423 13,277,641 12,665,343 0.243% 
+2025 26867 Southern Ins Co Of Va Property and Casualty N Stock None P Donegal Grp Licensed VA 0 0 -2,450 -2,450 0.000% 
+2025 26905 Century Natl Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 0 -11 0.000% 
+2025 27120 Trumbull Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 127,580 543,880 342,751 -253,950 0.001% 
+2025 27138 Midvale Ind Co Property and Casualty N Stock None P American Family Ins Grp Licensed WI 0 0 57,413 -22,684 0.000% 
+2025 27154 Atlantic Specialty Ins Co Property and Casualty N Stock None P Intact Financial Grp Licensed NY 0 0 0 -27 0.000% 
+2025 27740 North Pointe Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 -11 0.000% 
+2025 27998 Travelers Home & Marine Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 106,841,987 103,405,601 47,150,100 52,062,642 1.072% 
+2025 28304 Federated Serv Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 19,546 23,088 2,914 4,756 0.000% 
+2025 28665 The Cincinnati Cas Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 19,418,138 14,825,554 7,182,443 8,950,055 0.195% 
+2025 29068 American Family Connect Prop & Cas I Property and Casualty N Stock None P American Family Ins Grp Licensed WI 13,348,391 12,871,664 7,940,346 8,729,640 0.134% 
+2025 29424 Hartford Cas Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 376,208 362,419 175,300 525,722 0.004% 
+2025 29459 Twin City Fire Ins Co Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 0 0 0 -10,248 0.000% 
+2025 29580 Berkley Regional Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 7,915 8,897 0 -37 0.000% 
+2025 29742 Integon Natl Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 49,153,955 46,514,489 22,625,621 9,182,061 0.493% 
+2025 30104 Hartford Underwriters Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 3,306,932 3,624,587 2,680,672 2,797,935 0.033% 
+2025 31003 Tri State Ins Co Of Mn Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 93,962 74,996 4,713 14,475 0.001% 
+2025 31325 Acadia Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 30,847 22,150 22,949 52,392 0.000% 
+2025 31488 Integon Preferred Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 358,097,324 314,860,835 181,016,089 196,617,051 3.592% 
+2025 31968 Merastar Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IL 0 0 0 -10,964 0.000% 
+2025 32620 National Interstate Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 0 0 0 31 0.000% 
+2025 32700 Owners Ins Co Property and Casualty N Stock None P Auto Owners Grp Licensed OH 129,243,202 123,821,786 74,518,655 80,741,055 1.296% 
+2025 32972 Universal Ins Co Property and Casualty N Stock None P Automobile Club Mi Grp Licensed NC 12,497,762 13,080,855 11,266,926 10,062,290 0.125% 
+2025 33600 Lm Ins Corp Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 127,608,268 123,183,478 60,802,646 66,875,356 1.280% 
+2025 34690 Property & Cas Ins Co Of Hartford Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 2,856,419 2,814,148 1,272,526 1,054,653 0.029% 
+2025 34789 21st Century Centennial Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed PA 0 0 -497 -5,863 0.000% 
+2025 35696 Harleysville Preferred Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -6,668 0.000% 
+2025 36064 Hanover Amer Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 0 0 -733 -1,091 0.000% 
+2025 36145 Travelers Personal Security Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 184,812 798,705 579,160 242,791 0.002% 
+2025 36269 Titan Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Not Licensed MI 0 0 -2,558 -6,070 0.000% 
+2025 36447 Lm Gen Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 0 0 11,312 11,311 0.000% 
+2025 37141 Southern Gen Ins Co Property and Casualty N Stock None P   Licensed GA 7,402,461 7,656,806 9,399,947 9,826,374 0.074% 
+2025 37214 American States Preferred Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 532,170 574,459 160,575 225,155 0.005% 
+2025 37257 Praetorian Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 -50 0.000% 
+2025 37478 Hartford Ins Co Of The Midwest Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 17,493,862 16,577,060 7,282,082 8,383,838 0.175% 
+2025 37877 Nationwide Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 156,115 -21,118 6,077,483 -358,052 0.002% 
+2025 37915 Essentia Ins Co Property and Casualty N Stock None P Markel Grp Licensed MO 8,636,919 7,010,414 2,514,460 3,308,424 0.087% 
+2025 38067 Economy Preferred Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 17,429,681 17,295,359 10,938,273 10,029,611 0.175% 
+2025 38261 Hartford Ins Co Of The Southeast Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 0 0 79 79 0.000% 
+2025 38660 Mic Gen Ins Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 0 17,117 0.000% 
+2025 38784 Progressive Southeastern Ins Co Property and Casualty N Stock None P Progressive Grp Licensed IN 627,344,411 594,180,775 332,581,951 367,023,323 6.293% 
+2025 38911 Berkley Natl Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 7,392 8,020 1,127 11,481 0.000% 
+2025 39012 Safeco Ins Co Of Il Property and Casualty N Stock None P Liberty Mut Grp Not Licensed IL 0 0 42,277 42,277 0.000% 
+2025 39098 Omni Ins Co Property and Casualty N Stock None P American Independent Ins Grp Not Licensed IL 0 0 -847 -847 0.000% 
+2025 39217 Qbe Ins Corp Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 23,231 0.000% 
+2025 39608 Nutmeg Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 629,335 540,758 162,350 194,803 0.006% 
+2025 39845 Westport Ins Corp Property and Casualty N Stock None P Swiss Re Grp Licensed MO 0 0 0 -5,408 0.000% 
+2025 39926 Selective Ins Co Of The Southeast Property and Casualty N Stock None P Selective Ins Grp Licensed IN 157,507 159,674 35,369 19,907 0.002% 
+2025 40649 Economy Premier Assur Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 1,665,615 1,733,664 840,202 1,434,972 0.017% 
+2025 40703 Unitrin Safeguard Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed WI 18,835 30,272 995,173 -74,475 0.000% 
+2025 41181 Universal Underwriters Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed IL 0 0 0 3 0.000% 
+2025 41653 Milbank Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA -467 -252 1,747,991 -6,376,966 0.000% 
+2025 42447 National Gen Assur Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 -391 -391 0.000% 
+2025 42579 Allied Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA -3,615 80,702 693,084 176,190 0.000% 
+2025 42587 Depositors Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 0 0 0 27 0.000% 
+2025 42722 American Modern Prop & Cas Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed OH 71,559 70,503 406 -97 0.001% 
+2025 42889 Victoria Fire & Cas Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 147 0.000% 
+2025 44393 West Amer Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 9,624 7,545 0 1,577 0.000% 
+                                
+2025   TOTAL                 9,969,542,222 9,781,244,700 5,848,000,293 5,918,238,138 100.000% 
+ 
+Year Line of Business NAIC 
+Company 
+Code 
+Company Name Business Type Business 
+Sub Type 
+Code 
+Company  
+Type 
+Company 
+Sub Type 
+Code 
+Statement  
+Type  
+Code 
+Group Name Licensed  
+in NC 
+State of 
+Domicile 
+ Direct Premiums 
+Written  
+ Direct 
+Premiums 
+Earned  
+ Direct Losses 
+Paid  
+ Direct Losses 
+Incurred  
+2025 19.2. Other private passenger auto liability 34789 21st Century Centennial Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed PA 0 0 -497 -5,863 
+2025 19.2. Other private passenger auto liability 31325 Acadia Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 15,280 10,736 10,298 40,649 
+2025 21.1. Private passenger auto physical damage 31325 Acadia Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 15,567 11,414 12,651 11,743 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 10389 Agent Alliance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed AL 0 0 25,827 32,256 
+2025 19.2. Other private passenger auto liability 10389 Agent Alliance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed AL 261,854 275,751 363,254 48,932 
+2025 21.1. Private passenger auto physical damage 10389 Agent Alliance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed AL 106,949 121,192 34,103 29,197 
+2025 19.2. Other private passenger auto liability 19402 Aig Prop Cas Co Property and Casualty N Stock None P American Intl Grp Licensed IL 869,193 854,299 257,171 408,297 
+2025 21.1. Private passenger auto physical damage 19402 Aig Prop Cas Co Property and Casualty N Stock None P American Intl Grp Licensed IL 1,049,412 1,065,887 522,964 612,733 
+2025 19.2. Other private passenger auto liability 42579 Allied Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA -1,607 32,685 625,495 98,744 
+2025 21.1. Private passenger auto physical damage 42579 Allied Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA -2,008 48,017 67,589 77,446 
+2025 19.2. Other private passenger auto liability 19240 Allstate Ind Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 18,848,059 19,115,855 15,132,737 9,029,956 
+2025 21.1. Private passenger auto physical damage 19240 Allstate Ind Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 15,866,408 16,327,152 6,013,652 5,455,358 
+2025 19.2. Other private passenger auto liability 19232 Allstate Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 24,092,978 23,653,849 11,377,319 7,954,036 
+2025 21.1. Private passenger auto physical damage 19232 Allstate Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 21,070,590 21,271,707 9,226,123 8,454,131 
+2025 19.2. Other private passenger auto liability 17230 Allstate Prop & Cas Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 244,926,954 240,317,514 167,084,726 137,632,735 
+2025 21.1. Private passenger auto physical damage 17230 Allstate Prop & Cas Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 276,537,296 284,113,435 127,314,094 118,186,540 
+2025 19.2. Other private passenger auto liability 19100 Amco Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 0 0 0 -62 
+2025 21.1. Private passenger auto physical damage 19100 Amco Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 0 0 0 6 
+2025 19.2. Other private passenger auto liability 19720 American Alt Ins Corp Property and Casualty N Stock None P Munich Re Grp Licensed DE 0 0 0 1,878 
+2025 21.1. Private passenger auto physical damage 19720 American Alt Ins Corp Property and Casualty N Stock None P Munich Re Grp Licensed DE 0 0 0 -1,458 
+2025 19.2. Other private passenger auto liability 21849 American Automobile Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed MO 0 0 0 3 
+2025 21.1. Private passenger auto physical damage 10111 American Bankers Ins Co Of Fl Property and Casualty N Stock None P Assurant Inc Grp Licensed FL 548 335 0 -763 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 29068 American Family Connect Prop & Cas I Property and Casualty N Stock None P American Family Ins Grp Licensed WI 0 0 9,103 8,098 
+2025 19.2. Other private passenger auto liability 29068 American Family Connect Prop & Cas I Property and Casualty N Stock None P American Family Ins Grp Licensed WI 6,872,846 6,469,042 4,213,527 4,947,059 
+2025 21.1. Private passenger auto physical damage 29068 American Family Connect Prop & Cas I Property and Casualty N Stock None P American Family Ins Grp Licensed WI 6,475,545 6,402,622 3,717,716 3,774,483 
+2025 19.2. Other private passenger auto liability 23450 American Family Home Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed FL 17 -53 0 890 
+2025 21.1. Private passenger auto physical damage 23450 American Family Home Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed FL 617,084 596,483 96,642 98,045 
+2025 19.2. Other private passenger auto liability 24066 American Fire & Cas Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 1,123 3,860 0 56 
+2025 21.1. Private passenger auto physical damage 24066 American Fire & Cas Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 1,828 2,471 0 0 
+2025 21.1. Private passenger auto physical damage 23469 American Modern Home Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed OH -8 -8 0 0 
+2025 21.1. Private passenger auto physical damage 42722 American Modern Prop & Cas Ins Co Property and Casualty N Stock None P Munich Re Grp Licensed OH 71,559 70,503 406 -97 
+2025 19.2. Other private passenger auto liability 10235 American Southern Ins Co Property and Casualty N Stock None P Atlantic Amer Grp Licensed KS 0 0 -562 -562 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 19704 American States Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 0 0 14,595 26,894 
+2025 19.2. Other private passenger auto liability 19704 American States Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 41,653,949 38,339,335 22,879,996 27,169,153 
+2025 21.1. Private passenger auto physical damage 19704 American States Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 38,782,879 38,676,314 16,320,291 15,205,664 
+2025 19.2. Other private passenger auto liability 37214 American States Preferred Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 260,718 274,822 63,880 138,951 
+2025 21.1. Private passenger auto physical damage 37214 American States Preferred Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 271,452 299,637 96,695 86,204 
+2025 19.2. Other private passenger auto liability 19976 Amica Mut Ins Co Property and Casualty N Mutual None P Amica Mut Grp Licensed RI 30,514,391 30,371,075 17,217,894 19,095,547 
+2025 21.1. Private passenger auto physical damage 19976 Amica Mut Ins Co Property and Casualty N Mutual None P Amica Mut Grp Licensed RI 30,156,422 30,484,028 15,469,524 15,325,678 
+2025 19.2. Other private passenger auto liability 10984 Ansur Amer Ins Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 1,567 382 0 8 
+2025 21.1. Private passenger auto physical damage 10984 Ansur Amer Ins Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 2,860 697 0 14 
+2025 19.2. Other private passenger auto liability 27154 Atlantic Specialty Ins Co Property and Casualty N Stock None P Intact Financial Grp Licensed NY 0 0 0 -27 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 18988 Auto Owners Ins Co Property and Casualty N Mutual None P Auto Owners Grp Licensed MI 0 0 44,109 -24,530 
+2025 19.2. Other private passenger auto liability 18988 Auto Owners Ins Co Property and Casualty N Mutual None P Auto Owners Grp Licensed MI 36,623,263 35,966,940 25,695,787 31,514,266 
+2025 21.1. Private passenger auto physical damage 18988 Auto Owners Ins Co Property and Casualty N Mutual None P Auto Owners Grp Licensed MI 37,623,188 37,319,009 23,434,848 22,767,476 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 18279 Bankers Standard Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 2,751 2,239 0 263 
+2025 19.2. Other private passenger auto liability 18279 Bankers Standard Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 5,692,654 5,427,190 2,559,997 2,738,568 
+2025 21.1. Private passenger auto physical damage 18279 Bankers Standard Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 7,631,947 7,512,874 2,684,585 2,957,962 
+2025 19.2. Other private passenger auto liability 38911 Berkley Natl Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 4,747 5,094 0 10,929 
+2025 21.1. Private passenger auto physical damage 38911 Berkley Natl Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 2,645 2,926 1,127 552 
+2025 19.2. Other private passenger auto liability 29580 Berkley Regional Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 2,513 3,208 0 -37 
+2025 21.1. Private passenger auto physical damage 29580 Berkley Regional Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 5,402 5,689 0 0 
+2025 19.2. Other private passenger auto liability 10844 Builders Mut Ins Co Property and Casualty N Mutual None P Builders Grp Licensed NC 166,048 141,847 2,219 2,305 
+2025 21.1. Private passenger auto physical damage 10844 Builders Mut Ins Co Property and Casualty N Mutual None P Builders Grp Licensed NC 153,183 152,845 43,338 41,629 
+2025 19.2. Other private passenger auto liability 13036 Builders Premier Ins Co Property and Casualty N Stock None P Builders Grp Licensed NC 187 167 0 -5,352 
+2025 21.1. Private passenger auto physical damage 13036 Builders Premier Ins Co Property and Casualty N Stock None P Builders Grp Licensed NC 148 130 3,087 -5,107 
+2025 19.2. Other private passenger auto liability 20230 Central Ins Co Property and Casualty N Stock None P Central Mut Ins Co Grp Licensed OH 12,055,231 12,091,719 6,868,339 7,777,168 
+2025 21.1. Private passenger auto physical damage 20230 Central Ins Co Property and Casualty N Stock None P Central Mut Ins Co Grp Licensed OH 11,753,964 12,153,350 6,835,087 6,633,290 
+2025 21.1. Private passenger auto physical damage 26905 Century Natl Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 0 -11 
+2025 19.2. Other private passenger auto liability 25615 Charter Oak Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 19,858 57,465 17,006 -30,248 
+2025 21.1. Private passenger auto physical damage 25615 Charter Oak Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 19,936 53,109 14,338 14,377 
+2025 19.2. Other private passenger auto liability 10804 Continental Western Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 9,500 7,426 0 1,513 
+2025 21.1. Private passenger auto physical damage 10804 Continental Western Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 11,708 10,743 1,100 486 
+2025 19.2. Other private passenger auto liability 42587 Depositors Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 0 0 0 4 
+2025 21.1. Private passenger auto physical damage 42587 Depositors Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed IA 0 0 0 23 
+2025 19.2. Other private passenger auto liability 22635 Discovery Ins Co Property and Casualty N Stock None P   Licensed NC 16,000,289 17,400,567 21,903,463 19,882,265 
+2025 21.1. Private passenger auto physical damage 22635 Discovery Ins Co Property and Casualty N Stock None P   Licensed NC 11,821,329 14,164,709 7,442,775 7,132,393 
+2025 19.2. Other private passenger auto liability 22926 Economy Fire & Cas Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 8,181,647 8,122,383 6,389,528 6,760,916 
+2025 21.1. Private passenger auto physical damage 22926 Economy Fire & Cas Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 8,770,786 8,935,728 4,976,311 5,024,538 
+2025 19.2. Other private passenger auto liability 38067 Economy Preferred Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 8,474,193 8,292,801 5,889,304 5,237,413 
+2025 21.1. Private passenger auto physical damage 38067 Economy Preferred Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 8,955,488 9,002,558 5,048,969 4,792,198 
+2025 19.2. Other private passenger auto liability 40649 Economy Premier Assur Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 696,874 735,749 355,744 939,909 
+2025 21.1. Private passenger auto physical damage 40649 Economy Premier Assur Co Property and Casualty N Stock None P Farmers Ins Grp Licensed IL 968,741 997,915 484,458 495,063 
+2025 19.2. Other private passenger auto liability 21415 Employers Mut Cas Co Property and Casualty N Mutual None P Emc Ins Co Grp Licensed IA 0 0 0 -786 
+2025 19.2. Other private passenger auto liability 15130 Encompass Ind Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 -84 -84 
+2025 21.1. Private passenger auto physical damage 15130 Encompass Ind Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 0 -10 
+2025 19.2. Other private passenger auto liability 26263 Erie Ins Co Property and Casualty N Stock None P Erie Ins Grp Licensed PA 66,708,309 65,852,104 42,276,310 44,419,226 
+2025 21.1. Private passenger auto physical damage 26263 Erie Ins Co Property and Casualty N Stock None P Erie Ins Grp Licensed PA 64,343,755 65,477,720 42,583,446 41,557,863 
+2025 19.2. Other private passenger auto liability 26271 Erie Ins Exch Property and Casualty N Reciprocal None P Erie Ins Grp Licensed PA 148,331,157 137,481,591 85,159,292 90,688,617 
+2025 21.1. Private passenger auto physical damage 26271 Erie Ins Exch Property and Casualty N Reciprocal None P Erie Ins Grp Licensed PA 165,729,622 160,453,711 99,365,274 97,743,667 
+2025 19.2. Other private passenger auto liability 37915 Essentia Ins Co Property and Casualty N Stock None P Markel Grp Licensed MO 8,636,919 7,010,414 2,514,460 3,308,424 
+2025 19.2. Other private passenger auto liability 25712 Esurance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL -205 -205 1,757,228 -638,392 
+2025 21.1. Private passenger auto physical damage 25712 Esurance Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 -16,703 -100,652 
+2025 19.2. Other private passenger auto liability 10034 Farm Bureau Ins Of Nc Inc Property and Casualty N Stock None P North Carolina Farm Bureau Grp Licensed NC -151 -151 -2,200 -25,172 
+2025 21.1. Private passenger auto physical damage 10034 Farm Bureau Ins Of Nc Inc Property and Casualty N Stock None P North Carolina Farm Bureau Grp Licensed NC 201 201 4,858 4,858 
+2025 19.2. Other private passenger auto liability 25321 Farmers Direct Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed RI 2,892,134 2,886,302 2,098,711 2,087,584 
+2025 21.1. Private passenger auto physical damage 25321 Farmers Direct Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed RI 3,055,046 3,128,967 1,466,745 1,351,673 
+2025 19.2. Other private passenger auto liability 26298 Farmers Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed RI 10,063,895 10,245,338 7,743,999 7,509,140 
+2025 21.1. Private passenger auto physical damage 26298 Farmers Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed RI 14,182,158 15,458,085 5,533,642 5,156,203 
+2025 19.2. Other private passenger auto liability 20281 Federal Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 1,167 1,141 350,000 423,979 
+2025 21.1. Private passenger auto physical damage 20281 Federal Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 24,655 27,204 1,087 3,342 
+2025 19.2. Other private passenger auto liability 13935 Federated Mut Ins Co Property and Casualty N Mutual None P Federated Mut Grp Licensed MN 26,246 28,422 4,709 8,740 
+2025 21.1. Private passenger auto physical damage 13935 Federated Mut Ins Co Property and Casualty N Mutual None P Federated Mut Grp Licensed MN 35,323 32,780 0 21,502 
+2025 19.2. Other private passenger auto liability 16024 Federated Reserve Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 3,885 3,592 0 427 
+2025 21.1. Private passenger auto physical damage 16024 Federated Reserve Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 2,662 2,796 0 6 
+2025 19.2. Other private passenger auto liability 28304 Federated Serv Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 9,784 9,735 0 1,741 
+2025 21.1. Private passenger auto physical damage 28304 Federated Serv Ins Co Property and Casualty N Stock None P Federated Mut Grp Licensed MN 9,762 13,353 2,914 3,015 
+2025 19.2. Other private passenger auto liability 21873 Firemans Fund Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed IL 0 0 0 -21,902 
+2025 21.1. Private passenger auto physical damage 21873 Firemans Fund Ins Co Property and Casualty N Stock None P Allianz Ins Grp Licensed IL 0 0 0 13 
+2025 19.2. Other private passenger auto liability 21784 Firemens Ins Co Of Washington Dc Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 3,216 3,370 0 81 
+2025 21.1. Private passenger auto physical damage 21784 Firemens Ins Co Of Washington Dc Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 5,449 6,542 2,275 1,741 
+2025 19.2. Other private passenger auto liability 24724 First Natl Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 31,870 35,517 4,011 -1,110 
+2025 21.1. Private passenger auto physical damage 24724 First Natl Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 41,509 46,937 22,661 21,271 
+2025 19.2. Other private passenger auto liability 11185 Foremost Ins Co Grand Rapids Mi Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 910,250 912,227 642,554 894,141 
+2025 21.1. Private passenger auto physical damage 11185 Foremost Ins Co Grand Rapids Mi Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 4,769,243 4,914,085 2,092,795 1,186,165 
+2025 19.2. Other private passenger auto liability 11800 Foremost Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 104,760 101,093 0 94,433 
+2025 21.1. Private passenger auto physical damage 11800 Foremost Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 68,756 69,921 10,260 9,497 
+2025 19.2. Other private passenger auto liability 13986 Frankenmuth Ins Co Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 201,061 202,711 247,914 -239,726 
+2025 21.1. Private passenger auto physical damage 13986 Frankenmuth Ins Co Property and Casualty N Stock None P Frankenmuth Grp Licensed MI 168,408 156,948 23,142 23,142 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 21253 Garrison Prop & Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 0 0 185,314 95,454 
+2025 19.2. Other private passenger auto liability 21253 Garrison Prop & Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 55,412,431 53,728,271 34,753,602 40,204,503 
+2025 21.1. Private passenger auto physical damage 21253 Garrison Prop & Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 61,670,506 60,447,414 33,742,149 33,265,410 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22055 Geico Ind Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 0 0 3,145,337 4,197,761 
+2025 19.2. Other private passenger auto liability 22055 Geico Ind Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 234,345,777 232,538,696 174,057,601 199,123,819 
+2025 21.1. Private passenger auto physical damage 22055 Geico Ind Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 241,317,605 253,731,277 112,000,960 107,793,987 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 24414 General Cas Co Of Wi Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 -11 
+2025 19.2. Other private passenger auto liability 24414 General Cas Co Of Wi Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 11 
+2025 21.1. Private passenger auto physical damage 24414 General Cas Co Of Wi Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 16 
+2025 19.2. Other private passenger auto liability 24732 General Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 161,881 148,753 57,127 187,092 
+2025 21.1. Private passenger auto physical damage 24732 General Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 196,011 180,849 59,496 54,854 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22063 Government Employees Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 0 0 969,886 1,357,155 
+2025 19.2. Other private passenger auto liability 22063 Government Employees Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 287,585,721 280,342,326 196,948,238 218,776,344 
+2025 21.1. Private passenger auto physical damage 22063 Government Employees Ins Co Property and Casualty N Stock None P Berkshire Hathaway Grp Licensed NE 276,724,264 281,886,047 163,969,358 164,472,517 
+2025 19.2. Other private passenger auto liability 22098 Grain Dealers Mut Ins Co Property and Casualty N Mutual None P American Family Ins Grp Licensed IN 361,768 734,975 1,263,421 755,172 
+2025 21.1. Private passenger auto physical damage 22098 Grain Dealers Mut Ins Co Property and Casualty N Mutual None P American Family Ins Grp Licensed IN 395,496 817,879 685,193 556,447 
+2025 19.2. Other private passenger auto liability 25984 Graphic Arts Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 27,583 21,326 17,700 -10,194 
+2025 21.1. Private passenger auto physical damage 25984 Graphic Arts Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 25,283 18,757 0 1,353 
+2025 19.2. Other private passenger auto liability 25224 Great Divide Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed ND 729 489 0 1,627 
+2025 21.1. Private passenger auto physical damage 25224 Great Divide Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed ND 204 137 0 74 
+2025 19.2. Other private passenger auto liability 20303 Great Northern Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed IN 0 0 0 -4 
+2025 19.2. Other private passenger auto liability 11128 Greenville Cas Ins Co Inc Property and Casualty N Stock None P Leon Hix Grp Licensed SC 3,374,018 3,486,910 5,876,192 4,599,188 
+2025 19.2. Other private passenger auto liability 36064 Hanover Amer Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 0 0 -733 -1,091 
+2025 19.2. Other private passenger auto liability 22292 Hanover Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH -10 576 0 157 
+2025 21.1. Private passenger auto physical damage 22292 Hanover Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 0 0 0 21 
+2025 19.2. Other private passenger auto liability 23582 Harleysville Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -2,230 
+2025 21.1. Private passenger auto physical damage 23582 Harleysville Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -43 
+2025 19.2. Other private passenger auto liability 35696 Harleysville Preferred Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -5,273 
+2025 21.1. Private passenger auto physical damage 35696 Harleysville Preferred Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -1,395 
+2025 19.2. Other private passenger auto liability 26182 Harleysville Worcester Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -242 
+2025 21.1. Private passenger auto physical damage 26182 Harleysville Worcester Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -7 
+2025 19.2. Other private passenger auto liability 22357 Hartford Accident & Ind Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 1,087,150 1,113,172 424,284 287,622 
+2025 21.1. Private passenger auto physical damage 22357 Hartford Accident & Ind Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 1,079,248 1,128,549 370,476 259,809 
+2025 19.2. Other private passenger auto liability 29424 Hartford Cas Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 202,033 192,403 110,236 467,840 
+2025 21.1. Private passenger auto physical damage 29424 Hartford Cas Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 174,175 170,016 65,064 57,882 
+2025 19.2. Other private passenger auto liability 19682 Hartford Fire Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 17,741 16,794 -17 643 
+2025 21.1. Private passenger auto physical damage 19682 Hartford Fire Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 24,518 24,288 322 1,419 
+2025 19.2. Other private passenger auto liability 37478 Hartford Ins Co Of The Midwest Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 9,336,798 8,693,045 4,342,947 5,590,805 
+2025 21.1. Private passenger auto physical damage 37478 Hartford Ins Co Of The Midwest Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 8,157,064 7,884,015 2,939,135 2,793,033 
+2025 21.1. Private passenger auto physical damage 38261 Hartford Ins Co Of The Southeast Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 0 0 79 79 
+2025 19.2. Other private passenger auto liability 30104 Hartford Underwriters Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 1,807,589 1,937,897 1,979,275 2,249,138 
+2025 21.1. Private passenger auto physical damage 30104 Hartford Underwriters Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 1,499,343 1,686,690 701,397 548,797 
+2025 19.2. Other private passenger auto liability 22578 Horace Mann Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 8,498,862 8,282,293 4,832,633 4,951,583 
+2025 21.1. Private passenger auto physical damage 22578 Horace Mann Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 10,491,177 10,535,482 4,785,726 4,559,552 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22756 Horace Mann Prop & Cas Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 0 0 8,929 3,829 
+2025 19.2. Other private passenger auto liability 22756 Horace Mann Prop & Cas Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 3,982,686 4,082,056 2,958,023 2,160,228 
+2025 21.1. Private passenger auto physical damage 22756 Horace Mann Prop & Cas Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 6,053,441 6,213,509 2,172,716 2,143,101 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22268 Infinity Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IN 0 0 12,628 7,496 
+2025 19.2. Other private passenger auto liability 22268 Infinity Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IN 577 577 465,737 186,367 
+2025 21.1. Private passenger auto physical damage 22268 Infinity Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IN 813 813 -3,840 3,702 
+2025 21.1. Private passenger auto physical damage 12599 Infinity Standard Ins Co Property and Casualty N Stock None P Kemper Corp Grp Not Licensed IN 0 0 -177 -177 
+2025 21.1. Private passenger auto physical damage 11162 Insurance Co Of The South Property and Casualty N Stock None P Tiptree Fin Grp Licensed GA 4,106,226 3,755,386 869,828 878,898 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22780 Integon Gen Ins Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 113,871 208,433 
+2025 19.2. Other private passenger auto liability 22780 Integon Gen Ins Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 202,023,713 160,499,700 105,364,856 124,699,647 
+2025 21.1. Private passenger auto physical damage 22780 Integon Gen Ins Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 165,662,793 147,357,056 69,676,391 65,418,815 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22772 Integon Ind Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 2,832,106 3,994,239 
+2025 19.2. Other private passenger auto liability 22772 Integon Ind Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 388,683,514 378,167,343 315,558,415 295,586,916 
+2025 21.1. Private passenger auto physical damage 22772 Integon Ind Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 264,950,195 288,410,600 121,172,140 109,622,294 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 29742 Integon Natl Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 27,688 20,259 
+2025 19.2. Other private passenger auto liability 29742 Integon Natl Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 26,219,620 22,856,065 14,054,836 1,661,196 
+2025 21.1. Private passenger auto physical damage 29742 Integon Natl Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 22,934,335 23,658,424 8,543,097 7,500,606 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 31488 Integon Preferred Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 67,951 1,418 
+2025 19.2. Other private passenger auto liability 31488 Integon Preferred Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 188,403,647 159,230,836 100,714,715 122,633,371 
+2025 21.1. Private passenger auto physical damage 31488 Integon Preferred Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 169,693,677 155,629,999 80,233,423 73,982,262 
+2025 19.2. Other private passenger auto liability 17182 Intrepid Cas Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 5,208 4,190 0 0 
+2025 21.1. Private passenger auto physical damage 17182 Intrepid Cas Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 2,279 1,686 0 0 
+2025 19.2. Other private passenger auto liability 10749 Intrepid Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 3,333 4,734 0 0 
+2025 21.1. Private passenger auto physical damage 10749 Intrepid Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 2,100 2,831 0 0 
+2025 19.2. Other private passenger auto liability 10914 Kemper Independence Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IL 31,528 33,665 457,807 -121,566 
+2025 21.1. Private passenger auto physical damage 10914 Kemper Independence Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IL 13,517 15,098 -14,232 -4,284 
+2025 19.2. Other private passenger auto liability 19544 Liberty Cnty Mut Ins Co Property and Casualty N Mutual None P Liberty Mut Grp Not Licensed TX 0 0 417 21,753 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 23043 Liberty Mut Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed MA 0 0 -3,313 -3,314 
+2025 19.2. Other private passenger auto liability 23043 Liberty Mut Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed MA 3,114,108 3,383,796 2,316,734 2,941,573 
+2025 21.1. Private passenger auto physical damage 23043 Liberty Mut Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed MA 5,115,594 6,549,103 1,277,273 1,151,269 
+2025 19.2. Other private passenger auto liability 12484 Liberty Mut Personal Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 37,986 54,476 
+2025 21.1. Private passenger auto physical damage 12484 Liberty Mut Personal Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 16,754 20,383 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 36447 Lm Gen Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 0 0 0 -1 
+2025 19.2. Other private passenger auto liability 36447 Lm Gen Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 0 0 11,162 11,162 
+2025 21.1. Private passenger auto physical damage 36447 Lm Gen Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 0 0 150 150 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 33600 Lm Ins Corp Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 0 0 311,144 304,671 
+2025 19.2. Other private passenger auto liability 33600 Lm Ins Corp Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 62,406,349 56,213,983 43,126,062 49,916,154 
+2025 21.1. Private passenger auto physical damage 33600 Lm Ins Corp Property and Casualty N Stock None P Liberty Mut Grp Licensed IL 65,201,919 66,969,495 17,365,440 16,654,531 
+2025 21.1. Private passenger auto physical damage 10051 Lyndon Southern Ins Co Property and Casualty N Stock None P Tiptree Fin Grp Licensed DE 2,424,944 2,362,732 378,348 353,659 
+2025 19.2. Other private passenger auto liability 22306 Massachusetts Bay Ins Co Property and Casualty N Stock None P The Hanover Ins Grp Licensed NH 0 0 0 -796 
+2025 19.2. Other private passenger auto liability 31968 Merastar Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IL 0 0 0 -12,142 
+2025 21.1. Private passenger auto physical damage 31968 Merastar Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed IL 0 0 0 1,178 
+2025 21.1. Private passenger auto physical damage 38660 Mic Gen Ins Corp Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 0 17,117 
+2025 19.2. Other private passenger auto liability 23434 Middlesex Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 1,873 181 0 0 
+2025 21.1. Private passenger auto physical damage 23434 Middlesex Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 1,176 135 0 0 
+2025 19.2. Other private passenger auto liability 27138 Midvale Ind Co Property and Casualty N Stock None P American Family Ins Grp Licensed WI 0 0 57,725 -21,751 
+2025 21.1. Private passenger auto physical damage 27138 Midvale Ind Co Property and Casualty N Stock None P American Family Ins Grp Licensed WI 0 0 -312 -933 
+2025 19.2. Other private passenger auto liability 41653 Milbank Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA -238 -130 1,725,574 -6,361,891 
+2025 21.1. Private passenger auto physical damage 41653 Milbank Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA -229 -122 22,417 -15,075 
+2025 19.2. Other private passenger auto liability 16217 National Farmers Union Prop & Cas Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 0 -499 
+2025 21.1. Private passenger auto physical damage 42447 National Gen Assur Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 0 0 -391 -391 
+2025 19.2. Other private passenger auto liability 23728 National Gen Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 101,785 101,536 12,916 63,715 
+2025 21.1. Private passenger auto physical damage 23728 National Gen Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 86,917 91,860 74,378 69,346 
+2025 19.2. Other private passenger auto liability 32620 National Interstate Ins Co Property and Casualty N Stock None P American Financial Grp Licensed OH 0 0 0 31 
+2025 21.1. Private passenger auto physical damage 22608 National Specialty Ins Co Property and Casualty N Stock None P Markel Grp Licensed TX 448,495 462,128 556,220 406,404 
+2025 19.2. Other private passenger auto liability 26093 Nationwide Affinity Co Of Amer Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 -2,889 15,176 
+2025 21.1. Private passenger auto physical damage 26093 Nationwide Affinity Co Of Amer Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 -2,170 12,567 
+2025 19.2. Other private passenger auto liability 23760 Nationwide Gen Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 63,142,461 64,828,906 39,209,060 34,117,963 
+2025 21.1. Private passenger auto physical damage 23760 Nationwide Gen Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 88,508,386 93,489,914 24,654,914 21,919,640 
+2025 19.2. Other private passenger auto liability 25453 Nationwide Ins Co Of Amer Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 45,008,806 46,888,192 42,120,421 38,148,741 
+2025 21.1. Private passenger auto physical damage 25453 Nationwide Ins Co Of Amer Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 72,885,223 79,117,549 29,764,011 27,785,799 
+2025 19.2. Other private passenger auto liability 10948 Nationwide Ins Co Of Fl Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 -37,701 
+2025 19.2. Other private passenger auto liability 23787 Nationwide Mut Ins Co Property and Casualty N Mutual None P Nationwide Corp Grp Licensed OH 69,770,137 70,117,649 41,520,424 40,679,860 
+2025 21.1. Private passenger auto physical damage 23787 Nationwide Mut Ins Co Property and Casualty N Mutual None P Nationwide Corp Grp Licensed OH 87,230,741 88,580,222 34,326,178 37,144,896 
+2025 19.2. Other private passenger auto liability 37877 Nationwide Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 62,125 -8,505 6,164,702 -713,885 
+2025 21.1. Private passenger auto physical damage 37877 Nationwide Prop & Cas Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 93,990 -12,613 -87,219 355,833 
+2025 19.2. Other private passenger auto liability 12130 New South Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 34,500 34,374 
+2025 21.1. Private passenger auto physical damage 12130 New South Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 0 0 -587 -609 
+2025 19.2. Other private passenger auto liability 14788 Ngm Ins Co Property and Casualty N Stock None P American Family Ins Grp Licensed FL 985,071 2,107,670 1,646,909 1,541,109 
+2025 21.1. Private passenger auto physical damage 14788 Ngm Ins Co Property and Casualty N Stock None P American Family Ins Grp Licensed FL 979,872 2,027,094 1,283,176 1,148,736 
+2025 19.2. Other private passenger auto liability 14842 North Carolina Farm Bur Mut Ins Co Property and Casualty N Mutual None P North Carolina Farm Bureau Grp Licensed NC 555,174,792 539,995,658 308,848,251 312,706,996 
+2025 21.1. Private passenger auto physical damage 14842 North Carolina Farm Bur Mut Ins Co Property and Casualty N Mutual None P North Carolina Farm Bureau Grp Licensed NC 482,452,485 481,963,040 322,766,122 316,157,911 
+2025 21.1. Private passenger auto physical damage 27740 North Pointe Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 -11 
+2025 19.2. Other private passenger auto liability 39608 Nutmeg Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 315,056 268,413 29,039 86,646 
+2025 21.1. Private passenger auto physical damage 39608 Nutmeg Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 314,279 272,345 133,311 108,157 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 24074 Ohio Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 502,406 1,451,060 
+2025 19.2. Other private passenger auto liability 24074 Ohio Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 30,366 34,156 15,259 -128,613 
+2025 21.1. Private passenger auto physical damage 24074 Ohio Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 33,736 38,574 20,214 20,724 
+2025 19.2. Other private passenger auto liability 24082 Ohio Security Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 235,822 294,245 108,622 845,729 
+2025 21.1. Private passenger auto physical damage 24082 Ohio Security Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 196,079 232,157 73,861 -2,253 
+2025 19.2. Other private passenger auto liability 39098 Omni Ins Co Property and Casualty N Stock None P American Independent Ins Grp Not Licensed IL 0 0 -567 -567 
+2025 21.1. Private passenger auto physical damage 39098 Omni Ins Co Property and Casualty N Stock None P American Independent Ins Grp Not Licensed IL 0 0 -280 -280 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 32700 Owners Ins Co Property and Casualty N Stock None P Auto Owners Grp Licensed OH 0 0 77,151 71,056 
+2025 19.2. Other private passenger auto liability 32700 Owners Ins Co Property and Casualty N Stock None P Auto Owners Grp Licensed OH 60,236,590 57,822,735 35,466,408 42,967,486 
+2025 21.1. Private passenger auto physical damage 32700 Owners Ins Co Property and Casualty N Stock None P Auto Owners Grp Licensed OH 69,006,612 65,999,051 38,975,096 37,702,513 
+2025 19.2. Other private passenger auto liability 22748 Pacific Employers Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed PA 0 0 0 -1 
+2025 19.2. Other private passenger auto liability 20346 Pacific Ind Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed DE 0 0 0 -25,607 
+2025 21.1. Private passenger auto physical damage 20346 Pacific Ind Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed DE 0 0 0 206 
+2025 19.2. Other private passenger auto liability 18139 Peak Prop & Cas Ins Corp Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 72,789,900 69,513,356 63,836,111 66,715,637 
+2025 21.1. Private passenger auto physical damage 18139 Peak Prop & Cas Ins Corp Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 39,030,575 40,578,983 15,243,360 12,136,365 
+2025 19.2. Other private passenger auto liability 24198 Peerless Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 0 19,569 
+2025 21.1. Private passenger auto physical damage 24198 Peerless Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 0 0 -760 -4,657 
+2025 19.2. Other private passenger auto liability 14990 Pennsylvania Natl Mut Cas Ins Co Property and Casualty N Mutual None P Pennsylvania Natl Ins Grp Licensed PA 27,869,290 27,579,931 17,005,603 19,970,753 
+2025 21.1. Private passenger auto physical damage 14990 Pennsylvania Natl Mut Cas Ins Co Property and Casualty N Mutual None P Pennsylvania Natl Ins Grp Licensed PA 25,933,271 26,412,083 17,286,650 16,938,432 
+2025 19.2. Other private passenger auto liability 22906 Permanent Gen Assur Corp Of Oh Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 15,935,448 15,563,328 16,957,769 16,211,522 
+2025 21.1. Private passenger auto physical damage 22906 Permanent Gen Assur Corp Of Oh Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 10,074,044 11,625,754 4,749,324 5,133,869 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 13714 Pharmacists Mut Ins Co Property and Casualty N Stock None P Pharmacists Mut Grp Licensed IA 0 0 0 10 
+2025 19.2. Other private passenger auto liability 13714 Pharmacists Mut Ins Co Property and Casualty N Stock None P Pharmacists Mut Grp Licensed IA 0 0 16,000 -57,880 
+2025 19.2. Other private passenger auto liability 18058 Philadelphia Ind Ins Co Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed PA 392,450 356,670 254,867 315,024 
+2025 21.1. Private passenger auto physical damage 18058 Philadelphia Ind Ins Co Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed PA 3,752,595 3,705,931 1,024,247 947,876 
+2025 19.2. Other private passenger auto liability 25623 Phoenix Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 159,686 403,909 460,458 -83,255 
+2025 21.1. Private passenger auto physical damage 25623 Phoenix Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 130,379 334,282 68,436 57,881 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22888 Point Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 0 0 0 1 
+2025 19.2. Other private passenger auto liability 22888 Point Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 0 0 0 213 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 37257 Praetorian Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 243 
+2025 19.2. Other private passenger auto liability 37257 Praetorian Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 111 
+2025 21.1. Private passenger auto physical damage 37257 Praetorian Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 -404 
+2025 19.2. Other private passenger auto liability 12873 Privilege Underwriters Recp Exch Property and Casualty N Reciprocal None P Tokio Marine Holdings Inc Grp Licensed FL 6,099,433 5,731,283 2,406,412 2,369,170 
+2025 21.1. Private passenger auto physical damage 12873 Privilege Underwriters Recp Exch Property and Casualty N Reciprocal None P Tokio Marine Holdings Inc Grp Licensed FL 8,109,104 7,479,703 3,722,380 3,750,864 
+2025 21.1. Private passenger auto physical damage 24252 Progressive Amer Ins Co Property and Casualty N Stock None P Progressive Grp Licensed OH 0 0 327 327 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 21735 Progressive Premier Ins Co Of Il Property and Casualty N Stock None P Progressive Grp Licensed OH 0 0 2,623,845 2,994,132 
+2025 19.2. Other private passenger auto liability 21735 Progressive Premier Ins Co Of Il Property and Casualty N Stock None P Progressive Grp Licensed OH 446,174,122 412,802,634 236,075,861 288,929,461 
+2025 21.1. Private passenger auto physical damage 21735 Progressive Premier Ins Co Of Il Property and Casualty N Stock None P Progressive Grp Licensed OH 463,458,974 444,476,991 229,864,514 233,008,145 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 38784 Progressive Southeastern Ins Co Property and Casualty N Stock None P Progressive Grp Licensed IN 0 0 1,322,255 1,627,782 
+2025 19.2. Other private passenger auto liability 38784 Progressive Southeastern Ins Co Property and Casualty N Stock None P Progressive Grp Licensed IN 317,663,092 294,276,516 166,637,081 198,141,509 
+2025 21.1. Private passenger auto physical damage 38784 Progressive Southeastern Ins Co Property and Casualty N Stock None P Progressive Grp Licensed IN 309,681,319 299,904,259 164,622,615 167,254,032 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 21727 Progressive Universal Ins Co Property and Casualty N Stock None P Progressive Grp Licensed WI 0 0 -662 -662 
+2025 19.2. Other private passenger auto liability 21727 Progressive Universal Ins Co Property and Casualty N Stock None P Progressive Grp Licensed WI 3,846,403 3,873,195 2,195,921 1,877,333 
+2025 21.1. Private passenger auto physical damage 21727 Progressive Universal Ins Co Property and Casualty N Stock None P Progressive Grp Licensed WI 3,977,232 4,245,424 1,205,501 1,168,843 
+2025 19.2. Other private passenger auto liability 34690 Property & Cas Ins Co Of Hartford Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 1,562,789 1,526,110 521,686 440,188 
+2025 21.1. Private passenger auto physical damage 34690 Property & Cas Ins Co Of Hartford Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 1,293,630 1,288,038 750,840 614,465 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 39217 Qbe Ins Corp Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 -16,673 
+2025 19.2. Other private passenger auto liability 39217 Qbe Ins Corp Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 -233 
+2025 21.1. Private passenger auto physical damage 39217 Qbe Ins Corp Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 0 0 0 40,137 
+2025 19.2. Other private passenger auto liability 24449 Regent Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 -111 
+2025 21.1. Private passenger auto physical damage 24449 Regent Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 -16 
+2025 19.2. Other private passenger auto liability 12475 Republic Franklin Ins Co Property and Casualty N Stock None P Utica Grp Licensed OH 178,319 201,642 361,181 491,559 
+2025 21.1. Private passenger auto physical damage 12475 Republic Franklin Ins Co Property and Casualty N Stock None P Utica Grp Licensed OH 139,008 168,087 99,638 70,195 
+2025 19.2. Other private passenger auto liability 21261 Riverstone Intl Ins Inc Property and Casualty N Stock None P Riverstone Intl Grp Licensed MA -3,249 18,292 327,492 -87,207 
+2025 21.1. Private passenger auto physical damage 21261 Riverstone Intl Ins Inc Property and Casualty N Stock None P Riverstone Intl Grp Licensed MA -3,290 16,211 10,637 6,356 
+2025 19.2. Other private passenger auto liability 24740 Safeco Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 62,307 59,519 11,506 12,840 
+2025 21.1. Private passenger auto physical damage 24740 Safeco Ins Co Of Amer Property and Casualty N Stock None P Liberty Mut Grp Licensed NH 59,413 61,060 10,269 5,925 
+2025 19.2. Other private passenger auto liability 39012 Safeco Ins Co Of Il Property and Casualty N Stock None P Liberty Mut Grp Not Licensed IL 0 0 13,018 13,018 
+2025 21.1. Private passenger auto physical damage 39012 Safeco Ins Co Of Il Property and Casualty N Stock None P Liberty Mut Grp Not Licensed IL 0 0 29,259 29,259 
+2025 21.1. Private passenger auto physical damage 11071 Safeco Ins Co Of Or Property and Casualty N Stock None P Liberty Mut Grp   OR 0 0 346 346 
+2025 19.2. Other private passenger auto liability 12572 Selective Ins Co Of Amer Property and Casualty N Stock None P Selective Ins Grp Licensed NJ 147,309 146,399 12,489 43,707 
+2025 21.1. Private passenger auto physical damage 12572 Selective Ins Co Of Amer Property and Casualty N Stock None P Selective Ins Grp Licensed NJ 123,972 121,183 49,907 50,407 
+2025 19.2. Other private passenger auto liability 19259 Selective Ins Co Of Sc Property and Casualty N Stock None P Selective Ins Grp Licensed IN 83,799 88,391 2,114 -86 
+2025 21.1. Private passenger auto physical damage 19259 Selective Ins Co Of Sc Property and Casualty N Stock None P Selective Ins Grp Licensed IN 71,573 77,523 34,730 32,730 
+2025 19.2. Other private passenger auto liability 39926 Selective Ins Co Of The Southeast Property and Casualty N Stock None P Selective Ins Grp Licensed IN 79,067 82,783 20,794 11,294 
+2025 21.1. Private passenger auto physical damage 39926 Selective Ins Co Of The Southeast Property and Casualty N Stock None P Selective Ins Grp Licensed IN 78,440 76,891 14,575 8,613 
+2025 19.2. Other private passenger auto liability 11000 Sentinel Ins Co Ltd Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 54,585 54,676 29,278 -114,532 
+2025 21.1. Private passenger auto physical damage 11000 Sentinel Ins Co Ltd Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 52,650 52,091 37,262 17,747 
+2025 19.2. Other private passenger auto liability 24988 Sentry Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 25,363 27,792 0 11,081 
+2025 21.1. Private passenger auto physical damage 24988 Sentry Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 22,745 23,938 0 855 
+2025 19.2. Other private passenger auto liability 21180 Sentry Select Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 426,914 426,990 475,122 242,928 
+2025 21.1. Private passenger auto physical damage 21180 Sentry Select Ins Co Property and Casualty N Stock None P Sentry Ins Grp Licensed WI 909,229 915,500 337,322 365,817 
+2025 19.2. Other private passenger auto liability 37141 Southern Gen Ins Co Property and Casualty N Stock None P   Licensed GA 5,843,629 5,876,006 7,795,077 8,258,779 
+2025 21.1. Private passenger auto physical damage 37141 Southern Gen Ins Co Property and Casualty N Stock None P   Licensed GA 1,558,832 1,780,800 1,604,870 1,567,595 
+2025 19.2. Other private passenger auto liability 26867 Southern Ins Co Of Va Property and Casualty N Stock None P Donegal Grp Licensed VA 0 0 -160 -160 
+2025 21.1. Private passenger auto physical damage 26867 Southern Ins Co Of Va Property and Casualty N Stock None P Donegal Grp Licensed VA 0 0 -2,290 -2,290 
+2025 19.2. Other private passenger auto liability 22861 Southern Pilot Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 -127 
+2025 21.1. Private passenger auto physical damage 22861 Southern Pilot Ins Co Property and Casualty N Stock None P Qbe Ins Grp Licensed WI 0 0 0 -14 
+2025 19.2. Other private passenger auto liability 24376 Spinnaker Ins Co Property and Casualty N Stock None P Sh1 Holdings Grp Licensed IL 22,664 22,781 3,050 15,312 
+2025 21.1. Private passenger auto physical damage 24376 Spinnaker Ins Co Property and Casualty N Stock None P Sh1 Holdings Grp Licensed IL 319,328 293,716 50,757 130,761 
+2025 19.2. Other private passenger auto liability 19070 Standard Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 483,742 2,820,535 3,290,594 969,217 
+2025 21.1. Private passenger auto physical damage 19070 Standard Fire Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 405,266 2,372,131 1,363,453 1,028,580 
+2025 19.2. Other private passenger auto liability 25127 State Auto Prop & Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA 0 18 314,436 9,523,624 
+2025 21.1. Private passenger auto physical damage 25127 State Auto Prop & Cas Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IA 0 0 -27,726 -6,219 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 25178 State Farm Mut Auto Ins Co Property and Casualty N Mutual None P State Farm Grp Licensed IL 0 0 2,334,583 1,986,521 
+2025 19.2. Other private passenger auto liability 25178 State Farm Mut Auto Ins Co Property and Casualty N Mutual None P State Farm Grp Licensed IL 753,678,580 742,742,341 521,560,704 510,082,434 
+2025 21.1. Private passenger auto physical damage 25178 State Farm Mut Auto Ins Co Property and Casualty N Mutual None P State Farm Grp Licensed IL 705,719,269 728,422,790 409,595,426 389,588,541 
+2025 19.2. Other private passenger auto liability 12831 State Natl Ins Co Inc Property and Casualty N Stock None P Markel Grp Licensed TX 0 0 -668 -636,668 
+2025 21.1. Private passenger auto physical damage 12831 State Natl Ins Co Inc Property and Casualty N Stock None P Markel Grp Licensed TX 909,384 939,395 642,286 593,638 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 22683 Teachers Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 0 0 1,178 1,178 
+2025 19.2. Other private passenger auto liability 22683 Teachers Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 5,097,455 4,934,830 2,754,315 3,110,801 
+2025 21.1. Private passenger auto physical damage 22683 Teachers Ins Co Property and Casualty N Stock None P Horace Mann Grp Licensed IL 4,935,463 4,902,684 3,374,823 3,276,397 
+2025 19.2. Other private passenger auto liability 28665 The Cincinnati Cas Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 9,110,786 7,016,774 2,393,544 4,066,216 
+2025 21.1. Private passenger auto physical damage 28665 The Cincinnati Cas Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 10,307,352 7,808,780 4,788,899 4,883,839 
+2025 19.2. Other private passenger auto liability 23280 The Cincinnati Ind Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 43,627 36,745 8,887 8,887 
+2025 21.1. Private passenger auto physical damage 23280 The Cincinnati Ind Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 49,020 46,124 9,948 9,948 
+2025 19.2. Other private passenger auto liability 10677 The Cincinnati Ins Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 16,605,793 16,599,959 9,310,497 10,856,791 
+2025 21.1. Private passenger auto physical damage 10677 The Cincinnati Ins Co Property and Casualty N Stock None P Cincinnati Fin Grp Licensed OH 19,341,168 19,780,280 8,638,451 8,172,723 
+2025 19.2. Other private passenger auto liability 12617 The Members Ins Co Property and Casualty N Stock None P Automobile Club Mi Grp Licensed NC 27,573,608 27,426,528 19,202,753 21,131,185 
+2025 21.1. Private passenger auto physical damage 12617 The Members Ins Co Property and Casualty N Stock None P Automobile Club Mi Grp Licensed NC 26,242,304 27,338,646 14,843,122 14,445,805 
+2025 19.2. Other private passenger auto liability 36269 Titan Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Not Licensed MI 0 0 -2,198 -3,974 
+2025 21.1. Private passenger auto physical damage 36269 Titan Ins Co Property and Casualty N Stock None P Nationwide Corp Grp Not Licensed MI 0 0 -360 -2,096 
+2025 19.2. Other private passenger auto liability 27998 Travelers Home & Marine Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 43,433,810 38,511,581 23,591,922 28,407,218 
+2025 21.1. Private passenger auto physical damage 27998 Travelers Home & Marine Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 63,408,177 64,894,020 23,558,178 23,655,424 
+2025 19.2. Other private passenger auto liability 25658 Travelers Ind Co Property and Casualty N Stock None P Travelers Grp Licensed CT 132,519 380,110 640,502 209,730 
+2025 21.1. Private passenger auto physical damage 25658 Travelers Ind Co Property and Casualty N Stock None P Travelers Grp Licensed CT 106,460 318,401 184,900 152,819 
+2025 19.2. Other private passenger auto liability 25666 Travelers Ind Co Of Amer Property and Casualty N Stock None P Travelers Grp Licensed CT 75,805 227,925 328,684 -72,949 
+2025 21.1. Private passenger auto physical damage 25666 Travelers Ind Co Of Amer Property and Casualty N Stock None P Travelers Grp Licensed CT 64,984 194,969 71,715 60,489 
+2025 19.2. Other private passenger auto liability 25682 Travelers Ind Co Of Ct Property and Casualty N Stock None P Travelers Grp Licensed CT 38,938 206,936 426,130 96,838 
+2025 21.1. Private passenger auto physical damage 25682 Travelers Ind Co Of Ct Property and Casualty N Stock None P Travelers Grp Licensed CT 36,004 181,347 70,326 58,603 
+2025 19.2. Other private passenger auto liability 36145 Travelers Personal Security Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 97,235 427,696 275,382 -56,517 
+2025 21.1. Private passenger auto physical damage 36145 Travelers Personal Security Ins Co Property and Casualty N Stock None P Travelers Grp Licensed CT 87,577 371,009 303,778 299,308 
+2025 19.2. Other private passenger auto liability 31003 Tri State Ins Co Of Mn Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 45,821 35,882 1,597 12,718 
+2025 21.1. Private passenger auto physical damage 31003 Tri State Ins Co Of Mn Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 48,141 39,114 3,116 1,757 
+2025 19.2. Other private passenger auto liability 21709 Truck Ins Exch Property and Casualty N Reciprocal None P Farmers Ins Grp Licensed CA 1,373,112 1,391,993 1,424,972 -2,400,604 
+2025 21.1. Private passenger auto physical damage 21709 Truck Ins Exch Property and Casualty N Reciprocal None P Farmers Ins Grp Licensed CA 852,128 885,725 454,569 378,636 
+2025 19.2. Other private passenger auto liability 27120 Trumbull Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 53,954 285,739 225,871 -283,202 
+2025 21.1. Private passenger auto physical damage 27120 Trumbull Ins Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed CT 73,626 258,141 116,880 29,252 
+2025 19.2. Other private passenger auto liability 29459 Twin City Fire Ins Co Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 0 0 0 -5,357 
+2025 21.1. Private passenger auto physical damage 29459 Twin City Fire Ins Co Co Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 0 0 0 -4,891 
+2025 19.2. Other private passenger auto liability 25844 Union Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 264 3,772 6,786 6,680 
+2025 21.1. Private passenger auto physical damage 25844 Union Ins Co Property and Casualty N Stock None P Wr Berkley Corp Grp Licensed IA 1,468 5,284 19,034 15,496 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 25941 United Serv Automobile Assn Property and Casualty N Reciprocal None P United Serv Automobile Assn Grp Licensed TX 0 0 64,891 66,927 
+2025 19.2. Other private passenger auto liability 25941 United Serv Automobile Assn Property and Casualty N Reciprocal None P United Serv Automobile Assn Grp Licensed TX 126,245,842 125,398,600 78,768,551 85,742,003 
+2025 21.1. Private passenger auto physical damage 25941 United Serv Automobile Assn Property and Casualty N Reciprocal None P United Serv Automobile Assn Grp Licensed TX 136,451,204 135,007,992 75,005,722 73,788,524 
+2025 19.2. Other private passenger auto liability 16063 Unitrin Auto & Home Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed NY 5,464 8,344 495,509 325,408 
+2025 21.1. Private passenger auto physical damage 16063 Unitrin Auto & Home Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed NY 3,335 6,275 -14,135 29,480 
+2025 19.2. Other private passenger auto liability 40703 Unitrin Safeguard Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed WI 7,929 13,797 1,007,114 -127,745 
+2025 21.1. Private passenger auto physical damage 40703 Unitrin Safeguard Ins Co Property and Casualty N Stock None P Kemper Corp Grp Licensed WI 10,906 16,475 -11,941 53,270 
+2025 19.2. Other private passenger auto liability 32972 Universal Ins Co Property and Casualty N Stock None P Automobile Club Mi Grp Licensed NC 8,531,091 8,701,260 9,551,270 8,469,301 
+2025 21.1. Private passenger auto physical damage 32972 Universal Ins Co Property and Casualty N Stock None P Automobile Club Mi Grp Licensed NC 3,966,671 4,379,595 1,715,656 1,592,989 
+2025 19.2. Other private passenger auto liability 41181 Universal Underwriters Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed IL 0 0 0 3 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 25968 Usaa Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 0 0 53,046 88,652 
+2025 19.2. Other private passenger auto liability 25968 Usaa Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 109,973,693 108,876,687 74,480,258 81,054,066 
+2025 21.1. Private passenger auto physical damage 25968 Usaa Cas Ins Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 124,161,405 122,479,557 66,104,476 64,981,684 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 18600 Usaa Gen Ind Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 0 0 239,120 232,093 
+2025 19.2. Other private passenger auto liability 18600 Usaa Gen Ind Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 87,428,890 85,302,226 60,505,942 72,915,879 
+2025 21.1. Private passenger auto physical damage 18600 Usaa Gen Ind Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 99,483,539 97,797,115 58,921,067 58,216,422 
+2025 19.2. Other private passenger auto liability 25976 Utica Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 3,593,568 3,590,525 1,997,484 2,518,657 
+2025 21.1. Private passenger auto physical damage 25976 Utica Mut Ins Co Property and Casualty N Mutual None P Utica Grp Licensed NY 3,104,254 3,200,754 1,541,599 1,447,181 
+2025 19.1. Private passenger auto no-fault (personal injury protection) 16186 Vault Recip Exch Property and Casualty N Reciprocal None P Vault Holdings Grp Licensed FL 0 0 0 -362 
+2025 19.2. Other private passenger auto liability 16186 Vault Recip Exch Property and Casualty N Reciprocal None P Vault Holdings Grp Licensed FL 102,518 59,853 0 2,396 
+2025 21.1. Private passenger auto physical damage 16186 Vault Recip Exch Property and Casualty N Reciprocal None P Vault Holdings Grp Licensed FL 178,846 114,333 17,631 -66,561 
+2025 19.2. Other private passenger auto liability 42889 Victoria Fire & Cas Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 145 
+2025 21.1. Private passenger auto physical damage 42889 Victoria Fire & Cas Co Property and Casualty N Stock None P Nationwide Corp Grp Licensed OH 0 0 0 2 
+2025 19.2. Other private passenger auto liability 20397 Vigilant Ins Co Property and Casualty N Stock None P Chubb Ltd Grp Licensed NY 0 0 0 -71 
+2025 19.2. Other private passenger auto liability 44393 West Amer Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 4,799 3,706 0 1,577 
+2025 21.1. Private passenger auto physical damage 44393 West Amer Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed IN 4,825 3,839 0 0 
+2025 19.2. Other private passenger auto liability 39845 Westport Ins Corp Property and Casualty N Stock None P Swiss Re Grp Licensed MO 0 0 0 -5,408 
+2025 19.2. Other private passenger auto liability 13234 Wilshire Ins Co Property and Casualty N Stock None P Iat Reins Co Grp Licensed NC 0 0 -200 -200 
+2025 19.2. Other private passenger auto liability 16535 Zurich Amer Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed NY 0 0 19,966 19,966 
+2025 21.1. Private passenger auto physical damage 16535 Zurich Amer Ins Co Property and Casualty N Stock None P Zurich Ins Grp Licensed NY 0 0 2,749 2,749 
+                                
+2025 Private passenger auto lines   TOTAL                 9,969,542,222 9,781,244,700 5,848,000,293 5,918,238,138 
+ 
