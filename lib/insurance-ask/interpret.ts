@@ -554,17 +554,31 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
 
   if (
     /\b((?:licensed )?insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
-    /\b(colorado|virginia|new york|illinois|pennsylvania)\b/i.test(q) &&
-    !detectRequestedConsumerProducts(q).length
+    /\b(colorado|virginia|new york|illinois|pennsylvania)\b/i.test(q)
   ) {
     const state = detectStates(q)[0] ?? 'The requested state';
+    // TH-DISCOVERY-PARITY-001B / PA-INS-001 reconciliation: these five states have no acquired
+    // agency/producer bulk roster at all (a different grain than TH-DISCOVERY-PARITY-001B's
+    // product-disclosure fix, which only applies where real agency inventory exists to browse, e.g.
+    // FL). An unresolved consumer-product word (homeowners/auto/...) must not route these states
+    // into the generic entity/count builder -- there is no roster to return, so that would produce a
+    // silent, misleading zero instead of the honest NOT_ACQUIRED disclosure. The product is still
+    // named and given its own reason/failReason (distinct from the bare-agency reason) so a request
+    // like "homeowners insurance agencies Pennsylvania" is never indistinguishable from a plain
+    // "insurance agencies Pennsylvania" request.
+    const unresolvedProducts = detectRequestedConsumerProducts(q);
     const query = fail(
-      `${state} producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.`,
-      ['Find NPN 10391484.', 'What is an NPN?'],
+      unresolvedProducts.length
+        ? `${state} producer and agency bulk rosters were not acquired, so this extract cannot show a ${unresolvedProducts.join(' / ')}-qualified ${state} agency cohort. There is also no dedicated ${unresolvedProducts.join(' / ')} line of authority in this extract. Official verification remains search-only; search-only is not zero.`
+        : `${state} producer and agency bulk rosters were not acquired. Official verification remains search-only. Search-only is not zero, and this extract will not silently resolve those agents to the national person graph.`,
+      unresolvedProducts.length
+        ? ['Find NPN 10391484.', 'What is a line of authority?']
+        : ['Find NPN 10391484.', 'What is an NPN?'],
     );
     query.coverageState = 'NOT_ACQUIRED';
     query.entityClass = detectClass(q);
     query.jurisdiction = { state, meaning: geographyMeaning(q) };
+    if (unresolvedProducts.length) query.requestedProduct = unresolvedProducts;
     push('Coverage', `NOT_ACQUIRED — ${state} agency/producer roster`);
     return { raw: q, query, interpretation: lines };
   }
