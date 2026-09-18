@@ -85,6 +85,7 @@ const agencyDisc = interpretInsuranceAskQuery('insurance agency disciplinary act
 if (agencyDisc.query.mode !== 'fail_closed') throw new Error('agency discipline');
 const companyAction = interpretInsuranceAskQuery('insurance company action Ohio');
 if (companyAction.query.mode !== 'fail_closed') throw new Error('company action');
+if (!/496/.test(companyAction.query.failReason ?? '')) throw new Error('company action cites journal');
 const financial = interpretInsuranceAskQuery('Ohio insurer financial data');
 if (financial.query.mode !== 'fail_closed') throw new Error('financial grain');
 const agents = interpretInsuranceAskQuery('insurance agents Ohio');

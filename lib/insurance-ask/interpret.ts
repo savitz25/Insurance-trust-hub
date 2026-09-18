@@ -257,7 +257,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   }
   if (
     /\bohio\b/i.test(early) &&
-    /administrative action|disciplinary|journal|revocation|fine/i.test(early)
+    /administrative action|disciplinary|journal|revocation|fine|company action/i.test(early)
   ) {
     const query = fail(
       'ODI Administrative Actions Journal bounded past-12-months catalog: 496 documents (383 Order / 113 Notice). ODI warns search results may not be comprehensive and exclude most agent CE noncompliance. A document is not a unique matter. The Journal is not a complete adverse census. Name-only attachment is unsafe. Confirm /ohio.',
@@ -875,7 +875,7 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     push('Coverage', 'NOT_ACQUIRED — Ohio complaint bulk');
     return { raw: q, query, interpretation: lines };
   }
-  if (ohioAsked && /administrative action|disciplinary|journal|revocation|fine/i.test(q)) {
+  if (ohioAsked && /administrative action|disciplinary|journal|revocation|fine|company action/i.test(q)) {
     const query = fail(
       'ODI Administrative Actions Journal bounded past-12-months catalog: 496 documents (383 Order / 113 Notice). ODI warns search results may not be comprehensive and exclude most agent CE noncompliance. A document is not a unique matter. The Journal is not a complete adverse census. Name-only attachment is unsafe. Confirm /ohio.',
       ['Open Ohio insurance research.', 'Find NPN 40000001.'],
