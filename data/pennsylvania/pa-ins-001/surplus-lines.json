@@ -1,0 +1,1498 @@
+{
+  "source": "PID slsearch A-Z",
+  "officialUrl": "https://www.pid.pa.gov/dsf/slsearch.html",
+  "retrievedAt": "2026-09-17T16:56:23Z",
+  "letterRows": 233,
+  "distinctNaic": 233,
+  "noNaicRows": 0,
+  "domicileCounts": {
+    "GA": 6,
+    "NE": 7,
+    "AZ": 19,
+    "DE": 48,
+    "ND": 4,
+    "AL": 2,
+    "IL": 22,
+    "AR": 5,
+    "TX": 21,
+    "FL": 6,
+    "RI": 2,
+    "MO": 4,
+    "MI": 2,
+    "": 3,
+    "NC": 4,
+    "CT": 8,
+    "IA": 9,
+    "WI": 5,
+    "OK": 7,
+    "SC": 1,
+    "TN": 1,
+    "OH": 8,
+    "VT": 3,
+    "MT": 1,
+    "SD": 1,
+    "NJ": 4,
+    "NH": 7,
+    "VI": 1,
+    "CA": 3,
+    "MA": 1,
+    "NY": 7,
+    "LA": 2,
+    "MD": 1,
+    "KS": 1,
+    "IN": 2,
+    "VA": 3,
+    "WA": 1,
+    "DC": 1
+  },
+  "sample": [
+    {
+      "naic": "16890",
+      "domicile": "GA",
+      "name": "ACCELERANT SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "20010",
+      "domicile": "NE",
+      "name": "ACCEPTANCE INDEMNITY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "16835",
+      "domicile": "AZ",
+      "name": "ACCREDITED SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "24856",
+      "domicile": "DE",
+      "name": "ADMIRAL INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "39381",
+      "domicile": "ND",
+      "name": "ADRIATIC INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "10389",
+      "domicile": "AL",
+      "name": "AGENT ALLIANCE INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "26883",
+      "domicile": "IL",
+      "name": "AIG SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "12833",
+      "domicile": "DE",
+      "name": "AIX SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    }
+  ],
+  "rows": [
+    {
+      "naic": "16890",
+      "domicile": "GA",
+      "name": "ACCELERANT SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "20010",
+      "domicile": "NE",
+      "name": "ACCEPTANCE INDEMNITY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "16835",
+      "domicile": "AZ",
+      "name": "ACCREDITED SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "24856",
+      "domicile": "DE",
+      "name": "ADMIRAL INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "39381",
+      "domicile": "ND",
+      "name": "ADRIATIC INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "10389",
+      "domicile": "AL",
+      "name": "AGENT ALLIANCE INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "26883",
+      "domicile": "IL",
+      "name": "AIG SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "12833",
+      "domicile": "DE",
+      "name": "AIX SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "36420",
+      "domicile": "IL",
+      "name": "ALLIANZ UNDERWRITERS INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "19489",
+      "domicile": "DE",
+      "name": "ALLIED WORLD ASSURANCE COMPANY (U.S.) INC.",
+      "letter": "A"
+    },
+    {
+      "naic": "24319",
+      "domicile": "AR",
+      "name": "ALLIED WORLD SURPLUS LINES INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "17091",
+      "domicile": "AZ",
+      "name": "AM SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "43117",
+      "domicile": "AZ",
+      "name": "AMERICAN EQUITY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "10245",
+      "domicile": "TX",
+      "name": "AMERICAN FEDERATION INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "10043",
+      "domicile": "TX",
+      "name": "AMERICAN NATIONAL LLOYDS INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "33103",
+      "domicile": "GA",
+      "name": "AMERICAN SAFETY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "17565",
+      "domicile": "TX",
+      "name": "AMHERST SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "17866",
+      "domicile": "DE",
+      "name": "ANGELINA SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "17742",
+      "domicile": "FL",
+      "name": "APEX STAR RECIPROCAL EXCHANGE",
+      "letter": "A"
+    },
+    {
+      "naic": "10316",
+      "domicile": "RI",
+      "name": "APPALACHIAN INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "21199",
+      "domicile": "MO",
+      "name": "ARCH SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "16141",
+      "domicile": "MI",
+      "name": "ARDELLIS INSURANCE, LTD.",
+      "letter": "A"
+    },
+    {
+      "naic": "45055",
+      "domicile": "RI",
+      "name": "ASCOT SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "11680",
+      "domicile": "",
+      "name": "ASPEN INSURANCE UK LIMITED",
+      "letter": "A"
+    },
+    {
+      "naic": "10717",
+      "domicile": "ND",
+      "name": "ASPEN SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "23140",
+      "domicile": "FL",
+      "name": "ASSOCIATED INDUSTRIES INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "19607",
+      "domicile": "DE",
+      "name": "AT-BAY SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "29033",
+      "domicile": "TX",
+      "name": "ATAIN INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "16427",
+      "domicile": "DE",
+      "name": "ATEGRITY SPECIALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "42846",
+      "domicile": "NC",
+      "name": "ATLANTIC CASUALTY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "15708",
+      "domicile": "DE",
+      "name": "AWBURY INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "17863",
+      "domicile": "DE",
+      "name": "AXA XL EXCESS & SURPLUS LINES INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "26620",
+      "domicile": "IL",
+      "name": "AXIS SURPLUS INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "16495",
+      "domicile": "NE",
+      "name": "AZGUARD INSURANCE COMPANY",
+      "letter": "A"
+    },
+    {
+      "naic": "17520",
+      "domicile": "CT",
+      "name": "BEAZLEY EXCESS AND SURPLUS INSURANCE, INC.",
+      "letter": "B"
+    },
+    {
+      "naic": "17180",
+      "domicile": "AR",
+      "name": "BENCHMARK SPECIALTY INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "39462",
+      "domicile": "IA",
+      "name": "BERKLEY ASSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "17673",
+      "domicile": "IA",
+      "name": "BERKLEY LUXURY INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "17412",
+      "domicile": "IA",
+      "name": "BERKLEY PRESTIGE INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "31295",
+      "domicile": "DE",
+      "name": "BERKLEY SPECIALTY INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "11014",
+      "domicile": "IA",
+      "name": "BHHC SPECIAL RISKS INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "15643",
+      "domicile": "IL",
+      "name": "BLUE HILL SPECIALTY INSURANCE COMPANY INC.",
+      "letter": "B"
+    },
+    {
+      "naic": "16924",
+      "domicile": "WI",
+      "name": "BOWHEAD INSURANCE COMPANY, INC.",
+      "letter": "B"
+    },
+    {
+      "naic": "17166",
+      "domicile": "OK",
+      "name": "BRICKTOWN SPECIALTY INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "12489",
+      "domicile": "DE",
+      "name": "BRIDGEWAY INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "23620",
+      "domicile": "NC",
+      "name": "BURLINGTON INSURANCE COMPANY",
+      "letter": "B"
+    },
+    {
+      "naic": "17805",
+      "domicile": "IL",
+      "name": "CALAIS INSURANCE RECIPROCAL EXCHANGE",
+      "letter": "C"
+    },
+    {
+      "naic": "27790",
+      "domicile": "SC",
+      "name": "CANAL INDEMNITY COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "12961",
+      "domicile": "DE",
+      "name": "CANOPIUS US INSURANCE, INC",
+      "letter": "C"
+    },
+    {
+      "naic": "10328",
+      "domicile": "WI",
+      "name": "CAPITOL SPECIALTY INSURANCE CORPORATION",
+      "letter": "C"
+    },
+    {
+      "naic": "17862",
+      "domicile": "TX",
+      "name": "CAPSTONE SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "15989",
+      "domicile": "DE",
+      "name": "CATLIN SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "34568",
+      "domicile": "AL",
+      "name": "CENTENNIAL CASUALTY COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "19003",
+      "domicile": "TN",
+      "name": "CENTERLINE PROPERTY AND CASUALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "36951",
+      "domicile": "OH",
+      "name": "CENTURY SURETY COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "16834",
+      "domicile": "VT",
+      "name": "CHAMPLAIN SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "38989",
+      "domicile": "DE",
+      "name": "CHUBB CUSTOM INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "13037",
+      "domicile": "DE",
+      "name": "CINCINNATI SPECIALTY UNDERWRITERS INSURANCE COMPANY (THE)",
+      "letter": "C"
+    },
+    {
+      "naic": "37745",
+      "domicile": "TX",
+      "name": "CLEAR BLUE SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "15872",
+      "domicile": "WI",
+      "name": "CM VANTAGE SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "39993",
+      "domicile": "NE",
+      "name": "COLONY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "31127",
+      "domicile": "IL",
+      "name": "COLUMBIA CASUALTY COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "10906",
+      "domicile": "TX",
+      "name": "COMMERCIAL ALLIANCE INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "17151",
+      "domicile": "MT",
+      "name": "CONCERT SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "16923",
+      "domicile": "SD",
+      "name": "CONCORD SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "17989",
+      "domicile": "GA",
+      "name": "CORGI INSURANCE COMPANY, INC.",
+      "letter": "C"
+    },
+    {
+      "naic": "15686",
+      "domicile": "NJ",
+      "name": "COVERYS SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "13027",
+      "domicile": "NH",
+      "name": "COVINGTON SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "17372",
+      "domicile": "NE",
+      "name": "COWBELL SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "44520",
+      "domicile": "DE",
+      "name": "CRUM & FORSTER SPECIALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "12758",
+      "domicile": "IA",
+      "name": "CUMIS SPECIALTY INSURANCE COMPANY, INC.",
+      "letter": "C"
+    },
+    {
+      "naic": "10953",
+      "domicile": "FL",
+      "name": "CYPRESS PROPERTY & CASUALTY INSURANCE COMPANY",
+      "letter": "C"
+    },
+    {
+      "naic": "17332",
+      "domicile": "AZ",
+      "name": "DELLWOOD SPECIALTY INSURANCE COMPANY",
+      "letter": "D"
+    },
+    {
+      "naic": "17771",
+      "domicile": "IL",
+      "name": "DENTAL PROFESSIONAL SPECIALTY RISK",
+      "letter": "D"
+    },
+    {
+      "naic": "31461",
+      "domicile": "VI",
+      "name": "DORCHESTER INSURANCE COMPANY, LTD.",
+      "letter": "D"
+    },
+    {
+      "naic": "17527",
+      "domicile": "AZ",
+      "name": "EMERALD BAY SPECIALTY INSURANCE COMPANY",
+      "letter": "E"
+    },
+    {
+      "naic": "21334",
+      "domicile": "OK",
+      "name": "EMPIRE INDEMNITY INSURANCE COMPANY",
+      "letter": "E"
+    },
+    {
+      "naic": "41718",
+      "domicile": "DE",
+      "name": "ENDURANCE AMERICAN SPECIALTY INSURANCE COMPANY",
+      "letter": "E"
+    },
+    {
+      "naic": "35378",
+      "domicile": "IL",
+      "name": "EVANSTON INSURANCE COMPANY",
+      "letter": "E"
+    },
+    {
+      "naic": "10851",
+      "domicile": "DE",
+      "name": "EVEREST INDEMNITY INSURANCE COMPANY",
+      "letter": "E"
+    },
+    {
+      "naic": "16882",
+      "domicile": "AZ",
+      "name": "EVERSPAN INDEMNITY INSURANCE COMPANY",
+      "letter": "E"
+    },
+    {
+      "naic": "44792",
+      "domicile": "CT",
+      "name": "EXECUTIVE RISK SPECIALTY INSURANCE COMPANY",
+      "letter": "E"
+    },
+    {
+      "naic": "15201",
+      "domicile": "DE",
+      "name": "FAIR AMERICAN SELECT INSURANCE COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "15884",
+      "domicile": "CA",
+      "name": "FALLS LAKE FIRE AND CASUALTY COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "17602",
+      "domicile": "DE",
+      "name": "FCCI SPECIALTY INSURANCE COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "17333",
+      "domicile": "DE",
+      "name": "FEDERATED SPECIALTY INSURANCE COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "11380",
+      "domicile": "NJ",
+      "name": "FIREMAN'S FUND INDEMNITY CORPORATION",
+      "letter": "F"
+    },
+    {
+      "naic": "10657",
+      "domicile": "DE",
+      "name": "FIRST MERCURY INSURANCE COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "17460",
+      "domicile": "FL",
+      "name": "FIRST MILE INSURANCE COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "13943",
+      "domicile": "MA",
+      "name": "FITCHBURG MUTUAL INSURANCE COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "16823",
+      "domicile": "AZ",
+      "name": "FORTEGRA SPECIALTY INSURANCE COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "10074",
+      "domicile": "IL",
+      "name": "FRONTLINE INSURANCE UNLIMITED COMPANY",
+      "letter": "F"
+    },
+    {
+      "naic": "10833",
+      "domicile": "DE",
+      "name": "GEMINI INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "20559",
+      "domicile": "NY",
+      "name": "GENERAL SECURITY INDEMNITY COMPANY OF ARIZONA",
+      "letter": "G"
+    },
+    {
+      "naic": "37362",
+      "domicile": "DE",
+      "name": "GENERAL STAR INDEMNITY COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "10182",
+      "domicile": "CA",
+      "name": "GEOVERA SPECIALTY INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "10814",
+      "domicile": "AZ",
+      "name": "GNY CUSTOM INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "39861",
+      "domicile": "CA",
+      "name": "GOLDEN BEAR INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "25569",
+      "domicile": "NY",
+      "name": "GOTHAM INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "15889",
+      "domicile": "LA",
+      "name": "GRAY SURPLUS LINES INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "37532",
+      "domicile": "DE",
+      "name": "GREAT AMERICAN E & S INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "41858",
+      "domicile": "DE",
+      "name": "GREAT AMERICAN FIDELITY INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "38580",
+      "domicile": "OH",
+      "name": "GREAT AMERICAN PROTECTION INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "35351",
+      "domicile": "DE",
+      "name": "GREAT AMERICAN RISK SOLUTIONS SURPLUS LINES INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "14167",
+      "domicile": "IA",
+      "name": "GUIDEONE NATIONAL INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "10956",
+      "domicile": "IL",
+      "name": "GUILFORD INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "42811",
+      "domicile": "CT",
+      "name": "GULF UNDERWRITERS INSURANCE COMPANY",
+      "letter": "G"
+    },
+    {
+      "naic": "17534",
+      "domicile": "AR",
+      "name": "HADRON SPECIALTY INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "26808",
+      "domicile": "OK",
+      "name": "HALLMARK SPECIALTY INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "17178",
+      "domicile": "DE",
+      "name": "HAMILTON SELECT INSURANCE, INC.",
+      "letter": "H"
+    },
+    {
+      "naic": "10674",
+      "domicile": "OH",
+      "name": "HARLEYSVILLE INSURANCE COMPANY OF NEW YORK",
+      "letter": "H"
+    },
+    {
+      "naic": "16131",
+      "domicile": "IL",
+      "name": "HDI SPECIALTY INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "16777",
+      "domicile": "TX",
+      "name": "HIGHLANDER SPECIALTY INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "37079",
+      "domicile": "NY",
+      "name": "HILLTOP SPECIALTY INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "14231",
+      "domicile": "DE",
+      "name": "HOMELAND INSURANCE COMPANY OF DELAWARE",
+      "letter": "H"
+    },
+    {
+      "naic": "34452",
+      "domicile": "NY",
+      "name": "HOMELAND INSURANCE COMPANY OF NEW YORK",
+      "letter": "H"
+    },
+    {
+      "naic": "11156",
+      "domicile": "IL",
+      "name": "HOMESITE INSURANCE COMPANY OF FLORIDA",
+      "letter": "H"
+    },
+    {
+      "naic": "30317",
+      "domicile": "NY",
+      "name": "HOSPITALS INSURANCE COMPANY, INC.",
+      "letter": "H"
+    },
+    {
+      "naic": "15381",
+      "domicile": "VT",
+      "name": "HOUSING SPECIALTY INSURANCE COMPANY, INC.",
+      "letter": "H"
+    },
+    {
+      "naic": "42374",
+      "domicile": "TX",
+      "name": "HOUSTON CASUALTY COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "12936",
+      "domicile": "TX",
+      "name": "HOUSTON SPECIALTY INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "14438",
+      "domicile": "CT",
+      "name": "HSB SPECIALTY INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "14484",
+      "domicile": "DE",
+      "name": "HUDSON EXCESS INSURANCE COMPANY",
+      "letter": "H"
+    },
+    {
+      "naic": "27960",
+      "domicile": "IL",
+      "name": "ILLINOIS UNION INSURANCE COMPANY",
+      "letter": "I"
+    },
+    {
+      "naic": "17532",
+      "domicile": "TX",
+      "name": "INCLINE AMERICAS INSURANCE COMPANY",
+      "letter": "I"
+    },
+    {
+      "naic": "36940",
+      "domicile": "DE",
+      "name": "INDIAN HARBOR INSURANCE COMPANY",
+      "letter": "I"
+    },
+    {
+      "naic": "22829",
+      "domicile": "IL",
+      "name": "INTERSTATE FIRE & CASUALTY COMPANY",
+      "letter": "I"
+    },
+    {
+      "naic": "17181",
+      "domicile": "IA",
+      "name": "INTREPID SPECIALTY INSURANCE COMPANY",
+      "letter": "I"
+    },
+    {
+      "naic": "25445",
+      "domicile": "AZ",
+      "name": "IRONSHORE SPECIALTY INSURANCE COMPANY",
+      "letter": "I"
+    },
+    {
+      "naic": "11084",
+      "domicile": "IL",
+      "name": "ISMIE INDEMNITY COMPANY",
+      "letter": "I"
+    },
+    {
+      "naic": "12203",
+      "domicile": "OH",
+      "name": "JAMES RIVER INSURANCE COMPANY",
+      "letter": "J"
+    },
+    {
+      "naic": "38920",
+      "domicile": "AR",
+      "name": "KINSALE INSURANCE COMPANY",
+      "letter": "K"
+    },
+    {
+      "naic": "15366",
+      "domicile": "DE",
+      "name": "KNIGHT SPECIALTY INSURANCE COMPANY",
+      "letter": "K"
+    },
+    {
+      "naic": "16255",
+      "domicile": "DE",
+      "name": "KW SPECIALTY INSURANCE COMPANY",
+      "letter": "K"
+    },
+    {
+      "naic": "18295",
+      "domicile": "LA",
+      "name": "LAFAYETTE INSURANCE COMPANY",
+      "letter": "L"
+    },
+    {
+      "naic": "14925",
+      "domicile": "",
+      "name": "LANCASHIRE INSURANCE COMPANY LIMITED",
+      "letter": "L"
+    },
+    {
+      "naic": "33138",
+      "domicile": "OK",
+      "name": "LANDMARK AMERICAN INSURANCE COMPANY",
+      "letter": "L"
+    },
+    {
+      "naic": "19437",
+      "domicile": "DE",
+      "name": "LEXINGTON INSURANCE COMPANY",
+      "letter": "L"
+    },
+    {
+      "naic": "10725",
+      "domicile": "NH",
+      "name": "LIBERTY SURPLUS INSURANCE CORPORATION",
+      "letter": "L"
+    },
+    {
+      "naic": "17346",
+      "domicile": "AZ",
+      "name": "LIO SPECIALTY INSURANCE COMPANY",
+      "letter": "L"
+    },
+    {
+      "naic": "13551",
+      "domicile": "DE",
+      "name": "MARBLESHORE SPECIALTY INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "10744",
+      "domicile": "",
+      "name": "MARKEL INTERNATIONAL INSURANCE COMPANY LIMITED",
+      "letter": "M"
+    },
+    {
+      "naic": "26743",
+      "domicile": "CT",
+      "name": "MAXUM INDEMNITY COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "32328",
+      "domicile": "MD",
+      "name": "MEDICAL MUTUAL LIABILITY INSURANCE SOCIETY OF MARYLAND",
+      "letter": "M"
+    },
+    {
+      "naic": "33090",
+      "domicile": "NC",
+      "name": "MEDICAL SECURITY INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "12775",
+      "domicile": "NH",
+      "name": "MERCHANTS NATIONAL INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "36838",
+      "domicile": "NJ",
+      "name": "MESA UNDERWRITERS SPECIALTY INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "17666",
+      "domicile": "AZ",
+      "name": "MGT SPECIALTY INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "13794",
+      "domicile": "OH",
+      "name": "MID-CONTINENT EXCESS AND SURPLUS INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "16392",
+      "domicile": "AZ",
+      "name": "MOBILITAS INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "41807",
+      "domicile": "DE",
+      "name": "MS TRANSVERSE SPECIALTY INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "11066",
+      "domicile": "FL",
+      "name": "MSA INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "34886",
+      "domicile": "NY",
+      "name": "MSIG SPECIALTY INSURANCE USA INC.",
+      "letter": "M"
+    },
+    {
+      "naic": "37974",
+      "domicile": "KS",
+      "name": "MT. HAWLEY INSURANCE COMPANY",
+      "letter": "M"
+    },
+    {
+      "naic": "29629",
+      "domicile": "IN",
+      "name": "NAMIC INSURANCE COMPANY, INC.",
+      "letter": "N"
+    },
+    {
+      "naic": "20079",
+      "domicile": "NE",
+      "name": "NATIONAL FIRE & MARINE INSURANCE COMPANY",
+      "letter": "N"
+    },
+    {
+      "naic": "17370",
+      "domicile": "AZ",
+      "name": "NAUTILUS INSURANCE COMPANY",
+      "letter": "N"
+    },
+    {
+      "naic": "36056",
+      "domicile": "NY",
+      "name": "NAVIGATORS SPECIALTY INSURANCE COMPANY",
+      "letter": "N"
+    },
+    {
+      "naic": "35114",
+      "domicile": "TX",
+      "name": "NORCAL SPECIALTY INSURANCE COMPANY",
+      "letter": "N"
+    },
+    {
+      "naic": "13167",
+      "domicile": "IL",
+      "name": "NORTH LIGHT SPECIALTY INSURANCE COMPANY",
+      "letter": "N"
+    },
+    {
+      "naic": "27987",
+      "domicile": "IA",
+      "name": "NORTHFIELD INSURANCE COMPANY",
+      "letter": "N"
+    },
+    {
+      "naic": "16871",
+      "domicile": "DE",
+      "name": "OBSIDIAN SPECIALTY INSURANCE COMPANY",
+      "letter": "O"
+    },
+    {
+      "naic": "14175",
+      "domicile": "OK",
+      "name": "OKLAHOMA SPECIALTY INSURANCE COMPANY",
+      "letter": "O"
+    },
+    {
+      "naic": "31143",
+      "domicile": "IL",
+      "name": "OLD REPUBLIC UNION INSURANCE COMPANY",
+      "letter": "O"
+    },
+    {
+      "naic": "17731",
+      "domicile": "MO",
+      "name": "OZARK SPECIALTY INSURANCE COMPANY",
+      "letter": "O"
+    },
+    {
+      "naic": "10046",
+      "domicile": "CT",
+      "name": "PACIFIC INSURANCE COMPANY, LIMITED",
+      "letter": "P"
+    },
+    {
+      "naic": "17327",
+      "domicile": "DE",
+      "name": "PALMS SPECIALTY INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "16754",
+      "domicile": "AZ",
+      "name": "PALOMAR EXCESS AND SURPLUS INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "34118",
+      "domicile": "NE",
+      "name": "PELEUS INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "10121",
+      "domicile": "VA",
+      "name": "PENN-PATRIOT INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "11062",
+      "domicile": "IA",
+      "name": "PETROLEUM MARKETERS MANAGEMENT INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "17445",
+      "domicile": "WI",
+      "name": "POINT EXCESS AND SURPLUS INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "12588",
+      "domicile": "IL",
+      "name": "PRIME INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "17694",
+      "domicile": "IL",
+      "name": "PRIME SPECIAL RISK INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "10786",
+      "domicile": "DE",
+      "name": "PRINCETON EXCESS AND SURPLUS LINES INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "17400",
+      "domicile": "VT",
+      "name": "PROASSURANCE SPECIALTY INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "11811",
+      "domicile": "AZ",
+      "name": "PROFESSIONAL SECURITY INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "13149",
+      "domicile": "IN",
+      "name": "PROTECTIVE SPECIALTY INSURANCE COMPANY",
+      "letter": "P"
+    },
+    {
+      "naic": "17148",
+      "domicile": "AZ",
+      "name": "PURE SPECIALTY EXCHANGE",
+      "letter": "P"
+    },
+    {
+      "naic": "11515",
+      "domicile": "ND",
+      "name": "QBE SPECIALTY INSURANCE COMPANY",
+      "letter": "Q"
+    },
+    {
+      "naic": "15756",
+      "domicile": "NE",
+      "name": "RADNOR SPECIALTY INSURANCE COMPANY",
+      "letter": "R"
+    },
+    {
+      "naic": "40479",
+      "domicile": "AZ",
+      "name": "REPUBLIC-VANGUARD INSURANCE COMPANY",
+      "letter": "R"
+    },
+    {
+      "naic": "17103",
+      "domicile": "NH",
+      "name": "RICHMOND NATIONAL INSURANCE COMPANY",
+      "letter": "R"
+    },
+    {
+      "naic": "28053",
+      "domicile": "AZ",
+      "name": "ROCKHILL INSURANCE COMPANY",
+      "letter": "R"
+    },
+    {
+      "naic": "10214",
+      "domicile": "VA",
+      "name": "ROCKINGHAM INSURANCE COMPANY",
+      "letter": "R"
+    },
+    {
+      "naic": "16650",
+      "domicile": "VA",
+      "name": "ROCKINGHAM SPECIALTY, INC.",
+      "letter": "R"
+    },
+    {
+      "naic": "11100",
+      "domicile": "WA",
+      "name": "SAFECO SURPLUS LINES INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "15341",
+      "domicile": "FL",
+      "name": "SAFEPOINT INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "13815",
+      "domicile": "MO",
+      "name": "SAFETY SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "41297",
+      "domicile": "OH",
+      "name": "SCOTTSDALE INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "10672",
+      "domicile": "AZ",
+      "name": "SCOTTSDALE SURPLUS LINES INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "17631",
+      "domicile": "TX",
+      "name": "SECURIAN SPECIALTY LINES, INC.",
+      "letter": "S"
+    },
+    {
+      "naic": "10729",
+      "domicile": "DE",
+      "name": "SENECA SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "16762",
+      "domicile": "OH",
+      "name": "SHIELD INDEMNITY INCORPORATED",
+      "letter": "S"
+    },
+    {
+      "naic": "19208",
+      "domicile": "TX",
+      "name": "SIERRA SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "16820",
+      "domicile": "NH",
+      "name": "SIRIUSPOINT SPECIALTY INSURANCE CORPORATION",
+      "letter": "S"
+    },
+    {
+      "naic": "16999",
+      "domicile": "TX",
+      "name": "SOUTHLAKE SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "16826",
+      "domicile": "GA",
+      "name": "SPECIALTY BUILDERS INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "17045",
+      "domicile": "TX",
+      "name": "SPINNAKER SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "30481",
+      "domicile": "DE",
+      "name": "ST. PAUL SURPLUS LINES INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "13604",
+      "domicile": "TX",
+      "name": "STARR SURPLUS LINES INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "44776",
+      "domicile": "DE",
+      "name": "STARSTONE SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "17501",
+      "domicile": "IL",
+      "name": "STATE FARM SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "26387",
+      "domicile": "IL",
+      "name": "STEADFAST INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "14012",
+      "domicile": "IL",
+      "name": "STONEGATE INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "16889",
+      "domicile": "TX",
+      "name": "SUMMIT SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "16551",
+      "domicile": "DE",
+      "name": "SUPERIOR SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "16848",
+      "domicile": "OK",
+      "name": "SUTTON SPECIALTY INSURANCE COMPANY",
+      "letter": "S"
+    },
+    {
+      "naic": "34916",
+      "domicile": "MO",
+      "name": "SWISS RE CORPORATE SOLUTIONS CAPACITY INSURANCE CORPORATION",
+      "letter": "S"
+    },
+    {
+      "naic": "34487",
+      "domicile": "DC",
+      "name": "TDC SPECIALTY INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "16543",
+      "domicile": "TX",
+      "name": "TEXAS INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "17721",
+      "domicile": "DE",
+      "name": "TFG INDEMNITY INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "10713",
+      "domicile": "WI",
+      "name": "THIRD COAST INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "23850",
+      "domicile": "DE",
+      "name": "TOKIO MARINE SPECIALTY INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "29696",
+      "domicile": "CT",
+      "name": "TRAVELERS EXCESS AND SURPLUS LINES COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "10213",
+      "domicile": "CT",
+      "name": "TRAVELERS SPECIALTY INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "29734",
+      "domicile": "MI",
+      "name": "TRIASSIC INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "16188",
+      "domicile": "OK",
+      "name": "TRISURA SPECIALTY INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "37982",
+      "domicile": "NH",
+      "name": "TUDOR INSURANCE COMPANY",
+      "letter": "T"
+    },
+    {
+      "naic": "35416",
+      "domicile": "ND",
+      "name": "U. S. UNDERWRITERS INSURANCE COMPANY",
+      "letter": "U"
+    },
+    {
+      "naic": "12537",
+      "domicile": "DE",
+      "name": "UNITED SPECIALTY INSURANCE COMPANY",
+      "letter": "U"
+    },
+    {
+      "naic": "16988",
+      "domicile": "TX",
+      "name": "UPLAND SPECIALTY INSURANCE COMPANY",
+      "letter": "U"
+    },
+    {
+      "naic": "43451",
+      "domicile": "TX",
+      "name": "UTICA SPECIALTY RISK INSURANCE COMPANY",
+      "letter": "U"
+    },
+    {
+      "naic": "16275",
+      "domicile": "DE",
+      "name": "VANTAGE RISK SPECIALTY INSURANCE COMPANY",
+      "letter": "V"
+    },
+    {
+      "naic": "16237",
+      "domicile": "AR",
+      "name": "VAULT E&S INSURANCE COMPANY",
+      "letter": "V"
+    },
+    {
+      "naic": "39640",
+      "domicile": "DE",
+      "name": "VECTOR SPECIALTY INSURANCE COMPANY",
+      "letter": "V"
+    },
+    {
+      "naic": "17499",
+      "domicile": "DE",
+      "name": "VICTOR INSURANCE EXCHANGE",
+      "letter": "V"
+    },
+    {
+      "naic": "40428",
+      "domicile": "GA",
+      "name": "VOYAGER INDEMNITY INSURANCE COMPANY",
+      "letter": "V"
+    },
+    {
+      "naic": "15824",
+      "domicile": "NJ",
+      "name": "WATFORD SPECIALTY INSURANCE COMPANY",
+      "letter": "W"
+    },
+    {
+      "naic": "10172",
+      "domicile": "GA",
+      "name": "WESTCHESTER SURPLUS LINES INSURANCE COMPANY",
+      "letter": "W"
+    },
+    {
+      "naic": "13196",
+      "domicile": "NH",
+      "name": "WESTERN WORLD INSURANCE COMPANY",
+      "letter": "W"
+    },
+    {
+      "naic": "16992",
+      "domicile": "OH",
+      "name": "WESTFIELD SPECIALTY INSURANCE COMPANY",
+      "letter": "W"
+    },
+    {
+      "naic": "13234",
+      "domicile": "NC",
+      "name": "WILSHIRE INSURANCE COMPANY",
+      "letter": "W"
+    }
+  ]
+}

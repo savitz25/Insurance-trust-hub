@@ -75,10 +75,19 @@ const specs = {
  ["complaints.row_total", "Oregon DFR 2025 insurer-line complaint table rows", "dfr_complaint_table_row", "COMPLAINTS"],
  ["market_conduct.report_rows", "Oregon market-conduct examination report listings", "market_conduct_examination_listing", "EXAMINATIONS"],
  ["financial_exams.report_rows", "Oregon financial examination report listings", "financial_examination_listing", "EXAMINATIONS"],
+ ],
+ PA: [
+ ["company_lookup.distinct_naic", "PID licensed companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
+ ["surplus_lines.distinct_naic", "Eligible surplus-lines companies (distinct NAIC)", "surplus_lines_observation", "RATE_MARKET"],
+ ["complaints.row_total", "2025 complaint comparison insurer-line rows", "consumer_complaint_observation", "COMPLAINTS"],
+ ["enforcement.enforcement_actions", "Enforcement Actions documents", "regulatory_evidence_row"],
+ ["market_conduct.document_rows", "Market Conduct Actions documents", "market_conduct_examination_listing", "EXAMINATIONS"],
+ ["financial_exams.document_rows", "Financial examination report documents", "financial_examination_listing", "EXAMINATIONS"],
+ ["liquidation.document_rows", "Liquidation/rehab/discharge catalog documents", "regulatory_evidence_row"],
  ]
 };
-const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon" };
-const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon" };
+const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania" };
+const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania" };
 export function reconcile(manifest, root, census) {
   const paths = Object.fromEntries(Object.entries(slugs).map(([k,v]) => [k, `lib/${v}-intelligence/accepted-snapshot.json`]));
   const sources = Object.fromEntries(Object.entries(paths).map(([k,v])=>[k,read(root,v)]));

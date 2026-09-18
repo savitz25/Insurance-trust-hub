@@ -122,6 +122,20 @@ assert(bareProduct.query.entityClass === 'agency', 'bare product mention default
 assert(bareProduct.query.requestedProduct?.includes('auto'), 'bare product retained for disclosure');
 assert(!bareProduct.query.jurisdiction, 'no location was given, so none is invented');
 
+const homeownersPa = q('homeowners insurance agencies Pennsylvania');
+assert(homeownersPa.query.mode === 'fail_closed', 'PA homeowners does not execute a PA agency census');
+assert(homeownersPa.query.requestedProduct?.includes('homeowners'), 'PA homeowners product retained');
+assert(homeownersPa.query.jurisdiction?.state === 'PA', 'PA homeowners retains Pennsylvania');
+assert(!homeownersPa.query.linesOfAuthority?.length, 'do not invent a PA homeowners LOA');
+const autoPa = q('auto insurance agencies Pennsylvania');
+assert(autoPa.query.mode === 'fail_closed', 'PA auto does not execute a PA agency census');
+assert(autoPa.query.requestedProduct?.includes('auto'), 'PA auto product retained');
+const agenciesPa = q('insurance agencies Pennsylvania');
+assert(agenciesPa.query.mode === 'fail_closed', 'PA agencies search-only fail closed');
+assert(!agenciesPa.query.requestedProduct?.length, 'generic PA agencies carry no product');
+assert(homeownersPa.query.failReason !== agenciesPa.query.failReason, 'SQA-009: homeowners PA must not silently become generic PA agencies');
+assert(autoPa.query.failReason !== agenciesPa.query.failReason, 'SQA-009: auto PA must not silently become generic PA agencies');
+
 const unspecifiedFl = q('Show insurance agencies credentialed in Florida.');
 assert(unspecifiedFl.query.mode === 'entity' && unspecifiedFl.query.entityClass === 'agency', 'unspecified product remains FL agency cohort');
 assert(!unspecifiedFl.query.requestedProduct?.length, 'unspecified product has no unresolved product');

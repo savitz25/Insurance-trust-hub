@@ -1,0 +1,298 @@
+{
+  "version": "insurance-pa-state-intel-v1",
+  "ticket": "PA-INS-001",
+  "as_of": "2026-09-14",
+  "source_as_of": "2026-09-14",
+  "source_as_of_state": "KNOWN",
+  "retrieved_at": "2026-09-17T16:49:06Z",
+  "generated_at": "2026-09-17T17:02:37Z",
+  "snapshot_as_of": "2026-09-17",
+  "source_clock": "PID company information current as of 2026-09-14 (weekly refresh cadence is not that date). Business-entity and individual producer lookup clocks: Wednesday, September 16, 2026. Complaint Comparison Tool reporting year 2025 (2024 comparison harvested). Enforcement, market-conduct, financial-exam, and liquidation catalogs retrieved 2026-09-17. generatedAt is excluded from the semantic fingerprint.",
+  "no_trust_score": true,
+  "no_paid_ranking": true,
+  "no_pennsylvania_local_pages": true,
+  "missing_is_not_zero": true,
+  "search_only_is_not_zero": true,
+  "publication": {
+    "path": "/pennsylvania",
+    "indexable": true,
+    "robots": "index,follow",
+    "canonical": "https://www.insurancetrusthub.com/pennsylvania",
+    "h1": "Pennsylvania Insurance Market & Regulatory Intelligence",
+    "sitemap": true
+  },
+  "regulators": {
+    "name": "Pennsylvania Insurance Department",
+    "short": "PID",
+    "url": "https://www.pa.gov/agencies/insurance",
+    "company_lookup": "https://www.pid.pa.gov/dsf/gfsearch.html",
+    "producer_lookup": "https://apps02.ins.pa.gov/producer/ilist1.asp",
+    "agency_lookup": "https://apps02.ins.pa.gov/producer/alist1.asp",
+    "surplus_lines": "https://www.pid.pa.gov/dsf/slasearch.html",
+    "complaints": "https://www.pid.pa.gov/scrpts/cmpln_tool",
+    "file_complaint": "https://www.pa.gov/agencies/insurance/consumer-help-center/complaints-questions-help",
+    "enforcement": "https://www.pa.gov/agencies/insurance/resources/consumer-resources/enforcement-actions-search",
+    "financial_exams": "https://www.pa.gov/agencies/insurance/posted-filings-reports-company-orders/posted-reports/financial-examination-reports.html",
+    "liquidation": "https://www.pa.gov/agencies/insurance/resources/consumer-resources/liquidated-rehabilitated-discharged-insurance-companies",
+    "search_tools": "https://www.pa.gov/agencies/insurance/resources/search-tool-library"
+  },
+  "hero": {
+    "universe_value": 1722,
+    "universe_label": "PID licensed companies (distinct NAIC)",
+    "universe_hint": "A\u2013Z Licensed Company Search. Letter rows 1,724 / distinct NAIC 1,722. Not agencies, not producers, not surplus lines, not the liquidation catalog. Company information current as of 2026-09-14.",
+    "actions_value": 3232,
+    "actions_label": "PID Enforcement Actions documents",
+    "actions_hint": "Source facet Enforcement Actions only. Market Conduct Actions and CCRC Reports are separate grains. A document is not a unique matter. Name-only attachment is unsafe.",
+    "current_value": "Search only",
+    "current_label": "Agency / producer bulk roster",
+    "current_hint": "Licensed Business Entity and Licensed Individual Search require a name, city, or license number. Search-only is not zero. License information current as of Wednesday, September 16, 2026.",
+    "geography_value": "Pennsylvania",
+    "as_of_value": "2026-09-14",
+    "as_of_label": "company information current as of"
+  },
+  "company_lookup": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "classification": "VISIBLE_PUBLIC_METRIC",
+    "count": 1724,
+    "distinct_naic": 1722,
+    "pa_domicile_distinct_naic": 211,
+    "source_as_of": "2026-09-14",
+    "retrieved_at": "2026-09-17T16:49:06Z",
+    "weekly_refresh_note": "List is normally refreshed weekly; no explicit as-of date on the page.",
+    "weekly_cadence_is_not_source_as_of": true,
+    "search_only_is_not_zero": true,
+    "not_derived_from_orders": true,
+    "not_derived_from_complaints": true,
+    "not_derived_from_exams": true,
+    "not_derived_from_liquidation": true,
+    "not_surplus_lines": true,
+    "identity_namespace": "NAIC 5-digit",
+    "power_counts": {
+      "Accident and Health": 992,
+      "Life and Annuities": 495,
+      "Auto Liability": 865,
+      "Property and Allied Lines": 885,
+      "Workers Compensation": 674,
+      "HMO Authority": 30,
+      "Title": 29
+    },
+    "property_and_allied_lines_is_not_homeowners": true,
+    "auto_liability_is_not_consumer_auto_product": true,
+    "line_is_not_consumer_product_unless_proven": true
+  },
+  "producer_roster": {
+    "coverage": "OPEN_SEARCH_ONLY",
+    "count": null,
+    "distinct_npns": null,
+    "source_as_of": "2026-09-16",
+    "search_only_is_not_zero": true,
+    "individual_is_not_agency": true,
+    "npn_is_not_pa_license_number_unless_source_says_so": true,
+    "npn_is_not_insurer_certificate": true,
+    "source": "https://apps02.ins.pa.gov/producer/ilist1.asp"
+  },
+  "agency_roster": {
+    "coverage": "OPEN_SEARCH_ONLY",
+    "count": null,
+    "distinct_ids": null,
+    "source_as_of": "2026-09-16",
+    "search_only_is_not_zero": true,
+    "agency_is_not_insurer": true,
+    "agency_is_not_producer": true,
+    "source": "https://apps02.ins.pa.gov/producer/alist1.asp"
+  },
+  "appointments": {
+    "coverage": "OPEN_SEARCH_ONLY",
+    "count": null,
+    "license_is_not_appointment": true
+  },
+  "surplus_lines": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "classification": "VISIBLE_PUBLIC_METRIC",
+    "count": 233,
+    "distinct_naic": 233,
+    "retrieved_at": "2026-09-17T16:56:23Z",
+    "surplus_is_not_admitted_company": true,
+    "source": "https://www.pid.pa.gov/dsf/slasearch.html"
+  },
+  "enforcement": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "classification": "VISIBLE_PUBLIC_METRIC",
+    "source": "https://www.pa.gov/agencies/insurance/resources/consumer-resources/enforcement-actions-search",
+    "retrieved_at": "2026-09-17T16:52:08Z",
+    "document_rows": 3706,
+    "enforcement_actions": 3232,
+    "market_conduct_actions": 450,
+    "ccrc_reports": 24,
+    "unique_titles": 3656,
+    "unique_uris": 3706,
+    "unique_matters": null,
+    "naic_populated": 0,
+    "docket_populated": 0,
+    "name_only": true,
+    "document_is_not_matter": true,
+    "enforcement_is_not_complaint": true,
+    "enforcement_is_not_exam": true,
+    "ccrc_is_not_company_enforcement": true
+  },
+  "complaints": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "classification": "VISIBLE_PUBLIC_METRIC",
+    "year": 2025,
+    "source": "https://www.pid.pa.gov/scrpts/cmpln_tool",
+    "retrieved_at": "2026-09-17T16:55:00Z",
+    "row_total": 595,
+    "distinct_names": 500,
+    "sum_complaints": 9209,
+    "line_rows": {
+      "Accident and Health": 44,
+      "Annuity": 42,
+      "Auto": 223,
+      "Homeowners": 138,
+      "Life": 141,
+      "Title": 7
+    },
+    "line_total_complaints": {
+      "Accident and Health": 2008.0,
+      "Annuity": 87.0,
+      "Auto": 4326.0,
+      "Homeowners": 2124.0,
+      "Life": 653.0,
+      "Title": 11.0
+    },
+    "denominator": "Premium as published in the PID Complaint Comparison Tool (also publishes market share)",
+    "index_label": "Pennsylvania Insurance Department Complaint Index (source-created)",
+    "index_is_not_trust_score": true,
+    "complaint_is_not_violation": true,
+    "complaint_is_not_enforcement": true,
+    "complaint_is_not_finding": true,
+    "name_only": true,
+    "not_sorted_best_to_worst": true
+  },
+  "market_conduct": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "classification": "VISIBLE_SUPPORTING_CONTEXT",
+    "document_rows": 450,
+    "distinct_insurers": null,
+    "exam_is_not_discipline": true,
+    "exam_is_not_enforcement_action": true,
+    "name_only": true,
+    "source": "https://www.pa.gov/agencies/insurance/resources/consumer-resources/enforcement-actions-search",
+    "facet": "Market Conduct Actions"
+  },
+  "financial_exams": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "classification": "VISIBLE_SUPPORTING_CONTEXT",
+    "document_rows": 494,
+    "unique_titles": 367,
+    "distinct_insurers": null,
+    "naic_populated": 0,
+    "financial_exam_is_not_market_conduct": true,
+    "exam_is_not_enforcement": true,
+    "name_only": true,
+    "source": "https://www.pa.gov/agencies/insurance/posted-filings-reports-company-orders/posted-reports/financial-examination-reports.html",
+    "retrieved_at": "2026-09-17T16:57:36Z"
+  },
+  "liquidation": {
+    "coverage": "ACQUIRED_CURRENT_SNAPSHOT",
+    "classification": "VISIBLE_SUPPORTING_CONTEXT",
+    "document_rows": 95,
+    "unique_titles": 94,
+    "statuses": {
+      "Liquidation": 62,
+      "Discharged": 32,
+      "Rehabilitation": 1
+    },
+    "liquidation_is_not_current_census": true,
+    "rehab_is_not_liquidation": true,
+    "discharge_is_not_current_license": true,
+    "name_only": true,
+    "source": "https://www.pa.gov/agencies/insurance/resources/consumer-resources/liquidated-rehabilitated-discharged-insurance-companies",
+    "retrieved_at": "2026-09-17T16:52:08Z"
+  },
+  "specialized_classes": {
+    "ccrc": {
+      "coverage": "PUBLIC_RESEARCH_PATH",
+      "enforcement_hub_reports": 24,
+      "not_licensed_company": true,
+      "source": "https://www.pid.pa.gov/dsf/ccfsearch.html"
+    },
+    "tpa": {
+      "coverage": "PUBLIC_RESEARCH_PATH",
+      "source": "https://www.pid.pa.gov/dsf/tpasearch.html"
+    },
+    "premium_finance": {
+      "coverage": "PUBLIC_RESEARCH_PATH",
+      "source": "https://www.pid.pa.gov/dsf/pfasearch.html"
+    },
+    "qualified_unlicensed_reinsurers": {
+      "coverage": "PUBLIC_RESEARCH_PATH",
+      "source": "https://www.pid.pa.gov/dsf/qursearch.html"
+    },
+    "risk_retention_groups": {
+      "coverage": "PUBLIC_RESEARCH_PATH",
+      "source": "https://www.pid.pa.gov/dsf/rrsearch.html"
+    },
+    "risk_purchasing_groups": {
+      "coverage": "PUBLIC_RESEARCH_PATH",
+      "source": "https://www.pid.pa.gov/dsf/rpsearch.html"
+    },
+    "viatical_settlements": {
+      "coverage": "PUBLIC_RESEARCH_PATH",
+      "source": "https://www.pid.pa.gov/dsf/vspsearch.html"
+    }
+  },
+  "identity": {
+    "preferred_producer": "NPN when source-native",
+    "preferred_insurer": "NAIC number when source-native",
+    "pa_license_is_not_npn": true,
+    "naic_is_not_npn": true,
+    "company_is_not_agency": true,
+    "person_is_not_agency": true,
+    "appointment_is_not_license": true,
+    "name_only": "UNSAFE"
+  },
+  "enforcement_attachment": {
+    "EXACT_COMPANY_ENFORCEMENT_ASSOCIATIONS": 0,
+    "EXACT_PRODUCER_ENFORCEMENT_ASSOCIATIONS": 0,
+    "EXACT_COMPANY_COMPLAINT_ASSOCIATIONS": 0,
+    "EXACT_COMPANY_EXAM_BRIDGES": 0,
+    "REVIEW_REQUIRED_ASSOCIATIONS": 0,
+    "REJECTED_NAME_ONLY_ASSOCIATIONS": 0,
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "research_association_is_not_profile_attachment": true
+  },
+  "claim_eligibility": {
+    "broadened": false
+  },
+  "expansion_ledger": {
+    "PA_LICENSED_COMPANY_LETTER_ROWS": 1724,
+    "PA_LICENSED_COMPANY_DISTINCT_NAIC": 1722,
+    "PA_PA_DOMICILE_DISTINCT_NAIC": 211,
+    "PA_COMPANY_LOOKUP_COVERAGE": "ACQUIRED_CURRENT_SNAPSHOT",
+    "PA_AGENCY_ROSTER": "OPEN_SEARCH_ONLY",
+    "PA_AGENCY_ROWS": null,
+    "PA_PRODUCER_ROSTER": "OPEN_SEARCH_ONLY",
+    "PA_PRODUCER_ROWS": null,
+    "PA_PRODUCER_DISTINCT_NPNS": null,
+    "PA_SURPLUS_LINES_DISTINCT_NAIC": 233,
+    "PA_COMPLAINT_DATA_COVERAGE": "ACQUIRED_CURRENT_SNAPSHOT",
+    "PA_COMPLAINT_ROWS": 595,
+    "PA_COMPLAINT_DISTINCT_NAMES": 500,
+    "PA_ENFORCEMENT_ACTION_DOCUMENTS": 3232,
+    "PA_MARKET_CONDUCT_ACTION_DOCUMENTS": 450,
+    "PA_CCRC_REPORTS": 24,
+    "PA_FINANCIAL_EXAM_DOCUMENTS": 494,
+    "PA_LIQUIDATION_CATALOG_DOCUMENTS": 95,
+    "PA_UNIQUE_REGULATORY_MATTERS": null,
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "EXACT_COMPANY_EXAM_BRIDGES": 0,
+    "NET_NEW_STATE_RESEARCH_IDENTITIES": 0,
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_PUBLIC_INSURANCE_PROFILES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "GRAPH_WRITES": 0,
+    "CLAIM_ELIGIBILITY_BROADENED": false
+  },
+  "fingerprint": "530c42b9bb39e86bf76160594c5b37a6b105a6742e4a11b7c364a828e2294239"
+}

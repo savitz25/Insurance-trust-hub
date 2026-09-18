@@ -1,0 +1,92 @@
+{
+  "retrievedAt": "2026-09-17T16:52:08Z",
+  "hub": "Insurance-Liquidated and Rehabilitated Companies",
+  "documentRows": 95,
+  "uniqueTitles": 94,
+  "statuses": {
+    "Liquidation": 62,
+    "Discharged": 32,
+    "Rehabilitation": 1
+  },
+  "topics": {
+    "Company Liquidation, Workers\u2019 Compensation Liquidation": 1,
+    "Company Liquidation": 2,
+    "": 34,
+    "Workers\u2019 Compensation Liquidation": 58
+  },
+  "naicPopulated": 0,
+  "liquidationIsNotCurrentCensus": true,
+  "rehabIsNotLiquidation": true,
+  "dischargeIsNotCurrentLicense": true,
+  "sample": [
+    {
+      "title": "bedivere-insurance-company",
+      "status": [
+        "Liquidation"
+      ],
+      "topic": [
+        "Company Liquidation",
+        "Workers\u2019 Compensation Liquidation"
+      ]
+    },
+    {
+      "title": "r-and-q reinsurance-company",
+      "status": [
+        "Liquidation"
+      ],
+      "topic": [
+        "Company Liquidation"
+      ]
+    },
+    {
+      "title": "legion-insurance-company",
+      "status": [
+        "Discharged"
+      ],
+      "topic": null
+    },
+    {
+      "title": "reliance-insurance-company",
+      "status": [
+        "Discharged"
+      ],
+      "topic": null
+    },
+    {
+      "title": "healthcare-providers-insurance-exchange",
+      "status": [
+        "Liquidation"
+      ],
+      "topic": [
+        "Company Liquidation"
+      ]
+    },
+    {
+      "title": "employers-national-ins-co",
+      "status": [
+        "Liquidation"
+      ],
+      "topic": [
+        "Workers\u2019 Compensation Liquidation"
+      ]
+    },
+    {
+      "title": "the-home-ins-co",
+      "status": [
+        "Liquidation"
+      ],
+      "topic": [
+        "Workers\u2019 Compensation Liquidation"
+      ]
+    },
+    {
+      "title": "american-universal-ins-co",
+      "status": [
+        "Liquidation"
+      ],
+      "topic": [
+        "Workers\u2019 Compensation Liquidation"
+      ]
+    }
+  ]
+}

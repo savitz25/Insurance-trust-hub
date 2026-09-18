@@ -1,0 +1,123 @@
+{
+  "retrievedAt": "2026-09-17T16:52:08Z",
+  "hub": "Insurance-Regulatory Actions",
+  "documentRows": 3706,
+  "uniqueTitles": 3656,
+  "uniqueUris": 3706,
+  "actionTypes": {
+    "Market Conduct Actions": 450,
+    "Enforcement Actions": 3232,
+    "CCRC Reports": 24
+  },
+  "years": {
+    "1996": 1,
+    "2003": 12,
+    "2004": 174,
+    "2005": 164,
+    "2006": 202,
+    "2007": 189,
+    "2008": 182,
+    "2009": 170,
+    "2010": 139,
+    "2011": 119,
+    "2012": 134,
+    "2013": 140,
+    "2014": 104,
+    "2015": 108,
+    "2016": 73,
+    "2017": 85,
+    "2018": 94,
+    "2019": 160,
+    "2020": 143,
+    "2021": 212,
+    "2022": 273,
+    "2023": 199,
+    "2024": 218,
+    "2025": 212,
+    "2026": 153,
+    "unknown": 46
+  },
+  "enforcementActions": 3232,
+  "marketConductActions": 450,
+  "ccrcReports": 24,
+  "naicPopulated": 0,
+  "docketPopulated": 0,
+  "uniqueMatters": null,
+  "nameOnly": true,
+  "marketConductIsNotEnforcementAction": true,
+  "ccrcIsNotCompanyEnforcement": true,
+  "sampleEnforcement": [
+    {
+      "title": "abd-el-salam-ahmed-enforcement-action-04-2026",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/abd-el-salam-ahmed-enforcement-action-04-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    },
+    {
+      "title": "elsayed-omar-enforcement-action-05-2026",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/elsayed-omar-enforcement-action-05-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    },
+    {
+      "title": "Grady, Christopher (Kearny, NJ) 09/26",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/grady-christopher-enforcement-action-09-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    },
+    {
+      "title": "Covenant Administrators, LLC (Duluth, GA) 09/26",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/covenant-administrators-llc-enforcement-action-09-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    },
+    {
+      "title": "Brown, Linda Kim (Bellevue, WA) 08/26",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/brown-linda-enforcement-action-08-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    }
+  ],
+  "sampleMarketConduct": [
+    {
+      "title": "Aetna Market Conduct Exam (Hartford, CT) 01/2026",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/aetna-market-conduct-01-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    },
+    {
+      "title": "upmc finalexamreportpkg 12 13 2021",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/documents/current-market-conduct/upmc_finalexamreportpkg_12%2013%202021.pdf",
+      "year": [
+        "2021"
+      ]
+    },
+    {
+      "title": "USAA General Indemnity Company (San Antonio, TX) 05/26",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/usaa-general-indemnity-market-conduct-05-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    },
+    {
+      "title": "Ambetter Health of Pennsylvania, Inc. (Mechanicsburg, PA) 06/26",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/ambetter-health-market-conduct-06-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    },
+    {
+      "title": "American Freedom Insurance Company (Mount Prospect, IL) 06/26",
+      "uri": "https://www.pa.gov/content/dam/copapwp-pagov/en/insurance/documents/regulations/regulatory-actions/american-freedom-market-conduct-06-2026.pdf",
+      "year": [
+        "2026"
+      ]
+    }
+  ]
+}
