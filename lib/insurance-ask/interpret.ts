@@ -662,7 +662,16 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   // (e.g. "Newark NJ", "Springfield IL"), that state removes the real-world ambiguity for an
   // otherwise-ambiguous bare city name -- try it before giving up on a city and falling back to
   // state-only geography. See us-cities.ts's matchCityForState doc comment.
-  const cityMatch = matchKnownCity(q) ?? (states[0] ? matchCityForState(q, states[0]) : undefined);
+  //
+  // A resolved state MUST be checked first: matchKnownCity(q) matches ANY known city substring in
+  // the whole query with no regard for which state was already resolved (e.g. states[0]), so a
+  // query naming an explicit/city-derived state plus an unrelated place name from a DIFFERENT
+  // state's gazetteer entry (e.g. "insurance agent Charlotte County FL" -- Charlotte is only
+  // mapped to NC here) would attach that other state's city as requestedCity next to this query's
+  // actual (different) jurisdiction.state -- a false combined geography claim. Once a state is
+  // resolved, only a city consistent with THAT state (matchCityForState) may be attached;
+  // matchKnownCity is only reached when no state was resolved at all.
+  const cityMatch = states[0] ? matchCityForState(q, states[0]) : matchKnownCity(q);
   const ambiguousCity = !states.length ? matchAmbiguousCity(q) : undefined;
   const requestedCity = cityMatch ? titleCasePlace(cityMatch) : undefined;
   // TH-DISCOVERY-PARITY-001B: SQA-009 used to dead-end the ENTIRE request to fail_closed the

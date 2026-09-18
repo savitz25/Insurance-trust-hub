@@ -1021,9 +1021,15 @@ async function broadenAgencyToPublicDirectory(
     const { getProviders } = await import('@/lib/providers/queries');
     const pageSize = parsed.query.pageSize ?? INSURANCE_ASK_PAGE_SIZE;
     const byCity = city ? await getProviders({ city: city.toUpperCase(), limit: pageSize, offset: 0 }) : { providers: [], total: 0 };
-    const chosen = byCity.providers.length ? byCity : await getProviders({ state, limit: pageSize, offset: 0 });
+    const usedCity = byCity.providers.length > 0;
+    const chosen = usedCity ? byCity : await getProviders({ state, limit: pageSize, offset: 0 });
     if (!chosen.providers.length) return undefined;
-    const place = city ? `${city}, ${state}` : state;
+    // TH-DISCOVERY-PARITY-001B-REVIEW2: `place` must reflect which query actually produced
+    // `chosen`, not just whether a city was requested -- when the by-city lookup came back empty
+    // and this fell back to the state-wide query, the returned rows are NOT confirmed to be in
+    // `city` at all, so labeling every one of them "near {city}, {state}" would be a false
+    // geography claim on the state-wide fallback rows themselves.
+    const place = usedCity && city ? `${city}, ${state}` : state;
     const results: AskCard[] = chosen.providers.map((p) => ({
       entityId: p.id,
       entityClass: 'agency',
