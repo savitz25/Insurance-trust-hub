@@ -8,6 +8,18 @@
  * Official executable LOA / credential-class terms remain Property, Casualty,
  * Life, Health, Personal Lines, and Variable Life / Annuity. Do not invent a
  * Florida homeowners LOA or map homeowners onto Property / Personal Lines.
+ *
+ * TH-DISCOVERY-PARITY-001B: SQA-009's original fix (applyUnresolvedProduct) forced the ENTIRE
+ * request to `mode: 'fail_closed'` the moment an unresolved consumer product word appeared,
+ * regardless of whether a real, unambiguous provider-category + geography request could otherwise
+ * be answered. That over-corrected: "flood insurance provider Miami" and "cheap car insurance"
+ * dead-ended with zero providers even though real agency inventory was one query away. The
+ * regulatory point SQA-009 was protecting -- never claim a product word is a satisfied line of
+ * authority -- does not require hiding the result set. This file now only ANNOTATES the request
+ * (retains the requested product, marks it UNSUPPORTED as an LOA, and supplies disclosure copy);
+ * it no longer sets mode/coverageState/failReason, so interpret.ts's normal entity/count builder
+ * keeps running and execute.ts returns real rows with an honest "not established" disclosure
+ * instead of an empty screen.
  */
 import type { InsuranceResearchQuery, ParsedInsuranceAsk } from './contract';
 
@@ -20,6 +32,10 @@ const CONSUMER_PRODUCT_PATTERNS: Array<{ product: string; re: RegExp }> = [
   { product: 'medicare', re: /\bmedicare\b/i },
 ];
 
+/** Bare word forms of the same consumer-product concepts, for stripping (not labeling) purposes. */
+const CONSUMER_PRODUCT_WORD_STRIP =
+  /\b(?:homeowners?|home|auto(?:mobile)?|car|vehicle|flood|nfip|renters?|umbrella|medicare)\b/gi;
+
 export function detectRequestedConsumerProducts(raw: string): string[] {
   const out: string[] = [];
   for (const { product, re } of CONSUMER_PRODUCT_PATTERNS) {
@@ -28,7 +44,12 @@ export function detectRequestedConsumerProducts(raw: string): string[] {
   return out;
 }
 
-export function unresolvedProductReason(products: string[], state?: string): string {
+/** Strips bare consumer-product words from text; used to isolate non-geography, non-category residue. */
+export function stripConsumerProductWords(raw: string): string {
+  return raw.replace(CONSUMER_PRODUCT_WORD_STRIP, ' ');
+}
+
+function productNotEstablishedReason(products: string[], state?: string): string {
   const productList = products.join(' / ');
   const jurisdiction =
     state === 'FL'
@@ -38,24 +59,18 @@ export function unresolvedProductReason(products: string[], state?: string): str
         : `There is no dedicated ${productList} line of authority in this extract that can qualify an agency cohort.`;
   return (
     `${productList} is a consumer product request, not an official agency line of authority. ${jurisdiction} ` +
-    `Ask will not invent a ${productList} LOA, map it onto Property / Casualty / Personal Lines, or present the statewide agency census as a ${productList}-qualified result. ` +
-    'Missing product evidence is not a zero, and the unfiltered credential census is not product satisfaction.'
+    `These results are not asserted to be ${productList}-specific; Ask will not invent a ${productList} LOA or map it onto Property / Casualty / Personal Lines. ` +
+    'Missing product evidence is not a zero, and showing the broader real inventory is not product satisfaction.'
   );
 }
 
-export function applyUnresolvedProduct(query: InsuranceResearchQuery, products: string[]): void {
-  const state = query.jurisdiction?.state;
-  query.mode = 'fail_closed';
-  query.intent = 'FAIL_CLOSED';
-  query.coverageState = 'UNSUPPORTED';
+/**
+ * Retains the requested product on the query for disclosure and marks it UNSUPPORTED as an LOA.
+ * Does NOT change `mode`, `coverageState`, or `failReason` -- the caller keeps executing as a
+ * normal entity/count request and the disclosure surfaces as a limitation on the real result.
+ */
+export function annotateUnestablishedProduct(query: InsuranceResearchQuery, products: string[]): void {
   query.requestedProduct = products;
-  query.failReason = unresolvedProductReason(products, state);
-  query.alternatives = [
-    state && state !== 'FL'
-      ? `Show insurance agencies credentialed in ${state}.`
-      : 'Show insurance agencies credentialed in Florida.',
-    'What is a line of authority?',
-  ];
   const existing = query.conditions ?? [];
   const already = new Set(
     existing.filter((c) => c.meaning === 'requested insurance product').map((c) => c.value.toLowerCase()),
@@ -68,11 +83,18 @@ export function applyUnresolvedProduct(query: InsuranceResearchQuery, products: 
   ];
 }
 
-export function productInterpretationLines(products: string[]): ParsedInsuranceAsk['interpretation'] {
+/** @deprecated kept as an alias of annotateUnestablishedProduct; no longer forces fail_closed. */
+export function applyUnresolvedProduct(query: InsuranceResearchQuery, products: string[]): void {
+  annotateUnestablishedProduct(query, products);
+}
+
+export function productInterpretationLines(products: string[], state?: string): ParsedInsuranceAsk['interpretation'] {
   return [
     { label: 'Requested product', value: products.join(', ') },
-    { label: 'Product status', value: 'UNSUPPORTED — not an official agency LOA in this extract' },
-    { label: 'Mode', value: 'fail_closed' },
+    {
+      label: 'Product status',
+      value: `Not an official agency/insurer line of authority in this extract — product specialization not established. ${productNotEstablishedReason(products, state)}`,
+    },
   ];
 }
 
@@ -92,15 +114,9 @@ export function unresolvedProductsBlockingCensus(raw: string, query: InsuranceRe
 }
 
 export function rememberProductOnInterpretation(parsed: ParsedInsuranceAsk, products: string[]): void {
+  const state = parsed.query.jurisdiction?.state;
   const labels = new Set(parsed.interpretation.map((row) => row.label));
-  for (const row of productInterpretationLines(products)) {
-    if (row.label === 'Mode') {
-      parsed.interpretation = parsed.interpretation.map((existing) =>
-        existing.label === 'Mode' ? row : existing,
-      );
-      if (!parsed.interpretation.some((existing) => existing.label === 'Mode')) parsed.interpretation.push(row);
-      continue;
-    }
+  for (const row of productInterpretationLines(products, state)) {
     if (!labels.has(row.label)) parsed.interpretation.push(row);
   }
 }

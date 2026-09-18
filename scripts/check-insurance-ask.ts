@@ -86,30 +86,41 @@ assert(health.query.linesOfAuthority?.[0] === 'Health', 'Health LOA');
 const ah = q('Show Florida-credentialed agencies with Accident & Health.');
 assert(ah.query.linesOfAuthority?.includes('Health'), 'A&H → Health');
 
-// SQA-009: product intent is retained and does not execute the FL agency census.
+// SQA-009 / TH-DISCOVERY-PARITY-001B: product intent is retained and never claimed as a satisfied
+// LOA, but (per TH-DISCOVERY-PARITY-001B, which supersedes SQA-009's original hard dead end) an
+// unambiguous provider-category + geography request still EXECUTES as a normal entity query so
+// real agencies are returned, honestly disclosed as not product-qualified -- never a zero result
+// for a request this source can otherwise answer, and never a false product-match claim either.
 const homeownersFl = q('homeowners insurance agencies in Florida');
-assert(homeownersFl.query.mode === 'fail_closed', 'homeowners does not execute FL census');
-assert(homeownersFl.query.coverageState === 'UNSUPPORTED', 'homeowners coverage is unresolved product');
+assert(homeownersFl.query.mode === 'entity', 'homeowners still executes as a real FL agency query, not a dead end');
 assert(homeownersFl.query.entityClass === 'agency', 'homeowners still names agency class');
 assert(homeownersFl.query.jurisdiction?.state === 'FL', 'homeowners retains FL');
 assert(JSON.stringify(homeownersFl.query.requestedProduct) === JSON.stringify(['homeowners']), 'homeowners product retained');
 assert(homeownersFl.query.conditions?.some((c) => c.value === 'homeowners' && c.outcome === 'UNSUPPORTED'), 'homeowners condition unsupported');
 assert(!homeownersFl.query.linesOfAuthority?.length, 'do not invent a homeowners LOA');
-assert(/statewide agency census/i.test(homeownersFl.query.failReason ?? ''), 'fail reason refuses census-as-product');
 assert(JSON.stringify(homeownersFl.interpretation).toLowerCase().includes('homeowners'), 'homeowners visible in interpretation');
+assert(/not established/i.test(JSON.stringify(homeownersFl.interpretation)), 'interpretation discloses product not established, not a silent match');
 
 const homeownersAlt = q('Florida homeowners insurance agencies');
-assert(homeownersAlt.query.mode === 'fail_closed', 'word-order homeowners still unresolved');
+assert(homeownersAlt.query.mode === 'entity', 'word-order homeowners still executes');
 assert(homeownersAlt.query.requestedProduct?.includes('homeowners'), 'word-order homeowners retained');
 
 const autoFl = q('auto insurance agencies in Florida');
-assert(autoFl.query.mode === 'fail_closed', 'auto does not execute FL census');
+assert(autoFl.query.mode === 'entity', 'auto still executes the real FL agency query');
 assert(autoFl.query.requestedProduct?.includes('auto'), 'auto product retained');
 assert(!autoFl.query.linesOfAuthority?.length, 'do not invent an auto LOA');
 
 const homeownersCount = q('how many homeowners insurance agencies in Florida');
-assert(homeownersCount.query.mode === 'fail_closed', 'homeowners count is not the 56939 census');
+assert(homeownersCount.query.mode === 'count', 'homeowners count still executes (the real FL count, not the 56939 census pretending to be homeowners-specific)');
 assert(homeownersCount.query.requestedProduct?.includes('homeowners'), 'count retains homeowners');
+
+// A bare product mention with no other category word (e.g. "cheap car insurance", no location) is
+// still an implicit request for a provider -- it must not dead-end into "Clarification required."
+const bareProduct = q('cheap car insurance');
+assert(bareProduct.query.mode === 'entity', 'bare product mention still executes as a real (nationwide) agency query');
+assert(bareProduct.query.entityClass === 'agency', 'bare product mention defaults to the agency class this source can honestly browse');
+assert(bareProduct.query.requestedProduct?.includes('auto'), 'bare product retained for disclosure');
+assert(!bareProduct.query.jurisdiction, 'no location was given, so none is invented');
 
 const unspecifiedFl = q('Show insurance agencies credentialed in Florida.');
 assert(unspecifiedFl.query.mode === 'entity' && unspecifiedFl.query.entityClass === 'agency', 'unspecified product remains FL agency cohort');

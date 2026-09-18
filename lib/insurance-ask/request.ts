@@ -186,15 +186,14 @@ export function planInsuranceRequest(
   // execute.ts's listPersons now broadens an unsupported mass-producer cohort to real agencies (or
   // the national Wave-1 cohort) for the resolved jurisdiction instead of a zero-provider dead end,
   // so this query must reach it unmodified rather than being re-converted to fail_closed here.
-  if (
-    q.entityClass === "agency" &&
-    q.jurisdiction &&
-    !["FL", "TX", "MA", "OH", "VT"].includes(q.jurisdiction.state)
-  ) {
-    q.mode = "fail_closed";
-    q.coverageState = "NOT_ACQUIRED";
-    q.failReason = `${q.jurisdiction.state} agency bulk credentials are not acquired for this operation. This is not zero agencies.`;
-  }
+  //
+  // TH-DISCOVERY-PARITY-001B: this used to also unconditionally force a bare fail_closed for any
+  // AGENCY-class entity-mode query in a state outside FL/TX/MA/OH/VT -- overriding, before
+  // execution, exactly the same "zero providers despite plausible inventory" case this ticket
+  // exists to fix. execute.ts's listAgencies now broadens a resolved-but-uncredentialed state to
+  // InsuranceTrustHub's separate public verified-agency directory (real, geography-aware rows), and
+  // only falls back to an honest empty result when even that has nothing -- so this must reach
+  // listAgencies unmodified too, the same as the person-class case above.
   p.interpretation = p.interpretation.filter(
     (x) =>
       ![

@@ -159,6 +159,8 @@
     "check:ins-home-002": "tsx scripts/check-ins-home-002.ts",
     "check:insurance-ask": "tsx scripts/check-insurance-ask.ts",
     "check:insurance-ask-live": "tsx scripts/check-insurance-ask-live.ts",
+    "check:th-discovery-parity-001b": "tsx scripts/check-th-discovery-parity-001b.ts",
+    "check:th-discovery-parity-001b-live": "tsx scripts/check-th-discovery-parity-001b-live.ts",
     "check:th-search-001e": "tsx scripts/check-th-search-001e.ts",
     "check:ins-cap-001": "tsx scripts/check-ins-cap-001.ts",
     "check:ins-cust-cap-001": "tsx scripts/check-ins-cust-cap-001.ts",

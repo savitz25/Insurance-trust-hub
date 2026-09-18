@@ -25,8 +25,13 @@ assert.equal(interpretInsuranceAskQuery('licensed insurance companies in Texas')
 assert.ok(interpretInsuranceAskQuery('Florida agencies with Property and Casualty authority').query.linesOfAuthority?.length === 2);
 assert.equal(interpretInsuranceAskQuery('Florida agencies with Property and Casualty authority').query.coverageState, 'PARTIAL');
 assert.equal(interpretInsuranceAskQuery('What is an insurance appointment?').query.definitionId, 'appointment');
-assert.equal(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.mode, 'fail_closed');
+// TH-DISCOVERY-PARITY-001B: a requested consumer product no longer forces the whole request to
+// fail_closed (see lib/insurance-ask/product-intent.ts's doc comment) -- it still never becomes an
+// invented LOA, but now executes as a real agency query with an honest "not established"
+// disclosure instead of a zero-provider dead end.
+assert.equal(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.mode, 'entity');
 assert.deepEqual(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.requestedProduct, ['homeowners']);
+assert.equal(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.linesOfAuthority, undefined, 'homeowners is never invented as an LOA');
 assert.equal(interpretInsuranceAskQuery('Show insurance agencies credentialed in Florida.').query.mode, 'entity');
 
 for (const question of INSURANCE_SEARCH_GOLDEN_QUESTIONS) {

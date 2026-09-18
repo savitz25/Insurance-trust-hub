@@ -104,6 +104,13 @@ export type InsuranceResearchQuery = {
   entityClass?: InsuranceEntityClass;
   identifier?: { type: 'npn' | 'naic_company_code' | 'state_license'; value: string };
   jurisdiction?: { state: string; meaning: GeographyDimension };
+  /**
+   * TH-DISCOVERY-PARITY-001B: the specific city text resolved from the request (e.g. "Fort Worth"
+   * for "insurance broker near Fort Worth"), carried alongside `jurisdiction` so execution can
+   * broaden to real city-scoped public directory inventory instead of only a state-wide query or a
+   * geography-neutral national fallback. A geographic fact only -- not service territory.
+   */
+  requestedCity?: string;
   compareJurisdiction?: { state: string; meaning: GeographyDimension };
   credentialStatus?: 'active' | 'current_source' | 'any';
   linesOfAuthority?: string[];

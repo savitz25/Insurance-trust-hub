@@ -57,7 +57,17 @@ async function main() {
   assert.equal(territory.status, 422);
   assert.equal(territory.body.error?.code, 'service_territory_not_supported');
 
-  const ambiguous = await executeSpecialistV2({ query: 'insurance provider in Florida' });
+  // TH-DISCOVERY-PARITY-001B: "insurance provider" used to be treated as class-ambiguous here, but
+  // that was exactly the "Clarification required" dead end this ticket's audit flagged for real
+  // provider-category words ("flood insurance provider Miami" returned zero despite plausible
+  // inventory). "provider"/"providers" is now a recognized provider-category word (see
+  // lib/insurance-ask/entity-class.ts) that defaults to the agency class, so "insurance provider in
+  // Florida" now resolves and executes as a real (DB-backed) agency query instead of staying
+  // class-ambiguous -- check-th-search-r1-013.ts's fixture-backed suite covers that broadened path
+  // end-to-end. This script deliberately runs with no DB configured, so the clarification-code
+  // assertion below is kept on a phrase with NO recognized category word at all (agency/person/
+  // insurer/broker/provider), which still cannot resolve a class and stays a DB-free 422.
+  const ambiguous = await executeSpecialistV2({ query: 'insurance in Florida' });
   assert.equal(ambiguous.status, 422);
   assert.equal(ambiguous.body.error?.code, 'entity_class_clarification_required');
 
@@ -65,15 +75,20 @@ async function main() {
   assert.equal(ranking.status, 422);
   assert.equal(ranking.body.error?.code, 'ranking_not_supported');
 
+  // TH-DISCOVERY-PARITY-001B: "homeowners insurance agencies in Florida" used to dead-end at parse
+  // time (mode: fail_closed) before ever reaching the database -- exactly the "zero providers
+  // despite plausible inventory" bug this ticket exists to fix (see product-intent.ts's doc
+  // comment). It now executes as a real (DB-backed) FL agency query with an honest "product
+  // specialization not established" disclosure instead of a dead end -- covered end-to-end,
+  // against a live/fixture DB, by check-insurance-ask.ts, check-insurance-ask-live.ts, and
+  // check-th-search-r1-013.ts. This script deliberately runs with no DB configured, so it can only
+  // assert the DB-free consequence of that change: the request now reaches (and fails loud at) the
+  // database instead of short-circuiting before it -- "source outage is error, never zero" is this
+  // codebase's own established rule (see the passing assertion by that name below).
   const homeowners = await executeSpecialistV2({ query: 'homeowners insurance agencies in Florida' });
-  assert.equal(homeowners.status, 422);
-  assert.equal(homeowners.body.resultState, 'UNSUPPORTED_CAPABILITY');
-  assert.equal(homeowners.body.error?.code, 'unresolved_product');
-  assert.equal(homeowners.body.total, 0);
-  assert.equal(homeowners.body.rows.length, 0);
-  assert.equal(homeowners.body.pagination.total, 0);
-  assert.match(JSON.stringify(homeowners.body.queryInterpretation), /homeowners/i);
-  assert.match(homeowners.body.error?.message ?? '', /statewide agency census/i);
+  assert.equal(homeowners.status, 503);
+  assert.equal(homeowners.body.resultState, 'BACKEND_UNAVAILABLE');
+  assert.equal(homeowners.body.error?.code, 'backend_unavailable');
 
   const wave = await executeSpecialistV2({ query: 'legal insurer Wave 1', page: 1, limit: 10 });
   assert.equal(wave.status, 200);
