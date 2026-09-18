@@ -27,6 +27,7 @@
     "assert:il-ins-001": "python -X utf8 scripts/build-il-public-snapshot.py --check && python scripts/il-ins-001-tests.py && tsx scripts/assert-il-ins-001.mts",
     "assert:or-ins-001": "python -X utf8 scripts/build-or-public-snapshot.py --check && python scripts/or-ins-001-tests.py && tsx scripts/assert-or-ins-001.mts",
     "assert:pa-ins-001": "python -X utf8 scripts/build-pa-public-snapshot.py --check && python scripts/pa-ins-001-tests.py && tsx scripts/assert-pa-ins-001.mts",
+    "test:pa-rel-001": "tsx --test lib/seo/pa-rel-001.test.ts",
     "home:metrics": "node --import tsx scripts/build_network_metrics_v1.mjs",
     "assert:network-metrics": "node scripts/assert_network_metrics_v1.mjs && npx --yes tsx --test scripts/test_insurance_network_metrics.ts && python -X utf8 scripts/check-insurance-network-metrics-stale.py",
     "assert:visual": "node scripts/assert-visual-005.mjs",
