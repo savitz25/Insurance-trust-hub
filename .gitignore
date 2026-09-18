@@ -54,6 +54,11 @@ yarn-error.log*
 /data/raw/washington/**
 /data/colorado/co-ins-001/**
 !/data/colorado/co-ins-001/README.md
+/data/north-carolina/raw/**
+/data/north-carolina/nc-ins-001/raw/**
+/data/north-carolina/nc-ins-001/pdf/*.pdf
+/data/north-carolina/nc-ins-001/licensing-actions.json
+scripts/north-carolina/__pycache__/
 /data/pennsylvania/pa-ins-001/raw/**
 /data/pennsylvania/pa-ins-001/enforcement-catalog.json
 /data/pennsylvania/pa-ins-001/liquidation-catalog.json

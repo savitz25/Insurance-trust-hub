@@ -1,0 +1,93 @@
+{
+  "source": "https://www.ncdoi.gov/insurance-industry/receiverships",
+  "retrieved_at": "2026-09-18T03:20:41Z",
+  "entity_headings": [
+    {
+      "heading": "Friday Health Plans of North Carolina, Inc. in Receivership",
+      "status": "receivership"
+    },
+    {
+      "heading": "Southland National Insurance Corporation in Liquidation, Colorado Bankers Life Insurance Company in Liquidation, Bankers Life Insurance Company in Liquidation, Southland National Reinsurance Corporation in Rehabilitation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Banker's Life Insurance Company in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Colorado Bankers Life Insurance Company in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Southland National Insurance Corporation in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "North Carolina Mutual Life Insurance Company in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Related Links",
+      "status": "receivership"
+    },
+    {
+      "heading": "Contact Information",
+      "status": "receivership"
+    },
+    {
+      "heading": "Actions in Other States",
+      "status": "receivership"
+    },
+    {
+      "heading": "Friday Health Plans of North Carolina, Inc. in Receivership",
+      "status": "receivership"
+    },
+    {
+      "heading": "Important Dates",
+      "status": "receivership"
+    },
+    {
+      "heading": "Southland National Insurance Corporation in Liquidation, Colorado Bankers Life Insurance Company in Liquidation, Bankers Life Insurance Company in Liquidation, Southland National Reinsurance Corporation in Rehabilitation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Banker's Life Insurance Company in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Colorado Bankers Life Insurance Company in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Southland National Insurance Corporation in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "North Carolina Mutual Life Insurance Company in Liquidation",
+      "status": "liquidation"
+    },
+    {
+      "heading": "Related Links",
+      "status": "receivership"
+    },
+    {
+      "heading": "Contact Information",
+      "status": "receivership"
+    },
+    {
+      "heading": "Actions in Other States",
+      "status": "receivership"
+    },
+    {
+      "heading": "North Carolina Department of Insurance",
+      "status": "receivership"
+    }
+  ],
+  "entity_count": 20,
+  "liquidation_headings": 10,
+  "rehabilitation_headings": 0,
+  "admin_supervision_headings": 0,
+  "receivership_headings": 10,
+  "document_hrefs": 126,
+  "note": "Heading grain is estate/status index, not document count. Mixed SNIC/CBL/BLIC/SNRC heading is one accordion estate group."
+}

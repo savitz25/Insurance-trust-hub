@@ -234,6 +234,24 @@ const STATE_CARD_COPY: InsuranceStateCard[] = [
     ],
   },
   {
+    state: "North Carolina",
+    abbreviation: "NC",
+    href: "/north-carolina",
+    regulators: "North Carolina Department of Insurance",
+    evidence: [
+      "NCDOI Licensing Actions catalog (mixed license classes)",
+      "2025 company market-share line PDFs",
+      "Market-regulation and financial examination indexes",
+      "Current receivership estate index",
+    ],
+    limitation:
+      "Licensed-company, agency, and producer bulk rosters remain search-only. Company market-share lines are not agency product capability. Search-only is not zero.",
+    sourceClocks: [
+      { label: "Catalogs retrieved", retrievedAt: "2026-09-18T03:20:41Z" },
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-18" },
+    ],
+  },
+  {
     state: "Pennsylvania",
     abbreviation: "PA",
     href: "/pennsylvania",
@@ -310,6 +328,7 @@ const FAMILY_BY_KEY: Record<string, InsuranceHomeEvidenceFamily> = {
   pa_licensed_companies_distinct_naic: "ENTITY_IDENTITY",
   pa_enforcement_action_documents: "REGULATORY_ENFORCEMENT",
   pa_complaint_table_rows: "COMPLAINTS",
+  nc_licensing_action_rows: "REGULATORY_ENFORCEMENT",
   public_directory_listings: "PUBLIC_SURFACES",
   published_state_intelligence_pages: "PUBLIC_SURFACES",
   public_legal_insurer_wave1_profiles: "PUBLIC_SURFACES",
@@ -356,6 +375,7 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   pa_licensed_companies_distinct_naic: "/pennsylvania",
   pa_enforcement_action_documents: "/pennsylvania",
   pa_complaint_table_rows: "/pennsylvania",
+  nc_licensing_action_rows: "/north-carolina",
 };
 
 function fromMetric(

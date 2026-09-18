@@ -1,0 +1,13 @@
+{
+  "source": "https://www.ncdoi.gov/licensees/company-licensing-and-registration/surplus-lines-insurers",
+  "retrieved_at": "2026-09-18T03:20:41Z",
+  "candidate_links": [
+    "https://content.naic.org/sites/default/files/inline-files/Service_of_Process_fillable.pdf",
+    "https://content.naic.org/sites/default/files/industry-ucaa-form-12-uniform-consent-service-process.pdf"
+  ],
+  "status": "LIST_LINK_PRESENT_PARSE_PENDING",
+  "rows": null,
+  "distinct_naic": null,
+  "rows_missing_naic": null,
+  "note": "US-domiciled eligible list is a NCDOI document; alien insurers are NAIC IID quarterly listing, a separate universe."
+}

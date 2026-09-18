@@ -87,6 +87,9 @@ export type InsuranceNetworkMetricsInput = {
   pennsylvaniaLicensedCompaniesDistinctNaic: number;
   pennsylvaniaEnforcementActions: number;
   pennsylvaniaComplaintTableRows: number;
+  northCarolinaSnapshotFingerprint: string;
+  northCarolinaAsOf: string | null;
+  northCarolinaLicensingActionRows: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -212,6 +215,15 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   }
   if (!input.publishedStateIntelligencePaths.includes('/pennsylvania')) {
     throw new Error('Pennsylvania state intelligence path missing');
+  }
+  if (!input.publishedStateIntelligencePaths.includes('/north-carolina')) {
+    throw new Error('North Carolina state intelligence path missing');
+  }
+  if (input.northCarolinaLicensingActionRows === input.legalInsurers) {
+    throw new Error('North Carolina licensing actions must not equal national legal insurers');
+  }
+  if (input.northCarolinaLicensingActionRows === input.pennsylvaniaEnforcementActions) {
+    throw new Error('North Carolina licensing actions must not equal Pennsylvania enforcement');
   }
   if (input.oregonDfrInsuranceOrderDocuments === input.legalInsurers) {
     throw new Error('Oregon DFR insurance orders must not equal national legal insurers');
@@ -1004,6 +1016,28 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'nc_licensing_action_rows',
+      label: 'North Carolina NCDOI Licensing Action catalog rows',
+      value: input.northCarolinaLicensingActionRows,
+      valueState: 'KNOWN',
+      grain: 'regulatory_evidence_row',
+      denominator: 'NCDOI Licensing Actions catalog pages (mixed license classes)',
+      description:
+        'Source-native licensing-action rows. Not a producer census, not complaints, not unique matters, not licensed companies.',
+      coverage: 'North Carolina',
+      contributingSourceSystems: ['ncdoi_licaction'],
+      sourceAsOf: input.northCarolinaAsOf,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One NCDOI Licensing Actions catalog row.',
+        'Not complaints, not market exams, not financial exams, not licensed companies, not agencies.',
+        ['ncdoi'],
+        'North Carolina; Licensing Actions',
+        'NCDOI licaction catalog'
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -1138,9 +1172,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -1148,7 +1182,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -1241,6 +1275,8 @@ export function computeInsuranceNetworkMetrics(
     orComplaints: input.oregonComplaintTableRows,
     paFp: input.pennsylvaniaSnapshotFingerprint,
     paCompanies: input.pennsylvaniaLicensedCompaniesDistinctNaic,
+    ncFp: input.northCarolinaSnapshotFingerprint,
+    ncActions: input.northCarolinaLicensingActionRows,
     paEnforcement: input.pennsylvaniaEnforcementActions,
     paComplaints: input.pennsylvaniaComplaintTableRows,
     paths: input.publishedStateIntelligencePaths,
@@ -1399,6 +1435,14 @@ export function computeInsuranceNetworkMetrics(
       producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT',
+    },
+    northCarolina: {
+      snapshotFingerprint: input.northCarolinaSnapshotFingerprint,
+      asOf: input.northCarolinaAsOf,
+      licensingActionRows: input.northCarolinaLicensingActionRows,
+      producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      agencyRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
+      licensedCompanyCoverage: 'OPEN_SEARCH_ONLY',
     },
     publication: {
       publicPeople: 0,

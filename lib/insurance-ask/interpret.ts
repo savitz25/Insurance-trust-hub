@@ -148,6 +148,86 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = 'PARTIAL';
     return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Pennsylvania liquidation catalog' }] };
   }
+  if (/\b(charlotte|raleigh)\b/i.test(early) && /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(early)) {
+    const query = fail(
+      'This statewide North Carolina insurance page does not publish Charlotte, Raleigh, Mecklenburg, Wake, or other local insurance intelligence routes. License geography is statewide.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'UNSUPPORTED — no North Carolina local intelligence' }] };
+  }
+  if (/\bnorth carolina\b/i.test(early) && /complaint/i.test(early)) {
+    const query = fail(
+      'NCDOI accepts consumer complaints, but a complete public insurer-level complaint census was not acquired. Complaint intake is not a bulk census. Market-exam complaint templates and MCAS ratios are different evidence and are not a Trust Score. Search-only is not zero. Confirm /north-carolina and NCDOI assistance/complaints.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — North Carolina complaint bulk' }] };
+  }
+  if (/\bnorth carolina\b/i.test(early) && /licensing action|disciplinary|revocation|fine/i.test(early)) {
+    const query = fail(
+      'NCDOI Licensing Actions catalog: 2,874 rows (Insurance Producer 1,717; Business Entity 255; adjuster classes 72; other source-native classes 830 including bail-bond and collection-agency). Distinct dockets 404. Unique matters for the whole catalog remain unknown. A licensing action is not a complaint. Name-only attachment is unsafe. Confirm /north-carolina and NCDOI Licensing Actions.',
+      ['Open North Carolina insurance research.', 'Find NPN 10391484.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — North Carolina licensing actions' }] };
+  }
+  if (/\bnorth carolina\b/i.test(early) && /market conduct/i.test(early)) {
+    const query = fail(
+      'NCDOI Market Regulation Examination Reports index: 138 reports / 137 distinct titles. A market exam is not a licensing action, not a complaint, and not a financial exam. Exam existence is not a fine. See /north-carolina.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — North Carolina market-exam index' }] };
+  }
+  if (/\bnorth carolina\b/i.test(early) && /financial exam/i.test(early)) {
+    const query = fail(
+      'NCDOI Financial Examination Reports index: 158 reports / 158 distinct titles. A financial exam is solvency review, not market conduct and not enforcement. Exact NAIC attachments remain 0. See /north-carolina.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — North Carolina financial exams' }] };
+  }
+  if (/\bnorth carolina\b/i.test(early) && /receivership|liquidat|rehabilitat/i.test(early)) {
+    const query = fail(
+      'NCDOI current receivership estate index names 6 legal entities in 3 accordion groups. Rehabilitation is not liquidation. Historic receivership is not current authorization. Name-only attachment is unsafe. See /north-carolina.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — North Carolina receivership index' }] };
+  }
+  if (/\bnorth carolina\b/i.test(early) && /surplus lines/i.test(early)) {
+    const query = fail(
+      'NCDOI eligible surplus-lines insurers are a separate universe from admitted companies. The official eligible list is NAIC external lookup; alien insurers are the NAIC IID quarterly listing. No complete free eligible-list dump was acquired. Search-only is not zero. Confirm /north-carolina.',
+      ['Open North Carolina insurance research.', 'Find insurer NAIC code 13735.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'insurer';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — North Carolina surplus-lines bulk list' }] };
+  }
+  if (
+    /\bnorth carolina\b/i.test(early) &&
+    /\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(early) &&
+    !/\bagenc/i.test(early)
+  ) {
+    const homeowners = /homeowners/i.test(early);
+    const flood = /flood/i.test(early);
+    const auto = /\bauto\b/i.test(early);
+    const workers = /workers?\s*comp/i.test(early);
+    const reason = homeowners
+      ? 'North Carolina 2025 homeowners multiple peril market-share PDF lists 199 company-line rows / 199 distinct NAIC identities. That is market activity, not a licensed-company census and not an agency product-capability cohort. Complete licensed-company roster remains search-only. Confirm /north-carolina.'
+      : flood
+        ? 'North Carolina 2025 federal flood market-share PDF lists 25 company-line rows; private flood lists 125. Those are company market-activity grains, not agency flood capability and not the licensed-company census. Confirm /north-carolina.'
+        : auto
+          ? 'North Carolina 2025 private-passenger auto market-share lists 190 company rows; commercial auto lists 510 company rows. Those grains are not added together and are not agency auto capability. Licensed-company roster remains search-only. Confirm /north-carolina.'
+          : workers
+            ? 'North Carolina 2025 workers compensation market-share PDF lists 423 company-line rows / 423 distinct NAIC identities. That is market activity, not current authorization and not an agency cohort. Confirm /north-carolina.'
+            : 'North Carolina licensed-company bulk roster was not acquired (OPEN_SEARCH_ONLY). Market-share reporters, exam indexes, and receivership estates are different grains. Search-only is not zero. Confirm /north-carolina and NCDOI Company Licensing.';
+    const query = fail(reason, ['Open North Carolina insurance research.', 'Find insurer NAIC code 13735.']);
+    query.coverageState = homeowners || flood || auto || workers ? 'PARTIAL' : 'NOT_ACQUIRED';
+    query.entityClass = 'insurer';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: `${query.coverageState} — North Carolina companies` }] };
+  }
   const typed = interpretIdentityAndLocal(raw, page);
   if (typed) return typed;
   const q = raw.trim();
@@ -552,9 +632,100 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     return { raw: q, query, interpretation: lines };
   }
 
+  const northCarolinaAsked = /\bnorth carolina\b/i.test(q) || detectStates(q)[0] === 'NC';
+  if (/\b(charlotte|raleigh|mecklenburg|durham|wake county)\b/i.test(q) && /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(q)) {
+    const query = fail(
+      'This statewide North Carolina insurance page does not publish Charlotte, Raleigh, Mecklenburg, Wake, or other local insurance intelligence routes. License geography is statewide.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    push('Coverage', 'UNSUPPORTED — no North Carolina local intelligence');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (northCarolinaAsked && /complaint/i.test(q)) {
+    const query = fail(
+      'NCDOI accepts consumer complaints, but a complete public insurer-level complaint census was not acquired. Complaint intake is not a bulk census. Market-exam complaint templates and MCAS ratios are different evidence and are not a Trust Score. Search-only is not zero. Confirm /north-carolina and NCDOI assistance/complaints.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    push('Coverage', 'NOT_ACQUIRED — North Carolina complaint bulk');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (northCarolinaAsked && /licensing action|disciplinary|revocation|fine/i.test(q)) {
+    const query = fail(
+      'NCDOI Licensing Actions catalog: 2,874 rows (Insurance Producer 1,717; Business Entity 255; adjuster classes 72; other source-native classes 830 including bail-bond and collection-agency). Distinct dockets 404. Unique matters for the whole catalog remain unknown. A licensing action is not a complaint. Name-only attachment is unsafe. Confirm /north-carolina and NCDOI Licensing Actions.',
+      ['Open North Carolina insurance research.', 'Find NPN 10391484.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — North Carolina licensing actions');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (northCarolinaAsked && /market conduct/i.test(q)) {
+    const query = fail(
+      'NCDOI Market Regulation Examination Reports index: 138 reports / 137 distinct titles. A market exam is not a licensing action, not a complaint, and not a financial exam. Exam existence is not a fine. See /north-carolina.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — North Carolina market-exam index');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (northCarolinaAsked && /financial exam/i.test(q)) {
+    const query = fail(
+      'NCDOI Financial Examination Reports index: 158 reports / 158 distinct titles. A financial exam is solvency review, not market conduct and not enforcement. Exact NAIC attachments remain 0. See /north-carolina.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — North Carolina financial exams');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (northCarolinaAsked && /receivership|liquidat|rehabilitat/i.test(q)) {
+    const query = fail(
+      'NCDOI current receivership estate index names 6 legal entities in 3 accordion groups. Rehabilitation is not liquidation. Historic receivership is not current authorization. Name-only attachment is unsafe. See /north-carolina.',
+      ['Open North Carolina insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    push('Coverage', 'PARTIAL — North Carolina receivership index');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (northCarolinaAsked && /surplus lines/i.test(q)) {
+    const query = fail(
+      'NCDOI eligible surplus-lines insurers are a separate universe from admitted companies. The official eligible list is NAIC external lookup; alien insurers are the NAIC IID quarterly listing. No complete free eligible-list dump was acquired. Search-only is not zero. Confirm /north-carolina.',
+      ['Open North Carolina insurance research.', 'Find insurer NAIC code 13735.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'insurer';
+    push('Coverage', 'NOT_ACQUIRED — North Carolina surplus-lines bulk list');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (
+    northCarolinaAsked &&
+    /\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(q) &&
+    !/\bagenc/i.test(q)
+  ) {
+    const homeowners = /homeowners/i.test(q);
+    const flood = /flood/i.test(q);
+    const auto = /\bauto\b/i.test(q);
+    const workers = /workers?\s*comp/i.test(q);
+    const reason = homeowners
+      ? 'North Carolina 2025 homeowners multiple peril market-share PDF lists 199 company-line rows / 199 distinct NAIC identities. That is market activity, not a licensed-company census and not an agency product-capability cohort. Complete licensed-company roster remains search-only. Confirm /north-carolina.'
+      : flood
+        ? 'North Carolina 2025 federal flood market-share PDF lists 25 company-line rows; private flood lists 125. Those are company market-activity grains, not agency flood capability and not the licensed-company census. Confirm /north-carolina.'
+        : auto
+          ? 'North Carolina 2025 private-passenger auto market-share lists 190 company rows; commercial auto lists 510 company rows. Those grains are not added together and are not agency auto capability. Licensed-company roster remains search-only. Confirm /north-carolina.'
+          : workers
+            ? 'North Carolina 2025 workers compensation market-share PDF lists 423 company-line rows / 423 distinct NAIC identities. That is market activity, not current authorization and not an agency cohort. Confirm /north-carolina.'
+            : 'North Carolina licensed-company bulk roster was not acquired (OPEN_SEARCH_ONLY). Market-share reporters, exam indexes, and receivership estates are different grains. Search-only is not zero. Confirm /north-carolina and NCDOI Company Licensing.';
+    const query = fail(reason, ['Open North Carolina insurance research.', 'Find insurer NAIC code 13735.']);
+    query.coverageState = homeowners || flood || auto || workers ? 'PARTIAL' : 'NOT_ACQUIRED';
+    query.entityClass = 'insurer';
+    query.jurisdiction = { state: 'NC', meaning: geographyMeaning(q) };
+    push('Coverage', `${query.coverageState} — North Carolina companies`);
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (
     /\b((?:licensed )?insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
-    /\b(colorado|virginia|new york|illinois|pennsylvania)\b/i.test(q)
+    /\b(colorado|virginia|new york|illinois|pennsylvania|north carolina)\b/i.test(q)
   ) {
     const state = detectStates(q)[0] ?? 'The requested state';
     // TH-DISCOVERY-PARITY-001B / PA-INS-001 reconciliation: these five states have no acquired

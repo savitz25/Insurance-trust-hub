@@ -1,0 +1,65 @@
+FEDERAL FLOOD BUSINESS 
+FOR THE YEAR ENDED DECEMBER 31, 2025 
+Year Line of Business NAIC 
+Company 
+Code 
+Company Name Business Type Business 
+Sub Type 
+Code 
+Company  
+Type 
+Company 
+Sub Type 
+Code 
+Statement  
+Type  
+Code 
+Group Name Licensed  
+in NC 
+State of 
+Domicile 
+ Direct 
+Premiums 
+Written  
+ Direct 
+Premiums 
+Earned  
+ Direct 
+Losses 
+Paid  
+ Direct 
+Losses 
+Incurred  
+Market 
+Share % 
+ Cumulative 
+Market 
+Share %  
+2025 02.3. Federal flood 15816 Allied Trust Ins Co Property and Casualty N Stock None P   Licensed TX 29,451 12,510 0 0 0.031% 0.031% 
+2025 02.3. Federal flood 19232 Allstate Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed IL 3,642,988 3,585,147 1,718,549 1,688,549 3.798% 3.829% 
+2025 02.3. Federal flood 10111 American Bankers Ins Co Of Fl Property and Casualty N Stock None P Assurant Inc Grp Licensed FL 10,376,158 10,590,890 34,624,541 9,148,009 10.817% 14.646% 
+2025 02.3. Federal flood 10872 American Strategic Ins Corp Property and Casualty N Stock None P Progressive Grp Licensed IN 872,173 872,037 2,237,080 271,219 0.909% 15.555% 
+2025 02.3. Federal flood 18988 Auto Owners Ins Co Property and Casualty N Mutual None P Auto Owners Grp Licensed MI 3,738,689 3,633,600 29,311,171 -365,626 3.898% 19.452% 
+2025 02.3. Federal flood 33162 Bankers Ins Co Property and Casualty N Stock None P Bankers Ins Grp Licensed FL 3,538,396 3,431,887 1,402,198 573,653 3.689% 23.141% 
+2025 02.3. Federal flood 26298 Farmers Prop & Cas Ins Co Property and Casualty N Stock None P Farmers Ins Grp Licensed RI 169,412 189,536 928,691 368,322 0.177% 23.318% 
+2025 02.3. Federal flood 10897 First Protective Ins Co Property and Casualty N Stock None P Frontline Ins Grp Licensed FL 285,465 273,961 0 0 0.298% 23.615% 
+2025 02.3. Federal flood 11185 Foremost Ins Co Grand Rapids Mi Property and Casualty N Stock None P Farmers Ins Grp Licensed MI 497,777 461,723 3,825,874 922,996 0.519% 24.134% 
+2025 02.3. Federal flood 16823 Fortegra Specialty Ins Co Property and Casualty N Stock None P Tiptree Fin Grp Authorized Surplus Lines Writer AZ 649,847 488,459 268,618 378,523 0.677% 24.812% 
+2025 02.3. Federal flood 37478 Hartford Ins Co Of The Midwest Property and Casualty N Stock None P Hartford Fire & Cas Grp Licensed IN 10,957,186 11,111,414 23,603,633 23,603,633 11.423% 36.235% 
+2025 02.3. Federal flood 17221 Homesite Ins Co Property and Casualty N Stock None P American Family Ins Grp Licensed WI 577,410 527,452 1,965,043 -260,256 0.602% 36.837% 
+2025 02.3. Federal flood 29742 Integon Natl Ins Co Property and Casualty N Stock None P Allstate Ins Grp Licensed NC 10,000,436 9,646,671 14,005,737 4,014,132 10.425% 47.262% 
+2025 02.3. Federal flood 23035 Liberty Mut Fire Ins Co Property and Casualty N Stock None P Liberty Mut Grp Licensed WI 394,351 398,791 1,398,519 1,398,519 0.411% 47.673% 
+2025 02.3. Federal flood 23787 Nationwide Mut Ins Co Property and Casualty N Mutual None P Nationwide Corp Grp Licensed OH 0 0 0 -1,718 0.000% 47.673% 
+2025 02.3. Federal flood 14788 Ngm Ins Co Property and Casualty N Stock None P American Family Ins Grp Licensed FL 94,469 105,298 1,845,880 1,845,880 0.098% 47.772% 
+2025 02.3. Federal flood 14842 North Carolina Farm Bur Mut Ins Co Property and Casualty N Mutual None P North Carolina Farm Bureau Grp Licensed NC 16,596,559 16,596,559 9,717,982 2,411,550 17.302% 65.074% 
+2025 02.3. Federal flood 40231 Old Dominion Ins Co Property and Casualty N Stock None P American Family Ins Grp Licensed FL 15,834 2,367 0 0 0.017% 65.090% 
+2025 02.3. Federal flood 18058 Philadelphia Ind Ins Co Property and Casualty N Stock None P Tokio Marine Holdings Inc Grp Licensed PA 154,748 153,690 478,176 138,145 0.161% 65.251% 
+2025 02.3. Federal flood 12873 Privilege Underwriters Recp Exch Property and Casualty N Reciprocal None P Tokio Marine Holdings Inc Grp Licensed FL 171,283 159,065 163,124 36,333 0.179% 65.430% 
+2025 02.3. Federal flood 39217 Qbe Ins Corp Property and Casualty N Stock None P Qbe Ins Grp Licensed PA 713,678 710,590 143,758 176,295 0.744% 66.174% 
+2025 02.3. Federal flood 39926 Selective Ins Co Of The Southeast Property and Casualty N Stock None P Selective Ins Grp Licensed IN 14,832,455 13,594,210 28,353,159 7,833,074 15.463% 81.637% 
+2025 02.3. Federal flood 10759 Universal N Amer Ins Co Property and Casualty N Stock None P 5b Alliance Grp Licensed TX 30,010 29,703 75,047 45,047 0.031% 81.668% 
+2025 02.3. Federal flood 18600 Usaa Gen Ind Co Property and Casualty N Stock None P United Serv Automobile Assn Grp Licensed TX 7,982,749 7,709,827 4,953,805 1,932,852 8.322% 89.990% 
+2025 02.3. Federal flood 11523 Wright Natl Flood Ins Co Property and Casualty N Stock None P   Licensed TX 9,601,800 9,387,255 17,962,227 -3,058,154 10.010% 100.000% 
+                                    
+2025 02.3. Federal flood   TOTAL                 95,923,324  93,672,642  178,982,812  53,100,977  100.000%   
+ 

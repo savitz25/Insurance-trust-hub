@@ -1,0 +1,156 @@
+{
+  "retrieved_at": "2026-09-18T03:20:41Z",
+  "licensing_actions": {
+    "source": "https://www.ncdoi.gov/licaction",
+    "retrieved_at": "2026-09-18T03:20:41Z",
+    "document_rows": 2874,
+    "distinct_dockets": 404,
+    "unique_matters": 404,
+    "exact_npn_rows": 2398,
+    "rows_without_exact_id": 444,
+    "by_class": {
+      "insurance_producer": 1717,
+      "public_adjuster": 40,
+      "other": 83,
+      "business_entity": 255,
+      "bail_bond": 559,
+      "collection_agency": 149,
+      "insurance_company_notice": 25,
+      "ra_license": 14,
+      "company_adjuster": 32
+    },
+    "producer_rows": 1717,
+    "business_entity_rows": 255,
+    "adjuster_rows": 72,
+    "other_rows": 830,
+    "pages": 116
+  },
+  "market_exams": {
+    "source": "https://www.ncdoi.gov/market-regulation-examination-report",
+    "retrieved_at": "2026-09-18T03:20:41Z",
+    "report_rows": 138,
+    "distinct_titles": 137,
+    "hrefs": 138
+  },
+  "financial_exams": {
+    "source": "https://www.ncdoi.gov/financial-examination-report",
+    "retrieved_at": "2026-09-18T03:20:41Z",
+    "report_rows": 158,
+    "distinct_titles": 158,
+    "hrefs": 158
+  },
+  "receiverships": {
+    "source": "https://www.ncdoi.gov/insurance-industry/receiverships",
+    "retrieved_at": "2026-09-18T03:20:41Z",
+    "entity_headings": [
+      {
+        "heading": "Friday Health Plans of North Carolina, Inc. in Receivership",
+        "status": "receivership"
+      },
+      {
+        "heading": "Southland National Insurance Corporation in Liquidation, Colorado Bankers Life Insurance Company in Liquidation, Bankers Life Insurance Company in Liquidation, Southland National Reinsurance Corporation in Rehabilitation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Banker's Life Insurance Company in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Colorado Bankers Life Insurance Company in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Southland National Insurance Corporation in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "North Carolina Mutual Life Insurance Company in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Related Links",
+        "status": "receivership"
+      },
+      {
+        "heading": "Contact Information",
+        "status": "receivership"
+      },
+      {
+        "heading": "Actions in Other States",
+        "status": "receivership"
+      },
+      {
+        "heading": "Friday Health Plans of North Carolina, Inc. in Receivership",
+        "status": "receivership"
+      },
+      {
+        "heading": "Important Dates",
+        "status": "receivership"
+      },
+      {
+        "heading": "Southland National Insurance Corporation in Liquidation, Colorado Bankers Life Insurance Company in Liquidation, Bankers Life Insurance Company in Liquidation, Southland National Reinsurance Corporation in Rehabilitation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Banker's Life Insurance Company in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Colorado Bankers Life Insurance Company in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Southland National Insurance Corporation in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "North Carolina Mutual Life Insurance Company in Liquidation",
+        "status": "liquidation"
+      },
+      {
+        "heading": "Related Links",
+        "status": "receivership"
+      },
+      {
+        "heading": "Contact Information",
+        "status": "receivership"
+      },
+      {
+        "heading": "Actions in Other States",
+        "status": "receivership"
+      },
+      {
+        "heading": "North Carolina Department of Insurance",
+        "status": "receivership"
+      }
+    ],
+    "entity_count": 20,
+    "liquidation_headings": 10,
+    "rehabilitation_headings": 0,
+    "admin_supervision_headings": 0,
+    "receivership_headings": 10,
+    "document_hrefs": 126,
+    "note": "Heading grain is estate/status index, not document count. Mixed SNIC/CBL/BLIC/SNRC heading is one accordion estate group."
+  },
+  "surplus_lines": {
+    "source": "https://www.ncdoi.gov/licensees/company-licensing-and-registration/surplus-lines-insurers",
+    "retrieved_at": "2026-09-18T03:20:41Z",
+    "candidate_links": [
+      "https://content.naic.org/sites/default/files/inline-files/Service_of_Process_fillable.pdf",
+      "https://content.naic.org/sites/default/files/industry-ucaa-form-12-uniform-consent-service-process.pdf"
+    ],
+    "status": "LIST_LINK_PRESENT_PARSE_PENDING",
+    "rows": null,
+    "distinct_naic": null,
+    "rows_missing_naic": null,
+    "note": "US-domiciled eligible list is a NCDOI document; alien insurers are NAIC IID quarterly listing, a separate universe."
+  },
+  "market_share": {
+    "files": 102,
+    "parsed": 102
+  },
+  "company_roster_status": "OPEN_SEARCH_ONLY",
+  "agency_roster_status": "OPEN_SEARCH_ONLY",
+  "producer_roster_status": "OPEN_SEARCH_ONLY",
+  "complaint_coverage": "INTAKE_AVAILABLE / BULK_NOT_PUBLIC"
+}

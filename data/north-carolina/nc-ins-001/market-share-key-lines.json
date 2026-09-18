@@ -1,0 +1,51 @@
+{
+  "homeowners": {
+    "bytes": 559594,
+    "pages": 4,
+    "text_len": 36795,
+    "distinct_5digit": 199,
+    "year_mentions": 201
+  },
+  "federal_flood": {
+    "bytes": 181234,
+    "pages": 1,
+    "text_len": 4911,
+    "distinct_5digit": 25,
+    "year_mentions": 27
+  },
+  "private_flood": {
+    "bytes": 395249,
+    "pages": 3,
+    "text_len": 20962,
+    "distinct_5digit": 125,
+    "year_mentions": 127
+  },
+  "ppa": {
+    "bytes": 1218408,
+    "pages": 10,
+    "text_len": 93885,
+    "distinct_5digit": 190,
+    "year_mentions": 574
+  },
+  "comm_auto": {
+    "bytes": 2987702,
+    "pages": 26,
+    "text_len": 243269,
+    "distinct_5digit": 510,
+    "year_mentions": 1499
+  },
+  "wc": {
+    "bytes": 1047354,
+    "pages": 8,
+    "text_len": 74258,
+    "distinct_5digit": 423,
+    "year_mentions": 427
+  },
+  "domestics": {
+    "bytes": 618005,
+    "pages": 5,
+    "text_len": 41870,
+    "distinct_5digit": 49,
+    "year_mentions": 252
+  }
+}
