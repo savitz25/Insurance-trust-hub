@@ -1136,9 +1136,9 @@ export async function sendWelcomeIfNeededAction(): Promise<void> {
   void sendWelcomeEmail({ to: user.email }).catch(() => undefined);
 }
 
-export async function listSavedProviderSlugsAction(): Promise<string[]> {
+export async function listSavedProviderSlugsAction(expectedUserId?: string): Promise<string[]> {
   const user = await getAuthenticatedUser();
-  if (!user) return [];
+  if (!user || (expectedUserId !== undefined && user.id !== expectedUserId)) return [];
   const supabase = await insuranceDb();
   const { data } = await supabase
     .from('saved_providers')

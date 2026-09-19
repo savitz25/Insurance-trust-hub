@@ -32,7 +32,15 @@ try {
  assert.equal(evaluate(state)[0].providerSlug,'b3-fixture');
  browser('reload'); await until("document.querySelector('button')?.textContent.includes('In My')");
  assert.equal(evaluate(state).length,1);
+ assert.equal(evaluate("document.querySelector('[role=status]')?.textContent"),'Saved on this device');
+ assert.equal(evaluate("document.querySelector('button').getAttribute('aria-describedby')===document.querySelector('[role=status]').id"),true);
+ assert.equal(evaluate("document.body.textContent.includes('My TrustHub')"),false);
  console.log('B3-01/02/09 PASS browser keyboard immediate Save and real reload persistence');
+
+ await reset(); evaluate("window.b3.confirmedOwner='owner-a';window.b3.auth('owner-a')");
+ await until("document.querySelector('[role=status]')?.textContent==='Saved to your Insurance account'");
+ assert.equal(evaluate("document.querySelector('[role=status]').textContent.includes('device')"),false);
+ console.log('V2-1C PASS owner-confirmed legacy account fixture is not mislabeled local');
 
  await reset();
  evaluate("window.b3.writes=0;const original=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==='ith:my-insurance:v1')window.b3.writes++;return original.call(this,k,v)};document.querySelector('button').click();window.b3.firstWrites=window.b3.writes;document.querySelector('button').click();document.querySelector('button').click()");
@@ -68,6 +76,7 @@ try {
  await reset(); evaluate("window.b3.auth('owner-a')"); await delay(100);
  evaluate("document.querySelector('button').click();document.querySelector('button').click()");
  await until('window.b3.events.length===1');
+ assert.equal(evaluate("document.querySelector('[role=status]').textContent"),'Saved to your Insurance account');
  assert.equal(evaluate('window.b3.cloud.length'),1);
  assert.equal(evaluate('window.b3.cloud[0].providerSlug'),'b3-fixture');
  assert.equal(evaluate(state).length,1);
@@ -89,6 +98,8 @@ try {
 
  for(const width of [1440,390,320]){
    await reset(); browser('set','viewport',String(width),'900');
+   click(); await until(state+'.length===1'); browser('reload');
+   await until("document.querySelector('[role=status]')?.textContent==='Saved on this device'");
    browser('focus','button');
    assert.equal(evaluate("document.activeElement===document.querySelector('button')"),true);
    assert.equal(evaluate('document.documentElement.scrollWidth<=innerWidth'),true);

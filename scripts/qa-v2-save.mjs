@@ -38,6 +38,7 @@ const mocks = {
     if (window.b3.delayCloud) await new Promise(done => window.b3.finishCloud = done);
     return window.b3.failCloud ? {ok:false,error:'fixture failure'} : {ok:true};
   }
+  export async function listSavedProviderSlugsAction(owner) { return window.b3.confirmedOwner === owner ? [window.b3.slug] : []; }
   export async function removeProviderAction() { return {ok:true}; }`,
   '@/lib/analytics/ga-events': 'export const trackMyLendingSave = input => window.b3.events.push(input);',
 };
