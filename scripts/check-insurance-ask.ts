@@ -4,6 +4,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { interpretInsuranceAskQuery } from '../lib/insurance-ask/interpret';
+import { detectRequestedConsumerProducts } from '../lib/insurance-ask/product-intent';
 import {
   INSURANCE_ASK_CAPABILITY,
   INSURANCE_ASK_CONTRACT,
@@ -86,6 +87,19 @@ assert(health.query.linesOfAuthority?.[0] === 'Health', 'Health LOA');
 const ah = q('Show Florida-credentialed agencies with Accident & Health.');
 assert(ah.query.linesOfAuthority?.includes('Health'), 'A&H → Health');
 
+// SQA-009 closeout: detector must not treat official LOA / census language as consumer product.
+assert(detectRequestedConsumerProducts('insurance agencies in Florida').length === 0, 'CTRL_CENSUS is not a consumer product');
+assert(detectRequestedConsumerProducts('life insurance agencies in Texas').length === 0, 'Life LOA is not a consumer product');
+assert(detectRequestedConsumerProducts('Florida agencies with Property and Casualty authority').length === 0, 'authority is not auto');
+assert(detectRequestedConsumerProducts('Florida Property & Casualty authority').length === 0, 'CTRL_FL_PC phrasing is not auto');
+assert(detectRequestedConsumerProducts('Show insurance agencies credentialed in Florida.').length === 0, 'credentialed census is not auto');
+assert(detectRequestedConsumerProducts('authority').length === 0, 'bare authority is not auto');
+assert(detectRequestedConsumerProducts('casualty').length === 0, 'bare casualty is not a consumer product');
+assert(JSON.stringify(detectRequestedConsumerProducts('homeowners insurance agencies in Florida')) === JSON.stringify(['homeowners']), 'homeowners detected');
+assert(JSON.stringify(detectRequestedConsumerProducts('auto insurance agencies in Florida')) === JSON.stringify(['auto']), 'auto insurance detected');
+assert(detectRequestedConsumerProducts('automobile insurance agencies in Florida').includes('auto'), 'automobile insurance detected');
+assert(!detectRequestedConsumerProducts('auto agencies in Florida').includes('auto'), 'bare auto without insurance is not product-intent');
+
 // SQA-009 / TH-DISCOVERY-PARITY-001B: product intent is retained and never claimed as a satisfied
 // LOA, but (per TH-DISCOVERY-PARITY-001B, which supersedes SQA-009's original hard dead end) an
 // unambiguous provider-category + geography request still EXECUTES as a normal entity query so
@@ -141,11 +155,39 @@ assert(unspecifiedFl.query.mode === 'entity' && unspecifiedFl.query.entityClass 
 assert(!unspecifiedFl.query.requestedProduct?.length, 'unspecified product has no unresolved product');
 assert(!unspecifiedFl.query.linesOfAuthority?.length, 'unspecified product is not an LOA filter');
 
+const ctrlCensus = q('insurance agencies in Florida');
+assert(ctrlCensus.query.mode === 'entity' && ctrlCensus.query.entityClass === 'agency', 'CTRL_CENSUS remains FL agency cohort');
+assert(ctrlCensus.query.jurisdiction?.state === 'FL', 'CTRL_CENSUS jurisdiction FL');
+assert(ctrlCensus.query.coverageState === 'KNOWN', 'CTRL_CENSUS is not unresolved product');
+assert(!ctrlCensus.query.requestedProduct?.length, 'CTRL_CENSUS has no unresolved product');
+assert(!ctrlCensus.query.linesOfAuthority?.length, 'CTRL_CENSUS is unspecified-product, not an LOA filter');
+
 const lifeTx = q('life insurance agencies in Texas');
-assert(lifeTx.query.mode === 'entity' && lifeTx.query.entityClass === 'agency', 'TX life stays executable LOA');
-assert(lifeTx.query.linesOfAuthority?.[0] === 'Life', 'TX life is official Life LOA');
-assert(lifeTx.query.jurisdiction?.state === 'TX', 'TX life jurisdiction');
+assert(lifeTx.query.mode === 'entity' && lifeTx.query.entityClass === 'agency', 'CTRL_TX_LIFE stays executable LOA');
+assert(lifeTx.query.linesOfAuthority?.[0] === 'Life', 'CTRL_TX_LIFE is official Life LOA');
+assert(lifeTx.query.jurisdiction?.state === 'TX', 'CTRL_TX_LIFE jurisdiction');
+assert(lifeTx.query.coverageState !== 'UNSUPPORTED', 'CTRL_TX_LIFE is not unresolved product');
 assert(!lifeTx.query.requestedProduct?.length, 'life is LOA-supported, not unresolved product');
+
+const flPcAgencies = q('Florida agencies with Property and Casualty authority');
+assert(flPcAgencies.query.mode === 'entity' && flPcAgencies.query.entityClass === 'agency', 'CTRL_FL_PC agencies phrasing stays executable');
+assert(JSON.stringify(flPcAgencies.query.linesOfAuthority) === JSON.stringify(['Property', 'Casualty']), 'CTRL_FL_PC official Property + Casualty');
+assert(flPcAgencies.query.jurisdiction?.state === 'FL', 'CTRL_FL_PC Florida');
+assert(flPcAgencies.query.coverageState === 'PARTIAL', 'CTRL_FL_PC FL official LOA rows = 0 is PARTIAL, not product UNSUPPORTED');
+assert(!flPcAgencies.query.requestedProduct?.length, 'CTRL_FL_PC is not unresolved product');
+
+const flPcBare = q('Florida Property & Casualty authority');
+assert(flPcBare.query.mode === 'entity' && flPcBare.query.entityClass === 'agency', 'CTRL_FL_PC bare authority phrasing stays official LOA path');
+assert(JSON.stringify(flPcBare.query.linesOfAuthority) === JSON.stringify(['Property', 'Casualty']), 'CTRL_FL_PC bare keeps Property + Casualty');
+assert(flPcBare.query.jurisdiction?.state === 'FL', 'CTRL_FL_PC bare Florida');
+assert(flPcBare.query.coverageState === 'PARTIAL', 'CTRL_FL_PC bare is PARTIAL, not class-clarification UNSUPPORTED');
+assert(!flPcBare.query.requestedProduct?.length, 'CTRL_FL_PC bare is not unresolved product');
+assert(flPcBare.query.refinement !== 'class', 'CTRL_FL_PC does not demand a class restatement');
+
+const loaCountNoClass = q('how many with Property and Casualty authority in Florida');
+assert(loaCountNoClass.query.mode === 'fail_closed', 'official LOA count still requires an entity class');
+assert(/entity class/i.test(loaCountNoClass.query.failReason ?? ''), 'count without class is not injected as agency');
+assert(loaCountNoClass.query.entityClass === undefined, 'do not invent agency class for a classless count');
 
 const zipHomeowners = q('homeowners insurance agency in ZIP 33441');
 assert(zipHomeowners.query.mode === 'directory', 'ZIP homeowners remains directory');

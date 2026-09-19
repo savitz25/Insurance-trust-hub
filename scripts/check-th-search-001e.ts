@@ -31,8 +31,18 @@ assert.equal(interpretInsuranceAskQuery('What is an insurance appointment?').que
 // disclosure instead of a zero-provider dead end.
 assert.equal(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.mode, 'entity');
 assert.deepEqual(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.requestedProduct, ['homeowners']);
+assert.equal(interpretInsuranceAskQuery('Florida homeowners insurance agencies').query.mode, 'entity');
+assert.equal(interpretInsuranceAskQuery('auto insurance agencies in Florida').query.mode, 'entity');
+assert.equal(interpretInsuranceAskQuery('how many homeowners insurance agencies in Florida').query.mode, 'count');
 assert.equal(interpretInsuranceAskQuery('homeowners insurance agencies in Florida').query.linesOfAuthority, undefined, 'homeowners is never invented as an LOA');
 assert.equal(interpretInsuranceAskQuery('Show insurance agencies credentialed in Florida.').query.mode, 'entity');
+assert.equal(interpretInsuranceAskQuery('insurance agencies in Florida').query.mode, 'entity');
+assert.equal(interpretInsuranceAskQuery('insurance agencies in Florida').query.coverageState, 'KNOWN');
+assert.equal(interpretInsuranceAskQuery('life insurance agencies in Texas').query.mode, 'entity');
+assert.deepEqual(interpretInsuranceAskQuery('life insurance agencies in Texas').query.linesOfAuthority, ['Life']);
+assert.equal(interpretInsuranceAskQuery('Florida Property & Casualty authority').query.mode, 'entity');
+assert.deepEqual(interpretInsuranceAskQuery('Florida Property & Casualty authority').query.linesOfAuthority, ['Property', 'Casualty']);
+assert.equal(interpretInsuranceAskQuery('Florida Property & Casualty authority').query.coverageState, 'PARTIAL');
 
 for (const question of INSURANCE_SEARCH_GOLDEN_QUESTIONS) {
   const parsed = interpretInsuranceAskQuery(question.query);

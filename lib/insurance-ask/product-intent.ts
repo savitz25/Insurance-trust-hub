@@ -20,12 +20,25 @@
  * it no longer sets mode/coverageState/failReason, so interpret.ts's normal entity/count builder
  * keeps running and execute.ts returns real rows with an honest "not established" disclosure
  * instead of an empty screen.
+ *
+ * Detection is bounded: bare tokens such as "authority", "casualty", "life", and
+ * "auto" are not consumer-product requests by themselves. Auto matches only as
+ * auto/car/vehicle + insurance.
  */
 import type { InsuranceResearchQuery, ParsedInsuranceAsk } from './contract';
 
+const EXECUTABLE_LOA_LABELS = new Set([
+  'property',
+  'casualty',
+  'life',
+  'health',
+  'personal lines',
+  'variable life / annuity',
+]);
+
 const CONSUMER_PRODUCT_PATTERNS: Array<{ product: string; re: RegExp }> = [
   { product: 'homeowners', re: /\bhomeowners?\b|\bhome insurance\b/i },
-  { product: 'auto', re: /\bauto(?:mobile)?\b|\bcar insurance\b|\bvehicle insurance\b/i },
+  { product: 'auto', re: /\b(?:auto(?:mobile)?|car|vehicle)\s+insurance\b/i },
   { product: 'flood', re: /\bflood insurance\b|\bnfip\b/i },
   { product: 'renters', re: /\brenters? insurance\b/i },
   { product: 'umbrella', re: /\bumbrella insurance\b|\bumbrella (?:agenc|polic)/i },
@@ -39,7 +52,7 @@ const CONSUMER_PRODUCT_WORD_STRIP =
 export function detectRequestedConsumerProducts(raw: string): string[] {
   const out: string[] = [];
   for (const { product, re } of CONSUMER_PRODUCT_PATTERNS) {
-    if (re.test(raw) && !out.includes(product)) out.push(product);
+    if (re.test(raw) && !out.includes(product) && !EXECUTABLE_LOA_LABELS.has(product)) out.push(product);
   }
   return out;
 }
@@ -47,6 +60,10 @@ export function detectRequestedConsumerProducts(raw: string): string[] {
 /** Strips bare consumer-product words from text; used to isolate non-geography, non-category residue. */
 export function stripConsumerProductWords(raw: string): string {
   return raw.replace(CONSUMER_PRODUCT_WORD_STRIP, ' ');
+}
+
+export function hasOfficialExecutableLoa(loas: string[] | undefined): boolean {
+  return Boolean(loas?.some((loa) => EXECUTABLE_LOA_LABELS.has(loa.trim().toLowerCase())));
 }
 
 function productNotEstablishedReason(products: string[], state?: string): string {
@@ -105,6 +122,7 @@ export function unresolvedProductsBlockingCensus(raw: string, query: InsuranceRe
   }
   if (query.identifier || query.nameQuery) return [];
   if (query.entityClass === 'insurer') return [];
+  if (hasOfficialExecutableLoa(query.linesOfAuthority)) return [];
   const products = detectRequestedConsumerProducts(raw);
   if (!products.length) return [];
   if (query.mode === 'entity' || query.mode === 'count' || query.mode === 'aggregate' || query.mode === 'comparison') {

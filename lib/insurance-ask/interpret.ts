@@ -2,6 +2,7 @@ import { interpretIdentityAndLocal, resolveFlCityLaunchCounty } from './research
 import {
   annotateUnestablishedProduct,
   detectRequestedConsumerProducts,
+  hasOfficialExecutableLoa,
   productInterpretationLines,
 } from './product-intent';
 import { detectRequestedEntityClass } from './entity-class';
@@ -1099,6 +1100,20 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   const cityMatch = states[0] ? matchCityForState(q, states[0]) : matchKnownCity(q);
   const ambiguousCity = !states.length ? matchAmbiguousCity(q) : undefined;
   const requestedCity = cityMatch ? titleCasePlace(cityMatch) : undefined;
+
+  // CTRL_FL_PC: official LOA + jurisdiction without a named class is still the executable
+  // authority path, not class clarification and not unresolved product. Do not inject a
+  // class onto count queries — counts still require an explicit agency / person / insurer.
+  if (
+    !entityClass &&
+    !unresolvedProducts.length &&
+    hasOfficialExecutableLoa(loas) &&
+    states[0] &&
+    !/\bhow many\b|\bcount of\b/i.test(q)
+  ) {
+    entityClass = 'agency';
+  }
+
   // TH-DISCOVERY-PARITY-001B: SQA-009 used to dead-end the ENTIRE request to fail_closed the
   // instant an unresolved consumer-product word appeared, even when a real, unambiguous
   // provider-category (+ optional geography) request could otherwise be answered. That is exactly

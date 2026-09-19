@@ -80,12 +80,24 @@ check("statewide homeowners is a real FL agency query, product disclosed not inv
   assert.equal(q.linesOfAuthority, undefined);
   assert.ok(q.conditions?.some((c) => c.value === "homeowners" && c.outcome === "UNSUPPORTED"));
 });
+check("word-order homeowners variant still executes with disclosure", () => {
+  const q = parse("Florida homeowners insurance agencies").query;
+  assert.equal(q.mode, "entity");
+  assert.deepEqual(q.requestedProduct, ["homeowners"]);
+  assert.equal(q.linesOfAuthority, undefined);
+});
 check("auto product-intent variant also executes the real FL agency query", () => {
   const q = parse("auto insurance agencies in Florida").query;
   assert.equal(q.mode, "entity");
   assert.equal(q.entityClass, "agency");
   assert.deepEqual(q.requestedProduct, ["auto"]);
   assert.equal(q.linesOfAuthority, undefined);
+});
+check("homeowners count executes the real FL count with product disclosure", () => {
+  const q = parse("how many homeowners insurance agencies in Florida").query;
+  assert.equal(q.mode, "count");
+  assert.equal(q.entityClass, "agency");
+  assert.deepEqual(q.requestedProduct, ["homeowners"]);
 });
 check("unspecified-product FL agencies remain a credential cohort", () => {
   const q = parse("Show insurance agencies credentialed in Florida.").query;
@@ -94,11 +106,45 @@ check("unspecified-product FL agencies remain a credential cohort", () => {
   assert.equal(q.jurisdiction?.state, "FL");
   assert.equal(q.requestedProduct, undefined);
 });
+check("CTRL_CENSUS exact founder string remains unspecified-product FL cohort", () => {
+  const q = parse("insurance agencies in Florida").query;
+  assert.equal(q.mode, "entity");
+  assert.equal(q.entityClass, "agency");
+  assert.equal(q.jurisdiction?.state, "FL");
+  assert.equal(q.coverageState, "KNOWN");
+  assert.equal(q.requestedProduct, undefined);
+  assert.equal(q.linesOfAuthority, undefined);
+});
 check("TX life remains official LOA, not unresolved product", () => {
   const q = parse("life insurance agencies in Texas").query;
   assert.equal(q.mode, "entity");
   assert.deepEqual(q.linesOfAuthority, ["Life"]);
   assert.equal(q.requestedProduct, undefined);
+  assert.notEqual(q.coverageState, "UNSUPPORTED");
+});
+check("CTRL_FL_PC agencies phrasing stays official Property + Casualty", () => {
+  const q = parse("Florida agencies with Property and Casualty authority").query;
+  assert.equal(q.mode, "entity");
+  assert.equal(q.entityClass, "agency");
+  assert.deepEqual(q.linesOfAuthority, ["Property", "Casualty"]);
+  assert.equal(q.coverageState, "PARTIAL");
+  assert.equal(q.requestedProduct, undefined);
+});
+check("CTRL_FL_PC bare authority phrasing stays official LOA path", () => {
+  const q = parse("Florida Property & Casualty authority").query;
+  assert.equal(q.mode, "entity");
+  assert.equal(q.entityClass, "agency");
+  assert.deepEqual(q.linesOfAuthority, ["Property", "Casualty"]);
+  assert.equal(q.jurisdiction?.state, "FL");
+  assert.equal(q.coverageState, "PARTIAL");
+  assert.equal(q.requestedProduct, undefined);
+  assert.notEqual(q.refinement, "class");
+});
+check("official LOA count without a class still fail-closes", () => {
+  const q = parse("how many with Property and Casualty authority in Florida").query;
+  assert.equal(q.mode, "fail_closed");
+  assert.equal(q.entityClass, undefined);
+  assert.match(q.failReason ?? "", /entity class/i);
 });
 check("appointed with invokes evidence", () => {
   const q = parse("is NPN 10391484 appointed with State Farm?").query;
@@ -315,6 +361,7 @@ async function main() {
       // an LOA filter) and discloses that homeowners specialization is not established, rather than
       // hiding real inventory behind a zero-provider "capability limitation."
       await test("homeowners FL agencies execute the real FL agency query, product disclosed not invented", async () => {
+        const n = source.calls.length;
         const r = await executeInsuranceAsk(
           "homeowners insurance agencies in Florida",
         );
@@ -325,16 +372,24 @@ async function main() {
         );
         assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
         assert.equal(r.parsed.query.linesOfAuthority, undefined);
-        // Note: this suite's other renderToStaticMarkup(AskInsuranceResultView) calls have a
-        // pre-existing "React is not defined" failure unrelated to this ticket (reproduces on
-        // origin/main before any TH-DISCOVERY-PARITY-001B change, for other queries); this test
-        // intentionally asserts on the query/result data instead of going through that renderer.
+        assert.ok(source.calls.length > n);
         assert.ok(
           r.limitations.some((l) => /not asserted to be .*-specific/i.test(l)),
           "top-level result discloses homeowners is not established, not silently satisfied",
         );
       });
+      await test("word-order homeowners variant executes the same disclosed general agency query", async () => {
+        const n = source.calls.length;
+        const r = await executeInsuranceAsk("Florida homeowners insurance agencies");
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(r.results.map((c) => c.entityId), [ids.agency]);
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.equal(r.parsed.query.linesOfAuthority, undefined);
+        assert.ok(source.calls.length > n);
+        assert.ok(r.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
+      });
       await test("auto product-intent variant also executes the real FL agency query", async () => {
+        const n = source.calls.length;
         const r = await executeInsuranceAsk("auto insurance agencies in Florida");
         assert.equal(r.parsed.query.mode, "entity");
         assert.deepEqual(r.parsed.query.requestedProduct, ["auto"]);
@@ -342,6 +397,28 @@ async function main() {
           r.results.map((c) => c.entityId),
           [ids.agency],
         );
+        assert.ok(source.calls.length > n);
+        assert.ok(r.limitations.some((l) => /not asserted to be auto-specific/i.test(l)));
+      });
+      await test("homeowners count returns the general agency grain, never a product-qualified count", async () => {
+        const n = source.calls.length;
+        const r = await executeInsuranceAsk("how many homeowners insurance agencies in Florida");
+        assert.equal(r.parsed.query.mode, "count");
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.equal(r.parsed.query.linesOfAuthority, undefined);
+        assert.equal(r.results.length, 0);
+        assert.deepEqual(r.counts, [{ label: "Agency identities with attached FL credentials", value: 1, grain: "canonical agency entity" }]);
+        assert.ok(source.calls.length > n);
+        assert.ok(r.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
+      });
+      await test("specialist preserves disclosed product discovery instead of returning unresolved_product", async () => {
+        const r = await executeSpecialistV2({ query: "homeowners insurance agencies in Florida" });
+        assert.equal(r.status, 200);
+        assert.equal(r.body.resultState, "SUPPORTED_RESULTS");
+        assert.equal(r.body.error, undefined);
+        assert.equal(r.body.rows[0]?.entityClass, "agency");
+        assert.deepEqual(r.body.queryInterpretation.requestedProduct, ["homeowners"]);
+        assert.ok(r.body.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
       });
       await test("unspecified-product control still returns the FL agency cohort", async () => {
         const r = await executeInsuranceAsk(
@@ -350,6 +427,44 @@ async function main() {
         assert.equal(r.parsed.query.mode, "entity");
         assert.equal(r.results[0]?.entityId, ids.agency);
         assert.equal(r.parsed.query.requestedProduct, undefined);
+      });
+      await test("CTRL_CENSUS exact founder string still returns the FL agency cohort", async () => {
+        const r = await executeInsuranceAsk("insurance agencies in Florida");
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.equal(r.coverageState, "KNOWN");
+        assert.equal(r.parsed.query.requestedProduct, undefined);
+        assert.equal(r.results[0]?.entityId, ids.agency);
+        assert.notEqual(r.terminalState, "CAPABILITY_LIMITATION");
+      });
+      await test("CTRL_TX_LIFE official Life path is not unresolved product", async () => {
+        const r = await executeInsuranceAsk("life insurance agencies in Texas");
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(r.parsed.query.linesOfAuthority, ["Life"]);
+        assert.equal(r.parsed.query.requestedProduct, undefined);
+        assert.notEqual(r.coverageState, "UNSUPPORTED");
+        assert.notEqual(r.terminalState, "CAPABILITY_LIMITATION");
+        assert.equal(r.results[0]?.entityId, ids.other);
+      });
+      await test("CTRL_FL_PC official authority path is not unresolved product", async () => {
+        const n = source.calls.length;
+        const r = await executeInsuranceAsk(
+          "Florida agencies with Property and Casualty authority",
+        );
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(r.parsed.query.linesOfAuthority, ["Property", "Casualty"]);
+        assert.equal(r.parsed.query.requestedProduct, undefined);
+        assert.equal(r.coverageState, "PARTIAL");
+        assert.notEqual(r.terminalState, "CAPABILITY_LIMITATION");
+        assert.ok(source.calls.length > n);
+      });
+      await test("CTRL_FL_PC bare authority phrasing executes official LOA path", async () => {
+        const r = await executeInsuranceAsk("Florida Property & Casualty authority");
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.equal(r.parsed.query.entityClass, "agency");
+        assert.deepEqual(r.parsed.query.linesOfAuthority, ["Property", "Casualty"]);
+        assert.equal(r.parsed.query.requestedProduct, undefined);
+        assert.equal(r.coverageState, "PARTIAL");
+        assert.notEqual(r.parsed.query.refinement, "class");
       });
       await test("address request cannot become FL credential cohort", async () => {
         const n = source.calls.length,
