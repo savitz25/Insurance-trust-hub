@@ -199,7 +199,10 @@ function SaveProviderControl({
   }
 
   async function handlePrimaryClick() {
-    if (local) {
+    // Re-read synchronous storage: React may not have rendered the first write
+    // yet when another activation arrives in the same event turn.
+    if (local || findLocalProvider(providerSlug)) {
+      refresh();
       setManageOpen((v) => !v);
       return;
     }

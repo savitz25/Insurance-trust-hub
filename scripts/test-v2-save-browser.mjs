@@ -35,8 +35,9 @@ try {
  console.log('B3-01/02/09 PASS browser keyboard immediate Save and real reload persistence');
 
  await reset();
- evaluate("document.querySelector('button').click();document.querySelector('button').click();document.querySelector('button').click()");
+ evaluate("window.b3.writes=0;const original=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==='ith:my-insurance:v1')window.b3.writes++;return original.call(this,k,v)};document.querySelector('button').click();window.b3.firstWrites=window.b3.writes;document.querySelector('button').click();document.querySelector('button').click()");
  assert.equal(evaluate(state).length,1);
+ assert.equal(evaluate('window.b3.writes'),evaluate('window.b3.firstWrites'),'duplicate activation must not repeat persistence effects');
  console.log('B3-03 PASS rapid duplicate clicks create one row');
 
  await reset(); evaluate('window.b3.auth(null,true)'); await delay(100); click();
