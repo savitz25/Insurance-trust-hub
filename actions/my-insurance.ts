@@ -64,9 +64,13 @@ export async function ensureUserProfileAction(): Promise<{ ok: boolean }> {
 export async function saveProviderAction(input: {
   providerSlug: string;
   providerName: string;
+  expectedUserId?: string;
 }): Promise<{ ok: true } | { ok: false; error: string }> {
   try {
     const user = await requireAuthenticatedUser();
+    if (input.expectedUserId && input.expectedUserId !== user.id) {
+      return { ok: false, error: 'Account changed. Please try again.' };
+    }
     const supabase = await insuranceDb();
     await ensureUserProfile(await createClient(), user);
 
