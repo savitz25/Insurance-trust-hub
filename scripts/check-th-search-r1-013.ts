@@ -361,6 +361,7 @@ async function main() {
       // an LOA filter) and discloses that homeowners specialization is not established, rather than
       // hiding real inventory behind a zero-provider "capability limitation."
       await test("homeowners FL agencies execute the real FL agency query, product disclosed not invented", async () => {
+        const n = source.calls.length;
         const r = await executeInsuranceAsk(
           "homeowners insurance agencies in Florida",
         );
@@ -371,12 +372,24 @@ async function main() {
         );
         assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
         assert.equal(r.parsed.query.linesOfAuthority, undefined);
+        assert.ok(source.calls.length > n);
         assert.ok(
           r.limitations.some((l) => /not asserted to be .*-specific/i.test(l)),
           "top-level result discloses homeowners is not established, not silently satisfied",
         );
       });
+      await test("word-order homeowners variant executes the same disclosed general agency query", async () => {
+        const n = source.calls.length;
+        const r = await executeInsuranceAsk("Florida homeowners insurance agencies");
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(r.results.map((c) => c.entityId), [ids.agency]);
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.equal(r.parsed.query.linesOfAuthority, undefined);
+        assert.ok(source.calls.length > n);
+        assert.ok(r.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
+      });
       await test("auto product-intent variant also executes the real FL agency query", async () => {
+        const n = source.calls.length;
         const r = await executeInsuranceAsk("auto insurance agencies in Florida");
         assert.equal(r.parsed.query.mode, "entity");
         assert.deepEqual(r.parsed.query.requestedProduct, ["auto"]);
@@ -384,6 +397,28 @@ async function main() {
           r.results.map((c) => c.entityId),
           [ids.agency],
         );
+        assert.ok(source.calls.length > n);
+        assert.ok(r.limitations.some((l) => /not asserted to be auto-specific/i.test(l)));
+      });
+      await test("homeowners count returns the general agency grain, never a product-qualified count", async () => {
+        const n = source.calls.length;
+        const r = await executeInsuranceAsk("how many homeowners insurance agencies in Florida");
+        assert.equal(r.parsed.query.mode, "count");
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.equal(r.parsed.query.linesOfAuthority, undefined);
+        assert.equal(r.results.length, 0);
+        assert.deepEqual(r.counts, [{ label: "Agency identities with attached FL credentials", value: 1, grain: "canonical agency entity" }]);
+        assert.ok(source.calls.length > n);
+        assert.ok(r.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
+      });
+      await test("specialist preserves disclosed product discovery instead of returning unresolved_product", async () => {
+        const r = await executeSpecialistV2({ query: "homeowners insurance agencies in Florida" });
+        assert.equal(r.status, 200);
+        assert.equal(r.body.resultState, "SUPPORTED_RESULTS");
+        assert.equal(r.body.error, undefined);
+        assert.equal(r.body.rows[0]?.entityClass, "agency");
+        assert.deepEqual(r.body.queryInterpretation.requestedProduct, ["homeowners"]);
+        assert.ok(r.body.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
       });
       await test("unspecified-product control still returns the FL agency cohort", async () => {
         const r = await executeInsuranceAsk(
