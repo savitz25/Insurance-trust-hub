@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Bookmark, BookmarkCheck, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-p
 import {
   removeProviderAction,
   saveProviderAction,
+  listSavedProviderSlugsAction,
 } from '@/actions/my-insurance';
 import {
   getActivePlan,
@@ -24,7 +25,6 @@ import type { ProviderResearchStatus, SavedProvider } from '@/lib/my-insurance/p
 import { PROVIDER_STATUS_OPTIONS } from '@/lib/my-insurance/plan-types';
 import {
   removeGuestProvider,
-  stashPendingSaveAction,
 } from '@/lib/my-insurance/guest-storage';
 import { ShortlistFullPanel } from '@/components/my-insurance/shortlist-full-panel';
 import { toast } from 'sonner';
@@ -58,7 +58,12 @@ function findLocalProvider(slug: string): SavedProvider | null {
  * Save / manage My Insurance shortlist (guest localStorage + optional cloud).
  * Phase B: directory default researching; shortlist cap 3 with replace flow.
  */
-export function SaveProviderButton({
+export function SaveProviderButton(props: SaveProviderButtonProps) {
+  const mi = useMyInsuranceOptional();
+  return <SaveProviderControl key={`${props.providerSlug}:${mi?.user?.id ?? 'device'}`} {...props} />;
+}
+
+function SaveProviderControl({
   providerSlug,
   providerName,
   city,
@@ -72,9 +77,35 @@ export function SaveProviderButton({
 }: SaveProviderButtonProps) {
   const mi = useMyInsuranceOptional();
   const [busy, setBusy] = useState(false);
+  const saving = useRef(false);
+  const scope = useRef({ active: true });
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const disclosureId = useId();
+  const [accountConfirmed, setAccountConfirmed] = useState(false);
+  const [accountUnavailable, setAccountUnavailable] = useState(false);
+  const confirmationVersion = useRef(0);
   const [local, setLocal] = useState<SavedProvider | null>(null);
   const [manageOpen, setManageOpen] = useState(false);
   const [fullPanel, setFullPanel] = useState<SavedProvider[] | null>(null);
+
+  useEffect(() => {
+    const current = { active: true };
+    scope.current = current;
+    return () => { current.active = false; };
+  }, [mi?.user?.id]);
+
+  // The provider's saved set is cloud UNION local: never use it as a cloud receipt.
+  // An owner-bound read restores only the legacy Insurance account disclosure.
+  useEffect(() => {
+    const owner = mi?.user?.id;
+    if (!owner || mi?.loading) return;
+    const version = ++confirmationVersion.current;
+    let active = true;
+    void listSavedProviderSlugsAction(owner).then((slugs) => {
+      if (active && version === confirmationVersion.current && slugs.includes(providerSlug)) setAccountConfirmed(true);
+    }).catch(() => { if (active && version === confirmationVersion.current) setAccountUnavailable(true); });
+    return () => { active = false; };
+  }, [mi?.user?.id, mi?.loading, providerSlug]);
 
   const refresh = useCallback(() => {
     setLocal(findLocalProvider(providerSlug));
@@ -120,13 +151,9 @@ export function SaveProviderButton({
       });
     } else if (result.created) {
       toast.success('Saved to My Insurance', {
-        description: mi?.user
-          ? result.provider.status === 'researching'
-            ? 'Added under Researching · synced to your account'
-            : 'Added to shortlist · synced to your account'
-          : result.provider.status === 'researching'
-            ? 'Added under Researching on this device · sign in to sync'
-            : 'Added to shortlist on this device · sign in to sync',
+        description: result.provider.status === 'researching'
+          ? 'Added under Researching on this device'
+          : 'Added to shortlist on this device',
         action: {
           label: 'Open HQ',
           onClick: () => {
@@ -149,34 +176,55 @@ export function SaveProviderButton({
   }
 
   async function saveWithStatus(status: ProviderResearchStatus) {
-    if (busy) return;
+    if (saving.current || busy) return;
+    saving.current = true;
+    const current = scope.current;
+    let locallySaved = false;
+    setSaveError(null);
     setBusy(true);
     try {
-      if (mi?.user) {
-        // Cloud sync best-effort; local plan is source of shortlist discipline
-        if (!mi.isProviderSaved(providerSlug)) {
-          await saveProviderAction({ providerSlug, providerName });
-          mi.markProviderSaved(providerSlug);
-        }
-      } else {
-        stashPendingSaveAction({
-          type: 'provider',
-          payload: { providerSlug, providerName },
-        });
-      }
+      // The existing device workspace is shared by guests and signed-in users.
+      // Saving locally does not assert that unresolved auth means "guest".
+      // Auth continuity already merges persisted providers on session restore.
       const result = upsertSavedProvider({
         ...baseInput,
         status,
         shortlistPolicy: 'block',
       });
+      const storageError = getLastSaveError();
+      if (storageError) throw new Error(storageError);
       handleResult(result, { intendShortlist: status === 'shortlisted' });
+      locallySaved = result.ok;
+      if (!result.ok || result.alreadySaved) return;
+      // Never stash a failed/cap-blocked save as a future account mutation.
+      if (mi?.user && !mi.loading) {
+        const cloud = await saveProviderAction({ providerSlug, providerName, expectedUserId: mi.user.id });
+        if (!current.active) return;
+        if (!cloud.ok) {
+          setAccountUnavailable(true);
+          toast.error('Saved on this device, but account sync failed. Retry from My Insurance.');
+        } else {
+          setAccountConfirmed(true);
+          setAccountUnavailable(false);
+          mi.markProviderSaved(providerSlug);
+        }
+      }
+    } catch {
+      if (current.active && locallySaved) setAccountUnavailable(true);
+      if (current.active) setSaveError(locallySaved
+        ? 'Saved on this device, but account sync failed. Retry from My Insurance.'
+        : 'Could not complete Save. Check device storage and try again.');
     } finally {
-      setBusy(false);
+      saving.current = false;
+      if (current.active) setBusy(false);
     }
   }
 
   async function handlePrimaryClick() {
-    if (local) {
+    // Re-read synchronous storage: React may not have rendered the first write
+    // yet when another activation arrives in the same event turn.
+    if (local || findLocalProvider(providerSlug)) {
+      refresh();
       setManageOpen((v) => !v);
       return;
     }
@@ -186,6 +234,7 @@ export function SaveProviderButton({
 
   async function handleRemove() {
     if (busy) return;
+    confirmationVersion.current++;
     setBusy(true);
     try {
       if (mi?.user) {
@@ -194,6 +243,7 @@ export function SaveProviderButton({
       }
       removeProviderFromPlan(providerSlug);
       removeGuestProvider(providerSlug);
+      setAccountConfirmed(false);
       toast.message('Removed from My Insurance');
       setManageOpen(false);
       refresh();
@@ -202,7 +252,12 @@ export function SaveProviderButton({
     }
   }
 
-  const saved = Boolean(local) || (mi?.user ? mi.isProviderSaved(providerSlug) : false);
+  const saved = Boolean(local) || accountConfirmed;
+  const disclosure = accountConfirmed && mi?.user && !mi.loading
+    ? 'Saved to your Insurance account'
+    : accountUnavailable
+      ? 'Saved on this device — account sync unavailable'
+      : 'Saved on this device';
 
   return (
     <>
@@ -212,9 +267,11 @@ export function SaveProviderButton({
           variant={saved ? 'secondary' : variant}
           size={compact ? 'sm' : 'sm'}
           onClick={handlePrimaryClick}
-          disabled={busy || mi?.loading}
+          disabled={busy}
+          aria-busy={busy}
           className={cn('gap-1.5 min-h-11', compact && 'text-xs')}
           aria-pressed={saved}
+          aria-describedby={saved ? disclosureId : undefined}
           aria-expanded={saved ? manageOpen : undefined}
         >
           {saved ? (
@@ -225,6 +282,8 @@ export function SaveProviderButton({
           {saved ? (compact ? 'Saved' : 'In My Insurance') : compact ? 'Save' : 'Save'}
           {saved ? <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden /> : null}
         </Button>
+        {saved ? <p id={disclosureId} role="status" className="max-w-64 text-xs">{disclosure}</p> : null}
+        {saveError ? <p role="alert" className="max-w-64 text-sm text-red-700">{saveError}</p> : null}
 
         {saved && local ? (
           <p className="text-center text-[10px] font-medium uppercase tracking-wide text-[#0284C7]">
