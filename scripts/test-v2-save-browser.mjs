@@ -54,7 +54,7 @@ try {
  await until(state+'.length===1');
  console.log('B3-08 PASS blocked fresh storage honest error and recovery');
 
- 
+
  await reset(); evaluate("window.b3.auth('owner-a');window.b3.failCloud=true");
  await delay(100); click(); await until("document.body.textContent.includes('account sync failed')");
  assert.equal(evaluate(state).length,1);
@@ -85,7 +85,7 @@ try {
  evaluate("const real=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(this===sessionStorage)throw new Error('blocked session');return real.call(this,k,v)}");
  click(); await until(state+'.length===1');
  console.log('B3-08 PASS sessionStorage unavailable does not prevent device Save');
- 
+
  for(const width of [1440,390,320]){
    await reset(); browser('set','viewport',String(width),'900');
    browser('focus','button');

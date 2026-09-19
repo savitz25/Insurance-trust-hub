@@ -14,9 +14,9 @@ function action(owner) {
     '@/lib/my-insurance/ensure-profile':{ensureUserProfile:async()=>{}},
     '@/lib/my-insurance/constants':{MY_INSURANCE_PATH:'/my-insurance'},
   };
-  const module={exports:{}};
-  new Function('module','exports','require',code)(module,module.exports,id=>adapters[id]??{});
-  return {save:module.exports.saveProviderAction,writes};
+  const actionModule={exports:{}};
+  new Function('module','exports','require',code)(actionModule,actionModule.exports,id=>adapters[id]??{});
+  return {save:actionModule.exports.saveProviderAction,writes};
 }
 test('B3-I06 mocked server action preserves existing account destination',async()=>{
   const {save,writes}=action('owner-a');

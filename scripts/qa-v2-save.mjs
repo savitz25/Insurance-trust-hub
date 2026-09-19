@@ -22,7 +22,7 @@ window.b3 = {
   },
   auth(user, loading = false) {
     this.context = { ...this.context, user: user ? {id:user} : null, loading };
-    
+
     this.render();
   }
 };
