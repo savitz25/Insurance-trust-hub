@@ -27,6 +27,32 @@ const state=`JSON.parse(localStorage.getItem('ith:my-insurance:v1')||'{"savedPro
 const click=()=>evaluate("document.querySelector('button').click()");
 try {
  await reset();
+ evaluate("window.b3.count=48;window.b3.delayRead=true;window.b3.confirmedOwner='owner-a';window.b3.auth('owner-a')");
+ await until('window.b3.reads.length>0');
+ assert.equal(evaluate('window.b3.reads.length'),1,'48 cards share one owner-bound read');
+ assert.equal(evaluate('document.querySelectorAll("button").length'),48);
+ assert.equal(evaluate('document.querySelectorAll("[role=status]").length'),48);
+ assert.equal(evaluate('document.querySelector("button").disabled'),false,'pending read must not block local Save');
+ evaluate('window.b3.finishReads.splice(0).forEach(done=>done())');
+ await until("document.querySelector('[role=status]')?.textContent==='Saved to your Insurance account'");
+ evaluate('window.b3.count=49;window.b3.render()'); await delay(100);
+ assert.equal(evaluate('window.b3.reads.length'),1,'late card must not refetch account list');
+ evaluate("window.b3.context.accountSaveConfirmation.forget('b3-fixture');window.b3.count=50;window.b3.render()"); await delay(100);
+ assert.equal(evaluate("document.body.textContent.includes('Saved to your Insurance account')"),false,'removed confirmation must not reappear on another card');
+ evaluate("window.b3.auth('owner-b')"); await until('window.b3.reads.length===2');
+ assert.equal(evaluate("document.body.textContent.includes('Saved to your Insurance account')"),false);
+ evaluate("window.b3.auth(null);window.b3.finishReads.splice(0).forEach(done=>done())"); await delay(100);
+ assert.equal(evaluate("document.body.textContent.includes('Saved to your Insurance account')"),false,'stale owner read ignored');
+ console.log('N1-01/02/03 PASS 48 cards = 1 read, delayed mount no refetch, owner/logout isolation');
+
+ await reset();
+ evaluate("window.b3.failRead=true;window.b3.count=48;window.b3.auth('owner-a')"); await until('window.b3.reads.length===1');
+ await delay(100); click();
+ await until(state+'.length===1');
+ assert.equal(evaluate('window.b3.reads.length'),1,'failed read must not trigger card retries');
+ console.log('N1-04 PASS failed shared read does not block local Save or cause retry fan-out');
+
+ await reset();
  browser('focus','button'); browser('press','Enter');
  await until(state+'.length===1');
  assert.equal(evaluate(state)[0].providerSlug,'b3-fixture');

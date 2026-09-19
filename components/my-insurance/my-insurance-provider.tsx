@@ -32,10 +32,12 @@ import {
 } from '@/lib/my-insurance/auth-continuity';
 import { consumePendingSaveAction } from '@/lib/my-insurance/guest-storage';
 import { toast } from 'sonner';
+import { useAccountSaveConfirmation, type AccountSaveConfirmation } from './use-account-save-confirmation';
 
 type AuthContext = 'provider' | 'general';
 
 type MyInsuranceContextValue = {
+  accountSaveConfirmation: AccountSaveConfirmation;
   user: User | null;
   loading: boolean;
   authOpen: boolean;
@@ -64,6 +66,7 @@ function unionSlugs(cloud: string[], local: string[]): Set<string> {
 export function MyInsuranceProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const accountSaveConfirmation = useAccountSaveConfirmation(user?.id, loading);
   const [authOpen, setAuthOpen] = useState(false);
   const [authContext, setAuthContext] = useState<AuthContext>('general');
   const [redirectPath, setRedirectPath] = useState('/my-insurance');
@@ -317,6 +320,7 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<MyInsuranceContextValue>(
     () => ({
+      accountSaveConfirmation,
       user,
       loading,
       authOpen,
@@ -348,6 +352,7 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
       },
     }),
     [
+      accountSaveConfirmation,
       user,
       loading,
       authOpen,

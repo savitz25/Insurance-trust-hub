@@ -8,7 +8,6 @@ import { useMyInsuranceOptional } from '@/components/my-insurance/my-insurance-p
 import {
   removeProviderAction,
   saveProviderAction,
-  listSavedProviderSlugsAction,
 } from '@/actions/my-insurance';
 import {
   getActivePlan,
@@ -94,18 +93,11 @@ function SaveProviderControl({
     return () => { current.active = false; };
   }, [mi?.user?.id]);
 
-  // The provider's saved set is cloud UNION local: never use it as a cloud receipt.
-  // An owner-bound read restores only the legacy Insurance account disclosure.
-  useEffect(() => {
-    const owner = mi?.user?.id;
-    if (!owner || mi?.loading) return;
-    const version = ++confirmationVersion.current;
-    let active = true;
-    void listSavedProviderSlugsAction(owner).then((slugs) => {
-      if (active && version === confirmationVersion.current && slugs.includes(providerSlug)) setAccountConfirmed(true);
-    }).catch(() => { if (active && version === confirmationVersion.current) setAccountUnavailable(true); });
-    return () => { active = false; };
-  }, [mi?.user?.id, mi?.loading, providerSlug]);
+  // Shared owner-bound account read, never the provider's cloud UNION local set.
+  const confirmation = mi?.accountSaveConfirmation;
+  const confirmed = accountConfirmed || (confirmationVersion.current === 0 &&
+    Boolean(mi?.user && !mi.loading && confirmation?.slugs.has(providerSlug)));
+  const checkingAccount = Boolean(mi?.user && !mi.loading && confirmation?.status === 'pending');
 
   const refresh = useCallback(() => {
     setLocal(findLocalProvider(providerSlug));
@@ -243,6 +235,7 @@ function SaveProviderControl({
       }
       removeProviderFromPlan(providerSlug);
       removeGuestProvider(providerSlug);
+      confirmation?.forget(providerSlug);
       setAccountConfirmed(false);
       toast.message('Removed from My Insurance');
       setManageOpen(false);
@@ -252,10 +245,10 @@ function SaveProviderControl({
     }
   }
 
-  const saved = Boolean(local) || accountConfirmed;
-  const disclosure = accountConfirmed && mi?.user && !mi.loading
+  const saved = Boolean(local) || confirmed;
+  const disclosure = confirmed && mi?.user && !mi.loading
     ? 'Saved to your Insurance account'
-    : accountUnavailable
+    : accountUnavailable || confirmation?.status === 'unavailable'
       ? 'Saved on this device — account sync unavailable'
       : 'Saved on this device';
 
@@ -271,7 +264,7 @@ function SaveProviderControl({
           aria-busy={busy}
           className={cn('gap-1.5 min-h-11', compact && 'text-xs')}
           aria-pressed={saved}
-          aria-describedby={saved ? disclosureId : undefined}
+          aria-describedby={saved || checkingAccount ? disclosureId : undefined}
           aria-expanded={saved ? manageOpen : undefined}
         >
           {saved ? (
@@ -279,10 +272,11 @@ function SaveProviderControl({
           ) : (
             <Bookmark className="h-4 w-4" aria-hidden />
           )}
-          {saved ? (compact ? 'Saved' : 'In My Insurance') : compact ? 'Save' : 'Save'}
+          {saved ? (compact ? 'Saved' : 'In My Insurance') : checkingAccount ? 'Save (checking account)' : 'Save'}
           {saved ? <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden /> : null}
         </Button>
         {saved ? <p id={disclosureId} role="status" className="max-w-64 text-xs">{disclosure}</p> : null}
+        {!saved && checkingAccount ? <p id={disclosureId} role="status" className="max-w-64 text-xs">Checking account saved state</p> : null}
         {saveError ? <p role="alert" className="max-w-64 text-sm text-red-700">{saveError}</p> : null}
 
         {saved && local ? (

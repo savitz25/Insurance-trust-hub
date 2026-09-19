@@ -6,19 +6,27 @@ import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 const root = process.cwd();
 const baseline = process.argv.includes('--baseline');
+const reviewBaseline = process.argv.includes('--review-baseline');
 const entry = `
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { SaveProviderButton } from './components/my-insurance/save-provider-button';
 import * as storage from './lib/my-insurance/storage';
 import { Toaster } from 'sonner';
+import { useAccountSaveConfirmation } from './components/my-insurance/use-account-save-confirmation';
+const useConfirmation = ${reviewBaseline} ? () => undefined : useAccountSaveConfirmation;
+function Fixture() {
+  window.b3.context.accountSaveConfirmation = useConfirmation(window.b3.context.user?.id, window.b3.context.loading);
+  const slug=window.b3.slug;
+  return <main><h1>insurance isolated Save QA</h1>{Array.from({length:window.b3.count},(_,i)=><SaveProviderButton key={i} providerSlug={i ? slug+'-'+i : slug} providerName={slug} />)}<Toaster /></main>;
+}
 window.b3 = {
-  cloud: [], events: [], storage, slug: 'b3-fixture',
+  cloud: [], reads: [], events: [], storage, slug: 'b3-fixture', count: 1,
   context: { loading: false, user: null, workspaceStorage: { syncStatus: 'local_only' },
     isProviderSaved: () => false, markProviderSaved: slug => window.b3.events.push(slug) },
   render(slug = this.slug) {
     this.slug = slug;
-    root.render(<main><h1>insurance isolated Save QA</h1><SaveProviderButton providerSlug={slug} providerName={slug} /><Toaster /></main>);
+    root.render(<Fixture />);
   },
   auth(user, loading = false) {
     this.context = { ...this.context, user: user ? {id:user} : null, loading };
@@ -38,7 +46,12 @@ const mocks = {
     if (window.b3.delayCloud) await new Promise(done => window.b3.finishCloud = done);
     return window.b3.failCloud ? {ok:false,error:'fixture failure'} : {ok:true};
   }
-  export async function listSavedProviderSlugsAction(owner) { return window.b3.confirmedOwner === owner ? [window.b3.slug] : []; }
+  export async function listSavedProviderSlugsAction(owner) {
+    window.b3.reads.push(owner);
+    if(window.b3.delayRead) await new Promise(done => (window.b3.finishReads ||= []).push(done));
+    if(window.b3.failRead) throw new Error('fixture read unavailable');
+    return window.b3.confirmedOwner === owner ? [window.b3.slug] : [];
+  }
   export async function removeProviderAction() { return {ok:true}; }`,
   '@/lib/analytics/ga-events': 'export const trackMyLendingSave = input => window.b3.events.push(input);',
 };
@@ -49,8 +62,8 @@ const result = await build({
   plugins: [{ name:'isolated-adapters', setup(builder) {
     builder.onResolve({ filter: /.*/ }, args => mocks[args.path] ? { path: args.path, namespace:'mock' } : null);
     builder.onLoad({ filter: /.*/, namespace:'mock' }, args => ({ contents:mocks[args.path],loader:'js',resolveDir:root }));
-    if (baseline) builder.onLoad({ filter: /save-provider-button\.tsx$/ }, () => ({
-      contents: execFileSync('git',['show','860345d85adcc2616efe5768acf5d941c7f8cf92:components/my-insurance/save-provider-button.tsx'],{encoding:'utf8'}),
+    if (baseline || reviewBaseline) builder.onLoad({ filter: /save-provider-button\.tsx$/ }, () => ({
+      contents: execFileSync('git',['show',(reviewBaseline ? '58446e4d8c585bfc2c3c3f775f54d98cdbf956d6' : '860345d85adcc2616efe5768acf5d941c7f8cf92')+':components/my-insurance/save-provider-button.tsx'],{encoding:'utf8'}),
       loader:'tsx', resolveDir:resolve(root,'components/my-insurance')
     }));
   }}],
