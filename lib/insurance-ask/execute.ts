@@ -188,9 +188,11 @@ export async function executeInsuranceAsk(raw: string, page = 1, pageSize = INSU
   if(q.identifier && new Set(result.results.map(r=>r.entityId)).size>1 && !q.selectedEntity){result.candidateSelection=true;result.terminalState='NEEDS_CLARIFICATION';for(const row of result.results)row.selectionHref='/ask?'+new URLSearchParams({q:raw,...q.requestOptions,selected:row.entityId});}
   result.terminalState ??= q.terminalState ?? (q.mode === 'fail_closed' ? q.refinement ? 'NEEDS_CLARIFICATION' : 'CAPABILITY_LIMITATION' : q.mode === 'directory' ? 'DIRECTORY_HANDOFF' : q.mode === 'definition' ? 'EXPLANATION' : result.results.length || result.counts.length ? 'RESULTS' : 'NO_MATCH');
   if (q.mode === 'directory') { result.provenance.sourceFamily = 'Separate public directory'; result.provenance.grain = 'Directory handoff; no regulatory identities retrieved'; result.provenance.geographyMeaning = `Selected ZIP ${q.directoryZip}; recorded directory address, not service territory`; }
-  // Consumer products are never official LOAs. Local discovery and other independently executable
-  // requests retain an explicit disclosure; statewide FL product-qualified census requests are
-  // already fail-closed by the SQA-009 interpreter/plan gate and never reach this result path.
+  // TH-DISCOVERY-PARITY-001B: a requested consumer product (homeowners/auto/flood/...) is never an
+  // official LOA in this extract (see product-intent.ts). Rather than hide the result set (the old
+  // SQA-009 behavior), interpret.ts/product-intent.ts now let real rows execute and this appends one
+  // explicit, un-missable disclosure to WHATEVER result came back so the product is never silently
+  // dropped and never silently satisfied.
   if (q.requestedProduct?.length && q.mode !== 'fail_closed') {
     const products = q.requestedProduct.join(', ');
     result.limitations = [

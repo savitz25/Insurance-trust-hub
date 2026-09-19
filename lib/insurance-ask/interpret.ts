@@ -1,7 +1,6 @@
 import { interpretIdentityAndLocal, resolveFlCityLaunchCounty } from './research-intent';
 import {
   annotateUnestablishedProduct,
-  applyUnresolvedProduct,
   detectRequestedConsumerProducts,
   hasOfficialExecutableLoa,
   productInterpretationLines,
@@ -1115,30 +1114,14 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     entityClass = 'agency';
   }
 
-  // SQA-009: a statewide FL product-qualified agency/person census must fail closed. Official
-  // LOA, unspecified-product census, and local discovery paths remain executable.
-  if (
-    unresolvedProducts.length &&
-    !hasOfficialExecutableLoa(loas) &&
-    states[0] === 'FL' &&
-    !requestedCity &&
-    (entityClass === 'agency' || entityClass === 'person' || /\bhow many\b|\bcount of\b/i.test(q))
-  ) {
-    const query = fail('', []);
-    query.entityClass = entityClass;
-    query.jurisdiction = states[0] ? { state: states[0], meaning: geo } : undefined;
-    query.requestedCity = requestedCity;
-    applyUnresolvedProduct(query, unresolvedProducts);
-    for (const row of productInterpretationLines(unresolvedProducts, query.jurisdiction?.state, true)) {
-      push(row.label, row.value);
-    }
-    if (query.entityClass) push('Entity', entityLabel(query.entityClass));
-    if (query.jurisdiction) push(dimensionLabel(query.jurisdiction.meaning), query.jurisdiction.state);
-    return { raw: q, query, interpretation: lines };
-  }
-
-  // Preserve main's browse behavior for a bare product phrase with no explicit provider class.
-  // Execution retains the product as unsupported and cannot turn it into an LOA match.
+  // TH-DISCOVERY-PARITY-001B: SQA-009 used to dead-end the ENTIRE request to fail_closed the
+  // instant an unresolved consumer-product word appeared, even when a real, unambiguous
+  // provider-category (+ optional geography) request could otherwise be answered. That is exactly
+  // the "zero providers despite plausible inventory" bug this ticket exists to fix. A bare product
+  // mention with no other named category (e.g. "cheap car insurance") is still an implicit request
+  // for a provider, so it defaults to agency -- the class this source can honestly browse -- and
+  // falls through to the SAME entity/count builder every other request uses; product-status
+  // disclosure is attached below and again at execution time (execute.ts), never a false LOA claim.
   if (unresolvedProducts.length && !entityClass) entityClass = 'agency';
 
   if (/\bhow many\b|\bcount of\b/i.test(q)) {

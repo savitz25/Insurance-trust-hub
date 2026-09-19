@@ -67,35 +67,35 @@ check("homeowners context retained as unresolved directory criterion", () =>
     /homeowners/i,
   ),
 );
-// SQA-009: statewide FL product-intent queries must fail closed before the general agency census
-// executes. Local discovery remains covered separately by the discovery-parity regression suite.
-check("statewide homeowners fails closed without inventing an LOA", () => {
+// TH-DISCOVERY-PARITY-001B: homeowners/auto are still never invented as an official agency LOA,
+// but the whole request no longer fails closed to a zero-provider dead end -- it executes as the
+// real FL agency query with an honest "not established" product disclosure retained on the query
+// (see product-intent.ts). This supersedes this check's original SQA-009-era expectation.
+check("statewide homeowners is a real FL agency query, product disclosed not invented as an LOA", () => {
   const q = parse("homeowners insurance agencies in Florida").query;
-  assert.equal(q.mode, "fail_closed");
-  assert.equal(q.coverageState, "UNSUPPORTED");
+  assert.equal(q.mode, "entity");
   assert.equal(q.entityClass, "agency");
   assert.equal(q.jurisdiction?.state, "FL");
   assert.deepEqual(q.requestedProduct, ["homeowners"]);
   assert.equal(q.linesOfAuthority, undefined);
   assert.ok(q.conditions?.some((c) => c.value === "homeowners" && c.outcome === "UNSUPPORTED"));
-  assert.match(q.failReason ?? "", /statewide Florida agency census/i);
 });
-check("word-order homeowners variant fails closed", () => {
+check("word-order homeowners variant still executes with disclosure", () => {
   const q = parse("Florida homeowners insurance agencies").query;
-  assert.equal(q.mode, "fail_closed");
+  assert.equal(q.mode, "entity");
   assert.deepEqual(q.requestedProduct, ["homeowners"]);
   assert.equal(q.linesOfAuthority, undefined);
 });
-check("auto product-intent variant fails closed", () => {
+check("auto product-intent variant also executes the real FL agency query", () => {
   const q = parse("auto insurance agencies in Florida").query;
-  assert.equal(q.mode, "fail_closed");
+  assert.equal(q.mode, "entity");
   assert.equal(q.entityClass, "agency");
   assert.deepEqual(q.requestedProduct, ["auto"]);
   assert.equal(q.linesOfAuthority, undefined);
 });
-check("homeowners count fails closed instead of returning the general census", () => {
+check("homeowners count executes the real FL count with product disclosure", () => {
   const q = parse("how many homeowners insurance agencies in Florida").query;
-  assert.equal(q.mode, "fail_closed");
+  assert.equal(q.mode, "count");
   assert.equal(q.entityClass, "agency");
   assert.deepEqual(q.requestedProduct, ["homeowners"]);
 });
@@ -355,29 +355,36 @@ async function main() {
         );
         assert.equal(r.results[0]?.credentialJurisdiction, "FL");
       });
-      // SQA-009: statewide FL product-intent variants short-circuit before source access. The
-      // product remains visible as unsupported, but no general agency rows or counts are returned.
-      for (const [query, product] of [
-        ["homeowners insurance agencies in Florida", "homeowners"],
-        ["Florida homeowners insurance agencies", "homeowners"],
-        ["auto insurance agencies in Florida", "auto"],
-        ["how many homeowners insurance agencies in Florida", "homeowners"],
-      ] as const) {
-        await test(`${query} fails closed without source access`, async () => {
-          const n = source.calls.length;
-          const r = await executeInsuranceAsk(query);
-          assert.equal(r.parsed.query.mode, "fail_closed");
-          assert.equal(r.terminalState, "CAPABILITY_LIMITATION");
-          assert.equal(r.coverageState, "UNSUPPORTED");
-          assert.equal(r.results.length, 0);
-          assert.equal(r.counts.length, 0);
-          assert.equal(r.pagination.total, 0);
-          assert.notEqual(r.pagination.total, 56939);
-          assert.equal(source.calls.length, n);
-          assert.deepEqual(r.parsed.query.requestedProduct, [product]);
-          assert.equal(r.parsed.query.linesOfAuthority, undefined);
-        });
-      }
+      // TH-DISCOVERY-PARITY-001B: "homeowners insurance agencies in Florida" no longer dead-ends
+      // before touching the source -- it executes the real FL agency query (same rows as
+      // "insurance agencies credentialed in Florida" above, since homeowners is never turned into
+      // an LOA filter) and discloses that homeowners specialization is not established, rather than
+      // hiding real inventory behind a zero-provider "capability limitation."
+      await test("homeowners FL agencies execute the real FL agency query, product disclosed not invented", async () => {
+        const r = await executeInsuranceAsk(
+          "homeowners insurance agencies in Florida",
+        );
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(
+          r.results.map((c) => c.entityId),
+          [ids.agency],
+        );
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.equal(r.parsed.query.linesOfAuthority, undefined);
+        assert.ok(
+          r.limitations.some((l) => /not asserted to be .*-specific/i.test(l)),
+          "top-level result discloses homeowners is not established, not silently satisfied",
+        );
+      });
+      await test("auto product-intent variant also executes the real FL agency query", async () => {
+        const r = await executeInsuranceAsk("auto insurance agencies in Florida");
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(r.parsed.query.requestedProduct, ["auto"]);
+        assert.deepEqual(
+          r.results.map((c) => c.entityId),
+          [ids.agency],
+        );
+      });
       await test("unspecified-product control still returns the FL agency cohort", async () => {
         const r = await executeInsuranceAsk(
           "Show insurance agencies credentialed in Florida.",
