@@ -19,9 +19,11 @@ const MUTATIONS = [
   { id: 'M7_producer_rows_admitted', file: ENGINE, find: "  return row.entity_kind === 'agency';", replace: '  return true;', meaning: 'Person/producer rows handed back by the source become unscoped name candidates.' },
   { id: 'M8_source_failure_becomes_miss', file: SIBLING, find: "    return refuse(timeout ? 'TIMEOUT' : 'SOURCE_UNAVAILABLE', timeout ? 504 : 503,", replace: "    return refuse('NO_MATCH', 200,", meaning: 'A source outage is reported as a completed search with no match.' },
   { id: 'M9_profile_action_manufactured', file: SIBLING, find: '    const profileUrl = card.href ?? null, selectionUrl = card.selectionHref!;', replace: '    const profileUrl = card.href ?? `/providers/${card.entityId}`, selectionUrl = card.selectionHref!;', meaning: 'A research-only agency row is given a profile destination that was never published.' },
+  { id: 'M10_v2_partial_numeric_total_reenabled', file: 'lib/specialist-execution/v2.ts', find: "    if (nameWindow && (nameWindow.completeness !== 'COMPLETE' || nameWindow.matchedCount === null)) {", replace: '    if (false as boolean) {', meaning: 'TH-SEARCH-R1-019F-R1: a SCAN_BOUND_REACHED name search reaches the v2 success path again, so v2 emits a success-shaped response whose total is not an exact count.' },
+  { id: 'M11_v2_total_from_established_so_far', file: EXECUTE, find: '  const established = window.matchedCount ?? stream.candidates.length;', replace: "  const established = window.matchedCount ?? stream.candidates.length; if (window.matchedCount === null) (window as { matchedCount: number | null; completeness: string }).matchedCount = established, (window as { completeness: string }).completeness = 'COMPLETE';", meaning: 'TH-SEARCH-R1-019F-R1: the bridge presents the "established so far" figure of a bounded scan as if it were an exact, complete count.' },
 ];
 
-const sha = (b) => crypto.createHash('sha256').update(b).digest('hex');
+const sha =(b) => crypto.createHash('sha256').update(b).digest('hex');
 /** A mutation only counts if the gate RAN TO THE END and an assertion failed -- a crash or syntax error proves nothing. */
 function gate() {
   try { execSync(GATE, { stdio: 'pipe' }); return { ok: true, completedAllChecks: true, failing: [] }; }

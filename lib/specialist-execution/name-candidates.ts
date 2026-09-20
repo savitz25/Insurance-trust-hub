@@ -80,6 +80,13 @@ const LIMITATIONS = [
   'Agency and legal insurer are separate entity classes and are keyed independently.',
   'matchedCount is reported only when the source was read to its end; otherwise it is null and no total is asserted.',
   'A research-row action is a server-revalidated InsuranceTrustHub research continuation, not a profile.',
+  // TH-SEARCH-R1-019F-R1 (publication-suppression review): INS-DIR-BAIL-001 retains bail-bond evidence and
+  // keeps such businesses out of consumer insurance-agency LISTINGS; it does not remove them from the
+  // research identity graph, and native /ask shows them as research rows. This network surface follows the
+  // released trusthub-specialist-execution-v2 precedent (bailRowsSuppressedOnPage): the identity stays in
+  // the one deterministic stream -- so windows, continuation and matchedCount are identical on every
+  // surface -- and is withheld from THIS page's candidates, with the number withheld disclosed.
+  'Bail-bond businesses are withheld from this network surface per the consumer-directory publication firewall: pagination.suppressedByPublicationPolicy counts identities withheld on this page, so returned may be below limit while hasMore is true. matchedCount counts matched source identities, including withheld ones.',
 ];
 
 function envelope(state: NameCandidateResultState, page = 1, limit = INSURANCE_NAME_CANDIDATES_MAX_LIMIT): NameCandidatesEnvelope {

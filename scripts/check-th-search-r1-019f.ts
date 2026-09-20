@@ -26,7 +26,7 @@ const uuid = (n: number) => `10000000-0000-4000-8000-${String(n).padStart(12, '0
 const BAD_LINK = /=(undefined|null)(&|$)/;
 
 /** 23 "orchard" agencies (3 windows of 10), substring decoys that sort FIRST, a person, and a two-field entity. */
-function world(options: { outage?: boolean } = {}) {
+function world(options: { outage?: boolean; flood?: boolean } = {}) {
   const src = fixtureSource(options);
   const entities = src.tables.national_entities!;
   for (let i = 1; i <= 21; i += 1) entities.push({ id: uuid(i), entity_kind: 'agency', npn: String(5000000 + i), display_name: `Orchard Agency ${String(i).padStart(2, '0')}`, legal_name: `ORCHARD AGENCY ${String(i).padStart(2, '0')} LLC` });
@@ -38,6 +38,11 @@ function world(options: { outage?: boolean } = {}) {
   entities.push({ id: uuid(201), entity_kind: 'agency', npn: '5999998', display_name: 'Zed Orchard Partners', legal_name: 'ZED ORCHARD PARTNERS LLC' });
   // An individual producer whose name contains the term -- never eligible.
   entities.push({ id: uuid(300), entity_kind: 'person', npn: '7000001', display_name: 'Olive Orchard', legal_name: 'ORCHARD, OLIVE' });
+  // TH-SEARCH-R1-019F-R1: a name broad enough to exhaust the scan bound (5,200 > NAME_SCAN_ROW_BOUND per field).
+  if (options.flood) for (let i = 1; i <= 5200; i += 1) entities.push({ id: `20000000-0000-4000-8000-${String(i).padStart(12, '0')}`, entity_kind: 'agency', npn: null, display_name: `Meadow Agency ${String(i).padStart(4, '0')}`, legal_name: `MEADOW AGENCY ${String(i).padStart(4, '0')} LLC` });
+  // A bail-bond business and an ordinary agency sharing a distinctive word.
+  entities.push({ id: uuid(500), entity_kind: 'agency', npn: '5888801', display_name: 'Quarry Bail Bonds', legal_name: 'QUARRY BAIL BONDS LLC' });
+  entities.push({ id: uuid(501), entity_kind: 'agency', npn: '5888802', display_name: 'Quarry Insurance Agency', legal_name: 'QUARRY INSURANCE AGENCY LLC' });
   const insurers = [...insurerFixture, { ...insurerFixture[0]!, entity_id: uuid(400), canonical_legal_name: 'ORCHARD MUTUAL INSURANCE COMPANY', naic_cocode: '20064', slug: 'orchard-mutual-insurance-company', baseSlug: 'orchard-mutual-insurance-company' }];
   return { ...src, insurers, run: <T,>(task: () => Promise<T>) => withInsuranceSource(src.db, task, insurers) };
 }
@@ -251,6 +256,60 @@ async function main() {
     const insurer = await native(w, { q: 'Research ACME INSURANCE COMPANY' }); assert.ok(insurer.results.some((c) => c.entityClass === 'insurer' && c.naicCode === '10064' && c.href === '/insurers/acme-insurance-company'));
     const chosen = await native(w, { q: 'Find Acme Insurance Agency', selected: ids.other }); assert.equal(chosen.terminalState, 'IDENTITY_FOUND'); assert.equal(chosen.results[0]!.credentialJurisdiction, 'TX');
     const none = await native(w, { q: 'Find Zyqorvane Underwriters' }); assert.equal(none.terminalState, 'NO_MATCH'); assert.deepEqual(none.results, []);
+  });
+
+  // 19 --------------------------------------------------------------------------------------------
+  await check('19. v2 never emits an inexact success total: a bounded name search fails closed on v2, stays honest on sibling + native', async () => {
+    const w = world({ flood: true });
+    const SUCCESS_SHAPED = ['SUPPORTED_RESULTS', 'AMBIGUOUS_IDENTITIES', 'ZERO_MATCHING_ROWS', 'EXACT_IDENTITY', 'NO_CONFIDENT_MATCH'];
+    // A. engine
+    const engine = await w.run(async () => (await import('../lib/insurance-ask/execute')).searchInsuranceNameCandidates({ name: 'meadow', page: 1, limit: 10, q: 'Find meadow' }));
+    assert.equal(engine.stream.completeness, 'SCAN_BOUND_REACHED'); assert.equal(engine.window.matchedCount, null);
+    // B. sibling: partial, honest, useful
+    const s = await w.run(() => executeInsuranceNameCandidatesV1({ operation: 'name_candidates', name: 'meadow' }));
+    assert.equal(s.status, 200); assert.equal(s.body.resultState, 'PARTIAL_REFINE_REQUIRED'); assert.equal(s.body.name.predicateApplied, true);
+    assert.deepEqual([s.body.pagination.completeness, s.body.pagination.matchedCount, s.body.pagination.matchedCountIsExact], ['SCAN_BOUND_REACHED', null, false]);
+    assert.equal(s.body.candidates.length, 10);
+    // Native: bounded results stay, with the refine disclosure and no total claimed.
+    const n = await native(w, { q: 'Find meadow' });
+    assert.equal(n.results.length, 10); assert.equal(n.nameCandidateWindow!.matchedCount, null); assert.equal(n.candidateTruncated, true);
+    assert.ok(n.limitations.some((l) => /scan bound was reached/.test(l) && /no total is asserted/.test(l) && /not a complete list/.test(l)));
+    const html = renderToStaticMarkup(createElement(AskInsuranceResultView, { result: n }));
+    assert.match(html, /not a complete candidate list and no total is asserted\. Refine the name/); assert.doesNotMatch(html, /\b(\d[\d,]* total|all results)\b/i); assert.doesNotMatch(html, /\b\d[\d,]{3,} (identities|candidates)\b/);
+    // C. v2: fail closed, every page, never success-shaped, never a miss, never an outage.
+    for (const page of [1, 2, 7]) {
+      const v2 = await w.run(() => executeSpecialistV2({ identityName: 'meadow', page, limit: 10 }));
+      assert.equal(v2.status, 422, `page ${page}`); assert.equal(v2.body.resultState, 'UNSUPPORTED_CAPABILITY'); assert.ok(!SUCCESS_SHAPED.includes(v2.body.resultState)); assert.notEqual(v2.body.resultState, 'BACKEND_UNAVAILABLE');
+      assert.equal(v2.body.error?.code, 'name_search_refinement_required'); assert.match(v2.body.error!.message, /candidates may exist/i); assert.match(v2.body.error!.message, /insurance-name-candidates-v1/);
+      assert.deepEqual(v2.body.rows, []); assert.equal(v2.body.pagination.hasMore, false); assert.equal(v2.body.total, 0);
+      assert.ok(v2.body.limitations.some((l) => /NOT a no-match/.test(l) && /not a finding about this name/.test(l)));
+      assert.deepEqual(v2.body.destinations.filter((d) => d.type === 'IDENTITY_SELECTION'), []);
+      assert.equal(v2.body.schemaFingerprint, '4aa93bb372aebb45c7028b750000e77be4a847d9a210f3c40d3db1df1f7f637f');
+    }
+    const viaRoute = await w.run(async () => (await import('../app/api/specialist-execution/v2/route')).POST(new Request('https://hub.invalid/x', { method: 'POST', body: JSON.stringify({ identityName: 'meadow' }) })));
+    assert.equal(viaRoute.status, 422); assert.equal((await viaRoute.json()).error.code, 'name_search_refinement_required');
+    // The invariant, stated generally: v2 is success-shaped for a name ONLY when the count is exact, and then total IS that count.
+    for (const name of ['orchard', 'meadow', 'quarry', 'Zyqorvane Underwriters', 'Orchard and Vine Insurance Inc']) {
+      const sib = (await w.run(() => executeInsuranceNameCandidatesV1({ operation: 'name_candidates', name }))).body, v2 = await w.run(() => executeSpecialistV2({ identityName: name, limit: 10 }));
+      if (sib.pagination.completeness !== 'COMPLETE') { assert.ok(!SUCCESS_SHAPED.includes(v2.body.resultState), name); assert.equal(v2.status, 422, name); }
+      else { assert.ok(SUCCESS_SHAPED.includes(v2.body.resultState), name); assert.equal(v2.body.total, sib.pagination.matchedCount, name); assert.equal(v2.body.pagination.total, sib.pagination.matchedCount, name); assert.equal(v2.body.pagination.hasMore, sib.pagination.hasMore, name); }
+    }
+    const orchard = await w.run(() => executeSpecialistV2({ identityName: 'orchard', limit: 10 })); assert.equal(orchard.body.total, 24); assert.equal(orchard.body.pagination.total, 24);
+  });
+  // 20 --------------------------------------------------------------------------------------------
+  await check('20. bail-bond identity: a retained research identity natively; withheld per page (and disclosed) on network surfaces; one stream for all', async () => {
+    const w = world();
+    const n = await native(w, { q: 'Find quarry' });
+    assert.deepEqual(n.results.map((c) => c.displayName), ['Quarry Bail Bonds', 'Quarry Insurance Agency'], 'native research shows both: INS-DIR-BAIL-001 retains the evidence, it only bars consumer-directory listing');
+    assert.ok(n.results.every((c) => c.href === null), 'and neither is a profile');
+    const s = await structured(w, { name: 'quarry' });
+    assert.deepEqual(s.candidates.map((c) => c.displayName), ['Quarry Insurance Agency']); assert.equal(s.pagination.suppressedByPublicationPolicy, 1);
+    assert.deepEqual([s.pagination.matchedCount, s.pagination.hasMore, s.pagination.completeness], [n.nameCandidateWindow!.matchedCount, n.nameCandidateWindow!.hasMore, n.nameCandidateWindow!.completeness], 'same stream, same continuation, same count on both surfaces');
+    assert.deepEqual(structIds(s), nativeIds(n).filter((id) => id !== uuid(500)), 'every identity the network surface shows is the native identity, in the native order');
+    assert.ok(s.limitations.some((l) => /withheld from this network surface/.test(l)));
+    const v2 = await w.run(() => executeSpecialistV2({ identityName: 'quarry', limit: 10 }));
+    assert.deepEqual(v2.body.rows.map((r) => r.name), ['Quarry Insurance Agency']); assert.equal(v2.body.diagnostics.bailRowsSuppressedOnPage, 1); assert.equal(v2.body.total, 2);
+    const chosen = await native(w, { q: 'Find quarry', selected: uuid(500) }); assert.equal(chosen.terminalState, 'IDENTITY_FOUND'); assert.equal(chosen.results[0]!.href, null);
   });
 
   console.log({ pass, fail });

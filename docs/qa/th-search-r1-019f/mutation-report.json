@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-09-20T03:15:24.524Z",
+  "ranAt": "2026-09-20T03:47:41.375Z",
   "gate": "npm run --silent check:th-search-r1-019f",
   "baseline": "green",
   "mutations": [
@@ -33,7 +33,8 @@
         "FAIL 10. truthful final window, out-of-range window, and no total unless computed Expected values to be strict",
         "FAIL 12. no hub link ever contains =undefined or =null, on any surface Expected values to be strictly equal:",
         "FAIL 16. native / structured parity, field by field, for every window The input did not match the regular expr",
-        "FAIL 17. v2 stays compatible; the sibling contract is independently versioned and proves the name Expected val"
+        "FAIL 17. v2 stays compatible; the sibling contract is independently versioned and proves the name Expected val",
+        "FAIL 19. v2 never emits an inexact success total: a bounded name search fails closed on v2, stays honest on si"
       ],
       "restoredExactBytes": true
     },
@@ -121,9 +122,31 @@
         "FAIL 16. native / structured parity, field by field, for every window Expected values to be strictly equal:"
       ],
       "restoredExactBytes": true
+    },
+    {
+      "id": "M10_v2_partial_numeric_total_reenabled",
+      "file": "lib/specialist-execution/v2.ts",
+      "meaning": "TH-SEARCH-R1-019F-R1: a SCAN_BOUND_REACHED name search reaches the v2 success path again, so v2 emits a success-shaped response whose total is not an exact count.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 19. v2 never emits an inexact success total: a bounded name search fails closed on v2, stays honest on si"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M11_v2_total_from_established_so_far",
+      "file": "lib/insurance-ask/execute.ts",
+      "meaning": "TH-SEARCH-R1-019F-R1: the bridge presents the \"established so far\" figure of a bounded scan as if it were an exact, complete count.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 19. v2 never emits an inexact success total: a bounded name search fails closed on v2, stays honest on si"
+      ],
+      "restoredExactBytes": true
     }
   ],
   "gateGreenAfterRestore": true,
-  "detected": 9,
-  "total": 9
+  "detected": 11,
+  "total": 11
 }

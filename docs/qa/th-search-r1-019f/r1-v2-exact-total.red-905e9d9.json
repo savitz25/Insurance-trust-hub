@@ -1,0 +1,81 @@
+{
+  "label": "red-905e9d9",
+  "ranAt": "2026-09-20T03:43:15.154Z",
+  "frozenPartialCase": "V FINANCIAL LLC",
+  "v2Fingerprints": {
+    "schema": "4aa93bb372aebb45c7028b750000e77be4a847d9a210f3c40d3db1df1f7f637f",
+    "contract": "1292fd1ee4ce13a4d934dcb8c3deb21208d4e1e59049cbb8eb22793b310c1071"
+  },
+  "sibling": {
+    "status": 200,
+    "resultState": "PARTIAL_REFINE_REQUIRED",
+    "predicateApplied": true,
+    "returned": 10,
+    "completeness": "SCAN_BOUND_REACHED",
+    "matchedCount": null,
+    "matchedCountIsExact": false
+  },
+  "native": {
+    "terminalState": "NEEDS_CLARIFICATION",
+    "returned": 10,
+    "completeness": "SCAN_BOUND_REACHED",
+    "matchedCount": null,
+    "candidateTruncated": true,
+    "refineDisclosure": [
+      "The name is broad enough that the source scan bound was reached. Refine the name; no total is asserted and this is not a complete list."
+    ]
+  },
+  "v2": {
+    "httpStatus": 200,
+    "resultState": "AMBIGUOUS_IDENTITIES",
+    "rows": 10,
+    "total": 4960,
+    "pagination": {
+      "page": 1,
+      "limit": 10,
+      "total": 4960,
+      "hasMore": true
+    },
+    "error": null,
+    "notAMissLimitation": []
+  },
+  "v2EmitsSuccessShapedInexactTotal": true,
+  "completeNames": {
+    "allied": {
+      "httpStatus": 200,
+      "resultState": "AMBIGUOUS_IDENTITIES",
+      "total": 46,
+      "paginationTotal": 46,
+      "hasMore": true,
+      "siblingMatchedCount": 46,
+      "siblingExact": true,
+      "totalEqualsSiblingExactCount": true,
+      "page2DiffersFromPage1": true,
+      "page2Rows": 10
+    },
+    "beacon": {
+      "httpStatus": 200,
+      "resultState": "AMBIGUOUS_IDENTITIES",
+      "total": 46,
+      "paginationTotal": 46,
+      "hasMore": true,
+      "siblingMatchedCount": 46,
+      "siblingExact": true,
+      "totalEqualsSiblingExactCount": true,
+      "page2DiffersFromPage1": true,
+      "page2Rows": 10
+    },
+    "summit": {
+      "httpStatus": 200,
+      "resultState": "AMBIGUOUS_IDENTITIES",
+      "total": 97,
+      "paginationTotal": 97,
+      "hasMore": true,
+      "siblingMatchedCount": 97,
+      "siblingExact": true,
+      "totalEqualsSiblingExactCount": true,
+      "page2DiffersFromPage1": true,
+      "page2Rows": 10
+    }
+  }
+}

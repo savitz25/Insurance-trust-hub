@@ -1,0 +1,90 @@
+{
+  "label": "green-r1",
+  "ranAt": "2026-09-20T03:50:54.191Z",
+  "frozenPartialCase": "V FINANCIAL LLC",
+  "v2Fingerprints": {
+    "schema": "4aa93bb372aebb45c7028b750000e77be4a847d9a210f3c40d3db1df1f7f637f",
+    "contract": "1292fd1ee4ce13a4d934dcb8c3deb21208d4e1e59049cbb8eb22793b310c1071"
+  },
+  "sibling": {
+    "status": 200,
+    "resultState": "PARTIAL_REFINE_REQUIRED",
+    "predicateApplied": true,
+    "returned": 10,
+    "completeness": "SCAN_BOUND_REACHED",
+    "matchedCount": null,
+    "matchedCountIsExact": false
+  },
+  "native": {
+    "terminalState": "NEEDS_CLARIFICATION",
+    "returned": 10,
+    "completeness": "SCAN_BOUND_REACHED",
+    "matchedCount": null,
+    "candidateTruncated": true,
+    "refineDisclosure": [
+      "The name is broad enough that the source scan bound was reached. Refine the name; no total is asserted and this is not a complete list."
+    ]
+  },
+  "v2": {
+    "httpStatus": 422,
+    "resultState": "UNSUPPORTED_CAPABILITY",
+    "rows": 0,
+    "total": 0,
+    "pagination": {
+      "page": 1,
+      "limit": 20,
+      "total": 0,
+      "hasMore": false
+    },
+    "error": {
+      "code": "name_search_refinement_required",
+      "message": "The supplied organization name is too broad for the exact-total contract of trusthub-specialist-execution-v2. Matching candidates may exist. Refine the name, or use InsuranceTrustHub's dedicated name-candidates operation (insurance-name-candidates-v1), which reports partial searches honestly.",
+      "alternatives": [
+        "Refine the organization name with another distinctive word.",
+        "POST /api/specialist-execution/name-candidates/v1 with { \"operation\": \"name_candidates\", \"name\": \"<name>\" }."
+      ]
+    },
+    "notAMissLimitation": [
+      "This is NOT a no-match result: the name search was bounded before the source was exhausted, so candidates may exist and no total is asserted. rows=[] and total=0 are the standard empty values of an unsupported response, not a finding about this name."
+    ]
+  },
+  "v2EmitsSuccessShapedInexactTotal": false,
+  "completeNames": {
+    "allied": {
+      "httpStatus": 200,
+      "resultState": "AMBIGUOUS_IDENTITIES",
+      "total": 46,
+      "paginationTotal": 46,
+      "hasMore": true,
+      "siblingMatchedCount": 46,
+      "siblingExact": true,
+      "totalEqualsSiblingExactCount": true,
+      "page2DiffersFromPage1": true,
+      "page2Rows": 10
+    },
+    "beacon": {
+      "httpStatus": 200,
+      "resultState": "AMBIGUOUS_IDENTITIES",
+      "total": 46,
+      "paginationTotal": 46,
+      "hasMore": true,
+      "siblingMatchedCount": 46,
+      "siblingExact": true,
+      "totalEqualsSiblingExactCount": true,
+      "page2DiffersFromPage1": true,
+      "page2Rows": 10
+    },
+    "summit": {
+      "httpStatus": 200,
+      "resultState": "AMBIGUOUS_IDENTITIES",
+      "total": 97,
+      "paginationTotal": 97,
+      "hasMore": true,
+      "siblingMatchedCount": 97,
+      "siblingExact": true,
+      "totalEqualsSiblingExactCount": true,
+      "page2DiffersFromPage1": true,
+      "page2Rows": 10
+    }
+  }
+}
