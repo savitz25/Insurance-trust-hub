@@ -38,6 +38,7 @@ export type TrustReportContact = {
   kind: string;
   value: string;
   sourceDataset: string;
+  sourceObservedAt: string | null;
   publicEligible: boolean;
 };
 
