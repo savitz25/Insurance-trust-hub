@@ -138,13 +138,29 @@ export function AgencyTrustReportSection({ report }: Props) {
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Business / contact information</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm space-y-1">
-            {contactPreview.map((c, i) => (
-              <p key={`${c.kind}-${i}`}>
-                <span className="font-medium">{c.kind}:</span> {c.value}
-                <span className="block text-xs text-muted-foreground">{c.sourceDataset}</span>
+          <CardContent className="text-sm space-y-2">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Public business-contact information reported by an official regulator source and
+              linked to this agency through an exact identifier. Coverage is uneven and growing:
+              absence here does not mean no public contact record exists, only that one is not yet
+              linked in the sources currently included.
+            </p>
+            <div className="space-y-1">
+              {contactPreview.map((c, i) => (
+                <p key={`${c.kind}-${i}`}>
+                  <span className="font-medium">{c.kind}:</span> {c.value}
+                  <span className="block text-xs text-muted-foreground">
+                    {c.sourceDataset}
+                    {c.sourceObservedAt ? ` · as of ${c.sourceObservedAt.slice(0, 10)}` : ''}
+                  </span>
+                </p>
+              ))}
+            </div>
+            {report.contacts.length > contactPreview.length ? (
+              <p className="text-xs text-muted-foreground">
+                {report.contacts.length} business contact records in currently included sources.
               </p>
-            ))}
+            ) : null}
           </CardContent>
         </Card>
       ) : null}
