@@ -1,0 +1,149 @@
+{
+  "label": "final",
+  "base": "http://localhost:3947",
+  "ranAt": "2026-09-20T03:26:28.868Z",
+  "failures": 0,
+  "steps": [
+    {
+      "name": "allied: typed + Enter shows a full first candidate window with a truthful continuation",
+      "ok": true,
+      "url": "/ask?q=allied&entity=&state=&loa=&evidence=",
+      "cards": 10,
+      "nav": [
+        "Next"
+      ],
+      "badLinks": 0,
+      "forbiddenCopy": false
+    },
+    {
+      "name": "allied: research-only agencies expose no profile button",
+      "ok": true,
+      "profileButtons": 0,
+      "researchOnlyNotes": 10
+    },
+    {
+      "name": "beacon: typed + Enter shows a full first candidate window with a truthful continuation",
+      "ok": true,
+      "url": "/ask?q=beacon&entity=&state=&loa=&evidence=",
+      "cards": 10,
+      "nav": [
+        "Next"
+      ],
+      "badLinks": 0,
+      "forbiddenCopy": false
+    },
+    {
+      "name": "beacon: research-only agencies expose no profile button",
+      "ok": true,
+      "profileButtons": 0,
+      "researchOnlyNotes": 10
+    },
+    {
+      "name": "summit: typed + Enter shows a full first candidate window with a truthful continuation",
+      "ok": true,
+      "url": "/ask?q=summit&entity=&state=&loa=&evidence=",
+      "cards": 10,
+      "nav": [
+        "Next"
+      ],
+      "badLinks": 0,
+      "forbiddenCopy": false
+    },
+    {
+      "name": "summit: research-only agencies expose no profile button",
+      "ok": true,
+      "profileButtons": 0,
+      "researchOnlyNotes": 10
+    },
+    {
+      "name": "window 2: genuinely different candidates, none repeated from window 1, no stale cards",
+      "ok": true,
+      "url": "/ask?q=allied&page=2",
+      "overlap": [],
+      "nav": [
+        "Previous",
+        "Next"
+      ]
+    },
+    {
+      "name": "selecting a window-2 candidate reopens exactly that source identity (server-revalidated)",
+      "ok": true,
+      "intended": "ALLIED INSURANCE CONSULTANTS INCORPORATED",
+      "shown": [
+        "ALLIED INSURANCE CONSULTANTS INCORPORATED"
+      ],
+      "url": "/ask?q=allied&selected=0be9f3ee-57aa-4742-b70e-1ffe03bfc946"
+    },
+    {
+      "name": "Back returns to window 2 with the same candidates",
+      "ok": true,
+      "url": "/ask?q=allied&page=2"
+    },
+    {
+      "name": "Forward returns to the selected identity",
+      "ok": true,
+      "shown": [
+        "ALLIED INSURANCE CONSULTANTS INCORPORATED"
+      ]
+    },
+    {
+      "name": "Reload keeps the selected identity (no substitution)",
+      "ok": true,
+      "shown": [
+        "ALLIED INSURANCE CONSULTANTS INCORPORATED"
+      ]
+    },
+    {
+      "name": "last window: Previous only, no Next, no \"more\" message",
+      "ok": true,
+      "cards": 6,
+      "nav": [
+        "Previous"
+      ]
+    },
+    {
+      "name": "an allied identity selected under a beacon request fails closed (no identity shown)",
+      "ok": true,
+      "shown": []
+    },
+    {
+      "name": "genuine miss: honest no-match, no candidates, no continuation",
+      "ok": true,
+      "headings": [
+        "No matching indexed research identity",
+        "No matching research identities in this extract",
+        "What you can do next"
+      ]
+    },
+    {
+      "name": "1280px: no horizontal overflow, candidates and both window links present",
+      "ok": true,
+      "innerWidth": 1280,
+      "overflowX": false,
+      "nav": [
+        "Previous",
+        "Next"
+      ]
+    },
+    {
+      "name": "390px: no horizontal overflow, candidates and both window links present",
+      "ok": true,
+      "innerWidth": 390,
+      "overflowX": false,
+      "nav": [
+        "Previous",
+        "Next"
+      ]
+    },
+    {
+      "name": "320px: no horizontal overflow, candidates and both window links present",
+      "ok": true,
+      "innerWidth": 320,
+      "overflowX": false,
+      "nav": [
+        "Previous",
+        "Next"
+      ]
+    }
+  ]
+}

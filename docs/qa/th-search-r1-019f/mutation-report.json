@@ -1,0 +1,129 @@
+{
+  "ranAt": "2026-09-20T03:15:24.524Z",
+  "gate": "npm run --silent check:th-search-r1-019f",
+  "baseline": "green",
+  "mutations": [
+    {
+      "id": "M1_hard_cap_no_continuation",
+      "file": "lib/insurance-ask/name-candidates.ts",
+      "meaning": "The first window is final again: more candidates exist but no continuation is offered.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 4. agency and legal insurer stay separate classes, independently keyed Cannot read properties of undefine",
+        "FAIL 6. match BEFORE pagination: 15 substring decoys that sort first cost no candidate 21 numbered + exact-cap",
+        "FAIL 8. second window is a real continuation on BOTH surfaces Expected values to be strictly equal:",
+        "FAIL 9. no identity repeats across windows, including one that matches through two fields Expected values to b",
+        "FAIL 10. truthful final window, out-of-range window, and no total unless computed Expected values to be strict",
+        "FAIL 16. native / structured parity, field by field, for every window The input did not match the regular expr",
+        "FAIL 17. v2 stays compatible; the sibling contract is independently versioned and proves the name Expected val"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M2_raw_rows_limited_before_matching",
+      "file": "lib/insurance-ask/execute.ts",
+      "meaning": "Source rows are cut to 11 BEFORE the name predicate runs (the pre-019F defect).",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 6. match BEFORE pagination: 15 substring decoys that sort first cost no candidate 21 numbered + exact-cap",
+        "FAIL 8. second window is a real continuation on BOTH surfaces Expected values to be strictly equal:",
+        "FAIL 9. no identity repeats across windows, including one that matches through two fields Expected values to b",
+        "FAIL 10. truthful final window, out-of-range window, and no total unless computed Expected values to be strict",
+        "FAIL 12. no hub link ever contains =undefined or =null, on any surface Expected values to be strictly equal:",
+        "FAIL 16. native / structured parity, field by field, for every window The input did not match the regular expr",
+        "FAIL 17. v2 stays compatible; the sibling contract is independently versioned and proves the name Expected val"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M3_no_stable_tie_break",
+      "file": "lib/insurance-ask/name-candidates.ts",
+      "meaning": "Identities with equal names have no fixed order, so windows are not reproducible.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 7. deterministic ordering with a stable tie-break Expected values to be strictly deep-equal:"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M4_duplicate_identity_across_windows",
+      "file": "lib/insurance-ask/name-candidates.ts",
+      "meaning": "Successive windows overlap: the last identity of a window reappears in the next.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 6. match BEFORE pagination: 15 substring decoys that sort first cost no candidate 21 numbered + exact-cap",
+        "FAIL 8. second window is a real continuation on BOTH surfaces Expected values to be strictly deep-equal:",
+        "FAIL 9. no identity repeats across windows, including one that matches through two fields Expected values to b",
+        "FAIL 10. truthful final window, out-of-range window, and no total unless computed Expected values to be strict",
+        "FAIL 17. v2 stays compatible; the sibling contract is independently versioned and proves the name Expected val"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M5_undefined_serialized_into_links",
+      "file": "lib/insurance-ask/request.ts",
+      "meaning": "Absent options are written into hub links as =undefined (the observed Production defect).",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 12. no hub link ever contains =undefined or =null, on any surface Expected values to be strictly equal:",
+        "FAIL 13. a RAW selection URL (no consumer sanitation) reopens and server-revalidates the intended identity -- ",
+        "FAIL 15. publication action integrity: profile only where published; research rows get only the research conti",
+        "FAIL 16. native / structured parity, field by field, for every window The input did not match the regular expr"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M6_stale_selection_accepted",
+      "file": "lib/insurance-ask/name-candidates.ts",
+      "meaning": "A selected identity that is not a current candidate is silently replaced by another identity.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 14. a stale or wrong selection fails closed; nothing is substituted Expected values to be strictly equal:"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M7_producer_rows_admitted",
+      "file": "lib/insurance-ask/name-candidates.ts",
+      "meaning": "Person/producer rows handed back by the source become unscoped name candidates.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 5. individual producers are never name candidates (query filter AND engine guard) Expected values to be s"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M8_source_failure_becomes_miss",
+      "file": "lib/specialist-execution/name-candidates.ts",
+      "meaning": "A source outage is reported as a completed search with no match.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 11. source failure is never a miss, an empty window or a last page Expected values to be strictly equal:"
+      ],
+      "restoredExactBytes": true
+    },
+    {
+      "id": "M9_profile_action_manufactured",
+      "file": "lib/specialist-execution/name-candidates.ts",
+      "meaning": "A research-only agency row is given a profile destination that was never published.",
+      "detected": true,
+      "gateRanToCompletion": true,
+      "failingChecks": [
+        "FAIL 15. publication action integrity: profile only where published; research rows get only the research conti",
+        "FAIL 16. native / structured parity, field by field, for every window Expected values to be strictly equal:"
+      ],
+      "restoredExactBytes": true
+    }
+  ],
+  "gateGreenAfterRestore": true,
+  "detected": 9,
+  "total": 9
+}

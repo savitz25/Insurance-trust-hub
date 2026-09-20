@@ -310,6 +310,13 @@ export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ sta
     out.queryInterpretation = { sourceContract: v1.contract, mode: v1.parsed.query.mode, entityClass: v1.entityClass ? entityClassFromV1(v1.entityClass) : null, terminalState:v1.terminalState, directoryContext:v1.parsed.query.directoryContext, conditions:v1.parsed.query.conditions, requestedProduct:v1.parsed.query.requestedProduct, identifier: v1.parsed.query.identifier, geography: v1.parsed.query.jurisdiction, interpretation: v1.parsed.interpretation };
     out.appliedFilters = { jurisdiction: v1.parsed.query.jurisdiction, linesOfAuthority: v1.parsed.query.linesOfAuthority, publication: 'public-safe response allowlist' };
     out.rows = rows; out.total = v1.pagination.total; out.pagination = { page, limit, total: v1.pagination.total, hasMore: page * limit < v1.pagination.total };
+    // TH-SEARCH-R1-019F: organization-name candidates come from the shared engine, whose window is the
+    // truth for this page -- `page` is a real continuation, never page 1 again. `total` is the engine's
+    // computed count of distinct matched identities (exact when the source was read to its end; when
+    // the scan bound was reached the limitation below says so and insurance-name-candidates-v1
+    // carries the explicit completeness flag). Every other v2 branch is unchanged.
+    const nameWindow = v1.nameCandidateWindow;
+    if (nameWindow) out.pagination = { page: nameWindow.page, limit: nameWindow.limit, total: v1.pagination.total, hasMore: nameWindow.hasMore };
     out.provenance = { ...v1.provenance, sourceDataset: rows[0]?.sourceDataset ?? 'accepted InsuranceTrustHub source datasets', publicationSemantics: 'Research rows do not create public profiles.' };
     out.limitations = [...v1.limitations, ...BASE_LIMITATIONS.filter((x) => !v1.limitations.includes(x))];
     out.destinations = Array.from(new Set(rows.map((r) => r.destination).filter((x): x is string => Boolean(x)))).map((url) => ({ type: url.startsWith('/insurers/') ? 'LEGAL_INSURER_PROFILE' : 'DIRECTORY_RESEARCH', url }));

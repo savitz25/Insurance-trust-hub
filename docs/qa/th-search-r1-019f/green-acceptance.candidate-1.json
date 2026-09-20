@@ -1,0 +1,298 @@
+{
+  "label": "candidate-1",
+  "ranAt": "2026-09-20T03:04:35.354Z",
+  "note": "GREEN. Real source, read-only. Bounded QA; no statistical claim.",
+  "historicalControls": {
+    "allied": {
+      "windows": 5,
+      "candidatesAcrossWindows": 46,
+      "distinct": 46,
+      "matchedCount": 46,
+      "exact": true,
+      "lastWindowHasMore": false,
+      "everyWindowNativeEqualsStructured": true,
+      "malformedLinks": 0,
+      "firstWindow": [
+        "3A ALLIED INSURANCE CORP.",
+        "ALLIED ADVANTAGE INSURANCE SERVICES LLC,",
+        "ALLIED AMERICAN UNDERWRITERS, INC.",
+        "ALLIED BENEFIT SYSTEMS, LLC.",
+        "ALLIED BENEFITS SOLUTIONS, LLC",
+        "ALLIED BROKERS INSURANCE AGENCY, INC.",
+        "ALLIED BUILDING MATERIAL AGENCY, INC. DBA GREEN TREE RISK PARTNERS",
+        "ALLIED BUSINESS SERVICES INC",
+        "ALLIED ELITE FINANCIAL, LLC",
+        "ALLIED HEALTH INSURANCE ASSOCIATES"
+      ]
+    },
+    "beacon": {
+      "windows": 5,
+      "candidatesAcrossWindows": 46,
+      "distinct": 46,
+      "matchedCount": 46,
+      "exact": true,
+      "lastWindowHasMore": false,
+      "everyWindowNativeEqualsStructured": true,
+      "malformedLinks": 0,
+      "firstWindow": [
+        "BEACON ADVISORS LLC",
+        "BEACON AND STONE RISK ADVISORS DBA BEACON AND STONE INSURANCE GROUP",
+        "BEACON ASSOCIATES INSURANCE AGENCY LLC",
+        "BEACON AVIATION INSURANCE SERVICES, INC.",
+        "BEACON BENEFITS LLC",
+        "BEACON FINANCIAL",
+        "BEACON FINANCIAL & INSURANCE SOLUTIONS, CORP.",
+        "BEACON FINANCIAL DIRECTORS, INC.",
+        "BEACON FINANCIAL LLC",
+        "BEACON FINANCIAL PARTNERS LLC"
+      ]
+    },
+    "summit": {
+      "windows": 10,
+      "candidatesAcrossWindows": 97,
+      "distinct": 97,
+      "matchedCount": 97,
+      "exact": true,
+      "lastWindowHasMore": false,
+      "everyWindowNativeEqualsStructured": true,
+      "malformedLinks": 0,
+      "firstWindow": [
+        "BLUE SUMMIT INSURANCE SOLUTIONS LLC,",
+        "CASCADE SUMMIT INSURANCE OF OREGON, INC.",
+        "CRYSTAL SUMMIT INSURANCE SERVICES, LLC",
+        "FIRST SUMMIT FINANCIAL, INC.",
+        "MCGAW SUMMIT ENTERPRISES LLC",
+        "PENN SUMMIT INSURANCE ADVISORS GROUP LLC,",
+        "PENN SUMMIT INSURANCE AGENCY, LLC",
+        "SENIOR SUMMIT INSURANCE GROUP LLC",
+        "SOUTHERN SUMMIT INSURANCE AGENCY LLC",
+        "STELLA MARIS SUMMIT FINANCIAL SERVICES,LLC"
+      ]
+    }
+  },
+  "frozenMultiWindow": {
+    "term": "allied",
+    "windows": [
+      {
+        "page": 1,
+        "returned": 10,
+        "hasMore": true,
+        "nextPage": 2,
+        "matchedCount": 46,
+        "exact": true,
+        "completeness": "COMPLETE",
+        "nativeEqualsStructured": true,
+        "first": "3A ALLIED INSURANCE CORP.",
+        "last": "ALLIED HEALTH INSURANCE ASSOCIATES"
+      },
+      {
+        "page": 2,
+        "returned": 10,
+        "hasMore": true,
+        "nextPage": 3,
+        "matchedCount": 46,
+        "exact": true,
+        "completeness": "COMPLETE",
+        "nativeEqualsStructured": true,
+        "first": "ALLIED INDEMNITY AGENCY, INC.",
+        "last": "ALLIED INSURANCE PARTNERS LLC,"
+      },
+      {
+        "page": 3,
+        "returned": 10,
+        "hasMore": true,
+        "nextPage": 4,
+        "matchedCount": 46,
+        "exact": true,
+        "completeness": "COMPLETE",
+        "nativeEqualsStructured": true,
+        "first": "ALLIED INSURANCE SERVICES",
+        "last": "ALLIED PREMIUM INSURANCE, LLC"
+      },
+      {
+        "page": 4,
+        "returned": 10,
+        "hasMore": true,
+        "nextPage": 5,
+        "matchedCount": 46,
+        "exact": true,
+        "completeness": "COMPLETE",
+        "nativeEqualsStructured": true,
+        "first": "ALLIED PRODUCERS GROUP",
+        "last": "ALLIED WEALTH ADVISORS INC,"
+      },
+      {
+        "page": 5,
+        "returned": 6,
+        "hasMore": false,
+        "nextPage": null,
+        "matchedCount": 46,
+        "exact": true,
+        "completeness": "COMPLETE",
+        "nativeEqualsStructured": true,
+        "first": "BACCI CONSULTING LLC DBA ALLIED MARKETING INSURANCE",
+        "last": "TEXAS ALLIED INSURANCE GROUP LLC"
+      }
+    ],
+    "duplicateAcrossWindows": 0,
+    "outOfRange": {
+      "page": 8,
+      "state": "CANDIDATES",
+      "returned": 0,
+      "outOfRange": true,
+      "hasMore": false
+    },
+    "rawSelectionFromWindow2Reopen": [
+      {
+        "rawSelectionUrl": "/ask?q=Find+allied&selected=984b589d-df8d-477c-a948-eeb8c69f566d",
+        "terminalState": "IDENTITY_FOUND",
+        "reopened": [
+          "984b589d-df8d-477c-a948-eeb8c69f566d"
+        ],
+        "intended": true
+      },
+      {
+        "rawSelectionUrl": "/ask?q=Find+allied&selected=10a70e10-54cc-4dc9-b9d0-22d2e29601e6",
+        "terminalState": "IDENTITY_FOUND",
+        "reopened": [
+          "10a70e10-54cc-4dc9-b9d0-22d2e29601e6"
+        ],
+        "intended": true
+      },
+      {
+        "rawSelectionUrl": "/ask?q=Find+allied&selected=26bef67c-13eb-49de-bf2c-6a431c810d1a",
+        "terminalState": "IDENTITY_FOUND",
+        "reopened": [
+          "26bef67c-13eb-49de-bf2c-6a431c810d1a"
+        ],
+        "intended": true
+      }
+    ],
+    "alliedIdentitySelectedUnderBeaconRequest": {
+      "terminalState": "NEEDS_CLARIFICATION",
+      "results": 0,
+      "failsClosed": true
+    }
+  },
+  "structuredV2": {
+    "page1": {
+      "state": "AMBIGUOUS_IDENTITIES",
+      "returned": 10,
+      "pagination": {
+        "page": 1,
+        "limit": 10,
+        "total": 46,
+        "hasMore": true
+      }
+    },
+    "page2": {
+      "state": "AMBIGUOUS_IDENTITIES",
+      "returned": 10,
+      "pagination": {
+        "page": 2,
+        "limit": 10,
+        "total": 46,
+        "hasMore": true
+      }
+    },
+    "page2DiffersFromPage1": true,
+    "page2EqualsSiblingWindow2": true,
+    "malformedSelectionUrls": 0,
+    "schemaFingerprint": "4aa93bb372aebb45c7028b750000e77be4a847d9a210f3c40d3db1df1f7f637f"
+  },
+  "nameShapes": {
+    "exactNormalizedAgency": {
+      "supplied": "ALLIED AMERICAN UNDERWRITERS, INC.",
+      "state": "CANDIDATES",
+      "returned": 1,
+      "hasMore": false,
+      "matchedCount": 1,
+      "first": {
+        "displayName": "ALLIED AMERICAN UNDERWRITERS, INC.",
+        "class": "agency",
+        "method": "normalized_exact_name",
+        "field": "legal_name",
+        "action": {
+          "type": "RESEARCH",
+          "url": "/ask?q=Find+ALLIED+AMERICAN+UNDERWRITERS%2C+INC.&selected=0101665c-37cc-4a89-8be5-fd465eebf09b"
+        }
+      }
+    },
+    "punctuationVariant": {
+      "supplied": "allied american underwriters inc",
+      "state": "CANDIDATES",
+      "returned": 1,
+      "hasMore": false,
+      "matchedCount": 1,
+      "first": {
+        "displayName": "ALLIED AMERICAN UNDERWRITERS, INC.",
+        "class": "agency",
+        "method": "normalized_exact_name",
+        "field": "legal_name",
+        "action": {
+          "type": "RESEARCH",
+          "url": "/ask?q=Find+allied+american+underwriters+inc&selected=0101665c-37cc-4a89-8be5-fd465eebf09b"
+        }
+      }
+    },
+    "legalInsurerWave1": {
+      "supplied": "CITIZENS PROP INS CORP",
+      "state": "CANDIDATES",
+      "returned": 1,
+      "hasMore": false,
+      "matchedCount": 1,
+      "first": {
+        "displayName": "CITIZENS PROP INS CORP",
+        "class": "legal_insurer",
+        "method": "normalized_exact_name",
+        "field": "canonical_legal_name",
+        "action": {
+          "type": "PROFILE",
+          "url": "/insurers/citizens-property-insurance-corporation"
+        }
+      }
+    },
+    "legalInsurerShortWord": {
+      "supplied": "ocean harbor",
+      "state": "CANDIDATES",
+      "returned": 1,
+      "hasMore": false,
+      "matchedCount": 1,
+      "first": {
+        "displayName": "OCEAN HARBOR CAS INS CO",
+        "class": "legal_insurer",
+        "method": "distinctive_token_candidate",
+        "field": "canonical_legal_name",
+        "action": {
+          "type": "PROFILE",
+          "url": "/insurers/ocean-harbor-casualty-insurance-company"
+        }
+      }
+    },
+    "genuineMiss": {
+      "supplied": "Zyqorvane Underwriters",
+      "state": "NO_MATCH",
+      "returned": 0,
+      "hasMore": false,
+      "matchedCount": 0,
+      "first": null
+    },
+    "broadButDistinctive": {
+      "supplied": "summit",
+      "state": "CANDIDATES",
+      "returned": 10,
+      "hasMore": true,
+      "matchedCount": 97,
+      "first": {
+        "displayName": "BLUE SUMMIT INSURANCE SOLUTIONS LLC,",
+        "class": "agency",
+        "method": "distinctive_token_candidate",
+        "field": "display_name",
+        "action": {
+          "type": "RESEARCH",
+          "url": "/ask?q=Find+summit&selected=f774eac8-dff0-4b6d-a126-16d254f43a1a"
+        }
+      }
+    }
+  }
+}
