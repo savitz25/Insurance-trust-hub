@@ -1,0 +1,83 @@
+{
+  "capturedAt": "2026-09-20T02:50:29.843Z",
+  "codeUnderTest": "origin/main 860345d85adcc2616efe5768acf5d941c7f8cf92 (unmodified)",
+  "note": "RED: raw structured-surface selection URLs, reopened with NO parent sanitation.",
+  "allied": [
+    {
+      "intended": "3A ALLIED INSURANCE CORP.",
+      "rawSelectionUrl": "/ask?q=Find+allied&entity=undefined&state=undefined&loa=undefined&selected=269dbfd0-e1f7-4474-9a5e-b3aebe936908",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    },
+    {
+      "intended": "ALLIED ADVANTAGE INSURANCE SERVICES LLC,",
+      "rawSelectionUrl": "/ask?q=Find+allied&entity=undefined&state=undefined&loa=undefined&selected=9de852bb-b9f7-4725-9230-4b0566e39224",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    },
+    {
+      "intended": "ALLIED AMERICAN UNDERWRITERS, INC.",
+      "rawSelectionUrl": "/ask?q=Find+allied&entity=undefined&state=undefined&loa=undefined&selected=0101665c-37cc-4a89-8be5-fd465eebf09b",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    }
+  ],
+  "beacon": [
+    {
+      "intended": "BEACON ADVISORS LLC",
+      "rawSelectionUrl": "/ask?q=Find+beacon&entity=undefined&state=undefined&loa=undefined&selected=b3023c06-af5f-4854-928c-a1ccbd71e28a",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    },
+    {
+      "intended": "BEACON AND STONE RISK ADVISORS DBA BEACON AND STONE INSURANCE GROUP",
+      "rawSelectionUrl": "/ask?q=Find+beacon&entity=undefined&state=undefined&loa=undefined&selected=eec04c7c-7f79-47fa-b9a0-b99fa2e1174e",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    },
+    {
+      "intended": "BEACON ASSOCIATES INSURANCE AGENCY LLC",
+      "rawSelectionUrl": "/ask?q=Find+beacon&entity=undefined&state=undefined&loa=undefined&selected=c16e1635-bb95-4c90-8bca-e619c83e1e29",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    }
+  ],
+  "summit": [
+    {
+      "intended": "BLUE SUMMIT INSURANCE SOLUTIONS LLC,",
+      "rawSelectionUrl": "/ask?q=Find+summit&entity=undefined&state=undefined&loa=undefined&selected=f774eac8-dff0-4b6d-a126-16d254f43a1a",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    },
+    {
+      "intended": "CASCADE SUMMIT INSURANCE OF OREGON, INC.",
+      "rawSelectionUrl": "/ask?q=Find+summit&entity=undefined&state=undefined&loa=undefined&selected=6bad821f-7251-4f3b-9a8b-40794d29e422",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    },
+    {
+      "intended": "CRYSTAL SUMMIT INSURANCE SERVICES, LLC",
+      "rawSelectionUrl": "/ask?q=Find+summit&entity=undefined&state=undefined&loa=undefined&selected=99ed5bab-e238-4827-9666-f90200488cfa",
+      "reopenTerminalState": "INVALID_INPUT",
+      "reopenedEntityIds": [],
+      "failReason": "Invalid loa filter.",
+      "reopenedIntended": false
+    }
+  ]
+}

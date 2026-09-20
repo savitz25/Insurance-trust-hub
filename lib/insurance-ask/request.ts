@@ -82,8 +82,10 @@ export function readInsuranceRequest(
 export function planInsuranceRequest(
   raw: string,
   page: number,
-  options: InsuranceRequestOptions = {},
+  suppliedOptions: InsuranceRequestOptions = {},
 ): ParsedInsuranceAsk {
+  // A structured caller may hand over `{ entity: undefined, ... }`. An absent filter is not a filter.
+  const options = definedRequestOptions(suppliedOptions);
   const checked = readInsuranceRequest(
     new URLSearchParams(
       Object.entries({ q: raw, page: String(page), ...options }).filter(
@@ -217,17 +219,41 @@ export function planInsuranceRequest(
     });
   return p;
 }
+const HREF_OPTION_KEYS = ["entity", "state", "loa", "evidence", "zip"] as const;
+/** A request option is real only if it is a non-empty string that is not a stringified absence. */
+function realOption(value: unknown): value is string {
+  return typeof value === "string" && value !== "" && value !== "undefined" && value !== "null";
+}
+/** Only real option values survive: an absent filter is dropped, never carried as `undefined`. */
+export function definedRequestOptions(options: InsuranceRequestOptions = {}): InsuranceRequestOptions {
+  return Object.fromEntries(Object.entries(options).filter(([, value]) => realOption(value))) as InsuranceRequestOptions;
+}
+/**
+ * TH-SEARCH-R1-019F: the ONE builder of hub-owned /ask links (selection, continuation, pagination).
+ * Parameters are appended one by one and only when they hold a real value, so `=undefined` / `=null`
+ * can never be emitted -- a hub link must work as issued, without a consumer repairing it.
+ */
+export function insuranceAskHref(input: {
+  q: string;
+  options?: InsuranceRequestOptions;
+  page?: number;
+  selected?: string;
+}): string {
+  const params = new URLSearchParams();
+  params.set("q", input.q);
+  for (const key of HREF_OPTION_KEYS) {
+    const value = input.options?.[key];
+    if (realOption(value)) params.set(key, value);
+  }
+  if (Number.isInteger(input.page) && input.page! > 1) params.set("page", String(input.page));
+  const selected = input.selected ?? input.options?.selected;
+  if (realOption(selected)) params.set("selected", selected);
+  return "/ask?" + params.toString();
+}
 export function insuranceRequestHref(
   raw: string,
   options: InsuranceRequestOptions = {},
   page = 1,
 ): string {
-  return (
-    "/ask?" +
-    new URLSearchParams({
-      q: raw,
-      ...options,
-      ...(page > 1 ? { page: String(page) } : {}),
-    })
-  );
+  return insuranceAskHref({ q: raw, options, page });
 }

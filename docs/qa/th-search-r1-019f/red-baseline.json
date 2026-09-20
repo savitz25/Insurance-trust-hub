@@ -1,0 +1,192 @@
+{
+  "capturedAt": "2026-09-20T02:49:39.929Z",
+  "codeUnderTest": "origin/main 860345d85adcc2616efe5768acf5d941c7f8cf92 (unmodified)",
+  "note": "RED evidence. Never overwritten by green output.",
+  "realSourceCandidateSetSizes": [
+    {
+      "name": "allied",
+      "substringRowsScanned": 94,
+      "distinctWholeWordAgencyMatches": 46,
+      "supersetExhausted": true
+    },
+    {
+      "name": "beacon",
+      "substringRowsScanned": 98,
+      "distinctWholeWordAgencyMatches": 46,
+      "supersetExhausted": true
+    },
+    {
+      "name": "summit",
+      "substringRowsScanned": 204,
+      "distinctWholeWordAgencyMatches": 97,
+      "supersetExhausted": true
+    }
+  ],
+  "nativePage1": {
+    "allied": {
+      "terminalState": "NEEDS_CLARIFICATION",
+      "returned": 10,
+      "candidateTruncated": true,
+      "pagination": {
+        "page": 1,
+        "pageSize": 20,
+        "total": 10,
+        "hasMore": false
+      },
+      "selectionHrefsWithLiteralUndefinedOrNull": 0,
+      "firstSelectionHref": "/ask?q=Find+allied&selected=269dbfd0-e1f7-4474-9a5e-b3aebe936908",
+      "names": [
+        "3A ALLIED INSURANCE CORP.",
+        "ALLIED ADVANTAGE INSURANCE SERVICES LLC,",
+        "ALLIED AMERICAN UNDERWRITERS, INC.",
+        "ALLIED BENEFIT SYSTEMS, LLC.",
+        "ALLIED BENEFITS SOLUTIONS, LLC",
+        "ALLIED BROKERS INSURANCE AGENCY, INC.",
+        "ALLIED BUILDING MATERIAL AGENCY, INC. DBA GREEN TREE RISK PARTNERS",
+        "ALLIED BUSINESS SERVICES INC",
+        "ALLIED ELITE FINANCIAL, LLC",
+        "ALLIED HEALTH INSURANCE ASSOCIATES"
+      ]
+    },
+    "beacon": {
+      "terminalState": "NEEDS_CLARIFICATION",
+      "returned": 10,
+      "candidateTruncated": true,
+      "pagination": {
+        "page": 1,
+        "pageSize": 20,
+        "total": 10,
+        "hasMore": false
+      },
+      "selectionHrefsWithLiteralUndefinedOrNull": 0,
+      "firstSelectionHref": "/ask?q=Find+beacon&selected=b3023c06-af5f-4854-928c-a1ccbd71e28a",
+      "names": [
+        "BEACON ADVISORS LLC",
+        "BEACON AND STONE RISK ADVISORS DBA BEACON AND STONE INSURANCE GROUP",
+        "BEACON ASSOCIATES INSURANCE AGENCY LLC",
+        "BEACON AVIATION INSURANCE SERVICES, INC.",
+        "BEACON BENEFITS LLC",
+        "BEACON FINANCIAL",
+        "BEACON FINANCIAL & INSURANCE SOLUTIONS, CORP.",
+        "BEACON FINANCIAL DIRECTORS, INC.",
+        "BEACON FINANCIAL LLC",
+        "BEACON FINANCIAL PARTNERS LLC"
+      ]
+    },
+    "summit": {
+      "terminalState": "NEEDS_CLARIFICATION",
+      "returned": 9,
+      "candidateTruncated": true,
+      "pagination": {
+        "page": 1,
+        "pageSize": 20,
+        "total": 9,
+        "hasMore": false
+      },
+      "selectionHrefsWithLiteralUndefinedOrNull": 0,
+      "firstSelectionHref": "/ask?q=Find+summit&selected=f774eac8-dff0-4b6d-a126-16d254f43a1a",
+      "names": [
+        "BLUE SUMMIT INSURANCE SOLUTIONS LLC,",
+        "CASCADE SUMMIT INSURANCE OF OREGON, INC.",
+        "CRYSTAL SUMMIT INSURANCE SERVICES, LLC",
+        "FIRST SUMMIT FINANCIAL, INC.",
+        "MCGAW SUMMIT ENTERPRISES LLC",
+        "PENN SUMMIT INSURANCE ADVISORS GROUP LLC,",
+        "PENN SUMMIT INSURANCE AGENCY, LLC",
+        "SENIOR SUMMIT INSURANCE GROUP LLC",
+        "SOUTHERN SUMMIT INSURANCE AGENCY LLC"
+      ]
+    }
+  },
+  "rawSelectionLinkReopen": [
+    {
+      "intended": "3A ALLIED INSURANCE CORP.",
+      "intendedEntityId": "269dbfd0-e1f7-4474-9a5e-b3aebe936908",
+      "rawSelectionHref": "/ask?q=Find+allied&selected=269dbfd0-e1f7-4474-9a5e-b3aebe936908",
+      "terminalState": "IDENTITY_FOUND",
+      "reopenedEntityIds": [
+        "269dbfd0-e1f7-4474-9a5e-b3aebe936908"
+      ],
+      "reopenedIntended": true
+    },
+    {
+      "intended": "ALLIED ADVANTAGE INSURANCE SERVICES LLC,",
+      "intendedEntityId": "9de852bb-b9f7-4725-9230-4b0566e39224",
+      "rawSelectionHref": "/ask?q=Find+allied&selected=9de852bb-b9f7-4725-9230-4b0566e39224",
+      "terminalState": "IDENTITY_FOUND",
+      "reopenedEntityIds": [
+        "9de852bb-b9f7-4725-9230-4b0566e39224"
+      ],
+      "reopenedIntended": true
+    },
+    {
+      "intended": "ALLIED AMERICAN UNDERWRITERS, INC.",
+      "intendedEntityId": "0101665c-37cc-4a89-8be5-fd465eebf09b",
+      "rawSelectionHref": "/ask?q=Find+allied&selected=0101665c-37cc-4a89-8be5-fd465eebf09b",
+      "terminalState": "IDENTITY_FOUND",
+      "reopenedEntityIds": [
+        "0101665c-37cc-4a89-8be5-fd465eebf09b"
+      ],
+      "reopenedIntended": true
+    }
+  ],
+  "nativePage2": {
+    "page1Ids": [
+      "269dbfd0-e1f7-4474-9a5e-b3aebe936908",
+      "9de852bb-b9f7-4725-9230-4b0566e39224",
+      "0101665c-37cc-4a89-8be5-fd465eebf09b",
+      "4a52fcf7-537d-4e7f-b938-ae22a051937c",
+      "40031d04-cc35-461f-8fe3-5959d31ae486",
+      "74584b43-8eff-4bca-9841-2b4e3e35c807",
+      "a1c2fd7f-e749-45f6-9a93-e1f909e02726",
+      "4f15d195-3132-44de-b3bf-2374eb1a0929",
+      "638db875-3d37-419d-9cd6-65e08d92b2d0",
+      "b5b63e81-ad1b-42f4-ae60-53a59133e919"
+    ],
+    "page2Ids": [
+      "269dbfd0-e1f7-4474-9a5e-b3aebe936908",
+      "9de852bb-b9f7-4725-9230-4b0566e39224",
+      "0101665c-37cc-4a89-8be5-fd465eebf09b",
+      "4a52fcf7-537d-4e7f-b938-ae22a051937c",
+      "40031d04-cc35-461f-8fe3-5959d31ae486",
+      "74584b43-8eff-4bca-9841-2b4e3e35c807",
+      "a1c2fd7f-e749-45f6-9a93-e1f909e02726",
+      "4f15d195-3132-44de-b3bf-2374eb1a0929",
+      "638db875-3d37-419d-9cd6-65e08d92b2d0",
+      "b5b63e81-ad1b-42f4-ae60-53a59133e919"
+    ],
+    "page2IdenticalToPage1": true,
+    "page2Pagination": {
+      "page": 2,
+      "pageSize": 20,
+      "total": 10,
+      "hasMore": false
+    }
+  },
+  "structuredV2Page2": {
+    "page1": {
+      "state": "AMBIGUOUS_IDENTITIES",
+      "returned": 10,
+      "total": 10,
+      "pagination": {
+        "page": 1,
+        "limit": 10,
+        "total": 10,
+        "hasMore": false
+      }
+    },
+    "page2": {
+      "state": "AMBIGUOUS_IDENTITIES",
+      "returned": 10,
+      "total": 10,
+      "pagination": {
+        "page": 2,
+        "limit": 10,
+        "total": 10,
+        "hasMore": false
+      }
+    },
+    "page2IdenticalToPage1": true,
+    "selectionUrlsWithLiteralUndefinedOrNull": 10
+  }
+}

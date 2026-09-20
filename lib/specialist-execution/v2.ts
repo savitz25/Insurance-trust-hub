@@ -298,6 +298,17 @@ export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ sta
   try {
     const options: InsuranceRequestOptions = { entity: req.entityClass === 'producer' ? 'person' : req.entityClass === 'legal_insurer' ? 'insurer' : req.entityClass, state: req.query && req.geography?.intent === 'CREDENTIAL_JURISDICTION' ? stateFor(req) : undefined, loa: req.filters?.lineOfAuthority?.[0]?.toLowerCase() };
     const v1 = await executeInsuranceAsk(query, page, limit, options);
+    // TH-SEARCH-R1-019F-R1: v2 promises EXACT totals. An organization-name search whose source scan hit
+    // its bound has no exact total, so v2 cannot answer it with a success-shaped envelope at all -- it
+    // fails closed through the existing UNSUPPORTED_CAPABILITY state (no new state, no schema change).
+    // This is NOT a no-match: candidates may exist. insurance-name-candidates-v1 serves this case
+    // honestly (PARTIAL_REFINE_REQUIRED, matchedCount null), and native /ask keeps its bounded results.
+    const nameWindow = v1.nameCandidateWindow;
+    if (nameWindow && (nameWindow.completeness !== 'COMPLETE' || nameWindow.matchedCount === null)) {
+      const out = unsupported('name_search_refinement_required', 'The supplied organization name is too broad for the exact-total contract of trusthub-specialist-execution-v2. Matching candidates may exist. Refine the name, or use InsuranceTrustHub\'s dedicated name-candidates operation (insurance-name-candidates-v1), which reports partial searches honestly.', ['Refine the organization name with another distinctive word.', 'POST /api/specialist-execution/name-candidates/v1 with { "operation": "name_candidates", "name": "<name>" }.'], { queryType: 'identity', identityName: v1.parsed.query.nameQuery, reason: 'SCAN_BOUND_REACHED' });
+      out.limitations = ['This is NOT a no-match result: the name search was bounded before the source was exhausted, so candidates may exist and no total is asserted. rows=[] and total=0 are the standard empty values of an unsupported response, not a finding about this name.', ...out.limitations];
+      return { status: 422, body: out };
+    }
     const publicV1 = publicAskPayload(v1);
     const rows = safeRows(v1).slice(0, limit);
     let state: ResultState = rows.length ? 'SUPPORTED_RESULTS' : 'ZERO_MATCHING_ROWS';
@@ -310,6 +321,12 @@ export async function executeSpecialistV2(req: SpecialistRequest): Promise<{ sta
     out.queryInterpretation = { sourceContract: v1.contract, mode: v1.parsed.query.mode, entityClass: v1.entityClass ? entityClassFromV1(v1.entityClass) : null, terminalState:v1.terminalState, directoryContext:v1.parsed.query.directoryContext, conditions:v1.parsed.query.conditions, requestedProduct:v1.parsed.query.requestedProduct, identifier: v1.parsed.query.identifier, geography: v1.parsed.query.jurisdiction, interpretation: v1.parsed.interpretation };
     out.appliedFilters = { jurisdiction: v1.parsed.query.jurisdiction, linesOfAuthority: v1.parsed.query.linesOfAuthority, publication: 'public-safe response allowlist' };
     out.rows = rows; out.total = v1.pagination.total; out.pagination = { page, limit, total: v1.pagination.total, hasMore: page * limit < v1.pagination.total };
+    // TH-SEARCH-R1-019F: organization-name candidates come from the shared engine, whose window is the
+    // truth for this page -- `page` is a real continuation, never page 1 again. `total` is the engine's
+    // computed count of distinct matched identities. It is ALWAYS exact here: a bounded (inexact) name
+    // search never reaches this success path -- it failed closed above -- and the total is taken from
+    // the engine's exact matchedCount, not from any "established so far" figure. Other branches unchanged.
+    if (nameWindow) { out.total = nameWindow.matchedCount!; out.pagination = { page: nameWindow.page, limit: nameWindow.limit, total: nameWindow.matchedCount!, hasMore: nameWindow.hasMore }; }
     out.provenance = { ...v1.provenance, sourceDataset: rows[0]?.sourceDataset ?? 'accepted InsuranceTrustHub source datasets', publicationSemantics: 'Research rows do not create public profiles.' };
     out.limitations = [...v1.limitations, ...BASE_LIMITATIONS.filter((x) => !v1.limitations.includes(x))];
     out.destinations = Array.from(new Set(rows.map((r) => r.destination).filter((x): x is string => Boolean(x)))).map((url) => ({ type: url.startsWith('/insurers/') ? 'LEGAL_INSURER_PROFILE' : 'DIRECTORY_RESEARCH', url }));

@@ -1,6 +1,7 @@
 import { searchLegalInsurers } from '@/lib/national/legal-insurer-search';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { planInsuranceRequest, readInsuranceRequest } from './request';
+import { insuranceAskHref, planInsuranceRequest, readInsuranceRequest } from './request';
+import { NAME_CANDIDATE_WINDOW, collectInsuranceNameCandidates, nameCandidateWindow, revalidateSelection, type AgencySourceRow, type NameCandidate, type NameCandidateStream, type NameCandidateWindow, type NameSource } from './name-candidates';
 import { invalidResearch } from './research-intent';
 import { recoveryFor } from './recovery';
 import {
@@ -8,7 +9,7 @@ import {
   rememberProductOnInterpretation,
   unresolvedProductsBlockingCensus,
 } from './product-intent';
-import { matchSourceName, distinctiveNameTokens, escapeNamePattern } from './name-match';
+import { distinctiveNameTokens, escapeNamePattern } from './name-match';
 import type { InsuranceRequestOptions, RecoveryAction } from './contract';
 import { createClient } from '@supabase/supabase-js';
 import {
@@ -58,6 +59,8 @@ export type InsuranceAskResult = {
   terminalState?: string;
   candidateSelection?: boolean;
   candidateTruncated?: boolean;
+  /** TH-SEARCH-R1-019F: present only for organization-name candidate results. */
+  nameCandidateWindow?: NameCandidateWindow;
   recoveryActions?: RecoveryAction[];
   contract: typeof INSURANCE_ASK_CONTRACT;
   queryText: string;
@@ -185,7 +188,7 @@ export async function executeInsuranceAsk(raw: string, page = 1, pageSize = INSU
   const result = await executeInsurancePlan(planInsuranceRequest(raw, page, options), pageSize);
   const q = result.parsed.query;
   result.recoveryActions = recoveryFor(q);
-  if(q.identifier && new Set(result.results.map(r=>r.entityId)).size>1 && !q.selectedEntity){result.candidateSelection=true;result.terminalState='NEEDS_CLARIFICATION';for(const row of result.results)row.selectionHref='/ask?'+new URLSearchParams({q:raw,...q.requestOptions,selected:row.entityId});}
+  if(q.identifier && new Set(result.results.map(r=>r.entityId)).size>1 && !q.selectedEntity){result.candidateSelection=true;result.terminalState='NEEDS_CLARIFICATION';for(const row of result.results)row.selectionHref=insuranceAskHref({q:raw,options:q.requestOptions,selected:row.entityId});}
   result.terminalState ??= q.terminalState ?? (q.mode === 'fail_closed' ? q.refinement ? 'NEEDS_CLARIFICATION' : 'CAPABILITY_LIMITATION' : q.mode === 'directory' ? 'DIRECTORY_HANDOFF' : q.mode === 'definition' ? 'EXPLANATION' : result.results.length || result.counts.length ? 'RESULTS' : 'NO_MATCH');
   if (q.mode === 'directory') { result.provenance.sourceFamily = 'Separate public directory'; result.provenance.grain = 'Directory handoff; no regulatory identities retrieved'; result.provenance.geographyMeaning = `Selected ZIP ${q.directoryZip}; recorded directory address, not service territory`; }
   // TH-DISCOVERY-PARITY-001B: a requested consumer product (homeowners/auto/flood/...) is never an
@@ -551,12 +554,8 @@ async function lookupAppointment(parsed: ParsedInsuranceAsk, started: number): P
   return result;
 }
 
-async function lookupNaic(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
-  const code = parsed.query.identifier!.value.padStart(5, '0');
-  const published = publishedByNaic(code) ?? publishedByNaic(parsed.query.identifier!.value);
-  const results: AskCard[] = published
-    ? [
-        {
+function insurerCard(published: PublishedInsurer): AskCard {
+  return {
           entityId: published.entity_id,
           entityClass: 'insurer',
           displayName: published.canonical_legal_name,
@@ -572,9 +571,13 @@ async function lookupNaic(parsed: ParsedInsuranceAsk, started: number): Promise<
           href: insurerProfilePath(published.slug),
           publicationNote: null,
           whyMatched: `This legal insurer matches because the official record lists NAIC company code ${published.naic_cocode}. A consumer brand is not assumed.`,
-        },
-      ]
-    : [];
+        };
+}
+
+async function lookupNaic(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
+  const code = parsed.query.identifier!.value.padStart(5, '0');
+  const published = publishedByNaic(code) ?? publishedByNaic(parsed.query.identifier!.value);
+  const results: AskCard[] = published ? [insurerCard(published)] : [];
   const result = finish(
     parsed,
     results,
@@ -1246,6 +1249,7 @@ export function publicAskPayload(result: InsuranceAskResult) {
     terminalState: result.terminalState,
     candidateSelection: result.candidateSelection,
     candidateTruncated: result.candidateTruncated,
+    nameCandidateWindow: result.nameCandidateWindow,
     recoveryActions: result.recoveryActions,
     interpretation: result.parsed.interpretation,
     query: {
@@ -1290,46 +1294,66 @@ export function publicAskPayload(result: InsuranceAskResult) {
   };
 }
 
+/** Source access for the ONE name engine (lib/insurance-ask/name-candidates.ts). Reads only. */
+function nameSource(): NameSource {
+  const columns = 'id, entity_kind, npn, display_name, legal_name, identity_kind, identity_confidence';
+  return {
+    async agenciesExact(field, name, from, to) {
+      const { data } = await db().from('national_entities').select(columns).eq('entity_kind', 'agency').ilike(field, escapeNamePattern(name)).order(field).order('id').range(from, to);
+      return (data ?? []) as AgencySourceRow[];
+    },
+    async agenciesContainingTokens(field, tokens, from, to) {
+      let query = db().from('national_entities').select(columns).eq('entity_kind', 'agency');
+      for (const token of tokens) query = query.ilike(field, `%${escapeNamePattern(token)}%`);
+      const { data } = await query.order(field).order('id').range(from, to);
+      return (data ?? []) as AgencySourceRow[];
+    },
+    // Publication-permitted Wave-1 cohort ONLY; no expansion to unpublished profiles. Every published
+    // insurer is handed to the engine so the ONE name predicate decides (match first): the older
+    // searchPublishedInsurers prefilter needs 8+ characters for a containment hit and so dropped
+    // published insurers that satisfy matchSourceName through a shorter distinctive word.
+    publishedInsurers() {
+      return publishedInsurers().map((row) => ({ entityId: row.entity_id, canonicalLegalName: row.canonical_legal_name, naicCode: row.naic_cocode }));
+    },
+  };
+}
+
+function cardForNameCandidate(candidate: NameCandidate, name: string): AskCard | null {
+  if (candidate.entityClass === 'agency') {
+    const row = candidate.agency!, card = cardFromEntity(row as EntityRow, []);
+    card.matchEvidence = { method: candidate.match.method, field: candidate.match.field, value: candidate.match.value, requested: name, entityId: row.id, entityClass: 'agency', source: 'national_entities source legal/display name', normalization: candidate.match.normalization };
+    card.whyMatched = `Name candidate: requested "${name}" matches source ${candidate.match.field} "${candidate.match.value}" (${candidate.match.method}). NPN ${row.npn ?? 'not recorded'} identifies the source agency; similarity is not a license or appointment finding.`;
+    return card;
+  }
+  const published = publishedByNaic(candidate.insurer!.naicCode); if (!published) return null;
+  const card = insurerCard(published);
+  card.matchEvidence = { method: candidate.match.method, field: 'canonical_legal_name', value: published.canonical_legal_name, requested: name, entityId: published.entity_id, entityClass: 'insurer', source: 'ins-insurer-006-wave1', normalization: candidate.match.normalization };
+  card.whyMatched = `Name candidate: requested "${name}" matches source canonical_legal_name "${published.canonical_legal_name}" (${candidate.match.method}); NAIC company code ${published.naic_cocode}. This is not a consumer-brand or agency association.`;
+  return card;
+}
+
+export type InsuranceNameCandidateSearch = { stream: NameCandidateStream; window: NameCandidateWindow; cards: AskCard[] };
+/**
+ * TH-SEARCH-R1-019F: the single entry every surface uses for organization-name candidates.
+ * Native /ask reaches it through lookupNameCandidates; the structured operations call it directly.
+ * `q`/`options` are only used to mint the hub-owned selection link for each candidate.
+ */
+export async function searchInsuranceNameCandidates(input: { name: string; entityClass?: 'agency' | 'insurer' | 'person'; page: number; limit: number; q: string; options?: InsuranceRequestOptions }): Promise<InsuranceNameCandidateSearch> {
+  if (!sourceContext.getStore() && !isSupabaseAdminConfigured()) throw new Error('Insurance research source unavailable');
+  const stream = await collectInsuranceNameCandidates(nameSource(), { name: input.name, entityClass: input.entityClass });
+  const { window, candidates } = nameCandidateWindow(stream, input.page, input.limit);
+  const cards = candidates.flatMap((candidate) => { const card = cardForNameCandidate(candidate, input.name); if (!card) return []; card.selectionHref = insuranceAskHref({ q: input.q, options: input.options, selected: card.entityId }); return [card]; });
+  return { stream, window, cards };
+}
+
 async function lookupNameCandidates(parsed: ParsedInsuranceAsk, started: number): Promise<InsuranceAskResult> {
   const q = parsed.query, name = q.nameQuery!, tokens = distinctiveNameTokens(name);
   if (!tokens.length) return { ...emptyBase(parsed, started), terminalState: 'NEEDS_CLARIFICATION', limitations: ['Enter a distinctive company name. Generic insurance/agency/company words do not identify a business.', ...LIMITATIONS] };
-  const matches = new Map<string, AskCard>(); let truncated = false;
-  if (!q.entityClass || q.entityClass === 'agency') {
-    for (const field of ['legal_name', 'display_name'] as const) {
-      for (const exact of [true, false]) {
-        let query = db().from('national_entities').select('id, entity_kind, npn, display_name, legal_name, identity_kind, identity_confidence').eq('entity_kind','agency');
-        if (exact) query = query.ilike(field, escapeNamePattern(name));
-        else for (const token of tokens) query = query.ilike(field, `%${escapeNamePattern(token)}%`);
-        const {data} = await query.order(field).order('id').limit(11);
-        const rows = (data ?? []) as EntityRow[]; if (rows.length === 11) truncated = true;
-        for (const row of rows) {
-          const relation = matchSourceName(name, row[field]); if (!relation) continue;
-          const old = matches.get(row.id); if (old?.matchEvidence?.method === 'normalized_exact_name') continue;
-          const card = cardFromEntity(row, []);
-          card.matchEvidence = { method: relation.method, field, value: row[field], requested: name, entityId: row.id, entityClass: 'agency', source: 'national_entities source legal/display name', normalization: relation.normalization };
-          card.whyMatched = `Name candidate: requested ?${name}? matches source ${field} ?${row[field]}? (${relation.method}). NPN ${row.npn ?? 'not recorded'} identifies the source agency; similarity is not a license or appointment finding.`;
-          matches.set(row.id, card);
-        }
-      }
-    }
-  }
-  if (!q.entityClass || q.entityClass === 'insurer') {
-    // Existing publication-permitted Wave-1 names; no expansion to unpublished profiles.
-    for (const hit of publishedSearch(name)) {
-      const row = publishedByNaic(hit.naicCode ?? ''); if (!row) continue;
-      const relation = matchSourceName(name, row.canonical_legal_name); if (!relation) continue;
-      const exact = await lookupNaic({ ...parsed, query: { ...q, identifier: {type:'naic_company_code',value:row.naic_cocode} } }, started);
-      const card = exact.results[0]; if (!card) continue;
-      card.matchEvidence = {method:relation.method, field:'canonical_legal_name',value:row.canonical_legal_name,requested:name,entityId:row.entity_id,entityClass:'insurer',source:'ins-insurer-006-wave1',normalization:relation.normalization};
-      card.whyMatched = `Name candidate: requested ?${name}? matches source canonical_legal_name ?${row.canonical_legal_name}? (${relation.method}); NAIC company code ${row.naic_cocode}. This is not a consumer-brand or agency association.`;
-      matches.set(row.entity_id,card);
-    }
-  }
-  const ordered=[...matches.values()].sort((a,b)=>Number(b.matchEvidence?.method==='normalized_exact_name')-Number(a.matchEvidence?.method==='normalized_exact_name')||a.displayName.localeCompare(b.displayName)||a.entityId.localeCompare(b.entityId));
-  truncated ||= ordered.length>10;
-  const candidates=ordered.slice(0,10);
+  const limit = Math.min(q.pageSize ?? NAME_CANDIDATE_WINDOW, NAME_CANDIDATE_WINDOW);
+  const { stream, window, cards: candidates } = await searchInsuranceNameCandidates({ name, entityClass: q.entityClass, page: q.page, limit, q: parsed.raw, options: q.requestOptions });
   if(q.selectedEntity){
-    const chosen=candidates.find(c=>c.entityId===q.selectedEntity);
+    // Revalidated against the WHOLE current candidate stream of this request, never just one window.
+    const selected=revalidateSelection(stream,q.selectedEntity), chosen=selected?cardForNameCandidate(selected,name):null;
     if(!chosen)return {...emptyBase(parsed,started),terminalState:'NEEDS_CLARIFICATION',limitations:['The selected identity is not a current candidate for this request. Refine or select again.',...LIMITATIONS]};
     if(q.requestedTask==='appointment'){
       if(!chosen.npn||!q.appointerName)return {...finish(parsed,[chosen],1,started,'Selected source identity'),terminalState:'NEEDS_CLARIFICATION',limitations:['Appointment research requires the selected NPN and an appointing entity. No LOA substitution was made.',...LIMITATIONS]};
@@ -1340,13 +1364,17 @@ async function lookupNameCandidates(parsed: ParsedInsuranceAsk, started: number)
     if(chosen.entityClass==='agency'){const creds=await credentialsForEntity(chosen.entityId,8);const first=creds[0];chosen.credentialJurisdiction=first?.jurisdiction??null;chosen.credentialStatus=first?.regulatory_status??null;chosen.licenseNumber=first?.license_number??null;chosen.licenseClass=first?.license_class??null;chosen.sourceDataset=first?.source_dataset??chosen.sourceDataset;chosen.sourceObservedAt=first?.source_observed_at??null;}
     return {...finish(parsed,[chosen],1,started,'Server-revalidated selected source identity'),terminalState:'IDENTITY_FOUND'};
   }
-  for(const card of candidates)card.selectionHref='/ask?'+new URLSearchParams({q:parsed.raw,...q.requestOptions,selected:card.entityId});
-  const result=finish(parsed,candidates,candidates.length,started,'Displayed source-name candidates; not an exhaustive market count');
-  result.candidateSelection=Boolean(candidates.length);result.candidateTruncated=truncated;
+  const bounded = window.completeness === 'SCAN_BOUND_REACHED';
+  // `total` is the computed count of distinct matched identities when the source was read to its end;
+  // otherwise only what this request has actually established -- never presented as a census.
+  const established = window.matchedCount ?? stream.candidates.length;
+  const result=finish(parsed,candidates,established,started,'Displayed source-name candidates; not an exhaustive market count');
+  result.pagination={page:window.page,pageSize:window.limit,total:established,hasMore:window.hasMore};
+  result.nameCandidateWindow=window;
+  result.candidateSelection=Boolean(stream.candidates.length);result.candidateTruncated=window.hasMore||bounded;
   result.counts = candidates.length ? [{label:'Displayed source-name candidates',value:candidates.length,grain:'Bounded candidate identities; not an exhaustive market count'}] : [];
-  result.terminalState=candidates.length?'NEEDS_CLARIFICATION':'NO_MATCH';
-  result.pagination.hasMore=false;
-  result.limitations=[...(truncated?['Candidate retrieval is capped at 10 displayed identities. Refine the name; no exact total or uniqueness is asserted.']:[]),'Agency graph names and published Wave-1 legal-insurer names are searched separately. Display names are not assumed to be official DBAs.',...LIMITATIONS];
+  result.terminalState=stream.candidates.length||bounded?'NEEDS_CLARIFICATION':'NO_MATCH';
+  result.limitations=[...(window.hasMore?['More matching source-name candidates are available in the next window. Candidates are shown 10 at a time; no uniqueness is asserted.']:[]),...(bounded?['The name is broad enough that the source scan bound was reached. Refine the name; no total is asserted and this is not a complete list.']:[]),'Agency graph names and published Wave-1 legal-insurer names are searched separately. Display names are not assumed to be official DBAs.',...LIMITATIONS];
   return result;
 }
 

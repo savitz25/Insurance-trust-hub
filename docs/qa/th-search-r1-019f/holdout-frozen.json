@@ -1,0 +1,314 @@
+{
+  "frozenAt": "2026-09-20T02:53:49.051Z",
+  "method": "agencies: first national_entities agency at or after each of ten fixed UUID keyset anchors; insurers: Wave-1 sorted by NAIC code at fixed positions; variants derived mechanically; misses are invented strings. Drawn from the source, not through the candidate engine.",
+  "cases": [
+    {
+      "id": "A1-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "SJD INSURANCE SERVICES INC",
+      "expectedEntityId": "0a013d09-ce24-43bf-b696-d7e644f41120",
+      "expectedClass": "agency",
+      "sourceName": "SJD INSURANCE SERVICES INC"
+    },
+    {
+      "id": "A1-lower",
+      "kind": "agency lowercase",
+      "supplied": "sjd insurance services inc",
+      "expectedEntityId": "0a013d09-ce24-43bf-b696-d7e644f41120",
+      "expectedClass": "agency",
+      "sourceName": "SJD INSURANCE SERVICES INC"
+    },
+    {
+      "id": "A2-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "HAND TAX ADVISORY GROUP, INC.",
+      "expectedEntityId": "1f000fe9-1662-4ff1-8848-83f9de0dc256",
+      "expectedClass": "agency",
+      "sourceName": "HAND TAX ADVISORY GROUP, INC."
+    },
+    {
+      "id": "A2-lower",
+      "kind": "agency lowercase",
+      "supplied": "hand tax advisory group, inc.",
+      "expectedEntityId": "1f000fe9-1662-4ff1-8848-83f9de0dc256",
+      "expectedClass": "agency",
+      "sourceName": "HAND TAX ADVISORY GROUP, INC."
+    },
+    {
+      "id": "A2-punct",
+      "kind": "agency punctuation variant",
+      "supplied": "HAND TAX ADVISORY GROUP INC",
+      "expectedEntityId": "1f000fe9-1662-4ff1-8848-83f9de0dc256",
+      "expectedClass": "agency",
+      "sourceName": "HAND TAX ADVISORY GROUP, INC."
+    },
+    {
+      "id": "A3-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "ZIP BONDS LLC,",
+      "expectedEntityId": "33004e5c-28c6-4c50-ad05-fc4d2aab5fde",
+      "expectedClass": "agency",
+      "sourceName": "ZIP BONDS LLC,"
+    },
+    {
+      "id": "A3-lower",
+      "kind": "agency lowercase",
+      "supplied": "zip bonds llc,",
+      "expectedEntityId": "33004e5c-28c6-4c50-ad05-fc4d2aab5fde",
+      "expectedClass": "agency",
+      "sourceName": "ZIP BONDS LLC,"
+    },
+    {
+      "id": "A3-punct",
+      "kind": "agency punctuation variant",
+      "supplied": "ZIP BONDS LLC",
+      "expectedEntityId": "33004e5c-28c6-4c50-ad05-fc4d2aab5fde",
+      "expectedClass": "agency",
+      "sourceName": "ZIP BONDS LLC,"
+    },
+    {
+      "id": "A4-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "ALEXANDER CAPITAL INS AGENCY LLC,",
+      "expectedEntityId": "4c013b99-ab7a-44fc-aafc-832e243e32c0",
+      "expectedClass": "agency",
+      "sourceName": "ALEXANDER CAPITAL INS AGENCY LLC,"
+    },
+    {
+      "id": "A4-lower",
+      "kind": "agency lowercase",
+      "supplied": "alexander capital ins agency llc,",
+      "expectedEntityId": "4c013b99-ab7a-44fc-aafc-832e243e32c0",
+      "expectedClass": "agency",
+      "sourceName": "ALEXANDER CAPITAL INS AGENCY LLC,"
+    },
+    {
+      "id": "A4-punct",
+      "kind": "agency punctuation variant",
+      "supplied": "ALEXANDER CAPITAL INS AGENCY LLC",
+      "expectedEntityId": "4c013b99-ab7a-44fc-aafc-832e243e32c0",
+      "expectedClass": "agency",
+      "sourceName": "ALEXANDER CAPITAL INS AGENCY LLC,"
+    },
+    {
+      "id": "A5-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "KNIGHT-MIZE,INC.",
+      "expectedEntityId": "610048d4-4db7-4dd4-b035-f00526fd98a9",
+      "expectedClass": "agency",
+      "sourceName": "KNIGHT-MIZE,INC."
+    },
+    {
+      "id": "A5-lower",
+      "kind": "agency lowercase",
+      "supplied": "knight-mize,inc.",
+      "expectedEntityId": "610048d4-4db7-4dd4-b035-f00526fd98a9",
+      "expectedClass": "agency",
+      "sourceName": "KNIGHT-MIZE,INC."
+    },
+    {
+      "id": "A5-punct",
+      "kind": "agency punctuation variant",
+      "supplied": "KNIGHT-MIZE INC",
+      "expectedEntityId": "610048d4-4db7-4dd4-b035-f00526fd98a9",
+      "expectedClass": "agency",
+      "sourceName": "KNIGHT-MIZE,INC."
+    },
+    {
+      "id": "A6-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "RSB, INC.,",
+      "expectedEntityId": "7e006049-980c-4252-9f8e-1b661e7e25ae",
+      "expectedClass": "agency",
+      "sourceName": "RSB, INC.,"
+    },
+    {
+      "id": "A6-lower",
+      "kind": "agency lowercase",
+      "supplied": "rsb, inc.,",
+      "expectedEntityId": "7e006049-980c-4252-9f8e-1b661e7e25ae",
+      "expectedClass": "agency",
+      "sourceName": "RSB, INC.,"
+    },
+    {
+      "id": "A6-punct",
+      "kind": "agency punctuation variant",
+      "supplied": "RSB INC",
+      "expectedEntityId": "7e006049-980c-4252-9f8e-1b661e7e25ae",
+      "expectedClass": "agency",
+      "sourceName": "RSB, INC.,"
+    },
+    {
+      "id": "A7-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "V FINANCIAL LLC",
+      "expectedEntityId": "950035d4-7ba5-40a5-8a9b-97dbdfd79969",
+      "expectedClass": "agency",
+      "sourceName": "V FINANCIAL LLC"
+    },
+    {
+      "id": "A7-lower",
+      "kind": "agency lowercase",
+      "supplied": "v financial llc",
+      "expectedEntityId": "950035d4-7ba5-40a5-8a9b-97dbdfd79969",
+      "expectedClass": "agency",
+      "sourceName": "V FINANCIAL LLC"
+    },
+    {
+      "id": "A8-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "AEGIS FINANCIAL SERVICES LLC,",
+      "expectedEntityId": "a8000e74-d07d-4a18-9635-d7687dadf36f",
+      "expectedClass": "agency",
+      "sourceName": "AEGIS FINANCIAL SERVICES LLC,"
+    },
+    {
+      "id": "A8-lower",
+      "kind": "agency lowercase",
+      "supplied": "aegis financial services llc,",
+      "expectedEntityId": "a8000e74-d07d-4a18-9635-d7687dadf36f",
+      "expectedClass": "agency",
+      "sourceName": "AEGIS FINANCIAL SERVICES LLC,"
+    },
+    {
+      "id": "A8-punct",
+      "kind": "agency punctuation variant",
+      "supplied": "AEGIS FINANCIAL SERVICES LLC",
+      "expectedEntityId": "a8000e74-d07d-4a18-9635-d7687dadf36f",
+      "expectedClass": "agency",
+      "sourceName": "AEGIS FINANCIAL SERVICES LLC,"
+    },
+    {
+      "id": "A9-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "ASCENT FINANCIAL SOLUTIONS LLC DBA ASCENT SOLUTIONS INSURANCE AGENCY",
+      "expectedEntityId": "c200d0c6-954c-4def-8aa0-60b7ecea4a50",
+      "expectedClass": "agency",
+      "sourceName": "ASCENT FINANCIAL SOLUTIONS LLC DBA ASCENT SOLUTIONS INSURANCE AGENCY"
+    },
+    {
+      "id": "A9-lower",
+      "kind": "agency lowercase",
+      "supplied": "ascent financial solutions llc dba ascent solutions insurance agency",
+      "expectedEntityId": "c200d0c6-954c-4def-8aa0-60b7ecea4a50",
+      "expectedClass": "agency",
+      "sourceName": "ASCENT FINANCIAL SOLUTIONS LLC DBA ASCENT SOLUTIONS INSURANCE AGENCY"
+    },
+    {
+      "id": "A10-exact",
+      "kind": "agency exact source legal name",
+      "supplied": "MICHAEL WHITAKER AND ASSOCIATES, LLC",
+      "expectedEntityId": "e700d92f-1e2d-4edc-bc94-49dcbfda4917",
+      "expectedClass": "agency",
+      "sourceName": "MICHAEL WHITAKER AND ASSOCIATES, LLC"
+    },
+    {
+      "id": "A10-lower",
+      "kind": "agency lowercase",
+      "supplied": "michael whitaker and associates, llc",
+      "expectedEntityId": "e700d92f-1e2d-4edc-bc94-49dcbfda4917",
+      "expectedClass": "agency",
+      "sourceName": "MICHAEL WHITAKER AND ASSOCIATES, LLC"
+    },
+    {
+      "id": "A10-punct",
+      "kind": "agency punctuation variant",
+      "supplied": "MICHAEL WHITAKER AND ASSOCIATES LLC",
+      "expectedEntityId": "e700d92f-1e2d-4edc-bc94-49dcbfda4917",
+      "expectedClass": "agency",
+      "sourceName": "MICHAEL WHITAKER AND ASSOCIATES, LLC"
+    },
+    {
+      "id": "I1-exact",
+      "kind": "published Wave-1 legal insurer exact name",
+      "supplied": "CITIZENS PROP INS CORP",
+      "expectedEntityId": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+      "expectedClass": "insurer",
+      "sourceName": "CITIZENS PROP INS CORP"
+    },
+    {
+      "id": "I1-lower",
+      "kind": "published Wave-1 legal insurer lowercase",
+      "supplied": "citizens prop ins corp",
+      "expectedEntityId": "27d7418a-d2bf-4339-8c3b-4774e7f403bc",
+      "expectedClass": "insurer",
+      "sourceName": "CITIZENS PROP INS CORP"
+    },
+    {
+      "id": "I2-exact",
+      "kind": "published Wave-1 legal insurer exact name",
+      "supplied": "OCEAN HARBOR CAS INS CO",
+      "expectedEntityId": "311b9c1e-e164-49e3-9e81-d9bc6d95d68c",
+      "expectedClass": "insurer",
+      "sourceName": "OCEAN HARBOR CAS INS CO"
+    },
+    {
+      "id": "I2-lower",
+      "kind": "published Wave-1 legal insurer lowercase",
+      "supplied": "ocean harbor cas ins co",
+      "expectedEntityId": "311b9c1e-e164-49e3-9e81-d9bc6d95d68c",
+      "expectedClass": "insurer",
+      "sourceName": "OCEAN HARBOR CAS INS CO"
+    },
+    {
+      "id": "I3-exact",
+      "kind": "published Wave-1 legal insurer exact name",
+      "supplied": "MONARCH NATL INS CO",
+      "expectedEntityId": "699aa912-cba1-425d-867b-26e7e82320fd",
+      "expectedClass": "insurer",
+      "sourceName": "MONARCH NATL INS CO"
+    },
+    {
+      "id": "I3-lower",
+      "kind": "published Wave-1 legal insurer lowercase",
+      "supplied": "monarch natl ins co",
+      "expectedEntityId": "699aa912-cba1-425d-867b-26e7e82320fd",
+      "expectedClass": "insurer",
+      "sourceName": "MONARCH NATL INS CO"
+    },
+    {
+      "id": "I4-exact",
+      "kind": "published Wave-1 legal insurer exact name",
+      "supplied": "MID CENTURY INS CO",
+      "expectedEntityId": "488c66f8-8f2b-44c8-955a-71aaefcc9ca5",
+      "expectedClass": "insurer",
+      "sourceName": "MID CENTURY INS CO"
+    },
+    {
+      "id": "I4-lower",
+      "kind": "published Wave-1 legal insurer lowercase",
+      "supplied": "mid century ins co",
+      "expectedEntityId": "488c66f8-8f2b-44c8-955a-71aaefcc9ca5",
+      "expectedClass": "insurer",
+      "sourceName": "MID CENTURY INS CO"
+    },
+    {
+      "id": "B1-broad",
+      "kind": "broad multi-candidate name (frozen multi-window term)",
+      "supplied": "allied",
+      "expectedEntityId": null,
+      "expectedClass": null
+    },
+    {
+      "id": "M1-miss",
+      "kind": "genuine miss",
+      "supplied": "Zyqorvane Underwriters",
+      "expectedEntityId": null,
+      "expectedClass": null
+    },
+    {
+      "id": "M2-miss",
+      "kind": "genuine miss",
+      "supplied": "Quixelborn Mutual Assurance",
+      "expectedEntityId": null,
+      "expectedClass": null
+    },
+    {
+      "id": "M3-miss",
+      "kind": "genuine miss",
+      "supplied": "Vantrellisk Risk Partners",
+      "expectedEntityId": null,
+      "expectedClass": null
+    }
+  ]
+}

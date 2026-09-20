@@ -62,7 +62,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
       {q.conditions?.length ? <section className="rounded-2xl border bg-white p-5"><h2 className="font-semibold">Additional requested conditions</h2><ul>{q.conditions.map((c,i)=><li key={i}>{c.meaning}: {c.value} ? {c.outcome}. Identity resolution does not establish this condition.</li>)}</ul></section>:null}
       {q.directoryContext?.unresolvedConditions.map(x=><p key={x} className="rounded-xl bg-amber-50 p-4">{x}</p>)}
       {result.terminalState === 'NO_MATCH' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">No matching indexed research identity</h2><p>The complete {q.identifier ? `${q.identifier.type} ${q.identifier.value}` : q.nameQuery} was searched in the permitted corpus. No other identity or cohort was substituted. Absence here does not establish an invalid identifier or lack of authorization.</p></section>:null}
-      {result.candidateSelection ? <section className="rounded-xl bg-sky-50 p-4"><h2 className="text-xl font-semibold">Select the source identity you mean</h2><p>Names indicate candidates. Compare class and identifiers before continuing the original question.</p>{result.candidateTruncated?<p>Only 10 candidates are displayed; refine the name. This is not an exhaustive total.</p>:null}</section>:null}
+      {result.candidateSelection ? <section className="rounded-xl bg-sky-50 p-4"><h2 className="text-xl font-semibold">Select the source identity you mean</h2><p>Names indicate candidates. Compare class and identifiers before continuing the original question.</p>{result.nameCandidateWindow?.outOfRange?<p className="mt-2">This candidate window is past the end of the matching source-name candidates. No candidate was substituted. <Link href={insuranceRequestHref(result.queryText,q.requestOptions,1)} className="font-semibold text-sky-800 underline">Return to the first window</Link>.</p>:null}{result.nameCandidateWindow?.hasMore?<p className="mt-2">More matching source-name candidates are available. Candidates are shown {result.nameCandidateWindow.limit} at a time in a fixed order; use Next to continue, or refine the name.</p>:null}{result.nameCandidateWindow?.completeness==='SCAN_BOUND_REACHED'?<p className="mt-2">This name is very broad: the source search stopped at its scan bound, so this is not a complete candidate list and no total is asserted. Refine the name.</p>:null}</section>:null}
       {q.mode === 'directory' && (q.directoryZip || q.directoryLaunchCountyId) ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">
           <h2 className="text-2xl font-semibold text-[#0A2540]">Local directory research</h2>
@@ -216,7 +216,25 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         </ol>
       ) : null}
 
-      {result.results.length > 0 && result.pagination.total > INSURANCE_ASK_PAGE_SIZE ? (
+      {result.nameCandidateWindow && (result.nameCandidateWindow.page > 1 || result.nameCandidateWindow.hasMore) ? (
+        <nav className="flex flex-wrap items-center gap-3" aria-label="Source-name candidate windows" data-name-candidate-nav>
+          {result.nameCandidateWindow.page > 1 ? (
+            <Link href={insuranceRequestHref(result.queryText,q.requestOptions,result.nameCandidateWindow.page-1)} className="inline-flex min-h-11 items-center rounded-xl border px-4">
+              Previous
+            </Link>
+          ) : null}
+          {result.nameCandidateWindow.hasMore && result.nameCandidateWindow.nextPage ? (
+            <Link href={insuranceRequestHref(result.queryText,q.requestOptions,result.nameCandidateWindow.nextPage)} className="inline-flex min-h-11 items-center rounded-xl bg-[#0A2540] px-4 text-white">
+              Next
+            </Link>
+          ) : null}
+          <p className="text-xs">
+            Candidate window {result.nameCandidateWindow.page}{result.nameCandidateWindow.hasMore ? ' · more matching source-name candidates are available' : result.nameCandidateWindow.completeness === 'COMPLETE' && !result.nameCandidateWindow.outOfRange ? ' · last window for this name' : ''}
+          </p>
+        </nav>
+      ) : null}
+
+      {!result.nameCandidateWindow && result.results.length > 0 && result.pagination.total > INSURANCE_ASK_PAGE_SIZE ? (
         <nav className="flex gap-3" aria-label="Pagination">
           {result.pagination.page > 1 ? (
             <Link href={insuranceRequestHref(result.queryText,q.requestOptions,result.pagination.page-1)} className="inline-flex min-h-11 items-center rounded-xl border px-4">
