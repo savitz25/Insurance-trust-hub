@@ -11,6 +11,9 @@
     "url": "https://github.com/savitz25/Insurance-trust-hub/issues"
   },
   "scripts": {
+    "check:v2-save": "tsx --test scripts/test-v2-save.ts && node --test scripts/test-v2-save-action.mjs",
+    "qa:v2-save": "node scripts/qa-v2-save.mjs",
+    "test:v2-save:browser": "node scripts/test-v2-save-browser.mjs",
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
@@ -239,6 +242,7 @@
     "@types/pg": "^8.15.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "0.28.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.19",
     "tailwindcss": "^4",
