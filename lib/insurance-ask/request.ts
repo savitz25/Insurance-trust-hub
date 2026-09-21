@@ -22,6 +22,31 @@ const KEYS = [
   "zip",
   "selected",
 ];
+/**
+ * SQA-009-RESTORE-001B: consumer HTML /ask is a GET form (q + optional advanced filters)
+ * on a site that also uses chrome query keys (`from` for context-nav, `hub_resume` for
+ * Switch Hub). Those keys are not research filters. Treating them as "unsupported request
+ * parameters" fail-closed the entire natural-language interpretation ("Use one value for
+ * each supported request parameter." / Coverage UNSUPPORTED / Check the request / zero
+ * agencies) even when `q` was a valid 001B discovery request. Ignore chrome keys and
+ * empty filter values so typed Research can execute+disclose. Duplicate *research* keys
+ * and invalid non-empty filters still fail closed. `selected=undefined` remains invalid
+ * (name-continuation contract), while empty / stringified-absent Advanced filters are not
+ * applied as entity/state/loa/evidence.
+ */
+const CHROME_PARAM =
+  /^(?:from|hub_resume|_rsc|_vercel_share|vercelToolbarCode|dpl|fbclid|gclid|gclsrc|dclid|msclkid|twclid|ttclid|li_fat_id|mc_cid|mc_eid|_ga|_gl|vero_id)$/i;
+function isChromeParam(key: string): boolean {
+  return CHROME_PARAM.test(key) || key.toLowerCase().startsWith("utm_");
+}
+/** A request option is real only if it is a non-empty string that is not a stringified absence. */
+function realOption(value: unknown): value is string {
+  return typeof value === "string" && value !== "" && value !== "undefined" && value !== "null";
+}
+/** Present research values only: empty / stringified absence is not a parameter the consumer chose. */
+function presentParamValues(params: URLSearchParams, key: string): string[] {
+  return params.getAll(key).filter(realOption);
+}
 export function readInsuranceRequest(
   input: URLSearchParams | Record<string, string | string[] | undefined>,
 ): InsuranceRequest {
@@ -42,9 +67,13 @@ export function readInsuranceRequest(
     page: Number(params.get("page") || "1"),
     options: {},
   };
-  for (const key of params.keys())
-    if (!KEYS.includes(key) || params.getAll(key).length > 1)
+  for (const key of new Set(params.keys())) {
+    if (isChromeParam(key)) continue;
+    const values = params.getAll(key).filter((value) => value !== "");
+    if (!values.length) continue;
+    if (!KEYS.includes(key) || values.length > 1)
       out.error = "Use one value for each supported request parameter.";
+  }
   if (out.raw.length > INSURANCE_ASK_INPUT_LIMIT)
     out.error = `Use at most ${INSURANCE_ASK_INPUT_LIMIT} characters; no input was truncated.`;
   if (!Number.isInteger(out.page) || out.page < 1 || out.page > 200)
@@ -56,11 +85,11 @@ export function readInsuranceRequest(
     evidence: ["credential", "appointment", "marketplace"],
   };
   for (const [key, values] of Object.entries(allowed)) {
-    const value = params.get(key);
-    if (value) {
-      if (!values.includes(value)) out.error = `Invalid ${key} filter.`;
-      else (out.options as Record<string, string>)[key] = value;
-    }
+    const chosen = presentParamValues(params, key);
+    if (!chosen.length) continue;
+    const value = chosen[0]!;
+    if (!values.includes(value)) out.error = `Invalid ${key} filter.`;
+    else (out.options as Record<string, string>)[key] = value;
   }
   const zip = params.get("zip"),
     selected = params.get("selected");
@@ -220,10 +249,6 @@ export function planInsuranceRequest(
   return p;
 }
 const HREF_OPTION_KEYS = ["entity", "state", "loa", "evidence", "zip"] as const;
-/** A request option is real only if it is a non-empty string that is not a stringified absence. */
-function realOption(value: unknown): value is string {
-  return typeof value === "string" && value !== "" && value !== "undefined" && value !== "null";
-}
 /** Only real option values survive: an absent filter is dropped, never carried as `undefined`. */
 export function definedRequestOptions(options: InsuranceRequestOptions = {}): InsuranceRequestOptions {
   return Object.fromEntries(Object.entries(options).filter(([, value]) => realOption(value))) as InsuranceRequestOptions;
