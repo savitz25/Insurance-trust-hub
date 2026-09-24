@@ -287,6 +287,24 @@ const STATE_CARD_COPY: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-18" },
     ],
   },
+  {
+    state: "Georgia",
+    abbreviation: "GA",
+    href: "/georgia",
+    regulators: "Georgia Office of the Commissioner of Insurance and Safety Fire",
+    evidence: [
+      "Sircon license lookup (search-only)",
+      "HB410 principal-agency structure",
+      "OCI receivership index since September 2010",
+      "Consumer complaint intake (no public dataset)",
+    ],
+    limitation:
+      "Agency, producer, and company bulk rosters were not acquired. Receivership names are not NAIC attachments. Atlanta hub copy is not an OCI census. Search-only is not zero.",
+    sourceClocks: [
+      { label: "OCI pages retrieved", retrievedAt: "2026-09-23T23:15:00Z" },
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-23" },
+    ],
+  },
 ] as const;
 
 export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = STATE_CARD_COPY

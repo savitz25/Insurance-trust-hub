@@ -225,6 +225,9 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   if (!input.publishedStateIntelligencePaths.includes('/ohio')) {
     throw new Error('Ohio state intelligence path missing');
   }
+  if (!input.publishedStateIntelligencePaths.includes('/georgia')) {
+    throw new Error('Georgia state intelligence path missing');
+  }
   if (input.ohioAuthorizedCompaniesDistinctNaic === input.legalInsurers) {
     throw new Error('Ohio authorized companies must not equal national legal insurers');
   }
@@ -1206,9 +1209,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio /georgia publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC, OH',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC, OH, GA',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -1216,7 +1219,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel', 'oh-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel', 'oh-intel', 'ga-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),

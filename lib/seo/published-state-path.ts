@@ -4,6 +4,7 @@ export const PUBLISHED_STATEWIDE_SLUGS = [
   'california',
   'colorado',
   'florida',
+  'georgia',
   'illinois',
   'new-jersey',
   'new-york',
