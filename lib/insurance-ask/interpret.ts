@@ -85,6 +85,86 @@ export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
   const early = raw.trim();
+  const georgiaEarly = /\bgeorgia\b/i.test(early);
+  const labeledGeorgiaId = /\b(npn|naic)\b/i.test(early);
+  if (
+    /\b(atlanta|savannah)\b/i.test(early) &&
+    /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(early) &&
+    !labeledGeorgiaId
+  ) {
+    const products = detectRequestedConsumerProducts(early);
+    const query = fail(
+      products.length
+        ? `This statewide Georgia insurance page does not publish Atlanta, Savannah, or other local insurance intelligence routes, and it cannot show a ${products.join(' / ')}-qualified local cohort. Atlanta hub copy is not an OCI license census. License geography is statewide.`
+        : 'This statewide Georgia insurance page does not publish Atlanta, Savannah, or other local insurance intelligence routes. Atlanta is geography, not a licensing regime. Atlanta hub copy is not an OCI license census.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    if (products.length) query.requestedProduct = products;
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'UNSUPPORTED — no Georgia local intelligence' }] };
+  }
+  if (
+    georgiaEarly &&
+    /\b(augusta|macon|columbus)\b/i.test(early) &&
+    /\b(insurance|agenc|agent|insurer|company|producer)\b/i.test(early) &&
+    !labeledGeorgiaId
+  ) {
+    const query = fail(
+      'This statewide Georgia insurance page does not publish Augusta, Macon, Columbus, or other local insurance intelligence routes. License geography is statewide.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'UNSUPPORTED — no Georgia local intelligence' }] };
+  }
+  if (georgiaEarly && /complaint/i.test(early) && !labeledGeorgiaId) {
+    const query = fail(
+      'OCI accepts consumer insurance complaints, but a public complaint dataset was not acquired. Complaint intake is not a bulk census and is not zero. A complaint is not a finding. Confirm /georgia and the OCI consumer complaint portal.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Georgia complaint dataset' }] };
+  }
+  if (georgiaEarly && /receivership|liquidat/i.test(early) && !labeledGeorgiaId) {
+    const query = fail(
+      'OCI receivership index lists 7 companies subject to receivership action since September 2010. Each company page publishes a liquidation-order document; those PDF order dates were not extracted. Friday Health Plans of Georgia, Inc. and Sonder Health Plans, Inc. are later announcements and are not on that index. All nine are insurer-grain events. Exact NAIC attachments: 0. A name is not a join. Confirm /georgia.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    query.entityClass = 'insurer';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Georgia receivership index' }] };
+  }
+  if (georgiaEarly && /mental health parity|parity fine|parity violation/i.test(early) && !labeledGeorgiaId) {
+    const query = fail(
+      'The January 12, 2026 OCI announcement describes market-conduct examinations of twenty-two insurers and nearly $25 million in fines. It does not name the insurers or NAIC codes. Company-level orders were not acquired. The announcement is not a company roster. Confirm /georgia.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'PARTIAL';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Georgia mental-health parity announcement' }] };
+  }
+  if (georgiaEarly && /branch agenc|branch licens/i.test(early) && !labeledGeorgiaId) {
+    const query = fail(
+      'HB410, signed May 14, 2025, eliminated Georgia branch-agency licensing. The current business entity is the principal agency. Historical branch evidence is not a current branch-license census. Confirm /georgia and OCI agency licensing.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'UNSUPPORTED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'UNSUPPORTED — no current Georgia branch-license census' }] };
+  }
+  if (georgiaEarly && /serff|rate filing/i.test(early) && !labeledGeorgiaId) {
+    const query = fail(
+      'Georgia SERFF rate and form filings were not acquired. A filing is not a premium and not a license census. Search-only is not zero. Confirm /georgia.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Georgia SERFF filings' }] };
+  }
+  if (georgiaEarly && /consent order|market conduct|enforcement action|\bfine/i.test(early) && !labeledGeorgiaId) {
+    const query = fail(
+      'Company-level Georgia consent orders, market-conduct orders, and fines were not acquired as a catalog. The January 12, 2026 mental-health parity release is an aggregate announcement only. Receivership evidence on /georgia is a separate grain. Search-only is not zero.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'NOT_ACQUIRED — Georgia order catalog' }] };
+  }
   if (/\boregon\b/i.test(early) && /receivership|in supervision/i.test(early)) {
     const query = fail(
       'Oregon receivership is official NAIC GRID search-only. DFR supervision orders are a separate grain and are not a receivership census. Historical receivership is not current license status.',
@@ -979,6 +1059,51 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   }
 
   if (
+    (/\bgeorgia\b/i.test(q) || detectStates(q)[0] === 'GA') &&
+    /\bagenc/i.test(q) &&
+    /\b(agents?|producers?|insurers?|insurance compan)/i.test(q)
+  ) {
+    const query = fail(
+      'Georgia agency, producer, and insurer counts are different grains and were not acquired as bulk rosters. They are not added into one Georgia insurance-business total. Sircon lookup is search-only. Search-only is not zero. Confirm /georgia.',
+      ['Open Georgia insurance research.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.jurisdiction = { state: 'GA', meaning: geographyMeaning(q) };
+    push('Coverage', 'NOT_ACQUIRED — Georgia grains stay separate');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (
+    (/\bgeorgia\b/i.test(q) || detectStates(q)[0] === 'GA') &&
+    /\b(insurance agents?|producers?)\b/i.test(q) &&
+    !/\bagenc/i.test(q)
+  ) {
+    const query = fail(
+      'Georgia individual-producer bulk roster was not acquired. A producer is not an agency and not an insurer. NPN is not an NAIC company code. Sircon lookup is search-only. Search-only is not zero. Confirm /georgia.',
+      ['Open Georgia insurance research.', 'Find NPN 10391484.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'person';
+    query.jurisdiction = { state: 'GA', meaning: geographyMeaning(q) };
+    push('Coverage', 'NOT_ACQUIRED — Georgia producer roster');
+    return { raw: q, query, interpretation: lines };
+  }
+  if ((/\bgeorgia\b/i.test(q) || detectStates(q)[0] === 'GA') && /\bagenc/i.test(q) && !/\b(agents?|producers?)\b/i.test(q)) {
+    const products = detectRequestedConsumerProducts(q);
+    const query = fail(
+      products.length
+        ? `Georgia agency bulk roster was not acquired, so this extract cannot show a ${products.join(' / ')}-qualified Georgia agency cohort. An agency is not an insurer and not an individual producer. Sircon lookup is search-only. Search-only is not zero. Confirm /georgia.`
+        : 'Georgia agency bulk roster was not acquired. An agency is not an insurer and not an individual producer. Sircon lookup is search-only. Search-only is not zero. Confirm /georgia.',
+      ['Open Georgia insurance research.', 'Find NPN 10391484.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'agency';
+    query.jurisdiction = { state: 'GA', meaning: geographyMeaning(q) };
+    if (products.length) query.requestedProduct = products;
+    push('Coverage', 'NOT_ACQUIRED — Georgia agency roster');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (
     /\b((?:licensed )?insurance agenc(?:y|ies)|insurance agents?|producers?)\b/i.test(q) &&
     /\b(colorado|virginia|new york|illinois|pennsylvania|north carolina)\b/i.test(q)
   ) {
@@ -1033,6 +1158,26 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     );
     query.coverageState = 'PARTIAL';
     push('Coverage', 'PARTIAL — Illinois Director’s Orders');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (
+    (/\bgeorgia\b/i.test(q) || detectStates(q)[0] === 'GA') &&
+    /\b(licensed insurance compan(?:y|ies)|legal insurers?|insurers?|insurance compan(?:y|ies))\b/i.test(q) &&
+    !/\bagenc/i.test(q)
+  ) {
+    const products = detectRequestedConsumerProducts(q);
+    const query = fail(
+      products.length
+        ? `Georgia insurance-company bulk roster was not acquired, so this extract cannot show a ${products.join(' / ')}-qualified Georgia insurer cohort. An insurer is not an agency. Sircon and OCI company licensing remain search-only. Search-only is not zero. Confirm /georgia.`
+        : 'Georgia insurance-company bulk roster was not acquired. An insurer is not an agency and not a producer. NAIC is not an NPN. Sircon lookup and OCI company licensing remain search-only. Search-only is not zero. This extract does not answer a company question with the agency roster. Confirm /georgia.',
+      ['Open Georgia insurance research.', 'Find insurer NAIC code 10064.'],
+    );
+    query.coverageState = 'NOT_ACQUIRED';
+    query.entityClass = 'insurer';
+    query.jurisdiction = { state: 'GA', meaning: geographyMeaning(q) };
+    if (products.length) query.requestedProduct = products;
+    push('Coverage', 'NOT_ACQUIRED — Georgia company roster');
     return { raw: q, query, interpretation: lines };
   }
 

@@ -23,6 +23,11 @@ test('PA-REL-001 mixed-case statewide paths normalize', () => {
   assert.equal(normalizedPublishedStatePath('/oHiO'), '/ohio');
   assert.equal(normalizedPublishedStatePath('/ohio'), null);
   assert.equal(normalizedPublishedStatePath('/Ohio/columbus'), null);
+  assert.equal(normalizedPublishedStatePath('/Georgia'), '/georgia');
+  assert.equal(normalizedPublishedStatePath('/GEORGIA'), '/georgia');
+  assert.equal(normalizedPublishedStatePath('/gEoRgIa'), '/georgia');
+  assert.equal(normalizedPublishedStatePath('/georgia'), null);
+  assert.equal(normalizedPublishedStatePath('/Georgia/atlanta'), null);
 });
 
 test('PA-REL-001 middleware issues 308', () => {
