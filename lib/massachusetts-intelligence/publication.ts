@@ -9,4 +9,4 @@ export const MASSACHUSETTS_INTELLIGENCE_GATE = {
 
 export const MA_STATE_INTEL_VERSION = 'insurance-ma-state-intel-v1' as const;
 export const CANONICAL_MA_SNAPSHOT_FINGERPRINT =
-  '654a543b2235e53408b15cd1bfe663ef475663394a1bc585e8c03df44ac8828f';
+  'fe08b5e2b602f9a7b3af61ea1986b678fda98d53e00e1efbdaf060e4b4d88f17';

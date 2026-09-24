@@ -106,7 +106,18 @@ for (const text of ['Massachusetts insurance enforcement', 'DOI administrative a
 }
 const license = q('Massachusetts license 18716726');
 ok(license.identifier?.type === 'state_license' && /Settlement Agreement/.test(license.failReason ?? ''), 'license number lookup');
-ok(!/Tran|Trucly/.test(license.failReason ?? ''), 'license lookup republishes no name');
+ok(/^Massachusetts license number 18716726 is printed on 1 DOI administrative-action row\(s\): effective 2026-01-06; disposition as listed: Settlement Agreement;/.test(license.failReason ?? ''), 'license lookup shows only non-name fields');
+
+// MA-INS-001P: committed captures carry no individual licensee names or caption parties (forward-only; history not rewritten).
+const rawActions = JSON.parse(read('data/massachusetts/ma-ins-001/admin-actions-page.json'));
+ok(rawActions.redaction?.ticket === 'MA-INS-001P' && rawActions.redaction.licensee_name_cells_withheld === 305, 'licensee names withheld in capture');
+const rawHearings = JSON.parse(read('data/massachusetts/ma-ins-001/hearing-decisions-page.json'));
+ok(rawHearings.items.every((i: { href: string; text: string }) => i.href.startsWith('[document link withheld') && /\[(party|caption) withheld\]/.test(i.text)), 'hearing captions and slugs withheld');
+const hearingIndex = JSON.parse(read('data/massachusetts/ma-ins-001/hearing-decisions-index.json')).rows as Array<Record<string, unknown>>;
+ok(hearingIndex.every((row) => !('caption' in row) && !('url' in row) && !('listing_text' in row)), 'hearing index has no caption or URL fields');
+for (const report of ['data/reports/ma-ins-001-held-npns.json', 'data/reports/ma-ins-002-decisions.json']) {
+  ok((JSON.parse(read(report)) as Array<Record<string, unknown>>).every((row) => !('name' in row)), `${report} carries no name field`);
+}
 for (const [text, city] of [['insurance company Boston', 'Boston'], ['insurance agency Worcester', 'Worcester'], ['insurance agency Springfield MA', 'Springfield']]) {
   const r = q(text);
   ok(r.coverageState === 'UNSUPPORTED' && (r.failReason ?? '').includes(city), `local: ${text}`);

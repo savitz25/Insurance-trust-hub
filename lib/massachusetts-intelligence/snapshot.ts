@@ -15,7 +15,7 @@ export function assertMassachusettsInsurance(
   value: MassachusettsInsuranceSnapshot = MASSACHUSETTS_SNAPSHOT,
 ): MassachusettsInsuranceSnapshot {
   if (value.version !== MA_STATE_INTEL_VERSION_CHECK) throw new Error(`Unexpected Massachusetts contract ${value.version}`);
-  if (value.fingerprint !== '654a543b2235e53408b15cd1bfe663ef475663394a1bc585e8c03df44ac8828f') {
+  if (value.fingerprint !== 'fe08b5e2b602f9a7b3af61ea1986b678fda98d53e00e1efbdaf060e4b4d88f17') {
     throw new Error('Massachusetts insurance snapshot fingerprint drifted');
   }
   if (value.publication.path !== '/massachusetts') throw new Error('path');
