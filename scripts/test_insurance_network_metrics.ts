@@ -100,9 +100,12 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     ohioSnapshotFingerprint: '37736ead0d717acbaa8b3cfdcfa43f7b14b5dae985a158dadb6f6d545ebb25bc',
     ohioAsOf: '2026-09-18',
     ohioAuthorizedCompaniesDistinctNaic: 1738,
+    massachusettsSnapshotFingerprint: '654a543b2235e53408b15cd1bfe663ef475663394a1bc585e8c03df44ac8828f',
+    massachusettsAsOf: '2026-09-01',
+    massachusettsLicensedOrApprovedDistinctNaic: 1693,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
-    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia'],
+    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts'],
     ...over,
   };
 }
@@ -229,7 +232,7 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     assert.equal(metricByKey(m, 'il_authorized_companies').value, null);
     assert.equal(metricByKey(m, 'il_authorized_companies').valueState, 'NOT_ACQUIRED');
     assert.match(metricByKey(m, 'il_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
-    assert.equal(metricByKey(m, 'published_state_intelligence_pages').value, 14);
+    assert.equal(metricByKey(m, 'published_state_intelligence_pages').value, 15);
     assert.equal(metricByKey(m, 'or_dfr_insurance_order_documents').value, 738);
     assert.equal(metricByKey(m, 'or_complaint_table_rows').value, 1309);
     assert.equal(metricByKey(m, 'or_authorized_companies').value, null);
@@ -261,6 +264,16 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
       () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio'] })),
       /Georgia state intelligence path missing/
     );
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia'] })),
+      /Massachusetts state intelligence path missing/
+    );
+    assert.throws(
+      () => computeInsuranceNetworkMetrics(baseInput({ massachusettsLicensedOrApprovedDistinctNaic: 6185 })),
+      /Massachusetts licensed or approved companies must not equal national legal insurers/
+    );
+    assert.equal(metricByKey(m, 'ma_licensed_or_approved_distinct_naic').value, 1693);
+    assert.equal(metricByKey(m, 'ma_licensed_or_approved_distinct_naic').sourceAsOf, '2026-09-01');
     assert.equal(metricByKey(m, 'pa_licensed_companies_distinct_naic').value, 1722);
     assert.equal(metricByKey(m, 'pa_enforcement_action_documents').value, 3232);
     assert.equal(metricByKey(m, 'pa_complaint_table_rows').value, 595);

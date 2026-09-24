@@ -65,6 +65,14 @@ assert(byKey.pa_licensed_companies_distinct_naic.value === 1722, "PA licensed me
 assert(byKey.pa_licensed_companies_distinct_naic.value !== byKey.licensed_insurance_companies.value, "PA companies != national companies");
 assert(byKey.pa_enforcement_action_documents.value === 3232, "PA enforcement metric");
 assert(byKey.pa_complaint_table_rows.value === 595, "PA complaint metric");
+assert(v1.massachusetts.snapshotFingerprint === pub.massachusettsSnapshotFingerprint, "MA snapshot fingerprint");
+assert(v1.massachusetts.licensedOrApprovedDistinctNaic === 1693, "MA 1693 licensed or approved companies");
+assert(byKey.ma_licensed_or_approved_distinct_naic.value === 1693, "MA licensed or approved metric");
+assert(byKey.ma_licensed_or_approved_distinct_naic.sourceAsOf === "2026-09-01", "MA company-list source clock");
+assert(byKey.ma_licensed_or_approved_distinct_naic.value !== byKey.licensed_insurance_companies.value, "MA companies != national companies");
+assert(byKey.ma_administrative_actions_observation_rows.value === 319, "MA 319 administrative-action rows");
+assert(byKey.ma_agency_roster_count.value === null, "MA agency roster is not a number");
+assert(byKey.ma_producer_roster_count.value === null, "MA producer roster is not a number");
 assert(byKey.il_authorized_companies.value === null, "IL authorized metric not a number");
 assert(byKey.il_authorized_companies.valueState === "UNKNOWN", "IL authorized not acquired");
 assert(byKey.il_directors_order_observations.value === 2896, "IL 2896 order metric");

@@ -153,7 +153,14 @@ assert(appointmentBecomesWorksFor() === false, 'T13 no WORKS_FOR');
 assert(maIndividualsArePublic() === false, 'T14 no individual indexing');
 assert(PUBLIC_PERSON_PROFILES_ENABLED === false, 'T14 gate');
 assert(mayPublishEntityKind('person') === false, 'T14 person unpublished');
-assert(!existsSync(join(root, 'app/massachusetts')), 'T15 no /massachusetts app');
+// T15: the regulatory adapter adds no route. The later MA-INS-001 state sprint publishes /massachusetts
+// from DOI company lists and administrative actions; that page must never read the producer extract.
+if (existsSync(join(root, 'app/massachusetts'))) {
+  const statePage =
+    readFileSync(join(root, 'app/massachusetts/page.tsx'), 'utf8') +
+    readFileSync(join(root, 'components/massachusetts/ma-state-page.tsx'), 'utf8');
+  assert(!/ma-doi-regulatory|ma-held-resolution|entity_kind/.test(statePage), 'T15 /massachusetts does not read the producer extract');
+}
 {
   const a = fingerprintLines(['b', 'a']);
   const b = fingerprintLines(['a', 'b']);

@@ -1,0 +1,30 @@
+{
+ "consumer_services": {
+  "url": "https://www.mass.gov/info-details/consumer-services",
+  "statements": [
+   "The Consumer Services Unit responds to inquiries and assists consumers in resolving insurance complaints against insurers, producers and other licensees.",
+   "In addition to providing consumers with general insurance information in the form of brochures and guides, Consumer Services also advises consumers of their options and rights under their policies, state laws and regulations. The section typically resolves over 2,000 written consumer complaints each year.",
+   "Consumer Service Unit examiners respond to inquiries involving most lines of insurance and provide information about licensed companies and products, including licenses status and complaint numbers. If a matter appears suspicious, it may be referred to the Special Investigations, Enforcement, or Market Conduct units for further review. Patterns such as delayed claim payments or other emerging industry trends are shared with the Division’s Financial Surveillance staff, as they may serve as early indicators of liquidity or solvency concerns."
+  ]
+ },
+ "filing_a_complaint": {
+  "url": "https://www.mass.gov/how-to/filing-an-insurance-complaint",
+  "statements": [
+   "Consumer Services responds to consumer inquiries and intervenes on behalf of consumers to help resolve complaints against insurers, agents, and other licensees.",
+   "Please be sure to send us all relevant information when you submit your complaint. If you need to send additional documents please email the information to csscomplaints@mass.gov and note that you filed a complaint and are providing additional documentation. Please be aware that Consumer Service will send a copy of your complaint and any related materials to any company, agent or licensee involved in this matter. Please do not send us any medical records."
+  ]
+ },
+ "find_licensees": {
+  "url": "https://www.mass.gov/info-details/find-insurance-agents-agencies-and-other-licensees",
+  "statements": [
+   "The Massachusetts Division of Insurance, through State Based Systems (SBS), offers an online verification service to check the license status of Insurance Producers, Insurance Agencies, Public Insurance Adjusters, Motor Vehicle Damage Appraisers, Consultant Advisors, Reinsurance Intermediary Brokers, Reinsurance Intermediary Managers, Surplus Lines Brokers and Life Settlement Brokers.",
+   "Online Verification Service is available at the Massachusetts State Service SBS page.",
+   "Lists of licensees may be created using the Report Generator function in SBS. The reports are available to download immediately after paying the fee assessed by the NAIC. Alternatively, you may request a report from the Division of Insurance using the public record request form. There is no charge for a public record request but note that it may take up to 10 business days to receive a response."
+  ],
+  "sbs_state_services_url": "https://sbs.naic.org/solar-web/pages/public/stateServices.jsf?state=MA",
+  "public_records_request_url": "https://www.mass.gov/doi-public-records-request",
+  "legacy_list_url": "https://www.mass.gov/lists/massachusetts-licensed-individuals-and-business-entities",
+  "legacy_list_url_serves": "The same Find Insurance Agents, Agencies and Other Licensees page (no pre-generated monthly lists offered)."
+ },
+ "retrieved_on": "2026-09-24"
+}

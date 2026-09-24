@@ -273,6 +273,14 @@ export type InsuranceNetworkMetricsV1 = {
     agencyRosterCoverage: 'ACQUIRED_MAJOR_LINES_BUSINESS_ENTITY_MAILING_LIST';
     licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT';
   };
+  massachusetts: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    licensedOrApprovedDistinctNaic: number;
+    producerRosterCoverage: 'NOT_ACQUIRED / PAID_OR_REQUEST';
+    agencyRosterCoverage: 'NOT_ACQUIRED / PAID_OR_REQUEST';
+    licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT';
+  };
   publication: {
     publicPeople: 0;
     publicGraphAgencies: 0;

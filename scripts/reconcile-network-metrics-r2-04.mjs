@@ -88,6 +88,16 @@ const specs = {
  OH: [
  ["authorized_companies.distinct_naic", "ODI authorized companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
  ],
+ MA: [
+ ["licensed_or_approved.distinct_naic", "DOI licensed or approved companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
+ ["designations.auto_liability_6g.distinct_naic", "Auto Liability 6G companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
+ ["designations.workers_comp_6e.distinct_naic", "Workers' Compensation 6E companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
+ ["designations.health_6b.distinct_naic", "Health 6B companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
+ ["designations.eligible_surplus_lines.distinct_naic", "Eligible surplus-lines companies (distinct NAIC)", "surplus_lines_observation", "RATE_MARKET"],
+ ["administrative_actions.observation_rows", "DOI administrative-action rows since 2015 (unattached)", "regulatory_evidence_row"],
+ ["hearing_decisions.listing_rows", "Public hearing decision listings", "regulatory_evidence_row"],
+ ["market_conduct.listing_rows", "Market-conduct report and adoption-order listings", "market_conduct_examination_listing", "EXAMINATIONS"],
+ ],
  NC: [
  ["licensing_actions.document_rows", "NCDOI Licensing Action catalog rows", "regulatory_evidence_row"],
  ["licensing_actions.producer_rows", "Insurance Producer licensing-action rows", "regulatory_evidence_row"],
@@ -97,8 +107,8 @@ const specs = {
  ["receiverships.named_current_estates", "Named current receivership/liquidation/rehab estates", "regulatory_evidence_row"],
  ]
 };
-const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina", OH:"Ohio" };
-const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina", OH:"ohio" };
+const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina", OH:"Ohio", MA:"Massachusetts" };
+const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina", OH:"ohio", MA:"massachusetts" };
 export function reconcile(manifest, root, census) {
   const paths = Object.fromEntries(Object.entries(slugs).map(([k,v]) => [k, `lib/${v}-intelligence/accepted-snapshot.json`]));
   const sources = Object.fromEntries(Object.entries(paths).map(([k,v])=>[k,read(root,v)]));

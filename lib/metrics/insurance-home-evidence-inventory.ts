@@ -305,6 +305,24 @@ const STATE_CARD_COPY: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-23" },
     ],
   },
+  {
+    state: "Massachusetts",
+    abbreviation: "MA",
+    href: "/massachusetts",
+    regulators: "Massachusetts Division of Insurance",
+    evidence: [
+      "Licensed or Approved Companies list by NAIC code",
+      "Auto 6G, Workers' Comp 6E, Health 6B and surplus-lines lists",
+      "DOI administrative actions since 2015",
+      "SBS license verification (search-only)",
+    ],
+    limitation:
+      "Agency and producer bulk rosters were not acquired. Company lists are never added together. Administrative actions are standalone events, not attached by name. Search-only is not zero.",
+    sourceClocks: [
+      { label: "DOI company lists", sourceAsOf: "2026-09-01" },
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-24" },
+    ],
+  },
 ] as const;
 
 export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = STATE_CARD_COPY
@@ -366,6 +384,7 @@ const FAMILY_BY_KEY: Record<string, InsuranceHomeEvidenceFamily> = {
   pa_complaint_table_rows: "COMPLAINTS",
   nc_licensing_action_rows: "REGULATORY_ENFORCEMENT",
   oh_authorized_companies_distinct_naic: "ENTITY_IDENTITY",
+  ma_licensed_or_approved_distinct_naic: "ENTITY_IDENTITY",
   public_directory_listings: "PUBLIC_SURFACES",
   published_state_intelligence_pages: "PUBLIC_SURFACES",
   public_legal_insurer_wave1_profiles: "PUBLIC_SURFACES",
@@ -414,6 +433,7 @@ const DESTINATION_BY_KEY: Record<string, string> = {
   pa_complaint_table_rows: "/pennsylvania",
   nc_licensing_action_rows: "/north-carolina",
   oh_authorized_companies_distinct_naic: "/ohio",
+  ma_licensed_or_approved_distinct_naic: "/massachusetts",
 };
 
 function fromMetric(

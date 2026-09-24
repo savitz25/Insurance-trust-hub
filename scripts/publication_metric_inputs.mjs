@@ -24,6 +24,7 @@ export function publicationMetricInputs() {
   const ncPub = read("lib/north-carolina-intelligence/publication.ts");
   const ohPub = read("lib/ohio-intelligence/publication.ts");
   const gaPub = read("lib/georgia-intelligence/publication.ts");
+  const maPub = read("lib/massachusetts-intelligence/publication.ts");
   const njPub = read("lib/new-jersey-intelligence/publication.ts");
   const flPub = read("lib/national/fl-state-intel.ts");
   const tx = readJson("lib/texas-intelligence/accepted-snapshot.json");
@@ -37,6 +38,7 @@ export function publicationMetricInputs() {
   const pa = readJson("lib/pennsylvania-intelligence/accepted-snapshot.json");
   const nc = readJson("lib/north-carolina-intelligence/accepted-snapshot.json");
   const oh = readJson("lib/ohio-intelligence/accepted-snapshot.json");
+  const ma = readJson("lib/massachusetts-intelligence/accepted-snapshot.json");
   const nj = readJson("lib/new-jersey-intelligence/accepted-snapshot.json");
   const fl = readJson("data/reports/fl-ins-006-state-snapshot.json");
   const flMc = readJson("data/reports/fl-ins-004-market-exam-census.json");
@@ -62,6 +64,7 @@ export function publicationMetricInputs() {
   const ncPath = ncPub.match(/path: '(\/[^']+)'/)?.[1];
   const ohPath = ohPub.match(/path: '(\/[^']+)'/)?.[1];
   const gaPath = gaPub.match(/path: '(\/[^']+)'/)?.[1];
+  const maPath = maPub.match(/path: '(\/[^']+)'/)?.[1];
   if (txPath && existsSync(join(root, "app/texas/page.tsx"))) paths.push(txPath);
   if (njPath && existsSync(join(root, "app/new-jersey/page.tsx"))) paths.push(njPath);
   if (caPath && existsSync(join(root, "app/california/page.tsx"))) paths.push(caPath);
@@ -75,6 +78,7 @@ export function publicationMetricInputs() {
   if (ncPath && existsSync(join(root, "app/north-carolina/page.tsx"))) paths.push(ncPath);
   if (ohPath && existsSync(join(root, "app/ohio/page.tsx"))) paths.push(ohPath);
   if (gaPath && existsSync(join(root, "app/georgia/page.tsx"))) paths.push(gaPath);
+  if (maPath && existsSync(join(root, "app/massachusetts/page.tsx"))) paths.push(maPath);
 
   const cmsSourceAsOf = cms.match(/modified: '([^']+)'/)?.[1]?.slice(0, 10) ;
   if (!cmsSourceAsOf) throw new Error("Missing CMS source clock");
@@ -153,6 +157,9 @@ export function publicationMetricInputs() {
     ohioSnapshotFingerprint: oh.fingerprint,
     ohioAsOf: oh.source_as_of,
     ohioAuthorizedCompaniesDistinctNaic: oh.authorized_companies.distinct_naic,
+    massachusettsSnapshotFingerprint: ma.fingerprint,
+    massachusettsAsOf: ma.source_as_of,
+    massachusettsLicensedOrApprovedDistinctNaic: ma.licensed_or_approved.distinct_naic,
     censusTask: census.task,
     censusAsOf: census.at,
     censusAgencies: census.entities.agency,
