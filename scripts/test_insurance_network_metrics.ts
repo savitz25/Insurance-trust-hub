@@ -100,7 +100,7 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     ohioSnapshotFingerprint: '37736ead0d717acbaa8b3cfdcfa43f7b14b5dae985a158dadb6f6d545ebb25bc',
     ohioAsOf: '2026-09-18',
     ohioAuthorizedCompaniesDistinctNaic: 1738,
-    massachusettsSnapshotFingerprint: '654a543b2235e53408b15cd1bfe663ef475663394a1bc585e8c03df44ac8828f',
+    massachusettsSnapshotFingerprint: 'fe08b5e2b602f9a7b3af61ea1986b678fda98d53e00e1efbdaf060e4b4d88f17',
     massachusettsAsOf: '2026-09-01',
     massachusettsLicensedOrApprovedDistinctNaic: 1693,
     publicLegalInsurerWave1: 26,

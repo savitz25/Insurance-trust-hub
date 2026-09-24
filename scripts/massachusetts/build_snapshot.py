@@ -183,6 +183,7 @@ def parse_company_workbook(path: Path) -> dict:
 # --- administrative actions ------------------------------------------------------------------
 HDR8 = ["Licensee Name", "MA License Number", "SIU Case No. and/or Docket Number", "Primary Allegations(s)",
         "Type of Disposition", "Fine/Restitution", "Licensing Action", "Effective Date"]
+WITHHELD_LINK = "[document link withheld: free-text slug]"
 HEADER_LABELS = set(HDR8) | {"Type of License", "Case No.", "Case Number", "Primary Allegation(s)", "Disposition"}
 
 
@@ -242,7 +243,8 @@ def parse_actions(page: dict) -> list[dict]:
         for n, cells in enumerate(body[1:] if header_published else body, 1):
             need(len(cells) == len(head), f"{year} row {n}: width {len(cells)} != {len(head)}")
             v = {h: c["t"] for h, c in zip(head, cells)}
-            links = [doc_url(a) for c in cells for a in c["a"]]
+            links = [doc_url(a) for c in cells for a in c["a"] if a != WITHHELD_LINK]
+            withheld_links = sum(1 for c in cells for a in c["a"] if a == WITHHELD_LINK)
             case_raw = v.get("SIU Case No. and/or Docket Number") or v.get("Case No.") or v.get("Case Number") or ""
             disposition_raw = v.get("Type of Disposition") or v.get("Disposition") or ""
             licensing_raw = v.get("Licensing Action")
@@ -289,6 +291,7 @@ def parse_actions(page: dict) -> list[dict]:
                 "effective_date": effective,
                 "effective_date_as_listed": effective_raw,
                 "document_urls": links,
+                "document_links_withheld": withheld_links,
                 "document_link_anomalies": anomalies,
             })
     return out
@@ -314,16 +317,16 @@ def parse_hearing_index(page: dict) -> list[dict]:
         rest = parts[1:] if docket else parts
         issued = parse_listing_date(rest[-1]) if rest else None
         caption = "; ".join(rest[:-1] if issued and len(rest) > 1 else rest)
+        caption_form = "DIVISION_V" if caption.startswith("Division of Insurance v") else "WITHHELD" if caption else "NONE"
         year = re.search(r"Year (\d{4})", item["heading"] or "")
         out.append({
             "n": n,
             "list_year": int(year.group(1)) if year else None,
             "docket": docket,
             "docket_prefix": re.match(r"[A-Z]+", docket).group(0) if docket else None,
-            "caption": caption,
+            "caption_form": caption_form,
             "issued_date": issued,
-            "listing_text": body,
-            "url": doc_url(item["href"]),
+            "document_ref": item["document_ref"],
         })
     return out
 
@@ -498,7 +501,8 @@ def main() -> None:
         "rows_without_licensee_name_column": sum(1 for a in actions if not a["licensee_name_published"]),
         "rows_with_license_type": sum(1 for a in actions if a["license_type_as_listed"]),
         "rows_with_docket_number": sum(1 for a in actions if a["docket_numbers"]),
-        "rows_with_document_link": sum(1 for a in actions if a["document_urls"]),
+        "rows_with_document_link": sum(1 for a in actions if a["document_urls"] or a["document_links_withheld"]),
+        "document_links_withheld_for_privacy": sum(a["document_links_withheld"] for a in actions),
         "rows_with_link_anomaly": sum(1 for a in actions if a["document_link_anomalies"]),
         "effective_year_differs_from_table_year": sum(1 for a in actions if int(a["effective_date"][:4]) != a["table_year"]),
         "source_quirks": [
@@ -516,6 +520,7 @@ def main() -> None:
         "fine_restitution_not_summed": True,
         "licensee_type_person_or_business_not_published_after_2017": True,
         "licensee_names_not_republished": True,
+        "licensee_names_withheld_in_committed_capture": True,
         "exact_attachments": {
             "EXACT_NAIC_ATTACHMENTS": 0,
             "EXACT_MA_LICENSE_ATTACHMENTS": 0,
@@ -532,11 +537,12 @@ def main() -> None:
         "retrieved_at": read_json(SRC / "hearing-decisions-page.json")["retrieved_at"],
         "page_statements": read_json(SRC / "hearing-decisions-page.json")["page_statements"],
         "listing_rows": len(hearings),
-        "distinct_documents": len({h["url"] for h in hearings}),
+        "distinct_documents": len({h["document_ref"] for h in hearings}),
         "list_years": [min(h["list_year"] for h in hearings), max(h["list_year"] for h in hearings)],
         "listings_with_docket": sum(1 for h in hearings if h["docket"]),
         "docket_prefixes": dict(sorted(Counter(h["docket_prefix"] or "NONE" for h in hearings).items())),
-        "division_v_captions": sum(1 for h in hearings if h["caption"].startswith("Division of Insurance v")),
+        "division_v_captions": sum(1 for h in hearings if h["caption_form"] == "DIVISION_V"),
+        "captions_and_document_links_withheld_for_privacy": True,
         "listings_with_issued_date": sum(1 for h in hearings if h["issued_date"]),
         "docket_prefix_meaning": "NOT_DEFINED_BY_SOURCE",
         "pdfs_parsed": False,

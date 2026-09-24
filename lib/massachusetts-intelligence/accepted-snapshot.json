@@ -2,7 +2,7 @@
   "version": "insurance-ma-state-intel-v1",
   "ticket": "MA-INS-001",
   "state": "MA",
-  "generated_at": "2026-09-24T16:05:32Z",
+  "generated_at": "2026-09-24T17:55:01Z",
   "source_as_of": "2026-09-01",
   "snapshot_as_of": "2026-09-24",
   "retrieved_at": "2026-09-24T15:49:22Z",
@@ -365,6 +365,7 @@
     "rows_with_license_type": 185,
     "rows_with_docket_number": 30,
     "rows_with_document_link": 285,
+    "document_links_withheld_for_privacy": 35,
     "rows_with_link_anomaly": 2,
     "effective_year_differs_from_table_year": 2,
     "source_quirks": [
@@ -389,6 +390,7 @@
     "fine_restitution_not_summed": true,
     "licensee_type_person_or_business_not_published_after_2017": true,
     "licensee_names_not_republished": true,
+    "licensee_names_withheld_in_committed_capture": true,
     "exact_attachments": {
       "EXACT_NAIC_ATTACHMENTS": 0,
       "EXACT_MA_LICENSE_ATTACHMENTS": 0,
@@ -426,6 +428,7 @@
       "W": 5
     },
     "division_v_captions": 147,
+    "captions_and_document_links_withheld_for_privacy": true,
     "listings_with_issued_date": 311,
     "docket_prefix_meaning": "NOT_DEFINED_BY_SOURCE",
     "pdfs_parsed": false,
@@ -569,9 +572,9 @@
   },
   "derived_files": {
     "lib/massachusetts-intelligence/accepted-companies.json": "e67ad03309fb374d4990cee0009c380f6de14da82a3c982b3d106884cf891f54",
-    "lib/massachusetts-intelligence/accepted-actions.json": "c3f67c39ec2b39d158695f1f6830237114e8fdb37af57a202a8dfbfc0010a854",
-    "data/massachusetts/ma-ins-001/hearing-decisions-index.json": "6aff35377c25e397484b2d999c69aade82a9404fb65e5c787ae86a8657779d8b",
+    "lib/massachusetts-intelligence/accepted-actions.json": "c95a6b16c41b05adde523c7f0fd5896b301c44d74d5513d967925a2d1b782c0f",
+    "data/massachusetts/ma-ins-001/hearing-decisions-index.json": "9ac9f02a4b6306c226e92c718324f9b570d4b1db8932365564532ef28e2936d4",
     "data/massachusetts/ma-ins-001/market-conduct-index.json": "9191c0c53d4ccc60e1d3dc8f95bf35356d2bf15f4a903de586fde660ce37115a"
   },
-  "fingerprint": "654a543b2235e53408b15cd1bfe663ef475663394a1bc585e8c03df44ac8828f"
+  "fingerprint": "fe08b5e2b602f9a7b3af61ea1986b678fda98d53e00e1efbdaf060e4b4d88f17"
 }
