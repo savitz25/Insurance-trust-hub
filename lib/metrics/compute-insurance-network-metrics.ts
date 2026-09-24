@@ -93,6 +93,9 @@ export type InsuranceNetworkMetricsInput = {
   ohioSnapshotFingerprint: string;
   ohioAsOf: string | null;
   ohioAuthorizedCompaniesDistinctNaic: number;
+  massachusettsSnapshotFingerprint: string;
+  massachusettsAsOf: string | null;
+  massachusettsLicensedOrApprovedDistinctNaic: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -227,6 +230,15 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   }
   if (!input.publishedStateIntelligencePaths.includes('/georgia')) {
     throw new Error('Georgia state intelligence path missing');
+  }
+  if (!input.publishedStateIntelligencePaths.includes('/massachusetts')) {
+    throw new Error('Massachusetts state intelligence path missing');
+  }
+  if (input.massachusettsLicensedOrApprovedDistinctNaic === input.legalInsurers) {
+    throw new Error('Massachusetts licensed or approved companies must not equal national legal insurers');
+  }
+  if (input.massachusettsLicensedOrApprovedDistinctNaic === input.ohioAuthorizedCompaniesDistinctNaic) {
+    throw new Error('Massachusetts licensed or approved companies must not equal Ohio authorized companies');
   }
   if (input.ohioAuthorizedCompaniesDistinctNaic === input.legalInsurers) {
     throw new Error('Ohio authorized companies must not equal national legal insurers');
@@ -1075,6 +1087,28 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'ma_licensed_or_approved_distinct_naic',
+      label: 'Massachusetts DOI licensed or approved companies (distinct NAIC)',
+      value: input.massachusettsLicensedOrApprovedDistinctNaic,
+      valueState: 'KNOWN',
+      grain: 'authorized_company_row',
+      denominator: 'DOI Licensed or Approved Companies workbook (rows with an NAIC code)',
+      description:
+        'Distinct NAIC codes on the Massachusetts DOI Licensed or Approved Companies list. Includes surplus-lines, reinsurer and risk retention group company types; rows without an NAIC code are excluded. Not agencies and not agents.',
+      coverage: 'Massachusetts',
+      contributingSourceSystems: ['ma_doi_company_lists'],
+      sourceAsOf: input.massachusettsAsOf,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One distinct NAIC code on the DOI Licensed or Approved Companies workbook.',
+        'Not agencies, not agents, not rows without an NAIC code, not designation lists added together, not admitted-only, not a quality ranking.',
+        ['ma_doi'],
+        'Massachusetts; Licensed or Approved Companies',
+        'DOI company-list workbook'
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -1209,9 +1243,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio /georgia publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio /georgia /massachusetts publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC, OH, GA',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC, OH, GA, MA',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -1219,7 +1253,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel', 'oh-intel', 'ga-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel', 'oh-intel', 'ga-intel', 'ma-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -1316,6 +1350,8 @@ export function computeInsuranceNetworkMetrics(
     ncActions: input.northCarolinaLicensingActionRows,
     ohFp: input.ohioSnapshotFingerprint,
     ohAuthorized: input.ohioAuthorizedCompaniesDistinctNaic,
+    maFp: input.massachusettsSnapshotFingerprint,
+    maCompanies: input.massachusettsLicensedOrApprovedDistinctNaic,
     paEnforcement: input.pennsylvaniaEnforcementActions,
     paComplaints: input.pennsylvaniaComplaintTableRows,
     paths: input.publishedStateIntelligencePaths,
@@ -1489,6 +1525,14 @@ export function computeInsuranceNetworkMetrics(
       authorizedCompaniesDistinctNaic: input.ohioAuthorizedCompaniesDistinctNaic,
       producerRosterCoverage: 'SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY',
       agencyRosterCoverage: 'ACQUIRED_MAJOR_LINES_BUSINESS_ENTITY_MAILING_LIST',
+      licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT',
+    },
+    massachusetts: {
+      snapshotFingerprint: input.massachusettsSnapshotFingerprint,
+      asOf: input.massachusettsAsOf,
+      licensedOrApprovedDistinctNaic: input.massachusettsLicensedOrApprovedDistinctNaic,
+      producerRosterCoverage: 'NOT_ACQUIRED / PAID_OR_REQUEST',
+      agencyRosterCoverage: 'NOT_ACQUIRED / PAID_OR_REQUEST',
       licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT',
     },
     publication: {

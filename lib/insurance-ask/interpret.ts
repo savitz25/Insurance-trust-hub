@@ -1,5 +1,11 @@
 import { interpretIdentityAndLocal, resolveFlCityLaunchCounty } from './research-intent';
 import {
+  MASSACHUSETTS_AGENCY_COVERAGE_NOTE,
+  interpretMassachusettsEarly,
+  resolvesToMassachusetts,
+  withMassachusettsNaicContext,
+} from './massachusetts-routing';
+import {
   annotateUnestablishedProduct,
   detectRequestedConsumerProducts,
   hasOfficialExecutableLoa,
@@ -430,8 +436,10 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.entityClass = 'insurer';
     return { raw: early, query, interpretation: [{ label: 'Coverage', value: 'PARTIAL — Ohio authorized companies' }] };
   }
+  const massachusetts = interpretMassachusettsEarly(early);
+  if (massachusetts) return massachusetts;
   const typed = interpretIdentityAndLocal(raw, page);
-  if (typed) return typed;
+  if (typed) return withMassachusettsNaicContext(typed);
   const q = raw.trim();
   const lines: ParsedInsuranceAsk['interpretation'] = [];
   const push = (label: string, value: string) => lines.push({ label, value });
@@ -1416,6 +1424,10 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   push('Sort', 'Display name, then NPN, then canonical id');
   if (!CREDENTIAL_STATES.includes((states[0] ?? '') as (typeof CREDENTIAL_STATES)[number]) && states[0] && query.entityClass === 'agency') {
     push('Coverage', `${states[0]} may have 0 credential rows in this extract — missing is not “no market.”`);
+  }
+  if (states[0] === 'MA' && query.entityClass === 'agency' && resolvesToMassachusetts(q)) {
+    query.coverageState = 'PARTIAL';
+    push('Coverage', MASSACHUSETTS_AGENCY_COVERAGE_NOTE);
   }
   return { raw: q, query, interpretation: lines };
 }

@@ -1,0 +1,105 @@
+{
+  "ticket": "MA-INS-001",
+  "list_page_url": "https://www.mass.gov/lists/massachusetts-licensed-insurance-companies",
+  "list_page_note": "If you need a different list, please file a public record request.",
+  "retrieved_at": "2026-09-24T15:49:22Z",
+  "retrieval_method": "Headless Chromium on the official Mass.gov list page; each workbook downloaded by activating its link (direct HTTP clients receive 403).",
+  "files": {
+    "licensed_or_approved": {
+      "file": "raw/licensed-or-approved-companies.xlsx",
+      "list_page_label": "Massachusetts Licensed or Approved Companies",
+      "doc_url": "https://www.mass.gov/doc/massachusetts-licensed-or-approved-companiesxls",
+      "download_url": "https://www.mass.gov/doc/massachusetts-licensed-or-approved-companiesxls/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:31:02 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "Licensed Or Approved Companies.xlsx",
+      "bytes": 343524,
+      "sha256": "18eddcd3e25f320abf2041ac19b20c2903c968c3b37d32755c74b61dbf856b8d"
+    },
+    "domestic_life": {
+      "file": "raw/domestic-life-companies.xlsx",
+      "list_page_label": "Massachusetts Licensed Domestic Life Companies",
+      "doc_url": "https://www.mass.gov/doc/massachusetts-licensed-domestic-life-companiesxls-0",
+      "download_url": "https://www.mass.gov/doc/massachusetts-licensed-domestic-life-companiesxls-0/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:30:17 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "Licensed Life Companies Domestic.xlsx",
+      "bytes": 127771,
+      "sha256": "b9158896b818f392b7219929102315395d52a67b3cb59971c509548fb6a74038"
+    },
+    "domestic_pc": {
+      "file": "raw/domestic-pc-companies.xlsx",
+      "list_page_label": "Massachusetts Licensed Domestic P and C Companies",
+      "doc_url": "https://www.mass.gov/doc/massachusetts-licensed-domestic-p-and-c-companiesxls",
+      "download_url": "https://www.mass.gov/doc/massachusetts-licensed-domestic-p-and-c-companiesxls/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:31:52 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "Licensed Property Casualty Companies Domestic.xlsx",
+      "bytes": 130179,
+      "sha256": "0dd65c9fdb7151d831d4051b7f86309f91cc11226cc8397bf54af6af9078b540"
+    },
+    "fidelity_surety_4": {
+      "file": "raw/fidelity-surety-designation-4-companies.xlsx",
+      "list_page_label": "Massachusetts Licensed Fidelity and Surety, 4 Companies",
+      "doc_url": "https://www.mass.gov/doc/massachusetts-licensed-fidelity-surety-designation-4-companiesxls",
+      "download_url": "https://www.mass.gov/doc/massachusetts-licensed-fidelity-surety-designation-4-companiesxls/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:28:46 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "Licensed Fidelity Surety Companies Designation 4.xlsx",
+      "bytes": 163183,
+      "sha256": "7b3954807fb303da9ad1f46eea9cc69c4b20f47df09fbb3932d0fe3ea4bc9c44"
+    },
+    "workers_comp_6e": {
+      "file": "raw/workers-comp-designation-6e-companies.xlsx",
+      "list_page_label": "Massachusetts Licensed Workers' Compensation, 6E Companies",
+      "doc_url": "https://www.mass.gov/doc/massachusetts-licensed-workers-compensation-6e-companiesxls",
+      "download_url": "https://www.mass.gov/doc/massachusetts-licensed-workers-compensation-6e-companiesxls/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:32:23 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "Licensed Worker Comp Companies Designation 6E.xlsx",
+      "bytes": 160193,
+      "sha256": "8a0c8b6b82526356e6f4216b03cbff16cd6b50a398e85999ceca0386aed11ad4"
+    },
+    "auto_liability_6g": {
+      "file": "raw/auto-liability-designation-6g-companies.xlsx",
+      "list_page_label": "Massachusetts Licensed Auto Liability, 6G Companies",
+      "doc_url": "https://www.mass.gov/doc/massachusetts-licensed-auto-liability-6g-companiesxls",
+      "download_url": "https://www.mass.gov/doc/massachusetts-licensed-auto-liability-6g-companiesxls/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:23:50 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "Licensed Auto Liability Companies Designation 6G.xlsx",
+      "bytes": 166670,
+      "sha256": "e3ef0c2c1b54aaacf8866d932cf75ebaf9db8d5c002ba57c24018d024952d545"
+    },
+    "eligible_surplus_lines": {
+      "file": "raw/eligible-surplus-lines-companies.xlsx",
+      "list_page_label": "Massachusetts Eligible Surplus Lines Companies",
+      "doc_url": "https://www.mass.gov/doc/massachusetts-eligible-surplus-lines-companiesxls",
+      "download_url": "https://www.mass.gov/doc/massachusetts-eligible-surplus-lines-companiesxls/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:22:41 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "Authorized Surplus Lines Companies.xlsx",
+      "bytes": 144009,
+      "sha256": "c0cad61288310353abd0d2768f480a6d8f6c9778c48ae372644be63463d28082"
+    },
+    "health_6b": {
+      "file": "raw/health-designation-6b-companies.xlsx",
+      "list_page_label": "Licensed Health Insurers under Designation 6B-Health – All Kinds",
+      "doc_url": "https://www.mass.gov/doc/licensed-health-insurers-under-designation-6b-health-all-kinds-xls",
+      "download_url": "https://www.mass.gov/doc/licensed-health-insurers-under-designation-6b-health-all-kinds-xls/download",
+      "http_status": 200,
+      "http_last_modified": "Tue, 01 Sep 2026 14:29:30 GMT",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "served_filename": "licensed health insurers under designation 6B Health All Kinds.xlsx",
+      "bytes": 168851,
+      "sha256": "24cdaa6ed9fb733dd43f8b498bb3a133070639d0460237dcdc498e4ee4b5079a"
+    }
+  }
+}
