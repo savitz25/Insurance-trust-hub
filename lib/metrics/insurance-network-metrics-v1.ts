@@ -281,6 +281,14 @@ export type InsuranceNetworkMetricsV1 = {
     agencyRosterCoverage: 'NOT_ACQUIRED / PAID_OR_REQUEST';
     licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT';
   };
+  tennessee: {
+    snapshotFingerprint: string;
+    asOf: string | null;
+    licensedCompaniesDistinctNaic: number;
+    producerRosterCoverage: 'NOT_ACQUIRED / NO_FREE_BULK_FOUND';
+    agencyRosterCoverage: 'NOT_ACQUIRED / NO_FREE_BULK_FOUND';
+    licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT';
+  };
   publication: {
     publicPeople: 0;
     publicGraphAgencies: 0;

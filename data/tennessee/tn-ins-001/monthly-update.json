@@ -1,0 +1,649 @@
+{
+ "version": "insurance-tn-state-intel-v1",
+ "source": "https://www.tn.gov/commerce/insurance/consumer-resources/monthly-update.html",
+ "asterisk_statement": "* [asterisk] denotes new record since last update. As of August 31, 2026.",
+ "source_as_of": "2026-08-31",
+ "page_last_updated_statement": "This Page Last Updated: September 9, 2026 at 10:40 AM",
+ "sections": {
+  "admissions_recognitions": {
+   "heading": "Admissions / Recognitions",
+   "columns": [
+    "Company",
+    "NAIC#",
+    "License Type",
+    "Domicile",
+    "Date"
+   ],
+   "rows": [
+    [
+     "Ageas SA NV",
+     "RJ-1240059",
+     "‘RJ’ REINSURER",
+     "Delaware / Belgium",
+     "1/1/2026"
+    ],
+    [
+     "Conduit Reinsurance Limited",
+     "RJ-3191435",
+     "‘RJ’ REINSURER",
+     "Louisiana / Bermuda",
+     "1/1/2026"
+    ],
+    [
+     "DEVK Re",
+     "RJ-1340028",
+     "‘RJ’ REINSURER",
+     "Colorado / Germany",
+     "1/1/2026"
+    ],
+    [
+     "Everest Reinsurance (Bermuda), Ltd.",
+     "RJ-3194101",
+     "‘RJ’ REINSURER",
+     "Delaware / Bermuda",
+     "1/1/2026"
+    ],
+    [
+     "FIRST PROTECTIVE INSURANCE COMPANY",
+     "10897",
+     "PROPERTY",
+     "FL",
+     "1/1/2026"
+    ],
+    [
+     "LEADERS LIFE INSURANCE COMPANY",
+     "74799",
+     "LIFE",
+     "OK",
+     "1/1/2026"
+    ],
+    [
+     "Markel Bermuda Limited (RJ)",
+     "RJ-3190829",
+     "‘RJ’ REINSURER",
+     "New York/ Bermuda",
+     "1/1/2026"
+    ],
+    [
+     "Markel International Insurance Company Limited",
+     "RJ-1121425",
+     "‘RJ’ REINSURER",
+     "New York/ UK",
+     "1/1/2026"
+    ],
+    [
+     "Sabal Specialty Insurance Company, Inc.",
+     "17831",
+     "SURPLUS LINES",
+     "DE",
+     "1/1/2026"
+    ],
+    [
+     "SCOR SE",
+     "RJ-1320158",
+     "‘RJ’ REINSURER",
+     "Delaware / France",
+     "1/1/2026"
+    ],
+    [
+     "Devoted Health Insurance Company of South Carolina, Inc.",
+     "17218",
+     "LIFE",
+     "SC",
+     "1/15/2026"
+    ],
+    [
+     "AXA XL Excess & Surplus Lines Insurance Company",
+     "17863",
+     "SURPLUS LINES",
+     "DE",
+     "2/9/2026"
+    ],
+    [
+     "Frontline Insurance Unlimited Company",
+     "10074",
+     "SURPLUS LINES",
+     "IL",
+     "2/26/2026"
+    ],
+    [
+     "Angelina Specialty Insurance Company",
+     "17866",
+     "SURPLUS LINES",
+     "DE",
+     "2/27/2026"
+    ],
+    [
+     "Texas Service Life Insurance Company",
+     "83160",
+     "LIFE",
+     "TX",
+     "3/4/2026"
+    ],
+    [
+     "Capstone Specialty Insurance Company",
+     "17862",
+     "SURPLUS LINES",
+     "TX",
+     "3/26/2026"
+    ],
+    [
+     "ICW National Insurance Company",
+     "24635",
+     "PROPERTY",
+     "CA",
+     "4/15/2026"
+    ],
+    [
+     "Wichita National Life Insurance Company",
+     "70548",
+     "LIFE",
+     "OK",
+     "4/15/2026"
+    ],
+    [
+     "Florida Insurance and Reinsurance Company",
+     "17811",
+     "SURPLUS LINES",
+     "FL",
+     "4/22/2026"
+    ],
+    [
+     "Lone Peak Insurance Company",
+     "16694",
+     "PROPERTY",
+     "UT",
+     "5/11/2026"
+    ],
+    [
+     "Southern Underwriters Insurance Company",
+     "10809",
+     "SURPLUS LINES",
+     "OK",
+     "5/19/2026"
+    ],
+    [
+     "Klutch Insurance Company, Inc., a Risk Retention Group",
+     "17966",
+     "DOMESTIC CAPTIVE RRG",
+     "TN",
+     "6/10/2026"
+    ],
+    [
+     "SLIDE SPECIALTY INSURANCE COMPANY",
+     "14931",
+     "SURPLUS LINES",
+     "RI",
+     "6/23/2026"
+    ],
+    [
+     "Blue Horizon Partners Risk Retention Group, Inc.",
+     "17953",
+     "RISK RETENTION GROUP",
+     "SC",
+     "6/28/2026"
+    ],
+    [
+     "Surency Life & Health Insurance Company",
+     "13175",
+     "LIFE",
+     "KS",
+     "7/21/2026"
+    ],
+    [
+     "eMaxx Reciprocal Insurance Exchange",
+     "17883",
+     "SURPLUS LINES",
+     "AR",
+     "8/5/2026*"
+    ],
+    [
+     "Ledgebrook Specialty Insurance Company",
+     "17951",
+     "SURPLUS LINES",
+     "DE",
+     "8/5/2026*"
+    ],
+    [
+     "Stonehaven Specialty Insurance Company",
+     "17952",
+     "SURPLUS LINES",
+     "DE",
+     "8/5/2026*"
+    ],
+    [
+     "ATLANTIC CHARTER INSURANCE COMPANY",
+     "44326",
+     "PROPERTY",
+     "MA",
+     "8/10/2026*"
+    ],
+    [
+     "MSIG SPECIALTY AMERICA, INC.",
+     "17864",
+     "SURPLUS LINES",
+     "DE",
+     "8/11/2026*"
+    ],
+    [
+     "ICW REINSURANCE COMPANY",
+     "17921",
+     "ACCREDITED REINSURER",
+     "NV",
+     "8/26/2026*"
+    ]
+   ],
+   "published_none_row": false
+  },
+  "mergers": {
+   "heading": "Mergers",
+   "columns": [
+    "Non-Surviving Company",
+    "(Non-Survivor) NAIC#",
+    "Surviving Company",
+    "(Survivor) NAIC#",
+    "Date"
+   ],
+   "rows": [
+    [
+     "Peleus Insurance Company",
+     "34118",
+     "Colony Insurance Company",
+     "39993",
+     "7/1/2025"
+    ],
+    [
+     "Doma Title Insurance, Inc.",
+     "50130",
+     "Title Resources Guaranty Company",
+     "50016",
+     "12/31/2025"
+    ],
+    [
+     "Elips Life Insurance Company",
+     "85561",
+     "Wilcac Life Insurance Company",
+     "62413",
+     "4/1/2026"
+    ],
+    [
+     "Lumico Life Insurance Company",
+     "73504",
+     "Wilcac Life Insurance Company",
+     "62413",
+     "4/1/2026"
+    ]
+   ],
+   "published_none_row": false
+  },
+  "name_changes": {
+   "heading": "Name Changes",
+   "columns": [
+    "Prior Company Name",
+    "NAIC#",
+    "New Company Name",
+    "Date"
+   ],
+   "rows": [
+    [
+     "American Modern Select Insurance Company",
+     "38652",
+     "Trusted Resource Underwriters Exchange of Ohio",
+     "11/7/2025"
+    ],
+    [
+     "PMI INSURANCE CO.",
+     "10287",
+     "Anza Mortgage Insurance Corporation",
+     "12/2/2025"
+    ],
+    [
+     "Jet Insurance Company",
+     "16379",
+     "Amherst National Insurance Company",
+     "12/15/2025"
+    ],
+    [
+     "National Guardian Life Insurance Company",
+     "66583",
+     "NGL Insurance Company",
+     "1/1/2026"
+    ],
+    [
+     "Pharmacists Mutual Insurance Company",
+     "13714",
+     "Pharmacists Insurance Company",
+     "1/1/2026"
+    ],
+    [
+     "Forestry Mutual Insurance Company",
+     "10941",
+     "FMIC INSURANCE COMPANY",
+     "1/29/2026"
+    ],
+    [
+     "Gray Casualty and Surety Company, The",
+     "10671",
+     "PALOMAR CASUALTY AND SURETY COMPANY",
+     "2/9/2026"
+    ],
+    [
+     "Point Insurance Company",
+     "22888",
+     "Sentry Direct Insurance Company",
+     "2/25/2026"
+    ],
+    [
+     "Farmers Mutual Hail Insurance Company of Iowa",
+     "13897",
+     "Farmers Mutual Hail Insurance Company, SI",
+     "4/1/2026"
+    ],
+    [
+     "Generali USA Insurance Company",
+     "17630",
+     "Redion Insurance Company",
+     "5/28/2026"
+    ],
+    [
+     "Velocity Specialty Insurance Company",
+     "39640",
+     "Vector Specialty Insurance Company",
+     "6/3/2026"
+    ],
+    [
+     "Everett Cash Mutual Insurance Co.",
+     "17043",
+     "ECM Insurance Company",
+     "7/1/2026*"
+    ],
+    [
+     "Southern Underwriters Insurance Company",
+     "10809",
+     "NORTHWIND SPECIALTY INSURANCE COMPANY",
+     "8/10/2026*"
+    ]
+   ],
+   "published_none_row": false
+  },
+  "redomestications": {
+   "heading": "Redomestications",
+   "columns": [
+    "Company",
+    "NAIC#",
+    "Prior Domicile",
+    "New Domicile",
+    "Date"
+   ],
+   "rows": [
+    [
+     "Lasso Healthcare Insurance Company",
+     "76503",
+     "TX",
+     "IN",
+     "10/23/2025"
+    ],
+    [
+     "Humana Insurance Company",
+     "73288",
+     "WI",
+     "KY",
+     "12/1/2025"
+    ],
+    [
+     "PMI INSURANCE CO.",
+     "10287",
+     "AZ",
+     "NC",
+     "12/2/2025"
+    ],
+    [
+     "Catawba Insurance Company",
+     "24937",
+     "SC",
+     "NE",
+     "12/3/2025"
+    ],
+    [
+     "Firemen's Insurance Company of Washington, D. C.",
+     "21784",
+     "DE",
+     "IA",
+     "12/23/2025"
+    ],
+    [
+     "Guarantee Company of North America USA, The",
+     "36650",
+     "MI",
+     "AR",
+     "12/23/2025"
+    ],
+    [
+     "Midwest Employers Casualty Company",
+     "23612",
+     "DE",
+     "IA",
+     "12/23/2025"
+    ],
+    [
+     "Aegis Security Insurance Company",
+     "33898",
+     "PA",
+     "CA",
+     "12/31/2025"
+    ],
+    [
+     "Accelerant National Insurance Company",
+     "10220",
+     "DE",
+     "AR",
+     "1/1/2026*"
+    ],
+    [
+     "Life Insurance Company of North America",
+     "65498",
+     "PA",
+     "IA",
+     "1/1/2026"
+    ],
+    [
+     "Safety First Insurance Company",
+     "11123",
+     "IL",
+     "MO",
+     "1/1/026"
+    ],
+    [
+     "Service American Indemnity Company",
+     "39152",
+     "OK",
+     "TX",
+     "1/1/2026"
+    ],
+    [
+     "Direct Insurance Company",
+     "37220",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "Integon Casualty Insurance Company",
+     "27930",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "Imperial Fire and Casualty Insurance Company",
+     "44369",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "Integon General Insurance Corporation",
+     "22780",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "Integon Indemnity Corporation",
+     "22772",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "Integon National Insurance Company",
+     "29742",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "National Farmers Union Property and Casualty Company",
+     "16217",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "New South Insurance Company",
+     "12130",
+     "NC",
+     "IL",
+     "2/10/2026"
+    ],
+    [
+     "First Colonial Insurance Company",
+     "29980",
+     "FL",
+     "IL",
+     "3/10/2026"
+    ]
+   ],
+   "published_none_row": false
+  },
+  "surrenders_revocations": {
+   "heading": "Surrenders and Revocations",
+   "columns": [
+    "Company",
+    "NAIC#",
+    "Action",
+    "Date"
+   ],
+   "rows": [
+    [
+     "Centerline Insurance Company",
+     "19003",
+     "Surrender of Authority [traditional insurer]",
+     "12/31/2024"
+    ],
+    [
+     "Bright Health Insurance Company of Tennessee",
+     "16341",
+     "Surrender of Authority",
+     "9/25/2025"
+    ],
+    [
+     "American Western Home Insurance Company",
+     "35912",
+     "Surrender of Surplus Lines Insurer eligiblity",
+     "9/30/2025"
+    ],
+    [
+     "ROCKINGHAM CASUALTY COMPANY",
+     "42595",
+     "Surrender of Surplus Lines Insurer eligiblity",
+     "12/31/2025"
+    ],
+    [
+     "American Resources Insurance Company, Inc.",
+     "41300",
+     "Revocation of Authority",
+     "1/19/2026"
+    ],
+    [
+     "CORNERSTONE NATIONAL INSURANCE COMPANY",
+     "10783",
+     "Surrender of Authority",
+     "3/1/2026"
+    ],
+    [
+     "MMIC Insurance, Inc.",
+     "16942",
+     "Surrender of Authority",
+     "3/15/2026"
+    ],
+    [
+     "Mountain Valley Indemnity Company",
+     "10205",
+     "Surrender of Authority",
+     "3/25/2026"
+    ],
+    [
+     "WellCare Health Insurance Company of Kentucky, Inc.",
+     "64467",
+     "Surrender of Authority",
+     "5/1/2026"
+    ]
+   ],
+   "published_none_row": false
+  },
+  "suspensions": {
+   "heading": "Suspensions",
+   "columns": [
+    "Company",
+    "NAIC#",
+    "Action",
+    "Date"
+   ],
+   "rows": [],
+   "published_none_row": true
+  },
+  "miscellaneous": {
+   "heading": "Miscellaneous",
+   "columns": [
+    "Company",
+    "NAIC#",
+    "Action",
+    "Date"
+   ],
+   "rows": [
+    [
+     "First Dakota Indemnity Company",
+     "10351",
+     "Surrender of Property; Surety “Kinds” [Lines] of insurance",
+     "1/16/2026"
+    ],
+    [
+     "Park Avenue Life Insurance Company",
+     "60003",
+     "Addition of Variable Contracts “Kind” [Line] of insurance",
+     "1/20/2026"
+    ],
+    [
+     "Sentry Direct Insurance Company",
+     "22888",
+     "Addition of Surety“ Kind” [Line] of insurance",
+     "2/25/2026"
+    ],
+    [
+     "Amherst National Insurance Company",
+     "16379",
+     "Addition of Casualty; Property “Kinds” [Line] of insurance",
+     "4/1/2026"
+    ],
+    [
+     "Compass Insurance Company",
+     "21989",
+     "Lifting of “Restriction”",
+     "5/13/2026"
+    ]
+   ],
+   "published_none_row": false
+  }
+ }
+}

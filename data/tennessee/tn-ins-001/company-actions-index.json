@@ -1,0 +1,5752 @@
+{
+ "version": "insurance-tn-state-intel-v1",
+ "source": "https://www.tn.gov/commerce/insurance/company-resources/insurance-company-actions.html",
+ "list_date": null,
+ "organization": "Alphabetical by company; each line is a caption followed by dated or titled document links. No NAIC code, case number or action-type column is printed.",
+ "document_links": "Withheld: TDCI file names are free text and can name counterparties. Each document keeps a reference (first 16 hex of SHA-256 of its path); open the official archive to read it.",
+ "caption_screen": "Captions that name a second party (lower-case 'and', 'vs.', 'v.', 'd/b/a') or an individual name pattern are withheld; child lines inherit the parent's screen.",
+ "lines": [
+  {
+   "id": "tn-ca-001",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2016-07-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "e4383815930fc371",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2016-07-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-002",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2021-05-24"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "db8548dd9cd0e0e5",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2021-05-24"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-003",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Aetna Health, Inc, May 6, 2026",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2026-05-06"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ea8a46a14d486608",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-05-06"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-004",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "AF&L Insurance Company, May 13, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-05-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "471af6d206f88ed4",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-05-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-005",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Affirmative Insurance Company, September 23 2016",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2016-09-23"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "021a61adf5090d99",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2016-09-23"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-006",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Alliant Health Plans, Inc, May 6, 2026",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2026-05-06"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "44da18728128641c",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-05-06"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-007",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Country Insurance Company, November 14, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-11-14"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "5f1b225222207201",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-11-14"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-008",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Fidelity Assurance Company, October 12, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-10-12"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "3ef233672b0c9add",
+     "label_kind": "title",
+     "title_as_listed": "October 12, 202",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-009",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Health Plan, Inc. acquisition by MFO AHP, LLC, MFO AHP SUB, Et al., March 31, 2021",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2021-03-31"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Acquisition"
+   ],
+   "documents": [
+    {
+     "ref": "148ad984e2ed7024",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2021-03-31"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-010",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-01-03",
+    "2013-05-02"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "c73028932dbc91f0",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-01-03"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "7a1a332baa2ae0ba",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-05-02"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-011",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Manufacturers Mutual Insurance Company, July 06, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-07-06"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "03d545598d69a2b2",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-07-06"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-012",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Motorist Insurance Company, July 06, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-07-06"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2bd354a80efaa398",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-07-06"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-013",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American National Lawyers Insurance Reciprocal, Multiple Dates",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "03cbeb23a9f448ee",
+     "label_kind": "title",
+     "title_as_listed": "Multiple Dates",
+     "dates": [],
+     "pdf": false
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-014",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Resources Insurance Company February 03, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-02-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8d8140e5b7d728a8",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-02-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-015",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Service Insurance Company, November 14, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-11-14"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ebf3e839daf31288",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-11-14"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-016",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "American Trade Association, LLC, Multiple Dates",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0613a4e6736e1b47",
+     "label_kind": "title",
+     "title_as_listed": "Multiple Dates",
+     "dates": [],
+     "pdf": false
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-017",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2011-02-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "bc787783a1a3aeb4",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-02-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-018",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-08-08"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "d1cac81a99d8e155",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-08-08"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-019",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2013-06-27",
+    "2013-08-12",
+    "2014-01-27"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b40f45e3150a2812",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-06-27"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "86479aa198022050",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-08-12"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "66051143dd2915f2",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-01-27"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-020",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Ameritas Life Insurance Company, November 30, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-11-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "22ee73147bf3a872",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-11-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-021",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "AIU Insurance Company, October 07, 2004",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2004-10-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "1cd2c3916da44a86",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2004-10-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-022",
+   "letter": "A",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "AXA Re Property and Casualty Insurance Company, October 03, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-10-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "a4acae8379c1369c",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2006-10-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-023",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Bankers Life Insurance Company, January 22 2021",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2021-01-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "220107510bd702d3",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2021-01-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-024",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Bedivere Insurance Company, September 03, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-09-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8bebed80f2fc1323",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-09-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-025",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2011-02-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "61ff42bbfb006b35",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-02-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-026",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-03-19"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "97de50f00f6708b1",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-03-19"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-027",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2014-03-27"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "de8dc5b42c02887c",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-03-27"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-028",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2014-09-29"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7253b75bb66576a1",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-09-29"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-029",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-10-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "df417e39e66dfbae",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2009-10-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-030",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-05-14"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b2134ff9ea9d4d76",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-05-14"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-031",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Birmingham Steel June 05, 2003",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2003-06-05"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-032",
+   "letter": "B",
+   "depth": 2,
+   "parent": "tn-ca-031",
+   "caption_as_listed": "Change of Hearing Date",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "9d73116df9040b09",
+     "label_kind": "title",
+     "title_as_listed": "Change of Hearing Date",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-033",
+   "letter": "B",
+   "depth": 2,
+   "parent": "tn-ca-031",
+   "caption_as_listed": "Birmingham Steel Company - Petition",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Petition"
+   ],
+   "documents": [
+    {
+     "ref": "266040df4f2fa231",
+     "label_kind": "title",
+     "title_as_listed": "Birmingham Steel Company - Petition",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-034",
+   "letter": "B",
+   "depth": 2,
+   "parent": "tn-ca-031",
+   "caption_as_listed": "Birmingham Steel Company - Order",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "aef1aaa7ece5c229",
+     "label_kind": "title",
+     "title_as_listed": "Birmingham Steel Company - Order",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-035",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "BlueCross BlueShield of Tennessee Inc., August 27, 2021 and June 8, 2026 (Signed version available on request)",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2021-08-27",
+    "2026-06-08"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": true,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7e2c35ca60140071",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2021-08-27"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "dbf2d1a971e5cdca",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-06-08"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-036",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "person_name_pattern",
+   "dates": [
+    "2006-06-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "f281851802e71da0",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2006-06-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-037",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Broadspire Services, Inc., May 23, 2016",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2016-05-23"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "a450ed1c43f093e4",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2016-05-23"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-038",
+   "letter": "B",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Bright Health Insurance Company of Tennessee, November 4, 2022",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2022-11-04"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8a0381ca9e767581",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2022-11-04"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-039",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Cariten Health Plan Inc., October 31, 2003",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2003-10-31"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "91a0ee4c357d95eb",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2003-10-31"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-040",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Cariten Insurance Company, October 31, 2003",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2003-10-31"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "c86eb5040faeb72e",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2003-10-31"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-041",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Casualty Reciprocal Exchange, April 28, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-04-28"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ad79f47d4c4b223d",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-04-28"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-042",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Catawba Insurance Company, October 16, 2003",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2003-10-16"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "36951fb119b5f5de",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2003-10-16"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-043",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Century Indemnity Company, August 26, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-08-26"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2eab0ee19cf55b0a",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-08-26"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-044",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-08-05"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "e5607a94eb1dd8b3",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-08-05"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-045",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2011-07-26"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "6b45ab3ab7f7d2ad",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-07-26"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-046",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Cigna Healthcare of Tennessee, Inc, March 23, 2026 and May 22, 2026",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2026-03-23",
+    "2026-05-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8accafc4c5e101bd",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-03-23"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "bd8fcdc07298d7a4",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-05-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-047",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2013-07-08",
+    "2014-06-25"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0e9d5fdf6a719ca8",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-07-08"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "88e0e1e641872955",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-06-25"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-048",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-07-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "4772b2de1ac45491",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-07-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-049",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-03-30",
+    "2012-12-05"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "c638385e6c027213",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-03-30"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "1de3ace34788d5ba",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-12-05"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-050",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-05-19"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Merger"
+   ],
+   "documents": [
+    {
+     "ref": "cbe1d1e5f343566d",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-05-19"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-051",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2008-11-20"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b5f6d3a3b317a5c6",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2008-11-20"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-052",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Colorado Bankers Life Insurance Company, January 22, 2021",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2021-01-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "220107510bd702d3",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2021-01-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-053",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2013-07-02",
+    "2014-12-23"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "c98d99e4aaca2d28",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-07-02"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "88b8773d9bd754f7",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-12-23"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-054",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2014-12-10"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "4494776121995856",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-12-10"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-055",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2013-01-08"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "4bc17555bd0ca544",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-01-08"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-056",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2013-02-08"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "60d3ec99fa362042",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-02-08"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-057",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2013-03-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "3586789d9e5bb297",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-03-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-058",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-01-15"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "73dd5231bdb247c9",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-01-15"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-059",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-05-27"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "69effd015e7e632e",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-05-27"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-060",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-11-15"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "6bfd423a75b181fa",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-11-15"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-061",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-03-19"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "57dc995e6214aabc",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-03-19"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-062",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2011-03-04"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "33a90b42986270d5",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-03-04"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-063",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-01-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "6e48ae811ac20818",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2009-01-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-064",
+   "letter": "C",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Cumberland Casualty and Surety Company, April 28, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-04-28"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "487b7f3b4636f790",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-04-28"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-065",
+   "letter": "D",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Dakota Truck Underwriters, June 23, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-06-23"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "465a44eafa7845e3",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-06-23"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-066",
+   "letter": "D",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Dixie National Life Insurance Company, July 10, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-07-10"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7746cfe25e635a05",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2006-07-10"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-067",
+   "letter": "D",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Doctors Insurance Reciprocal Multiple Dates (See \"American National Lawyers Insurance Reciprocal\" above)",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-068",
+   "letter": "E",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-09-14"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "62f859934141037b",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-09-14"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-069",
+   "letter": "E",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Exchange Insurance Company Multiple Dates",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-070",
+   "letter": "E",
+   "depth": 2,
+   "parent": "tn-ca-069",
+   "caption_as_listed": "Petition for Rehabilitation",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Rehabilitation",
+    "Petition"
+   ],
+   "documents": [
+    {
+     "ref": "afdeb365c24373eb",
+     "label_kind": "title",
+     "title_as_listed": "Petition for Rehabilitation",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-071",
+   "letter": "E",
+   "depth": 2,
+   "parent": "tn-ca-069",
+   "caption_as_listed": "Order for Rehabilitation",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Rehabilitation"
+   ],
+   "documents": [
+    {
+     "ref": "cf15676c695c4275",
+     "label_kind": "title",
+     "title_as_listed": "Order for Rehabilitation",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-072",
+   "letter": "E",
+   "depth": 2,
+   "parent": "tn-ca-069",
+   "caption_as_listed": "Rehabilitator's Motion to Approve Plan & Proposed Plan of Rehabilitation",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Rehabilitation"
+   ],
+   "documents": [
+    {
+     "ref": "52f91e0913c6c4a8",
+     "label_kind": "title",
+     "title_as_listed": "Rehabilitator's Motion to Approve Plan & Proposed Plan of Rehabilitation",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-073",
+   "letter": "E",
+   "depth": 2,
+   "parent": "tn-ca-069",
+   "caption_as_listed": "Motion for Scheduling Order Setting a Hearing on Plan of Rehabilitation & Prescribing Notice",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Rehabilitation"
+   ],
+   "documents": [
+    {
+     "ref": "3210dd66b7a126fd",
+     "label_kind": "title",
+     "title_as_listed": "Motion for Scheduling Order Setting a Hearing on Plan of Rehabilitation & Prescribing Notice",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-074",
+   "letter": "E",
+   "depth": 2,
+   "parent": "tn-ca-069",
+   "caption_as_listed": "Agreement Of Assumption",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0487251e6ab58e04",
+     "label_kind": "title",
+     "title_as_listed": "Agreement Of Assumption",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-075",
+   "letter": "E",
+   "depth": 2,
+   "parent": "tn-ca-069",
+   "caption_as_listed": "Exchange Order Approving Plan of Rehabilitation August 3, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-08-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Rehabilitation"
+   ],
+   "documents": [
+    {
+     "ref": "8e065ebdb4649e27",
+     "label_kind": "title",
+     "title_as_listed": "Exchange Order Approving Plan of Rehabilitation August 3, 2005",
+     "dates": [
+      "2005-08-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-076",
+   "letter": "E",
+   "depth": 2,
+   "parent": "tn-ca-069",
+   "caption_as_listed": "Final Order Terminating Rehabilitation May 16, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-05-16"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Rehabilitation"
+   ],
+   "documents": [
+    {
+     "ref": "5ad491f505e7bf8a",
+     "label_kind": "title",
+     "title_as_listed": "Final Order Terminating Rehabilitation May 16, 2006",
+     "dates": [
+      "2006-05-16"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-077",
+   "letter": "E",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Express Scripts Administrators, LLC, August 3, 2017",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2017-08-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "d065e0ace0e301d9",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2017-08-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-078",
+   "letter": "F",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Farmers Life Insurance Company Acquisition by Arrowhead Capital Group LLC, July 20, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-07-20"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Acquisition"
+   ],
+   "documents": [
+    {
+     "ref": "0d7b99d43332f843",
+     "label_kind": "title",
+     "title_as_listed": "Farmers Life Insurance Company Acquisition by Arrowhead Capital Group LLC, July 20, 2020",
+     "dates": [
+      "2020-07-20"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-079",
+   "letter": "F",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Farmers Mutual Fire Insurance Company of Union County July 17, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-07-17"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "3915752c393f02a0",
+     "label_kind": "title",
+     "title_as_listed": "Farmers Mutual Fire Insurance Company of Union County July 17, 2020",
+     "dates": [
+      "2020-07-17"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-080",
+   "letter": "F",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "First Dakota Indemnity Company, July 27, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-07-27"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "4c3d51767509fe27",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-07-27"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-081",
+   "letter": "G",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Gray Insurance Company, June 29, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-06-29"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "acd8f88fddc629f9",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-06-29"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-082",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-07-24"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "77714637584f9c8d",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2009-07-24"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-083",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-03-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ec65cd35e3babcd8",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2009-03-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-084",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-10-01"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "82a1706571092602",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2010-10-01"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-085",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-05-19"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "850ff142b229a420",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2015-05-19"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-086",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2014-07-14"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "befa8d00b0d2023c",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2014-07-14"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-087",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-03-27"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0459511ed370c498",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2012-03-27"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-088",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Haulers Insurance Company, November 7, 2014",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2014-11-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "a9eb3429bc6a2355",
+     "label_kind": "title",
+     "title_as_listed": "Haulers Insurance Company, November 7, 2014",
+     "dates": [
+      "2014-11-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-089",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "HealthScope Benefits, Inc. December,18 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-12-18"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "e6f39829e1bb8f9b",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-12-18"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-090",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "person_name_pattern",
+   "dates": [
+    "2013-04-02",
+    "2014-01-31"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "a9eb3429bc6a2355",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    },
+    {
+     "ref": "79dc820dad265a68",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-04-02"
+     ],
+     "pdf": true
+    },
+    {
+     "ref": "218a0281aa908078",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-01-31"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-091",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Home Insurance Company September 15, 2003",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2003-09-15"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0b6a07d801ad678c",
+     "label_kind": "title",
+     "title_as_listed": "Home Insurance Company September 15, 2003",
+     "dates": [
+      "2003-09-15"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-092",
+   "letter": "H",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Humana Pharmacy Solutions, Inc. January 23, 2019",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2019-01-23"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "5a78de583df5bd71",
+     "label_kind": "title",
+     "title_as_listed": "Humana Pharmacy Solutions, Inc. January 23, 2019",
+     "dates": [
+      "2019-01-23"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-093",
+   "letter": "K",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "K-Tenn (Acquisition and Merger) December 16, 2019",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2019-12-16"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Acquisition",
+    "Merger"
+   ],
+   "documents": [
+    {
+     "ref": "9558e88947906530",
+     "label_kind": "title",
+     "title_as_listed": "K-Tenn (Acquisition and Merger) December 16, 2019",
+     "dates": [
+      "2019-12-16"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-094",
+   "letter": "K",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Kemper Casualty Insurance Company July 06, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-07-06"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "acfbe71dcd137fa6",
+     "label_kind": "title",
+     "title_as_listed": "Kemper Casualty Insurance Company July 06, 2005",
+     "dates": [
+      "2005-07-06"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-095",
+   "letter": "K",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Kentucky National Insurance Company Febuary 28, 2004",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2004-02-28"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "c5831d5d42692ab1",
+     "label_kind": "title",
+     "title_as_listed": "Kentucky National Insurance Company Febuary 28, 2004",
+     "dates": [
+      "2004-02-28"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-096",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2010-10-01"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "75b6edd9ef9ebd7b",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2010-10-01"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-097",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2011-11-18"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "a42145f804df0f16",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2011-11-18"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-098",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2011-05-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8c86afc5b2974454",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2011-05-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-099",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Order to Dismiss November 16, 2009",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2009-11-16"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "dd83f30320ff5434",
+     "label_kind": "title",
+     "title_as_listed": "Order to Dismiss November 16, 2009",
+     "dates": [
+      "2009-11-16"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-100",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-07-17"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b13232741dac6d9f",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2009-07-17"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-101",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-10-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b76812faa606ffbb",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2009-10-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-102",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-09-17"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "1e0a13b64fb59dd7",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2009-09-17"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-103",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-03-16"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "35b65020fab6e567",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2009-03-16"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-104",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2016-09-29"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "a9890e82cf057da6",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2016-09-29"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-105",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2005-09-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "75caf720a5b7ed58",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2005-09-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-106",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Life and Health Insurance Company of American September 02, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-09-02"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "fddee37e9efd6d75",
+     "label_kind": "title",
+     "title_as_listed": "Life and Health Insurance Company of American September 02, 2005",
+     "dates": [
+      "2005-09-02"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-107",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Lumbermens Mutual Casualty Company July 06, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-07-06"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8476d6aff16b2728",
+     "label_kind": "title",
+     "title_as_listed": "Lumbermens Mutual Casualty Company July 06, 2005",
+     "dates": [
+      "2005-07-06"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-108",
+   "letter": "L",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Lumbermen’s Underwriting Alliance, December,21 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-12-21"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ea841c1d907b690c",
+     "label_kind": "title",
+     "title_as_listed": "Lumbermen’s Underwriting Alliance, December,21 2015",
+     "dates": [
+      "2015-12-21"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-109",
+   "letter": "M",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2020-11-24"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "01a9088be66edb7e",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-11-24"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-110",
+   "letter": "M",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "MedAmerica Insurance Company, January 7, 2021",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2021-01-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7c5e9f5c382dbc74",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2021-01-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-111",
+   "letter": "M",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Medical Liability Mutual Insurance Company, April 22, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-04-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "11a601de2352f5ad",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-04-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-112",
+   "letter": "M",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Monumental Life Insurance Co., June 12, 2003",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2003-06-12"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "362f57c4c0ec659c",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2003-06-12"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-113",
+   "letter": "M",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Murray Incorporated (in bankruptcy) - Workers' Compensation Bond Fund Multiple Dates",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Bond"
+   ],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-114",
+   "letter": "M",
+   "depth": 2,
+   "parent": "tn-ca-113",
+   "caption_as_listed": "Notice of Receivership for Murray, Inc. Workers' Compensation",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Receivership"
+   ],
+   "documents": [
+    {
+     "ref": "296abd53ed5d32e0",
+     "label_kind": "title",
+     "title_as_listed": "Notice of Receivership for Murray, Inc. Workers' Compensation",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-115",
+   "letter": "M",
+   "depth": 2,
+   "parent": "tn-ca-113",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Bond"
+   ],
+   "documents": [
+    {
+     "ref": "296abd53ed5d32e0",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-116",
+   "letter": "M",
+   "depth": 2,
+   "parent": "tn-ca-113",
+   "caption_as_listed": "Notice of Order of Administration with Instructions for Proof of Claim Form",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "ea1811dc2308ef83",
+     "label_kind": "title",
+     "title_as_listed": "Notice of Order of Administration with Instructions for Proof of Claim Form",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-117",
+   "letter": "M",
+   "depth": 2,
+   "parent": "tn-ca-113",
+   "caption_as_listed": "Proof of Claim Form NOTE: Deadline for all Claims to be received is March 1, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-03-01"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2627500fd904cb64",
+     "label_kind": "title",
+     "title_as_listed": "Proof of Claim Form",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-118",
+   "letter": "N",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2011-08-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "06b0f2d284aace5c",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-08-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-119",
+   "letter": "N",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "d45b702d515b0670",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-120",
+   "letter": "N",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-121",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "951f6e6f33b78327",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-122",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Bond"
+   ],
+   "documents": [
+    {
+     "ref": "d86cfe10f63fc444",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-123",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7e613121a6020869",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-124",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "parent_names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Petition",
+    "Bond"
+   ],
+   "documents": [
+    {
+     "ref": "2206b841b3bbb9e9",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-125",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "parent_names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Bond"
+   ],
+   "documents": [
+    {
+     "ref": "cb20f9ea3dc8340d",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-126",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "parent_names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order to Show Cause",
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "a416e3534613afe7",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-127",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "parent_names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Agreed Order",
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "e3c9727d57c0b740",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-128",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Bond"
+   ],
+   "documents": [
+    {
+     "ref": "68cc32e65bf7f6c5",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-129",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "parent_names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Bond"
+   ],
+   "documents": [
+    {
+     "ref": "e23b9ba5297ac974",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-130",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "1ecd15e2b24c77ed",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-131",
+   "letter": "N",
+   "depth": 2,
+   "parent": "tn-ca-120",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Bond"
+   ],
+   "documents": [
+    {
+     "ref": "cff32990e48c60ef",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-132",
+   "letter": "O",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2021-02-09"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Acquisition",
+    "Merger"
+   ],
+   "documents": [
+    {
+     "ref": "ec01e421270c7a0d",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2021-02-09"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-133",
+   "letter": "O",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Ocoee Life Insurance Company, October 26, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-10-26"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b6763827bb716bff",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-10-26"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-134",
+   "letter": "O",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Oriska Insurance Company, June 30, 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-06-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "208e91af5a874964",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-06-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-135",
+   "letter": "O",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Oscar Insurance Company, May 13, 2026 (Signed version available on request)",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2026-05-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": true,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "1761764b32263ad3",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-05-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-136",
+   "letter": "P",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Penn Treaty Network America Insurance Company - Agreed Order March 6, 2009",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2009-03-06"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Agreed Order",
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "dfe901e32844d863",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2009-03-06"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-137",
+   "letter": "P",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Plastech Engineered Products, Inc. formerly known as United Screw & Bolt Corporation revised Consent Order (12/2/08)",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2008-12-02"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Consent Order",
+    "Order"
+   ],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-138",
+   "letter": "P",
+   "depth": 2,
+   "parent": "tn-ca-137",
+   "caption_as_listed": "Notice",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7d81f9b50f31b3bd",
+     "label_kind": "title",
+     "title_as_listed": "Notice",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-139",
+   "letter": "P",
+   "depth": 2,
+   "parent": "tn-ca-137",
+   "caption_as_listed": "Court Order",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Court Order",
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "d8427ed084d900ae",
+     "label_kind": "title",
+     "title_as_listed": "Court Order",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-140",
+   "letter": "P",
+   "depth": 2,
+   "parent": "tn-ca-137",
+   "caption_as_listed": "Supplemental Order",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "47eab27ac9a9ef33",
+     "label_kind": "title",
+     "title_as_listed": "Supplemental Order",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-141",
+   "letter": "P",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Preferred Auto Insurance Company – Consent Order December, 11 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-12-11"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Consent Order",
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "686fce0f38122ec9",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-12-11"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-142",
+   "letter": "P",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Protective Life Insurance Company merger of Shades Creek Captive Insurance Company November 30, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-11-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Merger"
+   ],
+   "documents": [
+    {
+     "ref": "f15eb7cdcbe718b0",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-11-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-143",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "R & Q Reinsurance Company, June 1, 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-06-01"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "109cbb7c230571be",
+     "label_kind": "title",
+     "title_as_listed": "R & Q Reinsurance Company, June 1, 2015",
+     "dates": [
+      "2015-06-01"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-144",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Realm National Insurance Company - Agreed Order - March 17, 2004",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2004-03-17"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Agreed Order",
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "5993655916bc1bf5",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2004-03-17"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-145",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Red Rock (formerly BankInsure), July 9, 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-07-09"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "6f3c6de3e991aadc",
+     "label_kind": "title",
+     "title_as_listed": "Red Rock (formerly BankInsure), July 9, 2015",
+     "dates": [
+      "2015-07-09"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-146",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "ReliaMax Surety Company, May, 16 2016",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2016-05-16"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "c56a22dbe834e7cd",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2016-05-16"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-147",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Reny Company, April 1, 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-04-01"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "111783ac49eab009",
+     "label_kind": "title",
+     "title_as_listed": "Reny Company, April 1, 2015",
+     "dates": [
+      "2015-04-01"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-148",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Republic American Life Insurance Co. June 11, 2008",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2008-06-11"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "1538a7d45cb9b63d",
+     "label_kind": "title",
+     "title_as_listed": "Republic American Life Insurance Co. June 11, 2008",
+     "dates": [
+      "2008-06-11"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-149",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2019-09-24"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "3f22ef9a790761a7",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2019-09-24"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-150",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-02-09"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ed275151c30d526d",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2015-02-09"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-151",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2013-10-17"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "47329ec72876b677",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2013-10-17"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-152",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-03-04"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2c285768e817bfed",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2015-03-04"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-153",
+   "letter": "R",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-04-09"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "89fc4aa4dc072b74",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2015-04-09"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-154",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Security Indemnity Insurance Company July 10, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-07-10"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b328d5eb16d72639",
+     "label_kind": "title",
+     "title_as_listed": "Security Indemnity Insurance Company July 10, 2006",
+     "dates": [
+      "2006-07-10"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-155",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Seechange Health Insurance Company, March 24, 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-03-24"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "f1261fc230a9929d",
+     "label_kind": "title",
+     "title_as_listed": "Seechange Health Insurance Company, March 24, 2015",
+     "dates": [
+      "2015-03-24"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-156",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Selective Insurance Company of South Carolina, January 8, 2014",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2014-01-08"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "3c047de814edcf94",
+     "label_kind": "title",
+     "title_as_listed": "Selective Insurance Company of South Carolina, January 8, 2014",
+     "dates": [
+      "2014-01-08"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-157",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Serve America Assurance, LTD Multiple Dates",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "893886cde1aa046e",
+     "label_kind": "title",
+     "title_as_listed": "Serve America Assurance, LTD Multiple Dates",
+     "dates": [],
+     "pdf": false
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-158",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Shelby Casualty Insurance Company October 18, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-10-18"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b5381e60078fc00a",
+     "label_kind": "title",
+     "title_as_listed": "Shelby Casualty Insurance Company October 18, 2006",
+     "dates": [
+      "2006-10-18"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-159",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Shelby Insurance Company October 18, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-10-18"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0ce2ee034260995e",
+     "label_kind": "title",
+     "title_as_listed": "Shelby Insurance Company October 18, 2006",
+     "dates": [
+      "2006-10-18"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-160",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2005-09-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "a4988e683352aa8e",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2005-09-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-161",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Shenandoah Life Insurance Company, December 20 2010",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2010-12-20"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "28c0d8f82fe775db",
+     "label_kind": "title",
+     "title_as_listed": "Shenandoah Life Insurance Company, December 20 2010",
+     "dates": [
+      "2010-12-20"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-162",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2007-03-23"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "f1660cda221ea772",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [
+      "2007-03-23"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-163",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Sidecar HR III, LLC, June 16, 2017",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2017-06-16"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "e12ee1924c8ab1ef",
+     "label_kind": "title",
+     "title_as_listed": "Sidecar HR III, LLC, June 16, 2017",
+     "dates": [
+      "2017-06-16"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-164",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Smart Data Solutions Multiple Dates",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-165",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "April 14, 2010",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2010-04-14"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "21b3b1e734cb74bb",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-04-14"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-166",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "April 27, 2010",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2010-04-27"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ae98427a8b5b8105",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-04-27"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-167",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "May 20, 2010",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2010-05-20"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "4311e5ba9c771f0d",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-05-20"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-168",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "May 24, 2010",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2010-05-24"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "60e9fa2434929e70",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-05-24"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-169",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "July 14, 2010",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2010-07-14"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "72187a20b217311c",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2010-07-14"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-170",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "June 3, 2011",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2011-06-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "76f129295f7c5b37",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-06-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-171",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "June 3, 2011",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2011-06-03"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8c734acb7651fa76",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-06-03"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-172",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "August 12, 2011",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2011-08-12"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "19b3b64ad9556459",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2011-08-12"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-173",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "July 28, 2014",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2014-07-28"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0cf1f5649b55b987",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-07-28"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-174",
+   "letter": "S",
+   "depth": 2,
+   "parent": "tn-ca-164",
+   "caption_as_listed": "January 13, 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-01-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "8e6bb1b0fce32049",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-01-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-175",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Softheon, Inc. Final Consent Order August 19, 2015",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2015-08-19"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Consent Order",
+    "Order"
+   ],
+   "documents": [
+    {
+     "ref": "20c9258769846a66",
+     "label_kind": "title",
+     "title_as_listed": "Softheon, Inc. Final Consent Order August 19, 2015",
+     "dates": [
+      "2015-08-19"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-176",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Southern States Insurance Company, July 10, 2020",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2020-07-10"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "640cc60bc8ea368d",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2020-07-10"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-177",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Southland National Insurance Corp. January 2, 2021",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2021-01-02"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "220107510bd702d3",
+     "label_kind": "title",
+     "title_as_listed": "Southland National Insurance Corp. January 2, 2021",
+     "dates": [
+      "2021-01-02"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-178",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "States General Life Insurance Company April 22, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-04-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "ee2ed1a276a6a9af",
+     "label_kind": "title",
+     "title_as_listed": "States General Life Insurance Company April 22, 2005",
+     "dates": [
+      "2005-04-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-179",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Statewide Insurance Liquidation April 22, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-04-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Liquidation"
+   ],
+   "documents": [
+    {
+     "ref": "4777497341a48d40",
+     "label_kind": "title",
+     "title_as_listed": "Statewide Insurance Liquidation April 22, 2005",
+     "dates": [
+      "2005-04-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-180",
+   "letter": "S",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Sunz Insurance Company June 05, 2013",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2013-06-05"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "cd0e0362263d79ce",
+     "label_kind": "title",
+     "title_as_listed": "Sunz Insurance Company June 05, 2013",
+     "dates": [
+      "2013-06-05"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-181",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "TD Consortium Benefits Trust, November 19, 2018",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2018-11-19"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "802abc623c5232ba",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2018-11-19"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-182",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2019-05-29"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "c1755cb89f5d4871",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2019-05-29"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-183",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-12-02"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "88628ff48d3943a4",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-12-02"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-184",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-02-20"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "cfacb642bd048539",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-02-20"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-185",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2015-04-21"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "d7130ba282dc2b0c",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2015-04-21"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-186",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-10-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "fdee10694b83cedf",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2009-10-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-187",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Tennessee Restaurant Association Self-Insured Workers' Compensation Trust, December 7, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-12-07"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "cbeac0ea1af1123f",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-12-07"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-188",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "The Reciprocal Alliance Multiple Dates (See \"American National Lawyers Insurance Reciprocal\" above)",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-189",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2008-08-26"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "211f1899adfdb149",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2008-08-26"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-190",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2008-07-21"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "e259015bc63cf4df",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2008-07-21"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-191",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-06-15"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "df3d7f10640f1fb6",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2009-06-15"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-192",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2016-01-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "0e09fbccc2687586",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2016-01-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-193",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "person_name_pattern",
+   "dates": [
+    "2008-10-17"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7ae6e8d416fcb5c2",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2008-10-17"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-194",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2008-12-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "399e92066b1baad0",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2008-12-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-195",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2014-10-17"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "b3e75c00b64aa35a",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2014-10-17"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-196",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2012-03-08"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "449ae4867a37f251",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2012-03-08"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-197",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Traveler Protective Services, Inc. f/k/a Vacation Protection Services, Inc., May 8, 2008",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2008-05-08"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "7dbe1fffda4c4bb3",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2008-05-08"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-198",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2006-05-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "fa47928404588365",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2006-05-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-199",
+   "letter": "T",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Trip Assured Inc., May 30, 2008",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2008-05-30"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "35437d4afc10d1ab",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2008-05-30"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-200",
+   "letter": "U",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "person_name_pattern",
+   "dates": [
+    "2013-09-10"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "6201d419d7a37c13",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2013-09-10"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-201",
+   "letter": "U",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "United Healthcare Insurance Company, June 09, 2026 (Signed version available on request)",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2026-06-09"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": true,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "bcbc88879f8b9f27",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-06-09"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-202",
+   "letter": "U",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "United Healthcare Plan of the River Valley, June 09, 2026 (Signed version available on request)",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2026-06-09"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": true,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2bb70467ab165f49",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    },
+    {
+     "ref": "a01a1711ca484651",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2026-06-09"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-203",
+   "letter": "U",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "United National Life Insurance Company of America, March 09, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-03-09"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2bb70467ab165f49",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-204",
+   "letter": "U",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Universal Life Insurance Company, June 22, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-06-22"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "432c4d336ecc609f",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2006-06-22"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-205",
+   "letter": "U",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "UNUM Provident Multiple Dates",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": true,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-206",
+   "letter": "U",
+   "depth": 2,
+   "parent": "tn-ca-205",
+   "caption_as_listed": "PRESS RELEASES:",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-207",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-206",
+   "caption_as_listed": "Multistate Settlement Remediates Unum Provident Claims Handling",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Settlement"
+   ],
+   "documents": [
+    {
+     "ref": "f72aee918709e389",
+     "label_kind": "title",
+     "title_as_listed": "Multistate Settlement Remediates Unum Provident Claims Handling",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-208",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-206",
+   "caption_as_listed": "Unum Provident Settlement Effective 01/04/2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-01-04"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Settlement"
+   ],
+   "documents": [
+    {
+     "ref": "85e37ab68337395d",
+     "label_kind": "title",
+     "title_as_listed": "Unum Provident Settlement Effective 01/04/2005",
+     "dates": [
+      "2005-01-04"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-209",
+   "letter": "U",
+   "depth": 2,
+   "parent": "tn-ca-205",
+   "caption_as_listed": "AGREEMENTS AND REPORTS:",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-210",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-209",
+   "caption_as_listed": "Unum Provident Settlement Effective",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Settlement"
+   ],
+   "documents": [
+    {
+     "ref": "85e37ab68337395d",
+     "label_kind": "title",
+     "title_as_listed": "Unum Provident Settlement Effective",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-211",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-209",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2005-12-31"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Exam"
+   ],
+   "documents": [
+    {
+     "ref": "397b7f408f849e90",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    },
+    {
+     "ref": "38ac535a07f64ed3",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-212",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-209",
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2005-12-31"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Order",
+    "Exam"
+   ],
+   "documents": [
+    {
+     "ref": "2d4eb26b22ff2d45",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    },
+    {
+     "ref": "d2b4954e7b36d400",
+     "label_kind": "title",
+     "title_as_listed": null,
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-213",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-209",
+   "caption_as_listed": "Tennessee Settlement Agreement",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Settlement"
+   ],
+   "documents": [
+    {
+     "ref": "027a8586da532b55",
+     "label_kind": "title",
+     "title_as_listed": "Tennessee Settlement Agreement",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-214",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-209",
+   "caption_as_listed": "Maine Settlement Agreement",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Settlement"
+   ],
+   "documents": [
+    {
+     "ref": "d84c4e6ffe5102df",
+     "label_kind": "title",
+     "title_as_listed": "Maine Settlement Agreement",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-215",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-209",
+   "caption_as_listed": "Massachusetts Settlement Agreement",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Settlement"
+   ],
+   "documents": [
+    {
+     "ref": "6b86b24e9ff8f21a",
+     "label_kind": "title",
+     "title_as_listed": "Massachusetts Settlement Agreement",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-216",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-209",
+   "caption_as_listed": "Amendment to Regulatory Settlement October 2005",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [
+    "Settlement"
+   ],
+   "documents": [
+    {
+     "ref": "8202e4a80de2832e",
+     "label_kind": "title",
+     "title_as_listed": "Amendment to Regulatory Settlement October 2005",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-217",
+   "letter": "U",
+   "depth": 2,
+   "parent": "tn-ca-205",
+   "caption_as_listed": "EXHIBITS TO THE AGREEMENTS:",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": []
+  },
+  {
+   "id": "tn-ca-218",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "1. Agreement Exhibit 1 - Reassessment Process",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "03c42ecfdf17d1b4",
+     "label_kind": "title",
+     "title_as_listed": "Agreement Exhibit 1 - Reassessment Process",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-219",
+   "letter": "U",
+   "depth": 4,
+   "parent": "tn-ca-218",
+   "caption_as_listed": "Ex 1, Attachment A-1 Reassessment Notice to Claimants",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "4513c7a019baf8aa",
+     "label_kind": "title",
+     "title_as_listed": "Ex 1, Attachment A-1 Reassessment Notice to Claimants",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-220",
+   "letter": "U",
+   "depth": 4,
+   "parent": "tn-ca-218",
+   "caption_as_listed": "Ex 1, Attachment A-2 Reassessment Notice RTW",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "793d098f59b2cfc0",
+     "label_kind": "title",
+     "title_as_listed": "Ex 1, Attachment A-2 Reassessment Notice RTW",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-221",
+   "letter": "U",
+   "depth": 4,
+   "parent": "tn-ca-218",
+   "caption_as_listed": "Ex 1, Attachment B Reassessment Return Letter",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "58de39ee4259939b",
+     "label_kind": "title",
+     "title_as_listed": "Ex 1, Attachment B Reassessment Return Letter",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-222",
+   "letter": "U",
+   "depth": 4,
+   "parent": "tn-ca-218",
+   "caption_as_listed": "Ex 1, Attachment C Reassessment Information Form",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "6bb017cbc6bb896d",
+     "label_kind": "title",
+     "title_as_listed": "Ex 1, Attachment C Reassessment Information Form",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-223",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "2. Exhibit 2 Changes in Claim Organization",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2a7698854dcfdc28",
+     "label_kind": "title",
+     "title_as_listed": "Exhibit 2 Changes in Claim Organization",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-224",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "3. Exhibit 3 Quality Compliance Consultant",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "de453d931630e0a0",
+     "label_kind": "title",
+     "title_as_listed": "Exhibit 3 Quality Compliance Consultant",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-225",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "4. Exhibit 4 Multiple Conditions",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "d158e8f041be1f0c",
+     "label_kind": "title",
+     "title_as_listed": "Exhibit 4 Multiple Conditions",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-226",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "5. Exhibit 5 Professional Conduct",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "92a1000ac013b37b",
+     "label_kind": "title",
+     "title_as_listed": "Exhibit 5 Professional Conduct",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-227",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "6. Exhibit 6 Independent Medical Assessments",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "e7b275dd52f1bf88",
+     "label_kind": "title",
+     "title_as_listed": "Exhibit 6 Independent Medical Assessments",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-228",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "7. Exhibit 7 Proof of Loss",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "2feec00613349794",
+     "label_kind": "title",
+     "title_as_listed": "Exhibit 7 Proof of Loss",
+     "dates": [],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-229",
+   "letter": "U",
+   "depth": 3,
+   "parent": "tn-ca-217",
+   "caption_as_listed": "Contact Unum Provident (off the Tennessee State Website)",
+   "caption_withheld_reason": null,
+   "dates": [],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "fbbb6b4f1744ff53",
+     "label_kind": "title",
+     "title_as_listed": "Contact Unum Provident",
+     "dates": [],
+     "pdf": false
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-230",
+   "letter": "U",
+   "depth": 2,
+   "parent": "tn-ca-205",
+   "caption_as_listed": "US International Reinsurance Company, September 15, 2003",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2003-09-15"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "83c76502220e7c52",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2003-09-15"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-231",
+   "letter": "V",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Vista Fire Insurance Corporation, October 18, 2006",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2006-10-18"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "20dc7c3423e5dc01",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2006-10-18"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-232",
+   "letter": "Y",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "York Insurance Company, May 13, 2005",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2005-05-13"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "e4c10a15120a68cb",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2005-05-13"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-233",
+   "letter": "Z",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": "Zenefits FTW Insurance Services, July 18, 2016",
+   "caption_withheld_reason": null,
+   "dates": [
+    "2016-07-18"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "f9c11a4e3a30bc59",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2016-07-18"
+     ],
+     "pdf": true
+    }
+   ]
+  },
+  {
+   "id": "tn-ca-234",
+   "letter": "Z",
+   "depth": 1,
+   "parent": null,
+   "caption_as_listed": null,
+   "caption_withheld_reason": "names_a_counterparty",
+   "dates": [
+    "2009-05-05"
+   ],
+   "multiple_dates_as_listed": false,
+   "signed_version_on_request": false,
+   "terms_as_listed": [],
+   "documents": [
+    {
+     "ref": "f9c11a4e3a30bc59",
+     "label_kind": "date",
+     "title_as_listed": null,
+     "dates": [
+      "2009-05-05"
+     ],
+     "pdf": true
+    }
+   ]
+  }
+ ]
+}

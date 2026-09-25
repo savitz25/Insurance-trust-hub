@@ -73,6 +73,16 @@ assert(byKey.ma_licensed_or_approved_distinct_naic.value !== byKey.licensed_insu
 assert(byKey.ma_administrative_actions_observation_rows.value === 319, "MA 319 administrative-action rows");
 assert(byKey.ma_agency_roster_count.value === null, "MA agency roster is not a number");
 assert(byKey.ma_producer_roster_count.value === null, "MA producer roster is not a number");
+assert(v1.tennessee.snapshotFingerprint === pub.tennesseeSnapshotFingerprint, "TN snapshot fingerprint");
+assert(v1.tennessee.licensedCompaniesDistinctNaic === 2029, "TN 2029 licensed companies");
+assert(byKey.tn_licensed_companies_distinct_naic.value === 2029, "TN licensed companies metric");
+assert(byKey.tn_licensed_companies_distinct_naic.sourceAsOf === "2026-08-31", "TN company-list source clock");
+assert(byKey.tn_licensed_companies_distinct_naic.value !== byKey.licensed_insurance_companies.value, "TN companies != national companies");
+assert(byKey.tn_company_actions_index_lines.value === 234, "TN 234 company-action archive lines");
+assert(byKey.tn_company_actions_index_lines.sourceAsOf === null, "TN actions archive prints no list date");
+assert(byKey.tn_agency_roster_count.value === null, "TN agency roster is not a number");
+assert(byKey.tn_producer_roster_count.value === null, "TN producer roster is not a number");
+assert(byKey.tn_complaints_count.value === null, "TN complaint data is not a number");
 assert(byKey.il_authorized_companies.value === null, "IL authorized metric not a number");
 assert(byKey.il_authorized_companies.valueState === "UNKNOWN", "IL authorized not acquired");
 assert(byKey.il_directors_order_observations.value === 2896, "IL 2896 order metric");

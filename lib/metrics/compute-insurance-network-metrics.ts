@@ -96,6 +96,9 @@ export type InsuranceNetworkMetricsInput = {
   massachusettsSnapshotFingerprint: string;
   massachusettsAsOf: string | null;
   massachusettsLicensedOrApprovedDistinctNaic: number;
+  tennesseeSnapshotFingerprint: string;
+  tennesseeAsOf: string | null;
+  tennesseeLicensedCompaniesDistinctNaic: number;
   publicLegalInsurerWave1: number;
   ingestedExamObservations: number;
   publishedStateIntelligencePaths: string[];
@@ -239,6 +242,15 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   }
   if (input.massachusettsLicensedOrApprovedDistinctNaic === input.ohioAuthorizedCompaniesDistinctNaic) {
     throw new Error('Massachusetts licensed or approved companies must not equal Ohio authorized companies');
+  }
+  if (!input.publishedStateIntelligencePaths.includes('/tennessee')) {
+    throw new Error('Tennessee state intelligence path missing');
+  }
+  if (input.tennesseeLicensedCompaniesDistinctNaic === input.legalInsurers) {
+    throw new Error('Tennessee licensed companies must not equal national legal insurers');
+  }
+  if (input.tennesseeLicensedCompaniesDistinctNaic === input.massachusettsLicensedOrApprovedDistinctNaic) {
+    throw new Error('Tennessee licensed companies must not equal Massachusetts licensed or approved companies');
   }
   if (input.ohioAuthorizedCompaniesDistinctNaic === input.legalInsurers) {
     throw new Error('Ohio authorized companies must not equal national legal insurers');
@@ -1109,6 +1121,28 @@ export function computeInsuranceNetworkMetrics(
       ),
     }),
     metric({
+      key: 'tn_licensed_companies_distinct_naic',
+      label: 'Tennessee TDCI licensed insurance companies (distinct NAIC)',
+      value: input.tennesseeLicensedCompaniesDistinctNaic,
+      valueState: 'KNOWN',
+      grain: 'authorized_company_row',
+      denominator: 'TDCI List of Licensed Insurance Companies (rows with a real NAIC code; placeholder 99999 excluded)',
+      description:
+        'Distinct NAIC codes on the Tennessee TDCI List of Licensed Insurance Companies. Includes surplus-lines (eligible), reinsurer and risk retention group company types; rows printing the placeholder NAIC 99999 are excluded. Not agencies and not agents.',
+      coverage: 'Tennessee',
+      contributingSourceSystems: ['tn_tdci_licensed_companies'],
+      sourceAsOf: input.tennesseeAsOf,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'One distinct NAIC code on the TDCI List of Licensed Insurance Companies.',
+        'Not agencies, not agents, not placeholder-NAIC reinsurer rows, not company types added together, not admitted-only, not a quality ranking.',
+        ['tn_tdci'],
+        'Tennessee; List of Licensed Insurance Companies',
+        'TDCI licensed-company data table'
+      ),
+    }),
+    metric({
       key: 'co_authorized_companies',
       label: 'Colorado authorized companies',
       value: null,
@@ -1243,9 +1277,9 @@ export function computeInsuranceNetworkMetrics(
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
-      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio /georgia /massachusetts publication gates',
+      denominator: 'Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio /georgia /massachusetts /tennessee publication gates',
       description: 'State intelligence routes currently published. Not an agency or company count.',
-      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC, OH, GA, MA',
+      coverage: 'FL, TX, NJ, CA, WA, CO, VA, NY, IL, OR, PA, NC, OH, GA, MA, TN',
       contributingSourceSystems: ['state-intelligence-publication'],
       sourceAsOf: input.texasAsOf.slice(0, 10),
       generatedAt,
@@ -1253,7 +1287,7 @@ export function computeInsuranceNetworkMetrics(
       trace: commonTrace(
         'Published state intelligence routes.',
         'Not live researched-agency totals, not counties, not a 50-state census, not a combined company total.',
-        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel', 'oh-intel', 'ga-intel', 'ma-intel'],
+        ['florida-intel', 'texas-intel', 'nj-intel', 'ca-intel', 'wa-intel', 'co-intel', 'va-intel', 'ny-intel', 'il-intel', 'or-intel', 'pa-intel', 'nc-intel', 'oh-intel', 'ga-intel', 'ma-intel', 'tn-intel'],
         input.publishedStateIntelligencePaths.join(', '),
         'Publication gates; Texas source clock is the newest documented official date among these pages'
       ),
@@ -1352,6 +1386,8 @@ export function computeInsuranceNetworkMetrics(
     ohAuthorized: input.ohioAuthorizedCompaniesDistinctNaic,
     maFp: input.massachusettsSnapshotFingerprint,
     maCompanies: input.massachusettsLicensedOrApprovedDistinctNaic,
+    tnFp: input.tennesseeSnapshotFingerprint,
+    tnCompanies: input.tennesseeLicensedCompaniesDistinctNaic,
     paEnforcement: input.pennsylvaniaEnforcementActions,
     paComplaints: input.pennsylvaniaComplaintTableRows,
     paths: input.publishedStateIntelligencePaths,
@@ -1533,6 +1569,14 @@ export function computeInsuranceNetworkMetrics(
       licensedOrApprovedDistinctNaic: input.massachusettsLicensedOrApprovedDistinctNaic,
       producerRosterCoverage: 'NOT_ACQUIRED / PAID_OR_REQUEST',
       agencyRosterCoverage: 'NOT_ACQUIRED / PAID_OR_REQUEST',
+      licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT',
+    },
+    tennessee: {
+      snapshotFingerprint: input.tennesseeSnapshotFingerprint,
+      asOf: input.tennesseeAsOf,
+      licensedCompaniesDistinctNaic: input.tennesseeLicensedCompaniesDistinctNaic,
+      producerRosterCoverage: 'NOT_ACQUIRED / NO_FREE_BULK_FOUND',
+      agencyRosterCoverage: 'NOT_ACQUIRED / NO_FREE_BULK_FOUND',
       licensedCompanyCoverage: 'ACQUIRED_CURRENT_SNAPSHOT',
     },
     publication: {

@@ -98,6 +98,14 @@ const specs = {
  ["hearing_decisions.listing_rows", "Public hearing decision listings", "regulatory_evidence_row"],
  ["market_conduct.listing_rows", "Market-conduct report and adoption-order listings", "market_conduct_examination_listing", "EXAMINATIONS"],
  ],
+ TN: [
+ ["licensed_companies.distinct_naic", "TDCI licensed insurance companies (distinct NAIC)", "authorized_company_row", "ENTITY_IDENTITY"],
+ ["licensed_companies.placeholder_rows", "Licensed-company rows printing placeholder NAIC 99999 (research rows, not identities)", "state_evidence_observation", "ENTITY_IDENTITY"],
+ ["company_activity_updates.event_rows", "Monthly company-activity events (events, not companies)", "regulatory_evidence_row"],
+ ["company_actions.index_lines", "Insurance Company Actions Archive lines (unattached)", "regulatory_evidence_row"],
+ ["company_examinations.listings", "Company Examinations Archive listings (unattached)", "regulatory_evidence_row", "EXAMINATIONS"],
+ ["producer_discipline.linked_entries", "Agent/producer disciplinary archive entries (person grain, unattached)", "regulatory_evidence_row"],
+ ],
  NC: [
  ["licensing_actions.document_rows", "NCDOI Licensing Action catalog rows", "regulatory_evidence_row"],
  ["licensing_actions.producer_rows", "Insurance Producer licensing-action rows", "regulatory_evidence_row"],
@@ -107,8 +115,8 @@ const specs = {
  ["receiverships.named_current_estates", "Named current receivership/liquidation/rehab estates", "regulatory_evidence_row"],
  ]
 };
-const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina", OH:"Ohio", MA:"Massachusetts" };
-const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina", OH:"ohio", MA:"massachusetts" };
+const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina", OH:"Ohio", MA:"Massachusetts", TN:"Tennessee" };
+const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina", OH:"ohio", MA:"massachusetts", TN:"tennessee" };
 export function reconcile(manifest, root, census) {
   const paths = Object.fromEntries(Object.entries(slugs).map(([k,v]) => [k, `lib/${v}-intelligence/accepted-snapshot.json`]));
   const sources = Object.fromEntries(Object.entries(paths).map(([k,v])=>[k,read(root,v)]));

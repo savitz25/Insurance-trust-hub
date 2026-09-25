@@ -1,0 +1,40 @@
+{
+ "version": "insurance-tn-state-intel-v1",
+ "complaints": {
+  "source": "https://www.tn.gov/commerce/insurance/consumer-resources/file-a-complaint.html",
+  "statements": [
+   "Consumers who believe they have been wrongfully denied a claim by their insurance company or have another issue with their insurance agent or company can file a complaint by completing the online complaint form, or by printing out the form and mailing and faxing it to Consumer Insurance Services.",
+   "The insurance policy must have been written in Tennessee.",
+   "Any complaints involving TennCare, CoverKids, or CoverRx should be sent to the TennCare Oversight Division."
+  ],
+  "online_form": "NAIC State Based Systems online complaint form for Tennessee",
+  "complaint_data_link_target": "https://www.naic.org/cis_refined_results.htm?INSURANCE_TYPE=(All)&COCODE=25151&REALM=PROD",
+  "complaint_data_link_note": "The TDCI page's 'Complaint Data' link opens the NAIC Consumer Insurance Search for a single example company code. TDCI publishes no Tennessee company-level complaint table or download on this page."
+ },
+ "license_verification": {
+  "source": "https://www.tn.gov/commerce/insurance/consumer-resources/verify-insurance-license.html",
+  "resolves_to": "https://external-lookup-web.prod.naic.org/",
+  "note": "The TDCI 'Verify an Insurance License' page resolves to the NAIC public license lookup (companies and producers). Search-only; no bulk file."
+ },
+ "company_types_page": {
+  "source": "https://www.tn.gov/commerce/insurance/company-resources/types-of-insurance-companies.html",
+  "types_listed": [
+   "Captive Insurance",
+   "Fraternal",
+   "Health Insurance",
+   "Life",
+   "Property & Casualty",
+   "Surplus Lines",
+   "Title",
+   "Workers Compensation"
+  ]
+ },
+ "reinsurers_and_jurisdictions": {
+  "source": "https://www.tn.gov/commerce/insurance/consumer-resources/reinsurers-jurisdictions.html",
+  "certified_reinsurer_rows": 8,
+  "rj_reinsurer_rows": 51,
+  "identifier": "7-digit NAIC alien company codes",
+  "financial_strength_rating_column_republished": false,
+  "note": "The licensed-company list prints NAIC 99999 for these reinsurers. Linking them to the 7-digit codes here would need a name match, so it is not done."
+ }
+}
