@@ -1,0 +1,168 @@
+{
+  "page": "https://doi.nv.gov/Consumers/Consumer_Complaint_Report/",
+  "grain": "complaint-reason row (one complaint can print one row per reason; rows are not complaints)",
+  "columns_as_published": [
+    "RESPONDENT NAME",
+    "OPENED DATE",
+    "CLOSED DATE",
+    "COVERAGE TYPE",
+    "COVERAGE LEVEL 1",
+    "COVERAGE LEVEL 2",
+    "REASON CATEGORY",
+    "REASON TYPE",
+    "DISPOSITIONS"
+  ],
+  "years_acquired": {
+    "2022": {
+      "complaint_reason_rows": 4624,
+      "opened_first": "2022-01-01",
+      "opened_last": "2022-12-31",
+      "closed_blank_rows": 0,
+      "distinct_respondent_strings": 782,
+      "respondent_strings_at_30_char_limit": 32,
+      "rows_with_individual_name_format_respondent": 315,
+      "coverage_type": {
+        "Automobile": 1691,
+        "Accident and Health": 1154,
+        "Miscellaneous": 858,
+        "Homeowners": 554,
+        "Liability": 183,
+        "Life & Annuity": 177,
+        "Fire, Allied Lines & CMP": 7
+      },
+      "reason_category": {
+        "Claim Handling": 2865,
+        "Policyholder Service": 1147,
+        "Marketing & Sales": 390,
+        "Underwriting": 222
+      },
+      "disposition": {
+        "No Further Action Req/Rqd": 1359,
+        "Compromised Settlement/Resol.": 854,
+        "Company Position Upheld": 852,
+        "No Jurisdiction": 480,
+        "Claim Settled": 437,
+        "Referred for Disciplinary Act.": 173,
+        "Company Position Overturned": 134,
+        "Contract Provision": 99,
+        "Complaint Withdrawn": 86,
+        "Insufficient Information": 73,
+        "State Specific": 43,
+        "Referred to Proper Agency": 13,
+        "Referred to Another Department": 12,
+        "Claim Re-opened": 3,
+        "Coverage Extended": 2,
+        "Company in Compliance": 1,
+        "Information Furnished/Expanded": 1,
+        "Refund": 1,
+        "Unable to Assist": 1
+      }
+    },
+    "2023": {
+      "complaint_reason_rows": 5215,
+      "opened_first": "2023-01-01",
+      "opened_last": "2023-12-31",
+      "closed_blank_rows": 0,
+      "distinct_respondent_strings": 801,
+      "respondent_strings_at_30_char_limit": 33,
+      "rows_with_individual_name_format_respondent": 326,
+      "coverage_type": {
+        "Automobile": 2140,
+        "Accident and Health": 1335,
+        "Miscellaneous": 755,
+        "Homeowners": 650,
+        "Life & Annuity": 221,
+        "Liability": 100,
+        "Fire, Allied Lines & CMP": 14
+      },
+      "reason_category": {
+        "Claim Handling": 3241,
+        "Policyholder Service": 1241,
+        "Underwriting": 375,
+        "Marketing & Sales": 358
+      },
+      "disposition": {
+        "Company Position Upheld": 1389,
+        "No Further Action Req/Rqd": 908,
+        "Compromised Settlement/Resol.": 758,
+        "No Jurisdiction": 694,
+        "Claim Settled": 650,
+        "Complaint Withdrawn": 176,
+        "Insufficient Information": 173,
+        "Company Position Overturned": 153,
+        "Referred for Disciplinary Act.": 127,
+        "Contract Provision": 78,
+        "Referred to Proper Agency": 35,
+        "State Specific": 32,
+        "Referred to Another Department": 26,
+        "Claim Re-opened": 9,
+        "-": 7
+      }
+    },
+    "2024": {
+      "complaint_reason_rows": 6019,
+      "opened_first": "2024-01-01",
+      "opened_last": "2024-12-31",
+      "closed_blank_rows": 0,
+      "distinct_respondent_strings": 822,
+      "respondent_strings_at_30_char_limit": 37,
+      "rows_with_individual_name_format_respondent": 205,
+      "coverage_type": {
+        "Automobile": 2899,
+        "Accident and Health": 1242,
+        "Homeowners": 799,
+        "Miscellaneous": 689,
+        "Life & Annuity": 245,
+        "Liability": 61,
+        "Fire, Allied Lines & CMP": 58,
+        "-": 26
+      },
+      "reason_category": {
+        "Claim Handling": 3603,
+        "Policyholder Service": 1498,
+        "Underwriting": 613,
+        "Marketing & Sales": 305
+      },
+      "disposition": {
+        "Company Position Upheld": 1796,
+        "No Further Action Req/Rqd": 822,
+        "No Jurisdiction": 790,
+        "Compromised Settlement/Resol.": 697,
+        "Claim Settled": 684,
+        "-": 550,
+        "Complaint Withdrawn": 168,
+        "Company Position Overturned": 117,
+        "Insufficient Information": 106,
+        "Referred for Disciplinary Act.": 92,
+        "Contract Provision": 74,
+        "State Specific": 58,
+        "Referred to Another Department": 34,
+        "Claim Re-opened": 26,
+        "Referred to Proper Agency": 5
+      }
+    }
+  },
+  "earlier_years_published_not_acquired": [
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021"
+  ],
+  "respondent_names_committed": false,
+  "respondent_names_published_here": false,
+  "respondent_field_is_truncated_at_30_characters": true,
+  "respondents_include_individual_people": true,
+  "identifiers_printed": {
+    "naic": false,
+    "npn": false,
+    "complaint_id": false
+  },
+  "exact_attachments": 0,
+  "name_only_attachment": "UNSUPPORTED",
+  "complaint_is_not_enforcement": true,
+  "complaint_count_is_not_quality_score": true,
+  "no_company_complaint_ranking": true
+}

@@ -1,0 +1,27 @@
+{
+  "page": "https://doi.nv.gov/News_Notices/Enforcements___Orders/",
+  "page_scope": "The NDOI Enforcements & Orders page lists only the current posting; no archive index is published there.",
+  "archived_copies_found": 0,
+  "listed_orders": 1,
+  "orders": [
+    {
+      "listing_label": "ORDER",
+      "respondent_as_listed": "Mitchell International Inc.",
+      "respondent_grain": "business_entity_not_an_insurer",
+      "respondent_note": "The order states the respondent does not hold a Nevada Third-Party Administrator Certificate of Registration.",
+      "cause_number": "26.0028",
+      "order_type_as_printed": "Consent Agreement and Order",
+      "listed_date": "2026-06-26",
+      "identifiers_printed": {
+        "naic": [],
+        "npn": [],
+        "nv_license": []
+      },
+      "exact_attachment": null,
+      "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Mitchell Int Cause 26.028_CAO.pdf",
+      "pdf_parsed_for": "order type, cause number and printed identifiers only"
+    }
+  ],
+  "coverage_2024_to_2026": "PARTIAL",
+  "orders_before_current_posting": "NOT_ACQUIRED"
+}

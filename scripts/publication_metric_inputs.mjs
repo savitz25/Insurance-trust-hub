@@ -26,6 +26,7 @@ export function publicationMetricInputs() {
   const gaPub = read("lib/georgia-intelligence/publication.ts");
   const maPub = read("lib/massachusetts-intelligence/publication.ts");
   const tnPub = read("lib/tennessee-intelligence/publication.ts");
+  const nvPub = read("lib/nevada-intelligence/publication.ts");
   const njPub = read("lib/new-jersey-intelligence/publication.ts");
   const flPub = read("lib/national/fl-state-intel.ts");
   const tx = readJson("lib/texas-intelligence/accepted-snapshot.json");
@@ -68,6 +69,7 @@ export function publicationMetricInputs() {
   const gaPath = gaPub.match(/path: '(\/[^']+)'/)?.[1];
   const maPath = maPub.match(/path: '(\/[^']+)'/)?.[1];
   const tnPath = tnPub.match(/path: '(\/[^']+)'/)?.[1];
+  const nvPath = nvPub.match(/path: '(\/[^']+)'/)?.[1];
   if (txPath && existsSync(join(root, "app/texas/page.tsx"))) paths.push(txPath);
   if (njPath && existsSync(join(root, "app/new-jersey/page.tsx"))) paths.push(njPath);
   if (caPath && existsSync(join(root, "app/california/page.tsx"))) paths.push(caPath);
@@ -83,6 +85,7 @@ export function publicationMetricInputs() {
   if (gaPath && existsSync(join(root, "app/georgia/page.tsx"))) paths.push(gaPath);
   if (maPath && existsSync(join(root, "app/massachusetts/page.tsx"))) paths.push(maPath);
   if (tnPath && existsSync(join(root, "app/tennessee/page.tsx"))) paths.push(tnPath);
+  if (nvPath && existsSync(join(root, "app/nevada/page.tsx"))) paths.push(nvPath);
 
   const cmsSourceAsOf = cms.match(/modified: '([^']+)'/)?.[1]?.slice(0, 10) ;
   if (!cmsSourceAsOf) throw new Error("Missing CMS source clock");

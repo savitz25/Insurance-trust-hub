@@ -1,0 +1,534 @@
+{
+  "version": "insurance-nv-state-intel-v1",
+  "ticket": "NV-INS-001",
+  "snapshot_as_of": "2026-09-25",
+  "source_as_of": null,
+  "source_clock_note": "No single Nevada source clock: the market-report census is as of October 2024, complaint rows run through 2024-12-31 and the one listed order is dated 2026-06-26.",
+  "retrieved_at": "2026-09-25T17:40:12Z",
+  "generated_at": "2026-09-25T17:43:26Z",
+  "publication": {
+    "path": "/nevada",
+    "robots_index": true,
+    "sitemap": true,
+    "h1": "Nevada insurance regulatory research"
+  },
+  "regulator": {
+    "agency": "Nevada Division of Insurance",
+    "short": "NDOI",
+    "department": "Department of Business and Industry",
+    "home_url": "https://doi.nv.gov/",
+    "license_lookup_url": "https://di.nv.gov/nv/r/doi/licensing/search",
+    "self_serve_lists_url": "https://di.nv.gov/nv/r/doi/reports-and-lookups/home",
+    "enforcements_url": "https://doi.nv.gov/News_Notices/Enforcements___Orders/",
+    "complaint_url": "https://doi.nv.gov/Consumers/File-A-Complaint/",
+    "complaint_data_url": "https://doi.nv.gov/Consumers/Consumer_Complaint_Report/",
+    "serff_url": "https://filingaccess.serff.com/sfa/home/nv",
+    "captive_url": "https://doi.nv.gov/Captive-Insurance/",
+    "public_records_url": "https://doi.nv.gov/News-Notices/Records/"
+  },
+  "market_report_census": {
+    "document": "2025 Insurance Market Report for the 83rd Legislative Session",
+    "figures_as_of_statement": "Figures are as of October 2024.",
+    "figures_as_of_month": "2024-10",
+    "regulator_statement_not_our_count": true,
+    "licensees": {
+      "report_stated_active_licensee_total": 267361,
+      "report_total_mixes_grains": true,
+      "report_total_equals_individuals_plus_agencies": true,
+      "report_total_excludes_listed_captives": true,
+      "republished_as_combined_total": false,
+      "individual_licensees": 250551,
+      "individual_resident": 24176,
+      "individual_non_resident": 226375,
+      "agency_licensees": 16810,
+      "agency_resident": 2147,
+      "agency_non_resident": 14663,
+      "captive_licensees": 147,
+      "producer_license_share_pct": 89,
+      "producer_license_holders_individuals_and_agencies": 237712
+    },
+    "companies": {
+      "licensed_domestic_and_foreign_insurers": 1652,
+      "captive_insurers": 147,
+      "sponsored_captive_cells": 135,
+      "self_insured_employers": 87,
+      "self_insured_groups_active": 7,
+      "surplus_lines_insurers_approximate": 160,
+      "surplus_lines_is_non_admitted": true,
+      "never_summed": true
+    },
+    "consumer_services_fy2024": {
+      "inquiries_approximate": 12000,
+      "complaints_investigated": 3849,
+      "volume_is_not_a_provider_count": true
+    },
+    "examinations_2022_2023": {
+      "financial_examinations_of_domestic_insurers": 15,
+      "regulatory_examinations_of_non_traditional_insurers": 44,
+      "examination_is_not_a_score": true
+    }
+  },
+  "legal_companies": {
+    "count": null,
+    "coverage": "NOT_ACQUIRED / SEARCH_ONLY_COMPANY_LOOKUP",
+    "verification": "KNOWN",
+    "regulator_stated_licensed_insurers": 1652,
+    "regulator_stated_as_of": "2024-10",
+    "surplus_lines_visible_in_lookup": false,
+    "no_public_company_bulk_list_found": true,
+    "national_legal_insurer_spine": 6185,
+    "national_spine_is_not_nevada_authority": true,
+    "nevada_credentials_in_national_graph": 0
+  },
+  "naic_crosswalk": {
+    "nevada_company_list": null,
+    "note": "No NDOI company list was acquired, so no NAIC crosswalk was run."
+  },
+  "agency_roster": {
+    "count": null,
+    "coverage": "NOT_ACQUIRED / SELF_SERVE_EXPORT_REJECTED_AUTOMATED_ACCESS",
+    "verification": "KNOWN",
+    "regulator_stated_agency_licensees": 16810,
+    "regulator_stated_resident": 2147,
+    "regulator_stated_non_resident": 14663,
+    "regulator_stated_as_of": "2024-10",
+    "existing_nv_directory": {
+      "verified_listings_observed": 18247,
+      "observed_at": "2026-09-25T17:05:00Z",
+      "source": "https://www.insurancetrusthub.com/api/inventory/health (verifiedNvCount)"
+    },
+    "existing_directory_is_not_ndoi_census": true,
+    "existing_directory_clock_differs_from_report": true
+  },
+  "producer_roster": {
+    "count": null,
+    "coverage": "NOT_ACQUIRED / SELF_SERVE_EXPORT_REJECTED_AUTOMATED_ACCESS",
+    "verification": "KNOWN",
+    "regulator_stated_individual_licensees": 250551,
+    "regulator_stated_resident": 24176,
+    "regulator_stated_non_resident": 226375,
+    "regulator_stated_as_of": "2024-10",
+    "individual_licensee_is_not_producer_only": true,
+    "person_names_published_here": false
+  },
+  "company_authority": {
+    "instruments": [
+      "Certificate of Authority",
+      "Certificate of Registration",
+      "Certificate of Approval",
+      "Certificate of License"
+    ],
+    "instrument_source": "https://doi.nv.gov/Insurers/Company-Admissions/",
+    "application_types_listed": 12,
+    "instruments_never_collapsed_to_licensed": true,
+    "risk_retention_registration_is_not_certificate_of_authority": true,
+    "surplus_lines_is_not_admitted": true,
+    "captive_is_not_a_traditional_insurer_license": true,
+    "company_type_is_not_product_offer": true,
+    "workers_comp_authority_lens": "NOT_ACQUIRED"
+  },
+  "enforcement": {
+    "page": "https://doi.nv.gov/News_Notices/Enforcements___Orders/",
+    "list_date": null,
+    "listed_orders": 1,
+    "orders": [
+      {
+        "listing_label": "ORDER",
+        "respondent_as_listed": "Mitchell International Inc.",
+        "respondent_grain": "business_entity_not_an_insurer",
+        "respondent_note": "The order states the respondent does not hold a Nevada Third-Party Administrator Certificate of Registration.",
+        "cause_number": "26.0028",
+        "order_type_as_printed": "Consent Agreement and Order",
+        "listed_date": "2026-06-26",
+        "identifiers_printed": {
+          "naic": [],
+          "npn": [],
+          "nv_license": []
+        },
+        "exact_attachment": null,
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Mitchell Int Cause 26.028_CAO.pdf",
+        "pdf_parsed_for": "order type, cause number and printed identifiers only"
+      }
+    ],
+    "archived_copies_found": 0,
+    "orders_before_current_posting": "NOT_ACQUIRED",
+    "exact_attachments": {
+      "EXACT_NAIC_ATTACHMENTS": 0,
+      "EXACT_NPN_ATTACHMENTS": 0,
+      "NAME_ONLY_ATTACHMENTS": "UNSUPPORTED"
+    },
+    "standalone_events": true,
+    "consent_order_is_not_a_rating": true
+  },
+  "mhpaea_reports": {
+    "page": "https://doi.nv.gov/News_Notices/Publications/",
+    "section": "Mental Health Parity and Addiction Equity Act (MHPAEA) non-quantitative treatment limitation reports",
+    "company_reports": 17,
+    "rows": [
+      {
+        "company_as_listed": "Aetna Health Inc.",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Aetna Health Inc. Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Aetna Health of Utah Inc",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Aetna Health of Utah Inc. Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Aetna Life Insurance Company",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Aetna Life Insurance Company Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Cigna Health and Life Insurance Company",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Cigna Health and Life Insurance Company Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Golden Rule Insurance Company",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Golden Rule Insurance Company Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Health Pan of Nevada, Inc",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Health Plan of Nevada, Inc. Draft Report SK 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "HMO Colorado, Inc.",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/HMO Colorado, Inc., D.B.A. HMO Nevada Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Hometown Health Plan, Inc.",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Hometown Health Plan, Inc. Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Hometown Health Providers Insurance Company",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Hometown Health Providers Insurance Company Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Molina Healthcare of NV",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Molina Healthcare of NV Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Prominence HealthFirst",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Prominence HealthFirst Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Prominence Preferred Health Insurance Company",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Prominence Preferred Health Insurance Company, Inc. Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Rocky Mountain Hospital & Medical",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Rocky Mountain Hospital  Medical Draft Report 11.10.25(1).pdf"
+      },
+      {
+        "company_as_listed": "Select Health",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Select Health Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "Sierra Health and Life Ins Co",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Sierra Health and Life Ins Co Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "SilverSummmit Health Plan",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/SilverSummit Health Plan Draft Report 11.10.25.pdf"
+      },
+      {
+        "company_as_listed": "United Healthcare Insurance Company",
+        "document_label": "Draft Report",
+        "file_name_date": "2025-11-10",
+        "source_document": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/United Healthcare Insurance Company Draft Report 11.10.25.pdf"
+      }
+    ],
+    "pdfs_parsed": false,
+    "draft_report_is_not_a_finding": true,
+    "exact_naic_attachments": 0,
+    "name_only_attachment": "UNSUPPORTED"
+  },
+  "complaint_data": {
+    "page": "https://doi.nv.gov/Consumers/Consumer_Complaint_Report/",
+    "grain": "complaint-reason row (one complaint can print one row per reason; rows are not complaints)",
+    "period_start": "2022-01-01",
+    "period_end": "2024-12-31",
+    "years": {
+      "2022": {
+        "complaint_reason_rows": 4624,
+        "opened_first": "2022-01-01",
+        "opened_last": "2022-12-31",
+        "closed_blank_rows": 0,
+        "distinct_respondent_strings": 782,
+        "respondent_strings_at_30_char_limit": 32,
+        "rows_with_individual_name_format_respondent": 315,
+        "coverage_type": {
+          "Automobile": 1691,
+          "Accident and Health": 1154,
+          "Miscellaneous": 858,
+          "Homeowners": 554,
+          "Liability": 183,
+          "Life & Annuity": 177,
+          "Fire, Allied Lines & CMP": 7
+        },
+        "reason_category": {
+          "Claim Handling": 2865,
+          "Policyholder Service": 1147,
+          "Marketing & Sales": 390,
+          "Underwriting": 222
+        },
+        "disposition": {
+          "No Further Action Req/Rqd": 1359,
+          "Compromised Settlement/Resol.": 854,
+          "Company Position Upheld": 852,
+          "No Jurisdiction": 480,
+          "Claim Settled": 437,
+          "Referred for Disciplinary Act.": 173,
+          "Company Position Overturned": 134,
+          "Contract Provision": 99,
+          "Complaint Withdrawn": 86,
+          "Insufficient Information": 73,
+          "State Specific": 43,
+          "Referred to Proper Agency": 13,
+          "Referred to Another Department": 12,
+          "Claim Re-opened": 3,
+          "Coverage Extended": 2,
+          "Company in Compliance": 1,
+          "Information Furnished/Expanded": 1,
+          "Refund": 1,
+          "Unable to Assist": 1
+        }
+      },
+      "2023": {
+        "complaint_reason_rows": 5215,
+        "opened_first": "2023-01-01",
+        "opened_last": "2023-12-31",
+        "closed_blank_rows": 0,
+        "distinct_respondent_strings": 801,
+        "respondent_strings_at_30_char_limit": 33,
+        "rows_with_individual_name_format_respondent": 326,
+        "coverage_type": {
+          "Automobile": 2140,
+          "Accident and Health": 1335,
+          "Miscellaneous": 755,
+          "Homeowners": 650,
+          "Life & Annuity": 221,
+          "Liability": 100,
+          "Fire, Allied Lines & CMP": 14
+        },
+        "reason_category": {
+          "Claim Handling": 3241,
+          "Policyholder Service": 1241,
+          "Underwriting": 375,
+          "Marketing & Sales": 358
+        },
+        "disposition": {
+          "Company Position Upheld": 1389,
+          "No Further Action Req/Rqd": 908,
+          "Compromised Settlement/Resol.": 758,
+          "No Jurisdiction": 694,
+          "Claim Settled": 650,
+          "Complaint Withdrawn": 176,
+          "Insufficient Information": 173,
+          "Company Position Overturned": 153,
+          "Referred for Disciplinary Act.": 127,
+          "Contract Provision": 78,
+          "Referred to Proper Agency": 35,
+          "State Specific": 32,
+          "Referred to Another Department": 26,
+          "Claim Re-opened": 9,
+          "-": 7
+        }
+      },
+      "2024": {
+        "complaint_reason_rows": 6019,
+        "opened_first": "2024-01-01",
+        "opened_last": "2024-12-31",
+        "closed_blank_rows": 0,
+        "distinct_respondent_strings": 822,
+        "respondent_strings_at_30_char_limit": 37,
+        "rows_with_individual_name_format_respondent": 205,
+        "coverage_type": {
+          "Automobile": 2899,
+          "Accident and Health": 1242,
+          "Homeowners": 799,
+          "Miscellaneous": 689,
+          "Life & Annuity": 245,
+          "Liability": 61,
+          "Fire, Allied Lines & CMP": 58,
+          "-": 26
+        },
+        "reason_category": {
+          "Claim Handling": 3603,
+          "Policyholder Service": 1498,
+          "Underwriting": 613,
+          "Marketing & Sales": 305
+        },
+        "disposition": {
+          "Company Position Upheld": 1796,
+          "No Further Action Req/Rqd": 822,
+          "No Jurisdiction": 790,
+          "Compromised Settlement/Resol.": 697,
+          "Claim Settled": 684,
+          "-": 550,
+          "Complaint Withdrawn": 168,
+          "Company Position Overturned": 117,
+          "Insufficient Information": 106,
+          "Referred for Disciplinary Act.": 92,
+          "Contract Provision": 74,
+          "State Specific": 58,
+          "Referred to Another Department": 34,
+          "Claim Re-opened": 26,
+          "Referred to Proper Agency": 5
+        }
+      }
+    },
+    "rows_2024": 6019,
+    "earlier_years_published_not_acquired": [
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021"
+    ],
+    "respondent_names_published_here": false,
+    "respondents_include_individual_people": true,
+    "respondent_field_is_truncated_at_30_characters": true,
+    "identifiers_printed": {
+      "naic": false,
+      "npn": false,
+      "complaint_id": false
+    },
+    "exact_attachments": 0,
+    "name_only_attachment": "UNSUPPORTED",
+    "rows_are_not_complaints": true,
+    "complaint_is_not_enforcement": true,
+    "complaint_count_is_not_quality_score": true,
+    "no_company_complaint_ranking": true,
+    "fy2024_investigated_statement_is_fiscal_year": true
+  },
+  "complaint_intake": {
+    "status": "KNOWN",
+    "url": "https://doi.nv.gov/Consumers/File-A-Complaint/",
+    "portal": "Sircon consumer portal"
+  },
+  "serff": {
+    "status": "KNOWN",
+    "url": "https://filingaccess.serff.com/sfa/home/nv",
+    "statement": "Life, Health, Property and Casualty rates, rules and forms filed with the Division are available through SERFF Filing Access.",
+    "filings_are_not_ratings_or_prices": true,
+    "filings_ingested": 0
+  },
+  "self_serve_lists": {
+    "statement_verbatim": "Producer lists are now readily available to download by visiting the Division's self-serve website. This page allows you to download lists by license or qualification types for producers and agencies. Please note that only the producer's business information such as their business emails, addresses, and phone numbers are available.",
+    "url": "https://di.nv.gov/nv/r/doi/reports-and-lookups/home",
+    "public_no_login": true,
+    "automated_access_result": "REJECTED_BY_BOT_DEFENSE",
+    "automated_access_note": "curl and a Chrome session were both answered with an F5 \"Request Rejected\" page; the reports page answered a plain HTTP client with a redirect loop. No bypass was attempted.",
+    "manual_download_path": "Download by license/qualification type from the self-serve site into data/nv-raw/ (Phase 14 procedure)."
+  },
+  "license_lookup": {
+    "url": "https://di.nv.gov/nv/r/doi/licensing/search",
+    "lookups": [
+      "Company Lookup",
+      "Agency Lookup",
+      "Agent Lookup"
+    ],
+    "surplus_lines_visible": false,
+    "caveat_verbatim": "Note: Surplus-lines insurers will not be visible using this lookup tool.",
+    "search_is_not_a_download": true
+  },
+  "capabilities": {
+    "legal_company_verification": "KNOWN",
+    "legal_company_bulk": "NOT_ACQUIRED",
+    "agency_bulk_export": "NOT_ACQUIRED",
+    "producer_bulk_export": "NOT_ACQUIRED",
+    "regulator_stated_census": "KNOWN",
+    "company_authority_instruments": "KNOWN",
+    "workers_comp_authority_lens": "NOT_ACQUIRED",
+    "enforcement_orders": "PARTIAL",
+    "enforcement_archive_before_current": "NOT_ACQUIRED",
+    "mhpaea_company_reports_index": "PARTIAL",
+    "complaint_intake": "KNOWN",
+    "complaint_data_2022_2024": "PARTIAL",
+    "complaint_data_2015_2021": "NOT_ACQUIRED",
+    "provider_level_complaint_attachment": "UNSUPPORTED",
+    "serff_filing_access": "KNOWN",
+    "public_records": "REQUEST_ONLY",
+    "name_only_adverse_join": "UNSUPPORTED",
+    "combined_nevada_insurance_total": "UNSUPPORTED",
+    "nevada_local_intelligence": "UNSUPPORTED"
+  },
+  "profile_attachments": {
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "graph_write": false
+  },
+  "expansion_ledger": {
+    "GRAPH_WRITES": 0,
+    "NET_NEW_CANONICAL_AGENCIES": 0,
+    "NET_NEW_CANONICAL_LEGAL_INSURERS": 0,
+    "NET_NEW_CANONICAL_PERSONS": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "NET_NEW_PUBLIC_PROFILES": 0,
+    "CLAIM_ELIGIBILITY_BROADENED": false
+  },
+  "source_extracts": {
+    "market-report-census.json": "f531d249dc2e3b929dbb1e2ebb5e6a2a0f48048c7a213ef0dc5d20f3375824b8",
+    "enforcement-orders-index.json": "1e057351b2afebbc6592c62cf4067f64682305f3212a47ba9c936c37a5eb68dc",
+    "mhpaea-company-reports-index.json": "98980f84e32d794798fbaa8d52be6804fab60d30abe7450b717caf27b5a7fe3e",
+    "complaint-data.json": "c10f69af134bbc95b7408f254b9f56b37b89f8ab689cd5fef769d97f33b28a19",
+    "capability-pages.json": "9a36ed12eb2637f56b834e4a70de5ed686d165b66a4c02e72da9ba5350d17f7f"
+  },
+  "source_captures_sha256": {
+    "captive-insurance.html": "0ce3c64ff79ea73f83abf5980eb9d4a3c0e6c7d57778b12b90a61a90e2e28acb",
+    "company-admissions.html": "3edd4bb09f66da3e34f56c17b0c1e6f8ab590e95bf372c5aa9f5234103f1a5ab",
+    "complaints-2022.zip": "a2b84b6e03daf43b86409a396885904e404c744785c398a4ac41fa1644edaabd",
+    "complaints-2023.zip": "3e98acd62ed9884de4dab5ec53148f72a431a3629be99706ff01658c1b647363",
+    "complaints-2024.zip": "75bd6dc2a671051647493d22e779538ed1a788471c955a3caa241f0c13c35b27",
+    "consumer-complaint-report.html": "458d387984ca4c25e332d1880efe19f5f160a09e32e72d164b3ddaa69b4fdc00",
+    "di-licensing-search.html": "08f75cf4f23c925e6cae6c58403ef1759a705d752a06234a44fffe9271eaebb5",
+    "di-reports-and-lookups.html": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "enforcements-orders.html": "0235b024cef63f125d6c07614bf10c5e69eed2ed21a6a5410db9c54fd7a22390",
+    "file-a-complaint.html": "0a2aa9f3b0f3b956aa8786025bf8297bd90b4b8916ee4ab6c581c3ae6d664e79",
+    "imr-2025.pdf": "e6085a6e0187c90bf525435c4ed45eb2e07f5b784295585b56c8a54c9c912d4f",
+    "insurers.html": "42786dd4ec8e1257bf78d3d9c6340cb8a2b481f421371a13607dc237e21c0877",
+    "licensing.html": "d7ee202ee0ddb02796657c980688aa5f3ffa1b2d179e2d54dc06ec88f0aaab89",
+    "order-26-0028.pdf": "0da1439866b3e5efaaf591574cce5680a05ed3f25c9fb041068abf2495631691",
+    "producer-and-company-lists.html": "17447dfa638c84b7192f02a7886bcdcf41240b6da7957c1ad968df250035c7f3",
+    "public-records.html": "bc734d3622e47e767488c966433b26811cff8b28f9d81788a7dce625c678dfa9",
+    "publications.html": "249d5a279dc08d8055b8dbde9077125e0ba753ab4c4ffe028453be180bf2d7bf",
+    "surplus-lines-insurers.html": "53438a1b3b56410b402849f54495282ec857b39b40a72146d022c19ee6761641"
+  },
+  "no_trust_score": true,
+  "no_paid_ranking": true,
+  "no_nevada_local_routes": true,
+  "fingerprint": "633d2f8bbcde1f817532ccf3c02e9ba0deda879ed4ebac79046736acbcf19c55"
+}

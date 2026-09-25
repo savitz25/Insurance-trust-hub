@@ -1,0 +1,48 @@
+{
+  "document": "2025 Insurance Market Report for the 83rd Legislative Session",
+  "publisher": "Nevada Division of Insurance",
+  "figures_as_of_statement": "Figures are as of October 2024.",
+  "figures_as_of": "2024-10",
+  "passages_verbatim": [
+    "Division regulates the 267,361 active licensees operating in Nevada, composed of 250,551 individuals, 16,810 agencies, and 147 captives. The individual licensee pool consists of 24,176 residents and 226,375 non-residents. Agency licensees consist of 2,147 residents and 14,663 non-resident firms. In Nevada there are 1,652 licensed domestic and foreign insurers, 147 captive insurers, 135 sponsored captive cells, 87 self-insured employers (SIE), and 7 active self-insured groups (SIGs). Additionally, there are approximately 160 insurers which compose the state's non-admitted market, known as surplus-lines insurance. (Figures are as of October 2024).",
+    "Roughly 89% of all licensees (237,712 individuals and agencies) hold a producer license.",
+    "For Fiscal Year 2024, the section responded to approximately 12,000 consumer inquiries and investigated 3,849 consumer complaints.",
+    "For the 2022 and 2023 calendar years, the Division participated in 15 financial examinations of domestic insurers. During that time, the Division conducted 44 regulatory examinations of \"non-traditional\" insurers."
+  ],
+  "licensees": {
+    "report_stated_active_licensee_total": 267361,
+    "report_total_mixes_grains": true,
+    "report_total_equals_individuals_plus_agencies": true,
+    "report_total_excludes_listed_captives": true,
+    "republished_as_combined_total": false,
+    "individual_licensees": 250551,
+    "individual_resident": 24176,
+    "individual_non_resident": 226375,
+    "agency_licensees": 16810,
+    "agency_resident": 2147,
+    "agency_non_resident": 14663,
+    "captive_licensees": 147,
+    "producer_license_share_pct": 89,
+    "producer_license_holders_individuals_and_agencies": 237712
+  },
+  "companies": {
+    "licensed_domestic_and_foreign_insurers": 1652,
+    "captive_insurers": 147,
+    "sponsored_captive_cells": 135,
+    "self_insured_employers": 87,
+    "self_insured_groups_active": 7,
+    "surplus_lines_insurers_approximate": 160,
+    "surplus_lines_is_non_admitted": true,
+    "never_summed": true
+  },
+  "consumer_services_fy2024": {
+    "inquiries_approximate": 12000,
+    "complaints_investigated": 3849,
+    "volume_is_not_a_provider_count": true
+  },
+  "examinations_2022_2023": {
+    "financial_examinations_of_domestic_insurers": 15,
+    "regulatory_examinations_of_non_traditional_insurers": 44,
+    "examination_is_not_a_score": true
+  }
+}

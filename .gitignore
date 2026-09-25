@@ -114,3 +114,4 @@ tmp/
 
 scripts/**/__pycache__/
 scripts/pennsylvania/__pycache__/
+/data/nevada/nv-ins-001/raw/**

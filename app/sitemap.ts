@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/georgia',
     '/massachusetts',
     '/tennessee',
+    '/nevada',
     '/new-jersey',
     '/texas',
     '/washington',
