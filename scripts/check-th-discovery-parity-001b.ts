@@ -29,6 +29,7 @@
  *   npx tsx scripts/check-th-discovery-parity-001b.ts
  */
 import { interpretInsuranceAskQuery } from '../lib/insurance-ask/interpret';
+import { readInsuranceRequest } from '../lib/insurance-ask/request';
 
 const errors: string[] = [];
 function assert(c: unknown, m: string) {
@@ -234,6 +235,93 @@ assert(best.query.mode === 'fail_closed', 'ranking ("best") still fail closed, n
 
 const npn = q('Find NPN 1234567.');
 assert(npn.query.mode === 'identifier', 'NPN identifier lookup unaffected');
+
+// ---------------------------------------------------------------------------------------------
+// SQA-009-RESTORE-001B: consumer HTML /ask typed+Enter is a GET of q plus empty Advanced
+// filters, and site chrome may add `from` / `hub_resume`. Those must not fail-close the
+// natural-language interpretation ("Use one value for each supported request parameter").
+// Duplicate research keys and invalid filters still fail. Ranking still fail-closes.
+// ---------------------------------------------------------------------------------------------
+
+function consumerAskParams(text: string, extra: Record<string, string> = {}) {
+  return new URLSearchParams({
+    q: text,
+    entity: '',
+    state: '',
+    loa: '',
+    evidence: '',
+    from: '/',
+    hub_resume: '1',
+    ...extra,
+  });
+}
+
+const RESTORE_MATRIX: Array<{
+  id: string;
+  q: string;
+  mode: 'entity' | 'count';
+  product?: string;
+  loa?: string[];
+  state: string;
+}> = [
+  { id: 'PI_HO', q: 'homeowners insurance agencies in Florida', mode: 'entity', product: 'homeowners', state: 'FL' },
+  { id: 'PI_AUTO', q: 'auto insurance agencies in Florida', mode: 'entity', product: 'auto', state: 'FL' },
+  { id: 'PI_HO2', q: 'Florida homeowners insurance agencies', mode: 'entity', product: 'homeowners', state: 'FL' },
+  { id: 'PI_COUNT', q: 'how many homeowners insurance agencies in Florida', mode: 'count', product: 'homeowners', state: 'FL' },
+  { id: 'PI_FLOOD', q: 'flood insurance provider Miami', mode: 'entity', product: 'flood', state: 'FL' },
+  { id: 'CTRL_CENSUS', q: 'insurance agencies in Florida', mode: 'entity', state: 'FL' },
+  { id: 'CTRL_TX_LIFE', q: 'life insurance agencies in Texas', mode: 'entity', loa: ['Life'], state: 'TX' },
+  { id: 'CTRL_FL_PC', q: 'Florida Property & Casualty insurance authority', mode: 'entity', loa: ['Property', 'Casualty'], state: 'FL' },
+];
+
+for (const row of RESTORE_MATRIX) {
+  const req = readInsuranceRequest(consumerAskParams(row.q));
+  assert(!req.error, `${row.id}: consumer /ask URL must not parameter-fail-close (got ${req.error})`);
+  assert(req.raw === row.q, `${row.id}: q retained`);
+  const parsed = q(req.raw);
+  assert(parsed.query.mode === row.mode, `${row.id}: mode ${row.mode} (got ${parsed.query.mode})`);
+  assert(parsed.query.jurisdiction?.state === row.state, `${row.id}: state ${row.state}`);
+  if (row.product) {
+    assert(parsed.query.requestedProduct?.includes(row.product), `${row.id}: product ${row.product} retained`);
+    assert(!parsed.query.linesOfAuthority?.length, `${row.id}: product is not an invented LOA`);
+  }
+  if (row.loa) {
+    assert(JSON.stringify(parsed.query.linesOfAuthority) === JSON.stringify(row.loa), `${row.id}: official LOA ${row.loa.join('+')}`);
+    assert(!parsed.query.requestedProduct?.length, `${row.id}: official LOA is not unresolved product`);
+  }
+}
+
+const undefinedFilters = readInsuranceRequest(
+  new URLSearchParams({
+    q: 'homeowners insurance agencies in Florida',
+    entity: 'undefined',
+    state: 'undefined',
+    loa: 'null',
+    evidence: 'undefined',
+  }),
+);
+assert(!undefinedFilters.error, `stringified-absent filters must not fail-close (got ${undefinedFilters.error})`);
+assert(!undefinedFilters.options.entity && !undefinedFilters.options.state, 'stringified-absent filters are not applied');
+
+const duplicateQ = readInsuranceRequest({ q: ['homeowners insurance agencies in Florida', 'NAIC 10064'] });
+assert(duplicateQ.error === 'Use one value for each supported request parameter.', 'duplicate q still fail-closes');
+
+const unknownResearch = readInsuranceRequest(
+  new URLSearchParams({ q: 'homeowners insurance agencies in Florida', foo: 'bar' }),
+);
+assert(
+  unknownResearch.error === 'Use one value for each supported request parameter.',
+  'unknown non-chrome research param still fail-closes',
+);
+
+const invalidEntity = readInsuranceRequest(
+  new URLSearchParams({ q: 'homeowners insurance agencies in Florida', entity: 'carrier' }),
+);
+assert(invalidEntity.error === 'Invalid entity filter.', 'invalid non-empty entity filter still fail-closes');
+
+const rankingConsumer = readInsuranceRequest(consumerAskParams('Which insurance agency is the best in Florida?'));
+assert(!rankingConsumer.error, 'CTRL_BEST consumer URL must reach ranking interpretation, not parameter fail-closed');
+assert(q(rankingConsumer.raw).query.mode === 'fail_closed', 'CTRL_BEST still ranking fail-closed after consumer URL parse');
 
 if (errors.length) {
   console.error(errors.join('\n'));
