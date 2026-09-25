@@ -1,0 +1,49 @@
+{
+  "self_serve_lists": {
+    "statement_verbatim": "Producer lists are now readily available to download by visiting the Division's self-serve website. This page allows you to download lists by license or qualification types for producers and agencies. Please note that only the producer's business information such as their business emails, addresses, and phone numbers are available.",
+    "url": "https://di.nv.gov/nv/r/doi/reports-and-lookups/home",
+    "public_no_login": true,
+    "automated_access_result": "REJECTED_BY_BOT_DEFENSE",
+    "automated_access_note": "curl and a Chrome session were both answered with an F5 \"Request Rejected\" page; the reports page answered a plain HTTP client with a redirect loop. No bypass was attempted.",
+    "manual_download_path": "Download by license/qualification type from the self-serve site into data/nv-raw/ (Phase 14 procedure)."
+  },
+  "license_lookup": {
+    "url": "https://di.nv.gov/nv/r/doi/licensing/search",
+    "lookups": [
+      "Company Lookup",
+      "Agency Lookup",
+      "Agent Lookup"
+    ],
+    "surplus_lines_visible": false,
+    "caveat_verbatim": "Note: Surplus-lines insurers will not be visible using this lookup tool.",
+    "search_is_not_a_download": true
+  },
+  "company_admission_instruments": {
+    "source": "https://doi.nv.gov/Insurers/Company-Admissions/",
+    "application_types_listed": 12,
+    "instrument_examples": [
+      "Certificate of Authority",
+      "Certificate of Registration (foreign Risk Retention Group)"
+    ],
+    "instruments_never_collapsed_to_licensed": true
+  },
+  "complaint_intake": {
+    "url": "https://doi.nv.gov/Consumers/File-A-Complaint/",
+    "online_portal": "Sircon consumer portal",
+    "status": "KNOWN"
+  },
+  "serff": {
+    "url": "https://filingaccess.serff.com/sfa/home/nv",
+    "status": "KNOWN",
+    "statement": "Life, Health, Property and Casualty rates, rules and forms filed with the Division are available through SERFF Filing Access.",
+    "filings_are_not_ratings_or_prices": true
+  },
+  "captive": {
+    "url": "https://doi.nv.gov/Captive-Insurance/",
+    "captive_is_not_a_traditional_insurer_license": true
+  },
+  "public_records": {
+    "url": "https://doi.nv.gov/News-Notices/Records/",
+    "status": "REQUEST_ONLY"
+  }
+}

@@ -106,6 +106,11 @@ const specs = {
  ["company_examinations.listings", "Company Examinations Archive listings (unattached)", "regulatory_evidence_row", "EXAMINATIONS"],
  ["producer_discipline.linked_entries", "Agent/producer disciplinary archive entries (person grain, unattached)", "regulatory_evidence_row"],
  ],
+ NV: [
+ ["complaint_data.years.2024.complaint_reason_rows", "NDOI consumer complaint-reason rows opened in 2024 (not complaints; unattached)", "consumer_complaint_observation", "COMPLAINTS"],
+ ["enforcement.listed_orders", "Current Enforcements & Orders postings (unattached)", "regulatory_evidence_row"],
+ ["mhpaea_reports.company_reports", "MHPAEA company draft report listings (unattached)", "regulatory_evidence_row", "EXAMINATIONS"],
+ ],
  NC: [
  ["licensing_actions.document_rows", "NCDOI Licensing Action catalog rows", "regulatory_evidence_row"],
  ["licensing_actions.producer_rows", "Insurance Producer licensing-action rows", "regulatory_evidence_row"],
@@ -115,8 +120,8 @@ const specs = {
  ["receiverships.named_current_estates", "Named current receivership/liquidation/rehab estates", "regulatory_evidence_row"],
  ]
 };
-const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina", OH:"Ohio", MA:"Massachusetts", TN:"Tennessee" };
-const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina", OH:"ohio", MA:"massachusetts", TN:"tennessee" };
+const names = { CO:"Colorado", VA:"Virginia", NY:"New York", IL:"Illinois", OR:"Oregon", PA:"Pennsylvania", NC:"North Carolina", OH:"Ohio", MA:"Massachusetts", TN:"Tennessee", NV:"Nevada" };
+const slugs = { CO:"colorado", VA:"virginia", NY:"new-york", IL:"illinois", OR:"oregon", PA:"pennsylvania", NC:"north-carolina", OH:"ohio", MA:"massachusetts", TN:"tennessee", NV:"nevada" };
 export function reconcile(manifest, root, census) {
   const paths = Object.fromEntries(Object.entries(slugs).map(([k,v]) => [k, `lib/${v}-intelligence/accepted-snapshot.json`]));
   const sources = Object.fromEntries(Object.entries(paths).map(([k,v])=>[k,read(root,v)]));

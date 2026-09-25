@@ -1,0 +1,212 @@
+{
+  "version": "insurance-nv-state-intel-v1",
+  "ticket": "NV-INS-001",
+  "regulator": "Nevada Division of Insurance (NDOI), Department of Business and Industry",
+  "captures": {
+    "captive-insurance.html": {
+      "url": "https://doi.nv.gov/Captive-Insurance/",
+      "final_url": "https://doi.nv.gov/Captive-Insurance/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:57Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 16996,
+      "sha256": "0ce3c64ff79ea73f83abf5980eb9d4a3c0e6c7d57778b12b90a61a90e2e28acb",
+      "request_rejected": false
+    },
+    "company-admissions.html": {
+      "url": "https://doi.nv.gov/Insurers/Company-Admissions/",
+      "final_url": "https://doi.nv.gov/Insurers/Company-Admissions/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:56Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 22298,
+      "sha256": "3edd4bb09f66da3e34f56c17b0c1e6f8ab590e95bf372c5aa9f5234103f1a5ab",
+      "request_rejected": false
+    },
+    "complaints-2022.zip": {
+      "url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/Consumers/Consumer%20Complaints_2022.zip",
+      "final_url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/Consumers/Consumer%20Complaints_2022.zip",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:12Z",
+      "last_modified": "Fri, 14 Feb 2025 17:37:00 GMT",
+      "content_type": "application/zip",
+      "bytes": 219336,
+      "sha256": "a2b84b6e03daf43b86409a396885904e404c744785c398a4ac41fa1644edaabd",
+      "request_rejected": false
+    },
+    "complaints-2023.zip": {
+      "url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/Consumers/Consumer%20Complaints_2023.zip",
+      "final_url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/Consumers/Consumer%20Complaints_2023.zip",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:11Z",
+      "last_modified": "Fri, 14 Feb 2025 17:37:22 GMT",
+      "content_type": "application/zip",
+      "bytes": 242940,
+      "sha256": "3e98acd62ed9884de4dab5ec53148f72a431a3629be99706ff01658c1b647363",
+      "request_rejected": false
+    },
+    "complaints-2024.zip": {
+      "url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/Consumers/Consumer%20Complaints_2024.zip",
+      "final_url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/Consumers/Consumer%20Complaints_2024.zip",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:10Z",
+      "last_modified": "Fri, 14 Feb 2025 17:37:40 GMT",
+      "content_type": "application/zip",
+      "bytes": 279702,
+      "sha256": "75bd6dc2a671051647493d22e779538ed1a788471c955a3caa241f0c13c35b27",
+      "request_rejected": false
+    },
+    "consumer-complaint-report.html": {
+      "url": "https://doi.nv.gov/Consumers/Consumer_Complaint_Report/",
+      "final_url": "https://doi.nv.gov/Consumers/Consumer_Complaint_Report/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:59Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 16872,
+      "sha256": "458d387984ca4c25e332d1880efe19f5f160a09e32e72d164b3ddaa69b4fdc00",
+      "request_rejected": false
+    },
+    "di-licensing-search.html": {
+      "url": "https://di.nv.gov/nv/r/doi/licensing/search",
+      "final_url": "https://di.nv.gov/nv/r/doi/licensing/search",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:15Z",
+      "last_modified": null,
+      "content_type": "text/html;charset=utf-8",
+      "bytes": 20196,
+      "sha256": "08f75cf4f23c925e6cae6c58403ef1759a705d752a06234a44fffe9271eaebb5",
+      "request_rejected": false
+    },
+    "di-reports-and-lookups.html": {
+      "url": "https://di.nv.gov/nv/r/doi/reports-and-lookups/home",
+      "final_url": "https://di.nv.gov/nv/r/doi/reports-and-lookups/home",
+      "status": 302,
+      "retrieved_at": "2026-09-25T17:40:14Z",
+      "last_modified": null,
+      "content_type": "text/html;charset=utf-8",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "request_rejected": false
+    },
+    "enforcements-orders.html": {
+      "url": "https://doi.nv.gov/News_Notices/Enforcements___Orders/",
+      "final_url": "https://doi.nv.gov/News_Notices/Enforcements___Orders/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:52Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 13693,
+      "sha256": "0235b024cef63f125d6c07614bf10c5e69eed2ed21a6a5410db9c54fd7a22390",
+      "request_rejected": false
+    },
+    "file-a-complaint.html": {
+      "url": "https://doi.nv.gov/Consumers/File-A-Complaint/",
+      "final_url": "https://doi.nv.gov/Consumers/File-A-Complaint/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:58Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 21073,
+      "sha256": "0a2aa9f3b0f3b956aa8786025bf8297bd90b4b8916ee4ab6c581c3ae6d664e79",
+      "request_rejected": false
+    },
+    "imr-2025.pdf": {
+      "url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/NDOI%20IMR%202025%20Final.pdf",
+      "final_url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/NDOI%20IMR%202025%20Final.pdf",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:09Z",
+      "last_modified": "Wed, 08 Jan 2025 18:30:49 GMT",
+      "content_type": "application/pdf",
+      "bytes": 7677615,
+      "sha256": "e6085a6e0187c90bf525435c4ed45eb2e07f5b784295585b56c8a54c9c912d4f",
+      "request_rejected": false
+    },
+    "insurers.html": {
+      "url": "https://doi.nv.gov/Insurers/",
+      "final_url": "https://doi.nv.gov/Insurers/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:55Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 18337,
+      "sha256": "42786dd4ec8e1257bf78d3d9c6340cb8a2b481f421371a13607dc237e21c0877",
+      "request_rejected": false
+    },
+    "licensing.html": {
+      "url": "https://doi.nv.gov/Licensing/",
+      "final_url": "https://doi.nv.gov/Licensing/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:00Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 16535,
+      "sha256": "d7ee202ee0ddb02796657c980688aa5f3ffa1b2d179e2d54dc06ec88f0aaab89",
+      "request_rejected": false
+    },
+    "order-26-0028.pdf": {
+      "url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Mitchell%20Int%20Cause%2026.028_CAO.pdf",
+      "final_url": "https://doi.nv.gov/uploadedFiles/doi.nv.gov/Content/News_and_Notices/Mitchell%20Int%20Cause%2026.028_CAO.pdf",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:03Z",
+      "last_modified": "Wed, 29 Jul 2026 21:10:24 GMT",
+      "content_type": "application/pdf",
+      "bytes": 467454,
+      "sha256": "0da1439866b3e5efaaf591574cce5680a05ed3f25c9fb041068abf2495631691",
+      "request_rejected": false
+    },
+    "producer-and-company-lists.html": {
+      "url": "https://doi.nv.gov/News_Notices/Producer_and_Company_Lists/",
+      "final_url": "https://doi.nv.gov/News_Notices/Producer_and_Company_Lists/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:53Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 16887,
+      "sha256": "17447dfa638c84b7192f02a7886bcdcf41240b6da7957c1ad968df250035c7f3",
+      "request_rejected": false
+    },
+    "public-records.html": {
+      "url": "https://doi.nv.gov/News-Notices/Records/",
+      "final_url": "https://doi.nv.gov/News-Notices/Records/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:40:01Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 20895,
+      "sha256": "bc734d3622e47e767488c966433b26811cff8b28f9d81788a7dce625c678dfa9",
+      "request_rejected": false
+    },
+    "publications.html": {
+      "url": "https://doi.nv.gov/News_Notices/Publications/",
+      "final_url": "https://doi.nv.gov/News_Notices/Publications/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:54Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 24137,
+      "sha256": "249d5a279dc08d8055b8dbde9077125e0ba753ab4c4ffe028453be180bf2d7bf",
+      "request_rejected": false
+    },
+    "surplus-lines-insurers.html": {
+      "url": "https://doi.nv.gov/Insurers/Property-Casualty/Surplus-Lines-Insurers/",
+      "final_url": "https://doi.nv.gov/Insurers/Property-Casualty/Surplus-Lines-Insurers/",
+      "status": 200,
+      "retrieved_at": "2026-09-25T17:39:57Z",
+      "last_modified": null,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 20046,
+      "sha256": "53438a1b3b56410b402849f54495282ec857b39b40a72146d022c19ee6761641",
+      "request_rejected": false
+    }
+  },
+  "extract_sha256": {
+    "market-report-census.json": "f531d249dc2e3b929dbb1e2ebb5e6a2a0f48048c7a213ef0dc5d20f3375824b8",
+    "enforcement-orders-index.json": "1e057351b2afebbc6592c62cf4067f64682305f3212a47ba9c936c37a5eb68dc",
+    "mhpaea-company-reports-index.json": "98980f84e32d794798fbaa8d52be6804fab60d30abe7450b717caf27b5a7fe3e",
+    "complaint-data.json": "c10f69af134bbc95b7408f254b9f56b37b89f8ab689cd5fef769d97f33b28a19",
+    "capability-pages.json": "9a36ed12eb2637f56b834e4a70de5ed686d165b66a4c02e72da9ba5350d17f7f"
+  }
+}

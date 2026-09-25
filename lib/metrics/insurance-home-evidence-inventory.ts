@@ -341,6 +341,24 @@ const STATE_CARD_COPY: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-25" },
     ],
   },
+  {
+    state: "Nevada",
+    abbreviation: "NV",
+    href: "/nevada",
+    regulators: "Nevada Division of Insurance",
+    evidence: [
+      "NDOI-stated licensee and company figures (as of October 2024)",
+      "Consumer complaint data 2022-2024 (aggregate reason rows)",
+      "Current Enforcements & Orders posting",
+      "NDOI company, agency and agent lookup (search-only)",
+    ],
+    limitation:
+      "Company, agency and producer bulk rosters were not acquired. NDOI's figures are quoted, never summed. Complaint rows are not complaints and are not attached to companies. Search-only is not zero.",
+    sourceClocks: [
+      { label: "NDOI market-report figures", sourceAsOf: "October 2024" },
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-25" },
+    ],
+  },
 ] as const;
 
 export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = STATE_CARD_COPY
