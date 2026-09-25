@@ -300,7 +300,7 @@ def capabilities() -> dict:
     need("An investigator will be assigned to the case" in complaint, "complaint intake wording")
     captive = page_text("captive-insurance.html")
     need("regulated form of self-insurance" in captive, "captive wording")
-    admissions = [label for h, label in links("company-admissions.html") if h.lower().endswith(".pdf") and "_Application_Checklist" in h or "Certificate_of_Registration" in h or "Risk_Purchasing_Group" in h]
+    admissions = [label for h, label in links("company-admissions.html") if h.lower().endswith(".pdf") and ("_Application_Checklist" in h or "Certificate_of_Registration" in h or "Risk_Purchasing_Group" in h)]
     return {
         "self_serve_lists": {
             "statement_verbatim": "Producer lists are now readily available to download by visiting the Division's self-serve website. "
