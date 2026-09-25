@@ -25,6 +25,7 @@ export function publicationMetricInputs() {
   const ohPub = read("lib/ohio-intelligence/publication.ts");
   const gaPub = read("lib/georgia-intelligence/publication.ts");
   const maPub = read("lib/massachusetts-intelligence/publication.ts");
+  const tnPub = read("lib/tennessee-intelligence/publication.ts");
   const njPub = read("lib/new-jersey-intelligence/publication.ts");
   const flPub = read("lib/national/fl-state-intel.ts");
   const tx = readJson("lib/texas-intelligence/accepted-snapshot.json");
@@ -39,6 +40,7 @@ export function publicationMetricInputs() {
   const nc = readJson("lib/north-carolina-intelligence/accepted-snapshot.json");
   const oh = readJson("lib/ohio-intelligence/accepted-snapshot.json");
   const ma = readJson("lib/massachusetts-intelligence/accepted-snapshot.json");
+  const tn = readJson("lib/tennessee-intelligence/accepted-snapshot.json");
   const nj = readJson("lib/new-jersey-intelligence/accepted-snapshot.json");
   const fl = readJson("data/reports/fl-ins-006-state-snapshot.json");
   const flMc = readJson("data/reports/fl-ins-004-market-exam-census.json");
@@ -65,6 +67,7 @@ export function publicationMetricInputs() {
   const ohPath = ohPub.match(/path: '(\/[^']+)'/)?.[1];
   const gaPath = gaPub.match(/path: '(\/[^']+)'/)?.[1];
   const maPath = maPub.match(/path: '(\/[^']+)'/)?.[1];
+  const tnPath = tnPub.match(/path: '(\/[^']+)'/)?.[1];
   if (txPath && existsSync(join(root, "app/texas/page.tsx"))) paths.push(txPath);
   if (njPath && existsSync(join(root, "app/new-jersey/page.tsx"))) paths.push(njPath);
   if (caPath && existsSync(join(root, "app/california/page.tsx"))) paths.push(caPath);
@@ -79,6 +82,7 @@ export function publicationMetricInputs() {
   if (ohPath && existsSync(join(root, "app/ohio/page.tsx"))) paths.push(ohPath);
   if (gaPath && existsSync(join(root, "app/georgia/page.tsx"))) paths.push(gaPath);
   if (maPath && existsSync(join(root, "app/massachusetts/page.tsx"))) paths.push(maPath);
+  if (tnPath && existsSync(join(root, "app/tennessee/page.tsx"))) paths.push(tnPath);
 
   const cmsSourceAsOf = cms.match(/modified: '([^']+)'/)?.[1]?.slice(0, 10) ;
   if (!cmsSourceAsOf) throw new Error("Missing CMS source clock");
@@ -160,6 +164,9 @@ export function publicationMetricInputs() {
     massachusettsSnapshotFingerprint: ma.fingerprint,
     massachusettsAsOf: ma.source_as_of,
     massachusettsLicensedOrApprovedDistinctNaic: ma.licensed_or_approved.distinct_naic,
+    tennesseeSnapshotFingerprint: tn.fingerprint,
+    tennesseeAsOf: tn.source_as_of,
+    tennesseeLicensedCompaniesDistinctNaic: tn.licensed_companies.distinct_naic,
     censusTask: census.task,
     censusAsOf: census.at,
     censusAgencies: census.entities.agency,

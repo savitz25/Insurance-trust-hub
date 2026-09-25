@@ -1,0 +1,167 @@
+{
+ "version": "insurance-tn-state-intel-v1",
+ "ticket": "TN-INS-001",
+ "regulator": "Tennessee Department of Commerce & Insurance (TDCI), Insurance Division",
+ "retrieval_note": "Captured with a plain HTTPS client on the retrieved_at clocks below. Raw captures are gitignored; their SHA-256 values are recorded here.",
+ "licensed_companies": {
+  "page": {
+   "url": "https://www.tn.gov/commerce/insurance/consumer-resources/list-of-licensed-companies.html",
+   "final_url": "https://www.tn.gov/commerce/insurance/consumer-resources/list-of-licensed-companies.html",
+   "status": 200,
+   "retrieved_at": "2026-09-25T12:29:22Z",
+   "last_modified": null,
+   "content_type": "text/html;charset=utf-8",
+   "bytes": 157997,
+   "sha256": "05423a8ad793cae81c3007ef5b24e457fb291a2011329b0a1316839836881f69"
+  },
+  "data_endpoint": {
+   "url": "https://www.tn.gov/commerce/insurance/consumer-resources/list-of-licensed-companies/_jcr_content/contentFullWidth/tn_complex_datatable_113950548.tablejson.json",
+   "final_url": "https://www.tn.gov/commerce/insurance/consumer-resources/list-of-licensed-companies/_jcr_content/contentFullWidth/tn_complex_datatable_113950548.tablejson.json",
+   "status": 200,
+   "retrieved_at": "2026-09-25T12:30:25Z",
+   "last_modified": "Thu, 24 Sep 2026 17:45:22 GMT",
+   "content_type": "application/json",
+   "bytes": 687778,
+   "sha256": "c2aa8d635e1cb3248bc999c8ac8f892788007196acb79af4c4b74ffbe9261b02"
+  },
+  "list_statement": "As of August 31, 2026.",
+  "source_as_of": "2026-08-31",
+  "rows": 2116,
+  "columns_published": [
+   "COMPANY_NAME",
+   "NAIC_COCODE",
+   "DOMICILE_STATE",
+   "COMPANY_TYPE",
+   "MAO_STATE_ABBR",
+   "STATUS_REASON",
+   "STATUS_DATE",
+   "MAO_ADDRESS1",
+   "MAO_ADDRESS2",
+   "MAO_CITY",
+   "MAO_ZIP",
+   "BUSINESS_PHONE"
+  ]
+ },
+ "monthly_update": {
+  "page": {
+   "url": "https://www.tn.gov/commerce/insurance/consumer-resources/monthly-update.html",
+   "final_url": "https://www.tn.gov/commerce/insurance/consumer-resources/monthly-update.html",
+   "status": 200,
+   "retrieved_at": "2026-09-25T12:29:27Z",
+   "last_modified": null,
+   "content_type": "text/html;charset=utf-8",
+   "bytes": 55627,
+   "sha256": "cf52e1aad428d4a44ff3982932f021c85b2edbbbee13f75fe0cc2195820cfb78"
+  },
+  "asterisk_statement": "* [asterisk] denotes new record since last update. As of August 31, 2026.",
+  "page_last_updated_statement": "This Page Last Updated: September 9, 2026 at 10:40 AM",
+  "source_as_of": "2026-08-31"
+ },
+ "company_actions": {
+  "page": {
+   "url": "https://www.tn.gov/commerce/insurance/company-resources/insurance-company-actions.html",
+   "final_url": "https://www.tn.gov/commerce/insurance/company-resources/insurance-company-actions.html",
+   "status": 200,
+   "retrieved_at": "2026-09-25T12:29:32Z",
+   "last_modified": null,
+   "content_type": "text/html;charset=utf-8",
+   "bytes": 94314,
+   "sha256": "ee0957d444786a9b6c18d259914e44f8482a4fe2f593501524ae4afd4f6e94e2"
+  },
+  "list_date": null
+ },
+ "company_examinations": {
+  "page": {
+   "url": "https://www.tn.gov/commerce/insurance/company-resources/company-examinations.html",
+   "final_url": "https://www.tn.gov/commerce/insurance/company-resources/company-examinations.html",
+   "status": 200,
+   "retrieved_at": "2026-09-25T12:29:36Z",
+   "last_modified": null,
+   "content_type": "text/html;charset=utf-8",
+   "bytes": 148467,
+   "sha256": "d59e22ffae8f0c75892f25c056decb22614e91a7f4e6ffa968c673922914b8d7"
+  }
+ },
+ "producer_discipline": {
+  "page": {
+   "url": "https://www.tn.gov/commerce/insurance/agent-producer-resources/disciplinary-actions.html",
+   "final_url": "https://www.tn.gov/commerce/insurance/agent-producer-resources/disciplinary-actions.html",
+   "status": 200,
+   "retrieved_at": "2026-09-25T12:29:41Z",
+   "last_modified": null,
+   "content_type": "text/html;charset=utf-8",
+   "bytes": 197147,
+   "sha256": "d499fc8f091aad4f82adff0c76421e9e847fc494055890451f4bae04fa0d974d"
+  }
+ },
+ "complaints": {
+  "url": "https://www.tn.gov/commerce/insurance/consumer-resources/file-a-complaint.html",
+  "final_url": "https://www.tn.gov/commerce/insurance/consumer-resources/file-a-complaint.html",
+  "status": 200,
+  "retrieved_at": "2026-09-25T12:29:50Z",
+  "last_modified": null,
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 40739,
+  "sha256": "6d40eb84ad6ad467f49d428eb0148e8c22ebe69e000856258c598dd6ab27b290"
+ },
+ "license_verification": {
+  "url": "https://www.tn.gov/commerce/insurance/consumer-resources/verify-insurance-license.html",
+  "final_url": "https://external-lookup-web.prod.naic.org/",
+  "status": 200,
+  "retrieved_at": "2026-09-25T12:29:55Z",
+  "last_modified": "Thu, 27 Aug 2026 16:09:47 GMT",
+  "content_type": "text/html",
+  "bytes": 50418,
+  "sha256": "395ab2a32c6968b6187ad1b0a172c3e09d4bd460df0960b835bc9f72e0700c76"
+ },
+ "company_types": {
+  "url": "https://www.tn.gov/commerce/insurance/company-resources/types-of-insurance-companies.html",
+  "final_url": "https://www.tn.gov/commerce/insurance/types-of-insurance-companies.html",
+  "status": 200,
+  "retrieved_at": "2026-09-25T12:29:46Z",
+  "last_modified": null,
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 39475,
+  "sha256": "7c4c21fda9597a4ca7fd5dae71e777fbd5450342b42e8f9267388cb5c30200a4"
+ },
+ "reinsurers_and_jurisdictions": {
+  "url": "https://www.tn.gov/commerce/insurance/consumer-resources/reinsurers-jurisdictions.html",
+  "final_url": "https://www.tn.gov/commerce/insurance/consumer-resources/reinsurers-jurisdictions.html",
+  "status": 200,
+  "retrieved_at": "2026-09-25T12:33:57Z",
+  "last_modified": null,
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 52129,
+  "sha256": "859c1a3e6647a62c9ed954a4775847e8d483bf7a3d87ead6d0b34188767f5d82"
+ },
+ "insurance_landing": {
+  "url": "https://www.tn.gov/commerce/insurance.html",
+  "final_url": "https://www.tn.gov/commerce/insurance-division.html",
+  "status": 200,
+  "retrieved_at": "2026-09-25T12:28:56Z",
+  "last_modified": null,
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 45883,
+  "sha256": "51a2ba66f8a1150b9dbb09232d8556f2743780a8ff2ee2ab51984f83aebd9ff4"
+ },
+ "company_resources": {
+  "url": "https://www.tn.gov/commerce/insurance/company-resources.html",
+  "final_url": "https://www.tn.gov/commerce/insurance/company-resources.html",
+  "status": 200,
+  "retrieved_at": "2026-09-25T12:29:09Z",
+  "last_modified": null,
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 38802,
+  "sha256": "ef8fdb5c70bc63dc03b7c9084fd15a8db83edd7e197e6c40c0f1431f63528bd3"
+ },
+ "agent_producer_resources": {
+  "url": "https://www.tn.gov/commerce/insurance/agent-producer-resources.html",
+  "final_url": "https://www.tn.gov/commerce/insurance/agent-producer-resources.html",
+  "status": 200,
+  "retrieved_at": "2026-09-25T12:29:12Z",
+  "last_modified": null,
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 53197,
+  "sha256": "8e0ec9f125800189723cf087a5e22edb14efd3153dc21466c4870cd0037c2878"
+ }
+}

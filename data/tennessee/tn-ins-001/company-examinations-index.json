@@ -1,0 +1,6734 @@
+{
+ "version": "insurance-tn-state-intel-v1",
+ "source": "https://www.tn.gov/commerce/insurance/company-resources/company-examinations.html",
+ "organization": "Grouped by the year the examination is as of, then company; most listings carry a posting date and Exam / Order PDF links.",
+ "pdfs_parsed": false,
+ "listings": [
+  {
+   "id": "tn-exam-001",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "Delta Dental of Tennessee",
+   "posted_as_listed": [
+    "6/12/2026"
+   ],
+   "posted": [
+    "2026-06-12"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DeltaDentalOfTN-ExamReport_20260612.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DeltaDentalOfTN-Order_20260612.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-002",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "Hamblen Mutual Insurance Company",
+   "posted_as_listed": [
+    "6/26/2026"
+   ],
+   "posted": [
+    "2026-06-26"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HamblenMutualInsCoExamReport_20260626.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HamblenMutualInsCoReportAdoptionOrder_20260626.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-003",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "Plateau Casualty Insurance Company",
+   "posted_as_listed": [
+    "6/29/2026"
+   ],
+   "posted": [
+    "2026-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauCasualtyInsCoExamReport_20260629.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauCasualtyInsCoReportAdoptionOrder_20260629.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-004",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "Plateau Insurance Company",
+   "posted_as_listed": [
+    "6/29/2026"
+   ],
+   "posted": [
+    "2026-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauInsuranceCoExamReport_20260629.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauInsuranceCoReportAdoptionOrder_20260629.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-005",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "Premier Group Insurance Company",
+   "posted_as_listed": [
+    "6/3/2026"
+   ],
+   "posted": [
+    "2026-06-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PremierGroupInsCo-2024Exam_20260602.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PremierGroupInsCo-Order_20260602.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-006",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "Primerica Life Insurance Company",
+   "posted_as_listed": [
+    "6/3/2026"
+   ],
+   "posted": [
+    "2026-06-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PrimericaLifeInsurance-2024Exam_20260603.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PrimericaLifeInsurance-Order_20260603.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-007",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "SteadPoint Insurance Company",
+   "posted_as_listed": [
+    "6/29/2026"
+   ],
+   "posted": [
+    "2026-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SteadPointInsuranceCoExamReport_20260629.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SteadPointInsuranceCoReportAdoptionOrder_20260629.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-008",
+   "exam_as_of_year": 2024,
+   "company_as_listed": "United States Letter Carriers Mutual Benefit Association",
+   "posted_as_listed": [
+    "6/3/2026"
+   ],
+   "posted": [
+    "2026-06-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLetterCarrierMutual-2024Exam_20260603.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLetterCarrierMutual-Order_20260603.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-009",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Bright Health Insurance Company of Tennessee",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BrightHealthInsCoTN%20-%20EXAM06302025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BrightHealthInsCoTN%20-%20ORDER06302025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-010",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "CareSource Tennessee Company",
+   "posted_as_listed": [
+    "9/10/2025"
+   ],
+   "posted": [
+    "2025-09-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CareSourceTNCompany%20-%20EXAM09102025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CareSourceTNCompany%20-%20ORDER09102025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-011",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Cigna Healthcare of Tennessee, Inc.",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CignaHealthcareofTNInc%20-%20EXAM07012025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CignaHealthcareofTNInc%20-%20ORDER07012025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-012",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "East Tennessee Mutual Insurance Company",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EastTNMutualInsurance%20-%20EXAM06182025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EastTNMutualInsurance%20-%20ORDER06182025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-013",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Jefferson County",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualJeffersonCounty%20-%20EXAM06302025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualJeffersonCounty%20-%20ORDER06302025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-014",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Sevier County",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualSevierCounty%20-%20EXAM07012025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualSevierCounty%20-%20ORDER07012025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-015",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Farmers Union Mutual Fire Insurance Company of Bradley County",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersUnionBradleyCounty%20-%20EXAM06302025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersUnionBradleyCounty%20-%20ORDER06302025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-016",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Monroe County Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MonroeCountyMutualFireInsCo%20-%20EXAM06102025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MonroeCountyMutualFireInsCo%20-%20ORDER06102025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-017",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Mountain Life Insurance Company",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MountainLifeInsuranceCompany%20-%20EXAM06302025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MountainLifeInsuranceCompany%20-%20ORDER06302025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-018",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Provident Life and Accident Insurance Company",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ProvidentLifeandAccidentInsCo%20-%20EXAM07082025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ProvidentLifeandAccidentInsCo%20-%20ORDER07082025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-019",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Provident Life and Casualty Insurance Company",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ProvidentLifeandCasualtyIncCo%20-%20EXAM07022025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ProvidentLifeandCasualtyIncCo%20-%20ORDER07022025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-020",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "Tennessee Life and Health Insurance Guranty Association",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNLifeHealthInsGuarantyAsso%20-%20EXAM06102025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNLifeHealthInsGuarantyAsso%20-%20ORDER06102025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-021",
+   "exam_as_of_year": 2023,
+   "company_as_listed": "U.S. Legal Services, Inc.",
+   "posted_as_listed": [
+    "9/11/2025"
+   ],
+   "posted": [
+    "2025-09-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLegalServicesInc%20-%20EXAM07012025.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLegalServicesInc%20-%20ORDER07012025.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-022",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Centene Venture Company",
+   "posted_as_listed": [
+    "8/15/2024"
+   ],
+   "posted": [
+    "2024-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CenteneVentureCo%20-%20EXAM06072024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CenteneVentureCo%20-%20ORDER07302024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-023",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Delta Dental of Tennessee",
+   "posted_as_listed": [
+    "8/15/2014"
+   ],
+   "posted": [
+    "2014-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DeltaDentalofTN%20-%20EXAM06252024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DeltaDentalofTN%20-%20ORDER06282024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-024",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Farmers Life Insurance Company",
+   "posted_as_listed": [
+    "8/26/2024"
+   ],
+   "posted": [
+    "2024-08-26"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersLifeInsCo%20-%20EXAM08232024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersLifeInsCo%20-%20ORDER08232024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-025",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Paratransit Insurance Company",
+   "posted_as_listed": [
+    "7/1/2024"
+   ],
+   "posted": [
+    "2024-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ParatransitInsuranceCo%20-%20EXAM06242024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ParatransitInsuranceCo%20-%20ORDER06242024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-026",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Paratransit Insurance Company, A Mutual Risk Retention Group",
+   "posted_as_listed": [
+    "8/15/2024"
+   ],
+   "posted": [
+    "2024-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ParatransitInsuranceCoRRG%20-%20EXAM06112024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ParatransitInsuranceCoRRG%20-%20ORDER06212024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-027",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Preferred Auto Insurance Company, Inc.",
+   "posted_as_listed": [
+    "8/15/2024"
+   ],
+   "posted": [
+    "2024-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PreferredAutoInsuranceCoInc%20-%20EXAM07022024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PreferredAutoInsuranceCoInc%20-%20ORDER07112024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-028",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Rhythm Health Tennessee, Inc.",
+   "posted_as_listed": [
+    "8/15/2024"
+   ],
+   "posted": [
+    "2024-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RhythmHealthTNInc%20-%20EXAM06072024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RhythmHealthTNInc%20-%20ORDER07302024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-029",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "State Volunteer Mutual Insurance Company",
+   "posted_as_listed": [
+    "8/15/2024"
+   ],
+   "posted": [
+    "2024-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/StateVolunteerMutualInsuranceCo%20-%20EXAM06132024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/StateVolunteerMutualInsuranceCo%20-%20ORDER06252024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-030",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "Tennessee Automotive Association Self-Insurers' Trust",
+   "posted_as_listed": [
+    "8/15/2024"
+   ],
+   "posted": [
+    "2024-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNAutomotiveAssoSelfInsurersTrust-%20EXAM06142024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNAutomotiveAssoSelfInsurersTrust%20-ORDER06252024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-031",
+   "exam_as_of_year": 2022,
+   "company_as_listed": "WellCare Health Insurance of Tennessee, Inc.",
+   "posted_as_listed": [
+    "8/15/2024"
+   ],
+   "posted": [
+    "2024-08-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WellCareHealthInsuranceofTNInc%20-%20EXAM06072024.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WellCareHealthInsuranceofTNInc%20-%20ORDER07302024.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-032",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "American Health Plan, Inc.",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AmericanHealthPlanInc%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AmericanHealthPlanInc%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-033",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Blount County Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BlountCountyMutualInsCo%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BlountCountyMutualInsCo%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-034",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Citizens Mutual Insurance Company of Lincoln County, Tennessee",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CitizensMutualInsCoLincolnCountyTN%20-%20EXAM1231201.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CitizensMutualInsCoLincolnCountyTN%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-035",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Farmers Life Insurance Company (as of 3/31/21)",
+   "posted_as_listed": [
+    "10/4/2021"
+   ],
+   "posted": [
+    "2021-10-04"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/Farmers_Life_Ins_Co_033121_Exam.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/Farmers_Life_Ins_Co_033121_Order.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-036",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Washington County",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualFireInsCoWashington%20County%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualFireInsCoWashington%20County%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-037",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Farmers Mutual Insurance Company of Giles County",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualInsCoGiles%20County%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualInsCoGilesCounty%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-038",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Farmers Mutual Insurance Company of Greene County",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualInsCoGreeneCounty%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualInsCoGreeneCounty%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-039",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Farmers Mutual of Tennessee",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualofTennessee%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FarmersMutualofTennessee%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-040",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Mendakota Insurance Company",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MendakotaInsCo%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MendakotaInsCo%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-041",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Mendota Insurance Company",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MendotaInsCo%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MendotaInsCo%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-042",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Oakwood Insurance Company",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/OakwoodInsCo%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/OakwoodInsCo%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-043",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "TD Consortium Benefits Trust",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TDConsortiumBenefitsTrust%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TDConsortiumBenefitsTrust%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-044",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "Tennessee Insurance Guaranty Association",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TennesseeInsuranceGuarantyAssociation%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TennesseeInsuranceGuarantyAssociation%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-045",
+   "exam_as_of_year": 2021,
+   "company_as_listed": "The Title Guaranty and Trust Company of Chattanooga",
+   "posted_as_listed": [
+    "7/6/2023"
+   ],
+   "posted": [
+    "2023-07-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TitleGuarantyTrustCompany%20-%20EXAM12312021.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TitleGuarantyTrustCompany%20-%20ORDER12312021.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-046",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "American Continental Insurance Company",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACIC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACIC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-047",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "BlueCross BlueShield of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBSTNI-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBSTNI-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-048",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "Cariten Health Plan, Inc.",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPI-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPI-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-049",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "Continental Life Insurance Company of Brentwood, Tennessee",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CLIC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CLIC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-050",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "First Acceptance Insurance Company of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAICTN-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAICTN-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-051",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "Golden Security Insurance Company",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSIC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSIC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-052",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "McMinn County Farmers Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMIC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMIC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-053",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "MidSouth Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MSMIC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MSMIC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-054",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "SecurityCare of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SCTN-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SCTN-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-055",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "SilverScript Insurance Company",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SSIC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SSIC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-056",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "Tennessee Farmers Assurance Company",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNFAC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNFAC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-057",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "Tennessee Farmers Life Insurance Company",
+   "posted_as_listed": [
+    "07/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNFLIC-Exam-12312020.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNFLIC-Order-12312020.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-058",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "Tennessee Farmers Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/19/2022"
+   ],
+   "posted": [
+    "2022-07-19"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNFMIC-exam-123120.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TNFMIC-Order-123120.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-059",
+   "exam_as_of_year": 2020,
+   "company_as_listed": "TRH Health Insurance Company",
+   "posted_as_listed": [
+    "07/18/22"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHHealthIC-exam-123120.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHHealthIC-order-123120.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-060",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "American Continental Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/American_Continental_Ins_Co_Exam_123119.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/American_Continental_Ins_Co_Order_123119.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-061",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Centerline Property and Casualty Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Centerline_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Centerline_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-062",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Continental Life Insurance Company of Brentwood, Tennessee",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Continental_Life_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Continental_Life_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-063",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Hamblen Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Hamblen_Mutual_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Hamblen_Mutual_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-064",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Plateau Casualty Insurance Company",
+   "posted_as_listed": [
+    "07/08/21"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Plateau_Casualty_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Plateau_Casualty_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-065",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Plateau Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Plateau_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Plateau_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-066",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Premier Group Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Premier_Group_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Premier_Group_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-067",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Primerica Life Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Primerica_Life_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Primerica_Life_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-068",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Protective Life Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_Protective_Life_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_Protective_Life_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-069",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "SteadPoint Insurance Company",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_SteadPoint_Ins_Co.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_SteadPoint_Ins_Co.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-070",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "Tennessee Forestry Association Selective Workers' Compensation Group",
+   "posted_as_listed": [
+    "7/18/2022"
+   ],
+   "posted": [
+    "2022-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFASWCG-Exam-123119.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFASWCG-ORDER-123119.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-071",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "US Letter Carriers Mutual Benefit Association",
+   "posted_as_listed": [
+    "7/8/2021"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_US_Letter_Carriers.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_US_Letter_Carriers.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-072",
+   "exam_as_of_year": 2019,
+   "company_as_listed": "White County Farmers Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "7/8/21"
+   ],
+   "posted": [
+    "2021-07-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Exam_White_County_Farmers_Mutual.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/123119_Order_White_County_Farmers.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-073",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Bright Health Insurance Company of Tennessee",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BHICOT_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BHICOT_Order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-074",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Cariten Health Plan Inc.",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHP_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHP_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-075",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Cigna Healthcare of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHOT_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHOT_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-076",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "East Tennessee Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/10/2020"
+   ],
+   "posted": [
+    "2020-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ETMIC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ETMIC_Order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-077",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Jefferson County",
+   "posted_as_listed": [
+    "07/10/2020"
+   ],
+   "posted": [
+    "2020-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICJC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICJC_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-078",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Sevier County",
+   "posted_as_listed": [
+    "07/10/2020"
+   ],
+   "posted": [
+    "2020-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICS_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICS_Order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-079",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Union County",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICUC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICUC_Order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-080",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Farmers Union Mutual Fire Insurance Company of Bradley County",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exa",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FUMFICB_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Orde",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FUMFICB_Order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-081",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Monroe County Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCMFIC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCMFIC_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-082",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Mountain Life Insurance Company",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MLIC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Orde",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MLIC_Order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-083",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Provident Life and Accident Insurance Company",
+   "posted_as_listed": [
+    "07/10/2020"
+   ],
+   "posted": [
+    "2020-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAIC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAIC_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-084",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Provident Life and Casualty Insurance Company",
+   "posted_as_listed": [
+    "07/10/2020"
+   ],
+   "posted": [
+    "2020-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCIC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCIC_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-085",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Silverscript Insurance Company",
+   "posted_as_listed": [
+    "07/10/2020"
+   ],
+   "posted": [
+    "2020-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SIC_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SIC_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-086",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Tennessee Life and Health Insurance Guaranty Association",
+   "posted_as_listed": [
+    "07/09/2020"
+   ],
+   "posted": [
+    "2020-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TLHIGA_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TLHIGA_Order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-087",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "U. S. Legal Services, Inc.",
+   "posted_as_listed": [
+    "07/10/2020"
+   ],
+   "posted": [
+    "2020-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLS_exam_123118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLS_order_123118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-088",
+   "exam_as_of_year": 2018,
+   "company_as_listed": "Workers' Compensation Self-Insurance Group Fund of CompTrustAGC Tennessee (as of March 31, 2018)",
+   "posted_as_listed": [
+    "10/8/2019"
+   ],
+   "posted": [
+    "2019-10-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/COMPTRUSTAGC_exam_033118.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/COMPTRUSTAGC_order_033118.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-089",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "American Health Plan, Inc. (Organizational Examination as of April 4, 2017)",
+   "posted_as_listed": [
+    "06/14/17"
+   ],
+   "posted": [
+    "2017-06-14"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AHP_Exam_040417_Organization_Exam.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AHP_Order_040417_Organization_exam.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-090",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "ClearRiver Health",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ClearRiver_Health_Exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ClearRiver_Health_Order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-091",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "Consumers Insurance USA,INC.",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/Consumers_Exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/Consumers_Order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-092",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "Delta Dental Of Tennessee",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DDOT_Exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DDOT_Order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-093",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "Direct Insurance Company",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DIC_Exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DIC_order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-094",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "HBAT Benefit Trust (Organizational Examination 10/31/17)",
+   "posted_as_listed": [
+    "5/23/18"
+   ],
+   "posted": [
+    "2018-05-23"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HBAT_Benefits_Trust_exam_103117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HBAT_Benefits_Trust_Order_103117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-095",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "Paratransit Insurance Company, A Mutual Risk Retention Group",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PIC_RRG_Exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PIC_RRG_Order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-096",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "Preferred Auto Insurance Company",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PAIC_Exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PAIC_Order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-097",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "State Volunteer Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SVMIC_exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SVMIC_Order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-098",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "Tennessee Automotive Association Self-Insurers Trust",
+   "posted_as_listed": [
+    "07/18/19"
+   ],
+   "posted": [
+    "2019-07-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TAASIT_Exam_123117.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TAASIT_Order_123117.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-099",
+   "exam_as_of_year": 2017,
+   "company_as_listed": "U. S. Law Shield of Tennessee, LLC (Organizational exam as of 1/23/17)",
+   "posted_as_listed": [
+    "01/23/18"
+   ],
+   "posted": [
+    "2018-01-23"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLST_exam_012317.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLST_order_012317.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-100",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Blount County Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "7/9/18"
+   ],
+   "posted": [
+    "2018-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCMFICexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCMFICorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-101",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Citizens Mutual Insurance Company of Lincoln County, TN",
+   "posted_as_listed": [
+    "7/9/18"
+   ],
+   "posted": [
+    "2018-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CMICLCexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CMICLCorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-102",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Crestpoint Health Insurance Company",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHICexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHICorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-103",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Erlanger Health Plan Trust",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EHPTexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EHPTorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-104",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Farmers Aid Association - A County Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/9/18"
+   ],
+   "posted": [
+    "2018-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAA_ACMICexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Orde",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAA_ACMICorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-105",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Greene County",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICGCexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICGCorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-106",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Washington County",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-107",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Farmers Mutual Insurance Company of Giles County",
+   "posted_as_listed": [
+    "7/9/18"
+   ],
+   "posted": [
+    "2018-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMICGCexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMICGCOrder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-108",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Farmers Mutual of Tennessee",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMTexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMTorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-109",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Haulers Insurance Company, Inc.",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-110",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "McMinn County Farmers Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/9/18"
+   ],
+   "posted": [
+    "2018-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMICexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMICorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-111",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Oakwood Insurance Company",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/OICexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/OICorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-112",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "TD Consortium Benefits Trust",
+   "posted_as_listed": [
+    "3/10/17"
+   ],
+   "posted": [
+    "2017-03-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TDCBT_Exam_123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TDCBT_Order_123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-113",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Tennessee Forestry Association Selective Workers' Compensation Group",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFASWCGexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFASWCGorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-114",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Tennessee Independent Colleges and Universities Association Benefit Consortium, Inc.",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TICUABCexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TICUABCorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-115",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "Tennessee Insurance Guaranty Association",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TIGAexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TIGAorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-116",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "The Title Guaranty and Trust Company of Chattanooga",
+   "posted_as_listed": [
+    "7/10/18"
+   ],
+   "posted": [
+    "2018-07-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TGTCCexam123116.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TGTCCorder123116.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-117",
+   "exam_as_of_year": 2016,
+   "company_as_listed": "K-Tenn Insurance Company",
+   "posted_as_listed": [
+    "12/8/16"
+   ],
+   "posted": [
+    "2016-12-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/KTIC_exam_063016_Organizational.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/KTIC_order_063016_Organizational.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-118",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Blue Cross Blue Shield of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/07/15"
+   ],
+   "posted": [
+    "2015-07-07"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBST_Exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBST_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-119",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Direct Insurance Company",
+   "posted_as_listed": [
+    "07/05/17"
+   ],
+   "posted": [
+    "2017-07-05"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DIC_exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-120",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "First Acceptance Insurance Company of Tennessee, Inc.",
+   "posted_as_listed": [
+    "06/23/17"
+   ],
+   "posted": [
+    "2017-06-23"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAIT_exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAIT_order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-121",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Golden Security Insurance Company",
+   "posted_as_listed": [
+    "06/14/17"
+   ],
+   "posted": [
+    "2017-06-14"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSIC_exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-122",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Midsouth Mutual Insurance Company",
+   "posted_as_listed": [],
+   "posted": [],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MMIC_Exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MMIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-123",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Provident Life and Accident Insurance Company",
+   "posted_as_listed": [
+    "07/05/17"
+   ],
+   "posted": [
+    "2017-07-05"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAIC_exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-124",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Provident Life and Casualty Insurance Company",
+   "posted_as_listed": [],
+   "posted": [],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCIC_Exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-125",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "SecurityCare of Tennessee, Inc.",
+   "posted_as_listed": [
+    "0614/17"
+   ],
+   "posted": [],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SCTI_exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SCTI_order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-126",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Tennessee Farmers Assurance Company",
+   "posted_as_listed": [
+    "07/05/17"
+   ],
+   "posted": [
+    "2017-07-05"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFAC_exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFAC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-127",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Tennessee Farmers Life Insurance Company",
+   "posted_as_listed": [
+    "07/03/17"
+   ],
+   "posted": [
+    "2017-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFLIC_Exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-128",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "Tennessee Farmers Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/03/17"
+   ],
+   "posted": [
+    "2017-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMIC_Exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-129",
+   "exam_as_of_year": 2015,
+   "company_as_listed": "TRH Health Insurance Company",
+   "posted_as_listed": [
+    "07/03/17"
+   ],
+   "posted": [
+    "2017-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHIC_Exam_123115.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHIC_Order_123115.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-130",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "American Continental Insurance Company",
+   "posted_as_listed": [
+    "06/29/16"
+   ],
+   "posted": [
+    "2016-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACIC_exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACIC_order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-131",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Associated Builders & contractors of Tennessee Workers' Compensation Self-Insurance Fund (as of March 31, 2014)",
+   "posted_as_listed": [
+    "06/13/16"
+   ],
+   "posted": [
+    "2016-06-13"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ABCOT_WCSIF_Exam_033114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ABCOT_WCSIF_Order_033114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-132",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "ClearRiver Health HMO (Organizational Examination)",
+   "posted_as_listed": [
+    "05/27/14"
+   ],
+   "posted": [
+    "2014-05-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHHMOexam040714.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHHMOorder040714.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-133",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Continental Life Insurance Company of Brentwood, Tennessee",
+   "posted_as_listed": [
+    "06/29/16"
+   ],
+   "posted": [
+    "2016-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CLICOB_exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CLICOB_order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-134",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Golden Security Insurance Company",
+   "posted_as_listed": [
+    "6/29/16"
+   ],
+   "posted": [
+    "2016-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSIC_exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSIC_Order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-135",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Hamblen Mutual Insurance Company",
+   "posted_as_listed": [
+    "06/30/16"
+   ],
+   "posted": [
+    "2016-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HMIC_Exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HMIC_order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-136",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Healthspring of Tennessee, Inc",
+   "posted_as_listed": [
+    "06/29/16"
+   ],
+   "posted": [
+    "2016-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HOT_exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HOT_order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-137",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Plateau Casualty Insurance Company",
+   "posted_as_listed": [
+    "06/30/16"
+   ],
+   "posted": [
+    "2016-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PCIC_Exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PCIC_Order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-138",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Plateau Insurance Company",
+   "posted_as_listed": [
+    "06/30/16"
+   ],
+   "posted": [
+    "2016-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PIC_Exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PIC_Order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-139",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Premier Group Insurance Company",
+   "posted_as_listed": [
+    "06/29/16"
+   ],
+   "posted": [
+    "2016-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PGIC_exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PGIC_order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-140",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Protective Life Insurance Company",
+   "posted_as_listed": [
+    "06/29/16"
+   ],
+   "posted": [
+    "2016-06-29"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLIC_exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLIC_order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-141",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "Steadpoint Insurance Company",
+   "posted_as_listed": [
+    "07/01/16"
+   ],
+   "posted": [
+    "2016-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SPIC_exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SPIC_order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-142",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "United States Letter Carriers Mutual Benefits Association",
+   "posted_as_listed": [
+    "06/30/16"
+   ],
+   "posted": [
+    "2016-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLC_Exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLC__Order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-143",
+   "exam_as_of_year": 2014,
+   "company_as_listed": "White County Farmers Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "06/30/16"
+   ],
+   "posted": [
+    "2016-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCFMFIC_Exam_123114.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCFMFIC_Order_123114.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-144",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Cariten Health Plan",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-145",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "CIGNA Healthcare of Tennessee, Inc.",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHTIexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHTIorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-146",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Community Health Alliance Mutual Insurance Company (Organizational Examination)",
+   "posted_as_listed": [
+    "05/15/13"
+   ],
+   "posted": [
+    "2013-05-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHAMICexam033113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHAMICorder033113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-147",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "East Tennessee Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ETMICexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ETMICorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-148",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Farmers Union Mutual Fire Insurance Company of Bradley County",
+   "posted_as_listed": [
+    "06/30/15"
+   ],
+   "posted": [
+    "2015-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FUMFICBCexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FUMFICBCorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-149",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Jefferson County",
+   "posted_as_listed": [
+    "06/30/15"
+   ],
+   "posted": [
+    "2015-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICJCexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICJCorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-150",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Sevier County",
+   "posted_as_listed": [
+    "06/30/13"
+   ],
+   "posted": [
+    "2013-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICSCexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICSCorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-151",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Union County",
+   "posted_as_listed": [
+    "06/30/2015"
+   ],
+   "posted": [
+    "2015-06-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICUCexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICUCorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-152",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Monroe County Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCMFICexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCMFICorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-153",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Mountain Life Insurance Company",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MLICexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MLICorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-154",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Road Contractors Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RCMICexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RCMICorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-155",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Securitycare of Tennessee, Inc. (Organizational Examination)",
+   "posted_as_listed": [
+    "02/08/13"
+   ],
+   "posted": [
+    "2013-02-08"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SCOTIexam020813.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SCOTIorder020813.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-156",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Silverscript Insurance Company",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-157",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Tennessee Life and Health Insurance Guarantee Association",
+   "posted_as_listed": [
+    "7/1/15"
+   ],
+   "posted": [
+    "2015-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TLHIGAexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TLHIGAorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-158",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "U. S. Legal Services, Inc. (As of 9/30/13 and 12/31/13)",
+   "posted_as_listed": [
+    "8/6/15"
+   ],
+   "posted": [
+    "2015-08-06"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLSIexam123113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLSIorder123113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-159",
+   "exam_as_of_year": 2013,
+   "company_as_listed": "Workers' Compensation Self-Insurance Group Fund of the CompTrustAGC... Tennessee (As of 03/31/13)",
+   "posted_as_listed": [
+    "3/10/15"
+   ],
+   "posted": [
+    "2015-03-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCSIGF_COMPTURSTAGC_exam_033113.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCSIGF_COMPTURSTAGC_order_033113.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-160",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "CIGNA Healthcare of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHOTIexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHOTIorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-161",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Consumers Insurance USA, Inc.",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CIUIexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CIUIorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-162",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Delta Dental of Tennessee",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DDOTexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DDOTorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-163",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Haulers Insurance Company, Inc.",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-164",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Home Builders Mutual Insurance Company (Organizational Examination)",
+   "posted_as_listed": [
+    "12/20/12"
+   ],
+   "posted": [
+    "2012-12-20"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HBMICexam120712.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HBMICorder120712.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-165",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Paratransit Insurance Company",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PTICexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PTICorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-166",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Preferred Auto Insurance Company, Inc.",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PAICIexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PAICIorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-167",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "State Volunteer Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SVMICexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SVMICorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-168",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Tennessee Automotive Association Self-Insurers Trust",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TAASITexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TAASITorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-169",
+   "exam_as_of_year": 2012,
+   "company_as_listed": "Windsor Health Plan, Inc.",
+   "posted_as_listed": [
+    "07/02/14"
+   ],
+   "posted": [
+    "2014-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WHPIexam123112.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WHPIorder123112.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-170",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "American General Life and Accident Insurance Company (Limited Scope)",
+   "posted_as_listed": [
+    "5/28/13"
+   ],
+   "posted": [
+    "2013-05-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICGCexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGLAICorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-171",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "American General Property Insurance Company",
+   "posted_as_listed": [
+    "5/28/13"
+   ],
+   "posted": [
+    "2013-05-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGPICexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGPICorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-172",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Blount County Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "7/3/13"
+   ],
+   "posted": [
+    "2013-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCMFICexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCMFICorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-173",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Citizens Mutual Insurance Company of Lincoln County",
+   "posted_as_listed": [
+    "7/2/13"
+   ],
+   "posted": [
+    "2013-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CMICLCexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CMICLCorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-174",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Crestpoint Health Insurance Company f/k/a Tennessee Insurance Company",
+   "posted_as_listed": [
+    "03/20/13"
+   ],
+   "posted": [
+    "2013-03-20"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHIC_TICexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHIC_TICorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-175",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Erlanger Health Plan Trust",
+   "posted_as_listed": [
+    "02/22/13"
+   ],
+   "posted": [
+    "2013-02-22"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EHPTexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EHPTorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-176",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Farmers Aid Association of Loudon County",
+   "posted_as_listed": [
+    "7/2/13"
+   ],
+   "posted": [
+    "2013-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAALCexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAALCorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-177",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Greene County",
+   "posted_as_listed": [
+    "7/3/13"
+   ],
+   "posted": [
+    "2013-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICGCexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICGCorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-178",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Washington County",
+   "posted_as_listed": [
+    "06/14/13"
+   ],
+   "posted": [
+    "2013-06-14"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-179",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Farmers Mutual Insurance Company of Giles County, Tennessee",
+   "posted_as_listed": [
+    "06/19/13"
+   ],
+   "posted": [
+    "2013-06-19"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMICGCexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMICGCorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-180",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Farmers Mutual of Tennessee",
+   "posted_as_listed": [
+    "7/2/13"
+   ],
+   "posted": [
+    "2013-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMTexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMTorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-181",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "McMinn County Farmers Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/2/13"
+   ],
+   "posted": [
+    "2013-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMICexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMICorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-182",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Premier Group Insurance Company",
+   "posted_as_listed": [
+    "06/14/13"
+   ],
+   "posted": [
+    "2013-06-14"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PGICexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PGICorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-183",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Road Contractors Mutual Insurance Company (Organizational Examination) as of 9/30/2011",
+   "posted_as_listed": [
+    "05/03/13"
+   ],
+   "posted": [
+    "2013-05-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RCMICexam093011.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RCMICorder093011.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-184",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Tennessee Independent Colleges and Universities Association Benefit Consortium, Inc.",
+   "posted_as_listed": [
+    "7/3/13"
+   ],
+   "posted": [
+    "2013-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TICUABCIexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TICUABCIorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-185",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Tennessee Insurance Guaranty Association",
+   "posted_as_listed": [
+    "06/14/13"
+   ],
+   "posted": [
+    "2013-06-14"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TIGAexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TIGAorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-186",
+   "exam_as_of_year": 2011,
+   "company_as_listed": "Title Guaranty and Trust Company of Chattanooga",
+   "posted_as_listed": [
+    "7/2/13"
+   ],
+   "posted": [
+    "2013-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TGTCCexam123111.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TGTCCorder123111.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-187",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "BlueCross BlueShield of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBSTIexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBSTIorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-188",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "Direct Insurance Company",
+   "posted_as_listed": [
+    "02/15/12"
+   ],
+   "posted": [
+    "2012-02-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DICexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DICorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-189",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "First Acceptance Insurance Company of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAICTexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAICTorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-190",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "HealthSpring of Tennessee, Inc.",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HSTIexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HSTIorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-191",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "Provident Life and Accident Insurance Company",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAICexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAICorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-192",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "Provident LIfe and Casualty Insurance Company",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCICexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCICorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-193",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "Silverscript Insurance Company",
+   "posted_as_listed": [
+    "07/09/13"
+   ],
+   "posted": [
+    "2013-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-194",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "Tennessee Farmers Assurance Company",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFACexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFACorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-195",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "Tennessee Farmers Life Insurance Company",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFLICexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFLICorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-196",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "Tennessee Farmers Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMICexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMICorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-197",
+   "exam_as_of_year": 2010,
+   "company_as_listed": "TRH Health Insurance Company",
+   "posted_as_listed": [
+    "07/03/12"
+   ],
+   "posted": [
+    "2012-07-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHHICexam123110.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHHICorder123110.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-198",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "American Continental Insurance Company",
+   "posted_as_listed": [
+    "06/28/10"
+   ],
+   "posted": [
+    "2010-06-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-199",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Associated Builders & Contractors of Tennessee Workers' Compensation Self-Insurance Fund (as of March 31, 2009)",
+   "posted_as_listed": [
+    "06/15/11"
+   ],
+   "posted": [
+    "2011-06-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ABC_WCSIFexam033109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ABC_WCSIForder033109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-200",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Cariten Health Plan Inc.",
+   "posted_as_listed": [
+    "06/28/11"
+   ],
+   "posted": [
+    "2011-06-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPIexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPIorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-201",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Cariten Insurance Company",
+   "posted_as_listed": [
+    "06/28/11"
+   ],
+   "posted": [
+    "2011-06-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-202",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Cariten Insurance Company and Cariten Health Plans, Inc (as of December 14, 2009)",
+   "posted_as_listed": [
+    "04/13/11"
+   ],
+   "posted": [
+    "2011-04-13"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CIC_CHPIexam121409.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CIC_CHPIorder121409.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-203",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Continental Life Insurance Company of Brentwood, Tennessee",
+   "posted_as_listed": [
+    "06/28/11"
+   ],
+   "posted": [
+    "2011-06-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CLICBTexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CLICBTorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-204",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Warren County (as of September 30, 2009)",
+   "posted_as_listed": [
+    "04/21/10"
+   ],
+   "posted": [
+    "2010-04-21"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCexam093009.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCorder093009.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-205",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Golden Security Insurance Company",
+   "posted_as_listed": [
+    "04/13/11"
+   ],
+   "posted": [
+    "2011-04-13"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GSICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-206",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Hamblen Mutual Insurance Company",
+   "posted_as_listed": [
+    "05/31/12"
+   ],
+   "posted": [
+    "2012-05-31"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HMICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HMICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-207",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Home Builders Association of Tennessee Self Insured Workers' Compensation Trust",
+   "posted_as_listed": [
+    "09/20/10"
+   ],
+   "posted": [
+    "2010-09-20"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HBATSIWCTexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HBATSIWCTorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-208",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Plateau Casualty Insurance Company",
+   "posted_as_listed": [
+    "06/15/11"
+   ],
+   "posted": [
+    "2011-06-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PCICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PCICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-209",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Plateau Insurance Company",
+   "posted_as_listed": [
+    "06/15/11"
+   ],
+   "posted": [
+    "2011-06-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-210",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Protective Life Insurance Company",
+   "posted_as_listed": [
+    "06/28/11"
+   ],
+   "posted": [
+    "2011-06-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-211",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Sheffield Insurance Company",
+   "posted_as_listed": [
+    "06/28/11"
+   ],
+   "posted": [
+    "2011-06-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-212",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Tennessee Forestry Association Selective Workers' Compensation Group",
+   "posted_as_listed": [
+    "10/04/12"
+   ],
+   "posted": [
+    "2012-10-04"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFASWCGexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFASWCGorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-213",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "White County Farmers Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "06/26/11"
+   ],
+   "posted": [
+    "2011-06-26"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCFMFICexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCFMFICorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-214",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "Unison Health Plan of Tennessee Inc.",
+   "posted_as_listed": [
+    "06/28/11"
+   ],
+   "posted": [
+    "2011-06-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/UHPOTexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/UHPOTorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-215",
+   "exam_as_of_year": 2009,
+   "company_as_listed": "United States Letter Carriers Mutual Benefit Association",
+   "posted_as_listed": [
+    "04/20/11"
+   ],
+   "posted": [
+    "2011-04-20"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLCMBAexam123109.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLCMBAorder123109.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-216",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "American General Life and Accident Insurance Company",
+   "posted_as_listed": [
+    "02/03/10"
+   ],
+   "posted": [
+    "2010-02-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGLAICexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGLAICorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-217",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "American General Property Insurance Company",
+   "posted_as_listed": [
+    "02/03/10"
+   ],
+   "posted": [
+    "2010-02-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGPICexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGPICorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-218",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Brentwood National Insurance",
+   "posted_as_listed": [
+    "01/27/10"
+   ],
+   "posted": [
+    "2010-01-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BNTCexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BNTCorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-219",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Cariten Health Plan Inc (as of June 30, 2008)",
+   "posted_as_listed": [
+    "04/13/11"
+   ],
+   "posted": [
+    "2011-04-13"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPIexam063008.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPIorder063008.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-220",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Cariten Insurance Company (as of June 30, 2008)",
+   "posted_as_listed": [
+    "04/13/11"
+   ],
+   "posted": [
+    "2011-04-13"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CICexam063008.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CICorder063008.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-221",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Cigna Healthcare of Tennessee, Inc.",
+   "posted_as_listed": [
+    "05/18/10"
+   ],
+   "posted": [
+    "2010-05-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHOTexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHOTorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-222",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "East Tennessee Mutual Insurance Company",
+   "posted_as_listed": [
+    "09/07/10"
+   ],
+   "posted": [
+    "2010-09-07"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ETMICexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ETMICorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-223",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Farmers Union Mutual Fire Insurance Company of Bradley County",
+   "posted_as_listed": [
+    "01/25/11"
+   ],
+   "posted": [
+    "2011-01-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FUMFICBCexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FUMFICBCorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-224",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Jefferson County",
+   "posted_as_listed": [
+    "01/25/11"
+   ],
+   "posted": [
+    "2011-01-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICJCexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICJCorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-225",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Sevier County",
+   "posted_as_listed": [
+    "01/25/11"
+   ],
+   "posted": [
+    "2011-01-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICSCexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICSCorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-226",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Famers Mutual Insurance Company of Union County",
+   "posted_as_listed": [
+    "01/25/11"
+   ],
+   "posted": [
+    "2011-01-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICUCexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICUCorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-227",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Hamilton Insurance Company, LLC (as of 12/22/08)",
+   "posted_as_listed": [
+    "05/11/10"
+   ],
+   "posted": [
+    "2010-05-11"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICLLCexam122208.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICLLCorder122208.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-228",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Monroe County Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "01/25/11"
+   ],
+   "posted": [
+    "2011-01-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCMFICexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCMFICorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-229",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Mountain Life Insurance Company",
+   "posted_as_listed": [
+    "06/25/10"
+   ],
+   "posted": [
+    "2010-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MLICexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MLICorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-230",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "North American Indemnity Company",
+   "posted_as_listed": [
+    "06/25/10"
+   ],
+   "posted": [
+    "2010-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/NAICexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/NAICorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-231",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Tennessee Health Care Association Selective Workers' Compensation Group",
+   "posted_as_listed": [
+    "07/14/10"
+   ],
+   "posted": [
+    "2010-07-14"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/THCASWCGexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/THCASWCGorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-232",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Tennessee Life and Health Insurance Guaranty Association",
+   "posted_as_listed": [],
+   "posted": [],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TLHIGAexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TLHIGAorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-233",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Tennessee Valley Mutual Insurance Company",
+   "posted_as_listed": [
+    "06/25/10"
+   ],
+   "posted": [
+    "2010-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TVMICexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TVMICorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-234",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "U. S. Legal Services of Tennessee, Inc.",
+   "posted_as_listed": [
+    "04/19/10"
+   ],
+   "posted": [
+    "2010-04-19"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLSTexam093008.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLSTorder093008.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-235",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "UnitedHealthcare of Tennessee Inc.",
+   "posted_as_listed": [
+    "06/25/10"
+   ],
+   "posted": [
+    "2010-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/UHOTexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/UHOTorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-236",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Windsor Health Plan, Inc.",
+   "posted_as_listed": [
+    "06/25/10"
+   ],
+   "posted": [
+    "2010-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WHPIexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WHPIorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-237",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Workers' Compensation Self-Insurance Group Fund of the Comptrust AGC Tennessee (as of 03/31/08)",
+   "posted_as_listed": [
+    "01/27/10"
+   ],
+   "posted": [
+    "2010-01-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCSGFCAGCTexam033108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCSGFCAGCTorder033108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-238",
+   "exam_as_of_year": 2008,
+   "company_as_listed": "Workers' Compensation Self-Insurance Group Fund of the Tennessee Association of business Company Owners' Managed Program d/b/a \"TABCOMP TRUST\"",
+   "posted_as_listed": [
+    "11/15/10"
+   ],
+   "posted": [
+    "2010-11-15"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TABCOMPTRUSTexam123108.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TABCOMPTRUSTorder123108.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-239",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Consumers Insurance USA, Inc.",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CIUSA123107Exam.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CIUSA123107Order.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-240",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Delta Dental of Tennessee",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DDexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DDorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-241",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Distributors Insurance Company",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DICexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DICorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-242",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Erlanger Health Plan Trust",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EHPexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EHPorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-243",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Haulers Insurance Company, Inc.",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HICorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-244",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Health 1-2-3, Inc.",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/Health123exam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/Health123order123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-245",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "HealthSpring of Tennessee Inc. Financial exam (as of March 31, 2007)",
+   "posted_as_listed": [
+    "10/28/08"
+   ],
+   "posted": [
+    "2008-10-28"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HSOTexam033107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HSOTorder033107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-246",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Hospital Underwriting Group, Inc.",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HUGexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HUGorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-247",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "National Trust Insurance Company",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/NTICexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/NTICorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-248",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Paratransit Insurance Company, a Mutual Risk Retention Group",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PICexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PICorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-249",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Preferred Auto Insurance Company, Inc.",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PAICexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PAICorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-250",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Professional Liability Insurance Company",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLICexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLICorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-251",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "State Volunteer Mutual Insurance Company",
+   "posted_as_listed": [
+    "07/02/09"
+   ],
+   "posted": [
+    "2009-07-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SVMICexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SVMICorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-252",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "Tennessee Automotive Association Self-Insurers Trust",
+   "posted_as_listed": [
+    "04/01/10"
+   ],
+   "posted": [
+    "2010-04-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TAASITexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TAASITorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-253",
+   "exam_as_of_year": 2007,
+   "company_as_listed": "UNUM Life Insurance Company of American, The Paul Revere Life Insurance Company, Provident Life and Accident Insurance Company, Provident Life and Casualty Insurance Company, and First UNUM Life Insurance Company (Market Conduct Examination)",
+   "posted_as_listed": [
+    "4/30/08"
+   ],
+   "posted": [
+    "2008-04-30"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ULICAexam123107.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ULICAorder123107.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-254",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "American General Life and Accident Insurance Company",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGLAICexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGLAICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-255",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "American General Property Insurance Company",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGPICexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AGPICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-256",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Blount County Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCMFICexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCMFICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-257",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Citizens Home Mutual Fire Insurance Company of Lincoln County",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHMFICLCexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHMFICLCorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-258",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Farmers Aid Association of Loudon County",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAALCexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAALCorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-259",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Warren County",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICWCorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-260",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Farmers Mutual Fire Insurance Company of Washington County",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICoWCexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMFICoWCorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-261",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Farmers Mutual of Tennessee",
+   "posted_as_listed": [
+    "6/26/08"
+   ],
+   "posted": [
+    "2008-06-26"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMTexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FMTorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-262",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "First Acceptance Insurance Company (Organization Exam) December 04, 2006",
+   "posted_as_listed": [
+    "1/2/07"
+   ],
+   "posted": [
+    "2007-01-02"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAICOTexam120406.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/FAICOTorder120406.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-263",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Greene County Farmers Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GCFMFICexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/GCFMFICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-264",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Hamblen Mutual Insurance Company (Target Exam) June 30, 2006",
+   "posted_as_listed": [
+    "12/04/06"
+   ],
+   "posted": [
+    "2006-12-04"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HMICexam063006.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HMICorder063006.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Amended Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HMICorder122106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-265",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "McMinn County Farmers Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMFICexam123106_000.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/MCFMFICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-266",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Premier Group Insurance Company",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PGICexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PGICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-267",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Pre-Paid Legal Services of Tennessee, Inc.",
+   "posted_as_listed": [
+    "6/25/08"
+   ],
+   "posted": [
+    "2008-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PPLSTexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PPLSTorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-268",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Road Contractors Mutual Insurance Company",
+   "posted_as_listed": [
+    "1/9/07"
+   ],
+   "posted": [
+    "2007-01-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RCMICexam111606.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/RCMICorder111606.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-269",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Tennessee Insurance Company",
+   "posted_as_listed": [
+    "3/27/08"
+   ],
+   "posted": [
+    "2008-03-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TICexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-270",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "Tennessee Insurance Guaranty Association",
+   "posted_as_listed": [
+    "6/25/08"
+   ],
+   "posted": [
+    "2008-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TIGAexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TIGAorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-271",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "The Farmers Mutual Insurance Company of Giles County, Tennessee",
+   "posted_as_listed": [
+    "7/01/08"
+   ],
+   "posted": [
+    "2008-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMICGCexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMICGCorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-272",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "The Title Guaranty and Trust Company of Chattanooga",
+   "posted_as_listed": [
+    "6/25/08"
+   ],
+   "posted": [
+    "2008-06-25"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TTGTCCexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TTGTCCorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-273",
+   "exam_as_of_year": 2006,
+   "company_as_listed": "White County Farmers Mutual Fire Insurance Company",
+   "posted_as_listed": [
+    "6/27/08"
+   ],
+   "posted": [
+    "2008-06-27"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCFMFICexam123106.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WCFMFICorder123106.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-274",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Aetna Health, Inc.",
+   "posted_as_listed": [
+    "1/16/07"
+   ],
+   "posted": [
+    "2007-01-16"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AHIexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/AHIorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-275",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "American Continental Insurance Company August 4, 2005",
+   "posted_as_listed": [],
+   "posted": [],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACICexam080405.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/ACICorder080405.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-276",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Blue Cross Blue Shield of Tennessee Inc.",
+   "posted_as_listed": [
+    "3/10/08"
+   ],
+   "posted": [
+    "2008-03-10"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBSexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/BCBSorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-277",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Cariten Health Plans, Inc.",
+   "posted_as_listed": [
+    "7/12/07"
+   ],
+   "posted": [
+    "2007-07-12"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPIexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CHPIorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-278",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Cariten Insurance Company",
+   "posted_as_listed": [
+    "7/12/07"
+   ],
+   "posted": [
+    "2007-07-12"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/CICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-279",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Direct Insurance Company",
+   "posted_as_listed": [
+    "7/09/07"
+   ],
+   "posted": [
+    "2007-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-280",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Employer Insurance Company of Wausau (Market Conduct)",
+   "posted_as_listed": [
+    "10/18/07"
+   ],
+   "posted": [
+    "2007-10-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EICWexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/EICWorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-281",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Liberty Mutual Fire Insurance Company (Market Conduct)",
+   "posted_as_listed": [
+    "10/18/07"
+   ],
+   "posted": [
+    "2007-10-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/LMFICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/LMFICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-282",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Provident Life and Accident Insurance Company",
+   "posted_as_listed": [
+    "7/09/07"
+   ],
+   "posted": [
+    "2007-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLAICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-283",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Provident Life and Casualty Insurance Company",
+   "posted_as_listed": [
+    "7/09/07"
+   ],
+   "posted": [
+    "2007-07-09"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PLCICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-284",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Sheffield Insurance Company - March 14, 2005",
+   "posted_as_listed": [
+    "5/03/05"
+   ],
+   "posted": [
+    "2005-05-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICexam031405.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICorder031405.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-285",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Silverscript Insurance Company - November 30, 2005",
+   "posted_as_listed": [
+    "8/03/06"
+   ],
+   "posted": [
+    "2006-08-03"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICexam113005.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SICorder113005.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-286",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Tennessee Farmers Assurance Company",
+   "posted_as_listed": [
+    "7/01/08"
+   ],
+   "posted": [
+    "2008-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFACexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFACorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-287",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Tennessee Farmers Life Reassurance Company",
+   "posted_as_listed": [
+    "7/01/08"
+   ],
+   "posted": [
+    "2008-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFLRCexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFLRCorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-288",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Tennessee Farmers Life Insurance Company",
+   "posted_as_listed": [
+    "7/01/08"
+   ],
+   "posted": [
+    "2008-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFLICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFLICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-289",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Tennessee Farmers Mutual Insurance Company",
+   "posted_as_listed": [
+    "7/01/08"
+   ],
+   "posted": [
+    "2008-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TFMICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-290",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "TRH Health Insurance Company",
+   "posted_as_listed": [
+    "7/01/08"
+   ],
+   "posted": [
+    "2008-07-01"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHHICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/TRHHICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-291",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Wausau Business Insurance Company (Market Conduct)",
+   "posted_as_listed": [
+    "10/18/07"
+   ],
+   "posted": [
+    "2007-10-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WBICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WBICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-292",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Wausau General Insurance Company (Market Conduct)",
+   "posted_as_listed": [
+    "10/18/07"
+   ],
+   "posted": [
+    "2007-10-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WGICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WGICorder123105.pdf"
+    }
+   ]
+  },
+  {
+   "id": "tn-exam-293",
+   "exam_as_of_year": 2005,
+   "company_as_listed": "Wausau Underwriters Insurance Company (Market Conduct)",
+   "posted_as_listed": [
+    "10/18/07"
+   ],
+   "posted": [
+    "2007-10-18"
+   ],
+   "documents": [
+    {
+     "kind": "Exam",
+     "label_as_listed": "Exam",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WUICexam123105.pdf"
+    },
+    {
+     "kind": "Order",
+     "label_as_listed": "Order",
+     "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/WUICorder123105.pdf"
+    }
+   ]
+  }
+ ]
+}

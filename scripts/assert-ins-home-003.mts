@@ -22,7 +22,7 @@ const renderedStructure = readFileSync(
   "utf8",
 );
 
-ok(inventory.length === 140, "140 deterministic inventory measures");
+ok(inventory.length === 150, "150 deterministic inventory measures");
 ok(
   Object.keys(INSURANCE_HOME_EVIDENCE_FAMILIES).length === 10,
   "ten evidence families",
@@ -143,10 +143,10 @@ ok(
   byKey("licensed_insurance_companies")?.destination === "/insurers",
   "insurer destination explicit",
 );
-ok(INSURANCE_HOMEPAGE_STATE_CARDS.length === 15, "exactly fifteen state cards");
+ok(INSURANCE_HOMEPAGE_STATE_CARDS.length === 16, "exactly sixteen state cards");
 ok(
   INSURANCE_HOMEPAGE_STATE_CARDS.map((s) => s.href).join(",") ===
-    "/florida,/texas,/new-jersey,/california,/washington,/colorado,/virginia,/new-york,/illinois,/oregon,/north-carolina,/pennsylvania,/ohio,/georgia,/massachusetts",
+    "/florida,/texas,/new-jersey,/california,/washington,/colorado,/virginia,/new-york,/illinois,/oregon,/north-carolina,/pennsylvania,/ohio,/georgia,/massachusetts,/tennessee",
   "canonical state hrefs",
 );
 ok(

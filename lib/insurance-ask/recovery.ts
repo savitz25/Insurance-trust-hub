@@ -51,6 +51,7 @@ export const STATE_RESEARCH: Record<string, string> = {
   OH: "/ohio",
   GA: "/georgia",
   MA: "/massachusetts",
+  TN: "/tennessee",
 };
 export function recoveryFor(q: InsuranceResearchQuery): RecoveryAction[] {
   const state =

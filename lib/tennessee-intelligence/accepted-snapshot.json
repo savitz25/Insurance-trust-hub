@@ -1,0 +1,804 @@
+{
+  "version": "insurance-tn-state-intel-v1",
+  "ticket": "TN-INS-001",
+  "snapshot_as_of": "2026-09-25",
+  "source_as_of": "2026-08-31",
+  "retrieved_at": "2026-09-25T12:30:25Z",
+  "generated_at": "2026-09-25T12:44:08Z",
+  "publication": {
+    "path": "/tennessee",
+    "robots_index": true,
+    "sitemap": true,
+    "h1": "Tennessee insurance companies and TDCI regulatory records"
+  },
+  "regulator": {
+    "name": "Tennessee Department of Commerce & Insurance — Insurance Division",
+    "insurance_url": "https://www.tn.gov/commerce/insurance.html",
+    "licensed_companies_url": "https://www.tn.gov/commerce/insurance/consumer-resources/list-of-licensed-companies.html",
+    "monthly_update_url": "https://www.tn.gov/commerce/insurance/consumer-resources/monthly-update.html",
+    "company_actions_url": "https://www.tn.gov/commerce/insurance/company-resources/insurance-company-actions.html",
+    "company_examinations_url": "https://www.tn.gov/commerce/insurance/company-resources/company-examinations.html",
+    "producer_discipline_url": "https://www.tn.gov/commerce/insurance/agent-producer-resources/disciplinary-actions.html",
+    "complaint_url": "https://www.tn.gov/commerce/insurance/consumer-resources/file-a-complaint.html",
+    "verify_license_url": "https://www.tn.gov/commerce/insurance/consumer-resources/verify-insurance-license.html",
+    "verify_license_resolves_to": "https://external-lookup-web.prod.naic.org/"
+  },
+  "no_trust_score": true,
+  "no_paid_ranking": true,
+  "no_tennessee_local_routes": true,
+  "licensed_companies": {
+    "source": "https://www.tn.gov/commerce/insurance/consumer-resources/list-of-licensed-companies.html",
+    "data_endpoint": "https://www.tn.gov/commerce/insurance/consumer-resources/list-of-licensed-companies/_jcr_content/contentFullWidth/tn_complex_datatable_113950548.tablejson.json",
+    "list_statement": "As of August 31, 2026.",
+    "source_as_of": "2026-08-31",
+    "raw_rows": 2116,
+    "blank_rows": 1,
+    "listed_rows": 2115,
+    "rows_with_naic": 2115,
+    "rows_without_naic": 0,
+    "placeholder_naic": "99999",
+    "placeholder_rows": 72,
+    "placeholder_rows_by_type": {
+      "REINSURER": 71,
+      "CAPTIVE": 1
+    },
+    "placeholder_rows_by_status": {
+      "RJ (passported)": 50,
+      "Trusteed": 13,
+      "Certified (passported)": 8,
+      "Licensed": 1
+    },
+    "rows_with_exact_naic": 2043,
+    "distinct_naic": 2029,
+    "naic_on_two_rows": 14,
+    "naic_on_two_rows_type_pairs": {
+      "REINSURER + SURPLUS LINES": 14
+    },
+    "company_types": {
+      "PROPERTY": 1063,
+      "LIFE": 480,
+      "SURPLUS LINES": 227,
+      "RISK RETENTION GROUP": 147,
+      "REINSURER": 104,
+      "TITLE": 32,
+      "FRATERNAL": 21,
+      "HEALTH MAINTENANCE ORGANIZATION": 17,
+      "CAPTIVE": 10,
+      "COUNTY MUTUAL": 9,
+      "HOSPITAL PLAN": 2,
+      "LIMITED CAPITAL REINSURER": 2,
+      "PREPAID LEGAL": 1
+    },
+    "distinct_naic_by_type": {
+      "CAPTIVE": 9,
+      "COUNTY MUTUAL": 9,
+      "FRATERNAL": 21,
+      "HEALTH MAINTENANCE ORGANIZATION": 17,
+      "HOSPITAL PLAN": 2,
+      "LIFE": 480,
+      "LIMITED CAPITAL REINSURER": 2,
+      "PREPAID LEGAL": 1,
+      "PROPERTY": 1063,
+      "REINSURER": 33,
+      "RISK RETENTION GROUP": 147,
+      "SURPLUS LINES": 227,
+      "TITLE": 32
+    },
+    "status_reasons": {
+      "Licensed": 1623,
+      "Eligible": 227,
+      "Registered": 144,
+      "RJ (passported)": 50,
+      "Accredited": 33,
+      "Suspended": 14,
+      "Trusteed": 13,
+      "Certified (passported)": 8,
+      "Restricted": 3
+    },
+    "status_reasons_by_type": {
+      "CAPTIVE": {
+        "Licensed": 10
+      },
+      "COUNTY MUTUAL": {
+        "Licensed": 9
+      },
+      "FRATERNAL": {
+        "Licensed": 21
+      },
+      "HEALTH MAINTENANCE ORGANIZATION": {
+        "Licensed": 17
+      },
+      "HOSPITAL PLAN": {
+        "Licensed": 2
+      },
+      "LIFE": {
+        "Licensed": 476,
+        "Suspended": 3,
+        "Restricted": 1
+      },
+      "LIMITED CAPITAL REINSURER": {
+        "Licensed": 2
+      },
+      "PREPAID LEGAL": {
+        "Licensed": 1
+      },
+      "PROPERTY": {
+        "Licensed": 1053,
+        "Suspended": 9,
+        "Restricted": 1
+      },
+      "REINSURER": {
+        "RJ (passported)": 50,
+        "Accredited": 33,
+        "Trusteed": 13,
+        "Certified (passported)": 8
+      },
+      "RISK RETENTION GROUP": {
+        "Registered": 144,
+        "Suspended": 2,
+        "Restricted": 1
+      },
+      "SURPLUS LINES": {
+        "Eligible": 227
+      },
+      "TITLE": {
+        "Licensed": 32
+      }
+    },
+    "status_dated_rows": 17,
+    "status_dated_rows_by_status": {
+      "Suspended": 14,
+      "Restricted": 3
+    },
+    "status_date_format": "Excel serial day number as published; ISO dates are derived (1899-12-30 epoch) and labelled as derived",
+    "status_date_range_derived": [
+      "1987-05-21",
+      "2025-12-16"
+    ],
+    "domicile_rows": {
+      "IL": 192,
+      "TX": 153,
+      "OH": 138,
+      "DE": 126,
+      "NY": 99,
+      "IA": 95,
+      "PA": 86,
+      "NE": 83,
+      "WI": 81,
+      "CT": 78,
+      "UN": 71,
+      "AZ": 69,
+      "IN": 67,
+      "TN": 67,
+      "MO": 54,
+      "FL": 53,
+      "VT": 48,
+      "MI": 46,
+      "CA": 40,
+      "SC": 39,
+      "NH": 36,
+      "AL": 34,
+      "OK": 33,
+      "NC": 30,
+      "MN": 24,
+      "DC": 23,
+      "GA": 20,
+      "NJ": 19,
+      "MA": 18,
+      "CO": 16,
+      "MD": 16,
+      "AR": 15,
+      "KS": 14,
+      "MS": 14,
+      "RI": 14,
+      "LA": 13,
+      "KY": 12,
+      "UT": 12,
+      "NV": 10,
+      "SD": 10,
+      "VA": 9,
+      "MT": 7,
+      "ND": 7,
+      "HI": 6,
+      "ME": 4,
+      "WV": 4,
+      "NM": 3,
+      "OR": 3,
+      "WA": 3,
+      "ID": 1
+    },
+    "tennessee_domiciled_rows": 67,
+    "tennessee_domiciled_distinct_naic": 66,
+    "tennessee_domiciled_rows_by_type": {
+      "PROPERTY": 18,
+      "LIFE": 15,
+      "CAPTIVE": 10,
+      "COUNTY MUTUAL": 9,
+      "HEALTH MAINTENANCE ORGANIZATION": 8,
+      "HOSPITAL PLAN": 2,
+      "LIMITED CAPITAL REINSURER": 2,
+      "FRATERNAL": 1,
+      "PREPAID LEGAL": 1,
+      "TITLE": 1
+    },
+    "foreign_or_alien_domiciled_rows": 2048,
+    "withheld_columns": [
+      "MAO_ADDRESS1",
+      "MAO_ADDRESS2",
+      "MAO_CITY",
+      "MAO_ZIP",
+      "BUSINESS_PHONE"
+    ],
+    "semantics": {
+      "rows_are_not_insurers": true,
+      "company_types_are_not_additive": true,
+      "domicile_is_not_tennessee_authority": true,
+      "tennessee_domicile_is_not_an_authority_class": true,
+      "mailing_state_is_not_domicile": true,
+      "surplus_lines_eligible_is_not_admitted": true,
+      "reinsurer_recognition_is_not_a_direct_writing_license": true,
+      "risk_retention_group_registration_is_not_a_license": true,
+      "placeholder_naic_is_not_an_identity": true,
+      "listing_is_not_a_quote_or_product_offer": true
+    },
+    "retrieved_at": "2026-09-25T12:30:25Z",
+    "data_endpoint_last_modified": "Thu, 24 Sep 2026 17:45:22 GMT"
+  },
+  "naic_crosswalk": {
+    "spine": "data/reports/ins-insurer-006-identity-index.json",
+    "spine_legal_insurers": 6185,
+    "read_only": true,
+    "graph_write": false,
+    "licensed_companies": {
+      "SOURCE_DISTINCT_NAIC": 2029,
+      "EXACT_EXISTING_LEGAL_INSURER_MATCHES": 2022,
+      "UNMATCHED_NAIC": 7,
+      "unmatched": [
+        {
+          "naic": "10234",
+          "types": [
+            "RISK RETENTION GROUP"
+          ]
+        },
+        {
+          "naic": "11063",
+          "types": [
+            "RISK RETENTION GROUP"
+          ]
+        },
+        {
+          "naic": "11117",
+          "types": [
+            "RISK RETENTION GROUP"
+          ]
+        },
+        {
+          "naic": "13018",
+          "types": [
+            "RISK RETENTION GROUP"
+          ]
+        },
+        {
+          "naic": "17677",
+          "types": [
+            "RISK RETENTION GROUP"
+          ]
+        },
+        {
+          "naic": "73504",
+          "types": [
+            "LIFE"
+          ]
+        },
+        {
+          "naic": "85561",
+          "types": [
+            "LIFE"
+          ]
+        }
+      ],
+      "placeholder_rows_excluded": 72,
+      "exact_match_is_not_profile_attachment": true,
+      "graph_write": false
+    }
+  },
+  "profile_attachments": {
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "graph_write": false,
+    "note": "Read-only exact NAIC comparison. An exact identity match is not a graph write and not a public profile attachment."
+  },
+  "company_activity_updates": {
+    "source": "https://www.tn.gov/commerce/insurance/consumer-resources/monthly-update.html",
+    "source_as_of": "2026-08-31",
+    "asterisk_statement": "* [asterisk] denotes new record since last update. As of August 31, 2026.",
+    "page_last_updated_statement": "This Page Last Updated: September 9, 2026 at 10:40 AM",
+    "event_rows_by_section": {
+      "admissions_recognitions": 31,
+      "mergers": 4,
+      "name_changes": 13,
+      "redomestications": 21,
+      "surrenders_revocations": 9,
+      "suspensions": 0,
+      "miscellaneous": 5
+    },
+    "suspensions_published_none": true,
+    "event_rows": 83,
+    "naic_keyed_event_rows": 76,
+    "event_rows_with_other_identifier_only": 7,
+    "event_naic_codes": 75,
+    "event_naic_on_current_licensed_list": 54,
+    "event_naic_in_national_identity_index": 68,
+    "new_since_last_update_rows": 9,
+    "event_is_not_a_company": true,
+    "not_a_second_company_census": true,
+    "exact_naic_only": true,
+    "retrieved_at": "2026-09-25T12:29:27Z"
+  },
+  "company_actions": {
+    "source": "https://www.tn.gov/commerce/insurance/company-resources/insurance-company-actions.html",
+    "list_date": null,
+    "index_lines": 234,
+    "top_level_entries": 171,
+    "linked_documents": 235,
+    "pdf_documents": 231,
+    "lines_with_dates": 177,
+    "lines_marked_multiple_dates": 10,
+    "dated_mentions_by_year": {
+      "2003": 7,
+      "2004": 3,
+      "2005": 21,
+      "2006": 11,
+      "2007": 1,
+      "2008": 9,
+      "2009": 13,
+      "2010": 14,
+      "2011": 10,
+      "2012": 9,
+      "2013": 12,
+      "2014": 12,
+      "2015": 18,
+      "2016": 7,
+      "2017": 2,
+      "2018": 1,
+      "2019": 4,
+      "2020": 15,
+      "2021": 8,
+      "2022": 1,
+      "2026": 8
+    },
+    "earliest_date": "2003-06-05",
+    "latest_date": "2026-06-09",
+    "latest_year": 2026,
+    "latest_year_entries": [
+      {
+        "caption_as_listed": "Aetna Health, Inc, May 6, 2026",
+        "dates": [
+          "2026-05-06"
+        ],
+        "signed_version_on_request": false
+      },
+      {
+        "caption_as_listed": "Alliant Health Plans, Inc, May 6, 2026",
+        "dates": [
+          "2026-05-06"
+        ],
+        "signed_version_on_request": false
+      },
+      {
+        "caption_as_listed": "BlueCross BlueShield of Tennessee Inc., August 27, 2021 and June 8, 2026 (Signed version available on request)",
+        "dates": [
+          "2026-06-08"
+        ],
+        "signed_version_on_request": true
+      },
+      {
+        "caption_as_listed": "Cigna Healthcare of Tennessee, Inc, March 23, 2026 and May 22, 2026",
+        "dates": [
+          "2026-03-23",
+          "2026-05-22"
+        ],
+        "signed_version_on_request": false
+      },
+      {
+        "caption_as_listed": "Oscar Insurance Company, May 13, 2026 (Signed version available on request)",
+        "dates": [
+          "2026-05-13"
+        ],
+        "signed_version_on_request": true
+      },
+      {
+        "caption_as_listed": "United Healthcare Insurance Company, June 09, 2026 (Signed version available on request)",
+        "dates": [
+          "2026-06-09"
+        ],
+        "signed_version_on_request": true
+      },
+      {
+        "caption_as_listed": "United Healthcare Plan of the River Valley, June 09, 2026 (Signed version available on request)",
+        "dates": [
+          "2026-06-09"
+        ],
+        "signed_version_on_request": true
+      }
+    ],
+    "captions_published": 144,
+    "captions_withheld": 90,
+    "captions_withheld_by_reason": {
+      "names_a_counterparty": 81,
+      "parent_names_a_counterparty": 5,
+      "person_name_pattern": 4
+    },
+    "document_links_withheld": true,
+    "action_type_column": "NOT_PRINTED",
+    "terms_as_listed": {
+      "Order": 23,
+      "Bond": 8,
+      "Settlement": 7,
+      "Rehabilitation": 6,
+      "Acquisition": 4,
+      "Merger": 4,
+      "Agreed Order": 3,
+      "Consent Order": 3,
+      "Petition": 3,
+      "Exam": 2,
+      "Court Order": 1,
+      "Liquidation": 1,
+      "Order to Show Cause": 1,
+      "Receivership": 1
+    },
+    "signed_version_on_request_lines": 4,
+    "exact_attachments": {
+      "EXACT_NAIC_ATTACHMENTS": 0,
+      "EXACT_OTHER_IDENTIFIER_ATTACHMENTS": 0,
+      "NAME_ONLY_ATTACHMENTS": "UNSUPPORTED"
+    },
+    "standalone_events": true,
+    "not_every_entry_is_punitive": true,
+    "entry_is_not_a_finding_unless_the_order_says_so": true,
+    "retrieved_at": "2026-09-25T12:29:32Z"
+  },
+  "company_examinations": {
+    "source": "https://www.tn.gov/commerce/insurance/company-resources/company-examinations.html",
+    "listings": 293,
+    "documents": 587,
+    "documents_by_kind": {
+      "Order": 294,
+      "Exam": 293
+    },
+    "exam_as_of_years": [
+      2005,
+      2024
+    ],
+    "listings_by_exam_as_of_year": {
+      "2005": 20,
+      "2006": 20,
+      "2007": 15,
+      "2008": 23,
+      "2009": 18,
+      "2010": 11,
+      "2011": 17,
+      "2012": 10,
+      "2013": 16,
+      "2014": 14,
+      "2015": 12,
+      "2016": 18,
+      "2017": 11,
+      "2018": 16,
+      "2019": 13,
+      "2020": 14,
+      "2021": 14,
+      "2022": 10,
+      "2023": 13,
+      "2024": 8
+    },
+    "listings_without_posting_date": 5,
+    "posted_by_year": {
+      "2005": 1,
+      "2006": 2,
+      "2007": 13,
+      "2008": 25,
+      "2009": 12,
+      "2010": 19,
+      "2011": 20,
+      "2012": 13,
+      "2013": 21,
+      "2014": 11,
+      "2015": 14,
+      "2016": 14,
+      "2017": 10,
+      "2018": 18,
+      "2019": 9,
+      "2020": 15,
+      "2021": 13,
+      "2022": 15,
+      "2023": 13,
+      "2024": 9,
+      "2025": 13,
+      "2026": 8
+    },
+    "latest_posting_year": 2026,
+    "latest_posting_year_listings": [
+      {
+        "company_as_listed": "Delta Dental of Tennessee",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-12"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DeltaDentalOfTN-ExamReport_20260612.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/DeltaDentalOfTN-Order_20260612.pdf"
+          }
+        ]
+      },
+      {
+        "company_as_listed": "Hamblen Mutual Insurance Company",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-26"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HamblenMutualInsCoExamReport_20260626.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/HamblenMutualInsCoReportAdoptionOrder_20260626.pdf"
+          }
+        ]
+      },
+      {
+        "company_as_listed": "Plateau Casualty Insurance Company",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-29"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauCasualtyInsCoExamReport_20260629.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauCasualtyInsCoReportAdoptionOrder_20260629.pdf"
+          }
+        ]
+      },
+      {
+        "company_as_listed": "Plateau Insurance Company",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-29"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauInsuranceCoExamReport_20260629.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PlateauInsuranceCoReportAdoptionOrder_20260629.pdf"
+          }
+        ]
+      },
+      {
+        "company_as_listed": "Premier Group Insurance Company",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-03"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PremierGroupInsCo-2024Exam_20260602.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PremierGroupInsCo-Order_20260602.pdf"
+          }
+        ]
+      },
+      {
+        "company_as_listed": "Primerica Life Insurance Company",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-03"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PrimericaLifeInsurance-2024Exam_20260603.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/PrimericaLifeInsurance-Order_20260603.pdf"
+          }
+        ]
+      },
+      {
+        "company_as_listed": "SteadPoint Insurance Company",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-29"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SteadPointInsuranceCoExamReport_20260629.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/SteadPointInsuranceCoReportAdoptionOrder_20260629.pdf"
+          }
+        ]
+      },
+      {
+        "company_as_listed": "United States Letter Carriers Mutual Benefit Association",
+        "exam_as_of_year": 2024,
+        "posted": [
+          "2026-06-03"
+        ],
+        "documents": [
+          {
+            "kind": "Exam",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLetterCarrierMutual-2024Exam_20260603.pdf"
+          },
+          {
+            "kind": "Order",
+            "url": "https://www.tn.gov/content/dam/tn/commerce/documents/insurance/companyexam/USLetterCarrierMutual-Order_20260603.pdf"
+          }
+        ]
+      }
+    ],
+    "pdfs_parsed": false,
+    "exact_naic_attachments": 0,
+    "name_only_attachment": "UNSUPPORTED",
+    "examination_is_not_a_score": true,
+    "retrieved_at": "2026-09-25T12:29:36Z"
+  },
+  "producer_discipline": {
+    "source": "https://www.tn.gov/commerce/insurance/agent-producer-resources/disciplinary-actions.html",
+    "retrieved_at": "2026-09-25T12:29:41Z",
+    "linked_entries": 1148,
+    "distinct_documents": 1141,
+    "names_published_here": false,
+    "npn_or_license_number_printed": false,
+    "action_date_printed_as_field": false,
+    "bounded_window": "NOT_TAKEN (no date field; file-name dates are not an official field)",
+    "person_grain": true,
+    "attached_to_agency_or_insurer": 0
+  },
+  "agency_roster": {
+    "count": null,
+    "coverage": "NOT_ACQUIRED / NO_FREE_BULK_FOUND",
+    "verification": "KNOWN",
+    "verification_path": "TDCI 'Verify an Insurance License' resolves to the NAIC public license lookup (search-only)",
+    "paid_bulk_purchased": false,
+    "existing_graph_credential_jurisdictions": [
+      "CA",
+      "FL",
+      "MA",
+      "NJ",
+      "OH",
+      "TX",
+      "VT"
+    ],
+    "existing_graph_tn_credentials": "NONE_LOADED",
+    "existing_graph_census_retrieved_at": "2026-09-13T15:23:00.840Z",
+    "existing_graph_is_not_tn_agency_census": true
+  },
+  "producer_roster": {
+    "count": null,
+    "coverage": "NOT_ACQUIRED / NO_FREE_BULK_FOUND",
+    "verification": "KNOWN",
+    "public_person_profiles": 0,
+    "npn_is_not_naic": true,
+    "producer_is_not_agency": true
+  },
+  "complaints": {
+    "count": null,
+    "coverage": "NOT_ACQUIRED",
+    "intake": "KNOWN",
+    "source": "https://www.tn.gov/commerce/insurance/consumer-resources/file-a-complaint.html",
+    "statements": [
+      "Consumers who believe they have been wrongfully denied a claim by their insurance company or have another issue with their insurance agent or company can file a complaint by completing the online complaint form, or by printing out the form and mailing and faxing it to Consumer Insurance Services.",
+      "The insurance policy must have been written in Tennessee.",
+      "Any complaints involving TennCare, CoverKids, or CoverRx should be sent to the TennCare Oversight Division."
+    ],
+    "complaint_data_link_target": "https://www.naic.org/cis_refined_results.htm?INSURANCE_TYPE=(All)&COCODE=25151&REALM=PROD",
+    "tn_company_level_dataset": "NOT_ACQUIRED",
+    "note": "The TDCI page's 'Complaint Data' link opens the NAIC Consumer Insurance Search for a single example company code. TDCI publishes no Tennessee company-level complaint table or download on this page.",
+    "complaint_is_not_enforcement": true,
+    "complaint_ratio_is_not_quality_score": true,
+    "years_not_combined": true
+  },
+  "reinsurers_and_jurisdictions": {
+    "source": "https://www.tn.gov/commerce/insurance/consumer-resources/reinsurers-jurisdictions.html",
+    "certified_reinsurer_rows": 8,
+    "rj_reinsurer_rows": 51,
+    "identifier": "7-digit NAIC alien company codes",
+    "financial_strength_rating_column_republished": false,
+    "note": "The licensed-company list prints NAIC 99999 for these reinsurers. Linking them to the 7-digit codes here would need a name match, so it is not done."
+  },
+  "company_types_page": {
+    "source": "https://www.tn.gov/commerce/insurance/company-resources/types-of-insurance-companies.html",
+    "types_listed": [
+      "Captive Insurance",
+      "Fraternal",
+      "Health Insurance",
+      "Life",
+      "Property & Casualty",
+      "Surplus Lines",
+      "Title",
+      "Workers Compensation"
+    ]
+  },
+  "pre_existing_hubs": {
+    "paths": [
+      "/hubs/tennessee",
+      "/hubs/tennessee/nashville",
+      "/hubs/tennessee/memphis",
+      "/hubs/tennessee/knoxville",
+      "/hubs/tennessee/chattanooga"
+    ],
+    "curated_agent_records_in_code": 48,
+    "source": "lib/hubs/data/*-agents.ts (curated research catalog, not TDCI data)",
+    "used_by_this_page": false,
+    "note": "Pre-existing Tennessee market hubs. They are not a TDCI license census and this sprint does not change them."
+  },
+  "capabilities": {
+    "licensed_company_list": "KNOWN",
+    "naic_identity": "KNOWN",
+    "company_type": "KNOWN",
+    "status_reason_and_date": "KNOWN",
+    "company_activity_updates": "KNOWN",
+    "company_actions_index": "KNOWN",
+    "company_examinations_index": "KNOWN",
+    "producer_verification": "KNOWN",
+    "agency_verification": "KNOWN",
+    "producer_bulk": "NOT_ACQUIRED",
+    "agency_bulk": "NOT_ACQUIRED",
+    "producer_discipline_index": "PARTIAL",
+    "complaint_intake": "KNOWN",
+    "company_complaint_data": "NOT_ACQUIRED",
+    "placeholder_naic_reinsurer_identity": "UNKNOWN",
+    "name_only_adverse_join": "UNSUPPORTED",
+    "combined_tennessee_insurance_total": "UNSUPPORTED",
+    "local_city_routes": "UNSUPPORTED"
+  },
+  "rejected_totals": {
+    "combined_tennessee_insurance_records": "UNSUPPORTED",
+    "company_types_summed": "UNSUPPORTED",
+    "licensed_rows_as_insurers": "UNSUPPORTED",
+    "events_as_companies": "UNSUPPORTED"
+  },
+  "expansion_ledger": {
+    "NET_NEW_CANONICAL_LEGAL_INSURERS": 0,
+    "NET_NEW_CANONICAL_AGENCIES": 0,
+    "NET_NEW_CANONICAL_PERSONS": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "GRAPH_WRITES": 0,
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "NET_NEW_PUBLIC_PROFILES": 0,
+    "CLAIM_ELIGIBILITY_BROADENED": false
+  },
+  "derived_files": {
+    "lib/tennessee-intelligence/accepted-companies.json": "b42f50ce07b83482a3ad66db6d76f98be012037a42b4d35d8f402b4b8783b1a8",
+    "lib/tennessee-intelligence/accepted-events.json": "a2ba3fd5ba378f23d004b206daf590c0f02c37d58177358fa945fdfd1104aa46"
+  },
+  "source_extracts": {
+    "company-actions-index.json": "eb7a64418e9831a1f729249ca090e9029cd110c07d8569ba9626c4959807f7b1",
+    "company-examinations-index.json": "8895b91af799b7eca2891cec9b17587cab4114b8ff5e5b97806de45ffd7c029f",
+    "consumer-and-licensing-pages.json": "297eebd974df3a6c18160069b9892db196d0d5cd92a4759a583ac5516c4c498d",
+    "licensed-companies.json": "1b3414a93b80067c3f4c333fc93f30a26d1f20931a7245fa7e71162c0b37dc80",
+    "monthly-update.json": "e29bc62563f6a32f0c0115380c2848ee98aede254e4d86e70d8c3af8b58777ca",
+    "producer-discipline-census.json": "5b4ecf3e23044a5e02311862b6adecf7a625dc9ddd252c2a0664028f726b7ad1",
+    "sources.json": "80a2edde8c8c2b81c43c2193b8c6fc409c9719fceab4896b86a56dc17dec4518"
+  },
+  "fingerprint": "bb82b021809e2deaf5355dd8d30e5d751483f51cb708a9c77bf79fad8eed1bf8"
+}
