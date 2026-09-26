@@ -6,6 +6,7 @@ import {
   withMassachusettsNaicContext,
 } from './massachusetts-routing';
 import { interpretTennesseeEarly, withTennesseeNaicContext } from './tennessee-routing';
+import { interpretMinnesotaEarly, withMinnesotaNaicContext } from './minnesota-routing';
 import { interpretNevadaEarly, withNevadaNaicContext } from './nevada-routing';
 import {
   annotateUnestablishedProduct,
@@ -444,8 +445,10 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
   if (tennessee) return tennessee;
   const nevada = interpretNevadaEarly(early);
   if (nevada) return nevada;
+  const minnesota = interpretMinnesotaEarly(early);
+  if (minnesota) return minnesota;
   const typed = interpretIdentityAndLocal(raw, page);
-  if (typed) return withNevadaNaicContext(withTennesseeNaicContext(withMassachusettsNaicContext(typed)));
+  if (typed) return withMinnesotaNaicContext(withNevadaNaicContext(withTennesseeNaicContext(withMassachusettsNaicContext(typed))));
   const q = raw.trim();
   const lines: ParsedInsuranceAsk['interpretation'] = [];
   const push = (label: string, value: string) => lines.push({ label, value });

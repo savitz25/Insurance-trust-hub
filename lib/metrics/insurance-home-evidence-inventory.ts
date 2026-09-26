@@ -359,6 +359,24 @@ const STATE_CARD_COPY: InsuranceStateCard[] = [
       { label: "Accepted state snapshot", snapshotAsOf: "2026-09-25" },
     ],
   },
+  {
+    state: "Minnesota",
+    abbreviation: "MN",
+    href: "/minnesota",
+    regulators: "Minnesota Department of Commerce, Insurance Division",
+    evidence: [
+      "Commerce license lookup for companies, agencies and producers (search-only)",
+      "CARDS enforcement and financial-document access (index not acquired)",
+      "SERFF rate and form filing access (filings not ingested)",
+      "Insurance Division complaint intake",
+    ],
+    limitation:
+      "Company, agency and producer bulk rosters were not acquired. Grains are never added together. Enforcement and examinations are not attached by name. Search-only is not zero.",
+    sourceClocks: [
+      { label: "Commerce license lookup", retrievedAt: "2026-09-26" },
+      { label: "Accepted state snapshot", snapshotAsOf: "2026-09-26" },
+    ],
+  },
 ] as const;
 
 export const INSURANCE_HOMEPAGE_STATE_CARDS: InsuranceStateCard[] = STATE_CARD_COPY

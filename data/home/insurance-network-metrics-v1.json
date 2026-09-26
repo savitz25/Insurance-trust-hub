@@ -1,9 +1,9 @@
 {
   "schemaVersion": "insurance-network-metrics-v1",
-  "generatedAt": "2026-09-25T18:08:10.824Z",
+  "generatedAt": "2026-09-26T15:18:59.524Z",
   "newestDocumentedSourceAsOf": "2026-09-18",
   "newestDocumentedSourceAsOfNote": "Newest explicit sourceAsOf/source_as_of in the reconciled state artifacts and CMS source. Count-query retrieval, accepted snapshot dates and build clocks are excluded. This is not a network-wide freshness guarantee.",
-  "sourceFingerprint": "5ac0850416ed0c39997ede34106cd96d5d741fb2a06e614d261159e76382bcf5",
+  "sourceFingerprint": "3e6b01cc9cca0d3d7a44e581d43ebd80cfc2e20741a209e0a94b84dad8ce83f2",
   "liveProductionHost": "gojyhmbojbwbpiamoktq.supabase.co",
   "nationalGraph": {
     "agencies": 82071,
@@ -212,7 +212,8 @@
       "/georgia",
       "/massachusetts",
       "/tennessee",
-      "/nevada"
+      "/nevada",
+      "/minnesota"
     ]
   },
   "rejectedTotals": {
@@ -248,7 +249,7 @@
         "ohio_odi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One national_entities row with entity_kind=agency.",
@@ -258,7 +259,7 @@
         ],
         "geographicCoverage": "Research-graph identities; public graph-agency profiles = 0",
         "sourceDates": "Graph census 2026-09-13; not Git/deploy time.",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       },
       "retrievedAt": "2026-09-13T15:23:00.840Z"
     },
@@ -277,7 +278,7 @@
         "naic_listing_of_companies"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One legal_insurer entity per NAIC company code.",
@@ -287,7 +288,7 @@
         ],
         "geographicCoverage": "National identity spine. Public legal-insurer kind remains unpublished; a 26-firm evidence cohort is a different grain.",
         "sourceDates": "Graph census 2026-09-13",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       },
       "retrievedAt": "2026-09-13T15:23:00.840Z"
     },
@@ -305,7 +306,7 @@
         "national_entities"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_RESEARCH_GRAPH",
       "trace": {
         "counts": "One person entity in the national graph.",
@@ -315,7 +316,7 @@
         ],
         "geographicCoverage": "Research graph only. Public people = 0.",
         "sourceDates": "Graph census 2026-09-13",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       },
       "retrievedAt": "2026-09-13T15:23:00.840Z"
     },
@@ -333,7 +334,7 @@
         "texas_tdi_agency_appointments"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One active TDI appointment between an agency NPN and a company NAIC.",
@@ -343,7 +344,7 @@
         ],
         "geographicCoverage": "Texas. County appointment is not statewide authority.",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-25",
+        "generationDate": "2026-09-26",
         "currentActiveRule": "Source file is active appointments only."
       }
     },
@@ -361,7 +362,7 @@
         "texas_tdi_complaints"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI complaint-name row (person or organization named in a complaint).",
@@ -371,7 +372,7 @@
         ],
         "geographicCoverage": "Texas complaints 2011-04-28 through 2026-08-31",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -388,7 +389,7 @@
         "florida_oir_market_conduct_exams"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One OIR market-conduct listing/PDF inventory row.",
@@ -398,7 +399,7 @@
         ],
         "geographicCoverage": "Florida listing catalog. Name-only attach forbidden; listings are unattached.",
         "sourceDates": "FL-INS-004 listing census 2026-08-28",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -415,7 +416,7 @@
         "texas_tdi_rate_filings"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI home/auto rate-filing row (SERFF-identified when present).",
@@ -425,7 +426,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -443,7 +444,7 @@
         "cms_ffm"
       ],
       "sourceAsOf": "2026-08-21",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One CMS Marketplace observation row in the research graph.",
@@ -453,7 +454,7 @@
         ],
         "geographicCoverage": "Federal overlay, not a DOI license",
         "sourceDates": "CMS source-modified 2026-08-21",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -472,7 +473,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One entity_kind=carrier appointing-entity row.",
@@ -482,7 +483,7 @@
         ],
         "geographicCoverage": "FL DFS and TX TDI appointing keys",
         "sourceDates": "Graph census 2026-09-13",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       },
       "retrievedAt": "2026-09-13T15:23:00.840Z"
     },
@@ -500,7 +501,7 @@
         "license_credentials"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One license_credentials row.",
@@ -510,7 +511,7 @@
         ],
         "geographicCoverage": "Source-state dependent",
         "sourceDates": "Graph census 2026-09-13",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       },
       "retrievedAt": "2026-09-13T15:23:00.840Z"
     },
@@ -528,7 +529,7 @@
         "providers"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One providers listing row currently stored.",
@@ -538,7 +539,7 @@
         ],
         "geographicCoverage": "Public ZIP directory, not the research graph",
         "sourceDates": "Production providers count 2026-09-13",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       },
       "retrievedAt": "2026-09-13T15:23:00.840Z"
     },
@@ -556,7 +557,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI agency/business license row.",
@@ -566,7 +567,7 @@
         ],
         "geographicCoverage": "Texas TDI",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -584,7 +585,7 @@
         "license_credentials"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Distinct agencies with a Florida credential.",
@@ -594,7 +595,7 @@
         ],
         "geographicCoverage": "Florida credential jurisdiction, not service territory",
         "sourceDates": "FL-INS-006 snapshot 2026-08-28",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -612,7 +613,7 @@
         "national_relationships"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One appointed_by relationship row.",
@@ -622,7 +623,7 @@
         ],
         "geographicCoverage": "Florida DFS appointing-entity identifier, not NAIC CoCode",
         "sourceDates": "FL-INS-006 appointment census",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -639,7 +640,7 @@
         "florida_oir_financial_exams"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One OIR financial-exam listing/PDF inventory row.",
@@ -649,7 +650,7 @@
         ],
         "geographicCoverage": "Florida listing catalog",
         "sourceDates": "FL-INS-004 listing census 2026-08-28",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -666,7 +667,7 @@
         "nj_dobi"
       ],
       "sourceAsOf": "2026-09-02",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One NJDOBI admitted-insurer row with exact NAIC.",
@@ -676,7 +677,7 @@
         ],
         "geographicCoverage": "New Jersey admitted census",
         "sourceDates": "NJ snapshot as of 2026-09-02",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -693,7 +694,7 @@
         "nj_dobi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No bulk surplus-lines eligible census is stored.",
@@ -703,7 +704,7 @@
         ],
         "geographicCoverage": "New Jersey",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-25",
+        "generationDate": "2026-09-26",
         "whyUnknown": "Official surplus-lines whitelist was not acquired as a deterministic bulk file. Never render as zero."
       }
     },
@@ -721,7 +722,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No bulk authorized-company universe is stored.",
@@ -731,7 +732,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-25",
+        "generationDate": "2026-09-26",
         "whyUnknown": "TDI authorized-company report is interactive-only. Appointment NAIC is a relationship, not the complete authorized universe. Never render as zero."
       }
     },
@@ -749,7 +750,7 @@
         "california_cdi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No complete CDI admitted census is stored.",
@@ -759,7 +760,7 @@
         ],
         "geographicCoverage": "California",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-25",
+        "generationDate": "2026-09-26",
         "whyUnknown": "CDI admitted/company lookup is open-search only. Never render as zero."
       }
     },
@@ -777,7 +778,7 @@
         "washington_oic_annual_report"
       ],
       "sourceAsOf": "2026-09-04",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One official 2025 annual-report regulated-entity total (domestic + foreign + alien).",
@@ -787,7 +788,7 @@
         ],
         "geographicCoverage": "Washington; dated report year 2025",
         "sourceDates": "OIC 2025 annual report as of 2026-09-04",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -804,7 +805,7 @@
         "washington_oic"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No bulk authorized-company universe is stored.",
@@ -814,7 +815,7 @@
         ],
         "geographicCoverage": "Washington",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-25",
+        "generationDate": "2026-09-26",
         "whyUnknown": "OIC company lookup is search-only. Annual-report 2,924 is not a live roster. Never render as zero."
       }
     },
@@ -840,7 +841,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One 2025 NAIC Companies directory row after excluding the statement-type legend.",
@@ -850,7 +851,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":\"2025-12-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -875,7 +876,7 @@
       "reportedAsOf": "2026-06-01",
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One distinct NAIC company identity from the 2025 financial-data PDFs.",
@@ -885,7 +886,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":\"2025-12-31\",\"reportedAsOf\":\"2026-06-01\",\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -910,7 +911,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One DFS Insurance Company Directory row.",
@@ -920,7 +921,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -945,7 +946,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One IDOI Director's Orders search-index row.",
@@ -955,7 +956,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -980,7 +981,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Current IDOI-authorized company identities when a bulk roster exists.",
@@ -990,7 +991,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -1008,7 +1009,7 @@
         "or_dfr_adminorders"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One DFR AdminOrders file in an insurance-native DFRAction class.",
@@ -1018,7 +1019,7 @@
         ],
         "geographicCoverage": "Oregon; AdminOrders retrieval",
         "sourceDates": "DFR AdminOrders SharePoint list",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1035,7 +1036,7 @@
         "or_dfr_complaints"
       ],
       "sourceAsOf": "2025",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One DFR 2025 insurer-line complaint table row.",
@@ -1045,7 +1046,7 @@
         ],
         "geographicCoverage": "Oregon; 2025 complaint PDFs",
         "sourceDates": "DFR complaint-stats-2025",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1062,7 +1063,7 @@
         "or_dfr"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Current Oregon-authorized company identities when a bulk roster exists.",
@@ -1072,7 +1073,7 @@
         ],
         "geographicCoverage": "Oregon; live SBS/DFR lookup",
         "sourceDates": "NAIC SBS / DFR Check a license",
-        "generationDate": "2026-09-25",
+        "generationDate": "2026-09-26",
         "whyUnknown": "Oregon authorized-insurer lookup is live/search-only. Do not fabricate sourceAsOf from retrieval. Never render as zero."
       }
     },
@@ -1090,7 +1091,7 @@
         "pa_pid_gfsearch"
       ],
       "sourceAsOf": "2026-09-14",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One distinct NAIC on the PID Licensed Company Search A–Z list.",
@@ -1100,7 +1101,7 @@
         ],
         "geographicCoverage": "Pennsylvania; Licensed Company Search",
         "sourceDates": "PID company information current as of 2026-09-14",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1117,7 +1118,7 @@
         "pa_pid_enforcement"
       ],
       "sourceAsOf": "2026-09-14",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One PID Enforcement Actions document.",
@@ -1127,7 +1128,7 @@
         ],
         "geographicCoverage": "Pennsylvania; Enforcement Actions Search",
         "sourceDates": "PID Insurance-Regulatory Actions hub",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1144,7 +1145,7 @@
         "pa_pid_complaints"
       ],
       "sourceAsOf": "2025",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One 2025 PID complaint comparison insurer-line row.",
@@ -1154,7 +1155,7 @@
         ],
         "geographicCoverage": "Pennsylvania; 2025 Complaint Comparison Tool",
         "sourceDates": "PID cmpln_tool 2025",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1171,7 +1172,7 @@
         "ncdoi_licaction"
       ],
       "sourceAsOf": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One NCDOI Licensing Actions catalog row.",
@@ -1181,7 +1182,7 @@
         ],
         "geographicCoverage": "North Carolina; Licensing Actions",
         "sourceDates": "NCDOI licaction catalog",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1206,7 +1207,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T16:05:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One distinct NAIC code on the ODI authorized-company Excel.",
@@ -1216,7 +1217,7 @@
         ],
         "geographicCoverage": "Ohio",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-18\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T16:05:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1241,7 +1242,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One distinct NAIC code on the DOI Licensed or Approved Companies workbook.",
@@ -1251,7 +1252,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1276,7 +1277,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:30:25Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One distinct NAIC code on the TDCI List of Licensed Insurance Companies.",
@@ -1286,7 +1287,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":\"2026-08-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1303,7 +1304,7 @@
         "colorado_doi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "No bulk current authorized-company universe is stored.",
@@ -1313,7 +1314,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "SOURCE_NOT_ACQUIRED",
-        "generationDate": "2026-09-25",
+        "generationDate": "2026-09-26",
         "whyUnknown": "Colorado company lookup is search-only. The 2025 statistical-report directory is not a live roster. Never render as zero."
       }
     },
@@ -1339,7 +1340,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One official eligible non-admitted identity on the 2026–2027 list.",
@@ -1349,7 +1350,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1366,7 +1367,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI surplus-lines status row (firm or individual).",
@@ -1376,7 +1377,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1393,7 +1394,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One active title underwriter appointment by county.",
@@ -1403,7 +1404,7 @@
         ],
         "geographicCoverage": "Texas counties in the title file; no county pages are published",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1420,7 +1421,7 @@
         "texas_tdi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One TDI complaint-index row (NAIC × year × line).",
@@ -1430,7 +1431,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TDI open data as of 2026-09-03",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1447,7 +1448,7 @@
         "nfip_agency_registry"
       ],
       "sourceAsOf": "2026-08-28",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One NFIP Agency Registry card in the Florida inventory.",
@@ -1457,14 +1458,14 @@
         ],
         "geographicCoverage": "Florida snapshot; NPN absent on cards",
         "sourceDates": "FL-INS-006 NFIP census",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state intelligence pages",
-      "value": 17,
+      "value": 18,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
       "denominator": "Indexable /florida /texas /new-jersey /california /washington /colorado /virginia /new-york /illinois /oregon /pennsylvania /north-carolina /ohio /georgia /massachusetts /tennessee /nevada publication gates",
@@ -1474,7 +1475,7 @@
         "state-intelligence-publication"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Published state intelligence routes.",
@@ -1498,9 +1499,9 @@
           "tn-intel",
           "nv-intel"
         ],
-        "geographicCoverage": "/florida, /texas, /new-jersey, /california, /washington, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada",
+        "geographicCoverage": "/florida, /texas, /new-jersey, /california, /washington, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota",
         "sourceDates": "Publication gates; Texas source clock is the newest documented official date among these pages",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1517,7 +1518,7 @@
         "legal-insurer-pilot"
       ],
       "sourceAsOf": "2026-08-29",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One published /insurers profile in the locked 26-firm wave.",
@@ -1527,7 +1528,7 @@
         ],
         "geographicCoverage": "Selected PUBLIC_READY legal insurers",
         "sourceDates": "INS-INSURER-006 cohort lock",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1542,7 +1543,7 @@
       "coverage": "Unsupported",
       "contributingSourceSystems": [],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "REJECTED",
       "trace": {
         "counts": "Not computed.",
@@ -1550,7 +1551,7 @@
         "contributingSourceSystems": [],
         "geographicCoverage": "None",
         "sourceDates": "Rejected by grain contract",
-        "generationDate": "2026-09-25"
+        "generationDate": "2026-09-26"
       }
     },
     {
@@ -1575,7 +1576,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Complaint company by line observations",
@@ -1585,7 +1586,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1610,7 +1611,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Distinct NAIC IDs in complaint company by line observations",
@@ -1620,7 +1621,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1645,7 +1646,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "statistical report: exact existing NAIC identity matches",
@@ -1655,7 +1656,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1680,7 +1681,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "surplus lines: exact existing NAIC identity matches",
@@ -1690,7 +1691,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1715,7 +1716,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "complaint standard 2025: exact existing NAIC identity matches",
@@ -1725,7 +1726,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1750,7 +1751,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -1760,7 +1761,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -1786,7 +1787,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -1796,7 +1797,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -1822,7 +1823,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "authorized insurers bulk universe (unknown)",
@@ -1832,7 +1833,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -1858,7 +1859,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-09",
       "retrievedAt": "2026-09-09",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "title bulk universe (unknown)",
@@ -1868,7 +1869,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -1894,7 +1895,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Regulatory action observations",
@@ -1904,7 +1905,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1929,7 +1930,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Regulatory case identifiers",
@@ -1939,7 +1940,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1964,7 +1965,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Market-conduct examination observations",
@@ -1974,7 +1975,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -1999,7 +2000,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Financial examination listings",
@@ -2009,7 +2010,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2034,7 +2035,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "statistical report: exact existing NAIC identity matches",
@@ -2044,7 +2045,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2069,7 +2070,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "regulatory actions: exact existing NAIC identity matches",
@@ -2079,7 +2080,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2104,7 +2105,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "market conduct: exact existing NAIC identity matches",
@@ -2114,7 +2115,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2139,7 +2140,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "financial exams: exact existing NAIC identity matches",
@@ -2149,7 +2150,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2174,7 +2175,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "current company verification bulk universe (unknown)",
@@ -2184,7 +2185,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2210,7 +2211,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -2220,7 +2221,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2246,7 +2247,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -2256,7 +2257,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2282,7 +2283,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "complaints bulk universe (unknown)",
@@ -2292,7 +2293,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2318,7 +2319,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-10T17:15:26Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "surplus lines bulk universe (unknown)",
@@ -2328,7 +2329,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2354,7 +2355,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Directory domicile observations",
@@ -2364,7 +2365,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2389,7 +2390,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Directory AH observations",
@@ -2399,7 +2400,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2424,7 +2425,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Distinct directory group identifiers",
@@ -2434,7 +2435,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2459,7 +2460,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "2024 auto-market observations",
@@ -2469,7 +2470,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2494,7 +2495,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "DFS enforcement observations (unattached)",
@@ -2504,7 +2505,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2529,7 +2530,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "company directory: exact existing NAIC identity matches",
@@ -2539,7 +2540,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2564,7 +2565,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "auto complaints: exact existing NAIC identity matches",
@@ -2574,7 +2575,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2599,7 +2600,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "current authorization bulk universe (unknown)",
@@ -2609,7 +2610,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2635,7 +2636,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -2645,7 +2646,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2671,7 +2672,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -2681,7 +2682,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2707,7 +2708,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-11",
       "retrievedAt": "2026-09-11T16:00:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "market conduct bulk universe (unknown)",
@@ -2717,7 +2718,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2743,7 +2744,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Distinct Director's Order IDs",
@@ -2753,7 +2754,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2778,7 +2779,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Director's Orders with a company name",
@@ -2788,7 +2789,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2813,7 +2814,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Director's Orders with a person name",
@@ -2823,7 +2824,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2848,7 +2849,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Director's Orders with both name fields",
@@ -2858,7 +2859,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -2883,7 +2884,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -2893,7 +2894,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2919,7 +2920,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -2929,7 +2930,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2955,7 +2956,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "complaints bulk universe (unknown)",
@@ -2965,7 +2966,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -2991,7 +2992,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-12",
       "retrievedAt": "2026-09-12T16:41:31Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "market conduct bulk universe (unknown)",
@@ -3001,7 +3002,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3027,7 +3028,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Oregon DFR insurance-related administrative-order documents",
@@ -3037,7 +3038,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3062,7 +3063,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Distinct DFR insurance case numbers",
@@ -3072,7 +3073,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3097,7 +3098,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Oregon DFR 2025 insurer-line complaint table rows",
@@ -3107,7 +3108,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3132,7 +3133,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Oregon market-conduct examination report listings",
@@ -3142,7 +3143,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3167,7 +3168,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Oregon financial examination report listings",
@@ -3177,7 +3178,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3202,7 +3203,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "company lookup bulk universe (unknown)",
@@ -3212,7 +3213,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3238,7 +3239,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -3248,7 +3249,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3274,7 +3275,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -3284,7 +3285,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3310,7 +3311,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "appointments bulk universe (unknown)",
@@ -3320,7 +3321,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3346,7 +3347,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "domestic insurers bulk universe (unknown)",
@@ -3356,7 +3357,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":\"2022-02-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3382,7 +3383,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T01:20:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "receivership bulk universe (unknown)",
@@ -3392,7 +3393,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3418,7 +3419,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:49:06Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "PID licensed companies (distinct NAIC)",
@@ -3428,7 +3429,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-14\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3453,7 +3454,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:56:23Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Eligible surplus-lines companies (distinct NAIC)",
@@ -3463,7 +3464,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:56:23Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3488,7 +3489,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:55:00Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "2025 complaint comparison insurer-line rows",
@@ -3498,7 +3499,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:55:00Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3523,7 +3524,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:52:08Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Enforcement Actions documents",
@@ -3533,7 +3534,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:52:08Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3558,7 +3559,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:49:06Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Market Conduct Actions documents",
@@ -3568,7 +3569,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3593,7 +3594,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:57:36Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Financial examination report documents",
@@ -3603,7 +3604,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:57:36Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3628,7 +3629,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:52:08Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Liquidation/rehab/discharge catalog documents",
@@ -3638,7 +3639,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:52:08Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3663,7 +3664,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:49:06Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -3673,7 +3674,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-16\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3699,7 +3700,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:49:06Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -3709,7 +3710,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-16\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3735,7 +3736,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T16:49:06Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "appointments bulk universe (unknown)",
@@ -3745,7 +3746,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -3771,7 +3772,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "NCDOI Licensing Action catalog rows",
@@ -3781,7 +3782,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3806,7 +3807,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Insurance Producer licensing-action rows",
@@ -3816,7 +3817,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3841,7 +3842,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "2025 homeowners multiple peril company-line rows",
@@ -3851,7 +3852,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3876,7 +3877,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Market Regulation examination report listings",
@@ -3886,7 +3887,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3911,7 +3912,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Financial examination report listings",
@@ -3921,7 +3922,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3946,7 +3947,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Named current receivership/liquidation/rehab estates",
@@ -3956,7 +3957,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -3981,7 +3982,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "company lookup bulk universe (unknown)",
@@ -3991,7 +3992,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4017,7 +4018,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "domestic insurers bulk universe (unknown)",
@@ -4027,7 +4028,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4053,7 +4054,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -4063,7 +4064,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4089,7 +4090,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -4099,7 +4100,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4125,7 +4126,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "surplus lines bulk universe (unknown)",
@@ -4135,7 +4136,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4161,7 +4162,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-18",
       "retrievedAt": "2026-09-18T03:20:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "complaints bulk universe (unknown)",
@@ -4171,7 +4172,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4197,7 +4198,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Auto Liability 6G companies (distinct NAIC)",
@@ -4207,7 +4208,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4232,7 +4233,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Workers' Compensation 6E companies (distinct NAIC)",
@@ -4242,7 +4243,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4267,7 +4268,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Health 6B companies (distinct NAIC)",
@@ -4277,7 +4278,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4302,7 +4303,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Eligible surplus-lines companies (distinct NAIC)",
@@ -4312,7 +4313,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4337,7 +4338,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:52:29Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "DOI administrative-action rows since 2015 (unattached)",
@@ -4347,7 +4348,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":\"2026-07-23\",\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:52:29Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4372,7 +4373,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:54:16Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Public hearing decision listings",
@@ -4382,7 +4383,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:54:16Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4407,7 +4408,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:54:20Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Market-conduct report and adoption-order listings",
@@ -4417,7 +4418,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:54:20Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4442,7 +4443,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "licensed or approved: exact existing NAIC identity matches",
@@ -4452,7 +4453,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4477,7 +4478,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -4487,7 +4488,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4513,7 +4514,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -4523,7 +4524,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4549,7 +4550,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-24",
       "retrievedAt": "2026-09-24T15:49:22Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "complaints bulk universe (unknown)",
@@ -4559,7 +4560,7 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4585,7 +4586,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:30:25Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Licensed-company rows printing placeholder NAIC 99999 (research rows, not identities)",
@@ -4595,7 +4596,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":\"2026-08-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4620,7 +4621,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:29:27Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Monthly company-activity events (events, not companies)",
@@ -4630,7 +4631,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":\"2026-08-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:27Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4655,7 +4656,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:29:32Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Insurance Company Actions Archive lines (unattached)",
@@ -4665,7 +4666,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:32Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4690,7 +4691,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:29:36Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Company Examinations Archive listings (unattached)",
@@ -4700,7 +4701,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:36Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4725,7 +4726,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:29:41Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Agent/producer disciplinary archive entries (person grain, unattached)",
@@ -4735,7 +4736,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:41Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4760,7 +4761,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:30:25Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "licensed companies: exact existing NAIC identity matches",
@@ -4770,7 +4771,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4795,7 +4796,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:30:25Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -4805,7 +4806,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4831,7 +4832,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:30:25Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -4841,7 +4842,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4867,7 +4868,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T12:30:25Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "complaints bulk universe (unknown)",
@@ -4877,7 +4878,7 @@
         ],
         "geographicCoverage": "Tennessee",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -4903,7 +4904,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T17:40:12Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "NDOI consumer complaint-reason rows opened in 2024 (not complaints; unattached)",
@@ -4913,7 +4914,7 @@
         ],
         "geographicCoverage": "Nevada",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":\"2024-12-31\",\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4938,7 +4939,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T17:40:12Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Current Enforcements & Orders postings (unattached)",
@@ -4948,7 +4949,7 @@
         ],
         "geographicCoverage": "Nevada",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -4973,7 +4974,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T17:40:12Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "MHPAEA company draft report listings (unattached)",
@@ -4983,7 +4984,7 @@
         ],
         "geographicCoverage": "Nevada",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z"
+        "generationDate": "2026-09-26T15:18:59.524Z"
       }
     },
     {
@@ -5008,7 +5009,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T17:40:12Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "legal companies bulk universe (unknown)",
@@ -5018,7 +5019,7 @@
         ],
         "geographicCoverage": "Nevada",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -5044,7 +5045,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T17:40:12Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "agency roster bulk universe (unknown)",
@@ -5054,7 +5055,7 @@
         ],
         "geographicCoverage": "Nevada",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     },
@@ -5080,7 +5081,7 @@
       "reportedAsOf": null,
       "snapshotAsOf": "2026-09-25",
       "retrievedAt": "2026-09-25T17:40:12Z",
-      "generatedAt": "2026-09-25T18:08:10.824Z",
+      "generatedAt": "2026-09-26T15:18:59.524Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "producer roster bulk universe (unknown)",
@@ -5090,7 +5091,7 @@
         ],
         "geographicCoverage": "Nevada",
         "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-        "generationDate": "2026-09-25T18:08:10.824Z",
+        "generationDate": "2026-09-26T15:18:59.524Z",
         "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
       }
     }
@@ -6287,7 +6288,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One 2025 NAIC Companies directory row after excluding the statement-type legend.",
@@ -6297,7 +6298,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":\"2025-12-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6322,7 +6323,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One official eligible non-admitted identity on the 2026–2027 list.",
@@ -6332,7 +6333,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6357,7 +6358,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Complaint company by line observations",
@@ -6367,7 +6368,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6392,7 +6393,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Distinct NAIC IDs in complaint company by line observations",
@@ -6402,7 +6403,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6427,7 +6428,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "statistical report: exact existing NAIC identity matches",
@@ -6437,7 +6438,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6462,7 +6463,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "surplus lines: exact existing NAIC identity matches",
@@ -6472,7 +6473,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6497,7 +6498,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "complaint standard 2025: exact existing NAIC identity matches",
@@ -6507,7 +6508,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6532,7 +6533,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -6542,7 +6543,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -6568,7 +6569,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -6578,7 +6579,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -6604,7 +6605,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "authorized insurers bulk universe (unknown)",
@@ -6614,7 +6615,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -6640,7 +6641,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "title bulk universe (unknown)",
@@ -6650,7 +6651,7 @@
           ],
           "geographicCoverage": "Colorado",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-09\",\"retrievedAt\":\"2026-09-09\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -6676,7 +6677,7 @@
         "reportedAsOf": "2026-06-01",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One distinct NAIC company identity from the 2025 financial-data PDFs.",
@@ -6686,7 +6687,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":\"2025-12-31\",\"reportedAsOf\":\"2026-06-01\",\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6711,7 +6712,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Regulatory action observations",
@@ -6721,7 +6722,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6746,7 +6747,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Regulatory case identifiers",
@@ -6756,7 +6757,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6781,7 +6782,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Market-conduct examination observations",
@@ -6791,7 +6792,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6816,7 +6817,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Financial examination listings",
@@ -6826,7 +6827,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6851,7 +6852,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "statistical report: exact existing NAIC identity matches",
@@ -6861,7 +6862,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6886,7 +6887,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "regulatory actions: exact existing NAIC identity matches",
@@ -6896,7 +6897,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6921,7 +6922,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "market conduct: exact existing NAIC identity matches",
@@ -6931,7 +6932,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6956,7 +6957,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "financial exams: exact existing NAIC identity matches",
@@ -6966,7 +6967,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -6991,7 +6992,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "current company verification bulk universe (unknown)",
@@ -7001,7 +7002,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7027,7 +7028,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -7037,7 +7038,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7063,7 +7064,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -7073,7 +7074,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7099,7 +7100,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "complaints bulk universe (unknown)",
@@ -7109,7 +7110,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7135,7 +7136,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10T17:15:26Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "surplus lines bulk universe (unknown)",
@@ -7145,7 +7146,7 @@
           ],
           "geographicCoverage": "Virginia",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-10\",\"retrievedAt\":\"2026-09-10T17:15:26Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7171,7 +7172,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One DFS Insurance Company Directory row.",
@@ -7181,7 +7182,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7206,7 +7207,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Directory domicile observations",
@@ -7216,7 +7217,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7241,7 +7242,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Directory AH observations",
@@ -7251,7 +7252,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7276,7 +7277,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Distinct directory group identifiers",
@@ -7286,7 +7287,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7311,7 +7312,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "2024 auto-market observations",
@@ -7321,7 +7322,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7346,7 +7347,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "DFS enforcement observations (unattached)",
@@ -7356,7 +7357,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7381,7 +7382,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "company directory: exact existing NAIC identity matches",
@@ -7391,7 +7392,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7416,7 +7417,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "auto complaints: exact existing NAIC identity matches",
@@ -7426,7 +7427,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7451,7 +7452,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "current authorization bulk universe (unknown)",
@@ -7461,7 +7462,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7487,7 +7488,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -7497,7 +7498,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7523,7 +7524,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -7533,7 +7534,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7559,7 +7560,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-11",
         "retrievedAt": "2026-09-11T16:00:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "market conduct bulk universe (unknown)",
@@ -7569,7 +7570,7 @@
           ],
           "geographicCoverage": "New York",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-11\",\"retrievedAt\":\"2026-09-11T16:00:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7595,7 +7596,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One IDOI Director's Orders search-index row.",
@@ -7605,7 +7606,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7630,7 +7631,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Distinct Director's Order IDs",
@@ -7640,7 +7641,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7665,7 +7666,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Director's Orders with a company name",
@@ -7675,7 +7676,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7700,7 +7701,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Director's Orders with a person name",
@@ -7710,7 +7711,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7735,7 +7736,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Director's Orders with both name fields",
@@ -7745,7 +7746,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7770,7 +7771,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "Current IDOI-authorized company identities when a bulk roster exists.",
@@ -7780,7 +7781,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7806,7 +7807,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -7816,7 +7817,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7842,7 +7843,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -7852,7 +7853,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7878,7 +7879,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "complaints bulk universe (unknown)",
@@ -7888,7 +7889,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7914,7 +7915,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12T16:41:31Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "market conduct bulk universe (unknown)",
@@ -7924,7 +7925,7 @@
           ],
           "geographicCoverage": "Illinois",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-12\",\"retrievedAt\":\"2026-09-12T16:41:31Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -7950,7 +7951,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Oregon DFR insurance-related administrative-order documents",
@@ -7960,7 +7961,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -7985,7 +7986,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Distinct DFR insurance case numbers",
@@ -7995,7 +7996,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8020,7 +8021,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Oregon DFR 2025 insurer-line complaint table rows",
@@ -8030,7 +8031,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8055,7 +8056,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Oregon market-conduct examination report listings",
@@ -8065,7 +8066,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8090,7 +8091,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Oregon financial examination report listings",
@@ -8100,7 +8101,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8125,7 +8126,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "company lookup bulk universe (unknown)",
@@ -8135,7 +8136,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8161,7 +8162,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -8171,7 +8172,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8197,7 +8198,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -8207,7 +8208,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8233,7 +8234,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "appointments bulk universe (unknown)",
@@ -8243,7 +8244,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8269,7 +8270,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "domestic insurers bulk universe (unknown)",
@@ -8279,7 +8280,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":\"2022-02-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8305,7 +8306,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T01:20:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "receivership bulk universe (unknown)",
@@ -8315,7 +8316,7 @@
           ],
           "geographicCoverage": "Oregon",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T01:20:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8341,7 +8342,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:49:06Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "PID licensed companies (distinct NAIC)",
@@ -8351,7 +8352,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-14\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8376,7 +8377,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:56:23Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Eligible surplus-lines companies (distinct NAIC)",
@@ -8386,7 +8387,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:56:23Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8411,7 +8412,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:55:00Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "2025 complaint comparison insurer-line rows",
@@ -8421,7 +8422,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:55:00Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8446,7 +8447,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:52:08Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Enforcement Actions documents",
@@ -8456,7 +8457,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:52:08Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8481,7 +8482,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:49:06Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Market Conduct Actions documents",
@@ -8491,7 +8492,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8516,7 +8517,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:57:36Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Financial examination report documents",
@@ -8526,7 +8527,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:57:36Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8551,7 +8552,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:52:08Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Liquidation/rehab/discharge catalog documents",
@@ -8561,7 +8562,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:52:08Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8586,7 +8587,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:49:06Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -8596,7 +8597,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-16\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8622,7 +8623,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:49:06Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -8632,7 +8633,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-16\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8658,7 +8659,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T16:49:06Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "appointments bulk universe (unknown)",
@@ -8668,7 +8669,7 @@
           ],
           "geographicCoverage": "Pennsylvania",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-17\",\"retrievedAt\":\"2026-09-17T16:49:06Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8694,7 +8695,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "NCDOI Licensing Action catalog rows",
@@ -8704,7 +8705,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8729,7 +8730,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Insurance Producer licensing-action rows",
@@ -8739,7 +8740,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8764,7 +8765,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "2025 homeowners multiple peril company-line rows",
@@ -8774,7 +8775,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8799,7 +8800,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Market Regulation examination report listings",
@@ -8809,7 +8810,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8834,7 +8835,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Financial examination report listings",
@@ -8844,7 +8845,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8869,7 +8870,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Named current receivership/liquidation/rehab estates",
@@ -8879,7 +8880,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -8904,7 +8905,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "company lookup bulk universe (unknown)",
@@ -8914,7 +8915,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8940,7 +8941,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "domestic insurers bulk universe (unknown)",
@@ -8950,7 +8951,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -8976,7 +8977,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -8986,7 +8987,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9012,7 +9013,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -9022,7 +9023,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9048,7 +9049,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "surplus lines bulk universe (unknown)",
@@ -9058,7 +9059,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9084,7 +9085,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T03:20:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "complaints bulk universe (unknown)",
@@ -9094,7 +9095,7 @@
           ],
           "geographicCoverage": "North Carolina",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T03:20:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9120,7 +9121,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-18",
         "retrievedAt": "2026-09-18T16:05:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One distinct NAIC code on the ODI authorized-company Excel.",
@@ -9130,7 +9131,7 @@
           ],
           "geographicCoverage": "Ohio",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-18\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-18\",\"retrievedAt\":\"2026-09-18T16:05:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9155,7 +9156,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One distinct NAIC code on the DOI Licensed or Approved Companies workbook.",
@@ -9165,7 +9166,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9190,7 +9191,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Auto Liability 6G companies (distinct NAIC)",
@@ -9200,7 +9201,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9225,7 +9226,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Workers' Compensation 6E companies (distinct NAIC)",
@@ -9235,7 +9236,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9260,7 +9261,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Health 6B companies (distinct NAIC)",
@@ -9270,7 +9271,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9295,7 +9296,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Eligible surplus-lines companies (distinct NAIC)",
@@ -9305,7 +9306,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":\"2026-09-01\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9330,7 +9331,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:52:29Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "DOI administrative-action rows since 2015 (unattached)",
@@ -9340,7 +9341,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":\"2026-07-23\",\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:52:29Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9365,7 +9366,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:54:16Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Public hearing decision listings",
@@ -9375,7 +9376,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:54:16Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9400,7 +9401,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:54:20Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Market-conduct report and adoption-order listings",
@@ -9410,7 +9411,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:54:20Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9435,7 +9436,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "licensed or approved: exact existing NAIC identity matches",
@@ -9445,7 +9446,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9470,7 +9471,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -9480,7 +9481,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9506,7 +9507,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -9516,7 +9517,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9542,7 +9543,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-24",
         "retrievedAt": "2026-09-24T15:49:22Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "complaints bulk universe (unknown)",
@@ -9552,7 +9553,7 @@
           ],
           "geographicCoverage": "Massachusetts",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-24\",\"retrievedAt\":\"2026-09-24T15:49:22Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9578,7 +9579,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:30:25Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "One distinct NAIC code on the TDCI List of Licensed Insurance Companies.",
@@ -9588,7 +9589,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":\"2026-08-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9613,7 +9614,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:30:25Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Licensed-company rows printing placeholder NAIC 99999 (research rows, not identities)",
@@ -9623,7 +9624,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":\"2026-08-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9648,7 +9649,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:29:27Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Monthly company-activity events (events, not companies)",
@@ -9658,7 +9659,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":\"2026-08-31\",\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:27Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9683,7 +9684,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:29:32Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Insurance Company Actions Archive lines (unattached)",
@@ -9693,7 +9694,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:32Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9718,7 +9719,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:29:36Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Company Examinations Archive listings (unattached)",
@@ -9728,7 +9729,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:36Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9753,7 +9754,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:29:41Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Agent/producer disciplinary archive entries (person grain, unattached)",
@@ -9763,7 +9764,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:29:41Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9788,7 +9789,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:30:25Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "licensed companies: exact existing NAIC identity matches",
@@ -9798,7 +9799,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9823,7 +9824,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:30:25Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -9833,7 +9834,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9859,7 +9860,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:30:25Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -9869,7 +9870,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9895,7 +9896,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T12:30:25Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "complaints bulk universe (unknown)",
@@ -9905,7 +9906,7 @@
           ],
           "geographicCoverage": "Tennessee",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T12:30:25Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -9931,7 +9932,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T17:40:12Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "NDOI consumer complaint-reason rows opened in 2024 (not complaints; unattached)",
@@ -9941,7 +9942,7 @@
           ],
           "geographicCoverage": "Nevada",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":\"2024-12-31\",\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -9966,7 +9967,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T17:40:12Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "Current Enforcements & Orders postings (unattached)",
@@ -9976,7 +9977,7 @@
           ],
           "geographicCoverage": "Nevada",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -10001,7 +10002,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T17:40:12Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC",
         "trace": {
           "counts": "MHPAEA company draft report listings (unattached)",
@@ -10011,7 +10012,7 @@
           ],
           "geographicCoverage": "Nevada",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z"
+          "generationDate": "2026-09-26T15:18:59.524Z"
         }
       },
       {
@@ -10036,7 +10037,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T17:40:12Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "legal companies bulk universe (unknown)",
@@ -10046,7 +10047,7 @@
           ],
           "geographicCoverage": "Nevada",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -10072,7 +10073,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T17:40:12Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "agency roster bulk universe (unknown)",
@@ -10082,7 +10083,7 @@
           ],
           "geographicCoverage": "Nevada",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       },
@@ -10108,7 +10109,7 @@
         "reportedAsOf": null,
         "snapshotAsOf": "2026-09-25",
         "retrievedAt": "2026-09-25T17:40:12Z",
-        "generatedAt": "2026-09-25T18:08:10.824Z",
+        "generatedAt": "2026-09-26T15:18:59.524Z",
         "publicationStatus": "PUBLIC_UNKNOWN",
         "trace": {
           "counts": "producer roster bulk universe (unknown)",
@@ -10118,7 +10119,7 @@
           ],
           "geographicCoverage": "Nevada",
           "sourceDates": "{\"sourceAsOf\":null,\"sourcePeriodEnd\":null,\"reportedAsOf\":null,\"snapshotAsOf\":\"2026-09-25\",\"retrievedAt\":\"2026-09-25T17:40:12Z\"}",
-          "generationDate": "2026-09-25T18:08:10.824Z",
+          "generationDate": "2026-09-26T15:18:59.524Z",
           "whyUnknown": "Search-only or public research path: no defensible bulk universe was acquired."
         }
       }
@@ -15126,7 +15127,7 @@
     "lib/nevada-intelligence/accepted-snapshot.json": "d105303742e5bb035d77d4efa3581a383de64ce2f7342f5246154f6ae543a052",
     "data/reports/ins-home-003b-sql-lock.json": "0ae9277201c48c1c9d0b73a7dbe3b0ef323f70d24733cb17d060c123a2f1c8b1",
     "data/reports/ins-nat-012-person-loa.json": "06b3a716a27c7c328e61c9f695243471646e9d1f71d3053acfe230697bb914d1",
-    "scripts/publication_metric_inputs.mjs": "f0938927581ed195a8575c67f56e436e845f32207e36211932bd4c33b6ebcd8a",
+    "scripts/publication_metric_inputs.mjs": "528515bdcf8ef4cfa658d736bd0a5c8c6aa06ba7006fd71c82b331c9ba51830a",
     "scripts/reconcile-network-metrics-r2-04.mjs": "52413a7042e7794a2becadeaceb00614bd7c3f344a26df231977853a8daf94ca",
     "scripts/regen-network-metrics-from-committed.mjs": "bb51f9b3a5903bc0ce5f653d32ea4425741ebe380949435464909265d3c8de72",
     "lib/california-intelligence/accepted-snapshot.json": "73b8d66185754fc4ca7ab24baf4cecf32ecb1dee3fef3aa12e6942367a61e4cf",
@@ -15136,6 +15137,8 @@
     "lib/georgia-intelligence/publication.ts": "0fd570ff89af9cbc782a42cc3873c4dc7b67c1c306e55e1f882b8910ce2d1ec2",
     "lib/illinois-intelligence/publication.ts": "507019b563e91fb9523e929b44fb4351ec35795f23babc3e0c78184e84ee247a",
     "lib/massachusetts-intelligence/publication.ts": "ed1c2c2836084692f3bf665c2e902e82ab304d619032178aa555b40598f19a73",
+    "lib/minnesota-intelligence/accepted-snapshot.json": "d12b8096c7fc6359234f9402683071a3410cfda40478c1648bb9b27c3a82fe9b",
+    "lib/minnesota-intelligence/publication.ts": "73da3662f3f8e257776b377ed2b01bde2eb6227c6f45e5a7830af0cfe0fdd138",
     "lib/nevada-intelligence/publication.ts": "e73743630cdcf1d7ba16e8fa96b3441bb985b55b6130bdbf7c41af8addc3f570",
     "lib/new-jersey-intelligence/accepted-snapshot.json": "0a3a2f63c95eb4dc30464c5de2a535c9b6115d7a5c0ff5aa79318c277fc71a98",
     "lib/new-jersey-intelligence/publication.ts": "3e680821915e1b063269d91ff980fd252d74911288ef32e8d632502bf9d1e9e3",
