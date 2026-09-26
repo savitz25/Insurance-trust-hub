@@ -249,6 +249,9 @@ export function assertGrainSafety(input: InsuranceNetworkMetricsInput): void {
   if (!input.publishedStateIntelligencePaths.includes('/nevada')) {
     throw new Error('Nevada state intelligence path missing');
   }
+  if (!input.publishedStateIntelligencePaths.includes('/minnesota')) {
+    throw new Error('Minnesota state intelligence path missing');
+  }
   if (input.tennesseeLicensedCompaniesDistinctNaic === input.legalInsurers) {
     throw new Error('Tennessee licensed companies must not equal national legal insurers');
   }

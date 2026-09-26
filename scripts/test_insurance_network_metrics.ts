@@ -108,7 +108,7 @@ function baseInput(over: Partial<InsuranceNetworkMetricsInput> = {}): InsuranceN
     tennesseeLicensedCompaniesDistinctNaic: 2029,
     publicLegalInsurerWave1: 26,
     ingestedExamObservations: 26,
-    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts', '/tennessee', '/nevada'],
+    publishedStateIntelligencePaths: ['/florida', '/texas', '/new-jersey', '/california', '/washington', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts', '/tennessee', '/nevada', '/minnesota'],
     ...over,
   };
 }
@@ -235,7 +235,7 @@ describe('missing is not zero; generatedAt is not sourceAsOf', () => {
     assert.equal(metricByKey(m, 'il_authorized_companies').value, null);
     assert.equal(metricByKey(m, 'il_authorized_companies').valueState, 'NOT_ACQUIRED');
     assert.match(metricByKey(m, 'il_authorized_companies').trace.whyUnknown ?? '', /never render as zero/i);
-    assert.equal(metricByKey(m, 'published_state_intelligence_pages').value, 17);
+    assert.equal(metricByKey(m, 'published_state_intelligence_pages').value, 18);
     assert.equal(metricByKey(m, 'or_dfr_insurance_order_documents').value, 738);
     assert.equal(metricByKey(m, 'or_complaint_table_rows').value, 1309);
     assert.equal(metricByKey(m, 'or_authorized_companies').value, null);

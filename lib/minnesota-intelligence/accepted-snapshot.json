@@ -1,0 +1,92 @@
+{
+  "version": "insurance-mn-state-intel-v1",
+  "fingerprint": "6ecbdbb8406a95152e1503977a57f1e87b6f9060c1b5a739a8d791e51a2911e2",
+  "retrieved_at": "2026-09-26T12:00:00Z",
+  "source_as_of": null,
+  "publication": {
+    "path": "/minnesota"
+  },
+  "regulator": {
+    "name": "Minnesota Department of Commerce, Insurance Division",
+    "home_url": "https://mn.gov/commerce/insurance/",
+    "license_lookup_url": "https://mn.gov/commerce/licensing/license-lookup/",
+    "company_licensing_url": "https://mn.gov/commerce/licensing/list/insurance/insurer.jsp",
+    "resident_producer_url": "https://mn.gov/commerce/licensing/list/insurance/resident-producers.jsp",
+    "nonresident_producer_url": "https://mn.gov/commerce/licensing/list/insurance/producers-non-res.jsp",
+    "sircon_url": "https://www.sircon.com/minnesota",
+    "financial_reporting_url": "https://mn.gov/commerce/insurance/industry/info.jsp",
+    "complaint_url": "https://mn.gov/commerce/insurance/about/",
+    "complaint_phone": "651-539-1600",
+    "licensing_phone": "651-539-1599"
+  },
+  "capabilities": {
+    "company_verification": "KNOWN",
+    "company_bulk_roster": "NOT_ACQUIRED",
+    "producer_verification": "KNOWN",
+    "producer_bulk_roster": "NOT_ACQUIRED",
+    "agency_verification": "KNOWN",
+    "agency_bulk_roster": "NOT_ACQUIRED",
+    "company_authority": "KNOWN",
+    "product_line_authority": "NOT_ACQUIRED",
+    "enforcement": "KNOWN",
+    "enforcement_index": "NOT_ACQUIRED",
+    "financial_examinations": "KNOWN",
+    "financial_examination_index": "NOT_ACQUIRED",
+    "financial_statements": "KNOWN",
+    "financial_statement_index": "NOT_ACQUIRED",
+    "serff": "KNOWN",
+    "complaint_intake": "KNOWN",
+    "complaint_outcomes": "NOT_ACQUIRED",
+    "name_only_joins": "UNSUPPORTED",
+    "combined_minnesota_insurance_total": "UNSUPPORTED"
+  },
+  "legal_companies": {
+    "count": null,
+    "verification": "KNOWN",
+    "national_spine_is_not_minnesota_authority": true,
+    "name_only_merge": "UNSUPPORTED"
+  },
+  "agency_roster": {
+    "count": null,
+    "verification": "KNOWN",
+    "existing_directory_is_not_commerce_census": true
+  },
+  "producer_roster": {
+    "count": null,
+    "verification": "KNOWN",
+    "person_names_published_here": false,
+    "person_is_not_agency": true
+  },
+  "company_authority": {
+    "classes_not_collapsed": true,
+    "class_is_not_product_offer": true,
+    "product_line_authority": "NOT_ACQUIRED"
+  },
+  "enforcement": {
+    "source": "Commerce Actions and Regulatory Documents Search (CARDS)",
+    "window": "2022 through current 2026",
+    "rows": [],
+    "exact_naic_attachments": 0,
+    "exact_npn_attachments": 0,
+    "name_only_attachment": "UNSUPPORTED",
+    "complaint_is_not_finding": true
+  },
+  "financial_examinations": {
+    "rows": [],
+    "exact_naic_attachments": 0,
+    "exam_is_not_enforcement": true,
+    "exam_is_not_score": true
+  },
+  "serff": {
+    "filings_ingested": 0,
+    "filing_is_not_quote": true,
+    "filing_is_not_recommendation": true
+  },
+  "expansion_ledger": {
+    "GRAPH_WRITES": 0,
+    "CLAIM_ELIGIBILITY_BROADENED": false
+  },
+  "no_minnesota_local_routes": true,
+  "no_trust_score": true,
+  "no_paid_ranking": true
+}
