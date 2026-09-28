@@ -1,0 +1,11 @@
+{
+  "basis": "Exact five-digit NAIC code against existing national legal-insurer identity index; read-only crosswalk, no evidence attachment",
+  "marketExamRowsWithExactNaicIdentity": 40,
+  "distinctExistingNaicIdentities": 37,
+  "canonicalCompanyEvidenceAttachments": 0,
+  "agencyEvidenceAttachments": 0,
+  "producerEvidenceAttachments": 0,
+  "nameOnlyAttachments": 0,
+  "netNewCanonicalOrganizations": 0,
+  "graphWrites": 0
+}

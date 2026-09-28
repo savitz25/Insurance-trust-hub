@@ -94,6 +94,36 @@ export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
   const early = raw.trim();
+  const michiganAsked = /\b(?:michigan|difs)\b/i.test(early) || detectStates(early)[0] === 'MI';
+  if (michiganAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const system = early.match(/\b(?:Michigan\s+)?System\s*ID\s*#?\s*(\d{6,9})\b/i)?.[1];
+    const cls: InsuranceEntityClass | undefined = naic || /\b(?:insurer|insurance compan(?:y|ies)|carrier)\b/i.test(early)
+      ? 'insurer' : /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early)
+        ? 'agency' : /\b(?:agent|individual producer)\b/i.test(early) ? 'person' : undefined;
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|top[- ]?rated|highest[- ]?rated|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const evidence = /\b(?:enforcement|disciplin|final decision|order|revok|market conduct|examin|complaint)\b/i.test(early);
+    const detail = ranking
+      ? 'Michigan insurers, agencies and producers are not ranked or recommended. DIFS licensing and decisions are evidence, not a quality score.'
+      : system
+        ? `Michigan System ID ${system} is routed to exact-number DIFS decision research. An indexed decision does not establish current license status or a canonical business attachment.`
+        : naic
+          ? `NAIC ${naic} identifies a legal insurer. Check the exact code in the DIFS entity locator and market-exam index. The current Michigan authorization roster was not acquired.`
+          : npn
+            ? `NPN ${npn} can identify a producer person or agency business; the number alone does not establish the grain. Check the appropriate DIFS locator for the exact record and current status.`
+            : /\bcomplaint\b/i.test(early)
+              ? 'DIFS accepts insurance complaints and publishes company complaint ratios. Provider-level complaint cases and outcomes were not acquired; a complaint is not a finding.'
+              : evidence
+                ? 'DIFS public Final Decisions are indexed for explicitly insurance-labeled 2022–2026 entries. Market-conduct exam index reports are historical; no 2022–2026 report appears there. Decisions and exams are separate evidence families and are not name-joined to profiles.'
+                : 'DIFS provides separate live insurer, agency, producer and appointment verification. Current bulk rosters were not acquired. An insurer is not an agency, an agency is not an individual producer, and an appointment is not a license.';
+    const query = fail(`${detail} Open /michigan and confirm current status in the DIFS locator.`, ['Open Michigan insurance research.']);
+    query.jurisdiction = { state: 'MI', meaning: geographyMeaning(early) };
+    query.entityClass = cls;
+    query.identifier = system ? { type: 'state_license', value: system } : naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : evidence ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Michigan DIFS', value: ranking ? 'No ranking' : evidence ? 'Bounded regulatory evidence' : 'Live verification; bulk roster NOT_ACQUIRED' }] };
+  }
   const georgiaEarly = /\bgeorgia\b/i.test(early);
   const labeledGeorgiaId = /\b(npn|naic)\b/i.test(early);
   if (

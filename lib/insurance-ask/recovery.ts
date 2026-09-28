@@ -53,6 +53,7 @@ export const STATE_RESEARCH: Record<string, string> = {
   MA: "/massachusetts",
   TN: "/tennessee",
   MN: "/minnesota",
+  MI: "/michigan",
   NV: "/nevada",
 };
 export function recoveryFor(q: InsuranceResearchQuery): RecoveryAction[] {
@@ -125,6 +126,22 @@ export function recoveryFor(q: InsuranceResearchQuery): RecoveryAction[] {
       doesNotEstablish:
         "A complete roster, current authority, appointment or service territory.",
     });
+  if (state === 'MI') {
+    const url = q.entityClass === 'agency'
+      ? 'https://difs.state.mi.us/locators?searchtype=InsAgency'
+      : q.entityClass === 'person'
+        ? 'https://difs.state.mi.us/locators?searchtype=InsAgent'
+        : q.entityClass === 'insurer'
+          ? 'https://difs.state.mi.us/locators?searchtype=InsCompany'
+          : 'https://www.michigan.gov/difs/industry/insurance/regulated-insurance-entities';
+    out.push({
+      type: 'OFFICIAL_SOURCE', label: 'Verify with Michigan DIFS', destination: url,
+      reason: 'DIFS live license locator for the requested record class.',
+      establishes: 'A live DIFS verification path.',
+      doesNotEstablish: 'This Ask response did not perform a live license-status check.',
+    });
+    return out;
+  }
   const official =
     q.entityClass !== "insurer" && state && state in OFFICIAL_RECOVERY
       ? OFFICIAL_RECOVERY[state as keyof typeof OFFICIAL_RECOVERY]
