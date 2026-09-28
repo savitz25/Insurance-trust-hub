@@ -163,6 +163,7 @@ def check_files() -> dict[str, Any]:
         "/tennessee",
         "/nevada",
         "/minnesota",
+        "/michigan",
     }:
         errors.append("published state intelligence paths drifted")
     if census["entities"]["agency"] != metrics["nationalGraph"]["agencies"] and os.environ.get("REQUIRE_LIVE_CENSUS_MATCH") == "1":
