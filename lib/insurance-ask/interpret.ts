@@ -94,6 +94,33 @@ export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
   const early = raw.trim();
+  const connecticutAsked = /\b(?:connecticut|connecticut insurance department|\bCID\b)\b/i.test(early) || detectStates(early)[0] === 'CT';
+  if (connecticutAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const cls: InsuranceEntityClass | undefined = naic || /\b(?:insurer|insurance compan(?:y|ies)|carrier)\b/i.test(early)
+      ? 'insurer' : /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early)
+        ? 'agency' : /\b(?:agent|individual producer|individual adjuster)\b/i.test(early) ? 'person' : undefined;
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const evidence = /\b(?:enforcement|disciplin|consent order|administrative order|market conduct|examin|complaint|revok|suspend|fine)\b/i.test(early);
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank or recommend Connecticut insurers, agencies or producers. CID evidence is not a quality score.'
+      : naic
+        ? `NAIC ${naic} identifies a legal insurance company, not an agency. Check the exact code and company type in the CID list, then confirm current authority in SBS.`
+        : npn
+          ? `NPN ${npn} is a labeled producer identifier. It may identify an agency business or a person; verify the grain and current license in SBS. No Connecticut NPN bulk roster was acquired.`
+          : /\bcomplaint/i.test(early)
+            ? 'CID accepts insurance complaints. Provider-level complaint cases and outcomes were not acquired; a complaint is not a finding.'
+            : evidence
+              ? 'CID publishes a bounded 2022–2026 market-conduct disposition index and linked consent orders, plus a financial-examination index. Licensee actions are searchable in SBS; no statewide bulk licensee-action roster was acquired. Exams, complaints and orders remain separate evidence grains.'
+              : 'CID publishes a dated legal-company list with NAIC codes. Agency and individual-producer licenses require separate SBS verification; appointment is not licensure. Bulk agency, person and appointment rosters were not acquired.';
+    const query = fail(`${detail} Open /connecticut for source records and verification links.`, ['Open Connecticut insurance research.']);
+    query.jurisdiction = { state: 'CT', meaning: geographyMeaning(early) };
+    query.entityClass = cls;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : evidence || naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Connecticut CID', value: ranking ? 'No ranking' : evidence || naic ? 'Bounded regulatory evidence' : 'SBS verification; agency/person bulk NOT_ACQUIRED' }] };
+  }
   const michiganAsked = /\b(?:michigan|difs)\b/i.test(early) || detectStates(early)[0] === 'MI';
   if (michiganAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
