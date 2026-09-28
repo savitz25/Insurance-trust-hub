@@ -29,6 +29,7 @@
     "assert:pa-ins-001": "python -X utf8 scripts/build-pa-public-snapshot.py --check && python scripts/pa-ins-001-tests.py && tsx scripts/assert-pa-ins-001.mts",
     "assert:nc-ins-001": "python -X utf8 scripts/build-nc-public-snapshot.py --check && python scripts/nc-ins-001-tests.py && tsx scripts/assert-nc-ins-001.mts",
     "assert:oh-ins-001": "python -X utf8 scripts/build-oh-public-snapshot.py --check && python scripts/oh-ins-001-tests.py && tsx scripts/assert-oh-ins-001.mts",
+    "assert:mi-ins-001": "tsx scripts/assert-mi-ins-001.mts",
     "assert:ga-ins-001": "python -X utf8 scripts/georgia/build_snapshot.py --check && tsx scripts/assert-ga-ins-001.mts",
     "assert:ma-ins-001": "python -X utf8 scripts/massachusetts/build_snapshot.py --check && tsx scripts/assert-ma-ins-001.mts",
     "assert:tn-ins-001": "python -X utf8 scripts/tennessee/build_snapshot.py --check && tsx scripts/assert-tn-ins-001.mts",

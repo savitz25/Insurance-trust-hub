@@ -1,0 +1,334 @@
+{
+  "retrievedAt": "2026-09-28T15:28:45+00:00",
+  "indexUrl": "https://www.michigan.gov/difs/industry/insurance-mkt-regulation/company-examinations",
+  "rows": [
+    {
+      "insurerAsIndexed": "Allstate Insurance Company",
+      "naicCodesAsIndexed": "19232",
+      "reportDate": "2014-05-20",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Allstate_Insurance_05-20-14.pdf?rev=2a740a37dd0b4f61a78d11bb98bf5a8c&hash=82C629F4700A76549A89ABBB230A960A"
+    },
+    {
+      "insurerAsIndexed": "Allstate Property and Casualty Insurance Company",
+      "naicCodesAsIndexed": "17230",
+      "reportDate": "2014-06-20",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Allstate_PC_06-20-14.pdf?rev=4e4b1a5cabfa448b9bccaf5de4fdea25&hash=681EF4946A05547F5696D56C8644C8D2"
+    },
+    {
+      "insurerAsIndexed": "American Community Mutual Insurance Company",
+      "naicCodesAsIndexed": "60305",
+      "reportDate": "2008-12-23",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/American_Comm_Mutual_12-23-08.pdf?rev=69b322316964454aba8317c7a004c7ef&hash=E47304B891DD05E32CA4330ED83EA2D0"
+    },
+    {
+      "insurerAsIndexed": "Auto Club Group Insurance Company",
+      "naicCodesAsIndexed": "21210",
+      "reportDate": "2013-06-20",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Auto_Club_Group_06-20-13.pdf?rev=d908cb582408423ba4896e704c5bfbfd&hash=B48D4CDDDE085806A62FC9BCA5D43EA1"
+    },
+    {
+      "insurerAsIndexed": "Bristol West Preferred Insurance Company",
+      "naicCodesAsIndexed": "12774",
+      "reportDate": "2014-07-29",
+      "examType": "Comprehensive",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Bristol_West_Preferred_07-29-14.pdf?rev=471e1bf980b0465480d960ee295ff652&hash=D3F45131C11BE592D944267FB0ED7EC9"
+    },
+    {
+      "insurerAsIndexed": "Brooke Life Insurance Company",
+      "naicCodesAsIndexed": "78620",
+      "reportDate": "2012-11-15",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Brooke_Life_11-15-12.pdf?rev=cc62c74f8a8a4c8c9639d9a6e32868ea&hash=B31048DB525650D76B28214C52FD13AD"
+    },
+    {
+      "insurerAsIndexed": "Equitrust Life Insurance Company",
+      "naicCodesAsIndexed": "62510",
+      "reportDate": "2015-09-14",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Equitrust_Life_09-14-15.pdf?rev=567bfa245bef4c41ae034c36578b4166&hash=F02DB3B17CDF7B948A1322705A254201"
+    },
+    {
+      "insurerAsIndexed": "Farm Bureau General Insurance Company",
+      "naicCodesAsIndexed": "21547",
+      "reportDate": "2012-08-31",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Farm_Bureau_08-31-12.pdf?rev=c9cedf92a7ec41c0bc5924d59d95d3b1&hash=EED58181C70799640FC2398D6FE2EF9E"
+    },
+    {
+      "insurerAsIndexed": "Farmers Mutual Fire Insurance Company of Branch County",
+      "naicCodesAsIndexed": "33448",
+      "reportDate": "2015-04-14",
+      "examType": "Limited",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Farmers_Mutual_04-14-15.pdf?rev=49c06430ee5d431daf01362ccbc4ef7e&hash=5937CDEE31A9C679A16271D67C44D889"
+    },
+    {
+      "insurerAsIndexed": "Farmers Mutual Fire Insurance Company of Branch County.",
+      "naicCodesAsIndexed": "33448",
+      "reportDate": "2014-03-03",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Farmers_Mutual_03-03-14.pdf?rev=665bfc71c940467b8e7d2dc19da8c947&hash=0ED06C6111A4A7794D02B024716236D5"
+    },
+    {
+      "insurerAsIndexed": "Fremont Insurance Company",
+      "naicCodesAsIndexed": "13994",
+      "reportDate": "2016-01-20",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Fremont_01-20-16.pdf?rev=acbb8af59eb348c4888c447165fb9718&hash=457C9F19777FA4207DE33EB6C0A20A5A"
+    },
+    {
+      "insurerAsIndexed": "Globe Life and Accident Insurance Company",
+      "naicCodesAsIndexed": "91472",
+      "reportDate": "2015-03-18",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Globe_Life_03-18-15.pdf?rev=65fd1440121f4b8fb279360b64ee4945&hash=586D074CD938AAD20C184C460AAFA312"
+    },
+    {
+      "insurerAsIndexed": "Golden Rule Insurance Company",
+      "naicCodesAsIndexed": "62286",
+      "reportDate": "2015-10-09",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Golden_Rule_10-09-15.pdf?rev=a1fc19b584b04b5eba29a76ee128c07d&hash=B9F22C46ED12F76883CB1ED15BD0C91E"
+    },
+    {
+      "insurerAsIndexed": "Golden Rule Insurance Company.",
+      "naicCodesAsIndexed": "62286",
+      "reportDate": "2011-05-10",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Golden_Rule_10-09-15.pdf?rev=a1fc19b584b04b5eba29a76ee128c07d&hash=B9F22C46ED12F76883CB1ED15BD0C91E"
+    },
+    {
+      "insurerAsIndexed": "Guardian Life Insurance Company of America",
+      "naicCodesAsIndexed": "64246",
+      "reportDate": "2015-06-01",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Guardian_Life_06-01-15.pdf?rev=5a17bc5321b04b6b826344675aee3454&hash=74B3E06F98B12F4A4CAB6D7324E2FA14"
+    },
+    {
+      "insurerAsIndexed": "Hastings Mutual Insurance Company",
+      "naicCodesAsIndexed": "14176",
+      "reportDate": "2013-06-14",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Hastings_Mutual_06-14-13.pdf?rev=d4326eca523f4214902e2077c9b2e402&hash=36D53096C7800815BC24FE6E85F4E8BD"
+    },
+    {
+      "insurerAsIndexed": "Humana Insurance Company",
+      "naicCodesAsIndexed": "73288",
+      "reportDate": "2015-01-05",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Humana_Report_01-15-15.pdf?rev=4abfb252e1bb41ca9947dd4c5120a621&hash=0F10D62862A3C730771CD55D0AE5A3BF"
+    },
+    {
+      "insurerAsIndexed": "Integon National Insurance Company",
+      "naicCodesAsIndexed": "29742",
+      "reportDate": "2011-06-01",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Integon_National_06-01-11.pdf?rev=a37e08d8c4b7408d88e5ed79dfc21254&hash=FD280EB9A134C440BE717A38AB0B44BA"
+    },
+    {
+      "insurerAsIndexed": "Jefferson National Life Insurance Company",
+      "naicCodesAsIndexed": "64017",
+      "reportDate": "2015-11-06",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Jefferson_National_11-06-15.pdf?rev=b4b070609b394629b9bea490a7e0b2ca&hash=12BF84BCC0BA7ECAB2D44B2AF56674F3"
+    },
+    {
+      "insurerAsIndexed": "Lafayette Life Insurance Company",
+      "naicCodesAsIndexed": "65242",
+      "reportDate": "2015-10-20",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Lafayette_Life_10-20-15.pdf?rev=9db45ff714b84b07b0f820d9e69579fc&hash=7038F40A4638DCFC31028691406FC142"
+    },
+    {
+      "insurerAsIndexed": "Liberty Union Life Assurance Company",
+      "naicCodesAsIndexed": "66753",
+      "reportDate": "2012-05-11",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Liberty_Union_05-11-12.pdf?rev=2897da6ca04d4f18a11ccc2a8a963478&hash=2A72DE83103432B3F8342D7432DED70F"
+    },
+    {
+      "insurerAsIndexed": "Lincoln Benefit Life Company",
+      "naicCodesAsIndexed": "65595",
+      "reportDate": "2013-07-05",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Lincoln_Benefit_Life_07-05-13.pdf?rev=24dcfe62943c4f489f05b9e3256feac8&hash=B89322743FFE037EF2A8C38828A2853B"
+    },
+    {
+      "insurerAsIndexed": "Members Life Insurance Company",
+      "naicCodesAsIndexed": "86126",
+      "reportDate": "2016-10-07",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Members_Life_10-07-16.pdf?rev=7b03ef88d024434992f2661b9670b026&hash=82667421CFCCEE2B5EC4C3B774B391AE"
+    },
+    {
+      "insurerAsIndexed": "MemberSelect Insurance Company",
+      "naicCodesAsIndexed": "21229",
+      "reportDate": "2013-06-20",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/MemberSelect_06-20-13.pdf?rev=737916b7f7574d398db2fbb70cc114af&hash=1CF7D214BEC27904BC497C6FAF7B9131"
+    },
+    {
+      "insurerAsIndexed": "Metlife Insurance Company USA",
+      "naicCodesAsIndexed": "87726",
+      "reportDate": "2016-05-17",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Metlife_05-17-16.pdf?rev=9b8edc23f7854a039bb0be92c088465a&hash=DE929C43D3E75D20E1E9631017181E1D"
+    },
+    {
+      "insurerAsIndexed": "MIC General Insurance Company",
+      "naicCodesAsIndexed": "38660",
+      "reportDate": "2011-06-01",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/MIC_General_06-01-11.pdf?rev=125155070da547ffa8068528246ec84e&hash=FB328557044273E7022A3C38B7EA64A6"
+    },
+    {
+      "insurerAsIndexed": "Michigan Millers Mutual Insurance Company",
+      "naicCodesAsIndexed": "14508",
+      "reportDate": "2012-05-31",
+      "examType": "Comprehensive",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/MI_Millers_Mutual_05-31-12.pdf?rev=e7fd71dae2d6471e9087819dce0ac8ce&hash=35FA75505374311AD24D43BE50D9FE0E"
+    },
+    {
+      "insurerAsIndexed": "Minnesota Life Insurance Company",
+      "naicCodesAsIndexed": "66168",
+      "reportDate": "2015-07-09",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Minnesota_Life_07-09-15.pdf?rev=4349b9ae404a4577ae5418117207a717&hash=DEE6D6D37EC87B6871FBDEA759C2C776"
+    },
+    {
+      "insurerAsIndexed": "National General Insurance Company",
+      "naicCodesAsIndexed": "23728",
+      "reportDate": "2011-06-01",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/National_General_06-01-11.pdf?rev=abde5493c43a4466b7e643a22bb0f1ab&hash=8913471B05BF146122F262A3B43B8933"
+    },
+    {
+      "insurerAsIndexed": "National Western Life Insurance Company",
+      "naicCodesAsIndexed": "66850",
+      "reportDate": "2015-06-15",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/National_Western_Life_06-15-15.pdf?rev=b3e78e9d91434dd1a21e7b6f42ba8b02&hash=CD03AD6BE70D8BF27C362241F3FD9F2B"
+    },
+    {
+      "insurerAsIndexed": "North American Company For Life and Health Insurance",
+      "naicCodesAsIndexed": "66974",
+      "reportDate": "2012-06-15",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/North_American_06-15-12.pdf?rev=e55da2e8137c4a1fab90593605a3a6f5&hash=FB63DEF79D9469DCFC89265600ADA902"
+    },
+    {
+      "insurerAsIndexed": "Pacific Life Insurance Company",
+      "naicCodesAsIndexed": "67466",
+      "reportDate": "2015-11-09",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Pacific_Life_11-09-15.pdf?rev=e91f5e90fd8044a49c4bdcfa3553d8b7&hash=FC633AE32FE0FAC1D7C1909437A3DC80"
+    },
+    {
+      "insurerAsIndexed": "Progressive Marathon Insurance Company",
+      "naicCodesAsIndexed": "37605",
+      "reportDate": "2015-03-02",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Progressive_Marathon_03-02-15.pdf?rev=ff6d3e413fe9437aaee1c1f7d270fe93&hash=75B557282EF2AEF3EAD6FB2F98814560"
+    },
+    {
+      "insurerAsIndexed": "Progressive Michigan Insurance Company",
+      "naicCodesAsIndexed": "10187",
+      "reportDate": "2015-02-27",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Progressive_Michigan_02-27-15.pdf?rev=1aed56b57f644d2faa1df1567c05f3c9&hash=2B4D4268B0D21B4174B7F5422F452114"
+    },
+    {
+      "insurerAsIndexed": "Progressive Michigan Insurance Company & Progressive Marathon Insurance Company",
+      "naicCodesAsIndexed": "10187; 37605",
+      "reportDate": "2021-12-16",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Progressive_12-16-21.pdf?rev=7fb27e6d071247e2ab4b4fb55f72171a&hash=32579B5BED61E8570B1022367846AFD8"
+    },
+    {
+      "insurerAsIndexed": "Safeco Insurance Company of Illinois",
+      "naicCodesAsIndexed": "39012",
+      "reportDate": "2013-10-11",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Safeco_10-11-13.pdf?rev=5893e17fbe9646cb8707e6a2b22eda4f&hash=9816E1740890D17FEAE3A11B13559F6F"
+    },
+    {
+      "insurerAsIndexed": "State Farm Mutual Auto Insurance Company",
+      "naicCodesAsIndexed": "25178",
+      "reportDate": "2012-10-29",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/State_Farm_10-29-12.pdf?rev=0a1610dd15ff4809abbcca087397e0c5&hash=AB8CEA2487224BE20A7C21D9934CED43"
+    },
+    {
+      "insurerAsIndexed": "Titan Insurance Company",
+      "naicCodesAsIndexed": "36269",
+      "reportDate": "2013-10-18",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Titan_10-18-13.pdf?rev=319655c32d9f4ec590ba9b08d7c389ac&hash=C1510C5249E95C03774DD3216944BCC9"
+    },
+    {
+      "insurerAsIndexed": "Transamerica Premier Life Insurance Company",
+      "naicCodesAsIndexed": "66281",
+      "reportDate": "2016-04-07",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Transamerica_Premier_Life_04-07-16.pdf?rev=2bacbd13d41b4b02a9dd9fe9d40624bd&hash=8C1412FEF59ECC67FA63C4E5898CACB0"
+    },
+    {
+      "insurerAsIndexed": "Trumball Insurance Company",
+      "naicCodesAsIndexed": "27120",
+      "reportDate": "2015-04-27",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/Trumball_04-27-15.pdf?rev=c94e0925a924435abd72f4d96e8d1821&hash=4F002DC6FFA7C48819BD96CF97031D95"
+    },
+    {
+      "insurerAsIndexed": "UnitedHealthcare Insurance Company",
+      "naicCodesAsIndexed": "79413",
+      "reportDate": "2015-10-13",
+      "examType": "Targeted",
+      "disposition": "Closed",
+      "sourceDocument": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/MR/Exam/UnitedHealthCare_10-13-15.pdf?rev=378a2b859fa34145b2169cb685980d2f&hash=767C5519440ED8AE10B48301524CB3E7"
+    }
+  ]
+}
