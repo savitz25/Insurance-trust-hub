@@ -94,6 +94,29 @@ export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
   const early = raw.trim();
+  const indianaAsked = /\b(?:indiana|indiana department of insurance|IDOI)\b/i.test(early) || detectStates(early)[0] === 'IN' || (/\b(?:indianapolis|fort wayne|evansville|south bend)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
+  if (indianaAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const cls: InsuranceEntityClass | undefined = naic || /\b(?:insurer|insurance compan(?:y|ies)|carrier)\b/i.test(early)
+      ? 'insurer' : /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early)
+        ? 'agency' : /\b(?:agent|individual producer|insurance producer)\b/i.test(early) ? 'person' : undefined;
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const evidence = /\b(?:enforcement|disciplin|order|market conduct|financial exam|examin|complaint|fraud)\b/i.test(early);
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank or recommend Indiana insurers, agencies or producers. IDOI records are not a quality score.'
+      : naic ? `NAIC ${naic} labels a legal insurer code, not an agency. The IDOI financial-exam index prints NAIC codes but does not establish current Indiana authority; verify company status with IDOI/Sircon.`
+      : npn ? `NPN ${npn} labels a producer identifier. Verify whether IDOI/Sircon records a business entity or an individual; the number alone does not establish grain or current licensure.`
+      : /\bcomplaint|fraud\b/i.test(early) ? 'IDOI accepts insurance complaints and fraud reports. Provider-level complaint outcomes were not acquired; a report is not a finding.'
+      : evidence ? 'IDOI publishes a bounded enforcement-action table and a separate domestic financial-exam index. Market-conduct exam reports, orders, complaints and financial exams remain distinct.'
+      : 'IDOI offers company, agency and producer verification. A current statewide NAIC-bearing company roster and agency/person rosters were not acquired.';
+    const query = fail(`${detail} Open /indiana for IDOI source records and verification links.`, ['Open Indiana insurance research.']);
+    query.jurisdiction = { state: 'IN', meaning: geographyMeaning(early) };
+    query.entityClass = cls;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : evidence || naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Indiana IDOI', value: ranking ? 'No ranking' : evidence ? 'Bounded regulatory index evidence' : 'Class-specific verification' }] };
+  }
   const wisconsinAsked = /\b(?:wisconsin|wisconsin office of the commissioner of insurance|wisconsin OCI)\b/i.test(early) || detectStates(early)[0] === 'WI' || (/\b(?:milwaukee|madison|green bay|kenosha)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (wisconsinAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
