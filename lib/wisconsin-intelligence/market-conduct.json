@@ -1,0 +1,730 @@
+{
+  "source": "https://oci.wi.gov/Pages/Companies/MCExams.aspx",
+  "retrievedAt": "2026-09-29",
+  "rowCount": 103,
+  "recent2022to2026": 1,
+  "rows": [
+    {
+      "company": "First Auto & Casualty Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "May 19 - 30, 2014",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportFirstAuto2014.pdf",
+      "naic": null
+    },
+    {
+      "company": "Abri Health Plan, Inc.",
+      "location": "West Allis Wisconsin",
+      "asOfAsPrinted": "October 26 - November, 2009",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAbri2009.pdf",
+      "naic": null
+    },
+    {
+      "company": "ACUITY, A Mutual Insurance Company",
+      "location": "Sheboygan, Wisconsin",
+      "asOfAsPrinted": "April 23 - May 4, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAcuity2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "AIU Insurance Company Response - AUI Insurance Company",
+      "location": "New York, New York",
+      "asOfAsPrinted": "May 19 - 23, 2003",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAiu2003.pdf",
+      "naic": null
+    },
+    {
+      "company": "Allianz Life Insurance Company of North America",
+      "location": "Minneapolis, Minnesota",
+      "asOfAsPrinted": "March 14 - 30, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAllianzLf2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "Allstate Insurance Company",
+      "location": "Northbrook, Illinois",
+      "asOfAsPrinted": "June 16 - 27, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAllstate2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Dental Plan of Wisconsin, Inc.",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 3 - 5, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAmDental.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Family Life Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "October 19 - November 6, 2009",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAmFamLif2009.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Family Mutual Insurance Company of Wisconsin",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAmFamMut1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Investors Life Insurance Company Response - American Investors Life Insurance Company",
+      "location": "Topeka, Kansas",
+      "asOfAsPrinted": "January 22 - February 1, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAmInvest2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Republic Insurance Company and American Republic Corp Insurance Company",
+      "location": "Des Moines, Iowa Omaha, Nebraska",
+      "asOfAsPrinted": "September 14 - 25, 2009",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/ARIC_ARCIC_Exam_Report.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Standard Insurance Company of Wisconsin",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAmStndrd1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "Athene Annuity and Life Company Response - Athene Annuity and Life Company",
+      "location": "West Des Moines, Iowa",
+      "asOfAsPrinted": "August 18 - September 5, 2014",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAthene2014.pdf",
+      "naic": null
+    },
+    {
+      "company": "Atrium Health Plan, Inc.",
+      "location": "Hudson, Wisconsin",
+      "asOfAsPrinted": "August 1999 (Managed Care Desk Audit)",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAtriumHealth1999.pdf",
+      "naic": null
+    },
+    {
+      "company": "Auto Club Insurance Association",
+      "location": "Southfield, Michigan",
+      "asOfAsPrinted": "September 13 - 24, 2010",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAutoClub2010.pdf",
+      "naic": null
+    },
+    {
+      "company": "Auto-Owners Insurance Company",
+      "location": "Lansing, Michigan",
+      "asOfAsPrinted": "October 20 - 24, 2014",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAutoOwners2014.pdf",
+      "naic": null
+    },
+    {
+      "company": "Aviva Life and Annuity Company Response - Aviva Life and Annuity Company",
+      "location": "Des Moines, Iowa",
+      "asOfAsPrinted": "September 15 - 26, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportAviva2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "Bankers Life & Casualty Company",
+      "location": "Carmel, Indiana",
+      "asOfAsPrinted": "July 23 - August 10, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportBankers2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "Blue Cross Blue Shield of Wisconsin",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "November 4 - 12, 2003",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportBlCr2003.pdf",
+      "naic": null
+    },
+    {
+      "company": "Blue Cross & Blue Shield United of Wisconsin",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "May 17 - May 21, 1999",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportBCBSUnitedOfWI1999.pdf",
+      "naic": null
+    },
+    {
+      "company": "Care-Plus Dental Plans, Inc. Response - Care-Plus Dental Plans, Inc.",
+      "location": "Wauwatosa, Wisconsin",
+      "asOfAsPrinted": "April 16 - May 1, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportCarePlus2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "Catholic Family Life Insurance",
+      "location": "Shorewood, Wisconsin",
+      "asOfAsPrinted": "March 17 - 26, 2003",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportCatFamLif.pdf",
+      "naic": null
+    },
+    {
+      "company": "Catholic Financial Life",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "August 15 - 26, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportCatholicFin2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "Compcare Health Services Insurance Corporation",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "July 23 - August 2, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportCompcare2001.pdf",
+      "naic": null
+    },
+    {
+      "company": "Conseco Senior Health Insurance Company",
+      "location": "Carmel, Indiana",
+      "asOfAsPrinted": "September 10 - 18, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportConseco2001.pdf",
+      "naic": null
+    },
+    {
+      "company": "Continental Indemnity Company",
+      "location": "Omaha, Nebraska",
+      "asOfAsPrinted": "August 20 - 29, 2018",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportContinentalIndemnity.pdf",
+      "naic": null
+    },
+    {
+      "company": "Continental Life Insurance Company of Brentwood, Tennessee Response - Continental Life Insurance Company",
+      "location": "Franklin, Tennessee",
+      "asOfAsPrinted": "June 16 - 27, 2014",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportContinentalLife.pdf",
+      "naic": null
+    },
+    {
+      "company": "CUNA Mutual Insurance Society",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "September 3 - 11, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportCunaMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "Dean Health Plan, Inc",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "September 8 - 24, 2014",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportDean2014.pdf",
+      "naic": null
+    },
+    {
+      "company": "Deerbrook Insurance Company",
+      "location": "N orthbrook, Illinoi s",
+      "asOfAsPrinted": "April 23 - May 3, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportDeerbrk.pdf",
+      "naic": null
+    },
+    {
+      "company": "Delta Dental of Wisconsin, Inc.",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "May 7 - 18, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportDeltaDent2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "Employers Health Insurance Company",
+      "location": "Green Bay, Wisconsin",
+      "asOfAsPrinted": "J anuary 30 - February 6, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportEmpHlthIns2001.pdf",
+      "naic": null
+    },
+    {
+      "company": "Employers Insurance of Wausau, A Mutual Company",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "September - October 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportEmployersInsWausau1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "Erie Insurance Exchange",
+      "location": "Erie, Pennsylvania",
+      "asOfAsPrinted": "May 9 - 20, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportErie2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "Farmers Insurance Exchange Response - Farmers Insurance Exchange",
+      "location": "Los Angeles, California",
+      "asOfAsPrinted": "June 7 - 17, 2010",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportFarmers2010.pdf",
+      "naic": null
+    },
+    {
+      "company": "Fidelity & Guaranty Life Insurance Company",
+      "location": "Baltimore, Maryland",
+      "asOfAsPrinted": "March 30 - April 18, 2014",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportFidGuar2014.pdf",
+      "naic": null
+    },
+    {
+      "company": "Fortis Insurance Company Response - Fortis Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "March 15 - 29, 2004",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportFortis2004.pdf",
+      "naic": null
+    },
+    {
+      "company": "GEICO General Insurance Company",
+      "location": "Macon, Georgia",
+      "asOfAsPrinted": "July 23 - August 3, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGEICOGen2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "General Casualty Company of Wisconsin",
+      "location": "Su n Prairie, Wisconsin",
+      "asOfAsPrinted": "November 3 - 14, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGenCasWi2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "Germantown Mutual Insurance Company",
+      "location": "Germantown, Wisconsin",
+      "asOfAsPrinted": "November 13 - 16, 2000",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGermantownMutual2000.pdf",
+      "naic": null
+    },
+    {
+      "company": "Globe American Casualty Company",
+      "location": "Milford, O hio",
+      "asOfAsPrinted": "February 1999",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGlobeAmericanCas1999.pdf",
+      "naic": null
+    },
+    {
+      "company": "Globe Life and Accident Insurance Company",
+      "location": "Oklahoma City, Oklahoma",
+      "asOfAsPrinted": "June 14 - 24, 2010",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGlobeLife2010.pdf",
+      "naic": null
+    },
+    {
+      "company": "Greater LaCrosse Health Plans, Inc.",
+      "location": "Onalaska, Wisconsin",
+      "asOfAsPrinted": "October 2000",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExam%20ReportGrtrLcrsHlthPlans1999.pdf",
+      "naic": null
+    },
+    {
+      "company": "Greatway Insurance Company",
+      "location": "Sheboygan, Wisconsin",
+      "asOfAsPrinted": "September 1998",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGreatwayIns1998.pdf",
+      "naic": null
+    },
+    {
+      "company": "Group Health Cooperative of Eau Claire",
+      "location": "Eau Claire, Wisconsin",
+      "asOfAsPrinted": "April 1 - 3, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGHCEC.pdf",
+      "naic": null
+    },
+    {
+      "company": "Group Health Cooperative of South Central Wisconsin",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "June 28 - July 2, 1999",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGHCSCW1999.pdf",
+      "naic": null
+    },
+    {
+      "company": "Guarantee Trust Life Insurance Company",
+      "location": "Glenview, Illinois",
+      "asOfAsPrinted": "August 2 - 20, 2010",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGuarTrust2010.pdf",
+      "naic": null
+    },
+    {
+      "company": "Gundersen Health Plan, Inc.",
+      "location": "La Crosse, Wisconsin",
+      "asOfAsPrinted": "September 9 - 27, 2013",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportGundersen2013.pdf",
+      "naic": null
+    },
+    {
+      "company": "Hartford Underwriters Insurance Company",
+      "location": "Hartford, Connecticut",
+      "asOfAsPrinted": "February 10 - 21, 2003",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportHartford2003.pdf",
+      "naic": null
+    },
+    {
+      "company": "Health Tradition Health Plan",
+      "location": "Onalaska, Wisconsin",
+      "asOfAsPrinted": "October 18 - 29, 2010",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportHealthTrad2010.pdf",
+      "naic": null
+    },
+    {
+      "company": "Heritage Mutual Insurance Company",
+      "location": "Sheboygan, Wisconsin",
+      "asOfAsPrinted": "September 1998",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportHeritageMut1998.pdf",
+      "naic": null
+    },
+    {
+      "company": "Homesite Insurance Company",
+      "location": "Boston, Massachusetts",
+      "asOfAsPrinted": "March 21 - April 1, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportHomesite2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "Humana Insurance Company",
+      "location": "Green Bay, Wisconsin",
+      "asOfAsPrinted": "September 10 - 26, 2007",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportHumana2007.pdf",
+      "naic": null
+    },
+    {
+      "company": "Humana Wisconsin Health Organization Insurance Corporation",
+      "location": "Waukesha, Wisconsin Louisville, Kentucky",
+      "asOfAsPrinted": "August 23-27, 2004 September 20-28, 2004",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportHumana2004.pdf",
+      "naic": null
+    },
+    {
+      "company": "Infinity Insurance Company",
+      "location": "Birmingham, Alabama",
+      "asOfAsPrinted": "January 1999",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportInfinityIns1999.pdf",
+      "naic": null
+    },
+    {
+      "company": "Jackson National Life Insurance Company Response - Jackson National Life Insurance Company",
+      "location": "Lansing, Michigan",
+      "asOfAsPrinted": "May 7 - 24, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportJacksonNtl2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "John Hancock Life Insurance Company",
+      "location": "Boston, Massachusetts",
+      "asOfAsPrinted": "May 11 - 21, 2009",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportJohnHanc2009.pdf",
+      "naic": null
+    },
+    {
+      "company": "Medical Associates Clinic Health Plan, Inc.",
+      "location": "Dubuque, Iowa",
+      "asOfAsPrinted": "June 2 - 18, 2003",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMedAssoc03.pdf",
+      "naic": null
+    },
+    {
+      "company": "Mercycare Insurance Company",
+      "location": "Janesville, Wisconsin",
+      "asOfAsPrinted": "September 16 - October 4, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMercycare2002.pdf",
+      "naic": null
+    },
+    {
+      "company": "Midwest Dental Plan, Ltd.",
+      "location": "Mondovi, Wisconsin",
+      "asOfAsPrinted": "November 5, 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMidwestDentalPlan1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "Midwest Security Insurance Company",
+      "location": "Onalaska, Wisconsin",
+      "asOfAsPrinted": "August 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMidwestSec1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "Midwest Security Life Insurance Company",
+      "location": "Onalaska, Wisconsin",
+      "asOfAsPrinted": "January 20 - February 3, 2004",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMidwestSecLife2004.pdf",
+      "naic": null
+    },
+    {
+      "company": "Molina Healthcare Insurance Company, Inc.",
+      "location": "Brookfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMolinaHealthcare.pdf",
+      "naic": null
+    },
+    {
+      "company": "Mutual of Omaha Insurance Company and United of Omaha Insurance Comany",
+      "location": "Omaha, Nebraska",
+      "asOfAsPrinted": "August 8 - 26, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMutOmaha2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "National Guardian Life Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "April 21 - May 5, 2009",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportNtlGuar2009.pdf",
+      "naic": null
+    },
+    {
+      "company": "National States Insurance Company",
+      "location": "St. Louis, Missouri",
+      "asOfAsPrinted": "October 21 - November 1, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportNatlStates2002.pdf",
+      "naic": null
+    },
+    {
+      "company": "Network Health Plan Response - Network Health Plan",
+      "location": "Menasha, Wisconsin",
+      "asOfAsPrinted": "January 18 - 26, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportNetwork11.pdf",
+      "naic": null
+    },
+    {
+      "company": "North American Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "February 26 - March 7, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportNorthAmerican2001.pdf",
+      "naic": null
+    },
+    {
+      "company": "North Central Health Protection Plan",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "October 6 - 7, 1999",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportNorthCntrlHlthProtPlan1999.pdf",
+      "naic": null
+    },
+    {
+      "company": "Northwestern Mutual Life Insurance Company, The",
+      "location": "Franklin, Wisconsin",
+      "asOfAsPrinted": "June 3 - 4, 2013",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportNwMutLife2013.pdf",
+      "naic": null
+    },
+    {
+      "company": "Owners Insurance Company",
+      "location": "Lansing, Michigan",
+      "asOfAsPrinted": "October 20 - 24, 2014",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportOwners2014.pdf",
+      "naic": null
+    },
+    {
+      "company": "Oxford Life Insurance Company",
+      "location": "Phoenix, Arizona",
+      "asOfAsPrinted": "April 8 - 24, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportOxford.pdf",
+      "naic": null
+    },
+    {
+      "company": "Physicians Insurance Company of Wisconsin",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "July 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportPIC1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "Physicians Life Insurance Company",
+      "location": "Omaha, Nebraska",
+      "asOfAsPrinted": "October 13 - 24, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportPhysLife2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "Physicians Mutual Insurance Company",
+      "location": "Omaha, Nebraska",
+      "asOfAsPrinted": "October 13 - 24, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportPhysMut2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "Physicians Plus Insurance Corporation",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "October 29 - November 8, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportPhyPlus2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "Prevea Health Insurance Plan, Inc.",
+      "location": "De Pere, Wisconsin",
+      "asOfAsPrinted": "August 6 - 17, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportPrevea2001.pdf",
+      "naic": null
+    },
+    {
+      "company": "Professional Dental Plan, Inc.",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 3 - 5, 2001",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportProfDentalPlan2001.pdf",
+      "naic": null
+    },
+    {
+      "company": "Progressive Classic Insurance Company",
+      "location": "Mayfield Village, Ohio",
+      "asOfAsPrinted": "July 28 - August 11, 2008 March 8 - 19, 2010",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportProgClassic2010.pdf",
+      "naic": null
+    },
+    {
+      "company": "Progressive Northern Insurance Company",
+      "location": "Mayfield Village, Ohio",
+      "asOfAsPrinted": "July 28 - August 11, 2008 March 8 - 19, 2010",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportProgNort2010.pdf",
+      "naic": null
+    },
+    {
+      "company": "Regent Insurance Company",
+      "location": "Sun Prairie, Wisconsin",
+      "asOfAsPrinted": "February 11 - 19, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportRegent.pdf",
+      "naic": null
+    },
+    {
+      "company": "Rural Mutual Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "September 22 - 30, 2003",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportRurMut03.pdf",
+      "naic": null
+    },
+    {
+      "company": "Secura Insurance A Mutual Company",
+      "location": "Appleton, Wisconsin",
+      "asOfAsPrinted": "June 7 - 11, 2004",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportSecura2004.pdf",
+      "naic": null
+    },
+    {
+      "company": "Security Health Plan of Wisconsin, Inc.",
+      "location": "Marshfield, Wisconsin",
+      "asOfAsPrinted": "September 10 - 28, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportSecurityHlt2012.pdf",
+      "naic": null
+    },
+    {
+      "company": "Sentry Insurance a Mutual Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "November 7 - 18, 2005 March 10 - 14, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportSentryMut2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "Society Insurance, A Mutual Company",
+      "location": "Fond du Lac, Wiscon sin",
+      "asOfAsPrinted": "November 6 - 15, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportSociet02.pdf",
+      "naic": null
+    },
+    {
+      "company": "Thrivent Financial for Lutherans",
+      "location": "Appleton, Wisconsin",
+      "asOfAsPrinted": "October 28 - November 8, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportThrivent.pdf",
+      "naic": null
+    },
+    {
+      "company": "Time Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "February 11 - 29, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportTimeIns2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "Touchpoint Health Plan",
+      "location": "Appleton, Wisconsin",
+      "asOfAsPrinted": "March 3 - 11, 2003",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportTouchpoint2003.pdf",
+      "naic": null
+    },
+    {
+      "company": "United of Omaha Life Insurance Company and ​ Mutual of Omaha Insurance Company",
+      "location": "Omaha, Nebraska",
+      "asOfAsPrinted": "August 8 - 26, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportMutOmaha2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "United Wisconsin Life Insurance Company",
+      "location": "Green Bay, Wisconsin",
+      "asOfAsPrinted": "March 4 - 15, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportUWLIC2002.pdf",
+      "naic": null
+    },
+    {
+      "company": "UnitedHealthcare of Wisconsin, Inc.",
+      "location": "Wauwatosa, Wisconsin",
+      "asOfAsPrinted": "April 14 - May 2, 2008",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportUHCWI2008.pdf",
+      "naic": null
+    },
+    {
+      "company": "Unity Health Plans Insurance Corporation",
+      "location": "Sauk City, Wisconsin",
+      "asOfAsPrinted": "April 29 - May 17, 2013",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportUnity2013.pdf",
+      "naic": null
+    },
+    {
+      "company": "Valley Health Plan, Inc.",
+      "location": "Eau Claire, Wisconsin",
+      "asOfAsPrinted": "February 7 - 10, 2000",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportValleyHealthPlan2000.pdf",
+      "naic": null
+    },
+    {
+      "company": "Vision Insurance Plan of America",
+      "location": "West Allis, Wisconsin",
+      "asOfAsPrinted": "January 21 - February 1, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportVIP2002.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wausau Underwriters Insurance Company",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "September & October 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWausau1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "WEA Insurance Corporation",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "October 6 - 13, 1997",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWEA1997.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wilson Mutual Insurance Company",
+      "location": "Sheboygan, Wisconsin",
+      "asOfAsPrinted": "February 2 - 13, 2009",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWilson2009.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Automobile Insurance Plan",
+      "location": "Waukesha, Wisconsin",
+      "asOfAsPrinted": "September 26 - October 7, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWAIP2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Compensation Rating Bureau and ​ Wisconsin Worker's Compensation Insu​rance Pool",
+      "location": "Waukesha, Wisconsin",
+      "asOfAsPrinted": "September 26 - October 7, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWCRB2011.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Mutual Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "September 30 - October 4 October 30, 2002",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWisMut02.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Physicians Service Insurance Corporation",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "November 1 - December 16, 2004",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWPS2004.pdf",
+      "naic": null
+    },
+    {
+      "company": "WPS Health Plan, Inc.",
+      "location": "Green Bay, Wisconsin",
+      "asOfAsPrinted": "November 7 - 23, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/MRExamReportWPSHealth2011.pdf",
+      "naic": null
+    }
+  ],
+  "note": "OCI index entries; not unique companies, enforcement orders, or exact identity attachments. Index does not print NAIC."
+}
