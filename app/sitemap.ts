@@ -53,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/texas',
     '/washington',
     '/wisconsin',
+    '/indiana',
     '/methodology',
     '/about',
     '/destinations',
