@@ -94,6 +94,29 @@ export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
   const early = raw.trim();
+  const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
+  if (marylandAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const cls: InsuranceEntityClass | undefined = naic || /\b(?:insurer|insurance compan(?:y|ies)|carrier)\b/i.test(early)
+      ? 'insurer' : /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early)
+        ? 'agency' : /\b(?:agent|individual producer|insurance producer)\b/i.test(early) ? 'person' : undefined;
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const evidence = /\b(?:enforcement|disciplin|order|market conduct|financial exam|examin|complaint|fraud)\b/i.test(early);
+    const detail = ranking
+      ? 'MIA does not rank insurance companies. InsuranceTrustHub does not rank or recommend Maryland insurers, agencies or producers.'
+      : naic ? `NAIC ${naic} identifies a legal insurance company, not an agency. Check the exact code and printed status in the MIA Company search. A search result is not a quality score.`
+      : npn ? `NPN ${npn} is a labeled producer identifier. Verify whether MIA records it as a firm or individual; the number alone does not establish grain. Agency and person bulk rosters were not acquired.`
+      : /\bcomplaint|fraud\b/i.test(early) ? 'MIA accepts insurance complaints and fraud referrals. Provider-level complaint outcomes and fraud orders were not acquired; a complaint is not a finding.'
+      : evidence ? 'MIA provides bounded 2022–2026 company and agency order/exam index rows and annual producer-enforcement summaries. Index categories and displayed status remain distinct; capped searches are not a complete action census.'
+      : 'MIA provides a Company search with NAIC codes and separate verification for other licensed entities, agencies and individual producers. Agency and person bulk rosters were not acquired.';
+    const query = fail(`${detail} Open /maryland for source records and verification links.`, ['Open Maryland insurance research.']);
+    query.jurisdiction = { state: 'MD', meaning: geographyMeaning(early) };
+    query.entityClass = cls;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : evidence || naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Maryland MIA', value: ranking ? 'No ranking' : evidence || naic ? 'Bounded regulatory evidence' : 'Class-specific verification' }] };
+  }
   const connecticutAsked = /\b(?:connecticut|connecticut insurance department|\bCID\b)\b/i.test(early) || detectStates(early)[0] === 'CT';
   if (connecticutAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
