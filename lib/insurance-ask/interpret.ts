@@ -94,6 +94,29 @@ export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
   const early = raw.trim();
+  const wisconsinAsked = /\b(?:wisconsin|wisconsin office of the commissioner of insurance|wisconsin OCI)\b/i.test(early) || detectStates(early)[0] === 'WI' || (/\b(?:milwaukee|madison|green bay|kenosha)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
+  if (wisconsinAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const cls: InsuranceEntityClass | undefined = naic || /\b(?:insurer|insurance compan(?:y|ies)|carrier)\b/i.test(early)
+      ? 'insurer' : /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early)
+        ? 'agency' : /\b(?:agent|individual producer|insurance producer)\b/i.test(early) ? 'person' : undefined;
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const evidence = /\b(?:enforcement|disciplin|order|market conduct|financial exam|examin|complaint)\b/i.test(early);
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank or recommend Wisconsin insurers, agencies or producers. OCI records are not a quality score.'
+      : naic ? `NAIC ${naic} labels a legal insurance-company identifier, not an agency. Wisconsin's published annual directory does not print NAIC codes; verify current company authority in OCI/SBS.`
+      : npn ? `NPN ${npn} labels a producer identifier. Verify whether SBS records it as an agency business or a person; statewide producer rosters were not acquired.`
+      : /\bcomplaint\b/i.test(early) ? 'OCI accepts insurance complaints. Provider-level complaint cases and outcomes were not acquired; a complaint is not a finding.'
+      : evidence ? 'OCI publishes administrative-action summaries and separate market-conduct and financial-exam indexes. Exact provider-level action attachments were not acquired; an exam is not an enforcement order.'
+      : 'OCI publishes a dated insurer-category table and licensed-insurer directory; SBS verifies current companies, agencies and producers. No statewide NAIC-bearing company or agency/producer roster was acquired.';
+    const query = fail(`${detail} Open /wisconsin for OCI source records and verification links.`, ['Open Wisconsin insurance research.']);
+    query.jurisdiction = { state: 'WI', meaning: geographyMeaning(early) };
+    query.entityClass = cls;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : evidence || naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Wisconsin OCI', value: ranking ? 'No ranking' : evidence ? 'Bounded OCI index evidence' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];

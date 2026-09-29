@@ -1,0 +1,1206 @@
+{
+  "source": "https://oci.wi.gov/Pages/Companies/FinExams.aspx",
+  "retrievedAt": "2026-09-29",
+  "rowCount": 171,
+  "recent2022to2026": 115,
+  "rows": [
+    {
+      "company": "ACUITY, A Mutual Insurance Company",
+      "location": "Sheboygan, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAcuity.pdf",
+      "naic": null
+    },
+    {
+      "company": "Alpha Property & Casualty Insurance Company",
+      "location": "Chicago, Illinois",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAlphaPC.pdf",
+      "naic": null
+    },
+    {
+      "company": "Ambac Assurance Corporation",
+      "location": "New York, New York",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAmbac.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Family Connect Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAFCIC.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Family Connect Property and Casualty Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAFCPCIC.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Family Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAmFam.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Family Life Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAmFamLif.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Family Mutual Insurance Company, S.I.",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAmFamMutSI.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Standard Insurance Company of Ohio",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAmStandOhio.pdf",
+      "naic": null
+    },
+    {
+      "company": "American Standard Insurance Company of Wisconsin",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAmStand.pdf",
+      "naic": null
+    },
+    {
+      "company": "Arch Mortgage Assurance Company",
+      "location": "Greensboro, North Carolina",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinArchMortAssur.pdf",
+      "naic": null
+    },
+    {
+      "company": "Arch Mortgage Guaranty Company",
+      "location": "Greensboro, North Carolina",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinArchMortGuar.pdf",
+      "naic": null
+    },
+    {
+      "company": "Arch Mortgage Insurance Company",
+      "location": "Greensboro, North Carolina",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinArchMortIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Arlington Mutual Fire Insurance Company",
+      "location": "Arlington, Wisconsin",
+      "asOfAsPrinted": "December 31, 2015",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinArlingtn.pdf",
+      "naic": null
+    },
+    {
+      "company": "Artisan and Truckers Casualty Company",
+      "location": "Cleveland, Ohio",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinArtisan.pdf",
+      "naic": null
+    },
+    {
+      "company": "Aspirus Arise Health Plan of Wisconsin, Inc.",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinAspirusAriseHealth.pdf",
+      "naic": null
+    },
+    {
+      "company": "Badger Mutual Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinBadgMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "Bankers Reserve Life Insurance Company of Wisconsin",
+      "location": "St. Louis, Missouri",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinBankResv.pdf",
+      "naic": null
+    },
+    {
+      "company": "BetterLife",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinBetterLife.pdf",
+      "naic": null
+    },
+    {
+      "company": "Bloomington Farmers Mutual Insurance Company",
+      "location": "Bloomington, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinBloomngt.pdf",
+      "naic": null
+    },
+    {
+      "company": "Blue Cross Blue Shield of Wisconsin",
+      "location": "Waukesha, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinBlCrBlSh.pdf",
+      "naic": null
+    },
+    {
+      "company": "Bowhead Insurance Company, Inc",
+      "location": "New York, New York",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinBowhead.pdf",
+      "naic": null
+    },
+    {
+      "company": "Capitol Indemnity Corporation",
+      "location": "Middleton, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCapInd.pdf",
+      "naic": null
+    },
+    {
+      "company": "Capitol Specialty Insurance Corporation",
+      "location": "Middleton, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCapSpec.pdf",
+      "naic": null
+    },
+    {
+      "company": "Care Improvement Plus Wisconsin Insurance Company",
+      "location": "Minnetonka, Minnesota",
+      "asOfAsPrinted": "December 31, 2024​",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCareImprovement.pdf",
+      "naic": null
+    },
+    {
+      "company": "Care-Plus Dental Plans, Inc.",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCarePlus.pdf",
+      "naic": null
+    },
+    {
+      "company": "Catholic Financial Life",
+      "location": "Sun Prairie, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCathFinancial.pdf",
+      "naic": null
+    },
+    {
+      "company": "​Central Wisconsin Mutual Insurance Company",
+      "location": "​Central, Wisconsin",
+      "asOfAsPrinted": "​​December 31, 2025",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCentralWI.pdf",
+      "naic": null
+    },
+    {
+      "company": "Chorus Community Health Plans, Inc.",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinChorusCom.pdf",
+      "naic": null
+    },
+    {
+      "company": "Church Mutual Insurance Company, S.I.",
+      "location": "Merrill, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinChurchMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "Cities and Villages Mutual Insurance Company",
+      "location": "Wauwatosa, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCitiesVillages.pdf",
+      "naic": null
+    },
+    {
+      "company": "CM Indemnity Insurance Company",
+      "location": "Merrill, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCMIndemIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "CM Regent Insurance Company",
+      "location": "Merrill, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCMRegIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "CM Select Insurance Company",
+      "location": "Merrill, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCMSelIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "CM Vantage Specialty Insurance Company",
+      "location": "Merrill, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCMVantSpecIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Common Ground Healthcare Cooperative",
+      "location": "Brookfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCommonGround.pdf",
+      "naic": null
+    },
+    {
+      "company": "Community Care Health Plan, Inc.",
+      "location": "Brookfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCommCareHealth.pdf",
+      "naic": null
+    },
+    {
+      "company": "Community Insurance Corporation",
+      "location": "Brookfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCommInsCorp.pdf",
+      "naic": null
+    },
+    {
+      "company": "Compcare Health Services Insurance Corporation",
+      "location": "Waukesha, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCompcare.pdf",
+      "naic": null
+    },
+    {
+      "company": "CUMIS Mortgage Reinsurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinCumisMortReins.pdf",
+      "naic": null
+    },
+    {
+      "company": "Dairyland Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinDairyland.pdf",
+      "naic": null
+    },
+    {
+      "company": "Dairyland National Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinDairyNat.pdf",
+      "naic": null
+    },
+    {
+      "company": "Dean Health Insurance, Inc.",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/finDeanHealthIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Dean Health Plan, Inc.",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinDeanHealthPlan.pdf",
+      "naic": null
+    },
+    {
+      "company": "Delta Dental of Wisconsin, Inc.",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinDeltaDental.pdf",
+      "naic": null
+    },
+    {
+      "company": "Districts Mutual Insurance",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinDistrictsMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "Eagle Point Mutual Insurance Company",
+      "location": "Chippewa Falls, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinEagle.pdf",
+      "naic": null
+    },
+    {
+      "company": "Employers Insurance Company of Wausau",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinEmpWausau.pdf",
+      "naic": null
+    },
+    {
+      "company": "Employes' Mutual Benefit Association",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinEmpMutBen.pdf",
+      "naic": null
+    },
+    {
+      "company": "The EPIC Life Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinEpicLife.pdf",
+      "naic": null
+    },
+    {
+      "company": "Everly Life Insurance Company",
+      "location": "Topeka, Kansas",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinEverly.pdf",
+      "naic": null
+    },
+    {
+      "company": "Fidelity and Guaranty Insurance Underwriters, Inc.",
+      "location": "Brookfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024​",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinFidelityGuar.pdf",
+      "naic": null
+    },
+    {
+      "company": "Florists' Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinFloristIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Florists' Mutual Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinFloristMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "Flyway Mutual Insurance Company",
+      "location": "Waupun, Wisconsin",
+      "asOfAsPrinted": "December 31, 2012",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinFlyway.pdf",
+      "naic": null
+    },
+    {
+      "company": "Forward Mutual Insurance Company",
+      "location": "Ixonia, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinForwardMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "General Automobile Insurance Company, Inc.",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinTheGeneralAuto.pdf",
+      "naic": null
+    },
+    {
+      "company": "General Casualty Company of Wisconsin",
+      "location": "Sun Prairie, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinGeneralCasCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "General Casualty Insurance Company",
+      "location": "Sun Prairie, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinGeneralCasIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Germantown Mutual Insurance Company",
+      "location": "Germantown, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinGermantn.pdf",
+      "naic": null
+    },
+    {
+      "company": "Glencar Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024​",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinGlencar.pdf",
+      "naic": null
+    },
+    {
+      "company": "Group Health Cooperative of Eau Claire",
+      "location": "Eau Claire, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinGHCEC.pdf",
+      "naic": null
+    },
+    {
+      "company": "Group Health Cooperative of South Central Wisconsin",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinGHCSCWI.pdf",
+      "naic": null
+    },
+    {
+      "company": "Harken Health Insurance Company",
+      "location": "Minnetonka, Minnesota",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHarken.pdf",
+      "naic": null
+    },
+    {
+      "company": "Hawkeye-Security Insurance Company",
+      "location": "Waukesha, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHawkeyeSec.pdf",
+      "naic": null
+    },
+    {
+      "company": "Homesite Indemnity Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHomesiteInd.pdf",
+      "naic": null
+    },
+    {
+      "company": "Homesite Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHomesiteInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "Homesite Insurance Company of the Midwest",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHomesiteInsMW.pdf",
+      "naic": null
+    },
+    {
+      "company": "Homestead Mutual Insurance Company",
+      "location": "Neenah, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHomestead.pdf",
+      "naic": null
+    },
+    {
+      "company": "Humana Insurance Company",
+      "location": "Louisville, Kentucky",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHumana.pdf",
+      "naic": null
+    },
+    {
+      "company": "Humana Wisconsin Health Organization Insurance Corporation",
+      "location": "Louisville, Kentucky",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHumanWHO.pdf",
+      "naic": null
+    },
+    {
+      "company": "HumanaDental Insurance Company",
+      "location": "Louisville, Kentucky",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinHumanDent.pdf",
+      "naic": null
+    },
+    {
+      "company": "Independent Care Health Plan",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinIndCare.pdf",
+      "naic": null
+    },
+    {
+      "company": "Jewelers Mutual Insurance Company",
+      "location": "Neenah, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinJewelers.pdf",
+      "naic": null
+    },
+    {
+      "company": "JM Specialty Insurance Company",
+      "location": "Neenah, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinJMSpecialty.pdf",
+      "naic": null
+    },
+    {
+      "company": "Lakeland Care Inc.",
+      "location": "Fond du Lac, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024​",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinLakelandCareInc.pdf",
+      "naic": null
+    },
+    {
+      "company": "LaPrairie Grove Mutual Insurance Company",
+      "location": "Janesville, Wisconsin",
+      "asOfAsPrinted": "December 31, 2025",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinLaprairie.pdf",
+      "naic": null
+    },
+    {
+      "company": "League of Wisconsin Municipalities Mutual Insurance",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinLeagueMun.pdf",
+      "naic": null
+    },
+    {
+      "company": "Lebanon Clyman Mutual Insurance Company",
+      "location": "Lebanon, Wisconsin",
+      "asOfAsPrinted": "December 31, 2011",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinLebanon.pdf",
+      "naic": null
+    },
+    {
+      "company": "Liberty Bankers Life Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 1999",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinLibertyBankers.pdf",
+      "naic": null
+    },
+    {
+      "company": "Liberty Mutual Fire Insurance Company",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinLibMFireBoston.pdf",
+      "naic": null
+    },
+    {
+      "company": "Madison National Life Insurance Company, Inc.",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMadisonNtlLIC.pdf",
+      "naic": null
+    },
+    {
+      "company": "Managed Health Services Insurance Corp.",
+      "location": "West Allis, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMgdHlthServ.pdf",
+      "naic": null
+    },
+    {
+      "company": "Maple Valley Mutual Insurance Company",
+      "location": "Lena, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMapleVly.pdf",
+      "naic": null
+    },
+    {
+      "company": "McMillan-Warner Mutual Insurance Company",
+      "location": "Marshfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMcmillan.pdf",
+      "naic": null
+    },
+    {
+      "company": "Medica Community Health Plan",
+      "location": "Minnetonka, Minnesota",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMedica.pdf",
+      "naic": null
+    },
+    {
+      "company": "Medical Associates Clinic Health Plan of Wisconsin, The",
+      "location": "Dubuque, Iowa",
+      "asOfAsPrinted": "December 31, 2024​",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMedAssoc.pdf",
+      "naic": null
+    },
+    {
+      "company": "MercyCare HMO, Inc.",
+      "location": "Janesville, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMercyCareHMO.pdf",
+      "naic": null
+    },
+    {
+      "company": "MercyCare Insurance Company",
+      "location": "Janesville, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMercyCare.pdf",
+      "naic": null
+    },
+    {
+      "company": "Merrimac Lodi Mutual Insurance Company",
+      "location": "Prairie du Sac, Wisconsin",
+      "asOfAsPrinted": "December 31, 2015",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMerrimac.pdf",
+      "naic": null
+    },
+    {
+      "company": "MGIC Assurance Corporation",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMGICAssur.pdf",
+      "naic": null
+    },
+    {
+      "company": "MGIC Credit Assurance Corporation",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMGICCrAssur.pdf",
+      "naic": null
+    },
+    {
+      "company": "MGIC Indemnity Corporation",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMGICInd.pdf",
+      "naic": null
+    },
+    {
+      "company": "Middlesex Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMiddlesx.pdf",
+      "naic": null
+    },
+    {
+      "company": "Midvale Indemnity Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMidvaleInd.pdf",
+      "naic": null
+    },
+    {
+      "company": "Molina Healthcare of Wisconsin, Inc.",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMolina.pdf",
+      "naic": null
+    },
+    {
+      "company": "Momentum Insurance Plans, Inc.",
+      "location": "Fitchburg, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMoment.pdf",
+      "naic": null
+    },
+    {
+      "company": "Mortgage Guaranty Insurance Corporation",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMortGInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "Mt. Morris Mutual Insurance Company",
+      "location": "Coloma, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMtMorris.pdf",
+      "naic": null
+    },
+    {
+      "company": "Municipal Property Insurance Company",
+      "location": "Middleton, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMuniProp.pdf",
+      "naic": null
+    },
+    {
+      "company": "Mutual of Wausau Insurance Corporation",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinMutWausau.pdf",
+      "naic": null
+    },
+    {
+      "company": "National Guardian Life Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinNtnlGuard.pdf",
+      "naic": null
+    },
+    {
+      "company": "National Mortgage Insurance Corporation",
+      "location": "Emeryville, California",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinNtnlMortgInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "National Mortgage Reinsurance Inc One",
+      "location": "Emeryville, California",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinNtnlMortgReOne.pdf",
+      "naic": null
+    },
+    {
+      "company": "Network Health Insurance Corporation",
+      "location": "Menasha, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinNetworkInsCorp.pdf",
+      "naic": null
+    },
+    {
+      "company": "Network Health Plan",
+      "location": "Menasha, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinNetworkPlan.pdf",
+      "naic": null
+    },
+    {
+      "company": "Northwestern Long Term Care Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinNWtrnLTC.pdf",
+      "naic": null
+    },
+    {
+      "company": "Northwestern Mutual Life Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinNWtrnMutLif.pdf",
+      "naic": null
+    },
+    {
+      "company": "Old Republic Surety Company",
+      "location": "Brookfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinOldRepubSure.pdf",
+      "naic": null
+    },
+    {
+      "company": "Pacific Star Insurance Company",
+      "location": "San Diego, California",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPacStar.pdf",
+      "naic": null
+    },
+    {
+      "company": "Parker Centennial Assurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinParker.pdf",
+      "naic": null
+    },
+    {
+      "company": "Partners Mutual Insurance Company",
+      "location": "Waukesha, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPartnersMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "Patriot General Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPatriot.pdf",
+      "naic": null
+    },
+    {
+      "company": "Peak Property and Casualty Insurance Corporation",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPeakPC.pdf",
+      "naic": null
+    },
+    {
+      "company": "Permanent General Assurance Corporation",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPermGenAssur.pdf",
+      "naic": null
+    },
+    {
+      "company": "Permanent General Assurance Corporation of Ohio",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPermGenAssurOhio.pdf",
+      "naic": null
+    },
+    {
+      "company": "Point Excess and Surplus Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPointESIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Point Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPointInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "Point Specialty Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinPointSpcltyIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Progressive Classic Insurance Company",
+      "location": "Cleveland, Ohio",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinProgClas.pdf",
+      "naic": null
+    },
+    {
+      "company": "Progressive Northern Insurance Company",
+      "location": "Cleveland, Ohio",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinProgNort.pdf",
+      "naic": null
+    },
+    {
+      "company": "Progressive Universal Insurance Company",
+      "location": "Cleveland, Ohio",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinProgUniv.pdf",
+      "naic": null
+    },
+    {
+      "company": "Quartz Health Benefit Plans Corporation",
+      "location": "Fitchburg, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinQuartzHealthBen.pdf",
+      "naic": null
+    },
+    {
+      "company": "Quartz Health Insurance Corporation",
+      "location": "Fitchburg, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinQuartzHealthIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Quartz Health Plan Corporation",
+      "location": "Fitchburg, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinQuartzHealthPlanCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "Reedsburg-Westfield Mutual Insurance Company",
+      "location": "Reedsburg, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinReedsbrg.pdf",
+      "naic": null
+    },
+    {
+      "company": "Regent Insurance Company",
+      "location": "Sun Prairie, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinRegent.pdf",
+      "naic": null
+    },
+    {
+      "company": "River Valley Mutual Insurance Company",
+      "location": "Whitehall, Wisconsin",
+      "asOfAsPrinted": "December 31, 2013",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinRiverValley.pdf",
+      "naic": null
+    },
+    {
+      "company": "Rural Mutual Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinRuralMut.pdf",
+      "naic": null
+    },
+    {
+      "company": "SECURA Insurance Company",
+      "location": "Neenah, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSecuraInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "SECURA Select Insurance Company",
+      "location": "Neenah, Wisconsin",
+      "asOfAsPrinted": "December 21, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSecuraSel.pdf",
+      "naic": null
+    },
+    {
+      "company": "SECURA Supreme Insurance Company",
+      "location": "Neenah, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSecuraSup.pdf",
+      "naic": null
+    },
+    {
+      "company": "Security Health Plan of Wisconsin, Inc.",
+      "location": "Marshfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSecurityHP.pdf",
+      "naic": null
+    },
+    {
+      "company": "SeniorDent Dental Plan, Inc.",
+      "location": "Shorewood, Illinois",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSeniorDent.pdf",
+      "naic": null
+    },
+    {
+      "company": "Sentry Casualty Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSentryCas.pdf",
+      "naic": null
+    },
+    {
+      "company": "Sentry Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSentryInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "Sentry Life Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSentryLf.pdf",
+      "naic": null
+    },
+    {
+      "company": "Sentry Select Insurance Company",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSentrySel.pdf",
+      "naic": null
+    },
+    {
+      "company": "SOCIETY INSURANCE, a mutual company",
+      "location": "Fond du Lac, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSociety.pdf",
+      "naic": null
+    },
+    {
+      "company": "Southern Guaranty Insurance Company",
+      "location": "Clearwater, Florida",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSouthernGurar.pdf",
+      "naic": null
+    },
+    {
+      "company": "Southern Pilot Insurance Company",
+      "location": "Sun Prairie, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSouthernPilot.pdf",
+      "naic": null
+    },
+    {
+      "company": "State Auto Insurance Company of Wisconsin",
+      "location": "Onalaska, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinStateAuto.pdf",
+      "naic": null
+    },
+    {
+      "company": "SU Insurance Company",
+      "location": "Oak Creek, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSUInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "Sugar Creek Mutual Insurance Company",
+      "location": "Elkhorn, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSugarCrk.pdf",
+      "naic": null
+    },
+    {
+      "company": "Superior Vision Insurance Plan of Wisconsin, Inc.",
+      "location": "Linthicum, Maryland",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinSuperiorVision.pdf",
+      "naic": null
+    },
+    {
+      "company": "Theresa Mutual Insurance Company",
+      "location": "Theresa, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinTheresa.pdf",
+      "naic": null
+    },
+    {
+      "company": "Third Coast Insurance Company",
+      "location": "New Berlin, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinThirdCoast.pdf",
+      "naic": null
+    },
+    {
+      "company": "Thrivent Financial for Lutherans",
+      "location": "Minneapolis, Minnesota",
+      "asOfAsPrinted": "December 31, 2024​",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinThrivent.pdf",
+      "naic": null
+    },
+    {
+      "company": "Transit Mutual Insurance Corporation of Wisconsin",
+      "location": "Appleton, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024​",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinTransit.pdf",
+      "naic": null
+    },
+    {
+      "company": "Unimerica Insurance Company",
+      "location": "Eden Prairie, Minnesota",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinUnimerica.pdf",
+      "naic": null
+    },
+    {
+      "company": "United Wisconsin Insurance Company",
+      "location": "New Berlin, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinUnitedWI.pdf",
+      "naic": null
+    },
+    {
+      "company": "UnitedHealthcare of Wisconsin, Inc.",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinUnitedHealthcare.pdf",
+      "naic": null
+    },
+    {
+      "company": "UnitedHealthcare Life Insurance Company",
+      "location": "Green Bay, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinUHLInsCo.pdf",
+      "naic": null
+    },
+    {
+      "company": "Unitrin Safeguard Insurance Company",
+      "location": "Chicago, Illinois",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinUnitrinSafe.pdf",
+      "naic": null
+    },
+    {
+      "company": "Viking Insurance Company of Wisconsin",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinViking.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wausau Business Insurance Company",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWausauBusiness.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wausau General Insurance Company",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWausauGen.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wausau Underwriters Insurance Company",
+      "location": "Wausau, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWausauUnder.pdf",
+      "naic": null
+    },
+    {
+      "company": "WEA Insurance Corporation",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWEAInsCorp.pdf",
+      "naic": null
+    },
+    {
+      "company": "WEA Property Casualty Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWEAPropCas.pdf",
+      "naic": null
+    },
+    {
+      "company": "West Bend Insurance Company",
+      "location": "West Bend, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWestBend.pdf",
+      "naic": null
+    },
+    {
+      "company": "West Bend Premier Insurance Company",
+      "location": "West Bend, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWestBendPremier.pdf",
+      "naic": null
+    },
+    {
+      "company": "West Bend Select Insurance Company",
+      "location": "West Bend, Wisconsin",
+      "asOfAsPrinted": "December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWestBendSelect.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin County Mutual Insurance Corporation",
+      "location": "Brookfield, Wisconsin",
+      "asOfAsPrinted": "December 31, 2023",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWICtyMutIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Lawyers Mutual Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWILawyers.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Municipal Mutual Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWIMunicipal.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Mutual Insurance Company",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWIMutIns.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wisconsin Physicians Service Insurance Corporation",
+      "location": "Madison, Wisconsin",
+      "asOfAsPrinted": "December 31, 2020",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWIPhyServ.pdf",
+      "naic": null
+    },
+    {
+      "company": "​​ Wisconsin River Mutual Insurance Company",
+      "location": "​Prairie du Sac, Wisconsin",
+      "asOfAsPrinted": "​​December 31, 2024",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWiscRiver.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wysh Life and Health Insurance Company",
+      "location": "Milwaukee, Wisconsin",
+      "asOfAsPrinted": "December 31, 2022",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWyshLifHea.pdf",
+      "naic": null
+    },
+    {
+      "company": "Wyssta Insurance Company, Inc.",
+      "location": "Stevens Point, Wisconsin",
+      "asOfAsPrinted": "December 31, 2021",
+      "sourceDocument": "https://oci.wi.gov/Documents/Companies/FinWyssta.pdf",
+      "naic": null
+    }
+  ],
+  "note": "OCI index entries; not unique companies, enforcement orders, or exact identity attachments. Index does not print NAIC."
+}
