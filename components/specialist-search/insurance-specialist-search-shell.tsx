@@ -5,6 +5,8 @@ import { SearchShellAnalytics } from './search-shell-analytics';
 const EXAMPLES = [
   'NPN 10391484',
   'Insurance agencies credentialed in Florida',
+  'Indiana insurance company complaints',
+  'Insurance enforcement actions in Michigan',
   'Agency vs insurer',
   'What is an insurance appointment?',
 ];
