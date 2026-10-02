@@ -2,6 +2,20 @@ import { searchLegalInsurers } from '@/lib/national/legal-insurer-search';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { insuranceAskHref, planInsuranceRequest, readInsuranceRequest } from './request';
 import { NAME_CANDIDATE_WINDOW, collectInsuranceNameCandidates, nameCandidateWindow, revalidateSelection, type AgencySourceRow, type NameCandidate, type NameCandidateStream, type NameCandidateWindow, type NameSource } from './name-candidates';
+import {
+  ACTIVE_CREDENTIALS_PER_ENTITY,
+  BRIDGES_PER_ENTITY,
+  OTHER_CREDENTIALS_PER_ENTITY,
+  PUBLIC_CONTACTS_PER_ENTITY,
+  UNKNOWN_CREDENTIALS_PER_ENTITY,
+  isCertifiedExactNpnBridge,
+  projectCertifiedAgency,
+  selectDisplayCredentials,
+  type BridgeRow,
+  type ContactRow,
+  type CredentialRow,
+  type ProviderSlugRow,
+} from './agency-card-projection';
 import { invalidResearch } from './research-intent';
 import { recoveryFor } from './recovery';
 import {
@@ -47,6 +61,12 @@ export type AskCard = {
   href: string | null;
   publicationNote: string | null;
   whyMatched: string;
+  /** Recorded public address. Present only for a certified exact-NPN agency bridge. */
+  recordedPlace?: string | null;
+  publicPhone?: string | null;
+  publicEmail?: string | null;
+  /** State-specific credential lines. Set only when that bridge exists. */
+  credentialFacts?: string[];
   evidenceFamily?: string;
   planYear?: string | null;
   matchEvidence?: { method: string; field: string; value: string; requested: string; entityId: string; entityClass: string; source: string; normalization: string[] };
@@ -99,7 +119,8 @@ export type AdminDb = {
 
 type Chain = {
   select: (columns: string, opts?: { count?: 'exact'; head?: boolean }) => Chain;
-  eq: (col: string, val: string) => Chain;
+  eq: (col: string, val: string | boolean) => Chain;
+  neq: (col: string, val: string) => Chain;
   ilike: (col: string, val: string) => Chain;
   in: (col: string, val: string[]) => Chain;
   not: (col: string, op: string, val: unknown) => Chain;
@@ -1279,6 +1300,10 @@ export function publicAskPayload(result: InsuranceAskResult) {
       href: row.href,
       publicationNote: row.publicationNote,
       whyMatched: row.whyMatched,
+      recordedPlace: row.recordedPlace ?? null,
+      publicPhone: row.publicPhone ?? null,
+      publicEmail: row.publicEmail ?? null,
+      credentialFacts: row.credentialFacts ?? null,
       evidenceFamily: row.evidenceFamily,
       planYear: row.planYear,
       matchEvidence: row.matchEvidence,
@@ -1332,17 +1357,106 @@ function cardForNameCandidate(candidate: NameCandidate, name: string): AskCard |
   return card;
 }
 
+const CREDENTIAL_COLUMNS = 'entity_id, jurisdiction, regulatory_status, license_number, license_class, source_dataset, source_observed_at';
+
+function assignPrimaryCredential(card: AskCard, credential: CredentialRow) {
+  card.credentialJurisdiction = credential.jurisdiction ?? null;
+  card.credentialStatus = credential.regulatory_status ?? null;
+  card.licenseNumber = credential.license_number ?? null;
+  card.licenseClass = credential.license_class ?? null;
+  card.sourceDataset = credential.source_dataset ?? card.sourceDataset;
+  card.sourceObservedAt = credential.source_observed_at ?? null;
+}
+
+async function readCertifiedBridges(entityIds: string[]): Promise<BridgeRow[]> {
+  const { data } = await db()
+    .from('provider_entity_bridges')
+    .select('provider_id, entity_id, confidence, match_method')
+    .in('entity_id', entityIds)
+    .eq('confidence', 'CONFIRMED')
+    .eq('match_method', 'exact_npn')
+    .limit(entityIds.length * BRIDGES_PER_ENTITY);
+  return ((data ?? []) as BridgeRow[]).filter((row) => entityIds.includes(row.entity_id) && isCertifiedExactNpnBridge(row, row.entity_id));
+}
+
+async function readProviderSlugs(providerIds: string[]): Promise<ProviderSlugRow[]> {
+  const { data } = await db().from('providers').select('id, slug').in('id', providerIds).limit(providerIds.length);
+  return (data ?? []) as ProviderSlugRow[];
+}
+
+async function readCredentials(entityIds: string[], kind: 'active' | 'sourced' | 'unknown'): Promise<CredentialRow[]> {
+  let query = db().from('license_credentials').select(CREDENTIAL_COLUMNS).in('entity_id', entityIds);
+  if (kind === 'active') query = query.eq('regulatory_status', 'active').limit(entityIds.length * ACTIVE_CREDENTIALS_PER_ENTITY);
+  else if (kind === 'sourced') query = query.neq('regulatory_status', 'unknown').limit(entityIds.length * OTHER_CREDENTIALS_PER_ENTITY);
+  else query = query.eq('regulatory_status', 'unknown').order('jurisdiction', { ascending: true }).limit(entityIds.length * UNKNOWN_CREDENTIALS_PER_ENTITY);
+  const { data } = await query;
+  return (data ?? []) as CredentialRow[];
+}
+
+async function readPublicContacts(entityIds: string[]): Promise<ContactRow[]> {
+  const { data } = await db()
+    .from('contact_observations')
+    .select('entity_id, contact_kind, value, public_eligible')
+    .in('entity_id', entityIds)
+    .eq('public_eligible', true)
+    .limit(entityIds.length * PUBLIC_CONTACTS_PER_ENTITY);
+  return ((data ?? []) as ContactRow[]).filter((row) => row.public_eligible === true);
+}
+
+/**
+ * One bridge read for the agency cards in this window, then at most one read each
+ * for provider slugs, public contacts, and the three credential batches.
+ * Contacts, place, and /providers/{slug} are applied only for a certified exact-NPN bridge.
+ * Selection still chooses an ACTIVE credential when the agency has no such bridge.
+ */
+async function projectAgencyCards(cards: AskCard[], mode: 'window' | 'selection'): Promise<void> {
+  const agencies = cards.filter((card) => card.entityClass === 'agency' && card.entityId);
+  const entityIds = [...new Set(agencies.map((card) => card.entityId))];
+  if (!entityIds.length) return;
+  const bridges = await readCertifiedBridges(entityIds);
+  const bridgedIds = [...new Set(bridges.map((row) => row.entity_id))];
+  const credentialIds = mode === 'selection' ? entityIds : bridgedIds;
+  if (!credentialIds.length) return;
+  const providerIds = [...new Set(bridges.map((row) => row.provider_id))];
+  const [providers, active, sourced, unknowns, contacts] = await Promise.all([
+    providerIds.length ? readProviderSlugs(providerIds) : Promise.resolve([]),
+    readCredentials(credentialIds, 'active'),
+    readCredentials(credentialIds, 'sourced'),
+    readCredentials(credentialIds, 'unknown'),
+    bridgedIds.length ? readPublicContacts(bridgedIds) : Promise.resolve([]),
+  ]);
+  for (const card of agencies) {
+    const credentials = [...active, ...sourced, ...unknowns].filter((row) => row.entity_id === card.entityId);
+    const projected = projectCertifiedAgency({ entityId: card.entityId, bridges, providers, credentials, contacts });
+    if (projected) {
+      if (projected.primary) assignPrimaryCredential(card, projected.primary);
+      card.recordedPlace = projected.recordedPlace;
+      card.publicPhone = projected.publicPhone;
+      card.publicEmail = projected.publicEmail;
+      card.credentialFacts = projected.credentialFacts;
+      if (projected.href) {
+        card.href = projected.href;
+        card.publicationNote = null;
+      }
+      continue;
+    }
+    const primary = selectDisplayCredentials(credentials)[0];
+    if (mode === 'selection' && primary) assignPrimaryCredential(card, primary);
+  }
+}
+
 export type InsuranceNameCandidateSearch = { stream: NameCandidateStream; window: NameCandidateWindow; cards: AskCard[] };
 /**
  * TH-SEARCH-R1-019F: the single entry every surface uses for organization-name candidates.
  * Native /ask reaches it through lookupNameCandidates; the structured operations call it directly.
  * `q`/`options` are only used to mint the hub-owned selection link for each candidate.
  */
-export async function searchInsuranceNameCandidates(input: { name: string; entityClass?: 'agency' | 'insurer' | 'person'; page: number; limit: number; q: string; options?: InsuranceRequestOptions }): Promise<InsuranceNameCandidateSearch> {
+export async function searchInsuranceNameCandidates(input: { name: string; entityClass?: 'agency' | 'insurer' | 'person'; page: number; limit: number; q: string; options?: InsuranceRequestOptions; project?: boolean }): Promise<InsuranceNameCandidateSearch> {
   if (!sourceContext.getStore() && !isSupabaseAdminConfigured()) throw new Error('Insurance research source unavailable');
   const stream = await collectInsuranceNameCandidates(nameSource(), { name: input.name, entityClass: input.entityClass });
   const { window, candidates } = nameCandidateWindow(stream, input.page, input.limit);
   const cards = candidates.flatMap((candidate) => { const card = cardForNameCandidate(candidate, input.name); if (!card) return []; card.selectionHref = insuranceAskHref({ q: input.q, options: input.options, selected: card.entityId }); return [card]; });
+  if (input.project !== false) await projectAgencyCards(cards, 'window');
   return { stream, window, cards };
 }
 
@@ -1350,7 +1464,7 @@ async function lookupNameCandidates(parsed: ParsedInsuranceAsk, started: number)
   const q = parsed.query, name = q.nameQuery!, tokens = distinctiveNameTokens(name);
   if (!tokens.length) return { ...emptyBase(parsed, started), terminalState: 'NEEDS_CLARIFICATION', limitations: ['Enter a distinctive company name. Generic insurance/agency/company words do not identify a business.', ...LIMITATIONS] };
   const limit = Math.min(q.pageSize ?? NAME_CANDIDATE_WINDOW, NAME_CANDIDATE_WINDOW);
-  const { stream, window, cards: candidates } = await searchInsuranceNameCandidates({ name, entityClass: q.entityClass, page: q.page, limit, q: parsed.raw, options: q.requestOptions });
+  const { stream, window, cards: candidates } = await searchInsuranceNameCandidates({ name, entityClass: q.entityClass, page: q.page, limit, q: parsed.raw, options: q.requestOptions, project: !q.selectedEntity });
   if(q.selectedEntity){
     // Revalidated against the WHOLE current candidate stream of this request, never just one window.
     const selected=revalidateSelection(stream,q.selectedEntity), chosen=selected?cardForNameCandidate(selected,name):null;
@@ -1361,7 +1475,7 @@ async function lookupNameCandidates(parsed: ParsedInsuranceAsk, started: number)
       if(!result.results.length)result.results=[chosen];
       result.terminalState ??= 'EVIDENCE_RESULT';return result;
     }
-    if(chosen.entityClass==='agency'){const creds=await credentialsForEntity(chosen.entityId,8);const first=creds[0];chosen.credentialJurisdiction=first?.jurisdiction??null;chosen.credentialStatus=first?.regulatory_status??null;chosen.licenseNumber=first?.license_number??null;chosen.licenseClass=first?.license_class??null;chosen.sourceDataset=first?.source_dataset??chosen.sourceDataset;chosen.sourceObservedAt=first?.source_observed_at??null;}
+    if (chosen.entityClass === 'agency') await projectAgencyCards([chosen], 'selection');
     return {...finish(parsed,[chosen],1,started,'Server-revalidated selected source identity'),terminalState:'IDENTITY_FOUND'};
   }
   const bounded = window.completeness === 'SCAN_BOUND_REACHED';

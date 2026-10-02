@@ -137,6 +137,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
                   {row.entityClass === 'person' ? 'Producer / individual' : row.entityClass === 'insurer' ? 'Legal insurer' : 'Agency'}
                 </span>
               </div>
+              {row.recordedPlace ? <p className="mt-1 text-sm text-[#1E293B]">{row.recordedPlace}</p> : null}
               <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
                 {row.npn ? (
                   <div>
@@ -150,13 +151,13 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
                     <dd className="font-semibold">{row.naicCode}</dd>
                   </div>
                 ) : null}
-                {row.credentialJurisdiction ? (
+                {!row.credentialFacts && row.credentialJurisdiction ? (
                   <div>
                     <dt className="text-xs uppercase">credential jurisdiction</dt>
                     <dd>{row.credentialJurisdiction}</dd>
                   </div>
                 ) : null}
-                {row.credentialStatus ? (
+                {!row.credentialFacts && row.credentialStatus ? (
                   <div>
                     <dt className="text-xs uppercase">Source credential status</dt>
                     <dd>{row.credentialStatus}</dd>
@@ -187,16 +188,28 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
                   </div>
                 ) : null}
               </dl>
-              <p className="mt-3 text-sm leading-relaxed text-[#1E293B]">
-                <span className="font-semibold">Why this matched. </span>
-                {row.whyMatched}
-              </p>
+              {row.credentialFacts?.length ? (
+                <div className="mt-3 text-sm text-[#1E293B]">
+                  <p className="text-xs font-semibold uppercase">Credential evidence</p>
+                  <ul className="mt-1 space-y-1">
+                    {row.credentialFacts.map((line, index) => <li key={`${line}:${index}`}>{line}</li>)}
+                  </ul>
+                </div>
+              ) : null}
+              {row.publicPhone ? <p className="mt-2 text-sm text-[#1E293B]">Phone: {row.publicPhone}</p> : null}
+              {row.publicEmail ? <p className="mt-1 text-sm text-[#1E293B]">Email: {row.publicEmail}</p> : null}
+              {row.credentialFacts ? null : (
+                <p className="mt-3 text-sm leading-relaxed text-[#1E293B]">
+                  <span className="font-semibold">Why this matched. </span>
+                  {row.whyMatched}
+                </p>
+              )}
               <div className="mt-4 flex flex-wrap gap-4">
               {row.publicationNote ? <p className="mt-2 text-xs text-[#1E293B]">{row.publicationNote}</p> : null}
               {row.selectionHref ? <Link href={row.selectionHref} className="inline-flex min-h-11 items-center font-semibold text-sky-800">Select this identity and continue</Link>:null}
               {row.href ? (
                 <Link href={row.href} data-specialist-event="profile_open" className="inline-flex min-h-11 items-center font-semibold text-[#0284C7]">
-                  Research this {row.entityClass === 'insurer' ? 'insurer' : row.entityClass === 'person' ? 'producer' : 'agency'}
+                  {row.credentialFacts && row.href.startsWith('/providers/') ? 'View company profile →' : <>Research this {row.entityClass === 'insurer' ? 'insurer' : row.entityClass === 'person' ? 'producer' : 'agency'}</>}
                 </Link>
               ) : null}
               </div>
@@ -207,8 +220,14 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
                   <div><dt className="text-xs uppercase">Identity method</dt><dd>{row.matchEvidence ? `${row.matchEvidence.method}: ${row.matchEvidence.field} = ${row.matchEvidence.value}` : row.npn ? 'Exact NPN or canonical graph identity' : row.naicCode ? 'Exact NAIC company code' : 'Structured source match'}</dd></div>
                   <div><dt className="text-xs uppercase">Credential source</dt><dd>{row.sourceDataset ?? 'See accepted source family'}</dd></div>
                   <div><dt className="text-xs uppercase">Official/source date</dt><dd>{row.sourceObservedAt ?? 'Source clock unavailable'}</dd></div>
-                  <div className="sm:col-span-2"><dt className="text-xs uppercase">Geography meaning</dt><dd>{row.credentialJurisdiction ? `${row.credentialJurisdiction} credential jurisdiction — not office or service territory` : 'No service territory inferred'}</dd></div>
+                  <div className="sm:col-span-2"><dt className="text-xs uppercase">Geography meaning</dt><dd>{row.credentialJurisdiction ? `${row.credentialJurisdiction} credential jurisdiction — not office or service territory` : 'No service territory inferred'}{row.recordedPlace ? ` Recorded address ${row.recordedPlace} is not a service area.` : ''}</dd></div>
                 </dl>
+                {row.credentialFacts ? (
+                  <p className="mt-3 text-sm leading-relaxed text-[#1E293B]">
+                    <span className="font-semibold">Why this matched. </span>
+                    {row.whyMatched}
+                  </p>
+                ) : null}
                 <p className="mt-3 text-xs text-slate-600">LOA is not appointment. Appointment is not employment or endorsement. Marketplace evidence is not a state license.</p>
               </details>
             </li>
