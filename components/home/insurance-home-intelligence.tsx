@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { ZipSearch } from "@/components/zip-search";
 import { InsuranceSpecialistSearchShell } from "@/components/specialist-search/insurance-specialist-search-shell";
 import { HomeIntelEvents } from "./home-intel-events";
+import {
+  NEWEST_PUBLISHED_STATES,
+  PUBLISHED_STATE_COUNT,
+  PUBLISHED_STATES,
+} from "@/lib/home/published-states";
 import type { InsuranceHomeIntelV1 } from "@/lib/national/home-intel";
 import type { InsuranceNetworkMetricsV1 } from "@/lib/metrics/insurance-network-metrics-v1";
 import {
@@ -107,7 +112,14 @@ export function InsuranceHomeIntelligence({
   intel: InsuranceHomeIntelV1;
   metrics: InsuranceNetworkMetricsV1;
 }) {
-  const inventory = buildInsuranceHomepageEvidenceInventory(metrics);
+  // The published-state measure follows the local published-state list, not the detailed card set.
+  const inventory = buildInsuranceHomepageEvidenceInventory(metrics).map((row) =>
+    row.key === "published_state_intelligence_pages"
+      ? { ...row, value: PUBLISHED_STATE_COUNT, display: String(PUBLISHED_STATE_COUNT) }
+      : row,
+  );
+  const cardHrefs = new Set<string>(INSURANCE_HOMEPAGE_STATE_CARDS.map((card) => card.href));
+  const moreStates = PUBLISHED_STATES.filter((state) => !cardHrefs.has(state.href));
   const highlights = [
     "insurance_agencies",
     "insurance_producer_records",
@@ -190,6 +202,40 @@ export function InsuranceHomeIntelligence({
                 </p>
               </article>
             ))}
+          </div>
+          <div className="mt-8 rounded-2xl border border-slate-600 p-5" id="footprint">
+            <p className="text-xs font-bold uppercase tracking-[.16em] text-sky-300">
+              Research footprint
+            </p>
+            <p className="mt-2 text-2xl font-semibold">
+              {PUBLISHED_STATE_COUNT} states with published insurance intelligence
+            </p>
+            <p className="mt-2 max-w-3xl text-sm text-slate-300">
+              Each state page is built from that state&rsquo;s own regulator sources.
+              Coverage keeps expanding state by state.
+            </p>
+            <p className="mt-4 text-sm font-semibold text-sky-200">Newest state pages</p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {NEWEST_PUBLISHED_STATES.map((state) => (
+                <li key={state.slug}>
+                  <Link
+                    href={state.href}
+                    title={state.newestSummary}
+                    data-intel-event="insurance_intel_state_click"
+                    className="inline-flex min-h-11 items-center rounded-full border border-slate-500 px-4 text-sm font-medium text-white hover:border-sky-300 hover:text-sky-200"
+                  >
+                    {state.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#states"
+              data-intel-event="insurance_intel_explore"
+              className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-300 hover:underline"
+            >
+              Explore all {PUBLISHED_STATE_COUNT} states →
+            </a>
           </div>
         </div>
       </section>
@@ -274,7 +320,7 @@ export function InsuranceHomeIntelligence({
             State intelligence coverage & source freshness
           </p>
           <h2 className="mt-2 text-3xl font-semibold text-[#0A2540]">
-            Five state regulatory systems, kept source-native
+            {PUBLISHED_STATE_COUNT} state regulatory systems, kept source-native
           </h2>
           <p className="mt-3 max-w-3xl">
             State cards describe evidence coverage—not market quality. Arizona
@@ -319,6 +365,33 @@ export function InsuranceHomeIntelligence({
               </article>
             ))}
           </div>
+          {moreStates.length > 0 ? (
+            <>
+              <h3 className="mt-10 text-xl font-semibold text-[#0A2540]">
+                Newest published states
+              </h3>
+              <ul className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {moreStates.map((state) => (
+                  <li
+                    key={state.slug}
+                    className="flex min-w-0 flex-col rounded-2xl border border-slate-200 p-5 shadow-sm"
+                  >
+                    <h4 className="text-xl font-semibold text-[#0A2540]">{state.name}</h4>
+                    <p className="mt-2 flex-1 text-sm text-slate-600">
+                      {state.newestSummary ?? `${state.name} insurance regulatory evidence`}
+                    </p>
+                    <Link
+                      href={state.href}
+                      data-intel-event="insurance_intel_state_click"
+                      className="mt-3 inline-flex min-h-11 items-center font-semibold text-sky-700"
+                    >
+                      Explore {state.abbreviation} intelligence →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
         </div>
       </section>
 
@@ -358,8 +431,7 @@ export function InsuranceHomeIntelligence({
                 publication
               </li>
               <li>
-                {INSURANCE_HOMEPAGE_STATE_CARDS.length} published state
-                intelligence pages
+                {PUBLISHED_STATE_COUNT} published state intelligence pages
               </li>
             </ul>
           </div>
