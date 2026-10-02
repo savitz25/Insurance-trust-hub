@@ -132,6 +132,10 @@ export function fixtureSource(
       this.filters.push(["in", k, v]);
       return this;
     }
+    neq(k: string, v: unknown) {
+      this.filters.push(["neq", k, v]);
+      return this;
+    }
     not(k: string, op: string, v: unknown) {
       this.filters.push(["not", k, [op, v]]);
       return this;
@@ -171,7 +175,9 @@ export function fixtureSource(
                 ? like(actual, String(v))
                 : op === "in"
                   ? (v as unknown[]).includes(actual)
-                  : actual != null,
+                  : op === "neq"
+                    ? actual !== v
+                    : actual != null,
           ),
         ),
       );
