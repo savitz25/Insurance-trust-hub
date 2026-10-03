@@ -28,8 +28,13 @@ import {
 } from '@/lib/my-insurance/parent-adapter';
 import {
   clearInsuranceParentPending,
+  readInsuranceParentPending,
   stashInsuranceParentPending,
 } from '@/lib/my-insurance/parent-pending-storage';
+import {
+  recoverParentPending,
+  submitParentHandoff,
+} from '@/lib/my-insurance/handoff-session';
 import {
   removeGuestProvider,
   stashPendingSaveAction,
@@ -42,8 +47,8 @@ export type SaveProviderButtonProps = {
   providerSlug: string;
   providerName: string;
   /**
-   * Published providers.id from the server render.
-   * The parent handoff re-reads the row and rejects a mismatch.
+   * Present on directory and profile cards.
+   * Parent identity is resolved on the server. This value is not sent.
    */
   providerId?: string | null;
   city?: string;
@@ -75,7 +80,6 @@ function findLocalProvider(slug: string): SavedProvider | null {
 export function SaveProviderButton({
   providerSlug,
   providerName,
-  providerId,
   city,
   state,
   licenseSummary,
@@ -102,6 +106,26 @@ export function SaveProviderButton({
     return () => window.removeEventListener('ith-my-insurance-store', onStore);
   }, [refresh]);
 
+  useEffect(() => {
+    const abandon = () => clearInsuranceParentPending(providerSlug);
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') abandon();
+    };
+    const decision = recoverParentPending({
+      pending: readInsuranceParentPending(providerSlug),
+      now: Date.now(),
+      pageOpen: document.visibilityState === 'visible',
+      locallySaved: Boolean(findLocalProvider(providerSlug)),
+    });
+    if (decision === 'abandon') abandon();
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pagehide', abandon);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pagehide', abandon);
+    };
+  }, [providerSlug]);
+
   const baseInput = {
     providerSlug,
     providerName,
@@ -127,21 +151,25 @@ export function SaveProviderButton({
     refresh();
   }
 
-  async function stageParentIntent(generation: number) {
+  async function stageParentIntent(generation: number, intent: 'save' | 'unsave') {
     try {
+      const pageOpen = document.visibilityState === 'visible';
       const handoff = await prepareInsuranceParentHandoffAction({
         providerSlug,
-        clientSuppliedId: providerId ?? null,
+        intent,
+        pageOpen,
       });
-      if (generation !== intentGeneration.current || !findLocalProvider(providerSlug)) {
+      const local = findLocalProvider(providerSlug);
+      const stale =
+        generation !== intentGeneration.current ||
+        (intent === 'save' ? !local : Boolean(local));
+      if (stale || !pageOpen || !handoff.ok) {
         clearInsuranceParentPending(providerSlug);
         return;
       }
-      if (handoff.ok) {
-        stashInsuranceParentPending(providerSlug, handoff.pending);
-      } else {
-        clearInsuranceParentPending(providerSlug);
-      }
+      stashInsuranceParentPending(providerSlug, handoff.pending);
+      const submitted = submitParentHandoff(intent);
+      if (submitted.submitted) clearInsuranceParentPending(providerSlug);
     } catch {
       if (generation === intentGeneration.current) {
         clearInsuranceParentPending(providerSlug);
@@ -181,7 +209,7 @@ export function SaveProviderButton({
       }
       const generation = intentGeneration.current + 1;
       intentGeneration.current = generation;
-      void stageParentIntent(generation);
+      void stageParentIntent(generation, 'save');
       toast.success(SAVE_ACKNOWLEDGEMENT);
       refresh();
     } finally {
@@ -202,8 +230,9 @@ export function SaveProviderButton({
         }
         removeProviderFromPlan(providerSlug);
         removeGuestProvider(providerSlug);
-        intentGeneration.current += 1;
-        clearInsuranceParentPending(providerSlug);
+        const generation = intentGeneration.current + 1;
+        intentGeneration.current = generation;
+        void stageParentIntent(generation, 'unsave');
         toast.message(UNSAVE_ACKNOWLEDGEMENT);
         refresh();
       } finally {
@@ -218,7 +247,7 @@ export function SaveProviderButton({
     if (result.ok && !getLastSaveError()) {
       const generation = intentGeneration.current + 1;
       intentGeneration.current = generation;
-      void stageParentIntent(generation);
+      void stageParentIntent(generation, 'save');
     }
     handleResult(result);
   }

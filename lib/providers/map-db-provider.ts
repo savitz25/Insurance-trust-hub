@@ -46,6 +46,7 @@ export function mapRowToProvider(row: DbProvider): Provider {
     is_verified: row.verified,
     /** Legacy display fields — first JSON license only. Full set is `licenses`. */
     licenses,
+    states_licensed: row.states_licensed ?? [],
     license_number: license?.license_number ?? null,
     license_state: license?.state ?? null,
     license_source: license?.source ?? null,

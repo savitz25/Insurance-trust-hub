@@ -3,8 +3,10 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import {
+  IDENTIFIER_NAMESPACE,
   INSURANCE_PARENT_SYNC,
   PROFILE_CLASS_CONTRACTS,
+  PROVIDERS_ID_DURABLE,
   SAVE_ACKNOWLEDGEMENT,
   SAVE_CONTROL_OFF,
   SAVE_CONTROL_ON,
@@ -12,12 +14,11 @@ import {
   parentSaveReady,
   profileSaveControl,
   resolveInsuranceProviderIdentity,
-  stageParentHandoff,
   transmitParentSync,
+  type PendingParentSync,
 } from './parent-adapter';
 
-const PROVIDER_ID = 'a1000001-0001-4000-8000-000000000001';
-const OTHER_ID = 'a1000001-0001-4000-8000-000000000002';
+const ONE_LICENSE = [{ state: 'FL', license_number: 'L106287', status: 'verified' as const }];
 
 test('profile Save toggles Save then Saved then Save and does not create a watch', () => {
   const saved = profileSaveControl(false);
@@ -38,105 +39,130 @@ test('profile Save toggles Save then Saved then Save and does not create a watch
   assert.equal(again.label, '♥ Saved');
 });
 
-test('a published agency id is the only parent identity and the return path is server-shaped', () => {
+test('one state license is the parent identity and providers.id is not', () => {
   const resolved = resolveInsuranceProviderIdentity({
-    publishedId: PROVIDER_ID.toUpperCase(),
-    publishedSlug: 'sunshine-coast-insurance-group',
-    licenseState: 'fl',
+    publishedId: 'A1000001-0001-4000-8000-000000000001',
+    publishedSlug: 'asfin-llc-l106287',
+    licenses: ONE_LICENSE,
+    statesLicensed: ['fl'],
   });
+  assert.equal(PROVIDERS_ID_DURABLE, false);
   assert.equal(resolved.ok, true);
   if (!resolved.ok) return;
-  assert.equal(resolved.nativeIdentity, PROVIDER_ID);
-  assert.equal(resolved.identifierNamespace, 'insurance.providers.id');
+  assert.equal(resolved.sourceIdentifier, 'L106287');
+  assert.equal(resolved.identifierNamespace, IDENTIFIER_NAMESPACE);
+  assert.equal(resolved.identifierNamespace, 'insurance.state_license');
   assert.equal(resolved.publicationSource, 'insurance.providers');
   assert.equal(resolved.publicationGrain, 'agency_provider');
   assert.equal(resolved.jurisdiction, 'FL');
-  assert.equal(resolved.returnPath, '/providers/sunshine-coast-insurance-group');
+  assert.equal(resolved.canonicalReturnPath, '/providers/asfin-llc-l106287');
   assert.equal(resolved.createsWatch, false);
+  assert.equal(JSON.stringify(resolved).includes('A1000001'), false);
 
-  const pending = stageParentHandoff(resolved);
-  assert.equal(pending.ok, true);
-  if (!pending.ok) return;
-  assert.equal(pending.pending.transmitted, false);
-  assert.equal(pending.pending.createsWatch, false);
-  assert.equal(pending.pending.status, 'pending');
-
-  const sent = transmitParentSync(pending.pending);
+  const pending: PendingParentSync = {
+    version: 'insurance-parent-prep/2',
+    intent: 'save',
+    profileClass: 'insurance_provider',
+    identifierNamespace: resolved.identifierNamespace,
+    sourceIdentifier: resolved.sourceIdentifier,
+    jurisdiction: resolved.jurisdiction,
+    canonicalReturnPath: resolved.canonicalReturnPath,
+    manifestDigest: 'abc',
+    assertion: null,
+    status: 'pending',
+    transmitted: false,
+    createsWatch: false,
+    pageOpen: true,
+    expiresAt: Date.now() + 1000,
+    acknowledgement: SAVE_ACKNOWLEDGEMENT,
+  };
+  const sent = transmitParentSync(pending);
   assert.equal(sent.ok, false);
   assert.equal(sent.reason, 'PRODUCTION_PARENT_SYNC_OFF');
   assert.equal(sent.transmitted, false);
   assert.equal(INSURANCE_PARENT_SYNC, 'OFF');
-  assert.equal(pending.pending.transmitted, false);
 });
 
-test('identity fails closed for slug-only, synthetic, missing, and mismatched ids', () => {
+test('identity fails closed for slug-only, synthetic, missing, tampered, and multi-license rows', () => {
+  const reason = (input: Parameters<typeof resolveInsuranceProviderIdentity>[0]) => {
+    const resolved = resolveInsuranceProviderIdentity(input);
+    assert.equal(resolved.ok, false);
+    if (resolved.ok) return '';
+    return resolved.reason;
+  };
   assert.equal(
-    resolveInsuranceProviderIdentity({
-      publishedId: null,
-      publishedSlug: 'sunshine-coast-insurance-group',
-    }).ok,
-    false,
-  );
-  assert.equal(
-    resolveInsuranceProviderIdentity({
-      publishedId: null,
-      publishedSlug: 'sunshine-coast-insurance-group',
-    }).ok
-      ? ''
-      : (
-          resolveInsuranceProviderIdentity({
-            publishedId: null,
-            publishedSlug: 'sunshine-coast-insurance-group',
-          }) as { reason: string }
-        ).reason,
+    reason({ publishedSlug: 'asfin-llc-l106287' }),
     'slug_only',
   );
   assert.equal(
-    (
-      resolveInsuranceProviderIdentity({
-        publishedId: 'fallback-1',
-        publishedSlug: 'summit-insurance-group',
-      }) as { reason: string }
-    ).reason,
+    reason({ publishedId: 'fallback-1', publishedSlug: 'summit-insurance-group', licenses: ONE_LICENSE }),
     'synthetic',
   );
   assert.equal(
-    (
-      resolveInsuranceProviderIdentity({
-        publishedId: null,
-        publishedSlug: null,
-        clientSuppliedId: 'fallback-4',
-      }) as { reason: string }
-    ).reason,
+    reason({ claimedProviderId: 'fallback-4' }),
     'synthetic',
   );
   assert.equal(
-    (
-      resolveInsuranceProviderIdentity({
-        publishedId: PROVIDER_ID,
-        publishedSlug: 'sunshine-coast-insurance-group',
-        clientSuppliedId: OTHER_ID,
-      }) as { reason: string }
-    ).reason,
+    reason({
+      publishedSlug: 'asfin-llc-l106287',
+      licenses: ONE_LICENSE,
+      claimedProviderId: 'a1000001-0001-4000-8000-000000000002',
+    }),
+    'tampered',
+  );
+  assert.equal(
+    reason({
+      publishedSlug: 'asfin-llc-l106287',
+      licenses: ONE_LICENSE,
+      claimedSourceIdentifier: 'L106287',
+    }),
+    'tampered',
+  );
+  assert.equal(
+    reason({
+      publishedSlug: 'asfin-llc-l106287',
+      licenses: ONE_LICENSE,
+      claimedJurisdiction: 'FL',
+    }),
+    'tampered',
+  );
+  assert.equal(
+    reason({
+      publishedSlug: 'asfin-llc-l106287',
+      licenses: ONE_LICENSE,
+      claimedName: 'ASFIN LLC',
+    }),
+    'tampered',
+  );
+  assert.equal(reason({ publishedSlug: null, publishedId: null }), 'unresolved');
+  assert.equal(
+    reason({ publishedSlug: '../ask', licenses: ONE_LICENSE }),
+    'unresolved',
+  );
+  assert.equal(
+    reason({
+      publishedSlug: 'asfin-llc-l106287',
+      licenses: [
+        ...ONE_LICENSE,
+        { state: 'TX', license_number: '1365714', status: 'verified' },
+      ],
+    }),
     'ambiguous',
   );
   assert.equal(
-    (
-      resolveInsuranceProviderIdentity({
-        publishedId: '00000000-0000-0000-0000-000000000000',
-        publishedSlug: 'sunshine-coast-insurance-group',
-      }) as { reason: string }
-    ).reason,
-    'unresolved',
+    reason({
+      publishedSlug: 'asfin-llc-l106287',
+      licenses: ONE_LICENSE,
+      statesLicensed: ['FL', 'TX'],
+    }),
+    'ambiguous',
   );
   assert.equal(
-    (
-      resolveInsuranceProviderIdentity({
-        publishedId: PROVIDER_ID,
-        publishedSlug: '../ask',
-      }) as { reason: string }
-    ).reason,
-    'unresolved',
+    reason({
+      publishedSlug: 'asfin-llc-l106287',
+      licenses: [{ state: 'FL', license_number: 'pending', status: 'verified' }],
+    }),
+    'slug_only',
   );
 });
 
@@ -227,6 +253,9 @@ test('the profile control has one Save toggle and does not call Ask', () => {
   );
   const adapter = readFileSync(join(root, 'lib/my-insurance/parent-adapter.ts'), 'utf8');
   const handoff = readFileSync(join(root, 'actions/insurance-parent-handoff.ts'), 'utf8');
+  const signed = readFileSync(join(root, 'lib/my-insurance/signed-handoff.ts'), 'utf8');
+  const session = readFileSync(join(root, 'lib/my-insurance/handoff-session.ts'), 'utf8');
+  const card = readFileSync(join(root, 'components/provider-card.tsx'), 'utf8');
   const navbar = readFileSync(join(root, 'components/navbar.tsx'), 'utf8');
 
   assert.match(button, /SAVE_CONTROL_OFF/);
@@ -234,10 +263,21 @@ test('the profile control has one Save toggle and does not call Ask', () => {
   assert.doesNotMatch(button, /Unsave/);
   assert.doesNotMatch(button, />\s*Remove\s*</);
   assert.doesNotMatch(button, /createWatch|startWatch|watchAction/);
+  assert.doesNotMatch(button, /clientSuppliedId/);
+  assert.doesNotMatch(button, /asktrusthub\.com/);
+  assert.doesNotMatch(button, /fetch\(/);
   assert.doesNotMatch(adapter, /asktrusthub\.com/);
   assert.doesNotMatch(adapter, /fetch\(/);
   assert.doesNotMatch(handoff, /asktrusthub\.com/);
   assert.doesNotMatch(handoff, /\.from\(/);
+  assert.doesNotMatch(handoff, /fetch\(/);
+  assert.match(handoff, /key: null/);
+  assert.doesNotMatch(signed, /fetch\(/);
+  assert.doesNotMatch(session, /asktrusthub\.com/);
+  assert.doesNotMatch(session, /location\.assign|window\.open/);
+  assert.match(card, /SaveProviderButtonLazy/);
+  assert.match(card, /providerId=\{provider\.id\}/);
+  assert.match(card, /defaultStatus="researching"/);
   assert.match(navbar, /My TrustHub/);
   assert.match(navbar, /href="\/my-trusthub"/);
   assert.doesNotMatch(navbar, /aria-label=\{showBadge \? `My Insurance/);

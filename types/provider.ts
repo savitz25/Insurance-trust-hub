@@ -26,6 +26,11 @@ export interface Provider {
    * Display fields below still use licenses[0] until INS-NAT-009.
    */
   licenses?: import('@/types/supabase').LicenseEntry[];
+  /**
+   * Published licensure states from providers.states_licensed.
+   * A mailing address in another state is not an extra license.
+   */
+  states_licensed?: string[];
   license_number?: string | null;
   /** Phase 6B1 provenance — required with license for hard verified / indexable */
   license_state?: string | null;
