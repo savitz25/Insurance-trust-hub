@@ -49,7 +49,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ContextNav } from '@/components/context-nav';
-import { cn } from '@/lib/utils';
 import type { Provider } from '@/types/provider';
 import { loaSpecialtyTags } from '@/lib/dfs/loa';
 import {
@@ -58,7 +57,6 @@ import {
   getMedicareNonClaim,
   getRegulatorProfile,
   getRegulatorShortLabel,
-  getResearchProfileKicker,
   getVerificationExplanation,
 } from '@/lib/regulators/labels';
 import {
@@ -237,6 +235,23 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
   // matches, and never on a plain agency profile with no such relationship.
   const showGovernmentVerification = governmentVerificationApplicable(provider);
 
+  const businessType = specialties.some((item) => /independent agency/i.test(item))
+    ? 'Independent insurance agency'
+    : 'Insurance agency';
+  const glanceLines = loaTags.length
+    ? loaTags.slice(0, 4)
+    : insuranceTypes
+        .map((type) => INSURANCE_TYPES.find((item) => item.value === type)?.label ?? String(type))
+        .slice(0, 4);
+  let websiteHost: string | null = null;
+  if (provider.website?.trim()) {
+    try {
+      websiteHost = new URL(provider.website).host.replace(/^www\./, '');
+    } catch {
+      websiteHost = null;
+    }
+  }
+
   const suitsRelocating =
     specialties.includes('Relocation Experienced') ||
     specialties.includes('Medicare Specialists') ||
@@ -248,210 +263,223 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
       <JsonLd data={buildInsuranceAgencySchema(provider)} />
 
       <div className="border-b bg-muted/20">
-        <div className="container mx-auto px-4 py-10 md:py-14">
+        <div className="container mx-auto px-4 py-8 md:py-10">
           <ContextNav
             pathname={`/providers/${slug}`}
             from={sp.from}
             currentLabel={provider.name}
             className="mb-5"
           />
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
-            <div className="max-w-3xl">
-              <div className="flex flex-wrap items-center gap-2 mb-3">
-                <InsuranceVerificationBadge verification={publicView.verification} />
-                <Badge variant="secondary">
-                  {provider.city}, {provider.state}
-                </Badge>
-                {freshness.badge ? (
-                  <Badge variant={freshness.kind === 'stale' ? 'outline' : 'secondary'}>
-                    {freshness.badge}
-                  </Badge>
-                ) : null}
+          <p className="text-sm font-medium text-[#0284C7]">{businessType}</p>
+          <h1 className="mt-1 text-3xl font-bold tracking-tight text-[#0A2540] md:text-4xl">
+            {dba ? legalName : provider.name}
+          </h1>
+          {dba ? (
+            <p className="mt-2 text-base text-muted-foreground">
+              Doing business as{' '}
+              <span className="font-semibold text-foreground">{dba}</span>
+            </p>
+          ) : null}
+          <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-base text-[#1E293B]">
+            <MapPin className="h-4 w-4 shrink-0 text-[#0284C7]" aria-hidden />
+            {locationParts.join(' · ')}
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <InsuranceVerificationBadge verification={publicView.verification} />
+            {freshness.badge ? (
+              <Badge variant={freshness.kind === 'stale' ? 'outline' : 'secondary'}>
+                {freshness.badge}
+              </Badge>
+            ) : null}
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            <SaveProviderButton
+              providerSlug={provider.slug}
+              providerName={provider.name}
+              city={provider.city}
+              state={provider.state}
+              licenseSummary={
+                publicView.verification.licenseNumber
+                  ? `License ${publicView.verification.licenseNumber}`
+                  : undefined
+              }
+              lines={insuranceTypes.map(String)}
+              defaultStatus="shortlisted"
+            />
+            <CompareProviderButton
+              providerSlug={provider.slug}
+              providerName={provider.name}
+            />
+            {publicView.phone && (
+              <Button asChild variant="outline" className="gap-2">
+                <a href={`tel:${publicView.phone.replace(/\D/g, '')}`}>
+                  <Phone className="h-4 w-4" /> {publicView.phone}
+                </a>
+              </Button>
+            )}
+            {provider.website && (
+              <Button asChild className="gap-2" variant={hasHighConfidenceWebsite ? 'default' : 'outline'}>
+                <a href={provider.website} target="_blank" rel="noopener noreferrer">
+                  <Globe className="h-4 w-4" /> Visit website
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </Button>
+            )}
+          </div>
+
+          <section className="mt-6" aria-label="At a glance">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-[#1E293B]">
+              At a glance
+            </h2>
+            <dl className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
+              <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                <dt className="text-xs uppercase text-[#1E293B]">Business</dt>
+                <dd className="mt-1 text-sm font-semibold text-[#0A2540]">{businessType}</dd>
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-                {dba ? legalName : provider.name}
-              </h1>
-              {dba ? (
-                <p className="mt-2 text-base text-muted-foreground">
-                  Doing business as{' '}
-                  <span className="font-semibold text-foreground">{dba}</span>
-                </p>
-              ) : null}
-              <p className="mt-2 text-sm text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1">
-                <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                {locationParts.join(' · ')}
-                <span className="text-muted-foreground/80">
-                  · {getResearchProfileKicker(licenseJurisdiction)}
-                </span>
-              </p>
-              {loaTags.length > 0 ? (
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {loaTags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="font-medium">
-                      {tag}
-                    </Badge>
-                  ))}
+              {publicView.verification.licenseNumber ? (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                  <dt className="text-xs uppercase text-[#1E293B]">State license on file</dt>
+                  <dd className="mt-1 text-sm font-semibold tabular-nums text-[#0A2540]">
+                    {licenseJurisdiction} {publicView.verification.licenseNumber}
+                  </dd>
                 </div>
               ) : null}
-              {provider.short_description && (
-                <p className="mt-3 text-base text-muted-foreground leading-relaxed">
-                  {provider.short_description}
-                </p>
-              )}
-              <p className="mt-2 text-xs text-muted-foreground max-w-xl">
-                {publicView.verification.summary} Research dossier — not an endorsement or ranking.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2 shrink-0">
-              <SaveProviderButton
-                providerSlug={provider.slug}
-                providerName={provider.name}
-                city={provider.city}
-                state={provider.state}
-                licenseSummary={
-                  publicView.verification.licenseNumber
-                    ? `License ${publicView.verification.licenseNumber}`
-                    : undefined
-                }
-                lines={insuranceTypes.map(String)}
-                defaultStatus="shortlisted"
-              />
-              <CompareProviderButton
-                providerSlug={provider.slug}
-                providerName={provider.name}
-              />
-              <SaveResearchSessionButton
-                session={{
-                  title: `${provider.name} research session`,
-                  source: 'profile',
-                  providerSlug: provider.slug,
-                  providerName: provider.name,
-                  hubPath: localHub?.href ?? null,
-                  directoryHref: `/directory?state=${licenseJurisdiction}&verified=true`,
-                  resumeHref: `/providers/${provider.slug}`,
-                  plannerHref: '/calculators/aca-subsidy',
-                }}
-              />
-              {publicView.phone && (
-                <Button asChild variant="outline" className="gap-2">
-                  <a href={`tel:${publicView.phone!.replace(/\D/g, '')}`}>
-                    <Phone className="h-4 w-4" /> {publicView.phone}
-                  </a>
-                </Button>
-              )}
-              {provider.website && (
-                <Button asChild className="gap-2" variant={hasHighConfidenceWebsite ? 'default' : 'outline'}>
-                  <a href={provider.website} target="_blank" rel="noopener noreferrer">
-                    <Globe className="h-4 w-4" /> Visit website
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                </Button>
-              )}
-            </div>
-          </div>
+              {npn ? (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                  <dt className="text-xs uppercase text-[#1E293B]">NPN</dt>
+                  <dd className="mt-1 text-sm font-semibold tabular-nums text-[#0A2540]">{npn}</dd>
+                </div>
+              ) : null}
+              <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                <dt className="text-xs uppercase text-[#1E293B]">Credential status</dt>
+                <dd className="mt-1 text-sm font-semibold text-[#0A2540]">
+                  {publicView.verification.badgeLabel}
+                </dd>
+              </div>
+              {glanceLines.length ? (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3 col-span-2">
+                  <dt className="text-xs uppercase text-[#1E293B]">Licensed lines on file</dt>
+                  <dd className="mt-1 text-sm font-semibold text-[#0A2540]">{glanceLines.join(' · ')}</dd>
+                </div>
+              ) : null}
+              {publicView.yearsInBusiness ? (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                  <dt className="text-xs uppercase text-[#1E293B]">Years in business</dt>
+                  <dd className="mt-1 text-sm font-semibold text-[#0A2540]">
+                    {publicView.yearsInBusiness}
+                  </dd>
+                </div>
+              ) : null}
+              {publicView.phone ? (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                  <dt className="text-xs uppercase text-[#1E293B]">Phone</dt>
+                  <dd className="mt-1 text-sm font-semibold text-[#0A2540]">
+                    <a href={`tel:${publicView.phone.replace(/\D/g, '')}`} className="hover:underline">
+                      {publicView.phone}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              {provider.website ? (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                  <dt className="text-xs uppercase text-[#1E293B]">Website</dt>
+                  <dd className="mt-1 text-sm font-semibold text-[#0A2540]">
+                    <a href={provider.website} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      {websiteHost ?? 'Public website'}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+            </dl>
+          </section>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-10 md:py-14">
-        <div className="grid lg:grid-cols-[1fr_360px] gap-10">
+        <div className={showContact ? 'grid gap-10 lg:grid-cols-[1fr_360px]' : 'grid gap-10'}>
           <div className="space-y-10">
             <section>
-              <h2 className="text-xl font-semibold mb-4">How verified</h2>
+              <h2 className="text-xl font-semibold mb-3">Contact information</h2>
               <Card>
-                <CardContent className="pt-6 space-y-3">
-                  <p className="text-sm">
-                    <span className="font-medium">Regulator:</span> {regulatorName}
+                <CardContent className="pt-6 space-y-2">
+                  <p className="text-sm flex items-start gap-2">
+                    <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden />
+                    <span>{locationParts.join(', ')}</span>
                   </p>
-                  {publicView.verification.licenseNumber && (
-                    <p className="text-sm">
-                      <span className="font-medium">License number:</span>{' '}
-                      <span className="tabular-nums">
-                        {publicView.verification.licenseNumber}
-                      </span>
-                    </p>
-                  )}
-                  {npn ? (
-                    <p className="text-sm">
-                      <span className="font-medium">NPN:</span>{' '}
-                      <span className="tabular-nums">{npn}</span>
-                    </p>
-                  ) : null}
-                  {publicView.verification.sourceLabel ? (
-                    <p className="text-sm">
-                      <span className="font-medium">Source:</span>{' '}
-                      {publicView.verification.sourceLabel}
-                    </p>
-                  ) : null}
-                  {publicView.verification.lastCheckedLabel ? (
-                    <p className="text-sm">
-                      <span className="font-medium">As of / last checked:</span>{' '}
-                      {publicView.verification.lastCheckedLabel}
-                    </p>
-                  ) : null}
-                  {freshness.badge ? (
-                    <p className="text-sm">
-                      <span className="font-medium">Freshness:</span> {freshness.badge}
-                    </p>
-                  ) : null}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {freshness.note} {publicView.verification.summary} This listing is research
-                    context — not a recommendation or ranking. Public listings require a
-                    re-checkable license number, {regulatorName} as regulator, and Phase 1 verified
-                    trust gates. {getMedicareNonClaim(licenseJurisdiction)}
+                  <p className="text-sm text-muted-foreground">
+                    This is the recorded office on file. It is not a service area.
                   </p>
-                  {provider.residency === 'non_resident' ? (
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {licenseJurisdiction || 'State'}-licensed (non-resident).
-                      {provider.home_address_state
-                        ? ` Home office state on file: ${provider.home_address_state} (address metadata only — not a verified ${provider.home_address_state} license).`
-                        : ' Home office is outside the license state. That address is metadata only, not a second verified license.'}
-                    </p>
-                  ) : null}
-                  <div className="flex flex-wrap gap-2">
-                    <Button asChild variant="outline" size="sm" className="gap-2">
-                      <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
-                        Verify license in {licenseJurisdiction}
-                        <ExternalLink className="h-3.5 w-3.5" />
+                  {publicView.phone ? (
+                    <p className="text-sm flex items-center gap-2">
+                      <Phone className="h-4 w-4 text-primary shrink-0" aria-hidden />
+                      <a
+                        href={`tel:${publicView.phone.replace(/\D/g, '')}`}
+                        className="text-primary hover:underline"
+                      >
+                        {publicView.phone}
                       </a>
-                    </Button>
-                    {regulator ? (
-                      <Button asChild variant="ghost" size="sm" className="gap-2">
-                        <a href={regulator.lookupUrl} target="_blank" rel="noopener noreferrer">
-                          {regulator.lookupLinkLabel}
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
-                      </Button>
-                    ) : null}
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
-                    Research listing only — not an endorsement, rating, or appointment guarantee.
-                  </p>
-                  <TrustMark />
+                    </p>
+                  ) : (
+                    <p className="text-sm text-muted-foreground">No public phone is on file.</p>
+                  )}
+                  {provider.website ? (
+                    <p className="text-sm flex items-center gap-2">
+                      <Globe className="h-4 w-4 text-primary shrink-0" aria-hidden />
+                      <a
+                        href={provider.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline"
+                      >
+                        {websiteHost ?? 'Public website'}
+                      </a>
+                    </p>
+                  ) : (
+                    <p className="text-sm text-muted-foreground">No public website is on file.</p>
+                  )}
+                  <Link
+                    href={`/directory?state=${licenseJurisdiction}&verified=true`}
+                    className="inline-block text-sm text-primary hover:underline pt-1"
+                  >
+                    More verified agencies in {provider.city} →
+                  </Link>
                 </CardContent>
               </Card>
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">Who they are</h2>
+              <h2 className="text-xl font-semibold mb-3">License &amp; credentials</h2>
               <Card>
                 <CardContent className="pt-6 space-y-3 text-sm">
                   <p>
-                    <span className="font-medium">Legal / listed name:</span>{' '}
-                    {dba ? legalName : provider.name}
+                    <span className="font-medium">Status:</span>{' '}
+                    {publicView.verification.badgeLabel}
                   </p>
-                  {dba ? (
+                  {publicView.verification.licenseNumber ? (
                     <p>
-                      <span className="font-medium">DBA:</span> {dba}
+                      <span className="font-medium">License number:</span>{' '}
+                      <span className="tabular-nums">{publicView.verification.licenseNumber}</span>
+                      {licenseJurisdiction ? ` · ${licenseJurisdiction}` : ''}
                     </p>
                   ) : null}
-                  <p>
-                    <span className="font-medium">Location:</span> {locationParts.join(', ')}
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {agencyCapabilitySummary(provider)}{' '}
-                    {getVerificationExplanation(licenseJurisdiction, regulatorName)}
-                  </p>
+                  {npn ? (
+                    <p>
+                      <span className="font-medium">NPN:</span>{' '}
+                      <span className="tabular-nums">{npn}</span>
+                    </p>
+                  ) : null}
+                  {freshness.badge ? (
+                    <p>
+                      <span className="font-medium">Record checked:</span> {freshness.badge}
+                    </p>
+                  ) : null}
+                  <Button asChild variant="outline" size="sm" className="gap-2">
+                    <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
+                      Check this license with {regulatorShort}
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </Button>
                 </CardContent>
               </Card>
             </section>
@@ -509,30 +537,95 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">Where they&apos;re located</h2>
+              <h2 className="text-xl font-semibold mb-3">About this agency</h2>
               <Card>
-                <CardContent className="pt-6 space-y-2">
-                  <p className="text-sm flex items-start gap-2">
-                    <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden />
-                    <span>{locationParts.join(', ')}</span>
+                <CardContent className="pt-6 space-y-3 text-sm">
+                  {provider.short_description ? (
+                    <p className="leading-relaxed text-[#1E293B]">{provider.short_description}</p>
+                  ) : null}
+                  <p>
+                    <span className="font-medium">Legal / listed name:</span>{' '}
+                    {dba ? legalName : provider.name}
                   </p>
-                  {publicView.phone ? (
-                    <p className="text-sm flex items-center gap-2">
-                      <Phone className="h-4 w-4 text-primary shrink-0" aria-hidden />
-                      <a
-                        href={`tel:${publicView.phone.replace(/\D/g, '')}`}
-                        className="text-primary hover:underline"
-                      >
-                        {publicView.phone}
-                      </a>
+                  {dba ? (
+                    <p>
+                      <span className="font-medium">DBA:</span> {dba}
                     </p>
                   ) : null}
-                  <Link
-                    href={`/directory?state=${licenseJurisdiction}&verified=true`}
-                    className="inline-block text-sm text-primary hover:underline pt-1"
-                  >
-                    More verified agencies in {provider.city} →
-                  </Link>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {agencyCapabilitySummary(provider)}
+                  </p>
+                </CardContent>
+              </Card>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold mb-4">How verified</h2>
+              <Card>
+                <CardContent className="pt-6 space-y-3">
+                  <p className="text-sm">
+                    <span className="font-medium">Regulator:</span> {regulatorName}
+                  </p>
+                  {publicView.verification.sourceLabel ? (
+                    <p className="text-sm">
+                      <span className="font-medium">Source:</span>{' '}
+                      {publicView.verification.sourceLabel}
+                    </p>
+                  ) : null}
+                  {publicView.verification.lastCheckedLabel ? (
+                    <p className="text-sm">
+                      <span className="font-medium">As of / last checked:</span>{' '}
+                      {publicView.verification.lastCheckedLabel}
+                    </p>
+                  ) : null}
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {freshness.note} {publicView.verification.summary} Research dossier — not an
+                    endorsement or ranking.{' '}
+                    {getVerificationExplanation(licenseJurisdiction, regulatorName)} This listing is
+                    research context — not a recommendation or ranking. Public listings require a
+                    re-checkable license number, {regulatorName} as regulator, and Phase 1 verified
+                    trust gates. {getMedicareNonClaim(licenseJurisdiction)}
+                  </p>
+                  {provider.residency === 'non_resident' ? (
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {licenseJurisdiction || 'State'}-licensed (non-resident).
+                      {provider.home_address_state
+                        ? ` Home office state on file: ${provider.home_address_state} (address metadata only — not a verified ${provider.home_address_state} license).`
+                        : ' Home office is outside the license state. That address is metadata only, not a second verified license.'}
+                    </p>
+                  ) : null}
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild variant="outline" size="sm" className="gap-2">
+                      <a href={licenseUrl} target="_blank" rel="noopener noreferrer">
+                        Verify license in {licenseJurisdiction}
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    </Button>
+                    {regulator ? (
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={regulator.lookupUrl} target="_blank" rel="noopener noreferrer">
+                          {regulator.lookupLinkLabel}
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    ) : null}
+                    <SaveResearchSessionButton
+                      session={{
+                        title: `${provider.name} research session`,
+                        source: 'profile',
+                        providerSlug: provider.slug,
+                        providerName: provider.name,
+                        hubPath: localHub?.href ?? null,
+                        directoryHref: `/directory?state=${licenseJurisdiction}&verified=true`,
+                        resumeHref: `/providers/${provider.slug}`,
+                        plannerHref: '/calculators/aca-subsidy',
+                      }}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/60">
+                    Research listing only — not an endorsement, rating, or appointment guarantee.
+                  </p>
+                  <TrustMark />
                 </CardContent>
               </Card>
             </section>
@@ -676,96 +769,99 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               <h2 className="text-xl font-semibold mb-4">Write a review</h2>
               <WriteReviewForm providerSlug={provider.slug} providerName={provider.name} />
             </section>
-          </div>
 
-          <aside className="lg:sticky lg:top-24 lg:self-start space-y-6">
-            <Card className="shadow-trust-lg">
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  {showContact ? 'Contact this agency' : 'Research tools'}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {showContact ? (
-                  <>
-                    <p className="mb-4 text-xs text-muted-foreground leading-relaxed">
-                      Direct options first: call the listed number or visit the agency website. The
-                      form below only relays a message to this agency — it is not a quote funnel and
-                      does not affect rankings.
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Public evidence</h2>
+              <Card>
+                <CardContent className="pt-6 text-sm space-y-3">
+                  <p>
+                    <span className="font-medium">License verification:</span>{' '}
+                    {publicView.verification.showLicenseVerifiedBadge
+                      ? 'Re-checkable license number on file'
+                      : 'License number on file — confirm status on official lookup'}
+                  </p>
+                  {publicView.showReviews && publicView.rating != null && publicView.reviewCount ? (
+                    <p>
+                      <span className="font-medium">Consumer reviews:</span>{' '}
+                      {publicView.rating.toFixed(1)} · {publicView.reviewCount} reviews (attributed
+                      snapshot, not a TrustHub rating)
                     </p>
-                    <LeadForm
-                      providerSlug={provider.slug}
-                      providerName={provider.name}
-                      defaultState={provider.state}
-                      defaultInsuranceType={insuranceTypes[0]}
-                    />
-                  </>
-                ) : (
-                  <div className="space-y-3 text-sm text-muted-foreground">
+                  ) : null}
+                  {secondarySignals?.bbb?.rating ? (
+                    <p>
+                      <span className="font-medium">BBB snapshot:</span>{' '}
+                      {secondarySignals.bbb.rating}
+                      {secondarySignals.bbb.checkedAtLabel
+                        ? ` · as of ${secondarySignals.bbb.checkedAtLabel}`
+                        : ''}
+                    </p>
+                  ) : null}
+                  {publicView.yearsInBusiness ? (
+                    <p>
+                      <span className="font-medium">Tenure:</span> {publicView.yearsInBusiness} years
+                      in business
+                    </p>
+                  ) : null}
+                  <p className="text-muted-foreground">
+                    No TrustHub score, grade, or ranking is calculated from this evidence. See{' '}
+                    <Link href="/methodology" className="text-primary underline">
+                      methodology
+                    </Link>
+                    .
+                  </p>
+                </CardContent>
+              </Card>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Official sources</h2>
+              <Card>
+                <CardContent className="pt-6 space-y-3 text-sm text-muted-foreground">
+                  <p>
+                    Re-check the license on the official state tool before you share personal
+                    information or buy a policy. This page is not an endorsement.
+                  </p>
+                  {!showContact ? (
                     <p>
                       Contact forms are available only on independently verified research listings.
                       Use official state tools to re-check licenses before sharing personal data.
                     </p>
-                    <Button asChild variant="trust" className="w-full">
+                  ) : null}
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild variant="outline" size="sm">
                       <Link href="/tools/license-verification">Verify a license</Link>
                     </Button>
-                    <Button asChild variant="outline" className="w-full">
+                    <Button asChild variant="outline" size="sm">
                       <Link href="/methodology">Research methodology</Link>
                     </Button>
                   </div>
-                )}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </section>
+          </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Evidence on file</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm space-y-3">
-                <p>
-                  <span className="font-medium">License verification:</span>{' '}
-                  {publicView.verification.showLicenseVerifiedBadge
-                    ? 'Re-checkable license number on file'
-                    : 'License number on file — confirm status on official lookup'}
-                </p>
-                {publicView.showReviews && publicView.rating != null && publicView.reviewCount ? (
-                  <p>
-                    <span className="font-medium">Consumer reviews:</span>{' '}
-                    {publicView.rating.toFixed(1)} · {publicView.reviewCount} reviews (attributed
-                    snapshot, not a TrustHub rating)
+          {showContact ? (
+            <aside className="lg:sticky lg:top-24 lg:self-start space-y-6">
+              <Card className="shadow-trust-lg">
+                <CardHeader>
+                  <CardTitle className="text-lg">Contact this agency</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-xs text-muted-foreground leading-relaxed">
+                    Direct options first: call the listed number or visit the agency website. The
+                    form below only relays a message to this agency — it is not a quote funnel and
+                    does not affect rankings.
                   </p>
-                ) : null}
-                {secondarySignals?.bbb?.rating ? (
-                  <p>
-                    <span className="font-medium">BBB snapshot:</span>{' '}
-                    {secondarySignals.bbb.rating}
-                    {secondarySignals.bbb.checkedAtLabel
-                      ? ` · as of ${secondarySignals.bbb.checkedAtLabel}`
-                      : ''}
-                  </p>
-                ) : null}
-                {publicView.yearsInBusiness ? (
-                  <p>
-                    <span className="font-medium">Tenure:</span> {publicView.yearsInBusiness} years
-                    in business
-                  </p>
-                ) : null}
-                <p className="text-muted-foreground">
-                  No TrustHub score, grade, or ranking is calculated from this evidence. See{' '}
-                  <Link href="/methodology" className="text-primary underline">
-                    methodology
-                  </Link>
-                  .
-                </p>
-              </CardContent>
-            </Card>
-
-            {publicView.yearsInBusiness ? (
-              <p className={cn('text-center text-sm text-muted-foreground')}>
-                {publicView.yearsInBusiness} years in business
-              </p>
-            ) : null}
-          </aside>
+                  <LeadForm
+                    providerSlug={provider.slug}
+                    providerName={provider.name}
+                    defaultState={provider.state}
+                    defaultInsuranceType={insuranceTypes[0]}
+                  />
+                </CardContent>
+              </Card>
+            </aside>
+          ) : null}
         </div>
       </div>
 
