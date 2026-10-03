@@ -175,7 +175,7 @@ test('device save then unsave stores one agency and creates no watch record', as
     },
   });
 
-  const storage = await import('./storage.ts');
+  const storage = await import('./storage');
   const first = storage.upsertSavedProvider({
     providerSlug: 'sunshine-coast-insurance-group',
     providerName: 'Sunshine Coast Insurance Group',
