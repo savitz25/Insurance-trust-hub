@@ -18,7 +18,7 @@ import { shareRouteOgImage } from '@/lib/seo/share-hub';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildInsuranceAgencySchema } from '@/lib/seo/schemas';
 import nextDynamic from 'next/dynamic';
-import { INSURANCE_TYPES } from '@/lib/constants';
+import { INSURANCE_TYPES, US_STATES } from '@/lib/constants';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { TrustMark } from '@/components/network/trust-mark';
@@ -187,6 +187,14 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     provider.state ||
     ''
   ).toUpperCase();
+  const licenseStateOnFile = (provider.license_state || '').trim().toUpperCase();
+  const licenseStateName =
+    US_STATES.find((item) => item.code === licenseStateOnFile)?.name ??
+    US_STATES.find((item) => item.name.toUpperCase() === licenseStateOnFile)?.name ??
+    null;
+  const licenseOnFileLabel = licenseStateName
+    ? `${licenseStateName}${provider.residency === 'non_resident' ? ' non-resident' : ''} license on file`
+    : null;
   const regulator = getRegulatorProfile(licenseJurisdiction);
   const regulatorName =
     regulator?.label ||
@@ -300,8 +308,11 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
           ) : null}
           <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-base text-[#1E293B]">
             <MapPin className="h-4 w-4 shrink-0 text-[#0284C7]" aria-hidden />
-            {locationParts.join(' · ')}
+            <span>Recorded office: {locationParts.join(' · ')}</span>
           </p>
+          {licenseOnFileLabel ? (
+            <p className="mt-1 text-base font-medium text-[#0A2540]">{licenseOnFileLabel}</p>
+          ) : null}
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <InsuranceVerificationBadge verification={publicView.verification} />
             {freshness.badge ? (
@@ -357,9 +368,13 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               </div>
               {publicView.verification.licenseNumber ? (
                 <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
-                  <dt className="text-xs uppercase text-[#1E293B]">State license on file</dt>
+                  <dt className="text-xs uppercase text-[#1E293B]">
+                    {licenseOnFileLabel ?? 'State license on file'}
+                  </dt>
                   <dd className="mt-1 text-sm font-semibold tabular-nums text-[#0A2540]">
-                    {licenseJurisdiction} {publicView.verification.licenseNumber}
+                    {licenseOnFileLabel
+                      ? publicView.verification.licenseNumber
+                      : `${licenseJurisdiction} ${publicView.verification.licenseNumber}`}
                   </dd>
                 </div>
               ) : null}
@@ -377,7 +392,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               </div>
               {glanceLines.length ? (
                 <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3 col-span-2">
-                  <dt className="text-xs uppercase text-[#1E293B]">Licensed lines on file</dt>
+                  <dt className="text-xs uppercase text-[#1E293B]">Profile categories</dt>
                   <dd className="mt-1 text-sm font-semibold text-[#0A2540]">{glanceLines.join(' · ')}</dd>
                 </div>
               ) : null}
