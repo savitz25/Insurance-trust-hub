@@ -168,7 +168,7 @@ export function WriteReviewForm({ providerSlug, providerName }: Props) {
 
       {!mi?.user && (
         <p className="text-xs text-slate-500">
-          You will be asked to sign in to My Insurance before submit.
+          You will be asked for My Insurance workspace sign-in before submit. This does not create a My TrustHub account.
         </p>
       )}
 

@@ -126,7 +126,7 @@ export function ResearchWalletPanel() {
         toast.error(res.error);
         return;
       }
-      toast.success('Research wallet synced to your account');
+      toast.success('Research wallet stored in the My Insurance workspace');
     } finally {
       setSyncing(false);
     }

@@ -251,7 +251,7 @@ export function PrescriptionDrugBasket() {
     // Optionally clear account basket when list was loaded from My Insurance
     if (loadedFromAccount && mi?.user) {
       const alsoCloud = window.confirm(
-        'Also delete the prescription basket saved to your My Insurance account?'
+        'Also delete the prescription basket saved in the My Insurance workspace?'
       );
       if (alsoCloud) {
         const res = await deleteDrugBasketAction();

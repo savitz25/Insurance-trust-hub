@@ -88,7 +88,7 @@ export function SaveResearchWalletButton(props: Props) {
       setSaved(true);
       toast.success('Saved to My Insurance research wallet', {
         description: mi?.user
-          ? 'Synced to your account when cloud is available'
+          ? 'Stored in the My Insurance workspace when cloud is available. My TrustHub sync is off.'
           : 'On this device — sign in with magic link to restore on another device',
         action: {
           label: 'Open wallet',

@@ -57,8 +57,8 @@ export function SaveDrugBasketButton({
     }
 
     setSaved(true);
-    toast.success('Prescription list saved to My Insurance', {
-      description: `${list.length} medication${list.length === 1 ? '' : 's'} in your account basket`,
+    toast.success('Prescription list saved in the My Insurance workspace', {
+      description: `${list.length} medication${list.length === 1 ? '' : 's'} on this device`,
       action: {
         label: 'View in My Insurance',
         onClick: () => {
@@ -98,8 +98,8 @@ export function SaveDrugBasketButton({
         toast.error('Sign-in is unavailable. Refresh the page and try again.');
         return;
       }
-      toast.message('Sign in to save your drug list to My Insurance', {
-        description: 'After you sign in, we will finish saving this list.',
+      toast.message('Sign in to store this list in the My Insurance workspace', {
+        description: 'This does not sync the list to My TrustHub.',
       });
       return;
     }

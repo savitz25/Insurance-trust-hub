@@ -186,7 +186,7 @@ export function SavedResearchPanel({ cloudRows = [] }: Props) {
                       </span>
                     ) : (
                       <span className="rounded-full bg-slate-100 px-2 py-0.5 font-medium text-slate-600">
-                        {row.source === 'cloud' ? 'In your account' : 'On this device'}
+                        {row.source === 'cloud' ? 'In the My Insurance workspace' : 'On this device'}
                       </span>
                     )}
                   </div>

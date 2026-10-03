@@ -25,8 +25,8 @@ export function AuthModal() {
 
   const contextCopy =
     authContext === 'provider'
-      ? 'Sign in to save this agent to My Insurance and sync across devices.'
-      : 'Sign in to open Insurance HQ and sync your saved research.';
+      ? 'The agency is already saved on this device. This workspace sign-in does not sync it to My TrustHub.'
+      : 'This restores the My Insurance workspace on this hub. It does not sign you into My TrustHub.';
 
   async function sendMagicLink(e: React.FormEvent) {
     e.preventDefault();
@@ -104,15 +104,15 @@ export function AuthModal() {
         </button>
 
         <p className="text-xs font-semibold uppercase tracking-wider text-[#0284C7]">
-          My Insurance
+          My TrustHub
         </p>
         <h2 id="auth-modal-title" className="mt-1 text-xl font-semibold text-slate-900">
-          Sign in to Insurance HQ
+          My TrustHub is your account
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-slate-600">{contextCopy}</p>
         <p className="mt-2 text-xs leading-relaxed text-slate-500">
-          Optional — every tool on Insurance Trust Hub works without an account. Sign-in only syncs
-          saved work across devices. We never sell your data or sell leads.
+          My Insurance is the specialist workspace. Sync to My TrustHub is off. Tools keep working
+          without this workspace sign-in. We never sell your data or sell leads.
         </p>
 
         {/* Move parity order: 1) Magic link (default) 2) Google 3) Facebook */}
@@ -224,8 +224,9 @@ export function AuthModal() {
 
         <p className="mt-4 flex items-start gap-2 text-[11px] leading-relaxed text-slate-500">
           <Shield className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#0284C7]" aria-hidden />
-          One Ask Trust Hub account across Move, Insurance, and Lending. Magic link by default —
-          or optional password. Also Google and Facebook. Sign out anytime from HQ.
+          My TrustHub is the one consumer account. This workspace sign-in does not create a second
+          customer account and does not join My TrustHub by email. Sign out anytime from the
+          workspace.
         </p>
       </div>
     </div>

@@ -168,17 +168,13 @@ export function Navbar() {
 
         <div className="th-header-actions">
           <Link
-            href="/my-insurance"
-            aria-label={showBadge ? `My Insurance, ${accountBadge} saved agencies` : 'My Insurance'}
-            title={
-              signedIn
-                ? 'My Insurance — coverage research HQ'
-                : 'My Insurance — research passport (sign in optional on HQ)'
-            }
+            href="/my-trusthub"
+            aria-label="My TrustHub"
+            title="My TrustHub is your consumer account. My Insurance is the specialist workspace."
             className="th-btn-secondary"
           >
             <Bookmark className="h-4 w-4 shrink-0" aria-hidden />
-            My Insurance
+            My TrustHub
             {showBadge ? (
               <span className="rounded-full bg-[#1E3A8A] px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
                 {accountBadge > 99 ? '99+' : accountBadge}
@@ -190,9 +186,9 @@ export function Navbar() {
 
         <div className="th-header-mobile-actions">
           <Link
-            href="/my-insurance"
+            href="/my-trusthub"
             className="th-btn-icon"
-            aria-label={showBadge ? `My Insurance, ${accountBadge} saved agencies` : 'My Insurance'}
+            aria-label="My TrustHub"
           >
             <span className="relative">
               <Bookmark className="h-5 w-5" aria-hidden />
@@ -248,13 +244,16 @@ export function Navbar() {
               <Link href="/carriers" prefetch={false} className="th-drawer-link" onClick={() => setOpen(false)}>
                 Carriers
               </Link>
-              <Link href="/my-insurance" className="th-drawer-link" onClick={() => setOpen(false)}>
-                My Insurance
+              <Link href="/my-trusthub" className="th-drawer-link" onClick={() => setOpen(false)}>
+                My TrustHub
                 {showBadge ? (
                   <span className="ml-2 rounded-full bg-[#1E3A8A] px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">
                     {accountBadge > 99 ? '99+' : accountBadge}
                   </span>
                 ) : null}
+              </Link>
+              <Link href="/my-insurance" className="th-drawer-link" onClick={() => setOpen(false)}>
+                My Insurance workspace
               </Link>
               {signedIn ? (
                 <button type="button" className="th-drawer-link w-full text-left" onClick={() => void handleSignOut()}>
