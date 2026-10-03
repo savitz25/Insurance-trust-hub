@@ -6,6 +6,7 @@ import {
   ExternalLink,
   MapPin,
   Phone,
+  Mail,
   Globe,
   Users,
 } from 'lucide-react';
@@ -69,6 +70,20 @@ import { continueClusterForProvider } from '@/lib/providers/continue-cluster';
 import { ContinueClusterResearch } from '@/components/profile/continue-cluster-research';
 import { SaveResearchSessionButton } from '@/components/my-insurance/save-research-session-button';
 import { localHubPathForProvider } from '@/lib/dfs/agency-display';
+import { displayEmail, displayPhone } from '@/lib/insurance-ask/agency-card-projection';
+
+function firstPublicReportContact(
+  report: { contacts: Array<{ kind: string; value: string; publicEligible: boolean }> } | null,
+  kind: 'phone' | 'email',
+): string | null {
+  if (!report) return null;
+  const values = report.contacts
+    .filter((contact) => contact.publicEligible === true && contact.kind === kind)
+    .map((contact) => contact.value.trim())
+    .filter(Boolean)
+    .sort();
+  return values[0] ?? null;
+}
 
 const LeadForm = nextDynamic(() =>
   import('@/components/lead-form').then((m) => m.LeadForm)
@@ -243,6 +258,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
     : insuranceTypes
         .map((type) => INSURANCE_TYPES.find((item) => item.value === type)?.label ?? String(type))
         .slice(0, 4);
+  const shownPhone =
+    publicView.phone ?? displayPhone(firstPublicReportContact(agencyTrustReport, 'phone'));
+  const shownEmail = displayEmail(firstPublicReportContact(agencyTrustReport, 'email'));
   let websiteHost: string | null = null;
   if (provider.website?.trim()) {
     try {
@@ -311,10 +329,10 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               providerSlug={provider.slug}
               providerName={provider.name}
             />
-            {publicView.phone && (
+            {shownPhone && (
               <Button asChild variant="outline" className="gap-2">
-                <a href={`tel:${publicView.phone.replace(/\D/g, '')}`}>
-                  <Phone className="h-4 w-4" /> {publicView.phone}
+                <a href={`tel:${shownPhone.replace(/\D/g, '')}`}>
+                  <Phone className="h-4 w-4" /> {shownPhone}
                 </a>
               </Button>
             )}
@@ -371,12 +389,22 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   </dd>
                 </div>
               ) : null}
-              {publicView.phone ? (
+              {shownPhone ? (
                 <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
                   <dt className="text-xs uppercase text-[#1E293B]">Phone</dt>
                   <dd className="mt-1 text-sm font-semibold text-[#0A2540]">
-                    <a href={`tel:${publicView.phone.replace(/\D/g, '')}`} className="hover:underline">
-                      {publicView.phone}
+                    <a href={`tel:${shownPhone.replace(/\D/g, '')}`} className="hover:underline">
+                      {shownPhone}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              {shownEmail ? (
+                <div className="rounded-xl border border-[#E2E8F0] bg-white px-3 py-3">
+                  <dt className="text-xs uppercase text-[#1E293B]">Email</dt>
+                  <dd className="mt-1 text-sm font-semibold text-[#0A2540]">
+                    <a href={`mailto:${encodeURIComponent(shownEmail)}`} className="hover:underline break-all">
+                      {shownEmail}
                     </a>
                   </dd>
                 </div>
@@ -410,19 +438,30 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                   <p className="text-sm text-muted-foreground">
                     This is the recorded office on file. It is not a service area.
                   </p>
-                  {publicView.phone ? (
+                  {shownPhone ? (
                     <p className="text-sm flex items-center gap-2">
                       <Phone className="h-4 w-4 text-primary shrink-0" aria-hidden />
                       <a
-                        href={`tel:${publicView.phone.replace(/\D/g, '')}`}
+                        href={`tel:${shownPhone.replace(/\D/g, '')}`}
                         className="text-primary hover:underline"
                       >
-                        {publicView.phone}
+                        {shownPhone}
                       </a>
                     </p>
                   ) : (
                     <p className="text-sm text-muted-foreground">No public phone is on file.</p>
                   )}
+                  {shownEmail ? (
+                    <p className="text-sm flex items-center gap-2">
+                      <Mail className="h-4 w-4 text-primary shrink-0" aria-hidden />
+                      <a
+                        href={`mailto:${encodeURIComponent(shownEmail)}`}
+                        className="text-primary hover:underline break-all"
+                      >
+                        {shownEmail}
+                      </a>
+                    </p>
+                  ) : null}
                   {provider.website ? (
                     <p className="text-sm flex items-center gap-2">
                       <Globe className="h-4 w-4 text-primary shrink-0" aria-hidden />
