@@ -606,25 +606,25 @@ export async function sendMagicLinkEmail(params: {
 }): Promise<boolean> {
   // confirmUrl must be passed through unchanged (token_hash, type, next, etc.)
   const html = buildEmailHtml({
-    preheader: 'Sign in to your InsuranceTrustHub research workspace',
-    title: 'Sign in to Insurance HQ',
+    preheader: 'Open the My Insurance specialist workspace',
+    title: 'My Insurance workspace',
     bodyHtml: `<p style="margin:0;">
-      Use this secure one-time link to open your My Insurance workspace and access saved agents,
-      research, and future baskets and results.
+      My TrustHub is your consumer account. This one-time link opens the My Insurance specialist
+      workspace. It does not sync saves to My TrustHub.
     </p>`,
-    ctaLabel: 'Sign in to Insurance HQ',
+    ctaLabel: 'Open My Insurance workspace',
     ctaHref: params.confirmUrl,
     noteHtml:
       "This link expires soon and can only be used once. For your security, don't forward this email.",
   });
   return sendResend({
     to: params.to,
-    subject: 'Sign in to My Insurance  -  Insurance Trust Hub',
+    subject: 'My Insurance workspace link  -  Insurance Trust Hub',
     html,
     text: [
-      'Sign in to Insurance HQ',
+      'My Insurance workspace',
       '',
-      'Use this secure one-time link to open your My Insurance workspace.',
+      'My TrustHub is your consumer account. This link opens the My Insurance specialist workspace.',
       '',
       params.confirmUrl,
       '',

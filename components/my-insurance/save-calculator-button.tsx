@@ -109,8 +109,8 @@ export function SaveCalculatorButton({
           });
           return;
         }
-        toast.success('Saved to My Insurance', {
-          description: 'On this device. Sign in anytime to sync across devices.',
+        toast.success('Saved on this device', {
+          description: 'Stored in the My Insurance workspace. My TrustHub sync is off.',
           action: {
             label: 'Open HQ',
             onClick: () => {
@@ -139,7 +139,7 @@ export function SaveCalculatorButton({
         toast.success('Saved to Insurance HQ', {
           description: sendEmail
             ? 'In My Insurance · summary email when Resend is configured'
-            : 'In My Insurance · your account',
+            : 'In the My Insurance workspace. My TrustHub sync is off.',
           action: {
             label: 'View HQ',
             onClick: () => {

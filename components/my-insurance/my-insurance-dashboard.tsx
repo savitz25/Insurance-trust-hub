@@ -107,19 +107,25 @@ export function MyInsuranceDashboard({ initial }: Props) {
         <Card className="border-[#0284C7]/30 bg-[#E0F2FE]/40 shadow-none">
           <CardContent className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-900">Sign in (optional)</p>
+              <p className="text-sm font-medium text-slate-900">My TrustHub is your account</p>
               <p className="mt-1 text-sm text-slate-600">
-                Research workspace only â€” tools still work without signing in. Magic link is for
-                restoring your research wallet on another device; contents are not sold as leads.
+                This page is the My Insurance specialist workspace. Saves stay on this device.
+                Sync to My TrustHub is off. Contents are not sold as leads.
               </p>
             </div>
-            <Button
-              className="gap-2 bg-[#0284C7] hover:bg-[#1E3A8A]"
-              onClick={() => openAuth({ redirectPath: '/my-insurance' })}
-            >
-              <LogIn className="h-4 w-4" />
-              Sign in
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button className="gap-2 bg-[#0284C7] hover:bg-[#1E3A8A]" asChild>
+                <Link href="/my-trusthub">My TrustHub</Link>
+              </Button>
+              <Button
+                variant="outline"
+                className="gap-2"
+                onClick={() => openAuth({ redirectPath: '/my-insurance' })}
+              >
+                <LogIn className="h-4 w-4" />
+                Workspace sign-in
+              </Button>
+            </div>
           </CardContent>
         </Card>
       )}
@@ -425,7 +431,7 @@ function CloudDrugBasket({
                 onClick={async () => {
                   if (
                     !window.confirm(
-                      'Delete your account prescription basket? This cannot be undone.'
+                      'Delete this workspace prescription basket? This cannot be undone.'
                     )
                   ) {
                     return;

@@ -27,10 +27,16 @@ export default async function MyInsurancePage() {
         <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
           My Insurance
         </h1>
+        <p className="mt-2 text-sm font-medium text-[#0284C7]">Specialist workspace</p>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-          Your research passport — saved agencies and saved tool results. Works on this device
-          without signing in. Sign in only if you want the same shortlist on another device.
+          Saved agencies and saved tool results stay on this device. My TrustHub is the consumer
+          account. This workspace is not a separate account, and sync to My TrustHub is off.
           Contents are private research, not leads.
+        </p>
+        <p className="mt-3 text-sm text-slate-600">
+          <Link href="/my-trusthub" className="font-medium text-[#0284C7] hover:underline">
+            My TrustHub account
+          </Link>
         </p>
         <p className="mt-2 text-xs text-slate-500">
           Research only · Not an endorsement · Not a claims portal · Part of the Ask Trust Hub

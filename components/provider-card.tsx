@@ -165,6 +165,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
         <SaveProviderButtonLazy
           providerSlug={provider.slug}
           providerName={provider.name}
+          providerId={provider.id}
           city={provider.city}
           state={provider.state}
           licenseSummary={

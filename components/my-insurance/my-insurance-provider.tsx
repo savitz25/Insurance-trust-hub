@@ -137,7 +137,7 @@ export function MyInsuranceProvider({ children }: { children: ReactNode }) {
         toast.success('Prescription list saved to My Insurance', {
           description: `${pending.payload.items.length} medication${
             pending.payload.items.length === 1 ? '' : 's'
-          } synced to your account`,
+          } saved in the My Insurance workspace`,
         });
         window.dispatchEvent(new CustomEvent('ith-my-insurance-drug-basket'));
       } else {
