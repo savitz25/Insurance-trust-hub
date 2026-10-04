@@ -76,7 +76,7 @@ test('one state license is the parent identity and providers.id is not', () => {
     expiresAt: Date.now() + 1000,
     acknowledgement: SAVE_ACKNOWLEDGEMENT,
   };
-  const sent = transmitParentSync(pending);
+  const sent = transmitParentSync(pending, {});
   assert.equal(sent.ok, false);
   assert.equal(sent.reason, 'PRODUCTION_PARENT_SYNC_OFF');
   assert.equal(sent.transmitted, false);
@@ -245,7 +245,7 @@ test('device save then unsave stores one agency and creates no watch record', as
   assert.doesNotMatch(blob, /"watch"/i);
 });
 
-test('the profile control has one Save toggle and does not call Ask', () => {
+test('the profile control has one Save toggle and the browser does not fetch Ask', () => {
   const root = process.cwd();
   const button = readFileSync(
     join(root, 'components/my-insurance/save-provider-button.tsx'),
@@ -272,7 +272,9 @@ test('the profile control has one Save toggle and does not call Ask', () => {
   assert.doesNotMatch(handoff, /\.from\(/);
   assert.doesNotMatch(handoff, /fetch\(/);
   assert.match(handoff, /key: null/);
-  assert.doesNotMatch(signed, /fetch\(/);
+  assert.equal(signed.match(/fetch\(/g)?.length, 1);
+  assert.match(signed, /fetch\(INSURANCE_PRODUCTION_PINS\.parentOrigin \+ PARENT_API_PATH/);
+  assert.match(button, /element\.submit\(\)/);
   assert.doesNotMatch(session, /asktrusthub\.com/);
   assert.doesNotMatch(session, /location\.assign|window\.open/);
   assert.match(card, /SaveProviderButtonLazy/);
