@@ -1,4 +1,5 @@
 import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
+import { productionParentGate, releaseAdmits, type ReleaseEnv } from '@/lib/my-insurance/production-gate';
 
 /**
  * Insurance-side parent handoff prep.
@@ -9,8 +10,8 @@ import { cleanLicenseNumber } from '@/lib/insurance/verification-levels';
  * - Signed-in Insurance `saved_providers` stays the specialist workspace copy,
  *   keyed by user and provider slug. This prep does not read it as a parent
  *   commit, migrate it, or delete it.
- * - A future My TrustHub parent Saved is a separate signed handoff. It is not
- *   committed while PRODUCTION_PARENT_SYNC is OFF.
+ * - A My TrustHub parent Saved is a separate signed handoff. INSURANCE_PARENT_SYNC
+ *   stays OFF. Only the operator gate can admit a production post.
  * My Insurance remains the specialist workspace.
  */
 
@@ -259,13 +260,23 @@ export function profileSaveControl(saved: boolean): {
   };
 }
 
-/** Production parent sync stays off. This does not call Ask. */
-export function transmitParentSync(_pending: PendingParentSync): {
+/**
+ * Gate check only. This function does not post.
+ * Absent or malformed config stays off. An admitted gate still needs the signer.
+ */
+export function transmitParentSync(pending: PendingParentSync, env?: ReleaseEnv): {
   ok: false;
-  reason: 'PRODUCTION_PARENT_SYNC_OFF';
+  reason: 'PRODUCTION_PARENT_SYNC_OFF' | 'UNSIGNED';
   transmitted: false;
 } {
-  return { ok: false, reason: 'PRODUCTION_PARENT_SYNC_OFF', transmitted: false };
+  const gate = productionParentGate(env);
+  const slug = pending.canonicalReturnPath.startsWith('/providers/')
+    ? pending.canonicalReturnPath.slice('/providers/'.length)
+    : '';
+  if (!releaseAdmits(slug, gate)) {
+    return { ok: false, reason: 'PRODUCTION_PARENT_SYNC_OFF', transmitted: false };
+  }
+  return { ok: false, reason: 'UNSIGNED', transmitted: false };
 }
 
 export function parentSaveReady(profileClass: InsuranceProfileClass): boolean {

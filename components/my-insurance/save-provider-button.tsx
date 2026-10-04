@@ -32,9 +32,14 @@ import {
   stashInsuranceParentPending,
 } from '@/lib/my-insurance/parent-pending-storage';
 import {
-  recoverParentPending,
-  submitParentHandoff,
-} from '@/lib/my-insurance/handoff-session';
+  handoffForm,
+  markHandoffSent,
+  readHandoff,
+  rememberHandoff,
+  resumeDecision,
+  type StoredHandoff,
+} from '@/lib/my-insurance/handoff-form';
+import { recoverParentPending } from '@/lib/my-insurance/handoff-session';
 import {
   removeGuestProvider,
   stashPendingSaveAction,
@@ -92,8 +97,29 @@ export function SaveProviderButton({
   const mi = useMyInsuranceOptional();
   const intentGeneration = useRef(0);
   const [busy, setBusy] = useState(false);
+  const [keepOpen, setKeepOpen] = useState(false);
   const [local, setLocal] = useState<SavedProvider | null>(null);
   const [fullPanel, setFullPanel] = useState<SavedProvider[] | null>(null);
+
+  const submitTicket = useCallback((ticket: StoredHandoff) => {
+    const form = handoffForm(ticket.target, ticket.continuationRef, ticket.intent);
+    if (!form || document.visibilityState === 'hidden') return false;
+    markHandoffSent(sessionStorage, ticket);
+    const element = document.createElement('form');
+    element.method = 'POST';
+    element.action = form.action;
+    element.target = '_top';
+    for (const [name, value] of [['continuationRef', form.continuationRef], ['intent', form.intent]] as const) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      element.append(input);
+    }
+    document.body.append(element);
+    element.submit();
+    return true;
+  }, []);
 
   const refresh = useCallback(() => {
     setLocal(findLocalProvider(providerSlug));
@@ -126,6 +152,16 @@ export function SaveProviderButton({
     };
   }, [providerSlug]);
 
+  useEffect(() => {
+    const resume = () => {
+      const ticket = readHandoff(sessionStorage, providerSlug, Date.now());
+      if (resumeDecision(ticket, document.visibilityState) === 'submit' && ticket) submitTicket(ticket);
+    };
+    resume();
+    document.addEventListener('visibilitychange', resume);
+    return () => document.removeEventListener('visibilitychange', resume);
+  }, [providerSlug, submitTicket]);
+
   const baseInput = {
     providerSlug,
     providerName,
@@ -152,6 +188,7 @@ export function SaveProviderButton({
   }
 
   async function stageParentIntent(generation: number, intent: 'save' | 'unsave') {
+    setKeepOpen(true);
     try {
       const pageOpen = document.visibilityState === 'visible';
       const handoff = await prepareInsuranceParentHandoffAction({
@@ -159,21 +196,34 @@ export function SaveProviderButton({
         intent,
         pageOpen,
       });
-      const local = findLocalProvider(providerSlug);
+      const current = findLocalProvider(providerSlug);
       const stale =
         generation !== intentGeneration.current ||
-        (intent === 'save' ? !local : Boolean(local));
+        (intent === 'save' ? !current : Boolean(current));
       if (stale || !pageOpen || !handoff.ok) {
         clearInsuranceParentPending(providerSlug);
         return;
       }
+      if (handoff.mode === 'continue') {
+        const ticket: StoredHandoff = {
+          slug: providerSlug,
+          target: handoff.target,
+          continuationRef: handoff.continuationRef,
+          intent: handoff.intent,
+          phase: 'staged',
+          expiresAt: handoff.expiresAt,
+        };
+        rememberHandoff(sessionStorage, ticket);
+        if (document.visibilityState === 'visible') submitTicket(ticket);
+        return;
+      }
       stashInsuranceParentPending(providerSlug, handoff.pending);
-      const submitted = submitParentHandoff(intent);
-      if (submitted.submitted) clearInsuranceParentPending(providerSlug);
     } catch {
       if (generation === intentGeneration.current) {
         clearInsuranceParentPending(providerSlug);
       }
+    } finally {
+      setKeepOpen(false);
     }
   }
 
@@ -267,6 +317,9 @@ export function SaveProviderButton({
         >
           {saved ? SAVE_CONTROL_ON : SAVE_CONTROL_OFF}
         </Button>
+        {keepOpen ? (
+          <p className="mt-1 text-xs text-zinc-600" role="status">Keep this page open</p>
+        ) : null}
       </div>
 
       {fullPanel ? (
