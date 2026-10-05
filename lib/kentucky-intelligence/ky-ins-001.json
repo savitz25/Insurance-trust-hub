@@ -1,0 +1,78 @@
+{
+  "regulator": "Kentucky Department of Insurance",
+  "publicationId": "KY-INS-001",
+  "naicKeyFacts": {
+    "source": "https://content.naic.org/sites/default/files/publications-key-facts-market-trends-kentucky.pdf",
+    "title": "2025 State Insurance Regulation: Key Facts and Market Trends — Kentucky",
+    "dataYear": 2024,
+    "sha256": "2264968fd7d545d80b0fdffb838deb4ffaa81f64ca0f138d8da600633ee2b8ee",
+    "bytes": 1440721,
+    "retrievedAt": "2026-10-05",
+    "underlyingSource": "NAIC Insurance Department Resources Report",
+    "publicationYearIsNotTheDataYear": true
+  },
+  "companies": {
+    "grain": "NAIC printed company counts",
+    "domesticInsurers": 81,
+    "domesticRank": 25,
+    "domesticAndLicensedForeignInsurers": 1734,
+    "licensedRank": 16,
+    "domesticIsInsideTheLicensedTotal": true,
+    "captivesExcluded": true,
+    "companyRows": null,
+    "distinctCompaniesLoaded": null
+  },
+  "captives": {
+    "grain": "captive companies",
+    "count": 32,
+    "directWrittenPremium": 52773517,
+    "totalCaptivePremium": 144616955,
+    "includedInLicensedInsurerCount": false
+  },
+  "premiumByStatement": {
+    "grain": "premium written by annual-statement type",
+    "isCompanyCount": false,
+    "health": 23642761117,
+    "lifeAccidentAndHealth": 10301226985,
+    "propertyAndCasualty": 11132739398,
+    "title": 134230867,
+    "printedTotal": 45210958367
+  },
+  "department": {
+    "complaints": 2521,
+    "complaintRank": 31,
+    "inquiries": 1255,
+    "employment": 104,
+    "complaintRows": null,
+    "complaintOutcomes": null,
+    "employmentIsLicensees": false
+  },
+  "rosters": {
+    "producers": null,
+    "agencies": null,
+    "adjusters": null,
+    "surplusLines": null,
+    "companySearch": "OPEN_SEARCH_ONLY",
+    "licenseeSearch": "OPEN_SEARCH_ONLY"
+  },
+  "marketConduct": {
+    "corpus": "NOT_ACQUIRED",
+    "search": "https://insurance.ky.gov/PPC/mc/default.aspx",
+    "domesticReportsPublic": false,
+    "statute": "KRS 304.2-270",
+    "examIsEnforcement": false
+  },
+  "enforcement": {
+    "orders": "NOT_ACQUIRED",
+    "rehabilitationLiquidation": "NOT_ACQUIRED",
+    "fraudCaseCorpus": "NOT_ACQUIRED",
+    "openRecordsRequest": "NOT_FILED"
+  },
+  "links": {
+    "companySearch": "https://insurance.ky.gov/ppc/Company/Default.aspx",
+    "licenseeSearch": "https://insurance.ky.gov/PPC/Agent/Default.aspx"
+  },
+  "newCanonicalOrganizations": 0,
+  "graphWrites": 0,
+  "claimEligibilityChanges": 0
+}

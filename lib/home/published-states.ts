@@ -27,6 +27,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   illinois: 'IL',
   louisiana: 'LA',
   alabama: 'AL',
+  kentucky: 'KY',
   massachusetts: 'MA',
   maryland: 'MD',
   michigan: 'MI',
@@ -48,6 +49,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  kentucky:
+    'NAIC 2024 domestic and licensed-foreign insurer counts, separate captives, and Department of Insurance complaint totals. Row rosters were not acquired.',
   alabama:
     'ALDOI 2024 company-type counts and separate License Type and Business Type counts. Row rosters were not acquired. Those totals are not one census.',
   louisiana:

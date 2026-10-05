@@ -262,6 +262,58 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic || receivership || financialExam ? 'PARTIAL' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Alabama ALDOI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
   }
+  const explicitKentucky = /\b(?:kentucky|kentucky department of insurance)\b/i.test(early)
+    || /\bKY\b/.test(early)
+    || /(?:\bin\s+|,\s*)ky\b/i.test(early);
+  const kentuckyCity = /\b(?:louisville|lexington)\b/i.test(early);
+  const kentuckyOtherState = detectStates(early).find((code) => code !== 'KY');
+  const kentuckyAsked = explicitKentucky
+    || (kentuckyCity && /\b(?:insurance|insurer|agency|producer|agent|adjuster|broker)\b/i.test(early) && !kentuckyOtherState);
+  if (kentuckyAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const products = detectRequestedConsumerProducts(early);
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesAgency = /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus lines?\b/i.test(early);
+    const namesCaptive = /\bcaptives?\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = kentuckyCity
+      ? ' Louisville and Lexington are geography only. No city page is published.'
+      : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank or recommend Kentucky insurers, agencies, producers, or adjusters. NAIC company counts are not a quality score.'
+      : products.length
+        ? `${products.join(' / ')} is a requested insurance product, not a Kentucky license-class census. Ask will not substitute an insurer count for that product.`
+        : naic
+          ? `NAIC ${naic} labels a legal insurance-company identifier, not an agency, producer, or adjuster. The NAIC key-facts counts do not print company codes. Verify the company in the Kentucky insurer directory search.`
+          : npn
+            ? `NPN ${npn} labels a producer identifier. Kentucky licensee search separates business entities and individuals. Statewide producer and agency rosters were not acquired.`
+            : namesCaptive
+              ? 'The NAIC key-facts report prints 32 Kentucky captive companies for calendar year 2024. Captives are excluded from the 1,734 domestic and licensed foreign insurers. Captive rows were not acquired.'
+              : namesAdjuster
+                ? 'A Kentucky adjuster roster was NOT_ACQUIRED. The adjuster count is null. Missing is not zero. Licensee search is search-only.'
+                : namesSurplus
+                  ? 'A Kentucky surplus-lines roster was NOT_ACQUIRED. The surplus-lines count is null. Missing is not zero.'
+                  : namesAgency && !namesCompany
+                    ? 'A Kentucky agency roster was NOT_ACQUIRED. The agency count is null. An agency is not an insurer. The 1,734 figure is domestic and licensed foreign insurers, not agencies.'
+                    : namesProducer && !namesCompany
+                      ? 'A Kentucky producer roster was NOT_ACQUIRED. The producer count is null. Department employment of 104 is staff, not producers. The 1,734 figure is insurers, not producers.'
+                      : /\bcomplaints?\b/i.test(early)
+                        ? 'The NAIC key-facts report prints 2,521 Kentucky Department of Insurance complaints for calendar year 2024, and 1,255 inquiries separately. Provider-level complaint rows and outcomes were NOT_ACQUIRED. A complaint total is not an enforcement finding.'
+                        : /\b(?:market conduct|examination|enforcement|order|rehabilitation|liquidation)\b/i.test(early)
+                          ? 'Kentucky market-conduct reports are search-only, and domestic examination reports are not public under KRS 304.2-270. The examination corpus, administrative orders, and rehabilitation or liquidation records were NOT_ACQUIRED. An examination is not an enforcement order.'
+                          : 'For calendar year 2024, NAIC reports 81 Kentucky domestic insurers and 1,734 domestic and licensed foreign insurers. The 81 are inside the 1,734 and are not added again. Captives are excluded and are printed separately as 32. Company rows were NOT_ACQUIRED. Producer, agency, adjuster, and surplus-lines rosters are null. Premium by statement type is not a company count.';
+    const query = fail(`${detail}${geographyNote} Open /kentucky for the NAIC source record and Kentucky verification links.`, ['Open Kentucky insurance research.']);
+    query.jurisdiction = { state: 'KY', meaning: geographyMeaning(early) };
+    query.entityClass = naic || (namesCompany && !namesAgency && !namesProducer && !namesAdjuster) ? 'insurer' : namesAgency && !namesCompany ? 'agency' : namesProducer && !namesCompany ? 'person' : undefined;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    if (products.length) annotateUnestablishedProduct(query, products);
+    query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Kentucky DOI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
