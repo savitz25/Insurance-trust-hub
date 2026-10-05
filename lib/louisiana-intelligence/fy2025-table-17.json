@@ -1,0 +1,70 @@
+{
+  "regulator": "Louisiana Department of Insurance",
+  "source": "https://www.ldi.la.gov/docs/default-source/documents/publicaffairs/annualreports/ar_fy2025_web.pdf",
+  "table": "Table 17",
+  "title": "Entities Licensed or Registered at Fiscal Year-End — Three-Year History",
+  "fiscalYear": "2024-2025",
+  "fiscalYearBegin": "2024-07-01",
+  "fiscalYearEnd": "2025-06-30",
+  "asOf": "2025-06-30",
+  "reportLetterDate": "2026-02-16",
+  "retrievedAt": "2026-10-05",
+  "generatedAt": "2026-10-05T13:40:00Z",
+  "categoryEntriesAreNotDistinctCompanies": true,
+  "riskBearing": {
+    "domestic": [
+      { "name": "Domestic Insurers", "count": 85 },
+      { "name": "Domestic Health Maintenance Organizations", "count": 14 },
+      { "name": "Captives", "count": 3 }
+    ],
+    "domesticSubtotal": 102,
+    "nonDomiciliary": [
+      { "name": "Foreign/Alien Insurers Admitted", "count": 1404 },
+      { "name": "Surplus Lines (estimated)", "count": 271, "estimated": true }
+    ],
+    "nonDomiciliarySubtotal": 1675,
+    "other": [
+      { "name": "Risk Retention Groups", "count": 113 },
+      { "name": "Vehicle Mechanical Breakdowns", "count": 12 },
+      { "name": "Accredited Reinsurers", "count": 21 },
+      { "name": "Property Residual Values", "count": 1 },
+      { "name": "Multiple Employer Welfare Arrangements", "count": 2 }
+    ],
+    "otherSubtotal": 149,
+    "total": 1926
+  },
+  "nonRiskBearing": [
+    { "name": "Third-Party Administrators", "count": 476 },
+    { "name": "Risk Purchasing Groups", "count": 220 },
+    { "name": "Utilization Review Organizations", "count": 92 },
+    { "name": "Discount Medical Plans", "count": 25 },
+    { "name": "Viatical Settlement Providers", "count": 18 },
+    { "name": "Independent Review Organizations", "count": 15 },
+    { "name": "Pharmacy Services Administrative Organizations", "count": 11 },
+    { "name": "Viatical Settlement Brokers", "count": 5 },
+    { "name": "Security Registrations", "count": 0 },
+    { "name": "Dental Referral Plans", "count": 0 },
+    { "name": "Viatical Investment Agents", "count": 0 }
+  ],
+  "nonRiskBearingSubtotal": 862,
+  "printedGrandTotal": 2788,
+  "printedGrandTotalIsNotACensus": true,
+  "licenseeRoster": {
+    "status": "NOT_ACQUIRED",
+    "publication": "OPEN_SEARCH_ONLY",
+    "individualCount": null,
+    "agencyCount": null,
+    "adjusterCount": null,
+    "appointmentCount": null,
+    "attemptedFile": "https://ldi.la.gov/LicenseeReports/ProducersLife.csv",
+    "attemptResult": "RETRIEVED_AMBIGUOUS",
+    "retrievedAt": "2026-10-05"
+  },
+  "graph": {
+    "graphWrites": 0,
+    "newCanonicalOrganizations": 0,
+    "claimEligibilityChanges": 0,
+    "exactAdverseAttachments": 0,
+    "nameOnlyAdverseJoins": 0
+  }
+}

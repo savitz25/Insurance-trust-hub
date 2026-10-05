@@ -25,6 +25,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   florida: 'FL',
   georgia: 'GA',
   illinois: 'IL',
+  louisiana: 'LA',
   massachusetts: 'MA',
   maryland: 'MD',
   michigan: 'MI',
@@ -46,6 +47,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  louisiana:
+    'LDI fiscal-year-end category entries, separate company and producer searches, and complaint intake. Category entries are not distinct companies.',
   indiana:
     'IDOI company and producer verification, administrative-action index, financial examinations, and complaint capabilities',
   wisconsin:
