@@ -1,0 +1,134 @@
+{
+  "regulator": "South Carolina Department of Insurance",
+  "publicationId": "SC-INS-001",
+  "naicKeyFacts": {
+    "source": "https://content.naic.org/sites/default/files/publications-key-facts-market-trends-south-carolina.pdf",
+    "title": "2025 State Insurance Regulation: Key Facts and Market Trends — South Carolina",
+    "dataYear": 2024,
+    "sha256": "6e1c2e37c2c087aaab2b051bc7045ebb08b009a16c71700cf40199487cfeddfb",
+    "bytes": 1482724,
+    "pages": 10,
+    "retrievedAt": "2026-10-05",
+    "pdfCreatedAt": "2026-03-10T16:05:14Z",
+    "underlyingSource": "NAIC Insurance Department Resources Report",
+    "publicationYearIsNotTheDataYear": true,
+    "overviewPrintsRegulatorUseOnly": true
+  },
+  "companies": {
+    "grain": "NAIC printed company counts for calendar year 2024",
+    "domesticInsurers": 317,
+    "domesticRank": 4,
+    "domesticAndLicensedForeignInsurers": 2229,
+    "licensedRank": 1,
+    "domesticIsInsideTheLicensedTotal": true,
+    "foreignOnlyCount": null,
+    "captivesExcluded": true,
+    "companyRows": null,
+    "distinctCompaniesLoaded": null
+  },
+  "captives": {
+    "grain": "captive companies",
+    "count": 230,
+    "directWrittenPremium": 1645704960,
+    "totalCaptivePremium": 3375906848,
+    "includedInLicensedInsurerCount": false
+  },
+  "premiumByStatement": {
+    "grain": "premium written by annual-statement type",
+    "isCompanyCount": false,
+    "health": 19526624512,
+    "lifeAccidentAndHealth": 15753785995,
+    "propertyAndCasualty": 17000168583,
+    "title": 218159433,
+    "printedTotal": 52498738523,
+    "printedTotalRank": 26
+  },
+  "propertyCasualtyLines": {
+    "grain": "property and casualty premium by line of business",
+    "printedTotal": 17000168577,
+    "printedTotalRank": 23,
+    "equalsStatementPropertyAndCasualty": false
+  },
+  "department": {
+    "taxes": 333962561,
+    "revenue": 376341093,
+    "budget": 21112614,
+    "budgetPerThousandPremium2024": 0.4,
+    "complaints": 5324,
+    "complaintRank": 14,
+    "inquiries": 9344,
+    "inquiryRank": 22,
+    "employment": 126,
+    "employmentRank": 25,
+    "complaintRows": null,
+    "complaintOutcomes": null,
+    "employmentIsLicensees": false,
+    "costYear2023": null
+  },
+  "doiCompanyList": {
+    "sourcePage": "https://doi.sc.gov/581/Company-Information",
+    "source": "https://doi.sc.gov/DocumentCenter/View/15282",
+    "title": "List of Insurance Companies Authorized to Transact Business in South Carolina as of April 2026",
+    "fileName": "All Companies_2.pdf",
+    "sha256": "346581a35528eb8c41a61760d0f38434233f0aed3324f2082b3595b6204718be",
+    "bytes": 1031034,
+    "pages": 115,
+    "pdfCreatedAt": "2026-04-23T14:20:46Z",
+    "clock": "April 2026",
+    "retrievedAt": "2026-10-05",
+    "isTheNaicLicensedTotal": false,
+    "printedFileTotal": null,
+    "typesAreNotAdded": true,
+    "parsedTypes": [
+      { "type": "Property & Casualty", "rows": 933 },
+      { "type": "Risk Purchasing Group", "rows": 423 },
+      { "type": "Life", "rows": 416 },
+      { "type": "Eligible Surplus Lines Insurer", "rows": 302 },
+      { "type": "Casualty", "rows": 78 },
+      { "type": "Reinsurance Intermediary", "rows": 57 },
+      { "type": "Health", "rows": 43 },
+      { "type": "Reciprocal Reinsurer", "rows": 43 },
+      { "type": "Approved Assuming Reinsurer", "rows": 43 },
+      { "type": "Title", "rows": 30 },
+      { "type": "Health Maintenance Organization", "rows": 23 },
+      { "type": "Fraternal", "rows": 23 },
+      { "type": "Approved Unlicensed Reinsurer", "rows": 21 },
+      { "type": "Ratings Organization", "rows": 21 },
+      { "type": "Reciprocal", "rows": 16 },
+      { "type": "Advisory Organization", "rows": 12 },
+      { "type": "Certified Reinsurer", "rows": 8 },
+      { "type": "Property", "rows": 7 },
+      { "type": "Mutual Benevolent Aid Association", "rows": 5 },
+      { "type": "County Mutual", "rows": 5 }
+    ],
+    "propertyTypeIsNotPropertyAndCasualty": true,
+    "wrappedSurplusLinesNamesJoined": 2,
+    "spacingRepairApprovedAssuming": 1
+  },
+  "rosters": {
+    "producers": null,
+    "agencies": null,
+    "adjusters": null,
+    "appointments": null,
+    "surplusLinesBrokers": null,
+    "companySearch": "OPEN_SEARCH_ONLY",
+    "licenseeSearch": "NOT_ACQUIRED"
+  },
+  "marketConduct": {
+    "corpus": "NOT_ACQUIRED",
+    "examIsEnforcement": false
+  },
+  "enforcement": {
+    "orders": "NOT_ACQUIRED",
+    "exactCanonicalAttachments": 0,
+    "nameOnlyAdverseJoins": 0,
+    "openRecordsRequest": "NOT_FILED"
+  },
+  "links": {
+    "companyInformation": "https://doi.sc.gov/581/Company-Information",
+    "companySearch": "https://doi.sc.gov/cosearch"
+  },
+  "newCanonicalOrganizations": 0,
+  "graphWrites": 0,
+  "claimEligibilityChanges": 0
+}

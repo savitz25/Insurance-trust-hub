@@ -314,6 +314,53 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Kentucky DOI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
   }
+  const explicitSouthCarolina = /\bsouth carolina\b/i.test(early) || /\bin sc\b/i.test(early);
+  const southCarolinaCity = explicitSouthCarolina && /\b(?:charleston|columbia|greenville)\b/i.test(early);
+  if (explicitSouthCarolina) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const products = detectRequestedConsumerProducts(early);
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesAgency = /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus lines?\b/i.test(early);
+    const namesCaptive = /\bcaptives?\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = southCarolinaCity
+      ? ' Charleston, Columbia, and Greenville are geography only. No city page is published.'
+      : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank South Carolina insurers, agencies, producers, or adjusters. NAIC company counts are not a quality score.'
+      : products.length
+        ? `${products.join(' / ')} is a requested insurance product, not a South Carolina license-class census. Ask will not substitute an insurer count for that product.`
+        : naic
+          ? `NAIC ${naic} labels a legal insurance-company identifier, not an agency, producer, or adjuster. The NAIC key-facts counts do not print company codes, and the April 2026 department list is a separate clock. Verify the company in the South Carolina company search.`
+          : npn
+            ? `NPN ${npn} labels a producer identifier. A South Carolina producer roster was NOT_ACQUIRED. The producer count is null.`
+            : namesCaptive
+              ? 'The NAIC key-facts report prints 230 South Carolina captive companies for calendar year 2024. Captives are excluded from the 2,229 domestic and licensed foreign insurers. Direct written premium and total captive premium are separate figures. Captive rows were not acquired.'
+              : namesAdjuster
+                ? 'A South Carolina adjuster roster was NOT_ACQUIRED. The adjuster count is null. Missing is not zero.'
+                : namesSurplus
+                  ? 'The April 2026 Department of Insurance company list parses 302 Eligible Surplus Lines Insurer rows. That count is not a surplus-lines broker roster and is not the 2024 NAIC licensed-insurer count of 2,229. Surplus-lines broker rows were NOT_ACQUIRED.'
+                  : namesAgency && !namesCompany
+                    ? 'A South Carolina agency roster was NOT_ACQUIRED. The agency count is null. An agency is not an insurer. The 2,229 figure is domestic and licensed foreign insurers, not agencies.'
+                    : namesProducer && !namesCompany
+                      ? 'A South Carolina producer roster was NOT_ACQUIRED. The producer count is null. Department employment of 126 is staff, not producers. The 2,229 figure is insurers, not producers.'
+                      : /\bcomplaints?\b/i.test(early)
+                        ? 'The NAIC key-facts report prints 5,324 South Carolina Department of Insurance complaints for calendar year 2024, and 9,344 inquiries separately. Provider-level complaint rows and outcomes were NOT_ACQUIRED. A complaint total is not an enforcement finding.'
+                        : /\b(?:market conduct|examination|enforcement|order|rehabilitation|liquidation)\b/i.test(early)
+                          ? 'South Carolina market-conduct examinations and enforcement orders were NOT_ACQUIRED. An examination is not an enforcement order.'
+                          : 'For calendar year 2024, NAIC reports 317 South Carolina domestic insurers and 2,229 domestic and licensed foreign insurers. The 317 are inside the 2,229 and are not added again. The printed state rank for the combined count is 1. Captives are excluded and are printed separately as 230. The April 2026 department list is a different clock and its printed types are not added into that count. Company rows were NOT_ACQUIRED. Producer, agency, adjuster, and surplus-lines broker rosters are null. Premium by statement type is not a company count.';
+    const query = fail(`${detail}${geographyNote} Open /south-carolina for the NAIC source record and South Carolina verification links.`, ['Open South Carolina insurance research.']);
+    query.jurisdiction = { state: 'SC', meaning: geographyMeaning(early) };
+    query.entityClass = naic || (namesCompany && !namesAgency && !namesProducer && !namesAdjuster) ? 'insurer' : namesAgency && !namesCompany ? 'agency' : namesProducer && !namesCompany ? 'person' : undefined;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    if (products.length) annotateUnestablishedProduct(query, products);
+    query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'South Carolina DOI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];

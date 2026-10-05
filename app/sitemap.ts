@@ -40,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/louisiana',
     '/alabama',
     '/kentucky',
+    '/south-carolina',
     '/north-carolina',
     '/ohio',
     '/oregon',
