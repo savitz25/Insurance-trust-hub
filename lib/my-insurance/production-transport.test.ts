@@ -216,13 +216,14 @@ function resolved(slug: string, state: string, license: string, id = '7658cca7-1
 }
 
 function signingEnv(insurance: ReturnType<typeof pair>, ask: ReturnType<typeof pair>): NodeJS.ProcessEnv {
-  return {
+  const env = {
     MY_TRUSTHUB_V23_INSURANCE_KEY_ID: insurance.privateKey.kid,
     MY_TRUSTHUB_V23_INSURANCE_SIGNING_PRIVATE_KEY_PEM: insurance.privateKey.pem,
     MY_TRUSTHUB_V23_ASK_KEY_ID: ask.publicKey.kid,
     MY_TRUSTHUB_V23_ASK_VERIFY_PUBLIC_KEY_PEM: ask.publicKey.pem,
     MY_TRUSTHUB_V23_PARENT_ORIGIN: INSURANCE_PRODUCTION_PINS.parentOrigin,
   };
+  return env as unknown as NodeJS.ProcessEnv;
 }
 
 test('G an admitted production profile loads a non-null Ed25519 signing key', () => {
@@ -539,10 +540,10 @@ test('O P Watch stays off and legal_insurer / NAIC is unchanged', async () => {
 test('the production poster targets the Ask profile-save path and does not use a live network call here', async () => {
   const insurance = pair('insurance-prod');
   const ask = pair('ask-prod');
-  let seen: { url: string; method: string; body: string; assertion: string; contentType: string; cache: string; redirect: string } | null = null;
+  const seen: { current: { url: string; method: string; body: string; assertion: string; contentType: string; cache: string; redirect: string } | null } = { current: null };
   globalThis.fetch = async (input, init) => {
     const headers = new Headers(init?.headers);
-    seen = {
+    seen.current = {
       url: String(input),
       method: String(init?.method),
       body: String(init?.body),
@@ -566,14 +567,15 @@ test('the production poster targets the Ask profile-save path and does not use a
     const deps = productionHandoffDeps(signingEnv(insurance, ask));
     const response = await deps.parent?.({ body: '{"closed":true}', assertion: 'header.payload.sig' });
     assert.equal(response?.ok, true);
-    assert.ok(seen);
-    assert.equal(seen?.url, PARENT_API);
-    assert.equal(seen?.method, 'POST');
-    assert.equal(seen?.body, '{"closed":true}');
-    assert.equal(seen?.assertion, 'header.payload.sig');
-    assert.equal(seen?.contentType, 'application/json');
-    assert.equal(seen?.cache, 'no-store');
-    assert.equal(seen?.redirect, 'error');
+    const posted = seen.current;
+    if (!posted) throw new Error('poster did not run');
+    assert.equal(posted.url, PARENT_API);
+    assert.equal(posted.method, 'POST');
+    assert.equal(posted.body, '{"closed":true}');
+    assert.equal(posted.assertion, 'header.payload.sig');
+    assert.equal(posted.contentType, 'application/json');
+    assert.equal(posted.cache, 'no-store');
+    assert.equal(posted.redirect, 'error');
   } finally {
     globalThis.fetch = async () => {
       throw new Error('live Ask fetch is not allowed in this test');

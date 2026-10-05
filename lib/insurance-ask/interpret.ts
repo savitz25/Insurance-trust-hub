@@ -191,6 +191,77 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Louisiana LDI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
   }
+  const explicitAlabama = /\b(?:alabama|alabama department of insurance|ALDOI|AL DOI)\b/i.test(early)
+    || /\bAL\b/.test(early)
+    || /(?:\bin\s+|,\s*)al\b/i.test(early);
+  const alabamaCity = /\b(?:birmingham|montgomery|huntsville|tuscaloosa)\b/i.test(early);
+  const alabamaOtherState = detectStates(early).find((code) => code !== 'AL');
+  const alabamaAsked = explicitAlabama
+    || (alabamaCity && /\b(?:insurance|insurer|agency|producer|agent|adjuster|broker)\b/i.test(early) && !alabamaOtherState);
+  if (alabamaAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const products = detectRequestedConsumerProducts(early);
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesAgency = /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early) && !/\bmanaging general agent\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesMga = /\bmanaging general agent\b/i.test(early);
+    const namesSurplus = /\bsurplus lines?\b/i.test(early);
+    const grainCount = [namesCompany, namesAgency || namesProducer, namesAdjuster, namesMga, namesSurplus].filter(Boolean).length;
+    const combinedCensus = grainCount >= 2 && /\b(?:how many|count of|number of|census|combined)\b/i.test(early);
+    const cls: InsuranceEntityClass | undefined = combinedCensus || namesAdjuster || namesMga || namesSurplus
+      ? undefined
+      : naic || (namesCompany && !namesAgency && !namesProducer)
+        ? 'insurer'
+        : namesAgency && !namesCompany
+          ? 'agency'
+          : namesProducer && !namesCompany
+            ? 'person'
+            : undefined;
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const receivership = /\b(?:receivership|rehabilitation|liquidation)\b/i.test(early);
+    const financialExam = /\b(?:financial exam|examination report)\b/i.test(early);
+    const fireMarshal = /\bfire marshal\b/i.test(early);
+    const unauthorized = /\bunauthorized\b/i.test(early);
+    const geographyNote = alabamaCity || /\bmobile\b/i.test(early)
+      ? ' Birmingham, Montgomery, Huntsville, Tuscaloosa, and Mobile are geography only. No city page is published.'
+      : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank or recommend Alabama insurers, agencies, producers, or adjusters. ALDOI records are not a quality score.'
+      : products.length
+        ? `${products.join(' / ')} is a requested insurance product, not an ALDOI license-class census. Ask will not substitute an Alabama company, agency, producer, or adjuster headcount for that product.`
+        : combinedCensus
+          ? 'Alabama companies, agencies, producers, adjusters, surplus-lines brokers, and managing general agents are separate grains. Ask will not add them into one census. Missing rosters are not zero.'
+          : naic
+            ? `NAIC ${naic} labels a legal insurance-company identifier, not an agency, producer, or adjuster. The 2024 company-type table does not print NAIC codes. Verify the company in the NAIC company search.`
+            : npn
+              ? `NPN ${npn} labels a producer identifier. ALDOI licensee search does not establish whether the record is a business entity or an individual. Statewide rosters were not acquired.`
+              : fireMarshal
+                ? 'State Fire Marshal permits are not Alabama insurance producer licenses.'
+                : unauthorized
+                  ? 'The ALDOI unauthorized-company page is surplus-lines filing instructions and an import tool. It is not an unauthorized-company roster.'
+                  : receivership
+                    ? 'ALDOI publishes a receivership company list with source status labels. Those names are not attached to insurer profiles or to the company-type table.'
+                    : /\bcomplaint\b/i.test(early)
+                      ? 'ALDOI accepts complaint intake. The 2024 annual report prints division complaint and inquiry activity. Provider-level complaint cases were not acquired. Intake and division activity are not a complaint census.'
+                      : financialExam
+                        ? 'The 2024 annual report prints examination activity. A separate examination-report index lists PDF links across many years. An exam is not an enforcement order, a complaint, or a license count. The PDF corpus was not downloaded.'
+                        : namesAdjuster
+                          ? 'Adjuster License Type counts and Adjuster Business Type counts are separate printed rows. They are not added, and neither row is an adjuster roster. The adjuster roster count is null.'
+                          : namesSurplus
+                            ? 'Surplus-lines broker License Type and Business Type counts are separate printed rows. They are not added. A surplus-lines broker roster was not acquired.'
+                            : namesMga
+                              ? 'Managing general agent is a Business Type row in the 2024 annual report. It is not a row roster. The managing-general-agent roster count is null.'
+                              : 'The 2024 ALDOI annual report prints company-type counts by domicile and two side-by-side licensee tables, License Type and Business Type. Those tables are not added together and are not one census. Company, agency, producer, adjuster, surplus-lines broker, and managing-general-agent row rosters were not acquired. Those roster counts are null.';
+    const query = fail(`${detail}${geographyNote} Open /alabama for ALDOI source records and verification links.`, ['Open Alabama insurance research.']);
+    query.jurisdiction = { state: 'AL', meaning: geographyMeaning(early) };
+    query.entityClass = cls;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    if (products.length) annotateUnestablishedProduct(query, products);
+    query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic || receivership || financialExam ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Alabama ALDOI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];

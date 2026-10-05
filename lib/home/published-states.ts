@@ -26,6 +26,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   georgia: 'GA',
   illinois: 'IL',
   louisiana: 'LA',
+  alabama: 'AL',
   massachusetts: 'MA',
   maryland: 'MD',
   michigan: 'MI',
@@ -47,6 +48,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  alabama:
+    'ALDOI 2024 company-type counts and separate License Type and Business Type counts. Row rosters were not acquired. Those totals are not one census.',
   louisiana:
     'LDI fiscal-year-end category entries, separate company and producer searches, and complaint intake. Category entries are not distinct companies.',
   indiana:
