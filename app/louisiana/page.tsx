@@ -33,7 +33,6 @@ const riskRows = [
 ];
 
 export default function LouisianaInsurancePage() {
-  const generatedAt = new Date().toISOString();
   return (
     <main className="th-shell mx-auto w-full max-w-[960px] px-4 py-8 sm:py-10">
       <nav aria-label="Breadcrumb" className="mb-4 text-sm">
@@ -123,7 +122,7 @@ export default function LouisianaInsurancePage() {
       <section id="clocks" className="mt-10 border-t border-slate-200 pt-6">
         <h2 className="text-xl font-semibold text-[#0A2540]">Source clocks and limits</h2>
         <p className="mt-2 text-sm text-slate-700">
-          Table 17: fiscal year-end June 30, 2025, from the report transmitted {table.reportLetterDate}, retrieved {table.retrievedAt}. Active Company Search, producer and adjuster search, the licensee-report index, the regulatory-action search, and the complaint form were observed {table.retrievedAt}. Individual live license status was not snapshotted. The Life licensee file was retrieved the same day and was not used as a headcount. Page generated {generatedAt}. No universal Louisiana insurance as-of date is asserted.
+          Table 17: fiscal year-end June 30, 2025, from the report transmitted {table.reportLetterDate}, retrieved {table.retrievedAt}. Active Company Search, producer and adjuster search, the licensee-report index, the regulatory-action search, and the complaint form were observed {table.retrievedAt}. Individual live license status was not snapshotted. The Life licensee file was retrieved the same day and was not used as a headcount. Page generated {table.generatedAt}. No universal Louisiana insurance as-of date is asserted.
         </p>
         <p className="mt-2 text-sm text-slate-700">
           Exact agency and license matches: NOT_ACQUIRED. Exact enforcement attachments: 0. New canonical organizations: 0. Graph writes: 0. Claim eligibility changes: 0. Statewide NAIC-bearing company rows, individual, agency, adjuster, and appointment rosters, the administrative-action corpus, examination indexes, and provider complaint cases: NOT_ACQUIRED. New Orleans, Baton Rouge, Shreveport, and Lafayette are geography only. No parish pages are published.
