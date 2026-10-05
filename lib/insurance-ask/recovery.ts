@@ -46,6 +46,7 @@ export const STATE_RESEARCH: Record<string, string> = {
   NY: "/new-york",
   IL: "/illinois",
   LA: "/louisiana",
+  AL: "/alabama",
   OR: "/oregon",
   PA: "/pennsylvania",
   NC: "/north-carolina",

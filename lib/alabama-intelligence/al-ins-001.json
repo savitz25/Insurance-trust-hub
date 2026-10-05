@@ -1,0 +1,253 @@
+{
+  "regulator": "Alabama Department of Insurance",
+  "publicationId": "AL-INS-001",
+  "annualReport": {
+    "source": "https://www.aldoi.gov/PDF/Misc/2024AnnualReport.pdf",
+    "title": "2024 Annual Report",
+    "sha256": "709897198abdec9cc7fd29bea813e457110935b24e94b73e3d5e9e75921c4cb4",
+    "authorityClock": "2024",
+    "layoutDate": "2025-09-26",
+    "layoutDateIsNotTheAuthorityClock": true,
+    "retrievedAt": "2026-10-05"
+  },
+  "companyOverview": {
+    "grain": "company-type by domicile",
+    "categoryEntriesAreNotDistinctCompanies": true,
+    "printedTotalIsNotAnAuthorizedInsurerCensus": true,
+    "printedTotalIsNotARowRoster": true,
+    "rows": [
+      { "name": "Accepted Reinsurer", "domestic": 0, "foreign": 22, "alien": 13, "other": 0, "total": 35 },
+      { "name": "Accredited Reinsurer", "domestic": 0, "foreign": 12, "alien": 1, "other": 0, "total": 13 },
+      { "name": "Automobile Club", "domestic": 4, "foreign": 27, "alien": 0, "other": 0, "total": 31 },
+      { "name": "Captive", "domestic": 52, "foreign": 0, "alien": 0, "other": 0, "total": 52 },
+      { "name": "Certified Reinsurer", "domestic": 0, "foreign": 0, "alien": 9, "other": 0, "total": 9 },
+      { "name": "Fraternal", "domestic": 1, "foreign": 13, "alien": 0, "other": 0, "total": 14 },
+      { "name": "Healthcare Service Plan", "domestic": 1, "foreign": 0, "alien": 0, "other": 0, "total": 1 },
+      { "name": "Health Maintenance Org", "domestic": 5, "foreign": 10, "alien": 0, "other": 0, "total": 15 },
+      { "name": "Life and Health", "domestic": 10, "foreign": 440, "alien": 0, "other": 0, "total": 450 },
+      { "name": "Pharm. Benefit Manager", "domestic": 2, "foreign": 58, "alien": 0, "other": 0, "total": 60 },
+      { "name": "Prepaid Dental", "domestic": 4, "foreign": 0, "alien": 0, "other": 0, "total": 4 },
+      { "name": "Prepaid Legal", "domestic": 1, "foreign": 2, "alien": 0, "other": 0, "total": 3 },
+      { "name": "Premium Finance", "domestic": 18, "foreign": 40, "alien": 0, "other": 2, "total": 60 },
+      { "name": "Preneed", "domestic": 236, "foreign": 0, "alien": 0, "other": 0, "total": 236 },
+      { "name": "Property and Casualty", "domestic": 16, "foreign": 955, "alien": 0, "other": 0, "total": 971 },
+      { "name": "Reciprocal Exchange", "domestic": 0, "foreign": 16, "alien": 0, "other": 0, "total": 16 },
+      { "name": "Reciprocal Jurisdiction Reinsurer", "domestic": 0, "foreign": 0, "alien": 38, "other": 0, "total": 38 },
+      { "name": "Risk Purchasing Group", "domestic": 11, "foreign": 331, "alien": 0, "other": 1, "total": 343 },
+      { "name": "Risk Retention Group", "domestic": 29, "foreign": 110, "alien": 0, "other": 0, "total": 139 },
+      { "name": "Service Contract", "domestic": 11, "foreign": 35, "alien": 0, "other": 3, "total": 49 },
+      { "name": "Title", "domestic": 1, "foreign": 31, "alien": 0, "other": 0, "total": 32 }
+    ],
+    "domestic": 402,
+    "foreign": 2102,
+    "alien": 61,
+    "other": 6,
+    "printedTotal": 2571
+  },
+  "licenseType": {
+    "header": "License Type",
+    "grain": "license-type category counts",
+    "rowsAreNotPersons": true,
+    "rows": [
+      { "name": "Adjuster", "total": 32976 },
+      { "name": "Apprentice Adjuster", "total": 11 },
+      { "name": "Insurance Producer", "total": 204628 },
+      { "name": "Portable Electronic Large", "total": 23 },
+      { "name": "Portable Electronic Small", "total": 30 },
+      { "name": "Reinsurance Intermediary", "total": 4 },
+      { "name": "Service Representative", "total": 21 },
+      { "name": "Surplus Lines Broker", "total": 2758 },
+      { "name": "Temporary Insurance Producer", "total": 344 },
+      { "name": "Title Insurance Agent", "total": 474 }
+    ],
+    "printedTotal": 241269
+  },
+  "businessType": {
+    "header": "Business Type",
+    "grain": "business-type category counts",
+    "rowsAreNotAgencies": true,
+    "rows": [
+      { "name": "Adjuster", "total": 334 },
+      { "name": "Insurance Producer", "total": 12693 },
+      { "name": "Managing General Agent", "total": 45 },
+      { "name": "Portable Electronic Large", "total": 14 },
+      { "name": "Portable Electronic Small", "total": 16 },
+      { "name": "Reinsurance Intermediary", "total": 16 },
+      { "name": "Surplus Lines Broker", "total": 939 },
+      { "name": "Title Insurance Agent", "total": 252 }
+    ],
+    "printedTotal": 14309
+  },
+  "licenseTablesAreNotAdded": true,
+  "narrative": {
+    "licensesIssuedMoreThan": 51000,
+    "licensesIssuedIsApproximateActivity": true,
+    "licenseesWhoCanSell": 262664,
+    "basedInTheState": 36854,
+    "basedInTheStateIsALocationAttribute": true,
+    "narrativeHasNoSeparateAsOfDate": true,
+    "narrativeIsNotReconciledToTheLicenseTables": true
+  },
+  "examinations": {
+    "title": "2024 Alabama Insurance Examination Report",
+    "grain": "examination activity",
+    "notALicenseCount": true,
+    "examsGiven": 8265,
+    "examsPassed": 4933,
+    "passingRatioPrinted": "60%",
+    "onlineExamsGiven": 4625,
+    "onlineExamsPassed": 2912,
+    "onlinePassingRatioPrinted": "63%",
+    "testingCenterRowsOmittedBecauseTheyAreNotCityLicenses": true,
+    "types": [
+      { "name": "Producer - Bail Bonds", "given": 54, "passed": 31, "ratio": "57%" },
+      { "name": "Producer - Casualty", "given": 12, "passed": 7, "ratio": "58%" },
+      { "name": "Producer - Health", "given": 354, "passed": 204, "ratio": "58%" },
+      { "name": "Producer - Life", "given": 1428, "passed": 852, "ratio": "60%" },
+      { "name": "Producer - Life & Health", "given": 3171, "passed": 2056, "ratio": "65%" },
+      { "name": "Producer - Personal Lines", "given": 846, "passed": 431, "ratio": "51%" },
+      { "name": "Producer - Property", "given": 13, "passed": 6, "ratio": "46%" },
+      { "name": "Producer - Property & Casualty", "given": 1722, "passed": 956, "ratio": "56%" },
+      { "name": "Independent Adjuster - P&C with WC & Crop", "given": 297, "passed": 167, "ratio": "56%" },
+      { "name": "Independent Adjuster - Property & Casualty (P&C)", "given": 300, "passed": 180, "ratio": "60%" },
+      { "name": "Independent Adjuster - Workers' Comp (WC)", "given": 35, "passed": 15, "ratio": "43%" },
+      { "name": "Independent Adjuster - Crop", "given": 5, "passed": 2, "ratio": "40%" },
+      { "name": "Title Insurance Agent", "given": 28, "passed": 26, "ratio": "93%" }
+    ],
+    "firstAttempts": {
+      "grain": "first attempts only",
+      "notAddedToAllAttempts": true,
+      "note": "First Attempts refers to the first time an individual has taken a particular exam.",
+      "examsGiven": 6295,
+      "examsPassed": 3976,
+      "passingRatioPrinted": "63%",
+      "types": [
+        { "name": "Producer - Bail Bonds", "given": 40, "passed": 21, "ratio": "53%" },
+        { "name": "Producer - Casualty", "given": 8, "passed": 6, "ratio": "75%" },
+        { "name": "Producer - Health", "given": 266, "passed": 167, "ratio": "63%" },
+        { "name": "Producer - Life", "given": 1140, "passed": 711, "ratio": "62%" },
+        { "name": "Producer - Life & Health", "given": 2532, "passed": 1734, "ratio": "68%" },
+        { "name": "Producer - Personal Lines", "given": 579, "passed": 300, "ratio": "52%" },
+        { "name": "Producer - Property", "given": 7, "passed": 3, "ratio": "43%" },
+        { "name": "Producer - Property & Casualty", "given": 1220, "passed": 729, "ratio": "60%" },
+        { "name": "Independent Adjuster - P&C with WC & Crop", "given": 227, "passed": 133, "ratio": "59%" },
+        { "name": "Independent Adjuster - Property & Casualty (P&C)", "given": 220, "passed": 135, "ratio": "61%" },
+        { "name": "Independent Adjuster - Workers' Comp (WC)", "given": 25, "passed": 10, "ratio": "40%" },
+        { "name": "Independent Adjuster - Crop", "given": 3, "passed": 1, "ratio": "33%" },
+        { "name": "Title Insurance Agent", "given": 28, "passed": 26, "ratio": "93%" }
+      ]
+    }
+  },
+  "filings": {
+    "grain": "rate and form filing activity",
+    "notALicenseCount": true,
+    "propertyAndCasualty": {
+      "homeownersPrintedLabel": "Homewoners",
+      "homeowners": 216,
+      "auto": 640,
+      "otherLines": 3965,
+      "printedTotal": 4821,
+      "visibleRowsEqualPrintedTotal": true
+    },
+    "lifeAndHealth": {
+      "annuity": 95,
+      "health": 720,
+      "life": 320,
+      "otherLines": 70,
+      "visibleRowSum": 1205,
+      "printedTotal": 2005,
+      "visibleRowsEqualPrintedTotal": false,
+      "published": false
+    }
+  },
+  "consumerServices": {
+    "clock": "2024",
+    "grain": "division activity",
+    "notAComplaintCensus": true,
+    "rows": [
+      { "line": "Automobile", "complaints": 666, "inquiries": 848 },
+      { "line": "Homeowners", "complaints": 581, "inquiries": 660 },
+      { "line": "Life and Health", "complaints": 1103, "inquiries": 2966 },
+      { "line": "All Other Lines", "complaints": 16, "inquiries": 429 }
+    ],
+    "complaintTotal": 2366,
+    "inquiryTotal": 4903,
+    "handledComplaintsAndInquiries": 7269,
+    "handledFigureEqualsTheTwoColumnSum": true,
+    "recoveredForConsumers": "$8.4 million",
+    "recoveryIsComplaintResolutionActivity": true
+  },
+  "examIndex": {
+    "source": "https://www.aldoi.gov/companies/ExaminationReports.aspx",
+    "retrievedAt": "2026-10-05",
+    "pdfLinks": 84,
+    "uniqueLabels": 84,
+    "labelYearMin": 1998,
+    "labelYearMax": 2023,
+    "marketConductOrComplianceLabels": 2,
+    "grain": "EXAMINATION_REPORT_INDEX",
+    "notALicenseRoster": true,
+    "notAnEnforcementCorpus": true,
+    "notACompanyCount": true
+  },
+  "receivership": {
+    "source": "https://aldoi.gov/Companies/ReceivershipCompanyList.aspx",
+    "retrievedAt": "2026-10-05",
+    "authorityAsOf": null,
+    "grain": "rehabilitation and liquidation list",
+    "namesAreSourceLabels": true,
+    "notJoinedToProfiles": true,
+    "rows": [
+      { "name": "BOOKER T. WASHINGTON", "status": "CLOSED", "detailId": 2 },
+      { "name": "DEARBOR", "status": "ACTIVE", "detailId": 33 },
+      { "name": "EARLY AMERICAN INS. COMPANY", "status": "ACTIVE", "detailId": 3 },
+      { "name": "EMPLOYERS INS. CO OF AL, INC", "status": "CLOSED", "detailId": 4 },
+      { "name": "EMPLOYERS LIFE INSURANCE", "status": "CLOSED", "detailId": 5 },
+      { "name": "FIRST NATIONAL LIFE", "status": "CLOSED", "detailId": 6 },
+      { "name": "JORDAN FUNERAL & INS. CO.", "status": "ACTIVE", "detailId": 19 },
+      { "name": "MAGNOLIA MEMORY GARDENS", "status": "CLOSED", "detailId": 23 },
+      { "name": "MOUNTAIN VIEW", "status": "CLOSED", "detailId": 24 },
+      { "name": "OAKWOOD CEMETERY ANNEX", "status": "CLOSED", "detailId": 25 },
+      { "name": "PHYSICIANS CASUALTY", "status": "ACTIVE", "detailId": 32 },
+      { "name": "PINNACLE CASUALTY ASS. CO", "status": "ACTIVE", "detailId": 26 },
+      { "name": "PREFERRED LIFE INSURANCE CO", "status": "CLOSED", "detailId": 27 },
+      { "name": "PRIMEHEALTH OF ALABAMA, INC", "status": "CLOSED", "detailId": 28 },
+      { "name": "SOUTHERN HEALTH SYSTEMS", "status": "CLOSED", "detailId": 29 },
+      { "name": "STANDARD FIRE INS CO. OF ALA", "status": "ACTIVE", "detailId": 30 },
+      { "name": "UNIVERSAL LIFE INSURANCE", "status": "CLOSED", "detailId": 31 }
+    ]
+  },
+  "rosters": {
+    "authorizedInsuranceCompanies": { "status": "NOT_ACQUIRED", "publication": "OPEN_SEARCH_ONLY", "rowCount": null },
+    "agenciesBusinessEntities": { "status": "NOT_ACQUIRED", "publication": "OPEN_SEARCH_ONLY", "rowCount": null },
+    "individualProducers": { "status": "NOT_ACQUIRED", "publication": "OPEN_SEARCH_ONLY", "rowCount": null },
+    "adjusters": { "status": "NOT_ACQUIRED", "publication": "OPEN_SEARCH_ONLY", "rowCount": null },
+    "surplusLinesBrokers": { "status": "NOT_ACQUIRED", "publication": "OPEN_SEARCH_ONLY", "rowCount": null },
+    "managingGeneralAgents": { "status": "NOT_ACQUIRED", "publication": "OPEN_SEARCH_ONLY", "rowCount": null },
+    "enforcement": { "status": "NOT_ACQUIRED", "publication": "OPEN_SEARCH_ONLY", "rowCount": null },
+    "unauthorizedCompanies": { "status": "NOT_ACQUIRED", "publication": "FILING_INSTRUCTIONS_ONLY", "rowCount": null }
+  },
+  "producerDirectoryCd": {
+    "source": "https://aldoi.gov/ContinuingEd/ProducerDirectoryLogin.aspx",
+    "status": "NOT_ACQUIRED",
+    "reason": "Sold to continuing-education providers only."
+  },
+  "fireMarshalPermitsAreNotProducerLicenses": true,
+  "links": {
+    "companySearch": "https://external-lookup-web.prod.naic.org/",
+    "agentSearch": "https://external-lookup-web.prod.naic.org/",
+    "licenseeSearch": "https://aldoi.gov/Licensing/CheckStatus.aspx",
+    "enforcementSearch": "https://aldoi.gov/ActionSearch/",
+    "complaintIntake": "https://aldoi.gov/Consumers/FileComplaint.aspx",
+    "unauthorizedCompanies": "https://aldoi.gov/SurplusLineWeb/UnauthCoInfo.aspx",
+    "surplusLineInformation": "https://aldoi.gov/SurplusLineWeb/SLInfo.aspx"
+  },
+  "graph": {
+    "graphWrites": 0,
+    "newCanonicalOrganizations": 0,
+    "claimEligibilityChanges": 0,
+    "exactAdverseAttachments": 0,
+    "nameOnlyAdverseJoins": 0
+  },
+  "generatedAt": "2026-10-05T18:00:00Z"
+}
