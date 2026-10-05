@@ -140,6 +140,57 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking ? 'UNSUPPORTED' : evidence || naic ? 'PARTIAL' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Wisconsin OCI', value: ranking ? 'No ranking' : evidence ? 'Bounded OCI index evidence' : 'Class-specific verification' }] };
   }
+  const louisianaCity = /\b(?:new orleans|baton rouge|shreveport|lafayette)\b/i.test(early);
+  const louisianaOtherState = detectStates(early).find((code) => code !== 'LA');
+  const louisianaAsked = /\b(?:louisiana|louisiana department of insurance|\bLDI\b)\b/i.test(early)
+    || detectStates(early)[0] === 'LA'
+    || (louisianaCity && /\b(?:insurance|insurer|agency|producer|agent|adjuster)\b/i.test(early) && !louisianaOtherState);
+  if (louisianaAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const products = detectRequestedConsumerProducts(early);
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesProducer = /\b(?:agenc(?:y|ies)|business entit(?:y|ies)|producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const grainCount = [namesCompany, namesProducer, namesAdjuster].filter(Boolean).length;
+    const combinedCensus = grainCount >= 2 && /\b(?:how many|count of|number of|census|combined)\b/i.test(early);
+    const cls: InsuranceEntityClass | undefined = combinedCensus
+      ? undefined
+      : naic || (namesCompany && !namesProducer && !namesAdjuster)
+        ? 'insurer'
+        : namesProducer && !namesCompany && !namesAdjuster && /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early)
+          ? 'agency'
+          : namesProducer && !namesCompany && !namesAdjuster
+            ? 'person'
+            : undefined;
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const evidence = /\b(?:enforcement|disciplin|order|market conduct|financial exam|examin|complaint|regulatory action)\b/i.test(early);
+    const geographyNote = louisianaCity
+      ? ' New Orleans, Baton Rouge, Shreveport, and Lafayette are geography only. No parish page is published.'
+      : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank or recommend Louisiana insurers, agencies, producers, or adjusters. LDI records are not a quality score.'
+      : products.length
+        ? `${products.join(' / ')} is a requested insurance product, not an LDI line-of-authority census. Ask will not substitute a Louisiana agency, producer, adjuster, or company headcount for that product.`
+        : combinedCensus
+          ? 'Louisiana companies, producers, agencies, and adjusters are separate grains. Ask will not add them into one census. Missing rosters are not zero.'
+          : naic
+            ? `NAIC ${naic} labels a legal insurance-company identifier, not an agency, producer, or adjuster. Table 17 does not print NAIC codes. Verify the company in LDI Active Company Search. That search also returns TPA, MNRO, and viatical records, which are not the insurer census.`
+            : npn
+              ? `NPN ${npn} labels a producer identifier. LDI producer search covers individuals, agencies, and adjusters; the number alone does not establish the grain. Statewide rosters were not acquired.`
+              : /\bcomplaint\b/i.test(early)
+                ? 'The LDI Consumer Complaint Division accepts complaint intake. Provider-level complaint cases and outcomes were not acquired. A complaint is not an enforcement finding, and intake is not a complaint census.'
+                : evidence
+                  ? 'LDI provides a regulatory-action search of final actions since January 1, 2016. The action corpus was not acquired. Market-conduct and financial-examination report indexes were not acquired. An exam is not an enforcement order.'
+                  : 'LDI Table 17 prints fiscal-year-end category entries; those entries are not distinct companies. Active Company Search is separate from producer and adjuster search. No statewide company, individual, agency, adjuster, or appointment roster was acquired. Those counts are null.';
+    const query = fail(`${detail}${geographyNote} Open /louisiana for LDI source records and verification links.`, ['Open Louisiana insurance research.']);
+    query.jurisdiction = { state: 'LA', meaning: geographyMeaning(early) };
+    query.entityClass = cls;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    if (products.length) annotateUnestablishedProduct(query, products);
+    query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Louisiana LDI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
