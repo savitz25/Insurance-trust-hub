@@ -361,6 +361,33 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'South Carolina DOI', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
   }
+  const explicitMississippi = /\bmississippi\b/i.test(early) || /\bin ms\b/i.test(early);
+  const mississippiCity = explicitMississippi && /\b(?:jackson|gulfport|biloxi)\b/i.test(early);
+  if (explicitMississippi && !/\bmissouri\b/i.test(early)) {
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesAgency = /\b(?:agenc(?:y|ies)|producer entit(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus lines?\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = mississippiCity ? ' Jackson, Gulfport, and Biloxi are geography only. No city page is published.' : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank Mississippi insurers, agencies, producers, or adjusters.'
+      : namesAdjuster
+        ? 'A Mississippi adjuster roster was NOT_ACQUIRED. The adjuster count is null. Missing is not zero.'
+        : namesSurplus
+          ? 'A Mississippi surplus-lines roster was NOT_ACQUIRED. The surplus-lines count is null. Missing is not zero.'
+          : namesAgency && !namesCompany
+            ? 'The 13 Aug 2026 Insurance Producer Entity file has 10,645 rows and 10,645 agency IDs. Those rows are business entities, not individual producers and not the licensed-company list. Mississippi mailing state is 1,422 rows on that same file.'
+            : namesProducer && !namesCompany
+              ? 'An individual Mississippi producer roster was NOT_ACQUIRED. The 10,645 figure is insurance producer entities, not individual producers. Missing individual producers are not zero.'
+              : 'The 5 Oct 2026 MID Licensed Insurance Companies list has 2,129 rows and 2,129 license numbers. The printed types partition that list and include third-party administrators, rate service organizations, auto clubs, a blood plan, and a stock permit, so 2,129 is not a risk-bearing-insurer-only census. The 10,645 producer-entity rows are a separate file and are not added.';
+    const query = fail(`${detail}${geographyNote} Open /mississippi for the two source clocks.`, ['Open Mississippi insurance research.']);
+    query.jurisdiction = { state: 'MS', meaning: geographyMeaning(early) };
+    query.entityClass = namesCompany && !namesAgency ? 'insurer' : namesAgency && !namesCompany ? 'agency' : namesProducer && !namesCompany ? 'person' : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Mississippi MID', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
