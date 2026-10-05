@@ -218,7 +218,8 @@
     "check:metrics": "node --import tsx scripts/build_network_metrics_v1.mjs --check && node --import tsx --test scripts/test-metrics-r2-04.mjs",
     "assert:mn-ins-001": "tsx scripts/assert-mn-ins-001.mts",
     "assert:al-ins-001": "tsx scripts/assert-al-ins-001.mts",
-    "assert:ky-ins-001": "tsx scripts/assert-ky-ins-001.mts"
+    "assert:ky-ins-001": "tsx scripts/assert-ky-ins-001.mts",
+    "assert:sc-ins-001": "tsx scripts/assert-sc-ins-001.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -28,6 +28,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   louisiana: 'LA',
   alabama: 'AL',
   kentucky: 'KY',
+  'south-carolina': 'SC',
   massachusetts: 'MA',
   maryland: 'MD',
   michigan: 'MI',
@@ -49,6 +50,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  'south-carolina':
+    'NAIC 2024 domestic and licensed-foreign insurer counts, separate captives, and the April 2026 Department of Insurance company list by printed type. Those clocks are not added. Row rosters were not acquired.',
   kentucky:
     'NAIC 2024 domestic and licensed-foreign insurer counts, separate captives, and Department of Insurance complaint totals. Row rosters were not acquired.',
   alabama:
