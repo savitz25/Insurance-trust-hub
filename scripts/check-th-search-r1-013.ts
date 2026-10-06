@@ -420,6 +420,41 @@ async function main() {
         assert.deepEqual(r.body.queryInterpretation.requestedProduct, ["homeowners"]);
         assert.ok(r.body.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
       });
+      await test("consumer HTML /ask params (empty filters + from=) still execute PI_HO", async () => {
+        const r = await executeInsuranceRequest(
+          new URLSearchParams({
+            q: "homeowners insurance agencies in Florida",
+            entity: "",
+            state: "",
+            loa: "",
+            evidence: "",
+            from: "/",
+          }),
+        );
+        assert.notEqual(r.terminalState, "INVALID_INPUT");
+        assert.doesNotMatch(r.parsed.query.failReason ?? "", /one value for each supported request parameter/i);
+        assert.equal(r.parsed.query.mode, "entity");
+        assert.deepEqual(r.parsed.query.requestedProduct, ["homeowners"]);
+        assert.deepEqual(r.results.map((c) => c.entityId), [ids.agency]);
+        assert.ok(r.limitations.some((l) => /not asserted to be homeowners-specific/i.test(l)));
+      });
+      await test("consumer HTML /ask params still ranking-refuse CTRL_BEST", async () => {
+        const r = await executeInsuranceRequest(
+          new URLSearchParams({
+            q: "Which insurance agency is the best in Florida?",
+            entity: "",
+            state: "",
+            loa: "",
+            evidence: "",
+            from: "/tools",
+          }),
+        );
+        assert.equal(r.parsed.query.mode, "fail_closed");
+        assert.equal(r.coverageState, "UNSUPPORTED");
+        assert.equal(r.results.length, 0);
+        assert.match(r.parsed.query.failReason ?? "", /does not rank/i);
+        assert.notEqual(r.terminalState, "INVALID_INPUT");
+      });
       await test("unspecified-product control still returns the FL agency cohort", async () => {
         const r = await executeInsuranceAsk(
           "Show insurance agencies credentialed in Florida.",
