@@ -51,6 +51,7 @@ export const STATE_RESEARCH: Record<string, string> = {
   SC: "/south-carolina",
   MS: "/mississippi",
   AR: "/arkansas",
+  OK: "/oklahoma",
   OR: "/oregon",
   PA: "/pennsylvania",
   NC: "/north-carolina",

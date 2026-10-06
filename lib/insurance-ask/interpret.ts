@@ -442,6 +442,37 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Arkansas AID', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
   }
+  const explicitOklahoma = /\boklahoma\b/i.test(early) || /\bin ok\b/i.test(early);
+  const oklahomaCity = /\b(?:oklahoma city|tulsa|norman|edmond|lawton|broken arrow)\b/i.test(early);
+  const oklahomaOtherState = detectStates(early).find((code) => code !== 'OK');
+  const oklahomaAsked = (explicitOklahoma || (oklahomaCity && /\b(?:insurance|insurer|agency|producer|agent|adjuster|surplus)\b/i.test(early))) && !oklahomaOtherState;
+  if (oklahomaAsked) {
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesAgency = /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus lines?\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = oklahomaCity ? ' Oklahoma City, Tulsa, Norman, Edmond, Lawton, and Broken Arrow are geography only. No city page is published.' : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank Oklahoma insurers, agencies, producers, or adjusters.'
+      : namesAdjuster
+        ? 'The 2025 annual report prints 3,627 resident adjusters. That figure is not the 23,166 resident producers and not the printed 342,456 total licensees. A bulk adjuster roster was NOT_ACQUIRED.'
+        : namesSurplus
+          ? 'Fiscal year 2025 surplus-lines tax revenue is $65,409,556. That collection is not a licensee count. A surplus-lines licensee roster was NOT_ACQUIRED.'
+          : namesAgency && !namesCompany
+            ? 'An Oklahoma agency or business-entity roster was NOT_ACQUIRED. The 342,456 total licensees figure is not an agency count. Missing agencies are not zero.'
+            : namesProducer && !namesCompany
+              ? 'The 2025 annual report prints 23,166 resident producers. It also prints 342,456 total licensees. The resident producers and 3,627 resident adjusters do not equal that total, and the remainder is not itemized. A bulk producer roster was NOT_ACQUIRED.'
+              : /\bcomplaints?\b/i.test(early)
+                ? 'The 2025 annual report prints 3,379 complaints and 3,379 feedback inquiries. It does not say those are the same rows. External reviews are 529. A complaint is not a finding. Provider-level complaint rows were NOT_ACQUIRED.'
+                : 'The 2025 annual report prints 88 domestic insurers and 1,794 foreign insurers. Those counts are not added. Named company rows were NOT_ACQUIRED. Resident producers, resident adjusters, agencies, appointments, and surplus-lines licensees stay separate. Premium volume is not a company count.';
+    const query = fail(`${detail}${geographyNote} Open /oklahoma for the annual-report record.`, ['Open Oklahoma insurance research.']);
+    query.jurisdiction = { state: 'OK', meaning: geographyMeaning(early) };
+    query.entityClass = namesCompany && !namesAgency ? 'insurer' : namesAgency && !namesCompany ? 'agency' : namesProducer && !namesCompany ? 'person' : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Oklahoma OID', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];

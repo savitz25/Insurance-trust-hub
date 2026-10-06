@@ -31,6 +31,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   'south-carolina': 'SC',
   mississippi: 'MS',
   arkansas: 'AR',
+  oklahoma: 'OK',
   massachusetts: 'MA',
   maryland: 'MD',
   michigan: 'MI',
@@ -52,6 +53,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  oklahoma:
+    '2025 annual-report domestic and foreign insurer counts stay separate from resident producers, resident adjusters, complaints, and legal activity. Bulk rosters were not acquired.',
   arkansas:
     'NAIC 2024 domestic and licensed-foreign insurer counts, separate captives, and Department complaint totals. Producer, agency, adjuster, title-agent, and appointment rosters were not acquired.',
   mississippi:
