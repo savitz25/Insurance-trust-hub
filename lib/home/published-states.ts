@@ -51,10 +51,13 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   washington: 'WA',
   wisconsin: 'WI',
   indiana: 'IN',
+  'new-mexico': 'NM',
 };
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  'new-mexico':
+    'Office of Superintendent of Insurance Title Insurance Bureau: 68 licensed title insurance agents and 24 underwriters stay separate. Other statewide rosters were not acquired.',
   utah:
     'Utah Insurance Department 2025 report: 1,466 commercial insurers licensed at 2024 year-end; 319 reported health business separately. Other statewide rosters were not acquired.',
   missouri:

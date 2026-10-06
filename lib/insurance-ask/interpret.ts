@@ -473,6 +473,51 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Oklahoma OID', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
   }
+  const explicitNewMexico = /\bnew mexico\b/i.test(early) || /\bin nm\b/i.test(early);
+  const newMexicoCity = /\b(?:albuquerque|santa fe)\b/i.test(early);
+  const newMexicoOtherState = detectStates(early).find((code) => code !== 'NM');
+  const newMexicoAsked = (explicitNewMexico || (newMexicoCity && /\b(?:insurance|insurer|agency|producer|agent|adjuster|surplus|title|underwriter|tpa|examination)\b/i.test(early))) && !newMexicoOtherState;
+  if (newMexicoAsked) {
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesAgency = /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus[- ]lines?(?:\s+brokers?)?\b/i.test(early);
+    const namesTitle = /\b(?:title|underwriters?)\b/i.test(early);
+    const namesTpa = /\b(?:third-party administrators?|TPAs?)\b/i.test(early);
+    const namesAppointment = /\bappointments?\b/i.test(early);
+    const namesExam = /\b(?:examinations?|exams?)\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = newMexicoCity ? ' Albuquerque and Santa Fe are geography only. No city page is published.' : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank New Mexico insurers, title agents, underwriters, agencies, or producers.'
+      : namesTpa
+        ? 'A New Mexico third-party administrator roster was NOT_ACQUIRED. A blank TPA annual-report form is not a census.'
+        : namesExam
+          ? 'New Mexico examination records were NOT_ACQUIRED. One examination order is not an exam census. This page does not name a single insurer as the exam population.'
+          : namesAppointment
+            ? 'A New Mexico appointment roster was NOT_ACQUIRED. An appointment is not a license.'
+            : namesAdjuster
+              ? 'A New Mexico adjuster roster was NOT_ACQUIRED. The adjuster count is null. Missing is not zero.'
+              : namesSurplus
+                ? 'A New Mexico surplus-lines broker roster was NOT_ACQUIRED. The surplus-lines count is null. Missing is not zero.'
+                : /\bcomplaints?\b/i.test(early)
+                  ? 'New Mexico complaint counts were NOT_ACQUIRED. A complaint is not a finding.'
+                  : namesTitle
+                    ? 'The Title Insurance Bureau present-tense statement on the divisions page, retrieved 2026-10-06, says it currently regulates 68 licensed title insurance agents and 24 underwriters. Those counts are not added. The page did not print a separate as-of date. Annual title agent and underwriter statistical reports are a filing grain, not the 68 and not the 24. PDF links on the statistical-reports index are not a licensee census.'
+                    : namesAgency && !namesCompany
+                      ? 'Business entities and agencies beyond the title-bureau sentence were NOT_ACQUIRED. The 68 licensed title insurance agents are not a statewide agency census and are not added to the 24 underwriters.'
+                      : namesProducer && !namesCompany
+                        ? 'An individual New Mexico producer roster was NOT_ACQUIRED. The 68 licensed title insurance agents are not an individual-producer census and are not added to the 24 underwriters.'
+                        : namesCompany
+                          ? 'A New Mexico insurer roster was NOT_ACQUIRED. Domestic and foreign insurers are not split because no insurer report was acquired. The 68 title insurance agents and 24 underwriters are not an insurer census and are not added.'
+                          : 'The New Mexico Office of Superintendent of Insurance Title Insurance Bureau present-tense statement on the divisions page, retrieved 2026-10-06, says it currently regulates 68 licensed title insurance agents and 24 underwriters. Those counts stay separate and are not added. The page did not print a separate as-of date. Insurers, agencies beyond that sentence, individual producers, adjusters, surplus-lines brokers, third-party administrators, appointments, examinations, enforcement orders, receivership, and complaints were NOT_ACQUIRED. License verification is a search, not a bulk census. Statistical-report filings are not the 68 or the 24.';
+    const query = fail(`${detail}${geographyNote} Open /new-mexico for the title-bureau limits.`, ['Open New Mexico insurance research.']);
+    query.jurisdiction = { state: 'NM', meaning: geographyMeaning(early) };
+    query.entityClass = namesCompany && !namesAgency && !namesProducer ? 'insurer' : namesAgency && !namesCompany ? 'agency' : namesProducer && !namesCompany && !namesTitle ? 'person' : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'New Mexico OSI', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
