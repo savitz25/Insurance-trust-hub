@@ -47,6 +47,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   tennessee: 'TN',
   texas: 'TX',
   utah: 'UT',
+  nebraska: 'NE',
   virginia: 'VA',
   washington: 'WA',
   wisconsin: 'WI',
@@ -58,6 +59,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
   'new-mexico':
     'Office of Superintendent of Insurance Title Insurance Bureau: 68 licensed title insurance agents and 24 underwriters stay separate. Other statewide rosters were not acquired.',
+  nebraska:
+    'NAIC 2025 key facts, calendar year 2024: 1,687 domestic and licensed foreign insurers, with 155 domestic insurers inside that total. Four captives are separate. Producer, agency, adjuster, and appointment rosters were not acquired.',
   utah:
     'Utah Insurance Department 2025 report: 1,466 commercial insurers licensed at 2024 year-end; 319 reported health business separately. Other statewide rosters were not acquired.',
   missouri:

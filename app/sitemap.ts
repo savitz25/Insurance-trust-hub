@@ -60,6 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/new-jersey',
     '/texas',
     '/utah',
+    '/nebraska',
     '/washington',
     '/wisconsin',
     '/indiana',

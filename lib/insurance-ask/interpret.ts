@@ -442,6 +442,40 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Arkansas AID', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
   }
+  const explicitNebraska = /\bnebraska\b/i.test(early) || /\bin ne\b/i.test(early);
+  const nebraskaOtherState = detectStates(early.replace(/\bnebraska\b/gi, ' ').replace(/\bin ne\b/gi, ' ')).find((code) => code !== 'NE');
+  const nebraskaAsked = explicitNebraska && !nebraskaOtherState && !/\bnevada\b/i.test(early);
+  if (nebraskaAsked) {
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = /\b(?:omaha|lincoln)\b/i.test(early) ? ' Omaha and Lincoln are geography only. No city page is published.' : '';
+    const namesAgency = /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus lines?\b/i.test(early);
+    const namesAppointment = /\bappointments?\b/i.test(early);
+    const namesCaptive = /\bcaptives?\b/i.test(early);
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank Nebraska insurers, agencies, producers, or adjusters. NAIC company counts are not a quality score.'
+      : namesCaptive
+        ? 'NAIC prints 4 Nebraska captive insurance companies for calendar year 2024, separate from 1,687 domestic and licensed foreign insurers. Captives are not included in that total and are not added to it.'
+        : namesAdjuster
+          ? 'A Nebraska adjuster roster was NOT_ACQUIRED. Missing is not zero.'
+          : namesSurplus
+            ? 'A Nebraska surplus-lines roster was NOT_ACQUIRED. Missing is not zero.'
+            : namesAppointment
+              ? 'A Nebraska appointment roster was NOT_ACQUIRED. An appointment is not a license.'
+              : namesAgency && !/\binsurers?\b/i.test(early)
+                ? 'A Nebraska agency roster was NOT_ACQUIRED. The 1,687 figure is domestic and licensed foreign insurers, not agencies.'
+                : namesProducer && !/\binsurers?\b/i.test(early)
+                  ? 'A Nebraska individual producer roster was NOT_ACQUIRED. Department employment of 101 is staff, not producers. The 1,687 figure is insurers, not producers.'
+                  : /\bcomplaints?\b/i.test(early)
+                    ? 'NAIC prints 1,496 Nebraska Insurance Department complaints and 1,748 inquiries for the department-resources clock. Provider-level complaint rows were NOT_ACQUIRED. A complaint is not a finding.'
+                    : 'For calendar year 2024, NAIC reports 155 Nebraska domestic insurers and 1,687 domestic and licensed foreign insurers. The 155 are inside the 1,687 and are not added again. Captives are excluded and are printed separately as 4. Company rows were NOT_ACQUIRED. Producer, agency, adjuster, surplus-lines, and appointment rosters are null.';
+    const query = fail(`${detail}${geographyNote} Open /nebraska for the NAIC source record.`, ['Open Nebraska insurance research.']);
+    query.jurisdiction = { state: 'NE', meaning: geographyMeaning(early) };
+    query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Nebraska DOI', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
+  }
   const explicitOklahoma = /\boklahoma\b/i.test(early) || /\bin ok\b/i.test(early);
   const oklahomaCity = /\b(?:oklahoma city|tulsa|norman|edmond|lawton|broken arrow)\b/i.test(early);
   const oklahomaOtherState = detectStates(early).find((code) => code !== 'OK');

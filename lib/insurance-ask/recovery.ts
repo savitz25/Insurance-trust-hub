@@ -63,6 +63,7 @@ export const STATE_RESEARCH: Record<string, string> = {
   MI: "/michigan",
   MD: "/maryland",
   NV: "/nevada",
+  NE: "/nebraska",
   WI: "/wisconsin",
   NM: "/new-mexico",
 };
