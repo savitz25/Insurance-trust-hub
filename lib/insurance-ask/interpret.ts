@@ -388,6 +388,60 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'Mississippi MID', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
   }
+  const explicitArkansas = /\barkansas\b/i.test(early) || /\bAR\b/.test(early) || /(?:\bin\s+|,\s*)ar\b/i.test(early);
+  const arkansasUnambiguousCity = /\b(?:little rock|fort smith)\b/i.test(early);
+  const arkansasCity = /\b(?:little rock|fayetteville|fort smith)\b/i.test(early);
+  const arkansasOtherState = detectStates(early).find((code) => code !== 'AR');
+  const arkansasAsked = (explicitArkansas || (arkansasUnambiguousCity && /\b(?:insurance|insurer|agency|producer|agent|adjuster|broker|title)\b/i.test(early))) && !arkansasOtherState && !/\barizona\b/i.test(early);
+  if (arkansasAsked) {
+    const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
+    const npn = early.match(/\bNPN\s*#?\s*(\d{5,12})\b/i)?.[1];
+    const products = detectRequestedConsumerProducts(early);
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesAgency = /\b(?:agenc(?:y|ies)|business entit(?:y|ies))\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesTitle = /\btitle agents?\b/i.test(early);
+    const namesSurplus = /\bsurplus lines?\b/i.test(early);
+    const namesCaptive = /\bcaptives?\b/i.test(early);
+    const namesAppointment = /\bappointments?\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = arkansasCity
+      ? ' Little Rock, Fayetteville, and Fort Smith are geography only. No city page is published.'
+      : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank Arkansas insurers, agencies, producers, or adjusters. NAIC company counts are not a quality score.'
+      : products.length
+        ? `${products.join(' / ')} is a requested insurance product, not an Arkansas license-class census. Ask will not substitute an insurer count for that product.`
+        : naic
+          ? `NAIC ${naic} labels a legal insurance-company identifier, not an agency, producer, or adjuster. The NAIC key-facts counts do not print company codes. Named company rows were NOT_ACQUIRED.`
+          : npn
+            ? `NPN ${npn} labels a producer identifier. An Arkansas producer roster was NOT_ACQUIRED. The producer count is null.`
+            : namesCaptive
+              ? 'The NAIC key-facts report prints 16 Arkansas captive companies for calendar year 2024. Captives are excluded from the 1,642 domestic and licensed foreign insurers. Direct written premium and total captive premium are separate figures. Captive rows were not acquired.'
+              : namesTitle
+                ? 'An Arkansas title-agent roster was NOT_ACQUIRED. The title-agent count is null. Title premium is not title agents.'
+                : namesAdjuster
+                  ? 'An Arkansas adjuster roster was NOT_ACQUIRED. The adjuster count is null. Missing is not zero. Department employment is staff, not adjusters.'
+                  : namesSurplus
+                    ? 'An Arkansas surplus-lines licensee roster was NOT_ACQUIRED. The surplus-lines count is null. Missing is not zero.'
+                    : namesAppointment
+                      ? 'An Arkansas appointment roster was NOT_ACQUIRED. An appointment is not a license. Missing appointments are not zero.'
+                      : namesAgency && !namesCompany
+                        ? 'An Arkansas agency roster was NOT_ACQUIRED. The agency count is null. An agency is not an insurer. The 1,642 figure is domestic and licensed foreign insurers, not agencies.'
+                        : namesProducer && !namesCompany
+                          ? 'An Arkansas producer roster was NOT_ACQUIRED. The producer count is null. Department employment of 215 is staff, not producers. The 1,642 figure is insurers, not producers.'
+                          : /\bcomplaints?\b/i.test(early)
+                            ? 'The NAIC key-facts report prints 2,240 Arkansas Insurance Department complaints for calendar year 2024, and 159 inquiries separately. Provider-level complaint rows and outcomes were NOT_ACQUIRED. A complaint total is not an enforcement finding.'
+                            : 'For calendar year 2024, NAIC reports 69 Arkansas domestic insurers and 1,642 domestic and licensed foreign insurers. The 69 are inside the 1,642 and are not added again. Captives are excluded and are printed separately as 16. Company rows were NOT_ACQUIRED. Producer, agency, adjuster, title-agent, surplus-lines, and appointment rosters are null. Premium by statement type is not a company count.';
+    const query = fail(`${detail}${geographyNote} Open /arkansas for the NAIC source record and Arkansas verification links.`, ['Open Arkansas insurance research.']);
+    query.jurisdiction = { state: 'AR', meaning: geographyMeaning(early) };
+    query.entityClass = naic || (namesCompany && !namesAgency && !namesProducer && !namesAdjuster) ? 'insurer' : namesAgency && !namesCompany ? 'agency' : namesProducer && !namesCompany ? 'person' : undefined;
+    query.identifier = naic ? { type: 'naic_company_code', value: naic } : npn ? { type: 'npn', value: npn } : undefined;
+    if (products.length) annotateUnestablishedProduct(query, products);
+    query.coverageState = ranking || products.length ? 'UNSUPPORTED' : naic ? 'PARTIAL' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Arkansas AID', value: ranking ? 'No ranking' : products.length ? 'Product intent unsupported' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
