@@ -1,0 +1,104 @@
+{
+  "regulator": "Oklahoma Insurance Department",
+  "publicationId": "OK-INS-001",
+  "annualReport": {
+    "source": "https://www.oid.ok.gov/wp-content/uploads/2026/02/2025_AnnualReport_Final.pdf",
+    "title": "Oklahoma Insurance Department 2025 Annual Report",
+    "pages": 58,
+    "bytes": 9287605,
+    "sha256": "8e9d26e8465d6fdc9ec442459d8014ea56d41cbadebc5317ec95a2934245d591",
+    "retrievedAt": "2026-10-06",
+    "printedClock": "2025 Annual Report. Legal and comptroller figures are labeled FY25 or fiscal year 2025. The insurer counts have no more precise as-of date in the report.",
+    "companyRosterPdf": "NOT_ACQUIRED"
+  },
+  "companies": {
+    "grain": "printed domestic and foreign insurer counts",
+    "domesticInsurers": 88,
+    "foreignInsurers": 1794,
+    "domesticAddedToForeign": false,
+    "combinedTotal": null,
+    "namedRoster": "NOT_ACQUIRED",
+    "companyRows": null
+  },
+  "premium": {
+    "grain": "printed premium volume",
+    "printedBillions": 43.8,
+    "exactDollars": null,
+    "isCompanyCount": false
+  },
+  "licensees": {
+    "grain": "licensing division printed figures",
+    "residentProducers": 23166,
+    "residentAdjusters": 3627,
+    "totalLicenseesPrinted": 342456,
+    "residentClassesEqualTotal": false,
+    "remainderItemized": false,
+    "businessEntities": null,
+    "nonresidentProducers": null,
+    "nonresidentAdjusters": null,
+    "appointments": null,
+    "ceCoursesOffered": 10544,
+    "ceCoursesApproved": 5007,
+    "ceCoursesAreLicensees": false
+  },
+  "complaints": {
+    "grain": "consumer assistance printed activity",
+    "complaints": 3379,
+    "feedbackInquiries": 3379,
+    "feedbackInquiriesAreTheSameRows": false,
+    "moneyRecoveredForComplaints": 10856381,
+    "externalReviews": 529,
+    "moneyRecoveredForExternalReviews": 148099,
+    "byLine": {
+      "lifeAndAnnuity": 280,
+      "commercial": 142,
+      "miscellaneous": 119,
+      "accidentAndHealth": 863,
+      "homeowners": 954,
+      "auto": 1021
+    },
+    "lineSplitEqualsPrintedComplaints": true,
+    "complaintRows": null,
+    "complaintsAreFindings": false
+  },
+  "legal": {
+    "grain": "legal division FY25 activity, not a licensee census",
+    "consumerAssistanceReferrals": 122,
+    "finesFromThoseReferrals": 77,
+    "fineDollarsFromThoseReferrals": 46400,
+    "eagleMediationReferrals": 55,
+    "eagleMediations": 8,
+    "antiFraudReferrals": 64,
+    "antiFraudCensures": 2,
+    "antiFraudOneYearProbations": 1,
+    "antiFraudRevocations": 1,
+    "antiFraudSixMonthSuspensions": 3,
+    "antiFraudFines": 9,
+    "antiFraudFineDollars": 9000,
+    "ordersIssued": 157,
+    "hearingsHeld": 21,
+    "finesCollectedDollars": 258871,
+    "finesCollectedIncludesTheReferralFines": "NOT_STATED",
+    "orderRows": null,
+    "isLicenseeCensus": false
+  },
+  "collections": {
+    "grain": "fiscal year 2025 revenue collections",
+    "surplusLinesTaxDollars": 65409556,
+    "surplusLinesTaxIsLicenseeCount": false,
+    "licensingPermitsAndFeesDollars": 63578719,
+    "licensingFeesAreLicenseeCount": false,
+    "surplusLinesLicenseeRoster": null
+  },
+  "notAcquired": {
+    "captiveCount": "NOT_ACQUIRED",
+    "examinationCounts": "NOT_ACQUIRED",
+    "receivershipCount": "NOT_ACQUIRED",
+    "enforcementOrderCorpus": "NOT_ACQUIRED"
+  },
+  "exactCanonicalAttachments": 0,
+  "nameOnlyAdverseJoins": 0,
+  "newCanonicalOrganizations": 0,
+  "graphWrites": 0,
+  "claimEligibilityChanges": 0
+}
