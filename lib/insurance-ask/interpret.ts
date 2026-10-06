@@ -552,6 +552,45 @@ export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuran
     query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
     return { raw: early, query, interpretation: [{ label: 'New Mexico OSI', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
   }
+  const explicitIdaho = /\bidaho\b/i.test(early) || /\bin id\b/i.test(early);
+  const idahoCity = /\b(?:boise|meridian|nampa|pocatello|idaho falls|twin falls|coeur d'alene)\b/i.test(early);
+  const idahoOtherState = detectStates(early.replace(/\bidaho\b/gi, ' ').replace(/\bin id\b/gi, ' ')).find((code) => code !== 'ID');
+  const idahoAsked = (explicitIdaho || (idahoCity && /\b(?:insurance|insurer|agency|producer|agent|adjuster|surplus|title|appointment|complaint)\b/i.test(early))) && !idahoOtherState;
+  if (idahoAsked) {
+    const namesCompany = /\b(?:insurers?|insurance compan(?:y|ies)|carriers?)\b/i.test(early);
+    const namesProducer = /\b(?:producers?|agents?|licenses?)\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus[- ]lines?\b/i.test(early);
+    const namesTitle = /\btitle\b/i.test(early);
+    const namesAppointment = /\bappointments?\b/i.test(early);
+    const namesExam = /\b(?:examinations?|exams?)\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = idahoCity ? ' Boise, Meridian, Nampa, Pocatello, Idaho Falls, Twin Falls, and Coeur d\'Alene are geography only. No city page is published.' : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank Idaho insurers, agencies, producers, or adjusters. The annual-report counts are not a quality score.'
+      : namesAppointment
+        ? 'An Idaho appointment roster was NOT_ACQUIRED. An appointment is not a license. Appointments are not inside the 114,549 licenses and are not added to the 2,384 regulated entities.'
+        : namesAdjuster
+          ? 'An Idaho adjuster roster was NOT_ACQUIRED. Adjusters are not separated inside the 114,549 licenses. Missing is not zero.'
+          : namesExam
+            ? 'The 2024 annual report prints 59 title examinations completed and 32 market analysis reviews completed. Those examinations are not the 19 licensed title companies.'
+            : /\bcomplaints?\b/i.test(early)
+              ? 'The 2024 annual report prints 1,086 closed consumer complaints and 1,064 new consumer complaints. It does not say those are the same rows. A complaint is not a finding. No complaint was joined to a licensee by name.'
+              : namesSurplus
+                ? 'The 2024 classification prints 207 listed surplus lines. That row is not added to the 875 licensed property and casualty companies or to the 2,384 printed total a second time.'
+                : namesTitle
+                  ? 'The 2024 classification prints 19 licensed title companies. That row is not the 59 title examinations and is not added to the other classes on this page.'
+                  : namesProducer && !namesCompany
+                    ? 'The Producer Licensing Section maintains 114,549 licenses, including resident and non-resident business entities and individuals. Person and business are NOT_SEPARATED. That stock is not added to the 2,384 regulated entities. The 2024 new-license rows are a flow by line of authority and are not summed here. A named producer roster was NOT_ACQUIRED.'
+                    : namesCompany
+                      ? 'The 2024 annual report prints 2,384 as Total Companies Regulated Entities. That is the report total of the printed classes, not a producer count. It is not the 114,549 licenses. Property and casualty is 875, life and disability is 424, and title is 19. Those classes are not added again. Named company rows were NOT_ACQUIRED.'
+                      : 'The Idaho Department of Insurance 2024 annual report prints 2,384 companies and regulated entities across separate licensed, listed, registered, and other classes. That entity total is not a producer count. It also says Producer Licensing maintains 114,549 licenses, including business entities and individuals. Those grains are NOT_SEPARATED inside the license stock and are not added to each other. A named roster was NOT_ACQUIRED. Company statements are as of December 31, 2024. The license sentence does not print its own as-of date.';
+    const query = fail(`${detail}${geographyNote} Open /idaho for the annual-report classes.`, ['Open Idaho insurance research.']);
+    query.jurisdiction = { state: 'ID', meaning: geographyMeaning(early) };
+    query.entityClass = namesCompany && !namesProducer ? 'insurer' : namesProducer && !namesCompany ? 'person' : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'Idaho Department of Insurance', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
+  }
   const marylandAsked = /\b(?:maryland|maryland insurance administration|MIA)\b/i.test(early) || detectStates(early)[0] === 'MD' || (/\b(?:baltimore|annapolis|frederick|rockville)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (marylandAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];
