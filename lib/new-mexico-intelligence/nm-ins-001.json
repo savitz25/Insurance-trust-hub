@@ -1,0 +1,52 @@
+{
+  "id": "NM-INS-001",
+  "regulator": "New Mexico Office of Superintendent of Insurance",
+  "source": "https://osi.state.nm.us/en/about-us/divisions/",
+  "retrievedAt": "2026-10-06",
+  "sourceClock": "The divisions page did not print a separate as-of date on the Title Insurance Bureau sentence. The sentence is the bureau's present-tense statement on that page, retrieved 2026-10-06.",
+  "titleBureau": {
+    "sentence": "The Title Insurance Bureau currently regulates (68) licensed title insurance agents and (24) underwriters in New Mexico.",
+    "licensedTitleInsuranceAgents": 68,
+    "underwriters": 24,
+    "agentsAddedToUnderwriters": false,
+    "combinedTotal": null
+  },
+  "statisticalReports": {
+    "grain": "filing",
+    "statement": "The bureau collects and analyzes annual title agent and underwriter statistical reports.",
+    "isTitleAgentCensus": false,
+    "isUnderwriterCensus": false,
+    "index": "https://www.osi.state.nm.us/en/insurance-professionals/title-insurance-forms/statistical-reports/",
+    "pdfLinksCountedAsLicenseeCensus": false,
+    "countedReportFiles": null
+  },
+  "notAcquired": {
+    "insurers": "NOT_ACQUIRED",
+    "insurersDomesticForeignSplit": false,
+    "businessEntitiesBeyondTitleBureauSentence": "NOT_ACQUIRED",
+    "individualProducers": "NOT_ACQUIRED",
+    "adjusters": "NOT_ACQUIRED",
+    "surplusLinesBrokers": "NOT_ACQUIRED",
+    "thirdPartyAdministrators": "NOT_ACQUIRED",
+    "appointments": "NOT_ACQUIRED",
+    "examinations": "NOT_ACQUIRED",
+    "enforcementOrders": "NOT_ACQUIRED",
+    "receivership": "NOT_ACQUIRED",
+    "complaints": "NOT_ACQUIRED"
+  },
+  "tpaAnnualReportFormIsCensus": false,
+  "oneExaminationOrderIsExamCensus": false,
+  "namedExamPopulation": null,
+  "licenseVerification": {
+    "url": "https://osi.state.nm.us/en/insurance-professionals/license-status-verification/",
+    "isBulkCensus": false
+  },
+  "complaintsAreFindings": false,
+  "albuquerqueMarketingIsStatewidePopulation": false,
+  "nameOnlyAdverseJoins": 0,
+  "netNewEntities": 0,
+  "graphWrites": 0,
+  "aggregateRating": null,
+  "trustScore": null,
+  "combinedInsurancePopulation": null
+}
