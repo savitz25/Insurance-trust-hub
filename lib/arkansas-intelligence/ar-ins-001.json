@@ -1,0 +1,80 @@
+{
+  "regulator": "Arkansas Insurance Department",
+  "publicationId": "AR-INS-001",
+  "naicKeyFacts": {
+    "source": "https://content.naic.org/sites/default/files/publications-key-facts-market-trends-arkansas.pdf",
+    "title": "2025 State Insurance Regulation: Key Facts and Market Trends — Arkansas",
+    "dataYear": 2024,
+    "publicationYear": 2025,
+    "sha256": "1e5c04d70d1d7422c580526c1aef54cb2196932f49eae5838f2d5921b2beb361",
+    "bytes": 1431234,
+    "httpLastModified": "2026-03-13T21:20:27Z",
+    "retrievedAt": "2026-10-06",
+    "underlyingSource": "NAIC Insurance Department Resources Report",
+    "publicationYearIsNotTheDataYear": true
+  },
+  "companies": {
+    "grain": "NAIC printed company counts",
+    "domesticInsurers": 69,
+    "domesticRank": 26,
+    "domesticAndLicensedForeignInsurers": 1642,
+    "licensedRank": 24,
+    "domesticIsInsideTheLicensedTotal": true,
+    "captivesExcluded": true,
+    "companyRows": null,
+    "distinctCompaniesLoaded": null,
+    "namedRoster": "NOT_ACQUIRED"
+  },
+  "captives": {
+    "grain": "captive insurance companies",
+    "count": 16,
+    "directWrittenPremium": 371585306,
+    "totalCaptivePremium": 395495892,
+    "includedInLicensedInsurerCount": false,
+    "rows": null
+  },
+  "premiumByStatement": {
+    "grain": "premium written by annual-statement type",
+    "isCompanyCount": false,
+    "health": 10856768183,
+    "lifeAccidentAndHealth": 5972467703,
+    "propertyAndCasualty": 8920646491,
+    "title": 86291403,
+    "printedTotal": 25836173780,
+    "propertyCasualtyLineOfBusinessPrintedTotal": 8920646494,
+    "lineOfBusinessTotalReplacesStatementType": false
+  },
+  "department": {
+    "complaints": 2240,
+    "complaintRank": 32,
+    "inquiries": 159,
+    "inquiryRank": 49,
+    "employment": 215,
+    "complaintRows": null,
+    "complaintOutcomes": null,
+    "complaintsAreFindings": false,
+    "employmentIsLicensees": false
+  },
+  "rosters": {
+    "producers": null,
+    "agencies": null,
+    "adjusters": null,
+    "titleAgents": null,
+    "surplusLines": null,
+    "appointments": null,
+    "licenseeSearch": "OPEN_SEARCH_ONLY"
+  },
+  "enforcement": {
+    "orders": "NOT_ACQUIRED",
+    "discipline": "NOT_ACQUIRED",
+    "exactCanonicalAttachments": 0,
+    "nameOnlyAdverseJoins": 0
+  },
+  "links": {
+    "licensing": "https://insurance.arkansas.gov/industry-regulation/licensing/",
+    "keyFacts": "https://content.naic.org/sites/default/files/publications-key-facts-market-trends-arkansas.pdf"
+  },
+  "newCanonicalOrganizations": 0,
+  "graphWrites": 0,
+  "claimEligibilityChanges": 0
+}

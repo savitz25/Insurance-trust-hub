@@ -30,6 +30,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   kentucky: 'KY',
   'south-carolina': 'SC',
   mississippi: 'MS',
+  arkansas: 'AR',
   massachusetts: 'MA',
   maryland: 'MD',
   michigan: 'MI',
@@ -51,6 +52,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  arkansas:
+    'NAIC 2024 domestic and licensed-foreign insurer counts, separate captives, and Department complaint totals. Producer, agency, adjuster, title-agent, and appointment rosters were not acquired.',
   mississippi:
     'MID licensed-company list of 2,129 rows, separate from the 13 Aug 2026 Insurance Producer Entity file of 10,645 rows. Individual producers were not acquired.',
   'south-carolina':
