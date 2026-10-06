@@ -46,6 +46,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   pennsylvania: 'PA',
   tennessee: 'TN',
   texas: 'TX',
+  utah: 'UT',
   virginia: 'VA',
   washington: 'WA',
   wisconsin: 'WI',
@@ -54,6 +55,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  utah:
+    'Utah Insurance Department 2025 report: 1,466 commercial insurers licensed at 2024 year-end; 319 reported health business separately. Other statewide rosters were not acquired.',
   missouri:
     'DCI active company directory detail records by printed license type. Insurers, administrators, purchasing groups, producers, appointments and regulatory actions stay separate.',
   oklahoma:

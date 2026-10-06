@@ -1,0 +1,35 @@
+{
+  "id": "UT-INS-001",
+  "source": "https://insurance.utah.gov/wp-content/uploads/2025HealthMarketReport.pdf",
+  "landingPage": "https://insurance.utah.gov/forms-reports/",
+  "retrievedAt": "2026-10-06T14:24:03Z",
+  "sourceClock": "Insurers licensed with the Department at the end of 2024; health-business subset reports 2024 annual financial statements.",
+  "sha256": "9FAA00C7FBBFB27D4E8467650B002DFA7331FD0A5644791856304FB274F98A26",
+  "artifact": "data/utah/ut-ins-001/utah-2024-health-market-report.pdf",
+  "insurersLicensedAtYearEnd": 1466,
+  "healthInsurersReportingBusiness": 319,
+  "underlyingSource": "NAIC Financial Database and Utah Accident & Health Survey",
+  "observations": 2,
+  "distinctEntityRows": 0,
+  "existingEntityMatches": "NOT_ACQUIRED",
+  "netNewEntities": 0,
+  "evidenceAttachments": 0,
+  "graphWrites": 0,
+  "rosters": {
+    "agenciesAndBusinessEntities": "NOT_ACQUIRED",
+    "producers": "NOT_ACQUIRED",
+    "adjusters": "NOT_ACQUIRED",
+    "surplusLines": "NOT_ACQUIRED",
+    "appointments": "NOT_ACQUIRED",
+    "examinations": "NOT_ACQUIRED",
+    "enforcementOrders": "NOT_ACQUIRED"
+  },
+  "links": {
+    "licenseeSearch": "https://insurance.utah.gov/licensee-search/",
+    "licenseeList": "https://insurance.utah.gov/licensees/producers/licensee-list/",
+    "companyLicensing": "https://insurance.utah.gov/licensees/insurers/company-licensing/",
+    "administrativeActions": "https://insurance.utah.gov/consumers/legal-resources/enforcement/",
+    "examinations": "https://insurance.utah.gov/licensees/insurers/exam/",
+    "surplusLines": "https://insurance.utah.gov/licensees/insurers/excess-surplus-lines/"
+  }
+}
