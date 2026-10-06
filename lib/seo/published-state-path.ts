@@ -36,6 +36,7 @@ export const PUBLISHED_STATEWIDE_SLUGS = [
   'indiana',
   'new-mexico',
   'idaho',
+  'west-virginia',
 ] as const;
 
 const SLUGS = new Set<string>(PUBLISHED_STATEWIDE_SLUGS);

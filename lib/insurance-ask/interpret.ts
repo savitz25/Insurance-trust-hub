@@ -94,6 +94,46 @@ export type { ParsedInsuranceAsk };
 
 export function interpretInsuranceAskQuery(raw: string, page = 1): ParsedInsuranceAsk {
   const early = raw.trim();
+  const explicitWestVirginia = /\bwest virginia\b/i.test(early) || /\bin wv\b/i.test(early);
+  const westVirginiaOtherState = detectStates(early.replace(/\bwest virginia\b/gi, ' ').replace(/\bin wv\b/gi, ' ')).find((code) => code !== 'WV');
+  const westVirginiaAsked = explicitWestVirginia && !westVirginiaOtherState;
+  if (westVirginiaAsked) {
+    const namesProducer = /\b(?:producers?|agents?)\b/i.test(early) && !/\bmanaging general agents?\b/i.test(early);
+    const namesAdjuster = /\badjusters?\b/i.test(early);
+    const namesSurplus = /\bsurplus[- ]lines?\b/i.test(early);
+    const namesTitle = /\btitle\b/i.test(early);
+    const namesMga = /\bmanaging general agents?\b|\bMGAs?\b/i.test(early);
+    const namesAppointment = /\bappointments?\b/i.test(early);
+    const namesAgency = /\bagenc(?:y|ies)\b/i.test(early);
+    const ranking = /\b(?:best|safest|recommended|most trustworthy|most trusted|top[- ]?rated|highest[- ]?rated|number one|trust score|AggregateRating|ratingValue|sponsored ranking|paid ranking)\b|#1\b/i.test(early);
+    const geographyNote = /\b(?:charleston|morgantown|huntington)\b/i.test(early)
+      ? ' Charleston, Morgantown, and Huntington are geography only. No city page is published.'
+      : '';
+    const detail = ranking
+      ? 'InsuranceTrustHub does not rank West Virginia insurers, agencies, producers, or adjusters. The company-type table is not a quality score.'
+      : namesAppointment
+        ? 'A West Virginia appointment roster was NOT_ACQUIRED. An appointment is not a license. The Managing General Agent company-type row is 41 and is not an appointment roster.'
+        : namesAdjuster
+          ? 'A West Virginia adjuster roster was NOT_ACQUIRED. Missing is not zero.'
+          : namesMga
+            ? 'The company-type table as of 09/11/2026 prints Managing General Agent 41. That row is a company type. It is not an appointment roster and it is not added to the other classes.'
+            : /\bcomplaints?\b/i.test(early)
+              ? 'Complaint intake is not a finding. West Virginia complaint counts were NOT_ACQUIRED. No complaint was joined to a company type by name.'
+              : namesSurplus
+                ? 'The company-type table as of 09/11/2026 prints Surplus Lines 250. That row is a company type, not a surplus-lines agent roster, and it is not added to the other classes.'
+                : namesTitle
+                  ? 'The company-type table as of 09/11/2026 prints Title 24. That row is not added to the other classes. A title-agent roster was NOT_ACQUIRED.'
+                  : namesAgency && !/\binsurers?|insurance compan/i.test(early)
+                    ? 'A West Virginia agency roster was NOT_ACQUIRED. Licensee Lookup is a search, not a bulk census. Missing is not zero.'
+                    : namesProducer
+                      ? 'A West Virginia individual producer roster was NOT_ACQUIRED. Missing is not zero. Producer records are not inside the company-type table and are not added to it.'
+                      : 'The West Virginia Offices of the Insurance Commissioner company-type table as of 09/11/2026 prints separate classes, including Property & Casualty 887, Life 440, Surplus Lines 250, Title 24, Managing General Agent 41, and Captive, which prints 0. Those classes are not added. The sentence that over 3,000 insurance related entities are licensed, registered, or eligible is a narrative quick fact and is not the sum of the table. Producer, agency, adjuster, and appointment rosters were NOT_ACQUIRED.';
+    const query = fail(`${detail}${geographyNote} Open /west-virginia for the company-type table.`, ['Open West Virginia insurance research.']);
+    query.jurisdiction = { state: 'WV', meaning: geographyMeaning(early) };
+    query.entityClass = namesProducer && !namesMga ? 'person' : namesAgency ? 'agency' : undefined;
+    query.coverageState = ranking ? 'UNSUPPORTED' : 'NOT_ACQUIRED';
+    return { raw: early, query, interpretation: [{ label: 'West Virginia Offices of the Insurance Commissioner', value: ranking ? 'No ranking' : 'Class-specific verification' }] };
+  }
   const indianaAsked = /\b(?:indiana|indiana department of insurance|IDOI)\b/i.test(early) || detectStates(early)[0] === 'IN' || (/\b(?:indianapolis|fort wayne|evansville|south bend)\b/i.test(early) && /\b(?:insurance|insurer|agency|producer|agent)\b/i.test(early));
   if (indianaAsked) {
     const naic = early.match(/\bNAIC\s*(?:co(?:mpany)?\s*code)?\s*#?\s*(\d{5})\b/i)?.[1];

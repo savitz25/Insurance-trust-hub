@@ -1,0 +1,93 @@
+import assert from 'node:assert/strict';
+import { readFileSync, readdirSync } from 'node:fs';
+import { interpretInsuranceAskQuery } from '../lib/insurance-ask/interpret';
+import { STATE_RESEARCH } from '../lib/insurance-ask/recovery';
+import { normalizedPublishedStatePath } from '../lib/seo/published-state-path';
+
+const read = (p: string) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
+const snapshot = JSON.parse(read('lib/west-virginia-intelligence/wv-ins-001.json'));
+const page = read('app/west-virginia/page.tsx');
+const sitemap = read('app/sitemap.ts');
+const ask = (q: string) => interpretInsuranceAskQuery(q).query.failReason ?? '';
+
+const classSum = snapshot.companyTypes.reduce((sum: number, row: { count: number }) => sum + row.count, 0);
+
+assert.equal(snapshot.regulator, 'West Virginia Offices of the Insurance Commissioner');
+assert.equal(snapshot.commissionerNamedOnPage, 'Erin K. Hunter');
+assert.equal(snapshot.tableClock, '2026-09-11');
+assert.equal(snapshot.tableClockLabel, 'Company Type (as of 09/11/2026)');
+assert.equal(snapshot.retrievedAt, '2026-10-06');
+assert.equal(snapshot.lastModified, 'NOT_PROVIDED');
+assert.equal(snapshot.sha256, 'efc5ff526498ddb5d3c0f221f1ce497950d9dc9babcbaa591ef34639432e4383');
+assert.equal(snapshot.bytes, 175289);
+assert.equal(snapshot.companyTypes.length, 33);
+assert.equal(snapshot.companyTypeRowCount, 33);
+assert.equal(classSum, 3041);
+assert.equal(snapshot.classesAddedByThisPage, false);
+assert.equal(snapshot.combinedInsurancePopulation, null);
+assert.equal(snapshot.narrativeQuickFactIsClassSum, false);
+assert.equal(snapshot.captivePrinted, 0);
+assert.equal(snapshot.companyTypes.find((row: { name: string }) => row.name === 'Captive').count, 0);
+assert.equal(snapshot.companyTypes.find((row: { name: string }) => row.name === 'Property & Casualty').count, 887);
+assert.equal(snapshot.companyTypes.find((row: { name: string }) => row.name === 'Life').count, 440);
+assert.equal(snapshot.companyTypes.find((row: { name: string }) => row.name === 'Surplus Lines').count, 250);
+assert.equal(snapshot.companyTypes.find((row: { name: string }) => row.name === 'Title').count, 24);
+assert.equal(snapshot.companyTypes.find((row: { name: string }) => row.name === 'Managing General Agent').count, 41);
+assert.equal(snapshot.surplusLinesRowIsAgentRoster, false);
+assert.equal(snapshot.managingGeneralAgentRowIsAppointmentRoster, false);
+assert.equal(snapshot.appointmentIsLicense, false);
+assert.equal(snapshot.complaintIntakeIsFinding, false);
+assert.equal(snapshot.licenseeLookupIsBulkCensus, false);
+assert.equal(snapshot.notAcquired.individualProducerRoster, 'NOT_ACQUIRED');
+assert.equal(snapshot.notAcquired.agencyRoster, 'NOT_ACQUIRED');
+assert.equal(snapshot.notAcquired.adjusterRoster, 'NOT_ACQUIRED');
+assert.equal(snapshot.notAcquired.appointmentRoster, 'NOT_ACQUIRED');
+assert.equal(snapshot.nameOnlyAdverseJoins, 0);
+assert.equal(snapshot.graphWrites, 0);
+assert.equal(snapshot.netNewEntities, 0);
+assert.equal(snapshot.aggregateRating, null);
+assert.equal(snapshot.trustScore, null);
+assert.equal(STATE_RESEARCH.WV, '/west-virginia');
+assert.equal(STATE_RESEARCH.ID, '/idaho');
+assert.equal(normalizedPublishedStatePath('/West-Virginia'), '/west-virginia');
+assert.equal(normalizedPublishedStatePath('/west-virginia'), null);
+assert.equal(normalizedPublishedStatePath('/west-virginia/charleston'), null);
+assert.equal((sitemap.match(/'\/west-virginia'/g) ?? []).length, 1);
+assert.equal((sitemap.match(/'\/idaho'/g) ?? []).length, 1);
+assert.equal((sitemap.match(/'\/kansas'/g) ?? []).length, 1);
+assert.deepEqual(readdirSync(new URL('../app/west-virginia', import.meta.url)), ['page.tsx']);
+assert.match(page, /path: '\/west-virginia'/);
+assert.match(page, /not added/);
+assert.match(page, /not the sum/);
+assert.match(page, /narrative quick fact/);
+assert.match(page, /not a license/);
+assert.match(page, /not a finding/);
+assert.match(page, /geography only/);
+assert.match(page, /Missing is not zero/);
+assert.doesNotMatch(page, /AggregateRating|ratingValue|Trust Score/);
+assert.doesNotMatch(page, /3,041|3041/);
+assert.doesNotMatch(page, /\/west-virginia\/charleston/);
+
+for (const q of ['how many insurers in West Virginia', 'insurance companies in wv', 'West Virginia insurance']) {
+  assert.match(ask(q), /09\/11\/2026/, q);
+  assert.match(ask(q), /not added/, q);
+  assert.match(ask(q), /not the sum/, q);
+  assert.match(ask(q), /887/, q);
+  assert.doesNotMatch(ask(q), /3,041|3041/, q);
+}
+for (const q of ['wv', 'WV', 'insurance wv', 'best insurer WV', 'Virginia insurance', 'insurance in Virginia', 'in va', 'insurance in Charleston']) {
+  assert.doesNotMatch(ask(q), /West Virginia Offices of the Insurance Commissioner/, q);
+}
+assert.match(ask('how many producers in West Virginia'), /NOT_ACQUIRED/);
+assert.match(ask('how many producers in West Virginia'), /not zero/);
+assert.match(ask('West Virginia adjusters'), /NOT_ACQUIRED/);
+assert.match(ask('West Virginia appointments'), /not a license/);
+assert.match(ask('West Virginia surplus lines'), /250/);
+assert.match(ask('West Virginia surplus lines'), /not a surplus-lines agent roster/);
+assert.match(ask('West Virginia managing general agents'), /41/);
+assert.match(ask('West Virginia title insurance'), /24/);
+assert.match(ask('West Virginia complaints'), /not a finding/);
+assert.match(ask('best West Virginia insurer'), /does not rank/);
+assert.match(ask('insurance in Charleston, West Virginia'), /geography only/);
+assert.match(ask('how many insurance companies in wv'), /Captive/);
+assert.match(ask('how many insurance companies in wv'), /prints 0/);
