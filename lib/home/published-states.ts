@@ -54,10 +54,13 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   indiana: 'IN',
   'new-mexico': 'NM',
   idaho: 'ID',
+  'west-virginia': 'WV',
 };
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  'west-virginia':
+    'Offices of the Insurance Commissioner company-type table as of 09/11/2026. Classes stay separate, including a printed Captive count of 0. Producer, agency, adjuster, and appointment rosters were not acquired.',
   idaho:
     'Department of Insurance 2024 annual report: 2,384 printed regulated entities and 114,549 licenses that mix business entities and individuals. Those grains are not added.',
   'new-mexico':
