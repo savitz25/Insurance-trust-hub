@@ -1,0 +1,164 @@
+{
+  "source": "https://insurance.mo.gov/find-insurance-company",
+  "retrievedAt": "2026-10-06T14:06:55.599399+00:00",
+  "sourceAsOf": null,
+  "filter": "Active",
+  "listObservations": 4148,
+  "distinctDetailRecords": 4147,
+  "distinctPrintedLicenseNumbers": 4147,
+  "duplicateListDetailIds": 1,
+  "licenseTypes": [
+    {
+      "type": "Property and Casualty (Ch 379, RSMo)",
+      "records": 1013
+    },
+    {
+      "type": "Third Party Administrator (Ch 376.1075 - 376.1095 RSMo)",
+      "records": 492
+    },
+    {
+      "type": "Life and Health (Ch 376 & 377, RSMo)",
+      "records": 473
+    },
+    {
+      "type": "Excess/Surplus Lines (Ch 384 RSMo)",
+      "records": 424
+    },
+    {
+      "type": "Reinsurer (Ch 375.246)",
+      "records": 344
+    },
+    {
+      "type": "Purchasing Group (Ch 375.1080 - 375.1087 RSMo)",
+      "records": 263
+    },
+    {
+      "type": "P&C - Work Comp - Individual",
+      "records": 207
+    },
+    {
+      "type": "Motor Veh Serv Contract Provider - Reimburse Policy",
+      "records": 201
+    },
+    {
+      "type": "Risk Retention Group (Ch 375.1080 - 375.1087 RSMo)",
+      "records": 129
+    },
+    {
+      "type": "Veh Protection Product Provider - Reimburse Policy",
+      "records": 88
+    },
+    {
+      "type": "Product Serv Contract Provider - Reimburse Policy",
+      "records": 81
+    },
+    {
+      "type": "Mutual Property Insurance Company (Ch 380, RSMo)",
+      "records": 65
+    },
+    {
+      "type": "Pharmacy Benefits Manager (Ch 376.393, RSMo)",
+      "records": 65
+    },
+    {
+      "type": "Health Maintenance Organization (354.400 - 354.636, RSMo)",
+      "records": 37
+    },
+    {
+      "type": "Reinsurance Intermediary (Ch 375.1110 - 375.1140 RSMo)",
+      "records": 33
+    },
+    {
+      "type": "Fraternal Benefit (Ch 378, RSMo)",
+      "records": 30
+    },
+    {
+      "type": "Discount Medical Plan (Ch 376.1500 - 376.1532)",
+      "records": 25
+    },
+    {
+      "type": "Title (Ch 381, RSMo)",
+      "records": 25
+    },
+    {
+      "type": "Rating Organization",
+      "records": 23
+    },
+    {
+      "type": "P&C Work Comp Group",
+      "records": 20
+    },
+    {
+      "type": "Self Insured Political Subdivision Assessable (537.620 - 537.650, RSMo)",
+      "records": 16
+    },
+    {
+      "type": "Product Serv Contract Provider - Funded Reserve",
+      "records": 16
+    },
+    {
+      "type": "Prepaid Dental (354.700, et seq., RSMo)",
+      "records": 13
+    },
+    {
+      "type": "Advisory Organization",
+      "records": 13
+    },
+    {
+      "type": "Motor Veh Serv Contract Provider - $100M Net Worth",
+      "records": 10
+    },
+    {
+      "type": "Product Serv Contract Provider - $100M Net Worth",
+      "records": 9
+    },
+    {
+      "type": "Life Care Facility (Ch 376.900 - 376.950, RSMo)",
+      "records": 8
+    },
+    {
+      "type": "Statutorily Created Entity",
+      "records": 6
+    },
+    {
+      "type": "Professional Malpractice Assessable (Ch 383, RSMo)",
+      "records": 5
+    },
+    {
+      "type": "Motor Veh Serv Contract Provider - Funded Reserve",
+      "records": 5
+    },
+    {
+      "type": "Domestic Surplus Lines Insurer (Ch 384, RSMo)",
+      "records": 4
+    },
+    {
+      "type": "Veh Protection Product Provider - $50M Net Worth",
+      "records": 2
+    },
+    {
+      "type": "Health Services Corporation (354.010 - 354.380, RSMo)",
+      "records": 1
+    },
+    {
+      "type": "Multiple Employer Self-Insured Health Plan",
+      "records": 1
+    }
+  ],
+  "separateSources": {
+    "agentsAndAgencies": "https://insurance.mo.gov/companies/find-insurance-agentagency",
+    "agentEnforcement": "https://insurance.mo.gov/enforcement-actions",
+    "marketRegulationActions": "https://insurance.mo.gov/companies/market-regulation-actions"
+  },
+  "notAcquired": [
+    "agency and individual producer roster",
+    "adjuster roster",
+    "individual surplus-lines licensees",
+    "appointments",
+    "examination records",
+    "receivership records",
+    "order details and exact license-number joins"
+  ],
+  "graphWrites": 0,
+  "exactAdverseAttachments": 0
+}

@@ -32,6 +32,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   mississippi: 'MS',
   arkansas: 'AR',
   oklahoma: 'OK',
+  missouri: 'MO',
   massachusetts: 'MA',
   maryland: 'MD',
   michigan: 'MI',
@@ -53,6 +54,8 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  missouri:
+    'DCI active company directory detail records by printed license type. Insurers, administrators, purchasing groups, producers, appointments and regulatory actions stay separate.',
   oklahoma:
     '2025 annual-report domestic and foreign insurer counts stay separate from resident producers, resident adjusters, complaints, and legal activity. Bulk rosters were not acquired.',
   arkansas:
