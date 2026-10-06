@@ -1,0 +1,113 @@
+{
+  "contract": "iowa-licensed-insurers-v1",
+  "catalog": "https://data.iowa.gov/catalog/dataset/667",
+  "source": "https://idh-be.iowa.gov/api/v1/datasets/667/rows.csv",
+  "regulator": "Iowa Insurance Division",
+  "grain": "Iowa licensed insurance company number, not agency, producer, adjuster or appointment",
+  "retrievedAt": "2026-10-06T16:04:55.572868+00:00",
+  "sourceAsOf": null,
+  "archiveSha256": "862ae8c23e627f58d71ce1d8ea0bb8c84551c2808f9fd233f8bf22a14e863271",
+  "rawRows": 1585,
+  "distinctIowaLicenseNumbers": 1585,
+  "distinctNonblankNaicNumbers": 1574,
+  "rowsWithoutNaicNumber": 11,
+  "licenseTypes": [
+    {
+      "type": "Non Iowa Stock Fire And Casualty Company",
+      "rows": 854
+    },
+    {
+      "type": "Non Iowa Stock Life - with A & H",
+      "rows": 358
+    },
+    {
+      "type": "Iowa Stock Fire And Casualty Company",
+      "rows": 72
+    },
+    {
+      "type": "Non Iowa Mutual Fire And Casualty Co",
+      "rows": 51
+    },
+    {
+      "type": "Iowa Stock Life - with A & H",
+      "rows": 35
+    },
+    {
+      "type": "Iowa State Mutual Insurance Association",
+      "rows": 32
+    },
+    {
+      "type": "Non Iowa Fraternal",
+      "rows": 28
+    },
+    {
+      "type": "County Mutual",
+      "rows": 22
+    },
+    {
+      "type": "Non Iowa HMO",
+      "rows": 22
+    },
+    {
+      "type": "Non Iowa Stock Life - without A&H",
+      "rows": 18
+    },
+    {
+      "type": "Non Iowa Mutual Life - with A & H",
+      "rows": 17
+    },
+    {
+      "type": "Non Iowa Reciprocal Exchange",
+      "rows": 17
+    },
+    {
+      "type": "Non Iowa Mortgage Guaranty Insurer",
+      "rows": 16
+    },
+    {
+      "type": "Iowa HMO",
+      "rows": 11
+    },
+    {
+      "type": "Limited Purpose Subsidiary",
+      "rows": 8
+    },
+    {
+      "type": "Multiple Employer Welfare Arrangement",
+      "rows": 6
+    },
+    {
+      "type": "Iowa Mutual Fire and Casualty Company",
+      "rows": 5
+    },
+    {
+      "type": "U.S. Branch Company Fire and Casualty",
+      "rows": 3
+    },
+    {
+      "type": "Iowa Stock Life - without A&H",
+      "rows": 3
+    },
+    {
+      "type": "Non Iowa Mutual Life - without A&H",
+      "rows": 2
+    },
+    {
+      "type": "Benevolent",
+      "rows": 2
+    },
+    {
+      "type": "Iowa Mutual Life - with A&H",
+      "rows": 1
+    },
+    {
+      "type": "Non-Profit Hospital and Medical Services",
+      "rows": 1
+    },
+    {
+      "type": "Mental Health Services & Substance Abuse",
+      "rows": 1
+    }
+  ],
+  "graphWrites": 0
+}
