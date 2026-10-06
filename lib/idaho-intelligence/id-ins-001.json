@@ -1,0 +1,149 @@
+{
+  "regulator": "Idaho Department of Insurance",
+  "source": "https://doi.idaho.gov/wp-content/uploads/ID/Publications/2024-annual-report_FINAL_for-web.pdf",
+  "sourceTitle": "Idaho Department of Insurance 2024 Annual Report",
+  "retrievedAt": "2026-10-06",
+  "bytes": 19223231,
+  "sha256": "4e2b35d7e3fb204c75bcc5b2c230dee8b6aebcb2bf8bc4ef2684394f3765e67e",
+  "letterDate": "2025-11-01",
+  "annualStatementClock": "2024-12-31",
+  "annualStatementClockScope": "annual statements submitted by insurance companies licensed to operate in Idaho",
+  "licenseStockAsOf": "NOT_PRINTED",
+  "classificationLabel": "CLASSIFICATION OF ACTIVE AND SUSPENDED ENTITIES IN 2024",
+  "licensed": {
+    "countyMutualFire": 1,
+    "fraternalBenefitSocieties": 17,
+    "hospitalAndProfessionalServiceCorporation": 1,
+    "hospitalLiabilitiesTrusts": 0,
+    "lifeAndDisability": 424,
+    "managedCareOrganizations": 25,
+    "petroleumCleanWaterTrusts": 1,
+    "propertyAndCasualty": 875,
+    "title": 19
+  },
+  "listed": {
+    "accreditedReinsurers": 29,
+    "advisoryOrganization": 13,
+    "certifiedReinsurer": 6,
+    "charitableGiftAnnuities": 348,
+    "reciprocalJurisdictionReinsurers": 30,
+    "surplusLines": 207,
+    "trustedReinsurers": 13
+  },
+  "registered": {
+    "purchasingGroup": 245,
+    "ratingOrganizations": 9,
+    "riskRetentionGroups": 101,
+    "selfFundedEmployeeHealthCarePlan": 16
+  },
+  "otherRegulatedEntities": {
+    "guarantyAssociations": 3,
+    "surplusLinesAssociations": 1
+  },
+  "totalCompaniesRegulatedEntities": 2384,
+  "totalIsReportPrinted": true,
+  "classesAddedByThisPage": false,
+  "licensesMaintained": 114549,
+  "licensesInclude": "resident and non-resident business entities and individuals",
+  "personVsBusiness": "NOT_SEPARATED",
+  "residentVsNonresident": "NOT_SEPARATED",
+  "licenseTypesOverseen": 13,
+  "licenseTypeNames": "NOT_ENUMERATED",
+  "licensesAddedToRegulatedEntities": false,
+  "newLicenses2024": {
+    "grain": "2024 new licenses by line of authority",
+    "isStock": false,
+    "addedToLicensesMaintained": false,
+    "rowTotalPublished": false,
+    "individual": [
+      { "line": "Accident & Health or Sickness", "resident": 794, "nonresident": 11666 },
+      { "line": "Casualty", "resident": 540, "nonresident": 8394 },
+      { "line": "Life", "resident": 1068, "nonresident": 11034 },
+      { "line": "Property", "resident": 541, "nonresident": 8843 },
+      { "line": "Personal Lines", "resident": 84, "nonresident": 7951 },
+      { "line": "Other", "resident": 299, "nonresident": 3189 }
+    ],
+    "business": [
+      { "line": "Accident & Health or Sickness", "resident": 84, "nonresident": 675 },
+      { "line": "Casualty", "resident": 55, "nonresident": 613 },
+      { "line": "Life", "resident": 88, "nonresident": 696 },
+      { "line": "Property", "resident": 55, "nonresident": 606 },
+      { "line": "Personal Lines", "resident": 4, "nonresident": 27 },
+      { "line": "Other", "resident": 4, "nonresident": 24 }
+    ]
+  },
+  "orders": {
+    "producers": {
+      "licenseSuspended": 0,
+      "licenseRevoked": 52,
+      "licenseDenied": 29,
+      "licenseSurrendered": 5,
+      "penaltyOnly": 1,
+      "otherOrders": 0
+    },
+    "insurersAndSelfFundedPlans": {
+      "certificateOfAuthoritySuspended": 11,
+      "certificateOfAuthorityRevoked": 0,
+      "certificateOfAuthorityReinstated": 0,
+      "penaltyOnly": 0,
+      "blockNonRenewalOrWithdrawal": 2,
+      "workersCompensationRateDeviation": 59,
+      "marketConductEnforcementOrders": 3,
+      "ordersAdoptingReportOfExamination": 4,
+      "otherOrders": 0
+    },
+    "otherTitleAgenciesTpasRrgs": {
+      "licenseSuspendedRevokedOrDenied": 1,
+      "penaltyOnly": 0,
+      "ordersAdoptingReportOfExamination": 38,
+      "otherOrders": 0,
+      "combinedActionLineIsNotSplit": true
+    },
+    "ordersAreNotPopulations": true
+  },
+  "complaints": {
+    "closed": 1086,
+    "new": 1064,
+    "sameRows": false,
+    "contacts": 5780,
+    "recoveriesUsd": 1238766,
+    "areFindings": false
+  },
+  "fraud": {
+    "referredToInHouseAttorneys": 22,
+    "referredToStateProsecutors": 9,
+    "pendingAtAttorneyGeneralAsOf": "2024-12-31",
+    "pendingAtAttorneyGeneral": 65
+  },
+  "examinations": {
+    "titleExaminationsCompleted": 59,
+    "marketAnalysisReviewsCompleted": 32,
+    "areCompanyCounts": false
+  },
+  "continuingEducationCourses": 6715,
+  "continuingEducationCoursesAreLicensees": false,
+  "serff": {
+    "companiesSentenceRepeatsRegulatedEntities": 2384,
+    "filings": 6003,
+    "documents": 30281,
+    "rates": 1520,
+    "filingsAreLicensees": false
+  },
+  "notAcquired": {
+    "namedInsurerRoster": "NOT_ACQUIRED",
+    "individualProducerRoster": "NOT_ACQUIRED",
+    "adjusterRoster": "NOT_ACQUIRED",
+    "appointmentRoster": "NOT_ACQUIRED",
+    "sbsBulkExport": "NOT_ACQUIRED"
+  },
+  "appointmentIsLicense": false,
+  "sbsLookupIsBulkCensus": false,
+  "complaintsAreFindings": false,
+  "boiseIsStatewidePopulation": false,
+  "nameOnlyAdverseJoins": 0,
+  "netNewEntities": 0,
+  "graphWrites": 0,
+  "aggregateRating": null,
+  "trustScore": null,
+  "combinedInsurancePopulation": null
+}

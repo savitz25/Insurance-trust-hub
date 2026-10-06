@@ -53,10 +53,13 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   wisconsin: 'WI',
   indiana: 'IN',
   'new-mexico': 'NM',
+  idaho: 'ID',
 };
 
 /** Newest state pages first. */
 const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>> = {
+  idaho:
+    'Department of Insurance 2024 annual report: 2,384 printed regulated entities and 114,549 licenses that mix business entities and individuals. Those grains are not added.',
   'new-mexico':
     'Office of Superintendent of Insurance Title Insurance Bureau: 68 licensed title insurance agents and 24 underwriters stay separate. Other statewide rosters were not acquired.',
   nebraska:

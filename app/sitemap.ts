@@ -66,6 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/indiana',
     '/new-mexico',
     '/kansas',
+    '/idaho',
     '/methodology',
     '/about',
     '/destinations',
