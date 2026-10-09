@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import snapshot from '@/lib/new-mexico-intelligence/nm-ins-001.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'New Mexico title-bureau limits and separate regulatory gaps',
@@ -109,6 +110,7 @@ export default function NewMexicoInsurancePage() {
           Retrieved 2026-10-06. Net-new entities {snapshot.netNewEntities}. Graph writes {snapshot.graphWrites}. Name-only adverse joins {snapshot.nameOnlyAdverseJoins}. Albuquerque and Santa Fe are geography only. This page does not add a city route.
         </p>
       </section>
+      <StateHubLinks stateSlug="new-mexico" />
     </main>
   );
 }

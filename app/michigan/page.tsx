@@ -5,6 +5,7 @@ import { DIFS_SOURCES, MICHIGAN_INSURANCE_GATE } from '@/lib/michigan-intelligen
 import decisions from '@/lib/michigan-intelligence/final-decisions.json';
 import exams from '@/lib/michigan-intelligence/market-exams.json';
 import audit from '@/lib/michigan-intelligence/linkage-audit.json';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: MICHIGAN_INSURANCE_GATE.title,
@@ -71,5 +72,6 @@ export default async function MichiganInsurancePage({ searchParams }: Props) {
     <section id="complaints" className="mt-10"><h2 className="text-2xl font-semibold text-[#0A2540]">Complaints and other reports</h2><p className="mt-2 text-sm text-slate-700">DIFS accepts insurance complaints and publishes company complaint statistics and ratios. Provider-level complaint records and case outcomes were not acquired; an intake is not a finding. The DIFS reports page also provides selected financial-examination material, but no current insurer-wide financial-exam index was acquired.</p><p className="mt-3 text-sm">{official(DIFS_SOURCES.complaints, 'File an insurance complaint')} · {official(DIFS_SOURCES.complaintStatistics, 'Company complaint statistics and ratios')} · {official(DIFS_SOURCES.reports, 'DIFS reports')}</p></section>
 
     <section id="clocks" className="mt-10 border-t border-slate-200 pt-6"><h2 className="text-xl font-semibold text-[#0A2540]">Source clocks and limits</h2><p className="mt-2 text-sm text-slate-700">Final-decision index and PDFs retrieved {decisions.retrievedAt}; each row keeps its index date and, where printed, decision issued date. Market exam index retrieved {exams.retrievedAt}; report dates are historical. Page generated {generatedAt}. DIFS locator data is live and was not snapshotted. Financial-exam and complaint-outcome rows are NOT_ACQUIRED.</p><p className="mt-2 text-sm text-slate-700">Exact graph attachments: 0. Name-only attachments: 0. Net-new canonical organizations: 0. Graph writes: 0. No local insurance pages or claims expansion were created.</p><p className="mt-3 text-sm"><Link className="text-sky-700 underline" href="/ask?q=Michigan%20insurance%20agency">Ask about Michigan insurance evidence</Link> · {official(DIFS_SOURCES.locatorFaq, 'DIFS locator FAQ')}</p></section>
+    <StateHubLinks stateSlug="michigan" />
   </main>;
 }

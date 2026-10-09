@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo/metadata';
 import snapshot from '@/lib/alabama-intelligence/al-ins-001.json';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Alabama insurance licensing and ALDOI regulatory evidence',
@@ -317,6 +318,7 @@ export default function AlabamaInsurancePage() {
           <Link className="text-sky-700 underline" href="/ask?q=Alabama%20insurance%20license">Ask about Alabama ALDOI evidence</Link>
         </p>
       </section>
+      <StateHubLinks stateSlug="alabama" />
     </main>
   );
 }

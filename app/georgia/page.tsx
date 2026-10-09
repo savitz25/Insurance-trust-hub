@@ -5,6 +5,7 @@ import { buildGeorgiaInsuranceJsonLd } from '@/lib/georgia-intelligence/jsonld';
 import { GEORGIA_INTELLIGENCE_GATE } from '@/lib/georgia-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: GEORGIA_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function GeorgiaIntelligencePage() {
     <>
       <JsonLd data={buildGeorgiaInsuranceJsonLd(snapshot)} />
       <GeorgiaInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="georgia" />
     </>
   );
 }

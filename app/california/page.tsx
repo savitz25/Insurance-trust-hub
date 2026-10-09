@@ -5,6 +5,7 @@ import { buildCaliforniaInsuranceJsonLd } from '@/lib/california-intelligence/js
 import { CALIFORNIA_INTELLIGENCE_GATE } from '@/lib/california-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: CALIFORNIA_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function CaliforniaIntelligencePage() {
     <>
       <JsonLd data={buildCaliforniaInsuranceJsonLd(snapshot)} />
       <CaliforniaInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="california" />
     </>
   );
 }

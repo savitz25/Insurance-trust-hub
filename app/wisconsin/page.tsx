@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo/metadata';
 import market from '@/lib/wisconsin-intelligence/market-conduct.json';
 import financial from '@/lib/wisconsin-intelligence/financial-exams.json';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Wisconsin insurance licensing and OCI regulatory evidence',
@@ -47,5 +48,6 @@ export default function WisconsinInsurancePage() {
     <section id="complaints" className="mt-10"><h2 className="text-2xl font-semibold text-[#0A2540]">Complaints</h2><p className="mt-2 text-sm text-slate-700">OCI {official(complaints, 'accepts consumer insurance complaints')}. Intake is KNOWN. Provider-level complaint cases and outcomes are NOT_ACQUIRED; outcomes may require a records request. OCI also offers a separate {official('https://oci.wi.gov/Pages/Consumers/GrievanceReport.aspx', 'health-insurer grievance report')} by company and plan type; those grievance aggregates were not acquired and are not complaint-case or enforcement rows. A complaint is not an enforcement finding.</p></section>
 
     <section id="clocks" className="mt-10 border-t border-slate-200 pt-6"><h2 className="text-xl font-semibold text-[#0A2540]">Source clocks and limits</h2><p className="mt-2 text-sm text-slate-700">Table A and company directory: December 31, 2025 snapshot, retrieved September 29, 2026. OCI lookup page: last updated July 17, 2026; individual live status was not snapshotted. Administrative-actions landing page: last updated September 2, 2026; individual action dates remain in source summaries, corpus NOT_ACQUIRED. Market-conduct and financial indexes: retrieved {market.retrievedAt} and {financial.retrievedAt}, with separate report dates on each row. Page generated {generatedAt}. No universal Wisconsin insurance as-of date is asserted.</p><p className="mt-2 text-sm text-slate-700">Exact agency/license matches: NOT_ACQUIRED. Exact enforcement attachments: 0. New canonical organizations: 0. Graph writes: 0. Claim eligibility changes: 0. Statewide NAIC-bearing company rows, agency and producer rosters, appointments, complete administrative-action corpus, provider complaint cases and outcomes: NOT_ACQUIRED.</p><p className="mt-3 text-sm"><Link className="text-sky-700 underline" href="/ask?q=Wisconsin%20insurance%20license">Ask about Wisconsin OCI evidence</Link></p></section>
+    <StateHubLinks stateSlug="wisconsin" />
   </main>;
 }

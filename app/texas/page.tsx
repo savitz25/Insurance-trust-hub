@@ -5,6 +5,7 @@ import { buildTexasInsuranceJsonLd } from '@/lib/texas-intelligence/jsonld';
 import { TEXAS_INTELLIGENCE_GATE } from '@/lib/texas-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: TEXAS_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function TexasIntelligencePage() {
     <>
       <JsonLd data={buildTexasInsuranceJsonLd(snapshot)} />
       <TexasInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="texas" />
     </>
   );
 }

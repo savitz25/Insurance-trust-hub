@@ -10,6 +10,7 @@ import {
   FLORIDA_PAGE_TITLE,
   FLORIDA_ROUTE,
 } from '@/lib/national/fl-state-intel';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: FLORIDA_PAGE_TITLE,
@@ -46,6 +47,7 @@ export default function FloridaIntelligencePage() {
     <>
       <JsonLd data={jsonLd} />
       <FloridaStatePage view={view} />
+      <StateHubLinks stateSlug="florida" />
     </>
   );
 }

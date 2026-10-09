@@ -68,6 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/kansas',
     '/idaho',
     '/west-virginia',
+    '/states',
     '/methodology',
     '/about',
     '/destinations',

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import snapshot from '@/lib/kentucky-intelligence/ky-ins-001.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Kentucky insurance company counts and Department of Insurance evidence',
@@ -95,6 +96,7 @@ export default function KentuckyInsurancePage() {
           Data year {facts.dataYear}. Retrieved {facts.retrievedAt}. Net-new canonical organizations {snapshot.newCanonicalOrganizations}. Graph writes {snapshot.graphWrites}. Louisville and Lexington are geographic context. This page does not add a city route.
         </p>
       </section>
+      <StateHubLinks stateSlug="kentucky" />
     </main>
   );
 }

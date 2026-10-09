@@ -6,6 +6,7 @@ import roster from '@/lib/connecticut-intelligence/company-roster.json';
 import market from '@/lib/connecticut-intelligence/market-conduct.json';
 import orders from '@/lib/connecticut-intelligence/consent-orders-2026.json';
 import financial from '@/lib/connecticut-intelligence/financial-exams.json';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: CT_INS_PUBLICATION.title,
@@ -63,5 +64,6 @@ export default async function ConnecticutInsurancePage({ searchParams }: Props) 
     <section id="complaints" className="mt-10"><h2 className="text-2xl font-semibold text-[#0A2540]">Complaints</h2><p className="mt-2 text-sm text-slate-700">CID accepts complaints about insurers, agents and adjusters. Intake capability is known; provider-level complaint case rows and outcomes were NOT_ACQUIRED. A complaint is not an enforcement finding.</p><p className="mt-3 text-sm">{official(CT_INS_SOURCES.complaints, 'File a CID complaint')}</p></section>
 
     <section id="clocks" className="mt-10 border-t border-slate-200 pt-6"><h2 className="text-xl font-semibold text-[#0A2540]">Source clocks, identity and limits</h2><p className="mt-2 text-sm text-slate-700">Company PDF as of {roster.asOf}, retrieved {roster.retrievedAt}. Market-conduct index and consent PDFs retrieved {market.retrievedAt}; each row retains its exam closed date, which is not necessarily the order signing date. Financial index retrieved {financial.retrievedAt}; each row retains its report as-of date. Page generated {generatedAt}. SBS license status is live and was not snapshotted.</p><p className="mt-2 text-sm text-slate-700">Exact NAIC cross-check: {fmt(roster.exactNaicRowsAlreadyInCanonicalIndex)} company-list rows share a code with {fmt(roster.distinctExactCanonicalNaics)} existing legal-insurer identities; {fmt(roster.unmatchedExactNaicRows)} NAIC-bearing rows do not. These are read-only code intersections, not new identities or evidence attachments. Agency NPN rows: NOT_ACQUIRED. Producer NPN rows: NOT_ACQUIRED. Exact enforcement attachments: 0. Name-only adverse joins: 0. New canonical organizations: 0. Graph writes: 0. Claim eligibility unchanged.</p><p className="mt-3 text-sm"><Link className="text-sky-700 underline" href="/ask?q=Connecticut%20insurance%20agency">Ask about Connecticut insurance evidence</Link></p></section>
+    <StateHubLinks stateSlug="connecticut" />
   </main>;
 }

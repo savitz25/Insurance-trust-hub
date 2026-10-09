@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import snapshot from '@/lib/nebraska-intelligence/ne-ins-001.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Nebraska Insurance License Evidence and Separate Regulatory Records',
@@ -100,6 +101,7 @@ export default function NebraskaInsurancePage() {
           <li><a className="font-medium text-sky-700 underline" href={snapshot.source}>NAIC Nebraska key facts</a> — the 2024 count and premium source.</li>
         </ul>
       </section>
+      <StateHubLinks stateSlug="nebraska" />
     </main>
   );
 }

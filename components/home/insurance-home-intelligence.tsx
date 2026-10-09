@@ -229,13 +229,13 @@ export function InsuranceHomeIntelligence({
                 </li>
               ))}
             </ul>
-            <a
-              href="#states"
+            <Link
+              href="/states"
               data-intel-event="insurance_intel_explore"
               className="mt-4 inline-flex min-h-11 items-center font-semibold text-sky-300 hover:underline"
             >
               Explore all {PUBLISHED_STATE_COUNT} states →
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -326,6 +326,14 @@ export function InsuranceHomeIntelligence({
             State cards describe evidence coverage—not market quality. Arizona
             has no published InsuranceTrustHub state-intelligence page;
             search-only or paid access is not presented as zero.
+          </p>
+          <p className="mt-3">
+            <Link
+              href="/states"
+              className="inline-flex min-h-11 items-center font-semibold text-sky-700"
+            >
+              All state pages
+            </Link>
           </p>
           <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {INSURANCE_HOMEPAGE_STATE_CARDS.map((state) => (

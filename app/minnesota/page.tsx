@@ -5,6 +5,7 @@ import { loadMinnesotaInsuranceView } from '@/lib/minnesota-intelligence/load';
 import { MINNESOTA_INTELLIGENCE_GATE } from '@/lib/minnesota-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: MINNESOTA_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function MinnesotaIntelligencePage() {
     <>
       <JsonLd data={buildMinnesotaInsuranceJsonLd(snapshot)} />
       <MinnesotaInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="minnesota" />
     </>
   );
 }

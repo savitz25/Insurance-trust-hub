@@ -348,6 +348,7 @@ export const INSURANCE_FOOTER_COLUMNS = [
       { href: '/tools/marketplace-plan-research', label: 'Marketplace plans near you' },
       { href: '/tools/aca-plan-explorer', label: 'ACA Plan Explorer' },
       { href: '/hubs', label: 'Market hubs' },
+      { href: '/states', label: 'State intelligence' },
       { href: '/directory', label: 'Verified directory' },
       { href: '/carriers', label: 'Carrier research' },
     ],

@@ -5,6 +5,7 @@ import { buildVirginiaInsuranceJsonLd } from '@/lib/virginia-intelligence/jsonld
 import { VIRGINIA_INTELLIGENCE_GATE } from '@/lib/virginia-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: VIRGINIA_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function VirginiaIntelligencePage() {
     <>
       <JsonLd data={buildVirginiaInsuranceJsonLd(snapshot)} />
       <VirginiaInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="virginia" />
     </>
   );
 }

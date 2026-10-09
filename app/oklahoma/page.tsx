@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import snapshot from '@/lib/oklahoma-intelligence/ok-ins-001.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Oklahoma insurance evidence from the 2025 annual report',
@@ -96,6 +97,7 @@ export default function OklahomaInsurancePage() {
           Retrieved {report.retrievedAt}. Net-new canonical organizations {snapshot.newCanonicalOrganizations}. Graph writes {snapshot.graphWrites}. Oklahoma City, Tulsa, Norman, Edmond, Lawton, and Broken Arrow are geographic context. This page does not add a city route.
         </p>
       </section>
+      <StateHubLinks stateSlug="oklahoma" />
     </main>
   );
 }
