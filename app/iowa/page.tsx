@@ -3,6 +3,7 @@ import Link from 'next/link';
 import snapshot from '@/data/iowa/ia-ins-001/insurer-snapshot.json';
 import agencies from '@/data/iowa/ia-ins-001/agency-snapshot.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Iowa insurance company licenses',
@@ -30,5 +31,6 @@ export default function IowaInsurancePage() {
       <p><a className="underline" href="https://iid.iowa.gov/legal-resources/legal-information/enforcement-orders-actions">IID enforcement orders</a> and <a className="underline" href="https://iid.iowa.gov/legal-resources/administrative-orders-actions">administrative actions</a> require case-level review. No adverse order was joined by name; complaints are not findings.</p>
       <p className="text-sm">Export retrieved {snapshot.retrievedAt.slice(0, 10)} UTC; dataset-wide record-effective date: UNKNOWN. Retained source ZIP SHA-256: {snapshot.archiveSha256}. Existing matches and net-new canonical entities: NOT_ACQUIRED. Graph writes and record-level evidence attachments from this publication: 0. Recheck the named entity before relying on current status.</p>
     </section>
+    <StateHubLinks stateSlug="iowa" />
   </main>;
 }

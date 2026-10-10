@@ -5,6 +5,7 @@ import { buildOregonInsuranceJsonLd } from '@/lib/oregon-intelligence/jsonld';
 import { OREGON_INTELLIGENCE_GATE } from '@/lib/oregon-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: OREGON_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function OregonIntelligencePage() {
     <>
       <JsonLd data={buildOregonInsuranceJsonLd(snapshot)} />
       <OregonInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="oregon" />
     </>
   );
 }

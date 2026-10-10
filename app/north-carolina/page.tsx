@@ -5,6 +5,7 @@ import { buildNorthCarolinaInsuranceJsonLd } from '@/lib/north-carolina-intellig
 import { NORTH_CAROLINA_INTELLIGENCE_GATE } from '@/lib/north-carolina-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: NORTH_CAROLINA_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function NorthCarolinaIntelligencePage() {
     <>
       <JsonLd data={buildNorthCarolinaInsuranceJsonLd(snapshot)} />
       <NorthCarolinaInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="north-carolina" />
     </>
   );
 }

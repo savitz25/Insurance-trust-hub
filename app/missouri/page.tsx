@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import snapshot from '@/lib/missouri-intelligence/mo-ins-001.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Missouri insurance company license types',
@@ -40,6 +41,7 @@ export default function MissouriInsurancePage() {
         <p><a className="underline" href={snapshot.separateSources.agentEnforcement}>Agent and agency enforcement actions</a> and <a className="underline" href={snapshot.separateSources.marketRegulationActions}>market-regulation actions</a> are separate DCI records. Order details, examinations and receivership records are NOT_ACQUIRED. A complaint is not a finding; no complaint count or adverse name-only join is published here.</p>
         <p className="text-sm">Existing entity matches, net-new canonical entities and record-level evidence attachments: NOT_ACQUIRED. Graph writes and exact adverse attachments: {snapshot.graphWrites}. This page is a source-grounded research route, not a live license search.</p>
       </section>
+      <StateHubLinks stateSlug="missouri" />
     </main>
   );
 }

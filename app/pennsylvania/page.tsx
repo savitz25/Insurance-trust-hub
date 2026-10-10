@@ -5,6 +5,7 @@ import { buildPennsylvaniaInsuranceJsonLd } from '@/lib/pennsylvania-intelligenc
 import { PENNSYLVANIA_INTELLIGENCE_GATE } from '@/lib/pennsylvania-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: PENNSYLVANIA_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function PennsylvaniaIntelligencePage() {
     <>
       <JsonLd data={buildPennsylvaniaInsuranceJsonLd(snapshot)} />
       <PennsylvaniaInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="pennsylvania" />
     </>
   );
 }

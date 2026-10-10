@@ -4,6 +4,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import companies from '@/lib/maryland-intelligence/companies.json';
 import index from '@/lib/maryland-intelligence/order-exam-index.json';
 import enforcement from '@/lib/maryland-intelligence/producer-enforcement.json';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Maryland insurance companies and MIA regulatory evidence',
@@ -57,5 +58,6 @@ export default async function MarylandInsurancePage({ searchParams }: Props) {
     <section id="complaints" className="mt-10"><h2 className="text-2xl font-semibold text-[#0A2540]">Complaints and fraud</h2><p className="mt-2 text-sm text-slate-700">MIA accepts insurance company and producer complaints and investigates suspected insurance fraud. Intake and investigation capabilities are KNOWN; provider-level complaint outcomes and fraud orders are NOT_ACQUIRED. The civil-complaint document category above is not a provider complaint-history corpus. A complaint is not a finding.</p><p className="mt-3 text-sm">{link(complaintSource, 'MIA complaint and fraud reporting')}</p></section>
 
     <section id="clocks" className="mt-10 border-t border-slate-200 pt-6"><h2 className="text-xl font-semibold text-[#0A2540]">Source clocks and limits</h2><p className="mt-2 text-sm text-slate-700">MIA says Company and Producer Information is updated weekly; the precise update instant and per-company status clock are not displayed. Company roster retrieved {companies.retrievedAt}. Order/exam index retrieved {index.retrievedAt}, with individual signed dates on rows. Producer summaries retrieved {enforcement.retrievedAt}, with separate action dates. Page generated {generatedAt}. No single Maryland insurance “as of” date is asserted.</p><p className="mt-2 text-sm text-slate-700">Exact agency/license matches: 0; exact enforcement attachments: 0; name-only adverse joins: 0; new canonical organizations: 0; graph writes: 0; claim eligibility changes: 0. Agency and producer rosters, complete company business types, individual exam PDF findings, provider-level complaint outcomes and a complete uncapped order census remain NOT_ACQUIRED.</p><p className="mt-3 text-sm"><Link className="text-sky-700 underline" href="/ask?q=Maryland%20insurance%20license">Ask about Maryland MIA evidence</Link></p></section>
+    <StateHubLinks stateSlug="maryland" />
   </main>;
 }

@@ -5,6 +5,7 @@ import { buildMassachusettsInsuranceJsonLd } from '@/lib/massachusetts-intellige
 import { MASSACHUSETTS_INTELLIGENCE_GATE } from '@/lib/massachusetts-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: MASSACHUSETTS_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function MassachusettsIntelligencePage() {
     <>
       <JsonLd data={buildMassachusettsInsuranceJsonLd(snapshot)} />
       <MassachusettsInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="massachusetts" />
     </>
   );
 }

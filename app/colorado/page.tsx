@@ -5,6 +5,7 @@ import { buildColoradoInsuranceJsonLd } from '@/lib/colorado-intelligence/jsonld
 import { COLORADO_INTELLIGENCE_GATE } from '@/lib/colorado-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: COLORADO_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function ColoradoIntelligencePage() {
     <>
       <JsonLd data={buildColoradoInsuranceJsonLd(snapshot)} />
       <ColoradoInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="colorado" />
     </>
   );
 }

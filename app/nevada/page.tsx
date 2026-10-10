@@ -5,6 +5,7 @@ import { buildNevadaInsuranceJsonLd } from '@/lib/nevada-intelligence/jsonld';
 import { NEVADA_INTELLIGENCE_GATE } from '@/lib/nevada-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: NEVADA_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function NevadaIntelligencePage() {
     <>
       <JsonLd data={buildNevadaInsuranceJsonLd(snapshot)} />
       <NevadaInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="nevada" />
     </>
   );
 }

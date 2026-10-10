@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo/metadata';
 import table from '@/lib/louisiana-intelligence/fy2025-table-17.json';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Louisiana insurance licensing and LDI regulatory evidence',
@@ -131,6 +132,7 @@ export default function LouisianaInsurancePage() {
           <Link className="text-sky-700 underline" href="/ask?q=Louisiana%20insurance%20license">Ask about Louisiana LDI evidence</Link>
         </p>
       </section>
+      <StateHubLinks stateSlug="louisiana" />
     </main>
   );
 }

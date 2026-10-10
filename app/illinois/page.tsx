@@ -5,6 +5,7 @@ import { buildIllinoisInsuranceJsonLd } from '@/lib/illinois-intelligence/jsonld
 import { ILLINOIS_INTELLIGENCE_GATE } from '@/lib/illinois-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: ILLINOIS_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function IllinoisIntelligencePage() {
     <>
       <JsonLd data={buildIllinoisInsuranceJsonLd(snapshot)} />
       <IllinoisInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="illinois" />
     </>
   );
 }

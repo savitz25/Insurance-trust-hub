@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import snapshot from '@/lib/utah-intelligence/ut-ins-001.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Utah Insurance License Evidence and Separate Regulatory Records',
@@ -84,6 +85,7 @@ export default function UtahInsurancePage() {
           <li>{official(snapshot.links.administrativeActions, 'Administrative actions against licensees')} — order records; no complaint-as-guilt inference.</li>
         </ul>
       </section>
+      <StateHubLinks stateSlug="utah" />
     </main>
   );
 }

@@ -5,6 +5,7 @@ import { buildWashingtonInsuranceJsonLd } from '@/lib/washington-intelligence/js
 import { WASHINGTON_INTELLIGENCE_GATE } from '@/lib/washington-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: WASHINGTON_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function WashingtonIntelligencePage() {
     <>
       <JsonLd data={buildWashingtonInsuranceJsonLd(snapshot)} />
       <WashingtonInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="washington" />
     </>
   );
 }

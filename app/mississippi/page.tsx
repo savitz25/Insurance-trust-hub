@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import snapshot from '@/lib/mississippi-intelligence/ms-ins-001.json';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Mississippi licensed companies and producer entities',
@@ -77,6 +78,7 @@ export default function MississippiInsurancePage() {
           Individual producers, adjusters, surplus-lines licensees, and appointments are {snapshot.notAcquired.individualProducers}. Company Type, Authorized Lines, and Risk Purchasing Groups downloads returned an error on {companies.retrievedAt} and were {snapshot.notAcquired.companyTypeExport}. The licensed-company type column is not a substitute for those exports. Enforcement orders are {snapshot.enforcement.orders}. Exact canonical attachments {snapshot.enforcement.exactCanonicalAttachments}. Name-only adverse joins {snapshot.enforcement.nameOnlyAdverseJoins}. Fire Marshal licensing is {snapshot.notAcquired.fireMarshalLicenses}. Jackson, Gulfport, and Biloxi are geography only. This page publishes no city route. Graph writes {snapshot.graphWrites}.
         </p>
       </section>
+      <StateHubLinks stateSlug="mississippi" />
     </main>
   );
 }

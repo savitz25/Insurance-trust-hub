@@ -5,6 +5,7 @@ import { buildNewYorkInsuranceJsonLd } from '@/lib/new-york-intelligence/jsonld'
 import { NEW_YORK_INTELLIGENCE_GATE } from '@/lib/new-york-intelligence/publication';
 import { JsonLd } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 export const metadata: Metadata = buildMetadata({
   title: NEW_YORK_INTELLIGENCE_GATE.title,
@@ -19,6 +20,7 @@ export default function NewYorkIntelligencePage() {
     <>
       <JsonLd data={buildNewYorkInsuranceJsonLd(snapshot)} />
       <NewYorkInsurancePage snapshot={snapshot} />
+      <StateHubLinks stateSlug="new-york" />
     </>
   );
 }
