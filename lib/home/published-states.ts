@@ -55,6 +55,7 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   'new-mexico': 'NM',
   idaho: 'ID',
   kansas: 'KS',
+  iowa: 'IA',
   'west-virginia': 'WV',
 };
 
