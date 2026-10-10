@@ -79,7 +79,7 @@ export async function loadAgencyTrustReportForProvider(
         .limit(APPOINTMENT_CAP),
       sb
         .from('contact_observations')
-        .select('contact_kind,value,source_dataset,public_eligible')
+        .select('contact_kind,value,source_dataset,source_observed_at,public_eligible')
         .eq('entity_id', entity.id)
         .eq('public_eligible', true)
         .limit(CONTACT_CAP),
@@ -127,6 +127,7 @@ export async function loadAgencyTrustReportForProvider(
       kind: String(c.contact_kind),
       value: String(c.value),
       sourceDataset: String(c.source_dataset || ''),
+      sourceObservedAt: c.source_observed_at ? String(c.source_observed_at) : null,
       publicEligible: Boolean(c.public_eligible),
     }));
     const cms = (cmsRes.data || []).map((c) => ({
