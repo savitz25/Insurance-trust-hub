@@ -1,7 +1,6 @@
 /**
- * 03C: state pages link sitemap-published county/metro hubs, Kansas is on the
- * homepage state list, and /states is a self-canonical index.
- * Iowa publication is intentionally undecided.
+ * 03C: state pages link sitemap-published county/metro hubs, Kansas and Iowa
+ * are on the homepage state list, and /states is a self-canonical index.
  */
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -52,12 +51,16 @@ assert.equal(
   'KS',
 );
 assert.equal(PUBLISHED_STATES.find((state) => state.slug === 'kansas')?.href, '/kansas');
-assert.equal(PUBLISHED_STATES.some((state) => state.slug === 'iowa'), false);
-assert.equal(PUBLISHED_STATEWIDE_SLUGS.includes('iowa' as (typeof PUBLISHED_STATEWIDE_SLUGS)[number]), false);
+assert.ok(PUBLISHED_STATEWIDE_SLUGS.includes('iowa'));
+assert.equal(
+  PUBLISHED_STATES.find((state) => state.slug === 'iowa')?.abbreviation,
+  'IA',
+);
+assert.equal(PUBLISHED_STATES.find((state) => state.slug === 'iowa')?.href, '/iowa');
 
 assert.equal(sitemapUrls.filter((url) => new URL(url).pathname === '/kansas').length, 1);
+assert.equal(sitemapUrls.filter((url) => new URL(url).pathname === '/iowa').length, 1);
 assert.equal(sitemapUrls.filter((url) => new URL(url).pathname === '/states').length, 1);
-assert.equal(sitemapUrls.some((url) => new URL(url).pathname === '/iowa'), false);
 
 const canonical = statesMetadata.alternates && 'canonical' in statesMetadata.alternates
   ? statesMetadata.alternates.canonical
