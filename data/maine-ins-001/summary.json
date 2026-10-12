@@ -1,0 +1,20 @@
+{
+  "source": "https://www.maine.gov/pfr/insurance/sites/maine.gov.pfr.insurance/files/inline-files/active-nonres-producers.xlsx",
+  "source_clock": "Active nonresident producers as of 2026-08-01 (quarterly list)",
+  "retrieved_at": "2026-10-12",
+  "sha256": "360e012590006308db275963cc7f7a52217879a4a0e589d815c22ff5a926f58a",
+  "worksheet": "Export Worksheet",
+  "license_rows": 225804,
+  "distinct_license_numbers": 225804,
+  "distinct_npn_identifiers": 225570,
+  "license_rows_by_class": {
+    "PRODUCER LIMITED NON-RESIDENT": 2821,
+    "PRODUCER NON-RESIDENT": 222983
+  },
+  "limitations": [
+    "Nonresident producer license slice only; not the complete Maine producer population.",
+    "NPN identifiers and license records are separate grains.",
+    "No agency, adjuster, surplus-lines, appointment, insurer, or enforcement census is included.",
+    "No contact fields or named-person records are emitted by this summary."
+  ]
+}
