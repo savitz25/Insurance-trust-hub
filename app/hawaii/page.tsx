@@ -34,7 +34,7 @@ export default function HawaiiInsurancePage() {
         <li>Insurers, agencies or business entities, individual producers, adjusters, and surplus-lines licensees are separate populations.</li>
         <li>Appointments are relationships between an insurer and producer, not additional licensees.</li>
         <li>Examinations and enforcement actions are separate regulatory events. Complaint intake does not establish wrongdoing.</li>
-        <li>No combined Hawaii insurance census, unsupported Trust Score, or AggregateRating is presented.</li>
+        <li>No combined Hawaii insurance census or unsupported ranking is presented.</li>
       </ul>
     </section>
     <section className="mt-8 rounded-xl bg-slate-50 p-5" aria-label="Official sources">
