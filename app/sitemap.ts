@@ -70,6 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/idaho',
     '/west-virginia',
     '/montana',
+    '/north-dakota',
     '/states',
     '/methodology',
     '/about',
