@@ -26,13 +26,19 @@ export default function MyTrustHubEntryPage() {
           agency research, comparisons, and saved tools on this hub.
         </p>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
-          Saves stay on this device. Sync to My TrustHub is off, so a Save here does not create
-          an account record and does not start a watch.
+          Profile saves stay on this device. Sync to My TrustHub is off, so saving a profile
+          here does not create a My TrustHub account record or start a watch.
         </p>
-        <p className="mt-6">
+        <p className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="https://www.asktrusthub.com/my"
+            className="inline-flex min-h-11 items-center rounded-full bg-[#0284C7] px-4 text-sm font-semibold text-white hover:bg-[#1E3A8A]"
+          >
+            Open My TrustHub account
+          </Link>
           <Link
             href={MY_INSURANCE_PATH}
-            className="inline-flex min-h-11 items-center rounded-full bg-[#0284C7] px-4 text-sm font-semibold text-white hover:bg-[#1E3A8A]"
+            className="inline-flex min-h-11 items-center rounded-full border border-[#0284C7] px-4 text-sm font-semibold text-[#0284C7] hover:bg-sky-50"
           >
             Open My Insurance workspace
           </Link>

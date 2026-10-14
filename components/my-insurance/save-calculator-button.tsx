@@ -53,7 +53,10 @@ export function SaveCalculatorButton({
 }: Props) {
   const mi = useMyInsuranceOptional();
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [savedKey, setSavedKey] = useState<string | null>(null);
+  // Derive Saved from the acknowledged snapshot rather than a permanent latch.
+  const snapshotKey = JSON.stringify([mi?.user?.id ?? null, calculatorId, title, snapshot]);
+  const saved = savedKey === snapshotKey;
 
   function saveLocalDevice() {
     const summary =
@@ -100,7 +103,7 @@ export function SaveCalculatorButton({
           payload: { calculatorId, title, snapshot },
         });
         stashPostLoginRedirect(MY_INSURANCE_PATH);
-        setSaved(true);
+        setSavedKey(snapshotKey);
         onSaved?.();
         if (requireSignInForCloud && mi?.openAuth) {
           mi.openAuth({ context: 'general', redirectPath: MY_INSURANCE_PATH });
@@ -134,7 +137,7 @@ export function SaveCalculatorButton({
           });
           return;
         }
-        setSaved(true);
+        setSavedKey(snapshotKey);
         onSaved?.();
         toast.success('Saved to Insurance HQ', {
           description: sendEmail

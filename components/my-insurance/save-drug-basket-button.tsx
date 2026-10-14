@@ -33,7 +33,11 @@ export function SaveDrugBasketButton({
   const mi = useMyInsuranceOptional();
   const router = useRouter();
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [savedKey, setSavedKey] = useState<string | null>(null);
+  // Keep completion tied to the submitted content and account, including when
+  // the user edits the list while an earlier save is still in flight.
+  const snapshotKey = JSON.stringify([mi?.user?.id ?? null, basketName, items]);
+  const saved = savedKey === snapshotKey;
 
   async function persistToAccount(list: DrugBasketItemInput[]) {
     const res = await saveDrugBasketAction({
@@ -56,7 +60,7 @@ export function SaveDrugBasketButton({
       });
     }
 
-    setSaved(true);
+    setSavedKey(snapshotKey);
     toast.success('Prescription list saved in the My Insurance workspace', {
       description: `${list.length} medication${list.length === 1 ? '' : 's'} on this device`,
       action: {
