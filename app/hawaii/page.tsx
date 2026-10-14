@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { StateHubLinks } from '@/components/hubs/state-hub-links';
 
 const INS = 'https://www.cca.hawaii.gov/ins/';
 const CATEGORIES = 'https://cca.hawaii.gov/ins/insurance-license-categories/';
@@ -46,5 +47,6 @@ export default function HawaiiInsurancePage() {
         <li><Source href={BUSINESS}>DCCA business check</Source> — business identity lookup, not insurance license evidence by itself.</li>
       </ul>
     </section>
+    <StateHubLinks stateSlug="hawaii" />
   </main>;
 }
