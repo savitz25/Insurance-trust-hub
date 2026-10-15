@@ -40,6 +40,16 @@ export const PUBLISHED_STATEWIDE_SLUGS = [
   'kansas',
   'iowa',
   'hawaii',
+  'alaska',
+  'delaware',
+  'maine',
+  'montana',
+  'new-hampshire',
+  'north-dakota',
+  'rhode-island',
+  'south-dakota',
+  'vermont',
+  'wyoming',
 ] as const;
 
 const SLUGS = new Set<string>(PUBLISHED_STATEWIDE_SLUGS);
