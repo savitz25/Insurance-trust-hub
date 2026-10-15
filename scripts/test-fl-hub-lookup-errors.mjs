@@ -30,9 +30,10 @@ function fixture(mode, county) {
       source: 'Florida DFS', verification_url: 'https://example.com/dfs',
       checkedAt: new Date().toISOString(), identityMatchAccepted: true }] },
   };
-  globalThis.hubFixture = { configured: mode !== 'unconfigured', client() {
+  globalThis.hubFixture = { configured: mode !== 'unconfigured', lookups: 0, client() {
     if (mode === 'no-client') return null;
     return { from() {
+      globalThis.hubFixture.lookups += 1;
       let countQuery = false;
       const query = {
         select(_columns, opts) { countQuery = !!opts?.head; return query; },
@@ -74,3 +75,31 @@ for (const [slug, county] of [['miami-dade', 'Miami-Dade'], ['broward-county', '
     });
   }
 }
+
+test('concurrent Miami-Dade page and metadata share one lookup', async () => {
+  fixture('success', 'Miami-Dade');
+  const args = () => ({
+    params: Promise.resolve({ state: 'florida', slug: 'miami-dade' }),
+    searchParams: Promise.resolve({}),
+  });
+  globalThis.hubFixture.lookups = 0;
+  const [rendered, metadata] = await Promise.all([page(args()), generateMetadata(args())]);
+  assert.equal(rendered.props.verifiedProviders.length, 1);
+  assert.equal(rendered.props.verifiedTotal, 1);
+  assert.equal(metadata.robots.index, true);
+  assert.equal(globalThis.hubFixture.lookups, 2);
+});
+
+test('concurrent Miami-Dade row failure still rejects both callers', async () => {
+  fixture('rows-error', 'Miami-Dade');
+  const args = () => ({
+    params: Promise.resolve({ state: 'florida', slug: 'miami-dade' }),
+    searchParams: Promise.resolve({}),
+  });
+  const results = await Promise.allSettled([page(args()), generateMetadata(args())]);
+  assert.equal(results.length, 2);
+  for (const result of results) {
+    assert.equal(result.status, 'rejected');
+    assert.match(String(result.reason), /Florida hub inventory/);
+  }
+});

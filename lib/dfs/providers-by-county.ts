@@ -817,6 +817,43 @@ export async function getHubInventory(
   if (!isFlLaunchHub(hubSlug)) {
     return emptyInventory(hubSlug, pageSize, page);
   }
+  return joinFloridaHubInventory(hubSlug, pageSize, page);
+}
+
+/**
+ * Page and metadata each call this for the same slug. Join only the in-flight
+ * read so one request does not run two identical count and row statements.
+ * The shared promise is dropped when it settles. A failure is never stored
+ * as an empty market, and a later request always reads again.
+ */
+const floridaHubInventoryInFlight = new Map<string, Promise<HubInventoryResult>>();
+
+function joinFloridaHubInventory(
+  hubSlug: string,
+  pageSize: number,
+  page: number
+): Promise<HubInventoryResult> {
+  const key = `${hubSlug}:${pageSize}:${page}`;
+  const current = floridaHubInventoryInFlight.get(key);
+  if (current) return current;
+  const pending = readFloridaHubInventory(hubSlug, pageSize, page);
+  floridaHubInventoryInFlight.set(key, pending);
+  // Cleanup is a separate chain. Catching here does not swallow the rejection
+  // returned to page and metadata; it only keeps finally() from emitting
+  // unhandledRejection after those callers have already observed the failure.
+  void pending.catch(() => {}).finally(() => {
+    if (floridaHubInventoryInFlight.get(key) === pending) {
+      floridaHubInventoryInFlight.delete(key);
+    }
+  });
+  return pending;
+}
+
+async function readFloridaHubInventory(
+  hubSlug: string,
+  pageSize: number,
+  page: number
+): Promise<HubInventoryResult> {
   if (!isSupabaseConfigured()) throw new Error('Florida hub inventory unavailable');
 
   const counties = launchCountiesForHubSlug(hubSlug);
