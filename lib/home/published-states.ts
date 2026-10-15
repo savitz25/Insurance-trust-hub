@@ -58,6 +58,16 @@ const ABBREVIATIONS: Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string> 
   iowa: 'IA',
   'west-virginia': 'WV',
   hawaii: 'HI',
+  alaska: 'AK',
+  delaware: 'DE',
+  maine: 'ME',
+  montana: 'MT',
+  'new-hampshire': 'NH',
+  'north-dakota': 'ND',
+  'rhode-island': 'RI',
+  'south-dakota': 'SD',
+  vermont: 'VT',
+  wyoming: 'WY',
 };
 
 /** Newest state pages first. */
@@ -99,6 +109,26 @@ const NEWEST: Partial<Record<(typeof PUBLISHED_STATEWIDE_SLUGS)[number], string>
   maryland:
     'Maryland Insurance Administration company licensing, orders, producer enforcement, and examination indexes',
   michigan: 'DIFS insurer, agency and producer verification, final decisions, and the company examination index',
+  alaska:
+    'Division of Insurance company and licensee search is published. Dated statewide insurer, agency, and producer rosters were NOT_ACQUIRED, not zero.',
+  delaware:
+    'October 1, 2026 active-company workbook: 2,279 company-type rows and 2,274 distinct SBS company identifiers. Those figures are not one insurer census. Producer, agency, and appointment rosters were NOT_ACQUIRED.',
+  maine:
+    'August 1, 2026 active nonresident producer list: 225,804 license rows and 225,570 distinct NPN identifiers. That slice is not resident producers, agencies, or insurers. Those rosters were NOT_ACQUIRED.',
+  montana:
+    'CSI and SBS lookup pathways are published. Current insurer, agency, producer, adjuster, and surplus-lines rosters were NOT_ACQUIRED in the October 14, 2026 preflight, not zero.',
+  'new-hampshire':
+    'Insurance Department SBS lookup is published. Current statewide insurer, agency, producer, and adjuster rosters were NOT_ACQUIRED, not zero.',
+  'north-dakota':
+    'Insurance Department company and SBS lookup paths are published. Dated statewide license rosters were NOT_ACQUIRED, not zero.',
+  'rhode-island':
+    'DBR insurer reports dated October 2, 2026 keep classes separate, including 840 property and casualty and 386 life report counts. Those classes are not added together. Producer and agency rosters were NOT_ACQUIRED.',
+  'south-dakota':
+    'Domestic company table as of October 2023: 22 named observations, kept separate from 7 farm-mutual observations as of September 2026. They are not a current insurer census. Producer and agency rosters were NOT_ACQUIRED.',
+  vermont:
+    'DFR lookup and list paths exist. Dated insurer, agency, and producer rosters were NOT_ACQUIRED because the public portal returned HTTP 403. That is not zero.',
+  wyoming:
+    'Insurance Department lookup is published. Current insurer, agency, producer, and appointment rosters were NOT_ACQUIRED, not zero.',
 };
 
 function nameFor(slug: string): string {

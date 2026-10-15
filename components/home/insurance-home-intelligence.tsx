@@ -4,7 +4,6 @@ import { ZipSearch } from "@/components/zip-search";
 import { InsuranceSpecialistSearchShell } from "@/components/specialist-search/insurance-specialist-search-shell";
 import { HomeIntelEvents } from "./home-intel-events";
 import {
-  NEWEST_PUBLISHED_STATES,
   PUBLISHED_STATE_COUNT,
   PUBLISHED_STATES,
 } from "@/lib/home/published-states";
@@ -130,6 +129,23 @@ export function InsuranceHomeIntelligence({
     "cms_marketplace_evidence_observations",
     "public_directory_listings",
   ].map((key) => inventory.find((row) => row.key === key)!);
+  const publishedHrefs = new Set(PUBLISHED_STATES.map((state) => state.href));
+  const featuredDestinations = new Set<string>();
+  const featuredRosters: InsuranceHomeEvidenceMeasure[] = [];
+  for (const item of inventory
+    .filter((entry) => {
+      if (entry.publicationStatus !== "PUBLIC" || typeof entry.value !== "number") return false;
+      if (entry.family !== "LICENSING_CREDENTIALS" && entry.family !== "ENTITY_IDENTITY") return false;
+      if (!publishedHrefs.has(entry.destination)) return false;
+      const blob = `${entry.key} ${entry.grain} ${entry.label} ${entry.doesNotCount}`;
+      return !/annual[-_ ]report|not a live insurer roster|crosswalk|exact_naic|designation/i.test(blob);
+    })
+    .sort((a, b) => b.value - a.value)) {
+    if (featuredDestinations.has(item.destination)) continue;
+    featuredDestinations.add(item.destination);
+    featuredRosters.push(item);
+    if (featuredRosters.length === 4) break;
+  }
   return (
     <main
       className="overflow-x-clip bg-white text-slate-800"
@@ -214,21 +230,33 @@ export function InsuranceHomeIntelligence({
               Each state page is built from that state&rsquo;s own regulator sources.
               Coverage keeps expanding state by state.
             </p>
-            <p className="mt-4 text-sm font-semibold text-sky-200">Newest state pages</p>
-            <ul className="mt-2 flex flex-wrap gap-2">
-              {NEWEST_PUBLISHED_STATES.map((state) => (
-                <li key={state.slug}>
+            <p className="mt-4 text-sm font-semibold text-sky-200">Featured published rosters</p>
+            <p className="mt-2 max-w-3xl text-sm text-slate-300">
+              Each figure is one source population. Credentialed agencies, agency
+              license rows, and distinct-NAIC company rows stay separate from
+              the national research-graph totals above. States without a
+              published roster stay disclosed and are not shown as zero.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {featuredRosters.map((row) => (
+                <article key={row.key} className="min-w-0 rounded-2xl border border-slate-600 p-4">
+                  <p className="text-2xl font-semibold tabular-nums">{row.value.toLocaleString("en-US")}</p>
+                  <h3 className="mt-1 text-sm font-semibold text-sky-200">{row.label}</h3>
+                  <p className="mt-2 text-xs text-slate-300">Grain: {row.grain.replace(/_/g, " ")}</p>
+                  <p className="mt-1 text-xs text-slate-300">
+                    {row.sourceAsOf ? `Source as of ${row.sourceAsOf.slice(0, 10)}` : "Source date not reported"}
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-slate-400">{row.doesNotCount}</p>
                   <Link
-                    href={state.href}
-                    title={state.newestSummary}
+                    href={row.destination}
                     data-intel-event="insurance_intel_state_click"
-                    className="inline-flex min-h-11 items-center rounded-full border border-slate-500 px-4 text-sm font-medium text-white hover:border-sky-300 hover:text-sky-200"
+                    className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-sky-300"
                   >
-                    {state.name}
+                    Review the published evidence
                   </Link>
-                </li>
+                </article>
               ))}
-            </ul>
+            </div>
             <Link
               href="/states"
               data-intel-event="insurance_intel_explore"
@@ -376,7 +404,7 @@ export function InsuranceHomeIntelligence({
           {moreStates.length > 0 ? (
             <>
               <h3 className="mt-10 text-xl font-semibold text-[#0A2540]">
-                Newest published states
+                Additional published states
               </h3>
               <ul className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {moreStates.map((state) => (
