@@ -1,0 +1,39 @@
+{
+  "state": "South Dakota",
+  "regulator": "South Dakota Department of Labor and Regulation, Division of Insurance",
+  "retrieved_on": "2026-10-14",
+  "observations": [
+    {
+      "population": "Division source-labelled domestic companies licensed to sell insurance and actively marketing in South Dakota",
+      "source": "https://dlr.sd.gov/insurance/company_listings/domestics.aspx",
+      "source_clock": "2023-10",
+      "raw_rows": 22,
+      "distinct_naic_identifiers": 22,
+      "scope_note": "The source says farm mutual and captive insurance companies are excluded. Historical source observations, not a current complete insurer census."
+    },
+    {
+      "population": "Farm mutual companies licensed to sell insurance and actively marketing in South Dakota",
+      "source": "https://dlr.sd.gov/insurance/company_listings/farm_mutuals.aspx",
+      "source_clock": "2026-09",
+      "raw_rows": 7,
+      "distinct_entities": "NOT_RECONCILED",
+      "scope_note": "Source-defined company observations; kept separate from the other company listing."
+    },
+    {
+      "population": "Foreign insurers licensed in South Dakota",
+      "source": "https://dlr.sd.gov/insurance/company_listings/documents/companies_licensed_foreign.pdf",
+      "source_clock": "2024-03-27",
+      "raw_rows": "NOT_ACQUIRED",
+      "access_note": "Official linked file returned HTTP 404 during retrieval on 2026-10-14."
+    },
+    {
+      "population": "Producers, agencies, adjusters, surplus-lines, appointments, examinations, and current administrative actions",
+      "source": "https://dlr.sd.gov/insurance/license_inquiry_service.aspx",
+      "source_clock": "Live lookup checked 2026-10-14",
+      "raw_rows": "NOT_ACQUIRED",
+      "access_note": "Public SBS verification is lookup-based; no dated free statewide bulk extract acquired."
+    }
+  ],
+  "paid_data_purchases_usd": 0,
+  "combined_insurer_total": "NOT_PUBLISHED"
+}
