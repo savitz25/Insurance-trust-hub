@@ -1,0 +1,212 @@
+{
+  "audit_at": "2026-10-15T02:58:44.583123+00:00",
+  "per_scope": [
+    {
+      "kind": "county",
+      "label": "broward",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 7936,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 7936
+    },
+    {
+      "kind": "county",
+      "label": "duval",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 2696,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 2696
+    },
+    {
+      "kind": "county",
+      "label": "hillsborough",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 4352,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 4352
+    },
+    {
+      "kind": "county",
+      "label": "miami_dade",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 9630,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 9630
+    },
+    {
+      "kind": "county",
+      "label": "orange",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 4723,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 4723
+    },
+    {
+      "kind": "county",
+      "label": "osceola",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 1086,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 1086
+    },
+    {
+      "kind": "county",
+      "label": "palm_beach",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 5147,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 5147
+    },
+    {
+      "kind": "county",
+      "label": "pasco",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 1390,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 1390
+    },
+    {
+      "kind": "county",
+      "label": "pinellas",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 2992,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 2992
+    },
+    {
+      "kind": "county",
+      "label": "seminole",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 1509,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 1509
+    },
+    {
+      "kind": "hub",
+      "label": "broward",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 7936,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 7936
+    },
+    {
+      "kind": "hub",
+      "label": "broward-county",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 7936,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 7936
+    },
+    {
+      "kind": "hub",
+      "label": "jacksonville",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 2696,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 2696
+    },
+    {
+      "kind": "hub",
+      "label": "miami-dade",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 9630,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 9630
+    },
+    {
+      "kind": "hub",
+      "label": "miami-fort-lauderdale",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 22713,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 22713
+    },
+    {
+      "kind": "hub",
+      "label": "orlando",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 7318,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 7318
+    },
+    {
+      "kind": "hub",
+      "label": "palm-beach-county",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 5147,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 5147
+    },
+    {
+      "kind": "hub",
+      "label": "tampa",
+      "duplicate_provider_ids": 0,
+      "ambiguous_text_fallback": 0,
+      "missing_launch_county_id": 0,
+      "matched_by_launch_county_id": 8734,
+      "conflicting_launch_county_id": 0,
+      "matched_only_by_text_fallback": 0,
+      "total_currently_matched_by_existing_logic": 8734
+    }
+  ],
+  "ambiguous_rows": 0,
+  "all_verified_fl_rows": 98046,
+  "fl_launch_rows_total": 41461,
+  "duplicate_provider_ids": 0,
+  "launch_county_id_present": 41461,
+  "missing_id_all_fallback_rows": 0,
+  "text_only_rows_requiring_backfill": 0,
+  "nonempty_conflicting_or_invalid_ids": 0,
+  "safe_backfill_candidates": 0
+}
