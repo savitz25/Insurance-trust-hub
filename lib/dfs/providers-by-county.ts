@@ -135,11 +135,15 @@ export function providerMatchesLaunchCounties(
 }
 
 async function countVerifiedForCounties(
-  counties: FlLaunchCounty[]
+  counties: FlLaunchCounty[],
+  requireSuccessfulLookup = false
 ): Promise<number> {
   if (!counties.length || !isSupabaseConfigured()) return 0;
   const supabase = createPublicClient();
-  if (!supabase) return 0;
+  if (!supabase) {
+    if (requireSuccessfulLookup) throw new Error('Florida hub inventory client unavailable');
+    return 0;
+  }
 
   const or = hubMatchOrParts(counties);
   if (!or) return 0;
@@ -151,6 +155,9 @@ async function countVerifiedForCounties(
     .contains('states_licensed', ['FL'])
     .or(or);
 
+  if (requireSuccessfulLookup && (error || count == null)) {
+    throw new Error('Florida hub inventory count unavailable');
+  }
   if (error) return 0;
   return count ?? 0;
 }
@@ -807,21 +814,22 @@ export async function getHubInventory(
     return getMsHubInventory(hubSlug, pageSize, page);
   }
 
-  if (!isFlLaunchHub(hubSlug) || !isSupabaseConfigured()) {
+  if (!isFlLaunchHub(hubSlug)) {
     return emptyInventory(hubSlug, pageSize, page);
   }
+  if (!isSupabaseConfigured()) throw new Error('Florida hub inventory unavailable');
 
   const counties = launchCountiesForHubSlug(hubSlug);
   if (!counties.length) return emptyInventory(hubSlug, pageSize, page);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Florida hub inventory client unavailable');
 
     const or = hubMatchOrParts(counties);
     if (!or) return emptyInventory(hubSlug, pageSize, page);
 
-    const total = await countVerifiedForCounties(counties);
+    const total = await countVerifiedForCounties(counties, true);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -838,7 +846,8 @@ export async function getHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error || !data?.length) {
+    if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
+    if (!data.length) {
       return {
         ...emptyInventory(hubSlug, pageSize, safePage),
         total,
@@ -864,7 +873,9 @@ export async function getHubInventory(
       hubSlug,
     };
   } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+    // Lookup/transport/mapping failures are not evidence of an empty market.
+    // Let the route error boundary handle them; never generate empty-market SEO.
+    throw new Error('Florida hub inventory unavailable');
   }
 }
 
