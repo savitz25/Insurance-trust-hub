@@ -131,9 +131,9 @@ export function InsuranceHomeIntelligence({
   ].map((key) => inventory.find((row) => row.key === key)!);
   const publishedHrefs = new Set(PUBLISHED_STATES.map((state) => state.href));
   const featuredDestinations = new Set<string>();
-  const featuredRosters: InsuranceHomeEvidenceMeasure[] = [];
+  const featuredRosters: Array<InsuranceHomeEvidenceMeasure & { value: number }> = [];
   for (const item of inventory
-    .filter((entry) => {
+    .filter((entry): entry is InsuranceHomeEvidenceMeasure & { value: number } => {
       if (entry.publicationStatus !== "PUBLIC" || typeof entry.value !== "number") return false;
       if (entry.family !== "LICENSING_CREDENTIALS" && entry.family !== "ENTITY_IDENTITY") return false;
       if (!publishedHrefs.has(entry.destination)) return false;
