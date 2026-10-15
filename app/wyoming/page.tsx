@@ -23,7 +23,7 @@ export default function WyomingInsurancePage() {
       <header>
         <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">Wyoming Department of Insurance</p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight">Wyoming insurance licensing evidence</h1>
-        <p className="mt-5 text-lg text-slate-700">The Wyoming Department of Insurance publishes separate company and licensee resources and links to public verification. No dated free statewide row-level extract was acquired in this pass; live verification sources are not represented as a frozen census.</p>
+        <p className="mt-5 text-lg text-slate-700">The Wyoming Department of Insurance describes separate company and license classes and links to Sircon for licensing services. No dated free statewide row-level export was acquired in this pass; the portal is not represented as a frozen census.</p>
       </header>
       <section className="mt-8 rounded-xl border border-slate-200 bg-white p-5">
         <h2 className="text-2xl font-semibold text-[#0A2540]">Current populations</h2>
@@ -47,7 +47,7 @@ export default function WyomingInsurancePage() {
           <li>{official(licensing, "Licensing overview")}</li>
           <li>{official(producers, "Producer licensing")}</li>
           <li>{official(companies, "Insurance companies and company information")}</li>
-          <li>{official(lookup, "Sircon public license verification")}</li>
+          <li>{official(lookup, "Sircon licensing portal linked by DOI")}</li>
         </ul>
         <StateHubLinks stateSlug="wyoming" />
       </section>
