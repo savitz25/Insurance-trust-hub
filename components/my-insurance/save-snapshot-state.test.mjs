@@ -81,7 +81,7 @@ test('guest calculator permits saving edited device results', async () => {
 });
 test('account entry links to canonical Ask and retains the specialist workspace', () => {
   const source = readFileSync(resolve(directory, '../../app/my-trusthub/page.tsx'), 'utf8');
-  assert.match(source, /href="https:\/\/www\.asktrusthub\.com\/my"/);
+  assert.match(source, /href="https:\/\/www\.asktrusthub\.com\/my\/sign-in"/);
   assert.match(source, /href=\{MY_INSURANCE_PATH\}/);
   assert.match(source, /Sync to My TrustHub is off/);
 });
