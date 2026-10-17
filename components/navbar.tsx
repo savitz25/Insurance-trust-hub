@@ -168,7 +168,7 @@ export function Navbar() {
 
         <div className="th-header-actions">
           <Link
-            href="/my-trusthub"
+            href="https://www.asktrusthub.com/my/sign-in"
             aria-label="My TrustHub"
             title="My TrustHub is your consumer account. My Insurance is the specialist workspace."
             className="th-btn-secondary"
@@ -186,7 +186,7 @@ export function Navbar() {
 
         <div className="th-header-mobile-actions">
           <Link
-            href="/my-trusthub"
+            href="https://www.asktrusthub.com/my/sign-in"
             className="th-btn-icon"
             aria-label="My TrustHub"
           >
@@ -244,7 +244,7 @@ export function Navbar() {
               <Link href="/carriers" prefetch={false} className="th-drawer-link" onClick={() => setOpen(false)}>
                 Carriers
               </Link>
-              <Link href="/my-trusthub" className="th-drawer-link" onClick={() => setOpen(false)}>
+              <Link href="https://www.asktrusthub.com/my/sign-in" className="th-drawer-link" onClick={() => setOpen(false)}>
                 My TrustHub
                 {showBadge ? (
                   <span className="ml-2 rounded-full bg-[#1E3A8A] px-1.5 py-0.5 text-[10px] font-semibold text-white tabular-nums">

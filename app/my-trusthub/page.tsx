@@ -31,7 +31,7 @@ export default function MyTrustHubEntryPage() {
         </p>
         <p className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="https://www.asktrusthub.com/my"
+            href="https://www.asktrusthub.com/my/sign-in"
             className="inline-flex min-h-11 items-center rounded-full bg-[#0284C7] px-4 text-sm font-semibold text-white hover:bg-[#1E3A8A]"
           >
             Open My TrustHub account

@@ -281,6 +281,6 @@ test('the profile control has one Save toggle and the browser does not fetch Ask
   assert.match(card, /providerId=\{provider\.id\}/);
   assert.match(card, /defaultStatus="researching"/);
   assert.match(navbar, /My TrustHub/);
-  assert.match(navbar, /href="\/my-trusthub"/);
+  assert.match(navbar, /href="https:\/\/www\.asktrusthub\.com\/my\/sign-in"/);
   assert.doesNotMatch(navbar, /aria-label=\{showBadge \? `My Insurance/);
 });
