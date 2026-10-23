@@ -3,6 +3,8 @@
 -- Does not alter bail-bond publication firewall or Florida examination architecture.
 
 -- Identifier schemes used by exact NJ joins. NPN and DOBI reference are not NAIC CoCodes.
+-- fl_oir_company_code stays in the allow-list. Re-applying this file must still accept
+-- Florida OIR identifiers already stored under that scheme.
 alter table national_entity_identifiers
   drop constraint if exists national_entity_identifiers_scheme_check;
 alter table national_entity_identifiers
@@ -12,6 +14,7 @@ alter table national_entity_identifiers
     'naic_group_code',
     'fein',
     'fl_dfs_appointing_entity_number',
+    'fl_oir_company_code',
     'tx_tdi_naic_id',
     'cms_medicare_contract_id',
     'cms_hios_issuer_id',

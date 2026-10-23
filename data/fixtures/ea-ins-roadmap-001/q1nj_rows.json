@@ -1,0 +1,1444 @@
+[
+ {
+  "row": 1,
+  "index_name": "AAA Mid-Atlantic Insurance Company of NJ Keystone Insurance Company",
+  "adopted": "01/26/2006",
+  "files": [
+   "adoptrptaaamidatlantic.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 2,
+  "index_name": "Aetna U.S. Healthcare",
+  "adopted": "07/09/2004",
+  "files": [
+   "adoptrptaetna.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 3,
+  "index_name": "Aetna Health, Inc.",
+  "adopted": "10/16/2017",
+  "files": [
+   "AetnaHealthAdoptRpt.pdf"
+  ],
+  "naic_candidates": [
+   "60054",
+   "95287"
+  ],
+  "from_ocr": [
+   "60054",
+   "95287"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 4,
+  "index_name": "Aetna Life Insurance Company",
+  "adopted": "08/31/2017",
+  "files": [
+   "AetnaLifeInsCoAdoptRpt.pdf"
+  ],
+  "naic_candidates": [
+   "60054",
+   "95287"
+  ],
+  "from_ocr": [
+   "60054",
+   "95287"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 5,
+  "index_name": "Allstate New Jersey Insurance Company",
+  "adopted": "10/10/2003",
+  "files": [
+   "adoptrptallstate.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 6,
+  "index_name": "Allstate New Jersey Insurance Company",
+  "adopted": "06/03/2008",
+  "files": [
+   "adoptrptallstate_0608.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 7,
+  "index_name": "Allstate New Jersey Property and Casualty Insurance Company Allstate New Jersey Insurance Company",
+  "adopted": "09/30/2010",
+  "files": [
+   "adoptrptallstate10.pdf"
+  ],
+  "naic_candidates": [
+   "10852",
+   "12344"
+  ],
+  "from_ocr": [
+   "10852",
+   "12344"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 8,
+  "index_name": "American Bankers Group (American Bankers Life Insurance and American Bankers Assurance)",
+  "adopted": "06/23/2011",
+  "files": [
+   "adoptrptamerbankersgrp.pdf"
+  ],
+  "naic_candidates": [
+   "10111"
+  ],
+  "from_ocr": [
+   "10111"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 9,
+  "index_name": "American General Insurance Company",
+  "adopted": "03/30/2005",
+  "files": [
+   "adoptrptamgen.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 10,
+  "index_name": "American General Life Insurance Company",
+  "adopted": "06/18/2008",
+  "files": [
+   "adoptedrptamgen_0608.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 11,
+  "index_name": "American Health and Life Insurance Company",
+  "adopted": "11/16/2011",
+  "files": [
+   "adoptrptamerhealthlife.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 12,
+  "index_name": "American International Insurance Company of Delaware",
+  "adopted": "04/27/2004",
+  "files": [
+   "adoptrptaig.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 13,
+  "index_name": "American International Insurance Company of New Jersey and Delaware",
+  "adopted": "10/27/2008",
+  "files": [
+   "adoptrptaig_08.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 14,
+  "index_name": "American Specialty Health ODS of New Jersey",
+  "adopted": "09/05/2012",
+  "files": [
+   "adoptrptash.pdf"
+  ],
+  "naic_candidates": [
+   "11866"
+  ],
+  "from_ocr": [
+   "11866"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 15,
+  "index_name": "AmeriChoice of NJ",
+  "adopted": "01/21/2015",
+  "files": [
+   "adoptrptamerichoice.pdf"
+  ],
+  "naic_candidates": [
+   "95497"
+  ],
+  "from_ocr": [
+   "95497"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 16,
+  "index_name": "AmeriHealth HMO AmeriHealth Insurance Company of New Jersey",
+  "adopted": "05/08/2015",
+  "files": [
+   "adoptrptamerihealthinsco.pdf"
+  ],
+  "naic_candidates": [
+   "60061"
+  ],
+  "from_ocr": [
+   "60061"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 17,
+  "index_name": "AmeriHealth HMO Incorporated",
+  "adopted": "08/09/2017",
+  "files": [
+   "AdoptRptAmeriHealthHMO.pdf"
+  ],
+  "naic_candidates": [
+   "60061",
+   "95044"
+  ],
+  "from_ocr": [
+   "60061",
+   "95044"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 18,
+  "index_name": "AmeriHealth Insurance Company of New Jersey",
+  "adopted": "08/09/2017",
+  "files": [
+   "AdoptRptAmeriHealthInsCo2.pdf"
+  ],
+  "naic_candidates": [
+   "60061",
+   "95044"
+  ],
+  "from_ocr": [
+   "60061",
+   "95044"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 19,
+  "index_name": "Amica Mutual Insurance Company Amica Property and Casualty Insurance Company",
+  "adopted": "07/17/2018",
+  "files": [
+   "amica180717.pdf"
+  ],
+  "naic_candidates": [
+   "12287",
+   "19976"
+  ],
+  "from_ocr": [
+   "12287",
+   "19976"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 20,
+  "index_name": "Andover Group (Merrimack Mutual Fire Insurance Company, Cambridge Mutual Fire Insurance Company and Bay State Insurance Company)",
+  "adopted": "04/12/2016",
+  "files": [
+   "adoptrptandover2016.pdf"
+  ],
+  "naic_candidates": [
+   "19763",
+   "19771",
+   "19798"
+  ],
+  "from_ocr": [
+   "19763",
+   "19771",
+   "19798"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 21,
+  "index_name": "Atlantic Mutual Insurance Company Centennial Insurance Company Atlantic Specialty Insurance Company",
+  "adopted": "03/30/2005",
+  "files": [
+   "adoptrptandover.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [
+   "adoptrptandover.pdf"
+  ],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_SOURCE_404"
+ },
+ {
+  "row": 22,
+  "index_name": "Aviva Life and Annuity Company",
+  "adopted": "04/24/2012",
+  "files": [
+   "avivaadoptrpt.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_NO_NAIC_IN_REPORT_IMAGE_ONLY"
+ },
+ {
+  "row": 23,
+  "index_name": "Chubb Insurance Company of New Jersey",
+  "adopted": "10/10/2003",
+  "files": [
+   "adoptrptchubb.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 24,
+  "index_name": "Cigna Health and Life Insurance Company",
+  "adopted": "05/23/2017",
+  "files": [
+   "AdoptRptCignaHealth_Life.pdf"
+  ],
+  "naic_candidates": [
+   "67369",
+   "95500"
+  ],
+  "from_ocr": [
+   "67369",
+   "95500"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 25,
+  "index_name": "Cigna Healthcare of New Jersey, Inc.",
+  "adopted": "05/23/2017",
+  "files": [
+   "AdoptRptCignaHealthcare.pdf"
+  ],
+  "naic_candidates": [
+   "67369",
+   "95500"
+  ],
+  "from_ocr": [
+   "67369",
+   "95500"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 26,
+  "index_name": "Citizens United Reciprocal Exchange (CURE)",
+  "adopted": "01/06/2011",
+  "files": [
+   "adoptrptcure.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_NO_NAIC_IN_REPORT_IMAGE_ONLY"
+ },
+ {
+  "row": 27,
+  "index_name": "Citizens United Reciprocal Exchange (CURE)",
+  "adopted": "04/07/2016",
+  "files": [
+   "adoptrptcure2016.pdf"
+  ],
+  "naic_candidates": [
+   "37028"
+  ],
+  "from_ocr": [
+   "37028"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 28,
+  "index_name": "Colonial Penn Insurance Company",
+  "adopted": "01/03/2003",
+  "files": [
+   "adoptrptcolpenn.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 29,
+  "index_name": "ConsCare",
+  "adopted": "10/09/2007",
+  "files": [
+   "adoptrptconscare.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 30,
+  "index_name": "CSAA Mid-Atlantic Insurance Company of New Jersey",
+  "adopted": "11/28/2017",
+  "files": [
+   "CSAAAdoptRptt.pdf"
+  ],
+  "naic_candidates": [
+   "42960"
+  ],
+  "from_ocr": [
+   "42960"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 31,
+  "index_name": "Cumberland Mutual Fire Insurance Company",
+  "adopted": "06/29/2004",
+  "files": [
+   "adoptrptcumber04.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 32,
+  "index_name": "Cumberland Mutual Fire Insurance Company",
+  "adopted": "09/07/2010",
+  "files": [
+   "adoptrptcumber10.pdf"
+  ],
+  "naic_candidates": [
+   "13684"
+  ],
+  "from_ocr": [
+   "13684"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 33,
+  "index_name": "CUNA Mutual Insurance Society",
+  "adopted": "05/16/2007",
+  "files": [
+   "adoptrptcuna.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 34,
+  "index_name": "Encompass Group Encompass Property and Casualty Encompass Insurance Company of New Jersey",
+  "adopted": "08/18/2011",
+  "files": [
+   "adoptrptencompass.pdf"
+  ],
+  "naic_candidates": [
+   "12496"
+  ],
+  "from_ocr": [
+   "12496"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 35,
+  "index_name": "Esurance Insurance Company of New Jersey",
+  "adopted": "06/26/2012",
+  "files": [
+   "esuranceadoptrpt1.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_NO_NAIC_IN_REPORT_IMAGE_ONLY"
+ },
+ {
+  "row": 36,
+  "index_name": "Farmers Insurance Company of Flemington",
+  "adopted": "07/01/2009",
+  "files": [
+   "adoptedrptfarmersflem.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 37,
+  "index_name": "Farmers Mutual Fire Insurance Company of Salem County",
+  "adopted": "10/19/2009",
+  "files": [
+   "adoptrptfarmmutsalemco.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 38,
+  "index_name": "FMI",
+  "adopted": "06/25/2009",
+  "files": [
+   "fmiadoptedrpt.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 39,
+  "index_name": "GEICO",
+  "adopted": "06/24/2009",
+  "files": [
+   "geicoadoptedrpt.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 40,
+  "index_name": "GEICO Casualty Company Government Employees Insurance Company GEICO Indemnity Company",
+  "adopted": "09/01/2016",
+  "files": [
+   "GEICOAdoptRpt160901.pdf"
+  ],
+  "naic_candidates": [
+   "22055",
+   "22063",
+   "41491"
+  ],
+  "from_ocr": [
+   "22055",
+   "22063",
+   "41491"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 41,
+  "index_name": "GEICO Government Employees Insurance Company GEICO Secure Insurance Company GEICO Choice Insurance Company GEICO Indemnity Company GEICO Casualty Company",
+  "adopted": "10/20/2026",
+  "files": [
+   "GEICOadopt2026.pdf",
+   "GEICOAdoptRpt.pdf"
+  ],
+  "naic_candidates": [
+   "14137",
+   "14139",
+   "22055",
+   "22063",
+   "41491"
+  ],
+  "from_ocr": [],
+  "missing_files": [
+   "GEICOAdoptRpt.pdf"
+  ],
+  "status": "EXACT_NAIC_TEXT",
+  "hold": "HELD_ONE_ACTION_MULTI_ENTITY_GEICO_10_20_2026"
+ },
+ {
+  "row": 42,
+  "index_name": "Genworth Life and Annuity Insurance Company Genworth Life Insurance Company",
+  "adopted": "06/10/2013",
+  "files": [
+   "adoptrptgenworth.pdf"
+  ],
+  "naic_candidates": [
+   "65536",
+   "70025"
+  ],
+  "from_ocr": [
+   "65536",
+   "70025"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 43,
+  "index_name": "Globe Life and Accident Insurance Company",
+  "adopted": "10/26/2009",
+  "files": [
+   "adoptrptglobelife.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 44,
+  "index_name": "The Guardian Insurance and Annuity Company, Inc.",
+  "adopted": "09/27/2012",
+  "files": [
+   "adoptrptguardian.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 45,
+  "index_name": "Hanover Insurance Company",
+  "adopted": "02/07/2003",
+  "files": [
+   "adoptrpthanover.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 46,
+  "index_name": "Hanover New Jersey Insurance Company Hanover Insurance Company",
+  "adopted": "03/17/2009",
+  "files": [
+   "adoptedrpthanover_09.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 47,
+  "index_name": "High Point Safety and Insurance Company High Point Property and Casualty Insurance Company High Point Preferred Insurance Company",
+  "adopted": "06/04/2010",
+  "files": [
+   "adoptrpthighpoint.pdf"
+  ],
+  "naic_candidates": [
+   "10930",
+   "10931",
+   "28959"
+  ],
+  "from_ocr": [
+   "10930",
+   "10931",
+   "28959"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 48,
+  "index_name": "Horizon Healthcare of New Jersey Inc.",
+  "adopted": "05/20/2008",
+  "files": [
+   "adoptrpthorizonhc.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 49,
+  "index_name": "Horizon Healthcare of New Jersey, Inc.",
+  "adopted": "05/23/2017",
+  "files": [
+   "AdoptRptHorizonhcareNJ.pdf",
+   "adoptrpthorizonhc.pdf"
+  ],
+  "naic_candidates": [
+   "55069",
+   "95529"
+  ],
+  "from_ocr": [
+   "55069",
+   "95529"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 50,
+  "index_name": "Horizon Healthcare Services, Inc.",
+  "adopted": "05/23/2017",
+  "files": [
+   "HorizonHealthcareSvcsInc.pdf",
+   "adoptrpthorizonhc.pdf"
+  ],
+  "naic_candidates": [
+   "55069",
+   "95529"
+  ],
+  "from_ocr": [
+   "55069",
+   "95529"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 51,
+  "index_name": "Horizon Healthcare of New Jersey, Inc.",
+  "adopted": "12/12/2017",
+  "files": [
+   "AdoptRptHorizonhcareNJ_171212.pdf"
+  ],
+  "naic_candidates": [
+   "95529"
+  ],
+  "from_ocr": [
+   "95529"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 52,
+  "index_name": "IDS Property Casualty Insurance Company",
+  "adopted": "04/18/2018",
+  "files": [
+   "IDS2018.pdf"
+  ],
+  "naic_candidates": [
+   "29068"
+  ],
+  "from_ocr": [
+   "29068"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 53,
+  "index_name": "IFA Insurance Company",
+  "adopted": "11/08/2013",
+  "files": [
+   "IFA2013.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_NO_NAIC_IN_REPORT_IMAGE_ONLY"
+ },
+ {
+  "row": 54,
+  "index_name": "Jimcor E&amp;S LLC",
+  "adopted": "01/03/2003",
+  "files": [
+   "adoptrptjimcor.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 55,
+  "index_name": "Liberty Mutual Fire Insurance Company",
+  "adopted": "02/19/2010",
+  "files": [
+   "adoptrptlibmut.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 56,
+  "index_name": "McCoy (K.) Insurance Agency",
+  "adopted": "11/20/2003",
+  "files": [
+   "adoptrptmccoy.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 57,
+  "index_name": "MDAdvantage Insurance Company of NJ",
+  "adopted": "09/23/2013",
+  "files": [
+   "adoptrptmda.pdf"
+  ],
+  "naic_candidates": [
+   "11498"
+  ],
+  "from_ocr": [
+   "11498"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 58,
+  "index_name": "Mercer Insurance Company of New Jersey",
+  "adopted": "12/11/2011",
+  "files": [
+   "adoptrptmercer.pdf"
+  ],
+  "naic_candidates": [
+   "43540"
+  ],
+  "from_ocr": [
+   "43540"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 59,
+  "index_name": "Mercury Indemnity Company of America",
+  "adopted": "01/06/2010",
+  "files": [
+   "adoptrptmercury.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 60,
+  "index_name": "Mercury Indemnity Company of America",
+  "adopted": "10/19/2015",
+  "files": [
+   "adoptrptmercury2015.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_NO_NAIC_IN_REPORT_IMAGE_ONLY"
+ },
+ {
+  "row": 61,
+  "index_name": "Metropolitan Direct Property and Casualty Insurance Company Metropolitan Group Property and Casualty Insurance Company",
+  "adopted": "06/30/2009",
+  "files": [
+   "adoptrptmetpc.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 62,
+  "index_name": "Metropolitan Life Insurance Company",
+  "adopted": "01/03/2003",
+  "files": [
+   "adoptrptmetlife.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 63,
+  "index_name": "MIIX Advantage Insurance Company",
+  "adopted": "03/29/2005",
+  "files": [
+   "adoptrptmiix.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 64,
+  "index_name": "NJ Manufacturers Insurance Company NJ Re-Insurance Company",
+  "adopted": "06/16/2010",
+  "files": [
+   "adoptrptnjm.pdf"
+  ],
+  "naic_candidates": [
+   "12122",
+   "35432"
+  ],
+  "from_ocr": [
+   "12122",
+   "35432"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 65,
+  "index_name": "NJ Skylands",
+  "adopted": "10/30/2007",
+  "files": [
+   "adoptrptnjskylands.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 66,
+  "index_name": "New York Life Insurance Company of Arizona New York Life Insurance and Annuity Corporation New York Life Insurance Company",
+  "adopted": "10/05/2010",
+  "files": [
+   "adoptrptnylife.pdf"
+  ],
+  "naic_candidates": [
+   "66915",
+   "81359",
+   "91596"
+  ],
+  "from_ocr": [
+   "66915",
+   "81359",
+   "91596"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 67,
+  "index_name": "Ocean Risk Retention Group",
+  "adopted": "03/23/2006",
+  "files": [
+   "oceanriskmc.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_NO_NAIC_IN_REPORT_IMAGE_ONLY"
+ },
+ {
+  "row": 68,
+  "index_name": "Oscar Insurance Corporation of New Jersey",
+  "adopted": "08/31/2017",
+  "files": [
+   "OscarAdoptRpt.pdf"
+  ],
+  "naic_candidates": [
+   "15585"
+  ],
+  "from_ocr": [
+   "15585"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_OCR_SINGLE_UNVERIFIED"
+ },
+ {
+  "row": 69,
+  "index_name": "Oxford Health Insurance, Inc",
+  "adopted": "06/27/2017",
+  "files": [
+   "AdoptRptOxfordHealthIns.pdf"
+  ],
+  "naic_candidates": [
+   "78026",
+   "95506"
+  ],
+  "from_ocr": [
+   "78026",
+   "95506"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 70,
+  "index_name": "Oxford Health Plan",
+  "adopted": "01/04/2005",
+  "files": [
+   "adoptrptoxford.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 71,
+  "index_name": "Oxford Health Plans NJ, Inc",
+  "adopted": "06/27/2017",
+  "files": [
+   "AdoptRptOxfordHealthPlansNJ.pdf"
+  ],
+  "naic_candidates": [
+   "78026",
+   "95506"
+  ],
+  "from_ocr": [
+   "78026",
+   "95506"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 72,
+  "index_name": "Oxford Health Plans (NJ), Inc. and United Healthcare of New Jersey",
+  "adopted": "04/12/2011",
+  "files": [
+   "oxfordunited.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_NO_NAIC_IN_REPORT_IMAGE_ONLY"
+ },
+ {
+  "row": 73,
+  "index_name": "Palisades Safety and Insurance Company Palisades Property and Casualty Company Palisades Insurance Company",
+  "adopted": "02/01/2011",
+  "files": [
+   "adoptrptpalisades.pdf"
+  ],
+  "naic_candidates": [
+   "10100",
+   "10791"
+  ],
+  "from_ocr": [
+   "10100",
+   "10791"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 74,
+  "index_name": "Philadelphia Contributionship Insurance Company Germantown Insurance Company",
+  "adopted": "04/03/2007",
+  "files": [
+   "adoptrptphilacont.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 75,
+  "index_name": "Philip Lehman Company",
+  "adopted": "02/08/2008",
+  "files": [
+   "adoptrptphiliplehman.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 76,
+  "index_name": "Physicians Health Services of New Jersey Inc.",
+  "adopted": "01/02/2003",
+  "files": [
+   "adoptrptphs.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 77,
+  "index_name": "Princeton Insurance Company",
+  "adopted": "07/08/2004",
+  "files": [
+   "adoptrptprinceton.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 78,
+  "index_name": "Proformance Insurance Co.",
+  "adopted": "01/03/2003",
+  "files": [
+   "adoptrptprofrmnce.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 79,
+  "index_name": "Progressive Group Drive Insurance Company Progressive Freedom Insurance Company Progressive Garden State Insurance Company",
+  "adopted": "10/25/2011",
+  "files": [
+   "adoptrptprogressive.pdf"
+  ],
+  "naic_candidates": [
+   "11410",
+   "12302",
+   "14800"
+  ],
+  "from_ocr": [
+   "11410",
+   "12302",
+   "14800"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 80,
+  "index_name": "Progressive Group Drive Insurance Company Progressive Freedom Insurance Company Progressive Garden State Insurance Company",
+  "adopted": "01/04/2015",
+  "files": [
+   "adoptrptprogressive2015.pdf"
+  ],
+  "naic_candidates": [
+   "11410",
+   "12301",
+   "14800"
+  ],
+  "from_ocr": [
+   "11410",
+   "12301",
+   "14800"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 81,
+  "index_name": "Progressive Group Drive Insurance Company Progressive Freedom Insurance Company Progressive Garden State Insurance Company",
+  "adopted": "09/11/2019",
+  "files": [
+   "progressive2019.pdf"
+  ],
+  "naic_candidates": [
+   "11410",
+   "12302",
+   "14800"
+  ],
+  "from_ocr": [
+   "11410",
+   "12302",
+   "14800"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 82,
+  "index_name": "Prudential Insurance Company of America",
+  "adopted": "04/27/2021",
+  "files": [
+   "prudential210427.pdf"
+  ],
+  "naic_candidates": [
+   "68241",
+   "93629"
+  ],
+  "from_ocr": [
+   "68241",
+   "93629"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 83,
+  "index_name": "Prudential Property and Casualty Insurance Company",
+  "adopted": "10/10/2003",
+  "files": [
+   "adoptrptprupc.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 84,
+  "index_name": "Rutgers Casualty Insurance Company Rutgers Enhanced Insurance Company",
+  "adopted": "03/24/2005",
+  "files": [
+   "adoptedrptrutgers.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 85,
+  "index_name": "Selective Insurance Company of America",
+  "adopted": "08/06/2003",
+  "files": [
+   "adoptrptselective.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 86,
+  "index_name": "Selective",
+  "adopted": "01/04/2008",
+  "files": [
+   "adoptrptselective08.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 87,
+  "index_name": "State Farm Indemnity State Farm Guaranty Insurance Company",
+  "adopted": "04/15/2013",
+  "files": [
+   "adoptrptstatefrm.pdf"
+  ],
+  "naic_candidates": [
+   "12251",
+   "43796"
+  ],
+  "from_ocr": [
+   "12251",
+   "43796"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 88,
+  "index_name": "Tower Group Companies (Tower NY, Tower National, Preserver, Castlepoint)",
+  "adopted": "05/24/2011",
+  "files": [
+   "adoptrpttowergrp.pdf"
+  ],
+  "naic_candidates": [
+   "15586",
+   "17205",
+   "43702",
+   "44300"
+  ],
+  "from_ocr": [
+   "15586",
+   "17205",
+   "43702",
+   "44300"
+  ],
+  "missing_files": [],
+  "status": "IMAGE_ONLY_NEEDS_OCR",
+  "hold": "HELD_MULTI_ENTITY_REVIEW"
+ },
+ {
+  "row": 89,
+  "index_name": "Travelers Auto Insurance Company of NJ First Trenton Indemnity Company",
+  "adopted": "01/23/2009",
+  "files": [
+   "adoptrpttravelers.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 90,
+  "index_name": "Triad Healthcare, Inc.",
+  "adopted": "11/16/2009",
+  "files": [
+   "adoptrpttriad.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 91,
+  "index_name": "The Turner Group",
+  "adopted": "10/10/2003",
+  "files": [
+   "adoptrptturneragcy.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 92,
+  "index_name": "United Services Automobile Association USAA Casualty Insurance Company",
+  "adopted": "03/06/2007",
+  "files": [
+   "adoptrptusaa.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ },
+ {
+  "row": 93,
+  "index_name": "UnitedHealthcare of New Jersey Inc.",
+  "adopted": "03/06/2007",
+  "files": [
+   "adoptrptunitedhlthcare.pdf"
+  ],
+  "naic_candidates": [],
+  "from_ocr": [],
+  "missing_files": [],
+  "status": "TEXT_NO_NAIC",
+  "hold": "HELD_NO_NAIC_IN_REPORT_TEXT"
+ }
+]

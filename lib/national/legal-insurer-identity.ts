@@ -62,6 +62,8 @@ export const IDENTIFIER_SCHEME = {
   TX_TDI_NAIC_ID: 'tx_tdi_naic_id',
   CMS_CONTRACT_ID: 'cms_medicare_contract_id',
   CMS_HIOS_ISSUER_ID: 'cms_hios_issuer_id',
+  /** CMS MLR bridge issuer id. Distinct from cms_hios_issuer_id and from naic_cocode. */
+  HIOS_ISSUER_ID: 'hios_issuer_id',
 } as const;
 
 export type IdentifierScheme =
