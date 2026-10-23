@@ -12,6 +12,7 @@ alter table national_entity_identifiers
     'naic_group_code',
     'fein',
     'fl_dfs_appointing_entity_number',
+    'fl_oir_company_code',
     'tx_tdi_naic_id',
     'cms_medicare_contract_id',
     'cms_hios_issuer_id',
@@ -32,7 +33,7 @@ alter table insurance_source_coverage
   ));
 
 comment on column national_entity_identifiers.scheme is
-  'Exact identifier schemes only. nj_crib_company_number is not a NAIC CoCode. serff_tracking_number identifies a filing, not an insurer. cms_hios_issuer_id is not a NAIC CoCode.';
+  'Exact identifier schemes only. nj_crib_company_number is not a NAIC CoCode. serff_tracking_number identifies a filing, not an insurer. cms_hios_issuer_id is not a NAIC CoCode. fl_oir_company_code remains allowed so re-applying this migration still accepts Florida OIR identifiers.';
 
 create table if not exists insurance_monitoring_events (
   id uuid primary key default gen_random_uuid(),
@@ -59,6 +60,9 @@ alter table insurance_monitoring_events force row level security;
 drop policy if exists "Service role manages insurance monitoring events" on insurance_monitoring_events;
 create policy "Service role manages insurance monitoring events"
   on insurance_monitoring_events for all to service_role using (true) with check (true);
+
+revoke all on table insurance_monitoring_events from anon, authenticated, public;
+grant all on table insurance_monitoring_events to service_role;
 
 comment on table market_intelligence_observations is
   'Source-faithful market metrics. Attach only via exact NAIC/NPN/documented crosswalk. Aggregates stay entity_id NULL. publication_allowed false until a later UI task. IHC, SEH, Get Covered, residual programs, CRIB Plan Risk, and SERFF filings are distinct families.';

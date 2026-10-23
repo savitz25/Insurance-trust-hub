@@ -1,0 +1,2295 @@
+[
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16890",
+  "name": "Accelerant Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17166",
+  "name": "Bricktown Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16835",
+  "name": "Accredited Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12489",
+  "name": "Bridgeway Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "24856",
+  "name": "Admiral Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "23620",
+  "name": "Burlington Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "39381",
+  "name": "Adriatic Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17805",
+  "name": "Calais Reciprocal Insurance Exchange",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10389",
+  "name": "Agent Alliance Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "27790",
+  "name": "Canal Indemnity Company (A-3)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "26883",
+  "name": "AIG Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12961",
+  "name": "Canopius US Insurance, Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12833",
+  "name": "AIX Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10328",
+  "name": "Capitol Specialty Insurance Corporation",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "36420",
+  "name": "Allianz Underwriters Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15989",
+  "name": "Catlin Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "19489",
+  "name": "Allied World Assurance Co. (U.S.), Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "34568",
+  "name": "Centennial Casualty Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "24319",
+  "name": "Allied World Surplus Lines Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "36951",
+  "name": "Century Surety Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17091",
+  "name": "AM Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16834",
+  "name": "Champlain Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10245",
+  "name": "American Federation Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13037",
+  "name": "Cincinnati Specialty Underwriters Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "40088",
+  "name": "American Inter-Fidelity Exchange",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "37745",
+  "name": "Clear Blue Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10043",
+  "name": "American National Lloyd\u2019s Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15872",
+  "name": "CM Vantage Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "33103",
+  "name": "American Safety Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "39993",
+  "name": "Colony Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17565",
+  "name": "Amherst Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "31127",
+  "name": "Columbia Casualty Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10316",
+  "name": "Appalachian Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17151",
+  "name": "Concert Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "21199",
+  "name": "ARCH Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16923",
+  "name": "Concord Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "45055",
+  "name": "Ascot Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13027",
+  "name": "Covington Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10717",
+  "name": "Aspen Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17372",
+  "name": "Cowbell Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "23140",
+  "name": "Associated Industries Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "44520",
+  "name": "Crum & Forster Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17159",
+  "name": "Atain Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12758",
+  "name": "Cumis Specialty Insurance Co., Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16427",
+  "name": "Ategrity Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10953",
+  "name": "Cypress Property &Casualty Ins. Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "42846",
+  "name": "Atlantic Casualty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17332",
+  "name": "Dellwood Specialty Ins Co",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "19607",
+  "name": "At-Bay Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "31461",
+  "name": "Dorchester Insurance Co., Ltd.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15708",
+  "name": "Awbury Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "21334",
+  "name": "Empire Indemnity Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17863",
+  "name": "AXA XL Excess & Surplus Lines (A-2)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17527",
+  "name": "Emerald Bay Specialty Ins Co",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "26620",
+  "name": "AXIS Surplus Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "41718",
+  "name": "Endurance American Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16495",
+  "name": "AzGuard Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "35378",
+  "name": "Evanston Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17180",
+  "name": "Benchmark Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10851",
+  "name": "Everest Indemnity Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17520",
+  "name": "Beazley Excess & Surplus Ins., Inc",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16882",
+  "name": "Everspan Indemnity Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "39462",
+  "name": "Berkley Assurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "44792",
+  "name": "Executive Risk Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17673",
+  "name": "Berkley Luxury Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15201",
+  "name": "Fair American Select Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17412",
+  "name": "Berkley Prestige Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15884",
+  "name": "Falls Lake Fire and Casualty Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "31295",
+  "name": "Berkley Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17333",
+  "name": "Federated Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11014",
+  "name": "BHHC Special Risk Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10657",
+  "name": "First Mercury Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15643",
+  "name": "Blue Hill Specialty Insurance Co., Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17460",
+  "name": "First Mile Insurance Co",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16924",
+  "name": "Bowhead Insurance Co., Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "18711",
+  "name": "Florida Insurance and Reinsurance Co. (A-4)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16823",
+  "name": "Fortegra Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17346",
+  "name": "Lio Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10833",
+  "name": "Gemini Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13551",
+  "name": "Marbleshore Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "20559",
+  "name": "General Security Indemnity Co. of Arizona",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "26743",
+  "name": "Maxum Indemnity Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "37362",
+  "name": "General Star Indemnity Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "33090",
+  "name": "Medical Security Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10182",
+  "name": "GeoVera Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12775",
+  "name": "Merchants National Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10814",
+  "name": "GNY Custom Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13794",
+  "name": "Mid-Continent Excess & Surplus Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "39861",
+  "name": "Golden Bear Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16392",
+  "name": "Mobilitas Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "25569",
+  "name": "Gotham Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "37974",
+  "name": "Mount Hawley Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15889",
+  "name": "Gray Surplus Lines Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "26522",
+  "name": "Mount Vernon Fire Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "37532",
+  "name": "Great American E&S Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "14420",
+  "name": "Mount Vernon Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "41858",
+  "name": "Great American Fidelity Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "41807",
+  "name": "MS Transverse Specialty Ins. Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "38580",
+  "name": "Great American Protection",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11066",
+  "name": "MSA Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "35351",
+  "name": "Great American Risk Solutions",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "34886",
+  "name": "MSIG Specialty Insurance USA Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "14167",
+  "name": "GuideOne National Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "20079",
+  "name": "National Fire & Marine Insurance",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10956",
+  "name": "Guilford Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "20087",
+  "name": "National Indemnity Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17534",
+  "name": "Hadron Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17370",
+  "name": "Nautilus Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17178",
+  "name": "Hamilton Select Insurance Inc",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "36056",
+  "name": "Navigators Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10674",
+  "name": "Harleysville Ins Co. of NY",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "35114",
+  "name": "NORCAL Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16131",
+  "name": "HDI Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13167",
+  "name": "North Light Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "14407",
+  "name": "Heritage Property & Cas. Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "27987",
+  "name": "Northfield Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16777",
+  "name": "Highlander Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10809",
+  "name": "Northwind Specialty Ins. Co. (A-9) (NC-3)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "37079",
+  "name": "Hilltop Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16871",
+  "name": "Obsidian Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "34452",
+  "name": "Homeland Insurance Co. of New York",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "14175",
+  "name": "Oklahoma Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11156",
+  "name": "Homesite Insurance Co. of Florida",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "31143",
+  "name": "Old Republic Union Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15381",
+  "name": "Housing Specialty Insurance Co., Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17320",
+  "name": "Orion180 Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "30317",
+  "name": "Hospitals Insurance Co. Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17731",
+  "name": "Ozark Specialty Insurance Company",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "42374",
+  "name": "Houston Casualty Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10046",
+  "name": "Pacific Ins Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12936",
+  "name": "Houston Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17327",
+  "name": "Palms Specialty Insurance Co., Inc",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "14438",
+  "name": "HSB Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16754",
+  "name": "Palomar Excess & Surplus Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "14484",
+  "name": "Hudson Excess Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "32859",
+  "name": "Penn-America Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "27960",
+  "name": "Illinois Union Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11062",
+  "name": "Petroleum Marketers Mgmt Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17532",
+  "name": "Incline Americas Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17445",
+  "name": "Point Excess and Surplus Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "36940",
+  "name": "Indian Harbor Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12588",
+  "name": "Prime Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "22829",
+  "name": "Interstate Fire and Casualty Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10786",
+  "name": "Princeton Excess & Surplus Lines Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17181",
+  "name": "Intrepid Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17400",
+  "name": "ProAssurance Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "25445",
+  "name": "Ironshore Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11811",
+  "name": "Professional Security Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11084",
+  "name": "ISMIE Indemnity Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13149",
+  "name": "Protective Specialty Ins",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12203",
+  "name": "James River Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17148",
+  "name": "Pure Specialty Exchange",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "38920",
+  "name": "Kinsale Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11515",
+  "name": "QBE Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "15366",
+  "name": "Knight Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "40479",
+  "name": "Republic-Vanguard Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16255",
+  "name": "KW Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17103",
+  "name": "Richmond National Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "33138",
+  "name": "Landmark American Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "28053",
+  "name": "Rockhill Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "18295",
+  "name": "Lafayette Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16650",
+  "name": "Rockingham Specialty, Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17951",
+  "name": "Ledgebrook Specialty Ins. Com. (A-10)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "11100",
+  "name": "SAFECO. Surplus Lines Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "19437",
+  "name": "Lexington Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17831",
+  "name": "Sabal Specialty Ins Company (A-5)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10725",
+  "name": "Liberty Surplus Ins Corp",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13815",
+  "name": "Safety Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "36560",
+  "name": "SafePort Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10713",
+  "name": "Third Coast Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "41297",
+  "name": "Scottsdale Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "23850",
+  "name": "Tokio Marine Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10672",
+  "name": "Scottsdale Surplus Lines Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "29696",
+  "name": "Travelers Excess & Surplus Lines Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17631",
+  "name": "Securian Specialty Lines, Ins",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10213",
+  "name": "Travelers Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10729",
+  "name": "Seneca Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "29734",
+  "name": "Triassic Insurance Company",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16762",
+  "name": "Shield Indemnity, Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16188",
+  "name": "Trisura Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "19208",
+  "name": "Sierra Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13064",
+  "name": "Tudor Insurance Co.",
+  "hold": "DUP_PRINTED_NAIC_13064_TWO_NAMES"
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16820",
+  "name": "SiriusPoint Specialty Insurance Corp",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13064",
+  "name": "United National Insurance Co.",
+  "hold": "DUP_PRINTED_NAIC_13064_TWO_NAMES"
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17227",
+  "name": "Slide Insurance Company (A-8)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "12537",
+  "name": "United Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16999",
+  "name": "Southlake Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16988",
+  "name": "Upland Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16826",
+  "name": "Specialty Builders Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "43451",
+  "name": "Utica Special Risk Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17045",
+  "name": "Spinnaker Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16275",
+  "name": "Vantage Risk Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "30481",
+  "name": "St. Paul Surplus Lines Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16237",
+  "name": "Vault E&S Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17501",
+  "name": "State Farm Specialty Ins. Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "39640",
+  "name": "Velocity Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13604",
+  "name": "Starr Surplus Lines Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10024",
+  "name": "VerTerra Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "44776",
+  "name": "StarStone Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17499",
+  "name": "Victor Insurance Exchange",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "26387",
+  "name": "Steadfast Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "40428",
+  "name": "Voyager Indemnity Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "14012",
+  "name": "Stonegate Insurance Co. (A-12)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "10172",
+  "name": "Westchester Surplus Lines Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "17952",
+  "name": "Stonehaven Specialty Ins. Co. (A-11)",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13196",
+  "name": "Western World Insurance Co., Inc.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16889",
+  "name": "Summit Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16992",
+  "name": "Westfield Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16551",
+  "name": "Superior Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "13234",
+  "name": "Wilshire Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16848",
+  "name": "Sutton Specialty Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "34916",
+  "name": "Swiss Re Corp Solutions Cap Ins Corp",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "34487",
+  "name": "TDC Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "foreign",
+  "id_ns": "NAIC",
+  "id": "16543",
+  "name": "Texas Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "domestic",
+  "id_ns": "NAIC",
+  "id": "38989",
+  "name": "Chubb Custom Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "domestic",
+  "id_ns": "NAIC",
+  "id": "15686",
+  "name": "Coverys Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "domestic",
+  "id_ns": "NAIC",
+  "id": "11380",
+  "name": "Fireman\u2019s Fund Indemnity Corporation",
+  "hold": null
+ },
+ {
+  "population": "domestic",
+  "id_ns": "NAIC",
+  "id": "36838",
+  "name": "MESA Underwriters Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "domestic",
+  "id_ns": "NAIC",
+  "id": "15824",
+  "name": "Watford Specialty Ins Co.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1344102",
+  "id_raw": "AA1344102",
+  "name": "Allianz Global Corporate & Specialty AG",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191229",
+  "id_raw": "AA3191229",
+  "name": "Ally International Insurance Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120187",
+  "id_raw": "AA1120187",
+  "name": "American International Group UK Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1780074",
+  "id_raw": "AA1780074",
+  "name": "AmTrust International Underwriters Designated Activity Co.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120053",
+  "id_raw": "AA1120053",
+  "name": "Arch Insurance (UK) Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3190932",
+  "id_raw": "AA3190932",
+  "name": "Argo Re, Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3190973",
+  "id_raw": "AA3190973",
+  "name": "Ariel Reinsurance Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120337",
+  "id_raw": "AA1120337",
+  "name": "Aspen Insurance UK Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3190004",
+  "id_raw": "AA3190004",
+  "name": "Associated Electric and Gas Insurance Services Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1420113",
+  "id_raw": "AA1420113",
+  "name": "Assuranceforeningen SKULD (Gjendig)",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1420016",
+  "id_raw": "AA1420016",
+  "name": "Assuranceforeningen Gard- Gjensidig",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120660",
+  "id_raw": "AA1120660",
+  "name": "Aviva Insurance Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1320012",
+  "id_raw": "AA1320012",
+  "name": "AXA Corporate Solutions Assurance",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120049",
+  "id_raw": "AA1120049",
+  "name": "AXA XL Insurance Co. UK Ltd",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1784130",
+  "id_raw": "AA1784130",
+  "name": "AXIS Specialty Europe Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1780132",
+  "id_raw": "AA1780132",
+  "name": "Berkshire Hathaway European Insurance DAC",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120030",
+  "id_raw": "AA1120030",
+  "name": "Berkshire Hathaway International Insurance Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191413",
+  "id_raw": "AA3191413",
+  "name": "Brit Reinsurance (Bermuda) Limited (A-1)",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1370054",
+  "id_raw": "AA1370054",
+  "name": "Britannia Steam Ship Ins Association Europe m.a., The",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191434",
+  "id_raw": "AA3191434",
+  "name": "Cedar Hamilton Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1780116",
+  "id_raw": "AA1780116",
+  "name": "Chaucer Insurance Co. DAC",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1320152",
+  "id_raw": "AA1320152",
+  "name": "CHUBB European Group SE",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA2730007",
+  "id_raw": "AA2730007",
+  "name": "Chubb Seguros M\u00e9xico., S.A.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA8310019",
+  "id_raw": "AA8310019",
+  "name": "Cigna Global Insurance Co. Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120191",
+  "id_raw": "AA1120191",
+  "name": "Convex Insurance UK Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191400",
+  "id_raw": "AA3191400",
+  "name": "Convex Re Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120233",
+  "id_raw": "AA1120233",
+  "name": "Coverys Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1370045",
+  "id_raw": "AA1370045",
+  "name": "CNA Insurance Co. (Europe) S.A.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1121106",
+  "id_raw": "AA1121106",
+  "name": "CNA Insurance Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191624",
+  "id_raw": "AA-3191624",
+  "name": "Enact Reinsurance Ltd (A-6)",
+  "hold": "ISI_ID_HYPHEN_NORMALIZED_REVIEW"
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3194130",
+  "id_raw": "AA3194130",
+  "name": "Endurance Specialty Insurance Ltd",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1124129",
+  "id_raw": "AA1124129",
+  "name": "Endurance Worldwide Insurance Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3160013",
+  "id_raw": "AA3160013",
+  "name": "Energy Insurance Mutual Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1780124",
+  "id_raw": "AA1780124",
+  "name": "Everest Insurance (Ireland), DAC",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191334",
+  "id_raw": "AA3191334",
+  "name": "Everest International Assurance Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120248",
+  "id_raw": "AA1120248",
+  "name": "Fortegra Insurance UK Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3194231",
+  "id_raw": "AA3194231",
+  "name": "Gard Marine & Energy Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1420017",
+  "id_raw": "AA1420017",
+  "name": "Gard Marine & Energy Insurance (Europe) As",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191188",
+  "id_raw": "AA3191188",
+  "name": "Gard P.&I. (Bermuda) Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1360015",
+  "id_raw": "AA1360015",
+  "name": "Generali, Assicurazioni Generali, S.p.A.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1340043",
+  "id_raw": "AA1340043",
+  "name": "Great Lakes Insurance SE",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1780104",
+  "id_raw": "AA1780104",
+  "name": "Hamilton Insurance DAC",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191316",
+  "id_raw": "AA3191316",
+  "name": "Hanover Atlantic Insurance Co., Ltd. (The)",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3190172",
+  "id_raw": "AA3190172",
+  "name": "HCC Reinsurance Company Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1340106",
+  "id_raw": "AA1340106",
+  "name": "HDI Global SE",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1340041",
+  "id_raw": "AA1340041",
+  "name": "HDI Global Specialty SE",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1490002",
+  "id_raw": "AA1490002",
+  "name": "Helvetia Global Solutions Ltd",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191254",
+  "id_raw": "AA3191254",
+  "name": "International General Insurance Co., Ltd",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120209",
+  "id_raw": "AA1120209",
+  "name": "International General Insurance Co. (UK) Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3190871",
+  "id_raw": "AA3190871",
+  "name": "Lancashire Insurance Co. Ltd. (Bermuda)",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120066",
+  "id_raw": "AA1120066",
+  "name": "Lancashire Insurance Co. (UK) Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1370048",
+  "id_raw": "AA1370048",
+  "name": "Liberty Mutual Insurance Europe SE",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3190917",
+  "id_raw": "AA3190917",
+  "name": "Liberty Specialty Markets Bermuda Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3160108",
+  "id_raw": "AA3160108",
+  "name": "London Life and Casualty (Barbados) Corporation",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1840610",
+  "id_raw": "AA1840610",
+  "name": "Mapfre Espa\u00f1a, Compa\u00f1ia de Seguros y Reaseguros, S.A.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1121276",
+  "id_raw": "AA1121276",
+  "name": "Marine Insurance Co. Ltd., The",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1340044",
+  "id_raw": "AA1340044",
+  "name": "Markel Insurance S.E.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1121425",
+  "id_raw": "AA1121425",
+  "name": "Markel International Insurance Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1121410",
+  "id_raw": "AA1121410",
+  "name": "Mitsui Sumitomo Insurance Co. (Europe) Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1580085",
+  "id_raw": "AA1580085",
+  "name": "Mitsui Sumitomo Insurance Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3194129",
+  "id_raw": "AA3194129",
+  "name": "Montpelier Reinsurance Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1560210",
+  "id_raw": "AA1560210",
+  "name": "Northbridge Indemnity Insurance Co.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120006",
+  "id_raw": "AA1120006",
+  "name": "North of England Protecting & Indemnity Association",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1420012",
+  "id_raw": "AA1420012",
+  "name": "Norwegian Hull Club",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120377",
+  "id_raw": "AA1120377",
+  "name": "Ocean Marine Insurance Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191431",
+  "id_raw": "AA3191431",
+  "name": "OCIL Specialty, Ltd",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3770038",
+  "id_raw": "AA3770038",
+  "name": "Palm Insurance Co., Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191504",
+  "id_raw": "AA3191504",
+  "name": "PartnerRe Insurance Solutions Bermuda Ltd",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1780096",
+  "id_raw": "AA1780096",
+  "name": "PartnerRe Ireland Insurance DAC",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191289",
+  "id_raw": "AA3191289",
+  "name": "Pelagos Insurance Capital Bermuda Limited (NC-1)",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120175",
+  "id_raw": "AA1120175",
+  "name": "Pelagos Insurance Capital Underwriting Limited (NC-2)",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191416",
+  "id_raw": "AA3191416",
+  "name": "QBE Blue Ocean Re Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1240051",
+  "id_raw": "AA1240051",
+  "name": "QBE Europe SA/NV",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120481",
+  "id_raw": "AA1120481",
+  "name": "QBE UK Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3190637",
+  "id_raw": "AA3190637",
+  "name": "R.V.I. Guaranty Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191238",
+  "id_raw": "AA3191238",
+  "name": "RenaissanceRe Specialty U.S. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120465",
+  "id_raw": "AA1120465",
+  "name": "RiverStone Insurance (UK) Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120019",
+  "id_raw": "AA1120019",
+  "name": "SCOR UK Co. Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1371003",
+  "id_raw": "AA1371003",
+  "name": "Shipowners Mutual Protection & Indemnity Association",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1370046",
+  "id_raw": "AA1370046",
+  "name": "SI Insurance (Europe) S.A.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1440076",
+  "id_raw": "AA1440076",
+  "name": "Siriuspoint International Insurance Corporation",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1121372",
+  "id_raw": "AA1121372",
+  "name": "Standard Club Europe Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1490005",
+  "id_raw": "AA1490005",
+  "name": "StarStone Insurance SE",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120155",
+  "id_raw": "AA1120155",
+  "name": "Steamship Mutual Underwriting Association Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1440031",
+  "id_raw": "AA-1440031",
+  "name": "Swedish Club, The (A-7)",
+  "hold": "ISI_ID_HYPHEN_NORMALIZED_REVIEW"
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1121405",
+  "id_raw": "AA1121405",
+  "name": "Swiss Re International SE",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191044",
+  "id_raw": "AA3191044",
+  "name": "Through Transport Mutual Insurance Association Ltd",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1121375",
+  "id_raw": "AA1121375",
+  "name": "Travelers Insurance Co. Limited",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1124127",
+  "id_raw": "AA1124127",
+  "name": "TT Club Mutual Insurance Ltd.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1122000",
+  "id_raw": "AA1122000",
+  "name": "Underwriters at Lloyd\u2019s London",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1120138",
+  "id_raw": "AA1120138",
+  "name": "U. K. Mutual Steam Ship Assurance Assoc. (Europe) Ltd, The",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA3191315",
+  "id_raw": "AA-3191315",
+  "name": "XL Bermuda Ltd",
+  "hold": "ISI_ID_HYPHEN_NORMALIZED_REVIEW"
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1490003",
+  "id_raw": "AA1490003",
+  "name": "W. R. Berkley Europe A.G.",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1371000",
+  "id_raw": "AA1371000",
+  "name": "West of England Ship Owners Mutual Ins. Assoc (Luxembourg)",
+  "hold": null
+ },
+ {
+  "population": "alien",
+  "id_ns": "ISI_AA",
+  "id": "AA1460190",
+  "id_raw": "AA1460190",
+  "name": "Zurich Insurance Co. Ltd.",
+  "hold": null
+ }
+]
