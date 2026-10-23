@@ -3,18 +3,18 @@
  * Reuses statutory 2026 FPL model — not an official Marketplace award.
  */
 
+import { aca2026ApplicablePercentage } from '@/lib/tools/aca-applicable-percentage';
 import { fplForHousehold } from '@/lib/tools/aca-cost-planner';
 import { ACA_SAVINGS_META } from '@/lib/tools/aca-subsidy-planner';
 
-/** Simplified applicable % of income for PTC (statutory schedule, educational). */
-function applicablePercent(fplRatio: number): number | null {
-  if (fplRatio < 1.0 || fplRatio > 4.0) return null;
-  if (fplRatio <= 1.5) return 0;
-  if (fplRatio <= 2.0) return 0 + ((fplRatio - 1.5) / 0.5) * 0.02;
-  if (fplRatio <= 2.5) return 0.02 + ((fplRatio - 2.0) / 0.5) * 0.02;
-  if (fplRatio <= 3.0) return 0.04 + ((fplRatio - 2.5) / 0.5) * 0.025;
-  if (fplRatio <= 4.0) return 0.065 + ((fplRatio - 3.0) / 1.0) * 0.02;
-  return null;
+/**
+ * Applicable fraction of income for PTC (0.021 means 2.10%).
+ * Same Rev. Proc. 2025-25 §3.01 table as the other calculators.
+ * Null below 100% FPL or above 400% FPL; exactly 400% stays eligible.
+ */
+export function applicablePercent(fplRatio: number): number | null {
+  const percent = aca2026ApplicablePercentage(fplRatio);
+  return percent == null ? null : percent / 100;
 }
 
 /**

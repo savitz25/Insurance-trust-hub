@@ -6,22 +6,44 @@
  * Utilization inputs affect estimated out-of-pocket only.
  */
 
+import { aca2026ApplicablePercentage } from '@/lib/tools/aca-applicable-percentage';
 import type { ZipLocation } from '@/lib/tools/zip-resolve';
 
 export const ACA_PLANNER_META = {
   planYear: 2026,
-  /** HHS poverty guidelines used for educational FPL math */
+  /**
+   * Guideline year used for 2026 Marketplace coverage. Open enrollment for
+   * 2026 began November 1, 2025, so IRC §36B(d)(3)(B) uses the 2025 guidelines.
+   */
   fplGuidelineYear: 2025,
-  fplSource: 'HHS Federal Poverty Guidelines (48 contiguous states + DC), 2025',
+  fplSource:
+    '2025 HHS Poverty Guidelines, 48 contiguous states and DC (90 Fed. Reg. 5917, Jan. 17, 2025) — the guidelines used for 2026 Marketplace coverage',
   premiumBasis:
     'State-adjusted marketplace average premium baselines derived from publicly reported KFF / CMS marketplace average premium patterns (educational reconstruction — not live plan quotes)',
   ageCurveNote: 'Simplified CMS ACA age rating curve (3:1 adult band, ages 0–64)',
-  lastReviewed: '2026-07',
+  lastReviewed: '2026-10',
   disclaimer:
     'Estimates only. Verify premiums, subsidies, networks, and enrollment on HealthCare.gov or your state marketplace before enrolling.',
 } as const;
 
-/** 2025 HHS FPL (contiguous US) — used for 2026 plan-year educational context */
+/**
+ * Poverty guidelines that apply to 2026 Marketplace coverage, for the 48
+ * contiguous states and DC.
+ *
+ * IRC §36B(d)(3)(B) defines the poverty line as the most recently published
+ * HHS poverty guidelines as of the first day of the regular enrollment period.
+ * Open enrollment for 2026 coverage began November 1, 2025. The guidelines
+ * then in effect are the 2025 annual update, not the January 2026 update
+ * (that update applies to 2027 Marketplace coverage). CMS uses the 2025 tables
+ * for every 2026 Marketplace application.
+ *
+ * One person: $15,650. Each additional person: $5,500.
+ * Annual Update of the HHS Poverty Guidelines, 90 Fed. Reg. 5917 (Jan. 17, 2025)
+ * (FR Doc. 2025-01377):
+ * https://www.govinfo.gov/content/pkg/FR-2025-01-17/html/2025-01377.htm
+ *
+ * Alaska ($19,550 + $6,880) and Hawaii ($17,990 + $6,330) are not modeled.
+ */
 const FPL_BASE_1 = 15650;
 const FPL_INCREMENT = 5500;
 
@@ -225,25 +247,13 @@ export function fplForHousehold(size: number): number {
 }
 
 /**
- * Educational PTC applicable % of income for plan year 2026 modeling.
- * Uses statutory schedule with restored 400% FPL cliff (no PTC above 400% FPL).
- * Enhanced IRA no-cliff table applied through 2025 only.
- * Returns a high sentinel when ineligible so callers can treat as no credit when desired.
+ * Educational PTC applicable % of income for plan year 2026.
+ * Uses the shared Rev. Proc. 2025-25 §3.01 table. Returns 100 when ineligible
+ * (under 100% FPL, or above 400% FPL) so callers can treat that as no credit.
+ * Exactly 400% of FPL remains eligible at the flat 9.96% row.
  */
 export function requiredContributionPercent(fplRatio: number): number {
-  if (fplRatio < 1.0) return 100; // effectively no PTC path in simplified model
-  if (fplRatio > 4.0) return 100; // cliff — no PTC
-  if (fplRatio <= 1.33) return 2.0;
-  if (fplRatio <= 1.5) return lerp(2.0, 3.0, (fplRatio - 1.33) / 0.17);
-  if (fplRatio <= 2.0) return lerp(3.0, 4.0, (fplRatio - 1.5) / 0.5);
-  if (fplRatio <= 2.5) return lerp(4.0, 6.3, (fplRatio - 2.0) / 0.5);
-  if (fplRatio <= 3.0) return lerp(6.3, 8.05, (fplRatio - 2.5) / 0.5);
-  if (fplRatio <= 4.0) return lerp(8.05, 9.5, (fplRatio - 3.0) / 1.0);
-  return 100;
-}
-
-function lerp(a: number, b: number, t: number): number {
-  return a + (b - a) * Math.min(1, Math.max(0, t));
+  return aca2026ApplicablePercentage(fplRatio) ?? 100;
 }
 
 function utilizationOopShare(level: UtilizationLevel, majorCare: boolean, rx: boolean): number {
