@@ -169,9 +169,34 @@ function sampleInput() {
       },
     ],
     contacts: [
-      { kind: 'phone', value: '555-0100', sourceDataset: 'tdi_agencies', publicEligible: true },
-      { kind: 'email', value: 'a@example.com', sourceDataset: 'tdi_agencies', publicEligible: true },
-      { kind: 'phone', value: '555-0199', sourceDataset: 'tdi_agencies', publicEligible: false },
+      {
+        kind: 'phone',
+        value: '555-0100',
+        sourceDataset: 'tdi_agencies',
+        sourceObservedAt: '2026-08-01T00:00:00.000Z',
+        publicEligible: true,
+      },
+      {
+        kind: 'email',
+        value: 'a@example.com',
+        sourceDataset: 'tdi_agencies',
+        sourceObservedAt: '2026-08-01T00:00:00.000Z',
+        publicEligible: true,
+      },
+      {
+        kind: 'phone',
+        value: '555-0199',
+        sourceDataset: 'tdi_agencies',
+        sourceObservedAt: '2026-08-01T00:00:00.000Z',
+        publicEligible: false,
+      },
+      {
+        kind: 'email',
+        value: 'a@example.com',
+        sourceDataset: 'dfs_agencies',
+        sourceObservedAt: '2026-08-05T00:00:00.000Z',
+        publicEligible: true,
+      },
     ],
     regulatoryCandidates: [
       {
@@ -226,9 +251,10 @@ assert(licensedJurisdictionsAreNotServiceTerritory() === true, 'T11');
 assert(!/Serves .* states/i.test(snap.footprintCopy), 'T11 copy');
 assert(/jurisdictions in the sources currently included/i.test(snap.footprintCopy), 'T11 footprint');
 
-// T12 multiple contacts preserved
-assert(snap.contacts.length === 2, 'T12 public contacts only');
+// T12 multiple contacts preserved, internal_only excluded
+assert(snap.contacts.length === 3, 'T12 public contacts only');
 assert(snap.contacts[0]!.value === '555-0100' && snap.contacts[1]!.value === 'a@example.com', 'T12 both');
+assert(!snap.contacts.some((c) => c.value === '555-0199'), 'T12 internal_only excluded');
 
 // T13 unresolved regulatory evidence hidden
 {
@@ -320,9 +346,98 @@ const complaintReady = mayPublishRegulatoryEvidenceRecord({
 });
 assert(complaintReady.ok === false, 'complaint still fail-closed even if ready');
 
+// ---------------------------------------------------------------------------
+// EA-INS-001 — activate already-owned public business-contact evidence
+// ---------------------------------------------------------------------------
+
+const loaderSrc = readFileSync(join(root, 'lib/national/load-agency-trust-report.ts'), 'utf8');
+const backfillSrc = readFileSync(
+  join(root, 'scripts/national/backfill-contact-observations.ts'),
+  'utf8'
+);
+const identityGraphMig = readFileSync(
+  join(root, 'supabase/migrations/20260826120000_national_identity_graph.sql'),
+  'utf8'
+);
+
+// EA1 exact-entity-gets-contacts / EA9 source clocks preserved
+assert(snap.contacts.every((c) => 'sourceObservedAt' in c), 'EA1 sourceObservedAt field present');
+assert(snap.contacts[0]!.sourceObservedAt === '2026-08-01T00:00:00.000Z', 'EA1 clock passthrough');
+
+// EA2 cross-source provenance preserved: same value, two source_datasets, both survive
+{
+  const corroborated = snap.contacts.filter((c) => c.value === 'a@example.com');
+  assert(corroborated.length === 2, 'EA2 both corroborating observations preserved');
+  const datasets = corroborated.map((c) => c.sourceDataset).sort();
+  assert(datasets[0] === 'dfs_agencies' && datasets[1] === 'tdi_agencies', 'EA2 distinct sources cited');
+}
+
+// EA3 no cross-profile leakage: loader scopes every graph query to the resolved entity_id
+assert(
+  /from\('contact_observations'\)[\s\S]{0,300}\.eq\('entity_id', entity\.id\)/.test(loaderSrc),
+  'EA3 contact query scoped to entity_id'
+);
+assert(
+  /from\('license_credentials'\)[\s\S]{0,300}\.eq\('entity_id', entity\.id\)/.test(loaderSrc),
+  'EA3 credential query scoped to entity_id'
+);
+
+// EA4 wrong-entity/no cross-grain leakage: fail-closed unless bridge is CONFIRMED + exact_npn,
+// and unless the bridged entity itself is entity_kind === 'agency'
+assert(loaderSrc.includes("bridge.confidence !== 'CONFIRMED'"), 'EA4 bridge confidence gate');
+assert(loaderSrc.includes("bridge.match_method !== 'exact_npn'"), 'EA4 exact NPN gate');
+assert(loaderSrc.includes("entity.entity_kind !== 'agency'"), 'EA4 agency-kind gate');
+
+// EA5 internal_only / non-public never surfaces: loader queries public_eligible = true at the DB level
+assert(loaderSrc.includes(".eq('public_eligible', true)"), 'EA5 public_eligible filter at query level');
+
+// EA6 safe field set: named_contact / contact_title are never public_eligible at the source
+assert(
+  backfillSrc.includes("kind !== 'named_contact' && kind !== 'contact_title'"),
+  'EA6 named contact and title excluded from public eligibility upstream'
+);
+assert(
+  !/named_contact|contact_title/.test(loaderSrc),
+  'EA6 report loader never special-cases named/title kinds (relies on public_eligible filter alone)'
+);
+
+// EA7 same-source exact duplicate collapses safely: enforced by a DB-level unique index,
+// never last-write-wins in application code
+assert(identityGraphMig.includes('idx_contact_observations_dedupe'), 'EA7 dedupe unique index exists');
+assert(
+  /idx_contact_observations_dedupe[\s\S]{0,120}entity_id,\s*\n\s*contact_kind,\s*\n\s*source_dataset,\s*\n\s*UPPER\(TRIM\(value\)\)/.test(
+    identityGraphMig
+  ),
+  'EA7 dedupe key is (entity_id, contact_kind, source_dataset, normalized value) — never entity_id+kind alone'
+);
+
+// EA8 absent evidence is never rendered as a false "none found" claim: the UI section is
+// omitted entirely when there are zero contacts, never replaced with negative copy
+const contactSectionSrc = readFileSync(join(root, 'components/agency-trust-report.tsx'), 'utf8');
+assert(contactSectionSrc.includes('contactPreview.length > 0 ?'), 'EA8 contact card conditionally rendered');
+assert(!/no (public )?contact(s)? (were )?found/i.test(contactSectionSrc), 'EA8 no false none-found copy');
+
+// EA10 uneven-coverage disclosure present in the contact module itself (not just the generic footer)
+assert(
+  /coverage is uneven and growing/i.test(contactSectionSrc),
+  'EA10 contact-specific uneven-coverage disclosure'
+);
+
+// EA11 no ranking/Trust Score language introduced specifically by the new contact card
+{
+  const contactCardMatch = contactSectionSrc.match(
+    /Business \/ contact information[\s\S]*?<\/Card>/
+  );
+  assert(!!contactCardMatch, 'EA11 contact card located');
+  assert(
+    !/trust score|top.?rated|best agency|recommended/i.test(contactCardMatch?.[0] || ''),
+    'EA11 no ranking/score/recommendation language in contact card'
+  );
+}
+
 if (errors.length) {
   console.error('INS-NAT-FINAL-005 FAIL');
   for (const e of errors) console.error(' -', e);
   process.exit(1);
 }
-console.log('INS-NAT-FINAL-005 PASS T1-T24 publication bridge trust-report');
+console.log('INS-NAT-FINAL-005 PASS T1-T24, EA1-EA11 publication bridge trust-report + EA-INS-001 contact activation');
