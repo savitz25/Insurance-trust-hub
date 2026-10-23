@@ -110,10 +110,11 @@ export default async function CostEstimatorPage({ searchParams }: PageProps) {
               </p>
               <p>
                 <strong className="font-medium text-slate-800">Subsidies:</strong> If you enter
-                income, we compare it to HHS federal poverty guidelines (
-                {ACA_PLANNER_META.fplGuidelineYear}) and apply an enhanced premium tax credit
-                contribution table for context. Cost-sharing reductions are noted for Silver when
-                FPL suggests eligibility.
+                income, we compare it to the {ACA_PLANNER_META.fplGuidelineYear} HHS poverty
+                guidelines used for {ACA_PLANNER_META.planYear} coverage and apply the IRS Rev.
+                Proc. 2025-25 applicable-percentage table (2.10% under 133% of FPL, sliding scales
+                through 300% of FPL, and a flat 9.96% from 300% through 400% of FPL). Cost-sharing
+                reductions are noted for Silver when FPL suggests eligibility.
               </p>
               <p>
                 <strong className="font-medium text-slate-800">Out-of-pocket:</strong> Utilization,

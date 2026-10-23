@@ -1,13 +1,16 @@
 /**
  * ACA Coverage & Savings Planner — educational PTC / CSR / local cost estimates.
  *
- * Plan year 2026 educational rules: statutory premium tax credit structure with
- * a restored 400% FPL cliff (enhanced IRA subsidies applied through 2025).
+ * Plan year 2026 educational rules: IRS Rev. Proc. 2025-25 §3.01 applicable
+ * percentages, with no premium tax credit above 400% FPL (enhanced IRA
+ * subsidies applied through 2025).
  * Not HealthCare.gov. Not a quote. Client-side only — inputs are not stored.
  */
 
 import type { ZipLocation } from '@/lib/tools/zip-resolve';
+import { aca2026ApplicablePercentage } from '@/lib/tools/aca-applicable-percentage';
 import {
+  ACA_PLANNER_META,
   ageRatingFactor,
   formatMoneyRange,
   fplForHousehold,
@@ -15,15 +18,15 @@ import {
 
 export const ACA_SAVINGS_META = {
   planYear: 2026,
-  fplGuidelineYear: 2025,
-  fplSource: 'HHS Federal Poverty Guidelines (48 contiguous states + DC), 2025',
+  fplGuidelineYear: ACA_PLANNER_META.fplGuidelineYear,
+  fplSource: ACA_PLANNER_META.fplSource,
   /** Enhanced IRA PTC (no 400% cliff) applied through coverage year 2025. */
-  ruleSet: 'statutory-2026-with-400-fpl-cliff' as const,
+  ruleSet: 'rev-proc-2025-25-with-400-fpl-cliff' as const,
   ruleNote:
-    'Educational model for plan year 2026 uses the statutory premium tax credit applicable-percentage schedule with no subsidy above 400% FPL (the “subsidy cliff”). Enhanced Inflation Reduction Act subsidies without a cliff applied through 2025. Confirm current law and official awards on the Marketplace.',
+    'Educational model for plan year 2026 uses the applicable-percentage table in IRS Rev. Proc. 2025-25, §3.01: 2.10% of income under 133% of FPL, linear scales through 300% of FPL, and a flat 9.96% from 300% through 400% of FPL. Premium tax credits are $0 above 400% FPL. Enhanced Inflation Reduction Act subsidies without that cliff applied through 2025 only. Confirm current law and official awards on the Marketplace.',
   premiumBasis:
     'State-adjusted marketplace average premium baselines (educational reconstruction from public KFF/CMS average patterns — not live plan quotes or SLCSP filings)',
-  lastReviewed: '2026-07',
+  lastReviewed: '2026-10',
   disclaimer:
     'Estimates only. Official eligibility, SLCSP, and enrollment are determined on HealthCare.gov or your state marketplace.',
 } as const;
@@ -149,25 +152,13 @@ export type SubsidyPlannerResult = {
   incomeConfidenceNote: string | null;
 };
 
-function lerp(a: number, b: number, t: number): number {
-  return a + (b - a) * Math.min(1, Math.max(0, t));
-}
-
 /**
- * Statutory applicable percentage of household income for the second-lowest-cost
- * Silver plan (SLCSP) — educational reconstruction of the pre-IRA / post-2025 cliff schedule.
- * Returns null when income is outside PTC eligibility (below ~100% FPL or above 400% FPL).
+ * Applicable percentage of household income for the benchmark Silver plan.
+ * Shared Rev. Proc. 2025-25 §3.01 table. Null below 100% FPL or above 400% FPL.
+ * Exactly 400% of FPL remains eligible at the flat 9.96% row.
  */
 export function statutoryApplicablePercent(fplRatio: number): number | null {
-  if (fplRatio < 1.0) return null; // typically Medicaid path or ineligible for PTC
-  if (fplRatio > 4.0) return null; // 400% FPL cliff — no PTC
-  if (fplRatio <= 1.33) return 2.0;
-  if (fplRatio <= 1.5) return lerp(2.0, 3.0, (fplRatio - 1.33) / 0.17);
-  if (fplRatio <= 2.0) return lerp(3.0, 4.0, (fplRatio - 1.5) / 0.5);
-  if (fplRatio <= 2.5) return lerp(4.0, 6.3, (fplRatio - 2.0) / 0.5);
-  if (fplRatio <= 3.0) return lerp(6.3, 8.05, (fplRatio - 2.5) / 0.5);
-  if (fplRatio <= 4.0) return lerp(8.05, 9.5, (fplRatio - 3.0) / 1.0);
-  return null;
+  return aca2026ApplicablePercentage(fplRatio);
 }
 
 /** CSR Silver tiers by FPL (100–250%). */
@@ -360,7 +351,6 @@ export function buildSubsidyPlannerResult(input: SubsidyPlannerInput): SubsidyPl
   });
 
   const bronzeNet = paths[0].monthlyNet.low;
-  const silverNet = paths[1].monthlyNet.high;
   const zeroPremiumPossible = qualifiesPtc && paths[0].monthlyNet.low === 0;
 
   let assistanceSummary: string;

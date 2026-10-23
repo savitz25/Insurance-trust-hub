@@ -20,7 +20,7 @@ Multi-step wizard that estimates **total annual cost** for ACA / Marketplace-sty
 | Location | Client-side ZIP → state / curated county map (`lib/insurance/tools/zip-resolve.ts`) | County resolution partial outside curated ZIPs |
 | Unsubsidized premium | State-adjusted educational baseline × simplified ACA age curve × metal factors × optional tobacco load (`aca-cost-planner.ts`) | **Yes** — not live plan quotes |
 | Metal paths | Bronze / Silver / Gold relative factors (not named carriers) | **Yes** |
-| Subsidy context | Household income vs 2025 HHS FPL; enhanced PTC contribution % table (educational) | **Yes** — not a determination |
+| Subsidy context | Household income vs 2025 HHS FPL (the guidelines used for 2026 coverage); IRS Rev. Proc. 2025-25 §3.01 applicable-percentage table (educational) | **Yes** — not a determination |
 | CSR note | Silver path when FPL suggests 100–250% band | **Yes** |
 | Expected OOP | Utilization level + Rx + major-care flags × MOOP band | **Yes** |
 | Total annual cost | Net premium + expected OOP | **Yes** |
@@ -34,8 +34,9 @@ Multi-step wizard that estimates **total annual cost** for ACA / Marketplace-sty
 ## Provenance labels (shown in UI)
 
 - Plan year context: 2026  
-- FPL: HHS 2025 contiguous guidelines  
-- Last reviewed: 2026-07  
+- FPL: 2025 HHS contiguous guidelines (90 Fed. Reg. 5917), used for 2026 coverage  
+- Applicable percentage: IRS Rev. Proc. 2025-25 §3.01 (2.10% under 133% FPL; flat 9.96% from 300% through 400% FPL)  
+- Last reviewed: 2026-10  
 - Disclaimer: verify on HealthCare.gov / state marketplace  
 
 ## Phase roadmap
