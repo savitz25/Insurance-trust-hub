@@ -5,8 +5,8 @@
  *           (see docs/IMPROVMX-SETUP.md). Resend does NOT receive inbound.
  * OUTBOUND: Resend sends *from* verified brand addresses.
  *
- * Monitored operator inbox (Google Workspace on movetrusthub.com):
- *   info@movetrusthub.com
+ * Monitored operator inbox (Google Workspace on asktrusthub.com):
+ *   hello@asktrusthub.com
  */
 
 /** Public brand address published on site (footer, contact, privacy, terms). */
@@ -16,7 +16,7 @@ export const PUBLIC_CONTACT_EMAIL = 'hello@asktrusthub.com' as const;
  * Monitored human inbox for Insurance operations.
  * Forms/admin: Resend TO here. Inbound hello@: ImprovMX forward here.
  */
-export const DEFAULT_OPERATOR_INBOX = 'info@movetrusthub.com' as const;
+export const DEFAULT_OPERATOR_INBOX = 'hello@asktrusthub.com' as const;
 
 /** Resend "from" identity — must be on a domain verified in Resend. */
 export const DEFAULT_TRANSACTIONAL_FROM =
@@ -25,9 +25,9 @@ export const DEFAULT_TRANSACTIONAL_FROM =
 /**
  * Intended routing — keep in sync with docs/EMAIL-ROUTING.md + IMPROVMX-SETUP.md.
  *
- *   hello@insurancetrusthub.com     → info@movetrusthub.com
- *   contact@insurancetrusthub.com   → info@movetrusthub.com
- *   *@insurancetrusthub.com         → info@movetrusthub.com
+ *   hello@insurancetrusthub.com     → hello@asktrusthub.com
+ *   contact@insurancetrusthub.com   → hello@asktrusthub.com
+ *   *@insurancetrusthub.com         → hello@asktrusthub.com
  */
 export const INSURANCE_MAIL_ROUTING = [
   {
