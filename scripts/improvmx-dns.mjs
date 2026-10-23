@@ -11,12 +11,12 @@
  *   VERCEL_TOKEN          — Vercel personal token
  *   VERCEL_TEAM_ID        — optional team id
  *   IMPROVMX_API_KEY      — from https://app.improvmx.com (Account → API)
- *   OPERATOR_INBOX        — default info@movetrusthub.com
+ *   OPERATOR_INBOX        — default hello@asktrusthub.com
  */
 
 const DOMAIN = 'insurancetrusthub.com';
 const OPERATOR =
-  process.env.OPERATOR_INBOX?.trim() || 'info@movetrusthub.com';
+  process.env.OPERATOR_INBOX?.trim() || 'hello@asktrusthub.com';
 
 const IMPROVMX_MX = [
   { priority: 10, value: 'mx1.improvmx.com.' },

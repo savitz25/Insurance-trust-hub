@@ -47,7 +47,7 @@ export default async function ClaimUnavailablePage({ searchParams }: Props) {
         Think this is incorrect?{" "}
         <a
           className="font-semibold underline"
-          href="mailto:support@asktrusthub.com?subject=Insurance%20profile%20claim%20review"
+          href="mailto:hello@asktrusthub.com?subject=Insurance%20profile%20claim%20review"
         >
           Request a review
         </a>
