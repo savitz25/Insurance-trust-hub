@@ -38,7 +38,11 @@ function fixture(mode, county) {
       const query = {
         select(_columns, opts) { countQuery = !!opts?.head; return query; },
         then(resolve, reject) {
-          if (mode === 'transport') return Promise.reject(new Error('fixture timeout')).then(resolve, reject);
+          if (mode === 'transport') {
+            const timeout = new Error('fixture timeout');
+            timeout.name = 'TimeoutError';
+            return Promise.reject(timeout).then(resolve, reject);
+          }
           const failure = mode === (countQuery ? 'count-error' : 'rows-error');
           return Promise.resolve({ error: failure ? { message: 'fixture unavailable' } : null,
             count: mode === 'null-count' ? null : mode === 'empty' ? 0 : 1,
@@ -102,4 +106,34 @@ test('concurrent Miami-Dade row failure still rejects both callers', async () =>
     assert.equal(result.status, 'rejected');
     assert.match(String(result.reason), /Florida hub inventory/);
   }
+});
+
+test('Florida hub diagnostics classify query stages without logging raw errors', async () => {
+  const originalError = console.error;
+  const logs = [];
+  console.error = (...args) => logs.push(args.join(' '));
+  try {
+    fixture('count-error', 'Miami-Dade');
+    await assert.rejects(page({
+      params: Promise.resolve({ state: 'florida', slug: 'miami-dade' }),
+      searchParams: Promise.resolve({}),
+    }), /Florida hub inventory/);
+    fixture('transport', 'Miami-Dade');
+    await assert.rejects(page({
+      params: Promise.resolve({ state: 'florida', slug: 'miami-dade' }),
+      searchParams: Promise.resolve({}),
+    }), /Florida hub inventory/);
+    fixture('rows-error', 'Miami-Dade');
+    await assert.rejects(page({
+      params: Promise.resolve({ state: 'florida', slug: 'miami-dade' }),
+      searchParams: Promise.resolve({}),
+    }), /Florida hub inventory/);
+  } finally {
+    console.error = originalError;
+  }
+  assert.ok(logs.some((line) => line.includes('"category":"count_query"')));
+  assert.ok(logs.some((line) => line.includes('"category":"row_query"')));
+  assert.ok(logs.some((line) => line.includes('"category":"timeout"')));
+  assert.ok(logs.every((line) => line.includes('miami-dade')));
+  assert.ok(logs.every((line) => !line.includes('fixture unavailable')));
 });
