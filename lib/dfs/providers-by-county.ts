@@ -11,6 +11,7 @@
 import type { Provider } from '@/types/provider';
 import { isSupabaseConfigured } from '@/lib/supabase/config';
 import { createPublicClient } from '@/lib/supabase/public';
+import { mapWithConcurrency } from '@/lib/map-with-concurrency';
 import { mapRowToProvider } from '@/lib/providers/map-db-provider';
 import type { Provider as DbProvider } from '@/types/supabase';
 import {
@@ -138,25 +139,43 @@ async function countVerifiedForCounties(
   counties: FlLaunchCounty[],
   requireSuccessfulLookup = false
 ): Promise<number> {
-  if (!counties.length || !isSupabaseConfigured()) return 0;
+  if (!counties.length) return 0;
+  if (!isSupabaseConfigured()) {
+    if (requireSuccessfulLookup) throw new FloridaHubInventoryError('configuration');
+    return 0;
+  }
   const supabase = createPublicClient();
   if (!supabase) {
-    if (requireSuccessfulLookup) throw new Error('Florida hub inventory client unavailable');
+    if (requireSuccessfulLookup) {
+      throw new FloridaHubInventoryError('database_connection');
+    }
     return 0;
   }
 
   const or = hubMatchOrParts(counties);
-  if (!or) return 0;
+  if (!or) {
+    if (requireSuccessfulLookup) throw new FloridaHubInventoryError('unavailable_data');
+    return 0;
+  }
 
-  const { count, error } = await supabase
-    .from('providers')
-    .select('id', { count: 'exact', head: true })
-    .eq('verified', true)
-    .contains('states_licensed', ['FL'])
-    .or(or);
+  let result: { count: number | null; error: unknown };
+  try {
+    result = await supabase
+      .from('providers')
+      .select('id', { count: 'exact', head: true })
+      .eq('verified', true)
+      .contains('states_licensed', ['FL'])
+      .or(or);
+  } catch (error) {
+    if (requireSuccessfulLookup) {
+      throw new FloridaHubInventoryError(classifyFloridaHubFailure(error, 'count_query'));
+    }
+    return 0;
+  }
+  const { count, error } = result;
 
   if (requireSuccessfulLookup && (error || count == null)) {
-    throw new Error('Florida hub inventory count unavailable');
+    throw new FloridaHubInventoryError(classifyFloridaHubFailure(error, 'count_query'));
   }
   if (error) return 0;
   return count ?? 0;
@@ -854,14 +873,17 @@ async function readFloridaHubInventory(
   pageSize: number,
   page: number
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) throw new Error('Florida hub inventory unavailable');
+  if (!isSupabaseConfigured()) {
+    logFloridaHubInventoryFailure('configuration', hubSlug);
+    throw new Error('Florida hub inventory unavailable');
+  }
 
   const counties = launchCountiesForHubSlug(hubSlug);
   if (!counties.length) return emptyInventory(hubSlug, pageSize, page);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) throw new Error('Florida hub inventory client unavailable');
+    if (!supabase) throw new FloridaHubInventoryError('database_connection');
 
     const or = hubMatchOrParts(counties);
     if (!or) return emptyInventory(hubSlug, pageSize, page);
@@ -874,17 +896,26 @@ async function readFloridaHubInventory(
     const overFetch = Math.min(pageSize + 40, 200);
     const to = from + overFetch - 1;
 
-    const { data, error } = await supabase
-      .from('providers')
-      .select('*')
-      .eq('verified', true)
-      .contains('states_licensed', ['FL'])
-      .or(or)
-      .order('name', { ascending: true })
-      .range(from, to);
+    let result: { data: unknown[] | null; error: unknown };
+    try {
+      result = await supabase
+        .from('providers')
+        .select('*')
+        .eq('verified', true)
+        .contains('states_licensed', ['FL'])
+        .or(or)
+        .order('name', { ascending: true })
+        .range(from, to);
+    } catch (error) {
+      throw new FloridaHubInventoryError(classifyFloridaHubFailure(error, 'row_query'));
+    }
+    const { data, error } = result;
 
-    if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
+    if (error || data == null) {
+      throw new FloridaHubInventoryError(classifyFloridaHubFailure(error, 'row_query'));
+    }
     if (!data.length) {
+      if (total > 0) throw new FloridaHubInventoryError('unavailable_data');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage),
         total,
@@ -909,11 +940,61 @@ async function readFloridaHubInventory(
       totalPages: Math.max(totalPages, safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0),
       hubSlug,
     };
-  } catch {
+  } catch (error) {
     // Lookup/transport/mapping failures are not evidence of an empty market.
     // Let the route error boundary handle them; never generate empty-market SEO.
+    const category = error instanceof FloridaHubInventoryError
+      ? error.category
+      : classifyFloridaHubFailure(error, 'unavailable_data');
+    // Only emit allow-listed category and route slug. Never serialize provider
+    // errors, messages, query filters, or returned rows into logs.
+    console.error('[fl-hub-inventory]', JSON.stringify({ category, hubSlug }));
     throw new Error('Florida hub inventory unavailable');
   }
+}
+
+type FloridaHubFailureCategory =
+  | 'configuration'
+  | 'database_connection'
+  | 'count_query'
+  | 'row_query'
+  | 'timeout'
+  | 'unavailable_data';
+
+class FloridaHubInventoryError extends Error {
+  constructor(readonly category: FloridaHubFailureCategory) {
+    super('Florida hub inventory unavailable');
+    this.name = 'FloridaHubInventoryError';
+  }
+}
+
+function logFloridaHubInventoryFailure(
+  category: FloridaHubFailureCategory,
+  hubSlug: string
+): void {
+  // Only emit allow-listed category and route slug. Never serialize provider
+  // errors, messages, query filters, credentials, or returned rows into logs.
+  console.error('[fl-hub-inventory]', JSON.stringify({ category, hubSlug }));
+}
+
+function classifyFloridaHubFailure(
+  error: unknown,
+  stage: 'count_query' | 'row_query' | 'unavailable_data'
+): FloridaHubFailureCategory {
+  if (error && typeof error === 'object') {
+    const candidate = error as { name?: unknown; code?: unknown };
+    const name = typeof candidate.name === 'string' ? candidate.name : '';
+    const code = typeof candidate.code === 'string' ? candidate.code : '';
+    if (
+      name === 'AbortError' ||
+      name === 'TimeoutError' ||
+      ['ETIMEDOUT', 'ESOCKETTIMEDOUT', 'PGRST003', '57014'].includes(code)
+    ) return 'timeout';
+    if (
+      ['ECONNRESET', 'ECONNREFUSED', 'ENOTFOUND', 'EAI_AGAIN', 'PGRST000', 'PGRST001'].includes(code)
+    ) return 'database_connection';
+  }
+  return stage;
 }
 
 /**
@@ -932,7 +1013,8 @@ export async function getVerifiedProvidersForHub(
 }
 
 export async function countVerifiedProvidersForHub(
-  hubSlug: string
+  hubSlug: string,
+  opts?: { requireSuccessfulLookup?: boolean }
 ): Promise<number> {
   if (isTxLaunchHub(hubSlug)) {
     const inv = await getTxHubInventory(hubSlug, 1, 1);
@@ -967,7 +1049,10 @@ export async function countVerifiedProvidersForHub(
     return inv.total;
   }
   if (!isFlLaunchHub(hubSlug)) return 0;
-  return countVerifiedForCounties(launchCountiesForHubSlug(hubSlug));
+  return countVerifiedForCounties(
+    launchCountiesForHubSlug(hubSlug),
+    opts?.requireSuccessfulLookup ?? false
+  );
 }
 
 export type LaunchNavLiveRow = {
@@ -983,29 +1068,34 @@ export type LaunchNavLiveRow = {
 /** Live totals for Florida launch county nav (state hub + directory). */
 export async function getLaunchCountyLiveTotals(): Promise<LaunchNavLiveRow[]> {
   const rows = flLaunchCountyNavRows();
-  const out: LaunchNavLiveRow[] = [];
-  for (const row of rows) {
-    const total = await countVerifiedProvidersForHub(row.hubSlug);
-    out.push({
+  // Keep the PostgREST fan-out bounded while avoiding one serial network wait
+  // per county. mapWithConcurrency preserves the input order for rendering.
+  const countyRows = await mapWithConcurrency(rows, 3, async (row) => {
+    const total = await countVerifiedProvidersForHub(row.hubSlug, {
+      requireSuccessfulLookup: true,
+    });
+    return {
       key: row.id,
       displayName: row.displayName,
       hubSlug: row.hubSlug,
       hubHref: row.hubHref,
       total,
       kind: 'county',
-    });
-  }
-  const sfl = await countVerifiedProvidersForHub('miami-fort-lauderdale');
-  out.push({
+    } satisfies LaunchNavLiveRow;
+  });
+  const sfl = await countVerifiedProvidersForHub('miami-fort-lauderdale', {
+    requireSuccessfulLookup: true,
+  });
+  return [...countyRows, {
     key: 'south-florida',
     displayName: 'South Florida (tri-county)',
     hubSlug: 'miami-fort-lauderdale',
     hubHref: '/hubs/south-florida',
     total: sfl,
     kind: 'aggregate',
-  });
-  return out;
+  }];
 }
+
 
 /** Per-launch-county verified totals (health / QA). */
 export async function countVerifiedByLaunchCounty(): Promise<
