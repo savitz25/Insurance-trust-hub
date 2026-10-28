@@ -5,7 +5,15 @@ import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { ARTICLES } from '@/lib/resources/articles';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
 import { INSURANCE_HUBS, getAllStateSlugs } from '@/lib/hubs/registry';
-import { SPECIALTY_TOPICS } from '@/lib/hubs/specialty-topics';
+import {
+  isPublishedHub,
+  type HubPublicationSignal,
+} from '@/lib/hubs/published-hub';
+import {
+  isSpecialtyTopicIndexable,
+  SPECIALTY_TOPICS,
+} from '@/lib/hubs/specialty-topics';
+import { isPermanentRedirectSource } from '@/lib/seo/permanent-redirects';
 import {
   classifyProviderListing,
   isIndexableListing,
@@ -24,9 +32,15 @@ import { publishedProfileSitemapPaths } from '@/lib/national/legal-insurer-pilot
  * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
  * Never emit movetrusthub.com or /insurance/* prefixes.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+export function buildSitemapEntries(
+  now: Date,
+  publicationSignals: ReadonlyMap<string, HubPublicationSignal>
+): MetadataRoute.Sitemap {
   const site = SITE_URL.replace(/\/$/, '');
+  const publishedHub = (hubSlug: string) => {
+    const signal = publicationSignals.get(hubSlug);
+    return signal ? isPublishedHub(signal) : false;
+  };
 
   const staticRoutes: MetadataRoute.Sitemap = [
     '',
@@ -89,16 +103,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/providers',
     '/hubs',
     '/hubs/browse',
-    '/hubs/health-insurance',
-    '/hubs/medicare',
-    '/hubs/aca',
     '/calculators',
     '/calculators/premium-estimator',
     '/calculators/medicare-gap',
     '/calculators/aca-subsidy',
     '/tools/cost-estimator',
     '/tools/coverage-compass',
-    '/tools/needs-assessment',
     '/tools/license-verification',
     '/tools/medicare-plan-finder',
     '/tools/medicare-provider-lookup',
@@ -140,8 +150,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/data/counties/miami-dade-fl',
     '/data/counties/broward-fl',
     '/data/counties/palm-beach-fl',
-    // My Insurance wallet is noindex (personal workspace) — not in sitemap
-    '/about',
+    // My Insurance wallet is noindex (personal workspace) — not in sitemap.
+    // /about is listed once, with the other static pages above.
     '/contact',
     '/claim-listing',
     '/privacy',
@@ -170,7 +180,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const specialtyTopics = SPECIALTY_TOPICS.map((topic) => ({
+  const specialtyTopics = SPECIALTY_TOPICS.filter(isSpecialtyTopicIndexable).map((topic) => ({
     url: `${site}${topic.path}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
@@ -213,7 +223,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  const hubPages = INSURANCE_HUBS.map((hub) => {
+  // Published only when the hub is a launch slug and a successful verified
+  // count is positive. Zero and failed lookups stay out of the sitemap.
+  const hubPages = INSURANCE_HUBS.filter((hub) => publishedHub(hub.slug)).map((hub) => {
     const path = `/hubs/${hub.stateSlug}/${hub.slug}`;
     return {
       url: `${site}${path}`,
@@ -223,9 +235,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  const clusterCanonicals = SEO_CLUSTERS.filter(
-    (c) => !INSURANCE_HUBS.some((h) => `/hubs/${h.stateSlug}/${h.slug}` === c.hubPath)
-  ).map((c) => ({
+  const clusterCanonicals = SEO_CLUSTERS.filter((c) => {
+    if (INSURANCE_HUBS.some((h) => `/hubs/${h.stateSlug}/${h.slug}` === c.hubPath)) return false;
+    // /hubs/south-florida is the tri-county canonical for miami-fort-lauderdale.
+    if (c.hubPath === '/hubs/south-florida') return publishedHub('miami-fort-lauderdale');
+    const parts = c.hubPath.split('/').filter(Boolean);
+    if (parts.length < 3) return false;
+    return publishedHub(parts[2]);
+  }).map((c) => ({
     url: `${site}${c.hubPath}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
@@ -304,6 +321,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return all.filter((entry) => {
     if (entry.url.includes('movetrusthub.com')) return false;
     if (entry.url.includes('/insurance/')) return false;
-    return entry.url.startsWith(site);
+    if (!entry.url.startsWith(site)) return false;
+    return !isPermanentRedirectSource(new URL(entry.url).pathname);
   });
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { readHubPublicationSnapshot } = await import('@/lib/hubs/read-hub-publication-signal');
+  const signals = await readHubPublicationSnapshot(INSURANCE_HUBS.map((hub) => hub.slug));
+  return buildSitemapEntries(
+    new Date(),
+    new Map(signals.map((signal) => [signal.hubSlug, signal]))
+  );
 }

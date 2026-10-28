@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SpecialtyTopicPage } from '@/components/specialty-topic-page';
 import {
-  getSouthFloridaAgents,
   getSpecialtyTopic,
+  isSpecialtyTopicIndexable,
 } from '@/lib/hubs/specialty-topics';
 import { SITE_URL } from '@/lib/constants';
 
 const topic = getSpecialtyTopic('health-insurance');
 if (!topic) throw new Error('health-insurance topic missing');
 
-const hasListings = topic.filterAgents(getSouthFloridaAgents()).length > 0;
+const hasListings = isSpecialtyTopicIndexable(topic);
 
 export const metadata: Metadata = {
   title: topic.metaTitle,

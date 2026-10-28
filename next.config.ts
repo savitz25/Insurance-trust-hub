@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { PERMANENT_REDIRECTS } from "./lib/seo/permanent-redirects";
 
 const nextConfig: NextConfig = {
   compress: true,
@@ -9,22 +10,10 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   async redirects() {
-    return [
-      { source: '/privacy-policy', destination: '/privacy', permanent: true },
-      { source: '/terms-of-service', destination: '/terms', permanent: true },
-      { source: '/hubs/florida/south-florida', destination: '/hubs/south-florida', permanent: true },
-      { source: '/hubs/florida/miami-dade-county', destination: '/hubs/florida/miami-dade', permanent: true },
-      { source: '/hubs/florida/broward', destination: '/hubs/florida/broward-county', permanent: true },
-      { source: '/hubs/florida/palm-beach', destination: '/hubs/florida/palm-beach-county', permanent: true },
-      { source: '/resources/how-to-choose-an-insurance-agent', destination: '/resources/how-to-choose-insurance-agent', permanent: true },
-      { source: '/resources/independent-vs-captive-agents', destination: '/resources/independent-vs-captive', permanent: true },
-      { source: '/resources/hurricane-prep-insurance-florida', destination: '/resources/hurricane-prep-insurance', permanent: true },
-      // Consolidate overlapping tools into flagship experiences
-      { source: '/tools/aca-eligibility-checker', destination: '/calculators/aca-subsidy', permanent: true },
-      { source: '/tools/quote-comparison', destination: '/tools/cost-estimator', permanent: true },
-      // Phase 3 — Coverage Compass canonical URL
-      { source: '/tools/needs-assessment', destination: '/tools/coverage-compass', permanent: true },
-    ];
+    return PERMANENT_REDIRECTS.map((redirect) => ({
+      ...redirect,
+      permanent: true as const,
+    }));
   },
 };
 
