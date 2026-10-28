@@ -1,13 +1,17 @@
 /**
  * Phase 4 — load verified providers for Florida launch hubs (public read path).
  *
- * Matching strategy (prefer structured → precise promote tags):
- * 1. contact.launch_county_id / contact.county / contact.county_normalized
- * 2. short_description tags written at promote: "Duval County", "Dade County", …
+ * Hub SQL matches verified rows by contact.launch_county_id only. A wide OR of
+ * county text and description ilike exceeds the database statement timeout
+ * when several Florida hubs are read together. countyMatchOrParts keeps that
+ * wider match for promote backfill. The in-memory geo check still confirms
+ * county text before a card is shown.
  *
- * Totals use exact head count; cards use HUB_PAGE_SIZE with ?page= pagination.
+ * Totals are exact head counts, one county id at a time. Cards use
+ * HUB_PAGE_SIZE with ?page= pagination.
  */
 
+import { cache } from 'react';
 import type { Provider } from '@/types/provider';
 import { isSupabaseConfigured } from '@/lib/supabase/config';
 import { createPublicClient } from '@/lib/supabase/public';
@@ -21,11 +25,14 @@ import {
 import {
   FL_LAUNCH_COUNTIES,
   countyMatchOrParts,
+  floridaHubIdOrParts,
+  floridaHubIdPredicate,
   flLaunchCountyNavRows,
   isFlLaunchHub,
   launchCountiesForHubSlug,
   matchLaunchCounty,
   normalizeCountyName,
+  sumFloridaCountyCounts,
   type FlLaunchCounty,
   type FlLaunchCountyId,
 } from '@/lib/dfs/launch-counties';
@@ -80,10 +87,6 @@ export type HubInventoryResult = {
   totalPages: number;
   hubSlug: string;
 };
-
-function hubMatchOrParts(counties: FlLaunchCounty[]): string {
-  return counties.flatMap(countyMatchOrParts).join(',');
-}
 
 /** In-memory Phase 1 + geo confirmation (guards SQL overmatch). */
 export function providerMatchesLaunchCounties(
@@ -145,21 +148,18 @@ async function countVerifiedForCounties(
     return 0;
   }
 
-  const or = hubMatchOrParts(counties);
-  if (!or) return 0;
-
-  const { count, error } = await supabase
-    .from('providers')
-    .select('id', { count: 'exact', head: true })
-    .eq('verified', true)
-    .contains('states_licensed', ['FL'])
-    .or(or);
-
-  if (requireSuccessfulLookup && (error || count == null)) {
-    throw new Error('Florida hub inventory count unavailable');
-  }
-  if (error) return 0;
-  return count ?? 0;
+  const counts = await Promise.all(
+    counties.map(async (county) => {
+      const { count, error } = await supabase
+        .from('providers')
+        .select('id', { count: 'exact', head: true })
+        .eq('verified', true)
+        .or(floridaHubIdPredicate(county.id));
+      if (error || count == null) return null;
+      return count;
+    })
+  );
+  return sumFloridaCountyCounts(counts, requireSuccessfulLookup);
 }
 
 function emptyInventory(
@@ -821,10 +821,10 @@ export async function getHubInventory(
 }
 
 /**
- * Page and metadata each call this for the same slug. Join only the in-flight
- * read so one request does not run two identical count and row statements.
- * The shared promise is dropped when it settles. A failure is never stored
- * as an empty market, and a later request always reads again.
+ * Page and metadata each call this for the same slug. React cache keeps the
+ * settled read for the rest of this request. The map joins only an in-flight
+ * read that has not settled yet. A failure is never stored as an empty market,
+ * and a later request reads again.
  */
 const floridaHubInventoryInFlight = new Map<string, Promise<HubInventoryResult>>();
 
@@ -836,7 +836,7 @@ function joinFloridaHubInventory(
   const key = `${hubSlug}:${pageSize}:${page}`;
   const current = floridaHubInventoryInFlight.get(key);
   if (current) return current;
-  const pending = readFloridaHubInventory(hubSlug, pageSize, page);
+  const pending = readFloridaHubInventoryCached(hubSlug, pageSize, page);
   floridaHubInventoryInFlight.set(key, pending);
   // Cleanup is a separate chain. Catching here does not swallow the rejection
   // returned to page and metadata; it only keeps finally() from emitting
@@ -863,7 +863,7 @@ async function readFloridaHubInventory(
     const supabase = createPublicClient();
     if (!supabase) throw new Error('Florida hub inventory client unavailable');
 
-    const or = hubMatchOrParts(counties);
+    const or = floridaHubIdOrParts(counties);
     if (!or) return emptyInventory(hubSlug, pageSize, page);
 
     const total = await countVerifiedForCounties(counties, true);
@@ -878,7 +878,6 @@ async function readFloridaHubInventory(
       .from('providers')
       .select('*')
       .eq('verified', true)
-      .contains('states_licensed', ['FL'])
       .or(or)
       .order('name', { ascending: true })
       .range(from, to);
@@ -915,6 +914,8 @@ async function readFloridaHubInventory(
     throw new Error('Florida hub inventory unavailable');
   }
 }
+
+const readFloridaHubInventoryCached = cache(readFloridaHubInventory);
 
 /**
  * Verified FL providers for a hub (one page).

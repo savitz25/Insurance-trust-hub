@@ -212,6 +212,41 @@ export function countyMatchOrParts(county: FlLaunchCounty): string[] {
   return [...new Set(parts)];
 }
 
+/**
+ * Hub inventory predicate. One equality on the structured county id.
+ * County text and description ilike stay in countyMatchOrParts for backfill.
+ */
+export function floridaHubIdPredicate(id: string): string {
+  return `contact->>launch_county_id.eq.${id}`;
+}
+
+/** PostgREST or() list for hub row reads. One id matches one provider. */
+export function floridaHubIdOrParts(counties: readonly { id: string }[]): string {
+  return counties.map((county) => floridaHubIdPredicate(county.id)).join(',');
+}
+
+/**
+ * A provider stores one launch_county_id, so per-id counts do not overlap.
+ * A null count is a failed read. Fail closed when the lookup is required,
+ * and do not add the successful siblings into a smaller total.
+ */
+export function sumFloridaCountyCounts(
+  counts: readonly (number | null)[],
+  requireSuccessfulLookup: boolean
+): number {
+  let total = 0;
+  for (const count of counts) {
+    if (count == null || !Number.isFinite(count)) {
+      if (requireSuccessfulLookup) {
+        throw new Error('Florida hub inventory count unavailable');
+      }
+      return 0;
+    }
+    total += count;
+  }
+  return total;
+}
+
 export function structuredContactForCounty(county: FlLaunchCounty): {
   county: string;
   county_normalized: string;
