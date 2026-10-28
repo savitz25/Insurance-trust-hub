@@ -10,18 +10,20 @@ import {
   countVerifiedFloridaProviders,
   countVerifiedOhioProviders,
   countVerifiedNorthCarolinaProviders,
-  getLaunchCountyLiveTotals,
-  getOhLaunchMarketLiveTotals,
-  getNcLaunchMarketLiveTotals,
   countVerifiedNevadaProviders,
-  getNvLaunchMarketLiveTotals,
   countVerifiedVermontProviders,
-  getVtLaunchMarketLiveTotals,
   countVerifiedMassachusettsProviders,
-  getMaLaunchMarketLiveTotals,
   countVerifiedMississippiProviders,
-  getMsLaunchMarketLiveTotals,
 } from '@/lib/dfs/providers-by-county';
+import {
+  getCachedLaunchCountyLiveTotals,
+  getCachedMaLaunchMarketLiveTotals,
+  getCachedMsLaunchMarketLiveTotals,
+  getCachedNcLaunchMarketLiveTotals,
+  getCachedNvLaunchMarketLiveTotals,
+  getCachedOhLaunchMarketLiveTotals,
+  getCachedVtLaunchMarketLiveTotals,
+} from '@/lib/directory/live-counts';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 import { OH_ODI_LOOKUP_URL } from '@/lib/odi/launch-markets';
 import { NC_DOI_LOOKUP_URL } from '@/lib/nc/launch-markets';
@@ -136,13 +138,13 @@ export default async function StateHubsPage({
   const isMassachusetts = state === 'massachusetts';
   const isMississippi = state === 'mississippi';
 
-  const launchRows = isFlorida ? await getLaunchCountyLiveTotals() : [];
-  const ohLaunchRows = isOhio ? await getOhLaunchMarketLiveTotals() : [];
-  const ncLaunchRows = isNorthCarolina ? await getNcLaunchMarketLiveTotals() : [];
-  const nvLaunchRows = isNevada ? await getNvLaunchMarketLiveTotals() : [];
-  const vtLaunchRows = isVermont ? await getVtLaunchMarketLiveTotals() : [];
-  const maLaunchRows = isMassachusetts ? await getMaLaunchMarketLiveTotals() : [];
-  const msLaunchRows = isMississippi ? await getMsLaunchMarketLiveTotals() : [];
+  const launchRows = isFlorida ? await getCachedLaunchCountyLiveTotals() : [];
+  const ohLaunchRows = isOhio ? await getCachedOhLaunchMarketLiveTotals() : [];
+  const ncLaunchRows = isNorthCarolina ? await getCachedNcLaunchMarketLiveTotals() : [];
+  const nvLaunchRows = isNevada ? await getCachedNvLaunchMarketLiveTotals() : [];
+  const vtLaunchRows = isVermont ? await getCachedVtLaunchMarketLiveTotals() : [];
+  const maLaunchRows = isMassachusetts ? await getCachedMaLaunchMarketLiveTotals() : [];
+  const msLaunchRows = isMississippi ? await getCachedMsLaunchMarketLiveTotals() : [];
   const flTotal = isFlorida ? await countVerifiedFloridaProviders() : 0;
   const ohTotal = isOhio ? await countVerifiedOhioProviders() : 0;
   const ncTotal = isNorthCarolina ? await countVerifiedNorthCarolinaProviders() : 0;

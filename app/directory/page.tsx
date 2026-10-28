@@ -23,20 +23,20 @@ import {
   classifyDirectoryEmpty,
   directoryEmptyCopy,
 } from '@/lib/research/empty-inventory';
-import {
-  countVerifiedNewJerseyProviders,
-  getLaunchCountyLiveTotals,
-  getTxLaunchMarketLiveTotals,
-  getNjLaunchRegionLiveTotals,
-  getOhLaunchMarketLiveTotals,
-  getNcLaunchMarketLiveTotals,
-  getNvLaunchMarketLiveTotals,
-  getVtLaunchMarketLiveTotals,
-  getMaLaunchMarketLiveTotals,
-  getMsLaunchMarketLiveTotals,
-} from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
-import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
+import {
+  getCachedLaunchCountyLiveTotals,
+  getCachedMaLaunchMarketLiveTotals,
+  getCachedMsLaunchMarketLiveTotals,
+  getCachedNcLaunchMarketLiveTotals,
+  getCachedNjLaunchRegionLiveTotals,
+  getCachedNvLaunchMarketLiveTotals,
+  getCachedOhLaunchMarketLiveTotals,
+  getCachedTxLaunchMarketLiveTotals,
+  getCachedVerifiedLaunchCounts,
+  getCachedVerifiedNewJerseyCount,
+  getCachedVtLaunchMarketLiveTotals,
+} from '@/lib/directory/live-counts';
 import {
   getDirectoryStateIntro,
   regulatorHasLoaSpecialtyTags,
@@ -196,20 +196,20 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   } = skipLaunchFanout
     ? { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0, ma: 0, ms: 0 }
     : await getCachedVerifiedLaunchCounts();
-  const njTotal = skipLaunchFanout ? 0 : await countVerifiedNewJerseyProviders();
+  const njTotal = skipLaunchFanout ? 0 : await getCachedVerifiedNewJerseyCount();
   const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows, vtHubRows, maHubRows, msHubRows] =
     skipLaunchFanout
       ? [[], [], [], [], [], [], [], [], []]
       : await Promise.all([
-          flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
-          txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
-          ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
-          njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
-          ncTotal > 0 ? getNcLaunchMarketLiveTotals() : Promise.resolve([]),
-          nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
-          vtTotal > 0 ? getVtLaunchMarketLiveTotals() : Promise.resolve([]),
-          maTotal > 0 ? getMaLaunchMarketLiveTotals() : Promise.resolve([]),
-          msTotal > 0 ? getMsLaunchMarketLiveTotals() : Promise.resolve([]),
+          flTotal > 0 ? getCachedLaunchCountyLiveTotals() : Promise.resolve([]),
+          txTotal > 0 ? getCachedTxLaunchMarketLiveTotals() : Promise.resolve([]),
+          ohTotal > 0 ? getCachedOhLaunchMarketLiveTotals() : Promise.resolve([]),
+          njTotal > 0 ? getCachedNjLaunchRegionLiveTotals() : Promise.resolve([]),
+          ncTotal > 0 ? getCachedNcLaunchMarketLiveTotals() : Promise.resolve([]),
+          nvTotal > 0 ? getCachedNvLaunchMarketLiveTotals() : Promise.resolve([]),
+          vtTotal > 0 ? getCachedVtLaunchMarketLiveTotals() : Promise.resolve([]),
+          maTotal > 0 ? getCachedMaLaunchMarketLiveTotals() : Promise.resolve([]),
+          msTotal > 0 ? getCachedMsLaunchMarketLiveTotals() : Promise.resolve([]),
         ]);
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';

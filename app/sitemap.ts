@@ -5,7 +5,12 @@ import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { ARTICLES } from '@/lib/resources/articles';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
 import { INSURANCE_HUBS, getAllStateSlugs } from '@/lib/hubs/registry';
-import { SPECIALTY_TOPICS } from '@/lib/hubs/specialty-topics';
+import { hubSlugCanCarryVerifiedInventory } from '@/lib/hubs/sitemap-eligibility';
+import {
+  isSpecialtyTopicIndexable,
+  SPECIALTY_TOPICS,
+} from '@/lib/hubs/specialty-topics';
+import { isPermanentRedirectSource } from '@/lib/seo/permanent-redirects';
 import {
   classifyProviderListing,
   isIndexableListing,
@@ -89,16 +94,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/providers',
     '/hubs',
     '/hubs/browse',
-    '/hubs/health-insurance',
-    '/hubs/medicare',
-    '/hubs/aca',
     '/calculators',
     '/calculators/premium-estimator',
     '/calculators/medicare-gap',
     '/calculators/aca-subsidy',
     '/tools/cost-estimator',
     '/tools/coverage-compass',
-    '/tools/needs-assessment',
     '/tools/license-verification',
     '/tools/medicare-plan-finder',
     '/tools/medicare-provider-lookup',
@@ -140,8 +141,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/data/counties/miami-dade-fl',
     '/data/counties/broward-fl',
     '/data/counties/palm-beach-fl',
-    // My Insurance wallet is noindex (personal workspace) — not in sitemap
-    '/about',
+    // My Insurance wallet is noindex (personal workspace) — not in sitemap.
+    // /about is listed once, with the other static pages above.
     '/contact',
     '/claim-listing',
     '/privacy',
@@ -170,7 +171,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const specialtyTopics = SPECIALTY_TOPICS.map((topic) => ({
+  const specialtyTopics = SPECIALTY_TOPICS.filter(isSpecialtyTopicIndexable).map((topic) => ({
     url: `${site}${topic.path}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
@@ -213,7 +214,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  const hubPages = INSURANCE_HUBS.map((hub) => {
+  // Non-launch metros are empty and noindex without a database read.
+  // Launch hubs stay listed, including hubs whose live count is currently zero.
+  const hubPages = INSURANCE_HUBS.filter((hub) =>
+    hubSlugCanCarryVerifiedInventory(hub.slug)
+  ).map((hub) => {
     const path = `/hubs/${hub.stateSlug}/${hub.slug}`;
     return {
       url: `${site}${path}`,
@@ -223,9 +228,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  const clusterCanonicals = SEO_CLUSTERS.filter(
-    (c) => !INSURANCE_HUBS.some((h) => `/hubs/${h.stateSlug}/${h.slug}` === c.hubPath)
-  ).map((c) => ({
+  const clusterCanonicals = SEO_CLUSTERS.filter((c) => {
+    if (INSURANCE_HUBS.some((h) => `/hubs/${h.stateSlug}/${h.slug}` === c.hubPath)) return false;
+    const parts = c.hubPath.split('/').filter(Boolean);
+    // /hubs/south-florida is the tri-county canonical, not a registry metro.
+    if (parts.length < 3) return true;
+    return hubSlugCanCarryVerifiedInventory(parts[2]);
+  }).map((c) => ({
     url: `${site}${c.hubPath}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
@@ -304,6 +313,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return all.filter((entry) => {
     if (entry.url.includes('movetrusthub.com')) return false;
     if (entry.url.includes('/insurance/')) return false;
-    return entry.url.startsWith(site);
+    if (!entry.url.startsWith(site)) return false;
+    return !isPermanentRedirectSource(new URL(entry.url).pathname);
   });
 }
