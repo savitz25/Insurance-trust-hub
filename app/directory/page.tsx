@@ -23,20 +23,18 @@ import {
   classifyDirectoryEmpty,
   directoryEmptyCopy,
 } from '@/lib/research/empty-inventory';
-import {
-  countVerifiedNewJerseyProviders,
-  getLaunchCountyLiveTotals,
-  getTxLaunchMarketLiveTotals,
-  getNjLaunchRegionLiveTotals,
-  getOhLaunchMarketLiveTotals,
-  getNcLaunchMarketLiveTotals,
-  getNvLaunchMarketLiveTotals,
-  getVtLaunchMarketLiveTotals,
-  getMaLaunchMarketLiveTotals,
-  getMsLaunchMarketLiveTotals,
-} from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
-import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
+import {
+  readFloridaNavigation,
+  readMassachusettsNavigation,
+  readMississippiNavigation,
+  readNevadaNavigation,
+  readNewJerseyNavigation,
+  readNorthCarolinaNavigation,
+  readOhioNavigation,
+  readTexasNavigation,
+  readVermontNavigation,
+} from '@/lib/directory/live-counts';
 import {
   getDirectoryStateIntro,
   regulatorHasLoaSpecialtyTags,
@@ -184,33 +182,37 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
   const skipLaunchFanout = Boolean(zipGeo || zipParam);
-  const {
-    fl: flTotal,
-    tx: txTotal,
-    oh: ohTotal,
-    nc: ncTotal,
-    nv: nvTotal,
-    vt: vtTotal,
-    ma: maTotal,
-    ms: msTotal,
-  } = skipLaunchFanout
-    ? { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0, ma: 0, ms: 0 }
-    : await getCachedVerifiedLaunchCounts();
-  const njTotal = skipLaunchFanout ? 0 : await countVerifiedNewJerseyProviders();
-  const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows, vtHubRows, maHubRows, msHubRows] =
-    skipLaunchFanout
-      ? [[], [], [], [], [], [], [], [], []]
-      : await Promise.all([
-          flTotal > 0 ? getLaunchCountyLiveTotals() : Promise.resolve([]),
-          txTotal > 0 ? getTxLaunchMarketLiveTotals() : Promise.resolve([]),
-          ohTotal > 0 ? getOhLaunchMarketLiveTotals() : Promise.resolve([]),
-          njTotal > 0 ? getNjLaunchRegionLiveTotals() : Promise.resolve([]),
-          ncTotal > 0 ? getNcLaunchMarketLiveTotals() : Promise.resolve([]),
-          nvTotal > 0 ? getNvLaunchMarketLiveTotals() : Promise.resolve([]),
-          vtTotal > 0 ? getVtLaunchMarketLiveTotals() : Promise.resolve([]),
-          maTotal > 0 ? getMaLaunchMarketLiveTotals() : Promise.resolve([]),
-          msTotal > 0 ? getMsLaunchMarketLiveTotals() : Promise.resolve([]),
-        ]);
+  const [flNav, txNav, ohNav, ncNav, nvNav, vtNav, maNav, msNav, njNav] = skipLaunchFanout
+    ? [null, null, null, null, null, null, null, null, null]
+    : await Promise.all([
+        readFloridaNavigation(),
+        readTexasNavigation(),
+        readOhioNavigation(),
+        readNorthCarolinaNavigation(),
+        readNevadaNavigation(),
+        readVermontNavigation(),
+        readMassachusettsNavigation(),
+        readMississippiNavigation(),
+        readNewJerseyNavigation(),
+      ]);
+  const flTotal = flNav?.total ?? 0;
+  const txTotal = txNav?.total ?? 0;
+  const ohTotal = ohNav?.total ?? 0;
+  const ncTotal = ncNav?.total ?? 0;
+  const nvTotal = nvNav?.total ?? 0;
+  const vtTotal = vtNav?.total ?? 0;
+  const maTotal = maNav?.total ?? 0;
+  const msTotal = msNav?.total ?? 0;
+  const njTotal = njNav?.total ?? 0;
+  const launchRows = flNav?.rows ?? [];
+  const txHubRows = txNav?.rows ?? [];
+  const ohHubRows = ohNav?.rows ?? [];
+  const njHubRows = njNav?.rows ?? [];
+  const ncHubRows = ncNav?.rows ?? [];
+  const nvHubRows = nvNav?.rows ?? [];
+  const vtHubRows = vtNav?.rows ?? [];
+  const maHubRows = maNav?.rows ?? [];
+  const msHubRows = msNav?.rows ?? [];
   const browsingTx = state === 'TX';
   const browsingOh = state === 'OH';
   const browsingNj = state === 'NJ';

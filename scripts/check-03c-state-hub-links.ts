@@ -4,28 +4,77 @@
  */
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import sitemap from '../app/sitemap';
+import { buildSitemapEntries } from '../app/sitemap';
 import { metadata as statesMetadata } from '../app/states/page';
 import { PUBLISHED_STATES } from '../lib/home/published-states';
+import { filterPublishedHubs, isPublishedHub } from '../lib/hubs/published-hub';
 import { getAllStateSlugs, getHubsByState } from '../lib/hubs/registry';
 import { PUBLISHED_STATEWIDE_SLUGS } from '../lib/seo/published-state-path';
 
-const sitemapUrls = sitemap().map((entry) => entry.url);
+async function main() {
+const sitemapUrls = buildSitemapEntries(new Date(), new Map()).map((entry) => entry.url);
+const publishedFixture = buildSitemapEntries(
+  new Date(),
+  new Map([
+    ['miami-dade', { hubSlug: 'miami-dade', lookupSucceeded: true, verifiedTotal: 3 }],
+    ['fort-lauderdale', { hubSlug: 'fort-lauderdale', lookupSucceeded: true, verifiedTotal: 9 }],
+    ['tampa', { hubSlug: 'tampa', lookupSucceeded: true, verifiedTotal: 0 }],
+  ])
+).map((entry) => entry.url);
 const floridaHubUrls = sitemapUrls.filter((url) => /\/hubs\/florida\/[^/]+$/.test(url));
 const floridaHubs = getHubsByState('florida');
 
 assert.equal(floridaHubs.length, 8, 'Florida registry hubs');
-assert.equal(floridaHubUrls.length, 8, 'Florida sitemap hub URLs');
+assert.equal(
+  floridaHubs.some((hub) => hub.slug === 'fort-lauderdale'),
+  true,
+  'fort-lauderdale stays in the Florida registry'
+);
+assert.equal(
+  floridaHubUrls.some((url) => url.endsWith('/hubs/florida/fort-lauderdale')),
+  false,
+  'fort-lauderdale stays out of the sitemap'
+);
+assert.equal(
+  publishedFixture.some((url) => url.endsWith('/hubs/florida/miami-dade')),
+  true,
+  'positive launch inventory is published'
+);
+assert.equal(
+  publishedFixture.some((url) => url.endsWith('/hubs/florida/fort-lauderdale')),
+  false,
+  'fort-lauderdale stays unpublished with a positive count'
+);
+assert.equal(
+  publishedFixture.some((url) => url.endsWith('/hubs/florida/tampa')),
+  false,
+  'zero inventory stays unpublished'
+);
+for (const url of floridaHubUrls) {
+  const slug = new URL(url).pathname.split('/').pop() ?? '';
+  assert.equal(
+    isPublishedHub({ hubSlug: slug, lookupSucceeded: true, verifiedTotal: 1 }),
+    true,
+    url
+  );
+}
+const published = filterPublishedHubs(floridaHubs, [
+  { hubSlug: 'miami-dade', lookupSucceeded: true, verifiedTotal: 4 },
+  { hubSlug: 'fort-lauderdale', lookupSucceeded: true, verifiedTotal: 9 },
+  { hubSlug: 'tampa', lookupSucceeded: true, verifiedTotal: 0 },
+  { hubSlug: 'orlando', lookupSucceeded: false, verifiedTotal: 6 },
+]);
+assert.deepEqual(
+  published.map((hub) => hub.slug),
+  ['miami-dade']
+);
 
 const linkComponent = readFileSync('components/hubs/state-hub-links.tsx', 'utf8');
 assert.match(linkComponent, /getHubsByState\(stateSlug\)/);
+assert.match(linkComponent, /filterPublishedHubs/);
 assert.match(linkComponent, /\$\{stateName\} county and metro hubs/);
 assert.match(linkComponent, /href=\{`\/hubs\/\$\{stateSlug\}`\}/);
 assert.match(linkComponent, /href=\{`\/hubs\/\$\{stateSlug\}\/\$\{hub\.slug\}`\}/);
-for (const hub of floridaHubs) {
-  const href = `/hubs/florida/${hub.slug}`;
-  assert.ok(floridaHubUrls.some((url) => url.endsWith(href)), href);
-}
 
 const floridaPage = readFileSync('app/florida/page.tsx', 'utf8');
 assert.match(floridaPage, /<StateHubLinks stateSlug="florida" \/>/);
@@ -77,3 +126,6 @@ assert.match(statesPage, /path: '\/states'/);
 assert.match(statesPage, /PUBLISHED_STATES/);
 
 console.log('03c state hub links: ok');
+}
+
+void main();

@@ -10,6 +10,7 @@ import {
   EMPTY_MARKET_COPY,
   buildMarketMetadata,
 } from '@/lib/insurance/trust/provider-trust-state';
+import { isPublishedHub } from '@/lib/hubs/published-hub';
 import { clusterForHubSlug, clusterForPath } from '@/lib/seo/seo-clusters';
 
 export type HubPublicSeo = {
@@ -61,18 +62,28 @@ export function resolveHubPublicSeo(
 export function buildHubMetadata(
   hub: InsuranceHub,
   canonicalPath?: string,
-  verifiedInventory?: { total: number; health?: number }
+  verifiedInventory?: { total: number; health?: number; lookupSucceeded?: boolean }
 ): Metadata {
-  const seo = resolveHubPublicSeo(hub, canonicalPath, verifiedInventory);
+  const verifiedTotal = verifiedInventory?.total ?? 0;
+  const published = isPublishedHub({
+    hubSlug: hub.slug,
+    lookupSucceeded: verifiedInventory?.lookupSucceeded === true,
+    verifiedTotal,
+  });
+  const seo = resolveHubPublicSeo(
+    hub,
+    canonicalPath,
+    published ? verifiedInventory : { total: 0, health: 0, lookupSucceeded: false }
+  );
   const url = `${SITE_URL}${seo.path}`;
 
   return {
     title: seo.title,
     description: seo.description,
     alternates: { canonical: url },
-    robots: seo.isEmpty
-      ? { index: false, follow: true }
-      : { index: true, follow: true },
+    robots: published
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
     openGraph: {
       title: seo.title,
       description: seo.description,

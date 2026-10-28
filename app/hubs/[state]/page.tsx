@@ -7,21 +7,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Shield } from 'lucide-react';
 import {
-  countVerifiedFloridaProviders,
-  countVerifiedOhioProviders,
-  countVerifiedNorthCarolinaProviders,
-  getLaunchCountyLiveTotals,
-  getOhLaunchMarketLiveTotals,
-  getNcLaunchMarketLiveTotals,
-  countVerifiedNevadaProviders,
-  getNvLaunchMarketLiveTotals,
-  countVerifiedVermontProviders,
-  getVtLaunchMarketLiveTotals,
-  countVerifiedMassachusettsProviders,
-  getMaLaunchMarketLiveTotals,
-  countVerifiedMississippiProviders,
-  getMsLaunchMarketLiveTotals,
-} from '@/lib/dfs/providers-by-county';
+  readFloridaNavigation,
+  readMassachusettsNavigation,
+  readMississippiNavigation,
+  readNevadaNavigation,
+  readNorthCarolinaNavigation,
+  readOhioNavigation,
+  readVermontNavigation,
+} from '@/lib/directory/live-counts';
 import { FL_DFS_LOOKUP_URL } from '@/lib/dfs/launch-counties';
 import { OH_ODI_LOOKUP_URL } from '@/lib/odi/launch-markets';
 import { NC_DOI_LOOKUP_URL } from '@/lib/nc/launch-markets';
@@ -136,20 +129,27 @@ export default async function StateHubsPage({
   const isMassachusetts = state === 'massachusetts';
   const isMississippi = state === 'mississippi';
 
-  const launchRows = isFlorida ? await getLaunchCountyLiveTotals() : [];
-  const ohLaunchRows = isOhio ? await getOhLaunchMarketLiveTotals() : [];
-  const ncLaunchRows = isNorthCarolina ? await getNcLaunchMarketLiveTotals() : [];
-  const nvLaunchRows = isNevada ? await getNvLaunchMarketLiveTotals() : [];
-  const vtLaunchRows = isVermont ? await getVtLaunchMarketLiveTotals() : [];
-  const maLaunchRows = isMassachusetts ? await getMaLaunchMarketLiveTotals() : [];
-  const msLaunchRows = isMississippi ? await getMsLaunchMarketLiveTotals() : [];
-  const flTotal = isFlorida ? await countVerifiedFloridaProviders() : 0;
-  const ohTotal = isOhio ? await countVerifiedOhioProviders() : 0;
-  const ncTotal = isNorthCarolina ? await countVerifiedNorthCarolinaProviders() : 0;
-  const nvTotal = isNevada ? await countVerifiedNevadaProviders() : 0;
-  const vtTotal = isVermont ? await countVerifiedVermontProviders() : 0;
-  const maTotal = isMassachusetts ? await countVerifiedMassachusettsProviders() : 0;
-  const msTotal = isMississippi ? await countVerifiedMississippiProviders() : 0;
+  const flNav = isFlorida ? await readFloridaNavigation() : null;
+  const ohNav = isOhio ? await readOhioNavigation() : null;
+  const ncNav = isNorthCarolina ? await readNorthCarolinaNavigation() : null;
+  const nvNav = isNevada ? await readNevadaNavigation() : null;
+  const vtNav = isVermont ? await readVermontNavigation() : null;
+  const maNav = isMassachusetts ? await readMassachusettsNavigation() : null;
+  const msNav = isMississippi ? await readMississippiNavigation() : null;
+  const launchRows = flNav?.rows ?? [];
+  const ohLaunchRows = ohNav?.rows ?? [];
+  const ncLaunchRows = ncNav?.rows ?? [];
+  const nvLaunchRows = nvNav?.rows ?? [];
+  const vtLaunchRows = vtNav?.rows ?? [];
+  const maLaunchRows = maNav?.rows ?? [];
+  const msLaunchRows = msNav?.rows ?? [];
+  const flTotal = flNav?.total ?? 0;
+  const ohTotal = ohNav?.total ?? 0;
+  const ncTotal = ncNav?.total ?? 0;
+  const nvTotal = nvNav?.total ?? 0;
+  const vtTotal = vtNav?.total ?? 0;
+  const maTotal = maNav?.total ?? 0;
+  const msTotal = msNav?.total ?? 0;
   const launchHubSlugs = new Set(launchRows.map((r) => r.hubSlug));
   const ohHubSlugs = new Set(ohLaunchRows.map((r) => r.hubSlug));
   const ncHubSlugs = new Set(ncLaunchRows.map((r) => r.hubSlug));
@@ -324,7 +324,7 @@ export default async function StateHubsPage({
         )}
       </p>
 
-      {isOhio && (
+      {ohNav && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -378,7 +378,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {isNorthCarolina && (
+      {ncNav && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -439,7 +439,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {isNevada && (
+      {nvNav && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -493,7 +493,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {isVermont && (
+      {vtNav && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -547,7 +547,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {isMassachusetts && (
+      {maNav && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -603,7 +603,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {isMississippi && (
+      {msNav && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -658,7 +658,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {isFlorida && (
+      {flNav && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
