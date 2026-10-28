@@ -212,6 +212,68 @@ export function countyMatchOrParts(county: FlLaunchCounty): string[] {
   return [...new Set(parts)];
 }
 
+/**
+ * Hub inventory predicate. One equality on the structured county id.
+ * County text and description ilike stay in countyMatchOrParts for backfill.
+ */
+export function floridaHubIdPredicate(id: string): string {
+  return `contact->>launch_county_id.eq.${id}`;
+}
+
+/** PostgREST or() list for hub row reads. One id matches one provider. */
+export function floridaHubIdOrParts(counties: readonly { id: string }[]): string {
+  return counties.map((county) => floridaHubIdPredicate(county.id)).join(',');
+}
+
+/**
+ * Hub membership is the structured launch county id.
+ * County display text, a normalized county, and description text do not
+ * add a provider and do not remove one whose id is in the hub.
+ * A missing id is not a member.
+ */
+export function isFloridaHubMember(
+  provider: { launchCountyId?: string | null },
+  counties: readonly { id: string }[]
+): boolean {
+  const id = provider.launchCountyId?.trim() ?? '';
+  if (!id) return false;
+  return counties.some((county) => county.id === id);
+}
+
+/** Keep the first row for each provider id. A multi-county read must not repeat a provider. */
+export function uniqueProvidersById<T extends { id: string }>(rows: readonly T[]): T[] {
+  const seen = new Set<string>();
+  const unique: T[] = [];
+  for (const row of rows) {
+    if (!row.id || seen.has(row.id)) continue;
+    seen.add(row.id);
+    unique.push(row);
+  }
+  return unique;
+}
+
+/**
+ * A provider stores one launch_county_id, so per-id counts do not overlap.
+ * A null count is a failed read. Fail closed when the lookup is required,
+ * and do not add the successful siblings into a smaller total.
+ */
+export function sumFloridaCountyCounts(
+  counts: readonly (number | null)[],
+  requireSuccessfulLookup: boolean
+): number {
+  let total = 0;
+  for (const count of counts) {
+    if (count == null || !Number.isFinite(count)) {
+      if (requireSuccessfulLookup) {
+        throw new Error('Florida hub inventory count unavailable');
+      }
+      return 0;
+    }
+    total += count;
+  }
+  return total;
+}
+
 export function structuredContactForCounty(county: FlLaunchCounty): {
   county: string;
   county_normalized: string;
