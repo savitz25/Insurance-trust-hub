@@ -18,6 +18,7 @@ import {
   getOhLaunchMarketLiveTotals,
   getTxLaunchMarketLiveTotals,
   getVtLaunchMarketLiveTotals,
+  type LaunchNavLiveRow,
 } from '@/lib/dfs/providers-by-county';
 
 export type VerifiedLaunchCounts = {
@@ -31,94 +32,184 @@ export type VerifiedLaunchCounts = {
   ms: number;
 };
 
+export type StateNavigationSnapshot = {
+  total: number;
+  rows: LaunchNavLiveRow[];
+};
+
+const STRICT = { requireSuccessfulLookup: true } as const;
+
+/** Homepage chips. Failures throw so unstable_cache does not store a zero. */
 async function loadVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
-  try {
-    const [fl, tx, oh, nc, nv, vt, ma, ms] = await Promise.all([
-      countVerifiedFloridaProviders(),
-      countVerifiedTexasProviders(),
-      countVerifiedOhioProviders(),
-      countVerifiedNorthCarolinaProviders(),
-      countVerifiedNevadaProviders(),
-      countVerifiedVermontProviders(),
-      countVerifiedMassachusettsProviders(),
-      countVerifiedMississippiProviders(),
-    ]);
-    return {
-      fl: Number.isFinite(fl) ? fl : 0,
-      tx: Number.isFinite(tx) ? tx : 0,
-      oh: Number.isFinite(oh) ? oh : 0,
-      nc: Number.isFinite(nc) ? nc : 0,
-      nv: Number.isFinite(nv) ? nv : 0,
-      vt: Number.isFinite(vt) ? vt : 0,
-      ma: Number.isFinite(ma) ? ma : 0,
-      ms: Number.isFinite(ms) ? ms : 0,
-    };
-  } catch {
-    return { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0, ma: 0, ms: 0 };
-  }
+  const [fl, tx, oh, nc, nv, vt, ma, ms] = await Promise.all([
+    countVerifiedFloridaProviders(STRICT),
+    countVerifiedTexasProviders(STRICT),
+    countVerifiedOhioProviders(STRICT),
+    countVerifiedNorthCarolinaProviders(STRICT),
+    countVerifiedNevadaProviders(STRICT),
+    countVerifiedVermontProviders(STRICT),
+    countVerifiedMassachusettsProviders(STRICT),
+    countVerifiedMississippiProviders(STRICT),
+  ]);
+  return { fl, tx, oh, nc, nv, vt, ma, ms };
 }
 
-/** Homepage / directory chips — 5-minute cache, fail soft to zeros. */
 export const LAUNCH_COUNT_REVALIDATE_SECONDS = 300;
+
+const ZERO_LAUNCH_COUNTS: VerifiedLaunchCounts = {
+  fl: 0,
+  tx: 0,
+  oh: 0,
+  nc: 0,
+  nv: 0,
+  vt: 0,
+  ma: 0,
+  ms: 0,
+};
 
 export const getCachedVerifiedLaunchCounts = unstable_cache(
   loadVerifiedLaunchCounts,
-  ['ith-verified-launch-counts-v6'],
+  ['ith-verified-launch-counts-v7'],
   { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
 );
 
 /**
- * Directory and state-hub navigation rows. The underlying counters fail soft
- * to zero and do not throw. Hub page inventory still throws when a Florida
- * launch lookup fails, and that error is not cached as an empty market.
+ * One request may show zeros when the count throws. That value is not cached.
+ * The cached loader above rejects instead of returning a failure as zero.
  */
-export const getCachedLaunchCountyLiveTotals = unstable_cache(
-  () => getLaunchCountyLiveTotals(),
-  ['ith-launch-county-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export async function readVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
+  try {
+    return await getCachedVerifiedLaunchCounts();
+  } catch {
+    return ZERO_LAUNCH_COUNTS;
+  }
+}
+
+async function loadFloridaNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedFloridaProviders(STRICT),
+    getLaunchCountyLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadTexasNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedTexasProviders(STRICT),
+    getTxLaunchMarketLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadOhioNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedOhioProviders(STRICT),
+    getOhLaunchMarketLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadNorthCarolinaNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedNorthCarolinaProviders(STRICT),
+    getNcLaunchMarketLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadNevadaNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedNevadaProviders(STRICT),
+    getNvLaunchMarketLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadVermontNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedVermontProviders(STRICT),
+    getVtLaunchMarketLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadMassachusettsNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedMassachusettsProviders(STRICT),
+    getMaLaunchMarketLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadMississippiNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedMississippiProviders(STRICT),
+    getMsLaunchMarketLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+async function loadNewJerseyNavigation(): Promise<StateNavigationSnapshot> {
+  const [total, rows] = await Promise.all([
+    countVerifiedNewJerseyProviders(STRICT),
+    getNjLaunchRegionLiveTotals(STRICT),
+  ]);
+  return { total, rows };
+}
+
+function cacheNavigation(
+  key: string,
+  load: () => Promise<StateNavigationSnapshot>
+) {
+  return unstable_cache(load, [key], { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS });
+}
+
+export const getCachedFloridaNavigation = cacheNavigation(
+  'ith-fl-navigation-v1',
+  loadFloridaNavigation
 );
-export const getCachedTxLaunchMarketLiveTotals = unstable_cache(
-  () => getTxLaunchMarketLiveTotals(),
-  ['ith-tx-launch-market-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedTexasNavigation = cacheNavigation(
+  'ith-tx-navigation-v1',
+  loadTexasNavigation
 );
-export const getCachedNjLaunchRegionLiveTotals = unstable_cache(
-  () => getNjLaunchRegionLiveTotals(),
-  ['ith-nj-launch-region-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedOhioNavigation = cacheNavigation(
+  'ith-oh-navigation-v1',
+  loadOhioNavigation
 );
-export const getCachedOhLaunchMarketLiveTotals = unstable_cache(
-  () => getOhLaunchMarketLiveTotals(),
-  ['ith-oh-launch-market-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedNorthCarolinaNavigation = cacheNavigation(
+  'ith-nc-navigation-v1',
+  loadNorthCarolinaNavigation
 );
-export const getCachedNcLaunchMarketLiveTotals = unstable_cache(
-  () => getNcLaunchMarketLiveTotals(),
-  ['ith-nc-launch-market-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedNevadaNavigation = cacheNavigation(
+  'ith-nv-navigation-v1',
+  loadNevadaNavigation
 );
-export const getCachedNvLaunchMarketLiveTotals = unstable_cache(
-  () => getNvLaunchMarketLiveTotals(),
-  ['ith-nv-launch-market-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedVermontNavigation = cacheNavigation(
+  'ith-vt-navigation-v1',
+  loadVermontNavigation
 );
-export const getCachedVtLaunchMarketLiveTotals = unstable_cache(
-  () => getVtLaunchMarketLiveTotals(),
-  ['ith-vt-launch-market-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedMassachusettsNavigation = cacheNavigation(
+  'ith-ma-navigation-v1',
+  loadMassachusettsNavigation
 );
-export const getCachedMaLaunchMarketLiveTotals = unstable_cache(
-  () => getMaLaunchMarketLiveTotals(),
-  ['ith-ma-launch-market-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedMississippiNavigation = cacheNavigation(
+  'ith-ms-navigation-v1',
+  loadMississippiNavigation
 );
-export const getCachedMsLaunchMarketLiveTotals = unstable_cache(
-  () => getMsLaunchMarketLiveTotals(),
-  ['ith-ms-launch-market-live-totals-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
+export const getCachedNewJerseyNavigation = cacheNavigation(
+  'ith-nj-navigation-v1',
+  loadNewJerseyNavigation
 );
-export const getCachedVerifiedNewJerseyCount = unstable_cache(
-  () => countVerifiedNewJerseyProviders(),
-  ['ith-nj-verified-count-v1'],
-  { revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS }
-);
+
+async function readNavigation(
+  load: () => Promise<StateNavigationSnapshot>
+): Promise<StateNavigationSnapshot | null> {
+  try {
+    return await load();
+  } catch {
+    return null;
+  }
+}
+
+export const readFloridaNavigation = () => readNavigation(getCachedFloridaNavigation);
+export const readTexasNavigation = () => readNavigation(getCachedTexasNavigation);
+export const readOhioNavigation = () => readNavigation(getCachedOhioNavigation);
+export const readNorthCarolinaNavigation = () => readNavigation(getCachedNorthCarolinaNavigation);
+export const readNevadaNavigation = () => readNavigation(getCachedNevadaNavigation);
+export const readVermontNavigation = () => readNavigation(getCachedVermontNavigation);
+export const readMassachusettsNavigation = () =>
+  readNavigation(getCachedMassachusettsNavigation);
+export const readMississippiNavigation = () => readNavigation(getCachedMississippiNavigation);
+export const readNewJerseyNavigation = () => readNavigation(getCachedNewJerseyNavigation);

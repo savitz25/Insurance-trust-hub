@@ -9,13 +9,13 @@ import { isTxLaunchHub } from '@/lib/tdi/launch-markets';
 import { isVtLaunchHub } from '@/lib/vt/launch-markets';
 
 /**
- * Same slug gate as getHubInventory. A slug outside every launch list returns
- * an empty market without a database read, and the hub page then sets
- * noindex. The sitemap must not list those URLs.
+ * Launch-slug gate shared with getHubInventory. A slug outside every launch
+ * list returns an empty market without a database read. This function does
+ * not query Supabase and does not decide publication.
  *
- * A launch slug stays eligible even when its live count is currently zero.
- * Dropping it here would also drop it after inventory is published. This
- * function does not query Supabase.
+ * A launch slug may still be counted when the live total is zero. Sitemap
+ * entries, StateHubLinks, and hub robots use isPublishedHub, which also
+ * requires a successful lookup and a positive verified total.
  */
 export function hubSlugCanCarryVerifiedInventory(hubSlug: string): boolean {
   return (

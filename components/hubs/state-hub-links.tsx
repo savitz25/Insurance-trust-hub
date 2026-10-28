@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { getHubsByState } from '@/lib/hubs/registry';
+import { filterPublishedHubs } from '@/lib/hubs/published-hub';
+import { readHubPublicationSignal } from '@/lib/hubs/read-hub-publication-signal';
 
 /**
  * Server HTML links from a statewide page to the county and metro hubs the
@@ -7,9 +9,11 @@ import { getHubsByState } from '@/lib/hubs/registry';
  * at /hubs/{stateSlug} and /hubs/{stateSlug}/{hub.slug}.
  * New Jersey already links its hub index from the state page and does not mount this.
  */
-export function StateHubLinks({ stateSlug }: { stateSlug: string }) {
+export async function StateHubLinks({ stateSlug }: { stateSlug: string }) {
   const hubs = getHubsByState(stateSlug);
   if (hubs.length === 0) return null;
+  const signals = await Promise.all(hubs.map((hub) => readHubPublicationSignal(hub.slug)));
+  const published = filterPublishedHubs(hubs, signals);
 
   const stateName = hubs[0]?.stateName ?? stateSlug;
   const headingId = `${stateSlug}-county-metro-hubs`;
@@ -28,7 +32,7 @@ export function StateHubLinks({ stateSlug }: { stateSlug: string }) {
             {`${stateName} hubs`}
           </Link>
         </li>
-        {hubs.map((hub) => (
+        {published.map((hub) => (
           <li key={hub.slug}>
             <Link
               href={`/hubs/${stateSlug}/${hub.slug}`}

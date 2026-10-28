@@ -2,12 +2,13 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
-import sitemap from '../app/sitemap';
+import { buildSitemapEntries } from '../app/sitemap';
 import { metadata as acaMetadata } from '../app/hubs/aca/page';
 import { metadata as healthMetadata } from '../app/hubs/health-insurance/page';
 import { metadata as medicareMetadata } from '../app/hubs/medicare/page';
-import { INSURANCE_HUBS } from '../lib/hubs/registry';
-import { hubSlugCanCarryVerifiedInventory } from '../lib/hubs/sitemap-eligibility';
+import { buildHubMetadata } from '../lib/hubs/hub-seo';
+import { getHubBySlug, INSURANCE_HUBS } from '../lib/hubs/registry';
+import { filterPublishedHubs, isPublishedHub } from '../lib/hubs/published-hub';
 import {
   isSpecialtyTopicIndexable,
   SPECIALTY_TOPICS,
@@ -25,7 +26,20 @@ function robotsIndex(metadata: { robots?: unknown }): boolean | undefined {
 }
 
 test('sitemap lists only launch hubs, indexable specialties, and non-redirect URLs', async () => {
-  const entries = await sitemap();
+  const signals = new Map(
+    INSURANCE_HUBS.map((hub) => {
+      const signal =
+        hub.slug === 'miami-dade'
+          ? { hubSlug: hub.slug, lookupSucceeded: true as const, verifiedTotal: 8 }
+          : hub.slug === 'orlando'
+            ? { hubSlug: hub.slug, lookupSucceeded: false as const, verifiedTotal: 4 }
+            : hub.slug === 'fort-lauderdale'
+              ? { hubSlug: hub.slug, lookupSucceeded: true as const, verifiedTotal: 12 }
+              : { hubSlug: hub.slug, lookupSucceeded: true as const, verifiedTotal: 0 };
+      return [hub.slug, signal] as const;
+    })
+  );
+  const entries = buildSitemapEntries(new Date(), signals);
   const paths = entries.map(({ url }) => new URL(url).pathname);
   const unique = new Set(paths);
 
@@ -34,8 +48,53 @@ test('sitemap lists only launch hubs, indexable specialties, and non-redirect UR
 
   for (const hub of INSURANCE_HUBS) {
     const path = `/hubs/${hub.stateSlug}/${hub.slug}`;
-    assert.equal(unique.has(path), hubSlugCanCarryVerifiedInventory(hub.slug), path);
+    const signal = signals.get(hub.slug);
+    assert.ok(signal);
+    assert.equal(unique.has(path), isPublishedHub(signal), path);
   }
+
+  const fortLauderdale = getHubBySlug('florida', 'fort-lauderdale');
+  assert.ok(fortLauderdale);
+  assert.equal(
+    isPublishedHub({ hubSlug: 'fort-lauderdale', lookupSucceeded: true, verifiedTotal: 12 }),
+    false
+  );
+  assert.equal(
+    filterPublishedHubs([fortLauderdale], [
+      { hubSlug: 'fort-lauderdale', lookupSucceeded: true, verifiedTotal: 12 },
+    ]).length,
+    0
+  );
+  const miamiDade = getHubBySlug('florida', 'miami-dade');
+  assert.ok(miamiDade);
+  assert.equal(
+    isPublishedHub({ hubSlug: 'miami-dade', lookupSucceeded: true, verifiedTotal: 0 }),
+    false
+  );
+  assert.equal(
+    isPublishedHub({ hubSlug: 'miami-dade', lookupSucceeded: false, verifiedTotal: 8 }),
+    false
+  );
+  assert.equal(
+    isPublishedHub({ hubSlug: 'miami-dade', lookupSucceeded: true, verifiedTotal: 8 }),
+    true
+  );
+  assert.equal(robotsIndex(buildHubMetadata(miamiDade, '/hubs/florida/miami-dade', {
+    total: 0,
+    lookupSucceeded: true,
+  })), false);
+  assert.equal(robotsIndex(buildHubMetadata(miamiDade, '/hubs/florida/miami-dade', {
+    total: 8,
+    lookupSucceeded: false,
+  })), false);
+  assert.equal(robotsIndex(buildHubMetadata(miamiDade, '/hubs/florida/miami-dade', {
+    total: 8,
+    lookupSucceeded: true,
+  })), true);
+  assert.equal(robotsIndex(buildHubMetadata(fortLauderdale, '/hubs/florida/fort-lauderdale', {
+    total: 8,
+    lookupSucceeded: true,
+  })), false);
 
   for (const topic of SPECIALTY_TOPICS) {
     assert.equal(unique.has(topic.path), isSpecialtyTopicIndexable(topic), topic.path);
@@ -46,9 +105,17 @@ test('sitemap lists only launch hubs, indexable specialties, and non-redirect UR
   }
 
   assert.equal(unique.has('/tools/coverage-compass'), true);
-  assert.equal(unique.has('/hubs/south-florida'), true);
-  assert.equal(unique.has('/hubs/florida/miami-dade'), true);
-  assert.equal(unique.has('/hubs/florida/miami-fort-lauderdale'), true);
+  const southFloridaSignal = signals.get('miami-fort-lauderdale');
+  assert.ok(southFloridaSignal);
+  assert.equal(unique.has('/hubs/south-florida'), isPublishedHub(southFloridaSignal));
+  assert.equal(
+    unique.has('/hubs/florida/miami-dade'),
+    isPublishedHub(signals.get('miami-dade')!)
+  );
+  assert.equal(
+    unique.has('/hubs/florida/miami-fort-lauderdale'),
+    isPublishedHub(southFloridaSignal)
+  );
   assert.equal(unique.has('/hubs/florida/fort-lauderdale'), false);
   assert.equal(unique.has('/hubs/california/los-angeles'), false);
   assert.equal(unique.has('/tools/needs-assessment'), false);
@@ -76,26 +143,40 @@ test('navigation totals are cached and hub inventory failures stay uncached', ()
   const counts = read('lib/directory/live-counts.ts');
   const sitemapSource = read('app/sitemap.ts');
   const hubPage = read('app/hubs/[state]/[slug]/page.tsx');
+  const links = read('components/hubs/state-hub-links.tsx');
 
-  for (const name of [
-    'getCachedLaunchCountyLiveTotals',
-    'getCachedTxLaunchMarketLiveTotals',
-    'getCachedNjLaunchRegionLiveTotals',
-    'getCachedVerifiedNewJerseyCount',
-  ]) {
-    assert.match(directory, new RegExp(`\\b${name}\\b`));
-  }
+  assert.match(directory, /\breadFloridaNavigation\b/);
+  assert.match(directory, /\breadNewJerseyNavigation\b/);
+  assert.doesNotMatch(directory, /flTotal > 0 \? (read|getCached|Promise)/);
   assert.doesNotMatch(directory, /\bgetLaunchCountyLiveTotals\b/);
   assert.doesNotMatch(directory, /\bcountVerifiedNewJerseyProviders\b/);
+  assert.match(directory, /const launchRows = flNav\?\.rows/);
+  assert.match(directory, /const flTotal = flNav\?\.total/);
 
-  assert.match(stateHub, /\bgetCachedLaunchCountyLiveTotals\b/);
+  assert.match(stateHub, /\breadFloridaNavigation\b/);
+  assert.match(stateHub, /const flTotal = flNav\?\.total/);
+  assert.match(stateHub, /const launchRows = flNav\?\.rows/);
+  assert.doesNotMatch(stateHub, /\bcountVerifiedFloridaProviders\b/);
   assert.doesNotMatch(stateHub, /\bgetLaunchCountyLiveTotals\b/);
 
   assert.match(counts, /LAUNCH_COUNT_REVALIDATE_SECONDS = 300/);
-  assert.match(counts, /revalidate: LAUNCH_COUNT_REVALIDATE_SECONDS/);
-  assert.match(counts, /ith-launch-county-live-totals-v1/);
+  assert.match(counts, /requireSuccessfulLookup: true/);
+  assert.doesNotMatch(counts, /catch \{[\s\S]*return \{ fl: 0/);
+  assert.match(counts, /async function loadVerifiedLaunchCounts/);
+  const cachedLoader = counts.slice(
+    counts.indexOf('async function loadVerifiedLaunchCounts'),
+    counts.indexOf('export const LAUNCH_COUNT_REVALIDATE_SECONDS')
+  );
+  assert.doesNotMatch(cachedLoader, /\bcatch\b/);
+  assert.match(counts, /export async function readVerifiedLaunchCounts/);
 
-  assert.doesNotMatch(sitemapSource, /providers-by-county|createPublicClient|unstable_cache|supabase/);
+  assert.match(sitemapSource, /isPublishedHub/);
+  assert.match(sitemapSource, /readHubPublicationSignal/);
+  assert.match(sitemapSource, /buildSitemapEntries/);
+  assert.doesNotMatch(sitemapSource, /createPublicClient|unstable_cache/);
   assert.match(hubPage, /\bgetHubInventory\b/);
-  assert.doesNotMatch(hubPage, /unstable_cache|getCachedLaunchCountyLiveTotals/);
+  assert.match(hubPage, /lookupSucceeded: inventory\.lookupSucceeded === true/);
+  assert.doesNotMatch(hubPage, /unstable_cache|readFloridaNavigation/);
+  assert.match(links, /filterPublishedHubs/);
+  assert.match(links, /readHubPublicationSignal/);
 });
