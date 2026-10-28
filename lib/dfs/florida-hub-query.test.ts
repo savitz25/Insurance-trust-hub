@@ -7,8 +7,10 @@ import {
   countyMatchOrParts,
   floridaHubIdOrParts,
   floridaHubIdPredicate,
+  isFloridaHubMember,
   launchCountiesForHubSlug,
   sumFloridaCountyCounts,
+  uniqueProvidersById,
 } from './launch-counties';
 
 const root = process.cwd();
@@ -52,6 +54,36 @@ test('backfill county matcher still includes description ilike', () => {
   assert.ok(parts.some((part) => part.startsWith('short_description.ilike.')));
 });
 
+test('launch county id decides hub membership when county text disagrees', () => {
+  const miami = launchCountiesForHubSlug('miami-dade');
+  const broward = launchCountiesForHubSlug('broward-county');
+  const southFlorida = launchCountiesForHubSlug('miami-fort-lauderdale');
+  const mismatched = { launchCountyId: 'miami_dade' };
+  assert.equal(isFloridaHubMember(mismatched, miami), true);
+  assert.equal(isFloridaHubMember(mismatched, southFlorida), true);
+  assert.equal(isFloridaHubMember(mismatched, broward), false);
+  assert.equal(isFloridaHubMember({ launchCountyId: null }, miami), false);
+  assert.equal(isFloridaHubMember({ launchCountyId: '   ' }, miami), false);
+  assert.equal(isFloridaHubMember({ launchCountyId: 'not_a_county' }, miami), false);
+
+  for (const county of FL_LAUNCH_COUNTIES) {
+    const homes = FL_LAUNCH_COUNTIES.filter((candidate) =>
+      isFloridaHubMember({ launchCountyId: county.id }, [candidate])
+    );
+    assert.deepEqual(homes.map((home) => home.id), [county.id]);
+  }
+});
+
+test('multi-county pages keep one card per provider id', () => {
+  const rows = uniqueProvidersById([
+    { id: 'hillsborough-agency', name: 'Alpha' },
+    { id: 'hillsborough-agency', name: 'Alpha duplicate' },
+    { id: 'pinellas-agency', name: 'Beta' },
+    { id: '', name: 'Missing' },
+  ]);
+  assert.deepEqual(rows.map((row) => row.id), ['hillsborough-agency', 'pinellas-agency']);
+});
+
 test('a failed county count does not become a smaller total', () => {
   assert.equal(sumFloridaCountyCounts([9630, 7936, 5147], true), 22713);
   assert.equal(sumFloridaCountyCounts([8734], true), 8734);
@@ -70,9 +102,12 @@ test('Florida hub inventory read stays fail-closed on the id predicate', () => {
   const readEnd = source.indexOf('const readFloridaHubInventoryCached');
   const readBody = source.slice(readStart, readEnd);
   assert.ok(readBody.includes('floridaHubIdOrParts(counties)'));
+  assert.ok(readBody.includes('isFloridaHubMember('));
+  assert.ok(readBody.includes(".contains('states_licensed', ['FL'])"));
+  assert.equal(readBody.includes('providerMatchesLaunchCounties'), false);
   assert.equal(readBody.includes('countyMatchOrParts'), false);
   assert.equal(readBody.includes('hubMatchOrParts'), false);
-  assert.equal(readBody.includes(".contains('states_licensed'"), false);
+  assert.equal(readBody.includes('overFetch'), false);
   assert.ok(readBody.includes("throw new Error('Florida hub inventory unavailable')"));
   const catchBody = readBody.slice(readBody.lastIndexOf('} catch {'));
   assert.equal(catchBody.includes('emptyInventory'), false);
@@ -84,7 +119,7 @@ test('Florida hub inventory read stays fail-closed on the id predicate', () => {
   assert.ok(countBody.includes('floridaHubIdPredicate(county.id)'));
   assert.ok(countBody.includes('sumFloridaCountyCounts(counts, requireSuccessfulLookup)'));
   assert.equal(countBody.includes('countyMatchOrParts'), false);
-  assert.equal(countBody.includes(".contains('states_licensed'"), false);
+  assert.ok(countBody.includes(".contains('states_licensed', ['FL'])"));
   const helper = readFileSync(join(root, 'lib/dfs/launch-counties.ts'), 'utf8');
   assert.ok(helper.includes("throw new Error('Florida hub inventory count unavailable')"));
   assert.ok(source.includes('cache(readFloridaHubInventory)'));

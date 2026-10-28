@@ -226,6 +226,33 @@ export function floridaHubIdOrParts(counties: readonly { id: string }[]): string
 }
 
 /**
+ * Hub membership is the structured launch county id.
+ * County display text, a normalized county, and description text do not
+ * add a provider and do not remove one whose id is in the hub.
+ * A missing id is not a member.
+ */
+export function isFloridaHubMember(
+  provider: { launchCountyId?: string | null },
+  counties: readonly { id: string }[]
+): boolean {
+  const id = provider.launchCountyId?.trim() ?? '';
+  if (!id) return false;
+  return counties.some((county) => county.id === id);
+}
+
+/** Keep the first row for each provider id. A multi-county read must not repeat a provider. */
+export function uniqueProvidersById<T extends { id: string }>(rows: readonly T[]): T[] {
+  const seen = new Set<string>();
+  const unique: T[] = [];
+  for (const row of rows) {
+    if (!row.id || seen.has(row.id)) continue;
+    seen.add(row.id);
+    unique.push(row);
+  }
+  return unique;
+}
+
+/**
  * A provider stores one launch_county_id, so per-id counts do not overlap.
  * A null count is a failed read. Fail closed when the lookup is required,
  * and do not add the successful siblings into a smaller total.

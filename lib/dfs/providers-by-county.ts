@@ -1,11 +1,11 @@
 /**
  * Phase 4 — load verified providers for Florida launch hubs (public read path).
  *
- * Hub SQL matches verified rows by contact.launch_county_id only. A wide OR of
- * county text and description ilike exceeds the database statement timeout
- * when several Florida hubs are read together. countyMatchOrParts keeps that
- * wider match for promote backfill. The in-memory geo check still confirms
- * county text before a card is shown.
+ * Hub SQL matches verified Florida-licensed rows by contact.launch_county_id.
+ * A wide OR of county text and description ilike exceeds the database
+ * statement timeout when several Florida hubs are read together.
+ * countyMatchOrParts keeps that wider match for promote backfill. The
+ * structured id is hub membership: county text does not add or remove a card.
  *
  * Totals are exact head counts, one county id at a time. Cards use
  * HUB_PAGE_SIZE with ?page= pagination.
@@ -28,11 +28,13 @@ import {
   floridaHubIdOrParts,
   floridaHubIdPredicate,
   flLaunchCountyNavRows,
+  isFloridaHubMember,
   isFlLaunchHub,
   launchCountiesForHubSlug,
   matchLaunchCounty,
   normalizeCountyName,
   sumFloridaCountyCounts,
+  uniqueProvidersById,
   type FlLaunchCounty,
   type FlLaunchCountyId,
 } from '@/lib/dfs/launch-counties';
@@ -154,6 +156,7 @@ async function countVerifiedForCounties(
         .from('providers')
         .select('id', { count: 'exact', head: true })
         .eq('verified', true)
+        .contains('states_licensed', ['FL'])
         .or(floridaHubIdPredicate(county.id));
       if (error || count == null) return null;
       return count;
@@ -870,14 +873,13 @@ async function readFloridaHubInventory(
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    // Slight over-fetch so Phase 1 filter still fills the page
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
+      .contains('states_licensed', ['FL'])
       .or(or)
       .order('name', { ascending: true })
       .range(from, to);
@@ -891,12 +893,18 @@ async function readFloridaHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => providerMatchesLaunchCounties(p, counties));
-
-    const providers = verified.slice(0, pageSize);
+    const members = uniqueProvidersById(
+      data.filter((row) =>
+        isFloridaHubMember(
+          { launchCountyId: row.contact?.launch_county_id ?? null },
+          counties
+        )
+      )
+    );
+    const mapped = members.map((row) => mapRowToProvider(row as DbProvider));
+    const providers = filterVerifiedProviders(mapped).filter((p) =>
+      canShowAsVerified(resolveProviderTrustState(p))
+    );
     const safeTotal = Math.max(total, from + providers.length);
 
     return {
