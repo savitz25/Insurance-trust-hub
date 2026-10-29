@@ -42,6 +42,7 @@
     "test:map-with-concurrency": "node --test scripts/test-map-with-concurrency.mjs",
     "test:ins-seo-reliability-001": "tsx --test scripts/ins-seo-reliability-001.test.ts",
     "test:ins-fl-hub-500": "tsx --test lib/dfs/florida-hub-query.test.ts && node --test scripts/ins-fl-hub-500-behavior.mjs",
+    "test:ins-ordering-integration-004": "tsx --test lib/dfs/florida-hub-order-contract.test.ts",
     "test:ins-seo-fl-integration-001": "npm run test:map-with-concurrency && npm run test:ins-seo-reliability-001 && npm run test:ins-fl-hub-500",
     "home:metrics": "node --import tsx scripts/build_network_metrics_v1.mjs",
     "assert:network-metrics": "node scripts/assert_network_metrics_v1.mjs && npx --yes tsx --test scripts/test_insurance_network_metrics.ts && python -X utf8 scripts/check-insurance-network-metrics-stale.py",

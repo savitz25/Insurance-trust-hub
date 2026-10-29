@@ -10,8 +10,14 @@ export type FloridaHubOrderKey = {
  * PostgreSQL `ORDER BY name, id` on this database uses the en_US collation.
  * A read-only Tampa comparison (hillsborough + pinellas + pasco, first 1,000
  * rows) disagreed with UTF-16 code-unit order at 680 positions and agreed
- * with this collator at every position. Single-id pages keep the SQL order.
- * Multi-id pages merge per-id streams with the same comparison.
+ * with this collator at every position.
+ *
+ * This raw comparison is the current multi-county merge. It is also the
+ * deliberate negative control for canonically equivalent names: Node ties
+ * the precomposed and combining-acute forms, while PostgreSQL `ORDER BY name`
+ * does not. Single-county pages keep PostgREST `order=name.asc,id.asc`.
+ * Do not switch this comparator to NFC until that query orders by the same
+ * key. PostgREST cannot order by the SQL expression `normalize(name, NFC)`.
  */
 const floridaHubCollator = new Intl.Collator('en-US', {
   usage: 'sort',
@@ -23,6 +29,25 @@ export function compareFloridaHubOrder(
   right: FloridaHubOrderKey
 ): number {
   const byName = floridaHubCollator.compare(left.name, right.name);
+  if (byName !== 0) return byName;
+  return floridaHubCollator.compare(left.id, right.id);
+}
+
+/**
+ * Shared contract: NFC, then the same en-US collation, then id.
+ * Comparison only. Stored and displayed names stay on `name`.
+ * The hub read must not call this until `provider_name_nfc` is available
+ * to PostgREST. Wiring it alone would make multi-county pages disagree
+ * with single-county SQL pages.
+ */
+export function compareFloridaHubOrderByNfc(
+  left: FloridaHubOrderKey,
+  right: FloridaHubOrderKey
+): number {
+  const byName = floridaHubCollator.compare(
+    left.name.normalize('NFC'),
+    right.name.normalize('NFC')
+  );
   if (byName !== 0) return byName;
   return floridaHubCollator.compare(left.id, right.id);
 }
@@ -60,7 +85,8 @@ export function assertCompleteFloridaHubPage(input: {
 export function mergeFloridaHubPage<T extends FloridaHubOrderKey>(
   streams: readonly (readonly T[])[],
   from: number,
-  pageSize: number
+  pageSize: number,
+  compare: (left: T, right: T) => number = compareFloridaHubOrder
 ): T[] {
   const indexes = streams.map(() => 0);
   const merged: T[] = [];
@@ -72,7 +98,7 @@ export function mergeFloridaHubPage<T extends FloridaHubOrderKey>(
       if (!row) continue;
       if (
         bestStream < 0 ||
-        compareFloridaHubOrder(row, streams[bestStream][indexes[bestStream]]) < 0
+        compare(row, streams[bestStream][indexes[bestStream]]) < 0
       ) {
         bestStream = stream;
       }
