@@ -2,7 +2,11 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
-import { mergeFloridaHubPage } from './florida-hub-merge';
+import {
+  assertCompleteFloridaHubPage,
+  compareFloridaHubOrder,
+  mergeFloridaHubPage,
+} from './florida-hub-merge';
 import {
   FL_LAUNCH_COUNTIES,
   countyMatchOrParts,
@@ -14,7 +18,11 @@ import {
   uniqueProvidersById,
 } from './launch-counties';
 import { foldPublicationSignals, publicationCountTasks } from '../hubs/publication-plan';
-import { mapWithConcurrency, PUBLICATION_DB_CONCURRENCY } from '../map-with-concurrency';
+import {
+  mapWithConcurrency,
+  PUBLICATION_DB_CONCURRENCY,
+  withPublicationDbSlot,
+} from '../map-with-concurrency';
 
 const root = process.cwd();
 
@@ -89,10 +97,20 @@ test('a failed county count does not become a smaller total', () => {
   assert.equal(sumFloridaCountyCounts([9630, 7936, 5147], true), 22713);
   assert.equal(sumFloridaCountyCounts([8734], true), 8734);
   assert.equal(sumFloridaCountyCounts([], true), 0);
-  assert.equal(sumFloridaCountyCounts([1, null], false), 0);
-  assert.equal(sumFloridaCountyCounts([null], false), 0);
+  assert.throws(
+    () => sumFloridaCountyCounts([1, null], false),
+    /Florida hub inventory count unavailable/
+  );
+  assert.throws(
+    () => sumFloridaCountyCounts([null], false),
+    /Florida hub inventory count unavailable/
+  );
   assert.throws(
     () => sumFloridaCountyCounts([9630, null], true),
+    /Florida hub inventory count unavailable/
+  );
+  assert.throws(
+    () => sumFloridaCountyCounts([Number.NaN], true),
     /Florida hub inventory count unavailable/
   );
 });
@@ -108,13 +126,19 @@ test('Florida hub inventory read stays fail-closed on per-id streams', () => {
   assert.ok(readBody.includes(".order('name'"));
   assert.ok(readBody.includes(".order('id'"));
   assert.equal(readBody.includes('floridaHubIdOrParts'), false);
-  assert.equal(readBody.includes('canShowAsVerified'), false);
+  assert.ok(readBody.includes('canShowAsVerified(resolveProviderTrustState(provider))'));
+  assert.ok(readBody.includes("throw new Error('Florida hub inventory eligibility unavailable')"));
+  assert.ok(readBody.includes('assertCompleteFloridaHubPage('));
   assert.equal(readBody.includes('filterVerifiedProviders'), false);
+  assert.equal(readBody.includes('.filter('), false);
   assert.equal(readBody.includes('providerMatchesLaunchCounties'), false);
   assert.equal(readBody.includes('countyMatchOrParts'), false);
   assert.equal(readBody.includes('hubMatchOrParts'), false);
   assert.equal(readBody.includes('overFetch'), false);
   assert.equal(readBody.includes('safeTotal'), false);
+  assert.equal(source.includes('overFetch'), false);
+  assert.equal(source.includes('safeTotal'), false);
+  assert.equal(source.includes('filterVerifiedProviders'), false);
   assert.ok(readBody.includes("throw new Error('Florida hub inventory unavailable')"));
   const catchBody = readBody.slice(readBody.lastIndexOf('} catch {'));
   assert.equal(catchBody.includes('emptyInventory'), false);
@@ -160,6 +184,66 @@ test('multi-county pages merge name then id and do not skip a later county', () 
     2
   );
   assert.deepEqual(tied.map((row) => row.id), ['m-1', 'm-2']);
+});
+
+test('multi-county order follows en-US collation where code units disagree', () => {
+  const underscore = {
+    id: '478733b7-52e9-4aa3-b56f-ad52579fe601',
+    name: 'A_1 AUTO SALES OF TAMPA INC',
+  };
+  const hyphen = {
+    id: '25f18cea-b4ce-49b3-8acf-dc2173e13915',
+    name: 'A-1 B COOL HEAT & AIR, LLC',
+  };
+  assert.ok(hyphen.name < underscore.name);
+  assert.ok(compareFloridaHubOrder(underscore, hyphen) < 0);
+  const page = mergeFloridaHubPage([[hyphen], [underscore]], 0, 2);
+  assert.deepEqual(
+    page.map((row) => row.id),
+    [underscore.id, hyphen.id]
+  );
+});
+
+test('a positive count cannot publish an empty or short page', () => {
+  assert.doesNotThrow(() =>
+    assertCompleteFloridaHubPage({ total: 101, from: 100, pageSize: 100, rowCount: 1 })
+  );
+  assert.doesNotThrow(() =>
+    assertCompleteFloridaHubPage({ total: 5, from: 4, pageSize: 2, rowCount: 1 })
+  );
+  assert.doesNotThrow(() =>
+    assertCompleteFloridaHubPage({ total: 2, from: 2, pageSize: 2, rowCount: 0 })
+  );
+  assert.throws(
+    () => assertCompleteFloridaHubPage({ total: 101, from: 0, pageSize: 100, rowCount: 0 }),
+    /Florida hub inventory page incomplete/
+  );
+  assert.throws(
+    () => assertCompleteFloridaHubPage({ total: 101, from: 0, pageSize: 100, rowCount: 99 }),
+    /Florida hub inventory page incomplete/
+  );
+  assert.throws(
+    () => assertCompleteFloridaHubPage({ total: 0, from: 0, pageSize: 100, rowCount: 1 }),
+    /Florida hub inventory page incomplete/
+  );
+});
+
+test('publication fetches share one process-wide cap of 3', async () => {
+  let active = 0;
+  let peak = 0;
+  await Promise.all(
+    Array.from({ length: 9 }, () =>
+      withPublicationDbSlot(async () => {
+        active += 1;
+        peak = Math.max(peak, active);
+        await new Promise((resolve) => setTimeout(resolve, 15));
+        active -= 1;
+      })
+    )
+  );
+  assert.equal(peak, PUBLICATION_DB_CONCURRENCY);
+  const publicClient = readFileSync(join(root, 'lib/supabase/public.ts'), 'utf8');
+  assert.ok(publicClient.includes('fetch: publicationFetch'));
 });
 
 test('publication counts each Florida id once and keeps a failed id off every hub', async () => {

@@ -254,20 +254,19 @@ export function uniqueProvidersById<T extends { id: string }>(rows: readonly T[]
 
 /**
  * A provider stores one launch_county_id, so per-id counts do not overlap.
- * A null count is a failed read. Fail closed when the lookup is required,
- * and do not add the successful siblings into a smaller total.
+ * A null or non-finite count is a failed read. It always throws, including
+ * when an older caller passes requireSuccessfulLookup false. Successful
+ * siblings are not added into a smaller total or a successful zero.
  */
 export function sumFloridaCountyCounts(
   counts: readonly (number | null)[],
-  requireSuccessfulLookup: boolean
+  requireSuccessfulLookup = true
 ): number {
+  void requireSuccessfulLookup;
   let total = 0;
   for (const count of counts) {
     if (count == null || !Number.isFinite(count)) {
-      if (requireSuccessfulLookup) {
-        throw new Error('Florida hub inventory count unavailable');
-      }
-      return 0;
+      throw new Error('Florida hub inventory count unavailable');
     }
     total += count;
   }

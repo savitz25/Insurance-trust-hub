@@ -185,7 +185,8 @@ function install(table, control = {}) {
               const window = query.range
                 ? ordered.slice(query.range[0], query.range[1] + 1)
                 : ordered;
-              const data = control.repeatFirst && window.length ? [window[0], ...window] : window;
+              let data = control.repeatFirst && window.length ? [window[0], ...window] : window;
+              if (control.shortPage && data.length) data = data.slice(0, -1);
               return finish({ data, error: null, count: ordered.length });
             },
           };
@@ -386,6 +387,68 @@ for (const [name, control] of [
       }
   });
 }
+
+test('multi-county punctuation order follows en-US collation', async () => {
+  const table = [
+    agency(
+      '25f18cea-b4ce-49b3-8acf-dc2173e13915',
+      'A-1 B COOL HEAT & AIR, LLC',
+      'pinellas',
+      'Pinellas'
+    ),
+    agency(
+      '478733b7-52e9-4aa3-b56f-ad52579fe601',
+      'A_1 AUTO SALES OF TAMPA INC',
+      'hillsborough',
+      'Hillsborough'
+    ),
+  ];
+  install(table);
+  const rendered = await getHubInventory('tampa', { pageSize: 2, page: 1 });
+  assert.deepEqual(
+    rendered.providers.map((provider) => provider.id),
+    ['478733b7-52e9-4aa3-b56f-ad52579fe601', '25f18cea-b4ce-49b3-8acf-dc2173e13915']
+  );
+  assert.equal(rendered.total, 2);
+  assert.equal(rendered.showing, 2);
+});
+
+test('an ineligible row aborts the page instead of shortening it', async () => {
+  const fresh = agency('fresh', 'Fresh Agency', 'miami_dade', 'Miami-Dade');
+  const stale = agency('stale', 'Stale Agency', 'miami_dade', 'Miami-Dade');
+  stale.license_info.licenses[0].checkedAt = '2020-01-01T00:00:00.000Z';
+  const bail = agency('bail-row', 'County Bail Bonds', 'miami_dade', 'Miami-Dade');
+  const seed = agency('seed-row', 'Seed Agency', 'miami_dade', 'Miami-Dade');
+  install([fresh, stale]);
+  await assert.rejects(
+    getHubInventory('miami-dade', { pageSize: 2, page: 1 }),
+    /Florida hub inventory/
+  );
+  install([fresh, bail]);
+  await assert.rejects(
+    getHubInventory('miami-dade', { pageSize: 2, page: 1 }),
+    /Florida hub inventory/
+  );
+  install([fresh, seed]);
+  await assert.rejects(
+    getHubInventory('miami-dade', { pageSize: 2, page: 1 }),
+    /Florida hub inventory/
+  );
+});
+
+test('a short page under a positive count is a failed read', async () => {
+  install(
+    [
+      agency('alpha', 'Alpha Agency', 'miami_dade', 'Miami-Dade'),
+      agency('beta', 'Beta Agency', 'miami_dade', 'Miami-Dade'),
+    ],
+    { shortPage: true }
+  );
+  await assert.rejects(
+    getHubInventory('miami-dade', { pageSize: 2, page: 1 }),
+    /Florida hub inventory/
+  );
+});
 
 test('a successful empty market stays empty and noindex', async () => {
     install([]);

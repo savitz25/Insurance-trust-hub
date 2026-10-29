@@ -56,17 +56,6 @@ async function loadVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
 
 export const LAUNCH_COUNT_REVALIDATE_SECONDS = 300;
 
-const ZERO_LAUNCH_COUNTS: VerifiedLaunchCounts = {
-  fl: 0,
-  tx: 0,
-  oh: 0,
-  nc: 0,
-  nv: 0,
-  vt: 0,
-  ma: 0,
-  ms: 0,
-};
-
 export const getCachedVerifiedLaunchCounts = unstable_cache(
   loadVerifiedLaunchCounts,
   ['ith-verified-launch-counts-v7'],
@@ -74,15 +63,11 @@ export const getCachedVerifiedLaunchCounts = unstable_cache(
 );
 
 /**
- * One request may show zeros when the count throws. That value is not cached.
- * The cached loader above rejects instead of returning a failure as zero.
+ * A failed count throws. Callers hide the chips. They do not substitute zero.
+ * unstable_cache does not store the rejection as a successful zero.
  */
 export async function readVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
-  try {
-    return await getCachedVerifiedLaunchCounts();
-  } catch {
-    return ZERO_LAUNCH_COUNTS;
-  }
+  return getCachedVerifiedLaunchCounts();
 }
 
 async function loadFloridaNavigation(): Promise<StateNavigationSnapshot> {

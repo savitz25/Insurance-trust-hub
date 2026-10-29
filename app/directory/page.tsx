@@ -195,15 +195,15 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         readMississippiNavigation(),
         readNewJerseyNavigation(),
       ]);
-  const flTotal = flNav?.total ?? 0;
-  const txTotal = txNav?.total ?? 0;
-  const ohTotal = ohNav?.total ?? 0;
-  const ncTotal = ncNav?.total ?? 0;
-  const nvTotal = nvNav?.total ?? 0;
-  const vtTotal = vtNav?.total ?? 0;
-  const maTotal = maNav?.total ?? 0;
-  const msTotal = msNav?.total ?? 0;
-  const njTotal = njNav?.total ?? 0;
+  const flTotal = flNav?.total;
+  const txTotal = txNav?.total;
+  const ohTotal = ohNav?.total;
+  const ncTotal = ncNav?.total;
+  const nvTotal = nvNav?.total;
+  const vtTotal = vtNav?.total;
+  const maTotal = maNav?.total;
+  const msTotal = msNav?.total;
+  const njTotal = njNav?.total;
   const launchRows = flNav?.rows ?? [];
   const txHubRows = txNav?.rows ?? [];
   const ohHubRows = ohNav?.rows ?? [];
@@ -296,7 +296,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           . We publish only after an official state license check. Not paid placement.
         </p>
         <div className="mt-4 flex flex-wrap gap-2" role="navigation" aria-label="Verified state filters">
-          {flTotal > 0 ? (
+          {flTotal != null && flTotal > 0 ? (
             <Link
               href="/directory?state=FL&verified=true"
               className={
@@ -311,7 +311,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
-          {txTotal > 0 ? (
+          {txTotal != null && txTotal > 0 ? (
             <Link
               href="/directory?state=TX&verified=true"
               className={
@@ -326,7 +326,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
-          {ohTotal > 0 ? (
+          {ohTotal != null && ohTotal > 0 ? (
             <Link
               href="/directory?state=OH&verified=true"
               className={
@@ -341,7 +341,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
-          {vtTotal > 0 ? (
+          {vtTotal != null && vtTotal > 0 ? (
             <Link
               href="/directory?state=VT&verified=true"
               className={
@@ -356,7 +356,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
-          {maTotal > 0 ? (
+          {maTotal != null && maTotal > 0 ? (
             <Link
               href="/directory?state=MA&verified=true"
               className={
@@ -371,7 +371,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
-          {msTotal > 0 ? (
+          {msTotal != null && msTotal > 0 ? (
             <Link
               href="/directory?state=MS&verified=true"
               className={
@@ -386,7 +386,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
-          {nvTotal > 0 ? (
+          {nvTotal != null && nvTotal > 0 ? (
             <Link
               href="/directory?state=NV&verified=true"
               className={
@@ -401,7 +401,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               </span>
             </Link>
           ) : null}
-          {ncTotal > 0 ? (
+          {ncTotal != null && ncTotal > 0 ? (
             <Link
               href="/directory?state=NC&verified=true"
               className={
@@ -426,7 +426,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           >
             All verified
           </Link>
-          {njTotal > 0 ? (
+          {njTotal != null && njTotal > 0 ? (
             <Link
               href="/directory?state=NJ&verified=true"
               className={
@@ -442,7 +442,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </Link>
           ) : null}
         </div>
-        {maTotal > 0 ? (
+        {maTotal != null && maTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Massachusetts launch hubs
@@ -485,7 +485,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {msTotal > 0 ? (
+        {msTotal != null && msTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Mississippi launch hubs
@@ -528,7 +528,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {vtTotal > 0 ? (
+        {vtTotal != null && vtTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Vermont launch hubs
@@ -571,7 +571,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {nvTotal > 0 ? (
+        {nvTotal != null && nvTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Nevada launch hubs
@@ -614,7 +614,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {ncTotal > 0 ? (
+        {ncTotal != null && ncTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               North Carolina launch hubs
@@ -665,7 +665,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {njTotal > 0 ? (
+        {njTotal != null && njTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               New Jersey launch hubs
@@ -692,7 +692,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {txTotal > 0 ? (
+        {txTotal != null && txTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Texas launch hubs
@@ -739,7 +739,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {ohTotal > 0 ? (
+        {ohTotal != null && ohTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Ohio launch hubs
@@ -782,7 +782,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             </ul>
           </div>
         ) : null}
-        {flTotal > 0 ? (
+        {flTotal != null && flTotal > 0 ? (
           <div className="mt-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Florida launch counties

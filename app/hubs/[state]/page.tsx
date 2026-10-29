@@ -143,13 +143,13 @@ export default async function StateHubsPage({
   const vtLaunchRows = vtNav?.rows ?? [];
   const maLaunchRows = maNav?.rows ?? [];
   const msLaunchRows = msNav?.rows ?? [];
-  const flTotal = flNav?.total ?? 0;
-  const ohTotal = ohNav?.total ?? 0;
-  const ncTotal = ncNav?.total ?? 0;
-  const nvTotal = nvNav?.total ?? 0;
-  const vtTotal = vtNav?.total ?? 0;
-  const maTotal = maNav?.total ?? 0;
-  const msTotal = msNav?.total ?? 0;
+  const flTotal = flNav?.total;
+  const ohTotal = ohNav?.total;
+  const ncTotal = ncNav?.total;
+  const nvTotal = nvNav?.total;
+  const vtTotal = vtNav?.total;
+  const maTotal = maNav?.total;
+  const msTotal = msNav?.total;
   const launchHubSlugs = new Set(launchRows.map((r) => r.hubSlug));
   const ohHubSlugs = new Set(ohLaunchRows.map((r) => r.hubSlug));
   const ncHubSlugs = new Set(ncLaunchRows.map((r) => r.hubSlug));
@@ -324,7 +324,7 @@ export default async function StateHubsPage({
         )}
       </p>
 
-      {ohNav && (
+      {ohNav && ohTotal != null && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -378,7 +378,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {ncNav && (
+      {ncNav && ncTotal != null && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -439,7 +439,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {nvNav && (
+      {nvNav && nvTotal != null && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -493,7 +493,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {vtNav && (
+      {vtNav && vtTotal != null && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -547,7 +547,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {maNav && (
+      {maNav && maTotal != null && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -603,7 +603,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {msNav && (
+      {msNav && msTotal != null && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -658,7 +658,7 @@ export default async function StateHubsPage({
         </section>
       )}
 
-      {flNav && (
+      {flNav && flTotal != null && (
         <section className="mt-8 rounded-2xl border border-trust/20 bg-trust/5 p-5 md:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>

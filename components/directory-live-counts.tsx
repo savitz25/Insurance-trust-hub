@@ -7,7 +7,13 @@ import { INSURANCE_BRAND } from '@/lib/design/insurance-design-system';
  * A failed count is not cached as zero. This request hides the chips.
  */
 export async function DirectoryLiveCounts() {
-  const { fl, tx, oh, nc, nv, vt, ma, ms } = await readVerifiedLaunchCounts();
+  let counts: Awaited<ReturnType<typeof readVerifiedLaunchCounts>>;
+  try {
+    counts = await readVerifiedLaunchCounts();
+  } catch {
+    return null;
+  }
+  const { fl, tx, oh, nc, nv, vt, ma, ms } = counts;
   const rows = [
     {
       label: 'Florida (DFS)',

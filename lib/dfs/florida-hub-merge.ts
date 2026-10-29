@@ -7,19 +7,49 @@ export type FloridaHubOrderKey = {
 };
 
 /**
- * Name, then id, using UTF-16 code unit order.
- * Multi-county pages merge per-id streams with this order.
- * Single-id pages use the same name, then id, columns in SQL.
+ * PostgreSQL `ORDER BY name, id` on this database uses the en_US collation.
+ * A read-only Tampa comparison (hillsborough + pinellas + pasco, first 1,000
+ * rows) disagreed with UTF-16 code-unit order at 680 positions and agreed
+ * with this collator at every position. Single-id pages keep the SQL order.
+ * Multi-id pages merge per-id streams with the same comparison.
  */
+const floridaHubCollator = new Intl.Collator('en-US', {
+  usage: 'sort',
+  sensitivity: 'variant',
+});
+
 export function compareFloridaHubOrder(
   left: FloridaHubOrderKey,
   right: FloridaHubOrderKey
 ): number {
-  if (left.name < right.name) return -1;
-  if (left.name > right.name) return 1;
-  if (left.id < right.id) return -1;
-  if (left.id > right.id) return 1;
-  return 0;
+  const byName = floridaHubCollator.compare(left.name, right.name);
+  if (byName !== 0) return byName;
+  return floridaHubCollator.compare(left.id, right.id);
+}
+
+/**
+ * A positive inventory count must produce the rows that count promised.
+ * The last page may be short. An empty or truncated earlier page is a failed
+ * read, not a successful short page.
+ */
+export function assertCompleteFloridaHubPage(input: {
+  total: number;
+  from: number;
+  pageSize: number;
+  rowCount: number;
+}): void {
+  if (!Number.isFinite(input.total) || input.total < 0) {
+    throw new Error('Florida hub inventory page incomplete');
+  }
+  const from = Math.max(0, input.from);
+  if (from >= input.total) {
+    if (input.rowCount !== 0) throw new Error('Florida hub inventory page incomplete');
+    return;
+  }
+  const expected = Math.min(Math.max(0, input.pageSize), input.total - from);
+  if (input.rowCount !== expected) {
+    throw new Error('Florida hub inventory page incomplete');
+  }
 }
 
 /**

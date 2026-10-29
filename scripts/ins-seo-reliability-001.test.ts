@@ -152,9 +152,11 @@ test('navigation totals are cached and hub inventory failures stay uncached', ()
   assert.doesNotMatch(directory, /\bcountVerifiedNewJerseyProviders\b/);
   assert.match(directory, /const launchRows = flNav\?\.rows/);
   assert.match(directory, /const flTotal = flNav\?\.total/);
+  assert.doesNotMatch(directory, /const flTotal = flNav\?\.total \?\? 0/);
 
   assert.match(stateHub, /\breadFloridaNavigation\b/);
   assert.match(stateHub, /const flTotal = flNav\?\.total/);
+  assert.doesNotMatch(stateHub, /const flTotal = flNav\?\.total \?\? 0/);
   assert.match(stateHub, /const launchRows = flNav\?\.rows/);
   assert.doesNotMatch(stateHub, /\bcountVerifiedFloridaProviders\b/);
   assert.doesNotMatch(stateHub, /\bgetLaunchCountyLiveTotals\b/);
@@ -162,6 +164,7 @@ test('navigation totals are cached and hub inventory failures stay uncached', ()
   assert.match(counts, /LAUNCH_COUNT_REVALIDATE_SECONDS = 300/);
   assert.match(counts, /requireSuccessfulLookup: true/);
   assert.doesNotMatch(counts, /catch \{[\s\S]*return \{ fl: 0/);
+  assert.doesNotMatch(counts, /ZERO_LAUNCH_COUNTS/);
   assert.match(counts, /async function loadVerifiedLaunchCounts/);
   const cachedLoader = counts.slice(
     counts.indexOf('async function loadVerifiedLaunchCounts'),

@@ -15,10 +15,10 @@ import { mapRowToProvider } from '@/lib/providers/map-db-provider';
 import type { Provider as DbProvider } from '@/types/supabase';
 import {
   canShowAsVerified,
-  filterVerifiedProviders,
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
 import {
+  assertCompleteFloridaHubPage,
   FLORIDA_HUB_CHUNK,
   mergeFloridaHubPage,
 } from '@/lib/dfs/florida-hub-merge';
@@ -148,8 +148,12 @@ export function providerMatchesLaunchCounties(
 
 /**
  * One exact count for one launch_county_id.
- * verified = true and states_licensed contains FL.
- * A failure throws when the lookup is required and returns null otherwise.
+ * Membership is verified = true, states_licensed contains FL, and that id.
+ * Provenance, freshness, and bail-bond exclusion are the promotion gates.
+ * A JSON predicate for those gates on this count returned HTTP 500 at the
+ * statement timeout, so the count does not repeat them. A fetched page throws
+ * if any row fails canShowAsVerified. It does not drop the row or shorten the
+ * page. A failed count throws when required and returns null otherwise.
  * It does not return a successful zero.
  */
 export async function countVerifiedFloridaCounty(
@@ -215,19 +219,33 @@ function emptyInventory(
   };
 }
 
+function pageOfEligibleProviders(
+  mapped: Provider[],
+  total: number,
+  from: number,
+  pageSize: number
+): Provider[] {
+  if (mapped.some((provider) => !canShowAsVerified(resolveProviderTrustState(provider)))) {
+    throw new Error('Hub inventory unavailable');
+  }
+  const expected = from >= total ? 0 : Math.min(pageSize, Math.max(0, total - from));
+  if (mapped.length !== expected) throw new Error('Hub inventory unavailable');
+  return mapped;
+}
+
 async function getTxHubInventory(
   hubSlug: string,
   pageSize: number,
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const markets = launchMarketsForHubSlug(hubSlug);
   if (!markets.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const marketIds = markets.map((m) => m.id);
     // Prefer structured contact.launch_market_id (Phase 8 promote)
@@ -243,7 +261,7 @@ async function getTxHubInventory(
       .contains('states_licensed', ['TX'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -255,8 +273,7 @@ async function getTxHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -267,8 +284,9 @@ async function getTxHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -276,29 +294,26 @@ async function getTxHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'TX');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -308,13 +323,13 @@ async function getNjHubInventory(
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const regions = launchRegionsForHubSlug(hubSlug);
   if (!regions.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const regionIds = regions.map((r) => r.id);
     const orParts = regionIds
@@ -329,7 +344,7 @@ async function getNjHubInventory(
       .contains('states_licensed', ['NJ'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -341,8 +356,7 @@ async function getNjHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -353,8 +367,9 @@ async function getNjHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -362,29 +377,26 @@ async function getNjHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'NJ');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -394,13 +406,13 @@ async function getOhHubInventory(
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const markets = launchOhMarketsForHubSlug(hubSlug);
   if (!markets.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const marketIds = markets.map((m) => m.id);
     const orParts = marketIds
@@ -415,7 +427,7 @@ async function getOhHubInventory(
       .contains('states_licensed', ['OH'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -427,8 +439,7 @@ async function getOhHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -439,8 +450,9 @@ async function getOhHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -448,29 +460,26 @@ async function getOhHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'OH');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -480,13 +489,13 @@ async function getNcHubInventory(
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const markets = launchNcMarketsForHubSlug(hubSlug);
   if (!markets.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const marketIds = markets.map((m) => m.id);
     const orParts = marketIds
@@ -501,7 +510,7 @@ async function getNcHubInventory(
       .contains('states_licensed', ['NC'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -513,8 +522,7 @@ async function getNcHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -525,8 +533,9 @@ async function getNcHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -534,29 +543,26 @@ async function getNcHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'NC');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -566,13 +572,13 @@ async function getNvHubInventory(
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const markets = launchNvMarketsForHubSlug(hubSlug);
   if (!markets.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const marketIds = markets.map((m) => m.id);
     const orParts = marketIds
@@ -587,7 +593,7 @@ async function getNvHubInventory(
       .contains('states_licensed', ['NV'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -599,8 +605,7 @@ async function getNvHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -611,8 +616,9 @@ async function getNvHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -620,29 +626,26 @@ async function getNvHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'NV');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -652,13 +655,13 @@ async function getMsHubInventory(
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const markets = launchMsMarketsForHubSlug(hubSlug);
   if (!markets.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const marketIds = markets.map((m) => m.id);
     const orParts = marketIds
@@ -673,7 +676,7 @@ async function getMsHubInventory(
       .contains('states_licensed', ['MS'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -685,8 +688,7 @@ async function getMsHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -697,8 +699,9 @@ async function getMsHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -706,29 +709,26 @@ async function getMsHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'MS');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -738,13 +738,13 @@ async function getMaHubInventory(
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const markets = launchMaMarketsForHubSlug(hubSlug);
   if (!markets.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const marketIds = markets.map((m) => m.id);
     const orParts = marketIds
@@ -759,7 +759,7 @@ async function getMaHubInventory(
       .contains('states_licensed', ['MA'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -771,8 +771,7 @@ async function getMaHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -783,8 +782,9 @@ async function getMaHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -792,29 +792,26 @@ async function getMaHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'MA');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -824,13 +821,13 @@ async function getVtHubInventory(
   page: number,
   countOnly = false
 ): Promise<HubInventoryResult> {
-  if (!isSupabaseConfigured()) return emptyInventory(hubSlug, pageSize, page);
+  if (!isSupabaseConfigured()) throw new Error('Hub inventory unavailable');
   const markets = launchVtMarketsForHubSlug(hubSlug);
   if (!markets.length) return emptyInventory(hubSlug, pageSize, page, true);
 
   try {
     const supabase = createPublicClient();
-    if (!supabase) return emptyInventory(hubSlug, pageSize, page);
+    if (!supabase) throw new Error('Hub inventory unavailable');
 
     const marketIds = markets.map((m) => m.id);
     const orParts = marketIds
@@ -845,7 +842,7 @@ async function getVtHubInventory(
       .contains('states_licensed', ['VT'])
       .or(or);
 
-    if (cErr || count == null) return emptyInventory(hubSlug, pageSize, page);
+    if (cErr || count == null) throw new Error('Hub inventory unavailable');
     const total = count;
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     if (countOnly) {
@@ -857,8 +854,7 @@ async function getVtHubInventory(
     }
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
-    const overFetch = Math.min(pageSize + 40, 200);
-    const to = from + overFetch - 1;
+    const to = from + pageSize - 1;
 
     const { data, error } = await supabase
       .from('providers')
@@ -869,8 +865,9 @@ async function getVtHubInventory(
       .order('name', { ascending: true })
       .range(from, to);
 
-    if (error) return emptyInventory(hubSlug, pageSize, safePage);
+    if (error) throw new Error('Hub inventory unavailable');
     if (!data?.length) {
+      if (total > from) throw new Error('Hub inventory unavailable');
       return {
         ...emptyInventory(hubSlug, pageSize, safePage, true),
         total,
@@ -878,29 +875,26 @@ async function getVtHubInventory(
       };
     }
 
-    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
-    const verified = filterVerifiedProviders(mapped)
-      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
-      .filter((p) => p.state?.toUpperCase() === 'VT');
-
-    const providers = verified.slice(0, pageSize);
-    const safeTotal = Math.max(total, from + providers.length);
+    const providers = pageOfEligibleProviders(
+      data.map((row) => mapRowToProvider(row as DbProvider)),
+      total,
+      from,
+      pageSize
+    );
 
     return {
       providers,
-      total: safeTotal,
+      total,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages: Math.max(
-        totalPages,
-        safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0
-      ),
+      totalPages,
       hubSlug,
       lookupSucceeded: true,
     };
-  } catch {
-    return emptyInventory(hubSlug, pageSize, page);
+  } catch (err) {
+    if (err instanceof Error && err.message === 'Hub inventory unavailable') throw err;
+    throw new Error('Hub inventory unavailable');
   }
 }
 
@@ -1059,6 +1053,15 @@ async function readFloridaHubInventory(
     }
 
     const providers = pageRows.map((row) => mapRowToProvider(row));
+    if (providers.some((provider) => !canShowAsVerified(resolveProviderTrustState(provider)))) {
+      throw new Error('Florida hub inventory eligibility unavailable');
+    }
+    assertCompleteFloridaHubPage({
+      total,
+      from,
+      pageSize,
+      rowCount: providers.length,
+    });
 
     return {
       providers,
@@ -1152,14 +1155,20 @@ export async function getLaunchCountyLiveTotals(opts?: {
     (county) => countVerifiedFloridaCounty(county.id, strict)
   );
   const byId = new Map(FL_LAUNCH_COUNTIES.map((county, index) => [county.id, counts[index]]));
-  const out: LaunchNavLiveRow[] = flLaunchCountyNavRows().map((row) => ({
-    key: row.id,
-    displayName: row.displayName,
-    hubSlug: row.hubSlug,
-    hubHref: row.hubHref,
-    total: byId.get(row.id) ?? 0,
-    kind: 'county' as const,
-  }));
+  const out: LaunchNavLiveRow[] = flLaunchCountyNavRows().map((row) => {
+    const total = byId.get(row.id);
+    if (total == null || !Number.isFinite(total)) {
+      throw new Error('Florida hub inventory count unavailable');
+    }
+    return {
+      key: row.id,
+      displayName: row.displayName,
+      hubSlug: row.hubSlug,
+      hubHref: row.hubHref,
+      total,
+      kind: 'county' as const,
+    };
+  });
   const southIds = launchCountiesForHubSlug('miami-fort-lauderdale').map((county) => county.id);
   out.push({
     key: 'south-florida',
@@ -1188,7 +1197,7 @@ export async function countVerifiedByLaunchCounty(): Promise<
   >;
 
   for (const c of FL_LAUNCH_COUNTIES) {
-    const total = await countVerifiedForCounties([c]);
+    const total = await countVerifiedForCounties([c], true);
     let sampleNames: string[] = [];
     try {
       const supabase = createPublicClient();
@@ -1212,38 +1221,25 @@ export async function countVerifiedByLaunchCounty(): Promise<
   return out;
 }
 
-function unavailableStateCount(stateCode: string, requireSuccessfulLookup: boolean): number {
-  if (requireSuccessfulLookup) {
-    throw new Error(`${stateCode} verified count unavailable`);
-  }
-  return 0;
+function unavailableStateCount(stateCode: string): never {
+  throw new Error(`${stateCode} verified count unavailable`);
 }
 
 async function countVerifiedProvidersForState(
   stateCode: string,
-  requireSuccessfulLookup = false
+  requireSuccessfulLookup = true
 ): Promise<number> {
-  if (!isSupabaseConfigured()) return unavailableStateCount(stateCode, requireSuccessfulLookup);
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return unavailableStateCount(stateCode, requireSuccessfulLookup);
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', [stateCode]);
-    if (error || count == null) return unavailableStateCount(stateCode, requireSuccessfulLookup);
-    return count;
-  } catch (err) {
-    if (
-      requireSuccessfulLookup &&
-      err instanceof Error &&
-      err.message.endsWith('verified count unavailable')
-    ) {
-      throw err;
-    }
-    return unavailableStateCount(stateCode, requireSuccessfulLookup);
-  }
+  void requireSuccessfulLookup;
+  if (!isSupabaseConfigured()) unavailableStateCount(stateCode);
+  const supabase = createPublicClient();
+  if (!supabase) unavailableStateCount(stateCode);
+  const { count, error } = await supabase
+    .from('providers')
+    .select('id', { count: 'exact', head: true })
+    .eq('verified', true)
+    .contains('states_licensed', [stateCode]);
+  if (error || count == null) unavailableStateCount(stateCode);
+  return count;
 }
 
 /** Total verified FL providers (homepage / directory honesty). */
