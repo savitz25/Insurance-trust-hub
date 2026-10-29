@@ -1,0 +1,400 @@
+{
+  "task": "INS-DB-PREPRODUCTION-PROOF-001",
+  "asOf": "2026-10-29T16:16:29.979Z",
+  "initMode": "linux-icu-en-US-glibc-locale",
+  "version": {
+    "server_version": "17.6",
+    "datcollate": "en_US.UTF-8",
+    "datctype": "en_US.UTF-8",
+    "datlocprovider": "i",
+    "datlocale": "en-US",
+    "server_encoding": "UTF8",
+    "version_string": "PostgreSQL 17.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit"
+  },
+  "runtime": {
+    "platform": "linux",
+    "node": "v22.23.4",
+    "icu": "78.3",
+    "libc": "glibc 2.39"
+  },
+  "productionCollation": {
+    "server_version": "17.6",
+    "datlocprovider": "i",
+    "datlocale": "en-US",
+    "datcollate": "en_US.UTF-8",
+    "datctype": "en_US.UTF-8",
+    "server_encoding": "UTF8",
+    "compile_target": "x86_64-pc-linux-gnu"
+  },
+  "collationMatch": true,
+  "loadMs": 1570,
+  "bulkRows": 41461,
+  "indexMs": 83,
+  "indexHealth": {
+    "indisvalid": true,
+    "indisready": true
+  },
+  "boundary": {
+    "exact": true,
+    "stale": false,
+    "elapsedMs": 0
+  },
+  "countDiffs": [
+    {
+      "county": "miami_dade",
+      "expected": 9630,
+      "sql": 9630,
+      "match": true
+    },
+    {
+      "county": "broward",
+      "expected": 7936,
+      "sql": 7936,
+      "match": true
+    },
+    {
+      "county": "palm_beach",
+      "expected": 5147,
+      "sql": 5147,
+      "match": true
+    },
+    {
+      "county": "duval",
+      "expected": 2696,
+      "sql": 2696,
+      "match": true
+    },
+    {
+      "county": "hillsborough",
+      "expected": 4352,
+      "sql": 4352,
+      "match": true
+    },
+    {
+      "county": "orange",
+      "expected": 4723,
+      "sql": 4723,
+      "match": true
+    },
+    {
+      "county": "osceola",
+      "expected": 1086,
+      "sql": 1086,
+      "match": true
+    },
+    {
+      "county": "seminole",
+      "expected": 1509,
+      "sql": 1509,
+      "match": true
+    },
+    {
+      "county": "pinellas",
+      "expected": 2992,
+      "sql": 2992,
+      "match": true
+    },
+    {
+      "county": "pasco",
+      "expected": 1390,
+      "sql": 1390,
+      "match": true
+    }
+  ],
+  "censusExcludesFixtureSlugs": true,
+  "fixtureSql": [
+    {
+      "label": "eligible",
+      "inSql": true,
+      "expectHub": true,
+      "match": true
+    },
+    {
+      "label": "bailey",
+      "inSql": true,
+      "expectHub": true,
+      "match": true
+    },
+    {
+      "label": "phone-placeholder",
+      "inSql": true,
+      "expectHub": true,
+      "match": true
+    },
+    {
+      "label": "exact-365",
+      "inSql": true,
+      "expectHub": true,
+      "match": true
+    },
+    {
+      "label": "state-fallback",
+      "inSql": true,
+      "expectHub": true,
+      "match": true
+    },
+    {
+      "label": "bail-name",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "second-license-bail",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "dirty-na",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "identity-false",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "stale",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "future",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "verified-false",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "display-county",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "empty-slug",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    },
+    {
+      "label": "null-booleans",
+      "inSql": false,
+      "expectHub": false,
+      "match": true
+    }
+  ],
+  "plans": {
+    "countPlan": "Aggregate  (cost=3705.72..3705.73 rows=1 width=8) (actual time=3.202..3.203 rows=1 loops=1)\n  Buffers: shared hit=791\n  ->  Bitmap Heap Scan on providers  (cost=454.57..3681.80 rows=9569 width=0) (actual time=0.409..2.912 rows=9630 loops=1)\n        Recheck Cond: ((publication_county_id = 'miami_dade'::text) AND verified AND (states_licensed @> '{FL}'::text[]) AND publication_license_ok AND publication_source_ok AND publication_identity_accepted AND (NOT publication_bail_excluded) AND (publication_license_state IS NOT NULL) AND (publication_checked_at IS NOT NULL) AND (slug <> ''::text) AND (name <> ''::text))\n        Filter: ((publication_checked_at >= '2025-10-29 16:16:29.979+00'::timestamp with time zone) AND (publication_checked_at <= '2026-10-29 16:16:29.979+00'::timestamp with time zone))\n        Heap Blocks: exact=688\n        Buffers: shared hit=791\n        ->  Bitmap Index Scan on idx_providers_fl_hub_publication  (cost=0.00..452.18 rows=9569 width=0) (actual time=0.355..0.355 rows=9630 loops=1)\n              Index Cond: (publication_county_id = 'miami_dade'::text)\n              Buffers: shared hit=103\nPlanning Time: 0.080 ms\nExecution Time: 3.217 ms",
+    "pagePlan": "Limit  (cost=0.41..293.74 rows=100 width=37) (actual time=0.014..0.039 rows=100 loops=1)\n  Buffers: shared hit=13\n  ->  Index Only Scan using idx_providers_fl_hub_publication on providers  (cost=0.41..3048.05 rows=1039 width=37) (actual time=0.013..0.033 rows=100 loops=1)\n        Index Cond: (publication_county_id = 'osceola'::text)\n        Filter: ((publication_checked_at >= '2025-10-29 16:16:29.979+00'::timestamp with time zone) AND (publication_checked_at <= '2026-10-29 16:16:29.979+00'::timestamp with time zone))\n        Heap Fetches: 100\n        Buffers: shared hit=13\nPlanning:\n  Buffers: shared hit=3\nPlanning Time: 0.109 ms\nExecution Time: 0.049 ms",
+    "deepPlan": "Limit  (cost=4338.43..4338.43 rows=1 width=37) (actual time=8.423..8.426 rows=30 loops=1)\n  Buffers: shared hit=791\n  ->  Sort  (cost=4314.51..4338.43 rows=9569 width=37) (actual time=7.853..8.190 rows=9630 loops=1)\n        Sort Key: name, id\n        Sort Method: quicksort  Memory: 1062kB\n        Buffers: shared hit=791\n        ->  Bitmap Heap Scan on providers  (cost=454.57..3681.80 rows=9569 width=37) (actual time=0.372..2.226 rows=9630 loops=1)\n              Recheck Cond: ((publication_county_id = 'miami_dade'::text) AND verified AND (states_licensed @> '{FL}'::text[]) AND publication_license_ok AND publication_source_ok AND publication_identity_accepted AND (NOT publication_bail_excluded) AND (publication_license_state IS NOT NULL) AND (publication_checked_at IS NOT NULL) AND (slug <> ''::text) AND (name <> ''::text))\n              Filter: ((publication_checked_at >= '2025-10-29 16:16:29.979+00'::timestamp with time zone) AND (publication_checked_at <= '2026-10-29 16:16:29.979+00'::timestamp with time zone))\n              Heap Blocks: exact=688\n              Buffers: shared hit=791\n              ->  Bitmap Index Scan on idx_providers_fl_hub_publication  (cost=0.00..452.18 rows=9569 width=0) (actual time=0.322..0.322 rows=9630 loops=1)\n                    Index Cond: (publication_county_id = 'miami_dade'::text)\n                    Buffers: shared hit=103\nPlanning Time: 0.072 ms\nExecution Time: 8.439 ms",
+    "genericPlan": "Aggregate  (cost=3421.90..3421.91 rows=1 width=8)\n  ->  Bitmap Heap Scan on providers  (cost=180.70..3421.85 rows=19 width=0)\n        Recheck Cond: ((publication_county_id = $1) AND verified AND (states_licensed @> '{FL}'::text[]) AND publication_license_ok AND publication_source_ok AND publication_identity_accepted AND (NOT publication_bail_excluded) AND (publication_license_state IS NOT NULL) AND (publication_checked_at IS NOT NULL) AND (slug <> ''::text) AND (name <> ''::text))\n        Filter: ((publication_checked_at >= $2) AND (publication_checked_at <= $3))\n        ->  Bitmap Index Scan on idx_providers_fl_hub_publication  (cost=0.00..180.70 rows=3771 width=0)\n              Index Cond: (publication_county_id = $1)",
+    "missingBoolPlan": "Aggregate  (cost=10000004049.22..10000004049.23 rows=1 width=8) (actual time=13.309..13.310 rows=1 loops=1)\n  Buffers: shared hit=2988\n  ->  Seq Scan on providers  (cost=10000000000.00..10000004025.30 rows=9570 width=0) (actual time=0.011..13.002 rows=9630 loops=1)\n        Filter: (verified AND publication_source_ok AND publication_identity_accepted AND (NOT publication_bail_excluded) AND (publication_license_state IS NOT NULL) AND (publication_checked_at IS NOT NULL) AND (states_licensed @> '{FL}'::text[]) AND (publication_checked_at >= '2025-10-29 16:16:29.979+00'::timestamp with time zone) AND (publication_checked_at <= '2026-10-29 16:16:29.979+00'::timestamp with time zone) AND (slug <> ''::text) AND (name <> ''::text) AND (publication_county_id = 'miami_dade'::text))\n        Rows Removed by Filter: 31862\n        Buffers: shared hit=2988\nPlanning Time: 0.069 ms\nExecution Time: 13.361 ms"
+  },
+  "scan": {
+    "count": "->  Bitmap Heap Scan on providers  (cost=454.57..3681.80 rows=9569 width=0) (actual time=0.409..2.912 rows=9630 loops=1)",
+    "page": "->  Index Only Scan using idx_providers_fl_hub_publication on providers  (cost=0.41..3048.05 rows=1039 width=37) (actual time=0.013..0.033 rows=100 loops=1)",
+    "deep": "->  Bitmap Heap Scan on providers  (cost=454.57..3681.80 rows=9569 width=37) (actual time=0.372..2.226 rows=9630 loops=1)",
+    "generic": "->  Bitmap Heap Scan on providers  (cost=180.70..3421.85 rows=19 width=0)",
+    "countUsesIndex": true,
+    "genericUsesIndex": true,
+    "missingBoolUsesIndex": false,
+    "pageHasNoSort": true,
+    "deepPageSorts": true,
+    "seqscanDisabledOnlyForMissingPredicate": true
+  },
+  "ordering": {
+    "rows": 1086,
+    "collatorMismatches": 0,
+    "codeUnitMismatches": 1,
+    "sampleMismatches": [],
+    "codeUnitSamples": [
+      "a-1 b cool heat & air, llc -> A-1 B COOL HEAT & AIR, LLC"
+    ],
+    "unicodeRows": 16,
+    "unicodeMismatches": 2,
+    "unicodeSamples": [
+      "Zoé Order Lab => Zoé Order Lab",
+      "Zoé Order Lab => Zoé Order Lab"
+    ],
+    "mergeRows": 2595,
+    "mergeMismatches": 0,
+    "sqlMergeMismatches": 0,
+    "deepPageMatches": true,
+    "deepPageRows": 30,
+    "deepPageSortJudgedByCorrectness": true
+  },
+  "concurrency": {
+    "queries": 30,
+    "errors": 0,
+    "burstMs": 43,
+    "p95": 10,
+    "max": 11,
+    "min": 0
+  },
+  "writers": {
+    "beforeStale": 1,
+    "staleStillCounted": 1,
+    "staleAfterHelper": 0,
+    "helperBailExcluded": true,
+    "countyStale": {
+      "publication_county_id": "broward",
+      "n": 1
+    },
+    "countyRefreshed": {
+      "publication_county_id": "palm_beach"
+    },
+    "adminFormDropsCounty": null,
+    "afterAdminSave": {
+      "publication_county_id": null,
+      "n": 0
+    },
+    "ratingBefore": {
+      "publication_county_id": "pasco",
+      "publication_bail_excluded": false
+    },
+    "ratingAfter": {
+      "publication_county_id": "pasco",
+      "publication_bail_excluded": false,
+      "rating": "4.5"
+    }
+  },
+  "updatedAt": {
+    "liveTrigger": false,
+    "before": {
+      "before": "2024-06-01T00:00:00.000Z"
+    },
+    "afterPlainUpdate": "2024-06-01T00:00:00.000Z",
+    "afterTriggerInstalled": "2026-10-29T16:16:34.347Z",
+    "plainChanged": false,
+    "triggerChanged": true
+  },
+  "permissions": {
+    "grantsBefore": {
+      "anon_update": true,
+      "authenticated_update": true
+    },
+    "anonVerified": {
+      "n": 41491
+    },
+    "anonHidden": {
+      "n": 0
+    },
+    "anonUpdate": {
+      "ok": true,
+      "rowCount": 0,
+      "code": null,
+      "message": null
+    },
+    "authenticatedUpdate": {
+      "ok": true,
+      "rowCount": 0,
+      "code": null,
+      "message": null
+    },
+    "serviceUpdate": {
+      "ok": true,
+      "rowCount": 1,
+      "rows": [
+        {
+          "review_count": 7
+        }
+      ],
+      "code": null,
+      "message": null
+    },
+    "orangeCountyUnchanged": {
+      "publication_county_id": "orange"
+    },
+    "columnRevokeUnderTableGrant": {
+      "ok": true,
+      "rowCount": 1,
+      "rows": [
+        {
+          "publication_county_id": "broward"
+        }
+      ],
+      "code": null
+    },
+    "tableDmlRevoke": {
+      "ok": false,
+      "code": "42501",
+      "message": "permission denied for table providers"
+    },
+    "selectAfterTableRevoke": {
+      "ok": true,
+      "rows": [
+        {
+          "publication_county_id": "broward"
+        }
+      ],
+      "code": null
+    },
+    "restoredCounty": {
+      "publication_county_id": "broward"
+    },
+    "anonSelectAfterLeastPrivilege": {
+      "n": 41491
+    },
+    "anonUpdateAfterLeastPrivilege": {
+      "ok": false,
+      "code": "42501",
+      "message": "permission denied for table providers"
+    },
+    "authenticatedUpdateAfterLeastPrivilege": {
+      "ok": false,
+      "code": "42501",
+      "message": "permission denied for table providers"
+    },
+    "serviceAfterLeastPrivilege": {
+      "ok": true,
+      "rows": [
+        {
+          "review_count": 8
+        }
+      ],
+      "code": null,
+      "message": null
+    },
+    "grantsAfter": {
+      "anon_update": false,
+      "anon_select": true,
+      "authenticated_update": false,
+      "service_update": true
+    }
+  },
+  "sitemap": {
+    "currentBuildThrowsWhenRequiredCountFails": false,
+    "currentFailedHubStillPublished": false,
+    "currentOtherProductionUrls": 290,
+    "currentFloridaUrls": 6,
+    "currentUnconfiguredThrows": false,
+    "currentUnconfiguredEntryCount": 290,
+    "currentUnconfiguredLabeledFixture": false,
+    "requiredContractThrows": true,
+    "requiredContractMessage": "SitemapPublicationIncomplete:miami-fort-lauderdale",
+    "unconfiguredContract": {
+      "label": "LOCAL_FIXTURE_BUILD",
+      "productionAuthoritative": false,
+      "floridaHubs": 0
+    },
+    "item9CurrentCodePasses": false
+  },
+  "gates": {
+    "performancePass": true,
+    "parityPass": true,
+    "orderingPass": false,
+    "linuxProofPass": false,
+    "supabasePerformanceValidated": false
+  }
+}
