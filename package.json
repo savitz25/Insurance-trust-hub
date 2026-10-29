@@ -43,6 +43,7 @@
     "test:ins-seo-reliability-001": "tsx --test scripts/ins-seo-reliability-001.test.ts",
     "test:ins-fl-hub-500": "tsx --test lib/dfs/florida-hub-query.test.ts && node --test scripts/ins-fl-hub-500-behavior.mjs",
     "test:ins-seo-fl-integration-001": "npm run test:map-with-concurrency && npm run test:ins-seo-reliability-001 && npm run test:ins-fl-hub-500",
+    "test:ins-sitemap-correction-002": "tsx --test scripts/ins-sitemap-correction-002.test.ts",
     "home:metrics": "node --import tsx scripts/build_network_metrics_v1.mjs",
     "assert:network-metrics": "node scripts/assert_network_metrics_v1.mjs && npx --yes tsx --test scripts/test_insurance_network_metrics.ts && python -X utf8 scripts/check-insurance-network-metrics-stale.py",
     "assert:visual": "node scripts/assert-visual-005.mjs",
