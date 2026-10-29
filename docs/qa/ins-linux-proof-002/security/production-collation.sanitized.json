@@ -1,0 +1,14 @@
+{
+  "inspected_at": "2026-10-29",
+  "method": "read-only PostgreSQL catalog settings. No DDL and no grant changes.",
+  "server_version": "17.6",
+  "server_version_num": "170006",
+  "server_encoding": "UTF8",
+  "datlocprovider": "i",
+  "datlocale": "en-US",
+  "datcollate": "en_US.UTF-8",
+  "datctype": "en_US.UTF-8",
+  "compile_target": "x86_64-pc-linux-gnu",
+  "compiler": "gcc (GCC) 15.2.0",
+  "note": "The locale provider is ICU. datcollate and datctype remain the glibc locale name en_US.UTF-8. Project identifier and database host are omitted."
+}

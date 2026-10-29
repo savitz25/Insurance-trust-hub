@@ -1,0 +1,46 @@
+name: INS Linux proof 002
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: glibc en_US.UTF-8 locale
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo locale-gen en_US.UTF-8
+          locale
+          getconf GNU_LIBC_VERSION
+      - uses: actions/checkout@v4
+        with:
+          ref: ac21c5c89980832ce3b2cc9effb8c3b286f4250d
+          path: held-app
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: install held application dependencies
+        working-directory: held-app
+        run: npm ci
+      - name: install isolated postgres proof runtime
+        working-directory: docs/qa/ins-linux-proof-002
+        run: npm install --no-fund --no-audit pg@8.23.1 embedded-postgres@17.6.0-beta.15 @embedded-postgres/linux-x64@17.6.0-beta.15
+      - name: run retained proof
+        working-directory: docs/qa/ins-linux-proof-002
+        env:
+          PROOF_APP_ROOT: ${{ github.workspace }}/held-app
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
+        run: ../../../held-app/node_modules/.bin/tsx --tsconfig "${{ github.workspace }}/held-app/tsconfig.json" src/run-proof.mts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-proof-result
+          path: |
+            docs/qa/ins-linux-proof-002/results/proof-result.json
+            docs/qa/ins-linux-proof-002/results/postgres.log
+          if-no-files-found: warn

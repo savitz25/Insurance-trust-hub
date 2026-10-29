@@ -27,6 +27,13 @@ import { listIndexableContractIds } from '@/lib/insurance/cms/contract-intellige
 import { listMedicareEvidencedCarrierSlugs } from '@/lib/carriers/rollup';
 import { carrierPath } from '@/lib/carriers/registry';
 import { publishedProfileSitemapPaths } from '@/lib/national/legal-insurer-pilot';
+import { isSupabaseConfigured } from '@/lib/supabase/config';
+import {
+  assertAuthoritativeSitemap,
+  labelLocalFixtureEntries,
+  selectSitemapMode,
+  SitemapCredentialsAbsent,
+} from '@/lib/hubs/sitemap-publication-mode';
 
 /**
  * Standalone InsuranceTrustHub sitemap — insurancetrusthub.com URLs only.
@@ -326,11 +333,21 @@ export function buildSitemapEntries(
   });
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const mode = selectSitemapMode({
+    configured: isSupabaseConfigured(),
+    localFixture: process.env.SITEMAP_LOCAL_FIXTURE === '1',
+    vercelEnv: process.env.VERCEL_ENV,
+  });
+  if (mode === 'credentials-absent') throw new SitemapCredentialsAbsent();
+  if (mode === 'local-fixture') {
+    return labelLocalFixtureEntries(buildSitemapEntries(new Date(), new Map()));
+  }
   const { readHubPublicationSnapshot } = await import('@/lib/hubs/read-hub-publication-signal');
   const signals = await readHubPublicationSnapshot(INSURANCE_HUBS.map((hub) => hub.slug));
-  return buildSitemapEntries(
-    new Date(),
-    new Map(signals.map((signal) => [signal.hubSlug, signal]))
-  );
+  const signalMap = new Map(signals.map((signal) => [signal.hubSlug, signal]));
+  assertAuthoritativeSitemap(INSURANCE_HUBS, signalMap);
+  return buildSitemapEntries(new Date(), signalMap);
 }
