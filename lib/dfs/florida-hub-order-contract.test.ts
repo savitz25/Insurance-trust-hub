@@ -228,11 +228,19 @@ test('the paired read uses the computed field and the SQL packet stays unapplied
 
   const packet = readFileSync(join(root, 'lib/dfs/ins-ordering-integration-004.not-applied.sql'), 'utf8');
   assert.ok(packet.includes('DO NOT APPLY'));
-  assert.ok(packet.includes('CREATE FUNCTION public.provider_name_nfc(public.providers)'));
-  assert.ok(packet.includes('SELECT normalize($1.name, NFC);'));
-  assert.ok(packet.includes('REVOKE ALL ON FUNCTION public.provider_name_nfc(public.providers) FROM PUBLIC;'));
+  assert.equal(packet.includes('CREATE FUNCTION'), false);
+  assert.ok(packet.includes('supabase/migrations/20261030160000_provider_name_nfc.sql'));
+  assert.ok(packet.includes('supabase/rollbacks/20261030160000_provider_name_nfc.sql'));
   assert.equal(packet.includes('CREATE INDEX'), false);
   assert.equal(packet.includes('ALTER TABLE'), false);
-  const migrations = readFileSync(join(root, 'supabase/migrations/20260811120000_florida_dfs_inventory.sql'), 'utf8');
-  assert.equal(migrations.includes('provider_name_nfc'), false);
+  const migration = readFileSync(
+    join(root, 'supabase/migrations/20261030160000_provider_name_nfc.sql'),
+    'utf8'
+  );
+  assert.ok(migration.includes('CREATE FUNCTION public.provider_name_nfc(public.providers)'));
+  assert.ok(migration.includes("pg_catalog.normalize($1.name, 'NFC')"));
+  assert.ok(migration.includes('SECURITY INVOKER'));
+  assert.equal(migration.includes('SECURITY DEFINER'), false);
+  const inventory = readFileSync(join(root, 'supabase/migrations/20260811120000_florida_dfs_inventory.sql'), 'utf8');
+  assert.equal(inventory.includes('provider_name_nfc'), false);
 });
