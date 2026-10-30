@@ -987,6 +987,7 @@ async function readFloridaCountyChunk(
     .eq('verified', true)
     .contains('states_licensed', ['FL'])
     .or(floridaHubIdPredicate(countyId))
+    // Column identifiers only. An SQL expression is not an order field.
     .order('name', { ascending: true })
     .order('id', { ascending: true })
     .range(offset, offset + limit - 1);

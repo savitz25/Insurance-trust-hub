@@ -1,0 +1,6 @@
+-- INS-ORDERING-INTEGRATION-004
+-- The executable statement now lives in the versioned migration
+-- supabase/migrations/20261030160000_provider_name_nfc.sql.
+-- The paired rollback is supabase/rollbacks/20261030160000_provider_name_nfc.sql.
+-- This file is not a migration. DO NOT APPLY this file.
+-- Do not keep a second function definition here.

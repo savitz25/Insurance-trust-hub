@@ -1,0 +1,85 @@
+{
+  "task": "INS-PR121-122-SECURITY-REPAIR-008",
+  "target": "disposable-local",
+  "database": "ins_nfc_repair_008",
+  "serverVersion": "17.6",
+  "postgrest": "v14.18",
+  "supabasePerformanceValidated": false,
+  "note": "Local disposable timings are not Supabase latency. The function was created only in ins_nfc_repair_008 and that database was dropped. Database proof was not dropped. PostgreSQL omits the default SECURITY INVOKER clause from pg_get_functiondef; prosecdef false is the catalog proof. The migration source still specifies SECURITY INVOKER.",
+  "rows": {
+    "verifiedMiamiDade": 167000,
+    "unverified": 1
+  },
+  "thresholds": {
+    "statementTimeoutBudgetMs": 3000,
+    "measurementTimeoutMs": 15000,
+    "nfcPageMaxMs": 3000,
+    "nfcDeepMaxMs": 3000,
+    "significantRegressionDeepDeltaMs": 500,
+    "significantRegressionNfcDeepMedianMs": 1000,
+    "iterations": 5,
+    "deepOffset": 166900,
+    "pageSize": 100
+  },
+  "hold": {
+    "migrationWithoutGoRefused": true,
+    "rollbackWithoutGoRefused": true,
+    "functionAbsentAfterRefusedMigration": true
+  },
+  "schemaCache": {
+    "loadedBeforeCreate": true,
+    "orderBeforeFunction": { "status": 400, "code": "42703" },
+    "selectBeforeFunction": { "status": 400, "code": "42703" },
+    "orderAfterCreateBeforeNotify": { "status": 200, "count": 100 },
+    "selectAfterCreateBeforeNotify": { "status": 200, "count": 100 },
+    "orderWaitsForReload": false,
+    "selectWaitsForReload": false,
+    "notifyReceived": true,
+    "secondLoadLogged": true,
+    "schemaLoadsBeforeCreate": 1,
+    "schemaLoadsAfterNotify": 2,
+    "orderAfterRollback": { "status": 400, "code": "42703" },
+    "orderAfterMigrationFile": { "status": 200, "count": 100 },
+    "orderAfterFinalRollback": { "status": 400, "code": "42703" }
+  },
+  "function": {
+    "prosecdef": false,
+    "volatility": "i",
+    "parallel": "s",
+    "proconfig": null,
+    "definitionHasPgCatalogNormalize": true,
+    "publicExecute": false,
+    "anonExecute": true,
+    "authenticatedExecute": true,
+    "serviceRoleExecute": true,
+    "anonUnverifiedRows": 0,
+    "anonHiddenHttpCount": 0,
+    "serviceRoleUnverifiedCount": 1,
+    "inlinesToNormalize": true,
+    "rawDeepExplainMs": 175.783,
+    "nfcDeepExplainMs": 242.544
+  },
+  "performance": {
+    "selectStar": {
+      "rawPageMedianMs": 80.222,
+      "nfcPageMedianMs": 155.082,
+      "rawDeepMedianMs": 191.083,
+      "nfcDeepMedianMs": 310.496
+    },
+    "idName": {
+      "rawPageMedianMs": 75.142,
+      "nfcPageMedianMs": 150.641,
+      "rawDeepMedianMs": 163.421,
+      "nfcDeepMedianMs": 296.466
+    },
+    "deepDeltaMs": 119.413,
+    "significantRegression": false,
+    "withinStatementBudget": true
+  },
+  "migrationFileAppliedWithGo": true,
+  "rollbackFileAppliedWithGo": true,
+  "visibilityUnchanged": true,
+  "functionAbsentAtEnd": true,
+  "databaseDropped": true,
+  "proofDatabaseRemains": true
+}
