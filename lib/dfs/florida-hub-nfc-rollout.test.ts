@@ -216,12 +216,50 @@ test('the rollout sequence, rollback order, and unrun checklist stay explicit', 
 
   const packet = readFileSync(join(root, 'lib/dfs/ins-ordering-integration-004.not-applied.sql'), 'utf8');
   assert.ok(packet.includes('DO NOT APPLY'));
+  assert.equal(packet.includes('CREATE FUNCTION'), false);
   assert.equal(packet.includes('CREATE INDEX'), false);
   assert.equal(packet.includes('ALTER TABLE'), false);
-  const migrations = readdirSync(join(root, 'supabase/migrations'));
+  const migrationName = '20261030160000_provider_name_nfc.sql';
+  const migrations = readdirSync(join(root, 'supabase/migrations')).filter((name) => name.endsWith('.sql'));
+  assert.equal(migrations.filter((name) => name.includes('provider_name_nfc')).length, 1);
   for (const name of migrations) {
-    if (!name.endsWith('.sql')) continue;
+    if (name === migrationName) continue;
     const text = readFileSync(join(root, 'supabase/migrations', name), 'utf8');
     assert.equal(text.includes('provider_name_nfc'), false, name);
   }
+  const migration = readFileSync(join(root, 'supabase/migrations', migrationName), 'utf8');
+  assert.equal(migration.includes('DROP FUNCTION'), false);
+  const rollback = readFileSync(join(root, 'supabase/rollbacks', migrationName), 'utf8');
+  assert.ok(rollback.includes('DROP FUNCTION IF EXISTS public.provider_name_nfc(public.providers);'));
+  assert.equal(rollback.includes('CREATE FUNCTION'), false);
+
+  const repair = JSON.parse(
+    readFileSync(join(root, 'lib/dfs/ins-provider-name-nfc-migration-008.json'), 'utf8')
+  ) as {
+    supabasePerformanceValidated: boolean;
+    rows: { verifiedMiamiDade: number };
+    thresholds: { statementTimeoutBudgetMs: number; nfcDeepMaxMs: number; significantRegressionDeepDeltaMs: number };
+    performance: {
+      selectStar: { rawDeepMedianMs: number; nfcDeepMedianMs: number };
+      deepDeltaMs: number;
+      significantRegression: boolean;
+      withinStatementBudget: boolean;
+    };
+    schemaCache: { notifyReceived: boolean; secondLoadLogged: boolean; orderWaitsForReload: boolean };
+    functionAbsentAtEnd: boolean;
+  };
+  assert.equal(repair.supabasePerformanceValidated, false);
+  assert.equal(repair.rows.verifiedMiamiDade, 167000);
+  assert.equal(repair.thresholds.statementTimeoutBudgetMs, 3000);
+  assert.equal(repair.thresholds.nfcDeepMaxMs, 3000);
+  assert.equal(repair.thresholds.significantRegressionDeepDeltaMs, 500);
+  assert.equal(repair.performance.selectStar.rawDeepMedianMs, 191.083);
+  assert.equal(repair.performance.selectStar.nfcDeepMedianMs, 310.496);
+  assert.equal(repair.performance.deepDeltaMs, 119.413);
+  assert.equal(repair.performance.significantRegression, false);
+  assert.equal(repair.performance.withinStatementBudget, true);
+  assert.equal(repair.schemaCache.notifyReceived, true);
+  assert.equal(repair.schemaCache.secondLoadLogged, true);
+  assert.equal(repair.schemaCache.orderWaitsForReload, false);
+  assert.equal(repair.functionAbsentAtEnd, true);
 });
