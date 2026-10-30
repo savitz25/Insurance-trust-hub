@@ -1,10 +1,15 @@
 /**
  * Phase 4 — load verified providers for Florida launch hubs (public read path).
  *
- * Hub pages count and page by one contact.launch_county_id equality at a time.
- * A wide OR of county text and description ilike is the statement that hits
- * the database timeout. countyMatchOrParts keeps that wider match for promote
- * backfill and directory search. County text does not add or remove a hub card.
+ * Single-county hub pages count and page by one contact.launch_county_id
+ * equality: miami-dade, broward, broward-county, palm-beach-county, and
+ * jacksonville. The page order is one SQL `ORDER BY name, id`. County text
+ * does not add or remove a card on that path.
+ *
+ * tampa, orlando, and miami-fort-lauderdale keep the current wide county
+ * match for the count and the page together. Directory search, state-nav
+ * totals, and promote backfill also keep that wide matcher. The relief is
+ * those five single-county hub page reads.
  *
  * Totals are exact head counts. Cards use HUB_PAGE_SIZE with ?page= pagination.
  */
@@ -34,12 +39,7 @@ import {
   type FlLaunchCounty,
   type FlLaunchCountyId,
 } from '@/lib/dfs/launch-counties';
-import {
-  assertCompleteFloridaHubPage,
-  FLORIDA_HUB_CHUNK,
-  FLORIDA_HUB_DB_CONCURRENCY,
-  mergeFloridaHubPage,
-} from '@/lib/dfs/florida-hub-merge';
+import { assertCompleteFloridaHubPage } from '@/lib/dfs/florida-hub-merge';
 import {
   isTxLaunchHub,
   launchMarketsForHubSlug,
@@ -862,24 +862,6 @@ function joinFloridaHubInventory(
 
 type FloridaHubClient = NonNullable<ReturnType<typeof createPublicClient>>;
 
-async function mapWithLimit<T, R>(
-  items: readonly T[],
-  limit: number,
-  worker: (item: T, index: number) => Promise<R>
-): Promise<R[]> {
-  const results = new Array<R>(items.length);
-  let cursor = 0;
-  const runners = Array.from({ length: Math.min(Math.max(1, limit), items.length) }, async () => {
-    while (cursor < items.length) {
-      const index = cursor;
-      cursor += 1;
-      results[index] = await worker(items[index], index);
-    }
-  });
-  await Promise.all(runners);
-  return results;
-}
-
 function floridaLaunchCountyId(row: { contact?: unknown }): string {
   const contact = row.contact;
   if (!contact || typeof contact !== 'object') return '';
@@ -929,22 +911,6 @@ async function readFloridaCountyChunk(
   return { rows, fetched: data.length };
 }
 
-async function readFloridaCountyPrefix(
-  supabase: FloridaHubClient,
-  countyId: string,
-  need: number
-): Promise<DbProvider[]> {
-  const rows: DbProvider[] = [];
-  let offset = 0;
-  while (rows.length < need) {
-    const chunk = await readFloridaCountyChunk(supabase, countyId, offset, FLORIDA_HUB_CHUNK);
-    rows.push(...chunk.rows);
-    offset += chunk.fetched;
-    if (chunk.fetched < FLORIDA_HUB_CHUNK) break;
-  }
-  return rows;
-}
-
 async function readFloridaHubInventory(
   hubSlug: string,
   pageSize: number,
@@ -959,58 +925,92 @@ async function readFloridaHubInventory(
     const supabase = createPublicClient();
     if (!supabase) throw new Error('Florida hub inventory client unavailable');
 
-    const counts = await mapWithLimit(counties, FLORIDA_HUB_DB_CONCURRENCY, (county) =>
-      countFloridaHubCounty(supabase, county.id)
-    );
-    const total = counts.reduce((sum, count) => sum + count, 0);
+    if (counties.length === 1) {
+      const county = counties[0];
+      const total = await countFloridaHubCounty(supabase, county.id);
+      const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
+      const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+      const from = (safePage - 1) * pageSize;
+
+      let pageRows: DbProvider[] = [];
+      if (total > 0 && from < total) {
+        pageRows = (await readFloridaCountyChunk(supabase, county.id, from, pageSize)).rows;
+      }
+
+      const providers = pageRows.map((row) => mapRowToProvider(row as DbProvider));
+      if (
+        providers.some(
+          (provider) => !canShowAsVerified(resolveProviderTrustState(provider))
+        )
+      ) {
+        throw new Error('Florida hub inventory eligibility unavailable');
+      }
+      assertCompleteFloridaHubPage({
+        total,
+        from,
+        pageSize,
+        rowCount: providers.length,
+      });
+
+      return {
+        providers,
+        total,
+        showing: providers.length,
+        pageSize,
+        page: safePage,
+        totalPages,
+        hubSlug,
+      };
+    }
+
+    const or = hubMatchOrParts(counties);
+    if (!or) return emptyInventory(hubSlug, pageSize, page);
+
+    const total = await countVerifiedForCounties(counties, true);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
+    const overFetch = Math.min(pageSize + 40, 200);
+    const to = from + overFetch - 1;
 
-    let pageRows: DbProvider[] = [];
-    if (total > 0 && from < total) {
-      if (counties.length === 1) {
-        pageRows = (await readFloridaCountyChunk(supabase, counties[0].id, from, pageSize)).rows;
-      } else {
-        const need = from + pageSize;
-        const streams = await mapWithLimit(counties, FLORIDA_HUB_DB_CONCURRENCY, (county) =>
-          readFloridaCountyPrefix(supabase, county.id, need)
-        );
-        pageRows = mergeFloridaHubPage(streams, from, pageSize);
-        const unique = uniqueProvidersById(pageRows);
-        if (unique.length !== pageRows.length) {
-          throw new Error('Florida hub inventory rows unavailable');
-        }
-      }
+    const { data, error } = await supabase
+      .from('providers')
+      .select('*')
+      .eq('verified', true)
+      .contains('states_licensed', ['FL'])
+      .or(or)
+      .order('name', { ascending: true })
+      .range(from, to);
+
+    if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
+    if (!data.length) {
+      return {
+        ...emptyInventory(hubSlug, pageSize, safePage),
+        total,
+        totalPages,
+      };
     }
 
-    const providers = pageRows.map((row) => mapRowToProvider(row as DbProvider));
-    if (
-      providers.some(
-        (provider) => !canShowAsVerified(resolveProviderTrustState(provider))
-      )
-    ) {
-      throw new Error('Florida hub inventory eligibility unavailable');
-    }
-    assertCompleteFloridaHubPage({
-      total,
-      from,
-      pageSize,
-      rowCount: providers.length,
-    });
+    const mapped = data.map((row) => mapRowToProvider(row as DbProvider));
+    const verified = filterVerifiedProviders(mapped)
+      .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
+      .filter((p) => providerMatchesLaunchCounties(p, counties));
+
+    const providers = verified.slice(0, pageSize);
+    const safeTotal = Math.max(total, from + providers.length);
 
     return {
       providers,
-      total,
+      total: safeTotal,
       showing: providers.length,
       pageSize,
       page: safePage,
-      totalPages,
+      totalPages: Math.max(totalPages, safeTotal > 0 ? Math.ceil(safeTotal / pageSize) : 0),
       hubSlug,
     };
   } catch {
     // Lookup, transport, and eligibility failures are not an empty market.
-    // Never turn a database timeout into an empty listing or a zero count.
+    // A failed count or row read stays a failed page.
     throw new Error('Florida hub inventory unavailable');
   }
 }
