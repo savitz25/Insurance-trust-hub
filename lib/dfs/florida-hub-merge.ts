@@ -7,22 +7,32 @@ export type FloridaHubOrderKey = {
 };
 
 /**
- * PostgreSQL `ORDER BY name, id` on this database uses the en_US collation.
- * A read-only Tampa comparison (hillsborough + pinellas + pasco, first 1,000
- * rows) disagreed with UTF-16 code-unit order at 680 positions and agreed
- * with this collator at every position.
- *
- * This raw comparison is the current multi-county merge. It is also the
- * deliberate negative control for canonically equivalent names: Node ties
- * the precomposed and combining-acute forms, while PostgreSQL `ORDER BY name`
- * does not. Single-county pages keep PostgREST `order=name.asc,id.asc`.
- * Do not switch this comparator to NFC until that query orders by the same
- * key. PostgREST cannot order by the SQL expression `normalize(name, NFC)`.
+ * Raw `ORDER BY name, id`. Deliberate negative control only.
+ * PostgreSQL ranks the combining acute before the precomposed form. Node's
+ * raw collator does not use that order. Production pages must not call this.
+ * PostgREST cannot order by the SQL expression `normalize(name, NFC)`.
  */
 const floridaHubCollator = new Intl.Collator('en-US', {
   usage: 'sort',
   sensitivity: 'variant',
 });
+
+/** PostgREST order field for `public.provider_name_nfc(providers)`. */
+export const FLORIDA_HUB_ORDER_COLUMN = 'provider_name_nfc';
+
+type HubOrderQuery<T> = {
+  order(column: string, options: { ascending: boolean }): T;
+};
+
+/**
+ * Per-county order: computed NFC key, then id.
+ * The argument is a column identifier. It is not an SQL expression.
+ */
+export function applyFloridaHubOrder<T extends HubOrderQuery<T>>(query: T): T {
+  return query
+    .order(FLORIDA_HUB_ORDER_COLUMN, { ascending: true })
+    .order('id', { ascending: true });
+}
 
 export function compareFloridaHubOrder(
   left: FloridaHubOrderKey,
@@ -34,11 +44,10 @@ export function compareFloridaHubOrder(
 }
 
 /**
- * Shared contract: NFC, then the same en-US collation, then id.
+ * Production contract: NFC, then the same en-US collation, then id.
  * Comparison only. Stored and displayed names stay on `name`.
- * The hub read must not call this until `provider_name_nfc` is available
- * to PostgREST. Wiring it alone would make multi-county pages disagree
- * with single-county SQL pages.
+ * `mergeFloridaHubPage` uses this by default, and `applyFloridaHubOrder`
+ * orders each county stream by the same key.
  */
 export function compareFloridaHubOrderByNfc(
   left: FloridaHubOrderKey,
@@ -86,7 +95,7 @@ export function mergeFloridaHubPage<T extends FloridaHubOrderKey>(
   streams: readonly (readonly T[])[],
   from: number,
   pageSize: number,
-  compare: (left: T, right: T) => number = compareFloridaHubOrder
+  compare: (left: T, right: T) => number = compareFloridaHubOrderByNfc
 ): T[] {
   const indexes = streams.map(() => 0);
   const merged: T[] = [];
