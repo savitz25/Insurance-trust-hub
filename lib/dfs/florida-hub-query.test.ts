@@ -123,8 +123,10 @@ test('Florida hub inventory read stays fail-closed on per-id streams', () => {
   assert.ok(readBody.includes('floridaHubIdPredicate('));
   assert.ok(readBody.includes('mergeFloridaHubPage('));
   assert.ok(readBody.includes(".contains('states_licensed', ['FL'])"));
-  assert.ok(readBody.includes(".order('name'"));
-  assert.ok(readBody.includes(".order('id'"));
+  assert.ok(readBody.includes('applyFloridaHubOrder('));
+  assert.ok(readBody.includes(".select('*'"));
+  assert.equal(readBody.includes(".order('name'"), false);
+  assert.equal(readBody.includes('publication_county_id'), false);
   assert.equal(readBody.includes('floridaHubIdOrParts'), false);
   assert.ok(readBody.includes('canShowAsVerified(resolveProviderTrustState(provider))'));
   assert.ok(readBody.includes("throw new Error('Florida hub inventory eligibility unavailable')"));

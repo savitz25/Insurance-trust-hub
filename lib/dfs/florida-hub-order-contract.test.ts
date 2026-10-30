@@ -214,16 +214,15 @@ test('NFC pages and split county streams do not drop or repeat providers', () =>
   assert.equal(next.length, 100);
 });
 
-test('the live read stays on raw name order until the computed field exists', () => {
+test('the paired read uses the computed field and the SQL packet stays unapplied', () => {
   const source = readFileSync(join(root, 'lib/dfs/providers-by-county.ts'), 'utf8');
   const readStart = source.indexOf('async function readFloridaCountyChunk');
   const readEnd = source.indexOf('async function readFloridaCountyPrefix');
   const readBody = source.slice(readStart, readEnd);
-  assert.ok(readBody.includes(".order('name'"));
-  assert.ok(readBody.includes(".order('id'"));
-  assert.equal(readBody.includes('provider_name_nfc'), false);
+  assert.ok(readBody.includes('applyFloridaHubOrder('));
+  assert.equal(readBody.includes(".order('name'"), false);
   assert.equal(readBody.includes('normalize'), false);
-  assert.equal(readBody.includes('compareFloridaHubOrderByNfc'), false);
+  assert.equal(readBody.includes('publication_'), false);
   assert.ok(readBody.includes(".contains('states_licensed', ['FL'])"));
   assert.ok(readBody.includes('floridaHubIdPredicate('));
 

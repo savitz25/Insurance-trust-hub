@@ -1,0 +1,12 @@
+{
+  "computedFieldExistsOnTarget": false,
+  "privilegesReviewedBySupabaseSecurity": false,
+  "targetPostgrestOrderingSucceeded": false,
+  "applicationSwitchApproved": false,
+  "targetOrderHttpStatus": null,
+  "securityReviewRef": "",
+  "vercelPreviewIsRuntimeCertification": false,
+  "prDescriptionIsRuntimeCertification": false,
+  "githubMergeableIsApproval": false,
+  "disposableProofIsTargetCertification": false
+}

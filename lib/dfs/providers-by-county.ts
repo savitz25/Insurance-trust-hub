@@ -18,6 +18,7 @@ import {
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
 import {
+  applyFloridaHubOrder,
   assertCompleteFloridaHubPage,
   FLORIDA_HUB_CHUNK,
   mergeFloridaHubPage,
@@ -981,16 +982,14 @@ async function readFloridaCountyChunk(
   offset: number,
   limit: number
 ): Promise<{ rows: DbProvider[]; fetched: number }> {
-  const { data, error } = await supabase
-    .from('providers')
-    .select('*')
-    .eq('verified', true)
-    .contains('states_licensed', ['FL'])
-    .or(floridaHubIdPredicate(countyId))
-    // Column identifiers only. An SQL expression is not an order field.
-    .order('name', { ascending: true })
-    .order('id', { ascending: true })
-    .range(offset, offset + limit - 1);
+  const { data, error } = await applyFloridaHubOrder(
+    supabase
+      .from('providers')
+      .select('*')
+      .eq('verified', true)
+      .contains('states_licensed', ['FL'])
+      .or(floridaHubIdPredicate(countyId))
+  ).range(offset, offset + limit - 1);
 
   if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
   if (data.some((row) => !row.id || floridaLaunchCountyId(row) !== countyId)) {
