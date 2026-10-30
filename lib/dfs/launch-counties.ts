@@ -212,42 +212,6 @@ export function countyMatchOrParts(county: FlLaunchCounty): string[] {
   return [...new Set(parts)];
 }
 
-/**
- * Hub inventory predicate. One equality on the structured county id.
- * County text and description ilike stay in countyMatchOrParts for backfill
- * and directory search. They are not the hub page predicate.
- */
-export function floridaHubIdPredicate(id: string): string {
-  return `contact->>launch_county_id.eq.${id}`;
-}
-
-/**
- * Hub membership is the structured launch county id.
- * County display text, a normalized county, and description text do not
- * add a provider and do not remove one whose id is in the hub.
- * A missing id is not a member.
- */
-export function isFloridaHubMember(
-  provider: { launchCountyId?: string | null },
-  counties: readonly { id: string }[]
-): boolean {
-  const id = provider.launchCountyId?.trim() ?? '';
-  if (!id) return false;
-  return counties.some((county) => county.id === id);
-}
-
-/** Keep the first row for each provider id. A merged page must not repeat a provider. */
-export function uniqueProvidersById<T extends { id: string }>(rows: readonly T[]): T[] {
-  const seen = new Set<string>();
-  const unique: T[] = [];
-  for (const row of rows) {
-    if (!row.id || seen.has(row.id)) continue;
-    seen.add(row.id);
-    unique.push(row);
-  }
-  return unique;
-}
-
 export function structuredContactForCounty(county: FlLaunchCounty): {
   county: string;
   county_normalized: string;
