@@ -1,20 +1,13 @@
 /**
  * Phase 4 — load verified providers for Florida launch hubs (public read path).
  *
- * Single-county hub pages count and page by one contact.launch_county_id
- * equality: miami-dade, broward, broward-county, palm-beach-county, and
- * jacksonville. The page order is one SQL `ORDER BY name, id`. County text
- * does not add or remove a card on that path.
+ * Matching strategy (prefer structured → precise promote tags):
+ * 1. contact.launch_county_id / contact.county / contact.county_normalized
+ * 2. short_description tags written at promote: "Duval County", "Dade County", …
  *
- * tampa, orlando, and miami-fort-lauderdale keep the current wide county
- * match for the count and the page together. Directory search, state-nav
- * totals, and promote backfill also keep that wide matcher. The relief is
- * those five single-county hub page reads.
- *
- * Totals are exact head counts. Cards use HUB_PAGE_SIZE with ?page= pagination.
+ * Totals use exact head count; cards use HUB_PAGE_SIZE with ?page= pagination.
  */
 
-import { cache } from 'react';
 import type { Provider } from '@/types/provider';
 import { isSupabaseConfigured } from '@/lib/supabase/config';
 import { createPublicClient } from '@/lib/supabase/public';
@@ -28,18 +21,14 @@ import {
 import {
   FL_LAUNCH_COUNTIES,
   countyMatchOrParts,
-  floridaHubIdPredicate,
   flLaunchCountyNavRows,
-  isFloridaHubMember,
   isFlLaunchHub,
   launchCountiesForHubSlug,
   matchLaunchCounty,
   normalizeCountyName,
-  uniqueProvidersById,
   type FlLaunchCounty,
   type FlLaunchCountyId,
 } from '@/lib/dfs/launch-counties';
-import { assertCompleteFloridaHubPage } from '@/lib/dfs/florida-hub-merge';
 import {
   isTxLaunchHub,
   launchMarketsForHubSlug,
@@ -847,7 +836,7 @@ function joinFloridaHubInventory(
   const key = `${hubSlug}:${pageSize}:${page}`;
   const current = floridaHubInventoryInFlight.get(key);
   if (current) return current;
-  const pending = readFloridaHubInventoryCached(hubSlug, pageSize, page);
+  const pending = readFloridaHubInventory(hubSlug, pageSize, page);
   floridaHubInventoryInFlight.set(key, pending);
   // Cleanup is a separate chain. Catching here does not swallow the rejection
   // returned to page and metadata; it only keeps finally() from emitting
@@ -858,57 +847,6 @@ function joinFloridaHubInventory(
     }
   });
   return pending;
-}
-
-type FloridaHubClient = NonNullable<ReturnType<typeof createPublicClient>>;
-
-function floridaLaunchCountyId(row: { contact?: unknown }): string {
-  const contact = row.contact;
-  if (!contact || typeof contact !== 'object') return '';
-  const id = (contact as { launch_county_id?: unknown }).launch_county_id;
-  return typeof id === 'string' ? id.trim() : '';
-}
-
-async function countFloridaHubCounty(supabase: FloridaHubClient, countyId: string): Promise<number> {
-  const { count, error } = await supabase
-    .from('providers')
-    .select('id', { count: 'exact', head: true })
-    .eq('verified', true)
-    .contains('states_licensed', ['FL'])
-    .or(floridaHubIdPredicate(countyId));
-  if (error || count == null) throw new Error('Florida hub inventory count unavailable');
-  return count;
-}
-
-async function readFloridaCountyChunk(
-  supabase: FloridaHubClient,
-  countyId: string,
-  offset: number,
-  limit: number
-): Promise<{ rows: DbProvider[]; fetched: number }> {
-  const { data, error } = await supabase
-    .from('providers')
-    .select('*')
-    .eq('verified', true)
-    .contains('states_licensed', ['FL'])
-    .or(floridaHubIdPredicate(countyId))
-    .order('name', { ascending: true })
-    .order('id', { ascending: true })
-    .range(offset, offset + limit - 1);
-
-  if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
-  if (
-    data.some(
-      (row) =>
-        !row.id ||
-        !isFloridaHubMember({ launchCountyId: floridaLaunchCountyId(row) }, [{ id: countyId }])
-    )
-  ) {
-    throw new Error('Florida hub inventory rows unavailable');
-  }
-  const rows = uniqueProvidersById(data);
-  if (rows.length !== data.length) throw new Error('Florida hub inventory rows unavailable');
-  return { rows, fetched: data.length };
 }
 
 async function readFloridaHubInventory(
@@ -925,44 +863,6 @@ async function readFloridaHubInventory(
     const supabase = createPublicClient();
     if (!supabase) throw new Error('Florida hub inventory client unavailable');
 
-    if (counties.length === 1) {
-      const county = counties[0];
-      const total = await countFloridaHubCounty(supabase, county.id);
-      const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
-      const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
-      const from = (safePage - 1) * pageSize;
-
-      let pageRows: DbProvider[] = [];
-      if (total > 0 && from < total) {
-        pageRows = (await readFloridaCountyChunk(supabase, county.id, from, pageSize)).rows;
-      }
-
-      const providers = pageRows.map((row) => mapRowToProvider(row as DbProvider));
-      if (
-        providers.some(
-          (provider) => !canShowAsVerified(resolveProviderTrustState(provider))
-        )
-      ) {
-        throw new Error('Florida hub inventory eligibility unavailable');
-      }
-      assertCompleteFloridaHubPage({
-        total,
-        from,
-        pageSize,
-        rowCount: providers.length,
-      });
-
-      return {
-        providers,
-        total,
-        showing: providers.length,
-        pageSize,
-        page: safePage,
-        totalPages,
-        hubSlug,
-      };
-    }
-
     const or = hubMatchOrParts(counties);
     if (!or) return emptyInventory(hubSlug, pageSize, page);
 
@@ -970,6 +870,7 @@ async function readFloridaHubInventory(
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
+    // Slight over-fetch so Phase 1 filter still fills the page
     const overFetch = Math.min(pageSize + 40, 200);
     const to = from + overFetch - 1;
 
@@ -1009,13 +910,11 @@ async function readFloridaHubInventory(
       hubSlug,
     };
   } catch {
-    // Lookup, transport, and eligibility failures are not an empty market.
-    // A failed count or row read stays a failed page.
+    // Lookup/transport/mapping failures are not evidence of an empty market.
+    // Let the route error boundary handle them; never generate empty-market SEO.
     throw new Error('Florida hub inventory unavailable');
   }
 }
-
-const readFloridaHubInventoryCached = cache(readFloridaHubInventory);
 
 /**
  * Verified FL providers for a hub (one page).
