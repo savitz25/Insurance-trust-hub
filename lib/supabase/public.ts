@@ -2,6 +2,7 @@ import 'server-only';
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/types/supabase';
+import { publicationFetch } from '@/lib/map-with-concurrency';
 import {
   getSupabaseAnonKey,
   getSupabaseUrl,
@@ -19,5 +20,6 @@ export function createPublicClient(): SupabaseClient<Database> | null {
       persistSession: false,
       autoRefreshToken: false,
     },
+    global: { fetch: publicationFetch },
   });
 }

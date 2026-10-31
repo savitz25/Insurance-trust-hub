@@ -38,6 +38,7 @@ export async function generateMetadata({
 
   return buildHubMetadata(hub, `/hubs/${state}/${slug}`, {
     total: inventory.total,
+    lookupSucceeded: inventory.lookupSucceeded === true,
   });
 }
 

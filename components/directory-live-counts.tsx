@@ -1,13 +1,19 @@
 import Link from 'next/link';
-import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
+import { readVerifiedLaunchCounts } from '@/lib/directory/live-counts';
 import { INSURANCE_BRAND } from '@/lib/design/insurance-design-system';
 
 /**
  * Homepage live verified inventory chips. Hidden when a state count is 0.
- * Fail-soft: cached helper returns zeros and this renders nothing.
+ * A failed count is not cached as zero. This request hides the chips.
  */
 export async function DirectoryLiveCounts() {
-  const { fl, tx, oh, nc, nv, vt, ma, ms } = await getCachedVerifiedLaunchCounts();
+  let counts: Awaited<ReturnType<typeof readVerifiedLaunchCounts>>;
+  try {
+    counts = await readVerifiedLaunchCounts();
+  } catch {
+    return null;
+  }
+  const { fl, tx, oh, nc, nv, vt, ma, ms } = counts;
   const rows = [
     {
       label: 'Florida (DFS)',

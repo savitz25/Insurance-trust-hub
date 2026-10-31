@@ -99,8 +99,10 @@ export async function GET() {
     if (error) {
       queryError =
         error.message || error.code || JSON.stringify(error) || queryError;
+    } else if (typeof count === 'number') {
+      verifiedFlCount = count;
     } else {
-      verifiedFlCount = count ?? 0;
+      queryError = queryError ?? 'Florida verified count missing';
     }
 
     const { data: sample, error: sampleErr } = await supabase
@@ -118,8 +120,21 @@ export async function GET() {
     sampleSlug = sample?.slug ?? null;
   }
 
-  const byCounty = await countVerifiedByLaunchCounty();
-  const hubTotals = {
+  let byCounty: Awaited<ReturnType<typeof countVerifiedByLaunchCounty>> | null = null;
+  let hubTotals: Record<string, number> | null = null;
+  let jax: Awaited<ReturnType<typeof getHubInventory>> | null = null;
+  let browardInv: Awaited<ReturnType<typeof getHubInventory>> | null = null;
+  let verifiedTxCount: number | null = null;
+  let verifiedOhCount: number | null = null;
+  let verifiedNvCount: number | null = null;
+  let verifiedVtCount: number | null = null;
+  let verifiedMaCount: number | null = null;
+  let verifiedMsCount: number | null = null;
+  let inventoryError: string | null = null;
+  let profile: Awaited<ReturnType<typeof getProviderBySlug>> | null = null;
+  try {
+  byCounty = await countVerifiedByLaunchCounty();
+  hubTotals = {
     jacksonville: await countVerifiedProvidersForHub('jacksonville'),
     'miami-dade': await countVerifiedProvidersForHub('miami-dade'),
     broward: await countVerifiedProvidersForHub('broward-county'),
@@ -144,33 +159,44 @@ export async function GET() {
     hattiesburg: await countVerifiedProvidersForHub('hattiesburg'),
   };
 
-  const jax = await getHubInventory('jacksonville', { pageSize: 5 });
-  const browardInv = await getHubInventory('broward-county', { pageSize: 3 });
-  const profile = sampleSlug ? await getProviderBySlug(sampleSlug) : null;
+  jax = await getHubInventory('jacksonville', { pageSize: 5 });
+  browardInv = await getHubInventory('broward-county', { pageSize: 3 });
+  profile = sampleSlug ? await getProviderBySlug(sampleSlug) : null;
 
-  const verifiedTxCount = await countVerifiedTexasProviders();
-  const verifiedOhCount = await countVerifiedOhioProviders();
-  const verifiedNvCount = await countVerifiedNevadaProviders();
-  const verifiedVtCount = await countVerifiedVermontProviders();
-  const verifiedMaCount = await countVerifiedMassachusettsProviders();
-  const verifiedMsCount = await countVerifiedMississippiProviders();
+  verifiedTxCount = await countVerifiedTexasProviders();
+  verifiedOhCount = await countVerifiedOhioProviders();
+  verifiedNvCount = await countVerifiedNevadaProviders();
+  verifiedVtCount = await countVerifiedVermontProviders();
+  verifiedMaCount = await countVerifiedMassachusettsProviders();
+  verifiedMsCount = await countVerifiedMississippiProviders();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : '';
+    inventoryError = /unavailable|incomplete/i.test(message)
+      ? message.slice(0, 200)
+      : 'Hub inventory unavailable';
+  }
 
   const restOk = restStatus === 200 || restStatus === 206;
   const countyOk =
-    (byCounty.duval?.total ?? 0) > 100 &&
-    (byCounty.broward?.total ?? 0) > 100 &&
-    (byCounty.miami_dade?.total ?? 0) > 100;
+    byCounty != null &&
+    byCounty.duval.total > 100 &&
+    byCounty.broward.total > 100 &&
+    byCounty.miami_dade.total > 100;
 
   return NextResponse.json(
     {
     ok:
+      inventoryError == null &&
       keyMatchesHost &&
       restOk &&
-      (verifiedFlCount ?? 0) > 0 &&
+      verifiedFlCount != null &&
+      verifiedFlCount > 0 &&
       countyOk &&
       Boolean(profile) &&
+      hubTotals != null &&
       hubTotals.jacksonville > 100 &&
       hubTotals['miami-fort-lauderdale'] > 100,
+    inventoryError,
     supabaseConfigured: true,
     supabaseHost: host,
     anonKeyRef: anonRef,
@@ -204,19 +230,23 @@ export async function GET() {
     },
     byLaunchCounty: byCounty,
     hubTotals,
-    jacksonville: {
-      total: jax.total,
-      showing: jax.showing,
-      pageSize: jax.pageSize,
-      sampleNames: jax.providers.slice(0, 3).map((p) => p.name),
-    },
-    broward: {
-      total: browardInv.total,
-      showing: browardInv.showing,
-      pageSize: browardInv.pageSize,
-      sampleNames: browardInv.providers.slice(0, 3).map((p) => p.name),
-      hubPath: '/hubs/florida/broward-county',
-    },
+    jacksonville: jax
+      ? {
+          total: jax.total,
+          showing: jax.showing,
+          pageSize: jax.pageSize,
+          sampleNames: jax.providers.slice(0, 3).map((p) => p.name),
+        }
+      : null,
+    broward: browardInv
+      ? {
+          total: browardInv.total,
+          showing: browardInv.showing,
+          pageSize: browardInv.pageSize,
+          sampleNames: browardInv.providers.slice(0, 3).map((p) => p.name),
+          hubPath: '/hubs/florida/broward-county',
+        }
+      : null,
     sampleSlug,
     profileResolves: Boolean(profile),
     },
