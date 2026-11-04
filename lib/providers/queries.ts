@@ -13,10 +13,10 @@ import {
   filterVerifiedProviders,
   resolveProviderTrustState,
 } from '@/lib/insurance/trust/provider-trust-state';
-import { countyMatchOrParts, FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
-import { providerMatchesLaunchCounties } from '@/lib/dfs/providers-by-county';
+import { FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
 import { looksLikeZip } from '@/lib/tools/zip-resolve';
 import { applyDirectoryZipScope } from './directory-scope';
+import { providerApiCountyFilter } from './provider-api-county-filter';
 /**
  * Phase 1 — public directory returns verified TrustState only.
  * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
@@ -46,16 +46,18 @@ export async function getProviders(
     const supabase = createPublicClient();
     if (!supabase) { if (failLoud) throw new Error('Directory source unavailable'); return { providers: [], total: 0 }; }
 
-    // Public directory: verified research rows only
-    let query = supabase
-      .from('providers')
-      .select('*', { count: 'exact' })
-      .eq('verified', true);
-
-    const stateCode = filters.state?.trim().toUpperCase();
     const launchCounty = !filters.zip && filters.launchCountyId
       ? FL_LAUNCH_COUNTIES.find((c) => c.id === filters.launchCountyId)
       : undefined;
+
+    // Public directory: verified research rows only.
+    // A county call uses a planned count. An exact count of the wide county OR is the 57014 timeout.
+    let query = supabase
+      .from('providers')
+      .select('*', { count: launchCounty ? 'planned' : 'exact' })
+      .eq('verified', true);
+
+    const stateCode = filters.state?.trim().toUpperCase();
     // Never treat a ZIP as a name/description ILIKE.
     const nameQuery =
       filters.query && !looksLikeZip(filters.query) ? filters.query.trim() : '';
@@ -67,8 +69,7 @@ export async function getProviders(
       query = query.contains('states_licensed', [stateCode]);
     }
     if (launchCounty) {
-      const or = countyMatchOrParts(launchCounty).join(',');
-      if (or) query = query.or(or);
+      query = query.or(providerApiCountyFilter(launchCounty));
     }
     // Phase 11A: no-state browse is all verified research (FL/TX/OH first-class).
     if (filters.city) {
@@ -121,9 +122,6 @@ export async function getProviders(
         const licensed = (p.license_state || p.state || '').toUpperCase();
         return licensed === stateCode;
       });
-    }
-    if (launchCounty) {
-      providers = providers.filter((p) => providerMatchesLaunchCounties(p, [launchCounty]));
     }
 
     providers = providers.slice(0, limit);
