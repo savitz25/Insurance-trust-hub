@@ -5,7 +5,8 @@
  * 1. contact.launch_county_id / contact.county / contact.county_normalized
  * 2. short_description tags written at promote: "Duval County", "Dade County", …
  *
- * Totals use exact head count; cards use HUB_PAGE_SIZE with ?page= pagination.
+ * Totals are exact head counts on one structured id key. Cards still use the
+ * wider matcher and HUB_PAGE_SIZE with ?page= pagination.
  */
 
 import type { Provider } from '@/types/provider';
@@ -61,6 +62,10 @@ import {
   isMsLaunchHub,
   launchMarketsForHubSlug as launchMsMarketsForHubSlug,
 } from '@/lib/ms/launch-markets';
+import {
+  countVerifiedProvidersInState,
+  exactStructuredProviderCount,
+} from '@/lib/dfs/provider-head-count';
 
 export { countyMatchOrParts };
 
@@ -134,32 +139,42 @@ export function providerMatchesLaunchCounties(
   return false;
 }
 
+/**
+ * Exact head count by one `launch_county_id` per county.
+ * The wide county-text OR on this same table is the HEAD statement that
+ * returns SQLSTATE 57014. Page reads still use that OR. A failed id count
+ * is not a partial sum and is not stored as zero when the caller requires
+ * a successful lookup.
+ */
 async function countVerifiedForCounties(
   counties: FlLaunchCounty[],
   requireSuccessfulLookup = false
 ): Promise<number> {
   if (!counties.length || !isSupabaseConfigured()) return 0;
-  const supabase = createPublicClient();
-  if (!supabase) {
-    if (requireSuccessfulLookup) throw new Error('Florida hub inventory client unavailable');
+  try {
+    let total = 0;
+    for (const county of counties) {
+      total += await exactStructuredProviderCount('FL', 'launch_county_id', [county.id]);
+    }
+    return total;
+  } catch (error) {
+    if (!requireSuccessfulLookup) return 0;
+    const message = error instanceof Error ? error.message : '';
+    throw new Error(
+      message.includes('client')
+        ? 'Florida hub inventory client unavailable'
+        : 'Florida hub inventory count unavailable'
+    );
+  }
+}
+
+/** Market head count on one id key. Row reads keep the two-key OR. */
+async function exactMarketHeadCount(state: string, ids: string[]): Promise<number> {
+  try {
+    return await exactStructuredProviderCount(state, 'launch_market_id', ids);
+  } catch {
     return 0;
   }
-
-  const or = hubMatchOrParts(counties);
-  if (!or) return 0;
-
-  const { count, error } = await supabase
-    .from('providers')
-    .select('id', { count: 'exact', head: true })
-    .eq('verified', true)
-    .contains('states_licensed', ['FL'])
-    .or(or);
-
-  if (requireSuccessfulLookup && (error || count == null)) {
-    throw new Error('Florida hub inventory count unavailable');
-  }
-  if (error) return 0;
-  return count ?? 0;
 }
 
 function emptyInventory(
@@ -198,14 +213,7 @@ async function getTxHubInventory(
       .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['TX'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('TX', marketIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -273,14 +281,7 @@ async function getNjHubInventory(
       .concat(regionIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['NJ'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('NJ', regionIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -348,14 +349,7 @@ async function getOhHubInventory(
       .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['OH'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('OH', marketIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -423,14 +417,7 @@ async function getNcHubInventory(
       .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['NC'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('NC', marketIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -498,14 +485,7 @@ async function getNvHubInventory(
       .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['NV'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('NV', marketIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -573,14 +553,7 @@ async function getMsHubInventory(
       .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['MS'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('MS', marketIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -648,14 +621,7 @@ async function getMaHubInventory(
       .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['MA'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('MA', marketIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -723,14 +689,7 @@ async function getVtHubInventory(
       .concat(marketIds.map((id) => `contact->>launch_county_id.eq.${id}`));
     const or = orParts.join(',');
 
-    const { count, error: cErr } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['VT'])
-      .or(or);
-
-    const total = cErr ? 0 : count ?? 0;
+    const total = await exactMarketHeadCount('VT', marketIds);
     const totalPages = total > 0 ? Math.ceil(total / pageSize) : 0;
     const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
     const from = (safePage - 1) * pageSize;
@@ -1046,56 +1005,17 @@ export async function countVerifiedByLaunchCounty(): Promise<
 
 /** Total verified FL providers (homepage / directory honesty). */
 export async function countVerifiedFloridaProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['FL']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('FL');
 }
 
 /** Total verified TX providers (directory honesty). */
 export async function countVerifiedTexasProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['TX']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('TX');
 }
 
 /** Total verified OH providers (directory honesty). */
 export async function countVerifiedOhioProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['OH']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('OH');
 }
 
 /** Live totals for Ohio Wave-1 hub nav (directory). */
@@ -1160,20 +1080,7 @@ export async function getOhLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]>
 
 /** Total verified NC providers (directory honesty). */
 export async function countVerifiedNorthCarolinaProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['NC']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('NC');
 }
 
 /** Live totals for North Carolina Wave-1 hub nav (directory). */
@@ -1224,20 +1131,7 @@ export async function getNcLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]>
 
 /** Total verified NV providers (directory honesty). */
 export async function countVerifiedNevadaProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['NV']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('NV');
 }
 
 /** Live totals for Nevada Wave-1 hub nav (directory). */
@@ -1281,38 +1175,12 @@ export async function getNvLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]>
 
 /** Total verified VT providers (directory honesty). */
 export async function countVerifiedVermontProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['VT']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('VT');
 }
 
 /** Total verified MA providers (directory honesty). */
 export async function countVerifiedMassachusettsProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['MA']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('MA');
 }
 
 /** Live totals for Massachusetts Wave-1 hub nav (directory). */
@@ -1356,20 +1224,7 @@ export async function getMaLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]>
 
 /** Total verified MS providers (directory honesty). */
 export async function countVerifiedMississippiProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['MS']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('MS');
 }
 
 /** Live totals for Mississippi Wave-1 hub nav (directory). */
@@ -1473,20 +1328,7 @@ export async function getVtLaunchMarketLiveTotals(): Promise<LaunchNavLiveRow[]>
 
 /** Total verified NJ providers (directory honesty). */
 export async function countVerifiedNewJerseyProviders(): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
-  try {
-    const supabase = createPublicClient();
-    if (!supabase) return 0;
-    const { count, error } = await supabase
-      .from('providers')
-      .select('id', { count: 'exact', head: true })
-      .eq('verified', true)
-      .contains('states_licensed', ['NJ']);
-    if (error) return 0;
-    return count ?? 0;
-  } catch {
-    return 0;
-  }
+  return countVerifiedProvidersInState('NJ');
 }
 
 /** Live totals for New Jersey Wave-1 hub nav (directory). */
