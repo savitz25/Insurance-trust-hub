@@ -51,10 +51,12 @@ export async function getProviders(
       : undefined;
 
     // Public directory: verified research rows only.
-    // A county call uses a planned count. An exact count of the wide county OR is the 57014 timeout.
+    // Every directory read uses a planned count. An exact count of the ZIP jsonb
+    // equality, a licensed-state scan, a name ILIKE, or a county predicate is the
+    // statement that hits SQLSTATE 57014 and surfaces as a providers 5xx.
     let query = supabase
       .from('providers')
-      .select('*', { count: launchCounty ? 'planned' : 'exact' })
+      .select('*', { count: 'planned' })
       .eq('verified', true);
 
     const stateCode = filters.state?.trim().toUpperCase();

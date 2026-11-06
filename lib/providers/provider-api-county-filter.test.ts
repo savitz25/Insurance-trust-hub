@@ -14,8 +14,9 @@ test('providers API county filter is one launch county id', () => {
   assert.equal(filter.includes(','), false);
 });
 
-test('county-scoped providers query drops the exact count and the wide county OR', () => {
-  assert.match(queries, /count: launchCounty \? 'planned' : 'exact'/);
+test('providers directory count is planned and the county filter stays one id', () => {
+  assert.match(queries, /count: 'planned'/);
+  assert.equal(queries.includes("count: 'exact'"), false);
   assert.match(queries, /providerApiCountyFilter\(launchCounty\)/);
   assert.equal(queries.includes('countyMatchOrParts'), false);
   assert.equal(queries.includes('providerMatchesLaunchCounties'), false);
