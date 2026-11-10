@@ -11,6 +11,7 @@ import {
   buildMarketMetadata,
 } from '@/lib/insurance/trust/provider-trust-state';
 import { clusterForHubSlug, clusterForPath } from '@/lib/seo/seo-clusters';
+import { hubSeoForCount, isReadyCount, type HeadCount } from '@/lib/dfs/provider-count';
 
 export type HubPublicSeo = {
   title: string;
@@ -25,12 +26,32 @@ export function resolveHubPublicSeo(
   hub: InsuranceHub,
   canonicalPath?: string,
   /** Phase 4 — live verified DB count overrides empty hub-agent catalog */
-  verifiedInventory?: { total: number; health?: number }
+  verifiedInventory?: { total: number | null; health?: number; listed?: number; count?: HeadCount }
 ): HubPublicSeo {
   const stats = getHubStats(hub);
   const path = canonicalPath ?? `/hubs/${hub.stateSlug}/${hub.slug}`;
-  const verifiedCount = verifiedInventory?.total ?? stats.totalAgents;
+  const listed = verifiedInventory?.listed ?? 0;
+  const count = verifiedInventory?.count;
+  const seoDecision = count
+    ? hubSeoForCount({ count, listed })
+    : null;
+  const verifiedCount = seoDecision
+    ? isReadyCount(count!)
+      ? count!.value
+      : listed
+    : (verifiedInventory?.total ?? stats.totalAgents);
   const healthCount = verifiedInventory?.health ?? stats.healthSpecialists;
+  if (count && !isReadyCount(count)) {
+    const place = hub.msaName ? `${hub.shortName} (${hub.msaName})` : hub.shortName;
+    return {
+      title: `Insurance agencies in ${hub.shortName} | Insurance Trust Hub`,
+      description: `Verified research listings in ${place}. The exact count is temporarily unavailable. Re-check licenses with state DOI. Independent research — no paid placements.`,
+      verifiedCount: listed,
+      healthCount,
+      isEmpty: false,
+      path,
+    };
+  }
   const meta = buildMarketMetadata({
     marketName: hub.shortName,
     regionLabel: hub.msaName,
@@ -61,7 +82,7 @@ export function resolveHubPublicSeo(
 export function buildHubMetadata(
   hub: InsuranceHub,
   canonicalPath?: string,
-  verifiedInventory?: { total: number; health?: number }
+  verifiedInventory?: { total: number | null; health?: number; listed?: number; count?: HeadCount }
 ): Metadata {
   const seo = resolveHubPublicSeo(hub, canonicalPath, verifiedInventory);
   const url = `${SITE_URL}${seo.path}`;

@@ -29,6 +29,8 @@ import { NV_DOI_LOOKUP_URL } from '@/lib/nv/launch-markets';
 import { VT_DFR_LOOKUP_URL } from '@/lib/vt/launch-markets';
 import { MA_DOI_LOOKUP_URL } from '@/lib/ma/launch-markets';
 import { MS_MID_LOOKUP_URL } from '@/lib/ms/launch-markets';
+import { unavailableCount } from '@/lib/dfs/provider-count';
+import { ExactMatchClause, HeadCountValue } from '@/components/head-count-value';
 
 /** Florida page reads live inventory totals */
 export const dynamic = 'force-dynamic';
@@ -143,13 +145,13 @@ export default async function StateHubsPage({
   const vtLaunchRows = isVermont ? await getVtLaunchMarketLiveTotals() : [];
   const maLaunchRows = isMassachusetts ? await getMaLaunchMarketLiveTotals() : [];
   const msLaunchRows = isMississippi ? await getMsLaunchMarketLiveTotals() : [];
-  const flTotal = isFlorida ? await countVerifiedFloridaProviders() : 0;
-  const ohTotal = isOhio ? await countVerifiedOhioProviders() : 0;
-  const ncTotal = isNorthCarolina ? await countVerifiedNorthCarolinaProviders() : 0;
-  const nvTotal = isNevada ? await countVerifiedNevadaProviders() : 0;
-  const vtTotal = isVermont ? await countVerifiedVermontProviders() : 0;
-  const maTotal = isMassachusetts ? await countVerifiedMassachusettsProviders() : 0;
-  const msTotal = isMississippi ? await countVerifiedMississippiProviders() : 0;
+  const flTotal = isFlorida ? await countVerifiedFloridaProviders() : unavailableCount();
+  const ohTotal = isOhio ? await countVerifiedOhioProviders() : unavailableCount();
+  const ncTotal = isNorthCarolina ? await countVerifiedNorthCarolinaProviders() : unavailableCount();
+  const nvTotal = isNevada ? await countVerifiedNevadaProviders() : unavailableCount();
+  const vtTotal = isVermont ? await countVerifiedVermontProviders() : unavailableCount();
+  const maTotal = isMassachusetts ? await countVerifiedMassachusettsProviders() : unavailableCount();
+  const msTotal = isMississippi ? await countVerifiedMississippiProviders() : unavailableCount();
   const launchHubSlugs = new Set(launchRows.map((r) => r.hubSlug));
   const ohHubSlugs = new Set(ohLaunchRows.map((r) => r.hubSlug));
   const ncHubSlugs = new Set(ncLaunchRows.map((r) => r.hubSlug));
@@ -209,8 +211,9 @@ export default async function StateHubsPage({
       <p className="mt-3 text-muted-foreground max-w-2xl leading-relaxed">
         {isFlorida ? (
           <>
-            Live Florida DFS–verified inventory for launch counties. Totals below are exact match
-            counts for public research listings — empty markets stay empty. Always re-check licenses
+            Live Florida DFS–verified inventory for launch counties.{' '}
+            <ExactMatchClause counts={[flTotal, ...launchRows.map((row) => row.total)]} />
+            Always re-check licenses
             on{' '}
             <a
               href={FL_DFS_LOOKUP_URL}
@@ -224,9 +227,9 @@ export default async function StateHubsPage({
           </>
         ) : isOhio ? (
           <>
-            Live Ohio Department of Insurance (ODI)–verified inventory for Wave-1 launch markets.
-            Totals below are exact match counts for public research listings — empty markets stay
-            empty. Always re-check licenses on the{' '}
+            Live Ohio Department of Insurance (ODI)–verified inventory for Wave-1 launch markets.{' '}
+            <ExactMatchClause counts={[ohTotal, ...ohLaunchRows.map((row) => row.total)]} />
+            Always re-check licenses on the{' '}
             <a
               href={OH_ODI_LOOKUP_URL}
               className="font-medium text-primary underline-offset-2 hover:underline"
@@ -240,8 +243,12 @@ export default async function StateHubsPage({
         ) : isNorthCarolina ? (
           <>
             Live North Carolina Department of Insurance (NC DOI)–verified inventory for Wave-1
-            launch markets. Totals below are exact match counts for public research listings —
-            empty markets stay empty until an official SBS agency export is promoted. Always
+            launch markets.{' '}
+            <ExactMatchClause
+              counts={[ncTotal, ...ncLaunchRows.map((row) => row.total)]}
+              until="until an official SBS agency export is promoted"
+            />
+            Always
             re-check licenses on the{' '}
             <a
               href={NC_DOI_LOOKUP_URL}
@@ -257,8 +264,9 @@ export default async function StateHubsPage({
         ) : isNevada ? (
           <>
             Live Nevada Division of Insurance (NV DOI)–verified inventory for Wave-1 launch
-            markets. Totals below are exact match counts for public research listings — empty
-            markets stay empty. Always re-check licenses on the{' '}
+            markets.{' '}
+            <ExactMatchClause counts={[nvTotal, ...nvLaunchRows.map((row) => row.total)]} />
+            Always re-check licenses on the{' '}
             <a
               href={NV_DOI_LOOKUP_URL}
               className="font-medium text-primary underline-offset-2 hover:underline"
@@ -333,7 +341,7 @@ export default async function StateHubsPage({
                 Launch inventory (live)
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
-                {ohTotal.toLocaleString()}
+                <HeadCountValue count={ohTotal} />
                 <span className="ml-2 text-sm font-medium text-muted-foreground">
                   verified OH research listings
                 </span>
@@ -359,7 +367,7 @@ export default async function StateHubsPage({
                     <Badge variant="success">Market</Badge>
                   </div>
                   <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
-                    {row.total.toLocaleString()}
+                    <HeadCountValue count={row.total} />
                   </p>
                   <p className="text-xs text-muted-foreground">verified research listings</p>
                   <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
@@ -387,7 +395,7 @@ export default async function StateHubsPage({
                 Launch inventory (live)
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
-                {ncTotal.toLocaleString()}
+                <HeadCountValue count={ncTotal} />
                 <span className="ml-2 text-sm font-medium text-muted-foreground">
                   verified NC research listings
                 </span>
@@ -413,7 +421,7 @@ export default async function StateHubsPage({
                     <Badge variant="success">Market</Badge>
                   </div>
                   <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
-                    {row.total.toLocaleString()}
+                    <HeadCountValue count={row.total} />
                   </p>
                   <p className="text-xs text-muted-foreground">verified research listings</p>
                   <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
@@ -448,7 +456,7 @@ export default async function StateHubsPage({
                 Launch inventory (live)
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
-                {nvTotal.toLocaleString()}
+                <HeadCountValue count={nvTotal} />
                 <span className="ml-2 text-sm font-medium text-muted-foreground">
                   verified NV research listings
                 </span>
@@ -474,7 +482,7 @@ export default async function StateHubsPage({
                     <Badge variant="success">Market</Badge>
                   </div>
                   <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
-                    {row.total.toLocaleString()}
+                    <HeadCountValue count={row.total} />
                   </p>
                   <p className="text-xs text-muted-foreground">verified research listings</p>
                   <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
@@ -502,7 +510,7 @@ export default async function StateHubsPage({
                 Launch inventory (live)
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
-                {vtTotal.toLocaleString()}
+                <HeadCountValue count={vtTotal} />
                 <span className="ml-2 text-sm font-medium text-muted-foreground">
                   verified VT research listings
                 </span>
@@ -528,7 +536,7 @@ export default async function StateHubsPage({
                     <Badge variant="success">Market</Badge>
                   </div>
                   <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
-                    {row.total.toLocaleString()}
+                    <HeadCountValue count={row.total} />
                   </p>
                   <p className="text-xs text-muted-foreground">verified research listings</p>
                   <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
@@ -556,7 +564,7 @@ export default async function StateHubsPage({
                 Launch inventory (live)
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
-                {maTotal.toLocaleString()}
+                <HeadCountValue count={maTotal} />
                 <span className="ml-2 text-sm font-medium text-muted-foreground">
                   verified MA research listings
                 </span>
@@ -582,7 +590,7 @@ export default async function StateHubsPage({
                     <Badge variant="success">Market</Badge>
                   </div>
                   <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
-                    {row.total.toLocaleString()}
+                    <HeadCountValue count={row.total} />
                   </p>
                   <p className="text-xs text-muted-foreground">verified research listings</p>
                   <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
@@ -612,7 +620,7 @@ export default async function StateHubsPage({
                 Launch inventory (live)
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
-                {msTotal.toLocaleString()}
+                <HeadCountValue count={msTotal} />
                 <span className="ml-2 text-sm font-medium text-muted-foreground">
                   verified MS research listings
                 </span>
@@ -638,7 +646,7 @@ export default async function StateHubsPage({
                     <Badge variant="success">Market</Badge>
                   </div>
                   <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
-                    {row.total.toLocaleString()}
+                    <HeadCountValue count={row.total} />
                   </p>
                   <p className="text-xs text-muted-foreground">verified research listings</p>
                   <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
@@ -667,7 +675,7 @@ export default async function StateHubsPage({
                 Launch inventory (live)
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
-                {flTotal.toLocaleString()}
+                <HeadCountValue count={flTotal} />
                 <span className="ml-2 text-sm font-medium text-muted-foreground">
                   verified FL research listings
                 </span>
@@ -695,7 +703,7 @@ export default async function StateHubsPage({
                     </Badge>
                   </div>
                   <p className="mt-3 text-2xl font-bold tabular-nums text-foreground">
-                    {row.total.toLocaleString()}
+                    <HeadCountValue count={row.total} />
                   </p>
                   <p className="text-xs text-muted-foreground">verified research listings</p>
                   <p className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
+import { isReadyCount } from '@/lib/dfs/provider-count';
 import { LIVE_LAUNCH_HUBS } from '@/lib/product/research-ia';
 import { INSURANCE_BRAND } from '@/lib/design/insurance-design-system';
 
@@ -7,10 +8,15 @@ import { INSURANCE_BRAND } from '@/lib/design/insurance-design-system';
  * Phase 18 — deep-link live launch hubs only when that state has verified inventory.
  */
 export async function LiveLaunchHubs() {
-  const counts = await getCachedVerifiedLaunchCounts();
+  let counts;
+  try {
+    counts = await getCachedVerifiedLaunchCounts();
+  } catch {
+    return null;
+  }
   const rows = LIVE_LAUNCH_HUBS.filter((hub) => {
     const n = counts[hub.state.toLowerCase() as keyof typeof counts];
-    return typeof n === 'number' && n > 0;
+    return isReadyCount(n) && n.value > 0;
   });
   if (!rows.length) return null;
 
