@@ -1,6 +1,40 @@
 import { SITE_EMAIL, SITE_NAME, SITE_URL } from "@/lib/constants";
 import type { Provider } from "@/types/provider";
 import { brandAsset, BRAND_LOGO } from "@/lib/brand";
+import {
+  badgeEligibleLicenses,
+  licenseClassLabel,
+  licenseRecheckUrl,
+  shouldRenderLicenseCredentialBadges,
+} from "@/lib/providers/license-entries";
+import { getLicenseDepartment } from "@/lib/tools/license-verification";
+
+/**
+ * JSON-LD credentials are badge-eligible licenses only.
+ * informational[] and expired / unverified entries are omitted.
+ * One-license profiles omit hasCredential so existing schema stays the same.
+ */
+export function insuranceAgencyJsonLdCredentials(
+  provider: Provider,
+  now: Date = new Date()
+) {
+  const licenseInfo = { licenses: provider.licenses ?? [] };
+  if (!shouldRenderLicenseCredentialBadges(licenseInfo, now)) return undefined;
+  return badgeEligibleLicenses(licenseInfo, now).map((entry) => {
+    const department = getLicenseDepartment(entry.state);
+    return {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "State insurance license",
+      identifier: entry.license_number,
+      name: licenseClassLabel(entry),
+      recognizedBy: {
+        "@type": "GovernmentOrganization",
+        name: department?.department ?? entry.state,
+        url: licenseRecheckUrl(entry),
+      },
+    };
+  });
+}
 
 /** Parent knowledge layer — reciprocal with Ask Trust Hub Organization graph. */
 export const ASK_PARENT_ORGANIZATION = {
@@ -87,6 +121,7 @@ export function buildInsuranceAgencySchema(provider: Provider) {
     !/\d/.test(provider.license_number);
   // Never emit AggregateRating from Google Places snapshots (Phase 6B2)
   const hasFirstPartyReviews = false;
+  const credentials = insuranceAgencyJsonLdCredentials(provider);
 
   return {
     "@type": "InsuranceAgency",
@@ -116,6 +151,7 @@ export function buildInsuranceAgencySchema(provider: Provider) {
       "@type": "State",
       name: provider.state,
     },
+    ...(credentials ? { hasCredential: credentials } : {}),
   };
 }
 
