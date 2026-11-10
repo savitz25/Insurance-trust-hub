@@ -9,7 +9,11 @@ import {
   countVerifiedMassachusettsProviders,
   countVerifiedMississippiProviders,
 } from '@/lib/dfs/providers-by-county';
-import { isReadyCount, type HeadCount } from '@/lib/dfs/provider-count';
+import {
+  isReadyCount,
+  reinterpretLaunchCounts,
+  type HeadCount,
+} from '@/lib/dfs/provider-count';
 
 export type VerifiedLaunchCounts = {
   fl: HeadCount;
@@ -42,10 +46,17 @@ async function loadVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
 
 /**
  * Homepage / directory chips. A failure is thrown so the shared cache
- * never stores a zero in place of a missed count.
+ * never stores a zero in place of a missed count. Every read recomputes
+ * `stale` from `asOf` and drops anything 24h or older, so a frozen
+ * `stale: false` cannot reach the exact-match disclosure.
  */
-export const getCachedVerifiedLaunchCounts = unstable_cache(
+const loadCachedVerifiedLaunchCounts = unstable_cache(
   loadVerifiedLaunchCounts,
   ['ith-verified-launch-counts-v7'],
   { revalidate: 300 }
 );
+
+export async function getCachedVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
+  const stored = await loadCachedVerifiedLaunchCounts();
+  return reinterpretLaunchCounts(stored, Date.now());
+}

@@ -67,7 +67,13 @@ export async function DirectoryLiveCounts() {
     },
   ].filter((row) => row.total > 0);
 
-  if (!rows.length) return null;
+  if (!rows.length) {
+    const counts = [fl, tx, oh, nc, nv, vt, ma, ms];
+    if (counts.some((count) => !isReadyCount(count))) {
+      return <p className="mt-4 text-sm text-muted-foreground">count temporarily unavailable</p>;
+    }
+    return null;
+  }
 
   return (
     <ul className="mt-4 flex flex-wrap gap-2" aria-label="Verified agency inventory">

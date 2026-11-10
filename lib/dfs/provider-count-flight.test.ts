@@ -104,6 +104,71 @@ test('a failed refresh backs off instead of calling the loader again', async () 
   clearRememberedCounts();
 });
 
+test('a stale data-cache hit does not clear backoff', async () => {
+  clearRememberedCounts();
+  const start = 2_000_000_000_000;
+  let current = start;
+  setCountClock(() => current);
+  await rememberCount('stamp', 1_000, async () => ({ value: 4, asOf: start }));
+  current = start + 5_000;
+  let hits = 0;
+  await rememberCount('stamp', 1_000, async () => {
+    hits += 1;
+    return { value: 4, asOf: start };
+  });
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(hits, 1);
+  let later = 0;
+  await rememberCount('stamp', 1_000, async () => {
+    later += 1;
+    return { value: 9, asOf: current + 1 };
+  });
+  assert.equal(later, 0);
+  current = start + 5_000 + COUNT_BACKOFF_BASE_MS;
+  await rememberCount('stamp', 1_000, async () => {
+    later += 1;
+    return { value: 9, asOf: current };
+  });
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  const seen = await rememberCount('stamp', 60_000, async () => {
+    throw new Error('stored live result should be fresh');
+  });
+  assert.equal(isReadyCount(seen) && seen.value, 9);
+  assert.equal(isReadyCount(seen) && seen.asOf, current);
+  setCountClock(null);
+  clearRememberedCounts();
+});
+
+test('concurrent stale readers share one refresh', async () => {
+  clearRememberedCounts();
+  const start = 2_100_000_000_000;
+  let current = start;
+  setCountClock(() => current);
+  await rememberCount('flight', 1_000, async () => ({ value: 2, asOf: start }));
+  current = start + 5_000;
+  let calls = 0;
+  let release: () => void = () => {};
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const load = async () => {
+    calls += 1;
+    await gate;
+    return { value: 6, asOf: current };
+  };
+  const [first, second] = await Promise.all([
+    rememberCount('flight', 1_000, load),
+    rememberCount('flight', 1_000, load),
+  ]);
+  assert.equal(calls, 1);
+  assert.equal(isReadyCount(first) && first.value, 2);
+  assert.equal(isReadyCount(second) && second.value, 2);
+  release();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  setCountClock(null);
+  clearRememberedCounts();
+});
+
 test('a stale value is returned before the background refresh settles', async () => {
   clearRememberedCounts();
   const start = 1_900_000_000_000;

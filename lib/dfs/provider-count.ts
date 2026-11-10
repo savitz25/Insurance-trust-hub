@@ -41,11 +41,14 @@ export function settleHubPage(input: {
   pageSize: number;
   page: number;
   rowCount: number;
+  /** True when the over-fetch returned a row past this page. */
+  hasMore?: boolean;
 }): { total: number | null; totalPages: number; count: HeadCount } {
   const page = Math.max(1, input.page);
   if (!isReadyCount(input.count)) {
-    const totalPages =
+    const fromRows =
       input.rowCount > 0 ? Math.max(page, Math.ceil(input.rowCount / input.pageSize)) : 0;
+    const totalPages = input.hasMore ? Math.max(fromRows, page + 1) : fromRows;
     return { total: null, totalPages, count: unavailableCount() };
   }
   const from = (page - 1) * input.pageSize;
@@ -104,6 +107,28 @@ export function formatCountAsOf(asOf: number): string {
     minute: '2-digit',
     timeZoneName: 'short',
   }).format(new Date(asOf));
+}
+
+/**
+ * Recompute freshness from the query timestamp. A cached `stale: false`
+ * is not trusted. Anything 24h or older is unavailable.
+ */
+export function reinterpretHeadCount(count: HeadCount, now = Date.now()): HeadCount {
+  if (!isReadyCount(count)) return unavailableCount();
+  const age = now - count.asOf;
+  if (age >= COUNT_MAX_AGE_MS) return unavailableCount();
+  return { value: count.value, asOf: count.asOf, stale: age >= COUNT_FRESH_MS };
+}
+
+export function reinterpretLaunchCounts<T extends Record<string, HeadCount>>(
+  counts: T,
+  now = Date.now()
+): T {
+  const next = {} as T;
+  for (const key of Object.keys(counts) as (keyof T)[]) {
+    next[key] = reinterpretHeadCount(counts[key], now) as T[keyof T];
+  }
+  return next;
 }
 
 export function headCountDisclosure(count: HeadCount): string {

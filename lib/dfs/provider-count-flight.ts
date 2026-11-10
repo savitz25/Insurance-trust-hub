@@ -59,14 +59,22 @@ function startLoad(key: string, load: () => Promise<LoadResult>): Promise<Stored
   const task = load()
     .then((result) => {
       const stored = normalize(result);
-      if (tooOld(stored)) throw new Error('provider count older than 24h');
-      // Keep the query's original timestamp. Do not re-stamp at copy time.
+      const previous = fresh.get(key);
+      if (tooOld(stored)) {
+        noteFailure(key);
+        throw new Error('provider count older than 24h');
+      }
+      // A data-cache hit repeats the old asOf. That is not a live query.
+      if (previous && stored.asOf <= previous.asOf) {
+        noteFailure(key);
+        throw new Error('provider count refresh was not a new query');
+      }
       fresh.set(key, stored);
       backoff.delete(key);
       return stored;
     })
     .catch((error: unknown) => {
-      noteFailure(key);
+      if (!backingOff(key)) noteFailure(key);
       throw error;
     })
     .finally(() => {

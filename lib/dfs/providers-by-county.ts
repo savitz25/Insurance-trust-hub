@@ -227,14 +227,31 @@ function unavailableInventory(
   };
 }
 
+function listedPage(verified: Provider[], pageSize: number): {
+  providers: Provider[];
+  hasMore: boolean;
+} {
+  return {
+    providers: verified.slice(0, pageSize),
+    hasMore: verified.length > pageSize,
+  };
+}
+
 function inventoryFromCount(
   count: HeadCount,
   providers: Provider[],
   pageSize: number,
   page: number,
-  hubSlug: string
+  hubSlug: string,
+  hasMore = false
 ): HubInventoryResult {
-  const settled = settleHubPage({ count, pageSize, page, rowCount: providers.length });
+  const settled = settleHubPage({
+    count,
+    pageSize,
+    page,
+    rowCount: providers.length,
+    hasMore,
+  });
   return {
     providers,
     total: settled.total,
@@ -291,8 +308,8 @@ async function getTxHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'TX');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -341,8 +358,8 @@ async function getNjHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'NJ');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -391,8 +408,8 @@ async function getOhHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'OH');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -441,8 +458,8 @@ async function getNcHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'NC');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -491,8 +508,8 @@ async function getNvHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'NV');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -541,8 +558,8 @@ async function getMsHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'MS');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -591,8 +608,8 @@ async function getMaHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'MA');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -641,8 +658,8 @@ async function getVtHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => p.state?.toUpperCase() === 'VT');
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     return unavailableInventory(hubSlug, pageSize, page);
   }
@@ -760,8 +777,8 @@ async function readFloridaHubInventory(
       .filter((p) => canShowAsVerified(resolveProviderTrustState(p)))
       .filter((p) => providerMatchesLaunchCounties(p, counties));
 
-    const providers = verified.slice(0, pageSize);
-    return inventoryFromCount(count, providers, pageSize, safePage, hubSlug);
+    const listed = listedPage(verified, pageSize);
+    return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
   } catch {
     // Lookup/transport/mapping failures are not evidence of an empty market.
     // Let the route error boundary handle them; never generate empty-market SEO.
