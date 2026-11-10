@@ -9,7 +9,7 @@ import {
 } from './provider-count-filter';
 import { rememberCount } from './provider-count-flight';
 
-const COUNT_TTL_MS = 5 * 60 * 1000;
+const COUNT_TTL_MS = 60 * 60 * 1000;
 
 async function queryStructuredCount(
   state: string,
@@ -45,16 +45,16 @@ async function queryStateCount(state: string): Promise<number> {
 const cachedStructuredCount = unstable_cache(
   queryStructuredCount,
   ['provider-structured-head-count-v1'],
-  { revalidate: 300 }
+  { revalidate: 3600 }
 );
 
 const cachedStateCount = unstable_cache(
   queryStateCount,
   ['provider-state-head-count-v1'],
-  { revalidate: 300 }
+  { revalidate: 3600 }
 );
 
-/** Exact verified count for one structured id key. Successes are reused for five minutes. */
+/** Exact verified count for one structured id key. Successes are reused for one hour. */
 export function exactStructuredProviderCount(
   state: string,
   field: ProviderCountField,
@@ -65,7 +65,7 @@ export function exactStructuredProviderCount(
   return rememberCount(key, COUNT_TTL_MS, () => cachedStructuredCount(state, field, idsCsv));
 }
 
-/** Exact verified count for one state license array. Successes are reused for five minutes. */
+/** Exact verified count for one state license array. Successes are reused for one hour. */
 export function exactVerifiedStateCount(state: string): Promise<number> {
   return rememberCount(`state:${state}`, COUNT_TTL_MS, () => cachedStateCount(state));
 }
