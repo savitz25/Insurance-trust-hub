@@ -27,6 +27,16 @@ export interface Provider {
    */
   licenses?: import('@/types/supabase').LicenseEntry[];
   /**
+   * license_info.informational entries. Display-only plain text.
+   * Not merged into `licenses` and not a trust-state input.
+   */
+  informational_licenses?: import('@/types/supabase').InformationalLicense[];
+  /**
+   * contact.business_supplied card. Labeled BUSINESS-SUPPLIED on the profile.
+   * Not a regulator contact and not a JSON-LD credential.
+   */
+  business_supplied?: import('@/lib/providers/business-supplied').BusinessSuppliedView | null;
+  /**
    * Published licensure states from providers.states_licensed.
    * A mailing address in another state is not an extra license.
    */

@@ -55,6 +55,10 @@ const LOOKUP_URLS: Record<string, { department: string; lookupUrl: string; notes
     notes:
       'Official SBS licensee lookup. Bulk agency lists: NC DOI SBS Report Generator (business entities only; paid per-row).',
   },
+  ID: {
+    department: 'Idaho Department of Insurance',
+    lookupUrl: 'https://doi.idaho.gov/public/licensing/',
+  },
   IL: {
     department: 'Illinois Department of Insurance',
     lookupUrl: 'https://www.insurance.illinois.gov/Producer/ProducerHome',
