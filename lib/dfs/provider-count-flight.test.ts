@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { clearRememberedCounts, rememberCount } from './provider-count-flight.ts';
+import { clearRememberedCounts, rememberCount } from './provider-count-flight';
 
 test('a failed refresh serves the last good count instead of throwing or zero', async () => {
   clearRememberedCounts();
