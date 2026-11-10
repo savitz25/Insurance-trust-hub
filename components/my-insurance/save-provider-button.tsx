@@ -45,6 +45,7 @@ import {
   stashPendingSaveAction,
 } from '@/lib/my-insurance/guest-storage';
 import { ShortlistFullPanel } from '@/components/my-insurance/shortlist-full-panel';
+import { captureTrustEvent } from '@/lib/analytics/trusthub';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
@@ -172,10 +173,19 @@ export function SaveProviderButton({
     profilePath: `/providers/${providerSlug}` as const,
   };
 
+  function captureSave(event: 'profile_saved' | 'profile_save_failed' | 'profile_unsaved') {
+    captureTrustEvent(event, {
+      surface: 'provider_profile',
+      state,
+      success: event !== 'profile_save_failed',
+    });
+  }
+
   function handleResult(result: UpsertSavedProviderResult) {
     const err = getLastSaveError();
     if (err) {
       toast.error(err);
+      captureSave('profile_save_failed');
       refresh();
       return;
     }
@@ -184,6 +194,7 @@ export function SaveProviderButton({
       return;
     }
     toast.success(SAVE_ACKNOWLEDGEMENT);
+    captureSave('profile_saved');
     refresh();
   }
 
@@ -243,13 +254,16 @@ export function SaveProviderButton({
       const err = getLastSaveError();
       if (err) {
         toast.error(err);
+        captureSave('profile_save_failed');
         refresh();
         return;
       }
+      let cloudFailed = false;
       if (mi?.user) {
         if (!mi.isProviderSaved(providerSlug)) {
-          await saveProviderAction({ providerSlug, providerName });
+          const cloud = await saveProviderAction({ providerSlug, providerName });
           mi.markProviderSaved(providerSlug);
+          cloudFailed = !cloud.ok;
         }
       } else {
         stashPendingSaveAction({
@@ -261,6 +275,8 @@ export function SaveProviderButton({
       intentGeneration.current = generation;
       void stageParentIntent(generation, 'save');
       toast.success(SAVE_ACKNOWLEDGEMENT);
+      captureSave('profile_saved');
+      if (cloudFailed) captureSave('profile_save_failed');
       refresh();
     } finally {
       setBusy(false);
@@ -284,6 +300,7 @@ export function SaveProviderButton({
         intentGeneration.current = generation;
         void stageParentIntent(generation, 'unsave');
         toast.message(UNSAVE_ACKNOWLEDGEMENT);
+        captureSave('profile_unsaved');
         refresh();
       } finally {
         setBusy(false);

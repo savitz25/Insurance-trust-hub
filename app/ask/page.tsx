@@ -1,4 +1,5 @@
 import { AskInsuranceResultView } from '@/components/ask-insurance-result';
+import { SearchResultsBeacon } from '@/components/analytics/search-results-beacon';
 import { InsuranceSpecialistSearchShell } from '@/components/specialist-search/insurance-specialist-search-shell';
 import { SearchAnalytics } from '@/components/specialist-search/search-analytics';
 import { executeInsuranceRequest } from '@/lib/insurance-ask/execute';
@@ -52,7 +53,7 @@ export default async function AskPage({
           <SearchAnalytics dimensions={{ hub: 'insurance', intent: result.parsed.query.nameQuery ? 'IDENTITY' : intentFor(result.parsed.query.mode), entityClass: result.parsed.query.entityClass, state: result.parsed.query.jurisdiction?.state, hasIdentifier: Boolean(result.parsed.query.identifier), identifierType: result.parsed.query.identifier?.type, hasLoa: Boolean(result.parsed.query.linesOfAuthority?.length), hasAppointmentFilter: result.parsed.query.evidenceFamily === 'appointment', evidenceFamily: result.parsed.query.evidenceFamily, coverageState: result.coverageState, directoryHandoff: result.parsed.query.mode === 'directory' }} resultCount={result.results.length} />
           <AskInsuranceResultView result={result} />
         </div>
-      ) : executionUnavailable ? <section className="mx-auto mt-8 max-w-5xl rounded-2xl border border-amber-200 bg-amber-50 p-5"><h2 className="text-xl font-semibold text-[#0A2540]">Regulatory research is temporarily unavailable</h2><p className="mt-2 text-sm text-slate-700">The source-backed query could not be completed. No result or zero-count conclusion was inferred. Please try again.</p></section> : null}
+      ) : executionUnavailable ? <><SearchResultsBeacon surface="ask" success={false} /><section className="mx-auto mt-8 max-w-5xl rounded-2xl border border-amber-200 bg-amber-50 p-5"><h2 className="text-xl font-semibold text-[#0A2540]">Regulatory research is temporarily unavailable</h2><p className="mt-2 text-sm text-slate-700">The source-backed query could not be completed. No result or zero-count conclusion was inferred. Please try again.</p></section></> : null}
     </div>
   );
 }

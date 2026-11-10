@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { SearchResultsBeacon } from '@/components/analytics/search-results-beacon';
+import { SearchSubmitListener } from '@/components/analytics/search-submit-listener';
 import { ContextNav } from '@/components/context-nav';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
 import { JsonLd } from '@/lib/seo/json-ld';
@@ -70,6 +72,7 @@ export default async function InsurersLandingPage({ searchParams }: Props) {
             Search by legal company name or NAIC company code
           </label>
           <div className="flex flex-col sm:flex-row gap-2">
+            <SearchSubmitListener surface="insurers" />
             <input
               id="insurer-q"
               name="q"
@@ -77,7 +80,8 @@ export default async function InsurersLandingPage({ searchParams }: Props) {
               defaultValue={q}
               autoComplete="off"
               enterKeyHint="search"
-              className="min-h-11 flex-1 rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm"
+              data-ph-mask=""
+              className="ph-no-capture min-h-11 flex-1 rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm"
               placeholder="Example: 21652 or Farmers Insurance Exchange"
             />
             <button
@@ -91,6 +95,7 @@ export default async function InsurersLandingPage({ searchParams }: Props) {
 
         {q ? (
           <section aria-live="polite" className="space-y-3">
+            <SearchResultsBeacon surface="insurers" resultCount={publishedHits.length} success />
             <h2 className="text-lg font-semibold text-[#0A2540]">Search results</h2>
             {publishedHits.length > 0 ? (
               <ul className="space-y-2">
@@ -98,6 +103,8 @@ export default async function InsurersLandingPage({ searchParams }: Props) {
                   <li key={hit.entityId}>
                     <Link
                       href={insurerProfilePath(hit.slug)}
+                      data-ph-event="search_result_opened"
+                      data-ph-surface="insurers"
                       className="block rounded-lg border bg-card p-4 hover:border-primary/40 min-h-11"
                     >
                       <p className="font-semibold text-[#0A2540]">{hit.legalName}</p>

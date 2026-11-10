@@ -49,6 +49,7 @@ import {
   clampDirectoryPage,
 } from '@/lib/directory/params';
 import { looksLikeZip, resolveDirectoryZip } from '@/lib/directory/zip-geo';
+import { SearchResultsBeacon } from '@/components/analytics/search-results-beacon';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -138,6 +139,9 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const serverSort =
     sort === 'rating' || sort === 'reviews' ? sort : ('name' as const);
   const pageSize = zipGeo ? 48 : DIRECTORY_PAGE_SIZE;
+  const directorySearched = Boolean(
+    rawQuery.trim() || getParam(params, 'state') || type || specialty || zipParam || hasAppointmentSnapshot || minRating,
+  );
 
   const searchArgs = (specialtyOverride?: Specialty | ''): ProviderFilters => ({
     query: query || undefined,
@@ -155,10 +159,24 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   });
 
   let loaFallback = false;
-  if(zipParam && !zipGeo)return <section className="mx-auto max-w-3xl p-6"><h1 className="text-2xl font-semibold">ZIP location needs clarification</h1><p>This ZIP is not resolved by the maintained directory location reference. No nationwide or state results were substituted.</p><form action="/directory" className="mt-4 flex flex-wrap gap-3"><input type="hidden" name="insuranceContext" value={insuranceContext.join(',')}/><input type="hidden" name="requestedPlace" value={requestedPlace}/><label>ZIP<input name="zip" defaultValue={zipParam} maxLength={5} pattern="[0-9]{5}" required className="min-h-11 rounded border px-3"/></label><button className="min-h-11 rounded border px-4">Update ZIP</button></form></section>;
+  if (zipParam && !zipGeo) {
+    return (
+      <>
+        {directorySearched ? <SearchResultsBeacon surface="directory" success={false} state={state} /> : null}
+        <section className="mx-auto max-w-3xl p-6"><h1 className="text-2xl font-semibold">ZIP location needs clarification</h1><p>This ZIP is not resolved by the maintained directory location reference. No nationwide or state results were substituted.</p><form action="/directory" className="mt-4 flex flex-wrap gap-3"><input type="hidden" name="insuranceContext" value={insuranceContext.join(',')}/><input type="hidden" name="requestedPlace" value={requestedPlace}/><label>ZIP<input name="zip" defaultValue={zipParam} maxLength={5} pattern="[0-9]{5}" required className="min-h-11 rounded border px-3"/></label><button className="min-h-11 rounded border px-4">Update ZIP</button></form></section>
+      </>
+    );
+  }
   let initial: {providers:Provider[];total:number};
   try { initial=await searchProviders(searchArgs()); }
-  catch { return <section className="mx-auto max-w-3xl p-6"><h1 className="text-2xl font-semibold">Directory source temporarily unavailable</h1><p>The recorded-address lookup could not complete. This is not a finding of zero listings.</p><Link href={`/directory?${new URLSearchParams({zip:zipParam,insuranceContext:insuranceContext.join(','),requestedPlace})}`} className="mt-4 inline-flex min-h-11 items-center underline">Retry this directory request</Link></section>; }
+  catch {
+    return (
+      <>
+        {directorySearched ? <SearchResultsBeacon surface="directory" success={false} state={state} /> : null}
+        <section className="mx-auto max-w-3xl p-6"><h1 className="text-2xl font-semibold">Directory source temporarily unavailable</h1><p>The recorded-address lookup could not complete. This is not a finding of zero listings.</p><Link href={`/directory?${new URLSearchParams({zip:zipParam,insuranceContext:insuranceContext.join(','),requestedPlace})}`} className="mt-4 inline-flex min-h-11 items-center underline">Retry this directory request</Link></section>
+      </>
+    );
+  }
   let {providers:rawProviders,total}=initial;
 
   if (!zipParam && zipGeo && specialty && total === 0) {
@@ -841,6 +859,9 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               are hidden so we do not invent filters.
             </p>
           )}
+          {directorySearched ? (
+            <SearchResultsBeacon surface="directory" resultCount={total} success state={state} />
+          ) : null}
           <Suspense fallback={null}>
             <DirectoryControls
               total={total}
