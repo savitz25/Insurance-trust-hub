@@ -51,12 +51,21 @@ export function captureTrustEvent(
   }
 }
 
+/** In-memory pageview dedupe key: the full location without the hash. Never sent to PostHog. */
+export function pageviewDedupeKey(pathname: string, href?: string): string {
+  return (href || pathname || '/').split('#')[0] || '/';
+}
+
 export function captureSanitizedPageview(pathname: string, href?: string): void {
   try {
     const path = (pathname || '/').split('?')[0] || '/';
     const current = sanitizeAnalyticsUrl(href || pathname) || path;
-    if (lastPageviewKey === current) return;
-    lastPageviewKey = current;
+    // Dedupe on the full in-memory location (never sent) so a new Ask/directory
+    // query on the same path still records a pageview, while React re-renders of
+    // the same location do not double count. Only the sanitized URL is captured.
+    const dedupeKey = pageviewDedupeKey(pathname, href);
+    if (lastPageviewKey === dedupeKey) return;
+    lastPageviewKey = dedupeKey;
     captureTrustEvent('$pageview', {
       surface: 'app_router',
       $pathname: path,

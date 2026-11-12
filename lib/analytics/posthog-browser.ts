@@ -3,7 +3,7 @@
 import type { PostHog } from 'posthog-js';
 import { analyticsEnvironment, posthogHost, posthogKey, shouldEnablePosthog } from './environment';
 import { createPosthogClientGate } from './posthog-gate';
-import { maskReplayAttribute, sanitizeCapturedNetworkRequest, sanitizeCaptureResult } from './privacy';
+import { isReplayEvent, maskReplayAttribute, sanitizeCapturedNetworkRequest, sanitizeCaptureResult } from './privacy';
 import { TRUSTHUB_HUB } from './trusthub-events';
 
 async function loadPosthog(): Promise<PostHog | null> {
@@ -16,20 +16,41 @@ async function loadPosthog(): Promise<PostHog | null> {
     capture_pageview: false,
     capture_pageleave: true,
     persistence: 'localStorage+cookie',
+    // Privacy: replay DOM snapshots and the document title can carry raw Ask
+    // queries, so session replay is off for this hub regardless of the shared
+    // project setting. Heatmaps and dead-click capture are off for the same reason.
+    disable_session_recording: true,
+    enable_heatmaps: false,
+    capture_heatmaps: false,
+    capture_dead_clicks: false,
+    // Autocapture never collects element text (labels and options can echo a query).
+    mask_all_text: true,
     autocapture: {
       // Clicks on links and buttons only. Input values are not autocaptured.
       element_allowlist: ['a', 'button', 'form', 'select', 'label'],
       capture_copied_text: false,
       capture_value_css_selector_allowlist: [],
     },
-    before_send: (event) => sanitizeCaptureResult(event),
+    before_send: (event) => {
+      // Replay is disabled; drop any replay payload outright as defense in depth.
+      if (event && isReplayEvent(event.event)) return null;
+      return sanitizeCaptureResult(event);
+    },
     session_recording: {
       maskAllInputs: true,
       maskInputOptions: {
         password: true,
         email: true,
+        text: true,
+        search: true,
+        tel: true,
+        url: true,
+        textarea: true,
+        select: true,
+        number: true,
       },
-      maskTextSelector: 'input, textarea, [contenteditable], [data-ph-mask], .ph-mask',
+      // Only relevant if replay is ever re-enabled in code: mask every text node.
+      maskTextSelector: '*',
       maskAttributeFn: (name, value) => maskReplayAttribute(name, value),
       maskCapturedNetworkRequestFn: (request) => sanitizeCapturedNetworkRequest(request),
     },
