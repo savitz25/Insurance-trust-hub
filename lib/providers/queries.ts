@@ -92,16 +92,20 @@ export async function getProviders(
       query = query.not('contact->appointment_snapshot', 'is', null);
     }
 
+    // `id` is the unique tiebreaker. Name-only order repeats rows across pages
+    // when several providers share a name.
     if (filters.sort === 'rating') {
       query = query
         .order('rating', { ascending: false })
-        .order('name', { ascending: true });
+        .order('name', { ascending: true })
+        .order('id', { ascending: true });
     } else if (filters.sort === 'reviews') {
       query = query
         .order('review_count', { ascending: false })
-        .order('name', { ascending: true });
+        .order('name', { ascending: true })
+        .order('id', { ascending: true });
     } else {
-      query = query.order('name', { ascending: true });
+      query = query.order('name', { ascending: true }).order('id', { ascending: true });
     }
     const offset = filters.offset ?? 0;
     const limit = filters.limit ?? 24;

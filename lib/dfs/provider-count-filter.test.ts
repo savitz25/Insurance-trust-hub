@@ -3,7 +3,12 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { structuredIdCountFilter } from './provider-count-filter';
-import { isReadyCount } from './provider-count';
+import {
+  combineHeadCounts,
+  exactTotalsSentence,
+  headCountDisclosure,
+  isReadyCount,
+} from './provider-count';
 import { clearRememberedCounts, rememberCount, setCountClock } from './provider-count-flight';
 
 const hub = readFileSync(join(process.cwd(), 'lib/dfs/providers-by-county.ts'), 'utf8');
@@ -79,15 +84,40 @@ test('florida exact count no longer uses the wide county OR', () => {
   assert.equal(countFn.includes('ilike'), false);
 });
 
-test('hub page reads still use the wide matcher and name order', () => {
+test('hub page reads still use the wide matcher and name, then id', () => {
   const pageFn = sliceBetween(
     hub,
     'async function readFloridaHubInventory',
     'export async function getVerifiedProvidersForHub'
   );
   assert.match(pageFn, /hubMatchOrParts\(counties\)/);
-  assert.match(pageFn, /\.order\('name', \{ ascending: true \}\)/);
-  assert.equal(pageFn.includes(".order('id'"), false);
+  assert.match(
+    pageFn,
+    /\.order\('name', \{ ascending: true \}\)\s*\.order\('id', \{ ascending: true \}\)/
+  );
+});
+
+test('county head counts are planner estimates and state counts stay exact', () => {
+  const head = readFileSync(join(process.cwd(), 'lib/dfs/provider-head-count.ts'), 'utf8');
+  const structured = sliceBetween(head, 'async function queryStructuredCount', 'async function queryStateCount');
+  assert.match(structured, /field === 'launch_county_id'/);
+  assert.match(structured, /count: estimated \? 'planned' : 'exact'/);
+  const state = sliceBetween(head, 'async function queryStateCount', 'const cachedStructuredCount');
+  assert.match(state, /count: 'exact'/);
+  assert.equal(state.includes('planned'), false);
+});
+
+test('an estimated county count is not described as an exact total', () => {
+  const asOf = Date.UTC(2026, 10, 12, 18, 0);
+  const estimate = { value: 853, asOf, stale: false, estimated: true as const };
+  assert.equal(headCountDisclosure(estimate), 'estimated');
+  assert.equal(exactTotalsSentence([estimate]), null);
+  const mixed = combineHeadCounts([
+    estimate,
+    { value: 10, asOf, stale: false },
+  ]);
+  assert.equal(isReadyCount(mixed) && mixed.estimated, true);
+  assert.equal(isReadyCount(mixed) && mixed.value, 863);
 });
 
 test('market head counts use one id key; row reads keep both keys', () => {

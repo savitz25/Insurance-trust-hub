@@ -150,11 +150,11 @@ export function providerMatchesLaunchCounties(
 }
 
 /**
- * Exact head count by one `launch_county_id` per county.
- * The wide county-text OR on this same table is the HEAD statement that
- * returns SQLSTATE 57014. Page reads still use that OR. A failed id count
- * is not a partial sum and is not stored as zero when the caller requires
- * a successful lookup.
+ * Planner estimate by one `launch_county_id` per county.
+ * An exact county HEAD count still returns SQLSTATE 57014. Page reads still
+ * use the wide county OR, ordered by name then id. A failed count is not a
+ * partial sum and is not stored as zero when the caller requires a
+ * successful lookup.
  */
 async function countVerifiedForCounties(
   counties: FlLaunchCounty[],
@@ -297,6 +297,7 @@ async function getTxHubInventory(
       .contains('states_licensed', ['TX'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -347,6 +348,7 @@ async function getNjHubInventory(
       .contains('states_licensed', ['NJ'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -397,6 +399,7 @@ async function getOhHubInventory(
       .contains('states_licensed', ['OH'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -447,6 +450,7 @@ async function getNcHubInventory(
       .contains('states_licensed', ['NC'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -497,6 +501,7 @@ async function getNvHubInventory(
       .contains('states_licensed', ['NV'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -547,6 +552,7 @@ async function getMsHubInventory(
       .contains('states_licensed', ['MS'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -597,6 +603,7 @@ async function getMaHubInventory(
       .contains('states_licensed', ['MA'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -647,6 +654,7 @@ async function getVtHubInventory(
       .contains('states_licensed', ['VT'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || !data?.length) {
@@ -765,6 +773,7 @@ async function readFloridaHubInventory(
       .contains('states_licensed', ['FL'])
       .or(or)
       .order('name', { ascending: true })
+      .order('id', { ascending: true })
       .range(from, to);
 
     if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
@@ -895,11 +904,12 @@ export async function countVerifiedByLaunchCounty(): Promise<
       if (supabase) {
         const { data } = await supabase
           .from('providers')
-          .select('name')
+          .select('name,id')
           .eq('verified', true)
           .contains('states_licensed', ['FL'])
           .or(countyMatchOrParts(c).join(','))
           .order('name', { ascending: true })
+          .order('id', { ascending: true })
           .limit(3);
         sampleNames = (data ?? []).map((r) => (r as { name: string }).name);
       }
