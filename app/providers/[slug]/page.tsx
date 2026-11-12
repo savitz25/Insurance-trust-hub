@@ -44,6 +44,7 @@ import {
   BusinessSuppliedCard,
   ProviderInformationalLicenses,
   ProviderLicenseCredentialBadges,
+  ProviderStateListings,
 } from '@/components/providers/provider-license-profile';
 import { ProviderSecondarySignals } from '@/components/provider-secondary-signals';
 import { ProviderAppointmentSnapshotSection } from '@/components/provider-appointment-snapshot';
@@ -543,6 +544,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                     </a>
                   </Button>
                   <ProviderLicenseCredentialBadges licenses={provider.licenses} />
+                  <ProviderStateListings provider={provider} />
                   <ProviderInformationalLicenses entries={provider.informational_licenses} />
                 </CardContent>
               </Card>

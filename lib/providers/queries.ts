@@ -19,6 +19,7 @@ import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
 import { PROVIDERS_STATEMENT_ROUTE } from '@/lib/observability/sentry-policy';
 import { applyDirectoryZipScope } from './directory-scope';
 import { providerApiCountyFilter } from './provider-api-county-filter';
+import { providerMatchesLicensedState } from './directory-state';
 
 /**
  * Phase 1 — public directory returns verified TrustState only.
@@ -127,10 +128,9 @@ export async function getProviders(
     );
 
     if (stateCode && !filters.zip) {
-      providers = providers.filter((p) => {
-        const licensed = (p.license_state || p.state || '').toUpperCase();
-        return licensed === stateCode;
-      });
+      providers = providers.filter((provider) =>
+        providerMatchesLicensedState(provider, stateCode)
+      );
     }
 
     providers = providers.slice(0, limit);

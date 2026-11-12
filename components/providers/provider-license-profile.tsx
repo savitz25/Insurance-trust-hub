@@ -15,26 +15,35 @@ import {
   licenseRecheckUrl,
   licenseResidencyLabel,
   shouldRenderLicenseCredentialBadges,
+  storedLicenseVerificationUrl,
 } from '@/lib/providers/license-entries';
+import { stateListingLinks } from '@/lib/providers/state-view';
 import type { InformationalLicense, LicenseEntry } from '@/types/supabase';
 import type { Provider } from '@/types/provider';
 
 export function ProviderLicenseCredentialBadges({
   licenses,
   now,
+  force = false,
 }: {
   licenses?: LicenseEntry[] | null;
   now?: Date;
+  /** State views render the one badge for that state. Profiles stay gated. */
+  force?: boolean;
 }) {
   const licenseInfo = { licenses: licenses ?? [] };
-  if (!shouldRenderLicenseCredentialBadges(licenseInfo, now)) return null;
   const eligible = badgeEligibleLicenses(licenseInfo, now);
+  if (!force && !shouldRenderLicenseCredentialBadges(licenseInfo, now)) return null;
+  if (eligible.length === 0) return null;
 
   return (
     <ul className="space-y-3 pt-2" aria-label="State license badges">
       {eligible.map((entry) => {
         const residency = licenseResidencyLabel(entry.residency);
         const href = licenseRecheckUrl(entry);
+        const storedVerificationUrl = storedLicenseVerificationUrl(entry);
+        const source = (entry.source || '').trim();
+        const checkedAt = (entry.checkedAt || '').trim();
         return (
           <li
             key={`${entry.state}-${entry.license_number}`}
@@ -58,8 +67,21 @@ export function ProviderLicenseCredentialBadges({
                 <span className="font-medium">Residency:</span> {residency}
               </p>
             ) : null}
+            {source ? (
+              <p className="text-sm">
+                <span className="font-medium">Source:</span> {source}
+              </p>
+            ) : null}
+            {checkedAt ? (
+              <p className="text-sm">
+                <span className="font-medium">Checked:</span> {checkedAt}
+              </p>
+            ) : null}
             <a
               href={href}
+              {...(storedVerificationUrl
+                ? { 'data-stored-verification-url': storedVerificationUrl }
+                : {})}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-1 text-sm text-primary hover:underline"
@@ -71,6 +93,31 @@ export function ProviderLicenseCredentialBadges({
         );
       })}
     </ul>
+  );
+}
+
+/** "State listings: TX · ID" — only when more than one state is badge-eligible. */
+export function ProviderStateListings({
+  provider,
+  now,
+}: {
+  provider: Provider;
+  now?: Date;
+}) {
+  const links = stateListingLinks(provider, now);
+  if (links.length === 0) return null;
+  return (
+    <p data-state-listings="true" className="text-sm">
+      {'State listings: '}
+      {links.map((link, index) => (
+        <span key={link.code}>
+          {index > 0 ? ' · ' : null}
+          <a href={link.href} className="text-primary hover:underline">
+            {link.code}
+          </a>
+        </span>
+      ))}
+    </p>
   );
 }
 
@@ -174,6 +221,7 @@ export function ProviderLicenseProfileExtras({
   return (
     <>
       <ProviderLicenseCredentialBadges licenses={provider.licenses} now={now} />
+      <ProviderStateListings provider={provider} now={now} />
       <ProviderInformationalLicenses entries={provider.informational_licenses} />
       <BusinessSuppliedCard supplied={provider.business_supplied} />
     </>

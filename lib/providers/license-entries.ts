@@ -107,9 +107,21 @@ export function licenseResidencyLabel(
   return null;
 }
 
-export function licenseRecheckUrl(entry: LicenseEntry): string {
+/** Stored http(s) verification URL only. A blank value stays blank. */
+export function storedLicenseVerificationUrl(entry: LicenseEntry): string | null {
   const raw = (entry.verification_url || '').trim();
   if (/^https?:\/\//i.test(raw)) return raw;
+  return null;
+}
+
+/**
+ * Re-check destination. Uses the stored verification URL when one was recorded.
+ * Otherwise the state regulator's public lookup — that lookup is not a
+ * verification_url and is never written onto the license.
+ */
+export function licenseRecheckUrl(entry: LicenseEntry): string {
+  const stored = storedLicenseVerificationUrl(entry);
+  if (stored) return stored;
   const department = getLicenseDepartment(entry.state);
   return department?.lookupUrl ?? 'https://content.naic.org/consumer.htm';
 }

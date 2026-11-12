@@ -1,7 +1,11 @@
 /**
  * contact.business_supplied — a business-supplied card on /providers/[slug].
  * Jsonb only. Not a regulator record, not a trust-state input, not JSON-LD.
+ * Optional office jurisdiction is read from the same jsonb. It never writes
+ * contact.address.
  */
+
+import { normalizeStateCode } from '@/lib/providers/state-code';
 
 export const BUSINESS_SUPPLIED_SOURCE = 'BUSINESS_SUPPLIED' as const;
 
@@ -14,6 +18,8 @@ export interface BusinessSuppliedOfficeInput {
   label?: string;
   address?: string | { street?: string; city?: string; state?: string; zip?: string };
   verified?: boolean;
+  /** Optional USPS code such as TX or ID. Absent means the office is untagged. */
+  jurisdiction?: string;
 }
 
 export interface BusinessSuppliedInput {
@@ -31,6 +37,7 @@ export interface BusinessSuppliedOfficeView {
   label: string;
   address: string;
   verified: boolean;
+  jurisdiction: string | null;
 }
 
 export interface BusinessSuppliedView {
@@ -104,6 +111,7 @@ export function parseBusinessSupplied(value: unknown): BusinessSuppliedView | nu
         label: label || 'Office',
         address,
         verified: office.verified === true,
+        jurisdiction: normalizeStateCode(office.jurisdiction),
       });
     }
   }
