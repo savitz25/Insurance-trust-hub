@@ -15,8 +15,12 @@ import {
 } from '@/lib/insurance/trust/provider-trust-state';
 import { FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
 import { looksLikeZip } from '@/lib/tools/zip-resolve';
+import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
+import { PROVIDERS_STATEMENT_ROUTE } from '@/lib/observability/sentry-policy';
 import { applyDirectoryZipScope } from './directory-scope';
 import { providerApiCountyFilter } from './provider-api-county-filter';
+import { providerMatchesLicensedState } from './directory-state';
+
 /**
  * Phase 1 — public directory returns verified TrustState only.
  * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
@@ -111,6 +115,10 @@ export async function getProviders(
     const { data, error, count } = await query;
 
     if (error || !data) {
+      captureProviderStatementTimeout(error, {
+        route: PROVIDERS_STATEMENT_ROUTE,
+        queryKind: 'page',
+      });
       if (failLoud) throw new Error('Directory source unavailable');
       return { providers: [], total: 0 };
     }
@@ -120,16 +128,19 @@ export async function getProviders(
     );
 
     if (stateCode && !filters.zip) {
-      providers = providers.filter((p) => {
-        const licensed = (p.license_state || p.state || '').toUpperCase();
-        return licensed === stateCode;
-      });
+      providers = providers.filter((provider) =>
+        providerMatchesLicensedState(provider, stateCode)
+      );
     }
 
     providers = providers.slice(0, limit);
 
     return { providers, total: count ?? providers.length };
-  } catch {
+  } catch (caught) {
+    captureProviderStatementTimeout(caught, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     if (failLoud) throw new Error('Directory source unavailable');
     return { providers: [], total: 0 };
   }

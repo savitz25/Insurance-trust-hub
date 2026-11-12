@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,7 +9,7 @@ type HubInventoryPaginationProps = {
   basePath: string;
   page: number;
   totalPages: number;
-  total: number;
+  total: number | null;
   pageSize: number;
   /** Preserve specialty filter across pages */
   loaFilter?: HubLoaFilterId;
@@ -40,12 +41,14 @@ export function HubInventoryPagination({
   loaFilter = 'all',
   className,
 }: HubInventoryPaginationProps) {
-  if (totalPages <= 1 || total <= pageSize) return null;
+  if (total == null) {
+    if (totalPages <= 1) return null;
+  } else if (totalPages <= 1 || total <= pageSize) return null;
 
   const prev = page > 1 ? page - 1 : null;
   const next = page < totalPages ? page + 1 : null;
   const from = (page - 1) * pageSize + 1;
-  const to = Math.min(page * pageSize, total);
+  const to = total == null ? Math.min(page * pageSize, from + pageSize - 1) : Math.min(page * pageSize, total);
 
   return (
     <nav
@@ -56,8 +59,14 @@ export function HubInventoryPagination({
       )}
     >
       <p className="text-sm text-muted-foreground">
-        Showing {from.toLocaleString()}–{to.toLocaleString()} of{' '}
-        {total.toLocaleString()} verified research listings
+        {total == null ? (
+          'count temporarily unavailable'
+        ) : (
+          <>
+            Showing {from.toLocaleString()}–{to.toLocaleString()} of {total.toLocaleString()}{' '}
+            verified research listings
+          </>
+        )}
         <span className="text-muted-foreground/80">
           {' '}
           · page {page} of {totalPages}

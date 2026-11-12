@@ -41,6 +41,12 @@ import {
 } from '@/lib/insurance/trust/provider-trust-state';
 import { toPublicSecondarySignals } from '@/lib/enrichment/public-secondary';
 import { InsuranceVerificationBadge } from '@/components/verification-badge';
+import {
+  BusinessSuppliedCard,
+  ProviderInformationalLicenses,
+  ProviderLicenseCredentialBadges,
+  ProviderStateListings,
+} from '@/components/providers/provider-license-profile';
 import { ProviderSecondarySignals } from '@/components/provider-secondary-signals';
 import { ProviderAppointmentSnapshotSection } from '@/components/provider-appointment-snapshot';
 import { AgencyTrustReportSection } from '@/components/agency-trust-report';
@@ -505,6 +511,8 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
               </Card>
             </section>
 
+            <BusinessSuppliedCard supplied={provider.business_supplied} />
+
             <section>
               <h2 className="text-xl font-semibold mb-3">License &amp; credentials</h2>
               <Card>
@@ -537,6 +545,9 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   </Button>
+                  <ProviderLicenseCredentialBadges licenses={provider.licenses} />
+                  <ProviderStateListings provider={provider} />
+                  <ProviderInformationalLicenses entries={provider.informational_licenses} />
                 </CardContent>
               </Card>
             </section>

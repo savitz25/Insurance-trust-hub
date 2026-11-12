@@ -2,8 +2,10 @@ import type { Provider } from '@/types/provider';
 import type { Provider as DbProvider } from '@/types/supabase';
 import type { InsuranceType, Specialty } from '@/lib/constants';
 import type { ProviderEnrichment } from '@/lib/enrichment/types';
+import { parseBusinessSupplied } from '@/lib/providers/business-supplied';
 import {
   allLicenseEntries,
+  informationalLicenseEntries,
   primaryLicenseEntry,
 } from '@/lib/providers/license-entries';
 
@@ -46,6 +48,10 @@ export function mapRowToProvider(row: DbProvider): Provider {
     is_verified: row.verified,
     /** Legacy display fields — first JSON license only. Full set is `licenses`. */
     licenses,
+    informational_licenses: informationalLicenseEntries(row.license_info),
+    business_supplied: parseBusinessSupplied(
+      (contact as { business_supplied?: unknown }).business_supplied
+    ),
     states_licensed: row.states_licensed ?? [],
     license_number: license?.license_number ?? null,
     license_state: license?.state ?? null,

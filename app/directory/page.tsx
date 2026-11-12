@@ -37,6 +37,8 @@ import {
 } from '@/lib/dfs/providers-by-county';
 import { DirectorySpecialtyChips } from '@/components/directory-specialty-chips';
 import { getCachedVerifiedLaunchCounts } from '@/lib/directory/live-counts';
+import { isReadyCount, unavailableCount, type HeadCount } from '@/lib/dfs/provider-count';
+import { HeadCountValue } from '@/components/head-count-value';
 import {
   getDirectoryStateIntro,
   regulatorHasLoaSpecialtyTags,
@@ -202,19 +204,28 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const providers = sortProviders(rawProviders, sort, query);
   const isList = view === 'list';
   const skipLaunchFanout = Boolean(zipGeo || zipParam);
-  const {
-    fl: flTotal,
-    tx: txTotal,
-    oh: ohTotal,
-    nc: ncTotal,
-    nv: nvTotal,
-    vt: vtTotal,
-    ma: maTotal,
-    ms: msTotal,
-  } = skipLaunchFanout
-    ? { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0, ma: 0, ms: 0 }
-    : await getCachedVerifiedLaunchCounts();
-  const njTotal = skipLaunchFanout ? 0 : await countVerifiedNewJerseyProviders();
+  const missed: HeadCount = unavailableCount();
+  const launchCounts = skipLaunchFanout
+    ? null
+    : await getCachedVerifiedLaunchCounts().catch(() => null);
+  const flCount = launchCounts?.fl ?? missed;
+  const txCount = launchCounts?.tx ?? missed;
+  const ohCount = launchCounts?.oh ?? missed;
+  const ncCount = launchCounts?.nc ?? missed;
+  const nvCount = launchCounts?.nv ?? missed;
+  const vtCount = launchCounts?.vt ?? missed;
+  const maCount = launchCounts?.ma ?? missed;
+  const msCount = launchCounts?.ms ?? missed;
+  const flTotal = isReadyCount(flCount) ? flCount.value : 0;
+  const txTotal = isReadyCount(txCount) ? txCount.value : 0;
+  const ohTotal = isReadyCount(ohCount) ? ohCount.value : 0;
+  const ncTotal = isReadyCount(ncCount) ? ncCount.value : 0;
+  const nvTotal = isReadyCount(nvCount) ? nvCount.value : 0;
+  const vtTotal = isReadyCount(vtCount) ? vtCount.value : 0;
+  const maTotal = isReadyCount(maCount) ? maCount.value : 0;
+  const msTotal = isReadyCount(msCount) ? msCount.value : 0;
+  const njCount = skipLaunchFanout ? missed : await countVerifiedNewJerseyProviders();
+  const njTotal = isReadyCount(njCount) ? njCount.value : 0;
   const [launchRows, txHubRows, ohHubRows, njHubRows, ncHubRows, nvHubRows, vtHubRows, maHubRows, msHubRows] =
     skipLaunchFanout
       ? [[], [], [], [], [], [], [], [], []]
@@ -323,7 +334,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               Florida (DFS)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {flTotal.toLocaleString()}
+                <HeadCountValue count={flCount} />
               </span>
             </Link>
           ) : null}
@@ -338,7 +349,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               Texas (TDI)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {txTotal.toLocaleString()}
+                <HeadCountValue count={txCount} />
               </span>
             </Link>
           ) : null}
@@ -353,7 +364,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               Ohio (ODI)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {ohTotal.toLocaleString()}
+                <HeadCountValue count={ohCount} />
               </span>
             </Link>
           ) : null}
@@ -368,7 +379,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               Vermont (VT DFR)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {vtTotal.toLocaleString()}
+                <HeadCountValue count={vtCount} />
               </span>
             </Link>
           ) : null}
@@ -383,7 +394,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               Massachusetts (MA DOI)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {maTotal.toLocaleString()}
+                <HeadCountValue count={maCount} />
               </span>
             </Link>
           ) : null}
@@ -398,7 +409,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               Mississippi (MID)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {msTotal.toLocaleString()}
+                <HeadCountValue count={msCount} />
               </span>
             </Link>
           ) : null}
@@ -413,7 +424,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               Nevada (NV DOI)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {nvTotal.toLocaleString()}
+                <HeadCountValue count={nvCount} />
               </span>
             </Link>
           ) : null}
@@ -428,7 +439,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               North Carolina (NC DOI)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {ncTotal.toLocaleString()}
+                <HeadCountValue count={ncCount} />
               </span>
             </Link>
           ) : null}
@@ -453,7 +464,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             >
               New Jersey (DOBI)
               <span className="ml-1.5 tabular-nums opacity-90">
-                {njTotal.toLocaleString()}
+                <HeadCountValue count={njCount} />
               </span>
             </Link>
           ) : null}
@@ -463,12 +474,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Massachusetts launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {maTotal.toLocaleString()} verified MA listings
+                · <HeadCountValue count={maCount} /> verified MA listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {maHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -477,7 +488,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -506,12 +517,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Mississippi launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {msTotal.toLocaleString()} verified MS listings
+                · <HeadCountValue count={msCount} /> verified MS listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {msHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -520,7 +531,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -549,12 +560,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Vermont launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {vtTotal.toLocaleString()} verified VT listings
+                · <HeadCountValue count={vtCount} /> verified VT listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {vtHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -563,7 +574,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -592,12 +603,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Nevada launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {nvTotal.toLocaleString()} verified NV listings
+                · <HeadCountValue count={nvCount} /> verified NV listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {nvHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -606,7 +617,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -635,12 +646,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               North Carolina launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {ncTotal.toLocaleString()} verified NC listings
+                · <HeadCountValue count={ncCount} /> verified NC listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {ncHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -649,7 +660,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -686,12 +697,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               New Jersey launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {njTotal.toLocaleString()} verified NJ listings
+                · <HeadCountValue count={njCount} /> verified NJ listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {njHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -700,7 +711,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -713,12 +724,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Texas launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {txTotal.toLocaleString()} verified TX listings
+                · <HeadCountValue count={txCount} /> verified TX listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {txHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -731,7 +742,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -760,12 +771,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Ohio launch hubs
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {ohTotal.toLocaleString()} verified OH listings
+                · <HeadCountValue count={ohCount} /> verified OH listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {ohHubRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -774,7 +785,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>
@@ -803,12 +814,12 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Florida launch counties
               <span className="ml-2 font-normal normal-case tracking-normal">
-                · {flTotal.toLocaleString()} verified FL listings
+                · <HeadCountValue count={flCount} /> verified FL listings
               </span>
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {launchRows
-                .filter((row) => row.total > 0)
+                .filter((row) => isReadyCount(row.total) && row.total.value > 0)
                 .map((row) => (
                   <li key={row.key}>
                     <Link
@@ -821,7 +832,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                     >
                       {row.displayName}
                       <span className="tabular-nums opacity-80">
-                        {row.total.toLocaleString()}
+                        <HeadCountValue count={row.total} />
                       </span>
                     </Link>
                   </li>

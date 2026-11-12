@@ -1,6 +1,51 @@
 import { SITE_EMAIL, SITE_NAME, SITE_URL } from "@/lib/constants";
 import type { Provider } from "@/types/provider";
 import { brandAsset, BRAND_LOGO } from "@/lib/brand";
+import {
+  badgeEligibleLicenses,
+  licenseClassLabel,
+  shouldRenderLicenseCredentialBadges,
+  storedLicenseVerificationUrl,
+} from "@/lib/providers/license-entries";
+import { getLicenseDepartment } from "@/lib/tools/license-verification";
+
+/**
+ * JSON-LD credentials are badge-eligible licenses only.
+ * informational[] and expired / unverified entries are omitted.
+ * One-license profiles omit hasCredential so existing schema stays the same.
+ * recognizedBy.url is the stored verification_url only. A regulator lookup
+ * fallback is not written into the credential.
+ */
+export function insuranceAgencyJsonLdCredentials(
+  provider: Provider,
+  now: Date = new Date(),
+  force = false
+) {
+  const licenseInfo = { licenses: provider.licenses ?? [] };
+  const eligible = badgeEligibleLicenses(licenseInfo, now);
+  if (!force && !shouldRenderLicenseCredentialBadges(licenseInfo, now)) return undefined;
+  if (eligible.length === 0) return undefined;
+  return eligible.map((entry) => {
+    const department = getLicenseDepartment(entry.state);
+    const verificationUrl = storedLicenseVerificationUrl(entry);
+    const recognizedBy: {
+      "@type": "GovernmentOrganization";
+      name: string;
+      url?: string;
+    } = {
+      "@type": "GovernmentOrganization",
+      name: department?.department ?? entry.state,
+    };
+    if (verificationUrl) recognizedBy.url = verificationUrl;
+    return {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "State insurance license",
+      identifier: entry.license_number,
+      name: licenseClassLabel(entry),
+      recognizedBy,
+    };
+  });
+}
 
 /** Parent knowledge layer — reciprocal with Ask Trust Hub Organization graph. */
 export const ASK_PARENT_ORGANIZATION = {
@@ -78,7 +123,10 @@ export const homepageWebPageSchema = {
   inLanguage: "en-US",
 };
 
-export function buildInsuranceAgencySchema(provider: Provider) {
+export function buildInsuranceAgencySchema(
+  provider: Provider,
+  options?: { now?: Date; forceCredentials?: boolean }
+) {
   // Phase 6A/6B2: no AggregateRating from seed or third-party Google snapshots
   const isSeed =
     provider.id.startsWith("fallback-") ||
@@ -87,6 +135,11 @@ export function buildInsuranceAgencySchema(provider: Provider) {
     !/\d/.test(provider.license_number);
   // Never emit AggregateRating from Google Places snapshots (Phase 6B2)
   const hasFirstPartyReviews = false;
+  const credentials = insuranceAgencyJsonLdCredentials(
+    provider,
+    options?.now ?? new Date(),
+    options?.forceCredentials === true
+  );
 
   return {
     "@type": "InsuranceAgency",
@@ -116,6 +169,7 @@ export function buildInsuranceAgencySchema(provider: Provider) {
       "@type": "State",
       name: provider.state,
     },
+    ...(credentials ? { hasCredential: credentials } : {}),
   };
 }
 

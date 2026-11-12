@@ -26,6 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const inventory = await getHubInventory(hub.slug, { page: 1 });
   return buildHubMetadata(hub, '/hubs/south-florida', {
     total: inventory.total,
+    listed: inventory.providers.length,
+    count: inventory.count,
   });
 }
 
@@ -75,6 +77,7 @@ export default async function SouthFloridaHubPage({
         hub={hub}
         canonicalPath="/hubs/south-florida"
         verifiedProviders={filtered}
+        count={inventory.count}
         verifiedTotal={inventory.total}
         inventoryShowing={filtered.length}
         inventoryPageSize={inventory.pageSize}

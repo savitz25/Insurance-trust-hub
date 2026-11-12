@@ -17,10 +17,21 @@ import {
   getHubInventory,
   HUB_PAGE_SIZE,
 } from '@/lib/dfs/providers-by-county';
+import { isReadyCount, type HeadCount } from '@/lib/dfs/provider-count';
 import { getProviderBySlug } from '@/lib/providers/queries';
+import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
+import {
+  headCountTimeoutError,
+  PROVIDERS_STATEMENT_ROUTE,
+  restStatementTimeoutError,
+} from '@/lib/observability/sentry-policy';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+
+function readyValue(count: HeadCount): number | null {
+  return isReadyCount(count) ? count.value : null;
+}
 
 function jwtProjectRef(jwt: string | undefined): string | null {
   if (!jwt) return null;
@@ -81,11 +92,19 @@ export async function GET() {
     restStatus = res.status;
     restCount = res.headers.get('content-range');
     restBodySnippet = (await res.text()).slice(0, 240);
+    const restTimeout = restStatementTimeoutError(restStatus, restBodySnippet, res.headers.get('proxy-status'));
+    captureProviderStatementTimeout(restTimeout, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'count',
+    });
   } catch (e) {
     restBodySnippet = e instanceof Error ? e.message : String(e);
   }
 
-  const supabase = createPublicClient();
+  let countProxyStatus: string | null = null;
+  const supabase = createPublicClient((response) => {
+    countProxyStatus = response.headers.get('proxy-status');
+  });
   let verifiedFlCount: number | null = null;
   let queryError: string | null = null;
   let sampleSlug: string | null = null;
@@ -96,6 +115,11 @@ export async function GET() {
       .select('id', { count: 'exact', head: true })
       .eq('verified', true)
       .contains('states_licensed', ['FL']);
+    const countStatus = countProxyStatus;
+    captureProviderStatementTimeout(headCountTimeoutError(error, countStatus), {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'count',
+    });
     if (error) {
       queryError =
         error.message || error.code || JSON.stringify(error) || queryError;
@@ -111,6 +135,10 @@ export async function GET() {
       .ilike('short_description', '%Duval%')
       .limit(1)
       .maybeSingle();
+    captureProviderStatementTimeout(sampleErr, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     if (sampleErr && !queryError) {
       queryError =
         sampleErr.message || sampleErr.code || JSON.stringify(sampleErr);
@@ -157,9 +185,9 @@ export async function GET() {
 
   const restOk = restStatus === 200 || restStatus === 206;
   const countyOk =
-    (byCounty.duval?.total ?? 0) > 100 &&
-    (byCounty.broward?.total ?? 0) > 100 &&
-    (byCounty.miami_dade?.total ?? 0) > 100;
+    (readyValue(byCounty.duval?.total ?? { unavailable: true }) ?? -1) > 100 &&
+    (readyValue(byCounty.broward?.total ?? { unavailable: true }) ?? -1) > 100 &&
+    (readyValue(byCounty.miami_dade?.total ?? { unavailable: true }) ?? -1) > 100;
 
   return NextResponse.json(
     {
@@ -169,8 +197,8 @@ export async function GET() {
       (verifiedFlCount ?? 0) > 0 &&
       countyOk &&
       Boolean(profile) &&
-      hubTotals.jacksonville > 100 &&
-      hubTotals['miami-fort-lauderdale'] > 100,
+      (readyValue(hubTotals.jacksonville) ?? -1) > 100 &&
+      (readyValue(hubTotals['miami-fort-lauderdale']) ?? -1) > 100,
     supabaseConfigured: true,
     supabaseHost: host,
     anonKeyRef: anonRef,

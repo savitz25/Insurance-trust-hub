@@ -135,6 +135,17 @@ const PROFILES: Record<string, RegulatorProfile> = {
     profileKicker: 'Mississippi agency research profile',
     allowsLeadForm: false,
   },
+  ID: {
+    code: 'ID',
+    label: 'Idaho Department of Insurance',
+    short: 'Idaho DOI',
+    lookupUrl: 'https://doi.idaho.gov/public/licensing/',
+    lookupLinkLabel: 'Idaho Department of Insurance licensing lookup',
+    loaSource: 'Idaho Department of Insurance license record',
+    inventoryNote: '',
+    profileKicker: 'Idaho agency research profile',
+    allowsLeadForm: false,
+  },
 };
 
 export function normalizeStateCode(raw?: string | null): string {
@@ -190,7 +201,8 @@ export function getLoaSourcePhrase(state?: string | null): string {
 export function regulatorHasLoaSpecialtyTags(state?: string | null): boolean {
   const code = normalizeStateCode(state);
   if (!code) return true; // all-states directory: mixed inventory
-  if (code === 'MS') return false;
+  // ID is a lookup label only — no Idaho lines-of-authority inventory file.
+  if (code === 'MS' || code === 'ID') return false;
   return Boolean(getRegulatorProfile(code));
 }
 

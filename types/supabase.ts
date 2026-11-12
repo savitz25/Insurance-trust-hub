@@ -30,10 +30,30 @@ export interface LicenseEntry {
   notes?: string;
   status?: 'verified' | 'pending' | 'unavailable' | 'seed' | 'suppressed';
   identityMatchAccepted?: boolean;
+  /** ISO date or timestamp. Null/absent means no expiration is on file. */
+  expires_at?: string | null;
+  /** Per-license residency. Contact.residency stays the legacy single flag. */
+  residency?: 'resident' | 'non_resident' | null;
+}
+
+/**
+ * Info-only license text. Never a badge, never a trust input, never JSON-LD.
+ * Stored on license_info jsonb — no schema migration.
+ */
+export interface InformationalLicense {
+  state: string;
+  license_number: string;
+  /** Class / record label, e.g. "Surplus Lines Agency". */
+  type?: string;
+  issued_at?: string | null;
+  source?: string;
+  notes?: string;
 }
 
 export interface LicenseInfo {
   licenses: LicenseEntry[];
+  /** Plain-text records. Not badges and not trust-state inputs. */
+  informational?: InformationalLicense[];
   /** Ops audit trail (append-only preferred) */
   audit?: Array<{
     at: string;
@@ -75,6 +95,11 @@ export interface ContactInfo {
    * Not an endorsement; never used for ranking.
    */
   appointment_snapshot?: import('@/lib/dfs/appointments').ProviderAppointmentSnapshot;
+  /**
+   * Business-supplied contact card. Not a regulator record.
+   * Shape is parsed in lib/providers/business-supplied.ts.
+   */
+  business_supplied?: import('@/lib/providers/business-supplied').BusinessSuppliedInput | null;
 }
 
 export type Database = {

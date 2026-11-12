@@ -9,48 +9,54 @@ import {
   countVerifiedMassachusettsProviders,
   countVerifiedMississippiProviders,
 } from '@/lib/dfs/providers-by-county';
+import {
+  isReadyCount,
+  reinterpretLaunchCounts,
+  type HeadCount,
+} from '@/lib/dfs/provider-count';
 
 export type VerifiedLaunchCounts = {
-  fl: number;
-  tx: number;
-  oh: number;
-  nc: number;
-  nv: number;
-  vt: number;
-  ma: number;
-  ms: number;
+  fl: HeadCount;
+  tx: HeadCount;
+  oh: HeadCount;
+  nc: HeadCount;
+  nv: HeadCount;
+  vt: HeadCount;
+  ma: HeadCount;
+  ms: HeadCount;
 };
 
 async function loadVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
-  try {
-    const [fl, tx, oh, nc, nv, vt, ma, ms] = await Promise.all([
-      countVerifiedFloridaProviders(),
-      countVerifiedTexasProviders(),
-      countVerifiedOhioProviders(),
-      countVerifiedNorthCarolinaProviders(),
-      countVerifiedNevadaProviders(),
-      countVerifiedVermontProviders(),
-      countVerifiedMassachusettsProviders(),
-      countVerifiedMississippiProviders(),
-    ]);
-    return {
-      fl: Number.isFinite(fl) ? fl : 0,
-      tx: Number.isFinite(tx) ? tx : 0,
-      oh: Number.isFinite(oh) ? oh : 0,
-      nc: Number.isFinite(nc) ? nc : 0,
-      nv: Number.isFinite(nv) ? nv : 0,
-      vt: Number.isFinite(vt) ? vt : 0,
-      ma: Number.isFinite(ma) ? ma : 0,
-      ms: Number.isFinite(ms) ? ms : 0,
-    };
-  } catch {
-    return { fl: 0, tx: 0, oh: 0, nc: 0, nv: 0, vt: 0, ma: 0, ms: 0 };
+  const [fl, tx, oh, nc, nv, vt, ma, ms] = await Promise.all([
+    countVerifiedFloridaProviders(),
+    countVerifiedTexasProviders(),
+    countVerifiedOhioProviders(),
+    countVerifiedNorthCarolinaProviders(),
+    countVerifiedNevadaProviders(),
+    countVerifiedVermontProviders(),
+    countVerifiedMassachusettsProviders(),
+    countVerifiedMississippiProviders(),
+  ]);
+  const counts = { fl, tx, oh, nc, nv, vt, ma, ms };
+  if (Object.values(counts).some((count) => !isReadyCount(count))) {
+    throw new Error('verified launch counts unavailable');
   }
+  return counts;
 }
 
-/** Homepage / directory chips — 5-minute cache, fail soft to zeros. */
-export const getCachedVerifiedLaunchCounts = unstable_cache(
+/**
+ * Homepage / directory chips. A failure is thrown so the shared cache
+ * never stores a zero in place of a missed count. Every read recomputes
+ * `stale` from `asOf` and drops anything 24h or older, so a frozen
+ * `stale: false` cannot reach the exact-match disclosure.
+ */
+const loadCachedVerifiedLaunchCounts = unstable_cache(
   loadVerifiedLaunchCounts,
-  ['ith-verified-launch-counts-v6'],
+  ['ith-verified-launch-counts-v7'],
   { revalidate: 300 }
 );
+
+export async function getCachedVerifiedLaunchCounts(): Promise<VerifiedLaunchCounts> {
+  const stored = await loadCachedVerifiedLaunchCounts();
+  return reinterpretLaunchCounts(stored, Date.now());
+}
