@@ -17,10 +17,15 @@ import {
   getHubInventory,
   HUB_PAGE_SIZE,
 } from '@/lib/dfs/providers-by-county';
+import { isReadyCount, type HeadCount } from '@/lib/dfs/provider-count';
 import { getProviderBySlug } from '@/lib/providers/queries';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+
+function readyValue(count: HeadCount): number | null {
+  return isReadyCount(count) ? count.value : null;
+}
 
 function jwtProjectRef(jwt: string | undefined): string | null {
   if (!jwt) return null;
@@ -157,9 +162,9 @@ export async function GET() {
 
   const restOk = restStatus === 200 || restStatus === 206;
   const countyOk =
-    (byCounty.duval?.total ?? 0) > 100 &&
-    (byCounty.broward?.total ?? 0) > 100 &&
-    (byCounty.miami_dade?.total ?? 0) > 100;
+    (readyValue(byCounty.duval?.total ?? { unavailable: true }) ?? -1) > 100 &&
+    (readyValue(byCounty.broward?.total ?? { unavailable: true }) ?? -1) > 100 &&
+    (readyValue(byCounty.miami_dade?.total ?? { unavailable: true }) ?? -1) > 100;
 
   return NextResponse.json(
     {
@@ -169,8 +174,8 @@ export async function GET() {
       (verifiedFlCount ?? 0) > 0 &&
       countyOk &&
       Boolean(profile) &&
-      hubTotals.jacksonville > 100 &&
-      hubTotals['miami-fort-lauderdale'] > 100,
+      (readyValue(hubTotals.jacksonville) ?? -1) > 100 &&
+      (readyValue(hubTotals['miami-fort-lauderdale']) ?? -1) > 100,
     supabaseConfigured: true,
     supabaseHost: host,
     anonKeyRef: anonRef,

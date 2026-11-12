@@ -25,6 +25,7 @@ import {
   type HubLoaFilterId,
 } from '@/components/hub-specialty-filter';
 import { inventoryScopeNoteForHub } from '@/lib/dfs/launch-counties';
+import { formatCountAsOf, isReadyCount, type HeadCount } from '@/lib/dfs/provider-count';
 import {
   formatHubPopulation,
   getLoaSourcePhrase,
@@ -50,10 +51,15 @@ interface HubPageViewProps {
   /** Phase 4 — DFS-promoted verified providers for this market (page of cards) */
   verifiedProviders?: Provider[];
   /**
-   * True verified match total for the hub (may exceed rendered cards).
-   * When omitted, falls back to verifiedProviders.length.
+   * Head count with freshness. Unavailable is not treated as zero.
+   * Pagination falls back to the listed rows when the count is missing.
    */
-  verifiedTotal?: number;
+  count: HeadCount;
+  /**
+   * Numeric total for pagination when the count is ready.
+   * Null when the count is unavailable.
+   */
+  verifiedTotal?: number | null;
   /** Cards shown on this page */
   inventoryShowing?: number;
   /** Explicit page size cap */
@@ -198,7 +204,7 @@ export function HubPageView({
   hub,
   canonicalPath,
   verifiedProviders = [],
-  verifiedTotal,
+  count,
   inventoryShowing,
   inventoryPageSize,
   inventoryPage = 1,
@@ -209,11 +215,7 @@ export function HubPageView({
   const path = canonicalPath ?? `/hubs/${state}/${slug}`;
   const dbProviders = filterVerifiedProviders(verifiedProviders);
   const baseStats = getHubStats(hub);
-  // Market total = exact matched inventory (not silent page-size cap)
-  const verifiedCount =
-    typeof verifiedTotal === 'number' && verifiedTotal >= 0
-      ? verifiedTotal
-      : dbProviders.length;
+  const verifiedCount = isReadyCount(count) ? count.value : dbProviders.length;
   const showingCount =
     typeof inventoryShowing === 'number' ? inventoryShowing : dbProviders.length;
   const pageSize =
@@ -256,13 +258,16 @@ export function HubPageView({
     : undefined;
   const acaGuideLinks = ACA_GUIDE_LINKS_BY_HUB[slug];
   const seo = resolveHubPublicSeo(hub, path, {
-    total: verifiedCount,
+    total: isReadyCount(count) ? count.value : null,
     health: healthCount,
+    listed: dbProviders.length,
+    count,
   });
   const cluster = clusterForPath(path) || clusterForHubSlug(hub.slug);
-  const curatedSummary = curatedConfig
-    ? honestCuratedSummary(hub.shortName, stats.totalAgents, curatedConfig.summary)
-    : null;
+  const curatedSummary =
+    curatedConfig && isReadyCount(count)
+      ? honestCuratedSummary(hub.shortName, count.value, curatedConfig.summary)
+      : null;
   const healthProviders = dbProviders.filter((p) => p.insurance_types?.includes('health'));
   const otherProviders = dbProviders.filter((p) => !p.insurance_types?.includes('health'));
 
@@ -349,17 +354,26 @@ export function HubPageView({
             {`Verified ${regulatorLabel} research listings for ${hub.localDescriptor}`}
           </p>
           <p className="mt-4 text-sm text-primary-foreground/70 max-w-2xl mx-auto">
-            {verifiedCountLabel(verifiedCount)}
+            {isReadyCount(count) ? (
+              <>
+                {verifiedCountLabel(count.value)}
+                {count.stale ? ` as of ${formatCountAsOf(count.asOf)}` : ''}
+              </>
+            ) : (
+              'count temporarily unavailable'
+            )}
           </p>
-          {verifiedCount > 0 ? (
+          {isReadyCount(count) && count.value > 0 ? (
             <p className="mt-2 text-xs text-primary-foreground/60 max-w-2xl mx-auto">
-              {isCapped
-                ? `Showing ${showingCount.toLocaleString()} of ${verifiedCount.toLocaleString()} verified agencies on this page (page ${inventoryPage}${
-                    inventoryTotalPages > 1 ? ` of ${inventoryTotalPages}` : ''
-                  }, ${pageSize} per page).`
-                : `${verifiedCount.toLocaleString()} verified agenc${
-                    verifiedCount === 1 ? 'y' : 'ies'
-                  }.`}
+              {count.stale
+                ? `Showing ${showingCount.toLocaleString()} of ${count.value.toLocaleString()} verified agencies on this page, as of ${formatCountAsOf(count.asOf)}.`
+                : isCapped
+                  ? `Showing ${showingCount.toLocaleString()} of ${count.value.toLocaleString()} verified agencies on this page (page ${inventoryPage}${
+                      inventoryTotalPages > 1 ? ` of ${inventoryTotalPages}` : ''
+                    }, ${pageSize} per page).`
+                  : `${count.value.toLocaleString()} verified agenc${
+                      count.value === 1 ? 'y' : 'ies'
+                    }.`}
             </p>
           ) : null}
           {inventoryScope ? (
@@ -439,11 +453,13 @@ export function HubPageView({
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                   {curatedSummary ??
-                    (verifiedCount > 0
-                      ? `${verifiedCount} verified research listing${
-                          verifiedCount === 1 ? '' : 's'
-                        } for ${hub.shortName}. Independent research only — re-check state DOI before you enroll.`
-                      : EMPTY_MARKET_COPY.section)}
+                    (!isReadyCount(count)
+                      ? 'count temporarily unavailable'
+                      : count.value > 0
+                        ? `${count.value} verified research listing${
+                            count.value === 1 ? '' : 's'
+                          } for ${hub.shortName}. Independent research only — re-check state DOI before you enroll.`
+                        : EMPTY_MARKET_COPY.section)}
                 </p>
                 {curatedConfig ? (
                   <div className="flex flex-wrap gap-2 mb-6">
@@ -470,12 +486,19 @@ export function HubPageView({
                     {inventoryScope}
                   </p>
                 ) : null}
-                {dbProviders.length > 0 || verifiedCount > 0 ? (
+                {dbProviders.length > 0 || (isReadyCount(count) && count.value > 0) ? (
                   <>
                     <div className="mb-4 rounded-xl border bg-card p-4 shadow-sm">
                       <p className="text-sm font-semibold text-foreground">
-                        {verifiedCount.toLocaleString()} verified research agenc
-                        {verifiedCount === 1 ? 'y' : 'ies'} in this market
+                        {isReadyCount(count) ? (
+                          <>
+                            {count.value.toLocaleString()} verified research agenc
+                            {count.value === 1 ? 'y' : 'ies'} in this market
+                            {count.stale ? ` as of ${formatCountAsOf(count.asOf)}` : ''}
+                          </>
+                        ) : (
+                          'count temporarily unavailable'
+                        )}
                       </p>
                       {isCapped ? (
                         <p className="mt-1 text-sm text-muted-foreground">
@@ -539,11 +562,13 @@ export function HubPageView({
                       basePath={path}
                       page={inventoryPage}
                       totalPages={inventoryTotalPages}
-                      total={verifiedCount}
+                      total={isReadyCount(count) ? count.value : null}
                       pageSize={pageSize}
                       loaFilter={loaFilter}
                     />
                   </>
+                ) : !isReadyCount(count) ? (
+                  <p className="text-sm text-muted-foreground">count temporarily unavailable</p>
                 ) : (
                   <EmptyCoveragePanel
                     variant="unmapped"

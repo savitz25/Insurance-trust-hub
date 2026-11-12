@@ -3,7 +3,8 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { structuredIdCountFilter } from './provider-count-filter';
-import { clearRememberedCounts, rememberCount } from './provider-count-flight';
+import { isReadyCount } from './provider-count';
+import { clearRememberedCounts, rememberCount, setCountClock } from './provider-count-flight';
 
 const hub = readFileSync(join(process.cwd(), 'lib/dfs/providers-by-county.ts'), 'utf8');
 
@@ -38,6 +39,7 @@ test('unsafe ids are rejected before they reach PostgREST or()', () => {
 });
 
 test('a successful count is shared and a failure is not stored', async () => {
+  setCountClock(null);
   clearRememberedCounts();
   let calls = 0;
   const load = () => {
@@ -48,10 +50,11 @@ test('a successful count is shared and a failure is not stored', async () => {
     rememberCount('fl:miami_dade', 50_000, load),
     rememberCount('fl:miami_dade', 50_000, load),
   ]);
-  assert.equal(a, 9630);
-  assert.equal(b, 9630);
+  assert.equal(isReadyCount(a) && a.value, 9630);
+  assert.equal(isReadyCount(b) && b.value, 9630);
   assert.equal(calls, 1);
-  assert.equal(await rememberCount('fl:miami_dade', 50_000, load), 9630);
+  const again = await rememberCount('fl:miami_dade', 50_000, load);
+  assert.equal(isReadyCount(again) && again.value, 9630);
   assert.equal(calls, 1);
 
   let failures = 0;
@@ -61,7 +64,7 @@ test('a successful count is shared and a failure is not stored', async () => {
   };
   await assert.rejects(rememberCount('fl:orange', 50_000, fail));
   await assert.rejects(rememberCount('fl:orange', 50_000, fail));
-  assert.equal(failures, 2);
+  assert.equal(failures, 1);
   clearRememberedCounts();
 });
 

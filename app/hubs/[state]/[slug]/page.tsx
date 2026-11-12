@@ -38,6 +38,8 @@ export async function generateMetadata({
 
   return buildHubMetadata(hub, `/hubs/${state}/${slug}`, {
     total: inventory.total,
+    listed: inventory.providers.length,
+    count: inventory.count,
   });
 }
 
@@ -67,6 +69,7 @@ export default async function HubPage({
     <HubPageView
       hub={hub}
       verifiedProviders={filtered}
+      count={inventory.count}
       verifiedTotal={inventory.total}
       inventoryShowing={filtered.length}
       inventoryPageSize={inventory.pageSize}
