@@ -56,27 +56,21 @@ export function readStatementSqlState(error: unknown): '57014' | null {
   return null;
 }
 
-function hasSqlStateCode(error: unknown): boolean {
-  if (!error || typeof error !== 'object') return false;
-  const code = (error as { code?: unknown }).code;
-  if (typeof code === 'number') return true;
-  return typeof code === 'string' && code.trim() !== '';
-}
-
-function blankErrorMessage(error: unknown): boolean {
-  if (!error || typeof error !== 'object') return true;
-  const message = (error as { message?: unknown }).message;
-  return typeof message !== 'string' || message.trim() === '';
+/**
+ * PostgREST sends `Proxy-Status: PostgREST; error=57014` on a failed HEAD.
+ * The header is the SQLSTATE. A bare HTTP 500 is not treated as a statement timeout.
+ */
+export function proxyStatusSqlState(proxyStatus: string | null | undefined): '57014' | null {
+  if (!proxyStatus) return null;
+  return /(?:^|[;\s])error=57014(?:$|[;\s])/.test(proxyStatus) ? '57014' : null;
 }
 
 /**
- * Exact-count queries use HTTP HEAD. A HEAD response cannot carry PostgREST's
- * JSON error, so SQLSTATE 57014 arrives as HTTP 500 with an empty message and no code.
- * Any other status, or a 500 that still names a code or message, is left unchanged.
+ * Exact-count queries use HTTP HEAD, which has no JSON body.
+ * Report 57014 only when the error object or Proxy-Status actually says so.
  */
-export function headCountTimeoutError(error: unknown, status: number | null | undefined): unknown {
-  if (readStatementSqlState(error) === '57014') return { code: '57014' };
-  if (status === 500 && !hasSqlStateCode(error) && blankErrorMessage(error)) {
+export function headCountTimeoutError(error: unknown, proxyStatus: string | null | undefined): unknown {
+  if (readStatementSqlState(error) === '57014' || proxyStatusSqlState(proxyStatus) === '57014') {
     return { code: '57014' };
   }
   return error;

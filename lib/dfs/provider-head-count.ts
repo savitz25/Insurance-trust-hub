@@ -19,13 +19,26 @@ import { headCountTimeoutError, PROVIDERS_STATEMENT_ROUTE } from '@/lib/observab
 
 const COUNT_TTL_MS = COUNT_FRESH_MS;
 
-function rejectProviderCount(error: unknown, count: number | null, status: number): asserts count is number {
+function rejectProviderCount(
+  error: unknown,
+  count: number | null,
+  proxyStatus: string | null
+): asserts count is number {
   if (!error && count != null) return;
-  captureProviderStatementTimeout(headCountTimeoutError(error, status), {
+  captureProviderStatementTimeout(headCountTimeoutError(error, proxyStatus), {
     route: PROVIDERS_STATEMENT_ROUTE,
     queryKind: 'count',
   });
   throw new Error('provider count unavailable');
+}
+
+function openCountClient(): { client: NonNullable<ReturnType<typeof createPublicClient>>; proxyStatus: () => string | null } | null {
+  let proxyStatus: string | null = null;
+  const client = createPublicClient((response) => {
+    proxyStatus = response.headers.get('proxy-status');
+  });
+  if (!client) return null;
+  return { client, proxyStatus: () => proxyStatus };
 }
 
 type CachedCount = { value: number; asOf: number };
@@ -36,28 +49,28 @@ async function queryStructuredCount(
   idsCsv: string
 ): Promise<CachedCount> {
   if (!isSupabaseConfigured()) throw new Error('provider count client unavailable');
-  const supabase = createPublicClient();
-  if (!supabase) throw new Error('provider count client unavailable');
-  const { count, error, status } = await supabase
+  const opened = openCountClient();
+  if (!opened) throw new Error('provider count client unavailable');
+  const { count, error } = await opened.client
     .from('providers')
     .select('id', { count: 'exact', head: true })
     .eq('verified', true)
     .contains('states_licensed', [state])
     .or(structuredIdCountFilter(idsCsv.split(','), field));
-  rejectProviderCount(error, count, status);
+  rejectProviderCount(error, count, opened.proxyStatus());
   return { value: count, asOf: Date.now() };
 }
 
 async function queryStateCount(state: string): Promise<CachedCount> {
   if (!isSupabaseConfigured()) throw new Error('provider count client unavailable');
-  const supabase = createPublicClient();
-  if (!supabase) throw new Error('provider count client unavailable');
-  const { count, error, status } = await supabase
+  const opened = openCountClient();
+  if (!opened) throw new Error('provider count client unavailable');
+  const { count, error } = await opened.client
     .from('providers')
     .select('id', { count: 'exact', head: true })
     .eq('verified', true)
     .contains('states_licensed', [state]);
-  rejectProviderCount(error, count, status);
+  rejectProviderCount(error, count, opened.proxyStatus());
   return { value: count, asOf: Date.now() };
 }
 

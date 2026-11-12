@@ -23,6 +23,7 @@ import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
 import {
   headCountTimeoutError,
   PROVIDERS_STATEMENT_ROUTE,
+  proxyStatusSqlState,
   restStatementTimeoutError,
 } from '@/lib/observability/sentry-policy';
 
@@ -92,7 +93,10 @@ export async function GET() {
     restStatus = res.status;
     restCount = res.headers.get('content-range');
     restBodySnippet = (await res.text()).slice(0, 240);
-    captureProviderStatementTimeout(restStatementTimeoutError(restStatus, restBodySnippet), {
+    const restTimeout =
+      restStatementTimeoutError(restStatus, restBodySnippet) ??
+      (proxyStatusSqlState(res.headers.get('proxy-status')) === '57014' ? { code: '57014' as const } : null);
+    captureProviderStatementTimeout(restTimeout, {
       route: PROVIDERS_STATEMENT_ROUTE,
       queryKind: 'count',
     });
@@ -100,18 +104,22 @@ export async function GET() {
     restBodySnippet = e instanceof Error ? e.message : String(e);
   }
 
-  const supabase = createPublicClient();
+  let countProxyStatus: string | null = null;
+  const supabase = createPublicClient((response) => {
+    countProxyStatus = response.headers.get('proxy-status');
+  });
   let verifiedFlCount: number | null = null;
   let queryError: string | null = null;
   let sampleSlug: string | null = null;
 
   if (supabase) {
-    const { count, error, status } = await supabase
+    const { count, error } = await supabase
       .from('providers')
       .select('id', { count: 'exact', head: true })
       .eq('verified', true)
       .contains('states_licensed', ['FL']);
-    captureProviderStatementTimeout(headCountTimeoutError(error, status), {
+    const countStatus = countProxyStatus;
+    captureProviderStatementTimeout(headCountTimeoutError(error, countStatus), {
       route: PROVIDERS_STATEMENT_ROUTE,
       queryKind: 'count',
     });

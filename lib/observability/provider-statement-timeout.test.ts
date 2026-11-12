@@ -7,6 +7,7 @@ import {
   insuranceSentryOptions,
   PROVIDERS_STATEMENT_ROUTE,
   providerTimeoutCapture,
+  proxyStatusSqlState,
   restStatementTimeoutError,
   scrubSentryEvent,
 } from './sentry-policy';
@@ -145,26 +146,28 @@ test('beforeSend removes headers, cookies, query strings, and user data', () => 
   assert.equal('request' in empty, false);
 });
 
-test('a bodyless exact-count HEAD 500 is reported as SQLSTATE 57014', () => {
+test('exact-count HEAD timeouts use Proxy-Status and ignore other HTTP 500s', () => {
   const dsn = 'https://public@o0.ingest.sentry.io/1';
   const ctx = { route: PROVIDERS_STATEMENT_ROUTE, queryKind: 'count' as const };
-  const headTimeout = headCountTimeoutError({ message: '' }, 500);
-  const capture = providerTimeoutCapture(dsn, headTimeout, ctx);
+  assert.equal(proxyStatusSqlState('PostgREST; error=57014'), '57014');
+  assert.equal(proxyStatusSqlState('PostgREST; error=57014; next=1'), '57014');
+  assert.equal(proxyStatusSqlState('PostgREST; error=PGRST000'), null);
+  assert.equal(proxyStatusSqlState('PostgREST; error=570140'), null);
+  assert.equal(proxyStatusSqlState(null), null);
+
+  const capture = providerTimeoutCapture(dsn, headCountTimeoutError({ message: '' }, 'PostgREST; error=57014'), ctx);
   assert.equal(capture?.tags.sqlstate, '57014');
   assert.equal(capture?.tags.query_kind, 'count');
   assert.equal(capture?.error.message, 'Postgres statement timeout');
+  assert.equal(JSON.stringify(capture).includes('PostgREST'), false);
 
-  assert.equal(providerTimeoutCapture(dsn, headCountTimeoutError({ message: '' }, 401), ctx), null);
+  assert.equal(providerTimeoutCapture(dsn, headCountTimeoutError({ message: '' }, null), ctx), null);
   assert.equal(
-    providerTimeoutCapture(dsn, headCountTimeoutError({ code: '42501', message: 'permission denied' }, 500), ctx),
+    providerTimeoutCapture(dsn, headCountTimeoutError({ message: '' }, 'PostgREST; error=PGRST000'), ctx),
     null
   );
   assert.equal(
-    providerTimeoutCapture(
-      dsn,
-      headCountTimeoutError({ message: 'FetchError: network down', code: '' }, 0),
-      ctx
-    ),
+    providerTimeoutCapture(dsn, headCountTimeoutError({ code: '42501', message: 'permission denied' }, null), ctx),
     null
   );
 });
