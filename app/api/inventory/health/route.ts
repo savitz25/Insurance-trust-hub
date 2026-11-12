@@ -23,7 +23,6 @@ import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
 import {
   headCountTimeoutError,
   PROVIDERS_STATEMENT_ROUTE,
-  proxyStatusSqlState,
   restStatementTimeoutError,
 } from '@/lib/observability/sentry-policy';
 
@@ -93,9 +92,7 @@ export async function GET() {
     restStatus = res.status;
     restCount = res.headers.get('content-range');
     restBodySnippet = (await res.text()).slice(0, 240);
-    const restTimeout =
-      restStatementTimeoutError(restStatus, restBodySnippet) ??
-      (proxyStatusSqlState(res.headers.get('proxy-status')) === '57014' ? { code: '57014' as const } : null);
+    const restTimeout = restStatementTimeoutError(restStatus, restBodySnippet, res.headers.get('proxy-status'));
     captureProviderStatementTimeout(restTimeout, {
       route: PROVIDERS_STATEMENT_ROUTE,
       queryKind: 'count',

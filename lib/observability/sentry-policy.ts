@@ -39,21 +39,47 @@ type ScrubbableEvent = {
   breadcrumbs?: Array<{ data?: Record<string, unknown> | null } | null>;
 };
 
-const STATEMENT_TIMEOUT = /statement timeout/i;
+/** A Postgres SQLSTATE is exactly five digits or uppercase letters (e.g. 57014, 23505, 42P01). */
+const SQLSTATE = /^[0-9A-Z]{5}$/;
 
-/** SQLSTATE 57014 is Postgres `query_canceled` / statement timeout. */
-export function readStatementSqlState(error: unknown): '57014' | null {
-  if (!error || typeof error !== 'object') return null;
-  const record = error as { code?: unknown; message?: unknown };
-  if (record.code === '57014' || record.code === 57014) return '57014';
-  if (
-    typeof record.message === 'string' &&
-    record.message.includes('57014') &&
-    STATEMENT_TIMEOUT.test(record.message)
-  ) {
-    return '57014';
+function sqlStateOf(value: unknown): string | null {
+  if (typeof value === 'string') return SQLSTATE.test(value) ? value : null;
+  if (typeof value === 'number' && Number.isInteger(value) && value >= 10000 && value <= 99999) {
+    return String(value);
   }
   return null;
+}
+
+/**
+ * The first structured SQLSTATE on the error, its `cause`, or a wrapped `error`, outermost first.
+ * Only `code` fields count. Message, details, and hint text are never read, so
+ * "statement timeout" or digits such as 1570149 in a message cannot produce a SQLSTATE.
+ */
+export function structuredSqlState(error: unknown): string | null {
+  const seen = new Set<object>();
+  let level: unknown[] = [error];
+  for (let depth = 0; depth < 5 && level.length; depth += 1) {
+    const next: unknown[] = [];
+    for (const node of level) {
+      if (!node || typeof node !== 'object' || seen.has(node)) continue;
+      seen.add(node);
+      const record = node as { code?: unknown; cause?: unknown; error?: unknown };
+      const state = sqlStateOf(record.code);
+      if (state) return state;
+      next.push(record.cause, record.error);
+    }
+    level = next;
+  }
+  return null;
+}
+
+/**
+ * SQLSTATE 57014 is Postgres `query_canceled` / statement timeout.
+ * Requires a structured `code` of exactly 57014. An explicit other SQLSTATE (e.g. 23505) is never
+ * overridden by message text.
+ */
+export function readStatementSqlState(error: unknown): '57014' | null {
+  return structuredSqlState(error) === '57014' ? '57014' : null;
 }
 
 /**
@@ -67,24 +93,45 @@ export function proxyStatusSqlState(proxyStatus: string | null | undefined): '57
 
 /**
  * Exact-count queries use HTTP HEAD, which has no JSON body.
- * Report 57014 only when the error object or Proxy-Status actually says so.
+ * Report 57014 only when the error's structured code or, absent any structured SQLSTATE,
+ * Proxy-Status actually says so. An explicit non-57014 SQLSTATE wins over Proxy-Status.
  */
 export function headCountTimeoutError(error: unknown, proxyStatus: string | null | undefined): unknown {
-  if (readStatementSqlState(error) === '57014' || proxyStatusSqlState(proxyStatus) === '57014') {
-    return { code: '57014' };
-  }
+  const state = structuredSqlState(error);
+  if (state === '57014') return { code: '57014' };
+  if (state === null && proxyStatusSqlState(proxyStatus) === '57014') return { code: '57014' };
   return error;
 }
 
-/**
- * A 500 from `/rest/v1/providers` whose body names SQLSTATE 57014.
- * The body itself is never returned.
- */
-export function restStatementTimeoutError(status: number | null, body: string): { code: '57014' } | null {
-  if (status !== 500) return null;
-  if (/"code"\s*:\s*"57014"/.test(body) || (body.includes('57014') && STATEMENT_TIMEOUT.test(body))) {
-    return { code: '57014' };
+/** The top-level `code` of a PostgREST JSON error body, or null. */
+function bodySqlState(body: string): string | null {
+  try {
+    const parsed: unknown = JSON.parse(body);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      return sqlStateOf((parsed as { code?: unknown }).code);
+    }
+    return null;
+  } catch {
+    // A truncated body: only a leading `{"code":"XXXXX"` counts, never digits elsewhere.
+    const match = /^\s*\{\s*"code"\s*:\s*"([^"]*)"/.exec(body);
+    return match ? sqlStateOf(match[1]) : null;
   }
+}
+
+/**
+ * A 500 from `/rest/v1/providers` whose body `code` is SQLSTATE 57014, or whose body carries no
+ * SQLSTATE and whose Proxy-Status says `error=57014`. A generic or empty 500 is not a timeout,
+ * and an explicit other SQLSTATE in the body is never overridden. The body itself is never returned.
+ */
+export function restStatementTimeoutError(
+  status: number | null,
+  body: string,
+  proxyStatus?: string | null
+): { code: '57014' } | null {
+  if (status !== 500) return null;
+  const state = bodySqlState(body);
+  if (state === '57014') return { code: '57014' };
+  if (state === null && proxyStatusSqlState(proxyStatus) === '57014') return { code: '57014' };
   return null;
 }
 
@@ -109,14 +156,37 @@ export function providerTimeoutCapture(
 }
 
 /**
+ * Default SDK integrations kept for this instrumentation. Everything else is removed, including
+ * Console (console breadcrumbs), Http / NodeFetch / WinterCGFetch (outgoing-call breadcrumbs with
+ * URLs), RequestData (incoming request), the global uncaught-exception / unhandled-rejection
+ * handlers (arbitrary error text), LocalVariables, ContextLines, Modules, ChildProcess, and others.
+ * The only events this hub sends are explicit provider statement-timeout captures.
+ */
+export const INSURANCE_SENTRY_INTEGRATIONS = ['EventFilters', 'FunctionToString', 'LinkedErrors', 'Dedupe'] as const;
+
+type NamedIntegration = { name: string };
+
+export function insuranceSentryIntegrations<I extends NamedIntegration>(defaults: I[]): I[] {
+  const allowed: readonly string[] = INSURANCE_SENTRY_INTEGRATIONS;
+  return defaults.filter((integration) => allowed.includes(integration.name));
+}
+
+/** Breadcrumbs are never collected: console, fetch, http, and manual crumbs are all dropped. */
+export function dropSentryBreadcrumb(): null {
+  return null;
+}
+
+/**
  * SDK 11 reads `dataCollection` instead of `sendDefaultPii`.
  * `sendDefaultPii: false` stays set so the approved privacy flag is explicit.
- * Query text, cookies, headers, and user fields are not collected.
+ * Query text, cookies, headers, user fields, and breadcrumbs are not collected, and
+ * `beforeSend` rebuilds every outgoing event from an allowlist.
  */
 export function insuranceSentryOptions(dsn: string | undefined): {
   dsn: string;
   tracesSampleRate: 0;
   sendDefaultPii: false;
+  maxBreadcrumbs: 0;
   dataCollection: {
     userInfo: false;
     cookies: false;
@@ -130,7 +200,9 @@ export function insuranceSentryOptions(dsn: string | undefined): {
     genAI: { inputs: false; outputs: false };
     mcp: { inputs: false; outputs: false };
   };
-  beforeSend: typeof scrubSentryEvent;
+  integrations: typeof insuranceSentryIntegrations;
+  beforeBreadcrumb: typeof dropSentryBreadcrumb;
+  beforeSend: typeof insuranceBeforeSend;
 } | null {
   const trimmed = dsn?.trim();
   if (!trimmed) return null;
@@ -138,6 +210,7 @@ export function insuranceSentryOptions(dsn: string | undefined): {
     dsn: trimmed,
     tracesSampleRate: 0,
     sendDefaultPii: false,
+    maxBreadcrumbs: 0,
     dataCollection: {
       userInfo: false,
       cookies: false,
@@ -151,7 +224,9 @@ export function insuranceSentryOptions(dsn: string | undefined): {
       genAI: { inputs: false, outputs: false },
       mcp: { inputs: false, outputs: false },
     },
-    beforeSend: scrubSentryEvent,
+    integrations: insuranceSentryIntegrations,
+    beforeBreadcrumb: dropSentryBreadcrumb,
+    beforeSend: insuranceBeforeSend,
   };
 }
 
@@ -161,6 +236,33 @@ function stripQuery(url: string): string {
   const cut = [queryIndex, hashIndex].filter((index) => index >= 0);
   if (!cut.length) return url;
   return url.slice(0, Math.min(...cut));
+}
+
+const REDACTIONS: Array<[RegExp, string]> = [
+  [/\b(Bearer|Basic|Token|Digest)\s+[^\s"',;]+/gi, '$1 [redacted]'],
+  [/\beyJ[\w-]*\.[\w-]+\.[\w-]*/g, '[redacted-jwt]'],
+  [/[\w.+-]+(?:@|%40)[\w-]+(?:\.[\w-]+)+/gi, '[redacted-email]'],
+  [
+    /\b(authorization|api[_-]?key|apikey|access[_-]?token|refresh[_-]?token|token|secret|password|passwd|pwd|cookie|session|signature|sig|q|query|email)=([^\s&;,"']*)/gi,
+    '$1=[redacted]',
+  ],
+  [/\?[^\s"'#]*/g, ''],
+];
+
+/** Removes emails, credentials, JWTs, and query strings from free text. */
+export function redactSentryText(text: string): string {
+  let out = text;
+  for (const [pattern, replacement] of REDACTIONS) out = out.replace(pattern, replacement);
+  return out;
+}
+
+function redactDeep(value: unknown, depth = 0): unknown {
+  if (typeof value === 'string') return redactSentryText(value);
+  if (!value || typeof value !== 'object' || depth > 8) return value;
+  if (Array.isArray(value)) return value.map((item) => redactDeep(item, depth + 1));
+  const out: Record<string, unknown> = {};
+  for (const [key, item] of Object.entries(value)) out[key] = redactDeep(item, depth + 1);
+  return out;
 }
 
 function scrubData(data: Record<string, unknown>): void {
@@ -188,6 +290,77 @@ export function scrubSentryEvent<E extends ScrubbableEvent>(event: E): E {
     for (const crumb of event.breadcrumbs) {
       if (crumb?.data) scrubData(crumb.data);
     }
+  }
+  return event;
+}
+
+const PROVIDER_TIMEOUT_TAGS = ['hub', 'route', 'sqlstate', 'query_kind'] as const;
+const KEPT_CONTEXTS = ['runtime', 'trace'] as const;
+
+type OutgoingEvent = ScrubbableEvent & {
+  tags?: Record<string, unknown>;
+  contexts?: Record<string, unknown>;
+  extra?: unknown;
+  modules?: unknown;
+  server_name?: unknown;
+  transaction?: unknown;
+  message?: unknown;
+  logentry?: unknown;
+  exception?: { values?: unknown[] };
+};
+
+/** True only for events built by `providerTimeoutCapture`. */
+function isProviderTimeoutEvent(event: OutgoingEvent): boolean {
+  return event.tags?.hub === 'insurance' && event.tags?.sqlstate === '57014';
+}
+
+/**
+ * `beforeSend` for the real SDK. Any event that is not an explicit provider statement-timeout
+ * capture is dropped. A timeout event keeps only its four tags, the runtime/trace contexts, and
+ * the exception (without source lines or frame variables); every remaining string is redacted.
+ * Request, user, breadcrumbs, extra, modules, server name, transaction, and other contexts are removed.
+ */
+export function insuranceBeforeSend<E extends OutgoingEvent>(event: E): E | null {
+  if (!isProviderTimeoutEvent(event)) return null;
+  scrubSentryEvent(event);
+  delete event.request;
+  delete event.breadcrumbs;
+  delete event.extra;
+  delete event.modules;
+  delete event.server_name;
+  delete event.transaction;
+  delete event.message;
+  delete event.logentry;
+
+  const tags: Record<string, unknown> = {};
+  for (const key of PROVIDER_TIMEOUT_TAGS) {
+    const value = event.tags?.[key];
+    if (typeof value === 'string') tags[key] = key === 'route' ? stripQuery(value) : value;
+  }
+  event.tags = tags;
+
+  if (event.contexts) {
+    const contexts: Record<string, unknown> = {};
+    for (const key of KEPT_CONTEXTS) {
+      if (event.contexts[key] !== undefined) contexts[key] = event.contexts[key];
+    }
+    event.contexts = contexts;
+  }
+
+  for (const value of event.exception?.values ?? []) {
+    const frames = (value as { stacktrace?: { frames?: Array<Record<string, unknown>> } }).stacktrace?.frames;
+    for (const frame of frames ?? []) {
+      delete frame.vars;
+      delete frame.pre_context;
+      delete frame.context_line;
+      delete frame.post_context;
+    }
+    const mechanism = (value as { mechanism?: Record<string, unknown> }).mechanism;
+    if (mechanism) delete mechanism.data;
+  }
+
+  for (const key of ['tags', 'contexts', 'exception'] as const) {
+    if (event[key] !== undefined) (event as Record<string, unknown>)[key] = redactDeep(event[key]);
   }
   return event;
 }

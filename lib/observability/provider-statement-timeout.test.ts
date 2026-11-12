@@ -107,7 +107,7 @@ test('beforeSend removes headers, cookies, query strings, and user data', () => 
   assert.equal('replaysSessionSampleRate' in options, false);
   assert.equal('replaysOnErrorSampleRate' in options, false);
 
-  const scrubbed = options.beforeSend({
+  const scrubbed = scrubSentryEvent({
     user: { email: 'jane.doe@example.com', ip_address: '203.0.113.8' },
     request: {
       url: 'https://www.insurancetrusthub.com/directory?zip=33101&q=jane.doe%40example.com',
