@@ -21,6 +21,7 @@ import { isReadyCount, type HeadCount } from '@/lib/dfs/provider-count';
 import { getProviderBySlug } from '@/lib/providers/queries';
 import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
 import {
+  headCountTimeoutError,
   PROVIDERS_STATEMENT_ROUTE,
   restStatementTimeoutError,
 } from '@/lib/observability/sentry-policy';
@@ -105,12 +106,12 @@ export async function GET() {
   let sampleSlug: string | null = null;
 
   if (supabase) {
-    const { count, error } = await supabase
+    const { count, error, status } = await supabase
       .from('providers')
       .select('id', { count: 'exact', head: true })
       .eq('verified', true)
       .contains('states_licensed', ['FL']);
-    captureProviderStatementTimeout(error, {
+    captureProviderStatementTimeout(headCountTimeoutError(error, status), {
       route: PROVIDERS_STATEMENT_ROUTE,
       queryKind: 'count',
     });

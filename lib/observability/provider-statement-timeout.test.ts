@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import test from 'node:test';
 import {
+  headCountTimeoutError,
   insuranceSentryOptions,
   PROVIDERS_STATEMENT_ROUTE,
   providerTimeoutCapture,
@@ -142,6 +143,30 @@ test('beforeSend removes headers, cookies, query strings, and user data', () => 
   assert.equal(JSON.stringify(scrubbed).includes('33101'), false);
   const empty = scrubSentryEvent({});
   assert.equal('request' in empty, false);
+});
+
+test('a bodyless exact-count HEAD 500 is reported as SQLSTATE 57014', () => {
+  const dsn = 'https://public@o0.ingest.sentry.io/1';
+  const ctx = { route: PROVIDERS_STATEMENT_ROUTE, queryKind: 'count' as const };
+  const headTimeout = headCountTimeoutError({ message: '' }, 500);
+  const capture = providerTimeoutCapture(dsn, headTimeout, ctx);
+  assert.equal(capture?.tags.sqlstate, '57014');
+  assert.equal(capture?.tags.query_kind, 'count');
+  assert.equal(capture?.error.message, 'Postgres statement timeout');
+
+  assert.equal(providerTimeoutCapture(dsn, headCountTimeoutError({ message: '' }, 401), ctx), null);
+  assert.equal(
+    providerTimeoutCapture(dsn, headCountTimeoutError({ code: '42501', message: 'permission denied' }, 500), ctx),
+    null
+  );
+  assert.equal(
+    providerTimeoutCapture(
+      dsn,
+      headCountTimeoutError({ message: 'FetchError: network down', code: '' }, 0),
+      ctx
+    ),
+    null
+  );
 });
 
 test('a providers 500 body is recognized only as SQLSTATE 57014', () => {

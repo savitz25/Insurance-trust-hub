@@ -15,13 +15,13 @@ import {
   type ProviderCountField,
 } from './provider-count-filter';
 import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
-import { PROVIDERS_STATEMENT_ROUTE } from '@/lib/observability/sentry-policy';
+import { headCountTimeoutError, PROVIDERS_STATEMENT_ROUTE } from '@/lib/observability/sentry-policy';
 
 const COUNT_TTL_MS = COUNT_FRESH_MS;
 
-function rejectProviderCount(error: unknown, count: number | null): asserts count is number {
+function rejectProviderCount(error: unknown, count: number | null, status: number): asserts count is number {
   if (!error && count != null) return;
-  captureProviderStatementTimeout(error, {
+  captureProviderStatementTimeout(headCountTimeoutError(error, status), {
     route: PROVIDERS_STATEMENT_ROUTE,
     queryKind: 'count',
   });
@@ -38,13 +38,13 @@ async function queryStructuredCount(
   if (!isSupabaseConfigured()) throw new Error('provider count client unavailable');
   const supabase = createPublicClient();
   if (!supabase) throw new Error('provider count client unavailable');
-  const { count, error } = await supabase
+  const { count, error, status } = await supabase
     .from('providers')
     .select('id', { count: 'exact', head: true })
     .eq('verified', true)
     .contains('states_licensed', [state])
     .or(structuredIdCountFilter(idsCsv.split(','), field));
-  rejectProviderCount(error, count);
+  rejectProviderCount(error, count, status);
   return { value: count, asOf: Date.now() };
 }
 
@@ -52,12 +52,12 @@ async function queryStateCount(state: string): Promise<CachedCount> {
   if (!isSupabaseConfigured()) throw new Error('provider count client unavailable');
   const supabase = createPublicClient();
   if (!supabase) throw new Error('provider count client unavailable');
-  const { count, error } = await supabase
+  const { count, error, status } = await supabase
     .from('providers')
     .select('id', { count: 'exact', head: true })
     .eq('verified', true)
     .contains('states_licensed', [state]);
-  rejectProviderCount(error, count);
+  rejectProviderCount(error, count, status);
   return { value: count, asOf: Date.now() };
 }
 
