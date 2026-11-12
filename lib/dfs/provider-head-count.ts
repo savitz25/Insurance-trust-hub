@@ -17,7 +17,7 @@ import {
 
 const COUNT_TTL_MS = COUNT_FRESH_MS;
 
-type CachedCount = { value: number; asOf: number };
+type CachedCount = { value: number; asOf: number; estimated?: boolean };
 
 async function queryStructuredCount(
   state: string,
@@ -27,14 +27,22 @@ async function queryStructuredCount(
   if (!isSupabaseConfigured()) throw new Error('provider count client unavailable');
   const supabase = createPublicClient();
   if (!supabase) throw new Error('provider count client unavailable');
+  // County filters are the HEAD counts that still return SQLSTATE 57014.
+  // A planner estimate finishes without a full count scan. State and market
+  // counts stay exact. No index and no migration.
+  const estimated = field === 'launch_county_id';
   const { count, error } = await supabase
     .from('providers')
-    .select('id', { count: 'exact', head: true })
+    .select('id', { count: estimated ? 'planned' : 'exact', head: true })
     .eq('verified', true)
     .contains('states_licensed', [state])
     .or(structuredIdCountFilter(idsCsv.split(','), field));
   if (error || count == null) throw new Error('provider count unavailable');
-  return { value: count, asOf: Date.now() };
+  return {
+    value: count,
+    asOf: Date.now(),
+    ...(estimated ? { estimated: true as const } : {}),
+  };
 }
 
 async function queryStateCount(state: string): Promise<CachedCount> {
@@ -68,7 +76,10 @@ async function loadCachedCount(cached: Promise<CachedCount>, live: () => Promise
   return live();
 }
 
-/** Exact verified count for one structured id key. Successes are reused for one hour. */
+/**
+ * Verified count for one structured id key. Successes are reused for one hour.
+ * `launch_county_id` is a planner estimate. Other fields stay exact.
+ */
 export function exactStructuredProviderCount(
   state: string,
   field: ProviderCountField,

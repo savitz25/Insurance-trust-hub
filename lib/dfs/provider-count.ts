@@ -1,6 +1,6 @@
 /** A head count with the time it was actually read, or an explicit miss. */
 export type HeadCount =
-  | { value: number; asOf: number; stale: boolean }
+  | { value: number; asOf: number; stale: boolean; estimated?: boolean }
   | { unavailable: true };
 
 export const COUNT_FRESH_MS = 60 * 60 * 1000;
@@ -8,7 +8,7 @@ export const COUNT_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 export function isReadyCount(
   count: HeadCount
-): count is { value: number; asOf: number; stale: boolean } {
+): count is { value: number; asOf: number; stale: boolean; estimated?: boolean } {
   return 'value' in count;
 }
 
@@ -24,10 +24,12 @@ export function combineHeadCounts(parts: readonly HeadCount[], now = Date.now())
   const asOf = Math.min(...ready.map((part) => part.asOf));
   const age = now - asOf;
   if (age >= COUNT_MAX_AGE_MS) return unavailableCount();
+  const estimated = ready.some((part) => part.estimated);
   return {
     value: ready.reduce((sum, part) => sum + part.value, 0),
     asOf,
     stale: ready.some((part) => part.stale) || age >= COUNT_FRESH_MS,
+    ...(estimated ? { estimated: true as const } : {}),
   };
 }
 
@@ -58,7 +60,12 @@ export function settleHubPage(input: {
   return {
     total: safeTotal,
     totalPages: Math.max(pagesFromCount, pagesFromRows),
-    count: { value: safeTotal, asOf: input.count.asOf, stale: input.count.stale },
+    count: {
+      value: safeTotal,
+      asOf: input.count.asOf,
+      stale: input.count.stale,
+      ...(input.count.estimated ? { estimated: true as const } : {}),
+    },
   };
 }
 
@@ -89,7 +96,10 @@ export function hubSeoForCount(input: { count: HeadCount; listed: number }): {
 }
 
 export function countsAreFresh(counts: readonly HeadCount[]): boolean {
-  return counts.length > 0 && counts.every((count) => isReadyCount(count) && !count.stale);
+  return (
+    counts.length > 0 &&
+    counts.every((count) => isReadyCount(count) && !count.stale && !count.estimated)
+  );
 }
 
 export function exactTotalsSentence(counts: readonly HeadCount[]): string | null {
@@ -117,7 +127,12 @@ export function reinterpretHeadCount(count: HeadCount, now = Date.now()): HeadCo
   if (!isReadyCount(count)) return unavailableCount();
   const age = now - count.asOf;
   if (age >= COUNT_MAX_AGE_MS) return unavailableCount();
-  return { value: count.value, asOf: count.asOf, stale: age >= COUNT_FRESH_MS };
+  return {
+    value: count.value,
+    asOf: count.asOf,
+    stale: age >= COUNT_FRESH_MS,
+    ...(count.estimated ? { estimated: true as const } : {}),
+  };
 }
 
 export function reinterpretLaunchCounts<T extends Record<string, HeadCount>>(
@@ -133,6 +148,7 @@ export function reinterpretLaunchCounts<T extends Record<string, HeadCount>>(
 
 export function headCountDisclosure(count: HeadCount): string {
   if (!isReadyCount(count)) return 'count temporarily unavailable';
+  if (count.estimated) return 'estimated';
   if (!count.stale) return '';
   return `as of ${formatCountAsOf(count.asOf)}`;
 }

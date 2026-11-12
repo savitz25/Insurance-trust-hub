@@ -17,6 +17,7 @@ test('providers API county filter is one launch county id', () => {
 test('providers directory count is planned and the county filter stays one id', () => {
   assert.match(queries, /count: 'planned'/);
   assert.equal(queries.includes("count: 'exact'"), false);
+  assert.equal(queries.match(/\.order\('id', \{ ascending: true \}\)/g)?.length, 3);
   assert.match(queries, /providerApiCountyFilter\(launchCounty\)/);
   assert.equal(queries.includes('countyMatchOrParts'), false);
   assert.equal(queries.includes('providerMatchesLaunchCounties'), false);

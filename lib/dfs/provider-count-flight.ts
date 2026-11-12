@@ -3,7 +3,7 @@ import {
   type HeadCount,
 } from './provider-count';
 
-type Stored = { value: number; asOf: number };
+type Stored = { value: number; asOf: number; estimated?: boolean };
 type LoadResult = number | Stored;
 
 /** A failed refresh may serve the last good value for at most this long. */
@@ -28,7 +28,11 @@ function now(): number {
 
 function normalize(result: LoadResult): Stored {
   if (typeof result === 'number') return { value: result, asOf: now() };
-  return { value: result.value, asOf: result.asOf };
+  return {
+    value: result.value,
+    asOf: result.asOf,
+    ...(result.estimated ? { estimated: true as const } : {}),
+  };
 }
 
 function tooOld(stored: Stored, at = now()): boolean {
@@ -47,10 +51,13 @@ function backingOff(key: string): boolean {
   return !!gate && now() < gate.until;
 }
 
-function toHead(stored: Stored, ttlMs: number): HeadCount {
-  const age = now() - stored.asOf;
-  if (age >= STALE_ON_ERROR_MS) return { unavailable: true };
-  return { value: stored.value, asOf: stored.asOf, stale: age >= ttlMs };
+function toHead(stored: Stored, stale: boolean): HeadCount {
+  return {
+    value: stored.value,
+    asOf: stored.asOf,
+    stale,
+    ...(stored.estimated ? { estimated: true as const } : {}),
+  };
 }
 
 function startLoad(key: string, load: () => Promise<LoadResult>): Promise<Stored> {
@@ -98,18 +105,22 @@ export function rememberCount(
   const hit = fresh.get(key);
   const usable = hit && !tooOld(hit) ? hit : undefined;
   if (usable && now() - usable.asOf < ttlMs) {
-    return Promise.resolve({ value: usable.value, asOf: usable.asOf, stale: false });
+    return Promise.resolve(toHead(usable, false));
   }
   if (usable) {
     if (!backingOff(key) && !inflight.has(key)) {
       void startLoad(key, load).catch(() => {});
     }
-    return Promise.resolve({ value: usable.value, asOf: usable.asOf, stale: true });
+    return Promise.resolve(toHead(usable, true));
   }
   if (backingOff(key)) {
     return Promise.reject(new Error('provider count refresh backing off'));
   }
-  return startLoad(key, load).then((stored) => toHead(stored, ttlMs));
+  return startLoad(key, load).then((stored) => {
+    const age = now() - stored.asOf;
+    if (age >= STALE_ON_ERROR_MS) return { unavailable: true };
+    return toHead(stored, age >= ttlMs);
+  });
 }
 
 /** Test-only. Production callers rely on the TTL. */
