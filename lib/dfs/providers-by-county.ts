@@ -66,6 +66,8 @@ import {
   countVerifiedProvidersInState,
   exactStructuredProviderCount,
 } from '@/lib/dfs/provider-head-count';
+import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
+import { PROVIDERS_STATEMENT_ROUTE } from '@/lib/observability/sentry-policy';
 import {
   combineHeadCounts,
   isReadyCount,
@@ -98,6 +100,14 @@ export type HubInventoryResult = {
 
 function hubMatchOrParts(counties: FlLaunchCounty[]): string {
   return counties.flatMap(countyMatchOrParts).join(',');
+}
+
+function observeProvidersPage<T extends { error: unknown }>(result: T): T {
+  captureProviderStatementTimeout(result.error, {
+    route: PROVIDERS_STATEMENT_ROUTE,
+    queryKind: 'page',
+  });
+  return result;
 }
 
 /** In-memory Phase 1 + geo confirmation (guards SQL overmatch). */
@@ -290,14 +300,14 @@ async function getTxHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['TX'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -310,7 +320,11 @@ async function getTxHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -340,14 +354,14 @@ async function getNjHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['NJ'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -360,7 +374,11 @@ async function getNjHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -390,14 +408,14 @@ async function getOhHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['OH'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -410,7 +428,11 @@ async function getOhHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -440,14 +462,14 @@ async function getNcHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['NC'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -460,7 +482,11 @@ async function getNcHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -490,14 +516,14 @@ async function getNvHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['NV'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -510,7 +536,11 @@ async function getNvHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -540,14 +570,14 @@ async function getMsHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['MS'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -560,7 +590,11 @@ async function getMsHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -590,14 +624,14 @@ async function getMaHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['MA'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -610,7 +644,11 @@ async function getMaHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -640,14 +678,14 @@ async function getVtHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['VT'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || !data?.length) {
       return inventoryFromCount(count, [], pageSize, safePage, hubSlug);
@@ -660,7 +698,11 @@ async function getVtHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     return unavailableInventory(hubSlug, pageSize, page);
   }
 }
@@ -758,14 +800,14 @@ async function readFloridaHubInventory(
     const from = range.from;
     const to = range.to;
 
-    const { data, error } = await supabase
+    const { data, error } = observeProvidersPage(await supabase
       .from('providers')
       .select('*')
       .eq('verified', true)
       .contains('states_licensed', ['FL'])
       .or(or)
       .order('name', { ascending: true })
-      .range(from, to);
+      .range(from, to));
 
     if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
     if (!data.length) {
@@ -779,7 +821,11 @@ async function readFloridaHubInventory(
 
     const listed = listedPage(verified, pageSize);
     return inventoryFromCount(count, listed.providers, pageSize, safePage, hubSlug, listed.hasMore);
-  } catch {
+  } catch (error) {
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     // Lookup/transport/mapping failures are not evidence of an empty market.
     // Let the route error boundary handle them; never generate empty-market SEO.
     throw new Error('Florida hub inventory unavailable');
@@ -893,17 +939,23 @@ export async function countVerifiedByLaunchCounty(): Promise<
     try {
       const supabase = createPublicClient();
       if (supabase) {
-        const { data } = await supabase
-          .from('providers')
-          .select('name')
-          .eq('verified', true)
-          .contains('states_licensed', ['FL'])
-          .or(countyMatchOrParts(c).join(','))
-          .order('name', { ascending: true })
-          .limit(3);
+        const { data } = observeProvidersPage(
+          await supabase
+            .from('providers')
+            .select('name')
+            .eq('verified', true)
+            .contains('states_licensed', ['FL'])
+            .or(countyMatchOrParts(c).join(','))
+            .order('name', { ascending: true })
+            .limit(3)
+        );
         sampleNames = (data ?? []).map((r) => (r as { name: string }).name);
       }
-    } catch {
+    } catch (error) {
+      captureProviderStatementTimeout(error, {
+        route: PROVIDERS_STATEMENT_ROUTE,
+        queryKind: 'page',
+      });
       sampleNames = [];
     }
     out[c.id] = { displayName: c.displayName, total, sampleNames };

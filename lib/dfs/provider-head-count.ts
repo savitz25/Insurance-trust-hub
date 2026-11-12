@@ -14,8 +14,19 @@ import {
   structuredIdCountFilter,
   type ProviderCountField,
 } from './provider-count-filter';
+import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
+import { PROVIDERS_STATEMENT_ROUTE } from '@/lib/observability/sentry-policy';
 
 const COUNT_TTL_MS = COUNT_FRESH_MS;
+
+function rejectProviderCount(error: unknown, count: number | null): asserts count is number {
+  if (!error && count != null) return;
+  captureProviderStatementTimeout(error, {
+    route: PROVIDERS_STATEMENT_ROUTE,
+    queryKind: 'count',
+  });
+  throw new Error('provider count unavailable');
+}
 
 type CachedCount = { value: number; asOf: number };
 
@@ -33,7 +44,7 @@ async function queryStructuredCount(
     .eq('verified', true)
     .contains('states_licensed', [state])
     .or(structuredIdCountFilter(idsCsv.split(','), field));
-  if (error || count == null) throw new Error('provider count unavailable');
+  rejectProviderCount(error, count);
   return { value: count, asOf: Date.now() };
 }
 
@@ -46,7 +57,7 @@ async function queryStateCount(state: string): Promise<CachedCount> {
     .select('id', { count: 'exact', head: true })
     .eq('verified', true)
     .contains('states_licensed', [state]);
-  if (error || count == null) throw new Error('provider count unavailable');
+  rejectProviderCount(error, count);
   return { value: count, asOf: Date.now() };
 }
 

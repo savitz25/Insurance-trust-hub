@@ -19,6 +19,11 @@ import {
 } from '@/lib/dfs/providers-by-county';
 import { isReadyCount, type HeadCount } from '@/lib/dfs/provider-count';
 import { getProviderBySlug } from '@/lib/providers/queries';
+import { captureProviderStatementTimeout } from '@/lib/observability/sentry';
+import {
+  PROVIDERS_STATEMENT_ROUTE,
+  restStatementTimeoutError,
+} from '@/lib/observability/sentry-policy';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -86,6 +91,10 @@ export async function GET() {
     restStatus = res.status;
     restCount = res.headers.get('content-range');
     restBodySnippet = (await res.text()).slice(0, 240);
+    captureProviderStatementTimeout(restStatementTimeoutError(restStatus, restBodySnippet), {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'count',
+    });
   } catch (e) {
     restBodySnippet = e instanceof Error ? e.message : String(e);
   }
@@ -101,6 +110,10 @@ export async function GET() {
       .select('id', { count: 'exact', head: true })
       .eq('verified', true)
       .contains('states_licensed', ['FL']);
+    captureProviderStatementTimeout(error, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'count',
+    });
     if (error) {
       queryError =
         error.message || error.code || JSON.stringify(error) || queryError;
@@ -116,6 +129,10 @@ export async function GET() {
       .ilike('short_description', '%Duval%')
       .limit(1)
       .maybeSingle();
+    captureProviderStatementTimeout(sampleErr, {
+      route: PROVIDERS_STATEMENT_ROUTE,
+      queryKind: 'page',
+    });
     if (sampleErr && !queryError) {
       queryError =
         sampleErr.message || sampleErr.code || JSON.stringify(sampleErr);
