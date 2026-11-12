@@ -17,6 +17,8 @@ import { FL_LAUNCH_COUNTIES } from '@/lib/dfs/launch-counties';
 import { looksLikeZip } from '@/lib/tools/zip-resolve';
 import { applyDirectoryZipScope } from './directory-scope';
 import { providerApiCountyFilter } from './provider-api-county-filter';
+import { providerMatchesLicensedState } from './directory-state';
+
 /**
  * Phase 1 — public directory returns verified TrustState only.
  * Seed catalog remains available only via getAllFallbackProviders (admin tooling).
@@ -120,10 +122,9 @@ export async function getProviders(
     );
 
     if (stateCode && !filters.zip) {
-      providers = providers.filter((p) => {
-        const licensed = (p.license_state || p.state || '').toUpperCase();
-        return licensed === stateCode;
-      });
+      providers = providers.filter((provider) =>
+        providerMatchesLicensedState(provider, stateCode)
+      );
     }
 
     providers = providers.slice(0, limit);
