@@ -11,6 +11,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { stateCode } from '@/lib/analytics/privacy';
+import { captureTrustEvent } from '@/lib/analytics/trusthub';
+import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
 
 interface SearchFiltersProps {
   className?: string;
@@ -50,6 +53,11 @@ export function SearchFilters({ className }: SearchFiltersProps) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const nextState = (formData.get('state') as string) || null;
+    captureTrustEvent(TRUSTHUB_EVENTS.SEARCH_SUBMITTED, {
+      surface: 'directory',
+      success: true,
+      state: stateCode(nextState),
+    });
     updateParams({
       q: (formData.get('q') as string) || null,
       state: nextState,
@@ -88,7 +96,8 @@ export function SearchFilters({ className }: SearchFiltersProps) {
           name="q"
           defaultValue={query}
           placeholder="Search by name, city, or specialty..."
-          className="pl-9"
+          className="pl-9 ph-no-capture"
+          data-ph-mask=""
         />
       </div>
 

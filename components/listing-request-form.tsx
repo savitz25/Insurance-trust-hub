@@ -1,6 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { stateCode } from '@/lib/analytics/privacy';
+import { captureTrustEvent } from '@/lib/analytics/trusthub';
+import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -41,6 +44,10 @@ export function ListingRequestForm() {
     },
   });
 
+  useEffect(() => {
+    captureTrustEvent(TRUSTHUB_EVENTS.CLAIM_STARTED, { surface: 'claim_listing', success: true });
+  }, []);
+
   async function onSubmit(data: ListingRequestValues) {
     setServerError(null);
     const res = await submitListingRequest(data);
@@ -48,6 +55,11 @@ export function ListingRequestForm() {
       setServerError('error' in res ? res.error : 'Something went wrong.');
       return;
     }
+    captureTrustEvent(TRUSTHUB_EVENTS.CLAIM_SUBMITTED, {
+      surface: 'claim_listing',
+      success: true,
+      state: stateCode(data.licenseState),
+    });
     setSubmitted(true);
   }
 

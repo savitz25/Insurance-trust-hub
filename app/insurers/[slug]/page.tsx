@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ProfileViewedBeacon } from "@/components/analytics/profile-viewed-beacon";
 import { LegalInsurerProfileView } from "@/components/insurers/legal-insurer-profile-view";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { buildMetadata } from "@/lib/seo/metadata";
@@ -81,6 +82,7 @@ export default async function LegalInsurerProfilePage({ params }: Props) {
 
   return (
     <>
+      <ProfileViewedBeacon surface="insurer_profile" state={row.jurisdiction.find((code) => /^[A-Z]{2}$/.test(code))} />
       <JsonLd data={jsonLd} />
       <LegalInsurerProfileView
         row={row}

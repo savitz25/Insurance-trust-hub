@@ -2,6 +2,9 @@
 
 import { useEffect } from 'react';
 import { track } from '@vercel/analytics';
+import { stateCode } from '@/lib/analytics/privacy';
+import { captureTrustEvent } from '@/lib/analytics/trusthub';
+import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
 
 export function SearchShellAnalytics() {
   useEffect(() => {
@@ -18,6 +21,16 @@ export function SearchShellAnalytics() {
         }
       }
       track('specialist_search_submit', { hub: 'insurance' });
+      const selected = form instanceof HTMLFormElement ? form.querySelector('select[name="state"]') : null;
+      captureTrustEvent(
+        TRUSTHUB_EVENTS.SEARCH_SUBMITTED,
+        {
+          surface: 'ask',
+          success: true,
+          state: stateCode(selected instanceof HTMLSelectElement ? selected.value : undefined),
+        },
+        { sendBeforeUnload: true },
+      );
     };
     forms.forEach((form) => form.addEventListener('submit', onSubmit));
     return () => forms.forEach((form) => form.removeEventListener('submit', onSubmit));
