@@ -79,15 +79,17 @@ test('florida exact count no longer uses the wide county OR', () => {
   assert.equal(countFn.includes('ilike'), false);
 });
 
-test('hub page reads still use the wide matcher and name order', () => {
+test('hub page reads still use the wide matcher and name, then id', () => {
   const pageFn = sliceBetween(
     hub,
     'async function readFloridaHubInventory',
     'export async function getVerifiedProvidersForHub'
   );
   assert.match(pageFn, /hubMatchOrParts\(counties\)/);
-  assert.match(pageFn, /\.order\('name', \{ ascending: true \}\)/);
-  assert.equal(pageFn.includes(".order('id'"), false);
+  assert.match(
+    pageFn,
+    /\.order\('name', \{ ascending: true \}\)\.order\('id', \{ ascending: true \}\)/
+  );
 });
 
 test('market head counts use one id key; row reads keep both keys', () => {
