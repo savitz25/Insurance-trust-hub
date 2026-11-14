@@ -39,10 +39,23 @@ export function posthogDebugEnabled(): boolean {
  * Missing key is a no-op. Development (and localhost) stay off unless the debug flag is set.
  * Preview and production send when the key is present.
  */
+/** Browser Do Not Track, or cookies turned off, opts out of product analytics. */
+export function analyticsBrowserOptOut(): boolean {
+  try {
+    if (typeof navigator === 'undefined') return false;
+    const dnt = navigator.doNotTrack;
+    if (dnt === '1' || dnt === 'yes') return true;
+    return navigator.cookieEnabled === false;
+  } catch {
+    return false;
+  }
+}
+
 export function shouldEnablePosthog(): boolean {
   if (!posthogKey()) return false;
   const env = analyticsEnvironment();
   if (env === 'development' && !posthogDebugEnabled()) return false;
+  if (analyticsBrowserOptOut()) return false;
   if (typeof window !== 'undefined' && !posthogDebugEnabled()) {
     const host = window.location.hostname.replace(/^www\./, '').toLowerCase();
     if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local')) return false;

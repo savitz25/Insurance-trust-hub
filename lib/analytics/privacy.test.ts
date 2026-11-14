@@ -9,7 +9,9 @@ import {
   sanitizeAnalyticsUrl,
   sanitizeCaptureResult,
   stripElementsChainText,
+  suppressExceptionCapture,
 } from './privacy';
+import { analyticsBrowserOptOut } from './environment';
 import { pageviewDedupeKey } from './trusthub';
 
 test('URL sanitizer strips q and other free-text params from page URLs', () => {
@@ -156,4 +158,50 @@ test('session replay payloads are dropped and the browser client disables replay
   assert.match(source, /mask_all_text:\s*true/);
   assert.match(source, /maskAllInputs:\s*true/);
   assert.match(source, /isReplayEvent\(event\.event\)\) return null/);
+});
+
+test('no $exception events are sent', () => {
+  const dropped = suppressExceptionCapture({
+    event: '$exception',
+    properties: {
+      $exception_list: [{ type: 'Error', value: 'who sells medicare in miami' }],
+      $exception_message: 'who sells medicare in miami',
+    },
+  });
+  assert.equal(dropped, null);
+
+  const pageview = suppressExceptionCapture({
+    event: '$pageview',
+    properties: { $pathname: '/privacy', $exception_list: [{ type: 'Error' }] },
+  });
+  assert.equal(pageview?.event, '$pageview');
+  assert.equal(pageview?.properties && '$exception_list' in pageview.properties, false);
+
+  const source = readFileSync(path.join(HERE, 'posthog-browser.ts'), 'utf8');
+  assert.match(source, /capture_exceptions:\s*false/);
+  assert.match(source, /suppressExceptionCapture\(event\)/);
+  assert.match(source, /respect_dnt:\s*true/);
+});
+
+test('Do Not Track or blocked cookies opt out of analytics', () => {
+  const previous = globalThis.navigator;
+  try {
+    Object.defineProperty(globalThis, 'navigator', {
+      configurable: true,
+      value: { doNotTrack: '1', cookieEnabled: true },
+    });
+    assert.equal(analyticsBrowserOptOut(), true);
+    Object.defineProperty(globalThis, 'navigator', {
+      configurable: true,
+      value: { doNotTrack: '0', cookieEnabled: false },
+    });
+    assert.equal(analyticsBrowserOptOut(), true);
+    Object.defineProperty(globalThis, 'navigator', {
+      configurable: true,
+      value: { doNotTrack: '0', cookieEnabled: true },
+    });
+    assert.equal(analyticsBrowserOptOut(), false);
+  } finally {
+    Object.defineProperty(globalThis, 'navigator', { configurable: true, value: previous });
+  }
 });

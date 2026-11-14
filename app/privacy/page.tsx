@@ -103,6 +103,15 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <h2 className="text-xl font-semibold text-foreground mb-3">Analytics and cookies</h2>
+          <p>
+            We use PostHog for product analytics. It collects pages viewed, clicks, and device and
+            browser info. No email addresses and no search text are sent. You can opt out with the
+            browser Do Not Track setting, or by blocking cookies.
+          </p>
+        </section>
+
+        <section>
           <h2 className="text-xl font-semibold text-foreground mb-3">Contact</h2>
           <p>
             Questions about this Privacy Policy:{' '}

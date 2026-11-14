@@ -3,7 +3,13 @@
 import type { PostHog } from 'posthog-js';
 import { analyticsEnvironment, posthogHost, posthogKey, shouldEnablePosthog } from './environment';
 import { createPosthogClientGate } from './posthog-gate';
-import { isReplayEvent, maskReplayAttribute, sanitizeCapturedNetworkRequest, sanitizeCaptureResult } from './privacy';
+import {
+  isReplayEvent,
+  maskReplayAttribute,
+  sanitizeCapturedNetworkRequest,
+  sanitizeCaptureResult,
+  suppressExceptionCapture,
+} from './privacy';
 import { TRUSTHUB_HUB } from './trusthub-events';
 
 async function loadPosthog(): Promise<PostHog | null> {
@@ -15,6 +21,8 @@ async function loadPosthog(): Promise<PostHog | null> {
     person_profiles: 'identified_only',
     capture_pageview: false,
     capture_pageleave: true,
+    capture_exceptions: false,
+    respect_dnt: true,
     persistence: 'localStorage+cookie',
     // Privacy: replay DOM snapshots and the document title can carry raw Ask
     // queries, so session replay is off for this hub regardless of the shared
@@ -34,7 +42,9 @@ async function loadPosthog(): Promise<PostHog | null> {
     before_send: (event) => {
       // Replay is disabled; drop any replay payload outright as defense in depth.
       if (event && isReplayEvent(event.event)) return null;
-      return sanitizeCaptureResult(event);
+      const kept = suppressExceptionCapture(event);
+      if (!kept) return null;
+      return sanitizeCaptureResult(kept);
     },
     session_recording: {
       maskAllInputs: true,
