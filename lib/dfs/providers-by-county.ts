@@ -306,7 +306,7 @@ async function getTxHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['TX'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -360,7 +360,7 @@ async function getNjHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['NJ'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -414,7 +414,7 @@ async function getOhHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['OH'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -468,7 +468,7 @@ async function getNcHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['NC'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -522,7 +522,7 @@ async function getNvHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['NV'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -576,7 +576,7 @@ async function getMsHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['MS'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -630,7 +630,7 @@ async function getMaHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['MA'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -684,7 +684,7 @@ async function getVtHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['VT'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || !data?.length) {
@@ -806,7 +806,7 @@ async function readFloridaHubInventory(
       .eq('verified', true)
       .contains('states_licensed', ['FL'])
       .or(or)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true }).order('id', { ascending: true })
       .range(from, to));
 
     if (error || data == null) throw new Error('Florida hub inventory rows unavailable');
@@ -946,7 +946,7 @@ export async function countVerifiedByLaunchCounty(): Promise<
             .eq('verified', true)
             .contains('states_licensed', ['FL'])
             .or(countyMatchOrParts(c).join(','))
-            .order('name', { ascending: true })
+            .order('name', { ascending: true }).order('id', { ascending: true })
             .limit(3)
         );
         sampleNames = (data ?? []).map((r) => (r as { name: string }).name);
