@@ -146,6 +146,8 @@ export function isPosthogReservedKey(key: string): boolean {
 
 export function shouldStripQueryParam(key: string, value: string | null): boolean {
   const lower = decodePart(key).trim().toLowerCase();
+  // OAuth and magic-link callbacks use a short `code` value. Length rules would keep it.
+  if (lower === 'code') return true;
   if ((FREE_TEXT_QUERY_KEYS as readonly string[]).includes(lower)) return true;
   if ((STRUCTURED_QUERY_KEYS as readonly string[]).includes(lower)) {
     return Boolean(value && decodePart(value).length > 64);
@@ -418,17 +420,30 @@ export function suppressExceptionCapture<
   return event;
 }
 
+/** Added by the sanitizer. `$geoip_disable` asks PostHog to skip location enrichment for this event. */
+export type SanitizedCaptureProperties = {
+  $geoip_disable?: boolean;
+};
+
+export type SanitizedCaptureEvent<T> = T extends null
+  ? null
+  : T extends { properties?: infer P }
+    ? Omit<T, 'properties'> & {
+        properties: NonNullable<P> & SanitizedCaptureProperties;
+      }
+    : T;
+
 export function sanitizeCaptureResult<
   T extends {
     properties?: Record<string, unknown>;
     $set?: Record<string, unknown>;
     $set_once?: Record<string, unknown>;
   } | null,
->(event: T): T {
-  if (!event) return event;
+>(event: T): SanitizedCaptureEvent<T> {
+  if (!event) return event as SanitizedCaptureEvent<T>;
   if (event.properties) sanitizePageviewProperties(event.properties);
   finishPrivacyPayload(event);
-  return event;
+  return event as SanitizedCaptureEvent<T>;
 }
 
 export function sanitizeCapturedNetworkRequest<T extends { name?: string }>(request: T): T {

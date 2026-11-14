@@ -281,3 +281,25 @@ test('identify, pageview, and custom event payloads drop email, search, and auth
   assert.equal(customJson.includes(email), false);
   assert.equal(customJson.includes('hunter2-secret'), false);
 });
+
+test('short authentication codes are stripped from the current url', () => {
+  const cleaned = sanitizeAnalyticsUrl(
+    'https://www.insurancetrusthub.com/auth/callback?code=ab&state=FL',
+  );
+  assert.ok(cleaned);
+  const url = new URL(cleaned);
+  assert.equal(url.searchParams.has('code'), false);
+  assert.equal(url.searchParams.get('state'), 'FL');
+  assert.equal(cleaned.includes('code='), false);
+
+  const event = sanitizeCaptureResult({
+    event: '$pageview',
+    properties: {
+      $current_url: 'https://www.insurancetrusthub.com/auth/callback?code=xy&state=FL',
+    },
+  });
+  const current = String(event?.properties?.$current_url);
+  assert.equal(current.includes('code='), false);
+  assert.match(current, /state=FL/);
+  assert.equal(event?.properties?.$geoip_disable, true);
+});

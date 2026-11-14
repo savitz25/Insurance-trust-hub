@@ -35,8 +35,11 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong className="text-foreground">Usage data:</strong> Pages visited, referral
-              source, browser type, and approximate location derived from IP address via analytics
-              services.
+              source, and browser type when product analytics is enabled. Each analytics event
+              sets a flag asking PostHog not to add a location from the network address. PostHog
+              can still receive that address with the request. Whether the address is stored, and
+              whether the PostHog project adds a location, is a PostHog project setting. This site
+              does not change that setting and has not verified it.
             </li>
             <li>
               <strong className="text-foreground">Cookies:</strong> Session cookies for admin
@@ -108,10 +111,12 @@ export default function PrivacyPage() {
             We use PostHog for product analytics when a project key is present. Events can include
             pages viewed, clicks on links, buttons, and forms, device and browser info, and an
             anonymous id stored in local storage and a cookie. Email addresses, search text, sign-in
-            fields, and sensitive URL parameters are removed before an event is sent. The event asks
-            PostHog not to add a location from the network address. PostHog can still receive that
-            address with the request, and whether it is stored is a PostHog project setting that this
-            site does not change. This site does not set how long events are kept. Retention follows
+            fields, and sensitive URL parameters, including a short authentication code, are removed
+            before an event is sent. The event sets a flag asking PostHog not to add a location from
+            the network address. PostHog can still receive that address with the request. Whether the
+            address is stored, and whether the PostHog project adds a location, is a PostHog project
+            setting that this site does not change and has not verified. This site does not set how
+            long events are kept. Retention follows
             the PostHog project settings. Do Not Track, Global Privacy Control, or blocking cookies
             turns analytics off in this browser. A cookie banner is not shown.
           </p>
