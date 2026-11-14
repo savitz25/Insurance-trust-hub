@@ -14,6 +14,13 @@ test('providers API county filter is one launch county id', () => {
   assert.equal(filter.includes(','), false);
 });
 
+test('provider list pages break name ties with id', () => {
+  assert.match(
+    queries,
+    /\.order\('name', \{ ascending: true \}\)\s*\.order\('id', \{ ascending: true \}\)/
+  );
+});
+
 test('providers directory count is planned and the county filter stays one id', () => {
   assert.match(queries, /count: 'planned'/);
   assert.equal(queries.includes("count: 'exact'"), false);
