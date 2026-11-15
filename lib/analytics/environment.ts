@@ -58,6 +58,11 @@ export function shouldEnablePosthog(): boolean {
   const env = analyticsEnvironment();
   if (env === 'development' && !posthogDebugEnabled()) return false;
   if (analyticsBrowserOptOut()) return false;
+  try {
+    if ((process.env.NEXT_PUBLIC_POSTHOG_ACTIVATION || '').trim() !== 'enabled') return false;
+  } catch {
+    return false;
+  }
   if (typeof window !== 'undefined' && !posthogDebugEnabled()) {
     const host = window.location.hostname.replace(/^www\./, '').toLowerCase();
     if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local')) return false;
