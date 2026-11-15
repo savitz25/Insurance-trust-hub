@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ASK_DEFINITIONS, INSURANCE_ASK_PAGE_SIZE } from '@/lib/insurance-ask/contract';
 import type { AskCard, InsuranceAskResult } from '@/lib/insurance-ask/execute';
 import { AskResultCardShell } from '@/components/ask-result-card';
+import { SearchSubmitListener } from '@/components/analytics/search-submit-listener';
 
 function href(q: string, page?: number) {
   const params = new URLSearchParams({ q });
@@ -200,6 +201,7 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
             Parsing and regulatory execution stay separate. Credential jurisdiction is not service territory.
           </p>
           <form action="/ask" method="get" className="mt-4 flex flex-col gap-2 sm:flex-row">
+            <SearchSubmitListener surface="ask" />
             <label htmlFor="ask-edit" className="sr-only">
               Change interpretation
             </label>
@@ -209,7 +211,8 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
               id="ask-edit"
               name="q"
               defaultValue={result.queryText}
-              className="min-h-11 min-w-0 flex-1 rounded-xl border border-[#E2E8F0] px-3 text-sm text-[#0A2540]"
+              data-ph-mask=""
+              className="ph-no-capture min-h-11 min-w-0 flex-1 rounded-xl border border-[#E2E8F0] px-3 text-sm text-[#0A2540]"
             />
             <button type="submit" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#0A2540] px-4 text-sm font-semibold text-white">
               Change interpretation
@@ -225,10 +228,10 @@ export function AskInsuranceResultView({ result }: { result: InsuranceAskResult 
         </section>
       )}
 
-      {q.refinement === 'zip' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">Enter a ZIP for directory research</h2><p className="mt-2">Requested location: {q.directoryContext?.requestedLocation}. We do not use device location or guess a ZIP.</p><form action="/ask" method="get" className="mt-4 flex flex-wrap gap-3"><input type="hidden" name="q" value={result.queryText}/>{Object.entries(q.requestOptions??{}).filter(([k])=>!['zip','selected'].includes(k)).map(([k,v])=><input key={k} type="hidden" name={k} value={v}/>)}<label htmlFor="directory-zip" className="grid gap-1">Five-digit ZIP<input id="directory-zip" name="zip" inputMode="numeric" pattern="[0-9]{5}" maxLength={5} required className="min-h-11 min-w-0 rounded border px-3"/></label><button className="min-h-11 rounded bg-sky-900 px-4 text-white">Apply ZIP</button></form></section> : null}
+      {q.refinement === 'zip' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">Enter a ZIP for directory research</h2><p className="mt-2" data-ph-mask="">Requested location: {q.directoryContext?.requestedLocation}. We do not use device location or guess a ZIP.</p><form action="/ask" method="get" className="mt-4 flex flex-wrap gap-3"><SearchSubmitListener surface="ask_zip" /><input type="hidden" name="q" value={result.queryText} className="ph-no-capture" data-ph-mask="" />{Object.entries(q.requestOptions??{}).filter(([k])=>!['zip','selected'].includes(k)).map(([k,v])=><input key={k} type="hidden" name={k} value={v}/>)}<label htmlFor="directory-zip" className="grid gap-1">Five-digit ZIP<input id="directory-zip" name="zip" inputMode="numeric" pattern="[0-9]{5}" maxLength={5} required className="min-h-11 min-w-0 rounded border px-3"/></label><button className="min-h-11 rounded bg-sky-900 px-4 text-white">Apply ZIP</button></form></section> : null}
       {q.conditions?.length ? <section className="rounded-2xl border bg-white p-5"><h2 className="font-semibold">Additional requested conditions</h2><ul>{q.conditions.map((c,i)=><li key={i}>{c.meaning}: {c.value} ? {c.outcome}. Identity resolution does not establish this condition.</li>)}</ul></section>:null}
       {q.directoryContext?.unresolvedConditions.map(x=><p key={x} className="rounded-xl bg-amber-50 p-4">{x}</p>)}
-      {result.terminalState === 'NO_MATCH' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">No matching indexed research identity</h2><p>The complete {q.identifier ? `${q.identifier.type} ${q.identifier.value}` : q.nameQuery} was searched in the permitted corpus. No other identity or cohort was substituted. Absence here does not establish an invalid identifier or lack of authorization.</p></section>:null}
+      {result.terminalState === 'NO_MATCH' ? <section className="rounded-2xl border bg-white p-5"><h2 className="text-xl font-semibold">No matching indexed research identity</h2><p data-ph-mask="">The complete {q.identifier ? `${q.identifier.type} ${q.identifier.value}` : q.nameQuery} was searched in the permitted corpus. No other identity or cohort was substituted. Absence here does not establish an invalid identifier or lack of authorization.</p></section>:null}
       {result.candidateSelection ? <section className="rounded-xl bg-sky-50 p-4"><h2 className="text-xl font-semibold">Select the source identity you mean</h2><p>Names indicate candidates. Compare class and identifiers before continuing the original question.</p>{result.nameCandidateWindow?.outOfRange?<p className="mt-2">This candidate window is past the end of the matching source-name candidates. No candidate was substituted. <Link href={insuranceRequestHref(result.queryText,q.requestOptions,1)} className="font-semibold text-sky-800 underline">Return to the first window</Link>.</p>:null}{result.nameCandidateWindow?.hasMore?<p className="mt-2">More matching source-name candidates are available. Candidates are shown {result.nameCandidateWindow.limit} at a time in a fixed order; use Next to continue, or refine the name.</p>:null}{result.nameCandidateWindow?.completeness==='SCAN_BOUND_REACHED'?<p className="mt-2">This name is very broad: the source search stopped at its scan bound, so this is not a complete candidate list and no total is asserted. Refine the name.</p>:null}</section>:null}
       {q.mode === 'directory' && (q.directoryZip || q.directoryLaunchCountyId) ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-5">

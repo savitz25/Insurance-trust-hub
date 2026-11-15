@@ -51,6 +51,9 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
             <CardTitle className="text-lg leading-snug">
               <Link
                 href={`/providers/${provider.slug}`}
+                data-ph-event="search_result_opened"
+                data-ph-surface="directory"
+                data-ph-state={provider.state}
                 className="hover:text-primary transition-colors"
               >
                 {provider.name}

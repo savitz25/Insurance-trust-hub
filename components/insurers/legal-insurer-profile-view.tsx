@@ -60,6 +60,8 @@ export function LegalInsurerProfileView({
             <a
               href={`/api/claim/handoff/${row.slug}`}
               rel="nofollow"
+              data-ph-event="claim_started"
+              data-ph-surface="insurer_claim"
               className="mt-5 inline-flex min-h-11 items-center rounded-md bg-[#0A2540] px-5 py-2 font-semibold text-white"
             >
               Claim this profile

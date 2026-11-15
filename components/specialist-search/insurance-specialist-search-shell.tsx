@@ -20,7 +20,7 @@ export function InsuranceSpecialistSearchShell({ query = '', compact = false, op
       <form action="/ask" method="get" role="search" aria-label="Research insurance identities and evidence" className="mt-5">
         <div className="flex flex-col gap-3 md:flex-row">
           <label className="sr-only" htmlFor={`${suffix}-insurance-search-q`}>Question, agency, insurer, NPN, or NAIC code</label>
-          <input id={`${suffix}-insurance-search-q`} name="q" type="search" maxLength={INSURANCE_ASK_INPUT_LIMIT} defaultValue={query} required placeholder="Ask a question, enter an agency, insurer, NPN, NAIC code, state or credential..." className="min-h-12 min-w-0 flex-1 rounded-xl border border-slate-300 px-4 text-base text-[#0A2540] outline-none focus-visible:ring-2 focus-visible:ring-sky-600" />
+          <input id={`${suffix}-insurance-search-q`} name="q" type="search" maxLength={INSURANCE_ASK_INPUT_LIMIT} defaultValue={query} required placeholder="Ask a question, enter an agency, insurer, NPN, NAIC code, state or credential..." className="ph-no-capture min-h-12 min-w-0 flex-1 rounded-xl border border-slate-300 px-4 text-base text-[#0A2540] outline-none focus-visible:ring-2 focus-visible:ring-sky-600" data-ph-mask="" />
           <button type="submit" className="min-h-12 rounded-xl bg-[#0A2540] px-7 font-semibold text-white outline-none hover:bg-sky-900 focus-visible:ring-2 focus-visible:ring-sky-600">Research</button>
         </div>
         <details className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -35,7 +35,7 @@ export function InsuranceSpecialistSearchShell({ query = '', compact = false, op
       </form>
       <SearchShellAnalytics />
       <nav className="mt-4 flex flex-wrap gap-2" aria-label="Example insurance research questions">
-        {EXAMPLES.map((example) => <Link key={example} href={`/ask?q=${encodeURIComponent(example)}`} className="inline-flex min-h-11 items-center rounded-full border border-sky-200 px-3 text-sm font-medium text-sky-800 hover:bg-sky-50">{example}</Link>)}
+        {EXAMPLES.map((example) => <Link key={example} href={`/ask?q=${encodeURIComponent(example)}`} data-ph-event="search_submitted" data-ph-surface="ask_example" data-ph-mask="" className="ph-no-capture ph-mask inline-flex min-h-11 items-center rounded-full border border-sky-200 px-3 text-sm font-medium text-sky-800 hover:bg-sky-50">{example}</Link>)}
       </nav>
       <p className="mt-4 text-sm leading-6 text-slate-600">Natural language is mapped to bounded regulatory research. Agencies, producers, and legal insurers stay separate; missing evidence is not zero.</p>
     </section>

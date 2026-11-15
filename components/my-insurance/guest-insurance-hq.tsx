@@ -49,6 +49,8 @@ import {
 import { COMPARE_PATH } from '@/lib/my-insurance/constants';
 import { ShortlistFullPanel } from '@/components/my-insurance/shortlist-full-panel';
 import { CompareProviderButton } from '@/components/my-insurance/compare-provider-button';
+import { captureTrustEvent } from '@/lib/analytics/trusthub';
+import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
 import { toast } from 'sonner';
 import { TrustMark } from '@/components/network/trust-mark';
 import { Button } from '@/components/ui/button';
@@ -429,6 +431,7 @@ export function GuestInsuranceHq() {
             }}
             onRemove={(slug) => {
               removeProviderFromPlan(slug, plan?.id);
+              captureTrustEvent(TRUSTHUB_EVENTS.PROFILE_UNSAVED, { surface: 'my_insurance', success: true });
               refresh();
             }}
           />
@@ -452,6 +455,7 @@ export function GuestInsuranceHq() {
             }}
             onRemove={(slug) => {
               removeProviderFromPlan(slug, plan?.id);
+              captureTrustEvent(TRUSTHUB_EVENTS.PROFILE_UNSAVED, { surface: 'my_insurance', success: true });
               refresh();
             }}
           />
@@ -493,6 +497,7 @@ export function GuestInsuranceHq() {
                     }}
                     onRemove={(slug) => {
                       removeProviderFromPlan(slug, plan?.id);
+                      captureTrustEvent(TRUSTHUB_EVENTS.PROFILE_UNSAVED, { surface: 'my_insurance', success: true });
                       refresh();
                     }}
                   />

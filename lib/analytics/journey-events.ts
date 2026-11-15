@@ -1,6 +1,9 @@
 /**
  * Stage A′ journey measurement (Insurance). Soft fail if gtag absent.
  */
+import { captureTrustEvent } from '@/lib/analytics/trusthub';
+import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
+import { stateCode } from '@/lib/analytics/privacy';
 
 type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
 
@@ -27,6 +30,16 @@ export function trackJourneyHandoff(params: {
     source_path: window.location.pathname,
   };
   try {
+    captureTrustEvent(
+      TRUSTHUB_EVENTS.SPECIALIST_HANDOFF_STARTED,
+      {
+        surface: 'network_handoff',
+        specialist_hub: params.to_hub,
+        state: stateCode(params.state),
+        success: true,
+      },
+      { sendBeforeUnload: true },
+    );
     w.gtag?.('event', 'journey_handoff_click', payload);
     w.gtag?.('event', 'cross_hub_continuation', {
       hub: 'insurance',

@@ -21,6 +21,7 @@ import nextDynamic from 'next/dynamic';
 import { INSURANCE_TYPES, US_STATES } from '@/lib/constants';
 import { StarRating } from '@/components/star-rating';
 import { DisclaimerBanner } from '@/components/disclaimer-banner';
+import { ProfileViewedBeacon } from '@/components/analytics/profile-viewed-beacon';
 import { TrustMark } from '@/components/network/trust-mark';
 import { BeforeYouReachOut } from '@/components/research/before-you-reach-out';
 import { SaveProviderButton } from '@/components/my-insurance/save-provider-button';
@@ -292,6 +293,7 @@ export default async function ProviderPage({ params, searchParams }: ProviderPag
 
   return (
     <>
+      <ProfileViewedBeacon surface="provider_profile" state={provider.state} />
       <JsonLd data={buildInsuranceAgencySchema(provider)} />
 
       <div className="border-b bg-muted/20">
