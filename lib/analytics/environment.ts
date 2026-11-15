@@ -59,7 +59,7 @@ export function shouldEnablePosthog(): boolean {
   if (env === 'development' && !posthogDebugEnabled()) return false;
   if (analyticsBrowserOptOut()) return false;
   try {
-    if ((process.env.NEXT_PUBLIC_POSTHOG_ACTIVATION || '').trim() !== 'enabled') return false;
+    if (process.env.NEXT_PUBLIC_POSTHOG_ACTIVATION !== 'enabled') return false;
   } catch {
     return false;
   }
