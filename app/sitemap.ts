@@ -5,7 +5,10 @@ import { DESTINATION_STATES } from '@/lib/destinations/data';
 import { ARTICLES } from '@/lib/resources/articles';
 import { FALLBACK_PROVIDERS } from '@/lib/providers/fallback-data';
 import { INSURANCE_HUBS, getAllStateSlugs } from '@/lib/hubs/registry';
-import { SPECIALTY_TOPICS } from '@/lib/hubs/specialty-topics';
+import {
+  isSpecialtyTopicIndexable,
+  SPECIALTY_TOPICS,
+} from '@/lib/hubs/specialty-topics';
 import {
   classifyProviderListing,
   isIndexableListing,
@@ -90,8 +93,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/hubs',
     '/hubs/browse',
     '/hubs/health-insurance',
-    '/hubs/medicare',
-    '/hubs/aca',
     '/calculators',
     '/calculators/premium-estimator',
     '/calculators/medicare-gap',
@@ -170,7 +171,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const specialtyTopics = SPECIALTY_TOPICS.map((topic) => ({
+  const specialtyTopics = SPECIALTY_TOPICS.filter(isSpecialtyTopicIndexable).map((topic) => ({
     url: `${site}${topic.path}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,

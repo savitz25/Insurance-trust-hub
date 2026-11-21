@@ -129,6 +129,11 @@ export function getSouthFloridaAgents(): HubAgent[] {
   return filterVerifiedHubAgents(SOUTH_FLORIDA_AGENTS);
 }
 
+/** Keep sitemap eligibility aligned with the topic pages' metadata robots gate. */
+export function isSpecialtyTopicIndexable(topic: SpecialtyTopic): boolean {
+  return topic.filterAgents(getSouthFloridaAgents()).length > 0;
+}
+
 export function getTopicFeaturedHubs(topic: SpecialtyTopic): InsuranceHub[] {
   return topic.featuredHubSlugs
     .map(({ state, slug }) => getHubBySlug(state, slug))
