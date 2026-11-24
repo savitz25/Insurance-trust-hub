@@ -3,8 +3,6 @@
  * Additive. Does not rename journey_handoff_click or other Stage A events.
  */
 
-type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
-
 export const INSURANCE_INTEL_EVENTS = [
   'insurance_intel_explore',
   'insurance_intel_trace_number',
@@ -18,14 +16,6 @@ export function trackInsuranceIntelEvent(
   params: Record<string, string | number | boolean | undefined> = {}
 ): void {
   if (typeof window === 'undefined') return;
-  const w = window as GtagWindow;
-  try {
-    w.gtag?.('event', eventName, {
-      hub: 'insurance',
-      page_path: window.location.pathname,
-      ...params,
-    });
-  } catch {
-    /* non-fatal */
-  }
+  void eventName;
+  void params;
 }
