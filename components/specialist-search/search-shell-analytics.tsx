@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { track } from '@vercel/analytics';
 import { stateCode } from '@/lib/analytics/privacy';
 import { captureTrustEvent } from '@/lib/analytics/trusthub';
 import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
@@ -20,7 +19,6 @@ export function SearchShellAnalytics() {
           if (el instanceof HTMLSelectElement && !el.value) el.disabled = true;
         }
       }
-      track('specialist_search_submit', { hub: 'insurance' });
       const selected = form instanceof HTMLFormElement ? form.querySelector('select[name="state"]') : null;
       captureTrustEvent(
         TRUSTHUB_EVENTS.SEARCH_SUBMITTED,

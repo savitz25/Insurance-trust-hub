@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
 import { PosthogRoot } from '@/components/analytics/posthog-root';
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/navbar';
@@ -58,7 +57,6 @@ export default function RootLayout({
           <InsurancePwaProvider />
           <Toaster position="top-right" richColors closeButton />
           <PosthogRoot environment={process.env.VERCEL_ENV} />
-          <Analytics />
         </MyInsuranceShell>
       </body>
     </html>
